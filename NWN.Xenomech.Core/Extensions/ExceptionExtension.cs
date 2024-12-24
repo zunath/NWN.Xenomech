@@ -2,7 +2,7 @@
 
 namespace NWN.Xenomech.Core.Extensions
 {
-    public static class ExceptionExtensions
+    public static class ExceptionExtension
     {
         public static string ToMessageAndCompleteStacktrace(this Exception exception)
         {

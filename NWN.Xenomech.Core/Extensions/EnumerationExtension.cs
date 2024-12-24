@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Reflection;
 
-namespace SWLOR.Game.Server.Extension
+namespace NWN.Xenomech.Core.Extensions
 {
     public static class EnumerationExtension
     {

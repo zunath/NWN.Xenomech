@@ -1,4 +1,6 @@
-﻿// ReSharper disable once CheckNamespace
+﻿using NWN.Xenomech.Core.Interop;
+
+// ReSharper disable once CheckNamespace
 namespace NWN.Xenomech.Core.NWScript
 {
     public partial class NWScript

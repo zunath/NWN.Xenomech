@@ -1,7 +1,6 @@
-﻿using Serilog;
+﻿using NWN.Xenomech.Core.Extensions;
+using Serilog;
 using Serilog.Core;
-using SWLOR.Game.Server;
-using SWLOR.Game.Server.Extension;
 
 namespace NWN.Xenomech.Core.Logging
 {
