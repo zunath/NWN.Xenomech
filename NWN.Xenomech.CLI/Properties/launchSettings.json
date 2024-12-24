@@ -2,7 +2,7 @@
   "profiles": {
     "NWN.Xenomech.CLI": {
       "commandName": "Project",
-      "commandLineArgs": "-u \"../Module/Xenomech.mod,../Module/\""
+      "commandLineArgs": "-o"
     }
   }
 }
