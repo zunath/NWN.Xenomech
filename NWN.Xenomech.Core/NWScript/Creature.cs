@@ -259,6 +259,7 @@ namespace NWN.Xenomech.Core.NWScript
         ///   spell as.
         ///   - Returns CLASS_TYPE_INVALID if the caster has
         ///   no valid class (placeables, etc...)
+        /// If used in an Area of Effect script it will return the creators spellcasting class.
         /// </summary>
         public static ClassType GetLastSpellCastClass()
         {
@@ -267,10 +268,9 @@ namespace NWN.Xenomech.Core.NWScript
         }
 
         /// <summary>
-        ///   Sets the number of base attacks for the specified
-        ///   creatures. The range of values accepted are from
-        ///   1 to 6
-        ///   Note: This function does not work on Player Characters
+        ///   Sets the number of base attacks each round for the specified creature (PC or NPC).
+        ///   If set on a PC it will not be shown on their character sheet, but will save to BIC/savegame.
+        ///   - nBaseAttackBonus - Number of base attacks per round, 1 to 6
         /// </summary>
         public static void SetBaseAttackBonus(int nBaseAttackBonus, uint oCreature = OBJECT_INVALID)
         {
