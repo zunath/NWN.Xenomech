@@ -1,0 +1,1 @@
+"..\Tools\nwn_tlk" -i ./tlk/xenomech.tlk -o ./tlk/xenomech.tlk.json -p

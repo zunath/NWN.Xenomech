@@ -1,0 +1,1 @@
+"..\Tools\NWN.Xenomech.CLI.exe" -k
