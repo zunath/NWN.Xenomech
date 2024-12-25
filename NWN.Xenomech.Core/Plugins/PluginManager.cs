@@ -9,6 +9,7 @@ namespace NWN.Xenomech.Core.Plugins
 
         public void LoadPlugins(string pluginDirectory)
         {
+            Console.WriteLine($"Loading plugins");
             foreach (var pluginPath in Directory.GetFiles(pluginDirectory, "*.dll"))
             {
                 var context = new AssemblyLoadContext(pluginPath, isCollectible: true);
@@ -27,6 +28,8 @@ namespace NWN.Xenomech.Core.Plugins
                     plugin.OnLoad();
                     _loadedPlugins.Add(plugin);
                     _pluginContexts.Add(context);
+
+                    Console.WriteLine($"Loading plugin: {pluginPath}");
                 }
             }
         }
@@ -40,7 +43,7 @@ namespace NWN.Xenomech.Core.Plugins
             LoadPlugins(pluginDirectory);
         }
 
-        private void UnloadPlugins()
+        public void UnloadPlugins()
         {
             foreach (var context in _pluginContexts)
             {

@@ -19,7 +19,7 @@ services:
         ports:
             - "8081:8081"
 
-    swlor-server:
+    nwn-server:
         hostname: nwnx-server
         stop_signal: SIGINT
         image: zunath/nwn-dotnet:8193.36.12

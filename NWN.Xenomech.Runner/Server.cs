@@ -11,7 +11,7 @@ namespace NWN.Xenomech.Runner
 {
     internal class Server
     {
-        private const string ServerContainerName = "debugserver-xenomech-server-1";
+        private const string ServerContainerName = "debugserver-nwn-server-1";
         private ICompositeService _service = null!;
         private readonly IHostService _docker;
         private readonly Dictionary<string, ContainerLogger> _containerLineCounts = new();

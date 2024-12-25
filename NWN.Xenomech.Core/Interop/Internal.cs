@@ -18,7 +18,7 @@ namespace NWN.Xenomech.Core.Interop
 
         public static void OnStart()
         {
-            Console.WriteLine($"OnStart()");
+            Entrypoints.OnStart();
         }
 
         [UnmanagedCallersOnly]
