@@ -6,7 +6,7 @@ namespace NWN.Xenomech.Plugin.Test
     {
         public void OnLoad()
         {
-            Console.WriteLine($"Loading plugin Test");
+            Console.WriteLine($"awesome new changes3");
         }
 
         public void OnUnload()

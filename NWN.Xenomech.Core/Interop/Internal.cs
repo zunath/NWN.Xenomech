@@ -18,7 +18,7 @@ namespace NWN.Xenomech.Core.Interop
 
         public static void OnStart()
         {
-            Entrypoints.OnStart();
+            EntryPoints.OnStart();
         }
 
         [UnmanagedCallersOnly]
@@ -26,7 +26,7 @@ namespace NWN.Xenomech.Core.Interop
         {
             try
             {
-                Entrypoints.OnMainLoop(frame);
+                EntryPoints.OnMainLoop(frame);
             }
             catch (Exception e)
             {
@@ -52,7 +52,7 @@ namespace NWN.Xenomech.Core.Interop
             ScriptContexts.Push(new ScriptContext { OwnerObject = oidSelf, ScriptName = script });
             try
             {
-                ret = Entrypoints.OnRunScript(script, oidSelf);
+                ret = EntryPoints.OnRunScript(script, oidSelf);
             }
             catch (Exception e)
             {
@@ -100,10 +100,10 @@ namespace NWN.Xenomech.Core.Interop
                 switch (signal)
                 {
                     case "ON_MODULE_LOAD_FINISH":
-                        Entrypoints.OnModuleLoad();
+                        EntryPoints.OnModuleLoad();
                         break;
                     case "ON_DESTROY_SERVER":
-                        Entrypoints.OnShutdown();
+                        EntryPoints.OnShutdown();
                         break;
                 }
             }

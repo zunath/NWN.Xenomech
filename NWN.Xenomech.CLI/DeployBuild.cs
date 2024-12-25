@@ -58,11 +58,15 @@
                 var binPath = new DirectoryInfo($"{path}/bin/Debug/net8.0/");
                 var target = new DirectoryInfo(PluginPath + folderName);
 
-                if (target.Exists)
+                if (!target.Exists)
                 {
-                    target.Delete(true);
+                    target.Create();
                 }
-                target.Create();
+
+                foreach (var file in target.GetFiles())
+                {
+                    file.Delete();
+                }
 
                 CopyAll(binPath, target, string.Empty, "NWN.Xenomech.Core.dll", "NWN.Xenomech.Core.pdb");
             }
@@ -86,7 +90,7 @@
             {
                 if (excludeFiles.Contains(fi.Name))
                     continue;
-
+                
                 var targetPath = Path.Combine(target.FullName, fi.Name);
 
                 if (File.Exists(targetPath) && fi.Name == preventOverwriteFile)

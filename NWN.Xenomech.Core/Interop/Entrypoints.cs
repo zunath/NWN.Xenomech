@@ -3,9 +3,9 @@ using NWN.Xenomech.Core.Plugins;
 
 namespace NWN.Xenomech.Core.Interop
 {
-    public class Entrypoints
+    public class EntryPoints
     {
-        private static PluginManager _pluginManager = new();
+        private static readonly PluginManager _pluginManager = new();
 
         public const int SCRIPT_HANDLED = 0;
         public const int SCRIPT_NOT_HANDLED = -1;
@@ -42,7 +42,7 @@ namespace NWN.Xenomech.Core.Interop
         public static void OnStart()
         {
             Console.WriteLine("OnStart() called");
-            _pluginManager.LoadPlugins("/nwn/home/dotnet/plugins");
+            _pluginManager.LoadPlugins();
         }
 
         //
@@ -63,6 +63,7 @@ namespace NWN.Xenomech.Core.Interop
         {
             Console.WriteLine("OnShutdown() called");
             _pluginManager.UnloadPlugins();
+            _pluginManager.Dispose();
         }
     }
 }
