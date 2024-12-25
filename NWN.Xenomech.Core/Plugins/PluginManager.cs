@@ -227,6 +227,9 @@ namespace NWN.Xenomech.Core.Plugins
             {
                 fileProvider.Dispose(); // Dispose of the PhysicalFileProvider (which cleans up the file watchers)
             }
+
+            _fileProviders.Clear();
+            _changeTokens.Clear();
         }
     }
 }
