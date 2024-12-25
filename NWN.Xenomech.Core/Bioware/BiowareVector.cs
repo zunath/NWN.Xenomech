@@ -6,7 +6,6 @@ namespace NWN.Xenomech.Core.Bioware
 {
     public static class BiowareVector
     {
-        // givemedeath - had to add this one to the Service as it wasn't in the ported script and I needed it for HoloComs.
         public static Location MoveLocation(Location lCurrent, float fDirection, float fDistance, float fOffFacing = 0.0f, float fOffZ = 0.0f)
         {
 
@@ -34,28 +33,6 @@ namespace NWN.Xenomech.Core.Bioware
         {
             return new Vector3(vRef.X + fDist * (float)Cos(fAngle), vRef.Y + fDist * (float)Sin(fAngle), vRef.Z);
         }
-
-        /*
-        // Returns the projection of v2 onto v1. The Vector3 component of v2
-        // in the direction of, or along v1.
-        public static Vector3 VectorProjection(Vector3 v1, Vector3 v2)
-        {
-            return (DotProduct(v1, v2) / VectorMagnitude(v1)) * VectorNormalize(v1);
-        }
-
-        // Finds the scalar projection of v2 onto v1. The length of the Vector3
-        // projection of v2 on to v1.
-        public static float ScalarProjection(Vector3 v1, Vector3 v2)
-        {
-            return DotProduct(v1, v2) / VectorMagnitude(v1);
-        }
-
-        // Returns the enclosed angle between two Vectors.
-        public static float EnclosedAngle(Vector3 v1, Vector3 v2)
-        {
-            return aCos(DotProduct(v1, v2) / (VectorMagnitude(v1) * VectorMagnitude(v2)));
-        }
-        */
 
         // Returns the scalar triple product of v1, v2 and v3.
         // - The scalar triple product is equivalent to the volume of a
