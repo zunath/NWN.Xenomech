@@ -1,5 +1,5 @@
+using NWN.Xenomech.Core.API.Enum.Item;
 using NWN.Xenomech.Core.Interop;
-using NWN.Xenomech.Core.NWScript.Enum.Item;
 
 namespace NWN.Xenomech.Core.NWNX
 {

@@ -173,14 +173,14 @@ namespace NWN.Xenomech.Core.NWNX
         {
             NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "CreateDoor");
 
-            var vPosition = NWScript.NWScript.GetPositionFromLocation(locLocation);
+            var vPosition = API.NWScript.GetPositionFromLocation(locLocation);
 
             NWNXPInvoke.NWNXPushString(sNewTag);
-            NWNXPInvoke.NWNXPushFloat(NWScript.NWScript.GetFacingFromLocation(locLocation));
+            NWNXPInvoke.NWNXPushFloat(API.NWScript.GetFacingFromLocation(locLocation));
             NWNXPInvoke.NWNXPushFloat(vPosition.Z);
             NWNXPInvoke.NWNXPushFloat(vPosition.Y);
             NWNXPInvoke.NWNXPushFloat(vPosition.X);
-            NWNXPInvoke.NWNXPushObject(NWScript.NWScript.GetAreaFromLocation(locLocation));
+            NWNXPInvoke.NWNXPushObject(API.NWScript.GetAreaFromLocation(locLocation));
             NWNXPInvoke.NWNXPushString(sResRef);
             NWNXPInvoke.NWNXCallFunction();
 

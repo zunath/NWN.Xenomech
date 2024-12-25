@@ -1,7 +1,7 @@
 using System.Numerics;
+using NWN.Xenomech.Core.API.Enum;
+using NWN.Xenomech.Core.API.Enum.Area;
 using NWN.Xenomech.Core.Interop;
-using NWN.Xenomech.Core.NWScript.Enum;
-using NWN.Xenomech.Core.NWScript.Enum.Area;
 
 namespace NWN.Xenomech.Core.NWNX
 {

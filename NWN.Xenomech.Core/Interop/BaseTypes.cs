@@ -1,4 +1,4 @@
-using NWN.Xenomech.Core.NWScript.Enum;
+using NWN.Xenomech.Core.API.Enum;
 
 namespace NWN.Xenomech.Core.Interop
 {

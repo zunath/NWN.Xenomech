@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
+using NWN.Xenomech.Core.API.Enum;
+using NWN.Xenomech.Core.API.Enum.VisualEffect;
 using NWN.Xenomech.Core.Interop;
 using NWN.Xenomech.Core.NWNX.Enum;
-using NWN.Xenomech.Core.NWScript.Enum;
-using NWN.Xenomech.Core.NWScript.Enum.VisualEffect;
 
 namespace NWN.Xenomech.Core.NWNX
 {

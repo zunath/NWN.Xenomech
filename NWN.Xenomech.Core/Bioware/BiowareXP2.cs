@@ -1,6 +1,6 @@
-﻿using NWN.Xenomech.Core.Interop;
-using NWN.Xenomech.Core.NWScript.Enum;
-using NWN.Xenomech.Core.NWScript.Enum.Item;
+﻿using NWN.Xenomech.Core.API.Enum;
+using NWN.Xenomech.Core.API.Enum.Item;
+using NWN.Xenomech.Core.Interop;
 
 namespace NWN.Xenomech.Core.Bioware
 {

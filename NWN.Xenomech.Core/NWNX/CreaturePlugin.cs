@@ -1,9 +1,9 @@
 using System.Numerics;
+using NWN.Xenomech.Core.API.Enum;
+using NWN.Xenomech.Core.API.Enum.Creature;
+using NWN.Xenomech.Core.API.Enum.Item;
 using NWN.Xenomech.Core.Interop;
 using NWN.Xenomech.Core.NWNX.Enum;
-using NWN.Xenomech.Core.NWScript.Enum;
-using NWN.Xenomech.Core.NWScript.Enum.Creature;
-using NWN.Xenomech.Core.NWScript.Enum.Item;
 
 namespace NWN.Xenomech.Core.NWNX
 {
@@ -606,7 +606,7 @@ namespace NWN.Xenomech.Core.NWNX
 
         // Get total effect bonus
         public static int GetTotalEffectBonus(uint creature, BonusType bonusType = BonusType.Attack,
-            uint target = NWScript.NWScript.OBJECT_INVALID, bool isElemental = false,
+            uint target = API.NWScript.OBJECT_INVALID, bool isElemental = false,
             bool isForceMax = false, int saveType = -1, int saveSpecificType = -1, NWNSkillType skill = NWNSkillType.Invalid,
             int abilityScore = -1, bool isOffhand = false)
         {
