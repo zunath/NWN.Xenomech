@@ -1,4 +1,5 @@
 using System.Numerics;
+using NWN.Xenomech.Core.Interop;
 using NWN.Xenomech.Core.NWScript.Enum;
 using NWN.Xenomech.Core.NWScript.Enum.Item.Property;
 using NWN.Xenomech.Core.NWScript.Enum.VisualEffect;
@@ -10,16 +11,15 @@ using SpellSchool = NWN.Xenomech.Core.NWScript.Enum.SpellSchool;
 namespace NWN.Xenomech.Core.NWScript
 {
     public partial class NWScript
-    {
-        /// <summary>
-        ///   Returns the string tag set for the provided effect.
-        ///   - If no tag has been set, returns an empty string.
-        /// </summary>
+    {/// <summary>
+     ///   Returns the string tag set for the provided effect.
+     ///   - If no tag has been set, returns an empty string.
+     /// </summary>
         public static string GetEffectTag(Effect eEffect)
         {
-            VM.StackPush((int)EngineStructure.Effect, eEffect);
-            VM.Call(849);
-            return NWNCore.NativeFunctions.StackPopStringUTF8();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(849);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -28,10 +28,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Effect TagEffect(Effect eEffect, string sNewTag)
         {
-            VM.StackPush(sNewTag);
-            VM.StackPush((int)EngineStructure.Effect, eEffect);
-            VM.Call(850);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushString(sNewTag);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(850);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
@@ -41,9 +41,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetEffectCasterLevel(Effect eEffect)
         {
-            VM.StackPush((int)EngineStructure.Effect, eEffect);
-            VM.Call(851);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(851);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -52,9 +52,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetEffectDuration(Effect eEffect)
         {
-            VM.StackPush((int)EngineStructure.Effect, eEffect);
-            VM.Call(852);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(852);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -63,9 +63,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetEffectDurationRemaining(Effect eEffect)
         {
-            VM.StackPush((int)EngineStructure.Effect, eEffect);
-            VM.Call(853);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(853);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -74,8 +74,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Effect EffectCutsceneImmobilize()
         {
-            VM.Call(767);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(767);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
@@ -85,8 +85,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Effect EffectCutsceneGhost()
         {
-            VM.Call(757);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(757);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
@@ -94,9 +94,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetItemCursedFlag(uint oItem)
         {
-            VM.StackPush(oItem);
-            VM.Call(744);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oItem);
+            NWNXPInvoke.CallBuiltIn(744);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -104,9 +104,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetItemCursedFlag(uint oItem, bool nCursed)
         {
-            VM.StackPush(nCursed ? 1 : 0);
-            VM.StackPush(oItem);
-            VM.Call(745);
+            NWNXPInvoke.StackPushInteger(nCursed ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oItem);
+            NWNXPInvoke.CallBuiltIn(745);
         }
 
         /// <summary>
@@ -117,43 +117,41 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetItemPossessor(uint oItem, bool bReturnBags = false)
         {
-            VM.StackPush(bReturnBags ? 1 : 0);
-            VM.StackPush(oItem);
-            VM.Call(29);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushInteger(bReturnBags ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oItem);
+            NWNXPInvoke.CallBuiltIn(29);
+            return NWNXPInvoke.StackPopObject();
         }
-
         /// <summary>
         ///   Get the object possessed by oCreature with the tag sItemTag
         ///   * Return value on error: OBJECT_INVALID
         /// </summary>
         public static uint GetItemPossessedBy(uint oCreature, string sItemTag)
         {
-            VM.StackPush(sItemTag);
-            VM.StackPush(oCreature);
-            VM.Call(30);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushString(sItemTag);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(30);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
         ///   Create an item with the template sItemTemplate in oTarget's inventory.
         ///   - nStackSize: This is the stack size of the item to be created
         ///   - sNewTag: If this string is not empty, it will replace the default tag from the template
-        ///   * Return value: The object that has been created.  On error, this returns
+        ///   * Return value: The object that has been created. On error, this returns
         ///   OBJECT_INVALID.
         ///   If the item created was merged into an existing stack of similar items,
         ///   the function will return the merged stack object. If the merged stack
         ///   overflowed, the function will return the overflowed stack that was created.
         /// </summary>
-        public static uint CreateItemOnObject(string sResRef, uint oTarget = OBJECT_INVALID, int nStackSize = 1,
-            string sNewTag = "")
+        public static uint CreateItemOnObject(string sResRef, uint oTarget = OBJECT_INVALID, int nStackSize = 1, string sNewTag = "")
         {
-            VM.StackPush(sNewTag);
-            VM.StackPush(nStackSize);
-            VM.StackPush(oTarget);
-            VM.StackPush(sResRef);
-            VM.Call(31);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushString(sNewTag);
+            NWNXPInvoke.StackPushInteger(nStackSize);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.StackPushString(sResRef);
+            NWNXPInvoke.CallBuiltIn(31);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -173,9 +171,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionEquipItem(uint oItem, InventorySlot nInventorySlot)
         {
-            VM.StackPush((int)nInventorySlot);
-            VM.StackPush(oItem);
-            VM.Call(32);
+            NWNXPInvoke.StackPushInteger((int)nInventorySlot);
+            NWNXPInvoke.StackPushObject(oItem);
+            NWNXPInvoke.CallBuiltIn(32);
         }
 
         /// <summary>
@@ -183,8 +181,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionUnequipItem(uint oItem)
         {
-            VM.StackPush(oItem);
-            VM.Call(33);
+            NWNXPInvoke.StackPushObject(oItem);
+            NWNXPInvoke.CallBuiltIn(33);
         }
 
         /// <summary>
@@ -194,8 +192,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionPickUpItem(uint oItem)
         {
-            VM.StackPush(oItem);
-            VM.Call(34);
+            NWNXPInvoke.StackPushObject(oItem);
+            NWNXPInvoke.CallBuiltIn(34);
         }
 
         /// <summary>
@@ -205,8 +203,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionPutDownItem(uint oItem)
         {
-            VM.StackPush(oItem);
-            VM.Call(35);
+            NWNXPInvoke.StackPushObject(oItem);
+            NWNXPInvoke.CallBuiltIn(35);
         }
 
         /// <summary>
@@ -216,9 +214,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionGiveItem(uint oItem, uint oGiveTo)
         {
-            VM.StackPush(oGiveTo);
-            VM.StackPush(oItem);
-            VM.Call(135);
+            NWNXPInvoke.StackPushObject(oGiveTo);
+            NWNXPInvoke.StackPushObject(oItem);
+            NWNXPInvoke.CallBuiltIn(135);
         }
 
         /// <summary>
@@ -228,9 +226,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionTakeItem(uint oItem, uint oTakeFrom)
         {
-            VM.StackPush(oTakeFrom);
-            VM.StackPush(oItem);
-            VM.Call(136);
+            NWNXPInvoke.StackPushObject(oTakeFrom);
+            NWNXPInvoke.StackPushObject(oItem);
+            NWNXPInvoke.CallBuiltIn(136);
         }
 
         /// <summary>
@@ -241,10 +239,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Effect EffectDeath(bool nSpectacularDeath = false, bool nDisplayFeedback = true)
         {
-            VM.StackPush(nDisplayFeedback ? 1 : 0);
-            VM.StackPush(nSpectacularDeath ? 1 : 0);
-            VM.Call(133);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nDisplayFeedback ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(nSpectacularDeath ? 1 : 0);
+            NWNXPInvoke.CallBuiltIn(133);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
@@ -255,10 +253,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Effect EffectKnockdown()
         {
-            VM.Call(134);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(134);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
-
         /// <summary>
         ///   Create a Curse effect.
         ///   - nStrMod: strength modifier
@@ -268,149 +265,114 @@ namespace NWN.Xenomech.Core.NWScript
         ///   - nWisMod: wisdom modifier
         ///   - nChaMod: charisma modifier
         /// </summary>
-        public static Effect EffectCurse(int nStrMod = 1, int nDexMod = 1, int nConMod = 1, int nIntMod = 1,
-            int nWisMod = 1, int nChaMod = 1)
+        public static Effect EffectCurse(int nStrMod = 1, int nDexMod = 1, int nConMod = 1, int nIntMod = 1, int nWisMod = 1, int nChaMod = 1)
         {
-            VM.StackPush(nChaMod);
-            VM.StackPush(nWisMod);
-            VM.StackPush(nIntMod);
-            VM.StackPush(nConMod);
-            VM.StackPush(nDexMod);
-            VM.StackPush(nStrMod);
-            VM.Call(138);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nChaMod);
+            NWNXPInvoke.StackPushInteger(nWisMod);
+            NWNXPInvoke.StackPushInteger(nIntMod);
+            NWNXPInvoke.StackPushInteger(nConMod);
+            NWNXPInvoke.StackPushInteger(nDexMod);
+            NWNXPInvoke.StackPushInteger(nStrMod);
+            NWNXPInvoke.CallBuiltIn(138);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Create an Entangle effect
-        ///   When applied, this effect will restrict the creature's movement and apply a
-        ///   (-2) to all attacks and a -4 to AC.
+        ///   Create an Entangle effect.
         /// </summary>
         public static Effect EffectEntangle()
         {
-            VM.Call(130);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(130);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Create a Saving Throw Increase effect
-        ///   - nSave: SAVING_THROW_* (not SAVING_THROW_TYPE_*)
-        ///   SAVING_THROW_ALL
-        ///   SAVING_THROW_FORT
-        ///   SAVING_THROW_REFLEX
-        ///   SAVING_THROW_WILL
-        ///   - nValue: size of the Saving Throw increase
-        ///   - nSaveType: SAVING_THROW_TYPE_* (e.g. SAVING_THROW_TYPE_ACID )
+        ///   Create a Saving Throw Increase effect.
         /// </summary>
-        public static Effect EffectSavingThrowIncrease(int nSave, int nValue,
-            SavingThrowType nSaveType = SavingThrowType.All)
+        public static Effect EffectSavingThrowIncrease(int nSave, int nValue, SavingThrowType nSaveType = SavingThrowType.All)
         {
-            VM.StackPush((int)nSaveType);
-            VM.StackPush(nValue);
-            VM.StackPush(nSave);
-            VM.Call(117);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nSaveType);
+            NWNXPInvoke.StackPushInteger(nValue);
+            NWNXPInvoke.StackPushInteger(nSave);
+            NWNXPInvoke.CallBuiltIn(117);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Create an Attack Increase effect
-        /// NOTE: On SWLOR, this is used for Accuracy.
-        ///   - nBonus: size of attack bonus
-        ///   - nModifierType: ATTACK_BONUS_*
+        ///   Create an Attack Increase effect.
         /// </summary>
         public static Effect EffectAccuracyIncrease(int nBonus, AttackBonus nModifierType = AttackBonus.Misc)
         {
-            VM.StackPush((int)nModifierType);
-            VM.StackPush(nBonus);
-            VM.Call(118);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nModifierType);
+            NWNXPInvoke.StackPushInteger(nBonus);
+            NWNXPInvoke.CallBuiltIn(118);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Create a Damage Reduction effect
-        ///   - nAmount: amount of damage reduction
-        ///   - nDamagePower: DAMAGE_POWER_*
-        ///   - nLimit: How much damage the effect can absorb before disappearing.
-        ///   - bRangedOnly: Set to TRUE to have this reduction only apply to ranged attacks 
-        ///   Set to zero for infinite
+        ///   Create a Damage Reduction effect.
         /// </summary>
         public static Effect EffectDamageReduction(int nAmount, DamagePower nDamagePower, int nLimit = 0, bool bRangedOnly = false)
         {
-            VM.StackPush(bRangedOnly ? 1 : 0);
-            VM.StackPush(nLimit);
-            VM.StackPush((int)nDamagePower);
-            VM.StackPush(nAmount);
-            VM.Call(119);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(bRangedOnly ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(nLimit);
+            NWNXPInvoke.StackPushInteger((int)nDamagePower);
+            NWNXPInvoke.StackPushInteger(nAmount);
+            NWNXPInvoke.CallBuiltIn(119);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Create a Damage Increase effect
-        ///   - nBonus: DAMAGE_BONUS_*
-        ///   - nDamageType: DAMAGE_TYPE_*
-        ///   NOTE! You *must* use the DAMAGE_BONUS_* constants! Using other values may
-        ///   result in odd behaviour.
+        ///   Create a Damage Increase effect.
         /// </summary>
         public static Effect EffectDamageIncrease(int nBonus, DamageType nDamageType = DamageType.Force)
         {
-            VM.StackPush((int)nDamageType);
-            VM.StackPush(nBonus);
-            VM.Call(120);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nDamageType);
+            NWNXPInvoke.StackPushInteger(nBonus);
+            NWNXPInvoke.CallBuiltIn(120);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Set the subtype of eEffect to Magical and return eEffect.
-        ///   (Effects default to magical if the subtype is not set)
-        ///   Magical effects are removed by resting, and by dispel magic
+        ///   Set the subtype of eEffect to Magical.
         /// </summary>
         public static Effect MagicalEffect(Effect eEffect)
         {
-            VM.StackPush((int)EngineStructure.Effect, eEffect);
-            VM.Call(112);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(112);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Set the subtype of eEffect to Supernatural and return eEffect.
-        ///   (Effects default to magical if the subtype is not set)
-        ///   Permanent supernatural effects are not removed by resting
+        ///   Set the subtype of eEffect to Supernatural.
         /// </summary>
         public static Effect SupernaturalEffect(Effect eEffect)
         {
-            VM.StackPush((int)EngineStructure.Effect, eEffect);
-            VM.Call(113);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(113);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Set the subtype of eEffect to Extraordinary and return eEffect.
-        ///   (Effects default to magical if the subtype is not set)
-        ///   Extraordinary effects are removed by resting, but not by dispel magic
+        ///   Set the subtype of eEffect to Extraordinary.
         /// </summary>
         public static Effect ExtraordinaryEffect(Effect eEffect)
         {
-            VM.StackPush((int)EngineStructure.Effect, eEffect);
-            VM.Call(114);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(114);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Create an AC Increase effect
-        ///   - nValue: size of AC increase
-        ///   - nModifyType: AC_*_BONUS
-        ///   - nDamageType: DAMAGE_TYPE_*
-        ///   * Default value for nDamageType should only ever be used in this function prototype.
+        ///   Create an AC Increase effect.
         /// </summary>
-        public static Effect EffectACIncrease(int nValue,
-            ArmorClassModiferType nModifyType = ArmorClassModiferType.Dodge,
-            AC nDamageType = AC.VsDamageTypeAll)
+        public static Effect EffectACIncrease(int nValue, ArmorClassModiferType nModifyType = ArmorClassModiferType.Dodge, AC nDamageType = AC.VsDamageTypeAll)
         {
-            VM.StackPush((int)nDamageType);
-            VM.StackPush((int)nModifyType);
-            VM.StackPush(nValue);
-            VM.Call(115);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nDamageType);
+            NWNXPInvoke.StackPushInteger((int)nModifyType);
+            NWNXPInvoke.StackPushInteger(nValue);
+            NWNXPInvoke.CallBuiltIn(115);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
@@ -418,9 +380,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Effect GetFirstEffect(uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.Call(85);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(85);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
@@ -428,406 +390,315 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Effect GetNextEffect(uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.Call(86);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(86);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
-
         /// <summary>
         ///   Remove eEffect from oCreature.
-        ///   * No return value
         /// </summary>
         public static void RemoveEffect(uint oCreature, Effect eEffect)
         {
-            VM.StackPush((int)EngineStructure.Effect, eEffect);
-            VM.StackPush(oCreature);
-            VM.Call(87);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(87);
         }
 
         /// <summary>
-        ///   * Returns TRUE if eEffect is a valid effect. The effect must have been applied to
-        ///   * an object or else it will return FALSE
+        ///   Returns TRUE if eEffect is a valid effect. The effect must have been applied to an object.
         /// </summary>
         public static bool GetIsEffectValid(Effect eEffect)
         {
-            VM.StackPush((int)EngineStructure.Effect, eEffect);
-            VM.Call(88);
-            return VM.StackPopInt() == 1;
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(88);
+            return NWNXPInvoke.StackPopInteger() == 1;
         }
 
         /// <summary>
         ///   Get the duration type (DURATION_TYPE_*) of eEffect.
-        ///   * Return value if eEffect is not valid: -1
         /// </summary>
         public static int GetEffectDurationType(Effect eEffect)
         {
-            VM.StackPush((int)EngineStructure.Effect, eEffect);
-            VM.Call(89);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(89);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
         ///   Get the subtype (SUBTYPE_*) of eEffect.
-        ///   * Return value on error: 0
         /// </summary>
         public static int GetEffectSubType(Effect eEffect)
         {
-            VM.StackPush((int)EngineStructure.Effect, eEffect);
-            VM.Call(90);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(90);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
         ///   Get the object that created eEffect.
-        ///   * Returns OBJECT_INVALID if eEffect is not a valid effect.
         /// </summary>
         public static uint GetEffectCreator(Effect eEffect)
         {
-            VM.StackPush((int)EngineStructure.Effect, eEffect);
-            VM.Call(91);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(91);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
-        ///   Create a Heal effect. This should be applied as an instantaneous effect.
-        ///   * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nDamageToHeal < 0.
+        ///   Create a Heal effect.
         /// </summary>
         public static Effect EffectHeal(int nDamageToHeal)
         {
-            VM.StackPush(nDamageToHeal);
-            VM.Call(78);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nDamageToHeal);
+            NWNXPInvoke.CallBuiltIn(78);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Create a Damage effect
-        ///   - nDamageAmount: amount of damage to be dealt. This should be applied as an
-        ///   instantaneous effect.
-        ///   - nDamageType: DAMAGE_TYPE_*
-        ///   - nDamagePower: DAMAGE_POWER_*
+        ///   Create a Damage effect.
         /// </summary>
-        public static Effect EffectDamage(int nDamageAmount, DamageType nDamageType = DamageType.Force,
-            DamagePower nDamagePower = DamagePower.Normal)
+        public static Effect EffectDamage(int nDamageAmount, DamageType nDamageType = DamageType.Force, DamagePower nDamagePower = DamagePower.Normal)
         {
-            VM.StackPush((int)nDamagePower);
-            VM.StackPush((int)nDamageType);
-            VM.StackPush(nDamageAmount);
-            VM.Call(79);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nDamagePower);
+            NWNXPInvoke.StackPushInteger((int)nDamageType);
+            NWNXPInvoke.StackPushInteger(nDamageAmount);
+            NWNXPInvoke.CallBuiltIn(79);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Create an Ability Increase effect
-        ///   - bAbilityToIncrease: ABILITY_*
+        ///   Create an Ability Increase effect.
         /// </summary>
         public static Effect EffectAbilityIncrease(AbilityType nAbilityToIncrease, int nModifyBy)
         {
-            VM.StackPush(nModifyBy);
-            VM.StackPush((int)nAbilityToIncrease);
-            VM.Call(80);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nModifyBy);
+            NWNXPInvoke.StackPushInteger((int)nAbilityToIncrease);
+            NWNXPInvoke.CallBuiltIn(80);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Create a Damage Resistance effect that removes the first nAmount points of
-        ///   damage of type nDamageType, up to nLimit (or infinite if nLimit is 0)
-        ///   - nDamageType: DAMAGE_TYPE_*
-        /// - nAmount: The amount of damage to soak each time the target is damaged.
-        /// - nLimit: How much damage the effect can absorb before disappearing.
-        ///   Set to zero for infinite.
-        /// - bRangedOnly: Set to TRUE to have this resistance only apply to ranged attacks.
+        ///   Create a Damage Resistance effect.
         /// </summary>
         public static Effect EffectDamageResistance(DamageType nDamageType, int nAmount, int nLimit = 0, bool bRangedOnly = false)
         {
-            VM.StackPush(bRangedOnly ? 1 : 0);
-            VM.StackPush(nLimit);
-            VM.StackPush(nAmount);
-            VM.StackPush((int)nDamageType);
-            VM.Call(81);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(bRangedOnly ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(nLimit);
+            NWNXPInvoke.StackPushInteger(nAmount);
+            NWNXPInvoke.StackPushInteger((int)nDamageType);
+            NWNXPInvoke.CallBuiltIn(81);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Create a Resurrection effect. This should be applied as an instantaneous effect.
+        ///   Create a Resurrection effect.
         /// </summary>
         public static Effect EffectResurrection()
         {
-            VM.Call(82);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(82);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Create a Summon Creature effect.  The creature is created and placed into the
-        ///   caller's party/faction.
-        ///   - sCreatureResref: Identifies the creature to be summoned
-        ///   - nVisualEffectId: VFX_*
-        ///   - fDelaySeconds: There can be delay between the visual effect being played, and the
-        ///   creature being added to the area
-        ///   - nUseAppearAnimation: should this creature play it's "appear" animation when it is
-        ///   summoned. If zero, it will just fade in somewhere near the target.  If the value is 1
-        ///   it will use the appear animation, and if it's 2 it will use appear2 (which doesn't exist for most creatures)
+        ///   Create a Summon Creature effect.
         /// </summary>
-        public static Effect EffectSummonCreature(string sCreatureResref, VisualEffect nVisualEffectId = VisualEffect.Vfx_Com_Sparks_Parry,
-            float fDelaySeconds = 0.0f, bool nUseAppearAnimation = false)
+        public static Effect EffectSummonCreature(string sCreatureResref, VisualEffect nVisualEffectId = VisualEffect.Vfx_Com_Sparks_Parry, float fDelaySeconds = 0.0f, bool nUseAppearAnimation = false)
         {
-            VM.StackPush(nUseAppearAnimation ? 1 : 0);
-            VM.StackPush(fDelaySeconds);
-            VM.StackPush((int)nVisualEffectId);
-            VM.StackPush(sCreatureResref);
-            VM.Call(83);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nUseAppearAnimation ? 1 : 0);
+            NWNXPInvoke.StackPushFloat(fDelaySeconds);
+            NWNXPInvoke.StackPushInteger((int)nVisualEffectId);
+            NWNXPInvoke.StackPushString(sCreatureResref);
+            NWNXPInvoke.CallBuiltIn(83);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Returns an effect of type EFFECT_TYPE_ETHEREAL which works just like EffectSanctuary
-        ///   except that the observers get no saving throw
+        ///   Returns an effect of type EFFECT_TYPE_ETHEREAL.
         /// </summary>
         public static Effect EffectEthereal()
         {
-            VM.Call(711);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(711);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Creates an effect that inhibits spells
-        ///   - nPercent - percentage of failure
-        ///   - nSpellSchool - the school of spells affected.
+        ///   Creates an effect that inhibits spells.
         /// </summary>
-        public static Effect EffectSpellFailure(int nPercent = 100,
-            SpellSchool nSpellSchool = SpellSchool.General)
+        public static Effect EffectSpellFailure(int nPercent = 100, SpellSchool nSpellSchool = SpellSchool.General)
         {
-            VM.StackPush((int)nSpellSchool);
-            VM.StackPush(nPercent);
-            VM.Call(690);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nSpellSchool);
+            NWNXPInvoke.StackPushInteger(nPercent);
+            NWNXPInvoke.CallBuiltIn(690);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Returns an effect that is guaranteed to dominate a creature
-        ///   Like EffectDominated but cannot be resisted
+        ///   Returns an effect that is guaranteed to dominate a creature.
         /// </summary>
         public static Effect EffectCutsceneDominated()
         {
-            VM.Call(604);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(604);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   returns an effect that will petrify the target
-        ///   * currently applies EffectParalyze and the stoneskin visual effect.
+        ///   Returns an effect that will petrify the target.
         /// </summary>
         public static Effect EffectPetrify()
         {
-            VM.Call(583);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(583);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   returns an effect that is guaranteed to paralyze a creature.
-        ///   this effect is identical to EffectParalyze except that it cannot be resisted.
+        ///   Returns an effect that is guaranteed to paralyze a creature.
         /// </summary>
         public static Effect EffectCutsceneParalyze()
         {
-            VM.Call(585);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(585);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
-
         /// <summary>
         ///   Create a Turn Resistance Decrease effect.
-        ///   - nHitDice: a positive number representing the number of hit dice for the
-        ///   /  decrease
         /// </summary>
         public static Effect EffectTurnResistanceDecrease(int nHitDice)
         {
-            VM.StackPush(nHitDice);
-            VM.Call(552);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nHitDice);
+            NWNXPInvoke.CallBuiltIn(552);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Turn Resistance Increase effect.
-        ///   - nHitDice: a positive number representing the number of hit dice for the
-        ///   increase
         /// </summary>
         public static Effect EffectTurnResistanceIncrease(int nHitDice)
         {
-            VM.StackPush(nHitDice);
-            VM.Call(553);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nHitDice);
+            NWNXPInvoke.CallBuiltIn(553);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Swarm effect.
-        ///   - nLooping: If this is TRUE, for the duration of the effect when one creature
-        ///   created by this effect dies, the next one in the list will be created.  If
-        ///   the last creature in the list dies, we loop back to the beginning and
-        ///   sCreatureTemplate1 will be created, and so on...
-        ///   - sCreatureTemplate1
-        ///   - sCreatureTemplate2
-        ///   - sCreatureTemplate3
-        ///   - sCreatureTemplate4
         /// </summary>
         public static Effect EffectSwarm(int nLooping, string sCreatureTemplate1, string sCreatureTemplate2 = "",
             string sCreatureTemplate3 = "", string sCreatureTemplate4 = "")
         {
-            VM.StackPush(sCreatureTemplate4);
-            VM.StackPush(sCreatureTemplate3);
-            VM.StackPush(sCreatureTemplate2);
-            VM.StackPush(sCreatureTemplate1);
-            VM.StackPush(nLooping);
-            VM.Call(510);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushString(sCreatureTemplate4);
+            NWNXPInvoke.StackPushString(sCreatureTemplate3);
+            NWNXPInvoke.StackPushString(sCreatureTemplate2);
+            NWNXPInvoke.StackPushString(sCreatureTemplate1);
+            NWNXPInvoke.StackPushInteger(nLooping);
+            NWNXPInvoke.CallBuiltIn(510);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Disappear/Appear effect.
-        ///   The object will "fly away" for the duration of the effect and will reappear
-        ///   at lLocation.
-        ///   - nAnimation determines which appear and disappear animations to use. Most creatures
-        ///   only have animation 1, although a few have 2 (like beholders)
         /// </summary>
         public static Effect EffectDisappearAppear(Location lLocation, int nAnimation = 1)
         {
-            VM.StackPush(nAnimation);
-            VM.StackPush((int)EngineStructure.Location, lLocation);
-            VM.Call(480);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nAnimation);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, lLocation);
+            NWNXPInvoke.CallBuiltIn(480);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Create a Disappear effect to make the object "fly away" and then destroy
-        ///   itself.
-        ///   - nAnimation determines which appear and disappear animations to use. Most creatures
-        ///   only have animation 1, although a few have 2 (like beholders)
+        ///   Create a Disappear effect.
         /// </summary>
         public static Effect EffectDisappear(int nAnimation = 1)
         {
-            VM.StackPush(nAnimation);
-            VM.Call(481);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nAnimation);
+            NWNXPInvoke.CallBuiltIn(481);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Create an Appear effect to make the object "fly in".
-        ///   - nAnimation determines which appear and disappear animations to use. Most creatures
-        ///   only have animation 1, although a few have 2 (like beholders)
+        ///   Create an Appear effect.
         /// </summary>
         public static Effect EffectAppear(int nAnimation = 1)
         {
-            VM.StackPush(nAnimation);
-            VM.Call(482);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nAnimation);
+            NWNXPInvoke.CallBuiltIn(482);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Create a Modify Attacks effect to add attacks.
-        ///   - nAttacks: maximum is 5, even with the effect stacked
-        ///   * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nAttacks > 5.
+        ///   Create a Modify Attacks effect.
         /// </summary>
         public static Effect EffectModifyAttacks(int nAttacks)
         {
-            VM.StackPush(nAttacks);
-            VM.Call(485);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nAttacks);
+            NWNXPInvoke.CallBuiltIn(485);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Create a Damage Shield effect which does (nDamageAmount + nRandomAmount)
-        ///   damage to any melee attacker on a successful attack of damage type nDamageType.
-        ///   - nDamageAmount: an integer value
-        ///   - nRandomAmount: DAMAGE_BONUS_*
-        ///   - nDamageType: DAMAGE_TYPE_*
-        ///   NOTE! You *must* use the DAMAGE_BONUS_* constants! Using other values may
-        ///   result in odd behaviour.
+        ///   Create a Damage Shield effect.
         /// </summary>
         public static Effect EffectDamageShield(int nDamageAmount, DamageBonus nRandomAmount, DamageType nDamageType)
         {
-            VM.StackPush((int)nDamageType);
-            VM.StackPush((int)nRandomAmount);
-            VM.StackPush(nDamageAmount);
-            VM.Call(487);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nDamageType);
+            NWNXPInvoke.StackPushInteger((int)nRandomAmount);
+            NWNXPInvoke.StackPushInteger(nDamageAmount);
+            NWNXPInvoke.CallBuiltIn(487);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Miss Chance effect.
-        ///   - nPercentage: 1-100 inclusive
-        ///   - nMissChanceType: MISS_CHANCE_TYPE_*
-        ///   * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nPercentage
-        ///   < 1 or
-        ///     nPercentage>
-        ///     100.
         /// </summary>
         public static Effect EffectMissChance(int nPercentage, MissChanceType nMissChanceType = MissChanceType.Normal)
         {
-            VM.StackPush((int)nMissChanceType);
-            VM.StackPush(nPercentage);
-            VM.Call(477);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nMissChanceType);
+            NWNXPInvoke.StackPushInteger(nPercentage);
+            NWNXPInvoke.CallBuiltIn(477);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Spell Level Absorption effect.
-        ///   - nMaxSpellLevelAbsorbed: maximum spell level that will be absorbed by the
-        ///   effect
-        ///   - nTotalSpellLevelsAbsorbed: maximum number of spell levels that will be
-        ///   absorbed by the effect
-        ///   - nSpellSchool: SPELL_SCHOOL_*
-        ///   * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if:
-        ///   nMaxSpellLevelAbsorbed is not between -1 and 9 inclusive, or nSpellSchool
-        ///   is invalid.
         /// </summary>
         public static Effect EffectSpellLevelAbsorption(int nMaxSpellLevelAbsorbed, int nTotalSpellLevelsAbsorbed = 0,
             SpellSchool nSpellSchool = SpellSchool.General)
         {
-            VM.StackPush((int)nSpellSchool);
-            VM.StackPush(nTotalSpellLevelsAbsorbed);
-            VM.StackPush(nMaxSpellLevelAbsorbed);
-            VM.Call(472);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nSpellSchool);
+            NWNXPInvoke.StackPushInteger(nTotalSpellLevelsAbsorbed);
+            NWNXPInvoke.StackPushInteger(nMaxSpellLevelAbsorbed);
+            NWNXPInvoke.CallBuiltIn(472);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Dispel Magic Best effect.
-        ///   If no parameter is specified, USE_CREATURE_LEVEL will be used. This will
-        ///   cause the dispel effect to use the level of the creature that created the
-        ///   effect.
         /// </summary>
         public static Effect EffectDispelMagicBest(int nCasterLevel = USE_CREATURE_LEVEL)
         {
-            VM.StackPush(nCasterLevel);
-            VM.Call(473);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nCasterLevel);
+            NWNXPInvoke.CallBuiltIn(473);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create an Invisibility effect.
-        ///   - nInvisibilityType: INVISIBILITY_TYPE_*
-        ///   * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nInvisibilityType
-        ///   is invalid.
         /// </summary>
         public static Effect EffectInvisibility(InvisibilityType nInvisibilityType)
         {
-            VM.StackPush((int)nInvisibilityType);
-            VM.Call(457);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nInvisibilityType);
+            NWNXPInvoke.CallBuiltIn(457);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Concealment effect.
-        ///   - nPercentage: 1-100 inclusive
-        ///   - nMissChanceType: MISS_CHANCE_TYPE_*
-        ///   * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nPercentage
-        ///   < 1 or
-        ///     nPercentage>
-        ///     100.
         /// </summary>
         public static Effect EffectConcealment(int nPercentage, MissChanceType nMissType = MissChanceType.Normal)
         {
-            VM.StackPush((int)nMissType);
-            VM.StackPush(nPercentage);
-            VM.Call(458);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nMissType);
+            NWNXPInvoke.StackPushInteger(nPercentage);
+            NWNXPInvoke.CallBuiltIn(458);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
@@ -835,21 +706,18 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Effect EffectDarkness()
         {
-            VM.Call(459);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(459);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Dispel Magic All effect.
-        ///   If no parameter is specified, USE_CREATURE_LEVEL will be used. This will
-        ///   cause the dispel effect to use the level of the creature that created the
-        ///   effect.
         /// </summary>
         public static Effect EffectDispelMagicAll(int nCasterLevel = USE_CREATURE_LEVEL)
         {
-            VM.StackPush(nCasterLevel);
-            VM.Call(460);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nCasterLevel);
+            NWNXPInvoke.CallBuiltIn(460);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
@@ -857,44 +725,39 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Effect EffectUltravision()
         {
-            VM.Call(461);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(461);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Negative Level effect.
-        ///   - nNumLevels: the number of negative levels to apply.
-        ///   * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nNumLevels > 100.
         /// </summary>
         public static Effect EffectNegativeLevel(int nNumLevels, bool bHPBonus = false)
         {
-            VM.StackPush(bHPBonus ? 1 : 0);
-            VM.StackPush(nNumLevels);
-            VM.Call(462);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(bHPBonus ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(nNumLevels);
+            NWNXPInvoke.CallBuiltIn(462);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
-
         /// <summary>
         ///   Create a Polymorph effect.
         /// </summary>
         public static Effect EffectPolymorph(int nPolymorphSelection, bool nLocked = false)
         {
-            VM.StackPush(nLocked ? 1 : 0);
-            VM.StackPush(nPolymorphSelection);
-            VM.Call(463);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nLocked ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(nPolymorphSelection);
+            NWNXPInvoke.CallBuiltIn(463);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Sanctuary effect.
-        ///   - nDifficultyClass: must be a non-zero, positive number
-        ///   * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nDifficultyClass <= 0.
         /// </summary>
         public static Effect EffectSanctuary(int nDifficultyClass)
         {
-            VM.StackPush(nDifficultyClass);
-            VM.Call(464);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nDifficultyClass);
+            NWNXPInvoke.CallBuiltIn(464);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
@@ -902,8 +765,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Effect EffectTrueSeeing()
         {
-            VM.Call(465);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(465);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
@@ -911,8 +774,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Effect EffectSeeInvisible()
         {
-            VM.Call(466);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(466);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
@@ -920,8 +783,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Effect EffectTimeStop()
         {
-            VM.Call(467);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(467);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
@@ -929,126 +792,100 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Effect EffectBlindness()
         {
-            VM.Call(468);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(468);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create an Ability Decrease effect.
-        ///   - nAbility: ABILITY_*
-        ///   - nModifyBy: This is the amount by which to decrement the ability
         /// </summary>
         public static Effect EffectAbilityDecrease(AbilityType nAbility, int nModifyBy)
         {
-            VM.StackPush(nModifyBy);
-            VM.StackPush((int)nAbility);
-            VM.Call(446);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nModifyBy);
+            NWNXPInvoke.StackPushInteger((int)nAbility);
+            NWNXPInvoke.CallBuiltIn(446);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create an Attack Decrease effect.
-        /// NOTE: On SWLOR, this is used for Accuracy.
-        ///   - nPenalty
-        ///   - nModifierType: ATTACK_BONUS_*
         /// </summary>
         public static Effect EffectAccuracyDecrease(int nPenalty, AttackBonus nModifierType = AttackBonus.Misc)
         {
-            VM.StackPush((int)nModifierType);
-            VM.StackPush(nPenalty);
-            VM.Call(447);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nModifierType);
+            NWNXPInvoke.StackPushInteger(nPenalty);
+            NWNXPInvoke.CallBuiltIn(447);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Damage Decrease effect.
-        ///   - nPenalty
-        ///   - nDamageType: DAMAGE_TYPE_*
         /// </summary>
         public static Effect EffectDamageDecrease(int nPenalty, DamageType nDamageType = DamageType.Force)
         {
-            VM.StackPush((int)nDamageType);
-            VM.StackPush(nPenalty);
-            VM.Call(448);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nDamageType);
+            NWNXPInvoke.StackPushInteger(nPenalty);
+            NWNXPInvoke.CallBuiltIn(448);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Damage Immunity Decrease effect.
-        ///   - nDamageType: DAMAGE_TYPE_*
-        ///   - nPercentImmunity
         /// </summary>
         public static Effect EffectDamageImmunityDecrease(int nDamageType, int nPercentImmunity)
         {
-            VM.StackPush(nPercentImmunity);
-            VM.StackPush(nDamageType);
-            VM.Call(449);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nPercentImmunity);
+            NWNXPInvoke.StackPushInteger(nDamageType);
+            NWNXPInvoke.CallBuiltIn(449);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create an AC Decrease effect.
-        ///   - nValue
-        ///   - nModifyType: AC_*
-        ///   - nDamageType: DAMAGE_TYPE_*
-        ///   * Default value for nDamageType should only ever be used in this function prototype.
         /// </summary>
         public static Effect EffectACDecrease(int nValue,
             ArmorClassModiferType nModifyType = ArmorClassModiferType.Dodge,
             AC nDamageType = AC.VsDamageTypeAll)
         {
-            VM.StackPush((int)nDamageType);
-            VM.StackPush((int)nModifyType);
-            VM.StackPush(nValue);
-            VM.Call(450);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nDamageType);
+            NWNXPInvoke.StackPushInteger((int)nModifyType);
+            NWNXPInvoke.StackPushInteger(nValue);
+            NWNXPInvoke.CallBuiltIn(450);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Movement Speed Decrease effect.
-        ///   - nPercentChange - range 0 through 99
-        ///   eg.
-        ///   0 = no change in speed
-        ///   50 = 50% slower
-        ///   99 = almost immobile
         /// </summary>
         public static Effect EffectMovementSpeedDecrease(int nPercentChange)
         {
-            VM.StackPush(nPercentChange);
-            VM.Call(451);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nPercentChange);
+            NWNXPInvoke.CallBuiltIn(451);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Saving Throw Decrease effect.
-        ///   - nSave: SAVING_THROW_* (not SAVING_THROW_TYPE_*)
-        ///   SAVING_THROW_ALL
-        ///   SAVING_THROW_FORT
-        ///   SAVING_THROW_REFLEX
-        ///   SAVING_THROW_WILL
-        ///   - nValue: size of the Saving Throw decrease
-        ///   - nSaveType: SAVING_THROW_TYPE_* (e.g. SAVING_THROW_TYPE_ACID )
         /// </summary>
         public static Effect EffectSavingThrowDecrease(int nSave, int nValue,
             SavingThrowType nSaveType = SavingThrowType.All)
         {
-            VM.StackPush((int)nSaveType);
-            VM.StackPush(nValue);
-            VM.StackPush(nSave);
-            VM.Call(452);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nSaveType);
+            NWNXPInvoke.StackPushInteger(nValue);
+            NWNXPInvoke.StackPushInteger(nSave);
+            NWNXPInvoke.CallBuiltIn(452);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Skill Decrease effect.
-        ///   * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nSkill is invalid.
         /// </summary>
         public static Effect EffectSkillDecrease(int nSkill, int nValue)
         {
-            VM.StackPush(nValue);
-            VM.StackPush(nSkill);
-            VM.Call(453);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nValue);
+            NWNXPInvoke.StackPushInteger(nSkill);
+            NWNXPInvoke.CallBuiltIn(453);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
@@ -1056,9 +893,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Effect EffectSpellResistanceDecrease(int nValue)
         {
-            VM.StackPush(nValue);
-            VM.Call(454);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nValue);
+            NWNXPInvoke.CallBuiltIn(454);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
@@ -1066,50 +903,44 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Event EventActivateItem(uint oItem, Location lTarget, uint oTarget = OBJECT_INVALID)
         {
-            VM.StackPush(oTarget);
-            VM.StackPush((int)EngineStructure.Location, lTarget);
-            VM.StackPush(oItem);
-            VM.Call(424);
-            return VM.StackPopStruct((int)EngineStructure.Event);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, lTarget);
+            NWNXPInvoke.StackPushObject(oItem);
+            NWNXPInvoke.CallBuiltIn(424);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Event);
         }
 
         /// <summary>
         ///   Create a Hit Point Change When Dying effect.
-        ///   - fHitPointChangePerRound: this can be positive or negative, but not zero.
-        ///   * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if fHitPointChangePerRound is 0.
         /// </summary>
         public static Effect EffectHitPointChangeWhenDying(float fHitPointChangePerRound)
         {
-            VM.StackPush(fHitPointChangePerRound);
-            VM.Call(387);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushFloat(fHitPointChangePerRound);
+            NWNXPInvoke.CallBuiltIn(387);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Turned effect.
-        ///   Turned effects are supernatural by default.
         /// </summary>
         public static Effect EffectTurned()
         {
-            VM.Call(379);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(379);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Set eEffect to be versus a specific alignment.
-        ///   - eEffect
-        ///   - nLawChaos: ALIGNMENT_LAWFUL/ALIGNMENT_CHAOTIC/ALIGNMENT_ALL
-        ///   - nGoodEvil: ALIGNMENT_GOOD/ALIGNMENT_EVIL/ALIGNMENT_ALL
         /// </summary>
         public static Effect VersusAlignmentEffect(Effect eEffect,
             Alignment nLawChaos = Alignment.All,
             Alignment nGoodEvil = Alignment.All)
         {
-            VM.StackPush((int)nGoodEvil);
-            VM.StackPush((int)nLawChaos);
-            VM.StackPush((int)EngineStructure.Effect, eEffect);
-            VM.Call(355);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nGoodEvil);
+            NWNXPInvoke.StackPushInteger((int)nLawChaos);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(355);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
@@ -1119,10 +950,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Effect VersusRacialTypeEffect(Effect eEffect, RacialType nRacialType)
         {
-            VM.StackPush((int)nRacialType);
-            VM.StackPush((int)EngineStructure.Effect, eEffect);
-            VM.Call(356);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nRacialType);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(356);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
@@ -1130,76 +961,60 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Effect VersusTrapEffect(Effect eEffect)
         {
-            VM.StackPush((int)EngineStructure.Effect, eEffect);
-            VM.Call(357);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(357);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Skill Increase effect.
-        ///   - nSkill: SKILL_*
-        ///   - nValue
-        ///   * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nSkill is invalid.
         /// </summary>
         public static Effect EffectSkillIncrease(NWNSkillType nSkill, int nValue)
         {
-            VM.StackPush(nValue);
-            VM.StackPush((int)nSkill);
-            VM.Call(351);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nValue);
+            NWNXPInvoke.StackPushInteger((int)nSkill);
+            NWNXPInvoke.CallBuiltIn(351);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Temporary Hitpoints effect.
-        ///   - nHitPoints: a positive integer
-        ///   * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nHitPoints < 0.
         /// </summary>
         public static Effect EffectTemporaryHitpoints(int nHitPoints)
         {
-            VM.StackPush(nHitPoints);
-            VM.Call(314);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nHitPoints);
+            NWNXPInvoke.CallBuiltIn(314);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Creates a conversation event.
-        ///   Note: This only creates the event. The event wont actually trigger until SignalEvent()
-        ///   is called using this created conversation event as an argument.
-        ///   For example:
-        ///   SignalEvent(oCreature, EventConversation());
-        ///   Once the event has been signaled. The script associated with the OnConversation event will
-        ///   run on the creature oCreature.
-        ///   To specify the OnConversation script that should run, view the Creature Properties on
-        ///   the creature and click on the Scripts Tab. Then specify a script for the OnConversation event.
         /// </summary>
         public static Event EventConversation()
         {
-            VM.Call(295);
-            return VM.StackPopStruct((int)EngineStructure.Event);
+            NWNXPInvoke.CallBuiltIn(295);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Event);
         }
 
         /// <summary>
         ///   Creates a Damage Immunity Increase effect.
-        ///   - nDamageType: DAMAGE_TYPE_*
-        ///   - nPercentImmunity
         /// </summary>
         public static Effect EffectDamageImmunityIncrease(DamageType nDamageType, int nPercentImmunity)
         {
-            VM.StackPush(nPercentImmunity);
-            VM.StackPush((int)nDamageType);
-            VM.Call(275);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nPercentImmunity);
+            NWNXPInvoke.StackPushInteger((int)nDamageType);
+            NWNXPInvoke.CallBuiltIn(275);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create an Immunity effect.
-        ///   - nImmunityType: IMMUNITY_TYPE_*
         /// </summary>
         public static Effect EffectImmunity(ImmunityType nImmunityType)
         {
-            VM.StackPush((int)nImmunityType);
-            VM.Call(273);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nImmunityType);
+            NWNXPInvoke.CallBuiltIn(273);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
@@ -1207,8 +1022,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Effect EffectHaste()
         {
-            VM.Call(270);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(270);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
@@ -1216,30 +1031,28 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Effect EffectSlow()
         {
-            VM.Call(271);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(271);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Poison effect.
-        ///   - nPoisonType: POISON_*
         /// </summary>
         public static Effect EffectPoison(Poison nPoisonType)
         {
-            VM.StackPush((int)nPoisonType);
-            VM.Call(250);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nPoisonType);
+            NWNXPInvoke.CallBuiltIn(250);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Disease effect.
-        ///   - nDiseaseType: DISEASE_*
         /// </summary>
         public static Effect EffectDisease(Disease nDiseaseType)
         {
-            VM.StackPush((int)nDiseaseType);
-            VM.Call(251);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nDiseaseType);
+            NWNXPInvoke.CallBuiltIn(251);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
@@ -1247,396 +1060,202 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Effect EffectSilence()
         {
-            VM.Call(252);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(252);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Spell Resistance Increase effect.
-        ///   - nValue: size of spell resistance increase
         /// </summary>
         public static Effect EffectSpellResistanceIncrease(int nValue)
         {
-            VM.StackPush(nValue);
-            VM.Call(212);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nValue);
+            NWNXPInvoke.CallBuiltIn(212);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Create a Beam effect.
-        ///   - nBeamVisualEffect: VFX_BEAM_*
-        ///   - oEffector: the beam is emitted from this creature
-        ///   - nBodyPart: BODY_NODE_*
-        ///   - bMissEffect: If this is TRUE, the beam will fire to a random vector near or
-        ///   past the target
-        ///   * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nBeamVisualEffect is
-        ///   not valid.
         /// </summary>
         public static Effect EffectBeam(VisualEffect nBeamVisualEffect, uint oEffector, BodyNode nBodyPart, bool bMissEffect = false)
         {
-            VM.StackPush(bMissEffect ? 1 : 0);
-            VM.StackPush((int)nBodyPart);
-            VM.StackPush(oEffector);
-            VM.StackPush((int)nBeamVisualEffect);
-            VM.Call(207);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(bMissEffect ? 1 : 0);
+            NWNXPInvoke.StackPushInteger((int)nBodyPart);
+            NWNXPInvoke.StackPushObject(oEffector);
+            NWNXPInvoke.StackPushInteger((int)nBeamVisualEffect);
+            NWNXPInvoke.CallBuiltIn(207);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Link the two supplied effects, returning eChildEffect as a child of
-        ///   eParentEffect.
-        ///   Note: When applying linked effects if the target is immune to all valid
-        ///   effects all other effects will be removed as well. This means that if you
-        ///   apply a visual effect and a silence effect (in a link) and the target is
-        ///   immune to the silence effect that the visual effect will get removed as well.
-        ///   Visual Effects are not considered "valid" effects for the purposes of
-        ///   determining if an effect will be removed or not and as such should never be
-        ///   packaged *only* with other visual effects in a link.
+        ///   Link the two supplied effects.
         /// </summary>
         public static Effect EffectLinkEffects(Effect eChildEffect, Effect eParentEffect)
         {
-            VM.StackPush((int)EngineStructure.Effect, eParentEffect);
-            VM.StackPush((int)EngineStructure.Effect, eChildEffect);
-            VM.Call(199);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eParentEffect);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eChildEffect);
+            NWNXPInvoke.CallBuiltIn(199);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
-
         /// <summary>
         ///   * Create a Visual Effect that can be applied to an object.
-        ///   - nVisualEffectId
-        ///   - nMissEffect: if this is TRUE, a random vector near or past the target will
-        ///   be generated, on which to play the effect
         /// </summary>
         public static Effect EffectVisualEffect(VisualEffect visualEffectID, bool nMissEffect = false, float fScale = 1.0f, Vector3 vTranslate = new Vector3(), Vector3 vRotate = new Vector3())
         {
-            VM.StackPush(vRotate);
-            VM.StackPush(vTranslate);
-            VM.StackPush(fScale);
-            VM.StackPush(nMissEffect ? 1 : 0);
-            VM.StackPush((int)visualEffectID);
+            NWNXPInvoke.StackPushVector(vRotate);
+            NWNXPInvoke.StackPushVector(vTranslate);
+            NWNXPInvoke.StackPushFloat(fScale);
+            NWNXPInvoke.StackPushInteger(nMissEffect ? 1 : 0);
+            NWNXPInvoke.StackPushInteger((int)visualEffectID);
 
-            VM.Call(180);
+            NWNXPInvoke.CallBuiltIn(180);
 
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         ///   Apply eEffect to oTarget.
         /// </summary>
-        public static void ApplyEffectToObject(DurationType nDurationType, Effect eEffect, uint oTarget,
-            float fDuration = 0.0f)
+        public static void ApplyEffectToObject(DurationType nDurationType, Effect eEffect, uint oTarget, float fDuration = 0.0f)
         {
-            VM.StackPush(fDuration);
-            VM.StackPush(oTarget);
-            VM.StackPush((int)EngineStructure.Effect, eEffect);
-            VM.StackPush((int)nDurationType);
-            VM.Call(220);
+            NWNXPInvoke.StackPushFloat(fDuration);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.StackPushInteger((int)nDurationType);
+            NWNXPInvoke.CallBuiltIn(220);
         }
 
         /// <summary>
         ///   Get the effect type (EFFECT_TYPE_*) of eEffect.
-        /// - bAllTypes: Set to TRUE to return additional values the game used to return EFFECT_INVALIDEFFECT for, specifically:
-        ///  EFFECT_TYPE: APPEAR, CUTSCENE_DOMINATED, DAMAGE, DEATH, DISAPPEAR, HEAL, HITPOINTCHANGEWHENDYING, KNOCKDOWN, MODIFYNUMATTACKS, SUMMON_CREATURE, TAUNT, WOUNDING
-        ///   * Return value if eEffect is invalid: EFFECT_INVALIDEFFECT
         /// </summary>
         public static EffectTypeScript GetEffectType(Effect eEffect, bool bAllTypes = false)
         {
-            VM.StackPush(bAllTypes ? 1 : 0);
-            VM.StackPush((int)EngineStructure.Effect, eEffect);
-            VM.Call(170);
-            return (EffectTypeScript)VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(bAllTypes ? 1 : 0);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(170);
+            return (EffectTypeScript)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
         ///   Create an Area Of Effect effect in the area of the creature it is applied to.
-        ///   If the scripts are not specified, default ones will be used.
         /// </summary>
-        public static Effect EffectAreaOfEffect(AreaOfEffect nAreaEffect, string sOnEnterScript = "",
-            string sHeartbeatScript = "", string sOnExitScript = "")
+        public static Effect EffectAreaOfEffect(AreaOfEffect nAreaEffect, string sOnEnterScript = "", string sHeartbeatScript = "", string sOnExitScript = "")
         {
-            VM.StackPush(sOnExitScript);
-            VM.StackPush(sHeartbeatScript);
-            VM.StackPush(sOnEnterScript);
-            VM.StackPush((int)nAreaEffect);
-            VM.Call(171);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushString(sOnExitScript);
+            NWNXPInvoke.StackPushString(sHeartbeatScript);
+            NWNXPInvoke.StackPushString(sOnEnterScript);
+            NWNXPInvoke.StackPushInteger((int)nAreaEffect);
+            NWNXPInvoke.CallBuiltIn(171);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        ///   Create a Regenerate effect.
-        ///   - nAmount: amount of damage to be regenerated per time interval
-        ///   - fIntervalSeconds: length of interval in seconds
-        /// </summary>
-        public static Effect EffectRegenerate(int nAmount, float fIntervalSeconds)
-        {
-            VM.StackPush(fIntervalSeconds);
-            VM.StackPush(nAmount);
-            VM.Call(164);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
-        }
-
-        /// <summary>
-        ///   Create a Movement Speed Increase effect.
-        ///   - nPercentChange - range 0 through 99
-        ///   eg.
-        ///   0 = no change in speed
-        ///   50 = 50% faster
-        ///   99 = almost twice as fast
-        /// </summary>
-        public static Effect EffectMovementSpeedIncrease(int nPercentChange)
-        {
-            VM.StackPush(nPercentChange);
-            VM.Call(165);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
-        }
-
-        /// <summary>
-        ///   Create a Charm effect
-        /// </summary>
-        public static Effect EffectCharmed()
-        {
-            VM.Call(156);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
-        }
-
-        /// <summary>
-        ///   Create a Confuse effect
-        /// </summary>
-        public static Effect EffectConfused()
-        {
-            VM.Call(157);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
-        }
-
-        /// <summary>
-        ///   Create a Frighten effect
-        /// </summary>
-        public static Effect EffectFrightened()
-        {
-            VM.Call(158);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
-        }
-
-        /// <summary>
-        ///   Create a Dominate effect
-        /// </summary>
-        public static Effect EffectDominated()
-        {
-            VM.Call(159);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
-        }
-
-        /// <summary>
-        ///   Create a Daze effect
-        /// </summary>
-        public static Effect EffectDazed()
-        {
-            VM.Call(160);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
-        }
-
-        /// <summary>
-        ///   Create a Stun effect
-        /// </summary>
-        public static Effect EffectStunned()
-        {
-            VM.Call(161);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
-        }
-
-        /// <summary>
-        ///   Create a Sleep effect
-        /// </summary>
-        public static Effect EffectSleep()
-        {
-            VM.Call(154);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
-        }
-
-        /// <summary>
-        ///   Create a Paralyze effect
-        /// </summary>
-        public static Effect EffectParalyze()
-        {
-            VM.Call(148);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
-        }
-
-        /// <summary>
-        ///   Create a Spell Immunity effect.
-        ///   There is a known bug with this function. There *must* be a parameter specified
-        ///   when this is called (even if the desired parameter is SPELL_ALL_SPELLS),
-        ///   otherwise an effect of type EFFECT_TYPE_INVALIDEFFECT will be returned.
-        ///   - nImmunityToSpell: SPELL_*
-        ///   * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nImmunityToSpell is
-        ///   invalid.
-        /// </summary>
-        public static Effect EffectSpellImmunity(Spell nImmunityToSpell = Spell.AllSpells)
-        {
-            VM.StackPush((int)nImmunityToSpell);
-            VM.Call(149);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
-        }
-
-        /// <summary>
-        ///   Create a Deaf effect
-        /// </summary>
-        public static Effect EffectDeaf()
-        {
-            VM.Call(150);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
-        }
-
-
-        /// <summary>
-        ///  Get the integer parameter of eEffect at nIndex.
-        ///  nIndex bounds: 0 to 7 inclusive
-        ///  Some experimentation will be needed to find the right index for the value you wish to determine.
-        ///  Returns: the value or 0 on error/when not set.
+        ///   Get the integer parameter of eEffect at nIndex.
         /// </summary>
         public static int GetEffectInteger(Effect eEffect, int nIndex)
         {
-            VM.StackPush(nIndex);
-            VM.StackPush((int) EngineStructure.Effect, eEffect.Handle);
-            VM.Call(939);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(939);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
         /// Get the float parameter of eEffect at nIndex.
-        /// * nIndex bounds: 0 to 3 inclusive
-        /// * Some experimentation will be needed to find the right index for the value you wish to determine.
-        /// Returns: the value or 0.0f on error/when not set.
         /// </summary>
         public static float GetEffectFloat(Effect eEffect, int nIndex)
         {
-            VM.StackPush(nIndex);
-            VM.StackPush((int)EngineStructure.Effect, eEffect.Handle);
-            VM.Call(940);
-            return VM.StackPopFloat();
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(940);
+            return NWNXPInvoke.StackPopFloat();
         }
 
         /// <summary>
         /// Get the string parameter of eEffect at nIndex.
-        /// * nIndex bounds: 0 to 5 inclusive
-        /// * Some experimentation will be needed to find the right index for the value you wish to determine.
-        /// Returns: the value or "" on error/when not set.
         /// </summary>
         public static string GetEffectString(Effect eEffect, int nIndex)
         {
-            VM.StackPush(nIndex);
-            VM.StackPush((int)EngineStructure.Effect, eEffect.Handle);
-            VM.Call(941);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(941);
+            return NWNXPInvoke.StackPopString();
         }
-        
+
         /// <summary>
         /// Get the object parameter of eEffect at nIndex.
-        /// * nIndex bounds: 0 to 3 inclusive
-        /// * Some experimentation will be needed to find the right index for the value you wish to determine.
-        /// Returns: the value or OBJECT_INVALID on error/when not set.
         /// </summary>
         public static uint GetEffectObject(Effect eEffect, int nIndex)
         {
-            VM.StackPush(nIndex);
-            VM.StackPush((int)EngineStructure.Effect, eEffect.Handle);
-            VM.Call(942);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(942);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
         /// Get the vector parameter of eEffect at nIndex.
         /// * nIndex bounds: 0 to 1 inclusive
-        /// * Some experimentation will be needed to find the right index for the value you wish to determine.
-        /// Returns: the value or {0.0f, 0.0f, 0.0f} on error/when not set.
         /// </summary>
         public static Vector3 GetEffectVector(Effect eEffect, int nIndex)
         {
-            VM.StackPush(nIndex);
-            VM.StackPush((int)EngineStructure.Effect, eEffect.Handle);
-            VM.Call(943);
-            return VM.StackPopVector();
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(943);
+            return NWNXPInvoke.StackPopVector();
         }
 
         /// <summary>
         /// Create a RunScript effect.
-        /// Notes: When applied as instant effect, only sOnAppliedScript will fire.
-        ///        In the scripts, OBJECT_SELF will be the object the effect is applied to.
         /// </summary>
-        /// <param name="sOnAppliedScript">An optional script to execute when the effect is applied.</param>
-        /// <param name="sOnRemovedScript">An optional script to execute when the effect is removed.</param>
-        /// <param name="sOnIntervalScript">An optional script to execute every fInterval seconds.</param>
-        /// <param name="fInterval">The interval in seconds, must be >0.0f if an interval script is set. Very low values may have an adverse effect on performance.</param>
-        /// <param name="sData">An optional string of data saved in the effect, retrievable with GetEffectString() at index 0.</param>
-        /// <returns></returns>
         public static Effect EffectRunScript(string sOnAppliedScript = "", string sOnRemovedScript = "", string sOnIntervalScript = "", float fInterval = 0.0f, string sData = "")
         {
-            VM.StackPush(sData);
-            VM.StackPush(fInterval);
-            VM.StackPush(sOnIntervalScript);
-            VM.StackPush(sOnRemovedScript);
-            VM.StackPush(sOnAppliedScript);
-            VM.Call(955);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushString(sData);
+            NWNXPInvoke.StackPushFloat(fInterval);
+            NWNXPInvoke.StackPushString(sOnIntervalScript);
+            NWNXPInvoke.StackPushString(sOnRemovedScript);
+            NWNXPInvoke.StackPushString(sOnAppliedScript);
+            NWNXPInvoke.CallBuiltIn(955);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         /// Get the effect that last triggered an EffectRunScript() script.
-        /// Note: This can be used to get the creator or tag, among others, of the EffectRunScript() in one of its scripts.
         /// </summary>
-        /// <returns>The effect that last triggered an EffectRunScript() script.</returns>
         public static Effect GetLastRunScriptEffect()
         {
-            VM.Call(956);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(956);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        /// Get the script type (RUNSCRIPT_EFFECT_SCRIPT_TYPE_*) of the last triggered EffectRunScript() script.
-        /// * Returns 0 when called outside of an EffectRunScript() script.
+        /// Hides the effect icon of eEffect.
         /// </summary>
-        /// <returns></returns>
-        public static int GetLastRunScriptEffectScriptType()
-        {
-            VM.Call(957);
-            return VM.StackPopInt();
-        }
-
-        /// <summary>
-        /// Hides the effect icon of eEffect and of all effects currently linked to it.
-        /// </summary>
-        /// <param name="eEffect"></param>
-        /// <returns></returns>
         public static Effect HideEffectIcon(Effect eEffect)
         {
-            VM.Call(958);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(958);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         /// Create an Icon effect.
-        /// * nIconID: The effect icon (EFFECT_ICON_*) to display.
-        ///            Using the icon for Poison/Disease will also color the health bar green/brown, useful to simulate custom poisons/diseases.
-        /// Returns an effect of type EFFECT_TYPE_INVALIDEFFECT when nIconID is < 1 or > 255.
         /// </summary>
         public static Effect EffectIcon(EffectIconType nIconId)
         {
-            VM.StackPush((int)nIconId);
-            VM.Call(959);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nIconId);
+            NWNXPInvoke.CallBuiltIn(959);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
         /// Set the subtype of eEffect to Unyielding and return eEffect.
-        /// (Effects default to magical if the subtype is not set)
-        /// Unyielding effects are not removed by resting, death or dispel magic, only by RemoveEffect().
-        /// Note: effects that modify state, Stunned/Knockdown/Deaf etc, WILL be removed on death.
         /// </summary>
         public static Effect UnyieldingEffect(Effect eEffect)
         {
-            VM.StackPush(eEffect);
-            VM.Call(1036);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(1036);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
@@ -1644,93 +1263,100 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Effect IgnoreEffectImmunity(Effect eEffect)
         {
-            VM.StackPush(eEffect);
-            VM.Call(1037);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(1037);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        /// Create a Pacified effect, making the creature unable to attack anyone
+        /// Create a Pacified effect.
         /// </summary>
         public static Effect EffectPacified()
         {
-            VM.Call(1089);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(1089);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        /// Returns the given effects Link ID. There is no guarantees about this identifier other than
-        /// it is unique and the same for all effects linked to it.
+        /// Get the Link ID of the given effect.
         /// </summary>
         public static string GetEffectLinkId(Effect eEffect)
         {
-            VM.StackPush(eEffect);
-            VM.Call(1096);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(1096);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
-        /// Creates a bonus feat effect. These act like the Bonus Feat item property,
-        /// and do not work as feat prerequisites for levelup purposes.
-        /// - nFeat: FEAT_*
+        /// Creates a bonus feat effect.
         /// </summary>
         public static Effect EffectBonusFeat(int nFeat)
         {
-            VM.StackPush(nFeat);
-            VM.Call(1107);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nFeat);
+            NWNXPInvoke.CallBuiltIn(1107);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        /// Provides immunity to the effects of EffectTimeStop which allows actions during other creatures time stop effects
+        /// Provides immunity to the effects of EffectTimeStop.
         /// </summary>
         public static Effect EffectTimeStopImmunity()
         {
-            VM.Call(1112);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(1112);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
 
         /// <summary>
-        /// Forces the creature to always walk
+        /// Forces the creature to always walk.
         /// </summary>
         public static Effect EffectForceWalk()
         {
-            VM.Call(1117);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.CallBuiltIn(1117);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
-        // Sets the effect creator
-        // - oCreator: The creator of the effect. Can be OBJECT_INVALID.
+
+        /// <summary>
+        /// Sets the effect creator.
+        /// </summary>
         public static Effect SetEffectCreator(Effect eEffect, uint oCreator)
         {
-            VM.StackPush(oCreator);
-            VM.StackPush(eEffect);
-            VM.Call(1123);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushObject(oCreator);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(1123);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
-        // Sets the effect caster level
-        // - nCasterLevel: The caster level of the effect for the purposes of dispel magic and GetEffectCasterlevel. Must be >= 0.
+
+        /// <summary>
+        /// Sets the effect caster level.
+        /// </summary>
         public static Effect SetEffectCasterLevel(Effect eEffect, int nCasterLevel)
         {
-            VM.StackPush(nCasterLevel);
-            VM.StackPush(eEffect);
-            VM.Call(1124);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nCasterLevel);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(1124);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
-        // Sets the effect spell id
-        // - nSpellId: The spell id for the purposes of effect stacking, dispel magic and GetEffectSpellId. Must be >= -1 (-1 being invalid/no spell)
+
+        /// <summary>
+        /// Sets the effect spell ID.
+        /// </summary>
         public static Effect SetEffectSpellId(Effect eEffect, Spell nSpellId)
         {
-            VM.StackPush((int)nSpellId);
-            VM.StackPush(eEffect);
-            VM.Call(1125);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger((int)nSpellId);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eEffect);
+            NWNXPInvoke.CallBuiltIn(1125);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
-        // Create an Enemy Attack Bonus effect. Creatures attacking the given creature with melee/ranged attacks or touch attacks get a bonus to hit.
+
+        /// <summary>
+        /// Create an Enemy Attack Bonus effect.
+        /// </summary>
         public static Effect EffectEnemyAttackBonus(int nBonus)
         {
-            VM.StackPush(nBonus);
-            VM.Call(1146);
-            return VM.StackPopStruct((int)EngineStructure.Effect);
+            NWNXPInvoke.StackPushInteger(nBonus);
+            NWNXPInvoke.CallBuiltIn(1146);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Effect);
         }
+
     }
 }

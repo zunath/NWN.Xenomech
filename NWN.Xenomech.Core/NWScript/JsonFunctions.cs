@@ -1,23 +1,23 @@
-﻿using NWN.Xenomech.Core.NWScript.Enum;
+﻿using NWN.Xenomech.Core.Interop;
+using NWN.Xenomech.Core.NWScript.Enum;
 
 namespace NWN.Xenomech.Core.NWScript
 {
     public partial class NWScript
-    {
-        /// <summary>
-        /// Parse the given string as a valid json value, and returns the corresponding type.
-        /// Returns a JSON_TYPE_NULL on error.
-        /// Check JsonGetError() to see the parse error, if any.
-        /// NB: The parsed string needs to be in game-local encoding, but the generated json structure
-        ///     will contain UTF-8 data.
-        /// </summary>
+    {/// <summary>
+     /// Parse the given string as a valid json value, and returns the corresponding type.
+     /// Returns a JSON_TYPE_NULL on error.
+     /// Check JsonGetError() to see the parse error, if any.
+     /// NB: The parsed string needs to be in game-local encoding, but the generated json structure
+     ///     will contain UTF-8 data.
+     /// </summary>
         public static Json JsonParse(string jValue, int nIndent = -1)
         {
-            VM.StackPush(nIndent);
-            VM.StackPush(jValue);
-            VM.Call(968);
+            NWNXPInvoke.StackPushInteger(nIndent);
+            NWNXPInvoke.StackPushString(jValue);
+            NWNXPInvoke.CallBuiltIn(968);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
@@ -28,11 +28,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string JsonDump(Json jValue, int nIndent = -1)
         {
-            VM.StackPush(nIndent);
-            VM.StackPush((int)EngineStructure.Json, jValue);
-            VM.Call(969);
+            NWNXPInvoke.StackPushInteger(nIndent);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jValue);
+            NWNXPInvoke.CallBuiltIn(969);
 
-            return VM.StackPopString();
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -41,10 +41,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static JsonType JsonGetType(Json jValue)
         {
-            VM.StackPush((int)EngineStructure.Json, jValue);
-            VM.Call(970);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jValue);
+            NWNXPInvoke.CallBuiltIn(970);
 
-            return (JsonType) VM.StackPopInt();
+            return (JsonType)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -56,10 +56,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int JsonGetLength(Json jValue)
         {
-            VM.StackPush((int)EngineStructure.Json, jValue);
-            VM.Call(971);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jValue);
+            NWNXPInvoke.CallBuiltIn(971);
 
-            return VM.StackPopInt();
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -68,10 +68,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string JsonGetError(Json jValue)
         {
-            VM.StackPush((int)EngineStructure.Json, jValue);
-            VM.Call(972);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jValue);
+            NWNXPInvoke.CallBuiltIn(972);
 
-            return VM.StackPopString();
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -79,10 +79,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Json JsonNull(string sError = "")
         {
-            VM.StackPush(sError);
-            VM.Call(973);
+            NWNXPInvoke.StackPushString(sError);
+            NWNXPInvoke.CallBuiltIn(973);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
@@ -90,8 +90,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Json JsonObject()
         {
-            VM.Call(974);
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            NWNXPInvoke.CallBuiltIn(974);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
@@ -99,8 +99,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Json JsonArray()
         {
-            VM.Call(975);
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            NWNXPInvoke.CallBuiltIn(975);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
@@ -109,10 +109,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Json JsonString(string sValue)
         {
-            VM.StackPush(sValue);
-            VM.Call(976);
+            NWNXPInvoke.StackPushString(sValue);
+            NWNXPInvoke.CallBuiltIn(976);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
@@ -120,10 +120,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Json JsonInt(int nValue)
         {
-            VM.StackPush(nValue);
-            VM.Call(977);
+            NWNXPInvoke.StackPushInteger(nValue);
+            NWNXPInvoke.CallBuiltIn(977);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
@@ -131,21 +131,21 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Json JsonFloat(float fValue)
         {
-            VM.StackPush(fValue);
-            VM.Call(978);
+            NWNXPInvoke.StackPushFloat(fValue);
+            NWNXPInvoke.CallBuiltIn(978);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
-        /// Create a json bool valye.
+        /// Create a json bool value.
         /// </summary>
         public static Json JsonBool(bool bValue)
         {
-            VM.StackPush(bValue ? 1 : 0);
-            VM.Call(979);
+            NWNXPInvoke.StackPushInteger(bValue ? 1 : 0);
+            NWNXPInvoke.CallBuiltIn(979);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
@@ -155,10 +155,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string JsonGetString(Json jValue)
         {
-            VM.StackPush((int)EngineStructure.Json, jValue);
-            VM.Call(980);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jValue);
+            NWNXPInvoke.CallBuiltIn(980);
 
-            return VM.StackPopString();
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -171,10 +171,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int JsonGetInt(Json jValue)
         {
-            VM.StackPush((int)EngineStructure.Json, jValue);
-            VM.Call(981);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jValue);
+            NWNXPInvoke.CallBuiltIn(981);
 
-            return VM.StackPopInt();
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -186,10 +186,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static float JsonGetFloat(Json jValue)
         {
-            VM.StackPush((int)EngineStructure.Json, jValue);
-            VM.Call(982);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jValue);
+            NWNXPInvoke.CallBuiltIn(982);
 
-            return VM.StackPopInt();
+            return NWNXPInvoke.StackPopFloat();
         }
 
         /// <summary>
@@ -198,50 +198,49 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Json JsonObjectKeys(Json jObject)
         {
-            VM.StackPush((int)EngineStructure.Json, jObject);
-            VM.Call(983);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jObject);
+            NWNXPInvoke.CallBuiltIn(983);
 
-            return VM.StackPopStruct((int) EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
-
         /// <summary>
-        /// Returns the key value of sKey on the object jObect.
-        /// Returns a null json value if jObject is not a object or sKey does not exist on the object, with GetJsonError() filled in.
+        /// Returns the key value of sKey on the object jObject.
+        /// Returns a null json value if jObject is not an object or sKey does not exist on the object, with GetJsonError() filled in.
         /// </summary>
         public static Json JsonObjectGet(Json jObject, string sKey)
         {
-            VM.StackPush(sKey);
-            VM.StackPush((int)EngineStructure.Json, jObject);
-            VM.Call(984);
+            NWNXPInvoke.StackPushString(sKey);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jObject);
+            NWNXPInvoke.CallBuiltIn(984);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
         /// Returns a modified copy of jObject with the key at sKey set to jValue.
-        /// Returns a json null value if jObject is not a object, with GetJsonError() filled in.
+        /// Returns a json null value if jObject is not an object, with GetJsonError() filled in.
         /// </summary>
         public static Json JsonObjectSet(Json jObject, string sKey, Json jValue)
         {
-            VM.StackPush((int)EngineStructure.Json, jValue);
-            VM.StackPush(sKey);
-            VM.StackPush((int)EngineStructure.Json, jObject);
-            VM.Call(985);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jValue);
+            NWNXPInvoke.StackPushString(sKey);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jObject);
+            NWNXPInvoke.CallBuiltIn(985);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
         /// Returns a modified copy of jObject with the key at sKey deleted.
-        /// Returns a json null value if jObject is not a object, with GetJsonError() filled in.
+        /// Returns a json null value if jObject is not an object, with GetJsonError() filled in.
         /// </summary>
         public static Json JsonObjectDel(Json jObject, string sKey)
         {
-            VM.StackPush(sKey);
-            VM.StackPush((int)EngineStructure.Json, jObject);
-            VM.Call(986);
+            NWNXPInvoke.StackPushString(sKey);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jObject);
+            NWNXPInvoke.CallBuiltIn(986);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
@@ -250,11 +249,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Json JsonArrayGet(Json jArray, int nIndex)
         {
-            VM.StackPush(nIndex);
-            VM.StackPush((int)EngineStructure.Json, jArray);
-            VM.Call(987);
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jArray);
+            NWNXPInvoke.CallBuiltIn(987);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
@@ -264,12 +263,12 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Json JsonArraySet(Json jArray, int nIndex, Json jValue)
         {
-            VM.StackPush((int)EngineStructure.Json, jValue);
-            VM.StackPush(nIndex);
-            VM.StackPush((int)EngineStructure.Json, jArray);
-            VM.Call(988);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jValue);
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jArray);
+            NWNXPInvoke.CallBuiltIn(988);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
@@ -282,12 +281,12 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Json JsonArrayInsert(Json jArray, Json jValue, int nIndex = -1)
         {
-            VM.StackPush(nIndex);
-            VM.StackPush((int)EngineStructure.Json, jValue);
-            VM.StackPush((int)EngineStructure.Json, jArray);
-            VM.Call(989);
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jValue);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jArray);
+            NWNXPInvoke.CallBuiltIn(989);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
@@ -298,11 +297,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Json JsonArrayDel(Json jArray, int nIndex)
         {
-            VM.StackPush(nIndex);
-            VM.StackPush((int)EngineStructure.Json, jArray);
-            VM.Call(990);
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jArray);
+            NWNXPInvoke.CallBuiltIn(990);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
@@ -315,11 +314,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Json ObjectToJson(uint oObject, bool bSaveObjectState = false)
         {
-            VM.StackPush(bSaveObjectState ? 1 : 0);
-            VM.StackPush(oObject);
-            VM.Call(991);
+            NWNXPInvoke.StackPushInteger(bSaveObjectState ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(991);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
@@ -331,13 +330,13 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint JsonToObject(Json jObject, Location locLocation, uint oOwner = OBJECT_INVALID, bool bLoadObjectState = false)
         {
-            VM.StackPush(bLoadObjectState ? 1 : 0);
-            VM.StackPush(oOwner);
-            VM.StackPush((int)EngineStructure.Location, locLocation);
-            VM.StackPush((int)EngineStructure.Json, jObject);
-            VM.Call(992);
+            NWNXPInvoke.StackPushInteger(bLoadObjectState ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oOwner);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, locLocation);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jObject);
+            NWNXPInvoke.CallBuiltIn(992);
 
-            return VM.StackPopObject();
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -347,11 +346,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Json JsonPointer(Json jData, string sPointer)
         {
-            VM.StackPush(sPointer);
-            VM.StackPush((int)EngineStructure.Json, jData);
-            VM.Call(993);
+            NWNXPInvoke.StackPushString(sPointer);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jData);
+            NWNXPInvoke.CallBuiltIn(993);
 
-            return VM.StackPopStruct((int) EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
@@ -368,11 +367,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Json JsonPatch(Json jData, Json jPatch)
         {
-            VM.StackPush((int)EngineStructure.Json, jPatch);
-            VM.StackPush((int)EngineStructure.Json, jData);
-            VM.Call(994);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jPatch);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jData);
+            NWNXPInvoke.CallBuiltIn(994);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
@@ -381,11 +380,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Json JsonDiff(Json jLHS, Json jRHS)
         {
-            VM.StackPush((int)EngineStructure.Json, jRHS);
-            VM.StackPush((int)EngineStructure.Json, jLHS);
-            VM.Call(995);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jRHS);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jLHS);
+            NWNXPInvoke.CallBuiltIn(995);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
@@ -396,11 +395,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Json JsonMerge(Json jData, Json jMerge)
         {
-            VM.StackPush((int)EngineStructure.Json, jMerge);
-            VM.StackPush((int)EngineStructure.Json, jData);
-            VM.Call(996);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jMerge);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jData);
+            NWNXPInvoke.CallBuiltIn(996);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
@@ -409,11 +408,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Json GetLocalJson(uint oObject, string sVarName)
         {
-            VM.StackPush(sVarName);
-            VM.StackPush(oObject);
-            VM.Call(997);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(997);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
@@ -421,10 +420,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetLocalJson(uint oObject, string sVarName, Json jValue)
         {
-            VM.StackPush((int)EngineStructure.Json, jValue);
-            VM.StackPush(sVarName);
-            VM.StackPush(oObject);
-            VM.Call(998);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jValue);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(998);
         }
 
         /// <summary>
@@ -432,9 +431,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void DeleteLocalJson(uint oObject, string sVarName)
         {
-            VM.StackPush(sVarName);
-            VM.StackPush(oObject);
-            VM.Call(999);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(999);
         }
 
         /// <summary>
@@ -460,195 +459,132 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Json TemplateToJson(string sResRef, ResType nResType)
         {
-            VM.StackPush((int) nResType);
-            VM.StackPush(sResRef);
-            VM.Call(1007);
+            NWNXPInvoke.StackPushInteger((int)nResType);
+            NWNXPInvoke.StackPushString(sResRef);
+            NWNXPInvoke.CallBuiltIn(1007);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
         /// Returns a modified copy of jArray with the value order changed according to nTransform:
         /// JSON_ARRAY_SORT_ASCENDING, JSON_ARRAY_SORT_DESCENDING
-        ///    Sorting is dependent on the type and follows json standards (.e.g. 99 < "100").
-        /// JSON_ARRAY_SHUFFLE
-        ///   Randomises the order of elements.
-        /// JSON_ARRAY_REVERSE
-        ///   Reverses the array.
-        /// JSON_ARRAY_UNIQUE
-        ///   Returns a modified copy of jArray with duplicate values removed.
-        ///   Coercable but different types are not considered equal (e.g. 99 != "99"); int/float equivalence however applies: 4.0 == 4.
-        ///   Order is preserved.
-        /// JSON_ARRAY_COALESCE
-        ///   Returns the first non-null entry. Empty-ish values (e.g. "", 0) are not considered null, only the json scalar type.
+        /// Sorting is dependent on the type and follows JSON standards (.e.g., 99 < "100").
         /// </summary>
-
         public static Json JsonArrayTransform(Json jArray, JsonArraySort nTransform)
         {
-            VM.StackPush((int)nTransform);
-            VM.StackPush((int)EngineStructure.Json, jArray);
-            VM.Call(1030);
+            NWNXPInvoke.StackPushInteger((int)nTransform);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jArray);
+            NWNXPInvoke.CallBuiltIn(1030);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
         /// Returns the nth-matching index or key of jNeedle in jHaystack.
-        /// Supported haystacks: object, array
-        /// Ordering behaviour for objects is unspecified.
-        /// Return null when not found or on any error.
+        /// Supported haystacks: object, array.
+        /// Returns null when not found or on any error.
         /// </summary>
-        public static Json JsonFind(
-            Json jHaystack, 
-            Json jNeedle, 
-            int nNth = 0,
-            JsonFind nConditional = Enum.JsonFind.Equal)
+        public static Json JsonFind(Json jHaystack, Json jNeedle, int nNth = 0, JsonFind nConditional = Enum.JsonFind.Equal)
         {
-            VM.StackPush((int)nConditional);
-            VM.StackPush(nNth);
-            VM.StackPush((int)EngineStructure.Json, jNeedle);
-            VM.StackPush((int)EngineStructure.Json, jHaystack);
-            VM.Call(1031);
+            NWNXPInvoke.StackPushInteger((int)nConditional);
+            NWNXPInvoke.StackPushInteger(nNth);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jNeedle);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jHaystack);
+            NWNXPInvoke.CallBuiltIn(1031);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
         /// Returns a copy of the range (nBeginIndex, nEndIndex) inclusive of jArray.
-        /// Negative nEndIndex values count from the other end.
-        /// Out-of-bound values are clamped to the array range.
-        /// Examples:
-        ///  json a = JsonParse("[0, 1, 2, 3, 4]");
-        ///  JsonArrayGetRange(a, 0, 1)    // => [0, 1]
-        ///  JsonArrayGetRange(a, 1, -1)   // => [1, 2, 3, 4]
-        ///  JsonArrayGetRange(a, 0, 4)    // => [0, 1, 2, 3, 4]
-        ///  JsonArrayGetRange(a, 0, 999)  // => [0, 1, 2, 3, 4]
-        ///  JsonArrayGetRange(a, 1, 0)    // => []
-        ///  JsonArrayGetRange(a, 1, 1)    // => [1]
         /// Returns a null type on error, including type mismatches.
         /// </summary>
         public static Json JsonArrayGetRange(Json jArray, int nBeginIndex, int nEndIndex)
         {
-            VM.StackPush((int)nEndIndex);
-            VM.StackPush(nBeginIndex);
-            VM.StackPush((int)EngineStructure.Json, jArray);
-            VM.Call(1032);
+            NWNXPInvoke.StackPushInteger(nEndIndex);
+            NWNXPInvoke.StackPushInteger(nBeginIndex);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jArray);
+            NWNXPInvoke.CallBuiltIn(1032);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
         /// Returns the result of a set operation on two arrays.
-        /// Operations:
-        /// JSON_SET_SUBSET (v <= o):
-        ///   Returns true if every element in jValue is also in jOther.
-        /// JSON_SET_UNION (v | o):
-        ///   Returns a new array containing values from both sides.
-        /// JSON_SET_INTERSECT (v & o):
-        ///   Returns a new array containing only values common to both sides.
-        /// JSON_SET_DIFFERENCE (v - o):
-        ///   Returns a new array containing only values not in jOther.
-        /// JSON_SET_SYMMETRIC_DIFFERENCE (v ^ o):
-        ///   Returns a new array containing all elements present in either array, but not both.
         /// </summary>
         public static Json JsonSetOp(Json jValue, JsonSet nOp, Json jOther)
         {
-            VM.StackPush((int)EngineStructure.Json, jOther);
-            VM.StackPush((int)nOp);
-            VM.StackPush((int)EngineStructure.Json, jValue);
-            VM.Call(1033);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jOther);
+            NWNXPInvoke.StackPushInteger((int)nOp);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jValue);
+            NWNXPInvoke.CallBuiltIn(1033);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
         /// Applies sRegExp on sValue, returning an array containing all matching groups.
-        /// * The regexp is not bounded by default (so /t/ will match "test").
-        /// * A matching result with always return a JSON_ARRAY with the full match as the first element.
-        /// * All matching groups will be returned as additional elements, depth-first.
-        /// * A non-matching result will return a empty JSON_ARRAY.
-        /// * If there was an error, the function will return JSON_NULL, with a error string filled in.
-        /// * nSyntaxFlags is a mask of REGEXP_*
-        /// * nMatchFlags is a mask of REGEXP_MATCH_* and REGEXP_FORMAT_*.
-        /// Examples:
-        /// * RegExpMatch("[", "test value")             -> null (error: "The expression contained mismatched [ and ].")
-        /// * RegExpMatch("nothing", "test value")       -> []
-        /// * RegExpMatch("^test", "test value")         -> ["test"]
-        /// * RegExpMatch("^(test) (.+)$", "test value") -> ["test value", "test", "value"]
         /// </summary>
-        public static Json RegExpMatch(
-            string sRegExp, 
-            string sValue, 
-            RegularExpressionType nSyntaxFlags = RegularExpressionType.Ecmascript, 
-            RegularExpressionFormatType nMatchFlags = RegularExpressionFormatType.Default)
+        public static Json RegExpMatch(string sRegExp, string sValue, RegularExpressionType nSyntaxFlags = RegularExpressionType.Ecmascript, RegularExpressionFormatType nMatchFlags = RegularExpressionFormatType.Default)
         {
-            VM.StackPush((int)nMatchFlags);
-            VM.StackPush((int)nSyntaxFlags);
-            VM.StackPush(sValue);
-            VM.StackPush(sRegExp);
-            VM.Call(1068);
+            NWNXPInvoke.StackPushInteger((int)nMatchFlags);
+            NWNXPInvoke.StackPushInteger((int)nSyntaxFlags);
+            NWNXPInvoke.StackPushString(sValue);
+            NWNXPInvoke.StackPushString(sRegExp);
+            NWNXPInvoke.CallBuiltIn(1068);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
-        ///  Iterates sValue with sRegExp.
-        /// * Returns an array of arrays; where each sub-array contains first the full match and then all matched groups.
-        /// * Returns empty JSON_ARRAY if no matches are found.
-        /// * If there was an error, the function will return JSON_NULL, with a error string filled in.
-        /// * nSyntaxFlags is a mask of REGEXP_*
-        /// * nMatchFlags is a mask of REGEXP_MATCH_* and REGEXP_FORMAT_*.
-        /// Example: RegExpIterate("(\\d)(\\S+)", "1i 2am 3 4asentence"); -> [["1i", "1", "i"], ["2am", "2", "am"], ["4sentence", "4", "sentence"]]
+        /// Iterates sValue with sRegExp, returning an array of arrays where each sub-array contains first the full match and then all matched groups.
         /// </summary>
-        public static Json RegExpIterate(
-            string sRegExp, 
-            string sValue,
-            RegularExpressionType nSyntaxFlags = RegularExpressionType.Ecmascript,
-            RegularExpressionFormatType nMatchFlags = RegularExpressionFormatType.Default)
+        public static Json RegExpIterate(string sRegExp, string sValue, RegularExpressionType nSyntaxFlags = RegularExpressionType.Ecmascript, RegularExpressionFormatType nMatchFlags = RegularExpressionFormatType.Default)
         {
-            VM.StackPush((int)nMatchFlags);
-            VM.StackPush((int)nSyntaxFlags);
-            VM.StackPush(sValue);
-            VM.StackPush(sRegExp);
-            VM.Call(1069);
+            NWNXPInvoke.StackPushInteger((int)nMatchFlags);
+            NWNXPInvoke.StackPushInteger((int)nSyntaxFlags);
+            NWNXPInvoke.StackPushString(sValue);
+            NWNXPInvoke.StackPushString(sRegExp);
+            NWNXPInvoke.CallBuiltIn(1069);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
-        // Serializes the given JSON structure (which must be a valid template spec) into a template.
-        // * The template will be stored in the TEMP: alias and currently NOT stored in savegames.
-        // * The stored template will override anything currently available in the module.
-        // * Supported GFF resource types are the same as TemplateToJson().
-        //   However, some types will not be read by the game (e.g. module.IFO is only read at module load).
-        // * Returns TRUE if the serialization was successful.
-        // * Any target file in TEMP: will be overwritten, even if the serialisation is not successful.
-        //   JsonToTemplate(JSON_NULL, ..) can be used to delete a previously-generated file.
+        /// <summary>
+        /// Serializes the given JSON structure (which must be a valid template spec) into a template.
+        /// Supported GFF resource types are the same as TemplateToJson().
+        /// Returns TRUE if the serialization was successful.
+        /// </summary>
         public static int JsonToTemplate(Json jTemplateSpec, string sResRef, ResType nResType)
         {
-            VM.StackPush((int)nResType);
-            VM.StackPush(sResRef);
-            VM.StackPush(jTemplateSpec);
-            VM.Call(1133);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger((int)nResType);
+            NWNXPInvoke.StackPushString(sResRef);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jTemplateSpec);
+            NWNXPInvoke.CallBuiltIn(1133);
+
+            return NWNXPInvoke.StackPopInteger();
         }
         // Modifies jObject in-place (with no memory copies of the full object).
         // jObject will have the key at sKey set to jValue.
         public static void JsonObjectSetInplace(Json jObject, string sKey, Json jValue)
         {
-            VM.StackPush(jValue);
-            VM.StackPush(sKey);
-            VM.StackPush(jObject);
-            VM.Call(1134);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jValue);
+            NWNXPInvoke.StackPushString(sKey);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jObject);
+            NWNXPInvoke.CallBuiltIn(1134);
         }
+
         // Modifies jObject in-place (with no memory copies needed).
         // jObject will have the element at the key sKey removed.
-        // Will do nothing if jObject is not a object, or sKey does not exist on the object.
+        // Will do nothing if jObject is not an object, or sKey does not exist on the object.
         public static void JsonObjectDelInplace(Json jObject, string sKey)
         {
-            VM.StackPush(sKey);
-            VM.StackPush(jObject);
-            VM.Call(1135);
+            NWNXPInvoke.StackPushString(sKey);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jObject);
+            NWNXPInvoke.CallBuiltIn(1135);
         }
+
         // Modifies jArray in-place (with no memory copies needed).
         // jArray will have jValue inserted at position nIndex.
         // All succeeding elements in the array will move by one.
@@ -656,29 +592,32 @@ namespace NWN.Xenomech.Core.NWScript
         // nIndex = 0 inserts at the beginning of the array.
         public static void JsonArrayInsertInplace(Json jArray, Json jValue, int nIndex = -1)
         {
-            VM.StackPush(nIndex);
-            VM.StackPush(jValue);
-            VM.StackPush(jArray);
-            VM.Call(1136);
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jValue);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jArray);
+            NWNXPInvoke.CallBuiltIn(1136);
         }
+
         // Modifies jArray in-place (with no memory copies needed).
         // jArray will have jValue set at position nIndex.
         // Will do nothing if jArray is not an array or nIndex is out of range.
         public static void JsonArraySetInplace(Json jArray, int nIndex, Json jValue)
         {
-            VM.StackPush(jValue);
-            VM.StackPush(nIndex);
-            VM.StackPush(jArray);
-            VM.Call(1137);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jValue);
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jArray);
+            NWNXPInvoke.CallBuiltIn(1137);
         }
+
         // Modifies jArray in-place (with no memory copies needed).
         // jArray will have the element at nIndex removed, and the array will be resized accordingly.
         // Will do nothing if jArray is not an array or nIndex is out of range.
         public static void JsonArrayDelInplace(Json jArray, int nIndex)
         {
-            VM.StackPush(nIndex);
-            VM.StackPush(jArray);
-            VM.Call(1138);
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jArray);
+            NWNXPInvoke.CallBuiltIn(1138);
         }
+
     }
 }

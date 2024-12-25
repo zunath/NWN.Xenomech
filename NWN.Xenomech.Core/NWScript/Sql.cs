@@ -1,24 +1,23 @@
 ﻿using System.Numerics;
+using NWN.Xenomech.Core.Interop;
 using NWN.Xenomech.Core.NWScript.Enum;
 
 namespace NWN.Xenomech.Core.NWScript
 {
     public partial class NWScript
-    {
-
-        /// <summary>
-        /// Destroys the given sqlite database, clearing out all data and schema.
-        /// This operation is _immediate_ and _irreversible_, even when
-        /// inside a transaction or running query.
-        /// Existing active/prepared sqlqueries will remain functional, but any references
-        /// to stored data or schema members will be invalidated.
-        /// oObject: Same as SqlPrepareQueryObject().
-        ///          To reset a campaign database, please use DestroyCampaignDatabase().
-        /// </summary>
+    {/// <summary>
+     /// Destroys the given sqlite database, clearing out all data and schema.
+     /// This operation is _immediate_ and _irreversible_, even when
+     /// inside a transaction or running query.
+     /// Existing active/prepared sqlqueries will remain functional, but any references
+     /// to stored data or schema members will be invalidated.
+     /// oObject: Same as SqlPrepareQueryObject().
+     ///          To reset a campaign database, please use DestroyCampaignDatabase().
+     /// </summary>
         public static void SqlDestroyDatabase(uint oObject)
         {
-            VM.StackPush(oObject);
-            VM.Call(921);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(921);
         }
 
         /// <summary>
@@ -27,9 +26,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string SqlGetError(IntPtr sqlQuery)
         {
-            VM.StackPush((int)EngineStructure.SQLQuery, sqlQuery);
-            VM.Call(922);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.SQLQuery, sqlQuery);
+            NWNXPInvoke.CallBuiltIn(922);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -46,10 +45,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static IntPtr SqlPrepareQueryCampaign(string sDatabase, string sQuery)
         {
-            VM.StackPush(sQuery);
-            VM.StackPush(sDatabase);
-            VM.Call(923);
-            return VM.StackPopStruct((int)EngineStructure.SQLQuery);
+            NWNXPInvoke.StackPushString(sQuery);
+            NWNXPInvoke.StackPushString(sDatabase);
+            NWNXPInvoke.CallBuiltIn(923);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.SQLQuery);
         }
 
         /// <summary>
@@ -72,10 +71,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static IntPtr SqlPrepareQueryObject(uint oObject, string sQuery)
         {
-            VM.StackPush(sQuery);
-            VM.StackPush(oObject);
-            VM.Call(924);
-            return VM.StackPopStruct((int)EngineStructure.SQLQuery);
+            NWNXPInvoke.StackPushString(sQuery);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(924);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.SQLQuery);
         }
 
         /// <summary>
@@ -87,10 +86,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SqlBindInt(IntPtr sqlQuery, string sParam, int nValue)
         {
-            VM.StackPush(nValue);
-            VM.StackPush(sParam);
-            VM.StackPush((int)EngineStructure.SQLQuery, sqlQuery);
-            VM.Call(925);
+            NWNXPInvoke.StackPushInteger(nValue);
+            NWNXPInvoke.StackPushString(sParam);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.SQLQuery, sqlQuery);
+            NWNXPInvoke.CallBuiltIn(925);
         }
 
         /// <summary>
@@ -98,10 +97,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SqlBindFloat(IntPtr sqlQuery, string sParam, float fFloat)
         {
-            VM.StackPush(fFloat);
-            VM.StackPush(sParam);
-            VM.StackPush((int)EngineStructure.SQLQuery, sqlQuery);
-            VM.Call(926);
+            NWNXPInvoke.StackPushFloat(fFloat);
+            NWNXPInvoke.StackPushString(sParam);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.SQLQuery, sqlQuery);
+            NWNXPInvoke.CallBuiltIn(926);
         }
 
         /// <summary>
@@ -109,10 +108,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SqlBindString(IntPtr sqlQuery, string sParam, string sString)
         {
-            VM.StackPush(sString);
-            VM.StackPush(sParam);
-            VM.StackPush((int)EngineStructure.SQLQuery, sqlQuery);
-            VM.Call(927);
+            NWNXPInvoke.StackPushString(sString);
+            NWNXPInvoke.StackPushString(sParam);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.SQLQuery, sqlQuery);
+            NWNXPInvoke.CallBuiltIn(927);
         }
 
         /// <summary>
@@ -120,10 +119,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SqlBindVector(IntPtr sqlQuery, string sParam, Vector3 vVector)
         {
-            VM.StackPush(vVector);
-            VM.StackPush(sParam);
-            VM.StackPush((int)EngineStructure.SQLQuery, sqlQuery);
-            VM.Call(928);
+            NWNXPInvoke.StackPushVector(vVector);
+            NWNXPInvoke.StackPushString(sParam);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.SQLQuery, sqlQuery);
+            NWNXPInvoke.CallBuiltIn(928);
         }
 
         /// <summary>
@@ -135,11 +134,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SqlBindObject(IntPtr sqlQuery, string sParam, uint oObject, bool bSaveObjectState = false)
         {
-            VM.StackPush(bSaveObjectState ? 1 : 0);
-            VM.StackPush(oObject);
-            VM.StackPush(sParam);
-            VM.StackPush((int)EngineStructure.SQLQuery, sqlQuery);
-            VM.Call(929);
+            NWNXPInvoke.StackPushInteger(bSaveObjectState ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.StackPushString(sParam);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.SQLQuery, sqlQuery);
+            NWNXPInvoke.CallBuiltIn(929);
         }
 
         /// <summary>
@@ -154,9 +153,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int SqlStep(IntPtr sqlQuery)
         {
-            VM.StackPush((int)EngineStructure.SQLQuery, sqlQuery);
-            VM.Call(930);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.SQLQuery, sqlQuery);
+            NWNXPInvoke.CallBuiltIn(930);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -167,24 +166,23 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int SqlGetInt(IntPtr sqlQuery, int nIndex)
         {
-            VM.StackPush(nIndex);
-            VM.StackPush((int)EngineStructure.SQLQuery, sqlQuery);
-            VM.Call(931);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.SQLQuery, sqlQuery);
+            NWNXPInvoke.CallBuiltIn(931);
+            return NWNXPInvoke.StackPopInteger();
         }
-
         /// <summary>
         /// Retrieve a column cast as a float of the currently stepped row.
         /// You can call this after SqlStep() returned TRUE.
         /// In case of error, 0.0f will be returned.
         /// In traditional fashion, nIndex starts at 0.
         /// </summary>
-        public static float SqlGetFloat(IntPtr sqlQuery, int nIndex)
+        public static float SqlGetFloat(SQLQuery sqlQuery, int nIndex)
         {
-            VM.StackPush(nIndex);
-            VM.StackPush((int)EngineStructure.SQLQuery, sqlQuery);
-            VM.Call(932);
-            return VM.StackPopFloat();
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.SQLQuery, sqlQuery);
+            NWNXPInvoke.CallBuiltIn(932);
+            return NWNXPInvoke.StackPopFloat();
         }
 
         /// <summary>
@@ -193,12 +191,12 @@ namespace NWN.Xenomech.Core.NWScript
         /// In case of error, a empty string will be returned.
         /// In traditional fashion, nIndex starts at 0.
         /// </summary>
-        public static string SqlGetString(IntPtr sqlQuery, int nIndex)
+        public static string SqlGetString(SQLQuery sqlQuery, int nIndex)
         {
-            VM.StackPush(nIndex);
-            VM.StackPush((int)EngineStructure.SQLQuery, sqlQuery);
-            VM.Call(933);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.SQLQuery, sqlQuery);
+            NWNXPInvoke.CallBuiltIn(933);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -207,12 +205,12 @@ namespace NWN.Xenomech.Core.NWScript
         /// In case of error, a zero vector will be returned.
         /// In traditional fashion, nIndex starts at 0.
         /// </summary>
-        public static Vector3 SqlGetVector(IntPtr sqlQuery, int nIndex)
+        public static Vector3 SqlGetVector(SQLQuery sqlQuery, int nIndex)
         {
-            VM.StackPush(nIndex);
-            VM.StackPush((int)EngineStructure.SQLQuery, sqlQuery);
-            VM.Call(934);
-            return VM.StackPopVector();
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.SQLQuery, sqlQuery);
+            NWNXPInvoke.CallBuiltIn(934);
+            return NWNXPInvoke.StackPopVector();
         }
 
         /// <summary>
@@ -225,15 +223,15 @@ namespace NWN.Xenomech.Core.NWScript
         /// In traditional fashion, nIndex starts at 0.
         /// If bLoadObjectState is TRUE, local vars, effects, action queue, and transition info (triggers, doors) are read in.
         /// </summary>
-        public static uint SqlGetObject(IntPtr sqlQuery, int nIndex, IntPtr lSpawnAt, uint oInventory = OBJECT_INVALID, bool bLoadObjectState = false)
+        public static uint SqlGetObject(SQLQuery sqlQuery, int nIndex, Location lSpawnAt, uint oInventory = OBJECT_INVALID, bool bLoadObjectState = false)
         {
-            VM.StackPush(bLoadObjectState ? 1 : 0);
-            VM.StackPush(oInventory);
-            VM.StackPush((int)EngineStructure.Location, lSpawnAt);
-            VM.StackPush(nIndex);
-            VM.StackPush((int)EngineStructure.SQLQuery, sqlQuery);
-            VM.Call(935);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushInteger(bLoadObjectState ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oInventory);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, lSpawnAt);
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.SQLQuery, sqlQuery);
+            NWNXPInvoke.CallBuiltIn(935);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -246,10 +244,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SqlBindJson(SQLQuery sqlQuery, string sParam, Json jValue)
         {
-            VM.StackPush((int)EngineStructure.Json, jValue);
-            VM.StackPush(sParam);
-            VM.StackPush((int)EngineStructure.SQLQuery, sqlQuery);
-            VM.Call(1000);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jValue);
+            NWNXPInvoke.StackPushString(sParam);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.SQLQuery, sqlQuery);
+            NWNXPInvoke.CallBuiltIn(1000);
         }
 
         /// <summary>
@@ -260,11 +258,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Json SqlGetJson(SQLQuery sqlQuery, int nIndex)
         {
-            VM.StackPush(nIndex);
-            VM.StackPush((int)EngineStructure.SQLQuery, sqlQuery);
-            VM.Call(1001);
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.SQLQuery, sqlQuery);
+            NWNXPInvoke.CallBuiltIn(1001);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
@@ -274,34 +272,40 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SqlResetQuery(SQLQuery sqlQuery, bool bClearBinds = false)
         {
-            VM.StackPush(bClearBinds ? 1 : 0);
-            VM.StackPush(sqlQuery);
-            VM.Call(1111);
+            NWNXPInvoke.StackPushInteger(bClearBinds ? 1 : 0);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.SQLQuery, sqlQuery);
+            NWNXPInvoke.CallBuiltIn(1111);
         }
-        // Retrieve the column count of a prepared query.  
-        // * sqlQuery must be prepared before this function is called, but can be called before or after parameters are bound.
-        // * If the prepared query contains no columns (such as with an UPDATE or INSERT query), 0 is returned.
-        // * If a non-SELECT query contains a RETURNING clause, the number of columns in the RETURNING clause will be returned.
-        // * A returned value greater than 0 does not guarantee the query will return rows.
+
+        /// <summary>
+        /// Retrieve the column count of a prepared query.  
+        /// * sqlQuery must be prepared before this function is called, but can be called before or after parameters are bound.
+        /// * If the prepared query contains no columns (such as with an UPDATE or INSERT query), 0 is returned.
+        /// * If a non-SELECT query contains a RETURNING clause, the number of columns in the RETURNING clause will be returned.
+        /// * A returned value greater than 0 does not guarantee the query will return rows.
+        /// </summary>
         public static int SqlGetColumnCount(SQLQuery sqlQuery)
         {
-            VM.StackPush(sqlQuery);
-            VM.Call(1126);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.SQLQuery, sqlQuery);
+            NWNXPInvoke.CallBuiltIn(1126);
+            return NWNXPInvoke.StackPopInteger();
         }
-        // Retrieve the column name of the Nth column of a prepared query.
-        // * sqlQuery must be prepared before this function is called, but can be called before or after parameters are bound.
-        // * If the prepared query contains no columns (such as with an UPDATE or INSERT query), an empty string is returned.
-        // * If a non-SELECT query contains a RETURNING clause, the name of the nNth column in the RETURNING clause is returned.
-        // * If nNth is out of range, an sqlite error is broadcast and an empty string is returned.
-        // * The value of the AS clause will be returned, if the clause exists for the nNth column.
-        // * A returned non-empty string does not guarantee the query will return rows.
+
+        /// <summary>
+        /// Retrieve the column name of the Nth column of a prepared query.
+        /// * sqlQuery must be prepared before this function is called, but can be called before or after parameters are bound.
+        /// * If the prepared query contains no columns (such as with an UPDATE or INSERT query), an empty string is returned.
+        /// * If a non-SELECT query contains a RETURNING clause, the name of the nNth column in the RETURNING clause is returned.
+        /// * If nNth is out of range, an sqlite error is broadcast and an empty string is returned.
+        /// * The value of the AS clause will be returned, if the clause exists for the nNth column.
+        /// * A returned non-empty string does not guarantee the query will return rows.
+        /// </summary>
         public static string SqlGetColumnName(SQLQuery sqlQuery, int nNth)
         {
-            VM.StackPush(nNth);
-            VM.StackPush(sqlQuery);
-            VM.Call(1127);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushInteger(nNth);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.SQLQuery, sqlQuery);
+            NWNXPInvoke.CallBuiltIn(1127);
+            return NWNXPInvoke.StackPopString();
         }
 
     }

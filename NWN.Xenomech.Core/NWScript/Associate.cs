@@ -1,5 +1,6 @@
 using NWN.Xenomech.Core.NWScript.Enum;
 using NWN.Xenomech.Core.NWScript.Enum.Associate;
+using NWN.Xenomech.Core.Interop;
 
 namespace NWN.Xenomech.Core.NWScript
 {
@@ -10,8 +11,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetMaxHenchmen(int nNumHenchmen)
         {
-            VM.StackPush(nNumHenchmen);
-            VM.Call(746);
+            NWNXPInvoke.StackPushInteger(nNumHenchmen);
+            NWNXPInvoke.CallBuiltIn(746);
         }
 
         /// <summary>
@@ -19,8 +20,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetMaxHenchmen()
         {
-            VM.Call(747);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(747);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -29,14 +30,14 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static AssociateType GetAssociateType(uint oAssociate)
         {
-            VM.StackPush(oAssociate);
-            VM.Call(748);
-            return (AssociateType)VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oAssociate);
+            NWNXPInvoke.CallBuiltIn(748);
+            return (AssociateType)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
         ///   Levels up a creature using default settings.
-        ///   If successfull it returns the level the creature now is, or 0 if it fails.
+        ///   If successful it returns the level the creature now is, or 0 if it fails.
         ///   If you want to give them a different level (ie: Give a Fighter a level of Wizard)
         ///   you can specify that in the nClass.
         ///   However, if you specify a class to which the creature no package specified,
@@ -46,17 +47,17 @@ namespace NWN.Xenomech.Core.NWScript
         ///   if nPackage is PACKAGE_INVALID then it will use the starting package assigned to that class or just the class package
         /// </summary>
         public static int LevelUpHenchman(
-            uint oCreature, 
+            uint oCreature,
             ClassType nClass = ClassType.Invalid,
-            bool bReadyAllSpells = false, 
+            bool bReadyAllSpells = false,
             Package nPackage = Package.Invalid)
         {
-            VM.StackPush((int)nPackage);
-            VM.StackPush(bReadyAllSpells ? 1 : 0);
-            VM.StackPush((int)nClass);
-            VM.StackPush(oCreature);
-            VM.Call(704);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger((int)nPackage);
+            NWNXPInvoke.StackPushInteger(bReadyAllSpells ? 1 : 0);
+            NWNXPInvoke.StackPushInteger((int)nClass);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(704);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -65,9 +66,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void RemoveSummonedAssociate(uint oMaster, uint oAssociate = OBJECT_INVALID)
         {
-            VM.StackPush(oAssociate);
-            VM.StackPush(oMaster);
-            VM.Call(503);
+            NWNXPInvoke.StackPushObject(oAssociate);
+            NWNXPInvoke.StackPushObject(oMaster);
+            NWNXPInvoke.CallBuiltIn(503);
         }
 
         /// <summary>
@@ -77,22 +78,22 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetFamiliarCreatureType(uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.Call(497);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(497);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
-        ///   Get oCreature's animal companion creature type
+        ///   Get oCreature's animal companion creature type (FAMILIAR_CREATURE_TYPE_*).
         ///   (ANIMAL_COMPANION_CREATURE_TYPE_*).
         ///   * Returns ANIMAL_COMPANION_CREATURE_TYPE_NONE if oCreature is invalid or does
         ///   not currently have an animal companion.
         /// </summary>
         public static int GetAnimalCompanionCreatureType(uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.Call(498);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(498);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -102,9 +103,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetFamiliarName(uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.Call(499);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(499);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -114,9 +115,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetAnimalCompanionName(uint oTarget)
         {
-            VM.StackPush(oTarget);
-            VM.Call(500);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.CallBuiltIn(500);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -128,11 +129,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetAssociate(AssociateType nAssociateType, uint oMaster = OBJECT_INVALID, int nTh = 1)
         {
-            VM.StackPush(nTh);
-            VM.StackPush(oMaster);
-            VM.StackPush((int)nAssociateType);
-            VM.Call(364);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushInteger(nTh);
+            NWNXPInvoke.StackPushObject(oMaster);
+            NWNXPInvoke.StackPushInteger((int)nAssociateType);
+            NWNXPInvoke.CallBuiltIn(364);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -141,9 +142,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void AddHenchman(uint oMaster, uint oHenchman = OBJECT_INVALID)
         {
-            VM.StackPush(oHenchman);
-            VM.StackPush(oMaster);
-            VM.Call(365);
+            NWNXPInvoke.StackPushObject(oHenchman);
+            NWNXPInvoke.StackPushObject(oMaster);
+            NWNXPInvoke.CallBuiltIn(365);
         }
 
         /// <summary>
@@ -151,9 +152,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void RemoveHenchman(uint oMaster, uint oHenchman = OBJECT_INVALID)
         {
-            VM.StackPush(oHenchman);
-            VM.StackPush(oMaster);
-            VM.Call(366);
+            NWNXPInvoke.StackPushObject(oHenchman);
+            NWNXPInvoke.StackPushObject(oMaster);
+            NWNXPInvoke.CallBuiltIn(366);
         }
 
         /// <summary>
@@ -163,10 +164,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetHenchman(uint oMaster = OBJECT_INVALID, int nNth = 1)
         {
-            VM.StackPush(nNth);
-            VM.StackPush(oMaster);
-            VM.Call(354);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushInteger(nNth);
+            NWNXPInvoke.StackPushObject(oMaster);
+            NWNXPInvoke.CallBuiltIn(354);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -174,8 +175,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SummonAnimalCompanion(uint oMaster = OBJECT_INVALID)
         {
-            VM.StackPush(oMaster);
-            VM.Call(334);
+            NWNXPInvoke.StackPushObject(oMaster);
+            NWNXPInvoke.CallBuiltIn(334);
         }
 
         /// <summary>
@@ -183,8 +184,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SummonFamiliar(uint oMaster = OBJECT_INVALID)
         {
-            VM.StackPush(oMaster);
-            VM.Call(335);
+            NWNXPInvoke.StackPushObject(oMaster);
+            NWNXPInvoke.CallBuiltIn(335);
         }
 
         /// <summary>
@@ -192,9 +193,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetLastAssociateCommand(uint oAssociate = OBJECT_INVALID)
         {
-            VM.StackPush(oAssociate);
-            VM.Call(321);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oAssociate);
+            NWNXPInvoke.CallBuiltIn(321);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -202,9 +203,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetMaster(uint oAssociate = OBJECT_INVALID)
         {
-            VM.StackPush(oAssociate);
-            VM.Call(319);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushObject(oAssociate);
+            NWNXPInvoke.CallBuiltIn(319);
+            return NWNXPInvoke.StackPopObject();
         }
     }
 }

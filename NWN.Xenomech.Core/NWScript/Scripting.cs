@@ -1,4 +1,6 @@
-﻿using NWN.Xenomech.Core.NWScript.Enum;
+﻿
+using NWN.Xenomech.Core.Interop;
+using NWN.Xenomech.Core.NWScript.Enum;
 
 namespace NWN.Xenomech.Core.NWScript
 {
@@ -13,9 +15,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetScriptParam(string sParamName)
         {
-            VM.StackPush(sParamName);
-            VM.Call(906);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushString(sParamName);
+            NWNXPInvoke.CallBuiltIn(906);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -24,9 +26,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetScriptParam(string sParamName, string sParamValue)
         {
-            VM.StackPush(sParamValue);
-            VM.StackPush(sParamName);
-            VM.Call(907);
+            NWNXPInvoke.StackPushString(sParamValue);
+            NWNXPInvoke.StackPushString(sParamName);
+            NWNXPInvoke.CallBuiltIn(907);
         }
 
         /// <summary>
@@ -40,9 +42,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static EventScript GetCurrentlyRunningEvent(bool bInheritParent = true)
         {
-            VM.StackPush(bInheritParent ? 1 : 0);
-            VM.Call(938);
-            return (EventScript)VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(bInheritParent ? 1 : 0);
+            NWNXPInvoke.CallBuiltIn(938);
+            return (EventScript)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -55,8 +57,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// <returns></returns>
         public static int GetScriptInstructionsRemaining()
         {
-            VM.Call(1029);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(1029);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -68,13 +70,12 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string CompileScript(string sScriptName, string sScriptData, bool bWrapIntoMain = false, bool bGenerateNDB = false)
         {
-            VM.StackPush(bGenerateNDB ? 1 : 0);
-            VM.StackPush(bWrapIntoMain ? 1 : 0);
-            VM.StackPush(sScriptData);
-            VM.StackPush(sScriptName);
-            VM.Call(1072);
-
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushInteger(bGenerateNDB ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(bWrapIntoMain ? 1 : 0);
+            NWNXPInvoke.StackPushString(sScriptData);
+            NWNXPInvoke.StackPushString(sScriptName);
+            NWNXPInvoke.CallBuiltIn(1072);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -88,8 +89,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void AbortRunningScript(string sError = "")
         {
-            VM.StackPush(sError);
-            VM.Call(1084);
+            NWNXPInvoke.StackPushString(sError);
+            NWNXPInvoke.CallBuiltIn(1084);
         }
 
         /// <summary>
@@ -111,10 +112,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Json GetScriptBacktrace(bool bIncludeStack = true)
         {
-            VM.StackPush(bIncludeStack ? 1 : 0);
-            VM.Call(1085);
-
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            NWNXPInvoke.StackPushInteger(bIncludeStack ? 1 : 0);
+            NWNXPInvoke.CallBuiltIn(1085);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
@@ -127,10 +127,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int SetJmp(string sLabel)
         {
-            VM.StackPush(sLabel);
-            VM.Call(1086);
-
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushString(sLabel);
+            NWNXPInvoke.CallBuiltIn(1086);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -151,9 +150,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void LongJmp(string sLabel, int nRetVal = 1)
         {
-            VM.StackPush(nRetVal);
-            VM.StackPush(sLabel);
-            VM.Call(1087);
+            NWNXPInvoke.StackPushInteger(nRetVal);
+            NWNXPInvoke.StackPushString(sLabel);
+            NWNXPInvoke.CallBuiltIn(1087);
         }
 
         /// <summary>
@@ -161,10 +160,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetIsValidJmp(string sLabel)
         {
-            VM.StackPush(sLabel);
-            VM.Call(1088);
-
-            return VM.StackPopInt() == 1;
+            NWNXPInvoke.StackPushString(sLabel);
+            NWNXPInvoke.CallBuiltIn(1088);
+            return NWNXPInvoke.StackPopInteger() == 1;
         }
 
         /// <summary>
@@ -172,8 +170,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetScriptRecursionLevel()
         {
-            VM.Call(1090);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(1090);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -183,9 +181,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetScriptName(int nRecursionLevel = -1)
         {
-            VM.StackPush(nRecursionLevel);
-            VM.Call(1091);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushInteger(nRecursionLevel);
+            NWNXPInvoke.CallBuiltIn(1091);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -195,9 +193,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetScriptChunk(int nRecursionLevel = -1)
         {
-            VM.StackPush(nRecursionLevel);
-            VM.Call(1092);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushInteger(nRecursionLevel);
+            NWNXPInvoke.CallBuiltIn(1092);
+            return NWNXPInvoke.StackPopString();
         }
     }
 }

@@ -1,15 +1,18 @@
+using NWN.Xenomech.Core.Interop;
+
 namespace NWN.Xenomech.Core.NWScript
 {
     public partial class NWScript
     {
         /// <summary>
-        ///   Determine whether oObject is in conversation.
+        /// Determine whether the specified object is in conversation.
+        /// * Returns true if the object is in conversation, false otherwise.
         /// </summary>
         public static bool IsInConversation(uint oObject)
         {
-            VM.StackPush(oObject);
-            VM.Call(445);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(445);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
     }
 }

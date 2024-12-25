@@ -1,3 +1,5 @@
+
+using NWN.Xenomech.Core.Interop;
 using NWN.Xenomech.Core.NWScript.Enum;
 
 namespace NWN.Xenomech.Core.NWScript
@@ -10,9 +12,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetStringLength(string sString)
         {
-            VM.StackPush(sString);
-            VM.Call(59);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushString(sString);
+            NWNXPInvoke.CallBuiltIn(59);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -21,9 +23,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetStringUpperCase(string sString)
         {
-            VM.StackPush(sString);
-            VM.Call(60);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushString(sString);
+            NWNXPInvoke.CallBuiltIn(60);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -32,9 +34,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetStringLowerCase(string sString)
         {
-            VM.StackPush(sString);
-            VM.Call(61);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushString(sString);
+            NWNXPInvoke.CallBuiltIn(61);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -43,10 +45,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetStringRight(string sString, int nCount)
         {
-            VM.StackPush(nCount);
-            VM.StackPush(sString);
-            VM.Call(62);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushInteger(nCount);
+            NWNXPInvoke.StackPushString(sString);
+            NWNXPInvoke.CallBuiltIn(62);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -55,10 +57,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetStringLeft(string sString, int nCount)
         {
-            VM.StackPush(nCount);
-            VM.StackPush(sString);
-            VM.Call(63);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushInteger(nCount);
+            NWNXPInvoke.StackPushString(sString);
+            NWNXPInvoke.CallBuiltIn(63);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -67,11 +69,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string InsertString(string sDestination, string sString, int nPosition)
         {
-            VM.StackPush(nPosition);
-            VM.StackPush(sString);
-            VM.StackPush(sDestination);
-            VM.Call(64);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushInteger(nPosition);
+            NWNXPInvoke.StackPushString(sString);
+            NWNXPInvoke.StackPushString(sDestination);
+            NWNXPInvoke.CallBuiltIn(64);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -80,11 +82,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetSubString(string sString, int nStart, int nCount)
         {
-            VM.StackPush(nCount);
-            VM.StackPush(nStart);
-            VM.StackPush(sString);
-            VM.Call(65);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushInteger(nCount);
+            NWNXPInvoke.StackPushInteger(nStart);
+            NWNXPInvoke.StackPushString(sString);
+            NWNXPInvoke.CallBuiltIn(65);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -94,11 +96,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int FindSubString(string sString, string sSubString, int nStart = 0)
         {
-            VM.StackPush(nStart);
-            VM.StackPush(sSubString);
-            VM.StackPush(sString);
-            VM.Call(66);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(nStart);
+            NWNXPInvoke.StackPushString(sSubString);
+            NWNXPInvoke.StackPushString(sString);
+            NWNXPInvoke.CallBuiltIn(66);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -106,10 +108,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int TestStringAgainstPattern(string sPattern, string sStringToTest)
         {
-            VM.StackPush(sStringToTest);
-            VM.StackPush(sPattern);
-            VM.Call(177);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushString(sStringToTest);
+            NWNXPInvoke.StackPushString(sPattern);
+            NWNXPInvoke.CallBuiltIn(177);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -119,9 +121,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetMatchedSubstring(int nString)
         {
-            VM.StackPush(nString);
-            VM.Call(178);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushInteger(nString);
+            NWNXPInvoke.CallBuiltIn(178);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -130,8 +132,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetMatchedSubstringsCount()
         {
-            VM.Call(179);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(179);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -156,14 +158,13 @@ namespace NWN.Xenomech.Core.NWScript
             RegularExpressionType nSyntaxFlags = RegularExpressionType.Ecmascript,
             RegularExpressionFormatType nMatchFlags = RegularExpressionFormatType.Default)
         {
-            VM.StackPush((int)nMatchFlags);
-            VM.StackPush((int)nSyntaxFlags);
-            VM.StackPush(sReplacement);
-            VM.StackPush(sValue);
-            VM.StackPush(sRegExp);
-            VM.Call(1070);
-
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushInteger((int)nMatchFlags);
+            NWNXPInvoke.StackPushInteger((int)nSyntaxFlags);
+            NWNXPInvoke.StackPushString(sReplacement);
+            NWNXPInvoke.StackPushString(sValue);
+            NWNXPInvoke.StackPushString(sRegExp);
+            NWNXPInvoke.CallBuiltIn(1070);
+            return NWNXPInvoke.StackPopString();
         }
     }
 }

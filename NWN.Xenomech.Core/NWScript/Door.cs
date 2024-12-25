@@ -1,89 +1,90 @@
 using NWN.Xenomech.Core.NWScript.Enum;
+using NWN.Xenomech.Core.Interop;
 
 namespace NWN.Xenomech.Core.NWScript
 {
     public partial class NWScript
     {
         /// <summary>
-        ///   * Returns TRUE if oObject (which is a placeable or a door) is currently open.
+        /// Returns true if the specified object (a placeable or a door) is currently open.
         /// </summary>
         public static bool GetIsOpen(uint oObject)
         {
-            VM.StackPush(oObject);
-            VM.Call(443);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(443);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
-        ///   The action subject will unlock oTarget, which can be a door or a placeable
-        ///   object.
+        /// The action subject will unlock the specified target, which can be a door or a placeable object.
         /// </summary>
         public static void ActionUnlockObject(uint oTarget)
         {
-            VM.StackPush(oTarget);
-            VM.Call(483);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.CallBuiltIn(483);
         }
 
         /// <summary>
-        ///   The action subject will lock oTarget, which can be a door or a placeable
-        ///   object.
+        /// The action subject will lock the specified target, which can be a door or a placeable object.
         /// </summary>
         public static void ActionLockObject(uint oTarget)
         {
-            VM.StackPush(oTarget);
-            VM.Call(484);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.CallBuiltIn(484);
         }
 
-
         /// <summary>
-        ///   Cause the action subject to open oDoor
+        /// Causes the action subject to open the specified door.
         /// </summary>
         public static void ActionOpenDoor(uint oDoor)
         {
-            VM.StackPush(oDoor);
-            VM.Call(43);
+            NWNXPInvoke.StackPushObject(oDoor);
+            NWNXPInvoke.CallBuiltIn(43);
         }
 
         /// <summary>
-        ///   Cause the action subject to close oDoor
+        /// Causes the action subject to close the specified door.
         /// </summary>
         public static void ActionCloseDoor(uint oDoor)
         {
-            VM.StackPush(oDoor);
-            VM.Call(44);
+            NWNXPInvoke.StackPushObject(oDoor);
+            NWNXPInvoke.CallBuiltIn(44);
         }
 
         /// <summary>
-        ///   Get the last blocking door encountered by the caller of this function.
-        ///   * Returns OBJECT_INVALID if the caller is not a valid creature.
+        /// Get the last blocking door encountered by the caller of this function.
+        /// * Returns OBJECT_INVALID if the caller is not a valid creature.
         /// </summary>
         public static uint GetBlockingDoor()
         {
-            VM.Call(336);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(336);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
-        ///   - oTargetDoor
-        ///   - nDoorAction: DOOR_ACTION_*
-        ///   * Returns TRUE if nDoorAction can be performed on oTargetDoor.
+        /// Checks if the specified door action can be performed on the target door.
         /// </summary>
+        /// <param name="oTargetDoor">The target door to check.</param>
+        /// <param name="nDoorAction">The door action to check (DOOR_ACTION_*).</param>
+        /// <returns>True if the door action is possible; otherwise, false.</returns>
         public static bool GetIsDoorActionPossible(uint oTargetDoor, DoorAction nDoorAction)
         {
-            VM.StackPush((int)nDoorAction);
-            VM.StackPush(oTargetDoor);
-            VM.Call(337);
-            return VM.StackPopInt() == 1;
+            NWNXPInvoke.StackPushInteger((int)nDoorAction);
+            NWNXPInvoke.StackPushObject(oTargetDoor);
+            NWNXPInvoke.CallBuiltIn(337);
+            return NWNXPInvoke.StackPopInteger() == 1;
         }
 
         /// <summary>
-        ///   Perform nDoorAction on oTargetDoor.
+        /// Performs the specified door action on the target door.
         /// </summary>
+        /// <param name="oTargetDoor">The target door to act upon.</param>
+        /// <param name="nDoorAction">The door action to perform (DOOR_ACTION_*).</param>
         public static void DoDoorAction(uint oTargetDoor, DoorAction nDoorAction)
         {
-            VM.StackPush((int)nDoorAction);
-            VM.StackPush(oTargetDoor);
-            VM.Call(338);
+            NWNXPInvoke.StackPushInteger((int)nDoorAction);
+            NWNXPInvoke.StackPushObject(oTargetDoor);
+            NWNXPInvoke.CallBuiltIn(338);
         }
     }
 }

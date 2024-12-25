@@ -1,3 +1,5 @@
+
+using NWN.Xenomech.Core.Interop;
 using NWN.Xenomech.Core.NWScript.Enum;
 
 namespace NWN.Xenomech.Core.NWScript
@@ -9,8 +11,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ForceRest(uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.Call(775);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(775);
         }
 
         /// <summary>
@@ -18,9 +20,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetIsResting(uint oCreature = OBJECT_INVALID)
         {
-            VM.StackPush(oCreature);
-            VM.Call(505);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(505);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -28,8 +30,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetLastPCRested()
         {
-            VM.Call(506);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(506);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -38,8 +40,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static RestEventType GetLastRestEventType()
         {
-            VM.Call(508);
-            return (RestEventType)VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(508);
+            return (RestEventType)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -53,8 +55,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionRest(bool bCreatureToEnemyLineOfSightCheck = false)
         {
-            VM.StackPush(bCreatureToEnemyLineOfSightCheck ? 1 : 0);
-            VM.Call(402);
+            NWNXPInvoke.StackPushInteger(bCreatureToEnemyLineOfSightCheck ? 1 : 0);
+            NWNXPInvoke.CallBuiltIn(402);
         }
     }
 }

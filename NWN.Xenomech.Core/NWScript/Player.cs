@@ -1,21 +1,21 @@
 using System.Numerics;
+using NWN.Xenomech.Core.Interop;
 using NWN.Xenomech.Core.NWScript.Enum;
 
 namespace NWN.Xenomech.Core.NWScript
 {
     public partial class NWScript
-    {
-        /// <summary>
-        ///   Gets the current cutscene state of the player specified by oCreature.
-        ///   Returns TRUE if the player is in cutscene mode.
-        ///   Returns FALSE if the player is not in cutscene mode, or on an error
-        ///   (such as specifying a non creature object).
-        /// </summary>
+    {/// <summary>
+     ///   Gets the current cutscene state of the player specified by oCreature.
+     ///   Returns TRUE if the player is in cutscene mode.
+     ///   Returns FALSE if the player is not in cutscene mode, or on an error
+     ///   (such as specifying a non creature object).
+     /// </summary>
         public static bool GetIsInCutsceneMode(uint oCreature = OBJECT_INVALID)
         {
-            VM.StackPush(oCreature);
-            VM.Call(781);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(781);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -24,9 +24,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetCameraHeight(uint oPlayer, float fHeight = 0.0f)
         {
-            VM.StackPush(fHeight);
-            VM.StackPush(oPlayer);
-            VM.Call(776);
+            NWNXPInvoke.StackPushFloat(fHeight);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(776);
         }
 
         /// <summary>
@@ -36,9 +36,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void DayToNight(uint oPlayer, float fTransitionTime = 0.0f)
         {
-            VM.StackPush(fTransitionTime);
-            VM.StackPush(oPlayer);
-            VM.Call(750);
+            NWNXPInvoke.StackPushFloat(fTransitionTime);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(750);
         }
 
         /// <summary>
@@ -48,9 +48,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void NightToDay(uint oPlayer, float fTransitionTime = 0.0f)
         {
-            VM.StackPush(fTransitionTime);
-            VM.StackPush(oPlayer);
-            VM.Call(751);
+            NWNXPInvoke.StackPushFloat(fTransitionTime);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(751);
         }
 
         /// <summary>
@@ -60,9 +60,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static float GetCutsceneCameraMoveRate(uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.Call(742);
-            return VM.StackPopFloat();
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(742);
+            return NWNXPInvoke.StackPopFloat();
         }
 
         /// <summary>
@@ -72,9 +72,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetCutsceneCameraMoveRate(uint oCreature, float fRate)
         {
-            VM.StackPush(fRate);
-            VM.StackPush(oCreature);
-            VM.Call(743);
+            NWNXPInvoke.StackPushFloat(fRate);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(743);
         }
 
         /// <summary>
@@ -83,8 +83,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionExamine(uint oExamine)
         {
-            VM.StackPush(oExamine);
-            VM.Call(738);
+            NWNXPInvoke.StackPushObject(oExamine);
+            NWNXPInvoke.CallBuiltIn(738);
         }
 
         /// <summary>
@@ -92,8 +92,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetPCItemLastEquipped()
         {
-            VM.Call(727);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(727);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -101,8 +101,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetPCItemLastEquippedBy()
         {
-            VM.Call(728);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(728);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -110,8 +110,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetPCItemLastUnequipped()
         {
-            VM.Call(729);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(729);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -119,8 +119,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetPCItemLastUnequippedBy()
         {
-            VM.Call(730);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(730);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -128,9 +128,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SendMessageToPCByStrRef(uint oPlayer, int nStrRef)
         {
-            VM.StackPush(nStrRef);
-            VM.StackPush(oPlayer);
-            VM.Call(717);
+            NWNXPInvoke.StackPushInteger(nStrRef);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(717);
         }
 
         /// <summary>
@@ -142,9 +142,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void OpenInventory(uint oCreature, uint oPlayer)
         {
-            VM.StackPush(oPlayer);
-            VM.StackPush(oCreature);
-            VM.Call(701);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(701);
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void StoreCameraFacing()
         {
-            VM.Call(702);
+            NWNXPInvoke.CallBuiltIn(702);
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void RestoreCameraFacing()
         {
-            VM.Call(703);
+            NWNXPInvoke.CallBuiltIn(703);
         }
 
         /// <summary>
@@ -172,9 +172,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void FadeFromBlack(uint oCreature, float fSpeed = FadeSpeed.Medium)
         {
-            VM.StackPush(fSpeed);
-            VM.StackPush(oCreature);
-            VM.Call(695);
+            NWNXPInvoke.StackPushFloat(fSpeed);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(695);
         }
 
         /// <summary>
@@ -183,9 +183,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void FadeToBlack(uint oCreature, float fSpeed = FadeSpeed.Medium)
         {
-            VM.StackPush(fSpeed);
-            VM.StackPush(oCreature);
-            VM.Call(696);
+            NWNXPInvoke.StackPushFloat(fSpeed);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(696);
         }
 
         /// <summary>
@@ -194,8 +194,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void StopFade(uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.Call(697);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(697);
         }
 
         /// <summary>
@@ -205,8 +205,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void BlackScreen(uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.Call(698);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(698);
         }
 
         /// <summary>
@@ -222,10 +222,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetCutsceneMode(uint oCreature, bool nInCutscene = true, bool nLeftClickingEnabled = false)
         {
-            VM.StackPush(nLeftClickingEnabled ? 1 : 0);
-            VM.StackPush(nInCutscene ? 1 : 0);
-            VM.StackPush(oCreature);
-            VM.Call(692);
+            NWNXPInvoke.StackPushInteger(nLeftClickingEnabled ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(nInCutscene ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(692);
         }
 
         /// <summary>
@@ -233,8 +233,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetLastPCToCancelCutscene()
         {
-            VM.Call(693);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(693);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -243,9 +243,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void BootPC(uint oPlayer, string sReason = "")
         {
-            VM.StackPush(sReason);
-            VM.StackPush(oPlayer);
-            VM.Call(565);
+            NWNXPInvoke.StackPushString(sReason);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(565);
         }
 
         /// <summary>
@@ -264,12 +264,12 @@ namespace NWN.Xenomech.Core.NWScript
         public static void PopUpDeathGUIPanel(uint oPC, bool bRespawnButtonEnabled = true,
             bool bWaitForHelpButtonEnabled = true, int nHelpStringReference = 0, string sHelpString = "")
         {
-            VM.StackPush(sHelpString);
-            VM.StackPush(nHelpStringReference);
-            VM.StackPush(bWaitForHelpButtonEnabled ? 1 : 0);
-            VM.StackPush(bRespawnButtonEnabled ? 1 : 0);
-            VM.StackPush(oPC);
-            VM.Call(554);
+            NWNXPInvoke.StackPushString(sHelpString);
+            NWNXPInvoke.StackPushInteger(nHelpStringReference);
+            NWNXPInvoke.StackPushInteger(bWaitForHelpButtonEnabled ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(bRespawnButtonEnabled ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oPC);
+            NWNXPInvoke.CallBuiltIn(554);
         }
 
         /// <summary>
@@ -278,8 +278,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetFirstPC()
         {
-            VM.Call(548);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(548);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -288,8 +288,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetNextPC()
         {
-            VM.Call(549);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(549);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -297,22 +297,19 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetPCLevellingUp()
         {
-            VM.Call(542);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(542);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
         ///   Set the camera mode for oPlayer.
         ///   - oPlayer
         ///   - nCameraMode: CAMERA_MODE_*
-        ///   * If oPlayer is not player-controlled or nCameraMode is invalid, nothing
-        ///   happens.
-        /// </summary>
         public static void SetCameraMode(uint oPlayer, int nCameraMode)
         {
-            VM.StackPush(nCameraMode);
-            VM.StackPush(oPlayer);
-            VM.Call(504);
+            NWNXPInvoke.StackPushInteger(nCameraMode);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(504);
         }
 
         /// <summary>
@@ -320,8 +317,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetLastPlayerDying()
         {
-            VM.Call(410);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(410);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -329,15 +326,12 @@ namespace NWN.Xenomech.Core.NWScript
         ///   Will force show panels disabled with SetGuiPanelDisabled()
         ///   - oPC
         ///   - nGUIPanel: GUI_PANEL_*, except GUI_PANEL_COMPASS / GUI_PANEL_LEVELUP / GUI_PANEL_GOLD_* / GUI_PANEL_EXAMINE_*
-        ///   * Nothing happens if oPC is not a player character or if an invalid value is used for nGUIPanel.
-        /// </summary>
         public static void PopUpGUIPanel(uint oPC, GuiPanel nGUIPanel)
         {
-            VM.StackPush((int)nGUIPanel);
-            VM.StackPush(oPC);
-            VM.Call(388);
+            NWNXPInvoke.StackPushInteger((int)nGUIPanel);
+            NWNXPInvoke.StackPushObject(oPC);
+            NWNXPInvoke.CallBuiltIn(388);
         }
-
 
         /// <summary>
         /// Returns the build number of oPlayer (i.e. 8193).
@@ -345,9 +339,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetPlayerBuildVersionMajor(uint oPlayer)
         {
-            VM.StackPush(oPlayer);
-            VM.Call(904);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(904);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -356,11 +350,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetPlayerBuildVersionMinor(uint oPlayer)
         {
-            VM.StackPush(oPlayer);
-            VM.Call(905);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(905);
+            return NWNXPInvoke.StackPopInteger();
         }
-
 
         /// <summary>
         /// Returns TRUE if the given player-controlled creature has DM privileges
@@ -369,115 +362,85 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetIsPlayerDM(uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.Call(918);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(918);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
         /// Gets the player that last triggered the module OnPlayerGuiEvent event.
         /// </summary>
-        /// <returns></returns>
         public static uint GetLastGuiEventPlayer()
         {
-            VM.Call(960);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(960);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
         /// Gets the last triggered GUIEVENT_* in the module OnPlayerGuiEvent event.
         /// </summary>
-        /// <returns></returns>
         public static GuiEventType GetLastGuiEventType()
         {
-            VM.Call(961);
-            return (GuiEventType)VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(961);
+            return (GuiEventType)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
         /// Gets an optional integer of specific gui events in the module OnPlayerGuiEvent event.
-        /// * GUIEVENT_CHATBAR_*: The selected chat channel. Does not indicate the actual used channel.
-        ///                       0 = Shout, 1 = Whisper, 2 = Talk, 3 = Party, 4 = DM
-        /// * GUIEVENT_CHARACTERSHEET_SKILL_SELECT: The skill ID.
-        /// * GUIEVENT_CHARACTERSHEET_FEAT_SELECT: The feat ID.
-        /// * GUIEVENT_EFFECTICON_CLICK: The effect icon ID (EFFECT_ICON_*)
-        /// * GUIEVENT_DISABLED_PANEL_ATTEMPT_OPEN: The GUI_PANEL_* the player attempted to open.
-        /// * GUIEVENT_QUICKCHAT_SELECT: The hotkey character representing the option
-        /// * GUIEVENT_EXAMINE_OBJECT: A GUI_PANEL_EXAMINE_* constant
         /// </summary>
-        /// <returns></returns>
         public static int GetLastGuiEventInteger()
         {
-            VM.Call(962);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(962);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
         /// Gets an optional object of specific gui events in the module OnPlayerGuiEvent event.
-        /// * GUIEVENT_MINIMAP_MAPPIN_CLICK: The waypoint the map note is attached to.
-        /// * GUIEVENT_CHARACTERSHEET_*_SELECT: The owner of the character sheet.
-        /// * GUIEVENT_PLAYERLIST_PLAYER_CLICK: The player clicked on.
-        /// * GUIEVENT_PARTYBAR_PORTRAIT_CLICK: The creature clicked on.
-        /// * GUIEVENT_DISABLED_PANEL_ATTEMPT_OPEN: For GUI_PANEL_CHARACTERSHEET, the owner of the character sheet.
-        ///                                         For GUI_PANEL_EXAMINE_*, the object being examined.
-        /// * GUIEVENT_*SELECT_CREATURE: The creature that was (un)selected
-        /// * GUIEVENT_EXAMINE_OBJECT: The object being examined.
-        /// * GUIEVENT_CHATLOG_PORTRAIT_CLICK: The owner of the portrait.
-        /// * GUIEVENT_PLAYERLIST_PLAYER_TELL: The selected player.
         /// </summary>
-        /// <returns></returns>
         public static uint GetLastGuiEventObject()
         {
-            VM.Call(963);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(963);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
         /// Disable a gui panel for the client that controls oPlayer.
         /// Notes: Will close the gui panel if currently open, except GUI_PANEL_LEVELUP / GUI_PANEL_GOLD_*
-        ///        Does not persist through relogging or in savegames.
-        ///        Will fire a GUIEVENT_DISABLED_PANEL_ATTEMPT_OPEN OnPlayerGuiEvent for some gui panels if a player attempts to open them.
-        ///        You can still force show a panel with PopUpGUIPanel().
-        ///        You can still force examine an object with ActionExamine().
-        /// * nGuiPanel: A GUI_PANEL_* constant, except GUI_PANEL_PLAYER_DEATH.
         /// </summary>
         public static void SetGuiPanelDisabled(uint oPlayer, GuiPanel nGuiPanel, bool bDisabled, uint oTarget = OBJECT_INVALID)
         {
-            VM.StackPush(oTarget);
-            VM.StackPush(bDisabled ? 1 : 0);
-            VM.StackPush((int)nGuiPanel);
-            VM.StackPush(oPlayer);
-            VM.Call(964);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.StackPushInteger(bDisabled ? 1 : 0);
+            NWNXPInvoke.StackPushInteger((int)nGuiPanel);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(964);
         }
 
         /// <summary>
         /// Gets the ID (1..8) of the last tile action performed in OnPlayerTileAction
         /// </summary>
-        /// <returns></returns>
         public static int GetLastTileActionId()
         {
-            VM.Call(965);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(965);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
         /// Gets the target position in the module OnPlayerTileAction event.
         /// </summary>
-        /// <returns></returns>
         public static Vector3 GetLastTileActionPosition()
         {
-            VM.Call(966);
-            return VM.StackPopVector();
+            NWNXPInvoke.CallBuiltIn(966);
+            return NWNXPInvoke.StackPopVector();
         }
 
         /// <summary>
         /// Gets the player object that triggered the OnPlayerTileAction event.
         /// </summary>
-        /// <returns></returns>
         public static uint GetLastPlayerToDoTileAction()
         {
-            VM.Call(967);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(967);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -485,17 +448,17 @@ namespace NWN.Xenomech.Core.NWScript
         /// sProperty is one of PLAYER_DEVICE_PROPERTY_xxx.
         /// Returns -1 if
         /// - the property was never set by the client,
-        /// - the the actual value is -1,
-        /// - the player is running a older build that does not advertise device properties,
+        /// - the actual value is -1,
+        /// - the player is running an older build that does not advertise device properties,
         /// - the player has disabled sending device properties (Options->Game->Privacy).
         /// </summary>
         public static int GetPlayerDeviceProperty(uint oPlayer, string sProperty)
         {
-            VM.StackPush(sProperty);
-            VM.StackPush(oPlayer);
-            VM.Call(1004);
+            NWNXPInvoke.StackPushString(sProperty);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(1004);
 
-            return VM.StackPopInt();
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -503,10 +466,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static PlayerLanguageType GetPlayerLanguage(uint oPlayer)
         {
-            VM.StackPush(oPlayer);
-            VM.Call(1005);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(1005);
 
-            return (PlayerLanguageType)VM.StackPopInt();
+            return (PlayerLanguageType)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -514,10 +477,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static PlayerDevicePlatformType GetPlayerDevicePlatform(uint oPlayer)
         {
-            VM.StackPush(oPlayer);
-            VM.Call(1006);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(1006);
 
-            return (PlayerDevicePlatformType)VM.StackPopInt();
+            return (PlayerDevicePlatformType)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -527,9 +490,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetPlayerBuildVersionPostfix(uint oPlayer)
         {
-            VM.StackPush(oPlayer);
-            VM.Call(1093);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(1093);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -539,9 +502,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetPlayerBuildVersionCommitSha1(uint oPlayer)
         {
-            VM.StackPush(oPlayer);
-            VM.Call(1094);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(1094);
+            return NWNXPInvoke.StackPopString();
         }
+
     }
 }

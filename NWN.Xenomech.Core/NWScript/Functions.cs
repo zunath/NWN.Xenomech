@@ -1,4 +1,5 @@
 using System.Numerics;
+using NWN.Xenomech.Core.Interop;
 using NWN.Xenomech.Core.NWScript.Enum;
 using NWN.Xenomech.Core.NWScript.Enum.Creature;
 
@@ -6,16 +7,11 @@ namespace NWN.Xenomech.Core.NWScript
 {
     public partial class NWScript
     {
+        // ReSharper disable once InconsistentNaming
         public static uint OBJECT_SELF
         {
-            get
-            {
-                return NWNCore.FunctionHandler.ObjectSelf;
-            }
-            set
-            {
-                NWNCore.FunctionHandler.ObjectSelf = value;
-            }
+            get => NWNCore.FunctionHandler.ObjectSelf;
+            set => NWNCore.FunctionHandler.ObjectSelf = value;
         }
 
         /// <summary>
@@ -59,9 +55,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int Random(int nMaxInteger)
         {
-            VM.StackPush(nMaxInteger);
-            VM.Call(0);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(nMaxInteger);
+            NWNXPInvoke.CallBuiltIn(0);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -69,8 +65,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void PrintString(string sString)
         {
-            VM.StackPush(sString);
-            VM.Call(1);
+            NWNXPInvoke.StackPushString(sString);
+            NWNXPInvoke.CallBuiltIn(1);
         }
 
         /// <summary>
@@ -80,10 +76,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void PrintFloat(float fFloat, int nWidth = 18, int nDecimals = 9)
         {
-            VM.StackPush(nDecimals);
-            VM.StackPush(nWidth);
-            VM.StackPush(fFloat);
-            VM.Call(2);
+            NWNXPInvoke.StackPushInteger(nDecimals);
+            NWNXPInvoke.StackPushInteger(nWidth);
+            NWNXPInvoke.StackPushFloat(fFloat);
+            NWNXPInvoke.CallBuiltIn(2);
         }
 
         /// <summary>
@@ -93,11 +89,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string FloatToString(float fFloat, int nWidth = 18, int nDecimals = 9)
         {
-            VM.StackPush(nDecimals);
-            VM.StackPush(nWidth);
-            VM.StackPush(fFloat);
-            VM.Call(3);
-            return NWNCore.NativeFunctions.StackPopStringUTF8();
+            NWNXPInvoke.StackPushInteger(nDecimals);
+            NWNXPInvoke.StackPushInteger(nWidth);
+            NWNXPInvoke.StackPushFloat(fFloat);
+            NWNXPInvoke.CallBuiltIn(3);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -105,8 +101,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void PrintInteger(int nInteger)
         {
-            VM.StackPush(nInteger);
-            VM.Call(4);
+            NWNXPInvoke.StackPushInteger(nInteger);
+            NWNXPInvoke.CallBuiltIn(4);
         }
 
         /// <summary>
@@ -114,8 +110,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void PrintObject(uint oObject)
         {
-            VM.StackPush(oObject);
-            VM.Call(5);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(5);
         }
 
         /// <summary>
@@ -128,8 +124,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ClearAllActions(bool nClearCombatState = false)
         {
-            VM.StackPush(nClearCombatState ? 1 : 0);
-            VM.Call(9);
+            NWNXPInvoke.StackPushInteger(nClearCombatState ? 1 : 0);
+            NWNXPInvoke.CallBuiltIn(9);
         }
 
         /// <summary>
@@ -140,13 +136,13 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetFacing(float fDirection)
         {
-            VM.StackPush(fDirection);
-            VM.Call(10);
+            NWNXPInvoke.StackPushFloat(fDirection);
+            NWNXPInvoke.CallBuiltIn(10);
         }
 
         /// <summary>
         ///   The action subject will generate a random location near its current location
-        ///   and pathfind to it.  ActionRandomwalk never ends, which means it is neccessary
+        ///   and pathfind to it.  ActionRandomwalk never ends, which means it is necessary
         ///   to call ClearAllActions in order to allow a creature to perform any other action
         ///   once ActionRandomWalk has been called.
         ///   * No return value, but if an error occurs the log file will contain
@@ -154,7 +150,7 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionRandomWalk()
         {
-            VM.Call(20);
+            NWNXPInvoke.CallBuiltIn(20);
         }
 
         /// <summary>
@@ -167,9 +163,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionMoveToLocation(Location lDestination, bool bRun = false)
         {
-            VM.StackPush(bRun ? 1 : 0);
-            VM.StackPush((int)EngineStructure.Location, lDestination);
-            VM.Call(21);
+            NWNXPInvoke.StackPushInteger(bRun ? 1 : 0);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, lDestination);
+            NWNXPInvoke.CallBuiltIn(21);
         }
 
         /// <summary>
@@ -183,10 +179,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionMoveToObject(uint oMoveTo, bool bRun = false, float fRange = 1.0f)
         {
-            VM.StackPush(fRange);
-            VM.StackPush(bRun ? 1 : 0);
-            VM.StackPush(oMoveTo);
-            VM.Call(22);
+            NWNXPInvoke.StackPushFloat(fRange);
+            NWNXPInvoke.StackPushInteger(bRun ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oMoveTo);
+            NWNXPInvoke.CallBuiltIn(22);
         }
 
         /// <summary>
@@ -202,10 +198,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionMoveAwayFromObject(uint oFleeFrom, bool bRun = false, float fMoveAwayRange = 40.0f)
         {
-            VM.StackPush(fMoveAwayRange);
-            VM.StackPush(bRun ? 1 : 0);
-            VM.StackPush(oFleeFrom);
-            VM.Call(23);
+            NWNXPInvoke.StackPushFloat(fMoveAwayRange);
+            NWNXPInvoke.StackPushInteger(bRun ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oFleeFrom);
+            NWNXPInvoke.CallBuiltIn(23);
         }
 
         /// <summary>
@@ -215,9 +211,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static float GetFacing(uint oTarget)
         {
-            VM.StackPush(oTarget);
-            VM.Call(28);
-            return VM.StackPopFloat();
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.CallBuiltIn(28);
+            return NWNXPInvoke.StackPopFloat();
         }
 
         /// <summary>
@@ -227,9 +223,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetLastAttacker(uint oAttackee = OBJECT_INVALID)
         {
-            VM.StackPush(oAttackee);
-            VM.Call(36);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushObject(oAttackee);
+            NWNXPInvoke.CallBuiltIn(36);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -238,11 +234,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionAttack(uint oAttackee, bool bPassive = false)
         {
-            VM.StackPush(bPassive ? 1 : 0);
-            VM.StackPush(oAttackee);
-            VM.Call(37);
+            NWNXPInvoke.StackPushInteger(bPassive ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oAttackee);
+            NWNXPInvoke.CallBuiltIn(37);
         }
-
         /// <summary>
         ///   Get the creature nearest to oTarget, subject to all the criteria specified.
         ///   - nFirstCriteriaType: CREATURE_TYPE_*
@@ -275,16 +270,16 @@ namespace NWN.Xenomech.Core.NWScript
             uint oTarget = OBJECT_INVALID, int nNth = 1, int nSecondCriteriaType = -1, int nSecondCriteriaValue = -1,
             int nThirdCriteriaType = -1, int nThirdCriteriaValue = -1)
         {
-            VM.StackPush(nThirdCriteriaValue);
-            VM.StackPush(nThirdCriteriaType);
-            VM.StackPush(nSecondCriteriaValue);
-            VM.StackPush(nSecondCriteriaType);
-            VM.StackPush(nNth);
-            VM.StackPush(oTarget);
-            VM.StackPush(nFirstCriteriaValue);
-            VM.StackPush((int)nFirstCriteriaType);
-            VM.Call(38);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushInteger(nThirdCriteriaValue);
+            NWNXPInvoke.StackPushInteger(nThirdCriteriaType);
+            NWNXPInvoke.StackPushInteger(nSecondCriteriaValue);
+            NWNXPInvoke.StackPushInteger(nSecondCriteriaType);
+            NWNXPInvoke.StackPushInteger(nNth);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.StackPushInteger(nFirstCriteriaValue);
+            NWNXPInvoke.StackPushInteger((int)nFirstCriteriaType);
+            NWNXPInvoke.CallBuiltIn(38);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -294,11 +289,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionSpeakString(string sStringToSpeak, TalkVolume nTalkVolume = TalkVolume.Talk)
         {
-            VM.StackPush((int)nTalkVolume);
-            VM.StackPush(sStringToSpeak);
-            VM.Call(39);
+            NWNXPInvoke.StackPushInteger((int)nTalkVolume);
+            NWNXPInvoke.StackPushString(sStringToSpeak);
+            NWNXPInvoke.CallBuiltIn(39);
         }
-
         /// <summary>
         ///   Cause the action subject to play an animation
         ///   - nAnimation: ANIMATION_*
@@ -308,10 +302,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionPlayAnimation(Animation nAnimation, float fSpeed = 1.0f, float fDurationSeconds = 0.0f)
         {
-            VM.StackPush(fDurationSeconds);
-            VM.StackPush(fSpeed);
-            VM.StackPush((int)nAnimation);
-            VM.Call(40);
+            NWNXPInvoke.StackPushFloat(fDurationSeconds);
+            NWNXPInvoke.StackPushFloat(fSpeed);
+            NWNXPInvoke.StackPushInteger((int)nAnimation);
+            NWNXPInvoke.CallBuiltIn(40);
         }
 
         /// <summary>
@@ -335,11 +329,11 @@ namespace NWN.Xenomech.Core.NWScript
         public static void SetCameraFacing(float fDirection, float fDistance = -1.0f, float fPitch = -1.0f,
             CameraTransitionType nTransitionType = CameraTransitionType.Snap)
         {
-            VM.StackPush((int)nTransitionType);
-            VM.StackPush(fPitch);
-            VM.StackPush(fDistance);
-            VM.StackPush(fDirection);
-            VM.Call(45);
+            NWNXPInvoke.StackPushInteger((int)nTransitionType);
+            NWNXPInvoke.StackPushFloat(fPitch);
+            NWNXPInvoke.StackPushFloat(fDistance);
+            NWNXPInvoke.StackPushFloat(fDirection);
+            NWNXPInvoke.CallBuiltIn(45);
         }
 
         /// <summary>
@@ -349,8 +343,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void PlaySound(string sSoundName)
         {
-            VM.StackPush(sSoundName);
-            VM.Call(46);
+            NWNXPInvoke.StackPushString(sSoundName);
+            NWNXPInvoke.CallBuiltIn(46);
         }
 
         /// <summary>
@@ -359,8 +353,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetSpellTargetObject()
         {
-            VM.Call(47);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(47);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -392,16 +386,16 @@ namespace NWN.Xenomech.Core.NWScript
             int nClass = -1,
             bool bSpontaneousCast = false)
         {
-            VM.StackPush(bSpontaneousCast ? 1 : 0);
-            VM.StackPush(nClass);
-            VM.StackPush(bInstantSpell ? 1 : 0);
-            VM.StackPush((int)nProjectilePathType);
-            VM.StackPush(nDomainLevel);
-            VM.StackPush(nCheat ? 1 : 0);
-            VM.StackPush((int)nMetaMagic);
-            VM.StackPush(oTarget);
-            VM.StackPush((int)nSpell);
-            VM.Call(48);
+            NWNXPInvoke.StackPushInteger(bSpontaneousCast ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(nClass);
+            NWNXPInvoke.StackPushInteger(bInstantSpell ? 1 : 0);
+            NWNXPInvoke.StackPushInteger((int)nProjectilePathType);
+            NWNXPInvoke.StackPushInteger(nDomainLevel);
+            NWNXPInvoke.StackPushInteger(nCheat ? 1 : 0);
+            NWNXPInvoke.StackPushInteger((int)nMetaMagic);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.StackPushInteger((int)nSpell);
+            NWNXPInvoke.CallBuiltIn(48);
         }
 
         /// <summary>
@@ -410,10 +404,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetLocalInt(uint oObject, string sVarName)
         {
-            VM.StackPush(sVarName);
-            VM.StackPush(oObject);
-            VM.Call(51);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(51);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -431,10 +425,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static float GetLocalFloat(uint oObject, string sVarName)
         {
-            VM.StackPush(sVarName);
-            VM.StackPush(oObject);
-            VM.Call(52);
-            return VM.StackPopFloat();
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(52);
+            return NWNXPInvoke.StackPopFloat();
         }
 
         /// <summary>
@@ -443,10 +437,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetLocalString(uint oObject, string sVarName)
         {
-            VM.StackPush(sVarName);
-            VM.StackPush(oObject);
-            VM.Call(53);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(53);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -455,10 +449,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetLocalObject(uint oObject, string sVarName)
         {
-            VM.StackPush(sVarName);
-            VM.StackPush(oObject);
-            VM.Call(54);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(54);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -466,10 +460,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetLocalInt(uint oObject, string sVarName, int nValue)
         {
-            VM.StackPush(nValue);
-            VM.StackPush(sVarName);
-            VM.StackPush(oObject);
-            VM.Call(55);
+            NWNXPInvoke.StackPushInteger(nValue);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(55);
         }
 
         /// <summary>
@@ -485,10 +479,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetLocalFloat(uint oObject, string sVarName, float fValue)
         {
-            VM.StackPush(fValue);
-            VM.StackPush(sVarName);
-            VM.StackPush(oObject);
-            VM.Call(56);
+            NWNXPInvoke.StackPushFloat(fValue);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(56);
         }
 
         /// <summary>
@@ -496,10 +490,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetLocalString(uint oObject, string sVarName, string sValue)
         {
-            VM.StackPush(sValue);
-            VM.StackPush(sVarName);
-            VM.StackPush(oObject);
-            VM.Call(57);
+            NWNXPInvoke.StackPushString(sValue);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(57);
         }
 
         /// <summary>
@@ -507,10 +501,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetLocalObject(uint oObject, string sVarName, uint oValue)
         {
-            VM.StackPush(oValue);
-            VM.StackPush(sVarName);
-            VM.StackPush(oObject);
-            VM.Call(58);
+            NWNXPInvoke.StackPushObject(oValue);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(58);
         }
 
         /// <summary>
@@ -519,8 +513,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string IntToString(int nInteger)
         {
-            VM.StackPush(nInteger);
-            VM.Call(92);
+            NWNXPInvoke.StackPushInteger(nInteger);
+            NWNXPInvoke.CallBuiltIn(92);
             return NWNCore.NativeFunctions.StackPopStringUTF8();
         }
 
@@ -530,9 +524,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int d2(int nNumDice = 1)
         {
-            VM.StackPush(nNumDice);
-            VM.Call(95);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(nNumDice);
+            NWNXPInvoke.CallBuiltIn(95);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -541,20 +535,19 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int d3(int nNumDice = 1)
         {
-            VM.StackPush(nNumDice);
-            VM.Call(96);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(nNumDice);
+            NWNXPInvoke.CallBuiltIn(96);
+            return NWNXPInvoke.StackPopInteger();
         }
-
         /// <summary>
         ///   Get the total from rolling (nNumDice x d4 dice).
         ///   - nNumDice: If this is less than 1, the value 1 will be used.
         /// </summary>
         public static int d4(int nNumDice = 1)
         {
-            VM.StackPush(nNumDice);
-            VM.Call(97);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(nNumDice);
+            NWNXPInvoke.CallBuiltIn(97);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -563,9 +556,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int d6(int nNumDice = 1)
         {
-            VM.StackPush(nNumDice);
-            VM.Call(98);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(nNumDice);
+            NWNXPInvoke.CallBuiltIn(98);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -574,9 +567,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int d8(int nNumDice = 1)
         {
-            VM.StackPush(nNumDice);
-            VM.Call(99);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(nNumDice);
+            NWNXPInvoke.CallBuiltIn(99);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -585,9 +578,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int d10(int nNumDice = 1)
         {
-            VM.StackPush(nNumDice);
-            VM.Call(100);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(nNumDice);
+            NWNXPInvoke.CallBuiltIn(100);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -596,9 +589,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int d12(int nNumDice = 1)
         {
-            VM.StackPush(nNumDice);
-            VM.Call(101);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(nNumDice);
+            NWNXPInvoke.CallBuiltIn(101);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -607,9 +600,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int d20(int nNumDice = 1)
         {
-            VM.StackPush(nNumDice);
-            VM.Call(102);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(nNumDice);
+            NWNXPInvoke.CallBuiltIn(102);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -618,9 +611,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int d100(int nNumDice = 1)
         {
-            VM.StackPush(nNumDice);
-            VM.Call(103);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(nNumDice);
+            NWNXPInvoke.CallBuiltIn(103);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -629,8 +622,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetMetaMagicFeat()
         {
-            VM.Call(105);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(105);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -648,12 +641,12 @@ namespace NWN.Xenomech.Core.NWScript
         public static SavingThrowResultType FortitudeSave(uint oCreature, int nDC, SavingThrowType nSaveType = SavingThrowType.All,
             uint oSaveVersus = OBJECT_INVALID)
         {
-            VM.StackPush(oSaveVersus);
-            VM.StackPush((int)nSaveType);
-            VM.StackPush(nDC);
-            VM.StackPush(oCreature);
-            VM.Call(108);
-            return (SavingThrowResultType)VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oSaveVersus);
+            NWNXPInvoke.StackPushInteger((int)nSaveType);
+            NWNXPInvoke.StackPushInteger(nDC);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(108);
+            return (SavingThrowResultType)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -671,12 +664,12 @@ namespace NWN.Xenomech.Core.NWScript
         public static SavingThrowResultType ReflexSave(uint oCreature, int nDC, SavingThrowType nSaveType = SavingThrowType.All,
             uint oSaveVersus = OBJECT_INVALID)
         {
-            VM.StackPush(oSaveVersus);
-            VM.StackPush((int)nSaveType);
-            VM.StackPush(nDC);
-            VM.StackPush(oCreature);
-            VM.Call(109);
-            return (SavingThrowResultType)VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oSaveVersus);
+            NWNXPInvoke.StackPushInteger((int)nSaveType);
+            NWNXPInvoke.StackPushInteger(nDC);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(109);
+            return (SavingThrowResultType)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -694,12 +687,12 @@ namespace NWN.Xenomech.Core.NWScript
         public static SavingThrowResultType WillSave(uint oCreature, int nDC, SavingThrowType nSaveType = SavingThrowType.All,
             uint oSaveVersus = OBJECT_INVALID)
         {
-            VM.StackPush(oSaveVersus);
-            VM.StackPush((int)nSaveType);
-            VM.StackPush(nDC);
-            VM.StackPush(oCreature);
-            VM.Call(110);
-            return (SavingThrowResultType)VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oSaveVersus);
+            NWNXPInvoke.StackPushInteger((int)nSaveType);
+            NWNXPInvoke.StackPushInteger(nDC);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(110);
+            return (SavingThrowResultType)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -708,8 +701,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetSpellSaveDC()
         {
-            VM.Call(111);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(111);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -742,14 +735,14 @@ namespace NWN.Xenomech.Core.NWScript
         public static uint GetFirstObjectInShape(Shape nShape, float fSize, Location lTarget, bool bLineOfSight = false,
             ObjectType nObjectFilter = ObjectType.Creature, Vector3 vOrigin = default)
         {
-            VM.StackPush(vOrigin);
-            VM.StackPush((int)nObjectFilter);
-            VM.StackPush(bLineOfSight ? 1 : 0);
-            VM.StackPush((int)EngineStructure.Location, lTarget);
-            VM.StackPush(fSize);
-            VM.StackPush((int)nShape);
-            VM.Call(128);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, lTarget);
+            NWNXPInvoke.StackPushFloat(fSize);
+            NWNXPInvoke.StackPushInteger((int)nShape);
+            NWNXPInvoke.StackPushInteger(bLineOfSight ? 1 : 0);
+            NWNXPInvoke.StackPushInteger((int)nObjectFilter);
+            NWNXPInvoke.StackPushVector(vOrigin);
+            NWNXPInvoke.CallBuiltIn(128);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -781,15 +774,16 @@ namespace NWN.Xenomech.Core.NWScript
         public static uint GetNextObjectInShape(Shape nShape, float fSize, Location lTarget, bool bLineOfSight = false,
             ObjectType nObjectFilter = ObjectType.Creature, Vector3 vOrigin = default)
         {
-            VM.StackPush(vOrigin);
-            VM.StackPush((int)nObjectFilter);
-            VM.StackPush(bLineOfSight ? 1 : 0);
-            VM.StackPush((int)EngineStructure.Location, lTarget);
-            VM.StackPush(fSize);
-            VM.StackPush((int)nShape);
-            VM.Call(129);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushVector(vOrigin);
+            NWNXPInvoke.StackPushInteger((int)nObjectFilter);
+            NWNXPInvoke.StackPushInteger(bLineOfSight ? 1 : 0);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, lTarget);
+            NWNXPInvoke.StackPushFloat(fSize);
+            NWNXPInvoke.StackPushInteger((int)nShape);
+            NWNXPInvoke.CallBuiltIn(129);
+            return NWNXPInvoke.StackPopObject();
         }
+
 
         /// <summary>
         ///   Causes object oObject to run the event evToRun. The script on the object that is
@@ -808,9 +802,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SignalEvent(uint oObject, Event evToRun)
         {
-            VM.StackPush((int)EngineStructure.Event, evToRun);
-            VM.StackPush(oObject);
-            VM.Call(131);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Event, evToRun);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(131);
         }
 
         /// <summary>
@@ -829,9 +823,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Event EventUserDefined(int nUserDefinedEventNumber)
         {
-            VM.StackPush(nUserDefinedEventNumber);
-            VM.Call(132);
-            return VM.StackPopStruct((int)EngineStructure.Event);
+            NWNXPInvoke.StackPushInteger(nUserDefinedEventNumber);
+            NWNXPInvoke.CallBuiltIn(132);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Event);
         }
 
         /// <summary>
@@ -844,11 +838,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetAbilityScore(uint oCreature, AbilityType nAbilityType, bool nBaseAbilityScore = false)
         {
-            VM.StackPush(nBaseAbilityScore ? 1 : 0);
-            VM.StackPush((int)nAbilityType);
-            VM.StackPush(oCreature);
-            VM.Call(139);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(nBaseAbilityScore ? 1 : 0);
+            NWNXPInvoke.StackPushInteger((int)nAbilityType);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(139);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -856,9 +850,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetIsDead(uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.Call(140);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(140);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -868,9 +862,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void PrintVector(Vector3 vVector, bool bPrepend = false)
         {
-            VM.StackPush(bPrepend ? 1 : 0);
-            VM.StackPush(vVector);
-            VM.Call(141);
+            NWNXPInvoke.StackPushInteger(bPrepend ? 1 : 0);
+            NWNXPInvoke.StackPushVector(vVector);
+            NWNXPInvoke.CallBuiltIn(141);
         }
 
         /// <summary>
@@ -878,11 +872,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Vector3 Vector3(float x = 0.0f, float y = 0.0f, float z = 0.0f)
         {
-            VM.StackPush(z);
-            VM.StackPush(y);
-            VM.StackPush(x);
-            VM.Call(142);
-            return VM.StackPopVector();
+            NWNXPInvoke.StackPushFloat(z);
+            NWNXPInvoke.StackPushFloat(y);
+            NWNXPInvoke.StackPushFloat(x);
+            NWNXPInvoke.CallBuiltIn(142);
+            return NWNXPInvoke.StackPopVector();
         }
 
         /// <summary>
@@ -890,8 +884,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetFacingPoint(Vector3 vTarget)
         {
-            VM.StackPush(vTarget);
-            VM.Call(143);
+            NWNXPInvoke.StackPushVector(vTarget);
+            NWNXPInvoke.CallBuiltIn(143);
         }
 
         /// <summary>
@@ -902,10 +896,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static TouchAttackReturn TouchAttackMelee(uint oTarget, bool bDisplayFeedback = true)
         {
-            VM.StackPush(bDisplayFeedback ? 1 : 0);
-            VM.StackPush(oTarget);
-            VM.Call(146);
-            return (TouchAttackReturn)VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(bDisplayFeedback ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.CallBuiltIn(146);
+            return (TouchAttackReturn)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -914,10 +908,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static TouchAttackReturn TouchAttackRanged(uint oTarget, bool bDisplayFeedback = true)
         {
-            VM.StackPush(bDisplayFeedback ? 1 : 0);
-            VM.StackPush(oTarget);
-            VM.Call(147);
-            return (TouchAttackReturn)VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(bDisplayFeedback ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.CallBuiltIn(147);
+            return (TouchAttackReturn)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -926,10 +920,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static float GetDistanceBetween(uint oObjectA, uint oObjectB)
         {
-            VM.StackPush(oObjectB);
-            VM.StackPush(oObjectA);
-            VM.Call(151);
-            return VM.StackPopFloat();
+            NWNXPInvoke.StackPushObject(oObjectB);
+            NWNXPInvoke.StackPushObject(oObjectA);
+            NWNXPInvoke.CallBuiltIn(151);
+            return NWNXPInvoke.StackPopFloat();
         }
 
         /// <summary>
@@ -937,10 +931,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetLocalLocation(uint oObject, string sVarName, Location lValue)
         {
-            VM.StackPush((int)EngineStructure.Location, lValue);
-            VM.StackPush(sVarName);
-            VM.StackPush(oObject);
-            VM.Call(152);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, lValue);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(152);
         }
 
         /// <summary>
@@ -948,10 +942,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Location GetLocalLocation(uint oObject, string sVarName)
         {
-            VM.StackPush(sVarName);
-            VM.StackPush(oObject);
-            VM.Call(153);
-            return VM.StackPopStruct((int)EngineStructure.Location);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(153);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Location);
         }
 
         /// <summary>
@@ -959,9 +953,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetCommandable(bool nCommandable, uint oTarget = OBJECT_INVALID)
         {
-            VM.StackPush(oTarget);
-            VM.StackPush(nCommandable ? 1 : 0);
-            VM.Call(162);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.StackPushInteger(nCommandable ? 1 : 0);
+            NWNXPInvoke.CallBuiltIn(162);
         }
 
         /// <summary>
@@ -969,9 +963,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetCommandable(uint oTarget = OBJECT_INVALID)
         {
-            VM.StackPush(oTarget);
-            VM.Call(163);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.CallBuiltIn(163);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -980,9 +974,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetHitDice(uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.Call(166);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(166);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -993,9 +987,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionForceFollowObject(uint oFollow, float fFollowDistance = 0.0f)
         {
-            VM.StackPush(fFollowDistance);
-            VM.StackPush(oFollow);
-            VM.Call(167);
+            NWNXPInvoke.StackPushFloat(fFollowDistance);
+            NWNXPInvoke.StackPushObject(oFollow);
+            NWNXPInvoke.CallBuiltIn(167);
         }
 
         /// <summary>
@@ -1004,8 +998,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetTag(uint oObject)
         {
-            VM.StackPush(oObject);
-            VM.Call(168);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(168);
             return NWNCore.NativeFunctions.StackPopStringUTF8();
         }
 
@@ -1020,10 +1014,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int ResistSpell(uint oCaster, uint oTarget)
         {
-            VM.StackPush(oTarget);
-            VM.StackPush(oCaster);
-            VM.Call(169);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.StackPushObject(oCaster);
+            NWNXPInvoke.CallBuiltIn(169);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -1031,9 +1025,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetIsListening(uint oObject)
         {
-            VM.StackPush(oObject);
-            VM.Call(174);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(174);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -1041,9 +1035,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetListening(uint oObject, bool bValue)
         {
-            VM.StackPush(bValue ? 1 : 0);
-            VM.StackPush(oObject);
-            VM.Call(175);
+            NWNXPInvoke.StackPushInteger(bValue ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(175);
         }
 
         /// <summary>
@@ -1052,10 +1046,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetListenPattern(uint oObject, string sPattern, int nNumber = 0)
         {
-            VM.StackPush(nNumber);
-            VM.StackPush(sPattern);
-            VM.StackPush(oObject);
-            VM.Call(176);
+            NWNXPInvoke.StackPushInteger(nNumber);
+            NWNXPInvoke.StackPushString(sPattern);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(176);
         }
 
         /// <summary>
@@ -1073,8 +1067,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionSit(uint oChair)
         {
-            VM.StackPush(oChair);
-            VM.Call(194);
+            NWNXPInvoke.StackPushObject(oChair);
+            NWNXPInvoke.CallBuiltIn(194);
         }
 
         /// <summary>
@@ -1084,8 +1078,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetListenPatternNumber()
         {
-            VM.Call(195);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(195);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -1093,9 +1087,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionJumpToObject(uint oToJumpTo, bool bWalkStraightLineToPoint = true)
         {
-            VM.StackPush(bWalkStraightLineToPoint ? 1 : 0);
-            VM.StackPush(oToJumpTo);
-            VM.Call(196);
+            NWNXPInvoke.StackPushInteger(bWalkStraightLineToPoint ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oToJumpTo);
+            NWNXPInvoke.CallBuiltIn(196);
         }
 
         /// <summary>
@@ -1104,9 +1098,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetWaypointByTag(string sWaypointTag)
         {
-            VM.StackPush(sWaypointTag);
-            VM.Call(197);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushString(sWaypointTag);
+            NWNXPInvoke.CallBuiltIn(197);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -1119,9 +1113,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetTransitionTarget(uint oTransition)
         {
-            VM.StackPush(oTransition);
-            VM.Call(198);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushObject(oTransition);
+            NWNXPInvoke.CallBuiltIn(198);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -1133,10 +1127,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetObjectByTag(string sTag, int nNth = 0)
         {
-            VM.StackPush(nNth);
-            VM.StackPush(sTag);
-            VM.Call(200);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushInteger(nNth);
+            NWNXPInvoke.StackPushString(sTag);
+            NWNXPInvoke.CallBuiltIn(200);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -1144,8 +1138,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionWait(float fSeconds)
         {
-            VM.StackPush(fSeconds);
-            VM.Call(202);
+            NWNXPInvoke.StackPushFloat(fSeconds);
+            NWNXPInvoke.CallBuiltIn(202);
         }
 
         /// <summary>
@@ -1159,11 +1153,11 @@ namespace NWN.Xenomech.Core.NWScript
         public static void ActionStartConversation(uint oObjectToConverseWith, string sDialogResRef = "",
             bool bPrivateConversation = true, bool bPlayHello = true)
         {
-            VM.StackPush(bPlayHello ? 1 : 0);
-            VM.StackPush(bPrivateConversation ? 1 : 0);
-            VM.StackPush(sDialogResRef);
-            VM.StackPush(oObjectToConverseWith);
-            VM.Call(204);
+            NWNXPInvoke.StackPushInteger(bPlayHello ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(bPrivateConversation ? 1 : 0);
+            NWNXPInvoke.StackPushString(sDialogResRef);
+            NWNXPInvoke.StackPushObject(oObjectToConverseWith);
+            NWNXPInvoke.CallBuiltIn(204);
         }
 
         /// <summary>
@@ -1171,19 +1165,16 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionPauseConversation()
         {
-            VM.Call(205);
+            NWNXPInvoke.CallBuiltIn(205);
         }
-
 
         /// <summary>
         ///   Resume a conversation after it has been paused.
         /// </summary>
         public static void ActionResumeConversation()
         {
-            VM.Call(206);
+            NWNXPInvoke.CallBuiltIn(206);
         }
-
-
         /// <summary>
         ///   Get the creature that is currently sitting on the specified object.
         ///   - oChair
@@ -1191,9 +1182,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetSittingCreature(uint oChair)
         {
-            VM.StackPush(oChair);
-            VM.Call(210);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushObject(oChair);
+            NWNXPInvoke.CallBuiltIn(210);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -1205,9 +1196,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetGoingToBeAttackedBy(uint oTarget)
         {
-            VM.StackPush(oTarget);
-            VM.Call(211);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.CallBuiltIn(211);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -1215,9 +1206,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetIsPC(uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.Call(217);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(217);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -1228,9 +1219,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SpeakString(string sStringToSpeak, TalkVolume nTalkVolume = TalkVolume.Talk)
         {
-            VM.StackPush((int)nTalkVolume);
-            VM.StackPush(sStringToSpeak);
-            VM.Call(221);
+            NWNXPInvoke.StackPushInteger((int)nTalkVolume);
+            NWNXPInvoke.StackPushString(sStringToSpeak);
+            NWNXPInvoke.CallBuiltIn(221);
         }
 
         /// <summary>
@@ -1238,8 +1229,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Location GetSpellTargetLocation()
         {
-            VM.Call(222);
-            return VM.StackPopStruct((int)EngineStructure.Location);
+            NWNXPInvoke.CallBuiltIn(222);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Location);
         }
 
         /// <summary>
@@ -1247,9 +1238,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static float GetFacingFromLocation(Location lLocation)
         {
-            VM.StackPush((int)EngineStructure.Location, lLocation);
-            VM.Call(225);
-            return VM.StackPopFloat();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, lLocation);
+            NWNXPInvoke.CallBuiltIn(225);
+            return NWNXPInvoke.StackPopFloat();
         }
 
         /// <summary>
@@ -1257,9 +1248,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static float IntToFloat(int nInteger)
         {
-            VM.StackPush(nInteger);
-            VM.Call(230);
-            return VM.StackPopFloat();
+            NWNXPInvoke.StackPushInteger(nInteger);
+            NWNXPInvoke.CallBuiltIn(230);
+            return NWNXPInvoke.StackPopFloat();
         }
 
         /// <summary>
@@ -1267,9 +1258,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int FloatToInt(float fFloat)
         {
-            VM.StackPush(fFloat);
-            VM.Call(231);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushFloat(fFloat);
+            NWNXPInvoke.CallBuiltIn(231);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -1277,9 +1268,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int StringToInt(string sNumber)
         {
-            VM.StackPush(sNumber);
-            VM.Call(232);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushString(sNumber);
+            NWNXPInvoke.CallBuiltIn(232);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -1287,9 +1278,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static float StringToFloat(string sNumber)
         {
-            VM.StackPush(sNumber);
-            VM.Call(233);
-            return VM.StackPopFloat();
+            NWNXPInvoke.StackPushString(sNumber);
+            NWNXPInvoke.CallBuiltIn(233);
+            return NWNXPInvoke.StackPopFloat();
         }
 
         /// <summary>
@@ -1323,16 +1314,16 @@ namespace NWN.Xenomech.Core.NWScript
             bool bSpontaneousCast = false,
             int nDomainLevel = 0)
         {
-            VM.StackPush(nDomainLevel);
-            VM.StackPush(bSpontaneousCast ? 1 : 0);
-            VM.StackPush(nClass);
-            VM.StackPush(bInstantSpell ? 1 : 0);
-            VM.StackPush((int)nProjectilePathType);
-            VM.StackPush(bCheat ? 1 : 0);
-            VM.StackPush((int)nMetaMagic);
-            VM.StackPush((int)EngineStructure.Location, lTargetLocation);
-            VM.StackPush((int)nSpell);
-            VM.Call(234);
+            NWNXPInvoke.StackPushInteger(nDomainLevel);
+            NWNXPInvoke.StackPushInteger(bSpontaneousCast ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(nClass);
+            NWNXPInvoke.StackPushInteger(bInstantSpell ? 1 : 0);
+            NWNXPInvoke.StackPushInteger((int)nProjectilePathType);
+            NWNXPInvoke.StackPushInteger(bCheat ? 1 : 0);
+            NWNXPInvoke.StackPushInteger((int)nMetaMagic);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, lTargetLocation);
+            NWNXPInvoke.StackPushInteger((int)nSpell);
+            NWNXPInvoke.CallBuiltIn(234);
         }
 
         /// <summary>
@@ -1341,8 +1332,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetPCSpeaker()
         {
-            VM.Call(238);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(238);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -1350,10 +1341,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetStringByStrRef(int nStrRef, Gender nGender = Gender.Male)
         {
-            VM.StackPush((int)nGender);
-            VM.StackPush(nStrRef);
-            VM.Call(239);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushInteger((int)nGender);
+            NWNXPInvoke.StackPushInteger(nStrRef);
+            NWNXPInvoke.CallBuiltIn(239);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -1363,9 +1354,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionSpeakStringByStrRef(int nStrRef, TalkVolume nTalkVolume = TalkVolume.Talk)
         {
-            VM.StackPush((int)nTalkVolume);
-            VM.StackPush(nStrRef);
-            VM.Call(240);
+            NWNXPInvoke.StackPushInteger((int)nTalkVolume);
+            NWNXPInvoke.StackPushInteger(nStrRef);
+            NWNXPInvoke.CallBuiltIn(240);
         }
 
         /// <summary>
@@ -1374,8 +1365,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetModule()
         {
-            VM.Call(242);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(242);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -1396,13 +1387,12 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Event EventSpellCastAt(uint oCaster, Spell nSpell, bool bHarmful = true)
         {
-            VM.StackPush(bHarmful ? 1 : 0);
-            VM.StackPush((int)nSpell);
-            VM.StackPush(oCaster);
-            VM.Call(244);
-            return VM.StackPopStruct((int)EngineStructure.Event);
+            NWNXPInvoke.StackPushInteger(bHarmful ? 1 : 0);
+            NWNXPInvoke.StackPushInteger((int)nSpell);
+            NWNXPInvoke.StackPushObject(oCaster);
+            NWNXPInvoke.CallBuiltIn(244);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Event);
         }
-
         /// <summary>
         ///   This is for use in a "Spell Cast" script, it gets who cast the spell.
         ///   The spell could have been cast by a creature, placeable or door.
@@ -1410,8 +1400,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetLastSpellCaster()
         {
-            VM.Call(245);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(245);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -1420,8 +1410,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetLastSpell()
         {
-            VM.Call(246);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(246);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -1429,8 +1419,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetUserDefinedEventNumber()
         {
-            VM.Call(247);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(247);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -1440,19 +1430,19 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetSpellId()
         {
-            VM.Call(248);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(248);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
         ///   Generate a random name.
-        ///   nNameType: The type of random name to be generated (NAME_*)
+        ///   nNameType: The type of random name to be generated (NAME_*).
         /// </summary>
         public static string RandomName(Name nNameType = Name.FirstGenericMale)
         {
-            VM.StackPush((int)nNameType);
-            VM.Call(249);
-            return NWNCore.NativeFunctions.StackPopStringUTF8();
+            NWNXPInvoke.StackPushInteger((int)nNameType);
+            NWNXPInvoke.CallBuiltIn(249);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -1462,10 +1452,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetName(uint oObject, bool bOriginalName = false)
         {
-            VM.StackPush(bOriginalName ? 1 : 0);
-            VM.StackPush(oObject);
-            VM.Call(253);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushInteger(bOriginalName ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(253);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -1474,8 +1464,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetLastSpeaker()
         {
-            VM.Call(254);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(254);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -1486,10 +1476,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int BeginConversation(string sResRef = "", uint oObjectToDialog = OBJECT_INVALID)
         {
-            VM.StackPush(oObjectToDialog);
-            VM.StackPush(sResRef);
-            VM.Call(255);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oObjectToDialog);
+            NWNXPInvoke.StackPushString(sResRef);
+            NWNXPInvoke.CallBuiltIn(255);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -1498,8 +1488,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetLastPerceived()
         {
-            VM.Call(256);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(256);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -1508,8 +1498,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetLastPerceptionHeard()
         {
-            VM.Call(257);
-            return Convert.ToBoolean(VM.StackPopInt());
+            NWNXPInvoke.CallBuiltIn(257);
+            return Convert.ToBoolean(NWNXPInvoke.StackPopInteger());
         }
 
         /// <summary>
@@ -1518,8 +1508,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetLastPerceptionInaudible()
         {
-            VM.Call(258);
-            return Convert.ToBoolean(VM.StackPopInt());
+            NWNXPInvoke.CallBuiltIn(258);
+            return Convert.ToBoolean(NWNXPInvoke.StackPopInteger());
         }
 
         /// <summary>
@@ -1528,8 +1518,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetLastPerceptionSeen()
         {
-            VM.Call(259);
-            return Convert.ToBoolean(VM.StackPopInt());
+            NWNXPInvoke.CallBuiltIn(259);
+            return Convert.ToBoolean(NWNXPInvoke.StackPopInteger());
         }
 
         /// <summary>
@@ -1538,8 +1528,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetLastClosedBy()
         {
-            VM.Call(260);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(260);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -1548,8 +1538,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetLastPerceptionVanished()
         {
-            VM.Call(261);
-            return Convert.ToBoolean(VM.StackPopInt());
+            NWNXPInvoke.CallBuiltIn(261);
+            return Convert.ToBoolean(NWNXPInvoke.StackPopInteger());
         }
 
         /// <summary>
@@ -1564,11 +1554,11 @@ namespace NWN.Xenomech.Core.NWScript
             ObjectType nResidentObjectType = ObjectType.Creature,
             PersistentZone nPersistentZone = PersistentZone.Active)
         {
-            VM.StackPush((int)nPersistentZone);
-            VM.StackPush((int)nResidentObjectType);
-            VM.StackPush(oPersistentObject);
-            VM.Call(262);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushInteger((int)nPersistentZone);
+            NWNXPInvoke.StackPushInteger((int)nResidentObjectType);
+            NWNXPInvoke.StackPushObject(oPersistentObject);
+            NWNXPInvoke.CallBuiltIn(262);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -1583,11 +1573,11 @@ namespace NWN.Xenomech.Core.NWScript
             ObjectType nResidentObjectType = ObjectType.Creature,
             PersistentZone nPersistentZone = PersistentZone.Active)
         {
-            VM.StackPush((int)nPersistentZone);
-            VM.StackPush((int)nResidentObjectType);
-            VM.StackPush(oPersistentObject);
-            VM.Call(263);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushInteger((int)nPersistentZone);
+            NWNXPInvoke.StackPushInteger((int)nResidentObjectType);
+            NWNXPInvoke.StackPushObject(oPersistentObject);
+            NWNXPInvoke.CallBuiltIn(263);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -1596,9 +1586,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetAreaOfEffectCreator(uint oAreaOfEffectObject = OBJECT_INVALID)
         {
-            VM.StackPush(oAreaOfEffectObject);
-            VM.Call(264);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushObject(oAreaOfEffectObject);
+            NWNXPInvoke.CallBuiltIn(264);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -1606,9 +1596,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void DeleteLocalInt(uint oObject, string sVarName)
         {
-            VM.StackPush(sVarName);
-            VM.StackPush(oObject);
-            VM.Call(265);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(265);
         }
 
         /// <summary>
@@ -1624,9 +1614,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void DeleteLocalFloat(uint oObject, string sVarName)
         {
-            VM.StackPush(sVarName);
-            VM.StackPush(oObject);
-            VM.Call(266);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(266);
         }
 
         /// <summary>
@@ -1634,9 +1624,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void DeleteLocalString(uint oObject, string sVarName)
         {
-            VM.StackPush(sVarName);
-            VM.StackPush(oObject);
-            VM.Call(267);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(267);
         }
 
         /// <summary>
@@ -1644,19 +1634,18 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void DeleteLocalObject(uint oObject, string sVarName)
         {
-            VM.StackPush(sVarName);
-            VM.StackPush(oObject);
-            VM.Call(268);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(268);
         }
-
         /// <summary>
         ///   Delete oObject's local location variable sVarName
         /// </summary>
         public static void DeleteLocalLocation(uint oObject, string sVarName)
         {
-            VM.StackPush(sVarName);
-            VM.StackPush(oObject);
-            VM.Call(269);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(269);
         }
 
         /// <summary>
@@ -1664,8 +1653,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string ObjectToString(uint oObject)
         {
-            VM.StackPush(oObject);
-            VM.Call(272);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(272);
             return NWNCore.NativeFunctions.StackPopStringUTF8();
         }
 
@@ -1678,11 +1667,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetIsImmune(uint oCreature, ImmunityType nImmunityType, uint oVersus = OBJECT_INVALID)
         {
-            VM.StackPush(oVersus);
-            VM.StackPush((int)nImmunityType);
-            VM.StackPush(oCreature);
-            VM.Call(274);
-            return VM.StackPopInt() == 1;
+            NWNXPInvoke.StackPushObject(oVersus);
+            NWNXPInvoke.StackPushInteger((int)nImmunityType);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(274);
+            return NWNXPInvoke.StackPopInteger() == 1;
         }
 
         /// <summary>
@@ -1690,9 +1679,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetEncounterActive(uint oEncounter = OBJECT_INVALID)
         {
-            VM.StackPush(oEncounter);
-            VM.Call(276);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oEncounter);
+            NWNXPInvoke.CallBuiltIn(276);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -1702,9 +1691,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetEncounterActive(int nNewValue, uint oEncounter = OBJECT_INVALID)
         {
-            VM.StackPush(oEncounter);
-            VM.StackPush(nNewValue);
-            VM.Call(277);
+            NWNXPInvoke.StackPushObject(oEncounter);
+            NWNXPInvoke.StackPushInteger(nNewValue);
+            NWNXPInvoke.CallBuiltIn(277);
         }
 
         /// <summary>
@@ -1712,9 +1701,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetEncounterSpawnsMax(uint oEncounter = OBJECT_INVALID)
         {
-            VM.StackPush(oEncounter);
-            VM.Call(278);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oEncounter);
+            NWNXPInvoke.CallBuiltIn(278);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -1722,9 +1711,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetEncounterSpawnsMax(int nNewValue, uint oEncounter = OBJECT_INVALID)
         {
-            VM.StackPush(oEncounter);
-            VM.StackPush(nNewValue);
-            VM.Call(279);
+            NWNXPInvoke.StackPushObject(oEncounter);
+            NWNXPInvoke.StackPushInteger(nNewValue);
+            NWNXPInvoke.CallBuiltIn(279);
         }
 
         /// <summary>
@@ -1732,9 +1721,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetEncounterSpawnsCurrent(uint oEncounter = OBJECT_INVALID)
         {
-            VM.StackPush(oEncounter);
-            VM.Call(280);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oEncounter);
+            NWNXPInvoke.CallBuiltIn(280);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -1742,9 +1731,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetEncounterSpawnsCurrent(int nNewValue, uint oEncounter = OBJECT_INVALID)
         {
-            VM.StackPush(oEncounter);
-            VM.StackPush(nNewValue);
-            VM.Call(281);
+            NWNXPInvoke.StackPushObject(oEncounter);
+            NWNXPInvoke.StackPushInteger(nNewValue);
+            NWNXPInvoke.CallBuiltIn(281);
         }
 
         /// <summary>
@@ -1752,9 +1741,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetCustomToken(int nCustomTokenNumber, string sTokenValue)
         {
-            VM.StackPush(sTokenValue);
-            VM.StackPush(nCustomTokenNumber);
-            VM.Call(284);
+            NWNXPInvoke.StackPushString(sTokenValue);
+            NWNXPInvoke.StackPushInteger(nCustomTokenNumber);
+            NWNXPInvoke.CallBuiltIn(284);
         }
 
         /// <summary>
@@ -1765,11 +1754,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetHasFeat(FeatType nFeat, uint oCreature, bool bIgnoreUses = false)
         {
-            VM.StackPush(bIgnoreUses ? 1 : 0);
-            VM.StackPush(oCreature);
-            VM.StackPush((int)nFeat);
-            VM.Call(285);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushInteger(bIgnoreUses ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.StackPushInteger((int)nFeat);
+            NWNXPInvoke.CallBuiltIn(285);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -1779,10 +1768,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetHasSkill(NWNSkillType nSkill, uint oCreature = OBJECT_INVALID)
         {
-            VM.StackPush(oCreature);
-            VM.StackPush((int)nSkill);
-            VM.Call(286);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.StackPushInteger((int)nSkill);
+            NWNXPInvoke.CallBuiltIn(286);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -1792,9 +1781,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionUseFeat(FeatType nFeat, uint oTarget)
         {
-            VM.StackPush(oTarget);
-            VM.StackPush((int)nFeat);
-            VM.Call(287);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.StackPushInteger((int)nFeat);
+            NWNXPInvoke.CallBuiltIn(287);
         }
 
         /// <summary>
@@ -1808,11 +1797,11 @@ namespace NWN.Xenomech.Core.NWScript
         public static void ActionUseSkill(NWNSkillType nSkill, uint oTarget, SubSkill nSubSkill = SubSkill.None,
             uint oItemUsed = OBJECT_INVALID)
         {
-            VM.StackPush(oItemUsed);
-            VM.StackPush((int)nSubSkill);
-            VM.StackPush(oTarget);
-            VM.StackPush((int)nSkill);
-            VM.Call(288);
+            NWNXPInvoke.StackPushObject(oItemUsed);
+            NWNXPInvoke.StackPushInteger((int)nSubSkill);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.StackPushInteger((int)nSkill);
+            NWNXPInvoke.CallBuiltIn(288);
         }
 
         /// <summary>
@@ -1822,10 +1811,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetObjectSeen(uint oTarget, uint oSource = OBJECT_INVALID)
         {
-            VM.StackPush(oSource);
-            VM.StackPush(oTarget);
-            VM.Call(289);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oSource);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.CallBuiltIn(289);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -1835,10 +1824,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetObjectHeard(uint oTarget, uint oSource = OBJECT_INVALID)
         {
-            VM.StackPush(oSource);
-            VM.StackPush(oTarget);
-            VM.Call(290);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oSource);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.CallBuiltIn(290);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -1846,8 +1835,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetLastPlayerDied()
         {
-            VM.Call(291);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(291);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -1856,8 +1845,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetModuleItemLost()
         {
-            VM.Call(292);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(292);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -1866,10 +1855,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetModuleItemLostBy()
         {
-            VM.Call(293);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(293);
+            return NWNXPInvoke.StackPopObject();
         }
-
         /// <summary>
         ///   Set the difficulty level of oEncounter.
         ///   - nEncounterDifficulty: ENCOUNTER_DIFFICULTY_*
@@ -1878,9 +1866,9 @@ namespace NWN.Xenomech.Core.NWScript
         public static void SetEncounterDifficulty(EncounterDifficulty nEncounterDifficulty,
             uint oEncounter = OBJECT_INVALID)
         {
-            VM.StackPush(oEncounter);
-            VM.StackPush((int)nEncounterDifficulty);
-            VM.Call(296);
+            NWNXPInvoke.StackPushObject(oEncounter);
+            NWNXPInvoke.StackPushInteger((int)nEncounterDifficulty);
+            NWNXPInvoke.CallBuiltIn(296);
         }
 
         /// <summary>
@@ -1888,9 +1876,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetEncounterDifficulty(uint oEncounter = OBJECT_INVALID)
         {
-            VM.StackPush(oEncounter);
-            VM.Call(297);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oEncounter);
+            NWNXPInvoke.CallBuiltIn(297);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -1898,10 +1886,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static float GetDistanceBetweenLocations(Location lLocationA, Location lLocationB)
         {
-            VM.StackPush((int)EngineStructure.Location, lLocationB);
-            VM.StackPush((int)EngineStructure.Location, lLocationA);
-            VM.Call(298);
-            return VM.StackPopFloat();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, lLocationB);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, lLocationA);
+            NWNXPInvoke.CallBuiltIn(298);
+            return NWNXPInvoke.StackPopFloat();
         }
 
         /// <summary>
@@ -1916,13 +1904,13 @@ namespace NWN.Xenomech.Core.NWScript
         public static int GetReflexAdjustedDamage(int nDamage, uint oTarget, int nDC,
             SavingThrowType nSaveType = SavingThrowType.All, uint oSaveVersus = OBJECT_INVALID)
         {
-            VM.StackPush(oSaveVersus);
-            VM.StackPush((int)nSaveType);
-            VM.StackPush(nDC);
-            VM.StackPush(oTarget);
-            VM.StackPush(nDamage);
-            VM.Call(299);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oSaveVersus);
+            NWNXPInvoke.StackPushInteger((int)nSaveType);
+            NWNXPInvoke.StackPushInteger(nDC);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.StackPushInteger(nDamage);
+            NWNXPInvoke.CallBuiltIn(299);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -1933,10 +1921,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void PlayAnimation(Animation nAnimation, float fSpeed = 1.0f, float fSeconds = 0.0f)
         {
-            VM.StackPush(fSeconds);
-            VM.StackPush(fSpeed);
-            VM.StackPush((int)nAnimation);
-            VM.Call(300);
+            NWNXPInvoke.StackPushFloat(fSeconds);
+            NWNXPInvoke.StackPushFloat(fSpeed);
+            NWNXPInvoke.StackPushInteger((int)nAnimation);
+            NWNXPInvoke.CallBuiltIn(300);
         }
 
         /// <summary>
@@ -1945,9 +1933,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Talent TalentSpell(Spell nSpell)
         {
-            VM.StackPush((int)nSpell);
-            VM.Call(301);
-            return VM.StackPopStruct((int)EngineStructure.Talent);
+            NWNXPInvoke.StackPushInteger((int)nSpell);
+            NWNXPInvoke.CallBuiltIn(301);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Talent);
         }
 
         /// <summary>
@@ -1956,9 +1944,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Talent TalentFeat(FeatType nFeat)
         {
-            VM.StackPush((int)nFeat);
-            VM.Call(302);
-            return VM.StackPopStruct((int)EngineStructure.Talent);
+            NWNXPInvoke.StackPushInteger((int)nFeat);
+            NWNXPInvoke.CallBuiltIn(302);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Talent);
         }
 
         /// <summary>
@@ -1967,25 +1955,21 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Talent TalentSkill(NWNSkillType nSkill)
         {
-            VM.StackPush((int)nSkill);
-            VM.Call(303);
-            return VM.StackPopStruct((int)EngineStructure.Talent);
+            NWNXPInvoke.StackPushInteger((int)nSkill);
+            NWNXPInvoke.CallBuiltIn(303);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Talent);
         }
 
         /// <summary>
         ///   Determines whether oObject has any effects applied by nSpell
         ///   - nSpell: SPELL_*
-        ///   - oObject
-        ///   * The spell id on effects is only valid if the effect is created
-        ///   when the spell script runs. If it is created in a delayed command
-        ///   then the spell id on the effect will be invalid.
         /// </summary>
         public static bool GetHasSpellEffect(Spell nSpell, uint oObject = OBJECT_INVALID)
         {
-            VM.StackPush(oObject);
-            VM.StackPush((int)nSpell);
-            VM.Call(304);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.StackPushInteger((int)nSpell);
+            NWNXPInvoke.CallBuiltIn(304);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -1994,9 +1978,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetEffectSpellId(Effect eSpellEffect)
         {
-            VM.StackPush((int)EngineStructure.Effect, eSpellEffect);
-            VM.Call(305);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Effect, eSpellEffect);
+            NWNXPInvoke.CallBuiltIn(305);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -2004,40 +1988,37 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetCreatureHasTalent(Talent tTalent, uint oCreature = OBJECT_INVALID)
         {
-            VM.StackPush(oCreature);
-            VM.StackPush((int)EngineStructure.Talent, tTalent);
-            VM.Call(306);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Talent, tTalent);
+            NWNXPInvoke.CallBuiltIn(306);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
         ///   Get a random talent of oCreature, within nCategory.
         ///   - nCategory: TALENT_CATEGORY_*
-        ///   - oCreature
         /// </summary>
         public static Talent GetCreatureTalentRandom(TalentCategory nCategory, uint oCreature = OBJECT_INVALID)
         {
-            VM.StackPush(oCreature);
-            VM.StackPush((int)nCategory);
-            VM.Call(307);
-            return VM.StackPopStruct((int)EngineStructure.Talent);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.StackPushInteger((int)nCategory);
+            NWNXPInvoke.CallBuiltIn(307);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Talent);
         }
 
         /// <summary>
         ///   Get the best talent (i.e. closest to nCRMax without going over) of oCreature,
         ///   within nCategory.
         ///   - nCategory: TALENT_CATEGORY_*
-        ///   - nCRMax: Challenge Rating of the talent
-        ///   - oCreature
         /// </summary>
         public static Talent GetCreatureTalentBest(TalentCategory nCategory, int nCRMax,
             uint oCreature = OBJECT_INVALID)
         {
-            VM.StackPush(oCreature);
-            VM.StackPush(nCRMax);
-            VM.StackPush((int)nCategory);
-            VM.Call(308);
-            return VM.StackPopStruct((int)EngineStructure.Talent);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.StackPushInteger(nCRMax);
+            NWNXPInvoke.StackPushInteger((int)nCategory);
+            NWNXPInvoke.CallBuiltIn(308);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Talent);
         }
 
         /// <summary>
@@ -2045,9 +2026,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionUseTalentOnObject(Talent tChosenTalent, uint oTarget)
         {
-            VM.StackPush(oTarget);
-            VM.StackPush((int)EngineStructure.Talent, tChosenTalent);
-            VM.Call(309);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Talent, tChosenTalent);
+            NWNXPInvoke.CallBuiltIn(309);
         }
 
         /// <summary>
@@ -2055,9 +2036,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionUseTalentAtLocation(Talent tChosenTalent, Location lTargetLocation)
         {
-            VM.StackPush((int)EngineStructure.Location, lTargetLocation);
-            VM.StackPush((int)EngineStructure.Talent, tChosenTalent);
-            VM.Call(310);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, lTargetLocation);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Talent, tChosenTalent);
+            NWNXPInvoke.CallBuiltIn(310);
         }
 
         /// <summary>
@@ -2065,9 +2046,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetIsPlayableRacialType(uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.Call(312);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(312);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -2075,26 +2056,21 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void JumpToLocation(Location lDestination)
         {
-            VM.StackPush((int)EngineStructure.Location, lDestination);
-            VM.Call(313);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, lDestination);
+            NWNXPInvoke.CallBuiltIn(313);
         }
 
         /// <summary>
         ///   Get the number of ranks that oTarget has in nSkill.
         ///   - nSkill: SKILL_*
-        ///   - oTarget
-        ///   - nBaseSkillRank: if set to true returns the number of base skill ranks the target
-        ///   has (i.e. not including any bonuses from ability scores, feats, etc).
-        ///   * Returns -1 if oTarget doesn't have nSkill.
-        ///   * Returns 0 if nSkill is untrained.
         /// </summary>
         public static int GetSkillRank(NWNSkillType nSkill, uint oTarget = OBJECT_INVALID, bool nBaseSkillRank = false)
         {
-            VM.StackPush(nBaseSkillRank ? 1 : 0);
-            VM.StackPush(oTarget);
-            VM.StackPush((int)nSkill);
-            VM.Call(315);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(nBaseSkillRank ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.StackPushInteger((int)nSkill);
+            NWNXPInvoke.CallBuiltIn(315);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -2103,9 +2079,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetAttackTarget(uint oCreature = OBJECT_INVALID)
         {
-            VM.StackPush(oCreature);
-            VM.Call(316);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(316);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -2114,9 +2090,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static SpecialAttack GetLastAttackType(uint oCreature = OBJECT_INVALID)
         {
-            VM.StackPush(oCreature);
-            VM.Call(317);
-            return (SpecialAttack)VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(317);
+            return (SpecialAttack)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -2125,9 +2101,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static CombatMode GetLastAttackMode(uint oCreature = OBJECT_INVALID)
         {
-            VM.StackPush(oCreature);
-            VM.Call(318);
-            return (CombatMode)VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(318);
+            return (CombatMode)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -2139,8 +2115,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetClickingObject()
         {
-            VM.Call(326);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(326);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -2148,8 +2124,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetAssociateListenPatterns(uint oTarget = OBJECT_INVALID)
         {
-            VM.StackPush(oTarget);
-            VM.Call(327);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.CallBuiltIn(327);
         }
 
         /// <summary>
@@ -2158,9 +2134,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetLastWeaponUsed(uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.Call(328);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(328);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -2168,8 +2144,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionInteractObject(uint oPlaceable)
         {
-            VM.StackPush(oPlaceable);
-            VM.Call(329);
+            NWNXPInvoke.StackPushObject(oPlaceable);
+            NWNXPInvoke.CallBuiltIn(329);
         }
 
         /// <summary>
@@ -2179,20 +2155,18 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetLastUsedBy()
         {
-            VM.Call(330);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(330);
+            return NWNXPInvoke.StackPopObject();
         }
-
 
         /// <summary>
         ///   Get the amount of damage of type nDamageType that has been dealt to the caller.
         ///   - nDamageType: DAMAGE_TYPE_*
-        /// </summary>
         public static int GetDamageDealtByType(DamageType nDamageType)
         {
-            VM.StackPush((int)nDamageType);
-            VM.Call(344);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger((int)nDamageType);
+            NWNXPInvoke.CallBuiltIn(344);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -2200,8 +2174,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetTotalDamageDealt()
         {
-            VM.Call(345);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(345);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -2210,9 +2184,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetLastDamager(uint oObject = OBJECT_INVALID)
         {
-            VM.StackPush(oObject);
-            VM.Call(346);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(346);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -2222,8 +2196,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetLastDisarmed()
         {
-            VM.Call(347);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(347);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -2232,8 +2206,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetLastDisturbed()
         {
-            VM.Call(348);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(348);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -2242,8 +2216,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetLastLocked()
         {
-            VM.Call(349);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(349);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -2252,8 +2226,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetLastUnlocked()
         {
-            VM.Call(350);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(350);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -2261,9 +2235,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetIsTalentValid(Talent tTalent)
         {
-            VM.StackPush((int)EngineStructure.Talent, tTalent);
-            VM.Call(359);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Talent, tTalent);
+            NWNXPInvoke.CallBuiltIn(359);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -2272,10 +2246,10 @@ namespace NWN.Xenomech.Core.NWScript
         public static void ActionMoveAwayFromLocation(Location lMoveAwayFrom, bool bRun = false,
             float fMoveAwayRange = 40.0f)
         {
-            VM.StackPush(fMoveAwayRange);
-            VM.StackPush(bRun ? 1 : 0);
-            VM.StackPush((int)EngineStructure.Location, lMoveAwayFrom);
-            VM.Call(360);
+            NWNXPInvoke.StackPushFloat(fMoveAwayRange);
+            NWNXPInvoke.StackPushInteger(bRun ? 1 : 0);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, lMoveAwayFrom);
+            NWNXPInvoke.CallBuiltIn(360);
         }
 
         /// <summary>
@@ -2286,8 +2260,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetAttemptedAttackTarget()
         {
-            VM.Call(361);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(361);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -2295,9 +2269,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static TalentType GetTypeFromTalent(Talent tTalent)
         {
-            VM.StackPush((int)EngineStructure.Talent, tTalent);
-            VM.Call(362);
-            return (TalentType)VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Talent, tTalent);
+            NWNXPInvoke.CallBuiltIn(362);
+            return (TalentType)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -2305,9 +2279,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetIdFromTalent(Talent tTalent)
         {
-            VM.StackPush((int)EngineStructure.Talent, tTalent);
-            VM.Call(363);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Talent, tTalent);
+            NWNXPInvoke.CallBuiltIn(363);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -2318,9 +2292,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetPCPublicCDKey(uint oPlayer, bool nSinglePlayerCDKey = false)
         {
-            VM.StackPush(nSinglePlayerCDKey ? 1 : 0);
-            VM.StackPush(oPlayer);
-            VM.Call(369);
+            NWNXPInvoke.StackPushInteger(nSinglePlayerCDKey ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(369);
             return NWNCore.NativeFunctions.StackPopStringUTF8();
         }
 
@@ -2329,8 +2303,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetPCIPAddress(uint oPlayer)
         {
-            VM.StackPush(oPlayer);
-            VM.Call(370);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(370);
             return NWNCore.NativeFunctions.StackPopStringUTF8();
         }
 
@@ -2339,9 +2313,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetPCPlayerName(uint oPlayer)
         {
-            VM.StackPush(oPlayer);
-            VM.Call(371);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(371);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -2349,19 +2323,18 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetPCLike(uint oPlayer, uint oTarget)
         {
-            VM.StackPush(oTarget);
-            VM.StackPush(oPlayer);
-            VM.Call(372);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(372);
         }
-
         /// <summary>
         ///   Sets oPlayer and oTarget to dislike each other.
         /// </summary>
         public static void SetPCDislike(uint oPlayer, uint oTarget)
         {
-            VM.StackPush(oTarget);
-            VM.StackPush(oPlayer);
-            VM.Call(373);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(373);
         }
 
         /// <summary>
@@ -2369,9 +2342,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SendMessageToPC(uint oPlayer, string szMessage)
         {
-            VM.StackPush(szMessage);
-            VM.StackPush(oPlayer);
-            VM.Call(374);
+            NWNXPInvoke.StackPushString(szMessage);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(374);
         }
 
         /// <summary>
@@ -2382,8 +2355,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetAttemptedSpellTarget()
         {
-            VM.Call(375);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(375);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -2391,9 +2364,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetJournalQuestExperience(string szPlotID)
         {
-            VM.StackPush(szPlotID);
-            VM.Call(384);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushString(szPlotID);
+            NWNXPInvoke.CallBuiltIn(384);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -2401,9 +2374,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void JumpToObject(uint oToJumpTo, bool nWalkStraightLineToPoint = true)
         {
-            VM.StackPush(nWalkStraightLineToPoint ? 1 : 0);
-            VM.StackPush(oToJumpTo);
-            VM.Call(385);
+            NWNXPInvoke.StackPushInteger(nWalkStraightLineToPoint ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oToJumpTo);
+            NWNXPInvoke.CallBuiltIn(385);
         }
 
         /// <summary>
@@ -2413,8 +2386,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string IntToHexString(int nInteger)
         {
-            VM.StackPush(nInteger);
-            VM.Call(396);
+            NWNXPInvoke.StackPushInteger(nInteger);
+            NWNXPInvoke.CallBuiltIn(396);
             return NWNCore.NativeFunctions.StackPopStringUTF8();
         }
 
@@ -2423,8 +2396,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Location GetStartingLocation()
         {
-            VM.Call(411);
-            return VM.StackPopStruct((int)EngineStructure.Location);
+            NWNXPInvoke.CallBuiltIn(411);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Location);
         }
 
         /// <summary>
@@ -2432,10 +2405,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetIsWeaponEffective(uint oVersus = OBJECT_INVALID, bool bOffHand = false)
         {
-            VM.StackPush(bOffHand ? 1 : 0);
-            VM.StackPush(oVersus);
-            VM.Call(422);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushInteger(bOffHand ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oVersus);
+            NWNXPInvoke.CallBuiltIn(422);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -2445,8 +2418,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetLastSpellHarmful()
         {
-            VM.Call(423);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.CallBuiltIn(423);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -2467,12 +2440,12 @@ namespace NWN.Xenomech.Core.NWScript
         public static void ActivatePortal(uint oTarget, string sIPaddress = "", string sPassword = "",
             string sWaypointTag = "", bool bSeamless = false)
         {
-            VM.StackPush(bSeamless ? 1 : 0);
-            VM.StackPush(sWaypointTag);
-            VM.StackPush(sPassword);
-            VM.StackPush(sIPaddress);
-            VM.StackPush(oTarget);
-            VM.Call(474);
+            NWNXPInvoke.StackPushInteger(bSeamless ? 1 : 0);
+            NWNXPInvoke.StackPushString(sWaypointTag);
+            NWNXPInvoke.StackPushString(sPassword);
+            NWNXPInvoke.StackPushString(sIPaddress);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.CallBuiltIn(474);
         }
 
         /// <summary>
@@ -2485,10 +2458,10 @@ namespace NWN.Xenomech.Core.NWScript
         public static void ActionCastFakeSpellAtObject(Spell nSpell, uint oTarget,
             ProjectilePathType nProjectilePathType = ProjectilePathType.Default)
         {
-            VM.StackPush((int)nProjectilePathType);
-            VM.StackPush(oTarget);
-            VM.StackPush((int)nSpell);
-            VM.Call(501);
+            NWNXPInvoke.StackPushInteger((int)nProjectilePathType);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.StackPushInteger((int)nSpell);
+            NWNXPInvoke.CallBuiltIn(501);
         }
 
         /// <summary>
@@ -2501,10 +2474,10 @@ namespace NWN.Xenomech.Core.NWScript
         public static void ActionCastFakeSpellAtLocation(Spell nSpell, Location lTarget,
             ProjectilePathType nProjectilePathType = ProjectilePathType.Default)
         {
-            VM.StackPush((int)nProjectilePathType);
-            VM.StackPush((int)EngineStructure.Location, lTarget);
-            VM.StackPush((int)nSpell);
-            VM.Call(502);
+            NWNXPInvoke.StackPushInteger((int)nProjectilePathType);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, lTarget);
+            NWNXPInvoke.StackPushInteger((int)nSpell);
+            NWNXPInvoke.CallBuiltIn(502);
         }
 
         /// <summary>
@@ -2513,8 +2486,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void StartNewModule(string sModuleName)
         {
-            VM.StackPush(sModuleName);
-            VM.Call(509);
+            NWNXPInvoke.StackPushString(sModuleName);
+            NWNXPInvoke.CallBuiltIn(509);
         }
 
         /// <summary>
@@ -2522,7 +2495,7 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void DoSinglePlayerAutoSave()
         {
-            VM.Call(512);
+            NWNXPInvoke.CallBuiltIn(512);
         }
 
         /// <summary>
@@ -2530,8 +2503,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetGameDifficulty()
         {
-            VM.Call(513);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(513);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -2539,9 +2512,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ActionType GetCurrentAction(uint oObject = OBJECT_INVALID)
         {
-            VM.StackPush(oObject);
-            VM.Call(522);
-            return (ActionType)VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(522);
+            return (ActionType)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -2561,11 +2534,11 @@ namespace NWN.Xenomech.Core.NWScript
             bool bBroadcastToFaction = true,
             bool bChatWindow = true)
         {
-            VM.StackPush(bChatWindow ? 1 : 0);
-            VM.StackPush(bBroadcastToFaction ? 1 : 0);
-            VM.StackPush(oCreatureToFloatAbove);
-            VM.StackPush(nStrRefToDisplay);
-            VM.Call(525);
+            NWNXPInvoke.StackPushInteger(bChatWindow ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(bBroadcastToFaction ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oCreatureToFloatAbove);
+            NWNXPInvoke.StackPushInteger(nStrRefToDisplay);
+            NWNXPInvoke.CallBuiltIn(525);
         }
 
         /// <summary>
@@ -2585,11 +2558,11 @@ namespace NWN.Xenomech.Core.NWScript
             bool bBroadcastToFaction = true,
             bool bChatWindow = true)
         {
-            VM.StackPush(bChatWindow ? 1 : 0);
-            VM.StackPush(bBroadcastToFaction ? 1 : 0);
-            VM.StackPush(oCreatureToFloatAbove);
-            VM.StackPush(sStringToDisplay);
-            VM.Call(526);
+            NWNXPInvoke.StackPushInteger(bChatWindow ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(bBroadcastToFaction ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oCreatureToFloatAbove);
+            NWNXPInvoke.StackPushString(sStringToDisplay);
+            NWNXPInvoke.CallBuiltIn(526);
         }
 
         /// <summary>
@@ -2597,9 +2570,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetLockKeyRequired(uint oObject)
         {
-            VM.StackPush(oObject);
-            VM.Call(537);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(537);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -2607,8 +2580,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetLockKeyTag(uint oObject)
         {
-            VM.StackPush(oObject);
-            VM.Call(538);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(538);
             return NWNCore.NativeFunctions.StackPopStringUTF8();
         }
 
@@ -2617,9 +2590,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetLockLockable(uint oObject)
         {
-            VM.StackPush(oObject);
-            VM.Call(539);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(539);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -2627,9 +2600,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetLockUnlockDC(uint oObject)
         {
-            VM.StackPush(oObject);
-            VM.Call(540);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(540);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -2637,9 +2610,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetLockLockDC(uint oObject)
         {
-            VM.StackPush(oObject);
-            VM.Call(541);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(541);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -2649,10 +2622,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetHasFeatEffect(int nFeat, uint oObject = OBJECT_INVALID)
         {
-            VM.StackPush(oObject);
-            VM.StackPush(nFeat);
-            VM.Call(543);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.StackPushInteger(nFeat);
+            NWNXPInvoke.CallBuiltIn(543);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -2672,9 +2645,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetPlaceableIllumination(uint oPlaceable = OBJECT_INVALID, bool bIlluminate = true)
         {
-            VM.StackPush(bIlluminate ? 1 : 0);
-            VM.StackPush(oPlaceable);
-            VM.Call(544);
+            NWNXPInvoke.StackPushInteger(bIlluminate ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oPlaceable);
+            NWNXPInvoke.CallBuiltIn(544);
         }
 
         /// <summary>
@@ -2682,9 +2655,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetPlaceableIllumination(uint oPlaceable = OBJECT_INVALID)
         {
-            VM.StackPush(oPlaceable);
-            VM.Call(545);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oPlaceable);
+            NWNXPInvoke.CallBuiltIn(545);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -2694,10 +2667,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetIsPlaceableObjectActionPossible(uint oPlaceable, int nPlaceableAction)
         {
-            VM.StackPush(nPlaceableAction);
-            VM.StackPush(oPlaceable);
-            VM.Call(546);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(nPlaceableAction);
+            NWNXPInvoke.StackPushObject(oPlaceable);
+            NWNXPInvoke.CallBuiltIn(546);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -2707,9 +2680,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void DoPlaceableObjectAction(uint oPlaceable, int nPlaceableAction)
         {
-            VM.StackPush(nPlaceableAction);
-            VM.StackPush(oPlaceable);
-            VM.Call(547);
+            NWNXPInvoke.StackPushInteger(nPlaceableAction);
+            NWNXPInvoke.StackPushObject(oPlaceable);
+            NWNXPInvoke.CallBuiltIn(547);
         }
 
         /// <summary>
@@ -2718,7 +2691,7 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ExportAllCharacters()
         {
-            VM.Call(557);
+            NWNXPInvoke.CallBuiltIn(557);
         }
 
         /// <summary>
@@ -2726,8 +2699,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void WriteTimestampedLogEntry(string sLogEntry)
         {
-            VM.StackPush(sLogEntry);
-            VM.Call(560);
+            NWNXPInvoke.StackPushString(sLogEntry);
+            NWNXPInvoke.CallBuiltIn(560);
         }
 
         /// <summary>
@@ -2737,8 +2710,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetModuleName()
         {
-            VM.Call(561);
-            return VM.StackPopString();
+            NWNXPInvoke.CallBuiltIn(561);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -2747,8 +2720,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void EndGame(string sEndMovie)
         {
-            VM.StackPush(sEndMovie);
-            VM.Call(564);
+            NWNXPInvoke.StackPushString(sEndMovie);
+            NWNXPInvoke.CallBuiltIn(564);
         }
 
         /// <summary>
@@ -2756,8 +2729,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionCounterSpell(uint oCounterSpellTarget)
         {
-            VM.StackPush(oCounterSpellTarget);
-            VM.Call(566);
+            NWNXPInvoke.StackPushObject(oCounterSpellTarget);
+            NWNXPInvoke.CallBuiltIn(566);
         }
 
         /// <summary>
@@ -2766,9 +2739,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static float GetStrRefSoundDuration(int nStrRef)
         {
-            VM.StackPush(nStrRef);
-            VM.Call(571);
-            return VM.StackPopFloat();
+            NWNXPInvoke.StackPushInteger(nStrRef);
+            NWNXPInvoke.CallBuiltIn(571);
+            return NWNXPInvoke.StackPopFloat();
         }
 
         /// <summary>
@@ -2783,7 +2756,7 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SpawnScriptDebugger()
         {
-            VM.Call(578);
+            NWNXPInvoke.CallBuiltIn(578);
         }
 
         /// <summary>
@@ -2795,11 +2768,11 @@ namespace NWN.Xenomech.Core.NWScript
         public static void SetCampaignFloat(string sCampaignName, string sVarName, float flFloat,
             uint oPlayer = OBJECT_INVALID)
         {
-            VM.StackPush(oPlayer);
-            VM.StackPush(flFloat);
-            VM.StackPush(sVarName);
-            VM.StackPush(sCampaignName);
-            VM.Call(589);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.StackPushFloat(flFloat);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushString(sCampaignName);
+            NWNXPInvoke.CallBuiltIn(589);
         }
 
         /// <summary>
@@ -2811,11 +2784,11 @@ namespace NWN.Xenomech.Core.NWScript
         public static void SetCampaignInt(string sCampaignName, string sVarName, int nInt,
             uint oPlayer = OBJECT_INVALID)
         {
-            VM.StackPush(oPlayer);
-            VM.StackPush(nInt);
-            VM.StackPush(sVarName);
-            VM.StackPush(sCampaignName);
-            VM.Call(590);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.StackPushInteger(nInt);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushString(sCampaignName);
+            NWNXPInvoke.CallBuiltIn(590);
         }
 
         /// <summary>
@@ -2827,11 +2800,11 @@ namespace NWN.Xenomech.Core.NWScript
         public static void SetCampaignVector(string sCampaignName, string sVarName, Vector3 vVector,
             uint oPlayer = OBJECT_INVALID)
         {
-            VM.StackPush(oPlayer);
-            VM.StackPush(vVector);
-            VM.StackPush(sVarName);
-            VM.StackPush(sCampaignName);
-            VM.Call(591);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.StackPushVector(vVector);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushString(sCampaignName);
+            NWNXPInvoke.CallBuiltIn(591);
         }
 
         /// <summary>
@@ -2843,11 +2816,11 @@ namespace NWN.Xenomech.Core.NWScript
         public static void SetCampaignLocation(string sCampaignName, string sVarName, Location locLocation,
             uint oPlayer = OBJECT_INVALID)
         {
-            VM.StackPush(oPlayer);
-            VM.StackPush((int)EngineStructure.Location, locLocation);
-            VM.StackPush(sVarName);
-            VM.StackPush(sCampaignName);
-            VM.Call(592);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, locLocation);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushString(sCampaignName);
+            NWNXPInvoke.CallBuiltIn(592);
         }
 
         /// <summary>
@@ -2859,11 +2832,11 @@ namespace NWN.Xenomech.Core.NWScript
         public static void SetCampaignString(string sCampaignName, string sVarName, string sString,
             uint oPlayer = OBJECT_INVALID)
         {
-            VM.StackPush(oPlayer);
-            VM.StackPush(sString);
-            VM.StackPush(sVarName);
-            VM.StackPush(sCampaignName);
-            VM.Call(593);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.StackPushString(sString);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushString(sCampaignName);
+            NWNXPInvoke.CallBuiltIn(593);
         }
 
         /// <summary>
@@ -2871,10 +2844,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void DestroyCampaignDatabase(string sCampaignName)
         {
-            VM.StackPush(sCampaignName);
-            VM.Call(594);
+            NWNXPInvoke.StackPushString(sCampaignName);
+            NWNXPInvoke.CallBuiltIn(594);
         }
-
         /// <summary>
         ///   This will read a float from the  specified campaign database
         ///   The database name IS case sensitive and it must be the same for both set and get functions.
@@ -2883,11 +2855,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static float GetCampaignFloat(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
         {
-            VM.StackPush(oPlayer);
-            VM.StackPush(sVarName);
-            VM.StackPush(sCampaignName);
-            VM.Call(595);
-            return VM.StackPopFloat();
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushString(sCampaignName);
+            NWNXPInvoke.CallBuiltIn(595);
+            return NWNXPInvoke.StackPopFloat();
         }
 
         /// <summary>
@@ -2898,11 +2870,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetCampaignInt(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
         {
-            VM.StackPush(oPlayer);
-            VM.StackPush(sVarName);
-            VM.StackPush(sCampaignName);
-            VM.Call(596);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushString(sCampaignName);
+            NWNXPInvoke.CallBuiltIn(596);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -2913,11 +2885,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Vector3 GetCampaignVector(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
         {
-            VM.StackPush(oPlayer);
-            VM.StackPush(sVarName);
-            VM.StackPush(sCampaignName);
-            VM.Call(597);
-            return VM.StackPopVector();
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushString(sCampaignName);
+            NWNXPInvoke.CallBuiltIn(597);
+            return NWNXPInvoke.StackPopVector();
         }
 
         /// <summary>
@@ -2928,11 +2900,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Location GetCampaignLocation(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
         {
-            VM.StackPush(oPlayer);
-            VM.StackPush(sVarName);
-            VM.StackPush(sCampaignName);
-            VM.Call(598);
-            return VM.StackPopStruct((int)EngineStructure.Location);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushString(sCampaignName);
+            NWNXPInvoke.CallBuiltIn(598);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Location);
         }
 
         /// <summary>
@@ -2943,11 +2915,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetCampaignString(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
         {
-            VM.StackPush(oPlayer);
-            VM.StackPush(sVarName);
-            VM.StackPush(sCampaignName);
-            VM.Call(599);
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushString(sCampaignName);
+            NWNXPInvoke.CallBuiltIn(599);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -2959,10 +2931,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void DeleteCampaignVariable(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
         {
-            VM.StackPush(oPlayer);
-            VM.StackPush(sVarName);
-            VM.StackPush(sCampaignName);
-            VM.Call(601);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushString(sCampaignName);
+            NWNXPInvoke.CallBuiltIn(601);
         }
 
         /// <summary>
@@ -2974,13 +2946,13 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int StoreCampaignObject(string sCampaignName, string sVarName, uint oObject, uint oPlayer = OBJECT_INVALID, bool bSaveObjectState = false)
         {
-            VM.StackPush(bSaveObjectState ? 1 : 0);
-            VM.StackPush(oPlayer);
-            VM.StackPush(oObject);
-            VM.StackPush(sVarName);
-            VM.StackPush(sCampaignName);
-            VM.Call(602);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(bSaveObjectState ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushString(sCampaignName);
+            NWNXPInvoke.CallBuiltIn(602);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -2991,14 +2963,14 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint RetrieveCampaignObject(string sCampaignName, string sVarName, Location locLocation, uint oOwner = OBJECT_INVALID, uint oPlayer = OBJECT_INVALID, bool bLoadObjectState = false)
         {
-            VM.StackPush(bLoadObjectState ? 1 : 0);
-            VM.StackPush(oPlayer);
-            VM.StackPush(oOwner);
-            VM.StackPush((int)EngineStructure.Location, locLocation);
-            VM.StackPush(sVarName);
-            VM.StackPush(sCampaignName);
-            VM.Call(603);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushInteger(bLoadObjectState ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.StackPushObject(oOwner);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, locLocation);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushString(sCampaignName);
+            NWNXPInvoke.CallBuiltIn(603);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -3011,12 +2983,12 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetCampaignJson(string sCampaignName, string sVarName, Json jValue, uint oPlayer = OBJECT_INVALID)
         {
-            VM.StackPush(oPlayer);
-            VM.StackPush((int)EngineStructure.Json, jValue);
-            VM.StackPush(sVarName);
-            VM.StackPush(sCampaignName);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jValue);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushString(sCampaignName);
 
-            VM.Call(1002);
+            NWNXPInvoke.CallBuiltIn(1002);
         }
 
         /// <summary>
@@ -3029,12 +3001,12 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Json GetCampaignJson(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
         {
-            VM.StackPush(oPlayer);
-            VM.StackPush(sVarName);
-            VM.StackPush(sCampaignName);
-            VM.Call(1003);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.StackPushString(sVarName);
+            NWNXPInvoke.StackPushString(sCampaignName);
+            NWNXPInvoke.CallBuiltIn(1003);
 
-            return VM.StackPopStruct((int)EngineStructure.Json);
+            return NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.Json);
         }
 
         /// <summary>
@@ -3043,9 +3015,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static float GetDialogSoundLength(int nStrRef)
         {
-            VM.StackPush(nStrRef);
-            VM.Call(694);
-            return VM.StackPopFloat();
+            NWNXPInvoke.StackPushInteger(nStrRef);
+            NWNXPInvoke.CallBuiltIn(694);
+            return NWNXPInvoke.StackPopFloat();
         }
 
         /// <summary>
@@ -3058,10 +3030,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string Get2DAString(string s2DA, string sColumn, int nRow)
         {
-            VM.StackPush(nRow);
-            VM.StackPush(sColumn);
-            VM.StackPush(s2DA);
-            VM.Call(710);
+            NWNXPInvoke.StackPushInteger(nRow);
+            NWNXPInvoke.StackPushString(sColumn);
+            NWNXPInvoke.StackPushString(s2DA);
+            NWNXPInvoke.CallBuiltIn(710);
             return NWNCore.NativeFunctions.StackPopStringUTF8();
         }
 
@@ -3071,8 +3043,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ExportSingleCharacter(uint oPlayer)
         {
-            VM.StackPush(oPlayer);
-            VM.Call(719);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(719);
         }
 
         /// <summary>
@@ -3082,9 +3054,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void PlaySoundByStrRef(int nStrRef, bool nRunAsAction = true)
         {
-            VM.StackPush(nRunAsAction ? 1 : 0);
-            VM.StackPush(nStrRef);
-            VM.Call(720);
+            NWNXPInvoke.StackPushInteger(nRunAsAction ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(nStrRef);
+            NWNXPInvoke.CallBuiltIn(720);
         }
 
         /// <summary>
@@ -3092,8 +3064,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetModuleXPScale()
         {
-            VM.Call(817);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(817);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -3102,8 +3074,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetModuleXPScale(int nXPScale)
         {
-            VM.StackPush(nXPScale);
-            VM.Call(818);
+            NWNXPInvoke.StackPushInteger(nXPScale);
+            NWNXPInvoke.CallBuiltIn(818);
         }
 
         /// <summary>
@@ -3112,8 +3084,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetAttackBonusLimit()
         {
-            VM.Call(872);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(872);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -3122,8 +3094,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetDamageBonusLimit()
         {
-            VM.Call(873);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(873);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -3132,8 +3104,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetSavingThrowBonusLimit()
         {
-            VM.Call(874);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(874);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -3142,8 +3114,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetAbilityBonusLimit()
         {
-            VM.Call(875);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(875);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -3152,8 +3124,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetAbilityPenaltyLimit()
         {
-            VM.Call(876);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(876);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -3162,8 +3134,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetSkillBonusLimit()
         {
-            VM.Call(877);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(877);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -3172,8 +3144,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetAttackBonusLimit(int nNewLimit)
         {
-            VM.StackPush(nNewLimit);
-            VM.Call(878);
+            NWNXPInvoke.StackPushInteger(nNewLimit);
+            NWNXPInvoke.CallBuiltIn(878);
         }
 
         /// <summary>
@@ -3182,8 +3154,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetDamageBonusLimit(int nNewLimit)
         {
-            VM.StackPush(nNewLimit);
-            VM.Call(879);
+            NWNXPInvoke.StackPushInteger(nNewLimit);
+            NWNXPInvoke.CallBuiltIn(879);
         }
 
         /// <summary>
@@ -3192,8 +3164,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetSavingThrowBonusLimit(int nNewLimit)
         {
-            VM.StackPush(nNewLimit);
-            VM.Call(880);
+            NWNXPInvoke.StackPushInteger(nNewLimit);
+            NWNXPInvoke.CallBuiltIn(880);
         }
 
         /// <summary>
@@ -3202,8 +3174,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetAbilityBonusLimit(int nNewLimit)
         {
-            VM.StackPush(nNewLimit);
-            VM.Call(881);
+            NWNXPInvoke.StackPushInteger(nNewLimit);
+            NWNXPInvoke.CallBuiltIn(881);
         }
 
         /// <summary>
@@ -3212,8 +3184,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetAbilityPenaltyLimit(int nNewLimit)
         {
-            VM.StackPush(nNewLimit);
-            VM.Call(882);
+            NWNXPInvoke.StackPushInteger(nNewLimit);
+            NWNXPInvoke.CallBuiltIn(882);
         }
 
         /// <summary>
@@ -3222,8 +3194,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetSkillBonusLimit(int nNewLimit)
         {
-            VM.StackPush(nNewLimit);
-            VM.Call(883);
+            NWNXPInvoke.StackPushInteger(nNewLimit);
+            NWNXPInvoke.CallBuiltIn(883);
         }
 
         /// <summary>
@@ -3232,9 +3204,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetIsPlayerConnectionRelayed(uint oPlayer)
         {
-            VM.StackPush(oPlayer);
-            VM.Call(884);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(884);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -3244,9 +3216,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetEventScript(uint oObject, EventScript nHandler)
         {
-            VM.StackPush((int)nHandler);
-            VM.StackPush(oObject);
-            VM.Call(885);
+            NWNXPInvoke.StackPushInteger((int)nHandler);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(885);
             return NWNCore.NativeFunctions.StackPopStringUTF8();
         }
 
@@ -3257,59 +3229,50 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int SetEventScript(uint oObject, EventScript nHandler, string sScript)
         {
-            VM.StackPush(sScript);
-            VM.StackPush((int)nHandler);
-            VM.StackPush(oObject);
-            VM.Call(886);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushString(sScript);
+            NWNXPInvoke.StackPushInteger((int)nHandler);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(886);
+            return NWNXPInvoke.StackPopInteger();
         }
-
         /// <summary>
         ///   Gets a visual transform on the given object.
         ///   - oObject can be any valid Creature, Placeable, Item or Door.
         ///   - nTransform is one of OBJECT_VISUAL_TRANSFORM_*
-        ///   Returns the current (or default) value.
-        /// </summary>
         public static float GetObjectVisualTransform(uint oObject, ObjectVisualTransform nTransform)
         {
-            VM.StackPush((int)nTransform);
-            VM.StackPush(oObject);
-            VM.Call(887);
-            return VM.StackPopFloat();
+            NWNXPInvoke.StackPushInteger((int)nTransform);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(887);
+            return NWNXPInvoke.StackPopFloat();
         }
 
         /// <summary>
         /// Sets a visual transform on the given object.
         /// - oObject can be any valid Creature, Placeable, Item or Door.
         /// - nTransform is one of OBJECT_VISUAL_TRANSFORM_*
-        /// - fValue depends on the transformation to apply.
-        /// - nScope is one of OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_* and specific to the object type being VT'ed.
-        /// - nBehaviorFlags: bitmask of OBJECT_VISUAL_TRANSFORM_BEHAVIOR_*.
-        /// - nRepeats: If > 0: N times, jump back to initial/from state after completing the transform. If -1: Do forever.
-        /// Returns the old/previous value.
-        /// </summary>
         public static float SetObjectVisualTransform(
-            uint oObject, 
-            ObjectVisualTransform nTransform, 
-            float fValue, 
-            Lerp nLerpType = Lerp.None, 
-            float fLerpDuration = 0.0f, 
-            bool bPauseWithGame = true, 
-            ObjectVisualTransformDataScopeType nScope = ObjectVisualTransformDataScopeType.Base, 
-            ObjectVisualTransformBehaviorType nBehaviorFlags = ObjectVisualTransformBehaviorType.Default , 
+            uint oObject,
+            ObjectVisualTransform nTransform,
+            float fValue,
+            Lerp nLerpType = Lerp.None,
+            float fLerpDuration = 0.0f,
+            bool bPauseWithGame = true,
+            ObjectVisualTransformDataScopeType nScope = ObjectVisualTransformDataScopeType.Base,
+            ObjectVisualTransformBehaviorType nBehaviorFlags = ObjectVisualTransformBehaviorType.Default,
             int nRepeats = 0)
         {
-            VM.StackPush(nRepeats);
-            VM.StackPush((int)nBehaviorFlags);
-            VM.StackPush((int)nScope);
-            VM.StackPush(bPauseWithGame ? 1 : 0);
-            VM.StackPush(fLerpDuration);
-            VM.StackPush((int)nLerpType);
-            VM.StackPush(fValue);
-            VM.StackPush((int)nTransform);
-            VM.StackPush(oObject);
-            VM.Call(888);
-            return VM.StackPopFloat();
+            NWNXPInvoke.StackPushInteger(nRepeats);
+            NWNXPInvoke.StackPushInteger((int)nBehaviorFlags);
+            NWNXPInvoke.StackPushInteger((int)nScope);
+            NWNXPInvoke.StackPushInteger(bPauseWithGame ? 1 : 0);
+            NWNXPInvoke.StackPushFloat(fLerpDuration);
+            NWNXPInvoke.StackPushInteger((int)nLerpType);
+            NWNXPInvoke.StackPushFloat(fValue);
+            NWNXPInvoke.StackPushInteger((int)nTransform);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(888);
+            return NWNXPInvoke.StackPopFloat();
         }
 
         /// <summary>
@@ -3319,11 +3282,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetMaterialShaderUniformInt(uint oObject, string sMaterial, string sParam, int nValue)
         {
-            VM.StackPush(nValue);
-            VM.StackPush(sParam);
-            VM.StackPush(sMaterial);
-            VM.StackPush(oObject);
-            VM.Call(889);
+            NWNXPInvoke.StackPushInteger(nValue);
+            NWNXPInvoke.StackPushString(sParam);
+            NWNXPInvoke.StackPushString(sMaterial);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(889);
         }
 
         /// <summary>
@@ -3335,14 +3298,14 @@ namespace NWN.Xenomech.Core.NWScript
         public static void SetMaterialShaderUniformVec4(uint oObject, string sMaterial, string sParam, float fValue1,
             float fValue2 = 0.0f, float fValue3 = 0.0f, float fValue4 = 0.0f)
         {
-            VM.StackPush(fValue4);
-            VM.StackPush(fValue3);
-            VM.StackPush(fValue2);
-            VM.StackPush(fValue1);
-            VM.StackPush(sParam);
-            VM.StackPush(sMaterial);
-            VM.StackPush(oObject);
-            VM.Call(890);
+            NWNXPInvoke.StackPushFloat(fValue4);
+            NWNXPInvoke.StackPushFloat(fValue3);
+            NWNXPInvoke.StackPushFloat(fValue2);
+            NWNXPInvoke.StackPushFloat(fValue1);
+            NWNXPInvoke.StackPushString(sParam);
+            NWNXPInvoke.StackPushString(sMaterial);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(890);
         }
 
         /// <summary>
@@ -3353,25 +3316,22 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ResetMaterialShaderUniforms(uint oObject, string sMaterial = "", string sParam = "")
         {
-            VM.StackPush(sParam);
-            VM.StackPush(sMaterial);
-            VM.StackPush(oObject);
-            VM.Call(891);
+            NWNXPInvoke.StackPushString(sParam);
+            NWNXPInvoke.StackPushString(sMaterial);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(891);
         }
 
         /// <summary>
         ///   Vibrate the player's device or controller. Does nothing if vibration is not supported.
         ///   - nMotor is one of VIBRATOR_MOTOR_*
-        ///   - fStrength is between 0.0 and 1.0
-        ///   - fSeconds is the number of seconds to vibrate
-        /// </summary>
         public static void Vibrate(uint oPlayer, int nMotor, float fStrength, float fSeconds)
         {
-            VM.StackPush(fSeconds);
-            VM.StackPush(fStrength);
-            VM.StackPush(nMotor);
-            VM.StackPush(oPlayer);
-            VM.Call(892);
+            NWNXPInvoke.StackPushFloat(fSeconds);
+            NWNXPInvoke.StackPushFloat(fStrength);
+            NWNXPInvoke.StackPushInteger(nMotor);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(892);
         }
 
         /// <summary>
@@ -3384,12 +3344,12 @@ namespace NWN.Xenomech.Core.NWScript
         public static void UnlockAchievement(uint oPlayer, string sId, int nLastValue = 0, int nCurValue = 0,
             int nMaxValue = 0)
         {
-            VM.StackPush(nMaxValue);
-            VM.StackPush(nCurValue);
-            VM.StackPush(nLastValue);
-            VM.StackPush(sId);
-            VM.StackPush(oPlayer);
-            VM.Call(893);
+            NWNXPInvoke.StackPushInteger(nMaxValue);
+            NWNXPInvoke.StackPushInteger(nCurValue);
+            NWNXPInvoke.StackPushInteger(nLastValue);
+            NWNXPInvoke.StackPushString(sId);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(893);
         }
 
         /// <summary>
@@ -3402,10 +3362,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string ExecuteScriptChunk(string sScriptChunk, uint oObject, bool bWrapIntoMain = true)
         {
-            VM.StackPush(bWrapIntoMain ? 1 : 0);
-            VM.StackPush(oObject);
-            VM.StackPush(sScriptChunk);
-            VM.Call(894);
+            NWNXPInvoke.StackPushInteger(bWrapIntoMain ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.StackPushString(sScriptChunk);
+            NWNXPInvoke.CallBuiltIn(894);
             return NWNCore.NativeFunctions.StackPopStringUTF8();
         }
 
@@ -3415,7 +3375,7 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetRandomUUID()
         {
-            VM.Call(895);
+            NWNXPInvoke.CallBuiltIn(895);
             return NWNCore.NativeFunctions.StackPopStringUTF8();
         }
 
@@ -3440,8 +3400,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetObjectUUID(uint oObject)
         {
-            VM.StackPush(oObject);
-            VM.Call(896);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(896);
             return NWNCore.NativeFunctions.StackPopStringUTF8();
         }
 
@@ -3450,8 +3410,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ForceRefreshObjectUUID(uint oObject)
         {
-            VM.StackPush(oObject);
-            VM.Call(897);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(897);
         }
 
         /// <summary>
@@ -3460,9 +3420,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetObjectByUUID(string sUUID)
         {
-            VM.StackPush(sUUID);
-            VM.Call(898);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushString(sUUID);
+            NWNXPInvoke.CallBuiltIn(898);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -3470,89 +3430,80 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void Reserved899()
         {
-            VM.Call(899);
+            NWNXPInvoke.CallBuiltIn(899);
         }
 
-        // Makes oPC load texture sNewName instead of sOldName.
-        // If oPC is OBJECT_INVALID, it will apply the override to all active players
-        // Setting sNewName to "" will clear the override and revert to original.
-        // void SetTextureOverride();
+        /// <summary>
+        /// Makes oPC load texture sNewName instead of sOldName.
+        /// If oPC is OBJECT_INVALID, it will apply the override to all active players
+        /// Setting sNewName to "" will clear the override and revert to original.
+        /// void SetTextureOverride();
+        /// </summary>
         public static void SetTextureOverride(string OldName, string NewName = "", uint PC = OBJECT_INVALID)
         {
-            VM.StackPush(PC);
-            VM.StackPush(NewName);
-            VM.StackPush(OldName);
-            VM.Call(900);
+            NWNXPInvoke.StackPushObject(PC);
+            NWNXPInvoke.StackPushString(NewName);
+            NWNXPInvoke.StackPushString(OldName);
+            NWNXPInvoke.CallBuiltIn(900);
         }
-
-
 
         /// <summary>
         /// Displays sMsg on oPC's screen.
         /// The message is displayed on top of whatever is on the screen, including UI elements
-        ///  nX, nY - coordinates of the first character to be displayed. The value is in terms
-        ///           of character 'slot' relative to the nAnchor anchor point.
-        ///           If the number is negative, it is applied from the bottom/right.
-        ///  nAnchor - SCREEN_ANCHOR_* constant
-        ///  fLife - Duration in seconds until the string disappears.
-        ///  nRGBA, nRGBA2 - Colors of the string in 0xRRGGBBAA format. String starts at nRGBA,
-        ///                  but as it nears end of life, it will slowly blend into nRGBA2.
-        ///  nID - Optional ID of a string. If not 0, subsequent calls to PostString will
-        ///        remove the old string with the same ID, even if it's lifetime has not elapsed.
-        ///        Only positive values are allowed.
-        ///  sFont - If specified, use this custom font instead of default console font.
+        /// nX, nY - coordinates of the first character to be displayed. The value is in terms
+        /// of character 'slot' relative to the nAnchor anchor point.
+        /// If the number is negative, it is applied from the bottom/right.
+        /// nAnchor - SCREEN_ANCHOR_* constant
+        /// fLife - Duration in seconds until the string disappears.
+        /// nRGBA, nRGBA2 - Colors of the string in 0xRRGGBBAA format. String starts at nRGBA,
+        /// but as it nears end of life, it will slowly blend into nRGBA2.
+        /// nID - Optional ID of a string. If not 0, subsequent calls to PostString will
+        /// remove the old string with the same ID, even if it's lifetime has not elapsed.
+        /// Only positive values are allowed.
+        /// sFont - If specified, use this custom font instead of default console font.
         /// </summary>
-        /// <param name="PC"></param>
-        /// <param name="Msg"></param>
-        /// <param name="X"></param>
-        /// <param name="Y"></param>
-        /// <param name="anchor"></param>
-        /// <param name="life"></param>
-        /// <param name="RGBA"></param>
-        /// <param name="RGBA2"></param>
-        /// <param name="ID"></param>
-        /// <param name="font"></param>
         public static void PostString(uint PC, string Msg, int X = 0, int Y = 0, ScreenAnchor anchor = ScreenAnchor.TopLeft,
             float life = 10.0f, int RGBA = 2147418367, int RGBA2 = 2147418367, int ID = 0, string font = "")
         {
-            VM.StackPush(font);
-            VM.StackPush(ID);
-            VM.StackPush(RGBA2);
-            VM.StackPush(RGBA);
-            VM.StackPush(life);
-            VM.StackPush((int)anchor);
-            VM.StackPush(Y);
-            VM.StackPush(X);
-            VM.StackPush(Msg);
-            VM.StackPush(PC);
-            VM.Call(901);
+            NWNXPInvoke.StackPushString(font);
+            NWNXPInvoke.StackPushInteger(ID);
+            NWNXPInvoke.StackPushInteger(RGBA2);
+            NWNXPInvoke.StackPushInteger(RGBA);
+            NWNXPInvoke.StackPushFloat(life);
+            NWNXPInvoke.StackPushInteger((int)anchor);
+            NWNXPInvoke.StackPushInteger(Y);
+            NWNXPInvoke.StackPushInteger(X);
+            NWNXPInvoke.StackPushString(Msg);
+            NWNXPInvoke.StackPushObject(PC);
+            NWNXPInvoke.CallBuiltIn(901);
         }
 
-        // Returns oCreature's spell school specialization in nClass (SPELL_SCHOOL_* constants)
-        // Unless custom content is used, only Wizards have spell schools
-        // Returns -1 on error
+        /// <summary>
+        /// Returns oCreature's spell school specialization in nClass (SPELL_SCHOOL_* constants)
+        /// Unless custom content is used, only Wizards have spell schools
+        /// Returns -1 on error
+        /// </summary>
         public static SpellSchool GetSpecialization(uint creature, ClassType playerClass)
         {
-            VM.StackPush((int)playerClass);
-            VM.StackPush(creature);
-            VM.Call(902);
-            return (SpellSchool)VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger((int)playerClass);
+            NWNXPInvoke.StackPushObject(creature);
+            NWNXPInvoke.CallBuiltIn(902);
+            return (SpellSchool)NWNXPInvoke.StackPopInteger();
         }
 
-        // Returns oCreature's domain in nClass (DOMAIN_* constants)
-        // nDomainIndex - 1 or 2
-        // Unless custom content is used, only Clerics have domains
-        // Returns -1 on error
+        /// <summary>
+        /// Returns oCreature's domain in nClass (DOMAIN_* constants)
+        /// nDomainIndex - 1 or 2
+        /// Unless custom content is used, only Clerics have domains
+        /// Returns -1 on error
+        /// </summary>
         public static ClericDomain GetDomain(uint creature, int DomainIndex = 1, ClassType playerClass = ClassType.Cleric)
         {
-            VM.StackPush((int)playerClass);
-            VM.StackPush(creature);
-            VM.Call(903);
-            return (ClericDomain)VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger((int)playerClass);
+            NWNXPInvoke.StackPushObject(creature);
+            NWNXPInvoke.CallBuiltIn(903);
+            return (ClericDomain)NWNXPInvoke.StackPopInteger();
         }
-
-
-
         /// <summary>
         /// Queue an action to use an active item property.
         /// * oItem - item that has the item property to use
@@ -3563,12 +3514,12 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionUseItemOnObject(uint oItem, IntPtr ip, uint oTarget, int nSubPropertyIndex = 0, bool bDecrementCharges = true)
         {
-            VM.StackPush(bDecrementCharges ? 1 : 0);
-            VM.StackPush(nSubPropertyIndex);
-            VM.StackPush(oTarget);
-            VM.StackPush((int)EngineStructure.ItemProperty, ip);
-            VM.StackPush(oItem);
-            VM.Call(910);
+            NWNXPInvoke.StackPushInteger(bDecrementCharges ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(nSubPropertyIndex);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.ItemProperty, ip);
+            NWNXPInvoke.StackPushObject(oItem);
+            NWNXPInvoke.CallBuiltIn(910);
         }
 
         /// <summary>
@@ -3581,12 +3532,12 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ActionUseItemAtLocation(uint oItem, IntPtr ip, IntPtr lTarget, int nSubPropertyIndex = 0, bool bDecrementCharges = true)
         {
-            VM.StackPush(bDecrementCharges ? 1 : 0);
-            VM.StackPush(nSubPropertyIndex);
-            VM.StackPush((int)EngineStructure.Location, lTarget);
-            VM.StackPush((int)EngineStructure.ItemProperty, ip);
-            VM.StackPush(oItem);
-            VM.Call(911);
+            NWNXPInvoke.StackPushInteger(bDecrementCharges ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(nSubPropertyIndex);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, lTarget);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.ItemProperty, ip);
+            NWNXPInvoke.StackPushObject(oItem);
+            NWNXPInvoke.CallBuiltIn(911);
         }
 
         /// <summary>
@@ -3595,11 +3546,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void EnterTargetingMode(uint oPC, ObjectType nValidObjectTypes = ObjectType.All, MouseCursor nMouseCursorId = MouseCursor.Magic, MouseCursor nBadTargetCursor = MouseCursor.NoMagic)
         {
-            VM.StackPush((int)nBadTargetCursor);
-            VM.StackPush((int)nMouseCursorId);
-            VM.StackPush((int)nValidObjectTypes);
-            VM.StackPush(oPC);
-            VM.Call(912);
+            NWNXPInvoke.StackPushInteger((int)nBadTargetCursor);
+            NWNXPInvoke.StackPushInteger((int)nMouseCursorId);
+            NWNXPInvoke.StackPushInteger((int)nValidObjectTypes);
+            NWNXPInvoke.StackPushObject(oPC);
+            NWNXPInvoke.CallBuiltIn(912);
         }
 
         /// <summary>
@@ -3608,8 +3559,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetTargetingModeSelectedObject()
         {
-            VM.Call(913);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(913);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -3617,8 +3568,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Vector3 GetTargetingModeSelectedPosition()
         {
-            VM.Call(914);
-            return VM.StackPopVector();
+            NWNXPInvoke.CallBuiltIn(914);
+            return NWNXPInvoke.StackPopVector();
         }
 
         /// <summary>
@@ -3626,8 +3577,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetLastPlayerToSelectTarget()
         {
-            VM.Call(915);
-            return VM.StackPopObject();
+            NWNXPInvoke.CallBuiltIn(915);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -3636,9 +3587,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetObjectHiliteColor(uint oObject, int nColor = -1)
         {
-            VM.StackPush(nColor);
-            VM.StackPush(oObject);
-            VM.Call(916);
+            NWNXPInvoke.StackPushInteger(nColor);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(916);
         }
 
         /// <summary>
@@ -3646,9 +3597,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetObjectMouseCursor(uint oObject, MouseCursor nCursor = MouseCursor.Invalid)
         {
-            VM.StackPush((int)nCursor);
-            VM.StackPush(oObject);
-            VM.Call(917);
+            NWNXPInvoke.StackPushInteger((int)nCursor);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(917);
         }
 
         /// <summary>
@@ -3657,9 +3608,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetTlkOverride(int nStrRef, string sValue = "")
         {
-            VM.StackPush(sValue);
-            VM.StackPush(nStrRef);
-            VM.Call(953);
+            NWNXPInvoke.StackPushString(sValue);
+            NWNXPInvoke.StackPushInteger(nStrRef);
+            NWNXPInvoke.CallBuiltIn(953);
         }
 
         /// <summary>
@@ -3668,11 +3619,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string Get2DAColumn(string s2DA, int nColumnIdx)
         {
-            VM.StackPush(nColumnIdx);
-            VM.StackPush(s2DA);
-            VM.Call(1034);
-
-            return VM.StackPopString();
+            NWNXPInvoke.StackPushInteger(nColumnIdx);
+            NWNXPInvoke.StackPushString(s2DA);
+            NWNXPInvoke.CallBuiltIn(1034);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -3680,10 +3630,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int Get2DARowCount(string s2DA)
         {
-            VM.StackPush(s2DA);
-            VM.Call(1035);
-
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushString(s2DA);
+            NWNXPInvoke.CallBuiltIn(1035);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -3691,48 +3640,42 @@ namespace NWN.Xenomech.Core.NWScript
         /// This data persists through spell casts; you're overwriting the entry in spells.2da for this session.
         /// In multiplayer, these need to be reapplied when a player rejoins.
         /// - nSpell: SPELL_*
-        /// - nShape: SPELL_TARGETING_SHAPE_*
-        /// - nFlags: SPELL_TARGETING_FLAGS_*
-        /// </summary>
         public static void SetSpellTargetingData(uint oPlayer, Spell nSpell, int nShape, float fSizeX, float fSizeY, int nFlags)
         {
-            VM.StackPush(nFlags);
-            VM.StackPush(fSizeY);
-            VM.StackPush(fSizeX);
-            VM.StackPush(nShape);
-            VM.StackPush((int)nSpell);
-            VM.StackPush(oPlayer);
-            VM.Call(1041);
+            NWNXPInvoke.StackPushInteger(nFlags);
+            NWNXPInvoke.StackPushFloat(fSizeY);
+            NWNXPInvoke.StackPushFloat(fSizeX);
+            NWNXPInvoke.StackPushInteger(nShape);
+            NWNXPInvoke.StackPushInteger((int)nSpell);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(1041);
         }
 
         /// <summary>
         /// Sets the spell targeting data which is used for the next call to EnterTargetingMode() for this player.
         /// If the shape is set to SPELL_TARGETING_SHAPE_NONE and the range is provided, the dotted line range indicator will still appear.
         /// - nShape: SPELL_TARGETING_SHAPE_*
-        /// - nFlags: SPELL_TARGETING_FLAGS_*
-        /// - nSpell: SPELL_* (optional, passed to the shader but does nothing by default, you need to edit the shader to use it)
-        /// - nFeat: FEAT_* (optional, passed to the shader but does nothing by default, you need to edit the shader to use it)
-        /// </summary>
         public static void SetEnterTargetingModeData(
-            uint oPlayer, 
-            int nShape, 
-            float fSizeX, 
-            float fSizeY, 
-            int nFlags, 
-            float fRange = 0.0f, 
-            Spell nSpell = Spell.AllSpells, 
+            uint oPlayer,
+            int nShape,
+            float fSizeX,
+            float fSizeY,
+            int nFlags,
+            float fRange = 0.0f,
+            Spell nSpell = Spell.AllSpells,
             FeatType nFeat = FeatType.Invalid)
         {
-            VM.StackPush((int)nFeat);
-            VM.StackPush((int)nSpell);
-            VM.StackPush(fRange);
-            VM.StackPush(nFlags);
-            VM.StackPush(fSizeY);
-            VM.StackPush(fSizeX);
-            VM.StackPush(nShape);
-            VM.StackPush(oPlayer);
-            VM.Call(1042);
+            NWNXPInvoke.StackPushInteger((int)nFeat);
+            NWNXPInvoke.StackPushInteger((int)nSpell);
+            NWNXPInvoke.StackPushFloat(fRange);
+            NWNXPInvoke.StackPushInteger(nFlags);
+            NWNXPInvoke.StackPushFloat(fSizeY);
+            NWNXPInvoke.StackPushFloat(fSizeX);
+            NWNXPInvoke.StackPushInteger(nShape);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(1042);
         }
+
         /// <summary>
         /// Gets the number of memorized spell slots for a given spell level.
         /// - nClassType: a CLASS_TYPE_* constant. Must be a MemorizesSpells class.
@@ -3741,12 +3684,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetMemorizedSpellCountByLevel(uint oCreature, ClassType nClassType, int nSpellLevel)
         {
-            VM.StackPush(nSpellLevel);
-            VM.StackPush((int)nClassType);
-            VM.StackPush(oCreature);
-            VM.Call(1043);
-
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(nSpellLevel);
+            NWNXPInvoke.StackPushInteger((int)nClassType);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(1043);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -3758,14 +3700,14 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetMemorizedSpellId(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex)
         {
-            VM.StackPush(nIndex);
-            VM.StackPush(nSpellLevel);
-            VM.StackPush((int)nClassType);
-            VM.StackPush(oCreature);
-            VM.Call(1044);
-
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushInteger(nSpellLevel);
+            NWNXPInvoke.StackPushInteger((int)nClassType);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(1044);
+            return NWNXPInvoke.StackPopInteger();
         }
+
         /// <summary>
         /// Gets the ready state of a memorized spell slot.
         /// - nClassType: a CLASS_TYPE_* constant. Must be a MemorizesSpells class.
@@ -3775,13 +3717,12 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetMemorizedSpellReady(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex)
         {
-            VM.StackPush(nIndex);
-            VM.StackPush(nSpellLevel);
-            VM.StackPush((int)nClassType);
-            VM.StackPush(oCreature);
-            VM.Call(1045);
-
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushInteger(nSpellLevel);
+            NWNXPInvoke.StackPushInteger((int)nClassType);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(1045);
+            return NWNXPInvoke.StackPopInteger();
         }
         /// <summary>
         /// Gets the metamagic of a memorized spell slot.
@@ -3792,13 +3733,13 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetMemorizedSpellMetaMagic(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex)
         {
-            VM.StackPush(nIndex);
-            VM.StackPush(nSpellLevel);
-            VM.StackPush((int)nClassType);
-            VM.StackPush(oCreature);
-            VM.Call(1046);
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushInteger(nSpellLevel);
+            NWNXPInvoke.StackPushInteger((int)nClassType);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(1046);
 
-            return VM.StackPopInt();
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -3810,13 +3751,13 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetMemorizedSpellIsDomainSpell(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex)
         {
-            VM.StackPush(nIndex);
-            VM.StackPush(nSpellLevel);
-            VM.StackPush((int)nClassType);
-            VM.StackPush(oCreature);
-            VM.Call(1047);
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushInteger(nSpellLevel);
+            NWNXPInvoke.StackPushInteger((int)nClassType);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(1047);
 
-            return VM.StackPopInt();
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -3830,24 +3771,24 @@ namespace NWN.Xenomech.Core.NWScript
         /// - bIsDomainSpell: TRUE for a domain spell.
         /// </summary>
         public static void SetMemorizedSpell(
-            uint oCreature, 
-            ClassType nClassType, 
-            int nSpellLevel, 
-            int nIndex, 
-            Spell nSpellId, 
-            bool bReady = true, 
-            MetaMagic nMetaMagic = MetaMagic.None, 
+            uint oCreature,
+            ClassType nClassType,
+            int nSpellLevel,
+            int nIndex,
+            Spell nSpellId,
+            bool bReady = true,
+            MetaMagic nMetaMagic = MetaMagic.None,
             bool bIsDomainSpell = false)
         {
-            VM.StackPush(bIsDomainSpell ? 1 : 0);
-            VM.StackPush((int)nMetaMagic);
-            VM.StackPush(bReady ? 1 : 0);
-            VM.StackPush((int)nSpellId);
-            VM.StackPush(nIndex);
-            VM.StackPush(nSpellLevel);
-            VM.StackPush((int)nClassType);
-            VM.StackPush(oCreature);
-            VM.Call(1048);
+            NWNXPInvoke.StackPushInteger(bIsDomainSpell ? 1 : 0);
+            NWNXPInvoke.StackPushInteger((int)nMetaMagic);
+            NWNXPInvoke.StackPushInteger(bReady ? 1 : 0);
+            NWNXPInvoke.StackPushInteger((int)nSpellId);
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushInteger(nSpellLevel);
+            NWNXPInvoke.StackPushInteger((int)nClassType);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(1048);
         }
 
         /// <summary>
@@ -3859,12 +3800,12 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetMemorizedSpellReady(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex, bool bReady)
         {
-            VM.StackPush(bReady ? 1 : 0);
-            VM.StackPush(nIndex);
-            VM.StackPush(nSpellLevel);
-            VM.StackPush((int)nClassType);
-            VM.StackPush(oCreature);
-            VM.Call(1049);
+            NWNXPInvoke.StackPushInteger(bReady ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushInteger(nSpellLevel);
+            NWNXPInvoke.StackPushInteger((int)nClassType);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(1049);
         }
 
         /// <summary>
@@ -3875,11 +3816,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ClearMemorizedSpell(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex)
         {
-            VM.StackPush(nIndex);
-            VM.StackPush(nSpellLevel);
-            VM.StackPush((int)nClassType);
-            VM.StackPush(oCreature);
-            VM.Call(1050);
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushInteger(nSpellLevel);
+            NWNXPInvoke.StackPushInteger((int)nClassType);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(1050);
         }
 
         /// <summary>
@@ -3889,10 +3830,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ClearMemorizedSpellBySpellId(uint oCreature, ClassType nClassType, int nSpellId)
         {
-            VM.StackPush(nSpellId);
-            VM.StackPush((int)nClassType);
-            VM.StackPush(oCreature);
-            VM.Call(1051);
+            NWNXPInvoke.StackPushInteger(nSpellId);
+            NWNXPInvoke.StackPushInteger((int)nClassType);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(1051);
         }
 
         /// <summary>
@@ -3903,12 +3844,12 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetKnownSpellCount(uint oCreature, ClassType nClassType, int nSpellLevel)
         {
-            VM.StackPush(nSpellLevel);
-            VM.StackPush((int)nClassType);
-            VM.StackPush(oCreature);
-            VM.Call(1052);
+            NWNXPInvoke.StackPushInteger(nSpellLevel);
+            NWNXPInvoke.StackPushInteger((int)nClassType);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(1052);
 
-            return VM.StackPopInt();
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -3920,13 +3861,13 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetKnownSpellId(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex)
         {
-            VM.StackPush(nIndex);
-            VM.StackPush(nSpellLevel);
-            VM.StackPush((int)nClassType);
-            VM.StackPush(oCreature);
-            VM.Call(1053);
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushInteger(nSpellLevel);
+            NWNXPInvoke.StackPushInteger((int)nClassType);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(1053);
 
-            return VM.StackPopInt();
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -3937,12 +3878,12 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetIsInKnownSpellList(uint oCreature, ClassType nClassType, Spell nSpellId)
         {
-            VM.StackPush((int)nSpellId);
-            VM.StackPush((int)nClassType);
-            VM.StackPush(oCreature);
-            VM.Call(1054);
+            NWNXPInvoke.StackPushInteger((int)nSpellId);
+            NWNXPInvoke.StackPushInteger((int)nClassType);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(1054);
 
-            return VM.StackPopInt() == 1;
+            return NWNXPInvoke.StackPopInteger() == 1;
         }
 
         /// <summary>
@@ -3954,20 +3895,20 @@ namespace NWN.Xenomech.Core.NWScript
         /// Returns: the amount of spell uses left.
         /// </summary>
         public static int GetSpellUsesLeft(
-            uint oCreature, 
-            ClassType nClassType, 
-            Spell nSpellId, 
-            MetaMagic nMetaMagic = MetaMagic.None, 
+            uint oCreature,
+            ClassType nClassType,
+            Spell nSpellId,
+            MetaMagic nMetaMagic = MetaMagic.None,
             int nDomainLevel = 0)
         {
-            VM.StackPush(nDomainLevel);
-            VM.StackPush((int)nMetaMagic);
-            VM.StackPush((int)nSpellId);
-            VM.StackPush((int)nClassType);
-            VM.StackPush(oCreature);
-            VM.Call(1055);
+            NWNXPInvoke.StackPushInteger(nDomainLevel);
+            NWNXPInvoke.StackPushInteger((int)nMetaMagic);
+            NWNXPInvoke.StackPushInteger((int)nSpellId);
+            NWNXPInvoke.StackPushInteger((int)nClassType);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(1055);
 
-            return VM.StackPopInt();
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -3978,11 +3919,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetSpellLevelByClass(ClassType nClassType, Spell nSpellId)
         {
-            VM.StackPush((int)nSpellId);
-            VM.StackPush((int)nClassType);
-            VM.Call(1056);
+            NWNXPInvoke.StackPushInteger((int)nSpellId);
+            NWNXPInvoke.StackPushInteger((int)nClassType);
+            NWNXPInvoke.CallBuiltIn(1056);
 
-            return VM.StackPopInt();
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -3991,10 +3932,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ReplaceObjectAnimation(uint oObject, string sOld, string sNew = "")
         {
-            VM.StackPush(sNew);
-            VM.StackPush(sOld);
-            VM.StackPush(oObject);
-            VM.Call(1057);
+            NWNXPInvoke.StackPushString(sNew);
+            NWNXPInvoke.StackPushString(sOld);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(1057);
         }
 
         /// <summary>
@@ -4006,9 +3947,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetObjectVisibleDistance(uint oObject, float fDistance = 45.0f)
         {
-            VM.StackPush(fDistance);
-            VM.StackPush(oObject);
-            VM.Call(1058);
+            NWNXPInvoke.StackPushFloat(fDistance);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(1058);
         }
 
         /// <summary>
@@ -4017,10 +3958,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static float GetObjectVisibleDistance(uint oObject)
         {
-            VM.StackPush(oObject);
-            VM.Call(1059);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(1059);
 
-            return VM.StackPopFloat();
+            return NWNXPInvoke.StackPopFloat();
         }
 
         /// <summary>
@@ -4028,8 +3969,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetGameActivePause(bool bState)
         {
-            VM.StackPush(bState ? 1 : 0);
-            VM.Call(1060);
+            NWNXPInvoke.StackPushInteger(bState ? 1 : 0);
+            NWNXPInvoke.CallBuiltIn(1060);
         }
 
         /// <summary>
@@ -4040,9 +3981,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetGamePauseState()
         {
-            VM.Call(1061);
+            NWNXPInvoke.CallBuiltIn(1061);
 
-            return VM.StackPopInt();
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -4051,9 +3992,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetGender(uint oCreature, Gender nGender)
         {
-            VM.StackPush((int)nGender);
-            VM.StackPush(oCreature);
-            VM.Call(1062);
+            NWNXPInvoke.StackPushInteger((int)nGender);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(1062);
         }
 
         /// <summary>
@@ -4062,10 +4003,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetSoundset(uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.Call(1063);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(1063);
 
-            return VM.StackPopInt();
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -4073,9 +4014,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetSoundset(uint oCreature, int nSoundset)
         {
-            VM.StackPush(nSoundset);
-            VM.StackPush(oCreature);
-            VM.Call(1064);
+            NWNXPInvoke.StackPushInteger(nSoundset);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(1064);
         }
 
         /// <summary>
@@ -4085,10 +4026,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ReadySpellLevel(uint oCreature, int nSpellLevel, ClassType nClassType = ClassType.Invalid)
         {
-            VM.StackPush((int)nClassType);
-            VM.StackPush(nSpellLevel);
-            VM.StackPush(oCreature);
-            VM.Call(1065);
+            NWNXPInvoke.StackPushInteger((int)nClassType);
+            NWNXPInvoke.StackPushInteger(nSpellLevel);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(1065);
         }
 
         /// <summary>
@@ -4099,9 +4040,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetCommandingPlayer(uint oCreature, uint oPlayer)
         {
-            VM.StackPush(oPlayer);
-            VM.StackPush(oCreature);
-            VM.Call(1066);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(1066);
         }
 
         /// <summary>
@@ -4110,18 +4051,18 @@ namespace NWN.Xenomech.Core.NWScript
         /// NB: Like all other camera settings, this is not saved when saving the game
         /// </summary>
         public static void SetCameraLimits(
-            uint oPlayer, 
-            float fMinPitch = -1.0f, 
-            float fMaxPitch = -1.0f, 
-            float fMinDist = -1.0f, 
+            uint oPlayer,
+            float fMinPitch = -1.0f,
+            float fMaxPitch = -1.0f,
+            float fMinDist = -1.0f,
             float fMaxDist = -1.0f)
         {
-            VM.StackPush(fMaxDist);
-            VM.StackPush(fMinDist);
-            VM.StackPush(fMaxPitch);
-            VM.StackPush(fMinPitch);
-            VM.StackPush(oPlayer);
-            VM.Call(1067);
+            NWNXPInvoke.StackPushFloat(fMaxDist);
+            NWNXPInvoke.StackPushFloat(fMinDist);
+            NWNXPInvoke.StackPushFloat(fMaxPitch);
+            NWNXPInvoke.StackPushFloat(fMinPitch);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(1067);
         }
 
         /// <summary>
@@ -4138,10 +4079,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void AttachCamera(uint oPlayer, uint oTarget, bool bFindClearView = false)
         {
-            VM.StackPush(bFindClearView ? 1 : 0);
-            VM.StackPush(oTarget);
-            VM.StackPush(oPlayer);
-            VM.Call(1073);
+            NWNXPInvoke.StackPushInteger(bFindClearView ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(1073);
         }
 
         /// <summary>
@@ -4150,24 +4091,21 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetObjectUiDiscoveryMask(uint oObject)
         {
-            VM.StackPush(oObject);
-            VM.Call(1074);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(1074);
 
-            return VM.StackPopInt();
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
         /// Sets the discoverability mask on oObject.
         /// This allows toggling areahilite (TAB key by default) and mouseover discovery in the area view.
         /// * nMask is a bitmask of OBJECT_UI_DISCOVERY_*
-        /// Will currently only work on Creatures, Doors (Hilite only), Items and Useable Placeables.
-        /// Does not affect inventory items.
-        /// </summary>
         public static void SetObjectUiDiscoveryMask(uint oObject, ObjectUIDiscoveryType nMask = ObjectUIDiscoveryType.Default)
         {
-            VM.StackPush((int)nMask);
-            VM.StackPush(oObject);
-            VM.Call(1075);
+            NWNXPInvoke.StackPushInteger((int)nMask);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(1075);
         }
 
         /// <summary>
@@ -4177,10 +4115,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetObjectTextBubbleOverride(uint oObject, ObjectUITextBubbleOverrideType nMode, string sText)
         {
-            VM.StackPush(sText);
-            VM.StackPush((int)nMode);
-            VM.StackPush(oObject);
-            VM.Call(1076);
+            NWNXPInvoke.StackPushString(sText);
+            NWNXPInvoke.StackPushInteger((int)nMode);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(1076);
         }
 
         /// <summary>
@@ -4190,11 +4128,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool ClearObjectVisualTransform(uint oObject, ObjectVisualTransformDataScopeType nScope = ObjectVisualTransformDataScopeType.Invalid)
         {
-            VM.StackPush((int)nScope);
-            VM.StackPush(oObject);
-            VM.Call(1077);
+            NWNXPInvoke.StackPushInteger((int)nScope);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(1077);
 
-            return VM.StackPopInt() == 1;
+            return NWNXPInvoke.StackPopInteger() == 1;
         }
 
         /// <summary>
@@ -4204,9 +4142,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// <returns></returns>
         public static Vector3 GetLastGuiEventVector()
         {
-            VM.Call(1078);
+            NWNXPInvoke.CallBuiltIn(1078);
 
-            return VM.StackPopVector();
+            return NWNXPInvoke.StackPopVector();
         }
 
         /// <summary>
@@ -4216,9 +4154,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetCameraFlags(uint oPlayer, int nFlags = 0)
         {
-            VM.StackPush(nFlags);
-            VM.StackPush(oPlayer);
-            VM.Call(1079);
+            NWNXPInvoke.StackPushInteger(nFlags);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(1079);
         }
 
         /// <summary>
@@ -4226,8 +4164,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetSpellFeatId()
         {
-            VM.Call(1095);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(1095);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -4238,10 +4176,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetFeatRemainingUses(FeatType nFeat, uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.StackPush((int)nFeat);
-            VM.Call(1097);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.StackPushInteger((int)nFeat);
+            NWNXPInvoke.CallBuiltIn(1097);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -4250,33 +4188,20 @@ namespace NWN.Xenomech.Core.NWScript
         ///   - For optimal use you should be familiar with how tilesets / .set files work.
         ///   - Will not update the height of non-creature objects.
         ///   - Creatures may get stuck on non-walkable terrain.
-        ///
-        /// - locTile: The location of the tile.
-        /// - nTileID: the ID of the tile, for values see the .set file of the tileset.
-        /// - nOrientation: the orientation of the tile, 0-3.
-        ///                 0 = Normal orientation
-        ///                 1 = 90 degrees counterclockwise
-        ///                 2 = 180 degrees counterclockwise
-        ///                 3 = 270 degrees counterclockwise
-        /// - nHeight: the height of the tile.
-        /// - nFlags: a bitmask of SETTILE_FLAG_* constants.
-        ///           - SETTILE_FLAG_RELOAD_GRASS: reloads the area's grass, use if your tile used to have grass or should have grass now.
-        ///           - SETTILE_FLAG_RELOAD_BORDER: reloads the edge tile border, use if you changed a tile on the edge of the area.
-        ///           - SETTILE_FLAG_RECOMPUTE_LIGHTING: recomputes the area's lighting and static shadows, use most of time.
         /// </summary>
         public static void SetTile(
-            Location locTile, 
-            int nTileID, 
-            int nOrientation, 
-            int nHeight = 0, 
+            Location locTile,
+            int nTileID,
+            int nOrientation,
+            int nHeight = 0,
             SetTileFlagType nFlags = SetTileFlagType.RecomputeLighting)
         {
-            VM.StackPush((int)nFlags);
-            VM.StackPush(nHeight);
-            VM.StackPush(nOrientation);
-            VM.StackPush(nTileID);
-            VM.StackPush(locTile);
-            VM.Call(1098);
+            NWNXPInvoke.StackPushInteger((int)nFlags);
+            NWNXPInvoke.StackPushInteger(nHeight);
+            NWNXPInvoke.StackPushInteger(nOrientation);
+            NWNXPInvoke.StackPushInteger(nTileID);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, locTile);
+            NWNXPInvoke.CallBuiltIn(1098);
         }
 
         /// <summary>
@@ -4285,9 +4210,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetTileID(Location locTile)
         {
-            VM.StackPush(locTile);
-            VM.Call(1099);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, locTile);
+            NWNXPInvoke.CallBuiltIn(1099);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -4296,9 +4221,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetTileOrientation(Location locTile)
         {
-            VM.StackPush(locTile);
-            VM.Call(1100);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, locTile);
+            NWNXPInvoke.CallBuiltIn(1100);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -4307,19 +4232,18 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetTileHeight(Location locTile)
         {
-            VM.StackPush(locTile);
-            VM.Call(1101);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, locTile);
+            NWNXPInvoke.CallBuiltIn(1101);
+            return NWNXPInvoke.StackPopInteger();
         }
-
         /// <summary>
         /// All clients in oArea will reload the area's grass.
         /// This can be used to update the grass of an area after changing a tile with SetTile() that will have or used to have grass.
         /// </summary>
         public static void ReloadAreaGrass(uint oArea)
         {
-            VM.StackPush(oArea);
-            VM.Call(1102);
+            NWNXPInvoke.StackPushObject(oArea);
+            NWNXPInvoke.CallBuiltIn(1102);
         }
 
         /// <summary>
@@ -4327,11 +4251,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetTileAnimationLoops(Location locTile, bool bAnimLoop1, bool bAnimLoop2, bool bAnimLoop3)
         {
-            VM.StackPush(bAnimLoop3 ? 1 : 0);
-            VM.StackPush(bAnimLoop2 ? 1 : 0);
-            VM.StackPush(bAnimLoop1 ? 1 : 0);
-            VM.StackPush(locTile);
-            VM.Call(1103);
+            NWNXPInvoke.StackPushInteger(bAnimLoop3 ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(bAnimLoop2 ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(bAnimLoop1 ? 1 : 0);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, locTile);
+            NWNXPInvoke.CallBuiltIn(1103);
         }
 
         /// <summary>
@@ -4356,43 +4280,43 @@ namespace NWN.Xenomech.Core.NWScript
         ///                      Make sure jTileData changes *all* tiles in the area and to a tile id that's supported by sTileset.
         /// </summary>
         public static void SetTileJson(
-            uint oArea, 
-            Json jTileData, 
-            SetTileFlagType nFlags = SetTileFlagType.RecomputeLighting, 
+            uint oArea,
+            Json jTileData,
+            SetTileFlagType nFlags = SetTileFlagType.RecomputeLighting,
             string sTileset = "")
         {
-            VM.StackPush(sTileset);
-            VM.StackPush((int)nFlags);
-            VM.StackPush(jTileData);
-            VM.StackPush(oArea);
-            VM.Call(1104);
+            NWNXPInvoke.StackPushString(sTileset);
+            NWNXPInvoke.StackPushInteger((int)nFlags);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Json, jTileData);
+            NWNXPInvoke.StackPushObject(oArea);
+            NWNXPInvoke.CallBuiltIn(1104);
         }
 
         /// <summary>
-        /// All clients in oArea will reload the inaccesible border tiles.
+        /// All clients in oArea will reload the inaccessible border tiles.
         /// This can be used to update the edge tiles after changing a tile with SetTile().
         /// </summary>
         public static void ReloadAreaBorder(uint oArea)
         {
-            VM.StackPush(oArea);
-            VM.Call(1105);
+            NWNXPInvoke.StackPushObject(oArea);
+            NWNXPInvoke.CallBuiltIn(1105);
         }
 
         /// <summary>
-        /// Sets whether or not oCreatures's nIconId is flashing in their GUI icon bar.  If oCreature does not
+        /// Sets whether or not oCreature's nIconId is flashing in their GUI icon bar.  If oCreature does not
         /// have an icon associated with nIconId, nothing happens. This function does not add icons to 
-        /// oCreatures's GUI icon bar. The icon will flash until the underlying effect is removed or this 
+        /// oCreature's GUI icon bar. The icon will flash until the underlying effect is removed or this 
         /// function is called again with bFlashing = FALSE.
         /// - oCreature: Player object to affect
         /// - nIconId: Referenced to effecticons.2da or EFFECT_ICON_*
-        /// - bFlashing: TRUE to force an existing icon to flash, FALSE to to stop.
+        /// - bFlashing: TRUE to force an existing icon to flash, FALSE to stop.
         /// </summary>
         public static void SetEffectIconFlashing(uint oCreature, int nIconId, bool bFlashing = true)
         {
-            VM.StackPush(bFlashing ? 1 : 0);
-            VM.StackPush(nIconId);
-            VM.StackPush(oCreature);
-            VM.Call(1106);
+            NWNXPInvoke.StackPushInteger(bFlashing ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(nIconId);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.CallBuiltIn(1106);
         }
 
         /// <summary>
@@ -4401,8 +4325,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static InventorySlot GetPCItemLastEquippedSlot()
         {
-            VM.Call(1108);
-            return (InventorySlot)VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(1108);
+            return (InventorySlot)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -4411,8 +4335,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static InventorySlot GetPCItemLastUnequippedSlot()
         {
-            VM.Call(1109);
-            return (InventorySlot)VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(1109);
+            return (InventorySlot)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -4421,8 +4345,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetSpellCastSpontaneously()
         {
-            VM.Call(1110);
-            return VM.StackPopInt() == 1;
+            NWNXPInvoke.CallBuiltIn(1110);
+            return NWNXPInvoke.StackPopInteger() == 1;
         }
 
         /// <summary>
@@ -4431,8 +4355,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetTickRate()
         {
-            VM.Call(1113);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(1113);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -4440,13 +4364,13 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetLastSpellLevel()
         {
-            VM.Call(1114);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(1114);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
         /// Returns the 32bit integer hash of sString
-        /// This hash is stable and will always have the same value for same input string, regardless of platform.
+        /// This hash is stable and will always have the same value for the same input string, regardless of platform.
         /// The hash algorithm is the same as the one used internally for strings in case statements, so you can do:
         ///    switch (HashString(sString))
         ///    {
@@ -4457,15 +4381,16 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int HashString(string sString)
         {
-            VM.StackPush(sString);
-            VM.Call(1115);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushString(sString);
+            NWNXPInvoke.CallBuiltIn(1115);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         public static int GetMicrosecondCounter()
         {
-            VM.Call(1116);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(1116);
+            return NWNXPInvoke.StackPopInteger();
         }
+
     }
 }

@@ -1,4 +1,6 @@
-﻿using NWN.Xenomech.Core.NWScript.Enum;
+﻿
+using NWN.Xenomech.Core.Interop;
+using NWN.Xenomech.Core.NWScript.Enum;
 
 namespace NWN.Xenomech.Core.NWScript
 {
@@ -13,10 +15,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetShaderUniformFloat(uint oPlayer, ShaderUniformType nShader, float fValue)
         {
-            VM.StackPush(fValue);
-            VM.StackPush((int)nShader);
-            VM.StackPush(oPlayer);
-            VM.Call(1038);
+            NWNXPInvoke.StackPushFloat(fValue);
+            NWNXPInvoke.StackPushInteger((int)nShader);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(1038);
         }
 
         /// <summary>
@@ -28,10 +30,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetShaderUniformInt(uint oPlayer, ShaderUniformType nShader, int nValue)
         {
-            VM.StackPush(nValue);
-            VM.StackPush((int)nShader);
-            VM.StackPush(oPlayer);
-            VM.Call(1039);
+            NWNXPInvoke.StackPushInteger(nValue);
+            NWNXPInvoke.StackPushInteger((int)nShader);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(1039);
         }
 
         /// <summary>
@@ -43,13 +45,13 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetShaderUniformVec(uint oPlayer, ShaderUniformType nShader, float fX, float fY, float fZ, float fW)
         {
-            VM.StackPush(fW);
-            VM.StackPush(fZ);
-            VM.StackPush(fY);
-            VM.StackPush(fX);
-            VM.StackPush((int)nShader);
-            VM.StackPush(oPlayer);
-            VM.Call(1040);
+            NWNXPInvoke.StackPushFloat(fW);
+            NWNXPInvoke.StackPushFloat(fZ);
+            NWNXPInvoke.StackPushFloat(fY);
+            NWNXPInvoke.StackPushFloat(fX);
+            NWNXPInvoke.StackPushInteger((int)nShader);
+            NWNXPInvoke.StackPushObject(oPlayer);
+            NWNXPInvoke.CallBuiltIn(1040);
         }
     }
 }

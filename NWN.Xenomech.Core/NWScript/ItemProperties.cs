@@ -1,3 +1,4 @@
+using NWN.Xenomech.Core.Interop;
 using NWN.Xenomech.Core.NWScript.Enum;
 using NWN.Xenomech.Core.NWScript.Enum.Item;
 using NWN.Xenomech.Core.NWScript.Enum.Item.Property;
@@ -8,107 +9,104 @@ using SpellSchool = NWN.Xenomech.Core.NWScript.Enum.SpellSchool;
 namespace NWN.Xenomech.Core.NWScript
 {
     public partial class NWScript
-    {
-        /// <summary>
-        ///   adds an item property to the specified item
-        ///   Only temporary and permanent duration types are allowed.
-        /// </summary>
-        public static void AddItemProperty(DurationType nDurationType, ItemProperty ipProperty, uint oItem,
-            float fDuration = 0.0f)
+    {/// <summary>
+     ///   Adds an item property to the specified item.
+     ///   Only temporary and permanent duration types are allowed.
+     /// </summary>
+        public static void AddItemProperty(DurationType nDurationType, ItemProperty ipProperty, uint oItem, float fDuration = 0.0f)
         {
-            VM.StackPush(fDuration);
-            VM.StackPush(oItem);
-            VM.StackPush((int)EngineStructure.ItemProperty, ipProperty);
-            VM.StackPush((int)nDurationType);
-            VM.Call(609);
+            NWNXPInvoke.StackPushFloat(fDuration);
+            NWNXPInvoke.StackPushObject(oItem);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.ItemProperty, ipProperty);
+            NWNXPInvoke.StackPushInteger((int)nDurationType);
+            NWNXPInvoke.CallBuiltIn(609);
         }
 
         /// <summary>
-        ///   removes an item property from the specified item
+        ///   Removes an item property from the specified item.
         /// </summary>
         public static void RemoveItemProperty(uint oItem, ItemProperty ipProperty)
         {
-            VM.StackPush((int)EngineStructure.ItemProperty, ipProperty);
-            VM.StackPush(oItem);
-            VM.Call(610);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.ItemProperty, ipProperty);
+            NWNXPInvoke.StackPushObject(oItem);
+            NWNXPInvoke.CallBuiltIn(610);
         }
 
         /// <summary>
-        ///   if the item property is valid this will return true
+        ///   If the item property is valid this will return true.
         /// </summary>
         public static bool GetIsItemPropertyValid(ItemProperty ipProperty)
         {
-            VM.StackPush((int)EngineStructure.ItemProperty, ipProperty);
-            VM.Call(611);
-            return VM.StackPopInt() == 1;
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.ItemProperty, ipProperty);
+            NWNXPInvoke.CallBuiltIn(611);
+            return NWNXPInvoke.StackPopInteger() == 1;
         }
 
         /// <summary>
-        ///   Gets the first item property on an item
+        ///   Gets the first item property on an item.
         /// </summary>
         public static ItemProperty GetFirstItemProperty(uint oItem)
         {
-            VM.StackPush(oItem);
-            VM.Call(612);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushObject(oItem);
+            NWNXPInvoke.CallBuiltIn(612);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
-        ///   Will keep retrieving the next and the next item property on an Item,
+        ///   Will keep retrieving the next and the next item property on an item,
         ///   will return an invalid item property when the list is empty.
         /// </summary>
         public static ItemProperty GetNextItemProperty(uint oItem)
         {
-            VM.StackPush(oItem);
-            VM.Call(613);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushObject(oItem);
+            NWNXPInvoke.CallBuiltIn(613);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
-        ///   will return the item property type (ie. holy avenger)
+        ///   Will return the item property type (e.g., holy avenger).
         /// </summary>
         public static ItemPropertyType GetItemPropertyType(ItemProperty ip)
         {
-            VM.StackPush((int)EngineStructure.ItemProperty, ip);
-            VM.Call(614);
-            return (ItemPropertyType)VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.ItemProperty, ip);
+            NWNXPInvoke.CallBuiltIn(614);
+            return (ItemPropertyType)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
-        ///   will return the duration type of the item property
+        ///   Will return the duration type of the item property.
         /// </summary>
         public static DurationType GetItemPropertyDurationType(ItemProperty ip)
         {
-            VM.StackPush((int)EngineStructure.ItemProperty, ip);
-            VM.Call(615);
-            return (DurationType)VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.ItemProperty, ip);
+            NWNXPInvoke.CallBuiltIn(615);
+            return (DurationType)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
-        ///   Returns Item property ability bonus.  You need to specify an
-        ///   ability constant(IP_CONST_ABILITY_*) and the bonus.  The bonus should
+        ///   Returns Item property ability bonus. You need to specify an
+        ///   ability constant (IP_CONST_ABILITY_*) and the bonus. The bonus should
         ///   be a positive integer between 1 and 12.
         /// </summary>
         public static ItemProperty ItemPropertyAbilityBonus(AbilityType nAbility, int nBonus)
         {
-            VM.StackPush(nBonus);
-            VM.StackPush((int)nAbility);
-            VM.Call(616);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nBonus);
+            NWNXPInvoke.StackPushInteger((int)nAbility);
+            NWNXPInvoke.CallBuiltIn(616);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
-        ///   Returns Item property AC bonus.  You need to specify the bonus.
+        ///   Returns Item property AC bonus. You need to specify the bonus.
         ///   The bonus should be a positive integer between 1 and 20. The modifier
         ///   type depends on the item it is being applied to.
         /// </summary>
         public static ItemProperty ItemPropertyACBonus(int nBonus)
         {
-            VM.StackPush(nBonus);
-            VM.Call(617);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nBonus);
+            NWNXPInvoke.CallBuiltIn(617);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
-
         /// <summary>
         ///   Returns Item property AC bonus vs. alignment group.  An example of
         ///   an alignment group is Chaotic, or Good.  You need to specify the
@@ -118,10 +116,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyACBonusVsAlign(AlignmentGroup nAlignGroup, int ACBonus)
         {
-            VM.StackPush(ACBonus);
-            VM.StackPush((int)nAlignGroup);
-            VM.Call(618);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(ACBonus);
+            NWNXPInvoke.StackPushInteger((int)nAlignGroup);
+            NWNXPInvoke.CallBuiltIn(618);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -134,10 +132,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyACBonusVsDmgType(ItemPropertyDamageType nDamageType, int ACBonus)
         {
-            VM.StackPush(ACBonus);
-            VM.StackPush((int)nDamageType);
-            VM.Call(619);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(ACBonus);
+            NWNXPInvoke.StackPushInteger((int)nDamageType);
+            NWNXPInvoke.CallBuiltIn(619);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -148,10 +146,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyACBonusVsRace(RacialType nRace, int nACBonus)
         {
-            VM.StackPush(nACBonus);
-            VM.StackPush((int)nRace);
-            VM.Call(620);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nACBonus);
+            NWNXPInvoke.StackPushInteger((int)nRace);
+            NWNXPInvoke.CallBuiltIn(620);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -162,10 +160,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyACBonusVsSAlign(Alignment nAlign, int nACBonus)
         {
-            VM.StackPush(nACBonus);
-            VM.StackPush((int)nAlign);
-            VM.Call(621);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nACBonus);
+            NWNXPInvoke.StackPushInteger((int)nAlign);
+            NWNXPInvoke.CallBuiltIn(621);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -175,9 +173,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyEnhancementBonus(int nEnhancementBonus)
         {
-            VM.StackPush(nEnhancementBonus);
-            VM.Call(622);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nEnhancementBonus);
+            NWNXPInvoke.CallBuiltIn(622);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -186,13 +184,12 @@ namespace NWN.Xenomech.Core.NWScript
         ///   and the enhancement bonus.  The Enhancement bonus should be an integer
         ///   between 1 and 20.
         /// </summary>
-        public static ItemProperty ItemPropertyEnhancementBonusVsAlign(AlignmentGroup nAlignGroup,
-            int nBonus)
+        public static ItemProperty ItemPropertyEnhancementBonusVsAlign(AlignmentGroup nAlignGroup, int nBonus)
         {
-            VM.StackPush(nBonus);
-            VM.StackPush((int)nAlignGroup);
-            VM.Call(623);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nBonus);
+            NWNXPInvoke.StackPushInteger((int)nAlignGroup);
+            NWNXPInvoke.CallBuiltIn(623);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -203,10 +200,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyEnhancementBonusVsRace(RacialType nRace, int nBonus)
         {
-            VM.StackPush(nBonus);
-            VM.StackPush((int)nRace);
-            VM.Call(624);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nBonus);
+            NWNXPInvoke.StackPushInteger((int)nRace);
+            NWNXPInvoke.CallBuiltIn(624);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -215,25 +212,24 @@ namespace NWN.Xenomech.Core.NWScript
         ///   enhancement bonus.  The enhancement bonus should be an integer between
         ///   1 and 20.
         /// </summary>
-        public static ItemProperty ItemPropertyEnhancementBonusVsSAlign(Alignment nAlign,
-            int nBonus)
+        public static ItemProperty ItemPropertyEnhancementBonusVsSAlign(Alignment nAlign, int nBonus)
         {
-            VM.StackPush(nBonus);
-            VM.StackPush((int)nAlign);
-            VM.Call(625);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nBonus);
+            NWNXPInvoke.StackPushInteger((int)nAlign);
+            NWNXPInvoke.CallBuiltIn(625);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
-        ///   Returns Item property Enhancment penalty.  You need to specify the
+        ///   Returns Item property Enhancement penalty.  You need to specify the
         ///   enhancement penalty.  The enhancement penalty should be a POSITIVE
         ///   integer between 1 and 5 (ie. 1 = -1).
         /// </summary>
         public static ItemProperty ItemPropertyEnhancementPenalty(int nPenalty)
         {
-            VM.StackPush(nPenalty);
-            VM.Call(626);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nPenalty);
+            NWNXPInvoke.CallBuiltIn(626);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -242,9 +238,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyWeightReduction(ReducedWeight nReduction)
         {
-            VM.StackPush((int)nReduction);
-            VM.Call(627);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nReduction);
+            NWNXPInvoke.CallBuiltIn(627);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -253,9 +249,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyBonusFeat(ItemPropertyFeat nFeat)
         {
-            VM.StackPush((int)nFeat);
-            VM.Call(628);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nFeat);
+            NWNXPInvoke.CallBuiltIn(628);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -266,10 +262,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyBonusLevelSpell(Class nClass, SpellLevel nSpellLevel)
         {
-            VM.StackPush((int)nSpellLevel);
-            VM.StackPush((int)nClass);
-            VM.Call(629);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nSpellLevel);
+            NWNXPInvoke.StackPushInteger((int)nClass);
+            NWNXPInvoke.CallBuiltIn(629);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -288,10 +284,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyCastSpell(CastSpell nSpell, CastSpellNumberUses nNumUses)
         {
-            VM.StackPush((int)nNumUses);
-            VM.StackPush((int)nSpell);
-            VM.Call(630);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nNumUses);
+            NWNXPInvoke.StackPushInteger((int)nSpell);
+            NWNXPInvoke.CallBuiltIn(630);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -303,10 +299,10 @@ namespace NWN.Xenomech.Core.NWScript
         public static ItemProperty ItemPropertyDamageBonus(ItemPropertyDamageType nDamageType,
             DamageBonus nDamage)
         {
-            VM.StackPush((int)nDamage);
-            VM.StackPush((int)nDamageType);
-            VM.Call(631);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nDamage);
+            NWNXPInvoke.StackPushInteger((int)nDamageType);
+            NWNXPInvoke.CallBuiltIn(631);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -319,11 +315,11 @@ namespace NWN.Xenomech.Core.NWScript
         public static ItemProperty ItemPropertyDamageBonusVsAlign(AlignmentGroup nAlignGroup,
             ItemPropertyDamageType nDamageType, DamageBonus nDamage)
         {
-            VM.StackPush((int)nDamage);
-            VM.StackPush((int)nDamageType);
-            VM.StackPush((int)nAlignGroup);
-            VM.Call(632);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nDamage);
+            NWNXPInvoke.StackPushInteger((int)nDamageType);
+            NWNXPInvoke.StackPushInteger((int)nAlignGroup);
+            NWNXPInvoke.CallBuiltIn(632);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -336,11 +332,11 @@ namespace NWN.Xenomech.Core.NWScript
         public static ItemProperty ItemPropertyDamageBonusVsRace(RacialType nRace,
             ItemPropertyDamageType nDamageType, DamageBonus nDamage)
         {
-            VM.StackPush((int)nDamage);
-            VM.StackPush((int)nDamageType);
-            VM.StackPush((int)nRace);
-            VM.Call(633);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nDamage);
+            NWNXPInvoke.StackPushInteger((int)nDamageType);
+            NWNXPInvoke.StackPushInteger((int)nRace);
+            NWNXPInvoke.CallBuiltIn(633);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -353,11 +349,11 @@ namespace NWN.Xenomech.Core.NWScript
         public static ItemProperty ItemPropertyDamageBonusVsSAlign(Alignment nAlign,
             ItemPropertyDamageType nDamageType, DamageBonus nDamage)
         {
-            VM.StackPush((int)nDamage);
-            VM.StackPush((int)nDamageType);
-            VM.StackPush((int)nAlign);
-            VM.Call(634);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nDamage);
+            NWNXPInvoke.StackPushInteger((int)nDamageType);
+            NWNXPInvoke.StackPushInteger((int)nAlign);
+            NWNXPInvoke.CallBuiltIn(634);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -370,10 +366,10 @@ namespace NWN.Xenomech.Core.NWScript
         public static ItemProperty ItemPropertyDamageImmunity(ItemPropertyDamageType nDamageType,
             DamageImmunity nImmuneBonus)
         {
-            VM.StackPush((int)nImmuneBonus);
-            VM.StackPush((int)nDamageType);
-            VM.Call(635);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nImmuneBonus);
+            NWNXPInvoke.StackPushInteger((int)nDamageType);
+            NWNXPInvoke.CallBuiltIn(635);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -384,9 +380,9 @@ namespace NWN.Xenomech.Core.NWScript
         public static ItemProperty ItemPropertyDamagePenalty(int nPenalty)
         {
             if (nPenalty > 5) nPenalty = 5;
-            VM.StackPush((int)nPenalty);
-            VM.Call(636);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nPenalty);
+            NWNXPInvoke.CallBuiltIn(636);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -397,10 +393,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyDamageReduction(DamageReduction nEnhancement, DamageSoak nHPSoak)
         {
-            VM.StackPush((int)nHPSoak);
-            VM.StackPush((int)nEnhancement);
-            VM.Call(637);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nHPSoak);
+            NWNXPInvoke.StackPushInteger((int)nEnhancement);
+            NWNXPInvoke.CallBuiltIn(637);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -411,10 +407,10 @@ namespace NWN.Xenomech.Core.NWScript
         public static ItemProperty ItemPropertyDamageResistance(ItemPropertyDamageType nDamageType,
             DamageResist nHPResist)
         {
-            VM.StackPush((int)nHPResist);
-            VM.StackPush((int)nDamageType);
-            VM.Call(638);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nHPResist);
+            NWNXPInvoke.StackPushInteger((int)nDamageType);
+            NWNXPInvoke.CallBuiltIn(638);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -425,19 +421,18 @@ namespace NWN.Xenomech.Core.NWScript
         public static ItemProperty ItemPropertyDamageVulnerability(ItemPropertyDamageType nDamageType,
             DamageVulnerability nVulnerability)
         {
-            VM.StackPush((int)nVulnerability);
-            VM.StackPush((int)nDamageType);
-            VM.Call(639);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nVulnerability);
+            NWNXPInvoke.StackPushInteger((int)nDamageType);
+            NWNXPInvoke.CallBuiltIn(639);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
-
         /// <summary>
         ///   Return Item property Darkvision.
         /// </summary>
         public static ItemProperty ItemPropertyDarkvision()
         {
-            VM.Call(640);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.CallBuiltIn(640);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -447,10 +442,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyDecreaseAbility(Ability nAbility, int nModifier)
         {
-            VM.StackPush(nModifier);
-            VM.StackPush((int)nAbility);
-            VM.Call(641);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nModifier);
+            NWNXPInvoke.StackPushInteger((int)nAbility);
+            NWNXPInvoke.CallBuiltIn(641);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -460,10 +455,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyDecreaseAC(ArmorClassModiferType nModifierType, int nPenalty)
         {
-            VM.StackPush(nPenalty);
-            VM.StackPush((int)nModifierType);
-            VM.Call(642);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nPenalty);
+            NWNXPInvoke.StackPushInteger((int)nModifierType);
+            NWNXPInvoke.CallBuiltIn(642);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -473,10 +468,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyDecreaseSkill(NWNSkillType nSkill, int nPenalty)
         {
-            VM.StackPush(nPenalty);
-            VM.StackPush((int)nSkill);
-            VM.Call(643);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nPenalty);
+            NWNXPInvoke.StackPushInteger((int)nSkill);
+            NWNXPInvoke.CallBuiltIn(643);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -486,9 +481,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyContainerReducedWeight(ContainerWeight nContainerType)
         {
-            VM.StackPush((int)nContainerType);
-            VM.Call(644);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nContainerType);
+            NWNXPInvoke.CallBuiltIn(644);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -500,9 +495,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyExtraMeleeDamageType(ItemPropertyDamageType nDamageType)
         {
-            VM.StackPush((int)nDamageType);
-            VM.Call(645);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nDamageType);
+            NWNXPInvoke.CallBuiltIn(645);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -514,9 +509,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyExtraRangeDamageType(ItemPropertyDamageType nDamageType)
         {
-            VM.StackPush((int)nDamageType);
-            VM.Call(646);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nDamageType);
+            NWNXPInvoke.CallBuiltIn(646);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -524,8 +519,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyHaste()
         {
-            VM.Call(647);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.CallBuiltIn(647);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -533,8 +528,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyHolyAvenger()
         {
-            VM.Call(648);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.CallBuiltIn(648);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -543,9 +538,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyImmunityMisc(ImmunityMisc nImmunityType)
         {
-            VM.StackPush((int)nImmunityType);
-            VM.Call(649);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nImmunityType);
+            NWNXPInvoke.CallBuiltIn(649);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -553,8 +548,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyImprovedEvasion()
         {
-            VM.Call(650);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.CallBuiltIn(650);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -563,9 +558,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyBonusSpellResistance(SpellResistanceBonus nBonus)
         {
-            VM.StackPush((int)nBonus);
-            VM.Call(651);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nBonus);
+            NWNXPInvoke.CallBuiltIn(651);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -576,10 +571,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyBonusSavingThrowVsX(SaveVs nBonusType, int nBonus)
         {
-            VM.StackPush(nBonus);
-            VM.StackPush((int)nBonusType);
-            VM.Call(652);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nBonus);
+            NWNXPInvoke.StackPushInteger((int)nBonusType);
+            NWNXPInvoke.CallBuiltIn(652);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -590,10 +585,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyBonusSavingThrow(SaveBaseType nBaseSaveType, int nBonus)
         {
-            VM.StackPush(nBonus);
-            VM.StackPush((int)nBaseSaveType);
-            VM.Call(653);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nBonus);
+            NWNXPInvoke.StackPushInteger((int)nBaseSaveType);
+            NWNXPInvoke.CallBuiltIn(653);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -602,8 +597,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyKeen()
         {
-            VM.Call(654);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.CallBuiltIn(654);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -613,10 +608,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyLight(LightBrightness nBrightness, LightColor nColor)
         {
-            VM.StackPush((int)nColor);
-            VM.StackPush((int)nBrightness);
-            VM.Call(655);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nColor);
+            NWNXPInvoke.StackPushInteger((int)nBrightness);
+            NWNXPInvoke.CallBuiltIn(655);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -626,9 +621,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyMaxRangeStrengthMod(int nModifier)
         {
-            VM.StackPush(nModifier);
-            VM.Call(656);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nModifier);
+            NWNXPInvoke.CallBuiltIn(656);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -637,10 +632,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyNoDamage()
         {
-            VM.Call(657);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.CallBuiltIn(657);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
-
         /// <summary>
         ///   Returns Item property on hit -> do effect property.  You must specify the on
         ///   hit property constant(IP_CONST_ONHIT_*) and the save DC constant(IP_CONST_ONHIT_SAVEDC_*).
@@ -684,11 +678,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyOnHitProps(int nProperty, int nSaveDC, int nSpecial = 0)
         {
-            VM.StackPush(nSpecial);
-            VM.StackPush(nSaveDC);
-            VM.StackPush(nProperty);
-            VM.Call(658);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nSpecial);
+            NWNXPInvoke.StackPushInteger(nSaveDC);
+            NWNXPInvoke.StackPushInteger(nProperty);
+            NWNXPInvoke.CallBuiltIn(658);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -699,10 +693,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyReducedSavingThrowVsX(SaveVs nBaseSaveType, int nPenalty)
         {
-            VM.StackPush(nPenalty);
-            VM.StackPush((int)nBaseSaveType);
-            VM.Call(659);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nPenalty);
+            NWNXPInvoke.StackPushInteger((int)nBaseSaveType);
+            NWNXPInvoke.CallBuiltIn(659);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -713,10 +707,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyReducedSavingThrow(SaveBaseType nBonusType, int nPenalty)
         {
-            VM.StackPush(nPenalty);
-            VM.StackPush((int)nBonusType);
-            VM.Call(660);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nPenalty);
+            NWNXPInvoke.StackPushInteger((int)nBonusType);
+            NWNXPInvoke.CallBuiltIn(660);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -725,9 +719,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyRegeneration(int nRegenAmount)
         {
-            VM.StackPush(nRegenAmount);
-            VM.Call(661);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nRegenAmount);
+            NWNXPInvoke.CallBuiltIn(661);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -737,10 +731,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertySkillBonus(NWNSkillType nSkill, int nBonus)
         {
-            VM.StackPush(nBonus);
-            VM.StackPush((int)nSkill);
-            VM.Call(662);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nBonus);
+            NWNXPInvoke.StackPushInteger((int)nSkill);
+            NWNXPInvoke.CallBuiltIn(662);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -749,9 +743,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertySpellImmunitySpecific(ImmunitySpell nSpell)
         {
-            VM.StackPush((int)nSpell);
-            VM.Call(663);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nSpell);
+            NWNXPInvoke.CallBuiltIn(663);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -760,9 +754,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertySpellImmunitySchool(SpellSchool nSchool)
         {
-            VM.StackPush((int)nSchool);
-            VM.Call(664);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nSchool);
+            NWNXPInvoke.CallBuiltIn(664);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -771,9 +765,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyThievesTools(int nModifier)
         {
-            VM.StackPush(nModifier);
-            VM.Call(665);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nModifier);
+            NWNXPInvoke.CallBuiltIn(665);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -782,11 +776,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyAttackBonus(int nBonus)
         {
-            VM.StackPush(nBonus);
-            VM.Call(666);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nBonus);
+            NWNXPInvoke.CallBuiltIn(666);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
-
         /// <summary>
         ///   Returns Item property Attack bonus vs. alignment group.  You must specify the
         ///   alignment group constant(IP_CONST_ALIGNMENTGROUP_*) and the attack bonus.  The
@@ -795,10 +788,10 @@ namespace NWN.Xenomech.Core.NWScript
         public static ItemProperty ItemPropertyAttackBonusVsAlign(AlignmentGroup nAlignGroup,
             int nBonus)
         {
-            VM.StackPush(nBonus);
-            VM.StackPush((int)nAlignGroup);
-            VM.Call(667);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nBonus);
+            NWNXPInvoke.StackPushInteger((int)nAlignGroup);
+            NWNXPInvoke.CallBuiltIn(667);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -808,10 +801,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyAttackBonusVsRace(RacialType nRace, int nBonus)
         {
-            VM.StackPush(nBonus);
-            VM.StackPush((int)nRace);
-            VM.Call(668);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nBonus);
+            NWNXPInvoke.StackPushInteger((int)nRace);
+            NWNXPInvoke.CallBuiltIn(668);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -821,10 +814,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyAttackBonusVsSAlign(Alignment nAlignment, int nBonus)
         {
-            VM.StackPush(nBonus);
-            VM.StackPush((int)nAlignment);
-            VM.Call(669);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nBonus);
+            NWNXPInvoke.StackPushInteger((int)nAlignment);
+            NWNXPInvoke.CallBuiltIn(669);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -833,9 +826,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyAttackPenalty(int nPenalty)
         {
-            VM.StackPush(nPenalty);
-            VM.Call(670);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nPenalty);
+            NWNXPInvoke.CallBuiltIn(670);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -847,9 +840,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyUnlimitedAmmo(Unlimited nAmmoDamage = Unlimited.Basic)
         {
-            VM.StackPush((int)nAmmoDamage);
-            VM.Call(671);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nAmmoDamage);
+            NWNXPInvoke.CallBuiltIn(671);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -858,9 +851,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyLimitUseByAlign(AlignmentGroup nAlignGroup)
         {
-            VM.StackPush((int)nAlignGroup);
-            VM.Call(672);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nAlignGroup);
+            NWNXPInvoke.CallBuiltIn(672);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -869,9 +862,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyLimitUseByClass(Class nClass)
         {
-            VM.StackPush((int)nClass);
-            VM.Call(673);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nClass);
+            NWNXPInvoke.CallBuiltIn(673);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -880,9 +873,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyLimitUseByRace(RacialType nRace)
         {
-            VM.StackPush((int)nRace);
-            VM.Call(674);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nRace);
+            NWNXPInvoke.CallBuiltIn(674);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -891,9 +884,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyLimitUseBySAlign(Alignment nAlignment)
         {
-            VM.StackPush((int)nAlignment);
-            VM.Call(675);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nAlignment);
+            NWNXPInvoke.CallBuiltIn(675);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -901,8 +894,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty BadBadReplaceMeThisDoesNothing()
         {
-            VM.Call(676);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.CallBuiltIn(676);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -911,9 +904,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyVampiricRegeneration(int nRegenAmount)
         {
-            VM.StackPush(nRegenAmount);
-            VM.Call(677);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nRegenAmount);
+            NWNXPInvoke.CallBuiltIn(677);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -922,10 +915,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyTrap(TrapStrength nTrapLevel, TrapType nTrapType)
         {
-            VM.StackPush((int)nTrapType);
-            VM.StackPush((int)nTrapLevel);
-            VM.Call(678);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nTrapType);
+            NWNXPInvoke.StackPushInteger((int)nTrapLevel);
+            NWNXPInvoke.CallBuiltIn(678);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -933,8 +926,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyTrueSeeing()
         {
-            VM.Call(679);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.CallBuiltIn(679);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -960,21 +953,20 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyOnMonsterHitProperties(int nProperty, int nSpecial = 0)
         {
-            VM.StackPush(nSpecial);
-            VM.StackPush(nProperty);
-            VM.Call(680);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nSpecial);
+            NWNXPInvoke.StackPushInteger(nProperty);
+            NWNXPInvoke.CallBuiltIn(680);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
-
         /// <summary>
         ///   Returns Item property turn resistance.  You must specify the resistance bonus.
         ///   The bonus must be an integer between 1 and 50.
         /// </summary>
         public static ItemProperty ItemPropertyTurnResistance(int nModifier)
         {
-            VM.StackPush(nModifier);
-            VM.Call(681);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nModifier);
+            NWNXPInvoke.CallBuiltIn(681);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -983,9 +975,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyMassiveCritical(DamageBonus nDamage)
         {
-            VM.StackPush((int)nDamage);
-            VM.Call(682);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nDamage);
+            NWNXPInvoke.CallBuiltIn(682);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -993,8 +985,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyFreeAction()
         {
-            VM.Call(683);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.CallBuiltIn(683);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -1005,9 +997,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyMonsterDamage(MonsterDamage nDamage)
         {
-            VM.StackPush((int)nDamage);
-            VM.Call(684);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nDamage);
+            NWNXPInvoke.CallBuiltIn(684);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -1018,9 +1010,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyImmunityToSpellLevel(int nLevel)
         {
-            VM.StackPush(nLevel);
-            VM.Call(685);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nLevel);
+            NWNXPInvoke.CallBuiltIn(685);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -1030,9 +1022,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertySpecialWalk()
         {
-            VM.StackPush(0);
-            VM.Call(686);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(0);
+            NWNXPInvoke.CallBuiltIn(686);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -1041,9 +1033,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyHealersKit(int nModifier)
         {
-            VM.StackPush(nModifier);
-            VM.Call(687);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nModifier);
+            NWNXPInvoke.CallBuiltIn(687);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -1052,9 +1044,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyWeightIncrease(WeightIncrease nWeight)
         {
-            VM.StackPush((int)nWeight);
-            VM.Call(688);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nWeight);
+            NWNXPInvoke.CallBuiltIn(688);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -1063,9 +1055,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetItemPropertyTag(ItemProperty nProperty)
         {
-            VM.StackPush((int)EngineStructure.ItemProperty, nProperty);
-            VM.Call(854);
-            return NWNCore.NativeFunctions.StackPopStringUTF8();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.ItemProperty, nProperty);
+            NWNXPInvoke.CallBuiltIn(854);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -1073,9 +1065,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetItemPropertyCostTable(ItemProperty iProp)
         {
-            VM.StackPush((int)EngineStructure.ItemProperty, iProp);
-            VM.Call(769);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.ItemProperty, iProp);
+            NWNXPInvoke.CallBuiltIn(769);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -1084,9 +1076,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetItemPropertyCostTableValue(ItemProperty iProp)
         {
-            VM.StackPush((int)EngineStructure.ItemProperty, iProp);
-            VM.Call(770);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.ItemProperty, iProp);
+            NWNXPInvoke.CallBuiltIn(770);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -1094,9 +1086,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetItemPropertyParam1(ItemProperty iProp)
         {
-            VM.StackPush((int)EngineStructure.ItemProperty, iProp);
-            VM.Call(771);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.ItemProperty, iProp);
+            NWNXPInvoke.CallBuiltIn(771);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -1104,11 +1096,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetItemPropertyParam1Value(ItemProperty iProp)
         {
-            VM.StackPush((int)EngineStructure.ItemProperty, iProp);
-            VM.Call(772);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.ItemProperty, iProp);
+            NWNXPInvoke.CallBuiltIn(772);
+            return NWNXPInvoke.StackPopInteger();
         }
-
         /// <summary>
         ///   Creates a new copy of an item, while making a single change to the appearance of the item.
         ///   Helmet models and simple items ignore iIndex.
@@ -1129,13 +1120,13 @@ namespace NWN.Xenomech.Core.NWScript
         public static uint CopyItemAndModify(uint oItem, ItemAppearanceType nType, int nIndex, int nNewValue,
             bool bCopyVars = false)
         {
-            VM.StackPush(bCopyVars ? 1 : 0);
-            VM.StackPush(nNewValue);
-            VM.StackPush(nIndex);
-            VM.StackPush((int)nType);
-            VM.StackPush(oItem);
-            VM.Call(731);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushInteger(bCopyVars ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(nNewValue);
+            NWNXPInvoke.StackPushInteger(nIndex);
+            NWNXPInvoke.StackPushInteger((int)nType);
+            NWNXPInvoke.StackPushObject(oItem);
+            NWNXPInvoke.CallBuiltIn(731);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -1145,10 +1136,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyOnHitCastSpell(OnHitCastSpellType nSpellType, int nLevel)
         {
-            VM.StackPush(nLevel);
-            VM.StackPush((int)nSpellType);
-            VM.Call(733);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nLevel);
+            NWNXPInvoke.StackPushInteger((int)nSpellType);
+            NWNXPInvoke.CallBuiltIn(733);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -1156,9 +1147,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetItemPropertySubType(ItemProperty iProperty)
         {
-            VM.StackPush((int)EngineStructure.ItemProperty, iProperty);
-            VM.Call(734);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.ItemProperty, iProperty);
+            NWNXPInvoke.CallBuiltIn(734);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -1167,10 +1158,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty TagItemProperty(ItemProperty nProperty, string sNewTag)
         {
-            VM.StackPush(sNewTag);
-            VM.StackPush((int)EngineStructure.ItemProperty, nProperty);
-            VM.Call(855);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushString(sNewTag);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.ItemProperty, nProperty);
+            NWNXPInvoke.CallBuiltIn(855);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -1179,9 +1170,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetItemPropertyDuration(ItemProperty nProperty)
         {
-            VM.StackPush((int)EngineStructure.ItemProperty, nProperty);
-            VM.Call(856);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.ItemProperty, nProperty);
+            NWNXPInvoke.CallBuiltIn(856);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -1190,9 +1181,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetItemPropertyDurationRemaining(ItemProperty nProperty)
         {
-            VM.StackPush((int)EngineStructure.ItemProperty, nProperty);
-            VM.Call(857);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.ItemProperty, nProperty);
+            NWNXPInvoke.CallBuiltIn(857);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -1203,9 +1194,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyMaterial(int nMaterialType)
         {
-            VM.StackPush(nMaterialType);
-            VM.Call(845);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nMaterialType);
+            NWNXPInvoke.CallBuiltIn(845);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -1216,9 +1207,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyQuality(Quality nQuality)
         {
-            VM.StackPush((int)nQuality);
-            VM.Call(846);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nQuality);
+            NWNXPInvoke.CallBuiltIn(846);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -1229,9 +1220,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyAdditional(Additional nAdditionalProperty)
         {
-            VM.StackPush((int)nAdditionalProperty);
-            VM.Call(847);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nAdditionalProperty);
+            NWNXPInvoke.CallBuiltIn(847);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -1240,9 +1231,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyArcaneSpellFailure(ArcaneSpellFailure nModLevel)
         {
-            VM.StackPush((int)nModLevel);
-            VM.Call(758);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nModLevel);
+            NWNXPInvoke.CallBuiltIn(758);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -1251,9 +1242,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyVisualEffect(ItemVisual nEffect)
         {
-            VM.StackPush((int)nEffect);
-            VM.Call(739);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger((int)nEffect);
+            NWNXPInvoke.CallBuiltIn(739);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
         /// <summary>
@@ -1263,10 +1254,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetItemPropertyUsesPerDayRemaining(uint oItem, IntPtr ip)
         {
-            VM.StackPush((int)EngineStructure.ItemProperty, ip);
-            VM.StackPush(oItem);
-            VM.Call(908);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.ItemProperty, ip);
+            NWNXPInvoke.StackPushObject(oItem);
+            NWNXPInvoke.CallBuiltIn(908);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -1276,10 +1267,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetItemPropertyUsesPerDayRemaining(uint oItem, IntPtr ip, int nUsesPerDay)
         {
-            VM.StackPush(nUsesPerDay);
-            VM.StackPush((int)EngineStructure.ItemProperty, ip);
-            VM.StackPush(oItem);
-            VM.Call(909);
+            NWNXPInvoke.StackPushInteger(nUsesPerDay);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.ItemProperty, ip);
+            NWNXPInvoke.StackPushObject(oItem);
+            NWNXPInvoke.CallBuiltIn(909);
         }
 
         /// <summary>
@@ -1289,12 +1280,12 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static ItemProperty ItemPropertyCustom(ItemPropertyType nType, int nSubType = -1, int nCostTableValue = -1, int nParam1Value = -1)
         {
-            VM.StackPush(nParam1Value);
-            VM.StackPush(nCostTableValue);
-            VM.StackPush(nSubType);
-            VM.StackPush((int)nType);
-            VM.Call(954);
-            return VM.StackPopStruct((int)EngineStructure.ItemProperty);
+            NWNXPInvoke.StackPushInteger(nParam1Value);
+            NWNXPInvoke.StackPushInteger(nCostTableValue);
+            NWNXPInvoke.StackPushInteger(nSubType);
+            NWNXPInvoke.StackPushInteger((int)nType);
+            NWNXPInvoke.CallBuiltIn(954);
+            return (ItemProperty)NWNXPInvoke.StackPopGameDefinedStructure((int)EngineStructure.ItemProperty);
         }
 
     }

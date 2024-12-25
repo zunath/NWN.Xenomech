@@ -1,27 +1,27 @@
+using NWN.Xenomech.Core.Interop;
 using NWN.Xenomech.Core.NWScript.Enum;
 
 namespace NWN.Xenomech.Core.NWScript
 {
     public partial class NWScript
-    {
-        /// <summary>
-        ///   Set the calendar to the specified date.
-        ///   - nYear should be from 0 to 32000 inclusive
-        ///   - nMonth should be from 1 to 12 inclusive
-        ///   - nDay should be from 1 to 28 inclusive
-        ///   1) Time can only be advanced forwards; attempting to set the time backwards
-        ///   will result in no change to the calendar.
-        ///   2) If values larger than the month or day are specified, they will be wrapped
-        ///   around and the overflow will be used to advance the next field.
-        ///   e.g. Specifying a year of 1350, month of 33 and day of 10 will result in
-        ///   the calender being set to a year of 1352, a month of 9 and a day of 10.
-        /// </summary>
+    {/// <summary>
+     ///   Set the calendar to the specified date.
+     ///   - nYear should be from 0 to 32000 inclusive
+     ///   - nMonth should be from 1 to 12 inclusive
+     ///   - nDay should be from 1 to 28 inclusive
+     ///   1) Time can only be advanced forwards; attempting to set the time backwards
+     ///   will result in no change to the calendar.
+     ///   2) If values larger than the month or day are specified, they will be wrapped
+     ///   around and the overflow will be used to advance the next field.
+     ///   e.g. Specifying a year of 1350, month of 33 and day of 10 will result in
+     ///   the calender being set to a year of 1352, a month of 9 and a day of 10.
+     /// </summary>
         public static void SetCalendar(int nYear, int nMonth, int nDay)
         {
-            VM.StackPush(nDay);
-            VM.StackPush(nMonth);
-            VM.StackPush(nYear);
-            VM.Call(11);
+            NWNXPInvoke.StackPushInteger(nDay);
+            NWNXPInvoke.StackPushInteger(nMonth);
+            NWNXPInvoke.StackPushInteger(nYear);
+            NWNXPInvoke.CallBuiltIn(11);
         }
 
         /// <summary>
@@ -42,11 +42,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetTime(int nHour, int nMinute, int nSecond, int nMillisecond)
         {
-            VM.StackPush(nMillisecond);
-            VM.StackPush(nSecond);
-            VM.StackPush(nMinute);
-            VM.StackPush(nHour);
-            VM.Call(12);
+            NWNXPInvoke.StackPushInteger(nMillisecond);
+            NWNXPInvoke.StackPushInteger(nSecond);
+            NWNXPInvoke.StackPushInteger(nMinute);
+            NWNXPInvoke.StackPushInteger(nHour);
+            NWNXPInvoke.CallBuiltIn(12);
         }
 
         /// <summary>
@@ -54,8 +54,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetCalendarYear()
         {
-            VM.Call(13);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(13);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -63,8 +63,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetCalendarMonth()
         {
-            VM.Call(14);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(14);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -72,8 +72,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetCalendarDay()
         {
-            VM.Call(15);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(15);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -81,8 +81,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetTimeHour()
         {
-            VM.Call(16);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(16);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -90,8 +90,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetTimeMinute()
         {
-            VM.Call(17);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(17);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -99,8 +99,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetTimeSecond()
         {
-            VM.Call(18);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(18);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -108,8 +108,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetTimeMillisecond()
         {
-            VM.Call(19);
-            return VM.StackPopInt();
+            NWNXPInvoke.CallBuiltIn(19);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -120,11 +120,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int SetTrapDetectedBy(uint oTrap, uint oDetector, bool bDetected = true)
         {
-            VM.StackPush(bDetected ? 1 : 0);
-            VM.StackPush(oDetector);
-            VM.StackPush(oTrap);
-            VM.Call(550);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger(bDetected ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oDetector);
+            NWNXPInvoke.StackPushObject(oTrap);
+            NWNXPInvoke.CallBuiltIn(550);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -133,9 +133,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetIsTrapped(uint oObject)
         {
-            VM.StackPush(oObject);
-            VM.Call(551);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.CallBuiltIn(551);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -144,9 +144,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetTrapDisarmable(uint oTrapObject)
         {
-            VM.StackPush(oTrapObject);
-            VM.Call(527);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oTrapObject);
+            NWNXPInvoke.CallBuiltIn(527);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -155,9 +155,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetTrapDetectable(uint oTrapObject)
         {
-            VM.StackPush(oTrapObject);
-            VM.Call(528);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oTrapObject);
+            NWNXPInvoke.CallBuiltIn(528);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -167,10 +167,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetTrapDetectedBy(uint oTrapObject, uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.StackPush(oTrapObject);
-            VM.Call(529);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.StackPushObject(oTrapObject);
+            NWNXPInvoke.CallBuiltIn(529);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -179,9 +179,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetTrapFlagged(uint oTrapObject)
         {
-            VM.StackPush(oTrapObject);
-            VM.Call(530);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oTrapObject);
+            NWNXPInvoke.CallBuiltIn(530);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -190,9 +190,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetTrapBaseType(uint oTrapObject)
         {
-            VM.StackPush(oTrapObject);
-            VM.Call(531);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oTrapObject);
+            NWNXPInvoke.CallBuiltIn(531);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -202,9 +202,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetTrapOneShot(uint oTrapObject)
         {
-            VM.StackPush(oTrapObject);
-            VM.Call(532);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oTrapObject);
+            NWNXPInvoke.CallBuiltIn(532);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -214,9 +214,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetTrapCreator(uint oTrapObject)
         {
-            VM.StackPush(oTrapObject);
-            VM.Call(533);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushObject(oTrapObject);
+            NWNXPInvoke.CallBuiltIn(533);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -225,9 +225,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static string GetTrapKeyTag(uint oTrapObject)
         {
-            VM.StackPush(oTrapObject);
-            VM.Call(534);
-            return NWNCore.NativeFunctions.StackPopStringUTF8();
+            NWNXPInvoke.StackPushObject(oTrapObject);
+            NWNXPInvoke.CallBuiltIn(534);
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -236,9 +236,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetTrapDisarmDC(uint oTrapObject)
         {
-            VM.StackPush(oTrapObject);
-            VM.Call(535);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oTrapObject);
+            NWNXPInvoke.CallBuiltIn(535);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -247,11 +247,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetTrapDetectDC(uint oTrapObject)
         {
-            VM.StackPush(oTrapObject);
-            VM.Call(536);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oTrapObject);
+            NWNXPInvoke.CallBuiltIn(536);
+            return NWNXPInvoke.StackPopInteger();
         }
-
         /// <summary>
         ///   Get the trap nearest to oTarget.
         ///   Note : "trap objects" are actually any trigger, placeable or door that is
@@ -262,10 +261,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetNearestTrapToObject(uint oTarget = OBJECT_INVALID, bool nTrapDetected = true)
         {
-            VM.StackPush(nTrapDetected ? 1 : 0);
-            VM.StackPush(oTarget);
-            VM.Call(488);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushInteger(nTrapDetected ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.CallBuiltIn(488);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -274,9 +273,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetLastTrapDetected(uint oTarget = OBJECT_INVALID)
         {
-            VM.StackPush(oTarget);
-            VM.Call(486);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.CallBuiltIn(486);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -285,9 +284,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetTrapActive(uint oTrapObject)
         {
-            VM.StackPush(oTrapObject);
-            VM.Call(821);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oTrapObject);
+            NWNXPInvoke.CallBuiltIn(821);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -302,9 +301,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetTrapActive(uint oTrapObject, bool nActive = true)
         {
-            VM.StackPush(nActive ? 1 : 0);
-            VM.StackPush(oTrapObject);
-            VM.Call(822);
+            NWNXPInvoke.StackPushInteger(nActive ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oTrapObject);
+            NWNXPInvoke.CallBuiltIn(822);
         }
 
         /// <summary>
@@ -313,9 +312,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetTrapRecoverable(uint oTrapObject)
         {
-            VM.StackPush(oTrapObject);
-            VM.Call(815);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oTrapObject);
+            NWNXPInvoke.CallBuiltIn(815);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -324,9 +323,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetTrapRecoverable(uint oTrapObject, bool nRecoverable = true)
         {
-            VM.StackPush(nRecoverable ? 1 : 0);
-            VM.StackPush(oTrapObject);
-            VM.Call(816);
+            NWNXPInvoke.StackPushInteger(nRecoverable ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oTrapObject);
+            NWNXPInvoke.CallBuiltIn(816);
         }
 
         /// <summary>
@@ -336,9 +335,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetTrapDisarmable(uint oTrapObject, bool nDisarmable = true)
         {
-            VM.StackPush(nDisarmable ? 1 : 0);
-            VM.StackPush(oTrapObject);
-            VM.Call(803);
+            NWNXPInvoke.StackPushInteger(nDisarmable ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oTrapObject);
+            NWNXPInvoke.CallBuiltIn(803);
         }
 
         /// <summary>
@@ -350,9 +349,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetTrapDetectable(uint oTrapObject, bool nDetectable = true)
         {
-            VM.StackPush(nDetectable ? 1 : 0);
-            VM.StackPush(oTrapObject);
-            VM.Call(804);
+            NWNXPInvoke.StackPushInteger(nDetectable ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oTrapObject);
+            NWNXPInvoke.CallBuiltIn(804);
         }
 
         /// <summary>
@@ -363,9 +362,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetTrapOneShot(uint oTrapObject, bool nOneShot = true)
         {
-            VM.StackPush(nOneShot ? 1 : 0);
-            VM.StackPush(oTrapObject);
-            VM.Call(805);
+            NWNXPInvoke.StackPushInteger(nOneShot ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oTrapObject);
+            NWNXPInvoke.CallBuiltIn(805);
         }
 
         /// <summary>
@@ -374,9 +373,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetTrapKeyTag(uint oTrapObject, string sKeyTag)
         {
-            VM.StackPush(sKeyTag);
-            VM.StackPush(oTrapObject);
-            VM.Call(806);
+            NWNXPInvoke.StackPushString(sKeyTag);
+            NWNXPInvoke.StackPushObject(oTrapObject);
+            NWNXPInvoke.CallBuiltIn(806);
         }
 
         /// <summary>
@@ -386,9 +385,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetTrapDisarmDC(uint oTrapObject, int nDisarmDC)
         {
-            VM.StackPush(nDisarmDC);
-            VM.StackPush(oTrapObject);
-            VM.Call(807);
+            NWNXPInvoke.StackPushInteger(nDisarmDC);
+            NWNXPInvoke.StackPushObject(oTrapObject);
+            NWNXPInvoke.CallBuiltIn(807);
         }
 
         /// <summary>
@@ -398,9 +397,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetTrapDetectDC(uint oTrapObject, int nDetectDC)
         {
-            VM.StackPush(nDetectDC);
-            VM.StackPush(oTrapObject);
-            VM.Call(808);
+            NWNXPInvoke.StackPushInteger(nDetectDC);
+            NWNXPInvoke.StackPushObject(oTrapObject);
+            NWNXPInvoke.CallBuiltIn(808);
         }
 
         /// <summary>
@@ -422,15 +421,15 @@ namespace NWN.Xenomech.Core.NWScript
             string sTag = "", Faction nFaction = Faction.Hostile, string sOnDisarmScript = "",
             string sOnTrapTriggeredScript = "")
         {
-            VM.StackPush(sOnTrapTriggeredScript);
-            VM.StackPush(sOnDisarmScript);
-            VM.StackPush((int)nFaction);
-            VM.StackPush(sTag);
-            VM.StackPush(fSize);
-            VM.StackPush((int)EngineStructure.Location, lLocation);
-            VM.StackPush((int)nTrapType);
-            VM.Call(809);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushString(sOnTrapTriggeredScript);
+            NWNXPInvoke.StackPushString(sOnDisarmScript);
+            NWNXPInvoke.StackPushInteger((int)nFaction);
+            NWNXPInvoke.StackPushString(sTag);
+            NWNXPInvoke.StackPushFloat(fSize);
+            NWNXPInvoke.StackPushGameDefinedStructure((int)EngineStructure.Location, lLocation);
+            NWNXPInvoke.StackPushInteger((int)nTrapType);
+            NWNXPInvoke.CallBuiltIn(809);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -452,12 +451,12 @@ namespace NWN.Xenomech.Core.NWScript
         public static void CreateTrapOnObject(int nTrapType, uint oObject, Faction nFaction = Faction.Hostile,
             string sOnDisarmScript = "", string sOnTrapTriggeredScript = "")
         {
-            VM.StackPush(sOnTrapTriggeredScript);
-            VM.StackPush(sOnDisarmScript);
-            VM.StackPush((int)nFaction);
-            VM.StackPush(oObject);
-            VM.StackPush(nTrapType);
-            VM.Call(810);
+            NWNXPInvoke.StackPushString(sOnTrapTriggeredScript);
+            NWNXPInvoke.StackPushString(sOnDisarmScript);
+            NWNXPInvoke.StackPushInteger((int)nFaction);
+            NWNXPInvoke.StackPushObject(oObject);
+            NWNXPInvoke.StackPushInteger(nTrapType);
+            NWNXPInvoke.CallBuiltIn(810);
         }
 
         /// <summary>
@@ -466,8 +465,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetTrapDisabled(uint oTrap)
         {
-            VM.StackPush(oTrap);
-            VM.Call(555);
+            NWNXPInvoke.StackPushObject(oTrap);
+            NWNXPInvoke.CallBuiltIn(555);
         }
+
     }
 }

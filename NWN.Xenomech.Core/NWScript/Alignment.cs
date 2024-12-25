@@ -1,3 +1,4 @@
+using NWN.Xenomech.Core.Interop;
 using NWN.Xenomech.Core.NWScript.Enum;
 
 namespace NWN.Xenomech.Core.NWScript
@@ -32,11 +33,11 @@ namespace NWN.Xenomech.Core.NWScript
         public static void AdjustAlignment(uint oSubject, Alignment nAlignment, int nShift,
             bool bAllPartyMembers = true)
         {
-            VM.StackPush(bAllPartyMembers ? 1 : 0);
-            VM.StackPush(nShift);
-            VM.StackPush((int)nAlignment);
-            VM.StackPush(oSubject);
-            VM.Call(201);
+            NWNXPInvoke.StackPushInteger(bAllPartyMembers ? 1 : 0);
+            NWNXPInvoke.StackPushInteger(nShift);
+            NWNXPInvoke.StackPushInteger((int)nAlignment);
+            NWNXPInvoke.StackPushInteger((int)oSubject);
+            NWNXPInvoke.CallBuiltIn(201);
         }
 
         /// <summary>
@@ -47,9 +48,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetLawChaosValue(uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.Call(124);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger((int)oCreature);
+            NWNXPInvoke.CallBuiltIn(124);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -60,9 +61,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetGoodEvilValue(uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.Call(125);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger((int)oCreature);
+            NWNXPInvoke.CallBuiltIn(125);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -71,9 +72,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Alignment GetAlignmentLawChaos(uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.Call(126);
-            return (Alignment)VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger((int)oCreature);
+            NWNXPInvoke.CallBuiltIn(126);
+            return (Alignment)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -82,9 +83,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static Alignment GetAlignmentGoodEvil(uint oCreature)
         {
-            VM.StackPush(oCreature);
-            VM.Call(127);
-            return (Alignment)VM.StackPopInt();
+            NWNXPInvoke.StackPushInteger((int)oCreature);
+            NWNXPInvoke.CallBuiltIn(127);
+            return (Alignment)NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -92,9 +93,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ClearPersonalReputation(uint oTarget, uint oSource = OBJECT_INVALID)
         {
-            VM.StackPush(oSource);
-            VM.StackPush(oTarget);
-            VM.Call(389);
+            NWNXPInvoke.StackPushInteger((int)oSource);
+            NWNXPInvoke.StackPushInteger((int)oTarget);
+            NWNXPInvoke.CallBuiltIn(389);
         }
 
         /// <summary>
@@ -115,11 +116,11 @@ namespace NWN.Xenomech.Core.NWScript
         public static void SetIsTemporaryFriend(uint oTarget, uint oSource = OBJECT_INVALID, bool bDecays = false,
             float fDurationInSeconds = 180.0f)
         {
-            VM.StackPush(fDurationInSeconds);
-            VM.StackPush(bDecays ? 1 : 0);
-            VM.StackPush(oSource);
-            VM.StackPush(oTarget);
-            VM.Call(390);
+            NWNXPInvoke.StackPushFloat(fDurationInSeconds);
+            NWNXPInvoke.StackPushInteger(bDecays ? 1 : 0);
+            NWNXPInvoke.StackPushInteger((int)oSource);
+            NWNXPInvoke.StackPushInteger((int)oTarget);
+            NWNXPInvoke.CallBuiltIn(390);
         }
 
         /// <summary>
@@ -137,11 +138,11 @@ namespace NWN.Xenomech.Core.NWScript
         public static void SetIsTemporaryEnemy(uint oTarget, uint oSource = OBJECT_INVALID, bool bDecays = false,
             float fDurationInSeconds = 180.0f)
         {
-            VM.StackPush(fDurationInSeconds);
-            VM.StackPush(bDecays ? 1 : 0);
-            VM.StackPush(oSource);
-            VM.StackPush(oTarget);
-            VM.Call(391);
+            NWNXPInvoke.StackPushFloat(fDurationInSeconds);
+            NWNXPInvoke.StackPushInteger(bDecays ? 1 : 0);
+            NWNXPInvoke.StackPushInteger((int)oSource);
+            NWNXPInvoke.StackPushInteger((int)oTarget);
+            NWNXPInvoke.CallBuiltIn(391);
         }
 
         /// <summary>
@@ -160,11 +161,11 @@ namespace NWN.Xenomech.Core.NWScript
         public static void SetIsTemporaryNeutral(uint oTarget, uint oSource = OBJECT_INVALID, bool bDecays = false,
             float fDurationInSeconds = 180.0f)
         {
-            VM.StackPush(fDurationInSeconds);
-            VM.StackPush(bDecays ? 1 : 0);
-            VM.StackPush(oSource);
-            VM.StackPush(oTarget);
-            VM.Call(392);
+            NWNXPInvoke.StackPushFloat(fDurationInSeconds);
+            NWNXPInvoke.StackPushInteger(bDecays ? 1 : 0);
+            NWNXPInvoke.StackPushInteger((int)oSource);
+            NWNXPInvoke.StackPushInteger((int)oTarget);
+            NWNXPInvoke.CallBuiltIn(392);
         }
     }
 }

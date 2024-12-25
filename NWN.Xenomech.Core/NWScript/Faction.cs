@@ -1,182 +1,156 @@
+using NWN.Xenomech.Core.Interop;
 using NWN.Xenomech.Core.NWScript.Enum;
 
 namespace NWN.Xenomech.Core.NWScript
 {
     public partial class NWScript
-    {
-        /// <summary>
-        ///   Get the weakest member of oFactionMember's faction.
-        ///   * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
-        /// </summary>
+    {/// <summary>
+     ///   Get the weakest member of oFactionMember's faction.
+     /// </summary>
         public static uint GetFactionWeakestMember(uint oFactionMember = OBJECT_INVALID, bool bMustBeVisible = true)
         {
-            VM.StackPush(bMustBeVisible ? 1 : 0);
-            VM.StackPush(oFactionMember);
-            VM.Call(181);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushInteger(bMustBeVisible ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oFactionMember);
+            NWNXPInvoke.CallBuiltIn(181);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
         ///   Get the strongest member of oFactionMember's faction.
-        ///   * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
         /// </summary>
         public static uint GetFactionStrongestMember(uint oFactionMember = OBJECT_INVALID, bool bMustBeVisible = true)
         {
-            VM.StackPush(bMustBeVisible ? 1 : 0);
-            VM.StackPush(oFactionMember);
-            VM.Call(182);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushInteger(bMustBeVisible ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oFactionMember);
+            NWNXPInvoke.CallBuiltIn(182);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
-        ///   Get the member of oFactionMember's faction that has taken the most hit points
-        ///   of damage.
-        ///   * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
+        ///   Get the member of oFactionMember's faction that has taken the most hit points of damage.
         /// </summary>
         public static uint GetFactionMostDamagedMember(uint oFactionMember = OBJECT_INVALID, bool bMustBeVisible = true)
         {
-            VM.StackPush(bMustBeVisible ? 1 : 0);
-            VM.StackPush(oFactionMember);
-            VM.Call(183);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushInteger(bMustBeVisible ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oFactionMember);
+            NWNXPInvoke.CallBuiltIn(183);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
-        ///   Get the member of oFactionMember's faction that has taken the fewest hit
-        ///   points of damage.
-        ///   * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
+        ///   Get the member of oFactionMember's faction that has taken the fewest hit points of damage.
         /// </summary>
-        public static uint GetFactionLeastDamagedMember(uint oFactionMember = OBJECT_INVALID,
-            bool bMustBeVisible = true)
+        public static uint GetFactionLeastDamagedMember(uint oFactionMember = OBJECT_INVALID, bool bMustBeVisible = true)
         {
-            VM.StackPush(bMustBeVisible ? 1 : 0);
-            VM.StackPush(oFactionMember);
-            VM.Call(184);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushInteger(bMustBeVisible ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oFactionMember);
+            NWNXPInvoke.CallBuiltIn(184);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
         ///   Get the amount of gold held by oFactionMember's faction.
-        ///   * Returns -1 if oFactionMember's faction is invalid.
         /// </summary>
         public static int GetFactionGold(uint oFactionMember)
         {
-            VM.StackPush(oFactionMember);
-            VM.Call(185);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oFactionMember);
+            NWNXPInvoke.CallBuiltIn(185);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
-        ///   Get an integer between 0 and 100 (inclusive) that represents how
-        ///   oSourceFactionMember's faction feels about oTarget.
-        ///   * Return value on error: -1
+        ///   Get the average reputation of oSourceFactionMember's faction towards oTarget.
         /// </summary>
         public static int GetFactionAverageReputation(uint oSourceFactionMember, uint oTarget)
         {
-            VM.StackPush(oTarget);
-            VM.StackPush(oSourceFactionMember);
-            VM.Call(186);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.StackPushObject(oSourceFactionMember);
+            NWNXPInvoke.CallBuiltIn(186);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
-        ///   Get an integer between 0 and 100 (inclusive) that represents the average
-        ///   good/evil alignment of oFactionMember's faction.
-        ///   * Return value on error: -1
+        ///   Get the average good/evil alignment of oFactionMember's faction.
         /// </summary>
         public static int GetFactionAverageGoodEvilAlignment(uint oFactionMember)
         {
-            VM.StackPush(oFactionMember);
-            VM.Call(187);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oFactionMember);
+            NWNXPInvoke.CallBuiltIn(187);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
-        ///   Get an integer between 0 and 100 (inclusive) that represents the average
-        ///   law/chaos alignment of oFactionMember's faction.
-        ///   * Return value on error: -1
+        ///   Get the average law/chaos alignment of oFactionMember's faction.
         /// </summary>
         public static int GetFactionAverageLawChaosAlignment(uint oFactionMember)
         {
-            VM.StackPush(oFactionMember);
-            VM.Call(188);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oFactionMember);
+            NWNXPInvoke.CallBuiltIn(188);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
         ///   Get the average level of the members of the faction.
-        ///   * Return value on error: -1
         /// </summary>
         public static int GetFactionAverageLevel(uint oFactionMember)
         {
-            VM.StackPush(oFactionMember);
-            VM.Call(189);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oFactionMember);
+            NWNXPInvoke.CallBuiltIn(189);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
         ///   Get the average XP of the members of the faction.
-        ///   * Return value on error: -1
         /// </summary>
         public static int GetFactionAverageXP(uint oFactionMember)
         {
-            VM.StackPush(oFactionMember);
-            VM.Call(190);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oFactionMember);
+            NWNXPInvoke.CallBuiltIn(190);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
-        ///   Get the most frequent class in the faction - this can be compared with the
-        ///   constants CLASS_TYPE_*.
-        ///   * Return value on error: -1
+        ///   Get the most frequent class in the faction.
         /// </summary>
         public static int GetFactionMostFrequentClass(uint oFactionMember)
         {
-            VM.StackPush(oFactionMember);
-            VM.Call(191);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oFactionMember);
+            NWNXPInvoke.CallBuiltIn(191);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
-        ///   Get the object faction member with the lowest armour class.
-        ///   * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
+        ///   Get the object faction member with the lowest armor class.
         /// </summary>
         public static uint GetFactionWorstAC(uint oFactionMember = OBJECT_INVALID, bool bMustBeVisible = true)
         {
-            VM.StackPush(bMustBeVisible ? 1 : 0);
-            VM.StackPush(oFactionMember);
-            VM.Call(192);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushInteger(bMustBeVisible ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oFactionMember);
+            NWNXPInvoke.CallBuiltIn(192);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
-        ///   Get the object faction member with the highest armour class.
-        ///   * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
+        ///   Get the object faction member with the highest armor class.
         /// </summary>
         public static uint GetFactionBestAC(uint oFactionMember = OBJECT_INVALID, bool bMustBeVisible = true)
         {
-            VM.StackPush(bMustBeVisible ? 1 : 0);
-            VM.StackPush(oFactionMember);
-            VM.Call(193);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushInteger(bMustBeVisible ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oFactionMember);
+            NWNXPInvoke.CallBuiltIn(193);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
-        ///   Get an integer between 0 and 100 (inclusive) that represents how oSource
-        ///   feels about oTarget.
-        ///   -> 0-10 means oSource is hostile to oTarget
-        ///   -> 11-89 means oSource is neutral to oTarget
-        ///   -> 90-100 means oSource is friendly to oTarget
-        ///   * Returns -1 if oSource or oTarget does not identify a valid object
+        ///   Get the reputation of oSource towards oTarget.
         /// </summary>
         public static int GetReputation(uint oSource, uint oTarget)
         {
-            VM.StackPush(oTarget);
-            VM.StackPush(oSource);
-            VM.Call(208);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.StackPushObject(oSource);
+            NWNXPInvoke.CallBuiltIn(208);
+            return NWNXPInvoke.StackPopInteger();
         }
-
         /// <summary>
         ///   Adjust how oSourceFactionMember's faction feels about oTarget by the
         ///   specified amount.
@@ -194,10 +168,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void AdjustReputation(uint oTarget, uint oSourceFactionMember, int nAdjustment)
         {
-            VM.StackPush(nAdjustment);
-            VM.StackPush(oSourceFactionMember);
-            VM.StackPush(oTarget);
-            VM.Call(209);
+            NWNXPInvoke.StackPushInteger(nAdjustment);
+            NWNXPInvoke.StackPushObject(oSourceFactionMember);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.CallBuiltIn(209);
         }
 
         /// <summary>
@@ -205,10 +179,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetIsEnemy(uint oTarget, uint oSource = OBJECT_INVALID)
         {
-            VM.StackPush(oSource);
-            VM.StackPush(oTarget);
-            VM.Call(235);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oSource);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.CallBuiltIn(235);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -216,10 +190,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetIsFriend(uint oTarget, uint oSource = OBJECT_INVALID)
         {
-            VM.StackPush(oSource);
-            VM.StackPush(oTarget);
-            VM.Call(236);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oSource);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.CallBuiltIn(236);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -227,10 +201,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetIsNeutral(uint oTarget, uint oSource = OBJECT_INVALID)
         {
-            VM.StackPush(oSource);
-            VM.StackPush(oTarget);
-            VM.Call(237);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oSource);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.CallBuiltIn(237);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -240,9 +214,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetFactionLeader(uint oMemberOfFaction)
         {
-            VM.StackPush(oMemberOfFaction);
-            VM.Call(562);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushObject(oMemberOfFaction);
+            NWNXPInvoke.CallBuiltIn(562);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -254,10 +228,10 @@ namespace NWN.Xenomech.Core.NWScript
         public static void SetStandardFactionReputation(StandardFaction nStandardFaction, int nNewReputation,
             uint oCreature = OBJECT_INVALID)
         {
-            VM.StackPush(oCreature);
-            VM.StackPush(nNewReputation);
-            VM.StackPush((int)nStandardFaction);
-            VM.Call(523);
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.StackPushInteger(nNewReputation);
+            NWNXPInvoke.StackPushInteger((int)nStandardFaction);
+            NWNXPInvoke.CallBuiltIn(523);
         }
 
         /// <summary>
@@ -272,10 +246,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetStandardFactionReputation(StandardFaction nStandardFaction, uint oCreature = OBJECT_INVALID)
         {
-            VM.StackPush(oCreature);
-            VM.StackPush((int)nStandardFaction);
-            VM.Call(524);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oCreature);
+            NWNXPInvoke.StackPushInteger((int)nStandardFaction);
+            NWNXPInvoke.CallBuiltIn(524);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -285,9 +259,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ChangeToStandardFaction(uint oCreatureToChange, StandardFaction nStandardFaction)
         {
-            VM.StackPush((int)nStandardFaction);
-            VM.StackPush(oCreatureToChange);
-            VM.Call(412);
+            NWNXPInvoke.StackPushInteger((int)nStandardFaction);
+            NWNXPInvoke.StackPushObject(oCreatureToChange);
+            NWNXPInvoke.CallBuiltIn(412);
         }
 
         /// <summary>
@@ -297,10 +271,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetFirstFactionMember(uint oMemberOfFaction, bool bPCOnly = true)
         {
-            VM.StackPush(bPCOnly ? 1 : 0);
-            VM.StackPush(oMemberOfFaction);
-            VM.Call(380);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushInteger(bPCOnly ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oMemberOfFaction);
+            NWNXPInvoke.CallBuiltIn(380);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -310,10 +284,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static uint GetNextFactionMember(uint oMemberOfFaction, bool bPCOnly = true)
         {
-            VM.StackPush(bPCOnly ? 1 : 0);
-            VM.StackPush(oMemberOfFaction);
-            VM.Call(381);
-            return VM.StackPopObject();
+            NWNXPInvoke.StackPushInteger(bPCOnly ? 1 : 0);
+            NWNXPInvoke.StackPushObject(oMemberOfFaction);
+            NWNXPInvoke.CallBuiltIn(381);
+            return NWNXPInvoke.StackPopObject();
         }
 
         /// <summary>
@@ -321,10 +295,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetFactionEqual(uint oFirstObject, uint oSecondObject = OBJECT_INVALID)
         {
-            VM.StackPush(oSecondObject);
-            VM.StackPush(oFirstObject);
-            VM.Call(172);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.StackPushObject(oSecondObject);
+            NWNXPInvoke.StackPushObject(oFirstObject);
+            NWNXPInvoke.CallBuiltIn(172);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -333,9 +307,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ChangeFaction(uint oObjectToChangeFaction, uint oMemberOfFactionToJoin)
         {
-            VM.StackPush(oMemberOfFactionToJoin);
-            VM.StackPush(oObjectToChangeFaction);
-            VM.Call(173);
+            NWNXPInvoke.StackPushObject(oMemberOfFactionToJoin);
+            NWNXPInvoke.StackPushObject(oObjectToChangeFaction);
+            NWNXPInvoke.CallBuiltIn(173);
         }
+
     }
 }

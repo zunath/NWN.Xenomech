@@ -1,3 +1,6 @@
+
+using NWN.Xenomech.Core.Interop;
+
 namespace NWN.Xenomech.Core.NWScript
 {
     public partial class NWScript
@@ -8,9 +11,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetStoreGold(uint oidStore)
         {
-            VM.StackPush(oidStore);
-            VM.Call(759);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oidStore);
+            NWNXPInvoke.CallBuiltIn(759);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -18,9 +21,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetStoreGold(uint oidStore, int nGold)
         {
-            VM.StackPush(nGold);
-            VM.StackPush(oidStore);
-            VM.Call(760);
+            NWNXPInvoke.StackPushInteger(nGold);
+            NWNXPInvoke.StackPushObject(oidStore);
+            NWNXPInvoke.CallBuiltIn(760);
         }
 
         /// <summary>
@@ -29,9 +32,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetStoreMaxBuyPrice(uint oidStore)
         {
-            VM.StackPush(oidStore);
-            VM.Call(761);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oidStore);
+            NWNXPInvoke.CallBuiltIn(761);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -39,9 +42,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetStoreMaxBuyPrice(uint oidStore, int nMaxBuy)
         {
-            VM.StackPush(nMaxBuy);
-            VM.StackPush(oidStore);
-            VM.Call(762);
+            NWNXPInvoke.StackPushInteger(nMaxBuy);
+            NWNXPInvoke.StackPushObject(oidStore);
+            NWNXPInvoke.CallBuiltIn(762);
         }
 
         /// <summary>
@@ -51,9 +54,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static int GetStoreIdentifyCost(uint oidStore)
         {
-            VM.StackPush(oidStore);
-            VM.Call(763);
-            return VM.StackPopInt();
+            NWNXPInvoke.StackPushObject(oidStore);
+            NWNXPInvoke.CallBuiltIn(763);
+            return NWNXPInvoke.StackPopInteger();
         }
 
         /// <summary>
@@ -62,9 +65,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void SetStoreIdentifyCost(uint oidStore, int nCost)
         {
-            VM.StackPush(nCost);
-            VM.StackPush(oidStore);
-            VM.Call(764);
+            NWNXPInvoke.StackPushInteger(nCost);
+            NWNXPInvoke.StackPushObject(oidStore);
+            NWNXPInvoke.CallBuiltIn(764);
         }
 
         /// <summary>
@@ -74,11 +77,11 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void OpenStore(uint oStore, uint oPC, int nBonusMarkUp = 0, int nBonusMarkDown = 0)
         {
-            VM.StackPush(nBonusMarkDown);
-            VM.StackPush(nBonusMarkUp);
-            VM.StackPush(oPC);
-            VM.StackPush(oStore);
-            VM.Call(378);
+            NWNXPInvoke.StackPushInteger(nBonusMarkDown);
+            NWNXPInvoke.StackPushInteger(nBonusMarkUp);
+            NWNXPInvoke.StackPushObject(oPC);
+            NWNXPInvoke.StackPushObject(oStore);
+            NWNXPInvoke.CallBuiltIn(378);
         }
     }
 }

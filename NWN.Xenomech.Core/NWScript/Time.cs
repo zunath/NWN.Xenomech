@@ -1,3 +1,6 @@
+
+using NWN.Xenomech.Core.Interop;
+
 namespace NWN.Xenomech.Core.NWScript
 {
     public partial class NWScript
@@ -7,8 +10,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetIsDay()
         {
-            VM.Call(405);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.CallBuiltIn(405);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -16,8 +19,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetIsNight()
         {
-            VM.Call(406);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.CallBuiltIn(406);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -25,8 +28,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetIsDawn()
         {
-            VM.Call(407);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.CallBuiltIn(407);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
 
         /// <summary>
@@ -34,10 +37,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static bool GetIsDusk()
         {
-            VM.Call(408);
-            return VM.StackPopInt() != 0;
+            NWNXPInvoke.CallBuiltIn(408);
+            return NWNXPInvoke.StackPopInteger() != 0;
         }
-
 
         /// <summary>
         ///   Convert nRounds into a number of seconds
@@ -45,9 +47,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static float RoundsToSeconds(int nRounds)
         {
-            VM.StackPush(nRounds);
-            VM.Call(121);
-            return VM.StackPopFloat();
+            NWNXPInvoke.StackPushInteger(nRounds);
+            NWNXPInvoke.CallBuiltIn(121);
+            return NWNXPInvoke.StackPopFloat();
         }
 
         /// <summary>
@@ -56,9 +58,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static float HoursToSeconds(int nHours)
         {
-            VM.StackPush(nHours);
-            VM.Call(122);
-            return VM.StackPopFloat();
+            NWNXPInvoke.StackPushInteger(nHours);
+            NWNXPInvoke.CallBuiltIn(122);
+            return NWNXPInvoke.StackPopFloat();
         }
 
         /// <summary>
@@ -67,9 +69,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static float TurnsToSeconds(int nTurns)
         {
-            VM.StackPush(nTurns);
-            VM.Call(123);
-            return VM.StackPopFloat();
+            NWNXPInvoke.StackPushInteger(nTurns);
+            NWNXPInvoke.CallBuiltIn(123);
+            return NWNXPInvoke.StackPopFloat();
         }
     }
 }
