@@ -1,4 +1,6 @@
-﻿// ReSharper disable once CheckNamespace
+﻿using NWN.Xenomech.Core.Interop;
+
+// ReSharper disable once CheckNamespace
 namespace NWN.Xenomech.Core.NWScript
 {
     public partial class NWScript
@@ -9,10 +11,10 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void DestroyObject(uint oDestroy, float fDelay = 0.0f)
         {
-            VM.StackPush(fDelay);
-            VM.StackPush(oDestroy);
-            VM.Call(241);
-
+            NWNXPInvoke.StackPushFloat(fDelay);
+            NWNXPInvoke.StackPushObject(oDestroy);
+            NWNXPInvoke.CallBuiltIn(241);
+            
             ExecuteScript("object_destroyed", oDestroy);
         }
     }

@@ -1,4 +1,5 @@
-﻿using NWN.Xenomech.Core.NWNX.Enum;
+﻿using NWN.Xenomech.Core.Interop;
+using NWN.Xenomech.Core.NWNX.Enum;
 using NWN.Xenomech.Core.NWScript.Enum;
 
 namespace NWN.Xenomech.Core.NWNX
@@ -6,7 +7,6 @@ namespace NWN.Xenomech.Core.NWNX
     public static class FeatPlugin
     {
         private const string PluginName = "NWNX_Feat";
-
         /// <summary>
         /// Sets a feat modifier.
         /// </summary>
@@ -17,23 +17,25 @@ namespace NWN.Xenomech.Core.NWNX
         /// <param name="param3">The third parameter for this feat modifier.</param>
         /// <param name="param4">The fourth parameter for this feat modifier.</param>
         public static void SetFeatModifier(
-            FeatType featType, 
-            FeatModifierType modifierType, 
-            uint param1 = 0xDEADBEEF, 
+            FeatType featType,
+            FeatModifierType modifierType,
+            uint param1 = 0xDEADBEEF,
             uint param2 = 0xDEADBEEF,
-            uint param3 = 0xDEADBEEF, 
+            uint param3 = 0xDEADBEEF,
             uint param4 = 0xDEADBEEF)
         {
             const string Function = "SetFeatModifier";
 
-            NWNXCore.NWNX_PushArgumentInt((int)param4);
-            NWNXCore.NWNX_PushArgumentInt((int)param3);
-            NWNXCore.NWNX_PushArgumentInt((int)param2);
-            NWNXCore.NWNX_PushArgumentInt((int)param1);
-            NWNXCore.NWNX_PushArgumentInt((int)modifierType);
-            NWNXCore.NWNX_PushArgumentInt((int)featType);
+            NWNXPInvoke.NWNXSetFunction(PluginName, Function);
+            NWNXPInvoke.NWNXPushInt((int)param4);
+            NWNXPInvoke.NWNXPushInt((int)param3);
+            NWNXPInvoke.NWNXPushInt((int)param2);
+            NWNXPInvoke.NWNXPushInt((int)param1);
+            NWNXPInvoke.NWNXPushInt((int)modifierType);
+            NWNXPInvoke.NWNXPushInt((int)featType);
 
-            NWNXCore.NWNX_CallFunction(PluginName, Function);
+            NWNXPInvoke.NWNXCallFunction();
         }
+
     }
 }

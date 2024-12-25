@@ -1,4 +1,6 @@
-﻿namespace NWN.Xenomech.Core.Interop
+﻿using NWN.Xenomech.Core.NWNX;
+
+namespace NWN.Xenomech.Core.Interop
 {
     public class Entrypoints
     {

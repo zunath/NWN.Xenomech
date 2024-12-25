@@ -1,3 +1,4 @@
+using NWN.Xenomech.Core.Interop;
 using NWN.Xenomech.Core.NWNX.Enum;
 
 namespace NWN.Xenomech.Core.NWNX
@@ -5,76 +6,76 @@ namespace NWN.Xenomech.Core.NWNX
     public static class FeedbackPlugin
     {
         private const string PLUGIN_NAME = "NWNX_Feedback";
-
         public static int GetFeedbackMessageHidden(FeedbackMessageTypes messageType, uint? player = null)
         {
-            if (player == null) player = NWScript.NWScript.OBJECT_INVALID;
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "GetMessageHidden");
-            NWNCore.NativeFunctions.nwnxPushInt((int)messageType);
-            NWNCore.NativeFunctions.nwnxPushInt(0);
-            NWNCore.NativeFunctions.nwnxPushObject((uint)player);
-            NWNCore.NativeFunctions.nwnxCallFunction();
-            return NWNCore.NativeFunctions.nwnxPopInt();
+            if (player == null) player = OBJECT_INVALID;
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "GetMessageHidden");
+            NWNXPInvoke.NWNXPushInt((int)messageType);
+            NWNXPInvoke.NWNXPushInt(0);
+            NWNXPInvoke.NWNXPushObject((uint)player);
+            NWNXPInvoke.NWNXCallFunction();
+            return NWNXPInvoke.NWNXPopInt();
         }
 
         public static void SetFeedbackMessageHidden(FeedbackMessageTypes messageType, bool hide, uint? player = null)
         {
-            if (player == null) player = NWScript.NWScript.OBJECT_INVALID;
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetMessageHidden");
-            NWNCore.NativeFunctions.nwnxPushInt(hide ? 1 : 0);
-            NWNCore.NativeFunctions.nwnxPushInt((int)messageType);
-            NWNCore.NativeFunctions.nwnxPushInt(0);
-            NWNCore.NativeFunctions.nwnxPushObject((uint)player);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            if (player == null) player = OBJECT_INVALID;
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetMessageHidden");
+            NWNXPInvoke.NWNXPushInt(hide ? 1 : 0);
+            NWNXPInvoke.NWNXPushInt((int)messageType);
+            NWNXPInvoke.NWNXPushInt(0);
+            NWNXPInvoke.NWNXPushObject((uint)player);
+            NWNXPInvoke.NWNXCallFunction();
         }
 
         public static bool GetCombatLogMessageHidden(FeedbackMessageTypes messageType, uint? player = null)
         {
-            if (player == null) player = NWScript.NWScript.OBJECT_INVALID;
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "GetMessageHidden");
-            NWNCore.NativeFunctions.nwnxPushInt((int)messageType);
-            NWNCore.NativeFunctions.nwnxPushInt(1);
-            NWNCore.NativeFunctions.nwnxPushObject((uint)player);
-            NWNCore.NativeFunctions.nwnxCallFunction();
-            return NWNCore.NativeFunctions.nwnxPopInt() == 1;
+            if (player == null) player = OBJECT_INVALID;
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "GetMessageHidden");
+            NWNXPInvoke.NWNXPushInt((int)messageType);
+            NWNXPInvoke.NWNXPushInt(1);
+            NWNXPInvoke.NWNXPushObject((uint)player);
+            NWNXPInvoke.NWNXCallFunction();
+            return NWNXPInvoke.NWNXPopInt() == 1;
         }
 
         public static void SetCombatLogMessageHidden(CombatLogMessageType messageType, bool hide, uint? player = null)
         {
-            if (player == null) player = NWScript.NWScript.OBJECT_INVALID;
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetMessageHidden");
-            NWNCore.NativeFunctions.nwnxPushInt(hide ? 1 : 0);
-            NWNCore.NativeFunctions.nwnxPushInt((int)messageType);
-            NWNCore.NativeFunctions.nwnxPushInt(1);
-            NWNCore.NativeFunctions.nwnxPushObject((uint)player);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            if (player == null) player = OBJECT_INVALID;
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetMessageHidden");
+            NWNXPInvoke.NWNXPushInt(hide ? 1 : 0);
+            NWNXPInvoke.NWNXPushInt((int)messageType);
+            NWNXPInvoke.NWNXPushInt(1);
+            NWNXPInvoke.NWNXPushObject((uint)player);
+            NWNXPInvoke.NWNXCallFunction();
         }
 
         public static int GetJournalUpdatedMessageHidden(uint? player = null)
         {
-            if (player == null) player = NWScript.NWScript.OBJECT_INVALID;
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "GetMessageHidden");
-            NWNCore.NativeFunctions.nwnxPushInt(0);
-            NWNCore.NativeFunctions.nwnxPushInt(2);
-            NWNCore.NativeFunctions.nwnxPushObject((uint)player);
-            NWNCore.NativeFunctions.nwnxCallFunction();
-            return NWNCore.NativeFunctions.nwnxPopInt();
+            if (player == null) player = OBJECT_INVALID;
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "GetMessageHidden");
+            NWNXPInvoke.NWNXPushInt(0);
+            NWNXPInvoke.NWNXPushInt(2);
+            NWNXPInvoke.NWNXPushObject((uint)player);
+            NWNXPInvoke.NWNXCallFunction();
+            return NWNXPInvoke.NWNXPopInt();
         }
 
         public static void SetFeedbackMessageMode(int whiteList)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetFeedbackMode");
-            NWNCore.NativeFunctions.nwnxPushInt(whiteList);
-            NWNCore.NativeFunctions.nwnxPushInt(0);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetFeedbackMode");
+            NWNXPInvoke.NWNXPushInt(whiteList);
+            NWNXPInvoke.NWNXPushInt(0);
+            NWNXPInvoke.NWNXCallFunction();
         }
 
         public static void SetCombatLogMessageMod(int whiteList)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetFeedbackMode");
-            NWNCore.NativeFunctions.nwnxPushInt(whiteList);
-            NWNCore.NativeFunctions.nwnxPushInt(1);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetFeedbackMode");
+            NWNXPInvoke.NWNXPushInt(whiteList);
+            NWNXPInvoke.NWNXPushInt(1);
+            NWNXPInvoke.NWNXCallFunction();
         }
+
     }
 }

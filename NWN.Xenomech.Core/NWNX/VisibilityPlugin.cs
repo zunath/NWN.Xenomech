@@ -1,11 +1,11 @@
-﻿using NWN.Xenomech.Core.NWNX.Enum;
+﻿using NWN.Xenomech.Core.Interop;
+using NWN.Xenomech.Core.NWNX.Enum;
 
 namespace NWN.Xenomech.Core.NWNX
 {
     public static class VisibilityPlugin
     {
         private const string PLUGIN_NAME = "NWNX_Visibility";
-
         // Queries the existing visibility override for given (player, target) pair
         // If player is OBJECT_INVALID, the global visibility override will be returned
         //
@@ -22,11 +22,11 @@ namespace NWN.Xenomech.Core.NWNX
 
         public static VisibilityType GetVisibilityOverride(uint player, uint target)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "GetVisibilityOverride");
-            NWNCore.NativeFunctions.nwnxPushObject(target);
-            NWNCore.NativeFunctions.nwnxPushObject(player);
-            NWNCore.NativeFunctions.nwnxCallFunction();
-            return (VisibilityType)NWNCore.NativeFunctions.nwnxPopInt();
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "GetVisibilityOverride");
+            NWNXPInvoke.NWNXPushObject(target);
+            NWNXPInvoke.NWNXPushObject(player);
+            NWNXPInvoke.NWNXCallFunction();
+            return (VisibilityType)NWNXPInvoke.NWNXPopInt();
         }
 
         // Overrides the default visibility rules about how player perceives the target object
@@ -49,11 +49,12 @@ namespace NWN.Xenomech.Core.NWNX
         // set to NWNX_VISIBILITY_VISIBLE for the target, the object will be visible to the player
         public static void SetVisibilityOverride(uint player, uint target, VisibilityType @override)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetVisibilityOverride");
-            NWNCore.NativeFunctions.nwnxPushInt((int)@override);
-            NWNCore.NativeFunctions.nwnxPushObject(target);
-            NWNCore.NativeFunctions.nwnxPushObject(player);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetVisibilityOverride");
+            NWNXPInvoke.NWNXPushInt((int)@override);
+            NWNXPInvoke.NWNXPushObject(target);
+            NWNXPInvoke.NWNXPushObject(player);
+            NWNXPInvoke.NWNXCallFunction();
         }
+
     }
 }

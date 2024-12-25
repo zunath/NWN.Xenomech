@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using NWN.Xenomech.Core.Interop;
+using System.Numerics;
 
 namespace NWN.Xenomech.Core.Bioware
 {

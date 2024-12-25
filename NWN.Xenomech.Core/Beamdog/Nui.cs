@@ -1,4 +1,6 @@
-﻿namespace NWN.Xenomech.Core.Beamdog
+﻿using NWN.Xenomech.Core.Interop;
+
+namespace NWN.Xenomech.Core.Beamdog
 {
     public static class Nui
     {

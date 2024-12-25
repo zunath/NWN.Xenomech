@@ -1,3 +1,4 @@
+using NWN.Xenomech.Core.Interop;
 using NWN.Xenomech.Core.NWNX.Enum;
 
 namespace NWN.Xenomech.Core.NWNX
@@ -5,30 +6,30 @@ namespace NWN.Xenomech.Core.NWNX
     public static class ItemPropertyPlugin
     {
         private const string PLUGIN_NAME = "NWNX_ItemProperty";
-
         // Convert native itemproperty type to unpacked structure
         public static ItemPropertyUnpacked UnpackIP(ItemProperty ip)
         {
             const string func = "UnpackIP";
 
-            NWNXCore.NWNX_PushArgumentItemProperty(ip);
-            NWNXCore.NWNX_CallFunction(PLUGIN_NAME, func);
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, func);
+            NWNXPInvoke.NWNXPushItemProperty(ip.Handle);
+            NWNXPInvoke.NWNXCallFunction();
 
             return new ItemPropertyUnpacked
             {
-                Id = NWNXCore.NWNX_GetReturnValueString(),
-                Property = NWNXCore.NWNX_GetReturnValueInt(),
-                SubType = NWNXCore.NWNX_GetReturnValueInt(),
-                CostTable = NWNXCore.NWNX_GetReturnValueInt(),
-                CostTableValue = NWNXCore.NWNX_GetReturnValueInt(),
-                Param1 = NWNXCore.NWNX_GetReturnValueInt(),
-                Param1Value = NWNXCore.NWNX_GetReturnValueInt(),
-                UsesPerDay = NWNXCore.NWNX_GetReturnValueInt(),
-                ChanceToAppear = NWNXCore.NWNX_GetReturnValueInt(),
-                IsUseable = Convert.ToBoolean(NWNXCore.NWNX_GetReturnValueInt()),
-                SpellId = NWNXCore.NWNX_GetReturnValueInt(),
-                Creator = NWNXCore.NWNX_GetReturnValueObject(),
-                Tag = NWNXCore.NWNX_GetReturnValueString()
+                Id = NWNXPInvoke.NWNXPopString(),
+                Property = NWNXPInvoke.NWNXPopInt(),
+                SubType = NWNXPInvoke.NWNXPopInt(),
+                CostTable = NWNXPInvoke.NWNXPopInt(),
+                CostTableValue = NWNXPInvoke.NWNXPopInt(),
+                Param1 = NWNXPInvoke.NWNXPopInt(),
+                Param1Value = NWNXPInvoke.NWNXPopInt(),
+                UsesPerDay = NWNXPInvoke.NWNXPopInt(),
+                ChanceToAppear = NWNXPInvoke.NWNXPopInt(),
+                IsUseable = Convert.ToBoolean(NWNXPInvoke.NWNXPopInt()),
+                SpellId = NWNXPInvoke.NWNXPopInt(),
+                Creator = NWNXPInvoke.NWNXPopObject(),
+                Tag = NWNXPInvoke.NWNXPopString()
             };
         }
 
@@ -37,21 +38,23 @@ namespace NWN.Xenomech.Core.NWNX
         {
             const string sFunc = "PackIP";
 
-            NWNXCore.NWNX_PushArgumentString(itemProperty.Tag);
-            NWNXCore.NWNX_PushArgumentObject(itemProperty.Creator);
-            NWNXCore.NWNX_PushArgumentInt(itemProperty.SpellId);
-            NWNXCore.NWNX_PushArgumentInt(itemProperty.IsUseable ? 1 : 0);
-            NWNXCore.NWNX_PushArgumentInt(itemProperty.ChanceToAppear);
-            NWNXCore.NWNX_PushArgumentInt(itemProperty.UsesPerDay);
-            NWNXCore.NWNX_PushArgumentInt(itemProperty.Param1Value);
-            NWNXCore.NWNX_PushArgumentInt(itemProperty.Param1);
-            NWNXCore.NWNX_PushArgumentInt(itemProperty.CostTableValue);
-            NWNXCore.NWNX_PushArgumentInt(itemProperty.CostTable);
-            NWNXCore.NWNX_PushArgumentInt(itemProperty.SubType);
-            NWNXCore.NWNX_PushArgumentInt(itemProperty.Property);
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, sFunc);
 
-            NWNXCore.NWNX_CallFunction(PLUGIN_NAME, sFunc);
-            return NWNXCore.NWNX_GetReturnValueItemProperty();
+            NWNXPInvoke.NWNXPushString(itemProperty.Tag);
+            NWNXPInvoke.NWNXPushObject(itemProperty.Creator);
+            NWNXPInvoke.NWNXPushInt(itemProperty.SpellId);
+            NWNXPInvoke.NWNXPushInt(itemProperty.IsUseable ? 1 : 0);
+            NWNXPInvoke.NWNXPushInt(itemProperty.ChanceToAppear);
+            NWNXPInvoke.NWNXPushInt(itemProperty.UsesPerDay);
+            NWNXPInvoke.NWNXPushInt(itemProperty.Param1Value);
+            NWNXPInvoke.NWNXPushInt(itemProperty.Param1);
+            NWNXPInvoke.NWNXPushInt(itemProperty.CostTableValue);
+            NWNXPInvoke.NWNXPushInt(itemProperty.CostTable);
+            NWNXPInvoke.NWNXPushInt(itemProperty.SubType);
+            NWNXPInvoke.NWNXPushInt(itemProperty.Property);
+
+            NWNXPInvoke.NWNXCallFunction();
+            return new ItemProperty(NWNXPInvoke.NWNXPopItemProperty());
         }
 
         /// @brief Gets the active item property at the index
@@ -62,23 +65,25 @@ namespace NWN.Xenomech.Core.NWNX
         {
             const string sFunc = "GetActiveProperty";
 
-            NWNXCore.NWNX_PushArgumentInt(nIndex);
-            NWNXCore.NWNX_PushArgumentObject(oItem);
-            NWNXCore.NWNX_CallFunction(PLUGIN_NAME, sFunc);
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, sFunc);
+            NWNXPInvoke.NWNXPushInt(nIndex);
+            NWNXPInvoke.NWNXPushObject(oItem);
+            NWNXPInvoke.NWNXCallFunction();
 
             return new ItemPropertyUnpacked
             {
-                Property = NWNXCore.NWNX_GetReturnValueInt(),
-                SubType = NWNXCore.NWNX_GetReturnValueInt(),
-                CostTable = NWNXCore.NWNX_GetReturnValueInt(),
-                CostTableValue = NWNXCore.NWNX_GetReturnValueInt(),
-                Param1 = NWNXCore.NWNX_GetReturnValueInt(),
-                Param1Value = NWNXCore.NWNX_GetReturnValueInt(),
-                UsesPerDay = NWNXCore.NWNX_GetReturnValueInt(),
-                ChanceToAppear = NWNXCore.NWNX_GetReturnValueInt(),
-                IsUseable = Convert.ToBoolean(NWNXCore.NWNX_GetReturnValueInt()),
-                Tag = NWNXCore.NWNX_GetReturnValueString()
+                Property = NWNXPInvoke.NWNXPopInt(),
+                SubType = NWNXPInvoke.NWNXPopInt(),
+                CostTable = NWNXPInvoke.NWNXPopInt(),
+                CostTableValue = NWNXPInvoke.NWNXPopInt(),
+                Param1 = NWNXPInvoke.NWNXPopInt(),
+                Param1Value = NWNXPInvoke.NWNXPopInt(),
+                UsesPerDay = NWNXPInvoke.NWNXPopInt(),
+                ChanceToAppear = NWNXPInvoke.NWNXPopInt(),
+                IsUseable = Convert.ToBoolean(NWNXPInvoke.NWNXPopInt()),
+                Tag = NWNXPInvoke.NWNXPopString()
             };
         }
+
     }
 }

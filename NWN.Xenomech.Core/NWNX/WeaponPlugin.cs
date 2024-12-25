@@ -1,3 +1,4 @@
+using NWN.Xenomech.Core.Interop;
 using NWN.Xenomech.Core.NWNX.Enum;
 using NWN.Xenomech.Core.NWScript.Enum;
 using NWN.Xenomech.Core.NWScript.Enum.Creature;
@@ -8,9 +9,8 @@ namespace NWN.Xenomech.Core.NWNX
     public static class WeaponPlugin
     {
         private const string PLUGIN_NAME = "NWNX_Weapon";
-
         // Options constants to be used with NWNX_Weapon_SetOption function
-        private const int GreaterFOcusABBonus = 0; // Greater Focus AB bonus
+        private const int GreaterFocusABBonus = 0; // Greater Focus AB bonus
         private const int GreaterSpecialDamageBonus = 1; // Greater Spec. DAM bonus
 
         // Get Event Data Constants
@@ -21,141 +21,140 @@ namespace NWN.Xenomech.Core.NWNX
 
         public static void SetWeaponFocusFeat(BaseItem baseItem, FeatType feat)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetWeaponFocusFeat");
-            NWNCore.NativeFunctions.nwnxPushInt((int)feat);
-            NWNCore.NativeFunctions.nwnxPushInt((int)baseItem);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetWeaponFocusFeat");
+            NWNXPInvoke.NWNXPushInt((int)feat);
+            NWNXPInvoke.NWNXPushInt((int)baseItem);
+            NWNXPInvoke.NWNXCallFunction();
         }
 
         public static void SetEpicWeaponFocusFeat(BaseItem baseItem, FeatType feat)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetEpicWeaponFocusFeat");
-            NWNCore.NativeFunctions.nwnxPushInt((int)feat);
-            NWNCore.NativeFunctions.nwnxPushInt((int)baseItem);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetEpicWeaponFocusFeat");
+            NWNXPInvoke.NWNXPushInt((int)feat);
+            NWNXPInvoke.NWNXPushInt((int)baseItem);
+            NWNXPInvoke.NWNXCallFunction();
         }
 
         public static void SetGreaterWeaponFocusFeat(BaseItem baseItem, FeatType feat)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetGreaterWeaponFocusFeat");
-            NWNCore.NativeFunctions.nwnxPushInt((int)feat);
-            NWNCore.NativeFunctions.nwnxPushInt((int)baseItem);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetGreaterWeaponFocusFeat");
+            NWNXPInvoke.NWNXPushInt((int)feat);
+            NWNXPInvoke.NWNXPushInt((int)baseItem);
+            NWNXPInvoke.NWNXCallFunction();
         }
 
         public static void SetWeaponFinesseSize(BaseItem baseItem, CreatureSize nCreatureSize)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetWeaponFinesseSize");
-            NWNCore.NativeFunctions.nwnxPushInt((int)nCreatureSize);
-            NWNCore.NativeFunctions.nwnxPushInt((int)baseItem);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetWeaponFinesseSize");
+            NWNXPInvoke.NWNXPushInt((int)nCreatureSize);
+            NWNXPInvoke.NWNXPushInt((int)baseItem);
+            NWNXPInvoke.NWNXCallFunction();
         }
 
         public static void SetWeaponUnarmed(BaseItem baseItem)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetWeaponUnarmed");
-            NWNCore.NativeFunctions.nwnxPushInt((int)baseItem);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetWeaponUnarmed");
+            NWNXPInvoke.NWNXPushInt((int)baseItem);
+            NWNXPInvoke.NWNXCallFunction();
         }
 
         public static void SetWeaponIsMonkWeapon(BaseItem baseItem)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetWeaponIsMonkWeapon");
-            NWNCore.NativeFunctions.nwnxPushInt((int)baseItem);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetWeaponIsMonkWeapon");
+            NWNXPInvoke.NWNXPushInt((int)baseItem);
+            NWNXPInvoke.NWNXCallFunction();
         }
 
         public static void SetWeaponImprovedCriticalFeat(BaseItem baseItem, FeatType feat)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetWeaponImprovedCriticalFeat");
-            NWNCore.NativeFunctions.nwnxPushInt((int)feat);
-            NWNCore.NativeFunctions.nwnxPushInt((int)baseItem);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetWeaponImprovedCriticalFeat");
+            NWNXPInvoke.NWNXPushInt((int)feat);
+            NWNXPInvoke.NWNXPushInt((int)baseItem);
+            NWNXPInvoke.NWNXCallFunction();
         }
 
         public static void SetWeaponSpecializationFeat(BaseItem baseItem, FeatType feat)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetWeaponSpecializationFeat");
-            NWNCore.NativeFunctions.nwnxPushInt((int)feat);
-            NWNCore.NativeFunctions.nwnxPushInt((int)baseItem);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetWeaponSpecializationFeat");
+            NWNXPInvoke.NWNXPushInt((int)feat);
+            NWNXPInvoke.NWNXPushInt((int)baseItem);
+            NWNXPInvoke.NWNXCallFunction();
         }
 
         public static void SetGreaterWeaponSpecializationFeat(BaseItem baseItem, FeatType feat)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetGreaterWeaponSpecializationFeat");
-            NWNCore.NativeFunctions.nwnxPushInt((int)feat);
-            NWNCore.NativeFunctions.nwnxPushInt((int)baseItem);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetGreaterWeaponSpecializationFeat");
+            NWNXPInvoke.NWNXPushInt((int)feat);
+            NWNXPInvoke.NWNXPushInt((int)baseItem);
+            NWNXPInvoke.NWNXCallFunction();
         }
 
         public static void SetEpicWeaponSpecializationFeat(BaseItem baseItem, FeatType feat)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetEpicWeaponSpecializationFeat");
-            NWNCore.NativeFunctions.nwnxPushInt((int)feat);
-            NWNCore.NativeFunctions.nwnxPushInt((int)baseItem);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetEpicWeaponSpecializationFeat");
+            NWNXPInvoke.NWNXPushInt((int)feat);
+            NWNXPInvoke.NWNXPushInt((int)baseItem);
+            NWNXPInvoke.NWNXCallFunction();
         }
 
         public static void SetEpicWeaponOverwhelmingCriticalFeat(BaseItem baseItem, FeatType feat)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetEpicWeaponOverwhelmingCriticalFeat");
-            NWNCore.NativeFunctions.nwnxPushInt((int)feat);
-            NWNCore.NativeFunctions.nwnxPushInt((int)baseItem);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetEpicWeaponOverwhelmingCriticalFeat");
+            NWNXPInvoke.NWNXPushInt((int)feat);
+            NWNXPInvoke.NWNXPushInt((int)baseItem);
+            NWNXPInvoke.NWNXCallFunction();
         }
 
         public static void SetEpicWeaponDevastatingCriticalFeat(BaseItem baseItem, FeatType feat)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetEpicWeaponDevastatingCriticalFeat");
-            NWNCore.NativeFunctions.nwnxPushInt((int)feat);
-            NWNCore.NativeFunctions.nwnxPushInt((int)baseItem);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetEpicWeaponDevastatingCriticalFeat");
+            NWNXPInvoke.NWNXPushInt((int)feat);
+            NWNXPInvoke.NWNXPushInt((int)baseItem);
+            NWNXPInvoke.NWNXCallFunction();
         }
 
         public static void SetWeaponOfChoiceFeat(BaseItem baseItem, FeatType feat)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetWeaponOfChoiceFeat");
-            NWNCore.NativeFunctions.nwnxPushInt((int)feat);
-            NWNCore.NativeFunctions.nwnxPushInt((int)baseItem);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetWeaponOfChoiceFeat");
+            NWNXPInvoke.NWNXPushInt((int)feat);
+            NWNXPInvoke.NWNXPushInt((int)baseItem);
+            NWNXPInvoke.NWNXCallFunction();
         }
 
         public static void SetOption(int nOption, int nVal)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetOption");
-            NWNCore.NativeFunctions.nwnxPushInt(nVal);
-            NWNCore.NativeFunctions.nwnxPushInt(nOption);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetOption");
+            NWNXPInvoke.NWNXPushInt(nVal);
+            NWNXPInvoke.NWNXPushInt(nOption);
+            NWNXPInvoke.NWNXCallFunction();
         }
 
         public static void SetDevastatingCriticalEventScript(string sScript)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetDevastatingCriticalEventScript");
-            NWNCore.NativeFunctions.nwnxPushString(sScript);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetDevastatingCriticalEventScript");
+            NWNXPInvoke.NWNXPushString(sScript);
+            NWNXPInvoke.NWNXCallFunction();
         }
 
         public static void BypassDevastatingCritical()
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetEventData");
-            NWNCore.NativeFunctions.nwnxPushInt(1);
-            NWNCore.NativeFunctions.nwnxPushInt(DC_Bypass);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetEventData");
+            NWNXPInvoke.NWNXPushInt(1);
+            NWNXPInvoke.NWNXPushInt(DC_Bypass);
+            NWNXPInvoke.NWNXCallFunction();
         }
 
         public static DevastatingCriticalData GetDevastatingCriticalEventData()
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "GetEventData");
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "GetEventData");
             var data = new DevastatingCriticalData();
-            NWNCore.NativeFunctions.nwnxPushInt(GetData_DC);
-            NWNCore.NativeFunctions.nwnxCallFunction();
-            data.Weapon = NWNCore.NativeFunctions.nwnxPopObject();
-            data.Target = NWNCore.NativeFunctions.nwnxPopObject();
-            data.Damage = NWNCore.NativeFunctions.nwnxPopInt();
+            NWNXPInvoke.NWNXPushInt(GetData_DC);
+            NWNXPInvoke.NWNXCallFunction();
+            data.Weapon = NWNXPInvoke.NWNXPopObject();
+            data.Target = NWNXPInvoke.NWNXPopObject();
+            data.Damage = NWNXPInvoke.NWNXPopInt();
             return data;
         }
-
 
         /// @brief Sets weapon to gain .5 strength bonus.
         /// @param oWeapon Should be a melee weapon.
@@ -163,13 +162,13 @@ namespace NWN.Xenomech.Core.NWNX
         /// @param bPersist whether the two hand state should persist to the gff file.
         public static void SetOneHalfStrength(uint oWeapon, bool nEnable, bool bPersist = false)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetOneHalfStrength");
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetOneHalfStrength");
 
-            NWNCore.NativeFunctions.nwnxPushInt(bPersist ? 1 : 0);
-            NWNCore.NativeFunctions.nwnxPushInt(nEnable ? 1 : 0);
-            NWNCore.NativeFunctions.nwnxPushObject(oWeapon);
+            NWNXPInvoke.NWNXPushInt(bPersist ? 1 : 0);
+            NWNXPInvoke.NWNXPushInt(nEnable ? 1 : 0);
+            NWNXPInvoke.NWNXPushObject(oWeapon);
 
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXCallFunction();
         }
 
         /// @brief Gets if the weapon is set to gain addition .5 strength bonus
@@ -177,11 +176,11 @@ namespace NWN.Xenomech.Core.NWNX
         /// @return FALSE/0 if weapon is not receiving the bonus. TRUE/1 if it does.
         public static int GetOneHalfStrength(uint oWeapon)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "GetOneHalfStrength");
-            NWNCore.NativeFunctions.nwnxPushObject(oWeapon);
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "GetOneHalfStrength");
+            NWNXPInvoke.NWNXPushObject(oWeapon);
+            NWNXPInvoke.NWNXCallFunction();
 
-            return NWNCore.NativeFunctions.nwnxPopInt();
+            return NWNXPInvoke.NWNXPopInt();
         }
 
         /// @brief Override the max attack distance of ranged weapons.
@@ -192,14 +191,15 @@ namespace NWN.Xenomech.Core.NWNX
         /// @note fMaxPassive should probably be lower than fMax, half of fMax seems to be a good start. fPreferred should be at least ~0.5f lower than fMax.
         public static void SetMaxRangedAttackDistanceOverride(BaseItem nBaseItem, float fMax, float fMaxPassive, float fPreferred)
         {
-            NWNCore.NativeFunctions.nwnxSetFunction(PLUGIN_NAME, "SetMaxRangedAttackDistanceOverride");
+            NWNXPInvoke.NWNXSetFunction(PLUGIN_NAME, "SetMaxRangedAttackDistanceOverride");
 
-            NWNCore.NativeFunctions.nwnxPushFloat(fPreferred);
-            NWNCore.NativeFunctions.nwnxPushFloat(fMaxPassive);
-            NWNCore.NativeFunctions.nwnxPushFloat(fMax);
-            NWNCore.NativeFunctions.nwnxPushInt((int)nBaseItem);
+            NWNXPInvoke.NWNXPushFloat(fPreferred);
+            NWNXPInvoke.NWNXPushFloat(fMaxPassive);
+            NWNXPInvoke.NWNXPushFloat(fMax);
+            NWNXPInvoke.NWNXPushInt((int)nBaseItem);
 
-            NWNCore.NativeFunctions.nwnxCallFunction();
+            NWNXPInvoke.NWNXCallFunction();
         }
+
     }
 }

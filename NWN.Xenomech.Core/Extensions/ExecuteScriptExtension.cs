@@ -14,9 +14,9 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ExecuteScriptNWScript(string sScript, uint oTarget)
         {
-            NWNCore.NativeFunctions.StackPushObject(oTarget);
-            NWNCore.NativeFunctions.StackPushStringUTF8(sScript);
-            NWNCore.NativeFunctions.CallBuiltIn(8);
+            NWNXPInvoke.StackPushObject(oTarget);
+            NWNXPInvoke.StackPushString(sScript);
+            NWNXPInvoke.CallBuiltIn(8);
         }
 
         /// <summary>
@@ -28,15 +28,8 @@ namespace NWN.Xenomech.Core.NWScript
         /// </summary>
         public static void ExecuteScript(string sScript, uint oTarget)
         {
-            // A workaround for adjusting OBJECT_SELF is needed here because without it,
-            // it will occasionally become invalid causing a cascading chain of errors to occur.
-            // This likely has to do with the execution chain of C# -> NWScript -> C# -> C#
-            // somewhere along the way, OBJECT_SELF gets out of whack.
-            var oldObjectSelf = OBJECT_SELF;
-            OBJECT_SELF = oTarget;
             // Note: Bypass the NWScript round-trip and directly call the script execution.
             Internal.DirectRunScript(sScript, oTarget);
-            OBJECT_SELF = oldObjectSelf;
         }
     }
 }

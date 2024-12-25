@@ -4,12 +4,11 @@ using NWN.Xenomech.Core.NWScript.Enum;
 namespace NWN.Xenomech.Core.NWNX
 {
     public static class PlayerQuickBarSlot
-    {
-        /// <summary>
-        /// Create an empty QBS of given type
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
+    {/// <summary>
+     /// Create an empty QBS of given type
+     /// </summary>
+     /// <param name="type"></param>
+     /// <returns></returns>
         public static QuickBarSlot Empty(QuickBarSlotType type)
         {
             var qbs = new QuickBarSlot
@@ -230,5 +229,6 @@ namespace NWN.Xenomech.Core.NWNX
 
             return qbs;
         }
+
     }
 }

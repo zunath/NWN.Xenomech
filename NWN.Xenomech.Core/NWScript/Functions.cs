@@ -8,11 +8,7 @@ namespace NWN.Xenomech.Core.NWScript
     public partial class NWScript
     {
         // ReSharper disable once InconsistentNaming
-        public static uint OBJECT_SELF
-        {
-            get => NWNCore.FunctionHandler.ObjectSelf;
-            set => NWNCore.FunctionHandler.ObjectSelf = value;
-        }
+        public static uint OBJECT_SELF => Internal.OBJECT_SELF;
 
         /// <summary>
         ///   Assign aActionToAssign to oActionSubject.
@@ -20,9 +16,9 @@ namespace NWN.Xenomech.Core.NWScript
         ///   "AssignCommand failed."
         ///   (If the object doesn't exist, nothing happens.)
         /// </summary>
-        public static void AssignCommand(uint oActionSubject, Action aActionToAssign)
+        public static void AssignCommand(uint oActionSubject, ActionDelegate aActionToAssign)
         {
-            NWNCore.FunctionHandler!.ClosureAssignCommand(oActionSubject, aActionToAssign);
+            Internal.ClosureAssignCommand(oActionSubject, aActionToAssign);
         }
 
         /// <summary>
@@ -35,18 +31,18 @@ namespace NWN.Xenomech.Core.NWScript
         ///   effect eDamage = EffectDamage(nDamage, DAMAGE_TYPE_MAGICAL);
         ///   DelayCommand(fDelay, ApplyEffectToObject(DURATION_TYPE_INSTANT, eDamage, oTarget);
         /// </summary>
-        public static void DelayCommand(float fSeconds, Action aActionToDelay)
+        public static void DelayCommand(float fSeconds, ActionDelegate aActionToDelay)
         {
-            NWNCore.FunctionHandler!.ClosureDelayCommand(OBJECT_SELF, fSeconds, aActionToDelay);
+            Internal.ClosureDelayCommand(Internal.OBJECT_SELF, fSeconds, aActionToDelay);
         }
 
 
         /// <summary>
         ///   Do aActionToDo.
         /// </summary>
-        public static void ActionDoCommand(Action aActionToDo)
+        public static void ActionDoCommand(ActionDelegate aActionToDo)
         {
-            NWNCore.FunctionHandler!.ClosureActionDoCommand(OBJECT_SELF, aActionToDo);
+            Internal.ClosureActionDoCommand(Internal.OBJECT_SELF, aActionToDo);
         }
 
         /// <summary>
@@ -515,7 +511,7 @@ namespace NWN.Xenomech.Core.NWScript
         {
             NWNXPInvoke.StackPushInteger(nInteger);
             NWNXPInvoke.CallBuiltIn(92);
-            return NWNCore.NativeFunctions.StackPopStringUTF8();
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -1000,7 +996,7 @@ namespace NWN.Xenomech.Core.NWScript
         {
             NWNXPInvoke.StackPushObject(oObject);
             NWNXPInvoke.CallBuiltIn(168);
-            return NWNCore.NativeFunctions.StackPopStringUTF8();
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -1655,7 +1651,7 @@ namespace NWN.Xenomech.Core.NWScript
         {
             NWNXPInvoke.StackPushObject(oObject);
             NWNXPInvoke.CallBuiltIn(272);
-            return NWNCore.NativeFunctions.StackPopStringUTF8();
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -2295,7 +2291,7 @@ namespace NWN.Xenomech.Core.NWScript
             NWNXPInvoke.StackPushInteger(nSinglePlayerCDKey ? 1 : 0);
             NWNXPInvoke.StackPushObject(oPlayer);
             NWNXPInvoke.CallBuiltIn(369);
-            return NWNCore.NativeFunctions.StackPopStringUTF8();
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -2305,7 +2301,7 @@ namespace NWN.Xenomech.Core.NWScript
         {
             NWNXPInvoke.StackPushObject(oPlayer);
             NWNXPInvoke.CallBuiltIn(370);
-            return NWNCore.NativeFunctions.StackPopStringUTF8();
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -2388,7 +2384,7 @@ namespace NWN.Xenomech.Core.NWScript
         {
             NWNXPInvoke.StackPushInteger(nInteger);
             NWNXPInvoke.CallBuiltIn(396);
-            return NWNCore.NativeFunctions.StackPopStringUTF8();
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -2582,7 +2578,7 @@ namespace NWN.Xenomech.Core.NWScript
         {
             NWNXPInvoke.StackPushObject(oObject);
             NWNXPInvoke.CallBuiltIn(538);
-            return NWNCore.NativeFunctions.StackPopStringUTF8();
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -3034,7 +3030,7 @@ namespace NWN.Xenomech.Core.NWScript
             NWNXPInvoke.StackPushString(sColumn);
             NWNXPInvoke.StackPushString(s2DA);
             NWNXPInvoke.CallBuiltIn(710);
-            return NWNCore.NativeFunctions.StackPopStringUTF8();
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -3219,7 +3215,7 @@ namespace NWN.Xenomech.Core.NWScript
             NWNXPInvoke.StackPushInteger((int)nHandler);
             NWNXPInvoke.StackPushObject(oObject);
             NWNXPInvoke.CallBuiltIn(885);
-            return NWNCore.NativeFunctions.StackPopStringUTF8();
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -3366,7 +3362,7 @@ namespace NWN.Xenomech.Core.NWScript
             NWNXPInvoke.StackPushObject(oObject);
             NWNXPInvoke.StackPushString(sScriptChunk);
             NWNXPInvoke.CallBuiltIn(894);
-            return NWNCore.NativeFunctions.StackPopStringUTF8();
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -3376,7 +3372,7 @@ namespace NWN.Xenomech.Core.NWScript
         public static string GetRandomUUID()
         {
             NWNXPInvoke.CallBuiltIn(895);
-            return NWNCore.NativeFunctions.StackPopStringUTF8();
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -3402,7 +3398,7 @@ namespace NWN.Xenomech.Core.NWScript
         {
             NWNXPInvoke.StackPushObject(oObject);
             NWNXPInvoke.CallBuiltIn(896);
-            return NWNCore.NativeFunctions.StackPopStringUTF8();
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>

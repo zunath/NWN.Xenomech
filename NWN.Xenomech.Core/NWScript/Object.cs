@@ -90,7 +90,7 @@ namespace NWN.Xenomech.Core.NWScript
         {
             NWNXPInvoke.StackPushObject(oTarget);
             NWNXPInvoke.CallBuiltIn(833);
-            return NWNCore.NativeFunctions.StackPopStringUTF8();
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -208,7 +208,7 @@ namespace NWN.Xenomech.Core.NWScript
         {
             NWNXPInvoke.StackPushObject(oObject);
             NWNXPInvoke.CallBuiltIn(819);
-            return NWNCore.NativeFunctions.StackPopStringUTF8();
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
@@ -460,7 +460,7 @@ namespace NWN.Xenomech.Core.NWScript
         {
             NWNXPInvoke.StackPushObject(oObject);
             NWNXPInvoke.CallBuiltIn(582);
-            return NWNCore.NativeFunctions.StackPopStringUTF8();
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>

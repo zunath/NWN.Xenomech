@@ -1,4 +1,5 @@
-﻿using NWN.Xenomech.Core.NWScript.Enum;
+﻿using NWN.Xenomech.Core.Interop;
+using NWN.Xenomech.Core.NWScript.Enum;
 using NWN.Xenomech.Core.NWScript.Enum.Item;
 
 namespace NWN.Xenomech.Core.Bioware

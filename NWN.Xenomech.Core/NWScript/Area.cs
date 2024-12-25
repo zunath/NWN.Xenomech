@@ -391,7 +391,7 @@ namespace NWN.Xenomech.Core.NWScript
         {
             NWNXPInvoke.StackPushObject(oArea);
             NWNXPInvoke.CallBuiltIn(814);
-            return NWNCore.NativeFunctions.StackPopStringUTF8();
+            return NWNXPInvoke.StackPopString();
         }
 
         /// <summary>
