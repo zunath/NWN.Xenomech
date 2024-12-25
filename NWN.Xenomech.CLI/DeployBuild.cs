@@ -64,7 +64,7 @@
                 }
                 target.Create();
 
-                CopyAll(binPath, target, string.Empty);
+                CopyAll(binPath, target, string.Empty, "NWN.Xenomech.Core.dll", "NWN.Xenomech.Core.pdb");
             }
         }
 
@@ -79,14 +79,17 @@
             File.Copy(modulePath, ModulesPath + "/Xenomech.mod", true);
         }
 
-        private static void CopyAll(DirectoryInfo source, DirectoryInfo target, string excludeFile)
+        private static void CopyAll(DirectoryInfo source, DirectoryInfo target, string preventOverwriteFile, params string[] excludeFiles)
         {
             Directory.CreateDirectory(target.FullName);
             foreach (var fi in source.GetFiles())
             {
+                if (excludeFiles.Contains(fi.Name))
+                    continue;
+
                 var targetPath = Path.Combine(target.FullName, fi.Name);
 
-                if (File.Exists(targetPath) && fi.Name == excludeFile)
+                if (File.Exists(targetPath) && fi.Name == preventOverwriteFile)
                     continue;
 
                 fi.CopyTo(targetPath, true);
@@ -95,7 +98,7 @@
             {
                 var nextTargetSubDir =
                     target.CreateSubdirectory(diSourceSubDir.Name);
-                CopyAll(diSourceSubDir, nextTargetSubDir, excludeFile);
+                CopyAll(diSourceSubDir, nextTargetSubDir, preventOverwriteFile, excludeFiles);
             }
         }
     }
