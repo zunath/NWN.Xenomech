@@ -7,13 +7,15 @@
         private const string HakPath = DebugServerPath + "hak";
         private const string ModulesPath = DebugServerPath + "modules";
         private const string TlkPath = DebugServerPath + "tlk";
+        private const string PluginPath = DebugServerPath + DotnetPath + "/plugins/";
 
         private readonly HakBuilder _hakBuilder = new();
 
         public void Process()
         {
             CreateDebugServerDirectory();
-            CopyBinaries();
+            CopyCoreBinaries();
+            CopyPluginBinaries();
             BuildHaks();
             BuildModule();
         }
@@ -25,6 +27,7 @@
             Directory.CreateDirectory(HakPath);
             Directory.CreateDirectory(ModulesPath);
             Directory.CreateDirectory(TlkPath);
+            Directory.CreateDirectory(PluginPath);
 
             var source = new DirectoryInfo("../NWN.Xenomech.Core/Docker");
             var target = new DirectoryInfo(DebugServerPath);
@@ -32,7 +35,7 @@
             CopyAll(source, target, "xenomech.env");
         }
 
-        private void CopyBinaries()
+        private void CopyCoreBinaries()
         {
             var binPath = "../NWN.Xenomech.Core/bin/Debug/net8.0/";
 
@@ -40,6 +43,29 @@
             var target = new DirectoryInfo(DotnetPath);
 
             CopyAll(source, target, string.Empty);
+        }
+
+        private void CopyPluginBinaries()
+        {
+            var rootPath = "../";
+
+            var pluginPaths = Directory.GetDirectories(rootPath, $"*.Plugin.*");
+            foreach (var path in pluginPaths)
+            {
+                var splitName = path.Split(".");
+                var folderName = splitName[^1];
+
+                var binPath = new DirectoryInfo($"{path}/bin/Debug/net8.0/");
+                var target = new DirectoryInfo(PluginPath + folderName);
+
+                if (target.Exists)
+                {
+                    target.Delete(true);
+                }
+                target.Create();
+
+                CopyAll(binPath, target, string.Empty);
+            }
         }
 
         private void BuildHaks()
