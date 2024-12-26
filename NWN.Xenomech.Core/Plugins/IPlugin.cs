@@ -1,8 +1,9 @@
 ﻿namespace NWN.Xenomech.Core.Plugins
 {
-    public interface IPlugin
+    public interface IPlugin: IDisposable
     {
-        void OnLoad();
-        void OnUnload();
+        string Name { get; }
+        void Load();
+        void Unload();
     }
 }

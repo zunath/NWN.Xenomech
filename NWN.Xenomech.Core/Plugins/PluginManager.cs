@@ -2,15 +2,17 @@
 using System.Reflection;
 using Microsoft.Extensions.Primitives;
 using System.Runtime.Loader;
+using System.Runtime.CompilerServices;
 
 namespace NWN.Xenomech.Core.Plugins
 {
     internal class PluginManager : IDisposable
     {
         private readonly List<AssemblyLoadContext> _pluginContexts = new();
-        private readonly List<IPlugin> _loadedPlugins = new();
+        private readonly Dictionary<IPlugin, WeakReference<IPlugin>> _loadedPlugins = new();  // Correctly define this list to store actual plugin objects
         private readonly List<IChangeToken> _changeTokens = new(); // List to hold change tokens
         private readonly List<PhysicalFileProvider> _fileProviders = new(); // List to hold PhysicalFileProvider instances
+        private readonly Dictionary<string, PhysicalFileProvider> _fileProviderMap = new(); // Map to track directory -> provider mapping
 
         private const string DotNetRoot = "/nwn/home/dotnet/";
         private const string PluginRoot = "/nwn/home/dotnet/plugins";
@@ -22,7 +24,6 @@ namespace NWN.Xenomech.Core.Plugins
             SetupPluginDirectoryWatchers();
         }
 
-        // Set up PhysicalFileProvider for each plugin folder
         private void SetupPluginDirectoryWatchers()
         {
             var pluginDirectories = Directory.GetDirectories(PluginRoot);
@@ -49,7 +50,6 @@ namespace NWN.Xenomech.Core.Plugins
             }
         }
 
-        // This is triggered when a plugin DLL is changed or created in any subdirectory
         private void OnPluginChanged(object state)
         {
             var pluginDirectory = state as string;
@@ -63,21 +63,36 @@ namespace NWN.Xenomech.Core.Plugins
             }
         }
 
-        // Re-register the plugin watcher after a change to continue watching for further changes
+
         private void ReRegisterPluginWatcher(string pluginDirectory)
         {
+            // Dispose of the old file provider if it exists
+            if (_fileProviderMap.ContainsKey(pluginDirectory))
+            {
+                var oldFileProvider = _fileProviderMap[pluginDirectory];
+                oldFileProvider.Dispose(); // Dispose the old provider to free resources
+                _fileProviderMap.Remove(pluginDirectory); // Remove from the map
+                Console.WriteLine($"Disposed old file provider for {pluginDirectory}");
+            }
+
+            // Create a new file provider
             var fileProvider = new PhysicalFileProvider(pluginDirectory)
             {
                 UsePollingFileWatcher = true, // Re-enable polling for further changes
                 UseActivePolling = true
             };
 
+            // Watch for changes in all files (DLLs) in the plugin folder
             var changeToken = fileProvider.Watch("*.dll");
+
+            // Register the callback to be triggered on changes
             changeToken.RegisterChangeCallback(OnPluginChanged, pluginDirectory);
 
-            _fileProviders.Add(fileProvider); // Track the new PhysicalFileProvider
+            // Add the new provider to the map
+            _fileProviderMap[pluginDirectory] = fileProvider; // Track the new PhysicalFileProvider
             Console.WriteLine($"Re-registered watch for plugin directory: {pluginDirectory}");
         }
+
 
         public void LoadPlugins()
         {
@@ -90,7 +105,7 @@ namespace NWN.Xenomech.Core.Plugins
                     // Load the core assembly into the default AppDomain
                     try
                     {
-                        var coreAssembly = Assembly.LoadFrom(coreAssemblyPath); // Load from default context
+                        var coreAssembly = Assembly.LoadFrom(coreAssemblyPath);
                         Console.WriteLine($"Loaded {CoreLibrary} from {coreAssemblyPath}");
                     }
                     catch (Exception ex)
@@ -161,11 +176,18 @@ namespace NWN.Xenomech.Core.Plugins
                         if (pluginType != null)
                         {
                             var plugin = (IPlugin)Activator.CreateInstance(pluginType);
-                            plugin.OnLoad();
-                            _loadedPlugins.Add(plugin);
+                            plugin.Load();
+                            _loadedPlugins.Add(plugin, CreateWeakReference(plugin));
                             _pluginContexts.Add(context);
 
                             Console.WriteLine($"Loaded plugin: {pluginPath}");
+
+                            
+
+                            foreach (var referenced in assembly.GetReferencedAssemblies())
+                            {
+                                Console.WriteLine($"Referenced assembly: {referenced}");
+                            }
                         }
                     }
                     catch (ReflectionTypeLoadException ex)
@@ -180,7 +202,13 @@ namespace NWN.Xenomech.Core.Plugins
             }
         }
 
-        // Method to check if an assembly is already loaded
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static WeakReference<IPlugin> CreateWeakReference(IPlugin plugin)
+        {
+            var reference = new WeakReference<IPlugin>(plugin, true);
+            return reference;
+        }
+
         private bool IsAssemblyLoaded(string assemblyName)
         {
             return
@@ -192,40 +220,38 @@ namespace NWN.Xenomech.Core.Plugins
 
         public void ReloadPlugins()
         {
-            // Unload current plugins
             UnloadPlugins();
-
-            // Trigger garbage collection to ensure the old context is unloaded
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-
-            // Reload plugins
             LoadPlugins();
         }
 
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public void UnloadPlugins()
         {
-            foreach (var plugin in _loadedPlugins)
+            foreach (var (plugin, reference) in _loadedPlugins)
             {
-                plugin.OnUnload();
+                plugin.Unload();
             }
+            _loadedPlugins.Clear();
 
+            Console.WriteLine($"GC Memory BEFORE: {GC.GetTotalMemory(true)}");
+
+            // Unload the assembly load contexts and clear the references
             foreach (var context in _pluginContexts)
             {
-                context.Unload();
+                context.Unload(); // Unload each context
             }
-
             _pluginContexts.Clear();
-            _loadedPlugins.Clear();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
+            Console.WriteLine($"GC Memory AFTER: {GC.GetTotalMemory(true)}");
         }
 
-        // Clean up file watchers when done
         public void Dispose()
         {
-            // Dispose of each PhysicalFileProvider to release the file watchers
             foreach (var fileProvider in _fileProviders)
             {
-                fileProvider.Dispose(); // Dispose of the PhysicalFileProvider (which cleans up the file watchers)
+                fileProvider.Dispose();
             }
 
             _fileProviders.Clear();

@@ -2,13 +2,6 @@
 
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
-		<PostBuildEvent>
-			<!-- Delete all files in the target directory before copying -->
-			del /Q /F "$(SolutionDir)debugserver\dotnet\plugins\Test\*.*"
-
-			<!-- Copy binaries to the target directory after build -->
-			xcopy "$(OutDir)*.*" "$(SolutionDir)debugserver\dotnet\plugins\Test\" /E /Y
-		</PostBuildEvent>
 	</PropertyGroup>
 
 	<ItemGroup>
