@@ -3,18 +3,15 @@
     internal class DeployBuild
     {
         private const string DebugServerPath = "../debugserver/";
-        private const string DotnetPath = DebugServerPath + "dotnet";
         private const string HakPath = DebugServerPath + "hak";
         private const string ModulesPath = DebugServerPath + "modules";
         private const string TlkPath = DebugServerPath + "tlk";
-        private const string PluginPath = DebugServerPath + DotnetPath + "/plugins/";
 
         private readonly HakBuilder _hakBuilder = new();
 
         public void Process()
         {
             CreateDebugServerDirectory();
-            CopyCoreBinaries();
             BuildHaks();
             BuildModule();
         }
@@ -22,25 +19,14 @@
         private void CreateDebugServerDirectory()
         {
             Directory.CreateDirectory(DebugServerPath);
-            Directory.CreateDirectory(DotnetPath);
             Directory.CreateDirectory(HakPath);
             Directory.CreateDirectory(ModulesPath);
             Directory.CreateDirectory(TlkPath);
 
-            var source = new DirectoryInfo("../NWN.Xenomech.Core/Docker");
+            var source = new DirectoryInfo("../NWN.Xenomech.Runner/Docker");
             var target = new DirectoryInfo(DebugServerPath);
 
-            CopyAll(source, target, "xenomech.env");
-        }
-
-        private void CopyCoreBinaries()
-        {
-            var binPath = "../NWN.Xenomech.Core/bin/Debug/net8.0/";
-
-            var source = new DirectoryInfo(binPath);
-            var target = new DirectoryInfo(DotnetPath);
-
-            CopyAll(source, target, string.Empty);
+            CopyAll(source, target, "nwserver.env");
         }
 
         private void BuildHaks()

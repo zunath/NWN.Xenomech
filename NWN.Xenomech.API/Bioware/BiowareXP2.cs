@@ -1,8 +1,8 @@
-﻿using NWN.Xenomech.Core.API.Enum;
-using NWN.Xenomech.Core.API.Enum.Item;
-using NWN.Xenomech.Core.Interop;
+﻿using Anvil.API;
+using NWN.Xenomech.API.Enum;
+using ItemPropertyType = NWN.Xenomech.API.Enum.Item.ItemPropertyType;
 
-namespace NWN.Xenomech.Core.Bioware
+namespace NWN.Xenomech.API.Bioware
 {
     public enum AddItemPropertyPolicy
     {

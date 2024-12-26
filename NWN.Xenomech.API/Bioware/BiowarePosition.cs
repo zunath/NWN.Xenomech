@@ -1,7 +1,7 @@
-﻿using NWN.Xenomech.Core.Interop;
-using System.Numerics;
+﻿using System.Numerics;
+using Anvil.API;
 
-namespace NWN.Xenomech.Core.Bioware
+namespace NWN.Xenomech.API.Bioware
 {
     public static class BiowarePosition
     {

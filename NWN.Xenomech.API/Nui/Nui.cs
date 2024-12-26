@@ -1,6 +1,12 @@
-﻿using NWN.Xenomech.Core.Interop;
+﻿using Anvil.API;
+using NWN.Xenomech.Core.Beamdog;
+using NuiChartType = NWN.Xenomech.Core.Beamdog.NuiChartType;
+using NuiDirection = NWN.Xenomech.Core.Beamdog.NuiDirection;
+using NuiDrawListItemType = NWN.Xenomech.Core.Beamdog.NuiDrawListItemType;
+using NuiScrollbars = NWN.Xenomech.Core.Beamdog.NuiScrollbars;
+using NuiStyle = NWN.Xenomech.Core.Beamdog.NuiStyle;
 
-namespace NWN.Xenomech.Core.Beamdog
+namespace NWN.Xenomech.API.Nui
 {
     public static class Nui
     {

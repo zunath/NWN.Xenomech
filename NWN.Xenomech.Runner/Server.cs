@@ -5,13 +5,12 @@ using Ductus.FluentDocker.Extensions;
 using System.Runtime.InteropServices;
 using EnvDTE;
 using Microsoft.VisualStudio.OLE.Interop;
-using NWN.Xenomech.Core.Extensions;
 
 namespace NWN.Xenomech.Runner
 {
     internal class Server
     {
-        private const string ServerContainerName = "debugserver-nwn-server-1";
+        private const string ServerContainerName = "anvil";
         private ICompositeService _service = null!;
         private readonly IHostService _docker;
         private readonly Dictionary<string, ContainerLogger> _containerLineCounts = new();

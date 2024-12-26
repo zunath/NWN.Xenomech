@@ -27,4 +27,8 @@
     </None>
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="cd $(SolutionDir)Tools\&#xD;&#xA;NWN.Xenomech.CLI.exe -o" />
+  </Target>
+
 </Project>

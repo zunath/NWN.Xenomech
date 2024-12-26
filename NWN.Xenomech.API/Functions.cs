@@ -34,7 +34,7 @@ namespace NWN.Xenomech.API
 {
     public partial class NWScript
     {
-        public static uint OBJECT_SELF => Core.NWScript.OBJECT_SELF;
+        public static uint OBJECT_SELF => NWN.Core.NWScript.OBJECT_SELF;
 
         /// <summary>
         ///   Assign aActionToAssign to oActionSubject.
@@ -44,7 +44,7 @@ namespace NWN.Xenomech.API
         /// </summary>
         public static void AssignCommand(uint oActionSubject, Action aActionToAssign)
         {
-            Core.NWScript.AssignCommand(oActionSubject, aActionToAssign);
+            NWN.Core.NWScript.AssignCommand(oActionSubject, aActionToAssign);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace NWN.Xenomech.API
         /// </summary>
         public static void DelayCommand(float fSeconds, Action aActionToDelay)
         {
-            Core.NWScript.DelayCommand(fSeconds, aActionToDelay);
+            NWN.Core.NWScript.DelayCommand(fSeconds, aActionToDelay);
         }
 
 
@@ -68,7 +68,7 @@ namespace NWN.Xenomech.API
         /// </summary>
         public static void ActionDoCommand(Action aActionToDo)
         {
-            Core.NWScript.ActionDoCommand(aActionToDo);
+            NWN.Core.NWScript.ActionDoCommand(aActionToDo);
         }
 
         /// <summary>

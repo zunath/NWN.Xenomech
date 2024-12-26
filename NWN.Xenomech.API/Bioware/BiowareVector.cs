@@ -1,8 +1,8 @@
-﻿using NWN.Xenomech.Core.Interop;
-using System.Numerics;
+﻿using System.Numerics;
+using Anvil.API;
 using static System.Math;
 
-namespace NWN.Xenomech.Core.Bioware
+namespace NWN.Xenomech.API.Bioware
 {
     public static class BiowareVector
     {
