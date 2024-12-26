@@ -2,29 +2,29 @@
 {
     internal class DeployBuild
     {
-        private const string DebugServerPath = "../debugserver/";
-        private const string HakPath = DebugServerPath + "hak";
-        private const string ModulesPath = DebugServerPath + "modules";
-        private const string TlkPath = DebugServerPath + "tlk";
+        private const string ServerPath = "../server/";
+        private const string HakPath = ServerPath + "hak";
+        private const string ModulesPath = ServerPath + "modules";
+        private const string TlkPath = ServerPath + "tlk";
 
         private readonly HakBuilder _hakBuilder = new();
 
         public void Process()
         {
-            CreateDebugServerDirectory();
+            CreateServerDirectory();
             BuildHaks();
             BuildModule();
         }
 
-        private void CreateDebugServerDirectory()
+        private void CreateServerDirectory()
         {
-            Directory.CreateDirectory(DebugServerPath);
+            Directory.CreateDirectory(ServerPath);
             Directory.CreateDirectory(HakPath);
             Directory.CreateDirectory(ModulesPath);
             Directory.CreateDirectory(TlkPath);
 
             var source = new DirectoryInfo("../NWN.Xenomech.Runner/Docker");
-            var target = new DirectoryInfo(DebugServerPath);
+            var target = new DirectoryInfo(ServerPath);
 
             CopyAll(source, target, "nwserver.env");
         }

@@ -27,8 +27,8 @@ namespace NWN.Xenomech.Runner
             Console.WriteLine($"Starting server");
             RegisterEvents();
 
-            var debugServerPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\"));
-            var dockerComposePath = debugServerPath + "debugserver/docker-compose.yml";
+            var serverPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\"));
+            var dockerComposePath = serverPath + "server/docker-compose.yml";
 
             using (_service = new Builder()
                        .UseContainer()

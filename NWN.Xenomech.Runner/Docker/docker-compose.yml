@@ -1,10 +1,10 @@
-version: "3.7"
+version: "3"
 services:
     redis:
         hostname: redis
         image: redislabs/redismod:latest
         volumes:
-          - ${PWD-.}/redis:/data
+          - ./redis:/data
         restart: unless-stopped
                 
     redis-commander:
@@ -12,19 +12,17 @@ services:
         hostname: redis-commander
         image: rediscommander/redis-commander:latest
         restart: unless-stopped
-        links:
-            - "redis:redis"
         environment:
             - REDIS_HOSTS=local:redis:6379
         ports:
             - "8081:8081"
+        depends_on:
+            - redis
 
     anvil:
-        hostname: nwnx-server
+        hostname: anvil
         stop_signal: SIGINT
         image: nwndotnet/anvil:8193.36.1
-        links:
-            - "redis:redis"
         container_name: anvil
         restart: unless-stopped
         stdin_open: true
@@ -36,7 +34,9 @@ services:
             - '5121:5121/udp'
         env_file:
             - ./nwserver.env
-            
+        depends_on:
+            - redis
+                
     influxdb:
         hostname: influxdb
         image: influxdb:1.8
@@ -53,8 +53,8 @@ services:
         volumes:
             - ./influxdb:/var/lib/influxdb
         ports:
-            - "8086"
-            - "8089"
+            - "8086:8086"
+            - "8089:8089"
             
     grafana:
         hostname: grafana

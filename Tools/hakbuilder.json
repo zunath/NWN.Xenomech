@@ -1,6 +1,6 @@
 {
   "TlkPath": "../Content/tlk/xenomech.tlk",
-  "OutputPath": "../debugserver/",
+  "OutputPath": "../server/",
   "HakList": [
     {
       "Name":  "xm_2da",

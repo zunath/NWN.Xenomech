@@ -82,7 +82,7 @@
   },
   "Mod_ID": {
     "type": "void",
-    "value": "kêO\"[ÍÆÍbaæÚZä≤c"
+    "value": "€àO\"S—ÆÍbbQÒ©V˜Ò"
   },
   "Mod_IsSaveGame": {
     "type": "byte",
@@ -90,7 +90,7 @@
   },
   "Mod_MinGameVer": {
     "type": "cexostring",
-    "value": "1.87"
+    "value": "1.88"
   },
   "Mod_MinPerHour": {
     "type": "byte",
@@ -217,6 +217,10 @@
   "Mod_Tag": {
     "type": "cexostring",
     "value": "MODULE"
+  },
+  "Mod_UUID": {
+    "type": "cexostring",
+    "value": ""
   },
   "Mod_Version": {
     "type": "dword",
