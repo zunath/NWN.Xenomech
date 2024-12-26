@@ -1,1 +1,0 @@
-﻿global using static NWN.Xenomech.Core.API.NWScript;
