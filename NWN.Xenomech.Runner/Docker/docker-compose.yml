@@ -22,14 +22,15 @@ services:
     anvil:
         hostname: anvil
         stop_signal: SIGINT
-        image: nwndotnet/anvil:8193.36.1
+        image: zunath/anvil-debugger:8193.36.1
         container_name: anvil
         restart: unless-stopped
         stdin_open: true
         tty: true
         volumes:
-            - ./server:/nwn/home
-            - ./logs:/nwn/run/logs.0
+            - ${PWD-.}/logs:/nwn/run/logs.0
+            - ${PWD-.}/:/nwn/home
+            - ${PWD-.}/logs:/nwn/data/bin/linux-x86/logs.0
         ports:
             - '5121:5121/udp'
         env_file:

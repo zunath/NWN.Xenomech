@@ -15,12 +15,10 @@ namespace NWN.Xenomech.Plugin.APITest
         {
             var player = GetLastUsedBy();
             var item = GetFirstItemInInventory(player);
-
+            
             SendMessageToPC(GetLastUsedBy(), $"Item = {GetName(item)}");
 
             AssignCommand(player, () => ActionPlayAnimation(Animation.LoopingSitCross, 1f, 9999f));
-
-            _logger.Debug("testing");
             
         }
     }
