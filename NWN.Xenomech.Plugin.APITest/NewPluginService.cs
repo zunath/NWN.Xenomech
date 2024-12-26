@@ -1,6 +1,8 @@
+using System;
 using Anvil.Services;
 using NLog;
-using NWN.Xenomech.API.Enum;
+using NWN.Xenomech.Core;
+using NWN.Xenomech.Core.Entity;
 
 namespace NWN.Xenomech.Plugin.APITest
 {
@@ -9,17 +11,26 @@ namespace NWN.Xenomech.Plugin.APITest
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
+        public NewPluginService()
+        {
+        }
+
 
         [ScriptHandler("bread_test")]
         public void TestMethod()
         {
             var player = GetLastUsedBy();
-            var item = GetFirstItemInInventory(player);
-            
-            SendMessageToPC(GetLastUsedBy(), $"Item = {GetName(item)}");
+            var playerId = GetObjectUUID(player);
 
-            AssignCommand(player, () => ActionPlayAnimation(Animation.LoopingSitCross, 1f, 9999f));
-            
+            SendMessageToPC(player, $"playerId = {playerId}");
+
+            var entity = new TestEntity()
+            {
+                Name = GetName(player) + " new name 2"
+            };
+
+            DB.Instance.Set(entity);
         }
+
     }
 }
