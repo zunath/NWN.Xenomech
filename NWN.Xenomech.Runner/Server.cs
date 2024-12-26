@@ -114,7 +114,7 @@ namespace NWN.Xenomech.Runner
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Failed to start Visual Studio debugger. Exception: {ex.ToMessageAndCompleteStacktrace()}");
+                Console.WriteLine($"Failed to start Visual Studio debugger. Exception: {ex}");
             }
 
 

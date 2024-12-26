@@ -28,6 +28,10 @@
 		<PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Beamdog\" />
+	</ItemGroup>
+
 	<Target Name="NWN" AfterTargets="Build">
 		<ItemGroup>
 			<AllOutputs Include="$(OutputPath)$(MSBuildProjectName).dll" />

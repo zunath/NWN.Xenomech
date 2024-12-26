@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWN.Xenomech.Core", "NWN.Xenomech.Core\NWN.Xenomech.Core.csproj", "{63E47894-0844-449C-8508-16C040A41D3B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWN.Xenomech.Runner", "NWN.Xenomech.Runner\NWN.Xenomech.Runner.csproj", "{6235C3D6-967E-4DD1-97D5-D59643B6E8CA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWN.Xenomech.CLI", "NWN.Xenomech.CLI\NWN.Xenomech.CLI.csproj", "{1CC0F210-5F61-4763-AECA-C5D769A1DD13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWN.Xenomech.Plugin.Test", "NWN.Xenomech.Plugin.Test\NWN.Xenomech.Plugin.Test.csproj", "{E68443F4-704B-424C-912D-8DC908BECD17}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWN.Xenomech.API", "NWN.Xenomech.API\NWN.Xenomech.API.csproj", "{DA720873-0E02-4FFE-B0A8-E795F27BA2B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWN.Xenomech.Plugin.APITest", "NWN.Xenomech.Plugin.APITest\NWN.Xenomech.Plugin.APITest.csproj", "{AA82296C-E5BD-4288-99E6-DA94E4CEC900}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{63E47894-0844-449C-8508-16C040A41D3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{63E47894-0844-449C-8508-16C040A41D3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{63E47894-0844-449C-8508-16C040A41D3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{63E47894-0844-449C-8508-16C040A41D3B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6235C3D6-967E-4DD1-97D5-D59643B6E8CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6235C3D6-967E-4DD1-97D5-D59643B6E8CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6235C3D6-967E-4DD1-97D5-D59643B6E8CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -29,10 +25,14 @@ Global
 		{1CC0F210-5F61-4763-AECA-C5D769A1DD13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CC0F210-5F61-4763-AECA-C5D769A1DD13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CC0F210-5F61-4763-AECA-C5D769A1DD13}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E68443F4-704B-424C-912D-8DC908BECD17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E68443F4-704B-424C-912D-8DC908BECD17}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E68443F4-704B-424C-912D-8DC908BECD17}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E68443F4-704B-424C-912D-8DC908BECD17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA720873-0E02-4FFE-B0A8-E795F27BA2B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA720873-0E02-4FFE-B0A8-E795F27BA2B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA720873-0E02-4FFE-B0A8-E795F27BA2B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA720873-0E02-4FFE-B0A8-E795F27BA2B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA82296C-E5BD-4288-99E6-DA94E4CEC900}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA82296C-E5BD-4288-99E6-DA94E4CEC900}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA82296C-E5BD-4288-99E6-DA94E4CEC900}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA82296C-E5BD-4288-99E6-DA94E4CEC900}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

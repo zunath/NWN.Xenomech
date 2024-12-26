@@ -270,3 +270,5 @@ debugserver
 Module/temp0
 Module/Xenomech.BackupMod
 Module/Xenomech.mod
+Docker/logs
+Docker/server
