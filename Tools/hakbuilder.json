@@ -8,6 +8,16 @@
       "CompileModels": false
     },
     {
+      "Name":  "xm_categories",
+      "Path": "../Content/xm_categories/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_gui",
+      "Path": "../Content/xm_gui/",
+      "CompileModels": false
+    },
+    {
       "Name":  "xm_mechs",
       "Path": "../Content/xm_mechs/",
       "CompileModels": false

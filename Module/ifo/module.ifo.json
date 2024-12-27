@@ -38,7 +38,9 @@
   },
   "Mod_Description": {
     "type": "cexolocstring",
-    "value": {}
+    "value": {
+      "0": ""
+    }
   },
   "Mod_DuskHour": {
     "type": "byte",
@@ -90,6 +92,20 @@
         "__struct_id": 8,
         "Mod_Hak": {
           "type": "cexostring",
+          "value": "xm_categories"
+        }
+      },
+      {
+        "__struct_id": 8,
+        "Mod_Hak": {
+          "type": "cexostring",
+          "value": "xm_gui"
+        }
+      },
+      {
+        "__struct_id": 8,
+        "Mod_Hak": {
+          "type": "cexostring",
           "value": "xm_mechs"
         }
       }
@@ -119,15 +135,15 @@
   },
   "Mod_OnAcquirItem": {
     "type": "resref",
-    "value": "x2_mod_def_aqu"
+    "value": ""
   },
   "Mod_OnActvtItem": {
     "type": "resref",
-    "value": "x2_mod_def_act"
+    "value": ""
   },
   "Mod_OnClientEntr": {
     "type": "resref",
-    "value": "x3_mod_def_enter"
+    "value": ""
   },
   "Mod_OnClientLeav": {
     "type": "resref",
@@ -143,7 +159,7 @@
   },
   "Mod_OnModLoad": {
     "type": "resref",
-    "value": "mod_load"
+    "value": ""
   },
   "Mod_OnModStart": {
     "type": "resref",
@@ -159,15 +175,15 @@
   },
   "Mod_OnPlrDeath": {
     "type": "resref",
-    "value": "nw_o0_death"
+    "value": ""
   },
   "Mod_OnPlrDying": {
     "type": "resref",
-    "value": "nw_o0_dying"
+    "value": ""
   },
   "Mod_OnPlrEqItm": {
     "type": "resref",
-    "value": "x2_mod_def_equ"
+    "value": ""
   },
   "Mod_OnPlrGuiEvt": {
     "type": "resref",
@@ -179,7 +195,7 @@
   },
   "Mod_OnPlrRest": {
     "type": "resref",
-    "value": "x2_mod_def_rest"
+    "value": ""
   },
   "Mod_OnPlrTarget": {
     "type": "resref",
@@ -191,15 +207,15 @@
   },
   "Mod_OnPlrUnEqItm": {
     "type": "resref",
-    "value": "x2_mod_def_unequ"
+    "value": ""
   },
   "Mod_OnSpawnBtnDn": {
     "type": "resref",
-    "value": "nw_o0_respawn"
+    "value": ""
   },
   "Mod_OnUnAqreItem": {
     "type": "resref",
-    "value": "x2_mod_def_unaqu"
+    "value": ""
   },
   "Mod_OnUsrDefined": {
     "type": "resref",
@@ -231,7 +247,7 @@
   },
   "Mod_Tag": {
     "type": "cexostring",
-    "value": "MODULE"
+    "value": "Xenomech"
   },
   "Mod_UUID": {
     "type": "cexostring",
@@ -243,6 +259,6 @@
   },
   "Mod_XPScale": {
     "type": "byte",
-    "value": 10
+    "value": 0
   }
 }
