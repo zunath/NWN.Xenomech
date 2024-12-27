@@ -7,5 +7,10 @@
       "Path": "../Content/xm_2da/",
       "CompileModels": false
     },
+    {
+      "Name":  "xm_mechs",
+      "Path": "../Content/xm_mechs/",
+      "CompileModels": false
+    },
   ]
 }
