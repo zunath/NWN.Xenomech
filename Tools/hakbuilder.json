@@ -1,10 +1,15 @@
 {
   "TlkPath": "../Content/tlk/xenomech.tlk",
-  "OutputPath": "../debugserver/",
+  "OutputPath": "../server/",
   "HakList": [
     {
       "Name":  "xm_2da",
       "Path": "../Content/xm_2da/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_mechs",
+      "Path": "../Content/xm_mechs/",
       "CompileModels": false
     },
   ]

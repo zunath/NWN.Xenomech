@@ -22,7 +22,7 @@
   },
   "Mod_CustomTlk": {
     "type": "cexostring",
-    "value": ""
+    "value": "xenomech"
   },
   "Mod_CutSceneList": {
     "type": "list",
@@ -78,11 +78,26 @@
   },
   "Mod_HakList": {
     "type": "list",
-    "value": []
+    "value": [
+      {
+        "__struct_id": 8,
+        "Mod_Hak": {
+          "type": "cexostring",
+          "value": "xm_2da"
+        }
+      },
+      {
+        "__struct_id": 8,
+        "Mod_Hak": {
+          "type": "cexostring",
+          "value": "xm_mechs"
+        }
+      }
+    ]
   },
   "Mod_ID": {
     "type": "void",
-    "value": "kêO\"[ÍÆÍbaæÚZä≤c"
+    "value": "ˇˇˇˇ\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
   },
   "Mod_IsSaveGame": {
     "type": "byte",
@@ -90,7 +105,7 @@
   },
   "Mod_MinGameVer": {
     "type": "cexostring",
-    "value": "1.87"
+    "value": "1.88"
   },
   "Mod_MinPerHour": {
     "type": "byte",
@@ -128,7 +143,7 @@
   },
   "Mod_OnModLoad": {
     "type": "resref",
-    "value": "x2_mod_def_load"
+    "value": "mod_load"
   },
   "Mod_OnModStart": {
     "type": "resref",
@@ -217,6 +232,10 @@
   "Mod_Tag": {
     "type": "cexostring",
     "value": "MODULE"
+  },
+  "Mod_UUID": {
+    "type": "cexostring",
+    "value": ""
   },
   "Mod_Version": {
     "type": "dword",

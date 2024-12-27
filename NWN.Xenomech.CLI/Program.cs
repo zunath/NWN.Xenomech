@@ -54,14 +54,12 @@ namespace NWN.Xenomech.CLI
 
                 if (modulePackerOption.HasValue())
                 {
-                    var paths = modulePackerOption.Value().Split(",");
-                    _modulePacker.PackModule(paths[0], paths[1]);
+                    _modulePacker.PackModule(modulePackerOption.Value());
                 }
 
                 if (moduleUnpackOption.HasValue())
                 {
-                    var paths = moduleUnpackOption.Value().Split(",");
-                    _modulePacker.UnpackModule(paths[0], paths[1]);
+                    _modulePacker.UnpackModule(moduleUnpackOption.Value());
                 }
 
                 if (adHocToolOption.HasValue())

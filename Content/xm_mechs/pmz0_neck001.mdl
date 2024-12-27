@@ -1,0 +1,68 @@
+# Exported from NWMax Plus v6.11.28 at 6/29/2021 10:20:55 PM
+# mdl file
+#
+#NWMax Plus MODEL  ASCII
+# model: pmz0_neck001
+filedependancy Unknown
+newmodel pmz0_neck001
+setsupermodel pmz0_neck001 NULL
+classification Character
+setanimationscale 1.0
+#NWMax Plus GEOM  ASCII
+beginmodelgeom pmz0_neck001
+node dummy pmz0_neck001
+  parent NULL
+endnode
+node trimesh neck
+  parent pmz0_neck001
+  position -5.15737e-007 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.8 0.8 0.8 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfIllumColor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 0
+  center 0.0 -0.944 11.9624 
+  bitmap pmz0_neck001
+  verts 8
+    0.149474 0.0712572 -0.383847
+    -0.149475 0.0712572 -0.383847
+    0.107243 0.18856 0.575629
+    -0.107242 0.18856 0.575629
+    0.107244 -0.0901336 0.623094
+    -0.107241 -0.0901336 0.623094
+    0.149475 -0.20744 -0.336383
+    -0.149474 -0.20744 -0.336383
+  faces 8
+    0 1 3  1  0 1 2  1
+    3 2 0  1  2 3 0  1
+    4 5 7  1  4 5 6  1
+    7 6 4  1  6 7 4  1
+    1 7 5  1  1 6 5  1
+    5 3 1  1  5 2 1  1
+    6 0 2  1  7 8 9  1
+    2 4 6  1  9 4 7  1
+  tverts 10
+    0.151724 0.925464 0
+    0.168662 0.699379 0
+    0.730487 0.768511 0
+    0.718371 0.930639 0
+    0.793342 0.396464 0
+    0.760339 0.556101 0
+    0.198514 0.486861 0
+    0.244488 0.264369 0
+    0.301475 0.0568488 0
+    0.850329 0.188889 0
+endnode
+endmodelgeom pmz0_neck001
+donemodel pmz0_neck001

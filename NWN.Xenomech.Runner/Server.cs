@@ -5,13 +5,12 @@ using Ductus.FluentDocker.Extensions;
 using System.Runtime.InteropServices;
 using EnvDTE;
 using Microsoft.VisualStudio.OLE.Interop;
-using NWN.Xenomech.Core.Extensions;
 
 namespace NWN.Xenomech.Runner
 {
     internal class Server
     {
-        private const string ServerContainerName = "debugserver-nwn-server-1";
+        private const string ServerContainerName = "anvil";
         private ICompositeService _service = null!;
         private readonly IHostService _docker;
         private readonly Dictionary<string, ContainerLogger> _containerLineCounts = new();
@@ -28,8 +27,8 @@ namespace NWN.Xenomech.Runner
             Console.WriteLine($"Starting server");
             RegisterEvents();
 
-            var debugServerPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\"));
-            var dockerComposePath = debugServerPath + "debugserver/docker-compose.yml";
+            var serverPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\"));
+            var dockerComposePath = serverPath + "server/docker-compose.yml";
 
             using (_service = new Builder()
                        .UseContainer()
@@ -114,7 +113,7 @@ namespace NWN.Xenomech.Runner
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Failed to start Visual Studio debugger. Exception: {ex.ToMessageAndCompleteStacktrace()}");
+                Console.WriteLine($"Failed to start Visual Studio debugger. Exception: {ex}");
             }
 
 

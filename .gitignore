@@ -266,7 +266,9 @@ __pycache__/
 .vscode/settings.json
 
 # Xenomech
-debugserver
+server
 Module/temp0
 Module/Xenomech.BackupMod
 Module/Xenomech.mod
+Docker/logs
+Docker/server

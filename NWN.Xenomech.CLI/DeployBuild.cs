@@ -2,45 +2,31 @@
 {
     internal class DeployBuild
     {
-        private const string DebugServerPath = "../debugserver/";
-        private const string DotnetPath = DebugServerPath + "dotnet";
-        private const string HakPath = DebugServerPath + "hak";
-        private const string ModulesPath = DebugServerPath + "modules";
-        private const string TlkPath = DebugServerPath + "tlk";
-        private const string PluginPath = DebugServerPath + DotnetPath + "/plugins/";
+        private const string ServerPath = "../server/";
+        private const string HakPath = ServerPath + "hak";
+        private const string ModulesPath = ServerPath + "modules";
+        private const string TlkPath = ServerPath + "tlk";
 
         private readonly HakBuilder _hakBuilder = new();
 
         public void Process()
         {
-            CreateDebugServerDirectory();
-            CopyCoreBinaries();
+            CreateServerDirectory();
             BuildHaks();
             BuildModule();
         }
 
-        private void CreateDebugServerDirectory()
+        private void CreateServerDirectory()
         {
-            Directory.CreateDirectory(DebugServerPath);
-            Directory.CreateDirectory(DotnetPath);
+            Directory.CreateDirectory(ServerPath);
             Directory.CreateDirectory(HakPath);
             Directory.CreateDirectory(ModulesPath);
             Directory.CreateDirectory(TlkPath);
 
-            var source = new DirectoryInfo("../NWN.Xenomech.Core/Docker");
-            var target = new DirectoryInfo(DebugServerPath);
+            var source = new DirectoryInfo("../NWN.Xenomech.Runner/Docker");
+            var target = new DirectoryInfo(ServerPath);
 
-            CopyAll(source, target, "xenomech.env");
-        }
-
-        private void CopyCoreBinaries()
-        {
-            var binPath = "../NWN.Xenomech.Core/bin/Debug/net8.0/";
-
-            var source = new DirectoryInfo(binPath);
-            var target = new DirectoryInfo(DotnetPath);
-
-            CopyAll(source, target, string.Empty);
+            CopyAll(source, target, "nwserver.env");
         }
 
         private void BuildHaks()

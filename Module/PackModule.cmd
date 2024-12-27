@@ -1,3 +1,3 @@
 cd ../Tools/
-NWN.Xenomech.CLI.exe -p "../Module/Xenomech.mod,../Module/"
+NWN.Xenomech.CLI.exe -p "../Module/Xenomech.mod"
 cd ../Module/
