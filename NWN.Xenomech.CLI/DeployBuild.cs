@@ -6,6 +6,8 @@
         private const string HakPath = ServerPath + "hak";
         private const string ModulesPath = ServerPath + "modules";
         private const string TlkPath = ServerPath + "tlk";
+        private const string ExternalPluginsPath = "../ExternalPlugins";
+        private const string AnvilPluginsPath = ServerPath + "anvil/Plugins";
 
         private readonly HakBuilder _hakBuilder = new();
 
@@ -27,6 +29,10 @@
             var target = new DirectoryInfo(ServerPath);
 
             CopyAll(source, target, "nwserver.env");
+
+            source = new DirectoryInfo(ExternalPluginsPath);
+            target = new DirectoryInfo(AnvilPluginsPath);
+            CopyAll(source, target, string.Empty);
         }
 
         private void BuildHaks()
