@@ -4,6 +4,22 @@
     {
       "id": 0,
       "text": "Bad Strref"
+    },
+    {
+      "id": 1,
+      "text": "You are not authorized to log in as a DM. Please contact the server administrator if this is incorrect."
+    },
+    {
+      "id": 4,
+      "text": "Mech"
+    },
+    {
+      "id": 5,
+      "text": "mech"
+    },
+    {
+      "id": 6,
+      "text": "Mechs"
     }
   ]
 }

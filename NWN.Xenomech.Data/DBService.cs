@@ -233,6 +233,44 @@ namespace NWN.Xenomech.Data
             } while (indexing != "1");
         }
 
+        /// <summary>
+        /// Searches the Redis DB for records matching the query criteria.
+        /// </summary>
+        /// <typeparam name="T">The type of entity to retrieve.</typeparam>
+        /// <param name="query">The query to run.</param>
+        /// <returns>An enumerable of entities matching the criteria.</returns>
+        public IEnumerable<T> Search<T>(DBQuery<T> query)
+            where T : EntityBase
+        {
+            var result = _searchClientsByType[typeof(T)].Search(query.BuildQuery());
+
+            foreach (var doc in result.Documents)
+            {
+                // Remove the 'Index:' prefix.
+                var recordId = doc.Id.Remove(0, 6);
+                yield return _multiplexer.GetDatabase().JsonGet<T>(recordId);
+            }
+        }
+
+        /// <summary>
+        /// Searches the Redis DB for raw JSON records matching the query criteria.
+        /// </summary>
+        /// <typeparam name="T">The type of entity to retrieve.</typeparam>
+        /// <param name="query">The query to run.</param>
+        /// <returns>An enumerable of raw json values matching the criteria.</returns>
+        public IEnumerable<string> SearchRawJson<T>(DBQuery<T> query)
+            where T : EntityBase
+        {
+            var result = _searchClientsByType[typeof(T)].Search(query.BuildQuery());
+
+            foreach (var doc in result.Documents)
+            {
+                // Remove the 'Index:' prefix.
+                var recordId = doc.Id.Remove(0, 6);
+                yield return _multiplexer.GetDatabase().JsonGet(recordId).ToString();
+            }
+        }
+        
         public void Dispose()
         {
             Console.WriteLine($"Disposing DBService");

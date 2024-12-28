@@ -9,11 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWN.Xenomech.CLI", "NWN.Xen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWN.Xenomech.API", "NWN.Xenomech.API\NWN.Xenomech.API.csproj", "{DA720873-0E02-4FFE-B0A8-E795F27BA2B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWN.Xenomech.Plugin.APITest", "NWN.Xenomech.Plugin.APITest\NWN.Xenomech.Plugin.APITest.csproj", "{AA82296C-E5BD-4288-99E6-DA94E4CEC900}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWN.Xenomech.Core", "NWN.Xenomech.Core\NWN.Xenomech.Core.csproj", "{EFBD34CF-106F-43A6-B395-B017A35BD62E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWN.Xenomech.Data", "NWN.Xenomech.Data\NWN.Xenomech.Data.csproj", "{65B4C2A8-EFE6-47FF-AD49-7D21BA6A9F5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWN.Xenomech.Authorization", "NWN.Xenomech.Authorization\NWN.Xenomech.Authorization.csproj", "{E13C756F-63B8-4476-B65B-03580540B537}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +33,6 @@ Global
 		{DA720873-0E02-4FFE-B0A8-E795F27BA2B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA720873-0E02-4FFE-B0A8-E795F27BA2B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA720873-0E02-4FFE-B0A8-E795F27BA2B4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AA82296C-E5BD-4288-99E6-DA94E4CEC900}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AA82296C-E5BD-4288-99E6-DA94E4CEC900}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AA82296C-E5BD-4288-99E6-DA94E4CEC900}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AA82296C-E5BD-4288-99E6-DA94E4CEC900}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EFBD34CF-106F-43A6-B395-B017A35BD62E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EFBD34CF-106F-43A6-B395-B017A35BD62E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFBD34CF-106F-43A6-B395-B017A35BD62E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{65B4C2A8-EFE6-47FF-AD49-7D21BA6A9F5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65B4C2A8-EFE6-47FF-AD49-7D21BA6A9F5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65B4C2A8-EFE6-47FF-AD49-7D21BA6A9F5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E13C756F-63B8-4476-B65B-03580540B537}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E13C756F-63B8-4476-B65B-03580540B537}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E13C756F-63B8-4476-B65B-03580540B537}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E13C756F-63B8-4476-B65B-03580540B537}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

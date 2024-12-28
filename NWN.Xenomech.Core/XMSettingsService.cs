@@ -5,11 +5,13 @@ namespace NWN.Xenomech.Core
     [ServiceBinding(typeof(XMSettingsService))]
     public class XMSettingsService
     {
+        public string SuperAdminCDKey { get; }
         public string RedisIPAddress { get; }
         public ServerEnvironmentType ServerEnvironment { get; }
 
         public XMSettingsService()
         {
+            SuperAdminCDKey = Environment.GetEnvironmentVariable("XM_SUPER_ADMIN_CD_KEY");
             RedisIPAddress = Environment.GetEnvironmentVariable("NWNX_REDIS_HOST");
 
             var environment = Environment.GetEnvironmentVariable("XM_ENVIRONMENT");

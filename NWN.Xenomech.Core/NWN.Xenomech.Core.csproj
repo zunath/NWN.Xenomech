@@ -11,6 +11,10 @@
 		<PackageReference Include="NWN.Anvil" Version="8193.36.2-dev.19.r9bb01d93" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\NWN.Xenomech.API\NWN.Xenomech.API.csproj" />
+	</ItemGroup>
+
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 	  <Exec Command="del /Q /F &quot;$(SolutionDir)server\server\anvil\Plugins\NWN.Xenomech.Core\*.*&quot;&#xD;&#xA;xcopy &quot;$(OutDir)*.*&quot; &quot;$(SolutionDir)server\anvil\Plugins\NWN.Xenomech.Core\&quot; /E /Y" />
 	</Target>
