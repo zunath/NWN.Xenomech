@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using Newtonsoft.Json;
+using Jil;
 using NWN.Xenomech.CLI.Model;
 
 namespace NWN.Xenomech.CLI
@@ -54,7 +54,10 @@ namespace NWN.Xenomech.CLI
 
             var json = File.ReadAllText(ConfigFilePath);
 
-            return JsonConvert.DeserializeObject<HakBuilderConfig>(json);
+            using (var input = new StringReader(json))
+            {
+                return JSON.Deserialize<HakBuilderConfig>(json);
+            }
         }
 
         /// <summary>
