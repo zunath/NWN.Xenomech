@@ -17,7 +17,6 @@
             CreateServerDirectory();
             BuildHaks();
             BuildModule();
-            //CopyBinaries(); //temp disable
             CopyExternalPlugins();
         }
 
@@ -34,16 +33,6 @@
 
             CopyAll(source, target, "nwserver.env");
 
-        }
-
-        private void CopyBinaries()
-        {
-            var binPath = "../NWN.Xenomech.Core/bin/Debug/net8.0/";
-
-            var source = new DirectoryInfo(binPath);
-            var target = new DirectoryInfo(AnvilPath);
-
-            CopyAll(source, target, string.Empty);
         }
 
         private void CopyExternalPlugins()

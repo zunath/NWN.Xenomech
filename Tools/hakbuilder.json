@@ -21,6 +21,6 @@
       "Name":  "xm_mechs",
       "Path": "../Content/xm_mechs/",
       "CompileModels": false
-    },
+    }
   ]
 }

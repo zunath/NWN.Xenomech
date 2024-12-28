@@ -69,7 +69,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NWN.Xenomech.API\NWN.Xenomech.API.csproj" />
-    <ProjectReference Include="..\NWN.Xenomech.Core\NWN.Xenomech.Core.csproj" />
+    <ProjectReference Include="..\NWN.Xenomech.Data\NWN.Xenomech.Data.csproj" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

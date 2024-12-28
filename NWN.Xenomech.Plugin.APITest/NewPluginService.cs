@@ -1,17 +1,27 @@
 using System;
+using System.IO;
 using Anvil.Services;
+using Jil;
 using NLog;
-using NWN.Xenomech.Core;
-using NWN.Xenomech.Core.Entity;
+using NWN.Xenomech.Data;
 
 namespace NWN.Xenomech.Plugin.APITest
 {
     [ServiceBinding(typeof(NewPluginService))]
-    public class NewPluginService
+    public class NewPluginService: IDisposable
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-        public NewPluginService()
+        private DBService _db;
+
+        public NewPluginService(DBService db)
+        {
+            _db = db;
+
+            RegisterTypes();
+        }
+
+        private void RegisterTypes()
         {
         }
 
@@ -26,11 +36,18 @@ namespace NWN.Xenomech.Plugin.APITest
 
             var entity = new TestEntity()
             {
-                Name = GetName(player) + " new name 2"
+                Id = playerId,
+                Name = GetName(player) + " new name"
             };
 
-            DB.Instance.Set(entity);
+            _db.Set(entity);
+
+
+            Console.WriteLine($"GET: {_db.Get<TestEntity>(playerId).Name}");
         }
 
+        public void Dispose()
+        {
+        }
     }
 }
