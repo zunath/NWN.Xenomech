@@ -7,7 +7,8 @@
         private const string ModulesPath = ServerPath + "modules";
         private const string TlkPath = ServerPath + "tlk";
         private const string ExternalPluginsPath = "../ExternalPlugins";
-        private const string AnvilPluginsPath = ServerPath + "anvil/Plugins";
+        private const string AnvilPath = ServerPath + "anvil/";
+        private const string AnvilPluginsPath = AnvilPath + "Plugins/";
 
         private readonly HakBuilder _hakBuilder = new();
 
@@ -16,10 +17,13 @@
             CreateServerDirectory();
             BuildHaks();
             BuildModule();
+            //CopyBinaries(); //temp disable
+            CopyExternalPlugins();
         }
 
         private void CreateServerDirectory()
         {
+            Directory.CreateDirectory(AnvilPath);
             Directory.CreateDirectory(ServerPath);
             Directory.CreateDirectory(HakPath);
             Directory.CreateDirectory(ModulesPath);
@@ -30,8 +34,22 @@
 
             CopyAll(source, target, "nwserver.env");
 
-            source = new DirectoryInfo(ExternalPluginsPath);
-            target = new DirectoryInfo(AnvilPluginsPath);
+        }
+
+        private void CopyBinaries()
+        {
+            var binPath = "../NWN.Xenomech.Core/bin/Debug/net8.0/";
+
+            var source = new DirectoryInfo(binPath);
+            var target = new DirectoryInfo(AnvilPath);
+
+            CopyAll(source, target, string.Empty);
+        }
+
+        private void CopyExternalPlugins()
+        {
+            var source = new DirectoryInfo(ExternalPluginsPath);
+            var target = new DirectoryInfo(AnvilPluginsPath);
             CopyAll(source, target, string.Empty);
         }
 
