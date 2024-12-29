@@ -1,7 +1,5 @@
-﻿
-
-using System;
-using NWN.Native.API;
+﻿using System;
+using NWN.Xenomech.API;
 
 namespace NWN.Xenomech.Core
 {
@@ -254,7 +252,7 @@ namespace NWN.Xenomech.Core
         //
         public static string GetNamePCColor(uint oPC)
         {
-            var name = GetName(oPC);
+            var name = NWScript.GetName(oPC);
             return TokenStart(153, 255, 255) + name + TokenEnd();
         }
 
@@ -266,24 +264,8 @@ namespace NWN.Xenomech.Core
         //
         public static string GetNameNPCColor(uint oNPC)
         {
-            var name = GetName(oNPC);
+            var name = NWScript.GetName(oNPC);
             return TokenStart(204, 153, 204) + name + TokenEnd();
         }
-
-        ///////////////////////////////////////////////////////////////////////////////
-        // _.GetNameNPCColor()
-        //
-        // Returns the name of creature in either light blue or purple, if the creature
-        // is a PC or an NPC. 
-        //
-
-        public static string GetNameColorNative(CNWSCreature creature)
-        {
-            var creatureName = (creature.GetFirstName().GetSimple() + " " + creature.GetLastName().GetSimple()).Trim();
-            return Convert.ToBoolean(creature.m_bPlayerCharacter) 
-                ? Custom(creatureName, 153, 255, 255) 
-                : Custom(creatureName, 204, 153, 204);
-        }
-
     }
 }

@@ -1,9 +1,8 @@
-﻿using Anvil.Services;
+﻿using NWN.Xenomech.API;
 
 namespace NWN.Xenomech.Core
 {
-    [ServiceBinding(typeof(Localization))]
-    public class Localization
+    public static class Localization
     {
         /// <summary>
         /// Custom TLK files begin at 16777216.
@@ -17,12 +16,12 @@ namespace NWN.Xenomech.Core
         /// <param name="tlkId">The tlk row ID number</param>
         /// <param name="args">The variables to replace in the formatting of the text.</param>
         /// <returns>A localized string.</returns>
-        public string GetString(int tlkId, params object[] args)
+        public static string GetString(int tlkId, params object[] args)
         {
             if (tlkId < CustomTlkIdStart)
                 tlkId += CustomTlkIdStart;
 
-            var text = string.Format(GetStringByStrRef(tlkId), args);
+            var text = string.Format(NWScript.GetStringByStrRef(tlkId), args);
             return text;
         }
     }
