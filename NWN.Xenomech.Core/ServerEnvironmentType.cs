@@ -1,4 +1,6 @@
-﻿namespace NWN.Xenomech.Core
+﻿using System;
+
+namespace NWN.Xenomech.Core
 {
     [Flags]
     public enum ServerEnvironmentType

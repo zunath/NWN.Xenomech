@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWN.Xenomech.Data", "NWN.Xe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWN.Xenomech.Authorization", "NWN.Xenomech.Authorization\NWN.Xenomech.Authorization.csproj", "{E13C756F-63B8-4476-B65B-03580540B537}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWN.Xenomech.ChatCommand", "NWN.Xenomech.ChatCommand\NWN.Xenomech.ChatCommand.csproj", "{FAC1830F-FE6F-4CD6-9677-55E2AA3E49CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{E13C756F-63B8-4476-B65B-03580540B537}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E13C756F-63B8-4476-B65B-03580540B537}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E13C756F-63B8-4476-B65B-03580540B537}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAC1830F-FE6F-4CD6-9677-55E2AA3E49CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAC1830F-FE6F-4CD6-9677-55E2AA3E49CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAC1830F-FE6F-4CD6-9677-55E2AA3E49CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAC1830F-FE6F-4CD6-9677-55E2AA3E49CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

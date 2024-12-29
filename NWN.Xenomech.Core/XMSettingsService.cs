@@ -1,4 +1,5 @@
-﻿using Anvil.Services;
+﻿using System;
+using Anvil.Services;
 
 namespace NWN.Xenomech.Core
 {
