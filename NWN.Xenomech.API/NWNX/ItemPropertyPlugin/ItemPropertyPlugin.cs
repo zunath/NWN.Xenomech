@@ -1,4 +1,5 @@
 ﻿using NWN.Core.NWNX;
+using NWN.Xenomech.API.BaseTypes;
 
 namespace NWN.Xenomech.API.NWNX.ItemPropertyPlugin
 {
@@ -9,7 +10,7 @@ namespace NWN.Xenomech.API.NWNX.ItemPropertyPlugin
         /// </summary>
         /// <param name="itemProperty">The native item property pointer to unpack.</param>
         /// <returns>A structured representation of the item property.</returns>
-        public static NWNX_IPUnpacked UnpackItemProperty(BaseTypes.ItemProperty itemProperty)
+        public static NWNX_IPUnpacked UnpackItemProperty(ItemProperty itemProperty)
         {
             return ItempropPlugin.UnpackIP(itemProperty);
         }
@@ -19,7 +20,7 @@ namespace NWN.Xenomech.API.NWNX.ItemPropertyPlugin
         /// </summary>
         /// <param name="unpackedProperty">The structured item property to pack.</param>
         /// <returns>The native item property pointer.</returns>
-        public static IntPtr PackItemProperty(NWNX_IPUnpacked unpackedProperty)
+        public static ItemProperty PackItemProperty(NWNX_IPUnpacked unpackedProperty)
         {
             return ItempropPlugin.PackIP(unpackedProperty);
         }

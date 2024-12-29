@@ -11,7 +11,7 @@ namespace NWN.Xenomech.API.NWNX.UtilPlugin
         /// <returns>The name of the currently executing script.</returns>
         public static string GetCurrentScriptName(int depth = 0)
         {
-            return NWN.Core.NWNX.UtilPlugin.GetCurrentScriptName(depth);
+            return Core.NWNX.UtilPlugin.GetCurrentScriptName(depth);
         }
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace NWN.Xenomech.API.NWNX.UtilPlugin
         /// <returns>A string that contains all characters at their position (e.g. 'A' at 65).</returns>
         public static string GetAsciiTableString()
         {
-            return NWN.Core.NWNX.UtilPlugin.GetAsciiTableString();
+            return Core.NWNX.UtilPlugin.GetAsciiTableString();
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace NWN.Xenomech.API.NWNX.UtilPlugin
         /// <returns>The hashed string as an integer.</returns>
         public static int Hash(string str)
         {
-            return NWN.Core.NWNX.UtilPlugin.Hash(str);
+            return Core.NWNX.UtilPlugin.Hash(str);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace NWN.Xenomech.API.NWNX.UtilPlugin
         /// <returns>The mtime of the module file.</returns>
         public static int GetModuleMtime()
         {
-            return NWN.Core.NWNX.UtilPlugin.GetModuleMtime();
+            return Core.NWNX.UtilPlugin.GetModuleMtime();
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace NWN.Xenomech.API.NWNX.UtilPlugin
         /// <returns>The module file as a string.</returns>
         public static string GetModuleFile()
         {
-            return NWN.Core.NWNX.UtilPlugin.GetModuleFile();
+            return Core.NWNX.UtilPlugin.GetModuleFile();
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace NWN.Xenomech.API.NWNX.UtilPlugin
         /// <returns>The string representation of the token value.</returns>
         public static string GetCustomToken(int customTokenNumber)
         {
-            return NWN.Core.NWNX.UtilPlugin.GetCustomToken(customTokenNumber);
+            return Core.NWNX.UtilPlugin.GetCustomToken(customTokenNumber);
         }
 
         /// <summary>
@@ -66,9 +66,9 @@ namespace NWN.Xenomech.API.NWNX.UtilPlugin
         /// </summary>
         /// <param name="e">The effect to convert to an item property.</param>
         /// <returns>The converted item property.</returns>
-        public static BaseTypes.ItemProperty EffectToItemProperty(Effect e)
+        public static ItemProperty EffectToItemProperty(Effect e)
         {
-            return NWN.Core.NWNX.UtilPlugin.EffectToItemProperty(e);
+            return Core.NWNX.UtilPlugin.EffectToItemProperty(e);
         }
 
         /// <summary>
@@ -76,9 +76,9 @@ namespace NWN.Xenomech.API.NWNX.UtilPlugin
         /// </summary>
         /// <param name="ip">The item property to convert to an effect.</param>
         /// <returns>The converted effect.</returns>
-        public static Effect ItemPropertyToEffect(BaseTypes.ItemProperty ip)
+        public static Effect ItemPropertyToEffect(ItemProperty ip)
         {
-            return NWN.Core.NWNX.UtilPlugin.ItemPropertyToEffect(ip);
+            return Core.NWNX.UtilPlugin.ItemPropertyToEffect(ip);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace NWN.Xenomech.API.NWNX.UtilPlugin
         /// <returns>The new string without any color codes.</returns>
         public static string StripColors(string str)
         {
-            return NWN.Core.NWNX.UtilPlugin.StripColors(str);
+            return Core.NWNX.UtilPlugin.StripColors(str);
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace NWN.Xenomech.API.NWNX.UtilPlugin
         /// <returns>The value of the environment variable.</returns>
         public static string GetEnvironmentVariable(string sVarname)
         {
-            return NWN.Core.NWNX.UtilPlugin.GetEnvironmentVariable(sVarname);
+            return Core.NWNX.UtilPlugin.GetEnvironmentVariable(sVarname);
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace NWN.Xenomech.API.NWNX.UtilPlugin
         /// <returns>The minutes per hour.</returns>
         public static int GetMinutesPerHour()
         {
-            return NWN.Core.NWNX.UtilPlugin.GetMinutesPerHour();
+            return Core.NWNX.UtilPlugin.GetMinutesPerHour();
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace NWN.Xenomech.API.NWNX.UtilPlugin
         /// <param name="minutes">The minutes per hour.</param>
         public static void SetMinutesPerHour(int minutes)
         {
-            NWN.Core.NWNX.UtilPlugin.SetMinutesPerHour(minutes);
+            Core.NWNX.UtilPlugin.SetMinutesPerHour(minutes);
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace NWN.Xenomech.API.NWNX.UtilPlugin
         /// <returns>The URL-encoded string.</returns>
         public static string EncodeStringForURL(string sURL)
         {
-            return NWN.Core.NWNX.UtilPlugin.EncodeStringForURL(sURL);
+            return Core.NWNX.UtilPlugin.EncodeStringForURL(sURL);
         }
 
         /// <summary>
@@ -136,9 +136,9 @@ namespace NWN.Xenomech.API.NWNX.UtilPlugin
         /// <param name="sRegexFilter">Allows filtering resrefs using a regex pattern.</param>
         /// <param name="bModuleResourcesOnly">If TRUE, only custom resources will be returned.</param>
         /// <returns>The first resref found or an empty string if none is found.</returns>
-        public static string GetFirstResRef(ResrefType nType, string sRegexFilter = "", int bModuleResourcesOnly = 1)
+        public static string GetFirstResRef(ResrefType nType, string sRegexFilter = "", bool bModuleResourcesOnly = true)
         {
-            return NWN.Core.NWNX.UtilPlugin.GetFirstResRef((int)nType, sRegexFilter, bModuleResourcesOnly);
+            return Core.NWNX.UtilPlugin.GetFirstResRef((int)nType, sRegexFilter, bModuleResourcesOnly ? 1 : 0);
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace NWN.Xenomech.API.NWNX.UtilPlugin
         /// <returns>The next resref found or an empty string if none is found.</returns>
         public static string GetNextResRef()
         {
-            return NWN.Core.NWNX.UtilPlugin.GetNextResRef();
+            return Core.NWNX.UtilPlugin.GetNextResRef();
         }
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace NWN.Xenomech.API.NWNX.UtilPlugin
         /// <returns>The last created object or OBJECT_INVALID on error.</returns>
         public static uint GetLastCreatedObject(int nObjectType, int nNthLast = 1)
         {
-            return NWN.Core.NWNX.UtilPlugin.GetLastCreatedObject(nObjectType, nNthLast);
+            return Core.NWNX.UtilPlugin.GetLastCreatedObject(nObjectType, nNthLast);
         }
     }
 }

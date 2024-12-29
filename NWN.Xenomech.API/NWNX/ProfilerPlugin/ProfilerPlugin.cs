@@ -10,14 +10,7 @@
         /// <param name="tag0Value">The value of the tag for filtering.</param>
         public static void PushPerfScope(string name, string tag0Tag = "", string tag0Value = "")
         {
-            if (!string.IsNullOrEmpty(tag0Tag) && !string.IsNullOrEmpty(tag0Value))
-            {
-                NWN.Core.NWNX.ProfilerPlugin.PushPerfScope(name, tag0Tag, tag0Value);
-            }
-            else
-            {
-                NWN.Core.NWNX.ProfilerPlugin.PushPerfScope(name);
-            }
+            NWN.Core.NWNX.ProfilerPlugin.PushPerfScope(name, tag0Tag, tag0Value);
         }
 
         /// <summary>
@@ -28,6 +21,5 @@
         {
             NWN.Core.NWNX.ProfilerPlugin.PopPerfScope();
         }
-
     }
 }

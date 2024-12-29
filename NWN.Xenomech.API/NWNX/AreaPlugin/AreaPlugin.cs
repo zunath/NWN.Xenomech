@@ -39,9 +39,9 @@ namespace NWN.Xenomech.API.NWNX.AreaPlugin
         /// </summary>
         /// <param name="area">The area object.</param>
         /// <returns>The PVP setting for the area.</returns>
-        public static int GetPVPSetting(uint area)
+        public static AreaPVPSettingType GetPVPSetting(uint area)
         {
-            return NWN.Core.NWNX.AreaPlugin.GetPVPSetting(area);
+            return (AreaPVPSettingType)NWN.Core.NWNX.AreaPlugin.GetPVPSetting(area);
         }
 
         /// <summary>
@@ -49,9 +49,9 @@ namespace NWN.Xenomech.API.NWNX.AreaPlugin
         /// </summary>
         /// <param name="area">The area object.</param>
         /// <param name="pvpSetting">The PVP setting to assign to the area.</param>
-        public static void SetPVPSetting(uint area, int pvpSetting)
+        public static void SetPVPSetting(uint area, AreaPVPSettingType pvpSetting)
         {
-            NWN.Core.NWNX.AreaPlugin.SetPVPSetting(area, pvpSetting);
+            NWN.Core.NWNX.AreaPlugin.SetPVPSetting(area, (int)pvpSetting);
         }
 
         /// <summary>

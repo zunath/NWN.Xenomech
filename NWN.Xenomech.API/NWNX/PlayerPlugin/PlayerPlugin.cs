@@ -1,5 +1,7 @@
-﻿using NWN.Core.NWNX;
+﻿using System.Numerics;
+using NWN.Core.NWNX;
 using NWN.Xenomech.API.BaseTypes;
+using NWN.Xenomech.API.Constants;
 
 namespace NWN.Xenomech.API.NWNX.PlayerPlugin
 {
@@ -89,7 +91,7 @@ namespace NWN.Xenomech.API.NWNX.PlayerPlugin
         /// <param name="scale">The scale of the effect</param>
         /// <param name="translate">A translation vector to offset the position of the effect</param>
         /// <param name="rotate">A rotation vector to rotate the effect</param>
-        public static void ShowVisualEffect(uint player, int effectId, System.Numerics.Vector3 position, float scale = 1.0f, System.Numerics.Vector3 translate = default, System.Numerics.Vector3 rotate = default)
+        public static void ShowVisualEffect(uint player, int effectId, Vector3 position, float scale = 1.0f, Vector3 translate = default, Vector3 rotate = default)
         {
             NWN.Core.NWNX.PlayerPlugin.ShowVisualEffect(player, effectId, position, scale, translate, rotate);
         }
@@ -174,14 +176,14 @@ namespace NWN.Xenomech.API.NWNX.PlayerPlugin
         /// Apply visualeffect to target that only player can see
         /// <param name="player">The player object.</param>
         /// <param name="target">The target object to play the effect upon.</param>
-        /// <param name="visualeffect">The visual effect id.</param>
+        /// <param name="visualEffect">The visual effect id.</param>
         /// <param name="scale">The scale of the effect</param>
         /// <param name="translate">A translation vector to offset the position of the effect</param>
         /// <param name="rotate">A rotation vector to rotate the effect</param>
         /// @note Only works with instant effects: VFX_COM_*, VFX_FNF_*, VFX_IMP_*
-        public static void ApplyInstantVisualEffectToObject(uint player, uint target, int visualeffect, float scale = 1.0f, System.Numerics.Vector3 translate = default, System.Numerics.Vector3 rotate = default)
+        public static void ApplyInstantVisualEffectToObject(uint player, uint target, VisualEffectType visualEffect, float scale = 1.0f, Vector3 translate = default, Vector3 rotate = default)
         {
-            NWN.Core.NWNX.PlayerPlugin.ApplyInstantVisualEffectToObject(player, target, visualeffect, scale, translate, rotate);
+            NWN.Core.NWNX.PlayerPlugin.ApplyInstantVisualEffectToObject(player, target, (int)visualEffect, scale, translate, rotate);
         }
 
         /// Refreshes the player's character sheet
@@ -233,19 +235,19 @@ namespace NWN.Xenomech.API.NWNX.PlayerPlugin
         /// <param name="oObject">The target object. Can be any valid Creature, Placeable, Item or Door.</param>
         /// <param name="nTransform">One of OBJECT_VISUAL_TRANSFORM_* or -1 to remove the override.</param>
         /// <param name="fValue">Depends on the transformation to apply.</param>
-        public static void SetObjectVisualTransformOverride(uint oPlayer, uint oObject, int nTransform, float fValue)
+        public static void SetObjectVisualTransformOverride(uint oPlayer, uint oObject, ObjectVisualTransformType nTransform, float fValue)
         {
-            NWN.Core.NWNX.PlayerPlugin.SetObjectVisualTransformOverride(oPlayer, oObject, nTransform, fValue);
+            NWN.Core.NWNX.PlayerPlugin.SetObjectVisualTransformOverride(oPlayer, oObject, (int)nTransform, fValue);
         }
 
         /// Apply a looping visualeffect to a target that only player can see
         /// <param name="player">The player object.</param>
         /// <param name="target">The target object.</param>
-        /// <param name="visualeffect">A VFX_DUR_*. Calling again will remove an applied effect. -1 to remove all effects</param>
+        /// <param name="visualEffect">A VFX_DUR_*. Calling again will remove an applied effect. -1 to remove all effects</param>
         /// @note Only really works with looping effects: VFX_DUR_*. Other types kind of work, they'll play when reentering the area and the object is in view or when they come back in view range.
-        public static void ApplyLoopingVisualEffectToObject(uint player, uint target, int visualeffect)
+        public static void ApplyLoopingVisualEffectToObject(uint player, uint target, VisualEffectType visualEffect)
         {
-            NWN.Core.NWNX.PlayerPlugin.ApplyLoopingVisualEffectToObject(player, target, visualeffect);
+            NWN.Core.NWNX.PlayerPlugin.ApplyLoopingVisualEffectToObject(player, target, (int)visualEffect);
         }
 
         /// Override the name of placeable for player only
@@ -261,9 +263,9 @@ namespace NWN.Xenomech.API.NWNX.PlayerPlugin
         /// <param name="player">The player object.</param>
         /// <param name="sQuestName">The name identifier of the quest from the Journal Editor.</param>
         /// <returns>True if the quest has been completed. -1 if the player does not have the journal entry.</returns>
-        public static int GetQuestCompleted(uint player, string sQuestName)
+        public static bool GetQuestCompleted(uint player, string sQuestName)
         {
-            return NWN.Core.NWNX.PlayerPlugin.GetQuestCompleted(player, sQuestName);
+            return NWN.Core.NWNX.PlayerPlugin.GetQuestCompleted(player, sQuestName) == 1;
         }
 
         /// Place waypoints on module load representing where a PC should start
@@ -292,23 +294,23 @@ namespace NWN.Xenomech.API.NWNX.PlayerPlugin
         /// <param name="bMindImmune">If False will remove the mind immunity effect on the possessor.</param>
         /// <param name="bCreateDefaultQB">If True will populate the quick bar with default buttons.</param>
         /// <returns>True if possession succeeded.</returns>
-        public static int PossessCreature(uint oPossessor, uint oPossessed, bool bMindImmune = true, bool bCreateDefaultQB = false)
+        public static bool PossessCreature(uint oPossessor, uint oPossessed, bool bMindImmune = true, bool bCreateDefaultQB = false)
         {
-            return NWN.Core.NWNX.PlayerPlugin.PossessCreature(oPossessor, oPossessed, bMindImmune ? 1 : 0, bCreateDefaultQB ? 1 : 0);
+            return NWN.Core.NWNX.PlayerPlugin.PossessCreature(oPossessor, oPossessed, bMindImmune ? 1 : 0, bCreateDefaultQB ? 1 : 0) == 1;
         }
 
         /// Returns the platform ID of the given player (NWNX_PLAYER_PLATFORM_*).
         /// <param name="oPlayer">The player object.</param>
-        public static int GetPlatformId(uint oPlayer)
+        public static PlayerDevicePlatformType GetPlatformId(uint oPlayer)
         {
-            return NWN.Core.NWNX.PlayerPlugin.GetPlatformId(oPlayer);
+            return (PlayerDevicePlatformType)NWN.Core.NWNX.PlayerPlugin.GetPlatformId(oPlayer);
         }
 
         /// Returns the game language of the given player (uses NWNX_DIALOG_LANGUAGE_*).
         /// <param name="oPlayer">The player object.</param>
-        public static int GetLanguage(uint oPlayer)
+        public static PlayerLanguageType GetLanguage(uint oPlayer)
         {
-            return NWN.Core.NWNX.PlayerPlugin.GetLanguage(oPlayer);
+            return (PlayerLanguageType)NWN.Core.NWNX.PlayerPlugin.GetLanguage(oPlayer);
         }
 
         /// Override sOldResName with sNewResName of nResType for oPlayer.
@@ -364,9 +366,9 @@ namespace NWN.Xenomech.API.NWNX.PlayerPlugin
         /// <param name="oPlayer">The player object.</param>
         /// <param name="oObject">The object.</param>
         /// <param name="nCursor">The cursor, one of MOUSECURSOR_*. -1 to clear the override.</param>
-        public static void SetObjectMouseCursorOverride(uint oPlayer, uint oObject, int nCursor)
+        public static void SetObjectMouseCursorOverride(uint oPlayer, uint oObject, MouseCursorType nCursor)
         {
-            NWN.Core.NWNX.PlayerPlugin.SetObjectMouseCursorOverride(oPlayer, oObject, nCursor);
+            NWN.Core.NWNX.PlayerPlugin.SetObjectMouseCursorOverride(oPlayer, oObject, (int)nCursor);
         }
 
         /// Override the hilite color of oObject for oPlayer only
@@ -410,9 +412,9 @@ namespace NWN.Xenomech.API.NWNX.PlayerPlugin
         /// <param name="nSilentUpdate">0 = Notify player via sound effects and feedback message, 1 = Suppress sound effects and feedback message</param>
         /// <returns>A positive number to indicate the new amount of journal entries on the player.</returns>
         /// @note In contrast to conventional nwn journal entries - this method will overwrite entries with the same tag, so the index / count of entries will only increase if you add new entries with unique tags
-        public static int AddCustomJournalEntry(uint oPlayer, JournalEntry journalEntry, int nSilentUpdate = 0)
+        public static int AddCustomJournalEntry(uint oPlayer, JournalEntry journalEntry, bool nSilentUpdate = false)
         {
-            return NWN.Core.NWNX.PlayerPlugin.AddCustomJournalEntry(oPlayer, journalEntry, nSilentUpdate);
+            return NWN.Core.NWNX.PlayerPlugin.AddCustomJournalEntry(oPlayer, journalEntry, nSilentUpdate ? 1 : 0);
         }
 
         /// Returns a struct containing a journal entry that can then be modified.
@@ -456,7 +458,7 @@ namespace NWN.Xenomech.API.NWNX.PlayerPlugin
         /// <param name="fMagnitude">The Wind's magnitude.</param>
         /// <param name="fYaw">The Wind's yaw.</param>
         /// <param name="fPitch">The Wind's pitch.</param>
-        public static void UpdateWind(uint oPlayer, System.Numerics.Vector3 vDirection, float fMagnitude, float fYaw, float fPitch)
+        public static void UpdateWind(uint oPlayer, Vector3 vDirection, float fMagnitude, float fYaw, float fPitch)
         {
             NWN.Core.NWNX.PlayerPlugin.UpdateWind(oPlayer, vDirection, fMagnitude, fYaw, fPitch);
         }
@@ -464,9 +466,9 @@ namespace NWN.Xenomech.API.NWNX.PlayerPlugin
         /// Update the SkyBox for oPlayer only.
         /// <param name="oPlayer">The player.</param>
         /// <param name="nSkyBox">The Skybox ID.</param>
-        public static void UpdateSkyBox(uint oPlayer, int nSkyBox)
+        public static void UpdateSkyBox(uint oPlayer, SkyboxType nSkyBox)
         {
-            NWN.Core.NWNX.PlayerPlugin.UpdateSkyBox(oPlayer, nSkyBox);
+            NWN.Core.NWNX.PlayerPlugin.UpdateSkyBox(oPlayer, (int)nSkyBox);
         }
 
         /// Update Sun and Moon Fog Color for oPlayer only.
@@ -499,9 +501,9 @@ namespace NWN.Xenomech.API.NWNX.PlayerPlugin
         /// <param name="oPlayer">The player object.</param>
         /// <param name="oObject">The target object.</param>
         /// <param name="nMask">A mask of OBJECT_UI_DISCOVERY_*, or -1 to clear the override</param>
-        public static void SetObjectUiDiscoveryMaskOverride(uint oPlayer, uint oObject, int nMask)
+        public static void SetObjectUiDiscoveryMaskOverride(uint oPlayer, uint oObject, ObjectUIDiscoveryType nMask)
         {
-            NWN.Core.NWNX.PlayerPlugin.SetObjectUiDiscoveryMaskOverride(oPlayer, oObject, nMask);
+            NWN.Core.NWNX.PlayerPlugin.SetObjectUiDiscoveryMaskOverride(oPlayer, oObject, (int)nMask);
         }
 
         /// Send a party invite from oInviter to oPlayer

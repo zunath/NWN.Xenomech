@@ -1,4 +1,5 @@
 ﻿using NWN.Core.NWNX;
+using NWN.Xenomech.API.Constants;
 
 namespace NWN.Xenomech.API.NWNX.WeaponPlugin
 {
@@ -9,9 +10,9 @@ namespace NWN.Xenomech.API.NWNX.WeaponPlugin
         /// </summary>
         /// <param name="nBaseItem">The base item id.</param>
         /// <param name="nFeat">The feat to set.</param>
-        public static void SetWeaponFocusFeat(int nBaseItem, int nFeat)
+        public static void SetWeaponFocusFeat(BaseItemType nBaseItem, FeatType nFeat)
         {
-            NWN.Core.NWNX.WeaponPlugin.SetWeaponFocusFeat(nBaseItem, nFeat);
+            NWN.Core.NWNX.WeaponPlugin.SetWeaponFocusFeat((int)nBaseItem, (int)nFeat);
         }
 
         /// <summary>
@@ -19,9 +20,9 @@ namespace NWN.Xenomech.API.NWNX.WeaponPlugin
         /// </summary>
         /// <param name="nBaseItem">The base item id.</param>
         /// <param name="nSize">The creature size minimum to consider this weapon finessable.</param>
-        public static void SetWeaponFinesseSize(int nBaseItem, int nSize)
+        public static void SetWeaponFinesseSize(BaseItemType nBaseItem, CreatureSizeType nSize)
         {
-            NWN.Core.NWNX.WeaponPlugin.SetWeaponFinesseSize(nBaseItem, nSize);
+            NWN.Core.NWNX.WeaponPlugin.SetWeaponFinesseSize((int)nBaseItem, (int)nSize);
         }
 
         /// <summary>
@@ -29,18 +30,18 @@ namespace NWN.Xenomech.API.NWNX.WeaponPlugin
         /// </summary>
         /// <param name="nBaseItem">The base item id.</param>
         /// <returns>The required creature size.</returns>
-        public static int GetWeaponFinesseSize(int nBaseItem)
+        public static CreatureSizeType GetWeaponFinesseSize(BaseItemType nBaseItem)
         {
-            return NWN.Core.NWNX.WeaponPlugin.GetWeaponFinesseSize(nBaseItem);
+            return (CreatureSizeType)NWN.Core.NWNX.WeaponPlugin.GetWeaponFinesseSize((int)nBaseItem);
         }
 
         /// <summary>
         /// Sets the weapon base item to be considered as unarmed for weapon finesse feat.
         /// </summary>
         /// <param name="nBaseItem">The base item id.</param>
-        public static void SetWeaponUnarmed(int nBaseItem)
+        public static void SetWeaponUnarmed(BaseItemType nBaseItem)
         {
-            NWN.Core.NWNX.WeaponPlugin.SetWeaponUnarmed(nBaseItem);
+            NWN.Core.NWNX.WeaponPlugin.SetWeaponUnarmed((int)nBaseItem);
         }
 
         /// <summary>
@@ -48,9 +49,9 @@ namespace NWN.Xenomech.API.NWNX.WeaponPlugin
         /// </summary>
         /// <param name="nBaseItem">The base item id.</param>
         /// <param name="nFeat">The feat to set.</param>
-        public static void SetWeaponImprovedCriticalFeat(int nBaseItem, int nFeat)
+        public static void SetWeaponImprovedCriticalFeat(BaseItemType nBaseItem, FeatType nFeat)
         {
-            NWN.Core.NWNX.WeaponPlugin.SetWeaponImprovedCriticalFeat(nBaseItem, nFeat);
+            NWN.Core.NWNX.WeaponPlugin.SetWeaponImprovedCriticalFeat((int)nBaseItem, (int)nFeat);
         }
 
         /// <summary>
@@ -58,9 +59,9 @@ namespace NWN.Xenomech.API.NWNX.WeaponPlugin
         /// </summary>
         /// <param name="nBaseItem">The base item id.</param>
         /// <param name="nFeat">The feat to set.</param>
-        public static void SetWeaponSpecializationFeat(int nBaseItem, int nFeat)
+        public static void SetWeaponSpecializationFeat(BaseItemType nBaseItem, FeatType nFeat)
         {
-            NWN.Core.NWNX.WeaponPlugin.SetWeaponSpecializationFeat(nBaseItem, nFeat);
+            NWN.Core.NWNX.WeaponPlugin.SetWeaponSpecializationFeat((int)nBaseItem, (int)nFeat);
         }
 
         /// <summary>
@@ -68,9 +69,9 @@ namespace NWN.Xenomech.API.NWNX.WeaponPlugin
         /// </summary>
         /// <param name="nBaseItem">The base item id.</param>
         /// <param name="nFeat">The feat to set.</param>
-        public static void SetEpicWeaponFocusFeat(int nBaseItem, int nFeat)
+        public static void SetEpicWeaponFocusFeat(BaseItemType nBaseItem, FeatType nFeat)
         {
-            NWN.Core.NWNX.WeaponPlugin.SetEpicWeaponFocusFeat(nBaseItem, nFeat);
+            NWN.Core.NWNX.WeaponPlugin.SetEpicWeaponFocusFeat((int)nBaseItem, (int)nFeat);
         }
 
         /// <summary>
@@ -78,9 +79,9 @@ namespace NWN.Xenomech.API.NWNX.WeaponPlugin
         /// </summary>
         /// <param name="nBaseItem">The base item id.</param>
         /// <param name="nFeat">The feat to set.</param>
-        public static void SetEpicWeaponSpecializationFeat(int nBaseItem, int nFeat)
+        public static void SetEpicWeaponSpecializationFeat(BaseItemType nBaseItem, FeatType nFeat)
         {
-            NWN.Core.NWNX.WeaponPlugin.SetEpicWeaponSpecializationFeat(nBaseItem, nFeat);
+            NWN.Core.NWNX.WeaponPlugin.SetEpicWeaponSpecializationFeat((int)nBaseItem, (int)nFeat);
         }
 
         /// <summary>
@@ -88,9 +89,9 @@ namespace NWN.Xenomech.API.NWNX.WeaponPlugin
         /// </summary>
         /// <param name="nBaseItem">The base item id.</param>
         /// <param name="nFeat">The feat to set.</param>
-        public static void SetEpicWeaponOverwhelmingCriticalFeat(int nBaseItem, int nFeat)
+        public static void SetEpicWeaponOverwhelmingCriticalFeat(BaseItemType nBaseItem, FeatType nFeat)
         {
-            NWN.Core.NWNX.WeaponPlugin.SetEpicWeaponOverwhelmingCriticalFeat(nBaseItem, nFeat);
+            NWN.Core.NWNX.WeaponPlugin.SetEpicWeaponOverwhelmingCriticalFeat((int)nBaseItem, (int)nFeat);
         }
 
         /// <summary>
@@ -98,9 +99,9 @@ namespace NWN.Xenomech.API.NWNX.WeaponPlugin
         /// </summary>
         /// <param name="nBaseItem">The base item id.</param>
         /// <param name="nFeat">The feat to set.</param>
-        public static void SetEpicWeaponDevastatingCriticalFeat(int nBaseItem, int nFeat)
+        public static void SetEpicWeaponDevastatingCriticalFeat(BaseItemType nBaseItem, FeatType nFeat)
         {
-            NWN.Core.NWNX.WeaponPlugin.SetEpicWeaponDevastatingCriticalFeat(nBaseItem, nFeat);
+            NWN.Core.NWNX.WeaponPlugin.SetEpicWeaponDevastatingCriticalFeat((int)nBaseItem, (int)nFeat);
         }
 
         /// <summary>
@@ -108,9 +109,9 @@ namespace NWN.Xenomech.API.NWNX.WeaponPlugin
         /// </summary>
         /// <param name="nBaseItem">The base item id.</param>
         /// <param name="nFeat">The feat to set.</param>
-        public static void SetWeaponOfChoiceFeat(int nBaseItem, int nFeat)
+        public static void SetWeaponOfChoiceFeat(BaseItemType nBaseItem, FeatType nFeat)
         {
-            NWN.Core.NWNX.WeaponPlugin.SetWeaponOfChoiceFeat(nBaseItem, nFeat);
+            NWN.Core.NWNX.WeaponPlugin.SetWeaponOfChoiceFeat((int)nBaseItem, (int)nFeat);
         }
 
         /// <summary>
@@ -118,9 +119,9 @@ namespace NWN.Xenomech.API.NWNX.WeaponPlugin
         /// </summary>
         /// <param name="nBaseItem">The base item id.</param>
         /// <param name="nFeat">The feat to set.</param>
-        public static void SetGreaterWeaponSpecializationFeat(int nBaseItem, int nFeat)
+        public static void SetGreaterWeaponSpecializationFeat(BaseItemType nBaseItem, FeatType nFeat)
         {
-            NWN.Core.NWNX.WeaponPlugin.SetGreaterWeaponSpecializationFeat(nBaseItem, nFeat);
+            NWN.Core.NWNX.WeaponPlugin.SetGreaterWeaponSpecializationFeat((int)nBaseItem, (int)nFeat);
         }
 
         /// <summary>
@@ -128,19 +129,9 @@ namespace NWN.Xenomech.API.NWNX.WeaponPlugin
         /// </summary>
         /// <param name="nBaseItem">The base item id.</param>
         /// <param name="nFeat">The feat to set.</param>
-        public static void SetGreaterWeaponFocusFeat(int nBaseItem, int nFeat)
+        public static void SetGreaterWeaponFocusFeat(BaseItemType nBaseItem, FeatType nFeat)
         {
-            NWN.Core.NWNX.WeaponPlugin.SetGreaterWeaponFocusFeat(nBaseItem, nFeat);
-        }
-
-        /// <summary>
-        /// Sets the weapon as a monk weapon.
-        /// </summary>
-        /// <param name="nBaseItem">The base item id.</param>
-        [Obsolete("Use baseitems.2da instead. This will be removed in future NWNX releases.")]
-        public static void SetWeaponIsMonkWeapon(int nBaseItem)
-        {
-            NWN.Core.NWNX.WeaponPlugin.SetWeaponIsMonkWeapon(nBaseItem);
+            NWN.Core.NWNX.WeaponPlugin.SetGreaterWeaponFocusFeat((int)nBaseItem, (int)nFeat);
         }
 
         /// <summary>
@@ -185,9 +176,9 @@ namespace NWN.Xenomech.API.NWNX.WeaponPlugin
         /// <param name="oWeapon">The melee weapon.</param>
         /// <param name="nEnable">TRUE for bonus, FALSE to turn off the bonus.</param>
         /// <param name="bPersist">Whether the two-hand state should persist to the GFF file.</param>
-        public static void SetOneHalfStrength(uint oWeapon, int nEnable, int bPersist = 0)
+        public static void SetOneHalfStrength(uint oWeapon, int nEnable, bool bPersist = false)
         {
-            NWN.Core.NWNX.WeaponPlugin.SetOneHalfStrength(oWeapon, nEnable, bPersist);
+            NWN.Core.NWNX.WeaponPlugin.SetOneHalfStrength(oWeapon, nEnable, bPersist ? 1 : 0);
         }
 
         /// <summary>
@@ -195,9 +186,9 @@ namespace NWN.Xenomech.API.NWNX.WeaponPlugin
         /// </summary>
         /// <param name="oWeapon">The weapon.</param>
         /// <returns>TRUE if the weapon gains the bonus, FALSE otherwise.</returns>
-        public static int GetOneHalfStrength(uint oWeapon)
+        public static bool GetOneHalfStrength(uint oWeapon)
         {
-            return NWN.Core.NWNX.WeaponPlugin.GetOneHalfStrength(oWeapon);
+            return NWN.Core.NWNX.WeaponPlugin.GetOneHalfStrength(oWeapon) == 1;
         }
 
         /// <summary>
@@ -207,9 +198,9 @@ namespace NWN.Xenomech.API.NWNX.WeaponPlugin
         /// <param name="fMax">The maximum attack distance.</param>
         /// <param name="fMaxPassive">The maximum passive attack distance.</param>
         /// <param name="fPreferred">The preferred attack distance.</param>
-        public static void SetMaxRangedAttackDistanceOverride(int nBaseItem, float fMax, float fMaxPassive, float fPreferred)
+        public static void SetMaxRangedAttackDistanceOverride(BaseItemType nBaseItem, float fMax, float fMaxPassive, float fPreferred)
         {
-            NWN.Core.NWNX.WeaponPlugin.SetMaxRangedAttackDistanceOverride(nBaseItem, fMax, fMaxPassive, fPreferred);
+            NWN.Core.NWNX.WeaponPlugin.SetMaxRangedAttackDistanceOverride((int)nBaseItem, fMax, fMaxPassive, fPreferred);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace NWN.Xenomech.API.NWNX.ItemPlugin
+﻿using NWN.Xenomech.API.Constants;
+
+namespace NWN.Xenomech.API.NWNX.ItemPlugin
 {
     public static class ItemPlugin
     {
@@ -57,9 +59,9 @@
         /// </summary>
         /// <param name="item">The item object.</param>
         /// <param name="baseItemType">The new base item type to set.</param>
-        public static void SetBaseItemType(uint item, int baseItemType)
+        public static void SetBaseItemType(uint item, BaseItemType baseItemType)
         {
-            NWN.Core.NWNX.ItemPlugin.SetBaseItemType(item, baseItemType);
+            NWN.Core.NWNX.ItemPlugin.SetBaseItemType(item, (int)baseItemType);
         }
 
         /// <summary>
@@ -70,9 +72,9 @@
         /// <param name="index">The appearance index.</param>
         /// <param name="value">The appearance value.</param>
         /// <param name="updateCreatureAppearance">True to update the creature's appearance if the item is equipped; otherwise, false.</param>
-        public static void SetItemAppearance(uint item, int type, int index, int value, bool updateCreatureAppearance = false)
+        public static void SetItemAppearance(uint item, ItemAppearanceType type, int index, int value, bool updateCreatureAppearance = false)
         {
-            NWN.Core.NWNX.ItemPlugin.SetItemAppearance(item, type, index, value, updateCreatureAppearance ? 1 : 0);
+            NWN.Core.NWNX.ItemPlugin.SetItemAppearance(item, (int)type, index, value, updateCreatureAppearance ? 1 : 0);
         }
 
         /// <summary>

@@ -3,6 +3,7 @@ namespace NWN.Xenomech.API.Constants
 {
     public enum ProjectilePathType
     {
+        Invalid = -1,
         Default = 0,
         Homing = 1,
         Ballistic = 2,
