@@ -3,6 +3,7 @@ namespace NWN.Xenomech.API.Constants
 {
     public enum SavingThrowType
     {
+        Invalid = -1,
         All = 0,
         None = 0,
         MindSpells = 1,

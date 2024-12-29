@@ -3,6 +3,7 @@ namespace NWN.Xenomech.API.Constants
 {
     public enum BaseItemType
     {
+        All = -1,
         ShortSword = 0,
         LongSword = 1,
         BattleAxe = 2,

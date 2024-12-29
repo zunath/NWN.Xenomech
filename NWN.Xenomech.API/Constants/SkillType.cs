@@ -2,6 +2,7 @@ namespace NWN.Xenomech.API.Constants
 {
     public enum SkillType
     {
+        Invalid = -1,
         AnimalEmpathy = 0,
         Concentration = 1,
         DisableTrap = 2,
