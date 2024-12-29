@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>default</LangVersion>
     <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
 
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
@@ -68,7 +68,6 @@
     <PackageReference Include="NWN.Anvil" Version="8193.36.2-dev.19.r9bb01d93" ExcludeAssets="runtime" PrivateAssets="all">
       <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="ServiceStack.Redis" Version="8.5.2" />
     <PackageReference Include="StackExchange.Redis" Version="2.8.24" />
   </ItemGroup>
 

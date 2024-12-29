@@ -12,7 +12,7 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
 
     <NoWarn>1591</NoWarn>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
 
     <RootNamespace>NWN.Xenomech.Authorization</RootNamespace>
   </PropertyGroup>
