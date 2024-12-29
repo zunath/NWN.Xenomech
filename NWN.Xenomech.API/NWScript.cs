@@ -879,9 +879,9 @@ namespace NWN.Xenomech.API
         ///    Set to zero for infinite.<br/>
         ///  - bRangedOnly: Set to TRUE to have this resistance only apply to ranged attacks.
         /// </summary>
-        public static System.IntPtr EffectDamageResistance(int nDamageType, int nAmount, int nLimit = 0, int bRangedOnly = FALSE)
+        public static System.IntPtr EffectDamageResistance(DamageType nDamageType, int nAmount, int nLimit = 0, int bRangedOnly = FALSE)
         {
-            return NWN.Core.NWScript.EffectDamageResistance(nDamageType, nAmount, nLimit, bRangedOnly);
+            return NWN.Core.NWScript.EffectDamageResistance((int)nDamageType, nAmount, nLimit, bRangedOnly);
         }
 
         /// <summary>
@@ -1545,9 +1545,9 @@ namespace NWN.Xenomech.API
         ///                       bonuses (e.g. ability bonuses granted from equipped items).<br/>
         ///  Return value on error: 0
         /// </summary>
-        public static int GetAbilityScore(uint oCreature, int nAbilityType, int nBaseAbilityScore = FALSE)
+        public static int GetAbilityScore(uint oCreature, AbilityType nAbilityType, int nBaseAbilityScore = FALSE)
         {
-            return NWN.Core.NWScript.GetAbilityScore(oCreature, nAbilityType, nBaseAbilityScore);
+            return NWN.Core.NWScript.GetAbilityScore(oCreature, (int)nAbilityType, nBaseAbilityScore);
         }
 
         /// <summary>
@@ -2329,9 +2329,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Apply eEffect at lLocation.
         /// </summary>
-        public static void ApplyEffectAtLocation(int nDurationType, System.IntPtr eEffect, System.IntPtr lLocation, float fDuration = 0.0f)
+        public static void ApplyEffectAtLocation(DurationType nDurationType, System.IntPtr eEffect, System.IntPtr lLocation, float fDuration = 0.0f)
         {
-            NWN.Core.NWScript.ApplyEffectAtLocation(nDurationType, eEffect, lLocation, fDuration);
+            NWN.Core.NWScript.ApplyEffectAtLocation((int)nDurationType, eEffect, lLocation, fDuration);
         }
 
         /// <summary>
@@ -2361,9 +2361,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Apply eEffect to oTarget.
         /// </summary>
-        public static void ApplyEffectToObject(int nDurationType, System.IntPtr eEffect, uint oTarget, float fDuration = 0.0f)
+        public static void ApplyEffectToObject(DurationType nDurationType, System.IntPtr eEffect, uint oTarget, float fDuration = 0.0f)
         {
-            NWN.Core.NWScript.ApplyEffectToObject(nDurationType, eEffect, oTarget, fDuration);
+            NWN.Core.NWScript.ApplyEffectToObject((int)nDurationType, eEffect, oTarget, fDuration);
         }
 
         /// <summary>
@@ -2610,9 +2610,9 @@ namespace NWN.Xenomech.API
         ///  - bUseAppearAnimation<br/>
         ///  - sNewTag - if this string is not empty, it will replace the default tag from the template
         /// </summary>
-        public static uint CreateObject(int nObjectType, string sTemplate, System.IntPtr lLocation, int bUseAppearAnimation = FALSE, string sNewTag = "")
+        public static uint CreateObject(ObjectType nObjectType, string sTemplate, System.IntPtr lLocation, int bUseAppearAnimation = FALSE, string sNewTag = "")
         {
-            return NWN.Core.NWScript.CreateObject(nObjectType, sTemplate, lLocation, bUseAppearAnimation, sNewTag);
+            return NWN.Core.NWScript.CreateObject((int)nObjectType, sTemplate, lLocation, bUseAppearAnimation, sNewTag);
         }
 
         /// <summary>
@@ -2687,18 +2687,18 @@ namespace NWN.Xenomech.API
         ///  Create a Poison effect.<br/>
         ///  - nPoisonType: POISON_*
         /// </summary>
-        public static System.IntPtr EffectPoison(int nPoisonType)
+        public static System.IntPtr EffectPoison(PoisonType nPoisonType)
         {
-            return NWN.Core.NWScript.EffectPoison(nPoisonType);
+            return NWN.Core.NWScript.EffectPoison((int)nPoisonType);
         }
 
         /// <summary>
         ///  Create a Disease effect.<br/>
         ///  - nDiseaseType: DISEASE_*
         /// </summary>
-        public static System.IntPtr EffectDisease(int nDiseaseType)
+        public static System.IntPtr EffectDisease(DiseaseType nDiseaseType)
         {
-            return NWN.Core.NWScript.EffectDisease(nDiseaseType);
+            return NWN.Core.NWScript.EffectDisease((int)nDiseaseType);
         }
 
         /// <summary>
@@ -2895,9 +2895,9 @@ namespace NWN.Xenomech.API
         ///  Create an Immunity effect.<br/>
         ///  - nImmunityType: IMMUNITY_TYPE_*
         /// </summary>
-        public static System.IntPtr EffectImmunity(int nImmunityType)
+        public static System.IntPtr EffectImmunity(ImmunityType nImmunityType)
         {
-            return NWN.Core.NWScript.EffectImmunity(nImmunityType);
+            return NWN.Core.NWScript.EffectImmunity((int)nImmunityType);
         }
 
         /// <summary>
@@ -2907,9 +2907,9 @@ namespace NWN.Xenomech.API
         ///    alignment of oVersus<br/>
         ///  * Returns TRUE if oCreature has immunity of type nImmunity versus oVersus.
         /// </summary>
-        public static int GetIsImmune(uint oCreature, int nImmunityType, uint oVersus = OBJECT_INVALID)
+        public static int GetIsImmune(uint oCreature, ImmunityType nImmunityType, uint oVersus = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetIsImmune(oCreature, nImmunityType, oVersus);
+            return NWN.Core.NWScript.GetIsImmune(oCreature, (int)nImmunityType, oVersus);
         }
 
         /// <summary>
@@ -2917,9 +2917,9 @@ namespace NWN.Xenomech.API
         ///  - nDamageType: DAMAGE_TYPE_*<br/>
         ///  - nPercentImmunity
         /// </summary>
-        public static System.IntPtr EffectDamageImmunityIncrease(int nDamageType, int nPercentImmunity)
+        public static System.IntPtr EffectDamageImmunityIncrease(DamageType nDamageType, int nPercentImmunity)
         {
-            return NWN.Core.NWScript.EffectDamageImmunityIncrease(nDamageType, nPercentImmunity);
+            return NWN.Core.NWScript.EffectDamageImmunityIncrease((int)nDamageType, nPercentImmunity);
         }
 
         /// <summary>
@@ -3564,18 +3564,18 @@ namespace NWN.Xenomech.API
         ///  - nClassType: CLASS_TYPE_*
         ///  - oCreature
         /// </summary>
-        public static int GetLevelByClass(int nClassType, uint oCreature = OBJECT_INVALID)
+        public static int GetLevelByClass(ClassType nClassType, uint oCreature = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetLevelByClass(nClassType, oCreature);
+            return NWN.Core.NWScript.GetLevelByClass((int)nClassType, oCreature);
         }
 
         /// <summary>
         ///  Get the amount of damage of type nDamageType that has been dealt to the caller.
         ///  - nDamageType: DAMAGE_TYPE_*
         /// </summary>
-        public static int GetDamageDealtByType(int nDamageType)
+        public static int GetDamageDealtByType(DamageType nDamageType)
         {
-            return NWN.Core.NWScript.GetDamageDealtByType(nDamageType);
+            return NWN.Core.NWScript.GetDamageDealtByType((int)nDamageType);
         }
 
         /// <summary>
@@ -3688,9 +3688,9 @@ namespace NWN.Xenomech.API
         ///  - eEffect
         ///  - nRacialType: RACIAL_TYPE_*
         /// </summary>
-        public static System.IntPtr VersusRacialTypeEffect(System.IntPtr eEffect, int nRacialType)
+        public static System.IntPtr VersusRacialTypeEffect(System.IntPtr eEffect, RacialType nRacialType)
         {
-            return NWN.Core.NWScript.VersusRacialTypeEffect(eEffect, nRacialType);
+            return NWN.Core.NWScript.VersusRacialTypeEffect(eEffect, (int)nRacialType);
         }
 
         /// <summary>
@@ -3759,9 +3759,9 @@ namespace NWN.Xenomech.API
         ///  - nTh: Which associate of the specified type to return
         ///  * Returns OBJECT_INVALID if no such associate exists.
         /// </summary>
-        public static uint GetAssociate(int nAssociateType, uint oMaster = OBJECT_INVALID, int nTh = 1)
+        public static uint GetAssociate(AssociateType nAssociateType, uint oMaster = OBJECT_INVALID, int nTh = 1)
         {
-            return NWN.Core.NWScript.GetAssociate(nAssociateType, oMaster, nTh);
+            return NWN.Core.NWScript.GetAssociate((int)nAssociateType, oMaster, nTh);
         }
 
         /// <summary>
@@ -4578,9 +4578,9 @@ namespace NWN.Xenomech.API
         ///  - nDamageType: DAMAGE_TYPE_*<br/>
         ///  - nPercentImmunity
         /// </summary>
-        public static System.IntPtr EffectDamageImmunityDecrease(int nDamageType, int nPercentImmunity)
+        public static System.IntPtr EffectDamageImmunityDecrease(DamageType nDamageType, int nPercentImmunity)
         {
-            return NWN.Core.NWScript.EffectDamageImmunityDecrease(nDamageType, nPercentImmunity);
+            return NWN.Core.NWScript.EffectDamageImmunityDecrease((int)nDamageType, nPercentImmunity);
         }
 
         /// <summary>
@@ -4662,9 +4662,9 @@ namespace NWN.Xenomech.API
         ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nInvisibilityType<br/>
         ///    is invalid.
         /// </summary>
-        public static System.IntPtr EffectInvisibility(int nInvisibilityType)
+        public static System.IntPtr EffectInvisibility(InvisibilityType nInvisibilityType)
         {
-            return NWN.Core.NWScript.EffectInvisibility(nInvisibilityType);
+            return NWN.Core.NWScript.EffectInvisibility((int)nInvisibilityType);
         }
 
         /// <summary>
@@ -4978,9 +4978,9 @@ namespace NWN.Xenomech.API
         ///  NOTE! You *must* use the DAMAGE_BONUS_* constants! Using other values may<br/>
         ///        result in odd behaviour.
         /// </summary>
-        public static System.IntPtr EffectDamageShield(int nDamageAmount, int nRandomAmount, int nDamageType)
+        public static System.IntPtr EffectDamageShield(int nDamageAmount, int nRandomAmount, DamageType nDamageType)
         {
-            return NWN.Core.NWScript.EffectDamageShield(nDamageAmount, nRandomAmount, nDamageType);
+            return NWN.Core.NWScript.EffectDamageShield(nDamageAmount, nRandomAmount, (int)nDamageType);
         }
 
         /// <summary>
@@ -6252,9 +6252,9 @@ namespace NWN.Xenomech.API
         ///  adds an item property to the specified item<br/>
         ///  Only temporary and permanent duration types are allowed.
         /// </summary>
-        public static void AddItemProperty(int nDurationType, System.IntPtr ipProperty, uint oItem, float fDuration = 0.0f)
+        public static void AddItemProperty(DurationType nDurationType, System.IntPtr ipProperty, uint oItem, float fDuration = 0.0f)
         {
-            NWN.Core.NWScript.AddItemProperty(nDurationType, ipProperty, oItem, fDuration);
+            NWN.Core.NWScript.AddItemProperty((int)nDurationType, ipProperty, oItem, fDuration);
         }
         /// <summary>
         ///  removes an item property from the specified item
@@ -6345,9 +6345,9 @@ namespace NWN.Xenomech.API
         ///  NOTE: Only the first 3 damage types may be used here, the 3 basic<br/>
         ///        physical types.
         /// </summary>
-        public static System.IntPtr ItemPropertyACBonusVsDmgType(int nDamageType, int nACBonus)
+        public static System.IntPtr ItemPropertyACBonusVsDmgType(DamageType nDamageType, int nACBonus)
         {
-            return NWN.Core.NWScript.ItemPropertyACBonusVsDmgType(nDamageType, nACBonus);
+            return NWN.Core.NWScript.ItemPropertyACBonusVsDmgType((int)nDamageType, nACBonus);
         }
 
         /// <summary>
@@ -6853,9 +6853,9 @@ namespace NWN.Xenomech.API
         ///  NOTE: not all the damage types will work, use only the following: Acid, Bludgeoning,<br/>
         ///        Cold, Electrical, Fire, Piercing, Slashing, Sonic.
         /// </summary>
-        public static System.IntPtr ItemPropertyDamageBonus(int nDamageType, int nDamage)
+        public static System.IntPtr ItemPropertyDamageBonus(DamageType nDamageType, int nDamage)
         {
-            return NWN.Core.NWScript.ItemPropertyDamageBonus(nDamageType, nDamage);
+            return NWN.Core.NWScript.ItemPropertyDamageBonus((int)nDamageType, nDamage);
         }
         /// <summary>
         ///  Returns Item property damage bonus vs. Alignment groups.  You must specify the<br/>
@@ -6864,9 +6864,9 @@ namespace NWN.Xenomech.API
         ///  NOTE: not all the damage types will work, use only the following: Acid, Bludgeoning,<br/>
         ///        Cold, Electrical, Fire, Piercing, Slashing, Sonic.
         /// </summary>
-        public static System.IntPtr ItemPropertyDamageBonusVsAlign(int nAlignGroup, int nDamageType, int nDamage)
+        public static System.IntPtr ItemPropertyDamageBonusVsAlign(int nAlignGroup, DamageType nDamageType, int nDamage)
         {
-            return NWN.Core.NWScript.ItemPropertyDamageBonusVsAlign(nAlignGroup, nDamageType, nDamage);
+            return NWN.Core.NWScript.ItemPropertyDamageBonusVsAlign(nAlignGroup, (int)nDamageType, nDamage);
         }
 
         /// <summary>
@@ -6876,9 +6876,9 @@ namespace NWN.Xenomech.API
         ///  NOTE: not all the damage types will work, use only the following: Acid, Bludgeoning,<br/>
         ///        Cold, Electrical, Fire, Piercing, Slashing, Sonic.
         /// </summary>
-        public static System.IntPtr ItemPropertyDamageBonusVsRace(int nRace, int nDamageType, int nDamage)
+        public static System.IntPtr ItemPropertyDamageBonusVsRace(int nRace, DamageType nDamageType, int nDamage)
         {
-            return NWN.Core.NWScript.ItemPropertyDamageBonusVsRace(nRace, nDamageType, nDamage);
+            return NWN.Core.NWScript.ItemPropertyDamageBonusVsRace(nRace, (int)nDamageType, nDamage);
         }
 
         /// <summary>
@@ -6888,9 +6888,9 @@ namespace NWN.Xenomech.API
         ///  NOTE: not all the damage types will work, use only the following: Acid, Bludgeoning,<br/>
         ///        Cold, Electrical, Fire, Piercing, Slashing, Sonic.
         /// </summary>
-        public static System.IntPtr ItemPropertyDamageBonusVsSAlign(int nAlign, int nDamageType, int nDamage)
+        public static System.IntPtr ItemPropertyDamageBonusVsSAlign(int nAlign, DamageType nDamageType, int nDamage)
         {
-            return NWN.Core.NWScript.ItemPropertyDamageBonusVsSAlign(nAlign, nDamageType, nDamage);
+            return NWN.Core.NWScript.ItemPropertyDamageBonusVsSAlign(nAlign, (int)nDamageType, nDamage);
         }
 
         /// <summary>
@@ -6900,9 +6900,9 @@ namespace NWN.Xenomech.API
         ///  NOTE: not all the damage types will work, use only the following: Acid, Bludgeoning,<br/>
         ///        Cold, Electrical, Fire, Piercing, Slashing, Sonic.
         /// </summary>
-        public static System.IntPtr ItemPropertyDamageImmunity(int nDamageType, int nImmuneBonus)
+        public static System.IntPtr ItemPropertyDamageImmunity(DamageType nDamageType, int nImmuneBonus)
         {
-            return NWN.Core.NWScript.ItemPropertyDamageImmunity(nDamageType, nImmuneBonus);
+            return NWN.Core.NWScript.ItemPropertyDamageImmunity((int)nDamageType, nImmuneBonus);
         }
 
         /// <summary>
@@ -6930,9 +6930,9 @@ namespace NWN.Xenomech.API
         ///  constant(IP_CONST_DAMAGETYPE_*) and the amount of HP of damage constant<br/>
         ///  (IP_CONST_DAMAGERESIST_*) that will be resisted against each round.
         /// </summary>
-        public static System.IntPtr ItemPropertyDamageResistance(int nDamageType, int nHPResist)
+        public static System.IntPtr ItemPropertyDamageResistance(DamageType nDamageType, int nHPResist)
         {
-            return NWN.Core.NWScript.ItemPropertyDamageResistance(nDamageType, nHPResist);
+            return NWN.Core.NWScript.ItemPropertyDamageResistance((int)nDamageType, nHPResist);
         }
 
         /// <summary>
@@ -6940,9 +6940,9 @@ namespace NWN.Xenomech.API
         ///  constant(IP_CONST_DAMAGETYPE_*) that you want the user to be extra vulnerable to<br/>
         ///  and the percentage vulnerability constant(IP_CONST_DAMAGEVULNERABILITY_*).
         /// </summary>
-        public static System.IntPtr ItemPropertyDamageVulnerability(int nDamageType, int nVulnerability)
+        public static System.IntPtr ItemPropertyDamageVulnerability(DamageType nDamageType, int nVulnerability)
         {
-            return NWN.Core.NWScript.ItemPropertyDamageVulnerability(nDamageType, nVulnerability);
+            return NWN.Core.NWScript.ItemPropertyDamageVulnerability((int)nDamageType, nVulnerability);
         }
 
         /// <summary>
@@ -7000,9 +7000,9 @@ namespace NWN.Xenomech.API
         ///        here.<br/>
         ///  NOTE: It is also only applicable to melee weapons.
         /// </summary>
-        public static System.IntPtr ItemPropertyExtraMeleeDamageType(int nDamageType)
+        public static System.IntPtr ItemPropertyExtraMeleeDamageType(DamageType nDamageType)
         {
-            return NWN.Core.NWScript.ItemPropertyExtraMeleeDamageType(nDamageType);
+            return NWN.Core.NWScript.ItemPropertyExtraMeleeDamageType((int)nDamageType);
         }
 
         /// <summary>
@@ -7012,9 +7012,9 @@ namespace NWN.Xenomech.API
         ///        here.<br/>
         ///  NOTE: It is also only applicable to ranged weapons.
         /// </summary>
-        public static System.IntPtr ItemPropertyExtraRangeDamageType(int nDamageType)
+        public static System.IntPtr ItemPropertyExtraRangeDamageType(DamageType nDamageType)
         {
-            return NWN.Core.NWScript.ItemPropertyExtraRangeDamageType(nDamageType);
+            return NWN.Core.NWScript.ItemPropertyExtraRangeDamageType((int)nDamageType);
         }
 
         /// <summary>
@@ -7037,9 +7037,9 @@ namespace NWN.Xenomech.API
         ///  Returns Item property immunity to miscellaneous effects.  You must specify the<br/>
         ///  effect to which the user is immune, it is a constant(IP_CONST_IMMUNITYMISC_*).
         /// </summary>
-        public static System.IntPtr ItemPropertyImmunityMisc(int nImmunityType)
+        public static System.IntPtr ItemPropertyImmunityMisc(ImmunityType nImmunityType)
         {
-            return NWN.Core.NWScript.ItemPropertyImmunityMisc(nImmunityType);
+            return NWN.Core.NWScript.ItemPropertyImmunityMisc((int)nImmunityType);
         }
 
         /// <summary>
@@ -8224,9 +8224,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Sets the creature&apos;s appearance type to the value specified (uses the APPEARANCE_TYPE_XXX constants)
         /// </summary>
-        public static void SetCreatureAppearanceType(uint oCreature, int nAppearanceType)
+        public static void SetCreatureAppearanceType(uint oCreature, AppearanceType nAppearanceType)
         {
-            NWN.Core.NWScript.SetCreatureAppearanceType(oCreature, nAppearanceType);
+            NWN.Core.NWScript.SetCreatureAppearanceType(oCreature, (int)nAppearanceType);
         }
 
         /// <summary>
@@ -8373,9 +8373,9 @@ namespace NWN.Xenomech.API
         ///  If an object other than an area is specified, will use the area that the object is currently in.<br/>
         ///  If fFadeTime is above 0.0, it will fade to the new color in the amount of seconds specified.
         /// </summary>
-        public static void SetFogColor(int nFogType, int nFogColor, uint oArea = OBJECT_INVALID, float fFadeTime = 0.0f)
+        public static void SetFogColor(FogType nFogType, int nFogColor, uint oArea = OBJECT_INVALID, float fFadeTime = 0.0f)
         {
-            NWN.Core.NWScript.SetFogColor(nFogType, nFogColor, oArea, fFadeTime);
+            NWN.Core.NWScript.SetFogColor((int)nFogType, nFogColor, oArea, fFadeTime);
         }
 
         /// <summary>
@@ -8408,9 +8408,9 @@ namespace NWN.Xenomech.API
         ///  If no valid area (or object) is specified, it uses the area of caller.<br/>
         ///  If an object other than an area is specified, will use the area that the object is currently in.
         /// </summary>
-        public static int GetFogColor(int nFogType, uint oArea = OBJECT_INVALID)
+        public static int GetFogColor(FogType nFogType, uint oArea = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetFogColor(nFogType, oArea);
+            return NWN.Core.NWScript.GetFogColor((int)nFogType, oArea);
         }
 
         /// <summary>
@@ -8420,9 +8420,9 @@ namespace NWN.Xenomech.API
         ///  If no valid area (or object) is specified, it uses the area of caller.<br/>
         ///  If an object other than an area is specified, will use the area that the object is currently in.
         /// </summary>
-        public static void SetFogAmount(int nFogType, int nFogAmount, uint oArea = OBJECT_INVALID)
+        public static void SetFogAmount(FogType nFogType, int nFogAmount, uint oArea = OBJECT_INVALID)
         {
-            NWN.Core.NWScript.SetFogAmount(nFogType, nFogAmount, oArea);
+            NWN.Core.NWScript.SetFogAmount((int)nFogType, nFogAmount, oArea);
         }
 
         /// <summary>
@@ -8432,9 +8432,9 @@ namespace NWN.Xenomech.API
         ///  If no valid area (or object) is specified, it uses the area of caller.<br/>
         ///  If an object other than an area is specified, will use the area that the object is currently in.
         /// </summary>
-        public static int GetFogAmount(int nFogType, uint oArea = OBJECT_INVALID)
+        public static int GetFogAmount(FogType nFogType, uint oArea = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetFogAmount(nFogType, oArea);
+            return NWN.Core.NWScript.GetFogAmount((int)nFogType, oArea);
         }
 
         /// <summary>
@@ -8491,9 +8491,9 @@ namespace NWN.Xenomech.API
         ///       FOOTSTEP_TYPE_NONE<br/>
         ///  - oCreature: the creature to change the footstep sound for.
         /// </summary>
-        public static void SetFootstepType(int nFootstepType, uint oCreature = OBJECT_INVALID)
+        public static void SetFootstepType(FootstepType nFootstepType, uint oCreature = OBJECT_INVALID)
         {
-            NWN.Core.NWScript.SetFootstepType(nFootstepType, oCreature);
+            NWN.Core.NWScript.SetFootstepType((int)nFootstepType, oCreature);
         }
 
         /// <summary>
@@ -10413,9 +10413,9 @@ namespace NWN.Xenomech.API
         ///  * oTarget: a valid creature, placeable or item.<br/>
         ///  Returns: TRUE if the baseitem type fits, FALSE if not or on error.
         /// </summary>
-        public static int GetBaseItemFitsInInventory(int nBaseItemType, uint oTarget)
+        public static int GetBaseItemFitsInInventory(BaseItemType nBaseItemType, uint oTarget)
         {
-            return NWN.Core.NWScript.GetBaseItemFitsInInventory(nBaseItemType, oTarget);
+            return NWN.Core.NWScript.GetBaseItemFitsInInventory((int)nBaseItemType, oTarget);
         }
 
         /// <summary>
@@ -11457,9 +11457,9 @@ namespace NWN.Xenomech.API
         ///  - nSpellLevel: the spell level, 0-9.<br/>
         ///  Returns: the number of spell slots.
         /// </summary>
-        public static int GetMemorizedSpellCountByLevel(uint oCreature, int nClassType, int nSpellLevel)
+        public static int GetMemorizedSpellCountByLevel(uint oCreature, ClassType nClassType, int nSpellLevel)
         {
-            return NWN.Core.NWScript.GetMemorizedSpellCountByLevel(oCreature, nClassType, nSpellLevel);
+            return NWN.Core.NWScript.GetMemorizedSpellCountByLevel(oCreature, (int)nClassType, nSpellLevel);
         }
 
         /// <summary>
@@ -11469,9 +11469,9 @@ namespace NWN.Xenomech.API
         ///  - nIndex: the index of the spell slot. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetMemorizedSpellCountByLevel()<br/>
         ///  Returns: a SPELL_* constant or -1 if the slot is not set.
         /// </summary>
-        public static int GetMemorizedSpellId(uint oCreature, int nClassType, int nSpellLevel, int nIndex)
+        public static int GetMemorizedSpellId(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex)
         {
-            return NWN.Core.NWScript.GetMemorizedSpellId(oCreature, nClassType, nSpellLevel, nIndex);
+            return NWN.Core.NWScript.GetMemorizedSpellId(oCreature, (int)nClassType, nSpellLevel, nIndex);
         }
 
         /// <summary>
@@ -11481,9 +11481,9 @@ namespace NWN.Xenomech.API
         ///  - nIndex: the index of the spell slot. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetMemorizedSpellCountByLevel()<br/>
         ///  Returns: TRUE/FALSE or -1 if the slot is not set.
         /// </summary>
-        public static int GetMemorizedSpellReady(uint oCreature, int nClassType, int nSpellLevel, int nIndex)
+        public static int GetMemorizedSpellReady(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex)
         {
-            return NWN.Core.NWScript.GetMemorizedSpellReady(oCreature, nClassType, nSpellLevel, nIndex);
+            return NWN.Core.NWScript.GetMemorizedSpellReady(oCreature, (int)nClassType, nSpellLevel, nIndex);
         }
 
         /// <summary>
@@ -11493,9 +11493,9 @@ namespace NWN.Xenomech.API
         ///  - nIndex: the index of the spell slot. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetMemorizedSpellCountByLevel()<br/>
         ///  Returns: a METAMAGIC_* constant or -1 if the slot is not set.
         /// </summary>
-        public static int GetMemorizedSpellMetaMagic(uint oCreature, int nClassType, int nSpellLevel, int nIndex)
+        public static int GetMemorizedSpellMetaMagic(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex)
         {
-            return NWN.Core.NWScript.GetMemorizedSpellMetaMagic(oCreature, nClassType, nSpellLevel, nIndex);
+            return NWN.Core.NWScript.GetMemorizedSpellMetaMagic(oCreature, (int)nClassType, nSpellLevel, nIndex);
         }
 
         /// <summary>
@@ -11505,9 +11505,9 @@ namespace NWN.Xenomech.API
         ///  - nIndex: the index of the spell slot. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetMemorizedSpellCountByLevel()<br/>
         ///  Returns: TRUE/FALSE or -1 if the slot is not set.
         /// </summary>
-        public static int GetMemorizedSpellIsDomainSpell(uint oCreature, int nClassType, int nSpellLevel, int nIndex)
+        public static int GetMemorizedSpellIsDomainSpell(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex)
         {
-            return NWN.Core.NWScript.GetMemorizedSpellIsDomainSpell(oCreature, nClassType, nSpellLevel, nIndex);
+            return NWN.Core.NWScript.GetMemorizedSpellIsDomainSpell(oCreature, (int)nClassType, nSpellLevel, nIndex);
         }
 
         /// <summary>
@@ -11532,9 +11532,9 @@ namespace NWN.Xenomech.API
         ///  - nIndex: the index of the spell slot. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetMemorizedSpellCountByLevel()<br/>
         ///  - bReady: TRUE to mark the slot ready.
         /// </summary>
-        public static void SetMemorizedSpellReady(uint oCreature, int nClassType, int nSpellLevel, int nIndex, int bReady)
+        public static void SetMemorizedSpellReady(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex, int bReady)
         {
-            NWN.Core.NWScript.SetMemorizedSpellReady(oCreature, nClassType, nSpellLevel, nIndex, bReady);
+            NWN.Core.NWScript.SetMemorizedSpellReady(oCreature, (int)nClassType, nSpellLevel, nIndex, bReady);
         }
 
         /// <summary>
@@ -11543,9 +11543,9 @@ namespace NWN.Xenomech.API
         ///  - nSpellLevel: the spell level, 0-9.<br/>
         ///  - nIndex: the index of the spell slot. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetMemorizedSpellCountByLevel()
         /// </summary>
-        public static void ClearMemorizedSpell(uint oCreature, int nClassType, int nSpellLevel, int nIndex)
+        public static void ClearMemorizedSpell(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex)
         {
-            NWN.Core.NWScript.ClearMemorizedSpell(oCreature, nClassType, nSpellLevel, nIndex);
+            NWN.Core.NWScript.ClearMemorizedSpell(oCreature, (int)nClassType, nSpellLevel, nIndex);
         }
 
         /// <summary>
@@ -11553,9 +11553,9 @@ namespace NWN.Xenomech.API
         ///  - nClassType: a CLASS_TYPE_* constant. Must be a MemorizesSpells class.<br/>
         ///  - nSpellId: a SPELL_* constant.
         /// </summary>
-        public static void ClearMemorizedSpellBySpellId(uint oCreature, int nClassType, int nSpellId)
+        public static void ClearMemorizedSpellBySpellId(uint oCreature, ClassType nClassType, int nSpellId)
         {
-            NWN.Core.NWScript.ClearMemorizedSpellBySpellId(oCreature, nClassType, nSpellId);
+            NWN.Core.NWScript.ClearMemorizedSpellBySpellId(oCreature, (int)nClassType, nSpellId);
         }
 
         /// <summary>
@@ -11564,9 +11564,9 @@ namespace NWN.Xenomech.API
         ///  - nSpellLevel: the spell level, 0-9.<br/>
         ///  Returns: the number of known spells.
         /// </summary>
-        public static int GetKnownSpellCount(uint oCreature, int nClassType, int nSpellLevel)
+        public static int GetKnownSpellCount(uint oCreature, ClassType nClassType, int nSpellLevel)
         {
-            return NWN.Core.NWScript.GetKnownSpellCount(oCreature, nClassType, nSpellLevel);
+            return NWN.Core.NWScript.GetKnownSpellCount(oCreature, (int)nClassType, nSpellLevel);
         }
 
         /// <summary>
@@ -11576,9 +11576,9 @@ namespace NWN.Xenomech.API
         ///  - nIndex: the index of the known spell. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetKnownSpellCount()<br/>
         ///  Returns: a SPELL_* constant or -1 on error.
         /// </summary>
-        public static int GetKnownSpellId(uint oCreature, int nClassType, int nSpellLevel, int nIndex)
+        public static int GetKnownSpellId(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex)
         {
-            return NWN.Core.NWScript.GetKnownSpellId(oCreature, nClassType, nSpellLevel, nIndex);
+            return NWN.Core.NWScript.GetKnownSpellId(oCreature, (int)nClassType, nSpellLevel, nIndex);
         }
 
         /// <summary>
@@ -11587,9 +11587,9 @@ namespace NWN.Xenomech.API
         ///  - nSpellId: a SPELL_* constant.<br/>
         ///  Returns: TRUE if the spell is in the known spell list.
         /// </summary>
-        public static int GetIsInKnownSpellList(uint oCreature, int nClassType, int nSpellId)
+        public static int GetIsInKnownSpellList(uint oCreature, ClassType nClassType, int nSpellId)
         {
-            return NWN.Core.NWScript.GetIsInKnownSpellList(oCreature, nClassType, nSpellId);
+            return NWN.Core.NWScript.GetIsInKnownSpellList(oCreature, (int)nClassType, nSpellId);
         }
 
         /// <summary>
@@ -11611,9 +11611,9 @@ namespace NWN.Xenomech.API
         ///  - nSpellId: a SPELL_* constant.<br/>
         ///  Returns: the spell level or -1 if the class does not get the spell.
         /// </summary>
-        public static int GetSpellLevelByClass(int nClassType, int nSpellId)
+        public static int GetSpellLevelByClass(ClassType nClassType, int nSpellId)
         {
-            return NWN.Core.NWScript.GetSpellLevelByClass(nClassType, nSpellId);
+            return NWN.Core.NWScript.GetSpellLevelByClass((int)nClassType, nSpellId);
         }
 
         /// <summary>
