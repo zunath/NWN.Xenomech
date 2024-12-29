@@ -483,9 +483,9 @@ namespace NWN.Xenomech.API
         ///  - fDurationSeconds: Duration of the animation (this is not used for Fire and<br/>
         ///    Forget animations)
         /// </summary>
-        public static void ActionPlayAnimation(int nAnimation, float fSpeed = 1.0f, float fDurationSeconds = 0.0f)
+        public static void ActionPlayAnimation(AnimationType nAnimation, float fSpeed = 1.0f, float fDurationSeconds = 0.0f)
         {
-            NWN.Core.NWScript.ActionPlayAnimation(nAnimation, fSpeed, fDurationSeconds);
+            NWN.Core.NWScript.ActionPlayAnimation((int)nAnimation, fSpeed, fDurationSeconds);
         }
 
         /// <summary>
@@ -3156,9 +3156,9 @@ namespace NWN.Xenomech.API
         ///  - fSpeed<br/>
         ///  - fSeconds
         /// </summary>
-        public static void PlayAnimation(int nAnimation, float fSpeed = 1.0f, float fSeconds = 0.0f)
+        public static void PlayAnimation(AnimationType nAnimation, float fSpeed = 1.0f, float fSeconds = 0.0f)
         {
-            NWN.Core.NWScript.PlayAnimation(nAnimation, fSpeed, fSeconds);
+            NWN.Core.NWScript.PlayAnimation((int)nAnimation, fSpeed, fSeconds);
         }
 
         /// <summary>
@@ -4913,9 +4913,9 @@ namespace NWN.Xenomech.API
         ///  - nAnimation determines which appear and disappear animations to use. Most creatures<br/>
         ///  only have animation 1, although a few have 2 (like beholders)
         /// </summary>
-        public static Effect EffectDisappearAppear(Location lLocation, int nAnimation = 1)
+        public static Effect EffectDisappearAppear(Location lLocation, AnimationType nAnimation = AnimationType.LoopingPause2)
         {
-            return NWN.Core.NWScript.EffectDisappearAppear(lLocation, nAnimation);
+            return NWN.Core.NWScript.EffectDisappearAppear(lLocation, (int)nAnimation);
         }
 
         /// <summary>
@@ -4924,9 +4924,9 @@ namespace NWN.Xenomech.API
         ///  - nAnimation determines which appear and disappear animations to use. Most creatures<br/>
         ///  only have animation 1, although a few have 2 (like beholders)
         /// </summary>
-        public static Effect EffectDisappear(int nAnimation = 1)
+        public static Effect EffectDisappear(AnimationType nAnimation = AnimationType.LoopingPause2)
         {
-            return NWN.Core.NWScript.EffectDisappear(nAnimation);
+            return NWN.Core.NWScript.EffectDisappear((int)nAnimation);
         }
 
         /// <summary>
@@ -4934,9 +4934,9 @@ namespace NWN.Xenomech.API
         ///  - nAnimation determines which appear and disappear animations to use. Most creatures<br/>
         ///  only have animation 1, although a few have 2 (like beholders)
         /// </summary>
-        public static Effect EffectAppear(int nAnimation = 1)
+        public static Effect EffectAppear(AnimationType nAnimation = AnimationType.LoopingPause2)
         {
-            return NWN.Core.NWScript.EffectAppear(nAnimation);
+            return NWN.Core.NWScript.EffectAppear((int)nAnimation);
         }
 
         /// <summary>
