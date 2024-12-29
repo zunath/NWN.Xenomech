@@ -35,7 +35,8 @@ namespace NWN.Xenomech.Authorization
         private void OnModuleEnter(ModuleEvents.OnClientEnter obj)
         {
             var dm = GetEnteringObject();
-            if (!GetIsDM(dm) && !GetIsDMPossessed(dm)) return;
+            if (GetIsDM(dm) == 0 && GetIsDMPossessed(dm) == 0) 
+                return;
 
             var authorizationLevel = GetAuthorizationLevel(dm);
 
