@@ -24,7 +24,16 @@ namespace NWN.Xenomech.Authorization
             _db = db;
             _settings = settings;
 
+            HookEvents();
+            RegisterEntities();
+        }
+
+        private void HookEvents()
+        {
             NwModule.Instance.OnClientEnter += OnModuleEnter;
+        }
+        private void RegisterEntities()
+        {
             _db.Register<AuthorizedDM>();
         }
 
