@@ -15,16 +15,13 @@ namespace NWN.Xenomech.Authorization
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         private readonly DBService _db;
-        private readonly Localization _localization;
         private readonly XMSettingsService _settings;
 
         public AuthorizationService(
             DBService db, 
-            Localization localization,
             XMSettingsService settings)
         {
             _db = db;
-            _localization = localization;
             _settings = settings;
 
             NwModule.Instance.OnClientEnter += OnModuleEnter;
@@ -34,7 +31,7 @@ namespace NWN.Xenomech.Authorization
         private void OnModuleEnter(ModuleEvents.OnClientEnter obj)
         {
             var dm = GetEnteringObject();
-            if (GetIsDM(dm) && GetIsDMPossessed(dm)) 
+            if (!GetIsDM(dm) && !GetIsDMPossessed(dm)) 
                 return;
 
             var authorizationLevel = GetAuthorizationLevel(dm);
@@ -43,7 +40,7 @@ namespace NWN.Xenomech.Authorization
                 authorizationLevel != AuthorizationLevel.Admin)
             {
                 LogDMAuthorization(false);
-                BootPC(dm, _localization.GetString(LocalizationIds.NotAuthorizedToLogin));
+                BootPC(dm, Localization.GetString(LocalizationIds.NotAuthorizedToLogin));
                 return;
             }
 
