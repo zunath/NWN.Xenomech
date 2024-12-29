@@ -1,5 +1,7 @@
 using NWN.Core;
+using NWN.Xenomech.API.BaseTypes;
 using NWN.Xenomech.API.Constants;
+using System.Numerics;
 using ClassType = NWN.Xenomech.API.Constants.ClassType;
 using MissChanceType = NWN.Xenomech.API.Constants.MissChanceType;
 using ProjectilePathType = NWN.Xenomech.API.Constants.ProjectilePathType;
@@ -11,7 +13,7 @@ namespace NWN.Xenomech.API
     {
         public const uint OBJECT_INVALID = 0x7F000000;
         public static uint OBJECT_SELF => NWN.Core.NWScript.OBJECT_SELF;
-        public static System.IntPtr LOCATION_INVALID => Location(OBJECT_INVALID, new System.Numerics.Vector3(0f, 0f, 0f), 0f);
+        public static Location LOCATION_INVALID => Location(OBJECT_INVALID, new Vector3(0f, 0f, 0f), 0f);
 
         public const string sLanguage = "nwscript";
         /// <summary>
@@ -239,7 +241,7 @@ namespace NWN.Xenomech.API
         ///  * No return value, but if an error occurs the log file will contain
         ///    "MoveToPoint failed."
         /// </summary>
-        public static void ActionMoveToLocation(System.IntPtr lDestination, bool bRun = false)
+        public static void ActionMoveToLocation(Location lDestination, bool bRun = false)
         {
             NWN.Core.NWScript.ActionMoveToLocation(lDestination, bRun ? 1 : 0);
         }
@@ -313,7 +315,7 @@ namespace NWN.Xenomech.API
         ///  Get the position of oTarget.
         ///  * Return value on error: vector (0.0f, 0.0f, 0.0f).
         /// </summary>
-        public static System.Numerics.Vector3 GetPosition(uint oTarget)
+        public static Vector3 GetPosition(uint oTarget)
         {
             return NWN.Core.NWScript.GetPosition(oTarget);
         }
@@ -842,7 +844,7 @@ namespace NWN.Xenomech.API
         ///  Create a Heal effect. This should be applied as an instantaneous effect.<br/>
         ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nDamageToHeal < 0.
         /// </summary>
-        public static System.IntPtr EffectHeal(int nDamageToHeal)
+        public static Effect EffectHeal(int nDamageToHeal)
         {
             return NWN.Core.NWScript.EffectHeal(nDamageToHeal);
         }
@@ -854,7 +856,7 @@ namespace NWN.Xenomech.API
         ///  - nDamageType: DAMAGE_TYPE_*<br/>
         ///  - nDamagePower: DAMAGE_POWER_*
         /// </summary>
-        public static System.IntPtr EffectDamage(int nDamageAmount, DamageType nDamageType = DamageType.Magical, DamagePowerType nDamagePower = DamagePowerType.Normal)
+        public static Effect EffectDamage(int nDamageAmount, DamageType nDamageType = DamageType.Magical, DamagePowerType nDamagePower = DamagePowerType.Normal)
         {
             return NWN.Core.NWScript.EffectDamage(nDamageAmount, (int)nDamageType, (int)nDamagePower);
         }
@@ -863,7 +865,7 @@ namespace NWN.Xenomech.API
         ///  Create an Ability Increase effect<br/>
         ///  - bAbilityToIncrease: ABILITY_*
         /// </summary>
-        public static System.IntPtr EffectAbilityIncrease(int nAbilityToIncrease, int nModifyBy)
+        public static Effect EffectAbilityIncrease(int nAbilityToIncrease, int nModifyBy)
         {
             return NWN.Core.NWScript.EffectAbilityIncrease(nAbilityToIncrease, nModifyBy);
         }
@@ -876,7 +878,7 @@ namespace NWN.Xenomech.API
         ///    Set to zero for infinite.<br/>
         ///  - bRangedOnly: Set to true to have this resistance only apply to ranged attacks.
         /// </summary>
-        public static System.IntPtr EffectDamageResistance(DamageType nDamageType, int nAmount, int nLimit = 0, bool bRangedOnly = false)
+        public static Effect EffectDamageResistance(DamageType nDamageType, int nAmount, int nLimit = 0, bool bRangedOnly = false)
         {
             return NWN.Core.NWScript.EffectDamageResistance((int)nDamageType, nAmount, nLimit, bRangedOnly ? 1 : 0);
         }
@@ -884,7 +886,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Resurrection effect. This should be applied as an instantaneous effect.
         /// </summary>
-        public static System.IntPtr EffectResurrection()
+        public static Effect EffectResurrection()
         {
             return NWN.Core.NWScript.EffectResurrection();
         }
@@ -900,7 +902,7 @@ namespace NWN.Xenomech.API
         ///    summoned. If zero, it will just fade in somewhere near the target.  If the value is 1<br/>
         ///    it will use the appear animation, and if it's 2 it will use appear2 (which doesn't exist for most creatures)
         /// </summary>
-        public static System.IntPtr EffectSummonCreature(string sCreatureResref, VisualEffectType nVisualEffectId = VisualEffectType.None, float fDelaySeconds = 0.0f, int nUseAppearAnimation = 0)
+        public static Effect EffectSummonCreature(string sCreatureResref, VisualEffectType nVisualEffectId = VisualEffectType.None, float fDelaySeconds = 0.0f, int nUseAppearAnimation = 0)
         {
             return NWN.Core.NWScript.EffectSummonCreature(sCreatureResref, (int)nVisualEffectId, fDelaySeconds, nUseAppearAnimation);
         }
@@ -920,7 +922,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the first in-game effect on oCreature.
         /// </summary>
-        public static System.IntPtr GetFirstEffect(uint oCreature)
+        public static Effect GetFirstEffect(uint oCreature)
         {
             return NWN.Core.NWScript.GetFirstEffect(oCreature);
         }
@@ -928,7 +930,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the next in-game effect on oCreature.
         /// </summary>
-        public static System.IntPtr GetNextEffect(uint oCreature)
+        public static Effect GetNextEffect(uint oCreature)
         {
             return NWN.Core.NWScript.GetNextEffect(oCreature);
         }
@@ -937,7 +939,7 @@ namespace NWN.Xenomech.API
         ///  Remove eEffect from oCreature.<br/>
         ///  * No return value
         /// </summary>
-        public static void RemoveEffect(uint oCreature, System.IntPtr eEffect)
+        public static void RemoveEffect(uint oCreature, Effect eEffect)
         {
             NWN.Core.NWScript.RemoveEffect(oCreature, eEffect);
         }
@@ -946,7 +948,7 @@ namespace NWN.Xenomech.API
         ///  * Returns true if eEffect is a valid effect. The effect must have been applied to<br/>
         ///  * an object or else it will return false
         /// </summary>
-        public static bool GetIsEffectValid(System.IntPtr eEffect)
+        public static bool GetIsEffectValid(Effect eEffect)
         {
             return NWN.Core.NWScript.GetIsEffectValid(eEffect) == 1;
         }
@@ -955,7 +957,7 @@ namespace NWN.Xenomech.API
         ///  Get the duration type (DURATION_TYPE_*) of eEffect.<br/>
         ///  * Return value if eEffect is not valid: -1
         /// </summary>
-        public static DurationType GetEffectDurationType(System.IntPtr eEffect)
+        public static DurationType GetEffectDurationType(Effect eEffect)
         {
             return (DurationType)NWN.Core.NWScript.GetEffectDurationType(eEffect);
         }
@@ -964,7 +966,7 @@ namespace NWN.Xenomech.API
         ///  Get the subtype (SUBTYPE_*) of eEffect.<br/>
         ///  * Return value on error: 0
         /// </summary>
-        public static EffectSubType GetEffectSubType(System.IntPtr eEffect)
+        public static EffectSubType GetEffectSubType(Effect eEffect)
         {
             return (EffectSubType)NWN.Core.NWScript.GetEffectSubType(eEffect);
         }
@@ -973,7 +975,7 @@ namespace NWN.Xenomech.API
         ///  Get the object that created eEffect.<br/>
         ///  * Returns OBJECT_INVALID if eEffect is not a valid effect.
         /// </summary>
-        public static uint GetEffectCreator(System.IntPtr eEffect)
+        public static uint GetEffectCreator(Effect eEffect)
         {
             return NWN.Core.NWScript.GetEffectCreator(eEffect);
         }
@@ -1096,7 +1098,7 @@ namespace NWN.Xenomech.API
         ///  distance between two points.<br/>
         ///  * Return value on error: 0.0f
         /// </summary>
-        public static float VectorMagnitude(System.Numerics.Vector3 vVector)
+        public static float VectorMagnitude(Vector3 vVector)
         {
             return NWN.Core.NWScript.VectorMagnitude(vVector);
         }
@@ -1193,7 +1195,7 @@ namespace NWN.Xenomech.API
         ///  (Effects default to magical if the subtype is not set)<br/>
         ///  Magical effects are removed by resting, and by dispel magic
         /// </summary>
-        public static System.IntPtr MagicalEffect(System.IntPtr eEffect)
+        public static Effect MagicalEffect(Effect eEffect)
         {
             return NWN.Core.NWScript.MagicalEffect(eEffect);
         }
@@ -1203,7 +1205,7 @@ namespace NWN.Xenomech.API
         ///  (Effects default to magical if the subtype is not set)<br/>
         ///  Permanent supernatural effects are not removed by resting
         /// </summary>
-        public static System.IntPtr SupernaturalEffect(System.IntPtr eEffect)
+        public static Effect SupernaturalEffect(Effect eEffect)
         {
             return NWN.Core.NWScript.SupernaturalEffect(eEffect);
         }
@@ -1213,7 +1215,7 @@ namespace NWN.Xenomech.API
         ///  (Effects default to magical if the subtype is not set)<br/>
         ///  Extraordinary effects are removed by resting, but not by dispel magic
         /// </summary>
-        public static System.IntPtr ExtraordinaryEffect(System.IntPtr eEffect)
+        public static Effect ExtraordinaryEffect(Effect eEffect)
         {
             return NWN.Core.NWScript.ExtraordinaryEffect(eEffect);
         }
@@ -1225,7 +1227,7 @@ namespace NWN.Xenomech.API
         ///  - nDamageType: DAMAGE_TYPE_*<br/>
         ///    * Default value for nDamageType should only ever be used in this function prototype.
         /// </summary>
-        public static System.IntPtr EffectACIncrease(int nValue, ACBonusType nModifyType = ACBonusType.Dodge, ACType nDamageType = ACType.VsDamageTypeAll)
+        public static Effect EffectACIncrease(int nValue, ACBonusType nModifyType = ACBonusType.Dodge, ACType nDamageType = ACType.VsDamageTypeAll)
         {
             return NWN.Core.NWScript.EffectACIncrease(nValue, (int)nModifyType, (int)nDamageType);
         }
@@ -1251,7 +1253,7 @@ namespace NWN.Xenomech.API
         ///  - nValue: size of the Saving Throw increase<br/>
         ///  - nSaveType: SAVING_THROW_TYPE_* (e.g. SAVING_THROW_TYPE_ACID )
         /// </summary>
-        public static System.IntPtr EffectSavingThrowIncrease(SavingThrowType nSave, int nValue, SavingThrowCategoryType nSaveType = SavingThrowCategoryType.All)
+        public static Effect EffectSavingThrowIncrease(SavingThrowType nSave, int nValue, SavingThrowCategoryType nSaveType = SavingThrowCategoryType.All)
         {
             return NWN.Core.NWScript.EffectSavingThrowIncrease((int)nSave, nValue, (int)nSaveType);
         }
@@ -1261,7 +1263,7 @@ namespace NWN.Xenomech.API
         ///  - nBonus: size of attack bonus<br/>
         ///  - nModifierType: ATTACK_BONUS_*
         /// </summary>
-        public static System.IntPtr EffectAttackIncrease(int nBonus, AttackBonusType nModifierType = AttackBonusType.Misc)
+        public static Effect EffectAttackIncrease(int nBonus, AttackBonusType nModifierType = AttackBonusType.Misc)
         {
             return NWN.Core.NWScript.EffectAttackIncrease(nBonus, (int)nModifierType);
         }
@@ -1274,7 +1276,7 @@ namespace NWN.Xenomech.API
         ///    Set to zero for infinite<br/>
         ///  - bRangedOnly: Set to true to have this reduction only apply to ranged attacks 
         /// </summary>
-        public static System.IntPtr EffectDamageReduction(int nAmount, int nDamagePower, int nLimit = 0, bool bRangedOnly = false)
+        public static Effect EffectDamageReduction(int nAmount, int nDamagePower, int nLimit = 0, bool bRangedOnly = false)
         {
             return NWN.Core.NWScript.EffectDamageReduction(nAmount, nDamagePower, nLimit, bRangedOnly ? 1 : 0);
         }
@@ -1286,7 +1288,7 @@ namespace NWN.Xenomech.API
         ///  NOTE! You *must* use the DAMAGE_BONUS_* constants! Using other values may<br/>
         ///        result in odd behaviour.
         /// </summary>
-        public static System.IntPtr EffectDamageIncrease(int nBonus, DamageType nDamageType = DamageType.Magical)
+        public static Effect EffectDamageIncrease(int nBonus, DamageType nDamageType = DamageType.Magical)
         {
             return NWN.Core.NWScript.EffectDamageIncrease(nBonus, (int)nDamageType);
         }
@@ -1385,7 +1387,7 @@ namespace NWN.Xenomech.API
         ///    origin of the effect(normally the spell-caster's position).<br/>
         ///  Return value on error: OBJECT_INVALID
         /// </summary>
-        public static uint GetFirstObjectInShape(int nShape, float fSize, System.IntPtr lTarget, bool bLineOfSight = false, ObjectType nObjectFilter = ObjectType.Creature, System.Numerics.Vector3 vOrigin = default)
+        public static uint GetFirstObjectInShape(int nShape, float fSize, Location lTarget, bool bLineOfSight = false, ObjectType nObjectFilter = ObjectType.Creature, Vector3 vOrigin = default)
         {
             return NWN.Core.NWScript.GetFirstObjectInShape(nShape, fSize, lTarget, bLineOfSight ? 1 : 0, (int)nObjectFilter, vOrigin);
         }
@@ -1416,7 +1418,7 @@ namespace NWN.Xenomech.API
         ///    of the effect (normally the spell-caster's position).<br/>
         ///  Return value on error: OBJECT_INVALID
         /// </summary>
-        public static uint GetNextObjectInShape(int nShape, float fSize, System.IntPtr lTarget, bool bLineOfSight = false, ObjectType nObjectFilter = ObjectType.Creature, System.Numerics.Vector3 vOrigin = default)
+        public static uint GetNextObjectInShape(int nShape, float fSize, Location lTarget, bool bLineOfSight = false, ObjectType nObjectFilter = ObjectType.Creature, Vector3 vOrigin = default)
         {
             return NWN.Core.NWScript.GetNextObjectInShape(nShape, fSize, lTarget, bLineOfSight ? 1 : 0, (int)nObjectFilter, vOrigin);
         }
@@ -1426,7 +1428,7 @@ namespace NWN.Xenomech.API
         ///  When applied, this effect will restrict the creature's movement and apply a<br/>
         ///  (-2) to all attacks and a -4 to AC.
         /// </summary>
-        public static System.IntPtr EffectEntangle()
+        public static Effect EffectEntangle()
         {
             return NWN.Core.NWScript.EffectEntangle();
         }
@@ -1445,7 +1447,7 @@ namespace NWN.Xenomech.API
         ///     EventUserDefined()  - This creates on OnUserDefined event. The script for handling this event<br/>
         ///                           can be set in the Scripts Tab of the Properties menu for the object/area/module.
         /// </summary>
-        public static void SignalEvent(uint oObject, System.IntPtr evToRun)
+        public static void SignalEvent(uint oObject, Event evToRun)
         {
             NWN.Core.NWScript.SignalEvent(oObject, evToRun);
         }
@@ -1465,7 +1467,7 @@ namespace NWN.Xenomech.API
         ///     GetUserDefinedEventNumber() to retrieve the value of nUserDefinedEventNumber<br/>
         ///     that was used when the event was signaled.
         /// </summary>
-        public static System.IntPtr EventUserDefined(int nUserDefinedEventNumber)
+        public static Event EventUserDefined(int nUserDefinedEventNumber)
         {
             return NWN.Core.NWScript.EventUserDefined(nUserDefinedEventNumber);
         }
@@ -1476,7 +1478,7 @@ namespace NWN.Xenomech.API
         ///    applied will die in an extraordinary fashion<br/>
         ///  - nDisplayFeedback
         /// </summary>
-        public static System.IntPtr EffectDeath(bool nSpectacularDeath = false, bool nDisplayFeedback = true)
+        public static Effect EffectDeath(bool nSpectacularDeath = false, bool nDisplayFeedback = true)
         {
             return NWN.Core.NWScript.EffectDeath(nSpectacularDeath ? 1 : 0, nDisplayFeedback ? 1 : 0);
         }
@@ -1487,7 +1489,7 @@ namespace NWN.Xenomech.API
         ///  is removed. This should be applied as a temporary effect with a 3 second<br/>
         ///  duration minimum (1 second to fall, 1 second sitting, 1 second to get up).
         /// </summary>
-        public static System.IntPtr EffectKnockdown()
+        public static Effect EffectKnockdown()
         {
             return NWN.Core.NWScript.EffectKnockdown();
         }
@@ -1515,7 +1517,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Normalize vVector
         /// </summary>
-        public static System.Numerics.Vector3 VectorNormalize(System.Numerics.Vector3 vVector)
+        public static Vector3 VectorNormalize(Vector3 vVector)
         {
             return NWN.Core.NWScript.VectorNormalize(vVector);
         }
@@ -1529,7 +1531,7 @@ namespace NWN.Xenomech.API
         ///  - nWisMod: wisdom modifier<br/>
         ///  - nChaMod: charisma modifier
         /// </summary>
-        public static System.IntPtr EffectCurse(int nStrMod = 1, int nDexMod = 1, int nConMod = 1, int nIntMod = 1, int nWisMod = 1, int nChaMod = 1)
+        public static Effect EffectCurse(int nStrMod = 1, int nDexMod = 1, int nConMod = 1, int nIntMod = 1, int nWisMod = 1, int nChaMod = 1)
         {
             return NWN.Core.NWScript.EffectCurse(nStrMod, nDexMod, nConMod, nIntMod, nWisMod, nChaMod);
         }
@@ -1560,7 +1562,7 @@ namespace NWN.Xenomech.API
         ///  - vVector<br/>
         ///  - bPrepend: if this is true, the message will be prefixed with "PRINTVECTOR:"
         /// </summary>
-        public static void PrintVector(System.Numerics.Vector3 vVector, bool bPrepend)
+        public static void PrintVector(Vector3 vVector, bool bPrepend)
         {
             NWN.Core.NWScript.PrintVector(vVector, bPrepend ? 1 : 0);
         }
@@ -1568,7 +1570,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a vector with the specified values for x, y and z
         /// </summary>
-        public static System.Numerics.Vector3 Vector(float x = 0.0f, float y = 0.0f, float z = 0.0f)
+        public static Vector3 Vector(float x = 0.0f, float y = 0.0f, float z = 0.0f)
         {
             return NWN.Core.NWScript.Vector(x, y, z);
         }
@@ -1576,7 +1578,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Cause the caller to face vTarget
         /// </summary>
-        public static void SetFacingPoint(System.Numerics.Vector3 vTarget)
+        public static void SetFacingPoint(Vector3 vTarget)
         {
             NWN.Core.NWScript.SetFacingPoint(vTarget);
         }
@@ -1584,7 +1586,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Convert fAngle to a vector
         /// </summary>
-        public static System.Numerics.Vector3 AngleToVector(float fAngle)
+        public static Vector3 AngleToVector(float fAngle)
         {
             return NWN.Core.NWScript.AngleToVector(fAngle);
         }
@@ -1592,7 +1594,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Convert vVector to an angle
         /// </summary>
-        public static float VectorToAngle(System.Numerics.Vector3 vVector)
+        public static float VectorToAngle(Vector3 vVector)
         {
             return NWN.Core.NWScript.VectorToAngle(vVector);
         }
@@ -1620,7 +1622,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Paralyze effect
         /// </summary>
-        public static System.IntPtr EffectParalyze()
+        public static Effect EffectParalyze()
         {
             return NWN.Core.NWScript.EffectParalyze();
         }
@@ -1634,7 +1636,7 @@ namespace NWN.Xenomech.API
         ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nImmunityToSpell is<br/>
         ///    invalid.
         /// </summary>
-        public static System.IntPtr EffectSpellImmunity(SpellType nImmunityToSpell = SpellType.AllSpells)
+        public static Effect EffectSpellImmunity(SpellType nImmunityToSpell = SpellType.AllSpells)
         {
             return NWN.Core.NWScript.EffectSpellImmunity((int)nImmunityToSpell);
         }
@@ -1642,7 +1644,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Deaf effect
         /// </summary>
-        public static System.IntPtr EffectDeaf()
+        public static Effect EffectDeaf()
         {
             return NWN.Core.NWScript.EffectDeaf();
         }
@@ -1659,7 +1661,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Set oObject's local location variable sVarname to lValue
         /// </summary>
-        public static void SetLocalLocation(uint oObject, string sVarName, System.IntPtr lValue)
+        public static void SetLocalLocation(uint oObject, string sVarName, Location lValue)
         {
             NWN.Core.NWScript.SetLocalLocation(oObject, sVarName, lValue);
         }
@@ -1667,7 +1669,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get oObject's local location variable sVarname
         /// </summary>
-        public static System.IntPtr GetLocalLocation(uint oObject, string sVarName)
+        public static Location GetLocalLocation(uint oObject, string sVarName)
         {
             return NWN.Core.NWScript.GetLocalLocation(oObject, sVarName);
         }
@@ -1675,7 +1677,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Sleep effect
         /// </summary>
-        public static System.IntPtr EffectSleep()
+        public static Effect EffectSleep()
         {
             return NWN.Core.NWScript.EffectSleep();
         }
@@ -1695,7 +1697,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Charm effect
         /// </summary>
-        public static System.IntPtr EffectCharmed()
+        public static Effect EffectCharmed()
         {
             return NWN.Core.NWScript.EffectCharmed();
         }
@@ -1703,7 +1705,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Confuse effect
         /// </summary>
-        public static System.IntPtr EffectConfused()
+        public static Effect EffectConfused()
         {
             return NWN.Core.NWScript.EffectConfused();
         }
@@ -1711,7 +1713,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Frighten effect
         /// </summary>
-        public static System.IntPtr EffectFrightened()
+        public static Effect EffectFrightened()
         {
             return NWN.Core.NWScript.EffectFrightened();
         }
@@ -1719,7 +1721,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Dominate effect
         /// </summary>
-        public static System.IntPtr EffectDominated()
+        public static Effect EffectDominated()
         {
             return NWN.Core.NWScript.EffectDominated();
         }
@@ -1727,7 +1729,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Daze effect
         /// </summary>
-        public static System.IntPtr EffectDazed()
+        public static Effect EffectDazed()
         {
             return NWN.Core.NWScript.EffectDazed();
         }
@@ -1735,7 +1737,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Stun effect
         /// </summary>
-        public static System.IntPtr EffectStunned()
+        public static Effect EffectStunned()
         {
             return NWN.Core.NWScript.EffectStunned();
         }
@@ -1760,7 +1762,7 @@ namespace NWN.Xenomech.API
         ///  - nAmount: amount of damage to be regenerated per time interval<br/>
         ///  - fIntervalSeconds: length of interval in seconds
         /// </summary>
-        public static System.IntPtr EffectRegenerate(int nAmount, float fIntervalSeconds)
+        public static Effect EffectRegenerate(int nAmount, float fIntervalSeconds)
         {
             return NWN.Core.NWScript.EffectRegenerate(nAmount, fIntervalSeconds);
         }
@@ -1773,7 +1775,7 @@ namespace NWN.Xenomech.API
         ///    50 = 50% faster<br/>
         ///    99 = almost twice as fast
         /// </summary>
-        public static System.IntPtr EffectMovementSpeedIncrease(int nPercentChange)
+        public static Effect EffectMovementSpeedIncrease(int nPercentChange)
         {
             return NWN.Core.NWScript.EffectMovementSpeedIncrease(nPercentChange);
         }
@@ -1826,7 +1828,7 @@ namespace NWN.Xenomech.API
         ///   EFFECT_TYPE: APPEAR, CUTSCENE_DOMINATED, DAMAGE, DEATH, DISAPPEAR, HEAL, HITPOINTCHANGEWHENDYING, KNOCKDOWN, MODIFYNUMATTACKS, SUMMON_CREATURE, TAUNT, WOUNDING<br/>
         ///  * Return value if eEffect is invalid: EFFECT_INVALIDEFFECT
         /// </summary>
-        public static EffectType GetEffectType(System.IntPtr eEffect, bool bAllTypes = false)
+        public static EffectType GetEffectType(Effect eEffect, bool bAllTypes = false)
         {
             return (EffectType)NWN.Core.NWScript.GetEffectType(eEffect, bAllTypes ? 1 : 0);
         }
@@ -1835,7 +1837,7 @@ namespace NWN.Xenomech.API
         ///  Create an Area Of Effect effect in the area of the creature it is applied to.<br/>
         ///  If the scripts are not specified, default ones will be used.
         /// </summary>
-        public static System.IntPtr EffectAreaOfEffect(int nAreaEffectId, string sOnEnterScript = "", string sHeartbeatScript = "", string sOnExitScript = "")
+        public static Effect EffectAreaOfEffect(int nAreaEffectId, string sOnEnterScript = "", string sHeartbeatScript = "", string sOnExitScript = "")
         {
             return NWN.Core.NWScript.EffectAreaOfEffect(nAreaEffectId, sOnEnterScript, sHeartbeatScript, sOnExitScript);
         }
@@ -1914,7 +1916,7 @@ namespace NWN.Xenomech.API
         ///  - nMissEffect: if this is true, a random vector near or past the target will<br/>
         ///    be generated, on which to play the effect
         /// </summary>
-        public static System.IntPtr EffectVisualEffect(int nVisualEffectId, bool nMissEffect = false, float fScale = 1.0f, System.Numerics.Vector3 vTranslate = default, System.Numerics.Vector3 vRotate = default)
+        public static Effect EffectVisualEffect(int nVisualEffectId, bool nMissEffect = false, float fScale = 1.0f, Vector3 vTranslate = default, Vector3 vRotate = default)
         {
             return NWN.Core.NWScript.EffectVisualEffect(nVisualEffectId, nMissEffect ? 1 : 0, fScale, vTranslate, vRotate);
         }
@@ -2114,7 +2116,7 @@ namespace NWN.Xenomech.API
         ///  determining if an effect will be removed or not and as such should never be<br/>
         ///  packaged *only* with other visual effects in a link.
         /// </summary>
-        public static System.IntPtr EffectLinkEffects(System.IntPtr eChildEffect, System.IntPtr eParentEffect)
+        public static Effect EffectLinkEffects(Effect eChildEffect, Effect eParentEffect)
         {
             return NWN.Core.NWScript.EffectLinkEffects(eChildEffect, eParentEffect);
         }
@@ -2224,7 +2226,7 @@ namespace NWN.Xenomech.API
         ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nBeamVisualEffect is<br/>
         ///    not valid.
         /// </summary>
-        public static System.IntPtr EffectBeam(int nBeamVisualEffect, uint oEffector, int nBodyPart, bool bMissEffect = false, float fScale = 1.0f, System.Numerics.Vector3 vTranslate = default, System.Numerics.Vector3 vRotate = default)
+        public static Effect EffectBeam(int nBeamVisualEffect, uint oEffector, int nBodyPart, bool bMissEffect = false, float fScale = 1.0f, Vector3 vTranslate = default, Vector3 vRotate = default)
         {
             return NWN.Core.NWScript.EffectBeam(nBeamVisualEffect, oEffector, nBodyPart, bMissEffect ? 1 : 0, fScale, vTranslate, vRotate);
         }
@@ -2288,7 +2290,7 @@ namespace NWN.Xenomech.API
         ///  Create a Spell Resistance Increase effect.<br/>
         ///  - nValue: size of spell resistance increase
         /// </summary>
-        public static System.IntPtr EffectSpellResistanceIncrease(int nValue)
+        public static Effect EffectSpellResistanceIncrease(int nValue)
         {
             return NWN.Core.NWScript.EffectSpellResistanceIncrease(nValue);
         }
@@ -2296,7 +2298,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the location of oObject.
         /// </summary>
-        public static System.IntPtr GetLocation(uint oObject)
+        public static Location GetLocation(uint oObject)
         {
             return NWN.Core.NWScript.GetLocation(oObject);
         }
@@ -2305,7 +2307,7 @@ namespace NWN.Xenomech.API
         ///  The subject will jump to lLocation instantly (even between areas).<br/>
         ///  If lLocation is invalid, nothing will happen.
         /// </summary>
-        public static void ActionJumpToLocation(System.IntPtr lLocation)
+        public static void ActionJumpToLocation(Location lLocation)
         {
             NWN.Core.NWScript.ActionJumpToLocation(lLocation);
         }
@@ -2315,7 +2317,7 @@ namespace NWN.Xenomech.API
         ///  The special constant LOCATION_INVALID describes a location with area equalling OBJECT_INVALID<br/>
         ///  and all other values 0.0f. Declared but not initialised location variables default to this value.
         /// </summary>
-        public static System.IntPtr Location(uint oArea, System.Numerics.Vector3 vPosition, float fOrientation)
+        public static Location Location(uint oArea, Vector3 vPosition, float fOrientation)
         {
             return NWN.Core.NWScript.Location(oArea, vPosition, fOrientation);
         }
@@ -2323,7 +2325,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Apply eEffect at lLocation.
         /// </summary>
-        public static void ApplyEffectAtLocation(DurationType nDurationType, System.IntPtr eEffect, System.IntPtr lLocation, float fDuration = 0.0f)
+        public static void ApplyEffectAtLocation(DurationType nDurationType, Effect eEffect, Location lLocation, float fDuration = 0.0f)
         {
             NWN.Core.NWScript.ApplyEffectAtLocation((int)nDurationType, eEffect, lLocation, fDuration);
         }
@@ -2354,7 +2356,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Apply eEffect to oTarget.
         /// </summary>
-        public static void ApplyEffectToObject(DurationType nDurationType, System.IntPtr eEffect, uint oTarget, float fDuration = 0.0f)
+        public static void ApplyEffectToObject(DurationType nDurationType, Effect eEffect, uint oTarget, float fDuration = 0.0f)
         {
             NWN.Core.NWScript.ApplyEffectToObject((int)nDurationType, eEffect, oTarget, fDuration);
         }
@@ -2373,7 +2375,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the location of the caller's last spell target.
         /// </summary>
-        public static System.IntPtr GetSpellTargetLocation()
+        public static Location GetSpellTargetLocation()
         {
             return NWN.Core.NWScript.GetSpellTargetLocation();
         }
@@ -2381,7 +2383,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the position vector from lLocation.
         /// </summary>
-        public static System.Numerics.Vector3 GetPositionFromLocation(System.IntPtr lLocation)
+        public static Vector3 GetPositionFromLocation(Location lLocation)
         {
             return NWN.Core.NWScript.GetPositionFromLocation(lLocation);
         }
@@ -2389,7 +2391,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the area's object ID from lLocation.
         /// </summary>
-        public static uint GetAreaFromLocation(System.IntPtr lLocation)
+        public static uint GetAreaFromLocation(Location lLocation)
         {
             return NWN.Core.NWScript.GetAreaFromLocation(lLocation);
         }
@@ -2397,7 +2399,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the orientation value from lLocation.
         /// </summary>
-        public static float GetFacingFromLocation(System.IntPtr lLocation)
+        public static float GetFacingFromLocation(Location lLocation)
         {
             return NWN.Core.NWScript.GetFacingFromLocation(lLocation);
         }
@@ -2430,7 +2432,7 @@ namespace NWN.Xenomech.API
         ///    further specify the type of creature that we are looking for.<br/>
         ///  * Return value on error: OBJECT_INVALID
         /// </summary>
-        public static uint GetNearestCreatureToLocation(int nFirstCriteriaType, int nFirstCriteriaValue, System.IntPtr lLocation, int nNth = 1, int nSecondCriteriaType = -1, int nSecondCriteriaValue = -1, int nThirdCriteriaType = -1, int nThirdCriteriaValue = -1)
+        public static uint GetNearestCreatureToLocation(int nFirstCriteriaType, int nFirstCriteriaValue, Location lLocation, int nNth = 1, int nSecondCriteriaType = -1, int nSecondCriteriaValue = -1, int nThirdCriteriaType = -1, int nThirdCriteriaValue = -1)
         {
             return NWN.Core.NWScript.GetNearestCreatureToLocation(nFirstCriteriaType, nFirstCriteriaValue, lLocation, nNth, nSecondCriteriaType, nSecondCriteriaValue, nThirdCriteriaType, nThirdCriteriaValue);
         }
@@ -2454,7 +2456,7 @@ namespace NWN.Xenomech.API
         ///  - nNth<br/>
         ///  * Return value on error: OBJECT_INVALID
         /// </summary>
-        public static uint GetNearestObjectToLocation(ObjectType nObjectType, System.IntPtr lLocation, int nNth = 1)
+        public static uint GetNearestObjectToLocation(ObjectType nObjectType, Location lLocation, int nNth = 1)
         {
             return NWN.Core.NWScript.GetNearestObjectToLocation((int)nObjectType, lLocation, nNth);
         }
@@ -2520,7 +2522,7 @@ namespace NWN.Xenomech.API
         ///  - nDomainLevel: The level of the spell if cast from a domain slot.<br/>
         ///    eg SPELL_HEAL can be spell level 5 on a cleric. Use 0 for no domain slot.
         /// </summary>
-        public static void ActionCastSpellAtLocation(SpellType nSpell, System.IntPtr lTargetLocation, MetamagicType nMetaMagic = MetamagicType.Any, bool bCheat = false, ProjectilePathType nProjectilePathType = ProjectilePathType.Default, bool bInstantSpell = false, int nClass = -1, bool bSpontaneousCast = false, int nDomainlevel = 0)
+        public static void ActionCastSpellAtLocation(SpellType nSpell, Location lTargetLocation, MetamagicType nMetaMagic = MetamagicType.Any, bool bCheat = false, ProjectilePathType nProjectilePathType = ProjectilePathType.Default, bool bInstantSpell = false, int nClass = -1, bool bSpontaneousCast = false, int nDomainlevel = 0)
         {
             NWN.Core.NWScript.ActionCastSpellAtLocation((int)nSpell, lTargetLocation, (int)nMetaMagic, bCheat ? 1 : 0, (int)nProjectilePathType, bInstantSpell ? 1 : 0, nClass, bSpontaneousCast ? 1 : 0, nDomainlevel);
         }
@@ -2604,7 +2606,7 @@ namespace NWN.Xenomech.API
         ///  - bUseAppearAnimation<br/>
         ///  - sNewTag - if this string is not empty, it will replace the default tag from the template
         /// </summary>
-        public static uint CreateObject(ObjectType nObjectType, string sTemplate, System.IntPtr lLocation, bool bUseAppearAnimation = false, string sNewTag = "")
+        public static uint CreateObject(ObjectType nObjectType, string sTemplate, Location lLocation, bool bUseAppearAnimation = false, string sNewTag = "")
         {
             return NWN.Core.NWScript.CreateObject((int)nObjectType, sTemplate, lLocation, bUseAppearAnimation ? 1 : 0, sNewTag);
         }
@@ -2626,7 +2628,7 @@ namespace NWN.Xenomech.API
         ///      GetLastSpell() to get the type of spell cast (nSpell)<br/>
         ///      GetLastSpellHarmful() to determine if the spell cast at the object was harmful.
         /// </summary>
-        public static System.IntPtr EventSpellCastAt(uint oCaster, int nSpell, bool bHarmful = true)
+        public static Event EventSpellCastAt(uint oCaster, int nSpell, bool bHarmful = true)
         {
             return NWN.Core.NWScript.EventSpellCastAt(oCaster, nSpell, bHarmful ? 1 : 0);
         }
@@ -2680,7 +2682,7 @@ namespace NWN.Xenomech.API
         ///  Create a Poison effect.<br/>
         ///  - nPoisonType: POISON_*
         /// </summary>
-        public static System.IntPtr EffectPoison(PoisonType nPoisonType)
+        public static Effect EffectPoison(PoisonType nPoisonType)
         {
             return NWN.Core.NWScript.EffectPoison((int)nPoisonType);
         }
@@ -2689,7 +2691,7 @@ namespace NWN.Xenomech.API
         ///  Create a Disease effect.<br/>
         ///  - nDiseaseType: DISEASE_*
         /// </summary>
-        public static System.IntPtr EffectDisease(DiseaseType nDiseaseType)
+        public static Effect EffectDisease(DiseaseType nDiseaseType)
         {
             return NWN.Core.NWScript.EffectDisease((int)nDiseaseType);
         }
@@ -2697,7 +2699,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Silence effect.
         /// </summary>
-        public static System.IntPtr EffectSilence()
+        public static Effect EffectSilence()
         {
             return NWN.Core.NWScript.EffectSilence();
         }
@@ -2863,7 +2865,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Haste effect.
         /// </summary>
-        public static System.IntPtr EffectHaste()
+        public static Effect EffectHaste()
         {
             return NWN.Core.NWScript.EffectHaste();
         }
@@ -2871,7 +2873,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Slow effect.
         /// </summary>
-        public static System.IntPtr EffectSlow()
+        public static Effect EffectSlow()
         {
             return NWN.Core.NWScript.EffectSlow();
         }
@@ -2888,7 +2890,7 @@ namespace NWN.Xenomech.API
         ///  Create an Immunity effect.<br/>
         ///  - nImmunityType: IMMUNITY_TYPE_*
         /// </summary>
-        public static System.IntPtr EffectImmunity(ImmunityType nImmunityType)
+        public static Effect EffectImmunity(ImmunityType nImmunityType)
         {
             return NWN.Core.NWScript.EffectImmunity((int)nImmunityType);
         }
@@ -2909,7 +2911,7 @@ namespace NWN.Xenomech.API
         ///  - nDamageType: DAMAGE_TYPE_*<br/>
         ///  - nPercentImmunity
         /// </summary>
-        public static System.IntPtr EffectDamageImmunityIncrease(DamageType nDamageType, int nPercentImmunity)
+        public static Effect EffectDamageImmunityIncrease(DamageType nDamageType, int nPercentImmunity)
         {
             return NWN.Core.NWScript.EffectDamageImmunityIncrease((int)nDamageType, nPercentImmunity);
         }
@@ -3019,7 +3021,7 @@ namespace NWN.Xenomech.API
         ///         - spells.2da line of the subdial spell, eg 708 for Dragon Shape: Blue Dragon when using FEAT_EPIC_WILD_SHAPE_DRAGON<br/>
         ///  - lTarget: The location to use the feat at. oTarget must be OBJECT_INVALID for this to be used.
         /// </summary>
-        public static void ActionUseFeat(int nFeat, uint oTarget = OBJECT_INVALID, int nSubFeat = 0, System.IntPtr lTarget = default)
+        public static void ActionUseFeat(int nFeat, uint oTarget = OBJECT_INVALID, int nSubFeat = 0, Location lTarget = default)
         {
             NWN.Core.NWScript.ActionUseFeat(nFeat, oTarget, nSubFeat, lTarget);
         }
@@ -3103,7 +3105,7 @@ namespace NWN.Xenomech.API
         ///  To specify the OnConversation script that should run, view the Creature Properties on<br/>
         ///  the creature and click on the Scripts Tab. Then specify a script for the OnConversation event.
         /// </summary>
-        public static System.IntPtr EventConversation()
+        public static Event EventConversation()
         {
             return NWN.Core.NWScript.EventConversation();
         }
@@ -3129,7 +3131,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the distance between lLocationA and lLocationB.
         /// </summary>
-        public static float GetDistanceBetweenLocations(System.IntPtr lLocationA, System.IntPtr lLocationB)
+        public static float GetDistanceBetweenLocations(Location lLocationA, Location lLocationB)
         {
             return NWN.Core.NWScript.GetDistanceBetweenLocations(lLocationA, lLocationB);
         }
@@ -3163,7 +3165,7 @@ namespace NWN.Xenomech.API
         ///  Create a Spell Talent.<br/>
         ///  - nSpell: SPELL_*
         /// </summary>
-        public static System.IntPtr TalentSpell(int nSpell)
+        public static Talent TalentSpell(int nSpell)
         {
             return NWN.Core.NWScript.TalentSpell(nSpell);
         }
@@ -3172,7 +3174,7 @@ namespace NWN.Xenomech.API
         ///  Create a Feat Talent.<br/>
         ///  - nFeat: FEAT_*
         /// </summary>
-        public static System.IntPtr TalentFeat(int nFeat)
+        public static Talent TalentFeat(int nFeat)
         {
             return NWN.Core.NWScript.TalentFeat(nFeat);
         }
@@ -3181,7 +3183,7 @@ namespace NWN.Xenomech.API
         ///  Create a Skill Talent.<br/>
         ///  - nSkill: SKILL_*
         /// </summary>
-        public static System.IntPtr TalentSkill(int nSkill)
+        public static Talent TalentSkill(int nSkill)
         {
             return NWN.Core.NWScript.TalentSkill(nSkill);
         }
@@ -3202,7 +3204,7 @@ namespace NWN.Xenomech.API
         ///  Get the spell (SPELL_*) that applied eSpellEffect.<br/>
         ///  * Returns -1 if eSpellEffect was applied outside a spell script.
         /// </summary>
-        public static SpellType GetEffectSpellId(System.IntPtr eSpellEffect)
+        public static SpellType GetEffectSpellId(Effect eSpellEffect)
         {
             return (SpellType)NWN.Core.NWScript.GetEffectSpellId(eSpellEffect);
         }
@@ -3210,7 +3212,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Determine whether oCreature has tTalent.
         /// </summary>
-        public static bool GetCreatureHasTalent(System.IntPtr tTalent, uint oCreature = OBJECT_INVALID)
+        public static bool GetCreatureHasTalent(Talent tTalent, uint oCreature = OBJECT_INVALID)
         {
             return NWN.Core.NWScript.GetCreatureHasTalent(tTalent, oCreature) == 1;
         }
@@ -3220,9 +3222,9 @@ namespace NWN.Xenomech.API
         ///  - nCategory: TALENT_CATEGORY_*<br/>
         ///  - oCreature
         /// </summary>
-        public static System.IntPtr GetCreatureTalentRandom(int nCategory, uint oCreature = OBJECT_INVALID)
+        public static Talent GetCreatureTalentRandom(TalentCategoryType nCategory, uint oCreature = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetCreatureTalentRandom(nCategory, oCreature);
+            return NWN.Core.NWScript.GetCreatureTalentRandom((int)nCategory, oCreature);
         }
 
         /// <summary>
@@ -3232,15 +3234,15 @@ namespace NWN.Xenomech.API
         ///  - nCRMax: Challenge Rating of the talent<br/>
         ///  - oCreature
         /// </summary>
-        public static System.IntPtr GetCreatureTalentBest(int nCategory, int nCRMax, uint oCreature = OBJECT_INVALID)
+        public static Talent GetCreatureTalentBest(TalentCategoryType nCategory, int nCRMax, uint oCreature = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetCreatureTalentBest(nCategory, nCRMax, oCreature);
+            return NWN.Core.NWScript.GetCreatureTalentBest((int)nCategory, nCRMax, oCreature);
         }
 
         /// <summary>
         ///  Use tChosenTalent on oTarget.
         /// </summary>
-        public static void ActionUseTalentOnObject(System.IntPtr tChosenTalent, uint oTarget)
+        public static void ActionUseTalentOnObject(Talent tChosenTalent, uint oTarget)
         {
             NWN.Core.NWScript.ActionUseTalentOnObject(tChosenTalent, oTarget);
         }
@@ -3248,7 +3250,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Use tChosenTalent at lTargetLocation.
         /// </summary>
-        public static void ActionUseTalentAtLocation(System.IntPtr tChosenTalent, System.IntPtr lTargetLocation)
+        public static void ActionUseTalentAtLocation(Talent tChosenTalent, Location lTargetLocation)
         {
             NWN.Core.NWScript.ActionUseTalentAtLocation(tChosenTalent, lTargetLocation);
         }
@@ -3274,7 +3276,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Jump to lDestination.  The action is added to the TOP of the action queue.
         /// </summary>
-        public static void JumpToLocation(System.IntPtr lDestination)
+        public static void JumpToLocation(Location lDestination)
         {
             NWN.Core.NWScript.JumpToLocation(lDestination);
         }
@@ -3284,7 +3286,7 @@ namespace NWN.Xenomech.API
         ///  - nHitPoints: a positive integer<br/>
         ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nHitPoints &lt; 0.
         /// </summary>
-        public static System.IntPtr EffectTemporaryHitpoints(int nHitPoints)
+        public static Effect EffectTemporaryHitpoints(int nHitPoints)
         {
             return NWN.Core.NWScript.EffectTemporaryHitpoints(nHitPoints);
         }
@@ -3638,7 +3640,7 @@ namespace NWN.Xenomech.API
         ///  - nValue
         ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nSkill is invalid.
         /// </summary>
-        public static System.IntPtr EffectSkillIncrease(int nSkill, int nValue)
+        public static Effect EffectSkillIncrease(int nSkill, int nValue)
         {
             return NWN.Core.NWScript.EffectSkillIncrease(nSkill, nValue);
         }
@@ -3679,7 +3681,7 @@ namespace NWN.Xenomech.API
         ///  - nLawChaos: ALIGNMENT_LAWFUL/ALIGNMENT_CHAOTIC/ALIGNMENT_ALL
         ///  - nGoodEvil: ALIGNMENT_GOOD/ALIGNMENT_EVIL/ALIGNMENT_ALL
         /// </summary>
-        public static System.IntPtr VersusAlignmentEffect(System.IntPtr eEffect, AlignmentType nLawChaos = AlignmentType.All, AlignmentType nGoodEvil = AlignmentType.All)
+        public static Effect VersusAlignmentEffect(Effect eEffect, AlignmentType nLawChaos = AlignmentType.All, AlignmentType nGoodEvil = AlignmentType.All)
         {
             return NWN.Core.NWScript.VersusAlignmentEffect(eEffect, (int)nLawChaos, (int)nGoodEvil);
         }
@@ -3689,7 +3691,7 @@ namespace NWN.Xenomech.API
         ///  - eEffect
         ///  - nRacialType: RACIAL_TYPE_*
         /// </summary>
-        public static System.IntPtr VersusRacialTypeEffect(System.IntPtr eEffect, RacialType nRacialType)
+        public static Effect VersusRacialTypeEffect(Effect eEffect, RacialType nRacialType)
         {
             return NWN.Core.NWScript.VersusRacialTypeEffect(eEffect, (int)nRacialType);
         }
@@ -3697,7 +3699,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Set eEffect to be versus traps.
         /// </summary>
-        public static System.IntPtr VersusTrapEffect(System.IntPtr eEffect)
+        public static Effect VersusTrapEffect(Effect eEffect)
         {
             return NWN.Core.NWScript.VersusTrapEffect(eEffect);
         }
@@ -3713,7 +3715,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  * Returns true if tTalent is valid.
         /// </summary>
-        public static bool GetIsTalentValid(System.IntPtr tTalent)
+        public static bool GetIsTalentValid(Talent tTalent)
         {
             return NWN.Core.NWScript.GetIsTalentValid(tTalent) == 1;
         }
@@ -3722,7 +3724,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Causes the action subject to move away from lMoveAwayFrom.
         /// </summary>
-        public static void ActionMoveAwayFromLocation(System.IntPtr lMoveAwayFrom, bool bRun = false, float fMoveAwayRange = 40.0f)
+        public static void ActionMoveAwayFromLocation(Location lMoveAwayFrom, bool bRun = false, float fMoveAwayRange = 40.0f)
         {
             NWN.Core.NWScript.ActionMoveAwayFromLocation(lMoveAwayFrom, bRun ? 1 : 0, fMoveAwayRange);
         }
@@ -3741,7 +3743,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the type (TALENT_TYPE_*) of tTalent.
         /// </summary>
-        public static TalentType GetTypeFromTalent(System.IntPtr tTalent)
+        public static TalentType GetTypeFromTalent(Talent tTalent)
         {
             return (TalentType)NWN.Core.NWScript.GetTypeFromTalent(tTalent);
         }
@@ -3750,7 +3752,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the ID of tTalent.  This could be a SPELL_*, FEAT_* or SKILL_*.
         /// </summary>
-        public static int GetIdFromTalent(System.IntPtr tTalent)
+        public static int GetIdFromTalent(Talent tTalent)
         {
             return NWN.Core.NWScript.GetIdFromTalent(tTalent);
         }
@@ -3910,7 +3912,7 @@ namespace NWN.Xenomech.API
         ///  Create a Turned effect.
         ///  Turned effects are supernatural by default.
         /// </summary>
-        public static System.IntPtr EffectTurned()
+        public static Effect EffectTurned()
         {
             return NWN.Core.NWScript.EffectTurned();
         }
@@ -3938,7 +3940,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Force the action subject to move to lDestination.
         /// </summary>
-        public static void ActionForceMoveToLocation(System.IntPtr lDestination, bool bRun = false, float fTimeout = 30.0f)
+        public static void ActionForceMoveToLocation(Location lDestination, bool bRun = false, float fTimeout = 30.0f)
         {
             NWN.Core.NWScript.ActionForceMoveToLocation(lDestination, bRun ? 1 : 0, fTimeout);
         }
@@ -3982,7 +3984,7 @@ namespace NWN.Xenomech.API
         ///  - fHitPointChangePerRound: this can be positive or negative, but not zero.
         ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if fHitPointChangePerRound is 0.
         /// </summary>
-        public static System.IntPtr EffectHitPointChangeWhenDying(float fHitPointChangePerRound)
+        public static Effect EffectHitPointChangeWhenDying(float fHitPointChangePerRound)
         {
             return NWN.Core.NWScript.EffectHitPointChangeWhenDying(fHitPointChangePerRound);
         }
@@ -4238,7 +4240,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the starting location of the module.
         /// </summary>
-        public static System.IntPtr GetStartingLocation()
+        public static Location GetStartingLocation()
         {
             return NWN.Core.NWScript.GetStartingLocation();
         }
@@ -4282,7 +4284,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Set the position of oSound.
         /// </summary>
-        public static void SoundObjectSetPosition(uint oSound, System.Numerics.Vector3 vPosition)
+        public static void SoundObjectSetPosition(uint oSound, Vector3 vPosition)
         {
             NWN.Core.NWScript.SoundObjectSetPosition(oSound, vPosition);
         }
@@ -4356,7 +4358,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Activate oItem.
         /// </summary>
-        public static System.IntPtr EventActivateItem(uint oItem, System.IntPtr lTarget, uint oTarget = OBJECT_INVALID)
+        public static Event EventActivateItem(uint oItem, Location lTarget, uint oTarget = OBJECT_INVALID)
         {
             return NWN.Core.NWScript.EventActivateItem(oItem, lTarget, oTarget);
         }
@@ -4506,7 +4508,7 @@ namespace NWN.Xenomech.API
         ///  Use this in an OnItemActivated module script to get the location of the item's<br/>
         ///  target.
         /// </summary>
-        public static System.IntPtr GetItemActivatedTargetLocation()
+        public static Location GetItemActivatedTargetLocation()
         {
             return NWN.Core.NWScript.GetItemActivatedTargetLocation();
         }
@@ -4552,7 +4554,7 @@ namespace NWN.Xenomech.API
         ///  - nAbility: ABILITY_*<br/>
         ///  - nModifyBy: This is the amount by which to decrement the ability
         /// </summary>
-        public static System.IntPtr EffectAbilityDecrease(int nAbility, int nModifyBy)
+        public static Effect EffectAbilityDecrease(int nAbility, int nModifyBy)
         {
             return NWN.Core.NWScript.EffectAbilityDecrease(nAbility, nModifyBy);
         }
@@ -4562,7 +4564,7 @@ namespace NWN.Xenomech.API
         ///  - nPenalty<br/>
         ///  - nModifierType: ATTACK_BONUS_*
         /// </summary>
-        public static System.IntPtr EffectAttackDecrease(int nPenalty, AttackBonusType nModifierType = AttackBonusType.Misc)
+        public static Effect EffectAttackDecrease(int nPenalty, AttackBonusType nModifierType = AttackBonusType.Misc)
         {
             return NWN.Core.NWScript.EffectAttackDecrease(nPenalty, (int)nModifierType);
         }
@@ -4572,7 +4574,7 @@ namespace NWN.Xenomech.API
         ///  - nPenalty<br/>
         ///  - nDamageType: DAMAGE_TYPE_*
         /// </summary>
-        public static System.IntPtr EffectDamageDecrease(int nPenalty, DamageType nDamageType = DamageType.Magical)
+        public static Effect EffectDamageDecrease(int nPenalty, DamageType nDamageType = DamageType.Magical)
         {
             return NWN.Core.NWScript.EffectDamageDecrease(nPenalty, (int)nDamageType);
         }
@@ -4582,7 +4584,7 @@ namespace NWN.Xenomech.API
         ///  - nDamageType: DAMAGE_TYPE_*<br/>
         ///  - nPercentImmunity
         /// </summary>
-        public static System.IntPtr EffectDamageImmunityDecrease(DamageType nDamageType, int nPercentImmunity)
+        public static Effect EffectDamageImmunityDecrease(DamageType nDamageType, int nPercentImmunity)
         {
             return NWN.Core.NWScript.EffectDamageImmunityDecrease((int)nDamageType, nPercentImmunity);
         }
@@ -4594,7 +4596,7 @@ namespace NWN.Xenomech.API
         ///  - nDamageType: DAMAGE_TYPE_*<br/>
         ///    * Default value for nDamageType should only ever be used in this function prototype.
         /// </summary>
-        public static System.IntPtr EffectACDecrease(int nValue, ACBonusType nModifyType = ACBonusType.Dodge, ACType nDamageType = ACType.VsDamageTypeAll)
+        public static Effect EffectACDecrease(int nValue, ACBonusType nModifyType = ACBonusType.Dodge, ACType nDamageType = ACType.VsDamageTypeAll)
         {
             return NWN.Core.NWScript.EffectACDecrease(nValue, (int)nModifyType, (int)nDamageType);
         }
@@ -4607,7 +4609,7 @@ namespace NWN.Xenomech.API
         ///    50 = 50% slower<br/>
         ///    99 = almost immobile
         /// </summary>
-        public static System.IntPtr EffectMovementSpeedDecrease(int nPercentChange)
+        public static Effect EffectMovementSpeedDecrease(int nPercentChange)
         {
             return NWN.Core.NWScript.EffectMovementSpeedDecrease(nPercentChange);
         }
@@ -4622,7 +4624,7 @@ namespace NWN.Xenomech.API
         ///  - nValue: size of the Saving Throw decrease<br/>
         ///  - nSaveType: SAVING_THROW_TYPE_* (e.g. SAVING_THROW_TYPE_ACID )
         /// </summary>
-        public static System.IntPtr EffectSavingThrowDecrease(SavingThrowType nSave, int nValue, SavingThrowCategoryType nSaveType = SavingThrowCategoryType.All)
+        public static Effect EffectSavingThrowDecrease(SavingThrowType nSave, int nValue, SavingThrowCategoryType nSaveType = SavingThrowCategoryType.All)
         {
             return NWN.Core.NWScript.EffectSavingThrowDecrease((int)nSave, nValue, (int)nSaveType);
         }
@@ -4631,7 +4633,7 @@ namespace NWN.Xenomech.API
         ///  Create a Skill Decrease effect.<br/>
         ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nSkill is invalid.
         /// </summary>
-        public static System.IntPtr EffectSkillDecrease(int nSkill, int nValue)
+        public static Effect EffectSkillDecrease(int nSkill, int nValue)
         {
             return NWN.Core.NWScript.EffectSkillDecrease(nSkill, nValue);
         }
@@ -4639,7 +4641,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Spell Resistance Decrease effect.
         /// </summary>
-        public static System.IntPtr EffectSpellResistanceDecrease(int nValue)
+        public static Effect EffectSpellResistanceDecrease(int nValue)
         {
             return NWN.Core.NWScript.EffectSpellResistanceDecrease(nValue);
         }
@@ -4666,7 +4668,7 @@ namespace NWN.Xenomech.API
         ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nInvisibilityType<br/>
         ///    is invalid.
         /// </summary>
-        public static System.IntPtr EffectInvisibility(InvisibilityType nInvisibilityType)
+        public static Effect EffectInvisibility(InvisibilityType nInvisibilityType)
         {
             return NWN.Core.NWScript.EffectInvisibility((int)nInvisibilityType);
         }
@@ -4678,7 +4680,7 @@ namespace NWN.Xenomech.API
         ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nPercentage < 1 or<br/>
         ///    nPercentage > 100.
         /// </summary>
-        public static System.IntPtr EffectConcealment(int nPercentage, MissChanceType nMissType = MissChanceType.Normal)
+        public static Effect EffectConcealment(int nPercentage, MissChanceType nMissType = MissChanceType.Normal)
         {
             return NWN.Core.NWScript.EffectConcealment(nPercentage, (int)nMissType);
         }
@@ -4686,7 +4688,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Darkness effect.
         /// </summary>
-        public static System.IntPtr EffectDarkness()
+        public static Effect EffectDarkness()
         {
             return NWN.Core.NWScript.EffectDarkness();
         }
@@ -4696,7 +4698,7 @@ namespace NWN.Xenomech.API
         ///  cause the dispel effect to use the level of the creature that created the<br/>
         ///  effect.
         /// </summary>
-        public static System.IntPtr EffectDispelMagicAll(int nCasterLevel = GeneralConstants.USE_CREATURE_LEVEL)
+        public static Effect EffectDispelMagicAll(int nCasterLevel = GeneralConstants.USE_CREATURE_LEVEL)
         {
             return NWN.Core.NWScript.EffectDispelMagicAll(nCasterLevel);
         }
@@ -4704,7 +4706,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create an Ultravision effect.
         /// </summary>
-        public static System.IntPtr EffectUltravision()
+        public static Effect EffectUltravision()
         {
             return NWN.Core.NWScript.EffectUltravision();
         }
@@ -4714,7 +4716,7 @@ namespace NWN.Xenomech.API
         ///  - nNumLevels: the number of negative levels to apply.<br/>
         ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nNumLevels > 100.
         /// </summary>
-        public static System.IntPtr EffectNegativeLevel(int nNumLevels, bool bHPBonus = false)
+        public static Effect EffectNegativeLevel(int nNumLevels, bool bHPBonus = false)
         {
             return NWN.Core.NWScript.EffectNegativeLevel(nNumLevels, bHPBonus ? 1 : 0);
         }
@@ -4722,7 +4724,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Polymorph effect.
         /// </summary>
-        public static System.IntPtr EffectPolymorph(int nPolymorphSelection, bool nLocked = false)
+        public static Effect EffectPolymorph(int nPolymorphSelection, bool nLocked = false)
         {
             return NWN.Core.NWScript.EffectPolymorph(nPolymorphSelection, nLocked ? 1 : 0);
         }
@@ -4732,7 +4734,7 @@ namespace NWN.Xenomech.API
         ///  - nDifficultyClass: must be a non-zero, positive number<br/>
         ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nDifficultyClass <= 0.
         /// </summary>
-        public static System.IntPtr EffectSanctuary(int nDifficultyClass)
+        public static Effect EffectSanctuary(int nDifficultyClass)
         {
             return NWN.Core.NWScript.EffectSanctuary(nDifficultyClass);
         }
@@ -4740,7 +4742,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a True Seeing effect.
         /// </summary>
-        public static System.IntPtr EffectTrueSeeing()
+        public static Effect EffectTrueSeeing()
         {
             return NWN.Core.NWScript.EffectTrueSeeing();
         }
@@ -4748,7 +4750,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a See Invisible effect.
         /// </summary>
-        public static System.IntPtr EffectSeeInvisible()
+        public static Effect EffectSeeInvisible()
         {
             return NWN.Core.NWScript.EffectSeeInvisible();
         }
@@ -4756,7 +4758,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Time Stop effect.
         /// </summary>
-        public static System.IntPtr EffectTimeStop()
+        public static Effect EffectTimeStop()
         {
             return NWN.Core.NWScript.EffectTimeStop();
         }
@@ -4764,7 +4766,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Blindness effect.
         /// </summary>
-        public static System.IntPtr EffectBlindness()
+        public static Effect EffectBlindness()
         {
             return NWN.Core.NWScript.EffectBlindness();
         }
@@ -4819,7 +4821,7 @@ namespace NWN.Xenomech.API
         ///    nMaxSpellLevelAbsorbed is not between -1 and 9 inclusive, or nSpellSchool<br/>
         ///    is invalid.
         /// </summary>
-        public static System.IntPtr EffectSpellLevelAbsorption(int nMaxSpellLevelAbsorbed, int nTotalSpellLevelsAbsorbed = 0, SpellSchoolType nSpellSchool = SpellSchoolType.General)
+        public static Effect EffectSpellLevelAbsorption(int nMaxSpellLevelAbsorbed, int nTotalSpellLevelsAbsorbed = 0, SpellSchoolType nSpellSchool = SpellSchoolType.General)
         {
             return NWN.Core.NWScript.EffectSpellLevelAbsorption(nMaxSpellLevelAbsorbed, nTotalSpellLevelsAbsorbed, (int)nSpellSchool);
         }
@@ -4830,7 +4832,7 @@ namespace NWN.Xenomech.API
         ///  cause the dispel effect to use the level of the creature that created the<br/>
         ///  effect.
         /// </summary>
-        public static System.IntPtr EffectDispelMagicBest(int nCasterLevel = GeneralConstants.USE_CREATURE_LEVEL)
+        public static Effect EffectDispelMagicBest(int nCasterLevel = GeneralConstants.USE_CREATURE_LEVEL)
         {
             return NWN.Core.NWScript.EffectDispelMagicBest(nCasterLevel);
         }
@@ -4881,7 +4883,7 @@ namespace NWN.Xenomech.API
         ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nPercentage < 1 or<br/>
         ///    nPercentage > 100.
         /// </summary>
-        public static System.IntPtr EffectMissChance(int nPercentage, MissChanceType nMissChanceType = MissChanceType.Normal)
+        public static Effect EffectMissChance(int nPercentage, MissChanceType nMissChanceType = MissChanceType.Normal)
         {
             return NWN.Core.NWScript.EffectMissChance(nPercentage, (int)nMissChanceType);
         }
@@ -4911,7 +4913,7 @@ namespace NWN.Xenomech.API
         ///  - nAnimation determines which appear and disappear animations to use. Most creatures<br/>
         ///  only have animation 1, although a few have 2 (like beholders)
         /// </summary>
-        public static System.IntPtr EffectDisappearAppear(System.IntPtr lLocation, int nAnimation = 1)
+        public static Effect EffectDisappearAppear(Location lLocation, int nAnimation = 1)
         {
             return NWN.Core.NWScript.EffectDisappearAppear(lLocation, nAnimation);
         }
@@ -4922,7 +4924,7 @@ namespace NWN.Xenomech.API
         ///  - nAnimation determines which appear and disappear animations to use. Most creatures<br/>
         ///  only have animation 1, although a few have 2 (like beholders)
         /// </summary>
-        public static System.IntPtr EffectDisappear(int nAnimation = 1)
+        public static Effect EffectDisappear(int nAnimation = 1)
         {
             return NWN.Core.NWScript.EffectDisappear(nAnimation);
         }
@@ -4932,7 +4934,7 @@ namespace NWN.Xenomech.API
         ///  - nAnimation determines which appear and disappear animations to use. Most creatures<br/>
         ///  only have animation 1, although a few have 2 (like beholders)
         /// </summary>
-        public static System.IntPtr EffectAppear(int nAnimation = 1)
+        public static Effect EffectAppear(int nAnimation = 1)
         {
             return NWN.Core.NWScript.EffectAppear(nAnimation);
         }
@@ -4960,7 +4962,7 @@ namespace NWN.Xenomech.API
         ///  - nAttacks: maximum is 5, even with the effect stacked<br/>
         ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nAttacks > 5.
         /// </summary>
-        public static System.IntPtr EffectModifyAttacks(int nAttacks)
+        public static Effect EffectModifyAttacks(int nAttacks)
         {
             return NWN.Core.NWScript.EffectModifyAttacks(nAttacks);
         }
@@ -4983,7 +4985,7 @@ namespace NWN.Xenomech.API
         ///  NOTE! You *must* use the DAMAGE_BONUS_* constants! Using other values may<br/>
         ///        result in odd behaviour.
         /// </summary>
-        public static System.IntPtr EffectDamageShield(int nDamageAmount, int nRandomAmount, DamageType nDamageType)
+        public static Effect EffectDamageShield(int nDamageAmount, int nRandomAmount, DamageType nDamageType)
         {
             return NWN.Core.NWScript.EffectDamageShield(nDamageAmount, nRandomAmount, (int)nDamageType);
         }
@@ -5136,7 +5138,7 @@ namespace NWN.Xenomech.API
         ///  - lTarget<br/>
         ///  - nProjectilePathType: PROJECTILE_PATH_TYPE_*
         /// </summary>
-        public static void ActionCastFakeSpellAtLocation(int nSpell, System.IntPtr lTarget, ProjectilePathType nProjectilePathType = ProjectilePathType.Default)
+        public static void ActionCastFakeSpellAtLocation(int nSpell, Location lTarget, ProjectilePathType nProjectilePathType = ProjectilePathType.Default)
         {
             NWN.Core.NWScript.ActionCastFakeSpellAtLocation(nSpell, lTarget, (int)nProjectilePathType);
         }
@@ -5223,7 +5225,7 @@ namespace NWN.Xenomech.API
         ///  - sCreatureTemplate3<br/>
         ///  - sCreatureTemplate4
         /// </summary>
-        public static System.IntPtr EffectSwarm(int nLooping, string sCreatureTemplate1, string sCreatureTemplate2 = "", string sCreatureTemplate3 = "", string sCreatureTemplate4 = "")
+        public static Effect EffectSwarm(int nLooping, string sCreatureTemplate1, string sCreatureTemplate2 = "", string sCreatureTemplate3 = "", string sCreatureTemplate4 = "")
         {
             return NWN.Core.NWScript.EffectSwarm(nLooping, sCreatureTemplate1, sCreatureTemplate2, sCreatureTemplate3, sCreatureTemplate4);
         }
@@ -5259,7 +5261,7 @@ namespace NWN.Xenomech.API
         ///  - nMainLight1Color: TILE_MAIN_LIGHT_COLOR_*<br/>
         ///  - nMainLight2Color: TILE_MAIN_LIGHT_COLOR_*
         /// </summary>
-        public static void SetTileMainLightColor(System.IntPtr lTileLocation, int nMainLight1Color, int nMainLight2Color)
+        public static void SetTileMainLightColor(Location lTileLocation, int nMainLight1Color, int nMainLight2Color)
         {
             NWN.Core.NWScript.SetTileMainLightColor(lTileLocation, nMainLight1Color, nMainLight2Color);
         }
@@ -5271,7 +5273,7 @@ namespace NWN.Xenomech.API
         ///  - nSourceLight1Color: TILE_SOURCE_LIGHT_COLOR_*<br/>
         ///  - nSourceLight2Color: TILE_SOURCE_LIGHT_COLOR_*
         /// </summary>
-        public static void SetTileSourceLightColor(System.IntPtr lTileLocation, int nSourceLight1Color, int nSourceLight2Color)
+        public static void SetTileSourceLightColor(Location lTileLocation, int nSourceLight1Color, int nSourceLight2Color)
         {
             NWN.Core.NWScript.SetTileSourceLightColor(lTileLocation, nSourceLight1Color, nSourceLight2Color);
         }
@@ -5291,7 +5293,7 @@ namespace NWN.Xenomech.API
         ///  lTile.<br/>
         ///  - lTile: the vector part of this is the tile grid (x,y) coordinate of the tile.
         /// </summary>
-        public static TileMainLightColorType GetTileMainLight1Color(System.IntPtr lTile)
+        public static TileMainLightColorType GetTileMainLight1Color(Location lTile)
         {
             return (TileMainLightColorType)NWN.Core.NWScript.GetTileMainLight1Color(lTile);
         }
@@ -5302,7 +5304,7 @@ namespace NWN.Xenomech.API
         ///  - lTile: the vector part of this is the tile grid (x,y) coordinate of the<br/>
         ///    tile.
         /// </summary>
-        public static TileMainLightColorType GetTileMainLight2Color(System.IntPtr lTile)
+        public static TileMainLightColorType GetTileMainLight2Color(Location lTile)
         {
             return (TileMainLightColorType)NWN.Core.NWScript.GetTileMainLight2Color(lTile);
         }
@@ -5313,7 +5315,7 @@ namespace NWN.Xenomech.API
         ///  - lTile: the vector part of this is the tile grid (x,y) coordinate of the<br/>
         ///    tile.
         /// </summary>
-        public static TileSourceLightColorType GetTileSourceLight1Color(System.IntPtr lTile)
+        public static TileSourceLightColorType GetTileSourceLight1Color(Location lTile)
         {
             return (TileSourceLightColorType)NWN.Core.NWScript.GetTileSourceLight1Color(lTile);
         }
@@ -5324,7 +5326,7 @@ namespace NWN.Xenomech.API
         ///  - lTile: the vector part of this is the tile grid (x,y) coordinate of the<br/>
         ///    tile.
         /// </summary>
-        public static TileSourceLightColorType GetTileSourceLight2Color(System.IntPtr lTile)
+        public static TileSourceLightColorType GetTileSourceLight2Color(Location lTile)
         {
             return (TileSourceLightColorType)NWN.Core.NWScript.GetTileSourceLight2Color(lTile);
         }
@@ -5651,7 +5653,7 @@ namespace NWN.Xenomech.API
         ///  - nHitDice: a positive number representing the number of hit dice for the<br/>
         /// /  decrease
         /// </summary>
-        public static System.IntPtr EffectTurnResistanceDecrease(int nHitDice)
+        public static Effect EffectTurnResistanceDecrease(int nHitDice)
         {
             return NWN.Core.NWScript.EffectTurnResistanceDecrease(nHitDice);
         }
@@ -5661,7 +5663,7 @@ namespace NWN.Xenomech.API
         ///  - nHitDice: a positive number representing the number of hit dice for the<br/>
         ///    increase
         /// </summary>
-        public static System.IntPtr EffectTurnResistanceIncrease(int nHitDice)
+        public static Effect EffectTurnResistanceIncrease(int nHitDice)
         {
             return NWN.Core.NWScript.EffectTurnResistanceIncrease(nHitDice);
         }
@@ -5965,7 +5967,7 @@ namespace NWN.Xenomech.API
         ///  returns an effect that will petrify the target<br/>
         ///  * currently applies EffectParalyze and the stoneskin visual effect.
         /// </summary>
-        public static System.IntPtr EffectPetrify()
+        public static Effect EffectPetrify()
         {
             return NWN.Core.NWScript.EffectPetrify();
         }
@@ -5992,7 +5994,7 @@ namespace NWN.Xenomech.API
         ///  returns an effect that is guaranteed to paralyze a creature.<br/>
         ///  this effect is identical to EffectParalyze except that it cannot be resisted.
         /// </summary>
-        public static System.IntPtr EffectCutsceneParalyze()
+        public static Effect EffectCutsceneParalyze()
         {
             return NWN.Core.NWScript.EffectCutsceneParalyze();
         }
@@ -6056,7 +6058,7 @@ namespace NWN.Xenomech.API
         ///  The var name must be unique across the entire database, regardless of the variable type.<br/>
         ///  If you want a variable to pertain to a specific player in the game, provide a player object.
         /// </summary>
-        public static void SetCampaignVector(string sCampaignName, string sVarName, System.Numerics.Vector3 vVector, uint oPlayer = OBJECT_INVALID)
+        public static void SetCampaignVector(string sCampaignName, string sVarName, Vector3 vVector, uint oPlayer = OBJECT_INVALID)
         {
             NWN.Core.NWScript.SetCampaignVector(sCampaignName, sVarName, vVector, oPlayer);
         }
@@ -6069,7 +6071,7 @@ namespace NWN.Xenomech.API
         ///  The var name must be unique across the entire database, regardless of the variable type.<br/>
         ///  If you want a variable to pertain to a specific player in the game, provide a player object.
         /// </summary>
-        public static void SetCampaignLocation(string sCampaignName, string sVarName, System.IntPtr locLocation, uint oPlayer = OBJECT_INVALID)
+        public static void SetCampaignLocation(string sCampaignName, string sVarName, Location locLocation, uint oPlayer = OBJECT_INVALID)
         {
             NWN.Core.NWScript.SetCampaignLocation(sCampaignName, sVarName, locLocation, oPlayer);
         }
@@ -6129,7 +6131,7 @@ namespace NWN.Xenomech.API
         ///  The var name must be unique across the entire database, regardless of the variable type.<br/>
         ///  If you want a variable to pertain to a specific player in the game, provide a player object.
         /// </summary>
-        public static System.Numerics.Vector3 GetCampaignVector(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
+        public static Vector3 GetCampaignVector(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
         {
             return NWN.Core.NWScript.GetCampaignVector(sCampaignName, sVarName, oPlayer);
         }
@@ -6142,7 +6144,7 @@ namespace NWN.Xenomech.API
         ///  The var name must be unique across the entire database, regardless of the variable type.<br/>
         ///  If you want a variable to pertain to a specific player in the game, provide a player object.
         /// </summary>
-        public static System.IntPtr GetCampaignLocation(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
+        public static Location GetCampaignLocation(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
         {
             return NWN.Core.NWScript.GetCampaignLocation(sCampaignName, sVarName, oPlayer);
         }
@@ -6168,7 +6170,7 @@ namespace NWN.Xenomech.API
         ///  If a new tag is specified, it will be assigned to the new object.<br/>
         ///  If bCopyLocalState is true, local vars, effects, action queue, and transition info (triggers, doors) are copied over.
         /// </summary>
-        public static uint CopyObject(uint oSource, System.IntPtr locLocation, uint oOwner = OBJECT_INVALID, string sNewTag = "", bool bCopyLocalState = false)
+        public static uint CopyObject(uint oSource, Location locLocation, uint oOwner = OBJECT_INVALID, string sNewTag = "", bool bCopyLocalState = false)
         {
             return NWN.Core.NWScript.CopyObject(oSource, locLocation, oOwner, sNewTag, bCopyLocalState ? 1 : 0);
         }
@@ -6199,7 +6201,7 @@ namespace NWN.Xenomech.API
         ///  If the owner can&apos;t handle the item (or if it&apos;s a non-item) it will be created at the given location.<br/>
         ///  If bLoadObjectState is true, local vars, effects, action queue, and transition info (triggers, doors) are read in.
         /// </summary>
-        public static uint RetrieveCampaignObject(string sCampaignName, string sVarName, System.IntPtr locLocation, uint oOwner = OBJECT_INVALID, uint oPlayer = OBJECT_INVALID, bool bLoadObjectState = false)
+        public static uint RetrieveCampaignObject(string sCampaignName, string sVarName, Location locLocation, uint oOwner = OBJECT_INVALID, uint oPlayer = OBJECT_INVALID, bool bLoadObjectState = false)
         {
             return NWN.Core.NWScript.RetrieveCampaignObject(sCampaignName, sVarName, locLocation, oOwner, oPlayer, bLoadObjectState ? 1 : 0);
         }
@@ -6208,7 +6210,7 @@ namespace NWN.Xenomech.API
         ///  Returns an effect that is guaranteed to dominate a creature<br/>
         ///  Like EffectDominated but cannot be resisted
         /// </summary>
-        public static System.IntPtr EffectCutsceneDominated()
+        public static Effect EffectCutsceneDominated()
         {
             return NWN.Core.NWScript.EffectCutsceneDominated();
         }
@@ -6262,14 +6264,14 @@ namespace NWN.Xenomech.API
         ///  adds an item property to the specified item<br/>
         ///  Only temporary and permanent duration types are allowed.
         /// </summary>
-        public static void AddItemProperty(DurationType nDurationType, System.IntPtr ipProperty, uint oItem, float fDuration = 0.0f)
+        public static void AddItemProperty(DurationType nDurationType, ItemProperty ipProperty, uint oItem, float fDuration = 0.0f)
         {
             NWN.Core.NWScript.AddItemProperty((int)nDurationType, ipProperty, oItem, fDuration);
         }
         /// <summary>
         ///  removes an item property from the specified item
         /// </summary>
-        public static void RemoveItemProperty(uint oItem, System.IntPtr ipProperty)
+        public static void RemoveItemProperty(uint oItem, ItemProperty ipProperty)
         {
             NWN.Core.NWScript.RemoveItemProperty(oItem, ipProperty);
         }
@@ -6277,7 +6279,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  if the item property is valid this will return true
         /// </summary>
-        public static bool GetIsItemPropertyValid(System.IntPtr ipProperty)
+        public static bool GetIsItemPropertyValid(ItemProperty ipProperty)
         {
             return NWN.Core.NWScript.GetIsItemPropertyValid(ipProperty) == 1;
         }
@@ -6285,7 +6287,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Gets the first item property on an item
         /// </summary>
-        public static System.IntPtr GetFirstItemProperty(uint oItem)
+        public static ItemProperty GetFirstItemProperty(uint oItem)
         {
             return NWN.Core.NWScript.GetFirstItemProperty(oItem);
         }
@@ -6294,7 +6296,7 @@ namespace NWN.Xenomech.API
         ///  Will keep retrieving the next and the next item property on an Item,<br/>
         ///  will return an invalid item property when the list is empty.
         /// </summary>
-        public static System.IntPtr GetNextItemProperty(uint oItem)
+        public static ItemProperty GetNextItemProperty(uint oItem)
         {
             return NWN.Core.NWScript.GetNextItemProperty(oItem);
         }
@@ -6302,7 +6304,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  will return the item property type (ie. holy avenger)
         /// </summary>
-        public static ItemPropertyType GetItemPropertyType(System.IntPtr ip)
+        public static ItemPropertyType GetItemPropertyType(ItemProperty ip)
         {
             return (ItemPropertyType)NWN.Core.NWScript.GetItemPropertyType(ip);
         }
@@ -6310,7 +6312,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  will return the duration type of the item property
         /// </summary>
-        public static DurationType GetItemPropertyDurationType(System.IntPtr ip)
+        public static DurationType GetItemPropertyDurationType(ItemProperty ip)
         {
             return (DurationType)NWN.Core.NWScript.GetItemPropertyDurationType(ip);
         }
@@ -6320,7 +6322,7 @@ namespace NWN.Xenomech.API
         ///  ability constant(IP_CONST_ABILITY_*) and the bonus.  The bonus should<br/>
         ///  be a positive integer between 1 and 12.
         /// </summary>
-        public static System.IntPtr ItemPropertyAbilityBonus(int nAbility, int nBonus)
+        public static ItemProperty ItemPropertyAbilityBonus(int nAbility, int nBonus)
         {
             return NWN.Core.NWScript.ItemPropertyAbilityBonus(nAbility, nBonus);
         }
@@ -6330,7 +6332,7 @@ namespace NWN.Xenomech.API
         ///  The bonus should be a positive integer between 1 and 20. The modifier<br/>
         ///  type depends on the item it is being applied to.
         /// </summary>
-        public static System.IntPtr ItemPropertyACBonus(int nBonus)
+        public static ItemProperty ItemPropertyACBonus(int nBonus)
         {
             return NWN.Core.NWScript.ItemPropertyACBonus(nBonus);
         }
@@ -6342,7 +6344,7 @@ namespace NWN.Xenomech.API
         ///  The AC bonus should be an integer between 1 and 20.  The modifier<br/>
         ///  type depends on the item it is being applied to.
         /// </summary>
-        public static System.IntPtr ItemPropertyACBonusVsAlign(int nAlignGroup, int nACBonus)
+        public static ItemProperty ItemPropertyACBonusVsAlign(int nAlignGroup, int nACBonus)
         {
             return NWN.Core.NWScript.ItemPropertyACBonusVsAlign(nAlignGroup, nACBonus);
         }
@@ -6355,7 +6357,7 @@ namespace NWN.Xenomech.API
         ///  NOTE: Only the first 3 damage types may be used here, the 3 basic<br/>
         ///        physical types.
         /// </summary>
-        public static System.IntPtr ItemPropertyACBonusVsDmgType(DamageType nDamageType, int nACBonus)
+        public static ItemProperty ItemPropertyACBonusVsDmgType(DamageType nDamageType, int nACBonus)
         {
             return NWN.Core.NWScript.ItemPropertyACBonusVsDmgType((int)nDamageType, nACBonus);
         }
@@ -6366,7 +6368,7 @@ namespace NWN.Xenomech.API
         ///  bonus should be an integer between 1 and 20.  The modifier type depends<br/>
         ///  on the item it is being applied to.
         /// </summary>
-        public static System.IntPtr ItemPropertyACBonusVsRace(int nRace, int nACBonus)
+        public static ItemProperty ItemPropertyACBonusVsRace(int nRace, int nACBonus)
         {
             return NWN.Core.NWScript.ItemPropertyACBonusVsRace(nRace, nACBonus);
         }
@@ -6377,7 +6379,7 @@ namespace NWN.Xenomech.API
         ///  bonus.  The AC bonus should be an integer between 1 and 20.  The<br/>
         ///  modifier type depends on the item it is being applied to.
         /// </summary>
-        public static System.IntPtr ItemPropertyACBonusVsSAlign(int nAlign, int nACBonus)
+        public static ItemProperty ItemPropertyACBonusVsSAlign(int nAlign, int nACBonus)
         {
             return NWN.Core.NWScript.ItemPropertyACBonusVsSAlign(nAlign, nACBonus);
         }
@@ -6387,7 +6389,7 @@ namespace NWN.Xenomech.API
         ///  enhancement bonus.  The Enhancement bonus should be an integer between<br/>
         ///  1 and 20.
         /// </summary>
-        public static System.IntPtr ItemPropertyEnhancementBonus(int nEnhancementBonus)
+        public static ItemProperty ItemPropertyEnhancementBonus(int nEnhancementBonus)
         {
             return NWN.Core.NWScript.ItemPropertyEnhancementBonus(nEnhancementBonus);
         }
@@ -6398,7 +6400,7 @@ namespace NWN.Xenomech.API
         ///  and the enhancement bonus.  The Enhancement bonus should be an integer<br/>
         ///  between 1 and 20.
         /// </summary>
-        public static System.IntPtr ItemPropertyEnhancementBonusVsAlign(int nAlignGroup, int nBonus)
+        public static ItemProperty ItemPropertyEnhancementBonusVsAlign(int nAlignGroup, int nBonus)
         {
             return NWN.Core.NWScript.ItemPropertyEnhancementBonusVsAlign(nAlignGroup, nBonus);
         }
@@ -6409,7 +6411,7 @@ namespace NWN.Xenomech.API
         ///  enhancement bonus.  The enhancement bonus should be an integer between<br/>
         ///  1 and 20.
         /// </summary>
-        public static System.IntPtr ItemPropertyEnhancementBonusVsRace(int nRace, int nBonus)
+        public static ItemProperty ItemPropertyEnhancementBonusVsRace(int nRace, int nBonus)
         {
             return NWN.Core.NWScript.ItemPropertyEnhancementBonusVsRace(nRace, nBonus);
         }
@@ -6420,7 +6422,7 @@ namespace NWN.Xenomech.API
         ///  enhancement bonus.  The enhancement bonus should be an integer between<br/>
         ///  1 and 20.
         /// </summary>
-        public static System.IntPtr ItemPropertyEnhancementBonusVsSAlign(int nAlign, int nBonus)
+        public static ItemProperty ItemPropertyEnhancementBonusVsSAlign(int nAlign, int nBonus)
         {
             return NWN.Core.NWScript.ItemPropertyEnhancementBonusVsSAlign(nAlign, nBonus);
         }
@@ -6430,7 +6432,7 @@ namespace NWN.Xenomech.API
         ///  enhancement penalty.  The enhancement penalty should be a POSITIVE<br/>
         ///  integer between 1 and 5 (ie. 1 = -1).
         /// </summary>
-        public static System.IntPtr ItemPropertyEnhancementPenalty(int nPenalty)
+        public static ItemProperty ItemPropertyEnhancementPenalty(int nPenalty)
         {
             return NWN.Core.NWScript.ItemPropertyEnhancementPenalty(nPenalty);
         }
@@ -6439,7 +6441,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property weight reduction.  You need to specify the weight<br/>
         ///  reduction constant(IP_CONST_REDUCEDWEIGHT_*).
         /// </summary>
-        public static System.IntPtr ItemPropertyWeightReduction(int nReduction)
+        public static ItemProperty ItemPropertyWeightReduction(int nReduction)
         {
             return NWN.Core.NWScript.ItemPropertyWeightReduction(nReduction);
         }
@@ -6448,7 +6450,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property Bonus Feat.  You need to specify the the feat<br/>
         ///  constant(IP_CONST_FEAT_*).
         /// </summary>
-        public static System.IntPtr ItemPropertyBonusFeat(int nFeat)
+        public static ItemProperty ItemPropertyBonusFeat(int nFeat)
         {
             return NWN.Core.NWScript.ItemPropertyBonusFeat(nFeat);
         }
@@ -6459,7 +6461,7 @@ namespace NWN.Xenomech.API
         ///  spell casting class) and the level of the bonus spell.  The level of the<br/>
         ///  bonus spell should be an integer between 0 and 9.
         /// </summary>
-        public static System.IntPtr ItemPropertyBonusLevelSpell(int nClass, int nSpellLevel)
+        public static ItemProperty ItemPropertyBonusLevelSpell(int nClass, int nSpellLevel)
         {
             return NWN.Core.NWScript.ItemPropertyBonusLevelSpell(nClass, nSpellLevel);
         }
@@ -6852,7 +6854,7 @@ namespace NWN.Xenomech.API
         ///           Special_Alcohol_Spirits<br/>
         ///           Special_Alcohol_Wine<br/>
         /// </summary>
-        public static System.IntPtr ItemPropertyCastSpell(int nSpell, int nNumUses)
+        public static ItemProperty ItemPropertyCastSpell(int nSpell, int nNumUses)
         {
             return NWN.Core.NWScript.ItemPropertyCastSpell(nSpell, nNumUses);
         }
@@ -6863,7 +6865,7 @@ namespace NWN.Xenomech.API
         ///  NOTE: not all the damage types will work, use only the following: Acid, Bludgeoning,<br/>
         ///        Cold, Electrical, Fire, Piercing, Slashing, Sonic.
         /// </summary>
-        public static System.IntPtr ItemPropertyDamageBonus(DamageType nDamageType, int nDamage)
+        public static ItemProperty ItemPropertyDamageBonus(DamageType nDamageType, int nDamage)
         {
             return NWN.Core.NWScript.ItemPropertyDamageBonus((int)nDamageType, nDamage);
         }
@@ -6874,7 +6876,7 @@ namespace NWN.Xenomech.API
         ///  NOTE: not all the damage types will work, use only the following: Acid, Bludgeoning,<br/>
         ///        Cold, Electrical, Fire, Piercing, Slashing, Sonic.
         /// </summary>
-        public static System.IntPtr ItemPropertyDamageBonusVsAlign(int nAlignGroup, DamageType nDamageType, int nDamage)
+        public static ItemProperty ItemPropertyDamageBonusVsAlign(int nAlignGroup, DamageType nDamageType, int nDamage)
         {
             return NWN.Core.NWScript.ItemPropertyDamageBonusVsAlign(nAlignGroup, (int)nDamageType, nDamage);
         }
@@ -6886,7 +6888,7 @@ namespace NWN.Xenomech.API
         ///  NOTE: not all the damage types will work, use only the following: Acid, Bludgeoning,<br/>
         ///        Cold, Electrical, Fire, Piercing, Slashing, Sonic.
         /// </summary>
-        public static System.IntPtr ItemPropertyDamageBonusVsRace(int nRace, DamageType nDamageType, int nDamage)
+        public static ItemProperty ItemPropertyDamageBonusVsRace(int nRace, DamageType nDamageType, int nDamage)
         {
             return NWN.Core.NWScript.ItemPropertyDamageBonusVsRace(nRace, (int)nDamageType, nDamage);
         }
@@ -6898,7 +6900,7 @@ namespace NWN.Xenomech.API
         ///  NOTE: not all the damage types will work, use only the following: Acid, Bludgeoning,<br/>
         ///        Cold, Electrical, Fire, Piercing, Slashing, Sonic.
         /// </summary>
-        public static System.IntPtr ItemPropertyDamageBonusVsSAlign(int nAlign, DamageType nDamageType, int nDamage)
+        public static ItemProperty ItemPropertyDamageBonusVsSAlign(int nAlign, DamageType nDamageType, int nDamage)
         {
             return NWN.Core.NWScript.ItemPropertyDamageBonusVsSAlign(nAlign, (int)nDamageType, nDamage);
         }
@@ -6910,7 +6912,7 @@ namespace NWN.Xenomech.API
         ///  NOTE: not all the damage types will work, use only the following: Acid, Bludgeoning,<br/>
         ///        Cold, Electrical, Fire, Piercing, Slashing, Sonic.
         /// </summary>
-        public static System.IntPtr ItemPropertyDamageImmunity(DamageType nDamageType, int nImmuneBonus)
+        public static ItemProperty ItemPropertyDamageImmunity(DamageType nDamageType, int nImmuneBonus)
         {
             return NWN.Core.NWScript.ItemPropertyDamageImmunity((int)nDamageType, nImmuneBonus);
         }
@@ -6919,7 +6921,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property damage penalty.  You must specify the damage penalty.<br/>
         ///  The damage penalty should be a POSITIVE integer between 1 and 5 (ie. 1 = -1).
         /// </summary>
-        public static System.IntPtr ItemPropertyDamagePenalty(int nPenalty)
+        public static ItemProperty ItemPropertyDamagePenalty(int nPenalty)
         {
             return NWN.Core.NWScript.ItemPropertyDamagePenalty(nPenalty);
         }
@@ -6930,7 +6932,7 @@ namespace NWN.Xenomech.API
         ///  and the amount of HP of damage constant(IP_CONST_DAMAGESOAK_*) will be soaked<br/>
         ///  up if your weapon is not of high enough enhancement.
         /// </summary>
-        public static System.IntPtr ItemPropertyDamageReduction(int nEnhancement, int nHPSoak)
+        public static ItemProperty ItemPropertyDamageReduction(int nEnhancement, int nHPSoak)
         {
             return NWN.Core.NWScript.ItemPropertyDamageReduction(nEnhancement, nHPSoak);
         }
@@ -6940,7 +6942,7 @@ namespace NWN.Xenomech.API
         ///  constant(IP_CONST_DAMAGETYPE_*) and the amount of HP of damage constant<br/>
         ///  (IP_CONST_DAMAGERESIST_*) that will be resisted against each round.
         /// </summary>
-        public static System.IntPtr ItemPropertyDamageResistance(DamageType nDamageType, int nHPResist)
+        public static ItemProperty ItemPropertyDamageResistance(DamageType nDamageType, int nHPResist)
         {
             return NWN.Core.NWScript.ItemPropertyDamageResistance((int)nDamageType, nHPResist);
         }
@@ -6950,7 +6952,7 @@ namespace NWN.Xenomech.API
         ///  constant(IP_CONST_DAMAGETYPE_*) that you want the user to be extra vulnerable to<br/>
         ///  and the percentage vulnerability constant(IP_CONST_DAMAGEVULNERABILITY_*).
         /// </summary>
-        public static System.IntPtr ItemPropertyDamageVulnerability(DamageType nDamageType, int nVulnerability)
+        public static ItemProperty ItemPropertyDamageVulnerability(DamageType nDamageType, int nVulnerability)
         {
             return NWN.Core.NWScript.ItemPropertyDamageVulnerability((int)nDamageType, nVulnerability);
         }
@@ -6958,7 +6960,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Return Item property Darkvision.
         /// </summary>
-        public static System.IntPtr ItemPropertyDarkvision()
+        public static ItemProperty ItemPropertyDarkvision()
         {
             return NWN.Core.NWScript.ItemPropertyDarkvision();
         }
@@ -6968,7 +6970,7 @@ namespace NWN.Xenomech.API
         ///  constant(IP_CONST_ABILITY_*) and the modifier constant.  The modifier must be<br/>
         ///  a POSITIVE integer between 1 and 10 (ie. 1 = -1).
         /// </summary>
-        public static System.IntPtr ItemPropertyDecreaseAbility(int nAbility, int nModifier)
+        public static ItemProperty ItemPropertyDecreaseAbility(int nAbility, int nModifier)
         {
             return NWN.Core.NWScript.ItemPropertyDecreaseAbility(nAbility, nModifier);
         }
@@ -6978,7 +6980,7 @@ namespace NWN.Xenomech.API
         ///  modifier type constant(IP_CONST_ACMODIFIERTYPE_*) and the armor class penalty.<br/>
         ///  The penalty must be a POSITIVE integer between 1 and 5 (ie. 1 = -1).
         /// </summary>
-        public static System.IntPtr ItemPropertyDecreaseAC(int nModifierType, int nPenalty)
+        public static ItemProperty ItemPropertyDecreaseAC(int nModifierType, int nPenalty)
         {
             return NWN.Core.NWScript.ItemPropertyDecreaseAC(nModifierType, nPenalty);
         }
@@ -6988,7 +6990,7 @@ namespace NWN.Xenomech.API
         ///  skill to be decreased(SKILL_*) and the amount of the penalty.  The penalty<br/>
         ///  must be a POSITIVE integer between 1 and 10 (ie. 1 = -1).
         /// </summary>
-        public static System.IntPtr ItemPropertyDecreaseSkill(int nSkill, int nPenalty)
+        public static ItemProperty ItemPropertyDecreaseSkill(int nSkill, int nPenalty)
         {
             return NWN.Core.NWScript.ItemPropertyDecreaseSkill(nSkill, nPenalty);
         }
@@ -6998,7 +7000,7 @@ namespace NWN.Xenomech.API
         ///  containers that reduce the weight of the objects inside them.  You must<br/>
         ///  specify the container weight reduction type constant(IP_CONST_CONTAINERWEIGHTRED_*).
         /// </summary>
-        public static System.IntPtr ItemPropertyContainerReducedWeight(int nContainerType)
+        public static ItemProperty ItemPropertyContainerReducedWeight(int nContainerType)
         {
             return NWN.Core.NWScript.ItemPropertyContainerReducedWeight(nContainerType);
         }
@@ -7010,7 +7012,7 @@ namespace NWN.Xenomech.API
         ///        here.<br/>
         ///  NOTE: It is also only applicable to melee weapons.
         /// </summary>
-        public static System.IntPtr ItemPropertyExtraMeleeDamageType(DamageType nDamageType)
+        public static ItemProperty ItemPropertyExtraMeleeDamageType(DamageType nDamageType)
         {
             return NWN.Core.NWScript.ItemPropertyExtraMeleeDamageType((int)nDamageType);
         }
@@ -7022,7 +7024,7 @@ namespace NWN.Xenomech.API
         ///        here.<br/>
         ///  NOTE: It is also only applicable to ranged weapons.
         /// </summary>
-        public static System.IntPtr ItemPropertyExtraRangeDamageType(DamageType nDamageType)
+        public static ItemProperty ItemPropertyExtraRangeDamageType(DamageType nDamageType)
         {
             return NWN.Core.NWScript.ItemPropertyExtraRangeDamageType((int)nDamageType);
         }
@@ -7030,7 +7032,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Returns Item property haste.
         /// </summary>
-        public static System.IntPtr ItemPropertyHaste()
+        public static ItemProperty ItemPropertyHaste()
         {
             return NWN.Core.NWScript.ItemPropertyHaste();
         }
@@ -7038,7 +7040,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Returns Item property Holy Avenger.
         /// </summary>
-        public static System.IntPtr ItemPropertyHolyAvenger()
+        public static ItemProperty ItemPropertyHolyAvenger()
         {
             return NWN.Core.NWScript.ItemPropertyHolyAvenger();
         }
@@ -7047,7 +7049,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property immunity to miscellaneous effects.  You must specify the<br/>
         ///  effect to which the user is immune, it is a constant(IP_CONST_IMMUNITYMISC_*).
         /// </summary>
-        public static System.IntPtr ItemPropertyImmunityMisc(ImmunityType nImmunityType)
+        public static ItemProperty ItemPropertyImmunityMisc(ImmunityType nImmunityType)
         {
             return NWN.Core.NWScript.ItemPropertyImmunityMisc((int)nImmunityType);
         }
@@ -7055,7 +7057,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Returns Item property improved evasion.
         /// </summary>
-        public static System.IntPtr ItemPropertyImprovedEvasion()
+        public static ItemProperty ItemPropertyImprovedEvasion()
         {
             return NWN.Core.NWScript.ItemPropertyImprovedEvasion();
         }
@@ -7064,7 +7066,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property bonus spell resistance.  You must specify the bonus spell<br/>
         ///  resistance constant(IP_CONST_SPELLRESISTANCEBONUS_*).
         /// </summary>
-        public static System.IntPtr ItemPropertyBonusSpellResistance(int nBonus)
+        public static ItemProperty ItemPropertyBonusSpellResistance(int nBonus)
         {
             return NWN.Core.NWScript.ItemPropertyBonusSpellResistance(nBonus);
         }
@@ -7075,7 +7077,7 @@ namespace NWN.Xenomech.API
         ///  applied to and the bonus that is be applied.  The bonus must be an integer<br/>
         ///  between 1 and 20.
         /// </summary>
-        public static System.IntPtr ItemPropertyBonusSavingThrowVsX(int nBonusType, int nBonus)
+        public static ItemProperty ItemPropertyBonusSavingThrowVsX(int nBonusType, int nBonus)
         {
             return NWN.Core.NWScript.ItemPropertyBonusSavingThrowVsX(nBonusType, nBonus);
         }
@@ -7086,7 +7088,7 @@ namespace NWN.Xenomech.API
         ///  to which the user gets the bonus and the bonus that he/she will get.  The<br/>
         ///  bonus must be an integer between 1 and 20.
         /// </summary>
-        public static System.IntPtr ItemPropertyBonusSavingThrow(int nBaseSaveType, int nBonus)
+        public static ItemProperty ItemPropertyBonusSavingThrow(int nBaseSaveType, int nBonus)
         {
             return NWN.Core.NWScript.ItemPropertyBonusSavingThrow(nBaseSaveType, nBonus);
         }
@@ -7095,7 +7097,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property keen.  This means a critical threat range of 19-20 on a<br/>
         ///  weapon will be increased to 17-20 etc.
         /// </summary>
-        public static System.IntPtr ItemPropertyKeen()
+        public static ItemProperty ItemPropertyKeen()
         {
             return NWN.Core.NWScript.ItemPropertyKeen();
         }
@@ -7105,7 +7107,7 @@ namespace NWN.Xenomech.API
         ///  light(IP_CONST_LIGHTBRIGHTNESS_*) and the color constant of the light<br/>
         ///  (IP_CONST_LIGHTCOLOR_*).
         /// </summary>
-        public static System.IntPtr ItemPropertyLight(int nBrightness, int nColor)
+        public static ItemProperty ItemPropertyLight(int nBrightness, int nColor)
         {
             return NWN.Core.NWScript.ItemPropertyLight(nBrightness, nColor);
         }
@@ -7115,7 +7117,7 @@ namespace NWN.Xenomech.API
         ///  specify the maximum modifier for strength that is allowed on a ranged weapon.<br/>
         ///  The modifier must be a positive integer between 1 and 20.
         /// </summary>
-        public static System.IntPtr ItemPropertyMaxRangeStrengthMod(int nModifier)
+        public static ItemProperty ItemPropertyMaxRangeStrengthMod(int nModifier)
         {
             return NWN.Core.NWScript.ItemPropertyMaxRangeStrengthMod(nModifier);
         }
@@ -7124,7 +7126,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property no damage.  This means the weapon will do no damage in<br/>
         ///  combat.
         /// </summary>
-        public static System.IntPtr ItemPropertyNoDamage()
+        public static ItemProperty ItemPropertyNoDamage()
         {
             return NWN.Core.NWScript.ItemPropertyNoDamage();
         }
@@ -7170,7 +7172,7 @@ namespace NWN.Xenomech.API
         ///       STUN              :nSpecial is the duration/percentage of effecting victim.<br/>
         ///                          constant(IP_CONST_ONHIT_DURATION_*)
         /// </summary>
-        public static System.IntPtr ItemPropertyOnHitProps(int nProperty, int nSaveDC, int nSpecial = 0)
+        public static ItemProperty ItemPropertyOnHitProps(int nProperty, int nSaveDC, int nSpecial = 0)
         {
             return NWN.Core.NWScript.ItemPropertyOnHitProps(nProperty, nSaveDC, nSpecial);
         }
@@ -7181,7 +7183,7 @@ namespace NWN.Xenomech.API
         ///  penalty to be applied.  The penalty must be a POSITIVE integer between 1 and 20<br/>
         ///  (ie. 1 = -1).
         /// </summary>
-        public static System.IntPtr ItemPropertyReducedSavingThrowVsX(int nBaseSaveType, int nPenalty)
+        public static ItemProperty ItemPropertyReducedSavingThrowVsX(int nBaseSaveType, int nPenalty)
         {
             return NWN.Core.NWScript.ItemPropertyReducedSavingThrowVsX(nBaseSaveType, nPenalty);
         }
@@ -7192,7 +7194,7 @@ namespace NWN.Xenomech.API
         ///  to be applied.  The constant for the base type starts with (IP_CONST_SAVEBASETYPE_*).<br/>
         ///  The penalty must be a POSITIVE integer between 1 and 20 (ie. 1 = -1).
         /// </summary>
-        public static System.IntPtr ItemPropertyReducedSavingThrow(int nBonusType, int nPenalty)
+        public static ItemProperty ItemPropertyReducedSavingThrow(int nBonusType, int nPenalty)
         {
             return NWN.Core.NWScript.ItemPropertyReducedSavingThrow(nBonusType, nPenalty);
         }
@@ -7201,7 +7203,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property regeneration.  You must specify the regeneration amount.<br/>
         ///  The amount must be an integer between 1 and 20.
         /// </summary>
-        public static System.IntPtr ItemPropertyRegeneration(int nRegenAmount)
+        public static ItemProperty ItemPropertyRegeneration(int nRegenAmount)
         {
             return NWN.Core.NWScript.ItemPropertyRegeneration(nRegenAmount);
         }
@@ -7211,7 +7213,7 @@ namespace NWN.Xenomech.API
         ///  will get a bonus(SKILL_*) and the amount of the bonus.  The bonus amount must<br/>
         ///  be an integer between 1 and 50.
         /// </summary>
-        public static System.IntPtr ItemPropertySkillBonus(int nSkill, int nBonus)
+        public static ItemProperty ItemPropertySkillBonus(int nSkill, int nBonus)
         {
             return NWN.Core.NWScript.ItemPropertySkillBonus(nSkill, nBonus);
         }
@@ -7220,7 +7222,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property spell immunity vs. specific spell.  You must specify the<br/>
         ///  spell to which the user will be immune(IP_CONST_IMMUNITYSPELL_*).
         /// </summary>
-        public static System.IntPtr ItemPropertySpellImmunitySpecific(int nSpell)
+        public static ItemProperty ItemPropertySpellImmunitySpecific(int nSpell)
         {
             return NWN.Core.NWScript.ItemPropertySpellImmunitySpecific(nSpell);
         }
@@ -7229,7 +7231,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property spell immunity vs. spell school.  You must specify the<br/>
         ///  school to which the user will be immune(IP_CONST_SPELLSCHOOL_*).
         /// </summary>
-        public static System.IntPtr ItemPropertySpellImmunitySchool(int nSchool)
+        public static ItemProperty ItemPropertySpellImmunitySchool(int nSchool)
         {
             return NWN.Core.NWScript.ItemPropertySpellImmunitySchool(nSchool);
         }
@@ -7238,7 +7240,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property Thieves tools.  You must specify the modifier you wish<br/>
         ///  the tools to have.  The modifier must be an integer between 1 and 12.
         /// </summary>
-        public static System.IntPtr ItemPropertyThievesTools(int nModifier)
+        public static ItemProperty ItemPropertyThievesTools(int nModifier)
         {
             return NWN.Core.NWScript.ItemPropertyThievesTools(nModifier);
         }
@@ -7247,7 +7249,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property Attack bonus.  You must specify an attack bonus.  The bonus<br/>
         ///  must be an integer between 1 and 20.
         /// </summary>
-        public static System.IntPtr ItemPropertyAttackBonus(int nBonus)
+        public static ItemProperty ItemPropertyAttackBonus(int nBonus)
         {
             return NWN.Core.NWScript.ItemPropertyAttackBonus(nBonus);
         }
@@ -7257,7 +7259,7 @@ namespace NWN.Xenomech.API
         ///  alignment group constant(IP_CONST_ALIGNMENTGROUP_*) and the attack bonus.  The<br/>
         ///  bonus must be an integer between 1 and 20.
         /// </summary>
-        public static System.IntPtr ItemPropertyAttackBonusVsAlign(int nAlignGroup, int nBonus)
+        public static ItemProperty ItemPropertyAttackBonusVsAlign(int nAlignGroup, int nBonus)
         {
             return NWN.Core.NWScript.ItemPropertyAttackBonusVsAlign(nAlignGroup, nBonus);
         }
@@ -7267,7 +7269,7 @@ namespace NWN.Xenomech.API
         ///  racial group constant(IP_CONST_RACIALTYPE_*) and the attack bonus.  The bonus<br/>
         ///  must be an integer between 1 and 20.
         /// </summary>
-        public static System.IntPtr ItemPropertyAttackBonusVsRace(int nRace, int nBonus)
+        public static ItemProperty ItemPropertyAttackBonusVsRace(int nRace, int nBonus)
         {
             return NWN.Core.NWScript.ItemPropertyAttackBonusVsRace(nRace, nBonus);
         }
@@ -7277,7 +7279,7 @@ namespace NWN.Xenomech.API
         ///  the alignment you want the bonus to work against(IP_CONST_ALIGNMENT_*) and the<br/>
         ///  attack bonus.  The bonus must be an integer between 1 and 20.
         /// </summary>
-        public static System.IntPtr ItemPropertyAttackBonusVsSAlign(int nAlignment, int nBonus)
+        public static ItemProperty ItemPropertyAttackBonusVsSAlign(int nAlignment, int nBonus)
         {
             return NWN.Core.NWScript.ItemPropertyAttackBonusVsSAlign(nAlignment, nBonus);
         }
@@ -7286,7 +7288,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property attack penalty.  You must specify the attack penalty.<br/>
         ///  The penalty must be a POSITIVE integer between 1 and 5 (ie. 1 = -1).
         /// </summary>
-        public static System.IntPtr ItemPropertyAttackPenalty(int nPenalty)
+        public static ItemProperty ItemPropertyAttackPenalty(int nPenalty)
         {
             return NWN.Core.NWScript.ItemPropertyAttackPenalty(nPenalty);
         }
@@ -7298,7 +7300,7 @@ namespace NWN.Xenomech.API
         ///  bonus).  For this parmeter you use the constants beginning with:<br/>
         ///       (IP_CONST_UNLIMITEDAMMO_*).
         /// </summary>
-        public static System.IntPtr ItemPropertyUnlimitedAmmo(IPConstUnlimitedAmmoType nAmmoDamage = IPConstUnlimitedAmmoType.Basic)
+        public static ItemProperty ItemPropertyUnlimitedAmmo(IPConstUnlimitedAmmoType nAmmoDamage = IPConstUnlimitedAmmoType.Basic)
         {
             return NWN.Core.NWScript.ItemPropertyUnlimitedAmmo((int)nAmmoDamage);
         }
@@ -7307,7 +7309,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property limit use by alignment group.  You must specify the<br/>
         ///  alignment group(s) that you want to be able to use this item(IP_CONST_ALIGNMENTGROUP_*).
         /// </summary>
-        public static System.IntPtr ItemPropertyLimitUseByAlign(int nAlignGroup)
+        public static ItemProperty ItemPropertyLimitUseByAlign(int nAlignGroup)
         {
             return NWN.Core.NWScript.ItemPropertyLimitUseByAlign(nAlignGroup);
         }
@@ -7316,7 +7318,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property limit use by class.  You must specify the class(es) who<br/>
         ///  are able to use this item(IP_CONST_CLASS_*).
         /// </summary>
-        public static System.IntPtr ItemPropertyLimitUseByClass(int nClass)
+        public static ItemProperty ItemPropertyLimitUseByClass(int nClass)
         {
             return NWN.Core.NWScript.ItemPropertyLimitUseByClass(nClass);
         }
@@ -7325,7 +7327,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property limit use by race.  You must specify the race(s) who are<br/>
         ///  allowed to use this item(IP_CONST_RACIALTYPE_*).
         /// </summary>
-        public static System.IntPtr ItemPropertyLimitUseByRace(int nRace)
+        public static ItemProperty ItemPropertyLimitUseByRace(int nRace)
         {
             return NWN.Core.NWScript.ItemPropertyLimitUseByRace(nRace);
         }
@@ -7334,7 +7336,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property limit use by specific alignment.  You must specify the<br/>
         ///  alignment(s) of those allowed to use the item(IP_CONST_ALIGNMENT_*).
         /// </summary>
-        public static System.IntPtr ItemPropertyLimitUseBySAlign(int nAlignment)
+        public static ItemProperty ItemPropertyLimitUseBySAlign(int nAlignment)
         {
             return NWN.Core.NWScript.ItemPropertyLimitUseBySAlign(nAlignment);
         }
@@ -7342,7 +7344,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  replace this function it does nothing.
         /// </summary>
-        public static System.IntPtr BadBadReplaceMeThisDoesNothing()
+        public static ItemProperty BadBadReplaceMeThisDoesNothing()
         {
             return NWN.Core.NWScript.BadBadReplaceMeThisDoesNothing();
         }
@@ -7351,7 +7353,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property vampiric regeneration.  You must specify the amount of<br/>
         ///  regeneration.  The regen amount must be an integer between 1 and 20.
         /// </summary>
-        public static System.IntPtr ItemPropertyVampiricRegeneration(int nRegenAmount)
+        public static ItemProperty ItemPropertyVampiricRegeneration(int nRegenAmount)
         {
             return NWN.Core.NWScript.ItemPropertyVampiricRegeneration(nRegenAmount);
         }
@@ -7360,7 +7362,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property Trap.  You must specify the trap level constant<br/>
         ///  (IP_CONST_TRAPSTRENGTH_*) and the trap type constant(IP_CONST_TRAPTYPE_*).
         /// </summary>
-        public static System.IntPtr ItemPropertyTrap(int nTrapLevel, int nTrapType)
+        public static ItemProperty ItemPropertyTrap(int nTrapLevel, int nTrapType)
         {
             return NWN.Core.NWScript.ItemPropertyTrap(nTrapLevel, nTrapType);
         }
@@ -7368,7 +7370,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Returns Item property true seeing.
         /// </summary>
-        public static System.IntPtr ItemPropertyTrueSeeing()
+        public static ItemProperty ItemPropertyTrueSeeing()
         {
             return NWN.Core.NWScript.ItemPropertyTrueSeeing();
         }
@@ -7394,7 +7396,7 @@ namespace NWN.Xenomech.API
         ///  NOTE: These can only be applied to monster NATURAL weapons (ie. bite, claw,<br/>
         ///        gore, and slam).  IT WILL NOT WORK ON NORMAL WEAPONS.
         /// </summary>
-        public static System.IntPtr ItemPropertyOnMonsterHitProperties(int nProperty, int nSpecial = 0)
+        public static ItemProperty ItemPropertyOnMonsterHitProperties(int nProperty, int nSpecial = 0)
         {
             return NWN.Core.NWScript.ItemPropertyOnMonsterHitProperties(nProperty, nSpecial);
         }
@@ -7403,7 +7405,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property turn resistance.  You must specify the resistance bonus.<br/>
         ///  The bonus must be an integer between 1 and 50.
         /// </summary>
-        public static System.IntPtr ItemPropertyTurnResistance(int nModifier)
+        public static ItemProperty ItemPropertyTurnResistance(int nModifier)
         {
             return NWN.Core.NWScript.ItemPropertyTurnResistance(nModifier);
         }
@@ -7412,7 +7414,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property Massive Critical.  You must specify the extra damage<br/>
         ///  constant(IP_CONST_DAMAGEBONUS_*) of the criticals.
         /// </summary>
-        public static System.IntPtr ItemPropertyMassiveCritical(int nDamage)
+        public static ItemProperty ItemPropertyMassiveCritical(int nDamage)
         {
             return NWN.Core.NWScript.ItemPropertyMassiveCritical(nDamage);
         }
@@ -7420,7 +7422,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Returns Item property free action.
         /// </summary>
-        public static System.IntPtr ItemPropertyFreeAction()
+        public static ItemProperty ItemPropertyFreeAction()
         {
             return NWN.Core.NWScript.ItemPropertyFreeAction();
         }
@@ -7431,7 +7433,7 @@ namespace NWN.Xenomech.API
         ///  NOTE: These can only be applied to monster NATURAL weapons (ie. bite, claw,<br/>
         ///        gore, and slam).  IT WILL NOT WORK ON NORMAL WEAPONS.
         /// </summary>
-        public static System.IntPtr ItemPropertyMonsterDamage(int nDamage)
+        public static ItemProperty ItemPropertyMonsterDamage(int nDamage)
         {
             return NWN.Core.NWScript.ItemPropertyMonsterDamage(nDamage);
         }
@@ -7442,7 +7444,7 @@ namespace NWN.Xenomech.API
         ///  between 1 and 9.  By putting in a 3 it will mean the user is immune to all<br/>
         ///  3rd level and lower spells.
         /// </summary>
-        public static System.IntPtr ItemPropertyImmunityToSpellLevel(int nLevel)
+        public static ItemProperty ItemPropertyImmunityToSpellLevel(int nLevel)
         {
             return NWN.Core.NWScript.ItemPropertyImmunityToSpellLevel(nLevel);
         }
@@ -7452,7 +7454,7 @@ namespace NWN.Xenomech.API
         ///  automatically use the zombie walk.  This will apply the special walk animation<br/>
         ///  to the user.
         /// </summary>
-        public static System.IntPtr ItemPropertySpecialWalk(int nWalkType = 0)
+        public static ItemProperty ItemPropertySpecialWalk(int nWalkType = 0)
         {
             return NWN.Core.NWScript.ItemPropertySpecialWalk(nWalkType);
         }
@@ -7460,7 +7462,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property healers kit.  You must specify the level of the kit.<br/>
         ///  The modifier must be an integer between 1 and 12.
         /// </summary>
-        public static System.IntPtr ItemPropertyHealersKit(int nModifier)
+        public static ItemProperty ItemPropertyHealersKit(int nModifier)
         {
             return NWN.Core.NWScript.ItemPropertyHealersKit(nModifier);
         }
@@ -7469,7 +7471,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property weight increase.  You must specify the weight increase<br/>
         ///  constant(IP_CONST_WEIGHTINCREASE_*).
         /// </summary>
-        public static System.IntPtr ItemPropertyWeightIncrease(int nWeight)
+        public static ItemProperty ItemPropertyWeightIncrease(int nWeight)
         {
             return NWN.Core.NWScript.ItemPropertyWeightIncrease(nWeight);
         }
@@ -7491,7 +7493,7 @@ namespace NWN.Xenomech.API
         ///  - nPercent - percentage of failure<br/>
         ///  - nSpellSchool - the school of spells affected.
         /// </summary>
-        public static System.IntPtr EffectSpellFailure(int nPercent = 100, SpellSchoolType nSpellSchool = SpellSchoolType.General)
+        public static Effect EffectSpellFailure(int nPercent = 100, SpellSchoolType nSpellSchool = SpellSchoolType.General)
         {
             return NWN.Core.NWScript.EffectSpellFailure(nPercent, (int)nSpellSchool);
         }
@@ -7715,7 +7717,7 @@ namespace NWN.Xenomech.API
         ///  Returns an effect of type EFFECT_TYPE_ETHEREAL which works just like EffectSanctuary<br/>
         ///  except that the observers get no saving throw
         /// </summary>
-        public static System.IntPtr EffectEthereal()
+        public static Effect EffectEthereal()
         {
             return NWN.Core.NWScript.EffectEthereal();
         }
@@ -7940,7 +7942,7 @@ namespace NWN.Xenomech.API
         ///  when a successful strike is made, or (when applied to armor) is struck by an opponent.<br/>
         ///  - nSpell uses the IP_CONST_ONHIT_CASTSPELL_* constants
         /// </summary>
-        public static System.IntPtr ItemPropertyOnHitCastSpell(int nSpell, int nLevel)
+        public static ItemProperty ItemPropertyOnHitCastSpell(int nSpell, int nLevel)
         {
             return NWN.Core.NWScript.ItemPropertyOnHitCastSpell(nSpell, nLevel);
         }
@@ -7948,7 +7950,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Returns the SubType number of the item property. See the 2DA files for value definitions.
         /// </summary>
-        public static int GetItemPropertySubType(System.IntPtr iProperty)
+        public static int GetItemPropertySubType(ItemProperty iProperty)
         {
             return NWN.Core.NWScript.GetItemPropertySubType(iProperty);
         }
@@ -7990,7 +7992,7 @@ namespace NWN.Xenomech.API
         ///  Creates a visual effect (ITEM_VISUAL_*) that may be applied to<br/>
         ///  melee weapons only.
         /// </summary>
-        public static System.IntPtr ItemPropertyVisualEffect(int nEffect)
+        public static ItemProperty ItemPropertyVisualEffect(int nEffect)
         {
             return NWN.Core.NWScript.ItemPropertyVisualEffect(nEffect);
         }
@@ -8124,7 +8126,7 @@ namespace NWN.Xenomech.API
         ///  PLEASE NOTE: This is an expensive function and may<br/>
         ///               degrade performance if used frequently.
         /// </summary>
-        public static bool LineOfSightVector(System.Numerics.Vector3 vSource, System.Numerics.Vector3 vTarget)
+        public static bool LineOfSightVector(Vector3 vSource, Vector3 vTarget)
         {
             return NWN.Core.NWScript.LineOfSightVector(vSource, vTarget) == 1;
         }
@@ -8165,7 +8167,7 @@ namespace NWN.Xenomech.API
         ///  to pathfind through other creatures without bumping into them<br/>
         ///  for the duration of the effect.
         /// </summary>
-        public static System.IntPtr EffectCutsceneGhost()
+        public static Effect EffectCutsceneGhost()
         {
             return NWN.Core.NWScript.EffectCutsceneGhost();
         }
@@ -8174,7 +8176,7 @@ namespace NWN.Xenomech.API
         ///  Creates an item property that offsets the effect on arcane spell failure<br/>
         ///  that a particular item has. Parameters come from the ITEM_PROP_ASF_* group.
         /// </summary>
-        public static System.IntPtr ItemPropertyArcaneSpellFailure(int nModLevel)
+        public static ItemProperty ItemPropertyArcaneSpellFailure(int nModLevel)
         {
             return NWN.Core.NWScript.ItemPropertyArcaneSpellFailure(nModLevel);
         }
@@ -8253,7 +8255,7 @@ namespace NWN.Xenomech.API
         ///  Returns an effect that when applied will paralyze the target&apos;s legs, rendering<br/>
         ///  them unable to walk but otherwise unpenalized. This effect cannot be resisted.
         /// </summary>
-        public static System.IntPtr EffectCutsceneImmobilize()
+        public static Effect EffectCutsceneImmobilize()
         {
             return NWN.Core.NWScript.EffectCutsceneImmobilize();
         }
@@ -8271,7 +8273,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Returns the Cost Table number of the item property. See the 2DA files for value definitions.
         /// </summary>
-        public static int GetItemPropertyCostTable(System.IntPtr iProp)
+        public static int GetItemPropertyCostTable(ItemProperty iProp)
         {
             return NWN.Core.NWScript.GetItemPropertyCostTable(iProp);
         }
@@ -8280,7 +8282,7 @@ namespace NWN.Xenomech.API
         ///  Returns the Cost Table value (index of the cost table) of the item property.<br/>
         ///  See the 2DA files for value definitions.
         /// </summary>
-        public static int GetItemPropertyCostTableValue(System.IntPtr iProp)
+        public static int GetItemPropertyCostTableValue(ItemProperty iProp)
         {
             return NWN.Core.NWScript.GetItemPropertyCostTableValue(iProp);
         }
@@ -8288,7 +8290,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Returns the Param1 number of the item property. See the 2DA files for value definitions.
         /// </summary>
-        public static int GetItemPropertyParam1(System.IntPtr iProp)
+        public static int GetItemPropertyParam1(ItemProperty iProp)
         {
             return NWN.Core.NWScript.GetItemPropertyParam1(iProp);
         }
@@ -8296,7 +8298,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Returns the Param1 value of the item property. See the 2DA files for value definitions.
         /// </summary>
-        public static int GetItemPropertyParam1Value(System.IntPtr iProp)
+        public static int GetItemPropertyParam1Value(ItemProperty iProp)
         {
             return NWN.Core.NWScript.GetItemPropertyParam1Value(iProp);
         }
@@ -8811,7 +8813,7 @@ namespace NWN.Xenomech.API
         ///                            type specified will fire instead (as specified in the<br/>
         ///                            traps.2da).
         /// </summary>
-        public static uint CreateTrapAtLocation(int nTrapType, System.IntPtr lLocation, float fSize = 2.0f, string sTag = "", StandardFactionType nFaction = StandardFactionType.Hostile, string sOnDisarmScript = "", string sOnTrapTriggeredScript = "")
+        public static uint CreateTrapAtLocation(int nTrapType, Location lLocation, float fSize = 2.0f, string sTag = "", StandardFactionType nFaction = StandardFactionType.Hostile, string sOnDisarmScript = "", string sOnTrapTriggeredScript = "")
         {
             return NWN.Core.NWScript.CreateTrapAtLocation(nTrapType, lLocation, fSize, sTag, (int)nFaction, sOnDisarmScript, sOnTrapTriggeredScript);
         }
@@ -9280,7 +9282,7 @@ namespace NWN.Xenomech.API
         ///  - nMasterialType: The Material Type should be a positive integer between 0 and 77 (see iprp_matcost.2da).<br/>
         ///  Note: The Material Type property will only affect the cost of the item if you modify the cost in the iprp_matcost.2da.
         /// </summary>
-        public static System.IntPtr ItemPropertyMaterial(int nMaterialType)
+        public static ItemProperty ItemPropertyMaterial(int nMaterialType)
         {
             return NWN.Core.NWScript.ItemPropertyMaterial(nMaterialType);
         }
@@ -9291,7 +9293,7 @@ namespace NWN.Xenomech.API
         ///               IP_CONST_QUALITY_*<br/>
         ///  Note: The quality property will only affect the cost of the item if you modify the cost in the iprp_qualcost.2da.
         /// </summary>
-        public static System.IntPtr ItemPropertyQuality(int nQuality)
+        public static ItemProperty ItemPropertyQuality(int nQuality)
         {
             return NWN.Core.NWScript.ItemPropertyQuality(nQuality);
         }
@@ -9302,7 +9304,7 @@ namespace NWN.Xenomech.API
         ///               IP_CONST_ADDITIONAL_*<br/>
         ///  Note: The additional property only affects the cost of the item if you modify the cost in the iprp_addcost.2da.
         /// </summary>
-        public static System.IntPtr ItemPropertyAdditional(int nAdditionalProperty)
+        public static ItemProperty ItemPropertyAdditional(int nAdditionalProperty)
         {
             return NWN.Core.NWScript.ItemPropertyAdditional(nAdditionalProperty);
         }
@@ -9324,7 +9326,7 @@ namespace NWN.Xenomech.API
         ///  Returns the string tag set for the provided effect.<br/>
         ///  - If no tag has been set, returns an empty string.
         /// </summary>
-        public static string GetEffectTag(System.IntPtr eEffect)
+        public static string GetEffectTag(Effect eEffect)
         {
             return NWN.Core.NWScript.GetEffectTag(eEffect);
         }
@@ -9333,7 +9335,7 @@ namespace NWN.Xenomech.API
         ///  Tags the effect with the provided string.<br/>
         ///  - Any other tags in the link will be overwritten.
         /// </summary>
-        public static System.IntPtr TagEffect(System.IntPtr eEffect, string sNewTag)
+        public static Effect TagEffect(Effect eEffect, string sNewTag)
         {
             return NWN.Core.NWScript.TagEffect(eEffect, sNewTag);
         }
@@ -9343,7 +9345,7 @@ namespace NWN.Xenomech.API
         ///  - If not created by a creature, returns 0.<br/>
         ///  - If created by a spell-like ability, returns 0.
         /// </summary>
-        public static int GetEffectCasterLevel(System.IntPtr eEffect)
+        public static int GetEffectCasterLevel(Effect eEffect)
         {
             return NWN.Core.NWScript.GetEffectCasterLevel(eEffect);
         }
@@ -9352,7 +9354,7 @@ namespace NWN.Xenomech.API
         ///  Returns the total duration of the effect in seconds.<br/>
         ///  - Returns 0 if the duration type of the effect is not DURATION_TYPE_TEMPORARY.
         /// </summary>
-        public static int GetEffectDuration(System.IntPtr eEffect)
+        public static int GetEffectDuration(Effect eEffect)
         {
             return NWN.Core.NWScript.GetEffectDuration(eEffect);
         }
@@ -9361,7 +9363,7 @@ namespace NWN.Xenomech.API
         ///  Returns the remaining duration of the effect in seconds.<br/>
         ///  - Returns 0 if the duration type of the effect is not DURATION_TYPE_TEMPORARY.
         /// </summary>
-        public static int GetEffectDurationRemaining(System.IntPtr eEffect)
+        public static int GetEffectDurationRemaining(Effect eEffect)
         {
             return NWN.Core.NWScript.GetEffectDurationRemaining(eEffect);
         }
@@ -9370,7 +9372,7 @@ namespace NWN.Xenomech.API
         ///  Returns the string tag set for the provided item property.<br/>
         ///  - If no tag has been set, returns an empty string.
         /// </summary>
-        public static string GetItemPropertyTag(System.IntPtr nProperty)
+        public static string GetItemPropertyTag(ItemProperty nProperty)
         {
             return NWN.Core.NWScript.GetItemPropertyTag(nProperty);
         }
@@ -9379,7 +9381,7 @@ namespace NWN.Xenomech.API
         ///  Tags the item property with the provided string.<br/>
         ///  - Any tags currently set on the item property will be overwritten.
         /// </summary>
-        public static System.IntPtr TagItemProperty(System.IntPtr nProperty, string sNewTag)
+        public static ItemProperty TagItemProperty(ItemProperty nProperty, string sNewTag)
         {
             return NWN.Core.NWScript.TagItemProperty(nProperty, sNewTag);
         }
@@ -9388,7 +9390,7 @@ namespace NWN.Xenomech.API
         ///  Returns the total duration of the item property in seconds.<br/>
         ///  - Returns 0 if the duration type of the item property is not DURATION_TYPE_TEMPORARY.
         /// </summary>
-        public static int GetItemPropertyDuration(System.IntPtr nProperty)
+        public static int GetItemPropertyDuration(ItemProperty nProperty)
         {
             return NWN.Core.NWScript.GetItemPropertyDuration(nProperty);
         }
@@ -9397,7 +9399,7 @@ namespace NWN.Xenomech.API
         ///  Returns the remaining duration of the item property in seconds.<br/>
         ///  - Returns 0 if the duration type of the item property is not DURATION_TYPE_TEMPORARY.
         /// </summary>
-        public static int GetItemPropertyDurationRemaining(System.IntPtr nProperty)
+        public static int GetItemPropertyDurationRemaining(ItemProperty nProperty)
         {
             return NWN.Core.NWScript.GetItemPropertyDurationRemaining(nProperty);
         }
@@ -9592,7 +9594,7 @@ namespace NWN.Xenomech.API
         ///  equivalent to the walkmesh type).<br/>
         ///  Returns 0 if the location is invalid or has no surface type.
         /// </summary>
-        public static int GetSurfaceMaterial(System.IntPtr at)
+        public static int GetSurfaceMaterial(Location at)
         {
             return NWN.Core.NWScript.GetSurfaceMaterial(at);
         }
@@ -9600,7 +9602,7 @@ namespace NWN.Xenomech.API
         ///  Returns the z-offset at which the walkmesh is at the given location.<br/>
         ///  Returns -6.0 for invalid locations.
         /// </summary>
-        public static float GetGroundHeight(System.IntPtr at)
+        public static float GetGroundHeight(Location at)
         {
             return NWN.Core.NWScript.GetGroundHeight(at);
         }
@@ -10009,7 +10011,7 @@ namespace NWN.Xenomech.API
         ///  * Will return 0 if the given item does not have the requested item property,<br/>
         ///    or the item property is not uses/day.
         /// </summary>
-        public static int GetItemPropertyUsesPerDayRemaining(uint oItem, System.IntPtr ip)
+        public static int GetItemPropertyUsesPerDayRemaining(uint oItem, ItemProperty ip)
         {
             return NWN.Core.NWScript.GetItemPropertyUsesPerDayRemaining(oItem, ip);
         }
@@ -10019,7 +10021,7 @@ namespace NWN.Xenomech.API
         ///  * Will do nothing if the given item and item property is not uses/day.<br/>
         ///  * Will constrain nUsesPerDay to the maximum allowed as the cost table defines.
         /// </summary>
-        public static void SetItemPropertyUsesPerDayRemaining(uint oItem, System.IntPtr ip, int nUsesPerDay)
+        public static void SetItemPropertyUsesPerDayRemaining(uint oItem, ItemProperty ip, int nUsesPerDay)
         {
             NWN.Core.NWScript.SetItemPropertyUsesPerDayRemaining(oItem, ip, nUsesPerDay);
         }
@@ -10032,7 +10034,7 @@ namespace NWN.Xenomech.API
         ///  * nSubPropertyIndex - specify if your itemproperty has subproperties (such as subradial spells)<br/>
         ///  * bDecrementCharges - decrement charges if item property is limited
         /// </summary>
-        public static void ActionUseItemOnObject(uint oItem, System.IntPtr ip, uint oTarget, int nSubPropertyIndex = 0, bool bDecrementCharges = true)
+        public static void ActionUseItemOnObject(uint oItem, ItemProperty ip, uint oTarget, int nSubPropertyIndex = 0, bool bDecrementCharges = true)
         {
             NWN.Core.NWScript.ActionUseItemOnObject(oItem, ip, oTarget, nSubPropertyIndex, bDecrementCharges ? 1 : 0);
         }
@@ -10045,7 +10047,7 @@ namespace NWN.Xenomech.API
         ///  * nSubPropertyIndex - specify if your itemproperty has subproperties (such as subradial spells)<br/>
         ///  * bDecrementCharges - decrement charges if item property is limited
         /// </summary>
-        public static void ActionUseItemAtLocation(uint oItem, System.IntPtr ip, System.IntPtr lTarget, int nSubPropertyIndex = 0, bool bDecrementCharges = true)
+        public static void ActionUseItemAtLocation(uint oItem, ItemProperty ip, Location lTarget, int nSubPropertyIndex = 0, bool bDecrementCharges = true)
         {
             NWN.Core.NWScript.ActionUseItemAtLocation(oItem, ip, lTarget, nSubPropertyIndex, bDecrementCharges ? 1 : 0);
         }
@@ -10072,7 +10074,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Gets the target position in the module OnPlayerTarget event.
         /// </summary>
-        public static System.Numerics.Vector3 GetTargetingModeSelectedPosition()
+        public static Vector3 GetTargetingModeSelectedPosition()
         {
             return NWN.Core.NWScript.GetTargetingModeSelectedPosition();
         }
@@ -10118,7 +10120,7 @@ namespace NWN.Xenomech.API
         ///    LIGHT: vDirection=(1.0, 1.0, 0.0), fMagnitude=1.0, fYaw=100.0, fPitch=3.0<br/>
         ///    HEAVY: vDirection=(1.0, 1.0, 0.0), fMagnitude=2.0, fYaw=150.0, fPitch=5.0
         /// </summary>
-        public static void SetAreaWind(uint oArea, System.Numerics.Vector3 vDirection, float fMagnitude, float fYaw, float fPitch)
+        public static void SetAreaWind(uint oArea, Vector3 vDirection, float fMagnitude, float fYaw, float fPitch)
         {
             NWN.Core.NWScript.SetAreaWind(oArea, vDirection, fMagnitude, fYaw, fPitch);
         }
@@ -10153,7 +10155,7 @@ namespace NWN.Xenomech.API
         ///  Additionally, all SQL errors are logged to the server log.<br/>
         ///  Additionally, all SQL errors are sent to all connected players.
         /// </summary>
-        public static string SqlGetError(System.IntPtr sqlQuery)
+        public static string SqlGetError(SQLQuery sqlQuery)
         {
             return NWN.Core.NWScript.SqlGetError(sqlQuery);
         }
@@ -10173,7 +10175,7 @@ namespace NWN.Xenomech.API
         ///        This ensures that no database handle will be left in an unusable state.<br/>
         ///  Please check the SQLite_README.txt file in lang/en/docs/ for the list of builtin functions.
         /// </summary>
-        public static System.IntPtr SqlPrepareQueryCampaign(string sDatabase, string sQuery)
+        public static SQLQuery SqlPrepareQueryCampaign(string sDatabase, string sQuery)
         {
             return NWN.Core.NWScript.SqlPrepareQueryCampaign(sDatabase, sQuery);
         }
@@ -10199,7 +10201,7 @@ namespace NWN.Xenomech.API
         ///        This ensures that no database handle will be left in an unusable state.<br/>
         ///  Please check the SQLite_README.txt file in lang/en/docs/ for the list of builtin functions.
         /// </summary>
-        public static System.IntPtr SqlPrepareQueryObject(uint oObject, string sQuery)
+        public static SQLQuery SqlPrepareQueryObject(uint oObject, string sQuery)
         {
             return NWN.Core.NWScript.SqlPrepareQueryObject(oObject, sQuery);
         }
@@ -10211,7 +10213,7 @@ namespace NWN.Xenomech.API
         ///    SqlBindInt(v, "@myint", 5);<br/>
         ///    SqlStep(v);
         /// </summary>
-        public static void SqlBindInt(System.IntPtr sqlQuery, string sParam, int nValue)
+        public static void SqlBindInt(SQLQuery sqlQuery, string sParam, int nValue)
         {
             NWN.Core.NWScript.SqlBindInt(sqlQuery, sParam, nValue);
         }
@@ -10219,7 +10221,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Bind a float to a named parameter of the given prepared query.
         /// </summary>
-        public static void SqlBindFloat(System.IntPtr sqlQuery, string sParam, float fFloat)
+        public static void SqlBindFloat(SQLQuery sqlQuery, string sParam, float fFloat)
         {
             NWN.Core.NWScript.SqlBindFloat(sqlQuery, sParam, fFloat);
         }
@@ -10227,7 +10229,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Bind a string to a named parameter of the given prepared query.
         /// </summary>
-        public static void SqlBindString(System.IntPtr sqlQuery, string sParam, string sString)
+        public static void SqlBindString(SQLQuery sqlQuery, string sParam, string sString)
         {
             NWN.Core.NWScript.SqlBindString(sqlQuery, sParam, sString);
         }
@@ -10235,7 +10237,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Bind a vector to a named parameter of the given prepared query.
         /// </summary>
-        public static void SqlBindVector(System.IntPtr sqlQuery, string sParam, System.Numerics.Vector3 vVector)
+        public static void SqlBindVector(SQLQuery sqlQuery, string sParam, Vector3 vVector)
         {
             NWN.Core.NWScript.SqlBindVector(sqlQuery, sParam, vVector);
         }
@@ -10247,7 +10249,7 @@ namespace NWN.Xenomech.API
         ///  If bSaveObjectState is true, local vars, effects, action queue, and transition info (triggers, doors) are saved out<br/>
         ///  (except for Combined Area Format, which always has object state saved out).
         /// </summary>
-        public static void SqlBindObject(System.IntPtr sqlQuery, string sParam, uint oObject, bool bSaveObjectState = false)
+        public static void SqlBindObject(SQLQuery sqlQuery, string sParam, uint oObject, bool bSaveObjectState = false)
         {
             NWN.Core.NWScript.SqlBindObject(sqlQuery, sParam, oObject, bSaveObjectState ? 1 : 0);
         }
@@ -10262,7 +10264,7 @@ namespace NWN.Xenomech.API
         ///    while (SqlStep(n))<br/>
         ///      SendMessageToPC(GetFirstPC(), "Found widget: " + SqlGetString(n, 0));
         /// </summary>
-        public static int SqlStep(System.IntPtr sqlQuery)
+        public static int SqlStep(SQLQuery sqlQuery)
         {
             return NWN.Core.NWScript.SqlStep(sqlQuery);
         }
@@ -10273,7 +10275,7 @@ namespace NWN.Xenomech.API
         ///  In case of error, 0 will be returned.<br/>
         ///  In traditional fashion, nIndex starts at 0.
         /// </summary>
-        public static int SqlGetInt(System.IntPtr sqlQuery, int nIndex)
+        public static int SqlGetInt(SQLQuery sqlQuery, int nIndex)
         {
             return NWN.Core.NWScript.SqlGetInt(sqlQuery, nIndex);
         }
@@ -10284,7 +10286,7 @@ namespace NWN.Xenomech.API
         ///  In case of error, 0.0f will be returned.<br/>
         ///  In traditional fashion, nIndex starts at 0.
         /// </summary>
-        public static float SqlGetFloat(System.IntPtr sqlQuery, int nIndex)
+        public static float SqlGetFloat(SQLQuery sqlQuery, int nIndex)
         {
             return NWN.Core.NWScript.SqlGetFloat(sqlQuery, nIndex);
         }
@@ -10295,7 +10297,7 @@ namespace NWN.Xenomech.API
         ///  In case of error, a empty string will be returned.<br/>
         ///  In traditional fashion, nIndex starts at 0.
         /// </summary>
-        public static string SqlGetString(System.IntPtr sqlQuery, int nIndex)
+        public static string SqlGetString(SQLQuery sqlQuery, int nIndex)
         {
             return NWN.Core.NWScript.SqlGetString(sqlQuery, nIndex);
         }
@@ -10306,7 +10308,7 @@ namespace NWN.Xenomech.API
         ///  In case of error, a zero vector will be returned.<br/>
         ///  In traditional fashion, nIndex starts at 0.
         /// </summary>
-        public static System.Numerics.Vector3 SqlGetVector(System.IntPtr sqlQuery, int nIndex)
+        public static Vector3 SqlGetVector(SQLQuery sqlQuery, int nIndex)
         {
             return NWN.Core.NWScript.SqlGetVector(sqlQuery, nIndex);
         }
@@ -10321,7 +10323,7 @@ namespace NWN.Xenomech.API
         ///  In traditional fashion, nIndex starts at 0.<br/>
         ///  If bLoadObjectState is true, local vars, effects, action queue, and transition info (triggers, doors) are read in.
         /// </summary>
-        public static uint SqlGetObject(System.IntPtr sqlQuery, int nIndex, System.IntPtr lSpawnAt, uint oInventory = OBJECT_INVALID, bool bLoadObjectState = false)
+        public static uint SqlGetObject(SQLQuery sqlQuery, int nIndex, Location lSpawnAt, uint oInventory = OBJECT_INVALID, bool bLoadObjectState = false)
         {
             return NWN.Core.NWScript.SqlGetObject(sqlQuery, nIndex, lSpawnAt, oInventory, bLoadObjectState ? 1 : 0);
         }
@@ -10369,7 +10371,7 @@ namespace NWN.Xenomech.API
         ///  * Some experimentation will be needed to find the right index for the value you wish to determine.<br/>
         ///  Returns: the value or 0 on error/when not set.
         /// </summary>
-        public static int GetEffectInteger(System.IntPtr eEffect, int nIndex)
+        public static int GetEffectInteger(Effect eEffect, int nIndex)
         {
             return NWN.Core.NWScript.GetEffectInteger(eEffect, nIndex);
         }
@@ -10380,7 +10382,7 @@ namespace NWN.Xenomech.API
         ///  * Some experimentation will be needed to find the right index for the value you wish to determine.<br/>
         ///  Returns: the value or 0.0f on error/when not set.
         /// </summary>
-        public static float GetEffectFloat(System.IntPtr eEffect, int nIndex)
+        public static float GetEffectFloat(Effect eEffect, int nIndex)
         {
             return NWN.Core.NWScript.GetEffectFloat(eEffect, nIndex);
         }
@@ -10391,7 +10393,7 @@ namespace NWN.Xenomech.API
         ///  * Some experimentation will be needed to find the right index for the value you wish to determine.<br/>
         ///  Returns: the value or "" on error/when not set.
         /// </summary>
-        public static string GetEffectString(System.IntPtr eEffect, int nIndex)
+        public static string GetEffectString(Effect eEffect, int nIndex)
         {
             return NWN.Core.NWScript.GetEffectString(eEffect, nIndex);
         }
@@ -10402,7 +10404,7 @@ namespace NWN.Xenomech.API
         ///  * Some experimentation will be needed to find the right index for the value you wish to determine.<br/>
         ///  Returns: the value or OBJECT_INVALID on error/when not set.
         /// </summary>
-        public static uint GetEffectObject(System.IntPtr eEffect, int nIndex)
+        public static uint GetEffectObject(Effect eEffect, int nIndex)
         {
             return NWN.Core.NWScript.GetEffectObject(eEffect, nIndex);
         }
@@ -10413,7 +10415,7 @@ namespace NWN.Xenomech.API
         ///  * Some experimentation will be needed to find the right index for the value you wish to determine.<br/>
         ///  Returns: the value or {0.0f, 0.0f, 0.0f} on error/when not set.
         /// </summary>
-        public static System.Numerics.Vector3 GetEffectVector(System.IntPtr eEffect, int nIndex)
+        public static Vector3 GetEffectVector(Effect eEffect, int nIndex)
         {
             return NWN.Core.NWScript.GetEffectVector(eEffect, nIndex);
         }
@@ -10437,7 +10439,7 @@ namespace NWN.Xenomech.API
         ///    Unlike scalars such as int and string, solver references share the same data.<br/>
         ///    Modifications made to one reference are reflected on others.
         /// </summary>
-        public static System.IntPtr GetLocalCassowary(uint oObject, string sVarName)
+        public static Cassowary GetLocalCassowary(uint oObject, string sVarName)
         {
             return NWN.Core.NWScript.GetLocalCassowary(oObject, sVarName);
         }
@@ -10448,7 +10450,7 @@ namespace NWN.Xenomech.API
         ///    Unlike scalars such as int and string, solver references share the same data.<br/>
         ///    Modifications made to one reference are reflected on others.
         /// </summary>
-        public static void SetLocalCassowary(uint oObject, string sVarName, System.IntPtr cSolver)
+        public static void SetLocalCassowary(uint oObject, string sVarName, Cassowary cSolver)
         {
             NWN.Core.NWScript.SetLocalCassowary(oObject, sVarName, cSolver);
         }
@@ -10469,7 +10471,7 @@ namespace NWN.Xenomech.API
         ///  This is provided as a convenience if you wish to reuse a cassowary variable.<br/>
         ///  It is not necessary to call this for solvers you simply want to let go out of scope.
         /// </summary>
-        public static void CassowaryReset(System.IntPtr cSolver)
+        public static void CassowaryReset(Cassowary cSolver)
         {
             NWN.Core.NWScript.CassowaryReset(cSolver);
         }
@@ -10485,7 +10487,7 @@ namespace NWN.Xenomech.API
         ///  * Any referenced variables can be retrieved with CassowaryGetValue().<br/>
         ///  * Returns "" on success, or the parser/constraint system error message.
         /// </summary>
-        public static string CassowaryConstrain(System.IntPtr cSolver, string sConstraint, float fStrength = CassowaryStrengthType.Required)
+        public static string CassowaryConstrain(Cassowary cSolver, string sConstraint, float fStrength = CassowaryStrengthType.Required)
         {
             return NWN.Core.NWScript.CassowaryConstrain(cSolver, sConstraint, fStrength);
         }
@@ -10498,7 +10500,7 @@ namespace NWN.Xenomech.API
         ///  * fStrength must be >= CASSOWARY_STRENGTH_WEAK &amp;&amp; < CASSOWARY_STRENGTH_REQUIRED<br/>
         ///    Suggested values cannot be required, as suggesting a value must not invalidate the solver.
         /// </summary>
-        public static void CassowarySuggestValue(System.IntPtr cSolver, string sVarName, float fValue, float fStrength = CassowaryStrengthType.Strong)
+        public static void CassowarySuggestValue(Cassowary cSolver, string sVarName, float fValue, float fStrength = CassowaryStrengthType.Strong)
         {
             NWN.Core.NWScript.CassowarySuggestValue(cSolver, sVarName, fValue, fStrength);
         }
@@ -10506,7 +10508,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the value for the given variable, or 0.0 on error.
         /// </summary>
-        public static float CassowaryGetValue(System.IntPtr cSolver, string sVarName)
+        public static float CassowaryGetValue(Cassowary cSolver, string sVarName)
         {
             return NWN.Core.NWScript.CassowaryGetValue(cSolver, sVarName);
         }
@@ -10515,7 +10517,7 @@ namespace NWN.Xenomech.API
         ///  Gets a printable debug state of the given solver, which may help you debug<br/>
         ///  complex systems.
         /// </summary>
-        public static string CassowaryDebug(System.IntPtr cSolver)
+        public static string CassowaryDebug(Cassowary cSolver)
         {
             return NWN.Core.NWScript.CassowaryDebug(cSolver);
         }
@@ -10534,7 +10536,7 @@ namespace NWN.Xenomech.API
         ///  This function can be used in place of all the other ItemPropertyXxx constructors<br/>
         ///  Use GetItemProperty{Type,SubType,CostTableValue,Param1Value} to see the values for a given itemproperty.
         /// </summary>
-        public static System.IntPtr ItemPropertyCustom(int nType, int nSubType = -1, int nCostTableValue = -1, int nParam1Value = -1)
+        public static ItemProperty ItemPropertyCustom(int nType, int nSubType = -1, int nCostTableValue = -1, int nParam1Value = -1)
         {
             return NWN.Core.NWScript.ItemPropertyCustom(nType, nSubType, nCostTableValue, nParam1Value);
         }
@@ -10550,7 +10552,7 @@ namespace NWN.Xenomech.API
         ///               Very low values may have an adverse effect on performance.<br/>
         ///  * sData: An optional string of data saved in the effect, retrievable with GetEffectString() at index 0.
         /// </summary>
-        public static System.IntPtr EffectRunScript(string sOnAppliedScript = "", string sOnRemovedScript = "", string sOnIntervalScript = "", float fInterval = 0.0f, string sData = "")
+        public static Effect EffectRunScript(string sOnAppliedScript = "", string sOnRemovedScript = "", string sOnIntervalScript = "", float fInterval = 0.0f, string sData = "")
         {
             return NWN.Core.NWScript.EffectRunScript(sOnAppliedScript, sOnRemovedScript, sOnIntervalScript, fInterval, sData);
         }
@@ -10560,7 +10562,7 @@ namespace NWN.Xenomech.API
         ///  Note: This can be used to get the creator or tag, among others, of the EffectRunScript() in one of its scripts.<br/>
         ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT when called outside of an EffectRunScript() script.
         /// </summary>
-        public static System.IntPtr GetLastRunScriptEffect()
+        public static Effect GetLastRunScriptEffect()
         {
             return NWN.Core.NWScript.GetLastRunScriptEffect();
         }
@@ -10577,7 +10579,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Hides the effect icon of eEffect and of all effects currently linked to it.
         /// </summary>
-        public static System.IntPtr HideEffectIcon(System.IntPtr eEffect)
+        public static Effect HideEffectIcon(Effect eEffect)
         {
             return NWN.Core.NWScript.HideEffectIcon(eEffect);
         }
@@ -10588,7 +10590,7 @@ namespace NWN.Xenomech.API
         ///             Using the icon for Poison/Disease will also color the health bar green/brown, useful to simulate custom poisons/diseases.<br/>
         ///  Returns an effect of type EFFECT_TYPE_INVALIDEFFECT when nIconID is < 1 or > 255.
         /// </summary>
-        public static System.IntPtr EffectIcon(int nIconID)
+        public static Effect EffectIcon(int nIconID)
         {
             return NWN.Core.NWScript.EffectIcon(nIconID);
         }
@@ -10668,7 +10670,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Gets the target position in the module OnPlayerTileAction event.
         /// </summary>
-        public static System.Numerics.Vector3 GetLastTileActionPosition()
+        public static Vector3 GetLastTileActionPosition()
         {
             return NWN.Core.NWScript.GetLastTileActionPosition();
         }
@@ -10688,7 +10690,7 @@ namespace NWN.Xenomech.API
         ///  NB: The parsed string needs to be in game-local encoding, but the generated json structure<br/>
         ///      will contain UTF-8 data.
         /// </summary>
-        public static System.IntPtr JsonParse(string sJson)
+        public static Json JsonParse(string sJson)
         {
             return NWN.Core.NWScript.JsonParse(sJson);
         }
@@ -10699,7 +10701,7 @@ namespace NWN.Xenomech.API
         ///  Returns a string describing JSON_TYPE_NULL on error, or if oObject is not serializable, with JsonGetError() filled in.<br/>
         ///  NB: The dumped string is in game-local encoding, with all non-ascii characters escaped.
         /// </summary>
-        public static string JsonDump(System.IntPtr jValue, int nIndent = -1)
+        public static string JsonDump(Json jValue, int nIndent = -1)
         {
             return NWN.Core.NWScript.JsonDump(jValue, nIndent);
         }
@@ -10708,7 +10710,7 @@ namespace NWN.Xenomech.API
         ///  Describes the type of the given json value.<br/>
         ///  Returns JSON_TYPE_NULL if the value is empty.
         /// </summary>
-        public static JsonType JsonGetType(System.IntPtr jValue)
+        public static JsonType JsonGetType(Json jValue)
         {
             return (JsonType)NWN.Core.NWScript.JsonGetType(jValue);
         }
@@ -10720,7 +10722,7 @@ namespace NWN.Xenomech.API
         ///  Null types are of size 0.<br/>
         ///  All other types return 1.
         /// </summary>
-        public static int JsonGetLength(System.IntPtr jValue)
+        public static int JsonGetLength(Json jValue)
         {
             return NWN.Core.NWScript.JsonGetLength(jValue);
         }
@@ -10729,7 +10731,7 @@ namespace NWN.Xenomech.API
         ///  Returns the error message if the value has errored out.<br/>
         ///  Currently only describes parse errors.
         /// </summary>
-        public static string JsonGetError(System.IntPtr jValue)
+        public static string JsonGetError(Json jValue)
         {
             return NWN.Core.NWScript.JsonGetError(jValue);
         }
@@ -10738,7 +10740,7 @@ namespace NWN.Xenomech.API
         ///  Create a NULL json value, seeded with a optional error message for JsonGetError().<br/>
         ///  You can say JSON_NULL for default parameters on functions to initialise with a null value.
         /// </summary>
-        public static System.IntPtr JsonNull(string sError = "")
+        public static Json JsonNull(string sError = "")
         {
             return NWN.Core.NWScript.JsonNull(sError);
         }
@@ -10747,7 +10749,7 @@ namespace NWN.Xenomech.API
         ///  Create a empty json object.<br/>
         ///  You can say JSON_OBJECT for default parameters on functions to initialise with an empty object.
         /// </summary>
-        public static System.IntPtr JsonObject()
+        public static Json JsonObject()
         {
             return NWN.Core.NWScript.JsonObject();
         }
@@ -10756,7 +10758,7 @@ namespace NWN.Xenomech.API
         ///  Create a empty json array.<br/>
         ///  You can say JSON_ARRAY for default parameters on functions to initialise with an empty array.
         /// </summary>
-        public static System.IntPtr JsonArray()
+        public static Json JsonArray()
         {
             return NWN.Core.NWScript.JsonArray();
         }
@@ -10766,7 +10768,7 @@ namespace NWN.Xenomech.API
         ///  You can say JSON_STRING for default parameters on functions to initialise with a empty string.<br/>
         ///  NB: Strings are encoded to UTF-8 from the game-local charset.
         /// </summary>
-        public static System.IntPtr JsonString(string sValue)
+        public static Json JsonString(string sValue)
         {
             return NWN.Core.NWScript.JsonString(sValue);
         }
@@ -10774,7 +10776,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a json integer value.
         /// </summary>
-        public static System.IntPtr JsonInt(int nValue)
+        public static Json JsonInt(int nValue)
         {
             return NWN.Core.NWScript.JsonInt(nValue);
         }
@@ -10782,7 +10784,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a json floating point value.
         /// </summary>
-        public static System.IntPtr JsonFloat(float fValue)
+        public static Json JsonFloat(float fValue)
         {
             return NWN.Core.NWScript.JsonFloat(fValue);
         }
@@ -10791,7 +10793,7 @@ namespace NWN.Xenomech.API
         ///  Create a json bool valye.<br/>
         ///  You can say JSON_TRUE or JSON_FALSE for default parameters on functions to initialise with a bool.
         /// </summary>
-        public static System.IntPtr JsonBool(bool bValue)
+        public static Json JsonBool(bool bValue)
         {
             return NWN.Core.NWScript.JsonBool(bValue ? 1 : 0);
         }
@@ -10801,7 +10803,7 @@ namespace NWN.Xenomech.API
         ///  Returns "" if the value cannot be represented as a string, or is empty.<br/>
         ///  NB: Strings are decoded from UTF-8 to the game-local charset.
         /// </summary>
-        public static string JsonGetString(System.IntPtr jValue)
+        public static string JsonGetString(Json jValue)
         {
             return NWN.Core.NWScript.JsonGetString(jValue);
         }
@@ -10814,7 +10816,7 @@ namespace NWN.Xenomech.API
         ///      If you are trying to read a 64 bit or unsigned integer that doesn't fit into int32, you will lose data.<br/>
         ///      You will not lose data if you keep the value as a json element (via Object/ArrayGet).
         /// </summary>
-        public static int JsonGetInt(System.IntPtr jValue)
+        public static int JsonGetInt(Json jValue)
         {
             return NWN.Core.NWScript.JsonGetInt(jValue);
         }
@@ -10826,7 +10828,7 @@ namespace NWN.Xenomech.API
         ///      If you are trying to read a double, you will potentially lose precision.<br/>
         ///      You will not lose data if you keep the value as a json element (via Object/ArrayGet).
         /// </summary>
-        public static float JsonGetFloat(System.IntPtr jValue)
+        public static float JsonGetFloat(Json jValue)
         {
             return NWN.Core.NWScript.JsonGetFloat(jValue);
         }
@@ -10835,7 +10837,7 @@ namespace NWN.Xenomech.API
         ///  Returns a json array containing all keys of jObject.<br/>
         ///  Returns a empty array if the object is empty or not a json object, with JsonGetError() filled in.
         /// </summary>
-        public static System.IntPtr JsonObjectKeys(System.IntPtr jObject)
+        public static Json JsonObjectKeys(Json jObject)
         {
             return NWN.Core.NWScript.JsonObjectKeys(jObject);
         }
@@ -10844,7 +10846,7 @@ namespace NWN.Xenomech.API
         ///  Returns the key value of sKey on the object jObect.<br/>
         ///  Returns a json null value if jObject is not a object or sKey does not exist on the object, with JsonGetError() filled in.
         /// </summary>
-        public static System.IntPtr JsonObjectGet(System.IntPtr jObject, string sKey)
+        public static Json JsonObjectGet(Json jObject, string sKey)
         {
             return NWN.Core.NWScript.JsonObjectGet(jObject, sKey);
         }
@@ -10853,7 +10855,7 @@ namespace NWN.Xenomech.API
         ///  Returns a modified copy of jObject with the key at sKey set to jValue.<br/>
         ///  Returns a json null value if jObject is not a object, with JsonGetError() filled in.
         /// </summary>
-        public static System.IntPtr JsonObjectSet(System.IntPtr jObject, string sKey, System.IntPtr jValue)
+        public static Json JsonObjectSet(Json jObject, string sKey, Json jValue)
         {
             return NWN.Core.NWScript.JsonObjectSet(jObject, sKey, jValue);
         }
@@ -10862,7 +10864,7 @@ namespace NWN.Xenomech.API
         ///  Returns a modified copy of jObject with the key at sKey deleted.<br/>
         ///  Returns a json null value if jObject is not a object, with JsonGetError() filled in.
         /// </summary>
-        public static System.IntPtr JsonObjectDel(System.IntPtr jObject, string sKey)
+        public static Json JsonObjectDel(Json jObject, string sKey)
         {
             return NWN.Core.NWScript.JsonObjectDel(jObject, sKey);
         }
@@ -10871,7 +10873,7 @@ namespace NWN.Xenomech.API
         ///  Gets the json object at jArray index position nIndex.<br/>
         ///  Returns a json null value if the index is out of bounds, with JsonGetError() filled in.
         /// </summary>
-        public static System.IntPtr JsonArrayGet(System.IntPtr jArray, int nIndex)
+        public static Json JsonArrayGet(Json jArray, int nIndex)
         {
             return NWN.Core.NWScript.JsonArrayGet(jArray, nIndex);
         }
@@ -10881,7 +10883,7 @@ namespace NWN.Xenomech.API
         ///  Returns a json null value if jArray is not actually an array, with JsonGetError() filled in.<br/>
         ///  Returns a json null value if nIndex is out of bounds, with JsonGetError() filled in.
         /// </summary>
-        public static System.IntPtr JsonArraySet(System.IntPtr jArray, int nIndex, System.IntPtr jValue)
+        public static Json JsonArraySet(Json jArray, int nIndex, Json jValue)
         {
             return NWN.Core.NWScript.JsonArraySet(jArray, nIndex, jValue);
         }
@@ -10894,7 +10896,7 @@ namespace NWN.Xenomech.API
         ///  Returns a json null value if jArray is not actually an array, with JsonGetError() filled in.<br/>
         ///  Returns a json null value if nIndex is not 0 or -1 and out of bounds, with JsonGetError() filled in.
         /// </summary>
-        public static System.IntPtr JsonArrayInsert(System.IntPtr jArray, System.IntPtr jValue, int nIndex = -1)
+        public static Json JsonArrayInsert(Json jArray, Json jValue, int nIndex = -1)
         {
             return NWN.Core.NWScript.JsonArrayInsert(jArray, jValue, nIndex);
         }
@@ -10905,7 +10907,7 @@ namespace NWN.Xenomech.API
         ///  Returns a json null value if jArray is not actually an array, with JsonGetError() filled in.<br/>
         ///  Returns a json null value if nIndex is out of bounds, with JsonGetError() filled in.
         /// </summary>
-        public static System.IntPtr JsonArrayDel(System.IntPtr jArray, int nIndex)
+        public static Json JsonArrayDel(Json jArray, int nIndex)
         {
             return NWN.Core.NWScript.JsonArrayDel(jArray, nIndex);
         }
@@ -10918,7 +10920,7 @@ namespace NWN.Xenomech.API
         ///  If bSaveObjectState is true, local vars, effects, action queue, and transition info (triggers, doors) are saved out<br/>
         ///  (except for Combined Area Format, which always has object state saved out).
         /// </summary>
-        public static System.IntPtr ObjectToJson(uint oObject, bool bSaveObjectState = false)
+        public static Json ObjectToJson(uint oObject, bool bSaveObjectState = false)
         {
             return NWN.Core.NWScript.ObjectToJson(oObject, bSaveObjectState ? 1 : 0);
         }
@@ -10930,7 +10932,7 @@ namespace NWN.Xenomech.API
         ///  For areas, locLocation is ignored.<br/>
         ///  If bLoadObjectState is true, local vars, effects, action queue, and transition info (triggers, doors) are read in.
         /// </summary>
-        public static uint JsonToObject(System.IntPtr jObject, System.IntPtr locLocation, uint oOwner = OBJECT_INVALID, bool bLoadObjectState = false)
+        public static uint JsonToObject(Json jObject, Json locLocation, uint oOwner = OBJECT_INVALID, bool bLoadObjectState = false)
         {
             return NWN.Core.NWScript.JsonToObject(jObject, locLocation, oOwner, bLoadObjectState ? 1 : 0);
         }
@@ -10966,7 +10968,7 @@ namespace NWN.Xenomech.API
         ///  See https://datatracker.ietf.org/doc/html/rfc6901 for more details.
         ///  Returns a json null value on error, with JsonGetError() filled in.
         /// </summary>
-        public static System.IntPtr JsonPointer(System.IntPtr jData, string sPointer)
+        public static Json JsonPointer(Json jData, string sPointer)
         {
             return NWN.Core.NWScript.JsonPointer(jData, sPointer);
         }
@@ -10984,7 +10986,7 @@ namespace NWN.Xenomech.API
         ///  Valid operations are: add, remove, replace, move, copy, test<br/>
         ///  See https://datatracker.ietf.org/doc/html/rfc7386 for more details on the patch rules.
         /// </summary>
-        public static System.IntPtr JsonPatch(System.IntPtr jData, System.IntPtr jPatch)
+        public static Json JsonPatch(Json jData, Json jPatch)
         {
             return NWN.Core.NWScript.JsonPatch(jData, jPatch);
         }
@@ -10993,7 +10995,7 @@ namespace NWN.Xenomech.API
         ///  Returns the diff (described as a json structure you can pass into JsonPatch) between the two objects.<br/>
         ///  Returns a json null value on error, with JsonGetError() filled in.
         /// </summary>
-        public static System.IntPtr JsonDiff(System.IntPtr jLHS, System.IntPtr jRHS)
+        public static Json JsonDiff(Json jLHS, Json jRHS)
         {
             return NWN.Core.NWScript.JsonDiff(jLHS, jRHS);
         }
@@ -11004,7 +11006,7 @@ namespace NWN.Xenomech.API
         ///  See https://datatracker.ietf.org/doc/html/rfc7386 for details.<br/>
         ///  Returns a json null value on error, with JsonGetError() filled in.
         /// </summary>
-        public static System.IntPtr JsonMerge(System.IntPtr jData, System.IntPtr jMerge)
+        public static Json JsonMerge(Json jData, Json jMerge)
         {
             return NWN.Core.NWScript.JsonMerge(jData, jMerge);
         }
@@ -11013,7 +11015,7 @@ namespace NWN.Xenomech.API
         ///  Get oObject's local json variable sVarName<br/>
         ///  * Return value on error: json null type
         /// </summary>
-        public static System.IntPtr GetLocalJson(uint oObject, string sVarName)
+        public static Json GetLocalJson(uint oObject, string sVarName)
         {
             return NWN.Core.NWScript.GetLocalJson(oObject, sVarName);
         }
@@ -11021,7 +11023,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Set oObject's local json variable sVarName to jValue
         /// </summary>
-        public static void SetLocalJson(uint oObject, string sVarName, System.IntPtr jValue)
+        public static void SetLocalJson(uint oObject, string sVarName, Json jValue)
         {
             NWN.Core.NWScript.SetLocalJson(oObject, sVarName, jValue);
         }
@@ -11042,7 +11044,7 @@ namespace NWN.Xenomech.API
         ///    SqlBindJson(v, "@myjson", myJsonObject);<br/>
         ///    SqlStep(v);
         /// </summary>
-        public static void SqlBindJson(System.IntPtr sqlQuery, string sParam, System.IntPtr jValue)
+        public static void SqlBindJson(Json sqlQuery, string sParam, Json jValue)
         {
             NWN.Core.NWScript.SqlBindJson(sqlQuery, sParam, jValue);
         }
@@ -11053,7 +11055,7 @@ namespace NWN.Xenomech.API
         ///  In case of error, a json null value will be returned.<br/>
         ///  In traditional fashion, nIndex starts at 0.
         /// </summary>
-        public static System.IntPtr SqlGetJson(System.IntPtr sqlQuery, int nIndex)
+        public static Json SqlGetJson(Json sqlQuery, int nIndex)
         {
             return NWN.Core.NWScript.SqlGetJson(sqlQuery, nIndex);
         }
@@ -11066,7 +11068,7 @@ namespace NWN.Xenomech.API
         ///  The var name must be unique across the entire database, regardless of the variable type.<br/>
         ///  If you want a variable to pertain to a specific player in the game, provide a player object.
         /// </summary>
-        public static void SetCampaignJson(string sCampaignName, string sVarName, System.IntPtr jValue, uint oPlayer = OBJECT_INVALID)
+        public static void SetCampaignJson(string sCampaignName, string sVarName, Json jValue, uint oPlayer = OBJECT_INVALID)
         {
             NWN.Core.NWScript.SetCampaignJson(sCampaignName, sVarName, jValue, oPlayer);
         }
@@ -11079,7 +11081,7 @@ namespace NWN.Xenomech.API
         ///  The var name must be unique across the entire database, regardless of the variable type.<br/>
         ///  If you want a variable to pertain to a specific player in the game, provide a player object.
         /// </summary>
-        public static System.IntPtr GetCampaignJson(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
+        public static Json GetCampaignJson(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
         {
             return NWN.Core.NWScript.GetCampaignJson(sCampaignName, sVarName, oPlayer);
         }
@@ -11135,7 +11137,7 @@ namespace NWN.Xenomech.API
         ///  * RESTYPE_GFF<br/>
         ///  Returns a valid gff-type json structure, or a null value with JsonGetError() set.
         /// </summary>
-        public static System.IntPtr TemplateToJson(string sResRef, int nResType)
+        public static Json TemplateToJson(string sResRef, int nResType)
         {
             return NWN.Core.NWScript.TemplateToJson(sResRef, nResType);
         }
@@ -11186,7 +11188,7 @@ namespace NWN.Xenomech.API
         ///  * See nw_inc_nui.nss for full documentation.<br/>
         ///  Returns the window token on success (>0), or 0 on error.
         /// </summary>
-        public static int NuiCreate(uint oPlayer, System.IntPtr jNui, string sWindowId = "", string sEventScript = "")
+        public static int NuiCreate(uint oPlayer, Json jNui, string sWindowId = "", string sEventScript = "")
         {
             return NWN.Core.NWScript.NuiCreate(oPlayer, jNui, sWindowId, sEventScript);
         }
@@ -11271,7 +11273,7 @@ namespace NWN.Xenomech.API
         ///    No auto-conversion happens.<br/>
         ///  Returns a json null value if the bind does not exist.
         /// </summary>
-        public static System.IntPtr NuiGetBind(uint oPlayer, int nUiToken, string sBindName)
+        public static Json NuiGetBind(uint oPlayer, int nUiToken, string sBindName)
         {
             return NWN.Core.NWScript.NuiGetBind(oPlayer, nUiToken, sBindName);
         }
@@ -11288,7 +11290,7 @@ namespace NWN.Xenomech.API
         ///    unless you enjoy stack overflows.<br/>
         ///  Does nothing if the given player+token is invalid.
         /// </summary>
-        public static void NuiSetBind(uint oPlayer, int nUiToken, string sBindName, System.IntPtr jValue)
+        public static void NuiSetBind(uint oPlayer, int nUiToken, string sBindName, Json jValue)
         {
             NWN.Core.NWScript.NuiSetBind(oPlayer, nUiToken, sBindName, jValue);
         }
@@ -11297,7 +11299,7 @@ namespace NWN.Xenomech.API
         ///  Swaps out the given element (by id) with the given nui layout (partial).<br/>
         ///  * This currently only works with the &amp;quot;group&amp;quot; element type, and the special &amp;quot;_window_&amp;quot; root group.
         /// </summary>
-        public static void NuiSetGroupLayout(uint oPlayer, int nUiToken, string sElement, System.IntPtr jNui)
+        public static void NuiSetGroupLayout(uint oPlayer, int nUiToken, string sElement, Json jNui)
         {
             NWN.Core.NWScript.NuiSetGroupLayout(oPlayer, nUiToken, sElement, jNui);
         }
@@ -11334,7 +11336,7 @@ namespace NWN.Xenomech.API
         ///  Returns the event payload, specific to the event.<br/>
         ///  Returns JsonNull if event has no payload.
         /// </summary>
-        public static System.IntPtr NuiGetEventPayload()
+        public static Json NuiGetEventPayload()
         {
             return NWN.Core.NWScript.NuiGetEventPayload();
         }
@@ -11343,7 +11345,7 @@ namespace NWN.Xenomech.API
         ///  Get the userdata of the given window token.<br/>
         ///  Returns JsonNull if the window does not exist on the given player, or has no userdata set.
         /// </summary>
-        public static System.IntPtr NuiGetUserData(uint oPlayer, int nToken)
+        public static Json NuiGetUserData(uint oPlayer, int nToken)
         {
             return NWN.Core.NWScript.NuiGetUserData(oPlayer, nToken);
         }
@@ -11354,7 +11356,7 @@ namespace NWN.Xenomech.API
         ///  This mechanism only exists as a convenience for the programmer to store data bound to a windows' lifecycle.<br/>
         ///  Will do nothing if the window does not exist.
         /// </summary>
-        public static void NuiSetUserData(uint oPlayer, int nToken, System.IntPtr jUserData)
+        public static void NuiSetUserData(uint oPlayer, int nToken, Json jUserData)
         {
             NWN.Core.NWScript.NuiSetUserData(oPlayer, nToken, jUserData);
         }
@@ -11386,7 +11388,7 @@ namespace NWN.Xenomech.API
         ///  * JSON_ARRAY_COALESCE<br/>
         ///    Returns the first non-null entry. Empty-ish values (e.g. "", 0) are not considered null, only the json scalar type.
         /// </summary>
-        public static System.IntPtr JsonArrayTransform(System.IntPtr jArray, int nTransform)
+        public static Json JsonArrayTransform(Json jArray, int nTransform)
         {
             return NWN.Core.NWScript.JsonArrayTransform(jArray, nTransform);
         }
@@ -11397,7 +11399,7 @@ namespace NWN.Xenomech.API
         ///  Ordering behaviour for objects is unspecified.<br/>
         ///  Return null when not found or on any error.
         /// </summary>
-        public static System.IntPtr JsonFind(System.IntPtr jHaystack, System.IntPtr jNeedle, int nNth = 0, JsonFindType nConditional = JsonFindType.Equal)
+        public static Json JsonFind(Json jHaystack, Json jNeedle, int nNth = 0, JsonFindType nConditional = JsonFindType.Equal)
         {
             return NWN.Core.NWScript.JsonFind(jHaystack, jNeedle, nNth, (int)nConditional);
         }
@@ -11416,7 +11418,7 @@ namespace NWN.Xenomech.API
         ///   JsonArrayGetRange(a, 1, 1)    // => [1]<br/>
         ///  Returns a null type on error, including type mismatches.
         /// </summary>
-        public static System.IntPtr JsonArrayGetRange(System.IntPtr jArray, int nBeginIndex, int nEndIndex)
+        public static Json JsonArrayGetRange(Json jArray, int nBeginIndex, int nEndIndex)
         {
             return NWN.Core.NWScript.JsonArrayGetRange(jArray, nBeginIndex, nEndIndex);
         }
@@ -11435,7 +11437,7 @@ namespace NWN.Xenomech.API
         ///  * JSON_SET_SYMMETRIC_DIFFERENCE (v ^ o):<br/>
         ///    Returns a new array containing all elements present in either array, but not both.
         /// </summary>
-        public static System.IntPtr JsonSetOp(System.IntPtr jValue, int nOp, System.IntPtr jOther)
+        public static Json JsonSetOp(Json jValue, int nOp, Json jOther)
         {
             return NWN.Core.NWScript.JsonSetOp(jValue, nOp, jOther);
         }
@@ -11463,7 +11465,7 @@ namespace NWN.Xenomech.API
         ///  Unyielding effects are not removed by resting, death or dispel magic, only by RemoveEffect().<br/>
         ///  Note: effects that modify state, Stunned/Knockdown/Deaf etc, WILL be removed on death.
         /// </summary>
-        public static System.IntPtr UnyieldingEffect(System.IntPtr eEffect)
+        public static Json UnyieldingEffect(Effect eEffect)
         {
             return NWN.Core.NWScript.UnyieldingEffect(eEffect);
         }
@@ -11471,7 +11473,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Set eEffect to ignore immunities and return eEffect.
         /// </summary>
-        public static System.IntPtr IgnoreEffectImmunity(System.IntPtr eEffect)
+        public static Json IgnoreEffectImmunity(Effect eEffect)
         {
             return NWN.Core.NWScript.IgnoreEffectImmunity(eEffect);
         }
@@ -11824,7 +11826,7 @@ namespace NWN.Xenomech.API
         ///  * RegExpMatch("^test", "test value")         -> ["test"]<br/>
         ///  * RegExpMatch("^(test) (.+)$", "test value") -> ["test value", "test", "value"]
         /// </summary>
-        public static System.IntPtr RegExpMatch(string sRegExp, string sValue, RegExpGrammarType nSyntaxFlags = RegExpGrammarType.ECMAScript, RegExpFormatFlagType nMatchFlags = RegExpFormatFlagType.Default)
+        public static Json RegExpMatch(string sRegExp, string sValue, RegExpGrammarType nSyntaxFlags = RegExpGrammarType.ECMAScript, RegExpFormatFlagType nMatchFlags = RegExpFormatFlagType.Default)
         {
             return NWN.Core.NWScript.RegExpMatch(sRegExp, sValue, (int)nSyntaxFlags, (int)nMatchFlags);
         }
@@ -11838,7 +11840,7 @@ namespace NWN.Xenomech.API
         ///  * nMatchFlags is a mask of REGEXP_MATCH_* and REGEXP_FORMAT_*.<br/>
         ///  Example: RegExpIterate("(\\d)(\\S+)", "1i 2am 3 4asentence"); -> [["1i", "1", "i"], ["2am", "2", "am"], ["4sentence", "4", "sentence"]]
         /// </summary>
-        public static System.IntPtr RegExpIterate(string sRegExp, string sValue, RegExpGrammarType nSyntaxFlags = RegExpGrammarType.ECMAScript, RegExpFormatFlagType nMatchFlags = RegExpFormatFlagType.Default)
+        public static Json RegExpIterate(string sRegExp, string sValue, RegExpGrammarType nSyntaxFlags = RegExpGrammarType.ECMAScript, RegExpFormatFlagType nMatchFlags = RegExpFormatFlagType.Default)
         {
             return NWN.Core.NWScript.RegExpIterate(sRegExp, sValue, (int)nSyntaxFlags, (int)nMatchFlags);
         }
@@ -11949,7 +11951,7 @@ namespace NWN.Xenomech.API
         ///  Gets an optional vecror of specific gui events in the module OnPlayerGuiEvent event.<br/>
         ///  GUIEVENT_RADIAL_OPEN - World vector position of radial if on tile.
         /// </summary>
-        public static System.Numerics.Vector3 GetLastGuiEventVector()
+        public static Vector3 GetLastGuiEventVector()
         {
             return NWN.Core.NWScript.GetLastGuiEventVector();
         }
@@ -12002,7 +12004,7 @@ namespace NWN.Xenomech.API
         ///  If no valid area (or object) is specified, it uses the area of caller.<br/>
         ///  If an object other than an area is specified, will use the area that the object is currently in.
         /// </summary>
-        public static System.Numerics.Vector3 GetAreaLightDirection(AreaLightDirectionType nLightType, uint oArea = OBJECT_INVALID)
+        public static Vector3 GetAreaLightDirection(AreaLightDirectionType nLightType, uint oArea = OBJECT_INVALID)
         {
             return NWN.Core.NWScript.GetAreaLightDirection((int)nLightType, oArea);
         }
@@ -12015,7 +12017,7 @@ namespace NWN.Xenomech.API
         ///  If an object other than an area is specified, will use the area that the object is currently in.<br/>
         ///  If fFadeTime is above 0.0, it will fade to the new color in the amount of seconds specified.
         /// </summary>
-        public static void SetAreaLightDirection(AreaLightDirectionType nLightType, System.Numerics.Vector3 vDirection, uint oArea = OBJECT_INVALID, float fFadeTime = 0.0f)
+        public static void SetAreaLightDirection(AreaLightDirectionType nLightType, Vector3 vDirection, uint oArea = OBJECT_INVALID, float fFadeTime = 0.0f)
         {
             NWN.Core.NWScript.SetAreaLightDirection((int)nLightType, vDirection, oArea, fFadeTime);
         }
@@ -12051,7 +12053,7 @@ namespace NWN.Xenomech.API
         ///      "data": type-specific payload. Not all type info is rendered in the interest of brevity.<br/>
         ///              Only enough for you to re-identify which variable this might belong to.
         /// </summary>
-        public static System.IntPtr GetScriptBacktrace(bool bIncludeStack = true)
+        public static Json GetScriptBacktrace(bool bIncludeStack = true)
         {
             return NWN.Core.NWScript.GetScriptBacktrace(bIncludeStack ? 1 : 0);
         }
@@ -12100,7 +12102,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Pacified effect, making the creature unable to attack anyone.
         /// </summary>
-        public static System.IntPtr EffectPacified()
+        public static Effect EffectPacified()
         {
             return NWN.Core.NWScript.EffectPacified();
         }
@@ -12165,7 +12167,7 @@ namespace NWN.Xenomech.API
         ///  Returns the given effects Link ID. There is no guarantees about this identifier other than<br/>
         ///  it is unique and the same for all effects linked to it.
         /// </summary>
-        public static string GetEffectLinkId(System.IntPtr eEffect)
+        public static string GetEffectLinkId(Effect eEffect)
         {
             return NWN.Core.NWScript.GetEffectLinkId(eEffect);
         }
@@ -12201,7 +12203,7 @@ namespace NWN.Xenomech.API
         ///            - SETTILE_FLAG_RELOAD_BORDER: reloads the edge tile border, use if you changed a tile on the edge of the area.<br/>
         ///            - SETTILE_FLAG_RECOMPUTE_LIGHTING: recomputes the area&apos;s lighting and static shadows, use most of time.
         /// </summary>
-        public static void SetTile(System.IntPtr locTile, int nTileID, int nOrientation, int nHeight = 0, SetTileFlagType nFlags = SetTileFlagType.RecomputeLighting)
+        public static void SetTile(Location locTile, int nTileID, int nOrientation, int nHeight = 0, SetTileFlagType nFlags = SetTileFlagType.RecomputeLighting)
         {
             NWN.Core.NWScript.SetTile(locTile, nTileID, nOrientation, nHeight, (int)nFlags);
         }
@@ -12210,7 +12212,7 @@ namespace NWN.Xenomech.API
         ///  Get the ID of the tile at location locTile.<br/>
         ///  Returns -1 on error.
         /// </summary>
-        public static int GetTileID(System.IntPtr locTile)
+        public static int GetTileID(Location locTile)
         {
             return NWN.Core.NWScript.GetTileID(locTile);
         }
@@ -12219,7 +12221,7 @@ namespace NWN.Xenomech.API
         ///  Get the orientation of the tile at location locTile.<br/>
         ///  Returns -1 on error.
         /// </summary>
-        public static int GetTileOrientation(System.IntPtr locTile)
+        public static int GetTileOrientation(Location locTile)
         {
             return NWN.Core.NWScript.GetTileOrientation(locTile);
         }
@@ -12228,7 +12230,7 @@ namespace NWN.Xenomech.API
         ///  Get the height of the tile at location locTile.<br/>
         ///  Returns -1 on error.
         /// </summary>
-        public static int GetTileHeight(System.IntPtr locTile)
+        public static int GetTileHeight(Location locTile)
         {
             return NWN.Core.NWScript.GetTileHeight(locTile);
         }
@@ -12245,7 +12247,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Set the state of the tile animation loops of the tile at location locTile.
         /// </summary>
-        public static void SetTileAnimationLoops(System.IntPtr locTile, bool bAnimLoop1, bool bAnimLoop2, bool bAnimLoop3)
+        public static void SetTileAnimationLoops(Location locTile, bool bAnimLoop1, bool bAnimLoop2, bool bAnimLoop3)
         {
             NWN.Core.NWScript.SetTileAnimationLoops(locTile, bAnimLoop1 ? 1 : 0, bAnimLoop2 ? 1 : 0, bAnimLoop3 ? 1 : 0);
         }
@@ -12271,7 +12273,7 @@ namespace NWN.Xenomech.API
         ///              Warning: only use this if you really know what you&apos;re doing, it&apos;s very easy to break things badly.<br/>
         ///                       Make sure jTileData changes *all* tiles in the area and to a tile id that&apos;s supported by sTileset.
         /// </summary>
-        public static void SetTileJson(uint oArea, System.IntPtr jTileData, SetTileFlagType nFlags = SetTileFlagType.RecomputeLighting, string sTileset = "")
+        public static void SetTileJson(uint oArea, Json jTileData, SetTileFlagType nFlags = SetTileFlagType.RecomputeLighting, string sTileset = "")
         {
             NWN.Core.NWScript.SetTileJson(oArea, jTileData, (int)nFlags, sTileset);
         }
@@ -12304,7 +12306,7 @@ namespace NWN.Xenomech.API
         ///  and do not work as feat prerequisites for levelup purposes.<br/>
         ///  - nFeat: FEAT_*
         /// </summary>
-        public static System.IntPtr EffectBonusFeat(int nFeat)
+        public static Effect EffectBonusFeat(int nFeat)
         {
             return NWN.Core.NWScript.EffectBonusFeat(nFeat);
         }
@@ -12341,7 +12343,7 @@ namespace NWN.Xenomech.API
         ///  All existing binds are kept untouched, unless bClearBinds is true.<br/>
         ///  This command only works on successfully-prepared queries that have not errored out.
         /// </summary>
-        public static void SqlResetQuery(System.IntPtr sqlQuery, bool bClearBinds = false)
+        public static void SqlResetQuery(SQLQuery sqlQuery, bool bClearBinds = false)
         {
             NWN.Core.NWScript.SqlResetQuery(sqlQuery, bClearBinds ? 1 : 0);
         }
@@ -12349,7 +12351,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Provides immunity to the effects of EffectTimeStop which allows actions during other creatures time stop effects.
         /// </summary>
-        public static System.IntPtr EffectTimeStopImmunity()
+        public static Effect EffectTimeStopImmunity()
         {
             return NWN.Core.NWScript.EffectTimeStopImmunity();
         }
@@ -12402,7 +12404,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Forces the creature to always walk.
         /// </summary>
-        public static System.IntPtr EffectForceWalk()
+        public static Effect EffectForceWalk()
         {
             return NWN.Core.NWScript.EffectForceWalk();
         }
@@ -12484,7 +12486,7 @@ namespace NWN.Xenomech.API
         ///  Sets the effect creator<br/>
         ///  - oCreator: The creator of the effect. Can be OBJECT_INVALID.
         /// </summary>
-        public static System.IntPtr SetEffectCreator(System.IntPtr eEffect, uint oCreator)
+        public static Effect SetEffectCreator(Effect eEffect, uint oCreator)
         {
             return NWN.Core.NWScript.SetEffectCreator(eEffect, oCreator);
         }
@@ -12493,7 +12495,7 @@ namespace NWN.Xenomech.API
         ///  Sets the effect caster level<br/>
         ///  - nCasterLevel: The caster level of the effect for the purposes of dispel magic and GetEffectCasterlevel. Must be &gt;= 0.
         /// </summary>
-        public static System.IntPtr SetEffectCasterLevel(System.IntPtr eEffect, int nCasterLevel)
+        public static Effect SetEffectCasterLevel(Effect eEffect, int nCasterLevel)
         {
             return NWN.Core.NWScript.SetEffectCasterLevel(eEffect, nCasterLevel);
         }
@@ -12502,7 +12504,7 @@ namespace NWN.Xenomech.API
         ///  Sets the effect spell id<br/>
         ///  - nSpellId: The spell id for the purposes of effect stacking, dispel magic and GetEffectSpellId. Must be &gt;= -1 (-1 being invalid/no spell)
         /// </summary>
-        public static System.IntPtr SetEffectSpellId(System.IntPtr eEffect, int nSpellId)
+        public static Effect SetEffectSpellId(Effect eEffect, int nSpellId)
         {
             return NWN.Core.NWScript.SetEffectSpellId(eEffect, nSpellId);
         }
@@ -12514,7 +12516,7 @@ namespace NWN.Xenomech.API
         ///  * If a non-SELECT query contains a RETURNING clause, the number of columns in the RETURNING clause will be returned.<br/>
         ///  * A returned value greater than 0 does not guarantee the query will return rows.
         /// </summary>
-        public static int SqlGetColumnCount(System.IntPtr sqlQuery)
+        public static int SqlGetColumnCount(SQLQuery sqlQuery)
         {
             return NWN.Core.NWScript.SqlGetColumnCount(sqlQuery);
         }
@@ -12528,7 +12530,7 @@ namespace NWN.Xenomech.API
         ///  * The value of the AS clause will be returned, if the clause exists for the nNth column.<br/>
         ///  * A returned non-empty string does not guarantee the query will return rows.
         /// </summary>
-        public static string SqlGetColumnName(System.IntPtr sqlQuery, int nNth)
+        public static string SqlGetColumnName(SQLQuery sqlQuery, int nNth)
         {
             return NWN.Core.NWScript.SqlGetColumnName(sqlQuery, nNth);
         }
@@ -12591,7 +12593,7 @@ namespace NWN.Xenomech.API
         ///  * Any target file in TEMP: will be overwritten, even if the serialisation is not successful.<br/>
         ///    JsonToTemplate(JSON_NULL, ..) can be used to delete a previously-generated file.
         /// </summary>
-        public static int JsonToTemplate(System.IntPtr jTemplateSpec, string sResRef, int nResType)
+        public static int JsonToTemplate(Json jTemplateSpec, string sResRef, int nResType)
         {
             return NWN.Core.NWScript.JsonToTemplate(jTemplateSpec, sResRef, nResType);
         }
@@ -12600,7 +12602,7 @@ namespace NWN.Xenomech.API
         ///  Modifies jObject in-place (with no memory copies of the full object).<br/>
         ///  jObject will have the key at sKey set to jValue.
         /// </summary>
-        public static void JsonObjectSetInplace(System.IntPtr jObject, string sKey, System.IntPtr jValue)
+        public static void JsonObjectSetInplace(Json jObject, string sKey, Json jValue)
         {
             NWN.Core.NWScript.JsonObjectSetInplace(jObject, sKey, jValue);
         }
@@ -12610,7 +12612,7 @@ namespace NWN.Xenomech.API
         ///  jObject will have the element at the key sKey removed.<br/>
         ///  Will do nothing if jObject is not a object, or sKey does not exist on the object.
         /// </summary>
-        public static void JsonObjectDelInplace(System.IntPtr jObject, string sKey)
+        public static void JsonObjectDelInplace(Json jObject, string sKey)
         {
             NWN.Core.NWScript.JsonObjectDelInplace(jObject, sKey);
         }
@@ -12622,7 +12624,7 @@ namespace NWN.Xenomech.API
         ///  By default (-1), inserts elements at the end of the array (&quot;push&quot;).<br/>
         ///  nIndex = 0 inserts at the beginning of the array.
         /// </summary>
-        public static void JsonArrayInsertInplace(System.IntPtr jArray, System.IntPtr jValue, int nIndex = -1)
+        public static void JsonArrayInsertInplace(Json jArray, Json jValue, int nIndex = -1)
         {
             NWN.Core.NWScript.JsonArrayInsertInplace(jArray, jValue, nIndex);
         }
@@ -12632,7 +12634,7 @@ namespace NWN.Xenomech.API
         ///  jArray will have jValue set at position nIndex.<br/>
         ///  Will do nothing if jArray is not an array or nIndex is out of range.
         /// </summary>
-        public static void JsonArraySetInplace(System.IntPtr jArray, int nIndex, System.IntPtr jValue)
+        public static void JsonArraySetInplace(Json jArray, int nIndex, Json jValue)
         {
             NWN.Core.NWScript.JsonArraySetInplace(jArray, nIndex, jValue);
         }
@@ -12642,7 +12644,7 @@ namespace NWN.Xenomech.API
         ///  jArray will have the element at nIndex removed, and the array will be resized accordingly.<br/>
         ///  Will do nothing if jArray is not an array or nIndex is out of range.
         /// </summary>
-        public static void JsonArrayDelInplace(System.IntPtr jArray, int nIndex)
+        public static void JsonArrayDelInplace(Json jArray, int nIndex)
         {
             NWN.Core.NWScript.JsonArrayDelInplace(jArray, nIndex);
         }
@@ -12660,7 +12662,7 @@ namespace NWN.Xenomech.API
         ///    - vAmbientColor: the ambient color of the grass, xyz as RGB clamped to 0.0-1.0f per value.<br/>
         ///    - vDiffuseColor: the diffuse color of the grass, xyz as RGB clamped to 0.0-1.0f per value.
         /// </summary>
-        public static void SetAreaGrassOverride(uint oArea, int nMaterialId, string sTexture, float fDensity, float fHeight, System.Numerics.Vector3 vAmbientColor, System.Numerics.Vector3 vDiffuseColor)
+        public static void SetAreaGrassOverride(uint oArea, int nMaterialId, string sTexture, float fDensity, float fHeight, Vector3 vAmbientColor, Vector3 vDiffuseColor)
         {
             NWN.Core.NWScript.SetAreaGrassOverride(oArea, nMaterialId, sTexture, fDensity, fHeight, vAmbientColor, vDiffuseColor);
         }
@@ -12721,7 +12723,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create an Enemy Attack Bonus effect. Creatures attacking the given creature with melee/ranged attacks or touch attacks get a bonus to hit.
         /// </summary>
-        public static System.IntPtr EffectEnemyAttackBonus(int nBonus)
+        public static Effect EffectEnemyAttackBonus(int nBonus)
         {
             return NWN.Core.NWScript.EffectEnemyAttackBonus(nBonus);
         }
