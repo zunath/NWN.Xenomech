@@ -534,7 +534,7 @@ namespace NWN.Xenomech.API
         ///    camera to the new position, while the other types will result in the camera moving gradually into position<br/>
         ///  Pitch and distance are limited to valid values for the current camera mode:<br/>
         ///  Top Down: Distance = 5-20, Pitch = 1-50<br/>
-        ///  Driving camera: Distance = 6 (can&amp;apos;t be changed), Pitch = 1-62<br/>
+        ///  Driving camera: Distance = 6 (can't be changed), Pitch = 1-62<br/>
         ///  Chase: Distance = 5-20, Pitch = 1-50<br/>
         ///  *** NOTE *** In NWN:Hordes of the Underdark the camera limits have been relaxed to the following:<br/>
         ///  Distance 1-25<br/>
@@ -569,9 +569,9 @@ namespace NWN.Xenomech.API
         ///  - nSpell: SPELL_*<br/>
         ///  - oTarget: Target for the spell<br/>
         ///  - nMetaMagic: METAMAGIC_*. If nClass is specified, cannot be METAMAGIC_ANY.<br/>
-        ///  - bCheat: If this is TRUE, then the executor of the action doesn&amp;apos;t have to be<br/>
+        ///  - bCheat: If this is TRUE, then the executor of the action doesn't have to be<br/>
         ///    able to cast the spell. Ignored if nClass is specified.<br/>
-        ///  - bCheat: If this is TRUE, then the executor of the action doesn&amp;apos;t have to be<br/>
+        ///  - bCheat: If this is TRUE, then the executor of the action doesn't have to be<br/>
         ///    able to cast the spell.<br/>
         ///  - nDomainLevel: The level of the spell if cast from a domain slot.<br/>
         ///    eg SPELL_HEAL can be spell level 5 on a cleric. Use 0 for no domain slot.<br/>
@@ -608,7 +608,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get oObject&amp;apos;s local integer variable sVarName<br/>
+        ///  Get oObject's local integer variable sVarName<br/>
         ///  * Return value on error: 0
         /// </summary>
         public static int GetLocalInt(uint oObject, string sVarName)
@@ -617,7 +617,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get oObject&amp;apos;s local float variable sVarName<br/>
+        ///  Get oObject's local float variable sVarName<br/>
         ///  * Return value on error: 0.0f
         /// </summary>
         public static float GetLocalFloat(uint oObject, string sVarName)
@@ -626,8 +626,8 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get oObject&amp;apos;s local string variable sVarName<br/>
-        ///  * Return value on error: &amp;quot;&amp;quot;
+        ///  Get oObject's local string variable sVarName<br/>
+        ///  * Return value on error: ""
         /// </summary>
         public static string GetLocalString(uint oObject, string sVarName)
         {
@@ -635,7 +635,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get oObject&amp;apos;s local object variable sVarName<br/>
+        ///  Get oObject's local object variable sVarName<br/>
         ///  * Return value on error: OBJECT_INVALID
         /// </summary>
         public static uint GetLocalObject(uint oObject, string sVarName)
@@ -644,7 +644,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Set oObject&amp;apos;s local integer variable sVarName to nValue
+        ///  Set oObject's local integer variable sVarName to nValue
         /// </summary>
         public static void SetLocalInt(uint oObject, string sVarName, int nValue)
         {
@@ -652,7 +652,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Set oObject&amp;apos;s local float variable sVarName to nValue
+        ///  Set oObject's local float variable sVarName to nValue
         /// </summary>
         public static void SetLocalFloat(uint oObject, string sVarName, float fValue)
         {
@@ -660,7 +660,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Set oObject&amp;apos;s local string variable sVarName to nValue
+        ///  Set oObject's local string variable sVarName to nValue
         /// </summary>
         public static void SetLocalString(uint oObject, string sVarName, string sValue)
         {
@@ -668,7 +668,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Set oObject&amp;apos;s local object variable sVarName to nValue
+        ///  Set oObject's local object variable sVarName to nValue
         /// </summary>
         public static void SetLocalObject(uint oObject, string sVarName, uint oValue)
         {
@@ -686,7 +686,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Convert sString into upper case<br/>
-        ///  * Return value on error: &amp;quot;&amp;quot;
+        ///  * Return value on error: ""
         /// </summary>
         public static string GetStringUpperCase(string sString)
         {
@@ -695,7 +695,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Convert sString into lower case<br/>
-        ///  * Return value on error: &amp;quot;&amp;quot;
+        ///  * Return value on error: ""
         /// </summary>
         public static string GetStringLowerCase(string sString)
         {
@@ -704,7 +704,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Get nCount characters from the right end of sString<br/>
-        ///  * Return value on error: &amp;quot;&amp;quot;
+        ///  * Return value on error: ""
         /// </summary>
         public static string GetStringRight(string sString, int nCount)
         {
@@ -712,7 +712,7 @@ namespace NWN.Xenomech.API
         }
         /// <summary>
         ///  Get nCounter characters from the left end of sString<br/>
-        ///  * Return value on error: &amp;quot;&amp;quot;
+        ///  * Return value on error: ""
         /// </summary>
         public static string GetStringLeft(string sString, int nCount)
         {
@@ -721,7 +721,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Insert sString into sDestination at nPosition<br/>
-        ///  * Return value on error: &amp;quot;&amp;quot;
+        ///  * Return value on error: ""
         /// </summary>
         public static string InsertString(string sDestination, string sString, int nPosition)
         {
@@ -730,7 +730,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Get nCount characters from sString, starting at nStart<br/>
-        ///  * Return value on error: &amp;quot;&amp;quot;
+        ///  * Return value on error: ""
         /// </summary>
         public static string GetSubString(string sString, int nStart, int nCount)
         {
@@ -781,7 +781,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Maths operation: arccosine of fValue<br/>
-        ///  * Returns zero if fValue &amp;gt; 1 or fValue &amp;lt; -1
+        ///  * Returns zero if fValue > 1 or fValue < -1
         /// </summary>
         public static float acos(float fValue)
         {
@@ -790,7 +790,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Maths operation: arcsine of fValue<br/>
-        ///  * Returns zero if fValue &amp;gt;1 or fValue &amp;lt; -1
+        ///  * Returns zero if fValue >1 or fValue < -1
         /// </summary>
         public static float asin(float fValue)
         {
@@ -807,7 +807,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Maths operation: log of fValue<br/>
-        ///  * Returns zero if fValue &amp;lt;= zero
+        ///  * Returns zero if fValue <= zero
         /// </summary>
         public static float log(float fValue)
         {
@@ -816,7 +816,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Maths operation: fValue is raised to the power of fExponent<br/>
-        ///  * Returns zero if fValue ==0 and fExponent &amp;lt;0
+        ///  * Returns zero if fValue ==0 and fExponent <0
         /// </summary>
         public static float pow(float fValue, float fExponent)
         {
@@ -825,7 +825,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Maths operation: square root of fValue<br/>
-        ///  * Returns zero if fValue &amp;lt;0
+        ///  * Returns zero if fValue <0
         /// </summary>
         public static float sqrt(float fValue)
         {
@@ -843,7 +843,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Create a Heal effect. This should be applied as an instantaneous effect.<br/>
-        ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nDamageToHeal &amp;lt; 0.
+        ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nDamageToHeal < 0.
         /// </summary>
         public static System.IntPtr EffectHeal(int nDamageToHeal)
         {
@@ -894,14 +894,14 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Create a Summon Creature effect.  The creature is created and placed into the<br/>
-        ///  caller&amp;apos;s party/faction.<br/>
+        ///  caller's party/faction.<br/>
         ///  - sCreatureResref: Identifies the creature to be summoned<br/>
         ///  - nVisualEffectId: VFX_*<br/>
         ///  - fDelaySeconds: There can be delay between the visual effect being played, and the<br/>
         ///    creature being added to the area<br/>
-        ///  - nUseAppearAnimation: should this creature play it&amp;apos;s &amp;quot;appear&amp;quot; animation when it is<br/>
+        ///  - nUseAppearAnimation: should this creature play it's "appear" animation when it is<br/>
         ///    summoned. If zero, it will just fade in somewhere near the target.  If the value is 1<br/>
-        ///    it will use the appear animation, and if it&amp;apos;s 2 it will use appear2 (which doesn&amp;apos;t exist for most creatures)
+        ///    it will use the appear animation, and if it's 2 it will use appear2 (which doesn't exist for most creatures)
         /// </summary>
         public static System.IntPtr EffectSummonCreature(string sCreatureResref, VisualEffectType nVisualEffectId = VisualEffectType.None, float fDelaySeconds = 0.0f, int nUseAppearAnimation = 0)
         {
@@ -910,7 +910,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Get the caster level of an object. This is consistent with the caster level used when applying effects if OBJECT_SELF is used.<br/>
-        ///  - oObject: A creature will return the caster level of their currently cast spell or ability, or the item&amp;apos;s caster level if an item was used<br/>
+        ///  - oObject: A creature will return the caster level of their currently cast spell or ability, or the item's caster level if an item was used<br/>
         ///             A placeable will return an automatic caster level: floor(10, (spell innate level * 2) - 1)<br/>
         ///             An Area of Effect object will return the caster level that was used to create the Area of Effect.<br/>
         ///  * Return value on error, or if oObject has not yet cast a spell: 0;
@@ -983,7 +983,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Convert nInteger into a string.<br/>
-        ///  * Return value on error: &amp;quot;&amp;quot;
+        ///  * Return value on error: ""
         /// </summary>
         public static string IntToString(int nInteger)
         {
@@ -991,8 +991,8 @@ namespace NWN.Xenomech.API
         }
         /// <summary>
         ///  Get the first object in oArea.<br/>
-        ///  If no valid area is specified, it will use the caller&amp;apos;s area.<br/>
-        ///  - nObjectFilter: This allows you to filter out undesired object types, using bitwise &amp;quot;or&amp;quot;.<br/>
+        ///  If no valid area is specified, it will use the caller's area.<br/>
+        ///  - nObjectFilter: This allows you to filter out undesired object types, using bitwise "or".<br/>
         ///    For example, to return only creatures and doors, the value for this parameter would be OBJECT_TYPE_CREATURE | OBJECT_TYPE_DOOR<br/>
         ///  * Return value on error: OBJECT_INVALID
         /// </summary>
@@ -1003,8 +1003,8 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Get the next object in oArea.<br/>
-        ///  If no valid area is specified, it will use the caller&amp;apos;s area.<br/>
-        ///  - nObjectFilter: This allows you to filter out undesired object types, using bitwise &amp;quot;or&amp;quot;.<br/>
+        ///  If no valid area is specified, it will use the caller's area.<br/>
+        ///  - nObjectFilter: This allows you to filter out undesired object types, using bitwise "or".<br/>
         ///    For example, to return only creatures and doors, the value for this parameter would be OBJECT_TYPE_CREATURE | OBJECT_TYPE_DOOR<br/>
         ///  * Return value on error: OBJECT_INVALID
         /// </summary>
@@ -1234,7 +1234,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  If oObject is a creature, this will return that creature&amp;apos;s armour class<br/>
+        ///  If oObject is a creature, this will return that creature's armour class<br/>
         ///  If oObject is an item, door or placeable, this will return zero.<br/>
         ///  - nForFutureUse: this parameter is not currently used<br/>
         ///  * Return value if oObject is not a creature, item, door or placeable: -1
@@ -1322,7 +1322,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get an integer between 0 and 100 (inclusive) to represent oCreature&amp;apos;s<br/>
+        ///  Get an integer between 0 and 100 (inclusive) to represent oCreature's<br/>
         ///  Law/Chaos alignment<br/>
         ///  (100=law, 0=chaos)<br/>
         ///  * Return value if oCreature is not a valid creature: -1
@@ -1333,7 +1333,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get an integer between 0 and 100 (inclusive) to represent oCreature&amp;apos;s<br/>
+        ///  Get an integer between 0 and 100 (inclusive) to represent oCreature's<br/>
         ///  Good/Evil alignment<br/>
         ///  (100=good, 0=evil)<br/>
         ///  * Return value if oCreature is not a valid creature: -1
@@ -1344,7 +1344,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Return an ALIGNMENT_* constant to represent oCreature&amp;apos;s law/chaos alignment<br/>
+        ///  Return an ALIGNMENT_* constant to represent oCreature's law/chaos alignment<br/>
         ///  * Return value if oCreature is not a valid creature: -1
         /// </summary>
         public static int GetAlignmentLawChaos(uint oCreature)
@@ -1353,7 +1353,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Return an ALIGNMENT_* constant to represent oCreature&amp;apos;s good/evil alignment<br/>
+        ///  Return an ALIGNMENT_* constant to represent oCreature's good/evil alignment<br/>
         ///  * Return value if oCreature is not a valid creature: -1
         /// </summary>
         public static int GetAlignmentGoodEvil(uint oCreature)
@@ -1365,14 +1365,14 @@ namespace NWN.Xenomech.API
         ///  Get the first object in nShape<br/>
         ///  - nShape: SHAPE_*<br/>
         ///  - fSize:<br/>
-        ///    -&amp;gt; If nShape == SHAPE_SPHERE, this is the radius of the sphere<br/>
-        ///    -&amp;gt; If nShape == SHAPE_SPELLCYLINDER, this is the length of the cylinder<br/>
-        ///       Spell Cylinder&amp;apos;s always have a radius of 1.5m.<br/>
-        ///    -&amp;gt; If nShape == SHAPE_CONE, this is the widest radius of the cone<br/>
-        ///    -&amp;gt; If nShape == SHAPE_SPELLCONE, this is the length of the cone in the<br/>
+        ///    -> If nShape == SHAPE_SPHERE, this is the radius of the sphere<br/>
+        ///    -> If nShape == SHAPE_SPELLCYLINDER, this is the length of the cylinder<br/>
+        ///       Spell Cylinder's always have a radius of 1.5m.<br/>
+        ///    -> If nShape == SHAPE_CONE, this is the widest radius of the cone<br/>
+        ///    -> If nShape == SHAPE_SPELLCONE, this is the length of the cone in the<br/>
         ///       direction of lTarget. Spell cones are always 60 degrees with the origin<br/>
         ///       at OBJECT_SELF.<br/>
-        ///    -&amp;gt; If nShape == SHAPE_CUBE, this is half the length of one of the sides of<br/>
+        ///    -> If nShape == SHAPE_CUBE, this is half the length of one of the sides of<br/>
         ///       the cube<br/>
         ///  - lTarget: This is the centre of the effect, usually GetSpellTargetLocation(),<br/>
         ///    or the end of a cylinder or cone.<br/>
@@ -1381,11 +1381,11 @@ namespace NWN.Xenomech.API
         ///    at a height 1m above the ground<br/>
         ///    (This can be used to ensure that spell effects do not go through walls.)<br/>
         ///  - nObjectFilter: This allows you to filter out undesired object types, using<br/>
-        ///    bitwise &amp;quot;or&amp;quot;.<br/>
+        ///    bitwise "or".<br/>
         ///    For example, to return only creatures and doors, the value for<br/>
         ///    this parameter would be OBJECT_TYPE_CREATURE | OBJECT_TYPE_DOOR<br/>
         ///  - vOrigin: This is only used for cylinders and cones, and specifies the<br/>
-        ///    origin of the effect(normally the spell-caster&amp;apos;s position).<br/>
+        ///    origin of the effect(normally the spell-caster's position).<br/>
         ///  Return value on error: OBJECT_INVALID
         /// </summary>
         public static uint GetFirstObjectInShape(int nShape, float fSize, System.IntPtr lTarget, int bLineOfSight = FALSE, ObjectType nObjectFilter = ObjectType.Creature, System.Numerics.Vector3 vOrigin = default)
@@ -1397,14 +1397,14 @@ namespace NWN.Xenomech.API
         ///  Get the next object in nShape<br/>
         ///  - nShape: SHAPE_*<br/>
         ///  - fSize:<br/>
-        ///    -&amp;gt; If nShape == SHAPE_SPHERE, this is the radius of the sphere<br/>
-        ///    -&amp;gt; If nShape == SHAPE_SPELLCYLINDER, this is the length of the cylinder.<br/>
-        ///       Spell Cylinder&amp;apos;s always have a radius of 1.5m.<br/>
-        ///    -&amp;gt; If nShape == SHAPE_CONE, this is the widest radius of the cone<br/>
-        ///    -&amp;gt; If nShape == SHAPE_SPELLCONE, this is the length of the cone in the<br/>
+        ///    -> If nShape == SHAPE_SPHERE, this is the radius of the sphere<br/>
+        ///    -> If nShape == SHAPE_SPELLCYLINDER, this is the length of the cylinder.<br/>
+        ///       Spell Cylinder's always have a radius of 1.5m.<br/>
+        ///    -> If nShape == SHAPE_CONE, this is the widest radius of the cone<br/>
+        ///    -> If nShape == SHAPE_SPELLCONE, this is the length of the cone in the<br/>
         ///       direction of lTarget. Spell cones are always 60 degrees with the origin<br/>
         ///       at OBJECT_SELF.<br/>
-        ///    -&amp;gt; If nShape == SHAPE_CUBE, this is half the length of one of the sides of<br/>
+        ///    -> If nShape == SHAPE_CUBE, this is half the length of one of the sides of<br/>
         ///       the cube<br/>
         ///  - lTarget: This is the centre of the effect, usually GetSpellTargetLocation(),<br/>
         ///    or the end of a cylinder or cone.<br/>
@@ -1413,10 +1413,10 @@ namespace NWN.Xenomech.API
         ///    through walls.) Line of sight check is done from origin to target object<br/>
         ///    at a height 1m above the ground<br/>
         ///  - nObjectFilter: This allows you to filter out undesired object types, using<br/>
-        ///    bitwise &amp;quot;or&amp;quot;. For example, to return only creatures and doors, the value for<br/>
+        ///    bitwise "or". For example, to return only creatures and doors, the value for<br/>
         ///    this parameter would be OBJECT_TYPE_CREATURE | OBJECT_TYPE_DOOR<br/>
         ///  - vOrigin: This is only used for cylinders and cones, and specifies the origin<br/>
-        ///    of the effect (normally the spell-caster&amp;apos;s position).<br/>
+        ///    of the effect (normally the spell-caster's position).<br/>
         ///  Return value on error: OBJECT_INVALID
         /// </summary>
         public static uint GetNextObjectInShape(int nShape, float fSize, System.IntPtr lTarget, int bLineOfSight = FALSE, ObjectType nObjectFilter = ObjectType.Creature, System.Numerics.Vector3 vOrigin = default)
@@ -1426,7 +1426,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Create an Entangle effect<br/>
-        ///  When applied, this effect will restrict the creature&amp;apos;s movement and apply a<br/>
+        ///  When applied, this effect will restrict the creature's movement and apply a<br/>
         ///  (-2) to all attacks and a -4 to AC.
         /// </summary>
         public static System.IntPtr EffectEntangle()
@@ -1462,7 +1462,7 @@ namespace NWN.Xenomech.API
         ///  Once the event has been signaled. The script associated with the OnUserDefined event will<br/>
         ///  run on the object oObject.<br/>
         /// <br/>
-        ///  To specify the OnUserDefined script that should run, view the object&amp;apos;s Properties<br/>
+        ///  To specify the OnUserDefined script that should run, view the object's Properties<br/>
         ///  and click on the Scripts Tab. Then specify a script for the OnUserDefined event.<br/>
         ///  From inside the OnUserDefined script call:<br/>
         ///     GetUserDefinedEventNumber() to retrieve the value of nUserDefinedEventNumber<br/>
@@ -1561,7 +1561,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Output vVector to the logfile.<br/>
         ///  - vVector<br/>
-        ///  - bPrepend: if this is TRUE, the message will be prefixed with &amp;quot;PRINTVECTOR:&amp;quot;
+        ///  - bPrepend: if this is TRUE, the message will be prefixed with "PRINTVECTOR:"
         /// </summary>
         public static void PrintVector(System.Numerics.Vector3 vVector, int bPrepend)
         {
@@ -1660,7 +1660,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Set oObject&amp;apos;s local location variable sVarname to lValue
+        ///  Set oObject's local location variable sVarname to lValue
         /// </summary>
         public static void SetLocalLocation(uint oObject, string sVarName, System.IntPtr lValue)
         {
@@ -1668,7 +1668,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get oObject&amp;apos;s local location variable sVarname
+        ///  Get oObject's local location variable sVarname
         /// </summary>
         public static System.IntPtr GetLocalLocation(uint oObject, string sVarName)
         {
@@ -1684,7 +1684,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get the object which is in oCreature&amp;apos;s specified inventory slot<br/>
+        ///  Get the object which is in oCreature's specified inventory slot<br/>
         ///  - nInventorySlot: INVENTORY_SLOT_*<br/>
         ///  - oCreature<br/>
         ///  * Returns OBJECT_INVALID if oCreature is not a valid creature or there is no<br/>
@@ -1744,7 +1744,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Set whether oTarget&amp;apos;s action stack can be modified
+        ///  Set whether oTarget's action stack can be modified
         /// </summary>
         public static void SetCommandable(int bCommandable, uint oTarget = OBJECT_INVALID)
         {
@@ -1752,7 +1752,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Determine whether oTarget&amp;apos;s action stack can be modified.
+        ///  Determine whether oTarget's action stack can be modified.
         /// </summary>
         public static int GetCommandable(uint oTarget = OBJECT_INVALID)
         {
@@ -1804,7 +1804,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Get the Tag of oObject<br/>
-        ///  * Return value if oObject is not a valid object: &amp;quot;&amp;quot;
+        ///  * Return value if oObject is not a valid object: ""
         /// </summary>
         public static string GetTag(uint oObject)
         {
@@ -1898,7 +1898,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the appropriate matched string (this should only be used in<br/>
         ///  OnConversation scripts).<br/>
-        ///  * Returns the appropriate matched string, otherwise returns &amp;quot;&amp;quot;
+        ///  * Returns the appropriate matched string, otherwise returns ""
         /// </summary>
         public static string GetMatchedSubstring(int nString)
         {
@@ -1926,8 +1926,8 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get the weakest member of oFactionMember&amp;apos;s faction.<br/>
-        ///  * Returns OBJECT_INVALID if oFactionMember&amp;apos;s faction is invalid.
+        ///  Get the weakest member of oFactionMember's faction.<br/>
+        ///  * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
         /// </summary>
         public static uint GetFactionWeakestMember(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
         {
@@ -1935,8 +1935,8 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get the strongest member of oFactionMember&amp;apos;s faction.<br/>
-        ///  * Returns OBJECT_INVALID if oFactionMember&amp;apos;s faction is invalid.
+        ///  Get the strongest member of oFactionMember's faction.<br/>
+        ///  * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
         /// </summary>
         public static uint GetFactionStrongestMember(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
         {
@@ -1944,9 +1944,9 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get the member of oFactionMember&amp;apos;s faction that has taken the most hit points<br/>
+        ///  Get the member of oFactionMember's faction that has taken the most hit points<br/>
         ///  of damage.<br/>
-        ///  * Returns OBJECT_INVALID if oFactionMember&amp;apos;s faction is invalid.
+        ///  * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
         /// </summary>
         public static uint GetFactionMostDamagedMember(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
         {
@@ -1954,9 +1954,9 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get the member of oFactionMember&amp;apos;s faction that has taken the fewest hit<br/>
+        ///  Get the member of oFactionMember's faction that has taken the fewest hit<br/>
         ///  points of damage.<br/>
-        ///  * Returns OBJECT_INVALID if oFactionMember&amp;apos;s faction is invalid.
+        ///  * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
         /// </summary>
         public static uint GetFactionLeastDamagedMember(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
         {
@@ -1964,8 +1964,8 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get the amount of gold held by oFactionMember&amp;apos;s faction.<br/>
-        ///  * Returns -1 if oFactionMember&amp;apos;s faction is invalid.
+        ///  Get the amount of gold held by oFactionMember's faction.<br/>
+        ///  * Returns -1 if oFactionMember's faction is invalid.
         /// </summary>
         public static int GetFactionGold(uint oFactionMember)
         {
@@ -1974,7 +1974,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Get an integer between 0 and 100 (inclusive) that represents how<br/>
-        ///  oSourceFactionMember&amp;apos;s faction feels about oTarget.<br/>
+        ///  oSourceFactionMember's faction feels about oTarget.<br/>
         ///  * Return value on error: -1
         /// </summary>
         public static int GetFactionAverageReputation(uint oSourceFactionMember, uint oTarget)
@@ -1984,7 +1984,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Get an integer between 0 and 100 (inclusive) that represents the average<br/>
-        ///  good/evil alignment of oFactionMember&amp;apos;s faction.<br/>
+        ///  good/evil alignment of oFactionMember's faction.<br/>
         ///  * Return value on error: -1
         /// </summary>
         public static int GetFactionAverageGoodEvilAlignment(uint oFactionMember)
@@ -1994,7 +1994,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Get an integer between 0 and 100 (inclusive) that represents the average<br/>
-        ///  law/chaos alignment of oFactionMember&amp;apos;s faction.<br/>
+        ///  law/chaos alignment of oFactionMember's faction.<br/>
         ///  * Return value on error: -1
         /// </summary>
         public static int GetFactionAverageLawChaosAlignment(uint oFactionMember)
@@ -2032,7 +2032,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Get the object faction member with the lowest armour class.<br/>
-        ///  * Returns OBJECT_INVALID if oFactionMember&amp;apos;s faction is invalid.
+        ///  * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
         /// </summary>
         public static uint GetFactionWorstAC(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
         {
@@ -2041,7 +2041,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Get the object faction member with the highest armour class.<br/>
-        ///  * Returns OBJECT_INVALID if oFactionMember&amp;apos;s faction is invalid.
+        ///  * Returns OBJECT_INVALID if oFactionMember's faction is invalid.
         /// </summary>
         public static uint GetFactionBestAC(uint oFactionMember = OBJECT_INVALID, int bMustBeVisible = TRUE)
         {
@@ -2116,7 +2116,7 @@ namespace NWN.Xenomech.API
         ///  effects all other effects will be removed as well. This means that if you<br/>
         ///  apply a visual effect and a silence effect (in a link) and the target is<br/>
         ///  immune to the silence effect that the visual effect will get removed as well.<br/>
-        ///  Visual Effects are not considered &amp;quot;valid&amp;quot; effects for the purposes of<br/>
+        ///  Visual Effects are not considered "valid" effects for the purposes of<br/>
         ///  determining if an effect will be removed or not and as such should never be<br/>
         ///  packaged *only* with other visual effects in a link.
         /// </summary>
@@ -2140,11 +2140,11 @@ namespace NWN.Xenomech.API
         ///  Adjust the alignment of oSubject.<br/>
         ///  - oSubject<br/>
         ///  - nAlignment:<br/>
-        ///    -&gt; ALIGNMENT_LAWFUL/ALIGNMENT_CHAOTIC/ALIGNMENT_GOOD/ALIGNMENT_EVIL: oSubject&amp;apos;s<br/>
+        ///    -&gt; ALIGNMENT_LAWFUL/ALIGNMENT_CHAOTIC/ALIGNMENT_GOOD/ALIGNMENT_EVIL: oSubject's<br/>
         ///       alignment will be shifted in the direction specified<br/>
-        ///    -&gt; ALIGNMENT_ALL: nShift will be added to oSubject&amp;apos;s law/chaos and<br/>
+        ///    -&gt; ALIGNMENT_ALL: nShift will be added to oSubject's law/chaos and<br/>
         ///       good/evil alignment values<br/>
-        ///    -&gt; ALIGNMENT_NEUTRAL: nShift is applied to oSubject&amp;apos;s law/chaos and<br/>
+        ///    -&gt; ALIGNMENT_NEUTRAL: nShift is applied to oSubject's law/chaos and<br/>
         ///       good/evil alignment values in the direction which is towards neutrality.<br/>
         ///      e.g. If oSubject has a law/chaos value of 10 (i.e. chaotic) and a<br/>
         ///           good/evil value of 80 (i.e. good) then if nShift is 15, the<br/>
@@ -2157,7 +2157,7 @@ namespace NWN.Xenomech.API
         ///           good/evil value will become 55<br/>
         ///  - nShift: this is the desired shift in alignment<br/>
         ///  - bAllPartyMembers: when TRUE the alignment shift of oSubject also has a<br/>
-        ///                      diminished affect all members of oSubject&amp;apos;s party (if oSubject is a Player).<br/>
+        ///                      diminished affect all members of oSubject's party (if oSubject is a Player).<br/>
         ///                      When FALSE the shift only affects oSubject.<br/>
         ///  * No return value
         /// </summary>
@@ -2176,7 +2176,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Set the transition bitmap of a player; this should only be called in area<br/>
-        ///  transition scripts. This action should be run by the person &amp;quot;clicking&amp;quot; the<br/>
+        ///  transition scripts. This action should be run by the person "clicking" the<br/>
         ///  area transition via AssignCommand.<br/>
         ///  - nPredefinedAreaTransition:<br/>
         ///    -&gt; To use a predefined area transition bitmap, use one of AREA_TRANSITION_*<br/>
@@ -2195,9 +2195,9 @@ namespace NWN.Xenomech.API
         ///  Starts a conversation with oObjectToConverseWith - this will cause their<br/>
         ///  OnDialog event to fire.<br/>
         ///  - oObjectToConverseWith<br/>
-        ///  - sDialogResRef: If this is blank, the creature&amp;apos;s own dialogue file will be used<br/>
+        ///  - sDialogResRef: If this is blank, the creature's own dialogue file will be used<br/>
         ///  - bPrivateConversation<br/>
-        ///  Turn off bPlayHello if you don&amp;apos;t want the initial greeting to play
+        ///  Turn off bPlayHello if you don't want the initial greeting to play
         /// </summary>
         public static void ActionStartConversation(uint oObjectToConverseWith, string sDialogResRef = "", int bPrivateConversation = FALSE, int bPlayHello = TRUE)
         {
@@ -2249,12 +2249,12 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Adjust how oSourceFactionMember&amp;apos;s faction feels about oTarget by the<br/>
+        ///  Adjust how oSourceFactionMember's faction feels about oTarget by the<br/>
         ///  specified amount.<br/>
         ///  Note: This adjusts Faction Reputation, how the entire faction that<br/>
         ///  oSourceFactionMember is in, feels about oTarget.<br/>
         ///  * No return value<br/>
-        ///  Note: You can&amp;apos;t adjust a player character&amp;apos;s (PC) faction towards<br/>
+        ///  Note: You can't adjust a player character's (PC) faction towards<br/>
         ///        NPCs, so attempting to make an NPC hostile by passing in a PC object<br/>
         ///        as oSourceFactionMember in the following call will fail:<br/>
         ///        AdjustReputation(oNPC,oPC,-100);<br/>
@@ -2281,7 +2281,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the creature that is going to attack oTarget.<br/>
         ///  Note: This value is cleared out at the end of every combat round and should<br/>
-        ///  not be used in any case except when getting a &amp;quot;going to be attacked&amp;quot; shout<br/>
+        ///  not be used in any case except when getting a "going to be attacked" shout<br/>
         ///  from the master creature (and this creature is a henchman)<br/>
         ///  * Returns OBJECT_INVALID if oTarget is not a valid creature.
         /// </summary>
@@ -2378,7 +2378,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get the location of the caller&amp;apos;s last spell target.
+        ///  Get the location of the caller's last spell target.
         /// </summary>
         public static System.IntPtr GetSpellTargetLocation()
         {
@@ -2394,7 +2394,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get the area&amp;apos;s object ID from lLocation.
+        ///  Get the area's object ID from lLocation.
         /// </summary>
         public static uint GetAreaFromLocation(System.IntPtr lLocation)
         {
@@ -2424,9 +2424,9 @@ namespace NWN.Xenomech.API
         ///    -&gt; REPUTATION_TYPE_* if nFirstCriteriaType was CREATURE_TYPE_REPUTATION<br/>
         ///    For example, to get the nearest PC, use<br/>
         ///    (CREATURE_TYPE_PLAYER_CHAR, PLAYER_CHAR_IS_PC)<br/>
-        ///  - lLocation: We&amp;apos;re trying to find the creature of the specified type that is<br/>
+        ///  - lLocation: We're trying to find the creature of the specified type that is<br/>
         ///    nearest to lLocation<br/>
-        ///  - nNth: We don&amp;apos;t have to find the first nearest: we can find the Nth nearest....<br/>
+        ///  - nNth: We don't have to find the first nearest: we can find the Nth nearest....<br/>
         ///  - nSecondCriteriaType: This is used in the same way as nFirstCriteriaType to<br/>
         ///    further specify the type of creature that we are looking for.<br/>
         ///  - nSecondCriteriaValue: This is used in the same way as nFirstCriteriaValue<br/>
@@ -2512,9 +2512,9 @@ namespace NWN.Xenomech.API
         ///  - nSpell: SPELL_*<br/>
         ///  - lTargetLocation<br/>
         ///  - nMetaMagic: METAMAGIC_*. If nClass is specified, cannot be METAMAGIC_ANY.<br/>
-        ///  - bCheat: If this is TRUE, then the executor of the action doesn&amp;apos;t have to be<br/>
+        ///  - bCheat: If this is TRUE, then the executor of the action doesn't have to be<br/>
         ///    able to cast the spell. Ignored if nClass is specified.<br/>
-        ///  - bCheat: If this is TRUE, then the executor of the action doesn&amp;apos;t have to be<br/>
+        ///  - bCheat: If this is TRUE, then the executor of the action doesn't have to be<br/>
         ///    able to cast the spell.<br/>
         ///  - nProjectilePathType: PROJECTILE_PATH_TYPE_*<br/>
         ///  - bInstantSpell: If this is TRUE, the spell is cast immediately; this allows<br/>
@@ -2616,16 +2616,16 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Create an event which triggers the &amp;quot;SpellCastAt&amp;quot; script<br/>
+        ///  Create an event which triggers the "SpellCastAt" script<br/>
         ///  Note: This only creates the event. The event wont actually trigger until SignalEvent()<br/>
         ///  is called using this created SpellCastAt event as an argument.<br/>
         ///  For example:<br/>
         ///      SignalEvent(oCreature, EventSpellCastAt(oCaster, SPELL_MAGIC_MISSILE, TRUE));<br/>
-        ///  This function doesn&amp;apos;t cast the spell specified, it only creates an event so that<br/>
+        ///  This function doesn't cast the spell specified, it only creates an event so that<br/>
         ///  when the event is signaled on an object, the object will use its OnSpellCastAt script<br/>
         ///  to react to the spell being cast.<br/>
         /// <br/>
-        ///  To specify the OnSpellCastAt script that should run, view the Object&amp;apos;s Properties<br/>
+        ///  To specify the OnSpellCastAt script that should run, view the Object's Properties<br/>
         ///  and click on the Scripts Tab. Then specify a script for the OnSpellCastAt event.<br/>
         ///  From inside the OnSpellCastAt script call:<br/>
         ///      GetLastSpellCaster() to get the object that cast the spell (oCaster).<br/>
@@ -2638,7 +2638,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  This is for use in a &amp;quot;Spell Cast&amp;quot; script, it gets who cast the spell.<br/>
+        ///  This is for use in a "Spell Cast" script, it gets who cast the spell.<br/>
         ///  The spell could have been cast by a creature, placeable or door.<br/>
         ///  * Returns OBJECT_INVALID if the caller is not a creature, placeable or door.
         /// </summary>
@@ -2648,7 +2648,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  This is for use in a &amp;quot;Spell Cast&amp;quot; script, it gets the ID of the spell that<br/>
+        ///  This is for use in a "Spell Cast" script, it gets the ID of the spell that<br/>
         ///  was cast.
         /// </summary>
         public static int GetLastSpell()
@@ -2712,7 +2712,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the name of oObject.<br/>
         ///  - bOriginalName:  if set to true any new name specified via a SetName scripting command<br/>
-        ///                    is ignored and the original object&amp;apos;s name is returned instead.
+        ///                    is ignored and the original object's name is returned instead.
         /// </summary>
         public static string GetName(uint oObject, int bOriginalName = FALSE)
         {
@@ -4152,7 +4152,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  The creature will rest if not in combat and no enemies are nearby.<br/>
         ///  - bCreatureToEnemyLineOfSightCheck: TRUE to allow the creature to rest if enemies<br/>
-        ///                                      are nearby, but the creature can&amp;apos;t see the enemy.<br/>
+        ///                                      are nearby, but the creature can't see the enemy.<br/>
         ///                                      FALSE the creature will not rest if enemies are<br/>
         ///                                      nearby regardless of whether or not the creature<br/>
         ///                                      can see them, such as if an enemy is close by,<br/>
@@ -4499,7 +4499,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Use this in an OnItemActivated module script to get the location of the item&amp;apos;s<br/>
+        ///  Use this in an OnItemActivated module script to get the location of the item's<br/>
         ///  target.
         /// </summary>
         public static System.IntPtr GetItemActivatedTargetLocation()
@@ -4508,7 +4508,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Use this in an OnItemActivated module script to get the item&amp;apos;s target.
+        ///  Use this in an OnItemActivated module script to get the item's target.
         /// </summary>
         public static uint GetItemActivatedTarget()
         {
@@ -4649,7 +4649,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Set oTarget&amp;apos;s plot object status.
+        ///  Set oTarget's plot object status.
         /// </summary>
         public static void SetPlotFlag(uint oTarget, int nPlotFlag)
         {
@@ -4671,8 +4671,8 @@ namespace NWN.Xenomech.API
         ///  Create a Concealment effect.<br/>
         ///  - nPercentage: 1-100 inclusive<br/>
         ///  - nMissChanceType: MISS_CHANCE_TYPE_*<br/>
-        ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nPercentage &amp;lt; 1 or<br/>
-        ///    nPercentage &amp;gt; 100.
+        ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nPercentage < 1 or<br/>
+        ///    nPercentage > 100.
         /// </summary>
         public static System.IntPtr EffectConcealment(int nPercentage, MissChanceType nMissType = MissChanceType.Normal)
         {
@@ -4708,7 +4708,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Negative Level effect.<br/>
         ///  - nNumLevels: the number of negative levels to apply.<br/>
-        ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nNumLevels &amp;gt; 100.
+        ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nNumLevels > 100.
         /// </summary>
         public static System.IntPtr EffectNegativeLevel(int nNumLevels, int bHPBonus = FALSE)
         {
@@ -4726,7 +4726,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Sanctuary effect.<br/>
         ///  - nDifficultyClass: must be a non-zero, positive number<br/>
-        ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nDifficultyClass &amp;lt;= 0.
+        ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nDifficultyClass <= 0.
         /// </summary>
         public static System.IntPtr EffectSanctuary(int nDifficultyClass)
         {
@@ -4768,7 +4768,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Determine whether oSource has a friendly reaction towards oTarget, depending<br/>
         ///  on the reputation, PVP setting and (if both oSource and oTarget are PCs),<br/>
-        ///  oSource&amp;apos;s Like/Dislike setting for oTarget.<br/>
+        ///  oSource's Like/Dislike setting for oTarget.<br/>
         ///  Note: If you just want to know how two objects feel about each other in terms<br/>
         ///  of faction and personal reputation, use GetIsFriend() instead.<br/>
         ///  * Returns TRUE if oSource has a friendly reaction towards oTarget
@@ -4781,7 +4781,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Determine whether oSource has a neutral reaction towards oTarget, depending<br/>
         ///  on the reputation, PVP setting and (if both oSource and oTarget are PCs),<br/>
-        ///  oSource&amp;apos;s Like/Dislike setting for oTarget.<br/>
+        ///  oSource's Like/Dislike setting for oTarget.<br/>
         ///  Note: If you just want to know how two objects feel about each other in terms<br/>
         ///  of faction and personal reputation, use GetIsNeutral() instead.<br/>
         ///  * Returns TRUE if oSource has a neutral reaction towards oTarget
@@ -4794,7 +4794,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Determine whether oSource has a Hostile reaction towards oTarget, depending<br/>
         ///  on the reputation, PVP setting and (if both oSource and oTarget are PCs),<br/>
-        ///  oSource&amp;apos;s Like/Dislike setting for oTarget.<br/>
+        ///  oSource's Like/Dislike setting for oTarget.<br/>
         ///  Note: If you just want to know how two objects feel about each other in terms<br/>
         ///  of faction and personal reputation, use GetIsEnemy() instead.<br/>
         ///  * Returns TRUE if oSource has a hostile reaction towards oTarget
@@ -4834,9 +4834,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Try to send oTarget to a new server defined by sIPaddress.<br/>
         ///  - oTarget<br/>
-        ///  - sIPaddress: this can be numerical &amp;quot;192.168.0.84&amp;quot; or alphanumeric<br/>
-        ///    &amp;quot;www.bioware.com&amp;quot;. It can also contain a port &amp;quot;192.168.0.84:5121&amp;quot; or<br/>
-        ///    &amp;quot;www.bioware.com:5121&amp;quot;; if the port is not specified, it will default to<br/>
+        ///  - sIPaddress: this can be numerical "192.168.0.84" or alphanumeric<br/>
+        ///    "www.bioware.com". It can also contain a port "192.168.0.84:5121" or<br/>
+        ///    "www.bioware.com:5121"; if the port is not specified, it will default to<br/>
         ///    5121.<br/>
         ///  - sPassword: login password for the destination server<br/>
         ///  - sWaypointTag: if this is set, after portalling the character will be moved<br/>
@@ -4861,7 +4861,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Use this on an NPC to cause all creatures within a 10-metre radius to stop<br/>
-        ///  what they are doing and sets the NPC&amp;apos;s enemies within this range to be<br/>
+        ///  what they are doing and sets the NPC's enemies within this range to be<br/>
         ///  neutral towards the NPC for roughly 3 minutes. If this command is run on a PC<br/>
         ///  or an object that is not a creature, nothing will happen.
         /// </summary>
@@ -4874,8 +4874,8 @@ namespace NWN.Xenomech.API
         ///  Create a Miss Chance effect.<br/>
         ///  - nPercentage: 1-100 inclusive<br/>
         ///  - nMissChanceType: MISS_CHANCE_TYPE_*<br/>
-        ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nPercentage &amp;lt; 1 or<br/>
-        ///    nPercentage &amp;gt; 100.
+        ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nPercentage < 1 or<br/>
+        ///    nPercentage > 100.
         /// </summary>
         public static System.IntPtr EffectMissChance(int nPercentage, MissChanceType nMissChanceType = MissChanceType.Normal)
         {
@@ -4901,7 +4901,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Create a Disappear/Appear effect.<br/>
-        ///  The object will &amp;quot;fly away&amp;quot; for the duration of the effect and will reappear<br/>
+        ///  The object will "fly away" for the duration of the effect and will reappear<br/>
         ///  at lLocation.<br/>
         ///  - nAnimation determines which appear and disappear animations to use. Most creatures<br/>
         ///  only have animation 1, although a few have 2 (like beholders)
@@ -4912,7 +4912,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Create a Disappear effect to make the object &amp;quot;fly away&amp;quot; and then destroy<br/>
+        ///  Create a Disappear effect to make the object "fly away" and then destroy<br/>
         ///  itself.<br/>
         ///  - nAnimation determines which appear and disappear animations to use. Most creatures<br/>
         ///  only have animation 1, although a few have 2 (like beholders)
@@ -4923,7 +4923,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Create an Appear effect to make the object &amp;quot;fly in&amp;quot;.<br/>
+        ///  Create an Appear effect to make the object "fly in".<br/>
         ///  - nAnimation determines which appear and disappear animations to use. Most creatures<br/>
         ///  only have animation 1, although a few have 2 (like beholders)
         /// </summary>
@@ -4953,7 +4953,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Create a Modify Attacks effect to add attacks.<br/>
         ///  - nAttacks: maximum is 5, even with the effect stacked<br/>
-        ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nAttacks &amp;gt; 5.
+        ///  * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if nAttacks > 5.
         /// </summary>
         public static System.IntPtr EffectModifyAttacks(int nAttacks)
         {
@@ -4985,8 +4985,8 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Get the trap nearest to oTarget.<br/>
-        ///  Note : &amp;quot;trap objects&amp;quot; are actually any trigger, placeable or door that is<br/>
-        ///  trapped in oTarget&amp;apos;s area.<br/>
+        ///  Note : "trap objects" are actually any trigger, placeable or door that is<br/>
+        ///  trapped in oTarget's area.<br/>
         ///  - oTarget<br/>
         ///  - nTrapDetected: if this is TRUE, the trap returned has to have been detected<br/>
         ///    by oTarget.
@@ -4997,8 +4997,8 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get the name of oCreature&amp;apos;s deity.<br/>
-        ///  * Returns &amp;quot;&amp;quot; if oCreature is invalid (or if the deity name is blank for<br/>
+        ///  Get the name of oCreature's deity.<br/>
+        ///  * Returns "" if oCreature is invalid (or if the deity name is blank for<br/>
         ///    oCreature).
         /// </summary>
         public static string GetDeity(uint oCreature)
@@ -5007,8 +5007,8 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get the name of oCreature&amp;apos;s sub race.<br/>
-        ///  * Returns &amp;quot;&amp;quot; if oCreature is invalid (or if sub race is blank for oCreature).
+        ///  Get the name of oCreature's sub race.<br/>
+        ///  * Returns "" if oCreature is invalid (or if sub race is blank for oCreature).
         /// </summary>
         public static string GetSubRace(uint oTarget)
         {
@@ -5016,7 +5016,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get oTarget&amp;apos;s base fortitude saving throw value (this will only work for<br/>
+        ///  Get oTarget's base fortitude saving throw value (this will only work for<br/>
         ///  creatures, doors, and placeables).<br/>
         ///  * Returns 0 if oTarget is invalid.
         /// </summary>
@@ -5026,7 +5026,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get oTarget&amp;apos;s base will saving throw value (this will only work for creatures,<br/>
+        ///  Get oTarget's base will saving throw value (this will only work for creatures,<br/>
         ///  doors, and placeables).<br/>
         ///  * Returns 0 if oTarget is invalid.
         /// </summary>
@@ -5036,7 +5036,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get oTarget&amp;apos;s base reflex saving throw value (this will only work for<br/>
+        ///  Get oTarget's base reflex saving throw value (this will only work for<br/>
         ///  creatures, doors, and placeables).<br/>
         ///  * Returns 0 if oTarget is invalid.
         /// </summary>
@@ -5046,7 +5046,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get oCreature&amp;apos;s challenge rating.<br/>
+        ///  Get oCreature's challenge rating.<br/>
         ///  * Returns 0.0 if oCreature is invalid.
         /// </summary>
         public static float GetChallengeRating(uint oCreature)
@@ -5055,7 +5055,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get oCreature&amp;apos;s age.<br/>
+        ///  Get oCreature's age.<br/>
         ///  * Returns 0 if oCreature is invalid.
         /// </summary>
         public static int GetAge(uint oCreature)
@@ -5064,7 +5064,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get oCreature&amp;apos;s movement rate.<br/>
+        ///  Get oCreature's movement rate.<br/>
         ///  * Returns 0 if oCreature is invalid.
         /// </summary>
         public static int GetMovementRate(uint oCreature)
@@ -5073,7 +5073,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get oCreature&amp;apos;s familiar creature type (FAMILIAR_CREATURE_TYPE_*).<br/>
+        ///  Get oCreature's familiar creature type (FAMILIAR_CREATURE_TYPE_*).<br/>
         ///  * Returns FAMILIAR_CREATURE_TYPE_NONE if oCreature is invalid or does<br/>
         ///    not currently have a familiar.
         /// </summary>
@@ -5083,7 +5083,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get oCreature&amp;apos;s animal companion creature type<br/>
+        ///  Get oCreature's animal companion creature type<br/>
         ///  (ANIMAL_COMPANION_CREATURE_TYPE_*).<br/>
         ///  * Returns ANIMAL_COMPANION_CREATURE_TYPE_NONE if oCreature is invalid or does<br/>
         ///    not currently have an animal companion.
@@ -5094,9 +5094,9 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get oCreature&amp;apos;s familiar&amp;apos;s name.<br/>
-        ///  * Returns &amp;quot;&amp;quot; if oCreature is invalid, does not currently<br/>
-        ///  have a familiar or if the familiar&amp;apos;s name is blank.
+        ///  Get oCreature's familiar's name.<br/>
+        ///  * Returns "" if oCreature is invalid, does not currently<br/>
+        ///  have a familiar or if the familiar's name is blank.
         /// </summary>
         public static string GetFamiliarName(uint oCreature)
         {
@@ -5104,9 +5104,9 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get oCreature&amp;apos;s animal companion&amp;apos;s name.<br/>
-        ///  * Returns &amp;quot;&amp;quot; if oCreature is invalid, does not currently<br/>
-        ///  have an animal companion or if the animal companion&amp;apos;s name is blank.
+        ///  Get oCreature's animal companion's name.<br/>
+        ///  * Returns "" if oCreature is invalid, does not currently<br/>
+        ///  have an animal companion or if the animal companion's name is blank.
         /// </summary>
         public static string GetAnimalCompanionName(uint oTarget)
         {
@@ -5324,7 +5324,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Make the corresponding panel button on the player&amp;apos;s client start or stop<br/>
+        ///  Make the corresponding panel button on the player's client start or stop<br/>
         ///  flashing.<br/>
         ///  - oPlayer<br/>
         ///  - nButton: PANEL_BUTTON_*<br/>
@@ -5379,7 +5379,7 @@ namespace NWN.Xenomech.API
         ///  - bBroadcastToFaction: If this is TRUE then only creatures in the same faction<br/>
         ///    as oCreatureToFloatAbove<br/>
         ///    will see the floaty text, and only if they are within range (30 metres).<br/>
-        ///  - bChatWindow:  If TRUE, the string reference will be displayed in oCreatureToFloatAbove&amp;apos;s chat window
+        ///  - bChatWindow:  If TRUE, the string reference will be displayed in oCreatureToFloatAbove's chat window
         /// </summary>
         public static void FloatingTextStrRefOnCreature(int nStrRefToDisplay, uint oCreatureToFloatAbove, int bBroadcastToFaction = TRUE, int bChatWindow = TRUE)
         {
@@ -5395,7 +5395,7 @@ namespace NWN.Xenomech.API
         ///  - bBroadcastToFaction: If this is TRUE then only creatures in the same faction<br/>
         ///    as oCreatureToFloatAbove<br/>
         ///    will see the floaty text, and only if they are within range (30 metres).<br/>
-        ///  - bChatWindow:  If TRUE, sStringToDisplay will be displayed in oCreatureToFloatAbove&amp;apos;s chat window.
+        ///  - bChatWindow:  If TRUE, sStringToDisplay will be displayed in oCreatureToFloatAbove's chat window.
         /// </summary>
         public static void FloatingTextStringOnCreature(string sStringToDisplay, uint oCreatureToFloatAbove, int bBroadcastToFaction = TRUE, int bChatWindow = TRUE)
         {
@@ -5556,8 +5556,8 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Set the status of the illumination for oPlaceable.<br/>
         ///  - oPlaceable<br/>
-        ///  - bIlluminate: if this is TRUE, oPlaceable&amp;apos;s illumination will be turned on.<br/>
-        ///    If this is FALSE, oPlaceable&amp;apos;s illumination will be turned off.<br/>
+        ///  - bIlluminate: if this is TRUE, oPlaceable's illumination will be turned on.<br/>
+        ///    If this is FALSE, oPlaceable's illumination will be turned off.<br/>
         ///  Note: You must call RecomputeStaticLighting() after calling this function in<br/>
         ///  order for the changes to occur visually for the players.<br/>
         ///  SetPlaceableIllumination() buffers the illumination changes, which are then<br/>
@@ -5566,7 +5566,7 @@ namespace NWN.Xenomech.API
         ///  to set the illumination on, and then call RecomputeStaticLighting() once after<br/>
         ///  all the placeable illumination has been set.<br/>
         ///  * If oPlaceable is not a placeable object, or oPlaceable is a placeable that<br/>
-        ///    doesn&amp;apos;t have a light, nothing will happen.
+        ///    doesn't have a light, nothing will happen.
         /// </summary>
         public static void SetPlaceableIllumination(uint oPlaceable = OBJECT_INVALID, int bIlluminate = TRUE)
         {
@@ -5661,12 +5661,12 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Spawn in the Death GUI.<br/>
         ///  The default (as defined by BioWare) can be spawned in by PopUpGUIPanel, but<br/>
-        ///  if you want to turn off the &amp;quot;Respawn&amp;quot; or &amp;quot;Wait for Help&amp;quot; buttons, this is the<br/>
+        ///  if you want to turn off the "Respawn" or "Wait for Help" buttons, this is the<br/>
         ///  function to use.<br/>
         ///  - oPC<br/>
-        ///  - bRespawnButtonEnabled: if this is TRUE, the &amp;quot;Respawn&amp;quot; button will be enabled<br/>
+        ///  - bRespawnButtonEnabled: if this is TRUE, the "Respawn" button will be enabled<br/>
         ///    on the Death GUI.<br/>
-        ///  - bWaitForHelpButtonEnabled: if this is TRUE, the &amp;quot;Wait For Help&amp;quot; button will<br/>
+        ///  - bWaitForHelpButtonEnabled: if this is TRUE, the "Wait For Help" button will<br/>
         ///    be enabled on the Death GUI (Note: This button will not appear in single player games).<br/>
         ///  - nHelpStringReference<br/>
         ///  - sHelpString
@@ -5737,7 +5737,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get the module&amp;apos;s name in the language of the server that&amp;apos;s running it.<br/>
+        ///  Get the module's name in the language of the server that's running it.<br/>
         ///  * If there is no entry for the language of the server, it will return an<br/>
         ///    empty string
         /// </summary>
@@ -5766,7 +5766,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  End the currently running game, play sEndMovie then return all players to the<br/>
-        ///  game&amp;apos;s main menu.
+        ///  game's main menu.
         /// </summary>
         public static void EndGame(string sEndMovie)
         {
@@ -5838,7 +5838,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Add oPC to oPartyLeader&amp;apos;s party.  This will only work on two PCs.<br/>
+        ///  Add oPC to oPartyLeader's party.  This will only work on two PCs.<br/>
         ///  - oPC: player to add to a party<br/>
         ///  - oPartyLeader: player already in the party
         /// </summary>
@@ -5849,7 +5849,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Remove oPC from their current party. This will only work on a PC.<br/>
-        ///  - oPC: removes this player from whatever party they&amp;apos;re currently in.
+        ///  - oPC: removes this player from whatever party they're currently in.
         /// </summary>
         public static void RemoveFromParty(uint oPC)
         {
@@ -5902,9 +5902,9 @@ namespace NWN.Xenomech.API
         ///  A sample debug server is included with the game installation in utils/.<br/>
         ///  Will only work in singleplayer, NOT on dedicated servers.<br/>
         ///  In order to compile the script for debugging go to Tools-&gt;Options-&gt;Script Editor<br/>
-        ///  and check the box labeled &amp;quot;Generate Debug Information When Compiling Scripts&amp;quot;<br/>
+        ///  and check the box labeled "Generate Debug Information When Compiling Scripts"<br/>
         ///  After you have checked the above box, recompile the script that you want to debug.<br/>
-        ///  If the script file isn&amp;apos;t compiled for debugging, this command will do nothing.<br/>
+        ///  If the script file isn't compiled for debugging, this command will do nothing.<br/>
         ///  Remove any SpawnScriptDebugger() calls once you have finished<br/>
         ///  debugging the script.
         /// </summary>
@@ -7120,7 +7120,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Returns Item property on hit -&amp;gt; do effect property.  You must specify the on<br/>
+        ///  Returns Item property on hit -> do effect property.  You must specify the on<br/>
         ///  hit property constant(IP_CONST_ONHIT_*) and the save DC constant(IP_CONST_ONHIT_SAVEDC_*).<br/>
         ///  Some of the item properties require a special parameter as well.  If the<br/>
         ///  property does not require one you may leave out the last one.  The list of<br/>
@@ -7367,7 +7367,7 @@ namespace NWN.Xenomech.API
         ///  Returns Item property Monster on hit apply effect property.  You must specify<br/>
         ///  the property that you want applied on hit.  There are some properties that<br/>
         ///  require an additional special parameter to be specified.  The others that<br/>
-        ///  don&amp;apos;t require any additional parameter you may just put in the one.  The<br/>
+        ///  don't require any additional parameter you may just put in the one.  The<br/>
         ///  special cases are as follows:<br/>
         ///       ABILITYDRAIN:nSpecial is the ability to drain.<br/>
         ///                    constant(IP_CONST_ABILITY_*)<br/>
@@ -7417,7 +7417,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Returns Item property monster damage.  You must specify the amount of damage<br/>
-        ///  the monster&amp;apos;s attack will do(IP_CONST_MONSTERDAMAGE_*).<br/>
+        ///  the monster's attack will do(IP_CONST_MONSTERDAMAGE_*).<br/>
         ///  NOTE: These can only be applied to monster NATURAL weapons (ie. bite, claw,<br/>
         ///        gore, and slam).  IT WILL NOT WORK ON NORMAL WEAPONS.
         /// </summary>
@@ -8682,7 +8682,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Set the key tag required to open object oObject.<br/>
         ///  This will only have an effect if the object is set to<br/>
-        ///  &amp;quot;Key required to unlock or lock&amp;quot; either in the toolset<br/>
+        ///  "Key required to unlock or lock" either in the toolset<br/>
         ///  or by using the scripting command SetLockKeyRequired().<br/>
         ///  - oObject: a door, placeable or trigger.<br/>
         ///  - sNewKeyTag: the key tag required to open the locked object.
@@ -9724,7 +9724,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Returns the event script for the given object and handler.<br/>
-        ///  Will return &amp;quot;&amp;quot; if unset, the object is invalid, or the object cannot<br/>
+        ///  Will return "" if unset, the object is invalid, or the object cannot<br/>
         ///  have the requested handler.
         /// </summary>
         public static string GetEventScript(uint oObject, int nHandler)
@@ -9746,7 +9746,7 @@ namespace NWN.Xenomech.API
         ///  Gets a visual transform on the given object.<br/>
         ///  - oObject can be any valid Creature, Placeable, Item or Door.<br/>
         ///  - nTransform is one of OBJECT_VISUAL_TRANSFORM_*<br/>
-        ///  - nScope is one of OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_* and specific to the object type being VT&amp;apos;ed.<br/>
+        ///  - nScope is one of OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_* and specific to the object type being VT'ed.<br/>
         ///  Returns the current (or default) value.
         /// </summary>
         public static float GetObjectVisualTransform(uint oObject, ObjectVisualTransformType nTransform, int bCurrentLerp = FALSE, ObjectVisualTransformDataScopeType nScope = ObjectVisualTransformDataScopeType.Base)
@@ -9759,9 +9759,9 @@ namespace NWN.Xenomech.API
         ///  - oObject can be any valid Creature, Placeable, Item or Door.<br/>
         ///  - nTransform is one of OBJECT_VISUAL_TRANSFORM_*<br/>
         ///  - fValue depends on the transformation to apply.<br/>
-        ///  - nScope is one of OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_* and specific to the object type being VT&amp;apos;ed.<br/>
+        ///  - nScope is one of OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_* and specific to the object type being VT'ed.<br/>
         ///  - nBehaviorFlags: bitmask of OBJECT_VISUAL_TRANSFORM_BEHAVIOR_*.<br/>
-        ///  - nRepeats: If &amp;gt; 0: N times, jump back to initial/from state after completing the transform. If -1: Do forever.<br/>
+        ///  - nRepeats: If > 0: N times, jump back to initial/from state after completing the transform. If -1: Do forever.<br/>
         ///  Returns the old/previous value.
         /// </summary>
         public static float SetObjectVisualTransform(uint oObject, ObjectVisualTransformType nTransform, float fValue, ObjectVisualTransformLerpType nLerpType = ObjectVisualTransformLerpType.None, float fLerpDuration = 0.0f, int bPauseWithGame = TRUE, ObjectVisualTransformDataScopeType nScope = ObjectVisualTransformDataScopeType.Base, ObjectVisualTransformBehaviorType nBehaviorFlags = ObjectVisualTransformBehaviorType.Default, int nRepeats = 0)
@@ -9802,7 +9802,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Vibrate the player&amp;apos;s device or controller. Does nothing if vibration is not supported.<br/>
+        ///  Vibrate the player's device or controller. Does nothing if vibration is not supported.<br/>
         ///  - nMotor is one of VIBRATOR_MOTOR_*<br/>
         ///  - fStrength is between 0.0 and 1.0<br/>
         ///  - fSeconds is the number of seconds to vibrate
@@ -9830,7 +9830,7 @@ namespace NWN.Xenomech.API
         ///  The script is jitted in place and currently not cached: Each invocation will recompile the script chunk.<br/>
         ///  Note that the script chunk will run as if a separate script. This is not eval().<br/>
         ///  By default, the script chunk is wrapped into void main() {}. Pass in bWrapIntoMain = FALSE to override.<br/>
-        ///  Returns &amp;quot;&amp;quot; on success, or the compilation error.
+        ///  Returns "" on success, or the compilation error.
         /// </summary>
         public static string ExecuteScriptChunk(string sScriptChunk, uint oObject = OBJECT_INVALID, int bWrapIntoMain = TRUE)
         {
@@ -9847,7 +9847,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Returns the given objects&amp;apos; UUID. This UUID is persisted across save boundaries,<br/>
+        ///  Returns the given objects' UUID. This UUID is persisted across save boundaries,<br/>
         ///  like Save/RestoreCampaignObject and save games.<br/>
         /// <br/>
         ///  Thus, reidentification is only guaranteed in scenarios where players cannot introduce<br/>
@@ -9869,7 +9869,7 @@ namespace NWN.Xenomech.API
         ///    Items, Creatures, Placeables, Triggers, Doors, Waypoints, Stores,<br/>
         ///    Encounters, Areas.<br/>
         /// <br/>
-        ///  Will return &amp;quot;&amp;quot; (empty string) when the given object cannot carry a UUID.
+        ///  Will return "" (empty string) when the given object cannot carry a UUID.
         /// </summary>
         public static string GetObjectUUID(uint oObject)
         {
@@ -9885,7 +9885,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Looks up a object on the server by it&amp;apos;s UUID.<br/>
+        ///  Looks up a object on the server by it's UUID.<br/>
         ///  Returns OBJECT_INVALID if the UUID is not on the server.
         /// </summary>
         public static uint GetObjectByUUID(string sUUID)
@@ -9904,7 +9904,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Makes oPC load texture sNewName instead of sOldName.<br/>
         ///  If oPC is OBJECT_INVALID, it will apply the override to all active players<br/>
-        ///  Setting sNewName to &amp;quot;&amp;quot; will clear the override and revert to original.
+        ///  Setting sNewName to "" will clear the override and revert to original.
         /// </summary>
         public static void SetTextureOverride(string sOldName, string sNewName = "", uint oPC = OBJECT_INVALID)
         {
@@ -9912,17 +9912,17 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Displays sMsg on oPC&amp;apos;s screen.<br/>
+        ///  Displays sMsg on oPC's screen.<br/>
         ///  The message is displayed on top of whatever is on the screen, including UI elements<br/>
         ///   nX, nY - coordinates of the first character to be displayed. The value is in terms<br/>
-        ///            of character &amp;apos;slot&amp;apos; relative to the nAnchor anchor point.<br/>
+        ///            of character 'slot' relative to the nAnchor anchor point.<br/>
         ///            If the number is negative, it is applied from the bottom/right.<br/>
         ///   nAnchor - SCREEN_ANCHOR_* constant<br/>
         ///   fLife - Duration in seconds until the string disappears.<br/>
         ///   nRGBA, nRGBA2 - Colors of the string in 0xRRGGBBAA format. String starts at nRGBA,<br/>
         ///                   but as it nears end of life, it will slowly blend into nRGBA2.<br/>
         ///   nID - Optional ID of a string. If not 0, subsequent calls to PostString will<br/>
-        ///         remove the old string with the same ID, even if it&amp;apos;s lifetime has not elapsed.<br/>
+        ///         remove the old string with the same ID, even if it's lifetime has not elapsed.<br/>
         ///         Only positive values are allowed.<br/>
         ///   sFont - If specified, use this custom font instead of default console font.
         /// </summary>
@@ -9932,7 +9932,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Returns oCreature&amp;apos;s spell school specialization in nClass (SPELL_SCHOOL_* constants)<br/>
+        ///  Returns oCreature's spell school specialization in nClass (SPELL_SCHOOL_* constants)<br/>
         ///  Unless custom content is used, only Wizards have spell schools<br/>
         ///  Returns -1 on error
         /// </summary>
@@ -9942,7 +9942,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Returns oCreature&amp;apos;s domain in nClass (DOMAIN_* constants)<br/>
+        ///  Returns oCreature's domain in nClass (DOMAIN_* constants)<br/>
         ///  nDomainIndex - 1 or 2<br/>
         ///  Unless custom content is used, only Clerics have domains<br/>
         ///  Returns -1 on error
@@ -9953,8 +9953,8 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Returns the patch build number of oPlayer (i.e. the 8193 out of &amp;quot;87.8193.35-29 abcdef01&amp;quot;).<br/>
-        ///  Returns 0 if the given object isn&amp;apos;t a player or did not advertise their build info, or the<br/>
+        ///  Returns the patch build number of oPlayer (i.e. the 8193 out of "87.8193.35-29 abcdef01").<br/>
+        ///  Returns 0 if the given object isn't a player or did not advertise their build info, or the<br/>
         ///  player version is old enough not to send this bit of build info to the server.
         /// </summary>
         public static int GetPlayerBuildVersionMajor(uint oPlayer)
@@ -9963,8 +9963,8 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Returns the patch revision number of oPlayer (i.e. the 35 out of &amp;quot;87.8193.35-29 abcdef01&amp;quot;).<br/>
-        ///  Returns 0 if the given object isn&amp;apos;t a player or did not advertise their build info, or the<br/>
+        ///  Returns the patch revision number of oPlayer (i.e. the 35 out of "87.8193.35-29 abcdef01").<br/>
+        ///  Returns 0 if the given object isn't a player or did not advertise their build info, or the<br/>
         ///  player version is old enough not to send this bit of build info to the server.
         /// </summary>
         public static int GetPlayerBuildVersionMinor(uint oPlayer)
@@ -9974,9 +9974,9 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Returns the script parameter value for a given parameter name.<br/>
-        ///  Script parameters can be set for conversation scripts in the toolset&amp;apos;s<br/>
+        ///  Script parameters can be set for conversation scripts in the toolset's<br/>
         ///  Conversation Editor, or for any script with SetScriptParam().<br/>
-        ///  * Will return &amp;quot;&amp;quot; if a parameter with the given name does not exist.
+        ///  * Will return "" if a parameter with the given name does not exist.
         /// </summary>
         public static string GetScriptParam(string sParamName)
         {
@@ -10074,7 +10074,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Sets oObject&amp;apos;s hilite color to nColor<br/>
+        ///  Sets oObject's hilite color to nColor<br/>
         ///  The nColor format is 0xRRGGBB; -1 clears the color override.
         /// </summary>
         public static void SetObjectHiliteColor(uint oObject, int nColor = -1)
@@ -10112,8 +10112,8 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Replace&amp;apos;s oObject&amp;apos;s texture sOld with sNew.<br/>
-        ///  Specifying sNew = &amp;quot;&amp;quot; will restore the original texture.<br/>
+        ///  Replace's oObject's texture sOld with sNew.<br/>
+        ///  Specifying sNew = "" will restore the original texture.<br/>
         ///  If sNew cannot be found, the original texture will be restored.<br/>
         ///  sNew must refer to a simple texture, not PLT
         /// </summary>
@@ -10137,7 +10137,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Returns &amp;quot;&amp;quot; if the last Sql command succeeded; or a human-readable error otherwise.<br/>
+        ///  Returns "" if the last Sql command succeeded; or a human-readable error otherwise.<br/>
         ///  Additionally, all SQL errors are logged to the server log.<br/>
         ///  Additionally, all SQL errors are sent to all connected players.
         /// </summary>
@@ -10195,8 +10195,8 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Bind an integer to a named parameter of the given prepared query.<br/>
         ///  Example:<br/>
-        ///    sqlquery v = SqlPrepareQueryObject(GetModule(), &amp;quot;insert into test (col) values (@myint);&amp;quot;);<br/>
-        ///    SqlBindInt(v, &amp;quot;@myint&amp;quot;, 5);<br/>
+        ///    sqlquery v = SqlPrepareQueryObject(GetModule(), "insert into test (col) values (@myint);");<br/>
+        ///    SqlBindInt(v, "@myint", 5);<br/>
         ///    SqlStep(v);
         /// </summary>
         public static void SqlBindInt(System.IntPtr sqlQuery, string sParam, int nValue)
@@ -10246,9 +10246,9 @@ namespace NWN.Xenomech.API
         ///  the query ran successfully but did not return data.<br/>
         ///  You need to call SqlPrepareQuery() and potentially SqlBind* before calling this.<br/>
         ///  Example:<br/>
-        ///    sqlquery n = SqlPrepareQueryObject(GetFirstPC(), &amp;quot;select widget from widgets;&amp;quot;);<br/>
+        ///    sqlquery n = SqlPrepareQueryObject(GetFirstPC(), "select widget from widgets;");<br/>
         ///    while (SqlStep(n))<br/>
-        ///      SendMessageToPC(GetFirstPC(), &amp;quot;Found widget: &amp;quot; + SqlGetString(n, 0));
+        ///      SendMessageToPC(GetFirstPC(), "Found widget: " + SqlGetString(n, 0));
         /// </summary>
         public static int SqlStep(System.IntPtr sqlQuery)
         {
@@ -10353,7 +10353,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Get the integer parameter of eEffect at nIndex.<br/>
-        ///  * nIndex bounds: 0 &amp;gt;= nIndex &amp;lt; 8.<br/>
+        ///  * nIndex bounds: 0 >= nIndex < 8.<br/>
         ///  * Some experimentation will be needed to find the right index for the value you wish to determine.<br/>
         ///  Returns: the value or 0 on error/when not set.
         /// </summary>
@@ -10364,7 +10364,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Get the float parameter of eEffect at nIndex.<br/>
-        ///  * nIndex bounds: 0 &amp;gt;= nIndex &amp;lt; 4.<br/>
+        ///  * nIndex bounds: 0 >= nIndex < 4.<br/>
         ///  * Some experimentation will be needed to find the right index for the value you wish to determine.<br/>
         ///  Returns: the value or 0.0f on error/when not set.
         /// </summary>
@@ -10375,9 +10375,9 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Get the string parameter of eEffect at nIndex.<br/>
-        ///  * nIndex bounds: 0 &amp;gt;= nIndex &amp;lt; 6.<br/>
+        ///  * nIndex bounds: 0 >= nIndex < 6.<br/>
         ///  * Some experimentation will be needed to find the right index for the value you wish to determine.<br/>
-        ///  Returns: the value or &amp;quot;&amp;quot; on error/when not set.
+        ///  Returns: the value or "" on error/when not set.
         /// </summary>
         public static string GetEffectString(System.IntPtr eEffect, int nIndex)
         {
@@ -10386,7 +10386,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Get the object parameter of eEffect at nIndex.<br/>
-        ///  * nIndex bounds: 0 &amp;gt;= nIndex &amp;lt; 4.<br/>
+        ///  * nIndex bounds: 0 >= nIndex < 4.<br/>
         ///  * Some experimentation will be needed to find the right index for the value you wish to determine.<br/>
         ///  Returns: the value or OBJECT_INVALID on error/when not set.
         /// </summary>
@@ -10397,7 +10397,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Get the vector parameter of eEffect at nIndex.<br/>
-        ///  * nIndex bounds: 0 &amp;gt;= nIndex &amp;lt; 2.<br/>
+        ///  * nIndex bounds: 0 >= nIndex < 2.<br/>
         ///  * Some experimentation will be needed to find the right index for the value you wish to determine.<br/>
         ///  Returns: the value or {0.0f, 0.0f, 0.0f} on error/when not set.
         /// </summary>
@@ -10407,7 +10407,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Check if nBaseItemType fits in oTarget&amp;apos;s inventory.<br/>
+        ///  Check if nBaseItemType fits in oTarget's inventory.<br/>
         ///  Note: Does not check inside any container items possessed by oTarget.<br/>
         ///  * nBaseItemType: a BASE_ITEM_* constant.<br/>
         ///  * oTarget: a valid creature, placeable or item.<br/>
@@ -10419,7 +10419,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get oObject&amp;apos;s local cassowary variable reference sVarName<br/>
+        ///  Get oObject's local cassowary variable reference sVarName<br/>
         ///  * Return value on error: empty solver<br/>
         ///  * NB: cassowary types are references, same as objects.<br/>
         ///    Unlike scalars such as int and string, solver references share the same data.<br/>
@@ -10464,14 +10464,14 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Add a constraint to the system.<br/>
-        ///  * The constraint needs to be a valid comparison equation, one of: &amp;gt;=, ==, &amp;lt;=.<br/>
+        ///  * The constraint needs to be a valid comparison equation, one of: >=, ==, <=.<br/>
         ///  * This implementation is a linear constraint solver.<br/>
         ///  * You cannot multiply or divide variables and expressions with each other.<br/>
         ///    Doing so will result in a error when attempting to add the constraint.<br/>
         ///    (You can, of course, multiply or divide by constants).<br/>
-        ///  * fStrength must be &amp;gt;= CASSOWARY_STRENGTH_WEAK &amp;&amp; &amp;lt;= CASSOWARY_STRENGTH_REQUIRED.<br/>
+        ///  * fStrength must be >= CASSOWARY_STRENGTH_WEAK &amp;&amp; <= CASSOWARY_STRENGTH_REQUIRED.<br/>
         ///  * Any referenced variables can be retrieved with CassowaryGetValue().<br/>
-        ///  * Returns &amp;quot;&amp;quot; on success, or the parser/constraint system error message.
+        ///  * Returns "" on success, or the parser/constraint system error message.
         /// </summary>
         public static string CassowaryConstrain(System.IntPtr cSolver, string sConstraint, float fStrength = CassowaryStrengthType.Required)
         {
@@ -10481,9 +10481,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Suggest a value to the solver.<br/>
         ///  * Edit variables are soft constraints and exist as an optimisation for complex systems.<br/>
-        ///    You can do the same with Constrain(&amp;quot;v == 5&amp;quot;, CASSOWARY_STRENGTH_xxx); but edit variables<br/>
+        ///    You can do the same with Constrain("v == 5", CASSOWARY_STRENGTH_xxx); but edit variables<br/>
         ///    allow you to suggest values without having to rebuild the solver.<br/>
-        ///  * fStrength must be &amp;gt;= CASSOWARY_STRENGTH_WEAK &amp;&amp; &amp;lt; CASSOWARY_STRENGTH_REQUIRED<br/>
+        ///  * fStrength must be >= CASSOWARY_STRENGTH_WEAK &amp;&amp; < CASSOWARY_STRENGTH_REQUIRED<br/>
         ///    Suggested values cannot be required, as suggesting a value must not invalidate the solver.
         /// </summary>
         public static void CassowarySuggestValue(System.IntPtr cSolver, string sVarName, float fValue, float fStrength = CassowaryStrengthType.Strong)
@@ -10515,7 +10515,7 @@ namespace NWN.Xenomech.API
         ///  * sOnAppliedScript: An optional script to execute when the effect is applied.<br/>
         ///  * sOnRemovedScript: An optional script to execute when the effect is removed.<br/>
         ///  * sOnIntervalScript: An optional script to execute every fInterval seconds.<br/>
-        ///  * fInterval: The interval in seconds, must be &amp;gt;0.0f if an interval script is set.<br/>
+        ///  * fInterval: The interval in seconds, must be >0.0f if an interval script is set.<br/>
         ///               Very low values may have an adverse effect on performance.<br/>
         ///  * sData: An optional string of data saved in the effect, retrievable with GetEffectString() at index 0.
         /// </summary>
@@ -10555,7 +10555,7 @@ namespace NWN.Xenomech.API
         ///  Create an Icon effect.<br/>
         ///  * nIconID: The effect icon (EFFECT_ICON_*) to display.<br/>
         ///             Using the icon for Poison/Disease will also color the health bar green/brown, useful to simulate custom poisons/diseases.<br/>
-        ///  Returns an effect of type EFFECT_TYPE_INVALIDEFFECT when nIconID is &amp;lt; 1 or &amp;gt; 255.
+        ///  Returns an effect of type EFFECT_TYPE_INVALIDEFFECT when nIconID is < 1 or > 255.
         /// </summary>
         public static System.IntPtr EffectIcon(int nIconID)
         {
@@ -10767,7 +10767,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Returns a string representation of the json value.<br/>
-        ///  Returns &amp;quot;&amp;quot; if the value cannot be represented as a string, or is empty.<br/>
+        ///  Returns "" if the value cannot be represented as a string, or is empty.<br/>
         ///  NB: Strings are decoded from UTF-8 to the game-local charset.
         /// </summary>
         public static string JsonGetString(System.IntPtr jValue)
@@ -10780,7 +10780,7 @@ namespace NWN.Xenomech.API
         ///  Returns 0 if the value cannot be represented as a int.<br/>
         ///  Use this to parse json bool types.<br/>
         ///  NB: This will narrow down to signed 32 bit, as that is what NWScript int is.<br/>
-        ///      If you are trying to read a 64 bit or unsigned integer that doesn&amp;apos;t fit into int32, you will lose data.<br/>
+        ///      If you are trying to read a 64 bit or unsigned integer that doesn't fit into int32, you will lose data.<br/>
         ///      You will not lose data if you keep the value as a json element (via Object/ArrayGet).
         /// </summary>
         public static int JsonGetInt(System.IntPtr jValue)
@@ -10858,7 +10858,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Returns a modified copy of jArray with jValue inserted at position nIndex.<br/>
         ///  All succeeding objects in the array will move by one.<br/>
-        ///  By default (-1), inserts objects at the end of the array (&amp;quot;push&amp;quot;).<br/>
+        ///  By default (-1), inserts objects at the end of the array ("push").<br/>
         ///  nIndex = 0 inserts at the beginning of the array.<br/>
         ///  Returns a json null value if jArray is not actually an array, with JsonGetError() filled in.<br/>
         ///  Returns a json null value if nIndex is not 0 or -1 and out of bounds, with JsonGetError() filled in.
@@ -10908,30 +10908,30 @@ namespace NWN.Xenomech.API
         ///  Returns the element at the given JSON pointer value.<br/>
         ///  For example, given the JSON document:<br/>
         ///    {<br/>
-        ///      &amp;quot;foo&amp;quot;: [&amp;quot;bar&amp;quot;, &amp;quot;baz&amp;quot;],<br/>
-        ///      &amp;quot;&amp;quot;: 0,<br/>
-        ///      &amp;quot;a/b&amp;quot;: 1,<br/>
-        ///      &amp;quot;c%d&amp;quot;: 2,<br/>
-        ///      &amp;quot;e^f&amp;quot;: 3,<br/>
-        ///      &amp;quot;g|h&amp;quot;: 4,<br/>
-        ///      &amp;quot;i\\j&amp;quot;: 5,<br/>
-        ///      &amp;quot;k\&amp;quot;l&amp;quot;: 6,<br/>
-        ///      &amp;quot; &amp;quot;: 7,<br/>
-        ///      &amp;quot;m~n&amp;quot;: 8<br/>
+        ///      "foo": ["bar", "baz"],<br/>
+        ///      "": 0,<br/>
+        ///      "a/b": 1,<br/>
+        ///      "c%d": 2,<br/>
+        ///      "e^f": 3,<br/>
+        ///      "g|h": 4,<br/>
+        ///      "i\\j": 5,<br/>
+        ///      "k\"l": 6,<br/>
+        ///      " ": 7,<br/>
+        ///      "m~n": 8<br/>
         ///    }<br/>
         ///  The following JSON strings evaluate to the accompanying values:<br/>
-        ///    &amp;quot;&amp;quot;           // the whole document<br/>
-        ///    &amp;quot;/foo&amp;quot;       [&amp;quot;bar&amp;quot;, &amp;quot;baz&amp;quot;]<br/>
-        ///    &amp;quot;/foo/0&amp;quot;     &amp;quot;bar&amp;quot;<br/>
-        ///    &amp;quot;/&amp;quot;          0<br/>
-        ///    &amp;quot;/a~1b&amp;quot;      1<br/>
-        ///    &amp;quot;/c%d&amp;quot;       2<br/>
-        ///    &amp;quot;/e^f&amp;quot;       3<br/>
-        ///    &amp;quot;/g|h&amp;quot;       4<br/>
-        ///    &amp;quot;/i\\j&amp;quot;      5<br/>
-        ///    &amp;quot;/k\&amp;quot;l&amp;quot;      6<br/>
-        ///    &amp;quot;/ &amp;quot;         7<br/>
-        ///    &amp;quot;/m~0n&amp;quot;      8<br/>
+        ///    ""           // the whole document<br/>
+        ///    "/foo"       ["bar", "baz"]<br/>
+        ///    "/foo/0"     "bar"<br/>
+        ///    "/"          0<br/>
+        ///    "/a~1b"      1<br/>
+        ///    "/c%d"       2<br/>
+        ///    "/e^f"       3<br/>
+        ///    "/g|h"       4<br/>
+        ///    "/i\\j"      5<br/>
+        ///    "/k\"l"      6<br/>
+        ///    "/ "         7<br/>
+        ///    "/m~0n"      8<br/>
         ///  See https://datatracker.ietf.org/doc/html/rfc6901 for more details.
         ///  Returns a json null value on error, with JsonGetError() filled in.
         /// </summary>
@@ -10946,9 +10946,9 @@ namespace NWN.Xenomech.API
         ///  Returns a json null value on error, with JsonGetError() filled in.<br/>
         ///  jPatch is an array of patch elements, each containing a op, a path, and a value field. Example:<br/>
         ///  [<br/>
-        ///    { &amp;quot;op&amp;quot;: &amp;quot;replace&amp;quot;, &amp;quot;path&amp;quot;: &amp;quot;/baz&amp;quot;, &amp;quot;value&amp;quot;: &amp;quot;boo&amp;quot; },<br/>
-        ///    { &amp;quot;op&amp;quot;: &amp;quot;add&amp;quot;, &amp;quot;path&amp;quot;: &amp;quot;/hello&amp;quot;, &amp;quot;value&amp;quot;: [&amp;quot;world&amp;quot;] },<br/>
-        ///    { &amp;quot;op&amp;quot;: &amp;quot;remove&amp;quot;, &amp;quot;path&amp;quot;: &amp;quot;/foo&amp;quot;}<br/>
+        ///    { "op": "replace", "path": "/baz", "value": "boo" },<br/>
+        ///    { "op": "add", "path": "/hello", "value": ["world"] },<br/>
+        ///    { "op": "remove", "path": "/foo"}<br/>
         ///  ]<br/>
         ///  Valid operations are: add, remove, replace, move, copy, test<br/>
         ///  See https://datatracker.ietf.org/doc/html/rfc7386 for more details on the patch rules.
@@ -10979,7 +10979,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Get oObject&amp;apos;s local json variable sVarName<br/>
+        ///  Get oObject's local json variable sVarName<br/>
         ///  * Return value on error: json null type
         /// </summary>
         public static System.IntPtr GetLocalJson(uint oObject, string sVarName)
@@ -10988,7 +10988,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Set oObject&amp;apos;s local json variable sVarName to jValue
+        ///  Set oObject's local json variable sVarName to jValue
         /// </summary>
         public static void SetLocalJson(uint oObject, string sVarName, System.IntPtr jValue)
         {
@@ -10996,7 +10996,7 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  Delete oObject&amp;apos;s local json variable sVarName
+        ///  Delete oObject's local json variable sVarName
         /// </summary>
         public static void DeleteLocalJson(uint oObject, string sVarName)
         {
@@ -11007,8 +11007,8 @@ namespace NWN.Xenomech.API
         ///  Bind an json to a named parameter of the given prepared query.<br/>
         ///  Json values are serialised into a string.<br/>
         ///  Example:<br/>
-        ///    sqlquery v = SqlPrepareQueryObject(GetModule(), &amp;quot;insert into test (col) values (@myjson);&amp;quot;);<br/>
-        ///    SqlBindJson(v, &amp;quot;@myjson&amp;quot;, myJsonObject);<br/>
+        ///    sqlquery v = SqlPrepareQueryObject(GetModule(), "insert into test (col) values (@myjson);");<br/>
+        ///    SqlBindJson(v, "@myjson", myJsonObject);<br/>
         ///    SqlStep(v);
         /// </summary>
         public static void SqlBindJson(System.IntPtr sqlQuery, string sParam, System.IntPtr jValue)
@@ -11060,7 +11060,7 @@ namespace NWN.Xenomech.API
         ///  - the property was never set by the client,<br/>
         ///  - the the actual value is -1,<br/>
         ///  - the player is running a older build that does not advertise device properties,<br/>
-        ///  - the player has disabled sending device properties (Options-&amp;gt;Game-&amp;gt;Privacy).
+        ///  - the player has disabled sending device properties (Options->Game->Privacy).
         /// </summary>
         public static int GetPlayerDeviceProperty(uint oPlayer, string sProperty)
         {
@@ -11112,7 +11112,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Returns the resource location of sResRef(.jui) as seen by the running module.<br/>
         ///  Note for dedicated servers: Checks on the module/server side, not the client.<br/>
-        ///  Returns &amp;quot;&amp;quot; if the resource does not exist in the search space.
+        ///  Returns "" if the resource does not exist in the search space.
         /// </summary>
         public static string ResManGetAliasFor(string sResRef, int nResType)
         {
@@ -11123,8 +11123,8 @@ namespace NWN.Xenomech.API
         ///  Finds the nNth available resref starting with sPrefix.<br/>
         ///  * Set bSearchBaseData to TRUE to also search base game content stored in your game installation directory.<br/>
         ///    WARNING: This can be very slow.<br/>
-        ///  * Set sOnlyKeyTable to a specific keytable to only search the given named keytable (e.g. &amp;quot;OVERRIDE:&amp;quot;).<br/>
-        ///  Returns &amp;quot;&amp;quot; if no such resref exists.
+        ///  * Set sOnlyKeyTable to a specific keytable to only search the given named keytable (e.g. "OVERRIDE:").<br/>
+        ///  Returns "" if no such resref exists.
         /// </summary>
         public static string ResManFindPrefix(string sPrefix, int nResType, int nNth = 1, int bSearchBaseData = FALSE, string sOnlyKeyTable = "")
         {
@@ -11139,7 +11139,7 @@ namespace NWN.Xenomech.API
         ///    Re-creating a window with the same id of one already open will immediately close the old one.<br/>
         ///  * sEventScript is optional and overrides the NUI module event for this window only.<br/>
         ///  * See nw_inc_nui.nss for full documentation.<br/>
-        ///  Returns the window token on success (&amp;gt;0), or 0 on error.
+        ///  Returns the window token on success (>0), or 0 on error.
         /// </summary>
         public static int NuiCreateFromResRef(uint oPlayer, string sResRef, string sWindowId = "", string sEventScript = "")
         {
@@ -11153,7 +11153,7 @@ namespace NWN.Xenomech.API
         ///    Re-creating a window with the same id of one already open will immediately close the old one.<br/>
         ///  * sEventScript is optional and overrides the NUI module event for this window only.<br/>
         ///  * See nw_inc_nui.nss for full documentation.<br/>
-        ///  Returns the window token on success (&amp;gt;0), or 0 on error.
+        ///  Returns the window token on success (>0), or 0 on error.
         /// </summary>
         public static int NuiCreate(uint oPlayer, System.IntPtr jNui, string sWindowId = "", string sEventScript = "")
         {
@@ -11226,7 +11226,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Returns the window ID of the window described by nUiToken.<br/>
-        ///  Returns &amp;quot;&amp;quot; on error, or if the window has no ID.
+        ///  Returns "" on error, or if the window has no ID.
         /// </summary>
         public static string NuiGetWindowId(uint oPlayer, int nUiToken)
         {
@@ -11264,7 +11264,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Sets an arbitrary json value as userdata on the given window token.<br/>
         ///  This userdata is not read or handled by the game engine and not sent to clients.<br/>
-        ///  This mechanism only exists as a convenience for the programmer to store data bound to a windows&amp;apos; lifecycle.<br/>
+        ///  This mechanism only exists as a convenience for the programmer to store data bound to a windows' lifecycle.<br/>
         ///  Will do nothing if the window does not exist.
         /// </summary>
         public static void NuiSetUserData(uint oPlayer, int nToken, System.IntPtr jUserData)
@@ -11287,17 +11287,17 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Returns a modified copy of jArray with the value order changed according to nTransform:<br/>
         ///  * JSON_ARRAY_SORT_ASCENDING, JSON_ARRAY_SORT_DESCENDING<br/>
-        ///     Sorting is dependent on the type and follows json standards (.e.g. 99 &amp;lt; &amp;quot;100&amp;quot;).<br/>
+        ///     Sorting is dependent on the type and follows json standards (.e.g. 99 < "100").<br/>
         ///  * JSON_ARRAY_SHUFFLE<br/>
         ///    Randomises the order of elements.<br/>
         ///  * JSON_ARRAY_REVERSE<br/>
         ///    Reverses the array.<br/>
         ///  * JSON_ARRAY_UNIQUE<br/>
         ///    Returns a modified copy of jArray with duplicate values removed.<br/>
-        ///    Coercable but different types are not considered equal (e.g. 99 != &amp;quot;99&amp;quot;); int/float equivalence however applies: 4.0 == 4.<br/>
+        ///    Coercable but different types are not considered equal (e.g. 99 != "99"); int/float equivalence however applies: 4.0 == 4.<br/>
         ///    Order is preserved.<br/>
         ///  * JSON_ARRAY_COALESCE<br/>
-        ///    Returns the first non-null entry. Empty-ish values (e.g. &amp;quot;&amp;quot;, 0) are not considered null, only the json scalar type.
+        ///    Returns the first non-null entry. Empty-ish values (e.g. "", 0) are not considered null, only the json scalar type.
         /// </summary>
         public static System.IntPtr JsonArrayTransform(System.IntPtr jArray, int nTransform)
         {
@@ -11320,13 +11320,13 @@ namespace NWN.Xenomech.API
         ///  Negative nEndIndex values count from the other end.<br/>
         ///  Out-of-bound values are clamped to the array range.<br/>
         ///  Examples:<br/>
-        ///   json a = JsonParse(&amp;quot;[0, 1, 2, 3, 4]&amp;quot;);<br/>
-        ///   JsonArrayGetRange(a, 0, 1)    // =&amp;gt; [0, 1]<br/>
-        ///   JsonArrayGetRange(a, 1, -1)   // =&amp;gt; [1, 2, 3, 4]<br/>
-        ///   JsonArrayGetRange(a, 0, 4)    // =&amp;gt; [0, 1, 2, 3, 4]<br/>
-        ///   JsonArrayGetRange(a, 0, 999)  // =&amp;gt; [0, 1, 2, 3, 4]<br/>
-        ///   JsonArrayGetRange(a, 1, 0)    // =&amp;gt; []<br/>
-        ///   JsonArrayGetRange(a, 1, 1)    // =&amp;gt; [1]<br/>
+        ///   json a = JsonParse("[0, 1, 2, 3, 4]");<br/>
+        ///   JsonArrayGetRange(a, 0, 1)    // => [0, 1]<br/>
+        ///   JsonArrayGetRange(a, 1, -1)   // => [1, 2, 3, 4]<br/>
+        ///   JsonArrayGetRange(a, 0, 4)    // => [0, 1, 2, 3, 4]<br/>
+        ///   JsonArrayGetRange(a, 0, 999)  // => [0, 1, 2, 3, 4]<br/>
+        ///   JsonArrayGetRange(a, 1, 0)    // => []<br/>
+        ///   JsonArrayGetRange(a, 1, 1)    // => [1]<br/>
         ///  Returns a null type on error, including type mismatches.
         /// </summary>
         public static System.IntPtr JsonArrayGetRange(System.IntPtr jArray, int nBeginIndex, int nEndIndex)
@@ -11337,7 +11337,7 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Returns the result of a set operation on two arrays.<br/>
         ///  Operations:<br/>
-        ///  * JSON_SET_SUBSET (v &amp;lt;= o):<br/>
+        ///  * JSON_SET_SUBSET (v <= o):<br/>
         ///    Returns true if every element in jValue is also in jOther.<br/>
         ///  * JSON_SET_UNION (v | o):<br/>
         ///    Returns a new array containing values from both sides.<br/>
@@ -11355,7 +11355,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Returns the column name of s2DA at nColumn index (starting at 0).<br/>
-        ///  Returns &amp;quot;&amp;quot; if column nColumn doesn&amp;apos;t exist (at end).
+        ///  Returns "" if column nColumn doesn't exist (at end).
         /// </summary>
         public static string Get2DAColumn(string s2DA, int nColumnIdx)
         {
@@ -11427,7 +11427,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Sets the spell targeting data manually for the player. This data is usually specified in spells.2da.<br/>
-        ///  This data persists through spell casts; you&amp;apos;re overwriting the entry in spells.2da for this session.<br/>
+        ///  This data persists through spell casts; you're overwriting the entry in spells.2da for this session.<br/>
         ///  In multiplayer, these need to be reapplied when a player rejoins.<br/>
         ///  - nSpell: SPELL_*<br/>
         ///  - nShape: SPELL_TARGETING_SHAPE_*<br/>
@@ -11466,7 +11466,7 @@ namespace NWN.Xenomech.API
         ///  Gets the spell id of a memorized spell slot.<br/>
         ///  - nClassType: a CLASS_TYPE_* constant. Must be a MemorizesSpells class.<br/>
         ///  - nSpellLevel: the spell level, 0-9.<br/>
-        ///  - nIndex: the index of the spell slot. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetMemorizedSpellCountByLevel()<br/>
+        ///  - nIndex: the index of the spell slot. Bounds: 0 <= nIndex < GetMemorizedSpellCountByLevel()<br/>
         ///  Returns: a SPELL_* constant or -1 if the slot is not set.
         /// </summary>
         public static int GetMemorizedSpellId(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex)
@@ -11478,7 +11478,7 @@ namespace NWN.Xenomech.API
         ///  Gets the ready state of a memorized spell slot.<br/>
         ///  - nClassType: a CLASS_TYPE_* constant. Must be a MemorizesSpells class.<br/>
         ///  - nSpellLevel: the spell level, 0-9.<br/>
-        ///  - nIndex: the index of the spell slot. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetMemorizedSpellCountByLevel()<br/>
+        ///  - nIndex: the index of the spell slot. Bounds: 0 <= nIndex < GetMemorizedSpellCountByLevel()<br/>
         ///  Returns: TRUE/FALSE or -1 if the slot is not set.
         /// </summary>
         public static int GetMemorizedSpellReady(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex)
@@ -11490,7 +11490,7 @@ namespace NWN.Xenomech.API
         ///  Gets the metamagic of a memorized spell slot.<br/>
         ///  - nClassType: a CLASS_TYPE_* constant. Must be a MemorizesSpells class.<br/>
         ///  - nSpellLevel: the spell level, 0-9.<br/>
-        ///  - nIndex: the index of the spell slot. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetMemorizedSpellCountByLevel()<br/>
+        ///  - nIndex: the index of the spell slot. Bounds: 0 <= nIndex < GetMemorizedSpellCountByLevel()<br/>
         ///  Returns: a METAMAGIC_* constant or -1 if the slot is not set.
         /// </summary>
         public static int GetMemorizedSpellMetaMagic(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex)
@@ -11502,7 +11502,7 @@ namespace NWN.Xenomech.API
         ///  Gets if the memorized spell slot has a domain spell.<br/>
         ///  - nClassType: a CLASS_TYPE_* constant. Must be a MemorizesSpells class.<br/>
         ///  - nSpellLevel: the spell level, 0-9.<br/>
-        ///  - nIndex: the index of the spell slot. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetMemorizedSpellCountByLevel()<br/>
+        ///  - nIndex: the index of the spell slot. Bounds: 0 <= nIndex < GetMemorizedSpellCountByLevel()<br/>
         ///  Returns: TRUE/FALSE or -1 if the slot is not set.
         /// </summary>
         public static int GetMemorizedSpellIsDomainSpell(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex)
@@ -11514,7 +11514,7 @@ namespace NWN.Xenomech.API
         ///  Set a memorized spell slot.<br/>
         ///  - nClassType: a CLASS_TYPE_* constant. Must be a MemorizesSpells class.<br/>
         ///  - nSpellLevel: the spell level, 0-9.<br/>
-        ///  - nIndex: the index of the spell slot. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetMemorizedSpellCountByLevel()<br/>
+        ///  - nIndex: the index of the spell slot. Bounds: 0 <= nIndex < GetMemorizedSpellCountByLevel()<br/>
         ///  - nSpellId: a SPELL_* constant.<br/>
         ///  - bReady: TRUE to mark the slot ready.<br/>
         ///  - nMetaMagic: a METAMAGIC_* constant.<br/>
@@ -11529,7 +11529,7 @@ namespace NWN.Xenomech.API
         ///  Set the ready state of a memorized spell slot.<br/>
         ///  - nClassType: a CLASS_TYPE_* constant. Must be a MemorizesSpells class.<br/>
         ///  - nSpellLevel: the spell level, 0-9.<br/>
-        ///  - nIndex: the index of the spell slot. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetMemorizedSpellCountByLevel()<br/>
+        ///  - nIndex: the index of the spell slot. Bounds: 0 <= nIndex < GetMemorizedSpellCountByLevel()<br/>
         ///  - bReady: TRUE to mark the slot ready.
         /// </summary>
         public static void SetMemorizedSpellReady(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex, int bReady)
@@ -11541,7 +11541,7 @@ namespace NWN.Xenomech.API
         ///  Clear a specific memorized spell slot.<br/>
         ///  - nClassType: a CLASS_TYPE_* constant. Must be a MemorizesSpells class.<br/>
         ///  - nSpellLevel: the spell level, 0-9.<br/>
-        ///  - nIndex: the index of the spell slot. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetMemorizedSpellCountByLevel()
+        ///  - nIndex: the index of the spell slot. Bounds: 0 <= nIndex < GetMemorizedSpellCountByLevel()
         /// </summary>
         public static void ClearMemorizedSpell(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex)
         {
@@ -11573,7 +11573,7 @@ namespace NWN.Xenomech.API
         ///  Gets the spell id of a known spell.<br/>
         ///  - nClassType: a CLASS_TYPE_* constant. Must be a SpellBookRestricted class.<br/>
         ///  - nSpellLevel: the spell level, 0-9.<br/>
-        ///  - nIndex: the index of the known spell. Bounds: 0 &amp;lt;= nIndex &amp;lt; GetKnownSpellCount()<br/>
+        ///  - nIndex: the index of the known spell. Bounds: 0 <= nIndex < GetKnownSpellCount()<br/>
         ///  Returns: a SPELL_* constant or -1 on error.
         /// </summary>
         public static int GetKnownSpellId(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex)
@@ -11618,7 +11618,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Replaces oObject&apos;s animation sOld with sNew.<br/>
-        ///  Specifying sNew = &amp;quot;&amp;quot; will restore the original animation.
+        ///  Specifying sNew = "" will restore the original animation.
         /// </summary>
         public static void ReplaceObjectAnimation(uint oObject, string sOld, string sNew = "")
         {
@@ -11669,7 +11669,7 @@ namespace NWN.Xenomech.API
 
         /// <summary>
         ///  Applies sRegExp on sValue, returning an array containing all matching groups.<br/>
-        ///  * The regexp is not bounded by default (so /t/ will match &amp;quot;test&amp;quot;).<br/>
+        ///  * The regexp is not bounded by default (so /t/ will match "test").<br/>
         ///  * A matching result with always return a JSON_ARRAY with the full match as the first element.<br/>
         ///  * All matching groups will be returned as additional elements, depth-first.<br/>
         ///  * A non-matching result will return a empty JSON_ARRAY.<br/>
@@ -11677,10 +11677,10 @@ namespace NWN.Xenomech.API
         ///  * nSyntaxFlags is a mask of REGEXP_*<br/>
         ///  * nMatchFlags is a mask of REGEXP_MATCH_* and REGEXP_FORMAT_*.<br/>
         ///  Examples:<br/>
-        ///  * RegExpMatch(&amp;quot;[&amp;quot;, &amp;quot;test value&amp;quot;)             -&amp;gt; null (error: &amp;quot;The expression contained mismatched [ and ].&amp;quot;)<br/>
-        ///  * RegExpMatch(&amp;quot;nothing&amp;quot;, &amp;quot;test value&amp;quot;)       -&amp;gt; []<br/>
-        ///  * RegExpMatch(&amp;quot;^test&amp;quot;, &amp;quot;test value&amp;quot;)         -&amp;gt; [&amp;quot;test&amp;quot;]<br/>
-        ///  * RegExpMatch(&amp;quot;^(test) (.+)$&amp;quot;, &amp;quot;test value&amp;quot;) -&amp;gt; [&amp;quot;test value&amp;quot;, &amp;quot;test&amp;quot;, &amp;quot;value&amp;quot;]
+        ///  * RegExpMatch("[", "test value")             -> null (error: "The expression contained mismatched [ and ].")<br/>
+        ///  * RegExpMatch("nothing", "test value")       -> []<br/>
+        ///  * RegExpMatch("^test", "test value")         -> ["test"]<br/>
+        ///  * RegExpMatch("^(test) (.+)$", "test value") -> ["test value", "test", "value"]
         /// </summary>
         public static System.IntPtr RegExpMatch(string sRegExp, string sValue, RegExpGrammarType nSyntaxFlags = RegExpGrammarType.ECMAScript, RegExpFormatFlagType nMatchFlags = RegExpFormatFlagType.Default)
         {
@@ -11694,7 +11694,7 @@ namespace NWN.Xenomech.API
         ///  * If there was an error, the function will return JSON_NULL, with a error string filled in.<br/>
         ///  * nSyntaxFlags is a mask of REGEXP_*<br/>
         ///  * nMatchFlags is a mask of REGEXP_MATCH_* and REGEXP_FORMAT_*.<br/>
-        ///  Example: RegExpIterate(&amp;quot;(\\d)(\\S+)&amp;quot;, &amp;quot;1i 2am 3 4asentence&amp;quot;); -&amp;gt; [[&amp;quot;1i&amp;quot;, &amp;quot;1&amp;quot;, &amp;quot;i&amp;quot;], [&amp;quot;2am&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;am&amp;quot;], [&amp;quot;4sentence&amp;quot;, &amp;quot;4&amp;quot;, &amp;quot;sentence&amp;quot;]]
+        ///  Example: RegExpIterate("(\\d)(\\S+)", "1i 2am 3 4asentence"); -> [["1i", "1", "i"], ["2am", "2", "am"], ["4sentence", "4", "sentence"]]
         /// </summary>
         public static System.IntPtr RegExpIterate(string sRegExp, string sValue, RegExpGrammarType nSyntaxFlags = RegExpGrammarType.ECMAScript, RegExpFormatFlagType nMatchFlags = RegExpFormatFlagType.Default)
         {
@@ -11714,7 +11714,7 @@ namespace NWN.Xenomech.API
         ///     $&apos;    The portion of string that follows the matched substring.<br/>
         ///     $n    The nth capture, where n is a single digit in the range 1 to 9 and $n is not followed by a decimal digit.<br/>
         ///     $nn   The nnth capture, where nn is a two-digit decimal number in the range 01 to 99.<br/>
-        ///  Example: RegExpReplace(&amp;quot;a+&amp;quot;, &amp;quot;vaaalue&amp;quot;, &amp;quot;[$&amp;]&amp;quot;)    =&amp;gt; &amp;quot;v[aaa]lue&amp;quot;
+        ///  Example: RegExpReplace("a+", "vaaalue", "[$&amp;]")    => "v[aaa]lue"
         /// </summary>
         public static string RegExpReplace(string sRegExp, string sValue, string sReplacement, RegExpGrammarType nSyntaxFlags = RegExpGrammarType.ECMAScript, RegExpFormatFlagType nMatchFlags = RegExpFormatFlagType.Default)
         {
@@ -11726,7 +11726,7 @@ namespace NWN.Xenomech.API
         ///  Note: If the output contains binary data it will only return data up to the first null byte.<br/>
         ///  - nResType: a RESTYPE_* constant.<br/>
         ///  - nFormat: one of RESMAN_FILE_CONTENTS_FORMAT_*<br/>
-        ///  Returns &amp;quot;&amp;quot; if the file does not exist.
+        ///  Returns "" if the file does not exist.
         /// </summary>
         public static string ResManGetFileContents(string sResRef, int nResType, ResmanFileContentsFormatType nFormat = ResmanFileContentsFormatType.Raw)
         {
@@ -11738,7 +11738,7 @@ namespace NWN.Xenomech.API
         ///  Note: Scripts will persist for as long as the module is running.<br/>
         ///  SinglePlayer / Saves: Scripts that overwrite existing module scripts will persist to the save file.<br/>
         ///                        New scripts, unknown to the module, will have to be re-compiled on module load when loading a save.<br/>
-        ///  Returns &amp;quot;&amp;quot; on success or the error on failure.
+        ///  Returns "" on success or the error on failure.
         /// </summary>
         public static string CompileScript(string sScriptName, string sScriptData, int bWrapIntoMain = FALSE, int bGenerateNDB = FALSE)
         {
@@ -11839,14 +11839,14 @@ namespace NWN.Xenomech.API
         ///  - Setting bIncludeStack = TRUE will include stack info in the output, which could be a<br/>
         ///    lot of data for large scripts. You can turn it off if you do not need the info.<br/>
         ///  Returned data format (JSON object):<br/>
-        ///    &amp;quot;frames&amp;quot;: array of stack frames:<br/>
-        ///      &amp;quot;ip&amp;quot;: instruction pointer into code<br/>
-        ///      &amp;quot;bp&amp;quot;, &amp;quot;sp&amp;quot;: current base/stack pointer<br/>
-        ///      &amp;quot;file&amp;quot;, &amp;quot;line&amp;quot;, &amp;quot;function&amp;quot;: available only if NDB loaded correctly<br/>
-        ///    &amp;quot;stack&amp;quot;: abbreviated stack data (only if bIncludeStack is TRUE)<br/>
-        ///      &amp;quot;type&amp;quot;: one of the nwscript object types, OR:<br/>
-        ///      &amp;quot;type_unknown&amp;quot;: hex code of AUX<br/>
-        ///      &amp;quot;data&amp;quot;: type-specific payload. Not all type info is rendered in the interest of brevity.<br/>
+        ///    "frames": array of stack frames:<br/>
+        ///      "ip": instruction pointer into code<br/>
+        ///      "bp", "sp": current base/stack pointer<br/>
+        ///      "file", "line", "function": available only if NDB loaded correctly<br/>
+        ///    "stack": abbreviated stack data (only if bIncludeStack is TRUE)<br/>
+        ///      "type": one of the nwscript object types, OR:<br/>
+        ///      "type_unknown": hex code of AUX<br/>
+        ///      "data": type-specific payload. Not all type info is rendered in the interest of brevity.<br/>
         ///              Only enough for you to re-identify which variable this might belong to.
         /// </summary>
         public static System.IntPtr GetScriptBacktrace(int bIncludeStack = TRUE)
