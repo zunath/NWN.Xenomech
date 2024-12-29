@@ -498,9 +498,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  * Returns true if oObject is a valid object.
         /// </summary>
-        public static int GetIsObjectValid(uint oObject)
+        public static bool GetIsObjectValid(uint oObject)
         {
-            return NWN.Core.NWScript.GetIsObjectValid(oObject);
+            return NWN.Core.NWScript.GetIsObjectValid(oObject) == 1;
         }
 
         /// <summary>
@@ -946,27 +946,27 @@ namespace NWN.Xenomech.API
         ///  * Returns true if eEffect is a valid effect. The effect must have been applied to<br/>
         ///  * an object or else it will return false
         /// </summary>
-        public static int GetIsEffectValid(System.IntPtr eEffect)
+        public static bool GetIsEffectValid(System.IntPtr eEffect)
         {
-            return NWN.Core.NWScript.GetIsEffectValid(eEffect);
+            return NWN.Core.NWScript.GetIsEffectValid(eEffect) == 1;
         }
 
         /// <summary>
         ///  Get the duration type (DURATION_TYPE_*) of eEffect.<br/>
         ///  * Return value if eEffect is not valid: -1
         /// </summary>
-        public static int GetEffectDurationType(System.IntPtr eEffect)
+        public static DurationType GetEffectDurationType(System.IntPtr eEffect)
         {
-            return NWN.Core.NWScript.GetEffectDurationType(eEffect);
+            return (DurationType)NWN.Core.NWScript.GetEffectDurationType(eEffect);
         }
 
         /// <summary>
         ///  Get the subtype (SUBTYPE_*) of eEffect.<br/>
         ///  * Return value on error: 0
         /// </summary>
-        public static int GetEffectSubType(System.IntPtr eEffect)
+        public static EffectSubType GetEffectSubType(System.IntPtr eEffect)
         {
-            return NWN.Core.NWScript.GetEffectSubType(eEffect);
+            return (EffectSubType)NWN.Core.NWScript.GetEffectSubType(eEffect);
         }
 
         /// <summary>
@@ -1105,27 +1105,27 @@ namespace NWN.Xenomech.API
         ///  Get the metamagic type (METAMAGIC_*) of the last spell cast by the caller<br/>
         ///  * Return value if the caster is not a valid object: -1
         /// </summary>
-        public static int GetMetaMagicFeat()
+        public static MetamagicType GetMetaMagicFeat()
         {
-            return NWN.Core.NWScript.GetMetaMagicFeat();
+            return (MetamagicType)NWN.Core.NWScript.GetMetaMagicFeat();
         }
 
         /// <summary>
         ///  Get the object type (OBJECT_TYPE_*) of oTarget<br/>
         ///  * Return value if oTarget is not a valid object: -1
         /// </summary>
-        public static int GetObjectType(uint oTarget)
+        public static ObjectType GetObjectType(uint oTarget)
         {
-            return NWN.Core.NWScript.GetObjectType(oTarget);
+            return (ObjectType)NWN.Core.NWScript.GetObjectType(oTarget);
         }
 
         /// <summary>
         ///  Get the racial type (RACIAL_TYPE_*) of oCreature<br/>
         ///  * Return value if oCreature is not a valid creature: RACIAL_TYPE_INVALID
         /// </summary>
-        public static int GetRacialType(uint oCreature)
+        public static RacialType GetRacialType(uint oCreature)
         {
-            return NWN.Core.NWScript.GetRacialType(oCreature);
+            return (RacialType)NWN.Core.NWScript.GetRacialType(oCreature);
         }
 
         /// <summary>
@@ -1550,9 +1550,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  * Returns true if oCreature is a dead NPC, dead PC or a dying PC.
         /// </summary>
-        public static int GetIsDead(uint oCreature)
+        public static bool GetIsDead(uint oCreature)
         {
-            return NWN.Core.NWScript.GetIsDead(oCreature);
+            return NWN.Core.NWScript.GetIsDead(oCreature) == 1;
         }
 
         /// <summary>
@@ -1603,18 +1603,18 @@ namespace NWN.Xenomech.API
         ///  oTarget<br/>
         ///  * Returns 0 on a miss, 1 on a hit and 2 on a critical hit
         /// </summary>
-        public static int TouchAttackMelee(uint oTarget, bool bDisplayFeedback = true)
+        public static TouchAttackResultType TouchAttackMelee(uint oTarget, bool bDisplayFeedback = true)
         {
-            return NWN.Core.NWScript.TouchAttackMelee(oTarget, bDisplayFeedback ? 1 : 0);
+            return (TouchAttackResultType)NWN.Core.NWScript.TouchAttackMelee(oTarget, bDisplayFeedback ? 1 : 0);
         }
 
         /// <summary>
         ///  The caller will perform a Ranged Touch Attack on oTarget<br/>
         ///  * Returns 0 on a miss, 1 on a hit and 2 on a critical hit
         /// </summary>
-        public static int TouchAttackRanged(uint oTarget, bool bDisplayFeedback = true)
+        public static TouchAttackResultType TouchAttackRanged(uint oTarget, bool bDisplayFeedback = true)
         {
-            return NWN.Core.NWScript.TouchAttackRanged(oTarget, bDisplayFeedback ? 1 : 0);
+            return (TouchAttackResultType)NWN.Core.NWScript.TouchAttackRanged(oTarget, bDisplayFeedback ? 1 : 0);
         }
 
         /// <summary>
@@ -1747,13 +1747,12 @@ namespace NWN.Xenomech.API
         {
             NWN.Core.NWScript.SetCommandable(bCommandable ? 1 : 0, oTarget);
         }
-
         /// <summary>
         ///  Determine whether oTarget's action stack can be modified.
         /// </summary>
-        public static int GetCommandable(uint oTarget = OBJECT_INVALID)
+        public static bool GetCommandable(uint oTarget = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetCommandable(oTarget);
+            return NWN.Core.NWScript.GetCommandable(oTarget) == 1;
         }
 
         /// <summary>
@@ -1821,16 +1820,15 @@ namespace NWN.Xenomech.API
         {
             return NWN.Core.NWScript.ResistSpell(oCaster, oTarget);
         }
-
         /// <summary>
         ///  Get the effect type (EFFECT_TYPE_*) of eEffect.<br/>
         ///  - bAllTypes: Set to true to return additional values the game used to return EFFECT_INVALIDEFFECT for, specifically:<br/>
         ///   EFFECT_TYPE: APPEAR, CUTSCENE_DOMINATED, DAMAGE, DEATH, DISAPPEAR, HEAL, HITPOINTCHANGEWHENDYING, KNOCKDOWN, MODIFYNUMATTACKS, SUMMON_CREATURE, TAUNT, WOUNDING<br/>
         ///  * Return value if eEffect is invalid: EFFECT_INVALIDEFFECT
         /// </summary>
-        public static int GetEffectType(System.IntPtr eEffect, bool bAllTypes = false)
+        public static EffectType GetEffectType(System.IntPtr eEffect, bool bAllTypes = false)
         {
-            return NWN.Core.NWScript.GetEffectType(eEffect, bAllTypes ? 1 : 0);
+            return (EffectType)NWN.Core.NWScript.GetEffectType(eEffect, bAllTypes ? 1 : 0);
         }
 
         /// <summary>
@@ -1841,13 +1839,12 @@ namespace NWN.Xenomech.API
         {
             return NWN.Core.NWScript.EffectAreaOfEffect(nAreaEffectId, sOnEnterScript, sHeartbeatScript, sOnExitScript);
         }
-
         /// <summary>
         ///  * Returns true if the Faction Ids of the two objects are the same
         /// </summary>
-        public static int GetFactionEqual(uint oFirstObject, uint oSecondObject = OBJECT_INVALID)
+        public static bool GetFactionEqual(uint oFirstObject, uint oSecondObject = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetFactionEqual(oFirstObject, oSecondObject);
+            return NWN.Core.NWScript.GetFactionEqual(oFirstObject, oSecondObject) == 1;
         }
 
         /// <summary>
@@ -1862,9 +1859,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  * Returns true if oObject is listening for something
         /// </summary>
-        public static int GetIsListening(uint oObject)
+        public static bool GetIsListening(uint oObject)
         {
-            return NWN.Core.NWScript.GetIsListening(oObject);
+            return NWN.Core.NWScript.GetIsListening(oObject) == 1;
         }
 
         /// <summary>
@@ -1887,9 +1884,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  * Returns true if sStringToTest matches sPattern.
         /// </summary>
-        public static int TestStringAgainstPattern(string sPattern, string sStringToTest)
+        public static bool TestStringAgainstPattern(string sPattern, string sStringToTest)
         {
-            return NWN.Core.NWScript.TestStringAgainstPattern(sPattern, sStringToTest);
+            return NWN.Core.NWScript.TestStringAgainstPattern(sPattern, sStringToTest) == 1;
         }
 
         /// <summary>
@@ -2022,9 +2019,9 @@ namespace NWN.Xenomech.API
         ///  constants CLASS_TYPE_*.<br/>
         ///  * Return value on error: -1
         /// </summary>
-        public static int GetFactionMostFrequentClass(uint oFactionMember)
+        public static ClassType GetFactionMostFrequentClass(uint oFactionMember)
         {
-            return NWN.Core.NWScript.GetFactionMostFrequentClass(oFactionMember);
+            return (ClassType)NWN.Core.NWScript.GetFactionMostFrequentClass(oFactionMember);
         }
 
         /// <summary>
@@ -2330,13 +2327,12 @@ namespace NWN.Xenomech.API
         {
             NWN.Core.NWScript.ApplyEffectAtLocation((int)nDurationType, eEffect, lLocation, fDuration);
         }
-
         /// <summary>
         ///  * Returns true if oCreature is a Player Controlled character.
         /// </summary>
-        public static int GetIsPC(uint oCreature)
+        public static bool GetIsPC(uint oCreature)
         {
-            return NWN.Core.NWScript.GetIsPC(oCreature);
+            return NWN.Core.NWScript.GetIsPC(oCreature) == 1;
         }
 
         /// <summary>
@@ -2532,25 +2528,26 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  * Returns true if oSource considers oTarget as an enemy.
         /// </summary>
-        public static int GetIsEnemy(uint oTarget, uint oSource = OBJECT_INVALID)
+        public static bool GetIsEnemy(uint oTarget, uint oSource = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetIsEnemy(oTarget, oSource);
+            return NWN.Core.NWScript.GetIsEnemy(oTarget, oSource) == 1;
         }
 
         /// <summary>
         ///  * Returns true if oSource considers oTarget as a friend.
         /// </summary>
-        public static int GetIsFriend(uint oTarget, uint oSource = OBJECT_INVALID)
+        public static bool GetIsFriend(uint oTarget, uint oSource = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetIsFriend(oTarget, oSource);
+            return NWN.Core.NWScript.GetIsFriend(oTarget, oSource) == 1;
         }
+
 
         /// <summary>
         ///  * Returns true if oSource considers oTarget as neutral.
         /// </summary>
-        public static int GetIsNeutral(uint oTarget, uint oSource = OBJECT_INVALID)
+        public static bool GetIsNeutral(uint oTarget, uint oSource = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetIsNeutral(oTarget, oSource);
+            return NWN.Core.NWScript.GetIsNeutral(oTarget, oSource) == 1;
         }
 
         /// <summary>
@@ -2643,14 +2640,13 @@ namespace NWN.Xenomech.API
         {
             return NWN.Core.NWScript.GetLastSpellCaster();
         }
-
         /// <summary>
         ///  This is for use in a "Spell Cast" script, it gets the ID of the spell that<br/>
         ///  was cast.
         /// </summary>
-        public static int GetLastSpell()
+        public static SpellType GetLastSpell()
         {
-            return NWN.Core.NWScript.GetLastSpell();
+            return (SpellType)NWN.Core.NWScript.GetLastSpell();
         }
 
         /// <summary>
@@ -2660,16 +2656,16 @@ namespace NWN.Xenomech.API
         {
             return NWN.Core.NWScript.GetUserDefinedEventNumber();
         }
-
         /// <summary>
         ///  This is for use in a Spell script, it gets the ID of the spell that is being cast.<br/>
         ///  If used in an Area of Effect script it will return the ID of the spell that generated the AOE effect.<br/>
         ///  * Returns the spell ID (SPELL_*) or -1 if no spell was cast or on error
         /// </summary>
-        public static int GetSpellId()
+        public static SpellType GetSpellId()
         {
-            return NWN.Core.NWScript.GetSpellId();
+            return (SpellType)NWN.Core.NWScript.GetSpellId();
         }
+
 
         /// <summary>
         ///  Generate a random name.<br/>
@@ -2896,7 +2892,6 @@ namespace NWN.Xenomech.API
         {
             return NWN.Core.NWScript.EffectImmunity((int)nImmunityType);
         }
-
         /// <summary>
         ///  - oCreature<br/>
         ///  - nImmunityType: IMMUNITY_TYPE_*<br/>
@@ -2904,9 +2899,9 @@ namespace NWN.Xenomech.API
         ///    alignment of oVersus<br/>
         ///  * Returns true if oCreature has immunity of type nImmunity versus oVersus.
         /// </summary>
-        public static int GetIsImmune(uint oCreature, ImmunityType nImmunityType, uint oVersus = OBJECT_INVALID)
+        public static bool GetIsImmune(uint oCreature, ImmunityType nImmunityType, uint oVersus = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetIsImmune(oCreature, (int)nImmunityType, oVersus);
+            return NWN.Core.NWScript.GetIsImmune(oCreature, (int)nImmunityType, oVersus) == 1;
         }
 
         /// <summary>
@@ -2922,9 +2917,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Determine whether oEncounter is active.
         /// </summary>
-        public static int GetEncounterActive(uint oEncounter = OBJECT_INVALID)
+        public static bool GetEncounterActive(uint oEncounter = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetEncounterActive(oEncounter);
+            return NWN.Core.NWScript.GetEncounterActive(oEncounter) == 1;
         }
 
         /// <summary>
@@ -2961,6 +2956,14 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
+        /// Set the number of times that oEncounter has spawned so far
+        /// </summary>
+        public static void SetEncounterSpawnsCurrent(int nNewValue, uint oEncounter = OBJECT_INVALID)
+        {
+            NWN.Core.NWScript.SetEncounterSpawnsCurrent(nNewValue, oEncounter);
+        }
+
+        /// <summary>
         ///  Use this in an OnItemAcquired script to get the item that was acquired.<br/>
         ///  * Returns OBJECT_INVALID if the module is not valid.
         /// </summary>
@@ -2986,16 +2989,15 @@ namespace NWN.Xenomech.API
         {
             NWN.Core.NWScript.SetCustomToken(nCustomTokenNumber, sTokenValue);
         }
-
         /// <summary>
         ///  Determine whether oCreature has nFeat, optionally if nFeat is useable.<br/>
         ///  - nFeat: FEAT_*<br/>
         ///  - oCreature<br/>
         ///  - bIgnoreUses: Will check if the creature has the given feat even if it has no uses remaining
         /// </summary>
-        public static int GetHasFeat(int nFeat, uint oCreature = OBJECT_INVALID, bool bIgnoreUses = false)
+        public static bool GetHasFeat(int nFeat, uint oCreature = OBJECT_INVALID, bool bIgnoreUses = false)
         {
-            return NWN.Core.NWScript.GetHasFeat(nFeat, oCreature, bIgnoreUses ? 1 : 0);
+            return NWN.Core.NWScript.GetHasFeat(nFeat, oCreature, bIgnoreUses ? 1 : 0) == 1;
         }
 
         /// <summary>
@@ -3003,9 +3005,9 @@ namespace NWN.Xenomech.API
         ///  - nSkill: SKILL_*<br/>
         ///  - oCreature
         /// </summary>
-        public static int GetHasSkill(int nSkill, uint oCreature = OBJECT_INVALID)
+        public static bool GetHasSkill(int nSkill, uint oCreature = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetHasSkill(nSkill, oCreature);
+            return NWN.Core.NWScript.GetHasSkill(nSkill, oCreature) == 1;
         }
 
         /// <summary>
@@ -3034,15 +3036,14 @@ namespace NWN.Xenomech.API
         {
             NWN.Core.NWScript.ActionUseSkill(nSkill, oTarget, nSubSkill, oItemUsed);
         }
-
         /// <summary>
         ///  Determine whether oSource sees oTarget.<br/>
         ///  NOTE: This *only* works on creatures, as visibility lists are not<br/>
         ///        maintained for non-creature objects.
         /// </summary>
-        public static int GetObjectSeen(uint oTarget, uint oSource = OBJECT_INVALID)
+        public static bool GetObjectSeen(uint oTarget, uint oSource = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetObjectSeen(oTarget, oSource);
+            return NWN.Core.NWScript.GetObjectSeen(oTarget, oSource) == 1;
         }
 
         /// <summary>
@@ -3050,9 +3051,9 @@ namespace NWN.Xenomech.API
         ///  NOTE: This *only* works on creatures, as visibility lists are not<br/>
         ///        maintained for non-creature objects.
         /// </summary>
-        public static int GetObjectHeard(uint oTarget, uint oSource = OBJECT_INVALID)
+        public static bool GetObjectHeard(uint oTarget, uint oSource = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetObjectHeard(oTarget, oSource);
+            return NWN.Core.NWScript.GetObjectHeard(oTarget, oSource) == 1;
         }
 
         /// <summary>
@@ -3184,7 +3185,6 @@ namespace NWN.Xenomech.API
         {
             return NWN.Core.NWScript.TalentSkill(nSkill);
         }
-
         /// <summary>
         ///  Determines whether oObject has any effects applied by nSpell<br/>
         ///  - nSpell: SPELL_*<br/>
@@ -3193,26 +3193,26 @@ namespace NWN.Xenomech.API
         ///    when the spell script runs. If it is created in a delayed command<br/>
         ///    then the spell id on the effect will be invalid.
         /// </summary>
-        public static int GetHasSpellEffect(int nSpell, uint oObject = OBJECT_INVALID)
+        public static bool GetHasSpellEffect(SpellType nSpell, uint oObject = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetHasSpellEffect(nSpell, oObject);
+            return NWN.Core.NWScript.GetHasSpellEffect((int)nSpell, oObject) == 1;
         }
 
         /// <summary>
         ///  Get the spell (SPELL_*) that applied eSpellEffect.<br/>
         ///  * Returns -1 if eSpellEffect was applied outside a spell script.
         /// </summary>
-        public static int GetEffectSpellId(System.IntPtr eSpellEffect)
+        public static SpellType GetEffectSpellId(System.IntPtr eSpellEffect)
         {
-            return NWN.Core.NWScript.GetEffectSpellId(eSpellEffect);
+            return (SpellType)NWN.Core.NWScript.GetEffectSpellId(eSpellEffect);
         }
 
         /// <summary>
         ///  Determine whether oCreature has tTalent.
         /// </summary>
-        public static int GetCreatureHasTalent(System.IntPtr tTalent, uint oCreature = OBJECT_INVALID)
+        public static bool GetCreatureHasTalent(System.IntPtr tTalent, uint oCreature = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetCreatureHasTalent(tTalent, oCreature);
+            return NWN.Core.NWScript.GetCreatureHasTalent(tTalent, oCreature) == 1;
         }
 
         /// <summary>
@@ -3265,10 +3265,11 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  * Returns true if oCreature is of a playable racial type.
         /// </summary>
-        public static int GetIsPlayableRacialType(uint oCreature)
+        public static bool GetIsPlayableRacialType(uint oCreature)
         {
-            return NWN.Core.NWScript.GetIsPlayableRacialType(oCreature);
+            return NWN.Core.NWScript.GetIsPlayableRacialType(oCreature) == 1;
         }
+
 
         /// <summary>
         ///  Jump to lDestination.  The action is added to the TOP of the action queue.
@@ -3315,19 +3316,20 @@ namespace NWN.Xenomech.API
         ///  Get the attack type (SPECIAL_ATTACK_*) of oCreature&apos;s last attack.<br/>
         ///  This only works when oCreature is in combat.
         /// </summary>
-        public static int GetLastAttackType(uint oCreature = OBJECT_INVALID)
+        public static SpecialAttackType GetLastAttackType(uint oCreature = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetLastAttackType(oCreature);
+            return (SpecialAttackType)NWN.Core.NWScript.GetLastAttackType(oCreature);
         }
 
         /// <summary>
         ///  Get the attack mode (COMBAT_MODE_*) of oCreature&apos;s last attack.<br/>
         ///  This only works when oCreature is in combat.
         /// </summary>
-        public static int GetLastAttackMode(uint oCreature = OBJECT_INVALID)
+        public static CombatModeType GetLastAttackMode(uint oCreature = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetLastAttackMode(oCreature);
+            return (CombatModeType)NWN.Core.NWScript.GetLastAttackMode(oCreature);
         }
+
 
         /// <summary>
         ///  Get the master of oAssociate.
@@ -3340,17 +3342,17 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  * Returns true if oCreature is in combat.
         /// </summary>
-        public static int GetIsInCombat(uint oCreature = OBJECT_INVALID)
+        public static bool GetIsInCombat(uint oCreature = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetIsInCombat(oCreature);
+            return NWN.Core.NWScript.GetIsInCombat(oCreature) == 1;
         }
 
         /// <summary>
         ///  Get the last command (ASSOCIATE_COMMAND_*) issued to oAssociate.
         /// </summary>
-        public static int GetLastAssociateCommand(uint oAssociate = OBJECT_INVALID)
+        public static AssociateCommandType GetLastAssociateCommand(uint oAssociate = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetLastAssociateCommand(oAssociate);
+            return (AssociateCommandType)NWN.Core.NWScript.GetLastAssociateCommand(oAssociate);
         }
 
         /// <summary>
@@ -3384,10 +3386,11 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the locked state of oTarget, which can be a door or a placeable object.
         /// </summary>
-        public static int GetLocked(uint oTarget)
+        public static bool GetLocked(uint oTarget)
         {
-            return NWN.Core.NWScript.GetLocked(oTarget);
+            return NWN.Core.NWScript.GetLocked(oTarget) == 1;
         }
+
 
         /// <summary>
         ///  Use this in a trigger&apos;s OnClick event script to get the object that last
@@ -3442,17 +3445,17 @@ namespace NWN.Xenomech.API
         ///  - nAbility: ABILITY_*<br/>
         ///  - oCreature
         /// </summary>
-        public static int GetAbilityModifier(int nAbility, uint oCreature = OBJECT_INVALID)
+        public static int GetAbilityModifier(AbilityType nAbility, uint oCreature = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetAbilityModifier(nAbility, oCreature);
+            return NWN.Core.NWScript.GetAbilityModifier((int)nAbility, oCreature);
         }
 
         /// <summary>
         ///  Determined whether oItem has been identified.
         /// </summary>
-        public static int GetIdentified(uint oItem)
+        public static bool GetIdentified(uint oItem)
         {
-            return NWN.Core.NWScript.GetIdentified(oItem);
+            return NWN.Core.NWScript.GetIdentified(oItem) == 1;
         }
 
         /// <summary>
@@ -3493,17 +3496,17 @@ namespace NWN.Xenomech.API
         ///  - nDoorAction: DOOR_ACTION_*<br/>
         ///  * Returns true if nDoorAction can be performed on oTargetDoor.
         /// </summary>
-        public static int GetIsDoorActionPossible(uint oTargetDoor, int nDoorAction)
+        public static bool GetIsDoorActionPossible(uint oTargetDoor, DoorActionType nDoorAction)
         {
-            return NWN.Core.NWScript.GetIsDoorActionPossible(oTargetDoor, nDoorAction);
+            return NWN.Core.NWScript.GetIsDoorActionPossible(oTargetDoor, (int)nDoorAction) == 1;
         }
 
         /// <summary>
         ///  Perform nDoorAction on oTargetDoor.
         /// </summary>
-        public static void DoDoorAction(uint oTargetDoor, int nDoorAction)
+        public static void DoDoorAction(uint oTargetDoor, DoorActionType nDoorAction)
         {
-            NWN.Core.NWScript.DoDoorAction(oTargetDoor, nDoorAction);
+            NWN.Core.NWScript.DoDoorAction(oTargetDoor, (int)nDoorAction);
         }
 
         /// <summary>
@@ -3537,9 +3540,9 @@ namespace NWN.Xenomech.API
         ///    nClassPosition (i.e. a single-class creature will only have a value in
         ///    nClassLocation=1) or if oCreature is not a valid creature.
         /// </summary>
-        public static int GetClassByPosition(int nClassPosition, uint oCreature = OBJECT_INVALID)
+        public static ClassType GetClassByPosition(int nClassPosition, uint oCreature = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetClassByPosition(nClassPosition, oCreature);
+            return (ClassType)NWN.Core.NWScript.GetClassByPosition(nClassPosition, oCreature);
         }
 
         /// <summary>
@@ -3645,10 +3648,11 @@ namespace NWN.Xenomech.API
         ///  OnInventoryDisturbed script to fire.  This will only work for creatures and
         ///  placeables.
         /// </summary>
-        public static int GetInventoryDisturbType()
+        public static InventoryDisturbType GetInventoryDisturbType()
         {
-            return NWN.Core.NWScript.GetInventoryDisturbType();
+            return (InventoryDisturbType)NWN.Core.NWScript.GetInventoryDisturbType();
         }
+
 
         /// <summary>
         ///  get the item that caused the caller's OnInventoryDisturbed script to fire.
@@ -3701,18 +3705,19 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the gender of oCreature.
         /// </summary>
-        public static int GetGender(uint oCreature)
+        public static GenderType GetGender(uint oCreature)
         {
-            return NWN.Core.NWScript.GetGender(oCreature);
+            return (GenderType)NWN.Core.NWScript.GetGender(oCreature);
         }
 
         /// <summary>
         ///  * Returns true if tTalent is valid.
         /// </summary>
-        public static int GetIsTalentValid(System.IntPtr tTalent)
+        public static bool GetIsTalentValid(System.IntPtr tTalent)
         {
-            return NWN.Core.NWScript.GetIsTalentValid(tTalent);
+            return NWN.Core.NWScript.GetIsTalentValid(tTalent) == 1;
         }
+
 
         /// <summary>
         ///  Causes the action subject to move away from lMoveAwayFrom.
@@ -3736,10 +3741,11 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the type (TALENT_TYPE_*) of tTalent.
         /// </summary>
-        public static int GetTypeFromTalent(System.IntPtr tTalent)
+        public static TalentType GetTypeFromTalent(System.IntPtr tTalent)
         {
-            return NWN.Core.NWScript.GetTypeFromTalent(tTalent);
+            return (TalentType)NWN.Core.NWScript.GetTypeFromTalent(tTalent);
         }
+
 
         /// <summary>
         ///  Get the ID of tTalent.  This could be a SPELL_*, FEAT_* or SKILL_*.
@@ -4094,9 +4100,9 @@ namespace NWN.Xenomech.API
         ///  Get the base item type (BASE_ITEM_*) of oItem.
         ///  * Returns BASE_ITEM_INVALID if oItem is an invalid item.
         /// </summary>
-        public static int GetBaseItemType(uint oItem)
+        public static BaseItemType GetBaseItemType(uint oItem)
         {
-            return NWN.Core.NWScript.GetBaseItemType(oItem);
+            return (BaseItemType)NWN.Core.NWScript.GetBaseItemType(oItem);
         }
 
         /// <summary>
@@ -4106,10 +4112,11 @@ namespace NWN.Xenomech.API
         ///  * Returns false if oItem is not a valid item, or if oItem does not have
         ///    nProperty.
         /// </summary>
-        public static int GetItemHasItemProperty(uint oItem, int nProperty)
+        public static bool GetItemHasItemProperty(uint oItem, int nProperty)
         {
-            return NWN.Core.NWScript.GetItemHasItemProperty(oItem, nProperty);
+            return NWN.Core.NWScript.GetItemHasItemProperty(oItem, nProperty) == 1;
         }
+
 
         /// <summary>
         ///  The creature will equip the melee weapon in its possession that can do the
@@ -4183,33 +4190,33 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  * Returns true if it is currently day.
         /// </summary>
-        public static int GetIsDay()
+        public static bool GetIsDay()
         {
-            return NWN.Core.NWScript.GetIsDay();
+            return NWN.Core.NWScript.GetIsDay() == 1;
         }
 
         /// <summary>
         ///  * Returns true if it is currently night.
         /// </summary>
-        public static int GetIsNight()
+        public static bool GetIsNight()
         {
-            return NWN.Core.NWScript.GetIsNight();
+            return NWN.Core.NWScript.GetIsNight() == 1;
         }
 
         /// <summary>
         ///  * Returns true if it is currently dawn.
         /// </summary>
-        public static int GetIsDawn()
+        public static bool GetIsDawn()
         {
-            return NWN.Core.NWScript.GetIsDawn();
+            return NWN.Core.NWScript.GetIsDawn() == 1;
         }
 
         /// <summary>
         ///  * Returns true if it is currently dusk.
         /// </summary>
-        public static int GetIsDusk()
+        public static bool GetIsDusk()
         {
-            return NWN.Core.NWScript.GetIsDusk();
+            return NWN.Core.NWScript.GetIsDusk() == 1;
         }
 
         /// <summary>
@@ -4313,9 +4320,9 @@ namespace NWN.Xenomech.API
         ///  Note: This will return false if oCreature is a DM Possessed creature.<br/>
         ///  To determine if oCreature is a DM Possessed creature, use GetIsDMPossessed()
         /// </summary>
-        public static int GetIsDM(uint oCreature)
+        public static bool GetIsDM(uint oCreature)
         {
-            return NWN.Core.NWScript.GetIsDM(oCreature);
+            return NWN.Core.NWScript.GetIsDM(oCreature) == 1;
         }
 
         /// <summary>
@@ -4323,17 +4330,17 @@ namespace NWN.Xenomech.API
         ///  - nVoiceChatID: VOICE_CHAT_*<br/>
         ///  - oTarget
         /// </summary>
-        public static void PlayVoiceChat(int nVoiceChatID, uint oTarget = OBJECT_INVALID)
+        public static void PlayVoiceChat(VoiceChatType nVoiceChatID, uint oTarget = OBJECT_INVALID)
         {
-            NWN.Core.NWScript.PlayVoiceChat(nVoiceChatID, oTarget);
+            NWN.Core.NWScript.PlayVoiceChat((int)nVoiceChatID, oTarget);
         }
 
         /// <summary>
         ///  * Returns true if the weapon equipped is capable of damaging oVersus.
         /// </summary>
-        public static int GetIsWeaponEffective(uint oVersus = OBJECT_INVALID, bool bOffHand = false)
+        public static bool GetIsWeaponEffective(uint oVersus = OBJECT_INVALID, bool bOffHand = false)
         {
-            return NWN.Core.NWScript.GetIsWeaponEffective(oVersus, bOffHand ? 1 : 0);
+            return NWN.Core.NWScript.GetIsWeaponEffective(oVersus, bOffHand ? 1 : 0) == 1;
         }
 
         /// <summary>
@@ -4341,9 +4348,9 @@ namespace NWN.Xenomech.API
         ///  harmful.<br/>
         ///  * Returns true if the last spell cast was harmful.
         /// </summary>
-        public static int GetLastSpellHarmful()
+        public static bool GetLastSpellHarmful()
         {
-            return NWN.Core.NWScript.GetLastSpellHarmful();
+            return NWN.Core.NWScript.GetLastSpellHarmful() == 1;
         }
 
         /// <summary>
@@ -4515,9 +4522,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  * Returns true if oObject (which is a placeable or a door) is currently open.
         /// </summary>
-        public static int GetIsOpen(uint oObject)
+        public static bool GetIsOpen(uint oObject)
         {
-            return NWN.Core.NWScript.GetIsOpen(oObject);
+            return NWN.Core.NWScript.GetIsOpen(oObject) == 1;
         }
 
         /// <summary>
@@ -4535,9 +4542,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Determine whether oObject is in conversation.
         /// </summary>
-        public static int IsInConversation(uint oObject)
+        public static bool IsInConversation(uint oObject)
         {
-            return NWN.Core.NWScript.IsInConversation(oObject);
+            return NWN.Core.NWScript.IsInConversation(oObject) == 1;
         }
 
         /// <summary>
@@ -4640,9 +4647,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Determine whether oTarget is a plot object.
         /// </summary>
-        public static int GetPlotFlag(uint oTarget = OBJECT_INVALID)
+        public static bool GetPlotFlag(uint oTarget = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetPlotFlag(oTarget);
+            return NWN.Core.NWScript.GetPlotFlag(oTarget) == 1;
         }
 
         /// <summary>
@@ -4770,9 +4777,9 @@ namespace NWN.Xenomech.API
         ///  of faction and personal reputation, use GetIsFriend() instead.<br/>
         ///  * Returns true if oSource has a friendly reaction towards oTarget
         /// </summary>
-        public static int GetIsReactionTypeFriendly(uint oTarget, uint oSource = OBJECT_INVALID)
+        public static bool GetIsReactionTypeFriendly(uint oTarget, uint oSource = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetIsReactionTypeFriendly(oTarget, oSource);
+            return NWN.Core.NWScript.GetIsReactionTypeFriendly(oTarget, oSource) == 1;
         }
 
         /// <summary>
@@ -4783,9 +4790,9 @@ namespace NWN.Xenomech.API
         ///  of faction and personal reputation, use GetIsNeutral() instead.<br/>
         ///  * Returns true if oSource has a neutral reaction towards oTarget
         /// </summary>
-        public static int GetIsReactionTypeNeutral(uint oTarget, uint oSource = OBJECT_INVALID)
+        public static bool GetIsReactionTypeNeutral(uint oTarget, uint oSource = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetIsReactionTypeNeutral(oTarget, oSource);
+            return NWN.Core.NWScript.GetIsReactionTypeNeutral(oTarget, oSource) == 1;
         }
 
         /// <summary>
@@ -4796,9 +4803,9 @@ namespace NWN.Xenomech.API
         ///  of faction and personal reputation, use GetIsEnemy() instead.<br/>
         ///  * Returns true if oSource has a hostile reaction towards oTarget
         /// </summary>
-        public static int GetIsReactionTypeHostile(uint oTarget, uint oSource = OBJECT_INVALID)
+        public static bool GetIsReactionTypeHostile(uint oTarget, uint oSource = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetIsReactionTypeHostile(oTarget, oSource);
+            return NWN.Core.NWScript.GetIsReactionTypeHostile(oTarget, oSource) == 1;
         }
 
         /// <summary>
@@ -4891,10 +4898,11 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the size (CREATURE_SIZE_*) of oCreature.
         /// </summary>
-        public static int GetCreatureSize(uint oCreature)
+        public static CreatureSizeType GetCreatureSize(uint oCreature)
         {
-            return NWN.Core.NWScript.GetCreatureSize(oCreature);
+            return (CreatureSizeType)NWN.Core.NWScript.GetCreatureSize(oCreature);
         }
+
 
         /// <summary>
         ///  Create a Disappear/Appear effect.<br/>
@@ -5064,9 +5072,9 @@ namespace NWN.Xenomech.API
         ///  Get oCreature's movement rate.<br/>
         ///  * Returns 0 if oCreature is invalid.
         /// </summary>
-        public static int GetMovementRate(uint oCreature)
+        public static MovementRateType GetMovementRate(uint oCreature)
         {
-            return NWN.Core.NWScript.GetMovementRate(oCreature);
+            return (MovementRateType)NWN.Core.NWScript.GetMovementRate(oCreature);
         }
 
         /// <summary>
@@ -5074,9 +5082,9 @@ namespace NWN.Xenomech.API
         ///  * Returns FAMILIAR_CREATURE_TYPE_NONE if oCreature is invalid or does<br/>
         ///    not currently have a familiar.
         /// </summary>
-        public static int GetFamiliarCreatureType(uint oCreature)
+        public static FamiliarCreatureType GetFamiliarCreatureType(uint oCreature)
         {
-            return NWN.Core.NWScript.GetFamiliarCreatureType(oCreature);
+            return (FamiliarCreatureType)NWN.Core.NWScript.GetFamiliarCreatureType(oCreature);
         }
 
         /// <summary>
@@ -5085,9 +5093,9 @@ namespace NWN.Xenomech.API
         ///  * Returns ANIMAL_COMPANION_CREATURE_TYPE_NONE if oCreature is invalid or does<br/>
         ///    not currently have an animal companion.
         /// </summary>
-        public static int GetAnimalCompanionCreatureType(uint oCreature)
+        public static AnimalCompanionCreatureType GetAnimalCompanionCreatureType(uint oCreature)
         {
-            return NWN.Core.NWScript.GetAnimalCompanionCreatureType(oCreature);
+            return (AnimalCompanionCreatureType)NWN.Core.NWScript.GetAnimalCompanionCreatureType(oCreature);
         }
 
         /// <summary>
@@ -5157,10 +5165,11 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  * Returns true if oCreature is resting.
         /// </summary>
-        public static int GetIsResting(uint oCreature = OBJECT_INVALID)
+        public static bool GetIsResting(uint oCreature = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetIsResting(oCreature);
+            return NWN.Core.NWScript.GetIsResting(oCreature) == 1;
         }
+
 
         /// <summary>
         ///  Get the last PC that has rested in the module.
@@ -5189,9 +5198,9 @@ namespace NWN.Xenomech.API
         ///  Determine the type (REST_EVENTTYPE_REST_*) of the last rest event (as<br/>
         ///  returned from the OnPCRested module event).
         /// </summary>
-        public static int GetLastRestEventType()
+        public static RestEventType GetLastRestEventType()
         {
-            return NWN.Core.NWScript.GetLastRestEventType();
+            return (RestEventType)NWN.Core.NWScript.GetLastRestEventType();
         }
 
         /// <summary>
@@ -5222,9 +5231,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  * Returns true if oItem is a ranged weapon.
         /// </summary>
-        public static int GetWeaponRanged(uint oItem)
+        public static bool GetWeaponRanged(uint oItem)
         {
-            return NWN.Core.NWScript.GetWeaponRanged(oItem);
+            return NWN.Core.NWScript.GetWeaponRanged(oItem) == 1;
         }
 
         /// <summary>
@@ -5238,9 +5247,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the game difficulty (GAME_DIFFICULTY_*).
         /// </summary>
-        public static int GetGameDifficulty()
+        public static GameDifficultyType GetGameDifficulty()
         {
-            return NWN.Core.NWScript.GetGameDifficulty();
+            return (GameDifficultyType)NWN.Core.NWScript.GetGameDifficulty();
         }
 
         /// <summary>
@@ -5282,9 +5291,9 @@ namespace NWN.Xenomech.API
         ///  lTile.<br/>
         ///  - lTile: the vector part of this is the tile grid (x,y) coordinate of the tile.
         /// </summary>
-        public static int GetTileMainLight1Color(System.IntPtr lTile)
+        public static TileMainLightColorType GetTileMainLight1Color(System.IntPtr lTile)
         {
-            return NWN.Core.NWScript.GetTileMainLight1Color(lTile);
+            return (TileMainLightColorType)NWN.Core.NWScript.GetTileMainLight1Color(lTile);
         }
 
         /// <summary>
@@ -5293,9 +5302,9 @@ namespace NWN.Xenomech.API
         ///  - lTile: the vector part of this is the tile grid (x,y) coordinate of the<br/>
         ///    tile.
         /// </summary>
-        public static int GetTileMainLight2Color(System.IntPtr lTile)
+        public static TileMainLightColorType GetTileMainLight2Color(System.IntPtr lTile)
         {
-            return NWN.Core.NWScript.GetTileMainLight2Color(lTile);
+            return (TileMainLightColorType)NWN.Core.NWScript.GetTileMainLight2Color(lTile);
         }
 
         /// <summary>
@@ -5304,9 +5313,9 @@ namespace NWN.Xenomech.API
         ///  - lTile: the vector part of this is the tile grid (x,y) coordinate of the<br/>
         ///    tile.
         /// </summary>
-        public static int GetTileSourceLight1Color(System.IntPtr lTile)
+        public static TileSourceLightColorType GetTileSourceLight1Color(System.IntPtr lTile)
         {
-            return NWN.Core.NWScript.GetTileSourceLight1Color(lTile);
+            return (TileSourceLightColorType)NWN.Core.NWScript.GetTileSourceLight1Color(lTile);
         }
 
         /// <summary>
@@ -5315,9 +5324,9 @@ namespace NWN.Xenomech.API
         ///  - lTile: the vector part of this is the tile grid (x,y) coordinate of the<br/>
         ///    tile.
         /// </summary>
-        public static int GetTileSourceLight2Color(System.IntPtr lTile)
+        public static TileSourceLightColorType GetTileSourceLight2Color(System.IntPtr lTile)
         {
-            return NWN.Core.NWScript.GetTileSourceLight2Color(lTile);
+            return (TileSourceLightColorType)NWN.Core.NWScript.GetTileSourceLight2Color(lTile);
         }
 
         /// <summary>
@@ -5336,9 +5345,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the current action (ACTION_*) that oObject is executing.
         /// </summary>
-        public static int GetCurrentAction(uint oObject = OBJECT_INVALID)
+        public static ActionType GetCurrentAction(uint oObject = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetCurrentAction(oObject);
+            return (ActionType)NWN.Core.NWScript.GetCurrentAction(oObject);
         }
 
         /// <summary>
@@ -5347,9 +5356,9 @@ namespace NWN.Xenomech.API
         ///  - nNewReputation: 0-100 (inclusive)<br/>
         ///  - oCreature
         /// </summary>
-        public static void SetStandardFactionReputation(int nStandardFaction, int nNewReputation, uint oCreature = OBJECT_INVALID)
+        public static void SetStandardFactionReputation(StandardFactionType nStandardFaction, int nNewReputation, uint oCreature = OBJECT_INVALID)
         {
-            NWN.Core.NWScript.SetStandardFactionReputation(nStandardFaction, nNewReputation, oCreature);
+            NWN.Core.NWScript.SetStandardFactionReputation((int)nStandardFaction, nNewReputation, oCreature);
         }
 
         /// <summary>
@@ -5362,9 +5371,9 @@ namespace NWN.Xenomech.API
         ///  11-89  :  Neutral.<br/>
         ///  90-100 :  Friendly.
         /// </summary>
-        public static int GetStandardFactionReputation(int nStandardFaction, uint oCreature = OBJECT_INVALID)
+        public static int GetStandardFactionReputation(StandardFactionType nStandardFaction, uint oCreature = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetStandardFactionReputation(nStandardFaction, oCreature);
+            return NWN.Core.NWScript.GetStandardFactionReputation((int)nStandardFaction, oCreature);
         }
 
         /// <summary>
@@ -5403,18 +5412,18 @@ namespace NWN.Xenomech.API
         ///  - oTrapObject: a placeable, door or trigger<br/>
         ///  * Returns true if oTrapObject is disarmable.
         /// </summary>
-        public static int GetTrapDisarmable(uint oTrapObject)
+        public static bool GetTrapDisarmable(uint oTrapObject)
         {
-            return NWN.Core.NWScript.GetTrapDisarmable(oTrapObject);
+            return NWN.Core.NWScript.GetTrapDisarmable(oTrapObject) == 1;
         }
 
         /// <summary>
         ///  - oTrapObject: a placeable, door or trigger<br/>
         ///  * Returns true if oTrapObject is detectable.
         /// </summary>
-        public static int GetTrapDetectable(uint oTrapObject)
+        public static bool GetTrapDetectable(uint oTrapObject)
         {
-            return NWN.Core.NWScript.GetTrapDetectable(oTrapObject);
+            return NWN.Core.NWScript.GetTrapDetectable(oTrapObject) == 1;
         }
 
         /// <summary>
@@ -5422,27 +5431,27 @@ namespace NWN.Xenomech.API
         ///  - oCreature<br/>
         ///  * Returns true if oCreature has detected oTrapObject
         /// </summary>
-        public static int GetTrapDetectedBy(uint oTrapObject, uint oCreature)
+        public static bool GetTrapDetectedBy(uint oTrapObject, uint oCreature)
         {
-            return NWN.Core.NWScript.GetTrapDetectedBy(oTrapObject, oCreature);
+            return NWN.Core.NWScript.GetTrapDetectedBy(oTrapObject, oCreature) == 1;
         }
 
         /// <summary>
         ///  - oTrapObject: a placeable, door or trigger<br/>
         ///  * Returns true if oTrapObject has been flagged as visible to all creatures.
         /// </summary>
-        public static int GetTrapFlagged(uint oTrapObject)
+        public static bool GetTrapFlagged(uint oTrapObject)
         {
-            return NWN.Core.NWScript.GetTrapFlagged(oTrapObject);
+            return NWN.Core.NWScript.GetTrapFlagged(oTrapObject) == 1;
         }
 
         /// <summary>
         ///  Get the trap base type (TRAP_BASE_TYPE_*) of oTrapObject.<br/>
         ///  - oTrapObject: a placeable, door or trigger
         /// </summary>
-        public static int GetTrapBaseType(uint oTrapObject)
+        public static TrapBaseType GetTrapBaseType(uint oTrapObject)
         {
-            return NWN.Core.NWScript.GetTrapBaseType(oTrapObject);
+            return (TrapBaseType)NWN.Core.NWScript.GetTrapBaseType(oTrapObject);
         }
 
         /// <summary>
@@ -5450,9 +5459,9 @@ namespace NWN.Xenomech.API
         ///  * Returns true if oTrapObject is one-shot (i.e. it does not reset itself<br/>
         ///    after firing.
         /// </summary>
-        public static int GetTrapOneShot(uint oTrapObject)
+        public static bool GetTrapOneShot(uint oTrapObject)
         {
-            return NWN.Core.NWScript.GetTrapOneShot(oTrapObject);
+            return NWN.Core.NWScript.GetTrapOneShot(oTrapObject) == 1;
         }
 
         /// <summary>
@@ -5495,10 +5504,11 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  * Returns true if a specific key is required to open the lock on oObject.
         /// </summary>
-        public static int GetLockKeyRequired(uint oObject)
+        public static bool GetLockKeyRequired(uint oObject)
         {
-            return NWN.Core.NWScript.GetLockKeyRequired(oObject);
+            return NWN.Core.NWScript.GetLockKeyRequired(oObject) == 1;
         }
+
 
         /// <summary>
         ///  Get the tag of the key that will open the lock on oObject.
@@ -5511,9 +5521,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  * Returns true if the lock on oObject is lockable.
         /// </summary>
-        public static int GetLockLockable(uint oObject)
+        public static bool GetLockLockable(uint oObject)
         {
-            return NWN.Core.NWScript.GetLockLockable(oObject);
+            return NWN.Core.NWScript.GetLockLockable(oObject) == 1;
         }
 
         /// <summary>
@@ -5545,9 +5555,9 @@ namespace NWN.Xenomech.API
         ///  - oObject<br/>
         ///  * Returns true if oObject has effects on it originating from nFeat.
         /// </summary>
-        public static int GetHasFeatEffect(int nFeat, uint oObject = OBJECT_INVALID)
+        public static bool GetHasFeatEffect(FeatType nFeat, uint oObject = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetHasFeatEffect(nFeat, oObject);
+            return NWN.Core.NWScript.GetHasFeatEffect((int)nFeat, oObject) == 1;
         }
 
         /// <summary>
@@ -5573,9 +5583,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  * Returns true if the illumination for oPlaceable is on
         /// </summary>
-        public static int GetPlaceableIllumination(uint oPlaceable = OBJECT_INVALID)
+        public static bool GetPlaceableIllumination(uint oPlaceable = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetPlaceableIllumination(oPlaceable);
+            return NWN.Core.NWScript.GetPlaceableIllumination(oPlaceable) == 1;
         }
 
         /// <summary>
@@ -5583,9 +5593,9 @@ namespace NWN.Xenomech.API
         ///  - nPlaceableAction: PLACEABLE_ACTION_*<br/>
         ///  * Returns true if nPlacebleAction is valid for oPlaceable.
         /// </summary>
-        public static int GetIsPlaceableObjectActionPossible(uint oPlaceable, int nPlaceableAction)
+        public static bool GetIsPlaceableObjectActionPossible(uint oPlaceable, PlaceableActionType nPlaceableAction)
         {
-            return NWN.Core.NWScript.GetIsPlaceableObjectActionPossible(oPlaceable, nPlaceableAction);
+            return NWN.Core.NWScript.GetIsPlaceableObjectActionPossible(oPlaceable, (int)nPlaceableAction) == 1;
         }
 
         /// <summary>
@@ -5630,10 +5640,11 @@ namespace NWN.Xenomech.API
         ///  Note: Only placeables, doors and triggers can be trapped.<br/>
         ///  * Returns true if oObject is trapped.
         /// </summary>
-        public static int GetIsTrapped(uint oObject)
+        public static bool GetIsTrapped(uint oObject)
         {
-            return NWN.Core.NWScript.GetIsTrapped(oObject);
+            return NWN.Core.NWScript.GetIsTrapped(oObject) == 1;
         }
+
 
         /// <summary>
         ///  Create a Turn Resistance Decrease effect.<br/>
@@ -5820,10 +5831,11 @@ namespace NWN.Xenomech.API
         ///  * Returns true for creatures and stores, and checks to see if an item or placeable object is a container.<br/>
         ///  * Returns false for all other object types.
         /// </summary>
-        public static int GetHasInventory(uint oObject)
+        public static bool GetHasInventory(uint oObject)
         {
-            return NWN.Core.NWScript.GetHasInventory(oObject);
+            return NWN.Core.NWScript.GetHasInventory(oObject) == 1;
         }
+
 
         /// <summary>
         ///  Get the duration (in seconds) of the sound attached to nStrRef<br/>
@@ -5858,9 +5870,9 @@ namespace NWN.Xenomech.API
         ///  - oCreature<br/>
         ///  * Returns a constant STEALTH_MODE_*
         /// </summary>
-        public static int GetStealthMode(uint oCreature)
+        public static StealthModeType GetStealthMode(uint oCreature)
         {
-            return NWN.Core.NWScript.GetStealthMode(oCreature);
+            return (StealthModeType)NWN.Core.NWScript.GetStealthMode(oCreature);
         }
 
         /// <summary>
@@ -5868,9 +5880,9 @@ namespace NWN.Xenomech.API
         ///  - oCreature<br/>
         ///  * Returns a constant DETECT_MODE_*
         /// </summary>
-        public static int GetDetectMode(uint oCreature)
+        public static DetectModeType GetDetectMode(uint oCreature)
         {
-            return NWN.Core.NWScript.GetDetectMode(oCreature);
+            return (DetectModeType)NWN.Core.NWScript.GetDetectMode(oCreature);
         }
 
         /// <summary>
@@ -5878,9 +5890,9 @@ namespace NWN.Xenomech.API
         ///  - oCreature<br/>
         ///  * Returns a constant DEFENSIVE_CASTING_MODE_*
         /// </summary>
-        public static int GetDefensiveCastingMode(uint oCreature)
+        public static DefensiveCastingModeType GetDefensiveCastingMode(uint oCreature)
         {
-            return NWN.Core.NWScript.GetDefensiveCastingMode(oCreature);
+            return (DefensiveCastingModeType)NWN.Core.NWScript.GetDefensiveCastingMode(oCreature);
         }
 
         /// <summary>
@@ -5888,10 +5900,11 @@ namespace NWN.Xenomech.API
         ///  * returns a constant APPEARANCE_TYPE_* for valid creatures<br/>
         ///  * returns APPEARANCE_TYPE_INVALID for non creatures/invalid creatures
         /// </summary>
-        public static int GetAppearanceType(uint oCreature)
+        public static AppearanceType GetAppearanceType(uint oCreature)
         {
-            return NWN.Core.NWScript.GetAppearanceType(oCreature);
+            return (AppearanceType)NWN.Core.NWScript.GetAppearanceType(oCreature);
         }
+
 
         /// <summary>
         ///  SpawnScriptDebugger() will attempt to communicate with the a running script debugger<br/>
@@ -5988,25 +6001,25 @@ namespace NWN.Xenomech.API
         ///  returns true if the item CAN be dropped<br/>
         ///  Droppable items will appear on a creature&apos;s remains when the creature is killed.
         /// </summary>
-        public static int GetDroppableFlag(uint oItem)
+        public static bool GetDroppableFlag(uint oItem)
         {
-            return NWN.Core.NWScript.GetDroppableFlag(oItem);
+            return NWN.Core.NWScript.GetDroppableFlag(oItem) == 1;
         }
 
         /// <summary>
         ///  returns true if the object is usable
         /// </summary>
-        public static int GetUseableFlag(uint oObject = OBJECT_INVALID)
+        public static bool GetUseableFlag(uint oObject = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetUseableFlag(oObject);
+            return NWN.Core.NWScript.GetUseableFlag(oObject) == 1;
         }
 
         /// <summary>
         ///  returns true if the item is stolen
         /// </summary>
-        public static int GetStolenFlag(uint oStolen)
+        public static bool GetStolenFlag(uint oStolen)
         {
-            return NWN.Core.NWScript.GetStolenFlag(oStolen);
+            return NWN.Core.NWScript.GetStolenFlag(oStolen) == 1;
         }
 
         /// <summary>
@@ -6264,9 +6277,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  if the item property is valid this will return true
         /// </summary>
-        public static int GetIsItemPropertyValid(System.IntPtr ipProperty)
+        public static bool GetIsItemPropertyValid(System.IntPtr ipProperty)
         {
-            return NWN.Core.NWScript.GetIsItemPropertyValid(ipProperty);
+            return NWN.Core.NWScript.GetIsItemPropertyValid(ipProperty) == 1;
         }
 
         /// <summary>
@@ -6289,17 +6302,17 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  will return the item property type (ie. holy avenger)
         /// </summary>
-        public static int GetItemPropertyType(System.IntPtr ip)
+        public static ItemPropertyType GetItemPropertyType(System.IntPtr ip)
         {
-            return NWN.Core.NWScript.GetItemPropertyType(ip);
+            return (ItemPropertyType)NWN.Core.NWScript.GetItemPropertyType(ip);
         }
 
         /// <summary>
         ///  will return the duration type of the item property
         /// </summary>
-        public static int GetItemPropertyDurationType(System.IntPtr ip)
+        public static DurationType GetItemPropertyDurationType(System.IntPtr ip)
         {
-            return NWN.Core.NWScript.GetItemPropertyDurationType(ip);
+            return (DurationType)NWN.Core.NWScript.GetItemPropertyDurationType(ip);
         }
 
         /// <summary>
@@ -7462,16 +7475,16 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
-        ///  ***********************  END OF ITEM PROPERTY FUNCTIONS  **************************<br/>
         ///  Returns true if 1d20 roll + skill rank is greater than or equal to difficulty<br/>
         ///  - oTarget: the creature using the skill<br/>
         ///  - nSkill: the skill being used<br/>
         ///  - nDifficulty: Difficulty class of skill
         /// </summary>
-        public static int GetIsSkillSuccessful(uint oTarget, int nSkill, int nDifficulty)
+        public static bool GetIsSkillSuccessful(uint oTarget, int nSkill, int nDifficulty)
         {
-            return NWN.Core.NWScript.GetIsSkillSuccessful(oTarget, nSkill, nDifficulty);
+            return NWN.Core.NWScript.GetIsSkillSuccessful(oTarget, nSkill, nDifficulty) == 1;
         }
+
 
         /// <summary>
         ///  Creates an effect that inhibits spells<br/>
@@ -7663,10 +7676,11 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Get the immortal flag on a creature
         /// </summary>
-        public static int GetImmortal(uint oTarget = OBJECT_INVALID)
+        public static bool GetImmortal(uint oTarget = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetImmortal(oTarget);
+            return NWN.Core.NWScript.GetImmortal(oTarget) == 1;
         }
+
 
         /// <summary>
         ///  Does a single attack on every hostile creature within 10ft. of the attacker<br/>
@@ -7711,9 +7725,9 @@ namespace NWN.Xenomech.API
         ///  Returns one of the following:<br/>
         ///  AI_LEVEL_INVALID, AI_LEVEL_VERY_LOW, AI_LEVEL_LOW, AI_LEVEL_NORMAL, AI_LEVEL_HIGH, AI_LEVEL_VERY_HIGH
         /// </summary>
-        public static int GetAILevel(uint oTarget = OBJECT_INVALID)
+        public static AILevelType GetAILevel(uint oTarget = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetAILevel(oTarget);
+            return (AILevelType)NWN.Core.NWScript.GetAILevel(oTarget);
         }
 
         /// <summary>
@@ -7738,9 +7752,9 @@ namespace NWN.Xenomech.API
         ///  possessed by his master.<br/>
         ///  returns false if not or if the creature object is invalid
         /// </summary>
-        public static int GetIsPossessedFamiliar(uint oCreature)
+        public static bool GetIsPossessedFamiliar(uint oCreature)
         {
-            return NWN.Core.NWScript.GetIsPossessedFamiliar(oCreature);
+            return NWN.Core.NWScript.GetIsPossessedFamiliar(oCreature) == 1;
         }
 
         /// <summary>
@@ -7756,9 +7770,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  This will return true if the area is flagged as either interior or underground.
         /// </summary>
-        public static int GetIsAreaInterior(uint oArea = OBJECT_INVALID)
+        public static bool GetIsAreaInterior(uint oArea = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetIsAreaInterior(oArea);
+            return NWN.Core.NWScript.GetIsAreaInterior(oArea) == 1;
         }
 
         /// <summary>
@@ -7820,9 +7834,9 @@ namespace NWN.Xenomech.API
         ///  Note: GetIsDMPossessed() will return false if oCreature is the DM character.<br/>
         ///  To determine if oCreature is a DM character use GetIsDM()
         /// </summary>
-        public static int GetIsDMPossessed(uint oCreature)
+        public static bool GetIsDMPossessed(uint oCreature)
         {
-            return NWN.Core.NWScript.GetIsDMPossessed(oCreature);
+            return NWN.Core.NWScript.GetIsDMPossessed(oCreature) == 1;
         }
 
         /// <summary>
@@ -7830,27 +7844,27 @@ namespace NWN.Xenomech.API
         ///    Returns: WEATHER_CLEAR, WEATHER_RAIN, WEATHER_SNOW, WEATHER_INVALID<br/>
         ///    Note: If called on an Interior area, this will always return WEATHER_CLEAR.
         /// </summary>
-        public static int GetWeather(uint oArea)
+        public static WeatherType GetWeather(uint oArea)
         {
-            return NWN.Core.NWScript.GetWeather(oArea);
+            return (WeatherType)NWN.Core.NWScript.GetWeather(oArea);
         }
 
         /// <summary>
         ///  Returns AREA_NATURAL if the area oArea is natural, AREA_ARTIFICIAL otherwise.<br/>
         ///  Returns AREA_INVALID, on an error.
         /// </summary>
-        public static int GetIsAreaNatural(uint oArea)
+        public static AreaType GetIsAreaNatural(uint oArea)
         {
-            return NWN.Core.NWScript.GetIsAreaNatural(oArea);
+            return (AreaType)NWN.Core.NWScript.GetIsAreaNatural(oArea);
         }
 
         /// <summary>
         ///  Returns AREA_ABOVEGROUND if the area oArea is above ground, AREA_UNDERGROUND otherwise.<br/>
         ///  Returns AREA_INVALID, on an error.
         /// </summary>
-        public static int GetIsAreaAboveGround(uint oArea)
+        public static AreaType GetIsAreaAboveGround(uint oArea)
         {
-            return NWN.Core.NWScript.GetIsAreaAboveGround(oArea);
+            return (AreaType)NWN.Core.NWScript.GetIsAreaAboveGround(oArea);
         }
 
         /// <summary>
@@ -7916,9 +7930,9 @@ namespace NWN.Xenomech.API
         ///  Queries the current value of the appearance settings on an item. The parameters are<br/>
         ///  identical to those of CopyItemAndModify().
         /// </summary>
-        public static int GetItemAppearance(uint oItem, int nType, int nIndex)
+        public static ItemAppearanceType GetItemAppearance(uint oItem, ItemAppearanceType nType, int nIndex)
         {
-            return NWN.Core.NWScript.GetItemAppearance(oItem, nType, nIndex);
+            return (ItemAppearanceType)NWN.Core.NWScript.GetItemAppearance(oItem, (int)nType, nIndex);
         }
 
         /// <summary>
@@ -7942,9 +7956,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Gets the status of ACTION_MODE_* modes on a creature.
         /// </summary>
-        public static int GetActionMode(uint oCreature, int nMode)
+        public static bool GetActionMode(uint oCreature, ActionModeType nMode)
         {
-            return NWN.Core.NWScript.GetActionMode(oCreature, nMode);
+            return NWN.Core.NWScript.GetActionMode(oCreature, (int)nMode) == 1;
         }
 
         /// <summary>
@@ -7993,9 +8007,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Returns the lootable state of a creature.
         /// </summary>
-        public static int GetLootable(uint oCreature)
+        public static bool GetLootable(uint oCreature)
         {
-            return NWN.Core.NWScript.GetLootable(oCreature);
+            return NWN.Core.NWScript.GetLootable(oCreature) == 1;
         }
 
         /// <summary>
@@ -8021,9 +8035,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Returns true if the item is cursed and cannot be dropped
         /// </summary>
-        public static int GetItemCursedFlag(uint oItem)
+        public static bool GetItemCursedFlag(uint oItem)
         {
-            return NWN.Core.NWScript.GetItemCursedFlag(oItem);
+            return NWN.Core.NWScript.GetItemCursedFlag(oItem) == 1;
         }
 
         /// <summary>
@@ -8054,9 +8068,9 @@ namespace NWN.Xenomech.API
         ///  Returns the associate type of the specified creature.<br/>
         ///  - Returns ASSOCIATE_TYPE_NONE if the creature is not the associate of anyone.
         /// </summary>
-        public static int GetAssociateType(uint oAssociate)
+        public static AssociateType GetAssociateType(uint oAssociate)
         {
-            return NWN.Core.NWScript.GetAssociateType(oAssociate);
+            return (AssociateType)NWN.Core.NWScript.GetAssociateType(oAssociate);
         }
 
         /// <summary>
@@ -8095,9 +8109,9 @@ namespace NWN.Xenomech.API
         ///  PLEASE NOTE: This is an expensive function and may<br/>
         ///               degrade performance if used frequently.
         /// </summary>
-        public static int LineOfSightObject(uint oSource, uint oTarget)
+        public static bool LineOfSightObject(uint oSource, uint oTarget)
         {
-            return NWN.Core.NWScript.LineOfSightObject(oSource, oTarget);
+            return NWN.Core.NWScript.LineOfSightObject(oSource, oTarget) == 1;
         }
 
         /// <summary>
@@ -8110,9 +8124,9 @@ namespace NWN.Xenomech.API
         ///  PLEASE NOTE: This is an expensive function and may<br/>
         ///               degrade performance if used frequently.
         /// </summary>
-        public static int LineOfSightVector(System.Numerics.Vector3 vSource, System.Numerics.Vector3 vTarget)
+        public static bool LineOfSightVector(System.Numerics.Vector3 vSource, System.Numerics.Vector3 vTarget)
         {
-            return NWN.Core.NWScript.LineOfSightVector(vSource, vTarget);
+            return NWN.Core.NWScript.LineOfSightVector(vSource, vTarget) == 1;
         }
 
         /// <summary>
@@ -8122,9 +8136,9 @@ namespace NWN.Xenomech.API
         ///    no valid class (placeables, etc...)<br/>
         ///  If used in an Area of Effect script it will return the creators spellcasting class.
         /// </summary>
-        public static int GetLastSpellCastClass()
+        public static ClassType GetLastSpellCastClass()
         {
-            return NWN.Core.NWScript.GetLastSpellCastClass();
+            return (ClassType)NWN.Core.NWScript.GetLastSpellCastClass();
         }
 
         /// <summary>
@@ -8230,9 +8244,9 @@ namespace NWN.Xenomech.API
         ///  Returns the default package selected for this creature to level up with<br/>
         ///  - returns PACKAGE_INVALID if error occurs
         /// </summary>
-        public static int GetCreatureStartingPackage(uint oCreature)
+        public static PackageType GetCreatureStartingPackage(uint oCreature)
         {
-            return NWN.Core.NWScript.GetCreatureStartingPackage(oCreature);
+            return (PackageType)NWN.Core.NWScript.GetCreatureStartingPackage(oCreature);
         }
 
         /// <summary>
@@ -8249,9 +8263,9 @@ namespace NWN.Xenomech.API
         ///  This function will tell you if the creature has triggered an onEnter event,<br/>
         ///  not if it is physically within the space of the subarea
         /// </summary>
-        public static int GetIsInSubArea(uint oCreature, uint oSubArea = OBJECT_INVALID)
+        public static bool GetIsInSubArea(uint oCreature, uint oSubArea = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetIsInSubArea(oCreature, oSubArea);
+            return NWN.Core.NWScript.GetIsInSubArea(oCreature, oSubArea) == 1;
         }
 
         /// <summary>
@@ -8291,17 +8305,18 @@ namespace NWN.Xenomech.API
         ///  Is this creature able to be disarmed? (checks disarm flag on creature, and if<br/>
         ///  the creature actually has a weapon equipped in their right hand that is droppable)
         /// </summary>
-        public static int GetIsCreatureDisarmable(uint oCreature)
+        public static bool GetIsCreatureDisarmable(uint oCreature)
         {
-            return NWN.Core.NWScript.GetIsCreatureDisarmable(oCreature);
+            return NWN.Core.NWScript.GetIsCreatureDisarmable(oCreature) == 1;
         }
+
 
         /// <summary>
         ///  Sets whether this item is &apos;stolen&apos; or not
         /// </summary>
-        public static void SetStolenFlag(uint oItem, int nStolenFlag)
+        public static void SetStolenFlag(uint oItem, bool nStolenFlag)
         {
-            NWN.Core.NWScript.SetStolenFlag(oItem, nStolenFlag);
+            NWN.Core.NWScript.SetStolenFlag(oItem, nStolenFlag ? 1 : 0);
         }
 
         /// <summary>
@@ -8335,9 +8350,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Returns the creature&apos;s currently set PhenoType (body type).
         /// </summary>
-        public static int GetPhenoType(uint oCreature)
+        public static Phenotype GetPhenoType(uint oCreature)
         {
-            return NWN.Core.NWScript.GetPhenoType(oCreature);
+            return (Phenotype)NWN.Core.NWScript.GetPhenoType(oCreature);
         }
 
         /// <summary>
@@ -8351,9 +8366,9 @@ namespace NWN.Xenomech.API
         ///  SetPhenoType will only work on part based creature (i.e. the starting<br/>
         ///  default playable races).
         /// </summary>
-        public static void SetPhenoType(int nPhenoType, uint oCreature = OBJECT_INVALID)
+        public static void SetPhenoType(Phenotype nPhenoType, uint oCreature = OBJECT_INVALID)
         {
-            NWN.Core.NWScript.SetPhenoType(nPhenoType, oCreature);
+            NWN.Core.NWScript.SetPhenoType((int)nPhenoType, oCreature);
         }
 
         /// <summary>
@@ -8381,9 +8396,9 @@ namespace NWN.Xenomech.API
         ///  Returns false if the player is not in cutscene mode, or on an error<br/>
         ///  (such as specifying a non creature object).
         /// </summary>
-        public static int GetCutsceneMode(uint oCreature = OBJECT_INVALID)
+        public static bool GetCutsceneMode(uint oCreature = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetCutsceneMode(oCreature);
+            return NWN.Core.NWScript.GetCutsceneMode(oCreature) == 1;
         }
 
         /// <summary>
@@ -8393,9 +8408,9 @@ namespace NWN.Xenomech.API
         ///  If no valid area (or object) is specified, it uses the area of caller.<br/>
         ///  If an object other than an area is specified, will use the area that the object is currently in.
         /// </summary>
-        public static int GetSkyBox(uint oArea = OBJECT_INVALID)
+        public static SkyboxType GetSkyBox(uint oArea = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetSkyBox(oArea);
+            return (SkyboxType)NWN.Core.NWScript.GetSkyBox(oArea);
         }
 
         /// <summary>
@@ -8405,9 +8420,9 @@ namespace NWN.Xenomech.API
         ///  If no valid area (or object) is specified, it uses the area of caller.<br/>
         ///  If an object other than an area is specified, will use the area that the object is currently in.
         /// </summary>
-        public static int GetFogColor(FogType nFogType, uint oArea = OBJECT_INVALID)
+        public static FogColorType GetFogColor(FogType nFogType, uint oArea = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetFogColor((int)nFogType, oArea);
+            return (FogColorType)NWN.Core.NWScript.GetFogColor((int)nFogType, oArea);
         }
 
         /// <summary>
@@ -8437,9 +8452,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Returns true if the item CAN be pickpocketed
         /// </summary>
-        public static int GetPickpocketableFlag(uint oItem)
+        public static bool GetPickpocketableFlag(uint oItem)
         {
-            return NWN.Core.NWScript.GetPickpocketableFlag(oItem);
+            return NWN.Core.NWScript.GetPickpocketableFlag(oItem) == 1;
         }
 
         /// <summary>
@@ -8459,9 +8474,9 @@ namespace NWN.Xenomech.API
         ///  returns FOOTSTEP_TYPE_INVALID if used on a non-creature object, or if<br/>
         ///  used on creature that has no footstep sounds by default (e.g. Will-O&apos;-Wisp).
         /// </summary>
-        public static int GetFootstepType(uint oCreature = OBJECT_INVALID)
+        public static FootstepType GetFootstepType(uint oCreature = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetFootstepType(oCreature);
+            return (FootstepType)NWN.Core.NWScript.GetFootstepType(oCreature);
         }
 
         /// <summary>
@@ -8506,9 +8521,9 @@ namespace NWN.Xenomech.API
         ///  if the creature has no wings, or if the creature can not have its<br/>
         ///  wing type changed in the toolset.
         /// </summary>
-        public static int GetCreatureWingType(uint oCreature = OBJECT_INVALID)
+        public static CreatureWingType GetCreatureWingType(uint oCreature = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetCreatureWingType(oCreature);
+            return (CreatureWingType)NWN.Core.NWScript.GetCreatureWingType(oCreature);
         }
 
         /// <summary>
@@ -8526,9 +8541,9 @@ namespace NWN.Xenomech.API
         ///  The MODELTYPE for the part based (playable) races &apos;P&apos;<br/>
         ///  and MODELTYPE &apos;W&apos; in the appearance.2da
         /// </summary>
-        public static void SetCreatureWingType(int nWingType, uint oCreature = OBJECT_INVALID)
+        public static void SetCreatureWingType(CreatureWingType nWingType, uint oCreature = OBJECT_INVALID)
         {
-            NWN.Core.NWScript.SetCreatureWingType(nWingType, oCreature);
+            NWN.Core.NWScript.SetCreatureWingType((int)nWingType, oCreature);
         }
 
         /// <summary>
@@ -8564,9 +8579,9 @@ namespace NWN.Xenomech.API
         ///       CREATURE_PART_LEFT_HAND<br/>
         ///       CREATURE_PART_HEAD
         /// </summary>
-        public static int GetCreatureBodyPart(int nPart, uint oCreature = OBJECT_INVALID)
+        public static int GetCreatureBodyPart(CreaturePartType nPart, uint oCreature = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetCreatureBodyPart(nPart, oCreature);
+            return NWN.Core.NWScript.GetCreatureBodyPart((int)nPart, oCreature);
         }
 
         /// <summary>
@@ -8603,9 +8618,9 @@ namespace NWN.Xenomech.API
         ///  Note: Only part based creature appearance types are supported.<br/>
         ///  i.e. The model types for the playable races (&apos;P&apos;) in the appearance.2da
         /// </summary>
-        public static void SetCreatureBodyPart(int nPart, int nModelNumber, uint oCreature = OBJECT_INVALID)
+        public static void SetCreatureBodyPart(CreaturePartType nPart, int nModelNumber, uint oCreature = OBJECT_INVALID)
         {
-            NWN.Core.NWScript.SetCreatureBodyPart(nPart, nModelNumber, oCreature);
+            NWN.Core.NWScript.SetCreatureBodyPart((int)nPart, nModelNumber, oCreature);
         }
 
         /// <summary>
@@ -8618,9 +8633,9 @@ namespace NWN.Xenomech.API
         ///  if the creature has no Tail, or if the creature can not have its<br/>
         ///  Tail type changed in the toolset.
         /// </summary>
-        public static int GetCreatureTailType(uint oCreature = OBJECT_INVALID)
+        public static CreatureTailType GetCreatureTailType(uint oCreature = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetCreatureTailType(oCreature);
+            return (CreatureTailType)NWN.Core.NWScript.GetCreatureTailType(oCreature);
         }
 
         /// <summary>
@@ -8635,9 +8650,9 @@ namespace NWN.Xenomech.API
         ///  The MODELTYPE for the part based (playable) races &apos;P&apos;<br/>
         ///  and MODELTYPE &apos;T&apos; in the appearance.2da
         /// </summary>
-        public static void SetCreatureTailType(int nTailType, uint oCreature = OBJECT_INVALID)
+        public static void SetCreatureTailType(CreatureTailType nTailType, uint oCreature = OBJECT_INVALID)
         {
-            NWN.Core.NWScript.SetCreatureTailType(nTailType, oCreature);
+            NWN.Core.NWScript.SetCreatureTailType((int)nTailType, oCreature);
         }
 
         /// <summary>
@@ -8883,9 +8898,9 @@ namespace NWN.Xenomech.API
         ///  - oTrapObject: a placeable, door or trigger<br/>
         ///  * Returns true if oTrapObject can be recovered.
         /// </summary>
-        public static int GetTrapRecoverable(uint oTrapObject)
+        public static bool GetTrapRecoverable(uint oTrapObject)
         {
-            return NWN.Core.NWScript.GetTrapRecoverable(oTrapObject);
+            return NWN.Core.NWScript.GetTrapRecoverable(oTrapObject) == 1;
         }
 
         /// <summary>
@@ -8942,9 +8957,9 @@ namespace NWN.Xenomech.API
         ///  - oTrapObject: a placeable, door or trigger<br/>
         ///  * Returns true if oTrapObject is active
         /// </summary>
-        public static int GetTrapActive(uint oTrapObject)
+        public static bool GetTrapActive(uint oTrapObject)
         {
-            return NWN.Core.NWScript.GetTrapActive(oTrapObject);
+            return NWN.Core.NWScript.GetTrapActive(oTrapObject) == 1;
         }
 
         /// <summary>
@@ -9017,9 +9032,9 @@ namespace NWN.Xenomech.API
         ///  An infinite item will still be available to purchase from a store after a player<br/>
         ///  buys the item (non-infinite items will disappear from the store when purchased).
         /// </summary>
-        public static int GetInfiniteFlag(uint oItem)
+        public static bool GetInfiniteFlag(uint oItem)
         {
-            return NWN.Core.NWScript.GetInfiniteFlag(oItem);
+            return NWN.Core.NWScript.GetInfiniteFlag(oItem) == 1;
         }
 
         /// <summary>
@@ -9045,9 +9060,9 @@ namespace NWN.Xenomech.API
         ///  If no valid area (or object) is specified, it uses the area of the caller.<br/>
         ///  If an object other than an area is specified, will use the area that the object is currently in.
         /// </summary>
-        public static int GetAreaSize(int nAreaDimension, uint oArea = OBJECT_INVALID)
+        public static AreaDimensionType GetAreaSize(int nAreaDimension, uint oArea = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetAreaSize(nAreaDimension, oArea);
+            return (AreaDimensionType)NWN.Core.NWScript.GetAreaSize(nAreaDimension, oArea);
         }
 
         /// <summary>
@@ -9194,9 +9209,9 @@ namespace NWN.Xenomech.API
         ///  * Returns -1 on error.<br/>
         ///  Note: Private tells do not trigger a OnPlayerChat event.
         /// </summary>
-        public static int GetPCChatVolume()
+        public static TalkVolumeType GetPCChatVolume()
         {
-            return NWN.Core.NWScript.GetPCChatVolume();
+            return (TalkVolumeType)NWN.Core.NWScript.GetPCChatVolume();
         }
 
         /// <summary>
@@ -9239,9 +9254,9 @@ namespace NWN.Xenomech.API
         ///                    COLOR_CHANNEL_TATTOO_2<br/>
         ///  * Returns -1 on error.
         /// </summary>
-        public static int GetColor(uint oObject, int nColorChannel)
+        public static int GetColor(uint oObject, ColorChannelType nColorChannel)
         {
-            return NWN.Core.NWScript.GetColor(oObject, nColorChannel);
+            return NWN.Core.NWScript.GetColor(oObject, (int)nColorChannel);
         }
 
         /// <summary>
@@ -9255,9 +9270,9 @@ namespace NWN.Xenomech.API
         ///                    COLOR_CHANNEL_TATTOO_2<br/>
         ///  - nColorValue: The color you want to set (0-175).
         /// </summary>
-        public static void SetColor(uint oObject, int nColorChannel, int nColorValue)
+        public static void SetColor(uint oObject, ColorChannelType nColorChannel, int nColorValue)
         {
-            NWN.Core.NWScript.SetColor(oObject, nColorChannel, nColorValue);
+            NWN.Core.NWScript.SetColor(oObject, (int)nColorChannel, nColorValue);
         }
 
         /// <summary>
@@ -9424,9 +9439,9 @@ namespace NWN.Xenomech.API
         ///    -2: Players in area.<br/>
         ///     1: Area destroyed successfully.
         /// </summary>
-        public static int DestroyArea(uint oArea)
+        public static AreaDestroyResultType DestroyArea(uint oArea)
         {
-            return NWN.Core.NWScript.DestroyArea(oArea);
+            return (AreaDestroyResultType)NWN.Core.NWScript.DestroyArea(oArea);
         }
 
         /// <summary>
@@ -9505,9 +9520,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Returns whether the provided item is hidden when equipped.
         /// </summary>
-        public static int GetHiddenWhenEquipped(uint oItem)
+        public static bool GetHiddenWhenEquipped(uint oItem)
         {
-            return NWN.Core.NWScript.GetHiddenWhenEquipped(oItem);
+            return NWN.Core.NWScript.GetHiddenWhenEquipped(oItem) == 1;
         }
 
         /// <summary>
@@ -9558,18 +9573,18 @@ namespace NWN.Xenomech.API
         ///  Does nothing for non-creatures.<br/>
         ///  Returns the previous state (or -1 if non-creature).
         /// </summary>
-        public static int SetCreatureExploresMinimap(uint creature, int newState)
+        public static int SetCreatureExploresMinimap(uint creature, bool newState)
         {
-            return NWN.Core.NWScript.SetCreatureExploresMinimap(creature, newState);
+            return NWN.Core.NWScript.SetCreatureExploresMinimap(creature, newState ? 1 : 0);
         }
 
         /// <summary>
         ///  Returns true if the creature is set to auto-explore the map as it walks around (on by default).<br/>
         ///  Returns false if creature is not actually a creature.
         /// </summary>
-        public static int GetCreatureExploresMinimap(uint creature)
+        public static bool GetCreatureExploresMinimap(uint creature)
         {
-            return NWN.Core.NWScript.GetCreatureExploresMinimap(creature);
+            return NWN.Core.NWScript.GetCreatureExploresMinimap(creature) == 1;
         }
 
         /// <summary>
@@ -9714,9 +9729,9 @@ namespace NWN.Xenomech.API
         ///  Get if oPlayer is currently connected over a relay (instead of directly).<br/>
         ///  Returns false for any other object, including OBJECT_INVALID.
         /// </summary>
-        public static int GetIsPlayerConnectionRelayed(uint oPlayer)
+        public static bool GetIsPlayerConnectionRelayed(uint oPlayer)
         {
-            return NWN.Core.NWScript.GetIsPlayerConnectionRelayed(oPlayer);
+            return NWN.Core.NWScript.GetIsPlayerConnectionRelayed(oPlayer) == 1;
         }
 
         /// <summary>
@@ -9734,9 +9749,9 @@ namespace NWN.Xenomech.API
         ///  Returns 1 on success, 0 on failure.<br/>
         ///  Will fail if oObject is invalid or does not have the requested handler.
         /// </summary>
-        public static int SetEventScript(uint oObject, int nHandler, string sScript)
+        public static int SetEventScript(uint oObject, EventScriptType nHandler, string sScript)
         {
-            return NWN.Core.NWScript.SetEventScript(oObject, nHandler, sScript);
+            return NWN.Core.NWScript.SetEventScript(oObject, (int)nHandler, sScript);
         }
 
         /// <summary>
@@ -9933,9 +9948,9 @@ namespace NWN.Xenomech.API
         ///  Unless custom content is used, only Wizards have spell schools<br/>
         ///  Returns -1 on error
         /// </summary>
-        public static int GetSpecialization(uint oCreature, ClassType nClass = ClassType.Wizard)
+        public static SpellSchoolType GetSpecialization(uint oCreature, ClassType nClass = ClassType.Wizard)
         {
-            return NWN.Core.NWScript.GetSpecialization(oCreature, (int)nClass);
+            return (SpellSchoolType)NWN.Core.NWScript.GetSpecialization(oCreature, (int)nClass);
         }
 
         /// <summary>
@@ -9944,9 +9959,9 @@ namespace NWN.Xenomech.API
         ///  Unless custom content is used, only Clerics have domains<br/>
         ///  Returns -1 on error
         /// </summary>
-        public static int GetDomain(uint oCreature, int nDomainIndex = 1, ClassType nClass = ClassType.Cleric)
+        public static DomainType GetDomain(uint oCreature, int nDomainIndex = 1, ClassType nClass = ClassType.Cleric)
         {
-            return NWN.Core.NWScript.GetDomain(oCreature, nDomainIndex, (int)nClass);
+            return (DomainType)NWN.Core.NWScript.GetDomain(oCreature, nDomainIndex, (int)nClass);
         }
 
         /// <summary>
@@ -10091,9 +10106,9 @@ namespace NWN.Xenomech.API
         ///  gained through a player login (as opposed to the DM client).<br/>
         ///  Note: GetIsDM() also returns true for player creature DMs.
         /// </summary>
-        public static int GetIsPlayerDM(uint oCreature)
+        public static bool GetIsPlayerDM(uint oCreature)
         {
-            return NWN.Core.NWScript.GetIsPlayerDM(oCreature);
+            return NWN.Core.NWScript.GetIsPlayerDM(oCreature) == 1;
         }
 
         /// <summary>
@@ -10343,9 +10358,9 @@ namespace NWN.Xenomech.API
         ///  Some events can run in the same script context as a previous event (for example: CreatureOnDeath, CreatureOnDamaged)<br/>
         ///  In cases like these calling the function with bInheritParent = true will return the wrong event ID.
         /// </summary>
-        public static int GetCurrentlyRunningEvent(bool bInheritParent = true)
+        public static EventScriptType GetCurrentlyRunningEvent(bool bInheritParent = true)
         {
-            return NWN.Core.NWScript.GetCurrentlyRunningEvent(bInheritParent ? 1 : 0);
+            return (EventScriptType)NWN.Core.NWScript.GetCurrentlyRunningEvent(bInheritParent ? 1 : 0);
         }
 
         /// <summary>
@@ -10410,9 +10425,9 @@ namespace NWN.Xenomech.API
         ///  * oTarget: a valid creature, placeable or item.<br/>
         ///  Returns: true if the baseitem type fits, false if not or on error.
         /// </summary>
-        public static int GetBaseItemFitsInInventory(BaseItemType nBaseItemType, uint oTarget)
+        public static bool GetBaseItemFitsInInventory(BaseItemType nBaseItemType, uint oTarget)
         {
-            return NWN.Core.NWScript.GetBaseItemFitsInInventory((int)nBaseItemType, oTarget);
+            return NWN.Core.NWScript.GetBaseItemFitsInInventory((int)nBaseItemType, oTarget) == 1;
         }
 
         /// <summary>
@@ -10506,6 +10521,25 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
+        /// Overrides a given strref to always return sValue instead of what is in the TLK file.<br/>
+        ///  Setting sValue to &amp;quot;&amp;quot; will delete the override
+        /// </summary>
+        public static void SetTlkOverride(int nStrRef, string sValue = "")
+        {
+            NWN.Core.NWScript.SetTlkOverride(nStrRef, sValue);
+        }
+
+        /// <summary>
+        /// Constructs a custom itemproperty given all the parameters explicitly.<br/>
+        ///  This function can be used in place of all the other ItemPropertyXxx constructors<br/>
+        ///  Use GetItemProperty{Type,SubType,CostTableValue,Param1Value} to see the values for a given itemproperty.
+        /// </summary>
+        public static System.IntPtr ItemPropertyCustom(int nType, int nSubType = -1, int nCostTableValue = -1, int nParam1Value = -1)
+        {
+            return NWN.Core.NWScript.ItemPropertyCustom(nType, nSubType, nCostTableValue, nParam1Value);
+        }
+
+        /// <summary>
         ///  Create a RunScript effect.<br/>
         ///  Notes: When applied as instant effect, only sOnAppliedScript will fire.<br/>
         ///         In the scripts, OBJECT_SELF will be the object the effect is applied to.<br/>
@@ -10535,9 +10569,9 @@ namespace NWN.Xenomech.API
         ///  Get the script type (RUNSCRIPT_EFFECT_SCRIPT_TYPE_*) of the last triggered EffectRunScript() script.<br/>
         ///  * Returns 0 when called outside of an EffectRunScript() script.
         /// </summary>
-        public static int GetLastRunScriptEffectScriptType()
+        public static RunScriptEffectScriptType GetLastRunScriptEffectScriptType()
         {
-            return NWN.Core.NWScript.GetLastRunScriptEffectScriptType();
+            return (RunScriptEffectScriptType)NWN.Core.NWScript.GetLastRunScriptEffectScriptType();
         }
 
         /// <summary>
@@ -10570,9 +10604,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Gets the last triggered GUIEVENT_* in the module OnPlayerGuiEvent event.
         /// </summary>
-        public static int GetLastGuiEventType()
+        public static GuiEventType GetLastGuiEventType()
         {
-            return NWN.Core.NWScript.GetLastGuiEventType();
+            return (GuiEventType)NWN.Core.NWScript.GetLastGuiEventType();
         }
 
         /// <summary>
@@ -10674,9 +10708,9 @@ namespace NWN.Xenomech.API
         ///  Describes the type of the given json value.<br/>
         ///  Returns JSON_TYPE_NULL if the value is empty.
         /// </summary>
-        public static int JsonGetType(System.IntPtr jValue)
+        public static JsonType JsonGetType(System.IntPtr jValue)
         {
-            return NWN.Core.NWScript.JsonGetType(jValue);
+            return (JsonType)NWN.Core.NWScript.JsonGetType(jValue);
         }
 
         /// <summary>
@@ -11067,17 +11101,17 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Returns the LANGUAGE_xx code of the given player, or -1 if unavailable.
         /// </summary>
-        public static int GetPlayerLanguage(uint oPlayer)
+        public static PlayerLanguageType GetPlayerLanguage(uint oPlayer)
         {
-            return NWN.Core.NWScript.GetPlayerLanguage(oPlayer);
+            return (PlayerLanguageType)NWN.Core.NWScript.GetPlayerLanguage(oPlayer);
         }
 
         /// <summary>
         ///  Returns one of PLAYER_DEVICE_PLATFORM_xxx, or 0 if unavailable.
         /// </summary>
-        public static int GetPlayerDevicePlatform(uint oPlayer)
+        public static PlayerDevicePlatformType GetPlayerDevicePlatform(uint oPlayer)
         {
-            return NWN.Core.NWScript.GetPlayerDevicePlatform(oPlayer);
+            return (PlayerDevicePlatformType)NWN.Core.NWScript.GetPlayerDevicePlatform(oPlayer);
         }
 
         /// <summary>
@@ -11228,6 +11262,62 @@ namespace NWN.Xenomech.API
         public static string NuiGetWindowId(uint oPlayer, int nUiToken)
         {
             return NWN.Core.NWScript.NuiGetWindowId(oPlayer, nUiToken);
+        }
+
+        /// <summary>
+        /// Gets the json value for the given player, token and bind.<br/>
+        ///  * json values can hold all kinds of values; but NUI widgets require specific bind types.<br/>
+        ///    It is up to you to either handle this in NWScript, or just set compatible bind types.<br/>
+        ///    No auto-conversion happens.<br/>
+        ///  Returns a json null value if the bind does not exist.
+        /// </summary>
+        public static System.IntPtr NuiGetBind(uint oPlayer, int nUiToken, string sBindName)
+        {
+            return NWN.Core.NWScript.NuiGetBind(oPlayer, nUiToken, sBindName);
+        }
+
+        /// <summary>
+        ///  Sets a json value for the given player, token and bind.<br/>
+        ///  The value is synced down to the client and can be used in UI binding.<br/>
+        ///  When the UI changes the value, it is returned to the server and can be retrieved via NuiGetBind().<br/>
+        ///  * json values can hold all kinds of values; but NUI widgets require specific bind types.<br/>
+        ///    It is up to you to either handle this in NWScript, or just set compatible bind types.<br/>
+        ///    No auto-conversion happens.<br/>
+        ///  * If the bind is on the watch list, this will immediately invoke the event handler with the &amp;quot;watch&amp;quot;<br/>
+        ///    even type; even before this function returns. Do not update watched binds from within the watch handler<br/>
+        ///    unless you enjoy stack overflows.<br/>
+        ///  Does nothing if the given player+token is invalid.
+        /// </summary>
+        public static void NuiSetBind(uint oPlayer, int nUiToken, string sBindName, System.IntPtr jValue)
+        {
+            NWN.Core.NWScript.NuiSetBind(oPlayer, nUiToken, sBindName, jValue);
+        }
+
+        /// <summary>
+        ///  Swaps out the given element (by id) with the given nui layout (partial).<br/>
+        ///  * This currently only works with the &amp;quot;group&amp;quot; element type, and the special &amp;quot;_window_&amp;quot; root group.
+        /// </summary>
+        public static void NuiSetGroupLayout(uint oPlayer, int nUiToken, string sElement, System.IntPtr jNui)
+        {
+            NWN.Core.NWScript.NuiSetGroupLayout(oPlayer, nUiToken, sElement, jNui);
+        }
+
+        /// <summary>
+        ///  Mark the given bind name as watched.<br/>
+        ///  A watched bind will invoke the NUI script event every time it&amp;apos;s value changes.<br/>
+        ///  Be careful with binding nui data inside a watch event handler: It&amp;apos;s easy to accidentally recurse yourself into a stack overflow.
+        /// </summary>
+        public static int NuiSetBindWatch(uint oPlayer, int nUiToken, string sBind, int bWatch)
+        {
+            return NWN.Core.NWScript.NuiSetBindWatch(oPlayer, nUiToken, sBind, bWatch);
+        }
+
+        ///  Returns the nNth window token of the player, or 0.<br/>
+        ///  nNth starts at 0.<br/>
+        ///  Iterator is not write-safe: Calling DestroyWindow() will invalidate move following offsets by one.
+        public static int NuiGetNthWindow(uint oPlayer, int nNth = 0)
+        {
+            return NWN.Core.NWScript.NuiGetNthWindow(oPlayer, nNth);
         }
 
         /// <summary>
@@ -11573,9 +11663,9 @@ namespace NWN.Xenomech.API
         ///  - nIndex: the index of the known spell. Bounds: 0 <= nIndex < GetKnownSpellCount()<br/>
         ///  Returns: a SPELL_* constant or -1 on error.
         /// </summary>
-        public static int GetKnownSpellId(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex)
+        public static SpellType GetKnownSpellId(uint oCreature, ClassType nClassType, int nSpellLevel, int nIndex)
         {
-            return NWN.Core.NWScript.GetKnownSpellId(oCreature, (int)nClassType, nSpellLevel, nIndex);
+            return (SpellType)NWN.Core.NWScript.GetKnownSpellId(oCreature, (int)nClassType, nSpellLevel, nIndex);
         }
 
         /// <summary>
@@ -11584,9 +11674,9 @@ namespace NWN.Xenomech.API
         ///  - nSpellId: a SPELL_* constant.<br/>
         ///  Returns: true if the spell is in the known spell list.
         /// </summary>
-        public static int GetIsInKnownSpellList(uint oCreature, ClassType nClassType, int nSpellId)
+        public static bool GetIsInKnownSpellList(uint oCreature, ClassType nClassType, int nSpellId)
         {
-            return NWN.Core.NWScript.GetIsInKnownSpellList(oCreature, (int)nClassType, nSpellId);
+            return NWN.Core.NWScript.GetIsInKnownSpellList(oCreature, (int)nClassType, nSpellId) == 1;
         }
 
         /// <summary>
@@ -11641,6 +11731,61 @@ namespace NWN.Xenomech.API
         public static float GetObjectVisibleDistance(uint oObject)
         {
             return NWN.Core.NWScript.GetObjectVisibleDistance(oObject);
+        }
+
+        /// <summary>
+        ///  Sets the active game pause state - same as if the player requested pause.
+        /// </summary>
+        public static void SetGameActivePause(PauseStateType bState)
+        {
+            NWN.Core.NWScript.SetGameActivePause((int)bState);
+        }
+
+        /// <summary>
+        ///  Returns &amp;gt;0 if the game is currently paused:<br/>
+        ///  - 0: Game is not paused.<br/>
+        ///  - 1: Timestop<br/>
+        ///  - 2: Active Player Pause (optionally on top of timestop)
+        /// </summary>
+        public static PauseStateType GetGamePauseState()
+        {
+            return (PauseStateType)NWN.Core.NWScript.GetGamePauseState();
+        }
+
+        /// <summary>
+        ///  Set the gender of oCreature.<br/>
+        ///  - nGender: a GENDER_* constant.
+        /// </summary>
+        public static void SetGender(uint oCreature, GenderType nGender)
+        {
+            NWN.Core.NWScript.SetGender(oCreature, (int)nGender);
+        }
+
+        /// <summary>
+        ///  Get the soundset of oCreature.<br/>
+        ///  Returns -1 on error.
+        /// </summary>
+        public static int GetSoundset(uint oCreature)
+        {
+            return NWN.Core.NWScript.GetSoundset(oCreature);
+        }
+
+        /// <summary>
+        ///  Set the soundset of oCreature, see soundset.2da for possible values.
+        /// </summary>
+        public static void SetSoundset(uint oCreature, int nSoundset)
+        {
+            NWN.Core.NWScript.SetSoundset(oCreature, nSoundset);
+        }
+
+        /// <summary>
+        ///  Ready a spell level for oCreature.<br/>
+        ///  - nSpellLevel: 0-9<br/>
+        ///  - nClassType: a CLASS_TYPE_* constant or CLASS_TYPE_INVALID to ready the spell level for all classes.
+        /// </summary>
+        public static void ReadySpellLevel(uint oCreature, int nSpellLevel, ClassType nClassType = ClassType.Invalid)
+        {
+            NWN.Core.NWScript.ReadySpellLevel(oCreature, nSpellLevel, (int)nClassType);
         }
 
         /// <summary>
@@ -11760,15 +11905,75 @@ namespace NWN.Xenomech.API
         }
 
         /// <summary>
+        ///  Get the current discoverability mask of oObject.<br/>
+        ///  Returns -1 if oObject cannot have a discovery mask.
+        /// </summary>
+        public static ObjectUIDiscoveryType GetObjectUiDiscoveryMask(uint oObject)
+        {
+            return (ObjectUIDiscoveryType)NWN.Core.NWScript.GetObjectUiDiscoveryMask(oObject);
+        }
+
+        /// <summary>
+        ///  Sets the discoverability mask on oObject.<br/>
+        ///  This allows toggling areahilite (TAB key by default) and mouseover discovery in the area view.<br/>
+        ///  * nMask is a bitmask of OBJECT_UI_DISCOVERY_*<br/>
+        ///  Will currently only work on Creatures, Doors (Hilite only), Items and Useable Placeables.<br/>
+        ///  Does not affect inventory items.
+        /// </summary>
+        public static void SetObjectUiDiscoveryMask(uint oObject, ObjectUIDiscoveryType nMask = ObjectUIDiscoveryType.Default)
+        {
+            NWN.Core.NWScript.SetObjectUiDiscoveryMask(oObject, (int)nMask);
+        }
+
+        /// <summary>
+        ///  Sets a text override for the mouseover/tab-highlight text bubble of oObject.<br/>
+        ///  Will currently only work on Creatures, Items and Useable Placeables.<br/>
+        ///  * nMode is one of OBJECT_UI_TEXT_BUBBLE_OVERRIDE_*.
+        /// </summary>
+        public static void SetObjectTextBubbleOverride(uint oObject, ObjectUITextBubbleOverrideType nMode, string sText)
+        {
+            NWN.Core.NWScript.SetObjectTextBubbleOverride(oObject, (int)nMode, sText);
+        }
+
+        /// <summary>
+        ///  Immediately unsets a VTs for the given object, with no lerp.<br/>
+        ///  * nScope: one of OBJECT_VISUAL_TRANSFORM_DATA_SCOPE_, or -1 for all scopes<br/>
+        ///  Returns TRUE only if transforms were successfully removed (valid object, transforms existed).
+        /// </summary>
+        public static bool ClearObjectVisualTransform(uint oObject, ObjectVisualTransformDataScopeType nScope = ObjectVisualTransformDataScopeType.All)
+        {
+            return NWN.Core.NWScript.ClearObjectVisualTransform(oObject, (int)nScope) == 1;
+        }
+
+        /// <summary>
+        ///  Gets an optional vecror of specific gui events in the module OnPlayerGuiEvent event.<br/>
+        ///  GUIEVENT_RADIAL_OPEN - World vector position of radial if on tile.
+        /// </summary>
+        public static System.Numerics.Vector3 GetLastGuiEventVector()
+        {
+            return NWN.Core.NWScript.GetLastGuiEventVector();
+        }
+
+        /// <summary>
+        ///  Sets oPlayer&amp;apos;s camera settings that override any client configuration settings<br/>
+        ///  nFlags is a bitmask of CAMERA_FLAG_* constants;<br/>
+        ///  NB: Like all other camera settings, this is not saved when saving the game
+        /// </summary>
+        public static void SetCameraFlags(uint oPlayer, CameraFlagType nFlags = CameraFlagType.None)
+        {
+            NWN.Core.NWScript.SetCameraFlags(oPlayer, (int)nFlags);
+        }
+
+        /// <summary>
         ///  Gets the light color in the area specified.<br/>
         ///  nColorType specifies the color type returned.<br/>
         ///     Valid values for nColorType are the AREA_LIGHT_COLOR_* values.<br/>
         ///  If no valid area (or object) is specified, it uses the area of caller.<br/>
         ///  If an object other than an area is specified, will use the area that the object is currently in.
         /// </summary>
-        public static int GetAreaLightColor(int nColorType, uint oArea = OBJECT_INVALID)
+        public static int GetAreaLightColor(AreaLightColorType nColorType, uint oArea = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetAreaLightColor(nColorType, oArea);
+            return NWN.Core.NWScript.GetAreaLightColor((int)nColorType, oArea);
         }
 
         /// <summary>
@@ -11785,9 +11990,9 @@ namespace NWN.Xenomech.API
         ///  If an object other than an area is specified, will use the area that the object is currently in.<br/>
         ///  If fFadeTime is above 0.0, it will fade to the new color in the amount of seconds specified.
         /// </summary>
-        public static void SetAreaLightColor(int nColorType, int nColor, uint oArea = OBJECT_INVALID, float fFadeTime = 0.0f)
+        public static void SetAreaLightColor(AreaLightColorType nColorType, FogColorType nColor, uint oArea = OBJECT_INVALID, float fFadeTime = 0.0f)
         {
-            NWN.Core.NWScript.SetAreaLightColor(nColorType, nColor, oArea, fFadeTime);
+            NWN.Core.NWScript.SetAreaLightColor((int)nColorType, (int)nColor, oArea, fFadeTime);
         }
 
         /// <summary>
@@ -11797,9 +12002,9 @@ namespace NWN.Xenomech.API
         ///  If no valid area (or object) is specified, it uses the area of caller.<br/>
         ///  If an object other than an area is specified, will use the area that the object is currently in.
         /// </summary>
-        public static System.Numerics.Vector3 GetAreaLightDirection(int nLightType, uint oArea = OBJECT_INVALID)
+        public static System.Numerics.Vector3 GetAreaLightDirection(AreaLightDirectionType nLightType, uint oArea = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetAreaLightDirection(nLightType, oArea);
+            return NWN.Core.NWScript.GetAreaLightDirection((int)nLightType, oArea);
         }
 
         /// <summary>
@@ -11810,9 +12015,9 @@ namespace NWN.Xenomech.API
         ///  If an object other than an area is specified, will use the area that the object is currently in.<br/>
         ///  If fFadeTime is above 0.0, it will fade to the new color in the amount of seconds specified.
         /// </summary>
-        public static void SetAreaLightDirection(int nLightType, System.Numerics.Vector3 vDirection, uint oArea = OBJECT_INVALID, float fFadeTime = 0.0f)
+        public static void SetAreaLightDirection(AreaLightDirectionType nLightType, System.Numerics.Vector3 vDirection, uint oArea = OBJECT_INVALID, float fFadeTime = 0.0f)
         {
-            NWN.Core.NWScript.SetAreaLightDirection(nLightType, vDirection, oArea, fFadeTime);
+            NWN.Core.NWScript.SetAreaLightDirection((int)nLightType, vDirection, oArea, fFadeTime);
         }
 
         /// <summary>
@@ -11887,9 +12092,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  Returns true if the given sLabel is a valid jump target at the current code location.
         /// </summary>
-        public static int GetIsValidJmp(string sLabel)
+        public static bool GetIsValidJmp(string sLabel)
         {
-            return NWN.Core.NWScript.GetIsValidJmp(sLabel);
+            return NWN.Core.NWScript.GetIsValidJmp(sLabel) == 1;
         }
 
         /// <summary>
@@ -11951,9 +12156,9 @@ namespace NWN.Xenomech.API
         /// <summary>
         ///  In the spell script returns the feat used, or -1 if no feat was used.
         /// </summary>
-        public static int GetSpellFeatId()
+        public static FeatType GetSpellFeatId()
         {
-            return NWN.Core.NWScript.GetSpellFeatId();
+            return (FeatType)NWN.Core.NWScript.GetSpellFeatId();
         }
 
         /// <summary>
@@ -11971,9 +12176,9 @@ namespace NWN.Xenomech.API
         ///  - nFeat: FEAT_*<br/>
         ///  - oCreature: Creature to check the feat of.
         /// </summary>
-        public static int GetFeatRemainingUses(int nFeat, uint oCreature = OBJECT_INVALID)
+        public static int GetFeatRemainingUses(FeatType nFeat, uint oCreature = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetFeatRemainingUses(nFeat, oCreature);
+            return NWN.Core.NWScript.GetFeatRemainingUses((int)nFeat, oCreature);
         }
 
         /// <summary>
@@ -12108,27 +12313,27 @@ namespace NWN.Xenomech.API
         ///  Returns the INVENTORY_SLOT_* constant of the last item equipped.  Can only be used in the<br/>
         ///  module&apos;s OnPlayerEquip event.  Returns -1 on error.
         /// </summary>
-        public static int GetPCItemLastEquippedSlot()
+        public static InventorySlotType GetPCItemLastEquippedSlot()
         {
-            return NWN.Core.NWScript.GetPCItemLastEquippedSlot();
+            return (InventorySlotType)NWN.Core.NWScript.GetPCItemLastEquippedSlot();
         }
 
         /// <summary>
         ///  Returns the INVENTORY_SLOT_* constant of the last item unequipped.  Can only be used in the<br/>
         ///  module&apos;s OnPlayerUnequip event.  Returns -1 on error.
         /// </summary>
-        public static int GetPCItemLastUnequippedSlot()
+        public static InventorySlotType GetPCItemLastUnequippedSlot()
         {
-            return NWN.Core.NWScript.GetPCItemLastUnequippedSlot();
+            return (InventorySlotType)NWN.Core.NWScript.GetPCItemLastUnequippedSlot();
         }
 
         /// <summary>
         ///  Returns true if the last spell was cast spontaneously<br/>
         ///  eg; a Cleric casting SPELL_CURE_LIGHT_WOUNDS when it is not prepared, using another level 1 slot
         /// </summary>
-        public static int GetSpellCastSpontaneously()
+        public static bool GetSpellCastSpontaneously()
         {
-            return NWN.Core.NWScript.GetSpellCastSpontaneously();
+            return NWN.Core.NWScript.GetSpellCastSpontaneously() == 1;
         }
 
         /// <summary>
@@ -12341,9 +12546,9 @@ namespace NWN.Xenomech.API
         ///  - nIndex: the index of the spell ability. Bounds: 0 &lt;= nIndex &lt; GetSpellAbilityCount()<br/>
         ///  Returns: a SPELL_* constant or -1 if the slot is not set.
         /// </summary>
-        public static int GetSpellAbilitySpell(uint oCreature, int nIndex)
+        public static SpellType GetSpellAbilitySpell(uint oCreature, int nIndex)
         {
-            return NWN.Core.NWScript.GetSpellAbilitySpell(oCreature, nIndex);
+            return (SpellType)NWN.Core.NWScript.GetSpellAbilitySpell(oCreature, nIndex);
         }
 
         /// <summary>
@@ -12361,9 +12566,9 @@ namespace NWN.Xenomech.API
         ///  - nIndex: the index of the spell ability. Bounds: 0 &lt;= nIndex &lt; GetSpellAbilityCount()<br/>
         ///  Returns: true/FALSE or -1 if the slot is not set.
         /// </summary>
-        public static int GetSpellAbilityReady(uint oCreature, int nIndex)
+        public static bool GetSpellAbilityReady(uint oCreature, int nIndex)
         {
-            return NWN.Core.NWScript.GetSpellAbilityReady(oCreature, nIndex);
+            return NWN.Core.NWScript.GetSpellAbilityReady(oCreature, nIndex) == 1;
         }
 
         /// <summary>
@@ -12481,9 +12686,9 @@ namespace NWN.Xenomech.API
         ///  Returns true if resting is not allowed in the area.<br/>
         ///  Passing in OBJECT_INVALID to parameter oArea will result in operating on the area of the caller.
         /// </summary>
-        public static int GetAreaNoRestFlag(uint oArea = OBJECT_INVALID)
+        public static bool GetAreaNoRestFlag(uint oArea = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetAreaNoRestFlag(oArea);
+            return NWN.Core.NWScript.GetAreaNoRestFlag(oArea) == 1;
         }
 
         /// <summary>

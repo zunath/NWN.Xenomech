@@ -2,6 +2,7 @@ namespace NWN.Xenomech.API.Constants
 {
     public enum FeatType
     {
+        Invalid = -1,
         Alertness = 0,
         Ambidexterity = 1,
         ArmorProficiencyHeavy = 2,

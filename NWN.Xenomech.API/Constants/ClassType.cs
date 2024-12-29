@@ -2,6 +2,7 @@ namespace NWN.Xenomech.API.Constants
 {
     public enum ClassType
     {
+        Error = -1,
         Barbarian = 0,
         Bard = 1,
         Cleric = 2,

@@ -2,6 +2,7 @@ namespace NWN.Xenomech.API.Constants
 {
     public enum CameraFlagType
     {
+        None = 0,
         EnableCollision = 1,
         DisableCollision = 2,
         DisableShake = 4,

@@ -2,6 +2,7 @@ namespace NWN.Xenomech.API.Constants
 {
     public enum ObjectVisualTransformDataScopeType
     {
+        All = -1,
         Base = 0,
         CreatureHead = 254,
         CreatureTail = 253,

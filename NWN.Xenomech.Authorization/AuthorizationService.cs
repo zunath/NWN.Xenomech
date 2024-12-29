@@ -5,7 +5,6 @@ using System.Linq;
 using Anvil.API;
 using Anvil.API.Events;
 using NLog;
-using NWN.Core;
 using NWN.Xenomech.Core;
 
 namespace NWN.Xenomech.Authorization
@@ -35,7 +34,7 @@ namespace NWN.Xenomech.Authorization
         private void OnModuleEnter(ModuleEvents.OnClientEnter obj)
         {
             var dm = GetEnteringObject();
-            if (GetIsDM(dm) == 0 && GetIsDMPossessed(dm) == 0) 
+            if (GetIsDM(dm) && GetIsDMPossessed(dm)) 
                 return;
 
             var authorizationLevel = GetAuthorizationLevel(dm);
@@ -49,7 +48,7 @@ namespace NWN.Xenomech.Authorization
             }
 
             LogDMAuthorization(true);
-            NWScript.ExecuteScript("dmfi_onclienter", OBJECT_SELF);
+            ExecuteScript("dmfi_onclienter", OBJECT_SELF);
         }
 
         /// <summary>
