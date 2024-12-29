@@ -160,9 +160,9 @@
         /// </summary>
         /// <param name="option">The administration option to retrieve.</param>
         /// <returns>The current setting for the option.</returns>
-        public static int GetPlayOption(AdminOptionType option)
+        public static AdminOptionType GetPlayOption(AdminOptionType option)
         {
-            return NWN.Core.NWNX.AdminPlugin.GetPlayOption((int)option);
+            return (AdminOptionType)NWN.Core.NWNX.AdminPlugin.GetPlayOption((int)option);
         }
 
         /// <summary>
@@ -191,9 +191,9 @@
         /// </summary>
         /// <param name="type">The debug type to retrieve.</param>
         /// <returns>The current debug value.</returns>
-        public static int GetDebugValue(AdminDebugType type)
+        public static AdminDebugType GetDebugValue(AdminDebugType type)
         {
-            return NWN.Core.NWNX.AdminPlugin.GetDebugValue((int)type);
+            return (AdminDebugType)NWN.Core.NWNX.AdminPlugin.GetDebugValue((int)type);
         }
 
         /// <summary>
@@ -249,6 +249,5 @@
         {
             NWN.Core.NWNX.AdminPlugin.SetMaxLevel(level);
         }
-
     }
 }
