@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Collections.Generic;
 using Anvil.Services;
 using XM.Authorization;
 using XM.Core;
@@ -28,6 +26,7 @@ namespace XM.ChatCommand.Commands
 
         public Dictionary<string, ChatCommandDetail> BuildChatCommands()
         {
+            ListEmotesCommand();
             Help();
 
             return _builder.Build();
@@ -57,6 +56,14 @@ namespace XM.ChatCommand.Commands
                         SendMessageToPC(user, _help.HelpTextPlayer);
                     }
                 });
+        }
+
+        private void ListEmotesCommand()
+        {
+            _builder.Create("emotes")
+                .Description("Displays all emotes available to you.")
+                .Permissions(AuthorizationLevel.All)
+                .Action((user, target, location, args) => { SendMessageToPC(user, _help.HelpTextEmote); });
         }
     }
 }

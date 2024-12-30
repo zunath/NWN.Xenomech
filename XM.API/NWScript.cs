@@ -1915,9 +1915,9 @@ namespace XM.API
         ///  - nMissEffect: if this is true, a random vector near or past the target will<br/>
         ///    be generated, on which to play the effect
         /// </summary>
-        public static Effect EffectVisualEffect(int nVisualEffectId, bool nMissEffect = false, float fScale = 1.0f, Vector3 vTranslate = default, Vector3 vRotate = default)
+        public static Effect EffectVisualEffect(VisualEffectType nVisualEffectId, bool nMissEffect = false, float fScale = 1.0f, Vector3 vTranslate = default, Vector3 vRotate = default)
         {
-            return NWN.Core.NWScript.EffectVisualEffect(nVisualEffectId, nMissEffect ? 1 : 0, fScale, vTranslate, vRotate);
+            return NWN.Core.NWScript.EffectVisualEffect((int)nVisualEffectId, nMissEffect ? 1 : 0, fScale, vTranslate, vRotate);
         }
 
         /// <summary>
