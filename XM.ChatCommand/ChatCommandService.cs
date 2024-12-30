@@ -12,35 +12,31 @@ using Location = XM.API.BaseTypes.Location;
 namespace XM.ChatCommand
 {
     [ServiceBinding(typeof(ChatCommandService))]
-    public class ChatCommandService: IInitializable
+    internal class ChatCommandService: IInitializable
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-        private readonly List<IChatCommandListDefinition> _definitions;
+        [Inject]
+        public IList<IChatCommandListDefinition> Definitions { get; set; }
+
         private readonly Dictionary<string, ChatCommandDetail> _chatCommands;
         internal readonly Dictionary<string, ChatCommandDetail> EmoteCommands;
 
-        public string HelpTextPlayer { get; private set; }
-        public string HelpTextEmote { get; private set; }
-        public string HelpTextDM { get; private set; }
-        public string HelpTextAdmin { get; private set; }
-
         private readonly XMSettingsService _settings;
         private readonly AuthorizationService _authorization;
-        private readonly Targeting _targeting;
+        private readonly ChatCommandHelpService _help;
 
         public ChatCommandService(
             XMSettingsService settings, 
             AuthorizationService authorization,
-            Targeting targeting)
+            ChatCommandHelpService help)
         {
-            _definitions = new List<IChatCommandListDefinition>();
             _chatCommands = new Dictionary<string, ChatCommandDetail>();
             EmoteCommands = new Dictionary<string, ChatCommandDetail>();
 
             _settings = settings;
             _authorization = authorization;
-            _targeting = targeting;
+            _help = help;
 
             HookEvents();
         }
@@ -49,6 +45,7 @@ namespace XM.ChatCommand
         {
             NwModule.Instance.OnChatMessageSend += OnPlayerChat;
         }
+
 
         private void OnPlayerChat(OnChatMessageSend obj)
         {
@@ -103,7 +100,7 @@ namespace XM.ChatCommand
                     chatCommand.Authorization.HasFlag(authorization))
                 {
                     var message = Localization.GetString(LocalizationIds.SelectATarget);
-                    _targeting.StartTargetingMode(sender, chatCommand.ValidTargetTypes, message,
+                    Targeting.EnterTargetingMode(sender, chatCommand.ValidTargetTypes, message,
                     target =>
                     {
                         var location = GetIsObjectValid(target)
@@ -124,13 +121,12 @@ namespace XM.ChatCommand
             LoadCommands();
             BuildHelpText();
 
-
             _logger.Info($"Loaded {_chatCommands.Count} chat commands.");
         }
 
         private void LoadCommands()
         {
-            foreach (var definition in _definitions)
+            foreach (var definition in Definitions)
             {
                 var commands = definition.BuildChatCommands();
                 foreach (var (command, detail) in commands)
@@ -147,11 +143,6 @@ namespace XM.ChatCommand
                     }
                 }
             }
-        }
-
-        public void Register(IChatCommandListDefinition chatCommandList)
-        {
-            _definitions.Add(chatCommandList);
         }
 
         /// <summary>
@@ -171,24 +162,24 @@ namespace XM.ChatCommand
                 {
                     if (definition.IsEmote)
                     {
-                        HelpTextEmote += ColorToken.Green("/" + text) + ColorToken.White(": " + definition.Description) + "\n";
+                        _help.HelpTextEmote += ColorToken.Green("/" + text) + ColorToken.White(": " + definition.Description) + "\n";
                     }
                     else
                     {
-                        HelpTextPlayer += ColorToken.Green("/" + text) + ColorToken.White(": " + definition.Description) + "\n";
+                        _help.HelpTextPlayer += ColorToken.Green("/" + text) + ColorToken.White(": " + definition.Description) + "\n";
                     }
                 }
 
                 if (definition.Authorization.HasFlag(AuthorizationLevel.DM))
                 {
                     if (!definition.IsEmote)
-                        HelpTextDM += ColorToken.Green("/" + text) + ColorToken.White(": " + definition.Description) + "\n";
+                        _help.HelpTextDM += ColorToken.Green("/" + text) + ColorToken.White(": " + definition.Description) + "\n";
                 }
 
                 if (definition.Authorization.HasFlag(AuthorizationLevel.Admin))
                 {
                     if (!definition.IsEmote)
-                        HelpTextAdmin += ColorToken.Green("/" + text) + ColorToken.White(": " + definition.Description) + "\n";
+                        _help.HelpTextAdmin += ColorToken.Green("/" + text) + ColorToken.White(": " + definition.Description) + "\n";
                 }
             }
         }

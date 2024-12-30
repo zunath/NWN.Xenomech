@@ -25,16 +25,11 @@ namespace XM.Authorization
             _settings = settings;
 
             HookEvents();
-            RegisterEntities();
         }
 
         private void HookEvents()
         {
             NwModule.Instance.OnClientEnter += OnModuleEnter;
-        }
-        private void RegisterEntities()
-        {
-            _db.Register<AuthorizedDM>();
         }
 
         private void OnModuleEnter(ModuleEvents.OnClientEnter obj)
