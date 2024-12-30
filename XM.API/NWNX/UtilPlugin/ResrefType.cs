@@ -1,7 +1,7 @@
 
 namespace XM.API.NWNX.UtilPlugin
 {
-    public enum ResrefType
+    public enum ResRefType
     {
         Nss = NWN.Core.NWNX.UtilPlugin.NWNX_UTIL_RESREF_TYPE_NSS,
         Ncs = NWN.Core.NWNX.UtilPlugin.NWNX_UTIL_RESREF_TYPE_NCS,
