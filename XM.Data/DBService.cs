@@ -13,7 +13,7 @@ using XM.Core;
 namespace XM.Data
 {
     [ServiceBinding(typeof(DBService))]
-    public class DBService : IDisposable, IUpdateable
+    public class DBService : IDisposable, IUpdateable, IInitializable
     {
         private readonly XMSettingsService _settings;
         private ConnectionMultiplexer _multiplexer;
@@ -22,12 +22,31 @@ namespace XM.Data
         private readonly Dictionary<Type, List<string>> _indexedPropertiesByName = new();
         private readonly Dictionary<string, IDBEntity> _cachedEntities = new();
 
+        [Inject]
+        public IList<IDBEntity> Entities { get; set; }
+
         public DBService(XMSettingsService settings)
         {
             NReJSONSerializer.SerializerProxy = new XMJsonSerializer();
             _settings = settings;
 
             Start();
+        }
+
+        public void Init()
+        {
+            foreach (var entity in Entities)
+            {
+                var type = entity.GetType();
+                // Register the type by itself first.
+                _keyPrefixByType[type] = type.Name;
+
+                // Register the search client.
+                _searchClientsByType[type] = new Client(type.Name, _multiplexer.GetDatabase());
+                ProcessIndex(entity);
+
+                Console.WriteLine($"Registered type '{entity.GetType()}' using key prefix {type.Name}");
+            }
         }
 
         public void Start()
@@ -47,21 +66,6 @@ namespace XM.Data
                 Thread.Sleep(100);
             }
             Console.WriteLine($"Database connection established.");
-        }
-
-        public void Register<T>()
-            where T : IDBEntity
-        {
-            var entity = (EntityBase)Activator.CreateInstance(typeof(T));
-            var type = entity.GetType();
-            // Register the type by itself first.
-            _keyPrefixByType[type] = type.Name;
-
-            // Register the search client.
-            _searchClientsByType[type] = new Client(type.Name, _multiplexer.GetDatabase());
-            ProcessIndex(entity);
-
-            Console.WriteLine($"Registered type '{entity.GetType()}' using key prefix {type.Name}");
         }
 
         /// <summary>
@@ -148,7 +152,7 @@ namespace XM.Data
         /// Processes the Redis Search index with the latest changes.
         /// </summary>
         /// <param name="entity"></param>
-        private void ProcessIndex(EntityBase entity)
+        private void ProcessIndex(IDBEntity entity)
         {
             var type = entity.GetType();
 
@@ -290,5 +294,6 @@ namespace XM.Data
         {
             _cachedEntities.Clear();
         }
+
     }
 }

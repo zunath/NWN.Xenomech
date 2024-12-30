@@ -1,5 +1,8 @@
-﻿namespace XM.Data.Entity
+﻿using Anvil.Services;
+
+namespace XM.Data.Entity
 {
+    [ServiceBinding(typeof(IDBEntity))]
     public class Account: EntityBase
     {
         public Account()
