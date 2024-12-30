@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Anvil.API;
+using Anvil.API.Events;
 using Anvil.Services;
 using NLog;
-using XM.API.Constants;
 using XM.Core.EventManagement.CreatureEvent;
-using XM.Core.EventManagement.ModuleEvent;
+using EventScriptType = XM.API.Constants.EventScriptType;
 
 namespace XM.Core.EventManagement
 {
     [ServiceBinding(typeof(PlayerEventRegistrationService))]
-    [ServiceBinding(typeof(IOnModuleEnter))]
-    internal class PlayerEventRegistrationService: IOnModuleEnter
+    internal class PlayerEventRegistrationService
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -50,6 +50,34 @@ namespace XM.Core.EventManagement
         [Inject]
         public IList<ICreatureOnBlockedByDoor> PlayerOnBlockedByDoorSubscriptions { get; set; }
 
+        public PlayerEventRegistrationService()
+        {
+            NwModule.Instance.OnClientEnter += OnClientEnter;
+        }
+
+        private void OnClientEnter(ModuleEvents.OnClientEnter obj)
+        {
+            var player = GetEnteringObject();
+            SetPlayerScripts(player);
+        }
+        private void SetPlayerScripts(uint player)
+        {
+            if (!GetIsPC(player) || GetIsDM(player))
+                return;
+
+            SetEventScript(player, EventScriptType.CreatureOnHeartbeat, EventScript.PlayerOnHeartbeatScript);
+            SetEventScript(player, EventScriptType.CreatureOnNotice, EventScript.PlayerOnNoticeScript);
+            SetEventScript(player, EventScriptType.CreatureOnSpellCastAt, EventScript.PlayerOnSpellCastAtScript);
+            SetEventScript(player, EventScriptType.CreatureOnMeleeAttacked, EventScript.PlayerOnMeleeAttackedScript);
+            SetEventScript(player, EventScriptType.CreatureOnDamaged, EventScript.PlayerOnDamagedScript);
+            SetEventScript(player, EventScriptType.CreatureOnDisturbed, EventScript.PlayerOnDisturbedScript);
+            SetEventScript(player, EventScriptType.CreatureOnEndCombatRound, EventScript.PlayerOnEndCombatRoundScript);
+            SetEventScript(player, EventScriptType.CreatureOnSpawnIn, EventScript.PlayerOnSpawnInScript);
+            SetEventScript(player, EventScriptType.CreatureOnRested, EventScript.PlayerOnRestedScript);
+            SetEventScript(player, EventScriptType.CreatureOnDeath, EventScript.PlayerOnDeathScript);
+            SetEventScript(player, EventScriptType.CreatureOnUserDefinedEvent, EventScript.PlayerOnUserDefinedScript);
+            SetEventScript(player, EventScriptType.CreatureOnBlockedByDoor, EventScript.PlayerOnBlockedByDoorScript);
+        }
 
         [ScriptHandler(EventScript.PlayerOnHeartbeatScript)]
         public void HandlePlayerOnHeartbeat()
@@ -241,31 +269,6 @@ namespace XM.Core.EventManagement
                     _logger.Error(ex);
                 }
             }
-        }
-
-        private void SetPlayerScripts(uint player)
-        {
-            if (!GetIsPC(player) || GetIsDM(player))
-                return;
-
-            SetEventScript(player, EventScriptType.CreatureOnHeartbeat, EventScript.PlayerOnHeartbeatScript);
-            SetEventScript(player, EventScriptType.CreatureOnNotice, EventScript.PlayerOnNoticeScript);
-            SetEventScript(player, EventScriptType.CreatureOnSpellCastAt, EventScript.PlayerOnSpellCastAtScript);
-            SetEventScript(player, EventScriptType.CreatureOnMeleeAttacked, EventScript.PlayerOnMeleeAttackedScript);
-            SetEventScript(player, EventScriptType.CreatureOnDamaged, EventScript.PlayerOnDamagedScript);
-            SetEventScript(player, EventScriptType.CreatureOnDisturbed, EventScript.PlayerOnDisturbedScript);
-            SetEventScript(player, EventScriptType.CreatureOnEndCombatRound, EventScript.PlayerOnEndCombatRoundScript);
-            SetEventScript(player, EventScriptType.CreatureOnSpawnIn, EventScript.PlayerOnSpawnInScript);
-            SetEventScript(player, EventScriptType.CreatureOnRested, EventScript.PlayerOnRestedScript);
-            SetEventScript(player, EventScriptType.CreatureOnDeath, EventScript.PlayerOnDeathScript);
-            SetEventScript(player, EventScriptType.CreatureOnUserDefinedEvent, EventScript.PlayerOnUserDefinedScript);
-            SetEventScript(player, EventScriptType.CreatureOnBlockedByDoor, EventScript.PlayerOnBlockedByDoorScript);
-        }
-
-        public void OnModuleOnClientEnter()
-        {
-            var player = GetEnteringObject();
-            SetPlayerScripts(player);
         }
     }
 }

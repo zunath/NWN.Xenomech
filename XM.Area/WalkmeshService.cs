@@ -1,24 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using Anvil.API;
+using Anvil.API.Events;
 using Anvil.Services;
-using XM.API.BaseTypes;
 using XM.API.Constants;
 using XM.API.NWNX.ObjectPlugin;
 using XM.Core;
 using XM.Core.Entity;
-using XM.Core.EventManagement.ModuleEvent;
 using XM.Core.EventManagement.XMEvent;
 using XM.Data;
+using Location = XM.API.BaseTypes.Location;
 
 namespace XM.Area
 {
     [ServiceBinding(typeof(WalkmeshService))]
     [ServiceBinding(typeof(IXMOnModuleContentChanged))]
-    [ServiceBinding(typeof(IOnModuleLoad))]
-    public class WalkmeshService: 
-        IXMOnModuleContentChanged,
-        IOnModuleLoad
+    public class WalkmeshService: IXMOnModuleContentChanged
     {
         private readonly Dictionary<uint, List<uint>> _noSpawnZoneTriggers = new();
         private Dictionary<string, List<Vector3>> _walkmeshesByArea = new();
@@ -29,6 +27,18 @@ namespace XM.Area
         public WalkmeshService(DBService db)
         {
             _db = db;
+
+            NwModule.Instance.OnModuleLoad += OnModuleLoad;
+        }
+
+        private void OnModuleLoad(ModuleEvents.OnModuleLoad obj)
+        {
+            if (_bakingRan)
+                return;
+
+            var serverConfig = _db.Get<ModuleCache>(ModuleCache.CacheIdName);
+            _walkmeshesByArea = serverConfig.WalkmeshesByArea;
+            Console.WriteLine($"Loaded {_walkmeshesByArea.Count} area walkmeshes.");
         }
 
         public void OnModuleContentChanged()
@@ -74,16 +84,6 @@ namespace XM.Area
                     _noSpawnZoneTriggers[area].Add(obj);
                 }
             }
-        }
-
-        public void OnModuleLoad()
-        {
-            if (_bakingRan)
-                return;
-
-            var serverConfig = _db.Get<ModuleCache>(ModuleCache.CacheIdName);
-            _walkmeshesByArea = serverConfig.WalkmeshesByArea;
-            Console.WriteLine($"Loaded {_walkmeshesByArea.Count} area walkmeshes.");
         }
 
         // Area baking process
