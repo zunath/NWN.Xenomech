@@ -8,12 +8,14 @@ namespace XM.Configuration
     {
         public string SuperAdminCDKey { get; }
         public string RedisIPAddress { get; }
+        public bool IsGameServerContext { get; }
         public ServerEnvironmentType ServerEnvironment { get; }
 
         public XMSettingsService()
         {
             SuperAdminCDKey = Environment.GetEnvironmentVariable("XM_SUPER_ADMIN_CD_KEY");
             RedisIPAddress = Environment.GetEnvironmentVariable("NWNX_REDIS_HOST");
+            IsGameServerContext = Convert.ToBoolean(Environment.GetEnvironmentVariable("XM_GAME_SERVER_CONTEXT"));
 
             var environment = Environment.GetEnvironmentVariable("XM_ENVIRONMENT");
             if (!string.IsNullOrWhiteSpace(environment) &&

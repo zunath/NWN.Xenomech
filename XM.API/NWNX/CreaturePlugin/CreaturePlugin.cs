@@ -344,7 +344,7 @@ namespace XM.API.NWNX.CreaturePlugin
         /// </summary>
         /// <param name="creature">The creature object.</param>
         /// <param name="rate">The movement rate.</param>
-        public static void SetMovementRate(uint creature, CreatureMovementType rate)
+        public static void SetMovementRate(uint creature, MovementRateType rate)
         {
             NWN.Core.NWNX.CreaturePlugin.SetMovementRate(creature, (int)rate);
         }
@@ -437,9 +437,9 @@ namespace XM.API.NWNX.CreaturePlugin
         /// <param name="creature">The creature object.</param>
         /// <param name="skill">The skill id.</param>
         /// <param name="rank">The value to set as the skill rank.</param>
-        public static void SetSkillRank(uint creature, int skill, int rank)
+        public static void SetSkillRank(uint creature, SkillType skill, int rank)
         {
-            NWN.Core.NWNX.CreaturePlugin.SetSkillRank(creature, skill, rank);
+            NWN.Core.NWNX.CreaturePlugin.SetSkillRank(creature, (int)skill, rank);
         }
 
         /// <summary>

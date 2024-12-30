@@ -6,13 +6,15 @@ using System.Numerics;
 using XM.API.Constants;
 using XM.Area;
 using XM.Combat.Entity;
+using XM.Core.EventManagement.XMEvent;
 using XM.Data;
 using XM.Localization;
+using static Anvil.API.Events.ModuleEvents;
 
 namespace XM.Combat
 {
     [ServiceBinding(typeof(DeathService))]
-    internal class DeathService
+    internal class DeathService: IXMOnPCInitialized
     {
         private const string DefaultSpawnWaypointTag = "DTH_DEFAULT_RESPAWN_POINT";
 
@@ -36,7 +38,6 @@ namespace XM.Combat
             NwModule.Instance.OnPlayerDying += OnModuleDying;
             NwModule.Instance.OnPlayerDeath += OnModuleDeath;
             NwModule.Instance.OnPlayerRespawn += OnModuleRespawn;
-            NwModule.Instance.OnClientEnter += OnModuleEnter;
         }
 
 
@@ -64,6 +65,7 @@ namespace XM.Combat
 
             WriteDeathAudit(player);
         }
+
         private void OnModuleRespawn(ModuleEvents.OnPlayerRespawn obj)
         {
             var player = GetLastRespawnButtonPresser();
@@ -75,31 +77,6 @@ namespace XM.Combat
 
             SendToHomePoint(player);
             WriteRespawnAudit(player);
-        }
-        private void OnModuleEnter(ModuleEvents.OnClientEnter obj)
-        {
-            var player = GetEnteringObject();
-
-            if (!GetIsPC(player) || GetIsDM(player)) return;
-
-            var playerId = GetObjectUUID(player);
-            var dbPlayerRespawn = _db.Get<PlayerRespawn>(playerId) ?? new PlayerRespawn(playerId);
-
-            // Already have a respawn point, no need to set the default one.
-            if (!string.IsNullOrWhiteSpace(dbPlayerRespawn.RespawnAreaResref)) return;
-
-            var waypoint = GetWaypointByTag(DefaultSpawnWaypointTag);
-            var position = GetPosition(waypoint);
-            var areaResref = GetResRef(GetArea(waypoint));
-            var facing = GetFacing(waypoint);
-
-            dbPlayerRespawn.RespawnLocationX = position.X;
-            dbPlayerRespawn.RespawnLocationY = position.Y;
-            dbPlayerRespawn.RespawnLocationZ = position.Z;
-            dbPlayerRespawn.RespawnAreaResref = areaResref;
-            dbPlayerRespawn.RespawnLocationOrientation = facing;
-
-            _db.Set(dbPlayerRespawn);
         }
 
         /// <summary>
@@ -156,6 +133,30 @@ namespace XM.Combat
 
             var log = $"DEATH: {name} - {areaName} - {areaTag} - {areaResref} Killed by: {hostileName}";
             _logger.Info(log);
+        }
+
+        public void OnPCInitialized()
+        {
+            var player = OBJECT_SELF;
+
+            if (!GetIsPC(player) || GetIsDM(player)) 
+                return;
+
+            var playerId = GetObjectUUID(player);
+            var dbPlayerRespawn = _db.Get<PlayerRespawn>(playerId) ?? new PlayerRespawn(playerId);
+
+            var waypoint = GetWaypointByTag(DefaultSpawnWaypointTag);
+            var position = GetPosition(waypoint);
+            var areaResref = GetResRef(GetArea(waypoint));
+            var facing = GetFacing(waypoint);
+
+            dbPlayerRespawn.RespawnLocationX = position.X;
+            dbPlayerRespawn.RespawnLocationY = position.Y;
+            dbPlayerRespawn.RespawnLocationZ = position.Z;
+            dbPlayerRespawn.RespawnAreaResref = areaResref;
+            dbPlayerRespawn.RespawnLocationOrientation = facing;
+
+            _db.Set(dbPlayerRespawn);
         }
     }
 }

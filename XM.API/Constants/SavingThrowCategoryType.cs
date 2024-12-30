@@ -5,7 +5,7 @@ namespace XM.API.Constants
     {
         Invalid = -1,
         All = 0,
-        Fort = 1,
+        Fortitude = 1,
         Reflex = 2,
         Will = 3
     }

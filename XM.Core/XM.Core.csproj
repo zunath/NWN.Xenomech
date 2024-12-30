@@ -62,6 +62,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="EventManagement\PlaceableEvent\**" />
+	  <EmbeddedResource Remove="EventManagement\PlaceableEvent\**" />
+	  <None Remove="EventManagement\PlaceableEvent\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="NWN.Anvil" Version="8193.36.2-dev.19.r9bb01d93" ExcludeAssets="runtime" PrivateAssets="all">
 			<IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
@@ -74,7 +80,6 @@
 
 	<ItemGroup>
 	  <Folder Include="EventManagement\AreaEvent\" />
-	  <Folder Include="EventManagement\PlaceableEvent\" />
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">

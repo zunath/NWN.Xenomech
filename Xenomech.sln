@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Configuration", "XM.Conf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Combat", "XM.Combat\XM.Combat.csproj", "{0FEEFDA6-2CA9-4722-A9D2-5C229C85C3E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Migration", "XM.Migration\XM.Migration.csproj", "{1E30C887-B95A-4900-A6F1-62814A93DC01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{0FEEFDA6-2CA9-4722-A9D2-5C229C85C3E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FEEFDA6-2CA9-4722-A9D2-5C229C85C3E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FEEFDA6-2CA9-4722-A9D2-5C229C85C3E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E30C887-B95A-4900-A6F1-62814A93DC01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E30C887-B95A-4900-A6F1-62814A93DC01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E30C887-B95A-4900-A6F1-62814A93DC01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E30C887-B95A-4900-A6F1-62814A93DC01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8044,9 +8044,9 @@ namespace XM.API
         /// <summary>
         ///  When cursed, items cannot be dropped
         /// </summary>
-        public static void SetItemCursedFlag(uint oItem, int nCursed)
+        public static void SetItemCursedFlag(uint oItem, bool nCursed)
         {
-            NWN.Core.NWScript.SetItemCursedFlag(oItem, nCursed);
+            NWN.Core.NWScript.SetItemCursedFlag(oItem, nCursed ? 1 : 0);
         }
 
         /// <summary>

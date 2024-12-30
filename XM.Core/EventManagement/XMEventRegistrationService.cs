@@ -20,43 +20,64 @@ namespace XM.Core.EventManagement
         private readonly SchedulerService _scheduler;
 
         [Inject]
-        public IList<IXMOnServerHeartbeat> OnXMServerHeartbeatSubscriptions { get; set; }
+        public IList<IXMOnServerHeartbeat> OnServerHeartbeatSubscriptions { get; set; }
 
         [Inject]
-        public IList<IXMOnSpawnCreated> OnXMSpawnCreatedSubscriptions { get; set; }
+        public IList<IXMOnSpawnCreated> OnSpawnCreatedSubscriptions { get; set; }
 
         [Inject]
-        public IList<IXMOnAreaCreated> OnXMAreaCreatedSubscriptions { get; set; }
+        public IList<IXMOnAreaCreated> OnAreaCreatedSubscriptions { get; set; }
 
         [Inject]
-        public IList<IXMOnModuleContentChanged> OnXMModuleContentChangedSubscriptions { get; set; }
+        public IList<IXMOnModuleContentChanged> OnModuleContentChangedSubscriptions { get; set; }
 
         [Inject]
-        public IList<IXMOnCacheDataBefore> OnXMCacheDataBeforeSubscriptions { get; set; }
+        public IList<IXMOnCacheDataBefore> OnCacheDataBeforeSubscriptions { get; set; }
 
         [Inject]
-        public IList<IXMOnCacheDataAfter> OnXMCacheDataAfterSubscriptions { get; set; }
+        public IList<IXMOnCacheDataAfter> OnCacheDataAfterSubscriptions { get; set; }
 
+        [Inject]
+        public IList<IXMOnDatabaseLoaded> OnDatabaseLoadedSubscriptions { get; set; }
+
+        [Inject]
+        public IList<IXMOnPCInitialized> OnPCInitializedSubscriptions { get; set; }
+
+        [Inject]
+        public IList<IXMPlayerMigrationBefore> OnPlayerMigrationBeforeSubscriptions { get; set; }
+        [Inject]
+        public IList<IXMPlayerMigrationAfter> OnPlayerMigrationAfterSubscriptions { get; set; }
 
 
         [ScriptHandler(EventScript.OnXMServerHeartbeatScript)]
-        public void HandleXMServerHeartbeat() => HandleEvent(OnXMServerHeartbeatSubscriptions, (subscription) => subscription.OnXMServerHeartbeat());
+        public void HandleXMServerHeartbeat() => HandleEvent(OnServerHeartbeatSubscriptions, (subscription) => subscription.OnXMServerHeartbeat());
 
         [ScriptHandler(EventScript.OnXMSpawnCreatedScript)]
-        public void HandleXMSpawnCreated() => HandleEvent(OnXMSpawnCreatedSubscriptions, (subscription) => subscription.OnSpawnCreated());
+        public void HandleXMSpawnCreated() => HandleEvent(OnSpawnCreatedSubscriptions, (subscription) => subscription.OnSpawnCreated());
 
         [ScriptHandler(EventScript.OnXMAreaCreatedScript)]
-        public void HandleXMAreaCreated() => HandleEvent(OnXMAreaCreatedSubscriptions, (subscription) => subscription.OnAreaCreated());
+        public void HandleXMAreaCreated() => HandleEvent(OnAreaCreatedSubscriptions, (subscription) => subscription.OnAreaCreated());
 
         [ScriptHandler(EventScript.OnXMModuleChangedScript)]
-        public void HandleModuleChanged() => HandleEvent(OnXMModuleContentChangedSubscriptions, (subscription) => subscription.OnModuleContentChanged());
+        public void HandleModuleChanged() => HandleEvent(OnModuleContentChangedSubscriptions, (subscription) => subscription.OnModuleContentChanged());
 
         [ScriptHandler(EventScript.OnXMCacheDataBeforeScript)]
-        public void HandleCacheDataBefore() => HandleEvent(OnXMCacheDataBeforeSubscriptions, (subscription) => subscription.OnCacheDataBefore());
+        public void HandleCacheDataBefore() => HandleEvent(OnCacheDataBeforeSubscriptions, (subscription) => subscription.OnCacheDataBefore());
 
         [ScriptHandler(EventScript.OnXMCacheDataAfterScript)]
-        public void HandleCacheDataAfter() => HandleEvent(OnXMCacheDataAfterSubscriptions, (subscription) => subscription.OnCacheDataAfter());
+        public void HandleCacheDataAfter() => HandleEvent(OnCacheDataAfterSubscriptions, (subscription) => subscription.OnCacheDataAfter());
 
+        [ScriptHandler(EventScript.OnXMDatabaseLoadedScript)]
+        public void HandleDatabaseLoaded() => HandleEvent(OnDatabaseLoadedSubscriptions, (subscription) => subscription.OnDatabaseLoaded());
+
+        [ScriptHandler(EventScript.OnXMPCInitializedScript)]
+        public void HandlePlayerInitialized() => HandleEvent(OnPCInitializedSubscriptions, (subscription) => subscription.OnPCInitialized());
+
+        [ScriptHandler(EventScript.OnXMPlayerMigrationBeforeScript)]
+        public void HandlePlayerMigrationBefore() => HandleEvent(OnPlayerMigrationBeforeSubscriptions, (subscription) => subscription.OnPlayerMigrationBefore());
+
+        [ScriptHandler(EventScript.OnXMPlayerMigrationAfterScript)]
+        public void HandlePlayerMigrationAfter() => HandleEvent(OnPlayerMigrationAfterSubscriptions, (subscription) => subscription.OnPlayerMigrationAfter());
 
         public XMEventRegistrationService(
             DBService db,

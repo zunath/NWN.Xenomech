@@ -18,6 +18,8 @@ namespace XM.Data
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
+        private const string DBLoadedEventScript = "xm_db_loaded";
+
         private readonly XMSettingsService _settings;
         private ConnectionMultiplexer _multiplexer;
         private readonly Dictionary<Type, string> _keyPrefixByType = new();
@@ -38,6 +40,12 @@ namespace XM.Data
 
         public void Init()
         {
+            LoadEntities();
+            PublishDBLoadedEvent();
+        }
+
+        private void LoadEntities()
+        {
             foreach (var entity in Entities)
             {
                 var type = entity.GetType();
@@ -50,6 +58,14 @@ namespace XM.Data
 
                 _logger.Info($"Registered type '{entity.GetType()}' using key prefix {type.Name}");
             }
+        }
+
+        private void PublishDBLoadedEvent()
+        {
+            // CLI tools also use this class and don't have access to the NWN context.
+            // Perform an environment variable check to ensure we're in the game server context before executing the event.
+            if (_settings.IsGameServerContext)
+                ExecuteScript(DBLoadedEventScript, OBJECT_SELF);
         }
 
         public void Start()
