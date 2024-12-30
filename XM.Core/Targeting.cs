@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Anvil.API;
 using Anvil.API.Events;
 using Anvil.Services;
+using XM.API;
 using XM.API.Constants;
 
 namespace XM.Core
@@ -47,13 +48,13 @@ namespace XM.Core
         /// <param name="objectType">The types of objects allowed to be targeted.</param>
         /// <param name="selectionAction">The action to run when an object is targeted.</param>
         /// <param name="message">The message to send to the player when entering targeting mode.</param>
-        public void StartTargetingMode(
+        public static void EnterTargetingMode(
             uint player,
             ObjectType objectType,
             string message,
             Action<uint> selectionAction)
         {
-            EnterTargetingMode(player, objectType);
+            NWScript.EnterTargetingMode(player, objectType);
             _playerTargetingActions[player] = selectionAction;
 
             if (!string.IsNullOrWhiteSpace(message))
