@@ -28,6 +28,9 @@ namespace XM.Core.EventManagement
         [Inject]
         public IList<IXMOnAreaCreated> OnXMAreaCreatedSubscriptions { get; set; }
 
+        [Inject]
+        public IList<IXMOnModuleContentChanged> OnXMModuleContentChangedSubscriptions { get; set; }
+
         public XMEventRegistrationService(
             DBService db,
             SchedulerService scheduler)
@@ -54,10 +57,7 @@ namespace XM.Core.EventManagement
         private void DetermineContentChange()
         {
 
-            Console.WriteLine($"getting module cache");
             var serverConfig = _db.Get<ModuleCache>(ModuleCache.CacheIdName) ?? new ModuleCache();
-            Console.WriteLine($"got module cache. mTime = {serverConfig.LastModuleMTime}, new mTime = {UtilPlugin.GetModuleMTime()}");
-
 
             if (UtilPlugin.GetModuleMTime() != serverConfig.LastModuleMTime)
             {
@@ -120,5 +120,20 @@ namespace XM.Core.EventManagement
             }
         }
 
+        [ScriptHandler(EventScript.OnXMModuleChangedScript)]
+        public void HandleModuleChanged()
+        {
+            foreach (var handler in OnXMModuleContentChangedSubscriptions)
+            {
+                try
+                {
+                    handler.OnModuleContentChanged();
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex);
+                }
+            }
+        }
     }
 }

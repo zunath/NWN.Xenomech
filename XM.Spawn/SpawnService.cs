@@ -13,8 +13,8 @@ using System.Numerics;
 using XM.AI;
 using NWN.Core.NWNX;
 using XM.Area;
+using XM.Core;
 using XM.Core.EventManagement;
-using Random = XM.Core.Random;
 using AreaPlugin = XM.API.NWNX.AreaPlugin.AreaPlugin;
 using CreaturePlugin = XM.API.NWNX.CreaturePlugin.CreaturePlugin;
 using ObjectPlugin = XM.API.NWNX.ObjectPlugin.ObjectPlugin;
@@ -533,7 +533,7 @@ namespace XM.Spawn
                     new Vector3(detail.X, detail.Y, detail.Z);
                 ObjectPlugin.AddToArea(deserialized, detail.Area, position);
 
-                var facing = detail.UseRandomSpawnLocation ? Random.Next(360) : detail.Facing;
+                var facing = detail.UseRandomSpawnLocation ? XMRandom.Next(360) : detail.Facing;
                 AssignCommand(deserialized, () => SetFacing(facing));
                 SetLocalString(deserialized, "SPAWN_ID", spawnId.ToString());
                 AdjustStats(deserialized);
@@ -558,7 +558,7 @@ namespace XM.Spawn
                     GetPositionFromLocation(_walkmesh.GetRandomLocation(detail.Area)) :
                     new Vector3(detail.X, detail.Y, detail.Z);
 
-                var facing = detail.UseRandomSpawnLocation ? Random.Next(360) : detail.Facing;
+                var facing = detail.UseRandomSpawnLocation ? XMRandom.Next(360) : detail.Facing;
                 var location = Location(detail.Area, position, facing);
 
                 var spawn = CreateObject(spawnObject.Type, spawnObject.Resref, location);

@@ -1,6 +1,6 @@
 ﻿namespace XM.Core
 {
-    public static class Random
+    public static class XMRandom
     {
         private static readonly System.Random _random = new();
 

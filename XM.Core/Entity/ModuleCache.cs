@@ -6,7 +6,7 @@ using XM.Data;
 namespace XM.Core.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
-    internal class ModuleCache: EntityBase
+    public class ModuleCache: EntityBase
     {
         public const string CacheIdName = "MOD_CACHE";
 

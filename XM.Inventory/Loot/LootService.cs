@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using Anvil.API.Events;
 using XM.Core;
-using Random = XM.Core.Random;
 
 namespace XM.Inventory.Loot
 {
@@ -125,10 +124,10 @@ namespace XM.Inventory.Loot
             }
             for (int x = 1; x <= attempts; x++)
             {
-                if (Random.D100(1) > chance) continue;
+                if (XMRandom.D100(1) > chance) continue;
 
                 var item = table.GetRandomItem(rareBonusChance);
-                var quantity = Random.Next(item.MaxQuantity) + 1;
+                var quantity = XMRandom.Next(item.MaxQuantity) + 1;
 
                 // CreditFinder perk - Increase the quantity of gold found.
                 if (item.Resref == "nw_it_gold001")

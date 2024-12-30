@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using XM.AI;
 using XM.API.Constants;
-using Random = XM.Core.Random;
+using XM.Core;
 
 namespace XM.Spawn
 {
@@ -48,7 +48,7 @@ namespace XM.Spawn
             if (filteredList.Count <= 0) return null;
 
             var weights = filteredList.Select(s => s.Weight).ToArray();
-            var index = Random.GetRandomWeightedIndex(weights);
+            var index = XMRandom.GetRandomWeightedIndex(weights);
             return filteredList.ElementAt(index);
         }
 

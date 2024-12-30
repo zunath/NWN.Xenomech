@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Random = XM.Core.Random;
+using XM.Core;
 
 namespace XM.Inventory.Loot
 {
@@ -34,7 +34,7 @@ namespace XM.Inventory.Loot
                 weights[x] = weight;
             }
 
-            var randomIndex = Random.GetRandomWeightedIndex(weights);
+            var randomIndex = XMRandom.GetRandomWeightedIndex(weights);
             return this.ElementAt(randomIndex);
         }
 
