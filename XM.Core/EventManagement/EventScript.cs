@@ -22,6 +22,19 @@
         public const string CreatureOnUserDefinedBeforeScript = "crea_userdef_bef";
         public const string CreatureOnBlockedByDoorBeforeScript = "crea_block_bef";
 
+        public const string CreatureOnHeartbeatAfterScript = "crea_hb_aft";
+        public const string CreatureOnNoticeAfterScript = "crea_perc_aft";
+        public const string CreatureOnSpellCastAtAfterScript = "crea_splcast_aft";
+        public const string CreatureOnMeleeAttackedAfterScript = "crea_attack_aft";
+        public const string CreatureOnDamagedAfterScript = "crea_damaged_aft";
+        public const string CreatureOnDisturbedAfterScript = "crea_disturb_aft";
+        public const string CreatureOnEndCombatRoundAfterScript = "crea_rndend_aft";
+        public const string CreatureOnSpawnInAfterScript = "crea_spawn_aft";
+        public const string CreatureOnRestedAfterScript = "crea_rest_aft";
+        public const string CreatureOnDeathAfterScript = "crea_death_aft";
+        public const string CreatureOnUserDefinedAfterScript = "crea_userdef_aft";
+        public const string CreatureOnBlockedByDoorAfterScript = "crea_block_aft";
+
         // Module scripts
         public const string OnModuleAcquireItemScript = "mod_acquire";
         public const string OnModuleActivateItemScript = "mod_activate";
