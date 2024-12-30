@@ -17,9 +17,9 @@ namespace XM.API.Constants
         Arrows = 11,
         Bullets = 12,
         Bolts = 13,
-        CWeaponL = 14,
-        CWeaponR = 15,
-        CWeaponB = 16,
-        CArmour = 17
+        CreatureWeaponLeft = 14,
+        CreatureWeaponRight = 15,
+        CreatureWeaponBite = 16,
+        CreatureArmor = 17
     }
 }

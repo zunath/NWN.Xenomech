@@ -4,7 +4,7 @@ using Anvil.API.Events;
 using Anvil.Services;
 using NLog;
 using XM.Authorization.Entity;
-using XM.Core;
+using XM.Configuration;
 using XM.Data;
 using XM.Localization;
 

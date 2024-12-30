@@ -62,7 +62,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Jil" Version="2.17.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NRediSearch" Version="2.2.79" />
     <PackageReference Include="NReJSON" Version="4.0.0" />
     <PackageReference Include="NWN.Anvil" Version="8193.36.2-dev.19.r9bb01d93" ExcludeAssets="runtime" PrivateAssets="all">
@@ -72,7 +72,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\XM.Core\XM.Core.csproj" />
+    <ProjectReference Include="..\XM.Configuration\XM.Configuration.csproj" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

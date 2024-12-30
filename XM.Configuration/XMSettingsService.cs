@@ -1,7 +1,7 @@
 ﻿using System;
 using Anvil.Services;
 
-namespace XM.Core
+namespace XM.Configuration
 {
     [ServiceBinding(typeof(XMSettingsService))]
     public class XMSettingsService

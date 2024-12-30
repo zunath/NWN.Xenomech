@@ -6,6 +6,7 @@ using Anvil.API.Events;
 using Anvil.Services;
 using NLog;
 using XM.Authorization;
+using XM.Configuration;
 using XM.Core;
 using XM.Localization;
 using Location = XM.API.BaseTypes.Location;

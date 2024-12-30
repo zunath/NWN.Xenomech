@@ -381,9 +381,9 @@ namespace XM.API
         ///        3) The creature has the level required to equip the item (if magical and ILR is on).
         ///        4) The creature possesses the required feats to equip the item (such as weapon proficiencies).
         /// </summary>
-        public static void ActionEquipItem(uint oItem, int nInventorySlot)
+        public static void ActionEquipItem(uint oItem, InventorySlotType nInventorySlot)
         {
-            NWN.Core.NWScript.ActionEquipItem(oItem, nInventorySlot);
+            NWN.Core.NWScript.ActionEquipItem(oItem, (int)nInventorySlot);
         }
 
         /// <summary>
@@ -1688,9 +1688,9 @@ namespace XM.API
         ///  * Returns OBJECT_INVALID if oCreature is not a valid creature or there is no<br/>
         ///    item in nInventorySlot.
         /// </summary>
-        public static uint GetItemInSlot(int nInventorySlot, uint oCreature = OBJECT_INVALID)
+        public static uint GetItemInSlot(InventorySlotType nInventorySlot, uint oCreature = OBJECT_INVALID)
         {
-            return NWN.Core.NWScript.GetItemInSlot(nInventorySlot, oCreature);
+            return NWN.Core.NWScript.GetItemInSlot((int)nInventorySlot, oCreature);
         }
 
         /// <summary>
@@ -9061,9 +9061,9 @@ namespace XM.API
         ///  If no valid area (or object) is specified, it uses the area of the caller.<br/>
         ///  If an object other than an area is specified, will use the area that the object is currently in.
         /// </summary>
-        public static AreaDimensionType GetAreaSize(int nAreaDimension, uint oArea = OBJECT_INVALID)
+        public static int GetAreaSize(AreaDimensionType nAreaDimension, uint oArea = OBJECT_INVALID)
         {
-            return (AreaDimensionType)NWN.Core.NWScript.GetAreaSize(nAreaDimension, oArea);
+            return NWN.Core.NWScript.GetAreaSize((int)nAreaDimension, oArea);
         }
 
         /// <summary>

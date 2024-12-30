@@ -1,4 +1,5 @@
-﻿using XM.API.BaseTypes;
+﻿using NWN.Core;
+using XM.API.BaseTypes;
 
 namespace XM.API.NWNX.UtilPlugin
 {
@@ -37,9 +38,12 @@ namespace XM.API.NWNX.UtilPlugin
         /// Gets the last modified timestamp (mtime) of the module file in seconds.
         /// </summary>
         /// <returns>The mtime of the module file.</returns>
-        public static int GetModuleMtime()
+        public static int GetModuleMTime()
         {
-            return NWN.Core.NWNX.UtilPlugin.GetModuleMtime();
+            // NWN.Core methods are broken, overwritten here to temporarily fix until PR is merged.
+            VM.NWNX.SetFunction("NWNX_Util", "GetModuleMtime");
+            VM.NWNX.Call();
+            return VM.NWNX.StackPopInt();
         }
 
         /// <summary>
@@ -48,7 +52,10 @@ namespace XM.API.NWNX.UtilPlugin
         /// <returns>The module file as a string.</returns>
         public static string GetModuleFile()
         {
-            return NWN.Core.NWNX.UtilPlugin.GetModuleFile();
+            // NWN.Core methods are broken, overwritten here to temporarily fix until PR is merged.
+            VM.NWNX.SetFunction("NWNX_Util", "GetModuleFile");
+            VM.NWNX.Call();
+            return VM.NWNX.StackPopString();
         }
 
         /// <summary>

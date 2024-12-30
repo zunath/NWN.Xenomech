@@ -4,11 +4,11 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 using Anvil.Services;
-using Jil;
+using Newtonsoft.Json;
 using NRediSearch;
 using NReJSON;
 using StackExchange.Redis;
-using XM.Core;
+using XM.Configuration;
 
 namespace XM.Data
 {
@@ -89,12 +89,7 @@ namespace XM.Data
                 if (string.IsNullOrWhiteSpace(data))
                     return default;
 
-                T entity;
-                using (var input = new StringReader(data))
-                {
-                    entity = JSON.Deserialize<T>(input);
-                }
-
+                var entity = JsonConvert.DeserializeObject<T>(data);
                 _cachedEntities[id] = entity;
 
                 return entity;
@@ -105,14 +100,7 @@ namespace XM.Data
             where T : IDBEntity
         {
             var type = typeof(T);
-            string data;
-
-            using (var output = new StringWriter())
-            {
-                JSON.Serialize(entity, output);
-                data = output.ToString();
-            }
-
+            var data = JsonConvert.SerializeObject(entity);
             var keyPrefix = _keyPrefixByType[type];
             var indexKey = $"Index:{keyPrefix}:{entity.Id}";
             var indexData = new Dictionary<string, RedisValue>();
