@@ -122,7 +122,7 @@ namespace XM.CLI
                 Console.WriteLine("Moving script: " + file);
                 var fileName = Path.GetFileName(file);
                 var extension = Path.GetExtension(file)?.Replace(".", string.Empty);
-                File.Move(file, $"./{extension}/{fileName}");
+                File.Move(file, $"../Module/{extension}/{fileName}");
             });
 
             sw.Stop();
