@@ -1,0 +1,82 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>default</LangVersion>
+    <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+
+    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+
+    <NoWarn>1591</NoWarn>
+    <Nullable>disable</Nullable>
+
+    <RootNamespace>XM.ChatCommand</RootNamespace>
+  </PropertyGroup>
+
+<!--Uncomment and fill to build a NuGet package for your plugin.-->
+<!--
+  <PropertyGroup>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+    <PackageId>$(AssemblyName)</PackageId>
+    <Authors></Authors>
+
+    <RepositoryUrl></RepositoryUrl>
+    <RepositoryType></RepositoryType>
+
+    <Description>
+      A NWN Anvil plugin: https://github.com/nwn-dotnet/Anvil
+    </Description>
+
+    <PackageTags>Neverwinter Nights;NWN;</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+-->
+
+<!--Uncomment to include debug symbols, source code and documentation with your nuget package/plugin.-->
+<!--
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <DebugSymbols>true</DebugSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+-->
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\$(AssemblyName)</OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\$(AssemblyName)</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>Portable</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NWN.Anvil" Version="8193.36.2-dev.19.r9bb01d93" ExcludeAssets="runtime" PrivateAssets="all">
+      <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\XM.API\XM.API.csproj" />
+    <ProjectReference Include="..\XM.Authorization\XM.Authorization.csproj" />
+    <ProjectReference Include="..\XM.Core\XM.Core.csproj" />
+    <ProjectReference Include="..\XM.Data\XM.Data.csproj" />
+    <ProjectReference Include="..\XM.Localization\XM.Localization.csproj" />
+  </ItemGroup>
+
+<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	<Exec Command="del /Q /F &quot;$(SolutionDir)server\server\anvil\Plugins\XM.ChatCommand\*.*&quot;&#xD;&#xA;xcopy &quot;$(OutDir)*.*&quot; &quot;$(SolutionDir)server\anvil\Plugins\XM.ChatCommand\&quot; /E /Y" />
+</Target>
+
+</Project>
