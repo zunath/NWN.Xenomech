@@ -143,7 +143,7 @@ namespace XM.API.NWNX.UtilPlugin
         /// <param name="sRegexFilter">Allows filtering resrefs using a regex pattern.</param>
         /// <param name="bModuleResourcesOnly">If TRUE, only custom resources will be returned.</param>
         /// <returns>The first resref found or an empty string if none is found.</returns>
-        public static string GetFirstResRef(ResrefType nType, string sRegexFilter = "", bool bModuleResourcesOnly = true)
+        public static string GetFirstResRef(ResRefType nType, string sRegexFilter = "", bool bModuleResourcesOnly = true)
         {
             return NWN.Core.NWNX.UtilPlugin.GetFirstResRef((int)nType, sRegexFilter, bModuleResourcesOnly ? 1 : 0);
         }
