@@ -76,6 +76,22 @@
           "type": "byte",
           "value": 5
         },
+        "LIST": {
+          "type": "list",
+          "value": [
+            {
+              "__struct_id": 0,
+              "NAME": {
+                "type": "cexostring",
+                "value": "Death Default Respawn Point"
+              },
+              "RESREF": {
+                "type": "resref",
+                "value": "dth_default_resp"
+              }
+            }
+          ]
+        },
         "STRREF": {
           "type": "dword",
           "value": 6798

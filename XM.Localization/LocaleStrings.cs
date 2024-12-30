@@ -8,5 +8,6 @@
         InvalidChatCommand = 2,
         SelectTargetForChatCommand = 3,
         CharacterChatCommandResult = 7,
+        DeathPrompt = 8,
     }
 }
