@@ -2,7 +2,7 @@
 using Anvil.API;
 using Anvil.API.Events;
 using Anvil.Services;
-using XM.Core.EventManagement.CreatureEvent;
+using XM.Core.EventManagement.PlayerEvent;
 using EventScriptType = XM.API.Constants.EventScriptType;
 
 namespace XM.Core.EventManagement
@@ -11,77 +11,77 @@ namespace XM.Core.EventManagement
     internal class PlayerEventRegistrationService: EventRegistrationServiceBase
     {
         [Inject]
-        public IList<ICreatureOnHeartbeatBefore> PlayerOnHeartbeatSubscriptions { get; set; }
+        public IList<IPlayerOnHeartbeat> PlayerOnHeartbeatSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnNoticeBefore> PlayerOnNoticeSubscriptions { get; set; }
+        public IList<IPlayerOnNotice> PlayerOnNoticeSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnSpellCastAtBefore> PlayerOnSpellCastAtSubscriptions { get; set; }
+        public IList<IPlayerOnSpellCastAt> PlayerOnSpellCastAtSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnMeleeAttackedBefore> PlayerOnMeleeAttackedSubscriptions { get; set; }
+        public IList<IPlayerOnMeleeAttacked> PlayerOnMeleeAttackedSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnDamagedBefore> PlayerOnDamagedSubscriptions { get; set; }
+        public IList<IPlayerOnDamaged> PlayerOnDamagedSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnDisturbedBefore> PlayerOnDisturbedSubscriptions { get; set; }
+        public IList<IPlayerOnDisturbed> PlayerOnDisturbedSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnEndCombatRoundBefore> PlayerOnEndCombatRoundSubscriptions { get; set; }
+        public IList<IPlayerOnEndCombatRound> PlayerOnEndCombatRoundSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnSpawnInBefore> PlayerOnSpawnInSubscriptions { get; set; }
+        public IList<IPlayerOnSpawnIn> PlayerOnSpawnInSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnRestedBefore> PlayerOnRestedSubscriptions { get; set; }
+        public IList<IPlayerOnRested> PlayerOnRestedSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnDeathBefore> PlayerOnDeathSubscriptions { get; set; }
+        public IList<IPlayerOnDeath> PlayerOnDeathSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnUserDefinedBefore> PlayerOnUserDefinedSubscriptions { get; set; }
+        public IList<IPlayerOnUserDefined> PlayerOnUserDefinedSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnBlockedByDoorBefore> PlayerOnBlockedByDoorSubscriptions { get; set; }
+        public IList<IPlayerOnBlockedByDoor> PlayerOnBlockedByDoorSubscriptions { get; set; }
 
 
         [ScriptHandler(EventScript.PlayerOnHeartbeatScript)]
-        public void HandlePlayerOnHeartbeat() => HandleEvent(PlayerOnHeartbeatSubscriptions, (subscription) => subscription.CreatureOnHeartbeatBefore());
+        public void HandlePlayerOnHeartbeat() => HandleEvent(PlayerOnHeartbeatSubscriptions, (subscription) => subscription.PlayerOnHeartbeat());
 
         [ScriptHandler(EventScript.PlayerOnNoticeScript)]
-        public void HandlePlayerOnNotice() => HandleEvent(PlayerOnNoticeSubscriptions, (subscription) => subscription.CreatureOnNoticeBefore());
+        public void HandlePlayerOnNotice() => HandleEvent(PlayerOnNoticeSubscriptions, (subscription) => subscription.PlayerOnNotice());
 
         [ScriptHandler(EventScript.PlayerOnSpellCastAtScript)]
-        public void HandlePlayerOnSpellCastAt() => HandleEvent(PlayerOnSpellCastAtSubscriptions, (subscription) => subscription.CreatureOnSpellCastAtBefore());
+        public void HandlePlayerOnSpellCastAt() => HandleEvent(PlayerOnSpellCastAtSubscriptions, (subscription) => subscription.PlayerOnSpellCastAt());
 
         [ScriptHandler(EventScript.PlayerOnMeleeAttackedScript)]
-        public void HandlePlayerOnMeleeAttacked() => HandleEvent(PlayerOnMeleeAttackedSubscriptions, (subscription) => subscription.CreatureOnMeleeAttackedBefore());
+        public void HandlePlayerOnMeleeAttacked() => HandleEvent(PlayerOnMeleeAttackedSubscriptions, (subscription) => subscription.PlayerOnMeleeAttacked());
 
         [ScriptHandler(EventScript.PlayerOnDamagedScript)]
-        public void HandlePlayerOnDamaged() => HandleEvent(PlayerOnDamagedSubscriptions, (subscription) => subscription.CreatureOnDamagedBefore());
+        public void HandlePlayerOnDamaged() => HandleEvent(PlayerOnDamagedSubscriptions, (subscription) => subscription.PlayerOnDamaged());
 
         [ScriptHandler(EventScript.PlayerOnDisturbedScript)]
-        public void HandlePlayerOnDisturbed() => HandleEvent(PlayerOnDisturbedSubscriptions, (subscription) => subscription.CreatureOnDisturbedBefore());
+        public void HandlePlayerOnDisturbed() => HandleEvent(PlayerOnDisturbedSubscriptions, (subscription) => subscription.PlayerOnDisturbed());
 
         [ScriptHandler(EventScript.PlayerOnEndCombatRoundScript)]
-        public void HandlePlayerOnEndCombatRound() => HandleEvent(PlayerOnEndCombatRoundSubscriptions, (subscription) => subscription.CreatureOnEndCombatRoundBefore());
+        public void HandlePlayerOnEndCombatRound() => HandleEvent(PlayerOnEndCombatRoundSubscriptions, (subscription) => subscription.PlayerOnEndCombatRound());
 
         [ScriptHandler(EventScript.PlayerOnSpawnInScript)]
-        public void HandlePlayerOnSpawnIn() => HandleEvent(PlayerOnSpawnInSubscriptions, (subscription) => subscription.CreatureOnSpawnInBefore());
+        public void HandlePlayerOnSpawnIn() => HandleEvent(PlayerOnSpawnInSubscriptions, (subscription) => subscription.PlayerOnSpawnIn());
 
         [ScriptHandler(EventScript.PlayerOnRestedScript)]
-        public void HandlePlayerOnRested() => HandleEvent(PlayerOnRestedSubscriptions, (subscription) => subscription.CreatureOnRestedBefore());
+        public void HandlePlayerOnRested() => HandleEvent(PlayerOnRestedSubscriptions, (subscription) => subscription.PlayerOnRested());
 
         [ScriptHandler(EventScript.PlayerOnDeathScript)]
-        public void HandlePlayerOnDeath() => HandleEvent(PlayerOnDeathSubscriptions, (subscription) => subscription.CreatureOnDeathBefore());
+        public void HandlePlayerOnDeath() => HandleEvent(PlayerOnDeathSubscriptions, (subscription) => subscription.PlayerOnDeath());
 
         [ScriptHandler(EventScript.PlayerOnUserDefinedScript)]
-        public void HandlePlayerOnUserDefined() => HandleEvent(PlayerOnUserDefinedSubscriptions, (subscription) => subscription.CreatureOnUserDefinedBefore());
+        public void HandlePlayerOnUserDefined() => HandleEvent(PlayerOnUserDefinedSubscriptions, (subscription) => subscription.PlayerOnUserDefined());
 
         [ScriptHandler(EventScript.PlayerOnBlockedByDoorScript)]
-        public void HandlePlayerOnBlockedByDoor() => HandleEvent(PlayerOnBlockedByDoorSubscriptions, (subscription) => subscription.CreatureOnBlockedByDoorBefore());
+        public void HandlePlayerOnBlockedByDoor() => HandleEvent(PlayerOnBlockedByDoorSubscriptions, (subscription) => subscription.PlayerOnBlockedByDoor());
 
         public PlayerEventRegistrationService()
         {
