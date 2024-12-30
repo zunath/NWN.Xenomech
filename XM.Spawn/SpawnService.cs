@@ -24,13 +24,13 @@ namespace XM.Spawn
     [ServiceBinding(typeof(SpawnService))]
     [ServiceBinding(typeof(IOnAreaEnter))]
     [ServiceBinding(typeof(IOnAreaExit))]
-    [ServiceBinding(typeof(ICreatureOnDeath))]
+    [ServiceBinding(typeof(ICreatureOnDeathBefore))]
     [ServiceBinding(typeof(IXMOnServerHeartbeat))]
     internal class SpawnService : 
         IInitializable, 
         IOnAreaEnter,
         IOnAreaExit,
-        ICreatureOnDeath,
+        ICreatureOnDeathBefore,
         IXMOnServerHeartbeat
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
@@ -48,7 +48,7 @@ namespace XM.Spawn
 
         [Inject] public IList<ISpawnListDefinition> Definitions { get; set; }
 
-        private WalkmeshService _walkmesh;
+        private readonly WalkmeshService _walkmesh;
 
         public SpawnService(WalkmeshService walkmesh)
         {
@@ -82,6 +82,8 @@ namespace XM.Spawn
                     }
                 }
             }
+
+            _logger.Info($"Loaded {_spawnTables.Count} spawn tables.");
         }
 
         /// <summary>
@@ -348,7 +350,7 @@ namespace XM.Spawn
             _queuedSpawnsByArea[spawnDetail.Area].Remove(queuedSpawn);
         }
 
-        public void CreatureOnDeath()
+        public void CreatureOnDeathBefore()
         {
             QueueRespawn();
         }

@@ -9,18 +9,18 @@
         public const string AreaOnUserDefinedEventScript = "area_user_def";
 
         // Creature scripts
-        public const string CreatureOnHeartbeatScript = "x2_def_heartbeat";
-        public const string CreatureOnNoticeScript = "x2_def_percept";
-        public const string CreatureOnSpellCastAtScript = "x2_def_spellcast";
-        public const string CreatureOnMeleeAttackedScript = "x2_def_attacked";
-        public const string CreatureOnDamagedScript = "x2_def_ondamage";
-        public const string CreatureOnDisturbedScript = "x2_def_ondisturb";
-        public const string CreatureOnEndCombatRoundScript = "x2_def_endcombat";
-        public const string CreatureOnSpawnInScript = "x2_def_spawn";
-        public const string CreatureOnRestedScript = "x2_def_rested";
-        public const string CreatureOnDeathScript = "x2_def_ondeath";
-        public const string CreatureOnUserDefinedScript = "x2_def_userdef";
-        public const string CreatureOnBlockedByDoorScript = "x2_def_onblocked";
+        public const string CreatureOnHeartbeatBeforeScript = "crea_hb_bef";
+        public const string CreatureOnNoticeBeforeScript = "crea_perc_bef";
+        public const string CreatureOnSpellCastAtBeforeScript = "crea_splcast_bef";
+        public const string CreatureOnMeleeAttackedBeforeScript = "crea_attack_bef";
+        public const string CreatureOnDamagedBeforeScript = "crea_damaged_bef";
+        public const string CreatureOnDisturbedBeforeScript = "crea_disturb_bef";
+        public const string CreatureOnEndCombatRoundBeforeScript = "crea_rndend_bef";
+        public const string CreatureOnSpawnInBeforeScript = "crea_spawn_bef";
+        public const string CreatureOnRestedBeforeScript = "crea_rest_bef";
+        public const string CreatureOnDeathBeforeScript = "crea_death_bef";
+        public const string CreatureOnUserDefinedBeforeScript = "crea_userdef_bef";
+        public const string CreatureOnBlockedByDoorBeforeScript = "crea_block_bef";
 
         // Module scripts
         public const string OnModuleAcquireItemScript = "mod_acquire";

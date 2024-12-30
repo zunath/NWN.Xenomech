@@ -9,8 +9,8 @@ using XM.Core.EventManagement.CreatureEvent;
 namespace XM.Inventory.Loot
 {
     [ServiceBinding(typeof(LootService))]
-    [ServiceBinding(typeof(ICreatureOnDeath))]
-    internal class LootService: IInitializable, ICreatureOnDeath
+    [ServiceBinding(typeof(ICreatureOnDeathBefore))]
+    internal class LootService: IInitializable, ICreatureOnDeathBefore
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -63,6 +63,8 @@ namespace XM.Inventory.Loot
                     _lootTables[key] = table;
                 }
             }
+
+            _logger.Info($"Loaded {_lootTables.Count} loot tables.");
         }
 
 
@@ -292,7 +294,7 @@ namespace XM.Inventory.Loot
             });
         }
 
-        public void CreatureOnDeath()
+        public void CreatureOnDeathBefore()
         {
             ProcessCorpse();
         }

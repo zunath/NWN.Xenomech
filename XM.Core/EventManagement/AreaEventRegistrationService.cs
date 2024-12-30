@@ -9,7 +9,7 @@ using XM.Core.EventManagement.XMEvent;
 namespace XM.Core.EventManagement
 {
     [ServiceBinding(typeof(AreaEventRegistrationService))]
-    internal class AreaEventRegistrationService: IXMOnAreaCreated
+    internal class AreaEventRegistrationService: EventRegistrationServiceBase, IXMOnAreaCreated
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -24,6 +24,19 @@ namespace XM.Core.EventManagement
 
         [Inject]
         public IList<IOnAreaUserDefinedEvent> OnAreaUserDefinedEventSubscriptions { get; set; }
+
+
+        [ScriptHandler(EventScript.AreaOnEnterScript)]
+        public void HandleOnAreaEnter() => HandleEvent(OnAreaEnterSubscriptions, (subscription) => subscription.OnAreaEnter());
+
+        [ScriptHandler(EventScript.AreaOnExitScript)]
+        public void HandleOnAreaExit() => HandleEvent(OnAreaExitSubscriptions, (subscription) => subscription.OnAreaExit());
+
+        [ScriptHandler(EventScript.AreaOnHeartbeatScript)]
+        public void HandleOnAreaHeartbeat() => HandleEvent(OnAreaHeartbeatSubscriptions, (subscription) => subscription.OnAreaHeartbeat());
+
+        [ScriptHandler(EventScript.AreaOnUserDefinedEventScript)]
+        public void HandleOnAreaUserDefinedEvent() => HandleEvent(OnAreaUserDefinedEventSubscriptions, (subscription) => subscription.OnAreaUserDefinedEvent());
 
         public AreaEventRegistrationService()
         {
@@ -40,7 +53,7 @@ namespace XM.Core.EventManagement
 
         private void HookAreaEvents()
         {
-            Console.WriteLine($"Registering area events...");
+            _logger.Info($"Registering area events...");
             for (var area = GetFirstArea(); GetIsObjectValid(area); area = GetNextArea())
             {
                 SetAreaScripts(area);
@@ -52,70 +65,5 @@ namespace XM.Core.EventManagement
             var area = OBJECT_SELF;
             SetAreaScripts(area);
         }
-
-        [ScriptHandler(EventScript.AreaOnEnterScript)]
-        public void HandleOnAreaEnter()
-        {
-            foreach (var handler in OnAreaEnterSubscriptions)
-            {
-                try
-                {
-                    handler.OnAreaEnter();
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error(ex);
-                }
-            }
-        }
-
-        [ScriptHandler(EventScript.AreaOnExitScript)]
-        public void HandleOnAreaExit()
-        {
-            foreach (var handler in OnAreaExitSubscriptions)
-            {
-                try
-                {
-                    handler.OnAreaExit();
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error(ex);
-                }
-            }
-        }
-
-        [ScriptHandler(EventScript.AreaOnHeartbeatScript)]
-        public void HandleOnAreaHeartbeat()
-        {
-            foreach (var handler in OnAreaHeartbeatSubscriptions)
-            {
-                try
-                {
-                    handler.OnAreaHeartbeat();
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error(ex);
-                }
-            }
-        }
-
-        [ScriptHandler(EventScript.AreaOnUserDefinedEventScript)]
-        public void HandleOnAreaUserDefinedEvent()
-        {
-            foreach (var handler in OnAreaUserDefinedEventSubscriptions)
-            {
-                try
-                {
-                    handler.OnAreaUserDefinedEvent();
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error(ex);
-                }
-            }
-        }
-
     }
 }

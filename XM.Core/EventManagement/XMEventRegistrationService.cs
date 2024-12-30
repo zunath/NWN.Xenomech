@@ -12,7 +12,7 @@ namespace XM.Core.EventManagement
 {
     [ServiceBinding(typeof(XMEventRegistrationService))]
     [ServiceBinding(typeof(INWNXOnModulePreload))]
-    internal class XMEventRegistrationService: INWNXOnModulePreload
+    internal class XMEventRegistrationService: EventRegistrationServiceBase, INWNXOnModulePreload
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -30,6 +30,20 @@ namespace XM.Core.EventManagement
 
         [Inject]
         public IList<IXMOnModuleContentChanged> OnXMModuleContentChangedSubscriptions { get; set; }
+
+
+        [ScriptHandler(EventScript.OnXMServerHeartbeatScript)]
+        public void HandleXMServerHeartbeat() => HandleEvent(OnXMServerHeartbeatSubscriptions, (subscription) => subscription.OnXMServerHeartbeat());
+
+        [ScriptHandler(EventScript.OnXMSpawnCreatedScript)]
+        public void HandleXMSpawnCreated() => HandleEvent(OnXMSpawnCreatedSubscriptions, (subscription) => subscription.OnSpawnCreated());
+
+        [ScriptHandler(EventScript.OnXMAreaCreatedScript)]
+        public void HandleXMAreaCreated() => HandleEvent(OnXMAreaCreatedSubscriptions, (subscription) => subscription.OnAreaCreated());
+
+        [ScriptHandler(EventScript.OnXMModuleChangedScript)]
+        public void HandleModuleChanged() => HandleEvent(OnXMModuleContentChangedSubscriptions, (subscription) => subscription.OnModuleContentChanged());
+
 
         public XMEventRegistrationService(
             DBService db,
@@ -56,12 +70,11 @@ namespace XM.Core.EventManagement
 
         private void DetermineContentChange()
         {
-
             var serverConfig = _db.Get<ModuleCache>(ModuleCache.CacheIdName) ?? new ModuleCache();
 
             if (UtilPlugin.GetModuleMTime() != serverConfig.LastModuleMTime)
             {
-                Console.WriteLine("Module has changed since last boot. Running module changed event.");
+                _logger.Info("Module has changed since last boot. Running module changed event.");
 
                 // DB record must be updated before the event fires, as some
                 // events use the server configuration record.
@@ -69,70 +82,6 @@ namespace XM.Core.EventManagement
                 _db.Set(serverConfig);
 
                 ExecuteScript(EventScript.OnXMModuleChangedScript, GetModule());
-            }
-        }
-
-        [ScriptHandler(EventScript.OnXMServerHeartbeatScript)]
-        public void HandleXMServerHeartbeat()
-        {
-            foreach (var handler in OnXMServerHeartbeatSubscriptions)
-            {
-                try
-                {
-                    handler.OnXMServerHeartbeat();
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error(ex);
-                }
-            }
-        }
-
-        [ScriptHandler(EventScript.OnXMSpawnCreatedScript)]
-        public void HandleXMSpawnCreated()
-        {
-            foreach (var handler in OnXMSpawnCreatedSubscriptions)
-            {
-                try
-                {
-                    handler.OnSpawnCreated();
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error(ex);
-                }
-            }
-        }
-
-        [ScriptHandler(EventScript.OnXMAreaCreatedScript)]
-        public void HandleXMAreaCreated()
-        {
-            foreach (var handler in OnXMAreaCreatedSubscriptions)
-            {
-                try
-                {
-                    handler.OnAreaCreated();
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error(ex);
-                }
-            }
-        }
-
-        [ScriptHandler(EventScript.OnXMModuleChangedScript)]
-        public void HandleModuleChanged()
-        {
-            foreach (var handler in OnXMModuleContentChangedSubscriptions)
-            {
-                try
-                {
-                    handler.OnModuleContentChanged();
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error(ex);
-                }
             }
         }
     }

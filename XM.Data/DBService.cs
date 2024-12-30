@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading;
 using Anvil.Services;
 using Newtonsoft.Json;
+using NLog;
 using NRediSearch;
 using NReJSON;
 using StackExchange.Redis;
@@ -15,6 +16,8 @@ namespace XM.Data
     [ServiceBinding(typeof(DBService))]
     public class DBService : IDisposable, IUpdateable, IInitializable
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
+
         private readonly XMSettingsService _settings;
         private ConnectionMultiplexer _multiplexer;
         private readonly Dictionary<Type, string> _keyPrefixByType = new();
@@ -45,7 +48,7 @@ namespace XM.Data
                 _searchClientsByType[type] = new Client(type.Name, _multiplexer.GetDatabase());
                 ProcessIndex(entity);
 
-                Console.WriteLine($"Registered type '{entity.GetType()}' using key prefix {type.Name}");
+                _logger.Info($"Registered type '{entity.GetType()}' using key prefix {type.Name}");
             }
         }
 
@@ -59,13 +62,13 @@ namespace XM.Data
 
             _multiplexer = ConnectionMultiplexer.Connect(options);
 
-            Console.WriteLine($"Waiting for database connection. If this takes longer than 10 minutes, there's a problem.");
+            _logger.Info($"Waiting for database connection. If this takes longer than 10 minutes, there's a problem.");
             while (!_multiplexer.IsConnected)
             {
                 // Spin
                 Thread.Sleep(100);
             }
-            Console.WriteLine($"Database connection established.");
+            _logger.Info($"Database connection established.");
         }
 
         /// <summary>
@@ -149,17 +152,17 @@ namespace XM.Data
             {
                 // FT.DROPINDEX is used here in lieu of DropIndex() as it does not cause all documents to be lost.
                 _multiplexer.GetDatabase().Execute("FT.DROPINDEX", type.Name);
-                Console.WriteLine($"Dropped index for {type}");
+                _logger.Info($"Dropped index for {type}");
             }
             catch (Exception ex)
             {
                 if (ex.Message.Contains("Unknown Index name", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    Console.WriteLine($"Index does not exist for type {type}.");
+                    _logger.Info($"Index does not exist for type {type}.");
                 }
                 else
                 {
-                    Console.WriteLine($"Issue dropping index for type {type}. Exception: {ex}");
+                    _logger.Info($"Issue dropping index for type {type}. Exception: {ex}");
                 }
 
             }
@@ -196,7 +199,7 @@ namespace XM.Data
             _indexedPropertiesByName[type] = indexedProperties;
 
             _searchClientsByType[type].CreateIndex(schema, new Client.ConfiguredIndexOptions());
-            Console.WriteLine($"Created index for {type}");
+            _logger.Info($"Created index for {type}");
             WaitForReindexing(type);
         }
 
@@ -204,7 +207,7 @@ namespace XM.Data
         {
             string indexing;
 
-            Console.WriteLine($"Waiting for Redis to complete indexing of: {type}");
+            _logger.Info($"Waiting for Redis to complete indexing of: {type}");
             do
             {
                 Thread.Sleep(100);
@@ -219,7 +222,7 @@ namespace XM.Data
                 catch (Exception ex)
                 {
                     indexing = "0";
-                    Console.WriteLine($"Error during indexing: {ex}");
+                    _logger.Info($"Error during indexing: {ex}");
                 }
 
             } while (indexing != "1");
@@ -265,7 +268,6 @@ namespace XM.Data
         
         public void Dispose()
         {
-            Console.WriteLine($"Disposing DBService");
             _multiplexer.Close();
 
             _multiplexer.Dispose();
@@ -275,7 +277,6 @@ namespace XM.Data
             _searchClientsByType.Clear();
             _indexedPropertiesByName.Clear();
             _cachedEntities.Clear();
-            Console.WriteLine($"finished disposing DBService");
         }
 
         public void Update()

@@ -4,6 +4,7 @@ using System.Numerics;
 using Anvil.API;
 using Anvil.API.Events;
 using Anvil.Services;
+using NLog;
 using XM.API.Constants;
 using XM.API.NWNX.ObjectPlugin;
 using XM.Core;
@@ -18,6 +19,8 @@ namespace XM.Area
     [ServiceBinding(typeof(IXMOnModuleContentChanged))]
     public class WalkmeshService: IXMOnModuleContentChanged
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
+
         private readonly Dictionary<uint, List<uint>> _noSpawnZoneTriggers = new();
         private Dictionary<string, List<Vector3>> _walkmeshesByArea = new();
         private const int AreaBakeStep = 2;
@@ -38,7 +41,7 @@ namespace XM.Area
 
             var serverConfig = _db.Get<ModuleCache>(ModuleCache.CacheIdName);
             _walkmeshesByArea = serverConfig.WalkmeshesByArea;
-            Console.WriteLine($"Loaded {_walkmeshesByArea.Count} area walkmeshes.");
+            _logger.Info($"Loaded {_walkmeshesByArea.Count} area walkmeshes.");
         }
 
         public void OnModuleContentChanged()
@@ -60,7 +63,7 @@ namespace XM.Area
             _db.Set(serverConfig);
 
             _bakingRan = true;
-            Console.WriteLine($"Baked {_walkmeshesByArea.Count} areas.");
+            _logger.Info($"Baked {_walkmeshesByArea.Count} areas.");
         }
 
         /// <summary>

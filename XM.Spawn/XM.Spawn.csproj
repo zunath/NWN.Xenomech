@@ -68,10 +68,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Tables\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\XM.AI\XM.AI.csproj" />
     <ProjectReference Include="..\XM.API\XM.API.csproj" />
     <ProjectReference Include="..\XM.Area\XM.Area.csproj" />
