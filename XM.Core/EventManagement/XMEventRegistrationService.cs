@@ -31,6 +31,13 @@ namespace XM.Core.EventManagement
         [Inject]
         public IList<IXMOnModuleContentChanged> OnXMModuleContentChangedSubscriptions { get; set; }
 
+        [Inject]
+        public IList<IXMOnCacheDataBefore> OnXMCacheDataBeforeSubscriptions { get; set; }
+
+        [Inject]
+        public IList<IXMOnCacheDataAfter> OnXMCacheDataAfterSubscriptions { get; set; }
+
+
 
         [ScriptHandler(EventScript.OnXMServerHeartbeatScript)]
         public void HandleXMServerHeartbeat() => HandleEvent(OnXMServerHeartbeatSubscriptions, (subscription) => subscription.OnXMServerHeartbeat());
@@ -43,6 +50,12 @@ namespace XM.Core.EventManagement
 
         [ScriptHandler(EventScript.OnXMModuleChangedScript)]
         public void HandleModuleChanged() => HandleEvent(OnXMModuleContentChangedSubscriptions, (subscription) => subscription.OnModuleContentChanged());
+
+        [ScriptHandler(EventScript.OnXMCacheDataBeforeScript)]
+        public void HandleCacheDataBefore() => HandleEvent(OnXMCacheDataBeforeSubscriptions, (subscription) => subscription.OnCacheDataBefore());
+
+        [ScriptHandler(EventScript.OnXMCacheDataAfterScript)]
+        public void HandleCacheDataAfter() => HandleEvent(OnXMCacheDataAfterSubscriptions, (subscription) => subscription.OnCacheDataAfter());
 
 
         public XMEventRegistrationService(
@@ -66,6 +79,8 @@ namespace XM.Core.EventManagement
         public void OnModulePreload()
         {
             DetermineContentChange();
+            ExecuteScript(EventScript.OnXMCacheDataBeforeScript);
+            ExecuteScript(EventScript.OnXMCacheDataAfterScript);
         }
 
         private void DetermineContentChange()

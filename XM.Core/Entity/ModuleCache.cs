@@ -14,6 +14,7 @@ namespace XM.Core.Entity
         {
             Id = CacheIdName;
             WalkmeshesByArea = new Dictionary<string, List<Vector3>>();
+            ItemNamesByResref = new Dictionary<string, string>();
         }
 
         public int LastModuleMTime { get; set; }
