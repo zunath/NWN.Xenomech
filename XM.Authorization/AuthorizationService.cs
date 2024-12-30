@@ -45,7 +45,7 @@ namespace XM.Authorization
                 authorizationLevel != AuthorizationLevel.Admin)
             {
                 LogDMAuthorization(false);
-                BootPC(dm, Locale.GetString(LocaleStrings.NotAuthorizedToLogin));
+                BootPC(dm, Locale.GetString(LocaleString.NotAuthorizedToLogin));
                 return;
             }
 

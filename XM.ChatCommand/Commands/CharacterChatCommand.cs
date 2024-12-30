@@ -41,7 +41,7 @@ namespace XM.ChatCommand.Commands
                     var playerId = GetObjectUUID(user);
                     var cdKey = GetPCPublicCDKey(user);
 
-                    var message = ColorToken.Green(Locale.GetString(LocaleStrings.CharacterChatCommandResult,
+                    var message = ColorToken.Green(Locale.GetString(LocaleString.CharacterChatCommandResult,
                         ColorToken.White(cdKey), 
                         ColorToken.White(playerId)));
 

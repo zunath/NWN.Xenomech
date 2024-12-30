@@ -73,7 +73,7 @@ namespace XM.ChatCommand
 
             if (!_chatCommands.ContainsKey(command))
             {
-                var message = Locale.GetString(LocaleStrings.InvalidChatCommand);
+                var message = Locale.GetString(LocaleString.InvalidChatCommand);
                 SendMessageToPC(sender, ColorToken.Red(message));
                 return;
             }
@@ -101,7 +101,7 @@ namespace XM.ChatCommand
                 if ((_settings.ServerEnvironment == ServerEnvironmentType.Test && chatCommand.AvailableToAllOnTestEnvironment) ||
                     chatCommand.Authorization.HasFlag(authorization))
                 {
-                    var message = Locale.GetString(LocaleStrings.SelectTargetForChatCommand);
+                    var message = Locale.GetString(LocaleString.SelectTargetForChatCommand);
                     Targeting.EnterTargetingMode(sender, chatCommand.ValidTargetTypes, message,
                     target =>
                     {
@@ -188,7 +188,7 @@ namespace XM.ChatCommand
 
         private void SendError(uint sender)
         {
-            var message = Locale.GetString(LocaleStrings.InvalidChatCommand);
+            var message = Locale.GetString(LocaleString.InvalidChatCommand);
             SendMessageToPC(sender, ColorToken.Red(message));
         }
 

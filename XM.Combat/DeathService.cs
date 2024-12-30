@@ -60,7 +60,7 @@ namespace XM.Combat
                 factionMember = GetNextFactionMember(hostile, false);
             }
 
-            PopUpDeathGUIPanel(player, true, true, 0, Locale.GetString(LocaleStrings.DeathPrompt));
+            PopUpDeathGUIPanel(player, true, true, 0, Locale.GetString(LocaleString.DeathPrompt));
 
             WriteDeathAudit(player);
         }

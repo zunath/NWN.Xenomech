@@ -16,7 +16,7 @@ namespace XM.Localization
         /// <param name="stringId">The translated string Id</param>
         /// <param name="args">The variables to replace in the formatting of the text.</param>
         /// <returns>A localized string.</returns>
-        public static string GetString(LocaleStrings stringId, params object[] args)
+        public static string GetString(LocaleString stringId, params object[] args)
         {
             var tlkId = (int)stringId;
 
