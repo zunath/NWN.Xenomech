@@ -1,8 +1,8 @@
 ﻿using XM.API;
 
-namespace XM.Core
+namespace XM.Localization
 {
-    public static class Localization
+    public static class Locale
     {
         /// <summary>
         /// Custom TLK files begin at 16777216.
@@ -13,11 +13,13 @@ namespace XM.Core
         /// Retrieves a localized string from the TLK file.
         /// Only strings from the module's custom TLK file can be used.
         /// </summary>
-        /// <param name="tlkId">The tlk row ID number</param>
+        /// <param name="stringId">The translated string Id</param>
         /// <param name="args">The variables to replace in the formatting of the text.</param>
         /// <returns>A localized string.</returns>
-        public static string GetString(int tlkId, params object[] args)
+        public static string GetString(LocaleStrings stringId, params object[] args)
         {
+            var tlkId = (int)stringId;
+
             if (tlkId < CustomTlkIdStart)
                 tlkId += CustomTlkIdStart;
 

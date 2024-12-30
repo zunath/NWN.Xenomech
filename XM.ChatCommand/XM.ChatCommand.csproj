@@ -72,6 +72,7 @@
     <ProjectReference Include="..\XM.Authorization\XM.Authorization.csproj" />
     <ProjectReference Include="..\XM.Core\XM.Core.csproj" />
     <ProjectReference Include="..\XM.Data\XM.Data.csproj" />
+    <ProjectReference Include="..\XM.Localization\XM.Localization.csproj" />
   </ItemGroup>
 
 <Target Name="PostBuild" AfterTargets="PostBuildEvent">

@@ -7,6 +7,7 @@ using Anvil.Services;
 using NLog;
 using XM.Authorization;
 using XM.Core;
+using XM.Localization;
 using Location = XM.API.BaseTypes.Location;
 
 namespace XM.ChatCommand
@@ -71,7 +72,7 @@ namespace XM.ChatCommand
 
             if (!_chatCommands.ContainsKey(command))
             {
-                var message = Localization.GetString(LocalizationIds.InvalidChatCommand);
+                var message = Locale.GetString(LocaleStrings.InvalidChatCommand);
                 SendMessageToPC(sender, ColorToken.Red(message));
                 return;
             }
@@ -99,7 +100,7 @@ namespace XM.ChatCommand
                 if ((_settings.ServerEnvironment == ServerEnvironmentType.Test && chatCommand.AvailableToAllOnTestEnvironment) ||
                     chatCommand.Authorization.HasFlag(authorization))
                 {
-                    var message = Localization.GetString(LocalizationIds.SelectATarget);
+                    var message = Locale.GetString(LocaleStrings.SelectTargetForChatCommand);
                     Targeting.EnterTargetingMode(sender, chatCommand.ValidTargetTypes, message,
                     target =>
                     {
@@ -186,7 +187,7 @@ namespace XM.ChatCommand
 
         private void SendError(uint sender)
         {
-            var message = Localization.GetString(LocalizationIds.InvalidChatCommand);
+            var message = Locale.GetString(LocaleStrings.InvalidChatCommand);
             SendMessageToPC(sender, ColorToken.Red(message));
         }
 

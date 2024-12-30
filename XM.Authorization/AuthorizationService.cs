@@ -6,6 +6,7 @@ using NLog;
 using XM.Authorization.Entity;
 using XM.Core;
 using XM.Data;
+using XM.Localization;
 
 namespace XM.Authorization
 {
@@ -44,7 +45,7 @@ namespace XM.Authorization
                 authorizationLevel != AuthorizationLevel.Admin)
             {
                 LogDMAuthorization(false);
-                BootPC(dm, Localization.GetString(LocalizationIds.NotAuthorizedToLogin));
+                BootPC(dm, Locale.GetString(LocaleStrings.NotAuthorizedToLogin));
                 return;
             }
 
