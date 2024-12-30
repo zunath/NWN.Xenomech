@@ -2,13 +2,15 @@
 using NLog;
 using System;
 using System.Collections.Generic;
-using Anvil.API.Events;
 using XM.Core;
+using XM.API.Constants;
+using XM.Core.EventManagement.CreatureEvent;
 
 namespace XM.Inventory.Loot
 {
     [ServiceBinding(typeof(LootService))]
-    internal class LootService: IInitializable
+    [ServiceBinding(typeof(ICreatureOnDeath))]
+    internal class LootService: IInitializable, ICreatureOnDeath
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -18,21 +20,19 @@ namespace XM.Inventory.Loot
         private const string CorpseBodyVariable = "CORPSE_BODY";
         private const string CorpseCopyItemVariable = "CORPSE_ITEM_COPY";
 
+        private const string CorpseClosedScript = "corpse_closed";
+        private const string CorpseDisturbedScript = "corpse_disturbed";
+
+
         [Inject]
         public IList<ILootTableDefinition> Definitions { get; set; }
 
-        public LootService(EventService es)
-        {
-            
+        private readonly InventoryService _inventory;
 
+        public LootService(InventoryService inventory)
+        {
+            _inventory = inventory;
             _lootTables = new Dictionary<string, LootTable>();
-
-            HookEvents();
-        }
-
-        private void HookEvents()
-        {
-            
         }
 
         public void Init()
@@ -110,7 +110,7 @@ namespace XM.Inventory.Loot
         }
 
 
-        private List<uint> SpawnLoot(uint source, uint receiver, string lootTableName, int chance, int attempts)
+        public List<uint> SpawnLoot(uint source, uint receiver, string lootTableName, int chance, int attempts)
         {
             var creditFinderLevel = GetLocalInt(source, "CREDITFINDER_LEVEL");
             var creditPercentIncrease = creditFinderLevel * 0.2f;
@@ -145,6 +145,24 @@ namespace XM.Inventory.Loot
         }
 
         /// <summary>
+        /// Attempts to spawn items found in the associated loot table based on the configured variables.
+        /// </summary>
+        /// <param name="source">The source of the items (must contain the local variables)</param>
+        /// <param name="receiver">The receiver of the items</param>
+        /// <param name="lootTablePrefix">The prefix of the loot tables. In the toolset this should be numeric starting at 1.</param>
+        public void SpawnLoot(uint source, uint receiver, string lootTablePrefix)
+        {
+            var lootTableEntries = GetLootTableDetails(source, lootTablePrefix);
+            foreach (var entry in lootTableEntries)
+            {
+                var delimitedString = GetLocalString(source, entry);
+                var (tableName, chance, attempts) = ParseLootTableArguments(delimitedString);
+
+                SpawnLoot(source, receiver, tableName, chance, attempts);
+            }
+        }
+
+        /// <summary>
         /// Retrieves a loot table by its unique name.
         /// If name is not registered, an exception will be raised.
         /// </summary>
@@ -164,7 +182,7 @@ namespace XM.Inventory.Loot
         /// <param name="creature">The creature to search.</param>
         /// <param name="lootTablePrefix">The prefix of the loot tables to look for.</param>
         /// <returns>A list of loot table details.</returns>
-        private static IEnumerable<string> GetLootTableDetails(uint creature, string lootTablePrefix)
+        private IEnumerable<string> GetLootTableDetails(uint creature, string lootTablePrefix)
         {
             var lootTables = new List<string>();
 
@@ -184,6 +202,155 @@ namespace XM.Inventory.Loot
             }
 
             return lootTables;
+        }
+
+
+        /// <summary>
+        /// Handles creating a corpse placeable on a creature's death, copying its inventory to the placeable,
+        /// and changing the name of the placeable to match the creature.
+        /// </summary>
+        private void ProcessCorpse()
+        {
+            var self = OBJECT_SELF;
+            SetIsDestroyable(false);
+
+            var area = GetArea(self);
+            var position = GetPosition(self);
+            var facing = GetFacing(self);
+            var lootPosition = Vector(position.X, position.Y, position.Z - 0.11f);
+            var spawnLocation = Location(area, lootPosition, facing);
+
+            var container = CreateObject(ObjectType.Placeable, "corpse", spawnLocation);
+            SetLocalObject(container, CorpseBodyVariable, self);
+            SetName(container, $"{GetName(self)}'s Corpse");
+
+            AssignCommand(container, () =>
+            {
+                var gold = GetGold(self);
+                TakeGoldFromCreature(gold, self);
+            });
+
+            // Dump equipped items in container
+            for (var slot = 0; slot < GeneralConstants.NumberOfInventorySlots; slot++)
+            {
+                if (slot == (int)InventorySlotType.CreatureArmor ||
+                    slot == (int)InventorySlotType.CreatureWeaponBite ||
+                    slot == (int)InventorySlotType.CreatureWeaponLeft ||
+                    slot == (int)InventorySlotType.CreatureWeaponRight)
+                    continue;
+
+                var item = GetItemInSlot((InventorySlotType)slot, self);
+                if (GetIsObjectValid(item) && !GetItemCursedFlag(item) && GetDroppableFlag(item))
+                {
+                    var copy = CopyItem(item, container, true);
+
+                    if (slot == (int)InventorySlotType.Head ||
+                        slot == (int)InventorySlotType.Chest)
+                    {
+                        SetLocalObject(copy, CorpseCopyItemVariable, item);
+                    }
+                    else
+                    {
+                        DestroyObject(item);
+                    }
+                }
+            }
+
+            for (var item = GetFirstItemInInventory(self); GetIsObjectValid(item); item = GetNextItemInInventory(self))
+            {
+                if (GetIsObjectValid(item) && !GetItemCursedFlag(item) && GetDroppableFlag(item))
+                {
+                    CopyItem(item, container, true);
+                    DestroyObject(item);
+                }
+            }
+
+            ScheduleCorpseCleanup(container);
+        }
+
+        private void ScheduleCorpseCleanup(uint placeable)
+        {
+            DelayCommand(CorpseLifespanSeconds, () =>
+            {
+                if (!GetIsObjectValid(placeable))
+                    return;
+
+                var body = GetLocalObject(placeable, CorpseBodyVariable);
+                AssignCommand(body, () => SetIsDestroyable(true));
+
+                for (var item = GetFirstItemInInventory(body); GetIsObjectValid(item); item = GetNextItemInInventory(body))
+                {
+                    DestroyObject(item);
+                }
+                DestroyObject(body);
+
+                for (var item = GetFirstItemInInventory(placeable); GetIsObjectValid(item); item = GetNextItemInInventory(placeable))
+                {
+                    DestroyObject(item);
+                }
+                DestroyObject(placeable);
+            });
+        }
+
+        public void CreatureOnDeath()
+        {
+            ProcessCorpse();
+        }
+
+        /// <summary>
+        /// When the loot corpse is closed, either spawn an "Extract" placeable to be used with Beast Mastery DNA extraction
+        /// or remove the dead creature from the game.
+        /// </summary>
+        [ScriptHandler(CorpseClosedScript)]
+        public void CloseCorpseContainer()
+        {
+            var container = OBJECT_SELF;
+            var firstItem = GetFirstItemInInventory(container);
+            var corpseOwner = GetLocalObject(container, CorpseBodyVariable);
+
+            if (!GetIsObjectValid(firstItem))
+            {
+                DestroyObject(container);
+
+                AssignCommand(corpseOwner, () =>
+                {
+                    SetIsDestroyable(true);
+                });
+            }
+        }
+
+        /// <summary>
+        /// When a player adds an item to a corpse, return it to them.
+        /// When a player removes an item from the corpse, update the connected creature's appearance if needed.
+        /// </summary>
+        [ScriptHandler(CorpseDisturbedScript)]
+        public void DisturbCorpseContainer()
+        {
+            var looter = GetLastDisturbed();
+            var item = GetInventoryDisturbItem();
+            var type = GetInventoryDisturbType();
+
+            AssignCommand(looter, () =>
+            {
+                ActionPlayAnimation(AnimationType.LoopingGetLow, 1.0f, 1.0f);
+            });
+
+            if (type == InventoryDisturbType.Added)
+            {
+                _inventory.ReturnItem(looter, item);
+                SendMessageToPC(looter, "You cannot place items inside of corpses.");
+            }
+            else if (type == InventoryDisturbType.Removed)
+            {
+                var copy = GetLocalObject(item, CorpseCopyItemVariable);
+
+                if (GetIsObjectValid(copy))
+                {
+                    DestroyObject(copy);
+                }
+
+                DeleteLocalObject(item, CorpseCopyItemVariable);
+            }
         }
     }
 }

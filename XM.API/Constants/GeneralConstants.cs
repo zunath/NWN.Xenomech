@@ -3,8 +3,8 @@ namespace XM.API.Constants
 {
     public static class GeneralConstants
     {
-        public const int ENGINE_NUM_STRUCTURES = 8;
-        public const int NUM_INVENTORY_SLOTS = 18;
+        public const int EngineNumberOfStructures = 8;
+        public const int NumberOfInventorySlots = 18;
         public const int TRUE = 1;
         public const int FALSE = 0;
         public const float PI = 3.141592f;

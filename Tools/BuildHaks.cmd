@@ -1,1 +1,1 @@
-NWN.Xenomech.CLI.exe -k
+XM.CLI.exe -k
