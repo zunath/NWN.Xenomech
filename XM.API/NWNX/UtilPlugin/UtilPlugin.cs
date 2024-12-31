@@ -1,4 +1,5 @@
 ﻿using NWN.Core;
+using NWN.Core.NWNX;
 using XM.API.BaseTypes;
 
 namespace XM.API.NWNX.UtilPlugin
@@ -167,5 +168,279 @@ namespace XM.API.NWNX.UtilPlugin
         {
             return NWN.Core.NWNX.UtilPlugin.GetLastCreatedObject(nObjectType, nNthLast);
         }
+        /// <summary>
+        /// Compiles and adds a script to the UserDirectory/nwnx folder, or to the location of sAlias.
+        /// Will override existing scripts that are in the module.
+        /// </summary>
+        /// <param name="sFileName">The script filename without extension, 16 or less characters.</param>
+        /// <param name="sScriptData">The script data to compile</param>
+        /// <param name="bWrapIntoMain">Set to TRUE to wrap sScriptData into void main(){}.</param>
+        /// <param name="sAlias">The alias of the resource directory to add the ncs file to. Default: UserDirectory/nwnx</param>
+        /// <returns>"</returns>
+        public static string AddScript(string sFileName, string sScriptData, int bWrapIntoMain = 0, string sAlias = "NWNX")
+        {
+            return NWN.Core.NWNX.UtilPlugin.AddScript(sFileName, sScriptData, bWrapIntoMain, sAlias);
+        }
+
+        /// <summary>
+        /// Adds a nss file to the UserDirectory/nwnx folder, or to the location of sAlias.
+        /// Will override existing nss files that are in the module.
+        /// </summary>
+        /// <param name="sFileName">The script filename without extension, 16 or less characters.</param>
+        /// <param name="sContents">The contents of the nss file</param>
+        /// <param name="sAlias">The alias of the resource directory to add the nss file to. Default: UserDirectory/nwnx</param>
+        /// <returns>TRUE on success.</returns>
+        public static int AddNSSFile(string sFileName, string sContents, string sAlias = "NWNX")
+        {
+            return NWN.Core.NWNX.UtilPlugin.AddNSSFile(sFileName, sContents, sAlias);
+        }
+
+        /// <summary>
+        /// Remove sFileName of nType from the UserDirectory/nwnx folder, or from the location of sAlias.
+        /// </summary>
+        /// <param name="sFileName">The filename without extension, 16 or less characters.</param>
+        /// <param name="nType">The @ref resref_types "Resref Type".</param>
+        /// <param name="sAlias">The alias of the resource directory to remove the file from. Default: UserDirectory/nwnx</param>
+        /// <returns>TRUE on success.</returns>
+        public static int RemoveNWNXResourceFile(string sFileName, int nType, string sAlias = "NWNX")
+        {
+            return NWN.Core.NWNX.UtilPlugin.RemoveNWNXResourceFile(sFileName, nType, sAlias);
+        }
+
+        /// <summary>
+        /// Set the NWScript instruction limit.
+        /// </summary>
+        /// <param name="nInstructionLimit">The new limit or -1 to reset to default.</param>
+        public static void SetInstructionLimit(int nInstructionLimit)
+        {
+            NWN.Core.NWNX.UtilPlugin.SetInstructionLimit(nInstructionLimit);
+        }
+
+        /// <summary>
+        /// Get the NWScript instruction limit.
+        /// </summary>
+        /// <returns>Instruction limit.</returns>
+        public static int GetInstructionLimit()
+        {
+            return NWN.Core.NWNX.UtilPlugin.GetInstructionLimit();
+        }
+
+        /// <summary>
+        /// Set the number of NWScript instructions currently executed.
+        /// </summary>
+        /// <param name="nInstructions">The number of instructions, must be >= 0.</param>
+        public static void SetInstructionsExecuted(int nInstructions)
+        {
+            NWN.Core.NWNX.UtilPlugin.SetInstructionsExecuted(nInstructions);
+        }
+
+        /// <summary>
+        /// Get the number of NWScript instructions currently executed.
+        /// </summary>
+        /// <returns>Number of instructions executed.</returns>
+        public static int GetInstructionsExecuted()
+        {
+            return NWN.Core.NWNX.UtilPlugin.GetInstructionsExecuted();
+        }
+
+        /// <summary>
+        /// Register a server console command that will execute a script chunk.
+        /// </summary>
+        /// <param name="sCommand">The name of the command.</param>
+        /// <param name="sScriptChunk">The script chunk to run. You can use $args to get the console command arguments.</param>
+        /// <returns>TRUE on success.</returns>
+        public static int RegisterServerConsoleCommand(string sCommand, string sScriptChunk)
+        {
+            return NWN.Core.NWNX.UtilPlugin.RegisterServerConsoleCommand(sCommand, sScriptChunk);
+        }
+
+        /// <summary>
+        /// Unregister a server console command that was registered with NWNX_Util_RegisterServerConsoleCommand().
+        /// </summary>
+        /// <param name="sCommand">The name of the command.</param>
+        public static void UnregisterServerConsoleCommand(string sCommand)
+        {
+            NWN.Core.NWNX.UtilPlugin.UnregisterServerConsoleCommand(sCommand);
+        }
+
+        /// <summary>
+        /// Determines if the given plugin exists and is enabled.
+        /// </summary>
+        /// <param name="sPlugin">The name of the plugin to check.</param>
+        /// <returns>TRUE if the plugin exists and is enabled, otherwise FALSE.</returns>
+        public static int PluginExists(string sPlugin)
+        {
+            WriteTimestampedLogEntry("WARNING:  NWNX_Util_PluginExists is deprecated.  You should migrate to NWNX_PluginExists.");
+            return NWN.Core.NWNX.UtilPlugin.PluginExists(sPlugin);
+        }
+
+        /// <summary>
+        /// Gets the server's current working user folder.
+        /// </summary>
+        /// <returns>The absolute path of the server's home directory (-userDirectory)</returns>
+        public static string GetUserDirectory()
+        {
+            return NWN.Core.NWNX.UtilPlugin.GetUserDirectory();
+        }
+
+        /// <summary>
+        /// Get the return value of the last run script with a StartingConditional.
+        /// </summary>
+        /// <returns>Return value of the last run script.</returns>
+        public static int GetScriptReturnValue()
+        {
+            return NWN.Core.NWNX.UtilPlugin.GetScriptReturnValue();
+        }
+
+        /// <summary>
+        /// Create a door.
+        /// </summary>
+        /// <param name="sResRef">The ResRef of the door.</param>
+        /// <param name="locLocation">The location to create the door at.</param>
+        /// <param name="sNewTag">An optional new tag for the door.</param>
+        /// <param name="nAppearanceType">An optional index into doortypes.2da for appearance.</param>
+        /// <returns>The door, or OBJECT_INVALID on failure.</returns>
+        public static uint CreateDoor(string sResRef, System.IntPtr locLocation, string sNewTag = "", int nAppearanceType = -1)
+        {
+            return NWN.Core.NWNX.UtilPlugin.CreateDoor(sResRef, locLocation, sNewTag, nAppearanceType);
+        }
+
+        /// <summary>
+        /// Set the object that will be returned by GetItemActivator.
+        /// </summary>
+        /// <param name="oObject">An object.</param>
+        public static void SetItemActivator(uint oObject)
+        {
+            NWN.Core.NWNX.UtilPlugin.SetItemActivator(oObject);
+        }
+        /// <summary>
+        /// Gets the world time as calendar day and time of day.
+        /// This function is useful for calculating effect expiry times.
+        /// </summary>
+        /// <param name="fAdjustment">An adjustment in seconds, 0.0f will return the current world time. Positive or negative values will return a world time in the future or past.</param>
+        /// <returns>A NWNX_Util_WorldTime struct with the calendar day and time of day.</returns>
+        public static WorldTime GetWorldTime(float fAdjustment = 0.0f)
+        {
+            return NWN.Core.NWNX.UtilPlugin.GetWorldTime(fAdjustment);
+        }
+
+        /// <summary>
+        /// Set a server-side resource override.
+        /// </summary>
+        /// <param name="nResType">A Resref Type.</param>
+        /// <param name="sOldName">The old resource name, 16 characters or less.</param>
+        /// <param name="sNewName">The new resource name or "" to clear a previous override, 16 characters or less.</param>
+        public static void SetResourceOverride(int nResType, string sOldName, string sNewName)
+        {
+            NWN.Core.NWNX.UtilPlugin.SetResourceOverride(nResType, sOldName, sNewName);
+        }
+
+        /// <summary>
+        /// Gets a server-side resource override.
+        /// </summary>
+        /// <param name="nResType">A Resref Type.</param>
+        /// <param name="sName">The name of the resource, 16 characters or less.</param>
+        /// <returns>The resource override, or "" if one is not set.</returns>
+        public static string GetResourceOverride(int nResType, string sName)
+        {
+            return NWN.Core.NWNX.UtilPlugin.GetResourceOverride(nResType, sName);
+        }
+
+        /// <summary>
+        /// Gets if a script param is set.
+        /// </summary>
+        /// <param name="sParamName">The script parameter name to check.</param>
+        /// <returns>TRUE if the script param is set, FALSE if not or on error.</returns>
+        public static bool GetScriptParamIsSet(string sParamName)
+        {
+            return NWN.Core.NWNX.UtilPlugin.GetScriptParamIsSet(sParamName) == 1;
+        }
+
+        /// <summary>
+        /// Set the module dawn hour.
+        /// </summary>
+        /// <param name="nDawnHour">The new dawn hour.</param>
+        public static void SetDawnHour(int nDawnHour)
+        {
+            NWN.Core.NWNX.UtilPlugin.SetDawnHour(nDawnHour);
+        }
+
+        /// <summary>
+        /// Set the module dusk hour.
+        /// </summary>
+        /// <param name="nDuskHour">The new dusk hour.</param>
+        public static void SetDuskHour(int nDuskHour)
+        {
+            NWN.Core.NWNX.UtilPlugin.SetDuskHour(nDuskHour);
+        }
+
+        /// <summary>
+        /// Returns the number of microseconds since midnight on January 1, 1970.
+        /// </summary>
+        /// <returns>A HighResTimestamp struct containing seconds and microseconds.</returns>
+        public static HighResTimestamp GetHighResTimeStamp()
+        {
+            return NWN.Core.NWNX.UtilPlugin.GetHighResTimeStamp();
+        }
+
+        /// <summary>
+        /// Return the name of a terminal, "" if not a TTY.
+        /// </summary>
+        /// <returns>Terminal name.</returns>
+        public static string GetTTY()
+        {
+            return NWN.Core.NWNX.UtilPlugin.GetTTY();
+        }
+
+        /// <summary>
+        /// Set the currently running script event.
+        /// </summary>
+        /// <param name="nEventID">The ID of the event.</param>
+        public static void SetCurrentlyRunningEvent(int nEventID)
+        {
+            NWN.Core.NWNX.UtilPlugin.SetCurrentlyRunningEvent(nEventID);
+        }
+
+        /// <summary>
+        /// Calculate the Levenshtein distance of two strings.
+        /// </summary>
+        /// <param name="sString">The string to compare with.</param>
+        /// <param name="sCompareTo">The string to compare sString to.</param>
+        /// <returns>The number of characters different between the compared strings.</returns>
+        public static int GetStringLevenshteinDistance(string sString, string sCompareTo)
+        {
+            return NWN.Core.NWNX.UtilPlugin.GetStringLevenshteinDistance(sString, sCompareTo);
+        }
+
+        /// <summary>
+        /// Sends a full object update of oObjectToUpdate to all clients.
+        /// </summary>
+        /// <param name="oObjectToUpdate">The object to update.</param>
+        /// <param name="oPlayer">The player for which the object needs to update, OBJECT_INVALID for all players.</param>
+        public static void UpdateClientObject(uint oObjectToUpdate, uint oPlayer = OBJECT_INVALID)
+        {
+            NWN.Core.NWNX.UtilPlugin.UpdateClientObject(oObjectToUpdate, oPlayer);
+        }
+
+        /// <summary>
+        /// Clean a resource directory, deleting all files of nResType.
+        /// </summary>
+        /// <param name="sAlias">A resource directory alias, NWNX or one defined in the custom resource directory file.</param>
+        /// <param name="nResType">The type of file to delete or 0xFFFF for all types.</param>
+        /// <returns>TRUE if successful, FALSE on error.</returns>
+        public static int CleanResourceDirectory(string sAlias, int nResType = 65535)
+        {
+            return NWN.Core.NWNX.UtilPlugin.CleanResourceDirectory(sAlias, nResType);
+        }
+
+        /// <summary>
+        /// Return the filename of the tlk file.
+        /// </summary>
+        /// <returns>The name of the tlk file.</returns>
+        public static string GetModuleTlkFile()
+        {
+            return NWN.Core.NWNX.UtilPlugin.GetModuleTlkFile();
+        }
+
     }
 }
