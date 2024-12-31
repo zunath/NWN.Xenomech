@@ -1,7 +1,6 @@
 namespace XM.Core.EventManagement.ModuleEvent
 {
-    public interface IModuleOnPlayerEnterEvent : IXMEvent
+    public sealed class ModuleOnPlayerEnterEvent : IXMEvent
     {
-        void OnModuleClientEnter();
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using XM.Core.EventManagement;
 using XM.Core.EventManagement.XMEvent;
 using XM.Core.Extension;
 using XM.Data;
@@ -11,8 +12,7 @@ using XM.Localization;
 namespace XM.Inventory.KeyItem
 {
     [ServiceBinding(typeof(KeyItemService))]
-    [ServiceBinding(typeof(ICacheDataBeforeEvent))]
-    public class KeyItemService: ICacheDataBeforeEvent
+    public class KeyItemService
     {
         // All categories/key items
         private readonly Dictionary<KeyItemCategoryType, KeyItemCategoryAttribute> _allCategories = new();
@@ -28,14 +28,16 @@ namespace XM.Inventory.KeyItem
         private readonly Dictionary<string, KeyItemType> _keyItemsByTypeName = new();
         private readonly Dictionary<int, KeyItemType> _keyItemsByTypeId = new();
 
-        private DBService _db;
+        private readonly DBService _db;
 
-        public KeyItemService(DBService db)
+        public KeyItemService(DBService db, XMEventService @event)
         {
             _db = db;
+
+            @event.Subscribe<CacheDataBeforeEvent>(OnCacheDataBefore);
         }
 
-        public void OnCacheDataBefore()
+        private void OnCacheDataBefore()
         {
             // Organize categories
             var categories = Enum.GetValues(typeof(KeyItemCategoryType)).Cast<KeyItemCategoryType>();

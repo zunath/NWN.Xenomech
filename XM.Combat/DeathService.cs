@@ -1,20 +1,18 @@
-﻿using Anvil.API;
-using Anvil.API.Events;
-using Anvil.Services;
+﻿using Anvil.Services;
 using NLog;
-using System.Numerics;
 using XM.API.Constants;
 using XM.Area;
 using XM.Combat.Entity;
+using XM.Core.EventManagement;
+using XM.Core.EventManagement.ModuleEvent;
 using XM.Core.EventManagement.XMEvent;
 using XM.Data;
 using XM.Localization;
-using static Anvil.API.Events.ModuleEvents;
 
 namespace XM.Combat
 {
     [ServiceBinding(typeof(DeathService))]
-    internal class DeathService: IPCInitializedEvent
+    internal class DeathService
     {
         private const string DefaultSpawnWaypointTag = "DTH_DEFAULT_RESPAWN_POINT";
 
@@ -22,30 +20,34 @@ namespace XM.Combat
 
         private readonly DBService _db;
         private readonly AreaCacheService _areaCache;
+        private readonly XMEventService _event;
 
         public DeathService(
             DBService db,
-            AreaCacheService areaCache)
+            AreaCacheService areaCache,
+            XMEventService @event)
         {
             _db = db;
             _areaCache = areaCache;
+            _event = @event;
 
-            HookEvents();
+            SubscribeEvents();
         }
 
-        private void HookEvents()
+        private void SubscribeEvents()
         {
-            NwModule.Instance.OnPlayerDying += OnModuleDying;
-            NwModule.Instance.OnPlayerDeath += OnModuleDeath;
-            NwModule.Instance.OnPlayerRespawn += OnModuleRespawn;
+            _event.Subscribe<ModuleOnPlayerDyingEvent>(OnModuleDying);
+            _event.Subscribe<ModuleOnPlayerDeathEvent>(OnModuleDeath);
+            _event.Subscribe<ModuleOnPlayerRespawnEvent>(OnModuleRespawn);
+            _event.Subscribe<PCInitializedEvent>(OnPCInitialized);
         }
 
 
-        private void OnModuleDying(ModuleEvents.OnPlayerDying obj)
+        private void OnModuleDying()
         {
             ApplyEffectToObject(DurationType.Instant, EffectDeath(), GetLastPlayerDying());
         }
-        private void OnModuleDeath(ModuleEvents.OnPlayerDeath obj)
+        private void OnModuleDeath()
         {
             var player = GetLastPlayerDied();
             var hostile = GetLastHostileActor(player);
@@ -66,7 +68,7 @@ namespace XM.Combat
             WriteDeathAudit(player);
         }
 
-        private void OnModuleRespawn(ModuleEvents.OnPlayerRespawn obj)
+        private void OnModuleRespawn()
         {
             var player = GetLastRespawnButtonPresser();
             var maxHP = GetMaxHitPoints(player);

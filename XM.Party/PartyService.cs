@@ -1,43 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Anvil.API;
-using Anvil.API.Events;
 using Anvil.Services;
 using NWN.Core.NWNX;
+using XM.Core.EventManagement;
+using XM.Core.EventManagement.ModuleEvent;
 using XM.Core.EventManagement.NWNXEvent;
 
 namespace XM.Party
 {
     [ServiceBinding(typeof(PartyService))]
-    [ServiceBinding(typeof(IPartyAcceptInvitationBeforeEvent))]
-    [ServiceBinding(typeof(IAddAssociateBeforeEvent))]
-    [ServiceBinding(typeof(IRemoveAssociateBeforeEvent))]
-    [ServiceBinding(typeof(IPartyLeaveBeforeEvent))]
-    [ServiceBinding(typeof(IPartyTransferLeadershipBeforeEvent))]
-    internal class PartyService:
-        IPartyAcceptInvitationBeforeEvent,
-        IAddAssociateBeforeEvent,
-        IRemoveAssociateBeforeEvent,
-        IPartyLeaveBeforeEvent,
-        IPartyTransferLeadershipBeforeEvent
+    internal class PartyService
     {
         private readonly Dictionary<Guid, List<uint>> _parties = new();
         private readonly Dictionary<uint, Guid> _creatureToParty = new();
         private readonly Dictionary<Guid, uint> _partyLeaders = new();
 
-        public PartyService()
+        private readonly XMEventService _event;
+
+        public PartyService(XMEventService @event)
         {
-            NwModule.Instance.OnClientLeave += OnModuleLeave; 
+            _event = @event;
+
+            SubscribeEvents();
         }
 
-        private void OnModuleLeave(ModuleEvents.OnClientLeave obj)
+        private void SubscribeEvents()
+        {
+            _event.Subscribe<ModuleOnPlayerLeaveEvent>(OnModuleLeave);
+            _event.Subscribe<PartyAcceptInvitationBeforeEvent>(OnPartyAcceptInvitationBefore);
+            _event.Subscribe<AddAssociateBeforeEvent>(OnAddAssociateBefore);
+            _event.Subscribe<RemoveAssociateBeforeEvent>(OnRemoveAssociateBefore);
+            _event.Subscribe<PartyLeaveBeforeEvent>(OnPartyLeaveBefore);
+            _event.Subscribe<PartyTransferLeadershipBeforeEvent>(OnPartyTransferLeadershipBefore);
+        }
+
+        private void OnModuleLeave()
         {
             var creature = GetExitingObject();
             RemoveCreatureFromParty(creature);
         }
 
-        public void OnPartyAcceptInvitationBefore()
+        private void OnPartyAcceptInvitationBefore()
         {
             var creature = OBJECT_SELF;
             var requester = StringToObject(EventsPlugin.GetEventData("INVITED_BY"));
@@ -45,7 +49,7 @@ namespace XM.Party
             AddToParty(requester, creature);
         }
 
-        public void OnAddAssociateBefore()
+        private void OnAddAssociateBefore()
         {
             var owner = OBJECT_SELF;
             var associate = StringToObject(EventsPlugin.GetEventData("ASSOCIATE_OBJECT_ID"));
@@ -53,19 +57,19 @@ namespace XM.Party
             AddToParty(owner, associate);
         }
 
-        public void OnRemoveAssociateBefore()
+        private void OnRemoveAssociateBefore()
         {
             var associate = StringToObject(EventsPlugin.GetEventData("ASSOCIATE_OBJECT_ID"));
             RemoveCreatureFromParty(associate);
         }
 
-        public void OnPartyLeaveBefore()
+        private void OnPartyLeaveBefore()
         {
             var creature = StringToObject(EventsPlugin.GetEventData("LEAVING"));
             RemoveCreatureFromParty(creature);
         }
 
-        public void OnPartyTransferLeadershipBefore()
+        private void OnPartyTransferLeadershipBefore()
         {
             var creature = StringToObject(EventsPlugin.GetEventData("NEW_LEADER"));
             var partyId = _creatureToParty[creature];

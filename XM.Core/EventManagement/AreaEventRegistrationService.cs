@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Anvil.Services;
+﻿using Anvil.Services;
 using NLog;
+using XM.API.BaseTypes;
 using XM.API.Constants;
 using XM.Core.EventManagement.AreaEvent;
 using XM.Core.EventManagement.XMEvent;
@@ -9,38 +8,36 @@ using XM.Core.EventManagement.XMEvent;
 namespace XM.Core.EventManagement
 {
     [ServiceBinding(typeof(AreaEventRegistrationService))]
-    internal class AreaEventRegistrationService: EventRegistrationServiceBase, IAreaCreatedEvent
+    internal class AreaEventRegistrationService
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-        [Inject]
-        public IList<IAreaEnterEvent> OnAreaEnterSubscriptions { get; set; }
+        private readonly XMEventService _event;
 
-        [Inject]
-        public IList<IAreaExitEvent> OnAreaExitSubscriptions { get; set; }
-
-        [Inject]
-        public IList<IAreaHeartbeatEvent> OnAreaHeartbeatSubscriptions { get; set; }
-
-        [Inject]
-        public IList<IAreaUserDefinedEvent> OnAreaUserDefinedEventSubscriptions { get; set; }
-
-
-        [ScriptHandler(EventScript.AreaOnEnterScript)]
-        public void HandleOnAreaEnter() => HandleEvent(OnAreaEnterSubscriptions, (subscription) => subscription.OnAreaEnter());
-
-        [ScriptHandler(EventScript.AreaOnExitScript)]
-        public void HandleOnAreaExit() => HandleEvent(OnAreaExitSubscriptions, (subscription) => subscription.OnAreaExit());
-
-        [ScriptHandler(EventScript.AreaOnHeartbeatScript)]
-        public void HandleOnAreaHeartbeat() => HandleEvent(OnAreaHeartbeatSubscriptions, (subscription) => subscription.OnAreaHeartbeat());
-
-        [ScriptHandler(EventScript.AreaOnUserDefinedEventScript)]
-        public void HandleOnAreaUserDefinedEvent() => HandleEvent(OnAreaUserDefinedEventSubscriptions, (subscription) => subscription.OnAreaUserDefinedEvent());
-
-        public AreaEventRegistrationService()
+        public AreaEventRegistrationService(XMEventService @event)
         {
-            HookAreaEvents();
+            _event = @event;
+
+            _logger.Info($"Registering area events...");
+            RegisterEvents();
+            HookAreaScripts();
+            SubscribeScripts();
+        }
+
+        private void RegisterEvents()
+        {
+            _event.RegisterEvent<AreaEnterEvent>(EventScript.AreaOnEnterScript);
+            _event.RegisterEvent<AreaExitEvent>(EventScript.AreaOnExitScript);
+            _event.RegisterEvent<AreaHeartbeatEvent>(EventScript.AreaOnHeartbeatScript);
+            _event.RegisterEvent<AreaUserDefinedEvent>(EventScript.AreaOnUserDefinedEventScript);
+        }
+
+        private void HookAreaScripts()
+        {
+            for (var area = GetFirstArea(); GetIsObjectValid(area); area = GetNextArea())
+            {
+                SetAreaScripts(area);
+            }
         }
 
         private void SetAreaScripts(uint area)
@@ -51,13 +48,9 @@ namespace XM.Core.EventManagement
             SetEventScript(area, EventScriptType.AreaOnUserDefinedEvent, EventScript.AreaOnUserDefinedEventScript);
         }
 
-        private void HookAreaEvents()
+        private void SubscribeScripts()
         {
-            _logger.Info($"Registering area events...");
-            for (var area = GetFirstArea(); GetIsObjectValid(area); area = GetNextArea())
-            {
-                SetAreaScripts(area);
-            }
+            _event.Subscribe<AreaCreatedEvent>(OnAreaCreated);
         }
 
         public void OnAreaCreated()

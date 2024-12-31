@@ -1,7 +1,9 @@
 ﻿using System;
 using Anvil.Services;
+using XM.Core.EventManagement;
 using XM.Data;
 using XM.Progression.Stat.Entity;
+using XM.Progression.Stat.Event;
 
 namespace XM.Progression.Stat
 {
@@ -10,10 +12,20 @@ namespace XM.Progression.Stat
     {
         private readonly DBService _db;
         private const string NPCEPStatVariable = "EP";
+        private readonly XMEventService _event;
 
-        public StatService(DBService db)
+        public StatService(DBService db, XMEventService @event)
         {
             _db = db;
+            _event = @event;
+
+            RegisterEvents();
+        }
+
+        private void RegisterEvents()
+        {
+            _event.RegisterEvent<PlayerHPAdjustedEvent>(ProgressionEventScript.OnPlayerHPAdjustedScript);
+            _event.RegisterEvent<PlayerEPAdjustedEvent>(ProgressionEventScript.OnPlayerEPAdjustedScript);
         }
 
         public int GetCurrentHP(uint creature)

@@ -4,14 +4,14 @@ using System.Linq;
 using Anvil.Services;
 using NLog;
 using XM.API.NWNX.UtilPlugin;
+using XM.Core.EventManagement;
 using XM.Core.EventManagement.XMEvent;
 using XM.Dialog.Event;
 
 namespace XM.Dialog.Snippet
 {
     [ServiceBinding(typeof(SnippetService))]
-    [ServiceBinding(typeof(ICacheDataBeforeEvent))]
-    public class SnippetService: ICacheDataBeforeEvent
+    public class SnippetService
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -21,7 +21,12 @@ namespace XM.Dialog.Snippet
         [Inject]
         public IList<ISnippetListDefinition> Definitions { get; set; }
 
-        public void OnCacheDataBefore()
+        public SnippetService(XMEventService @event)
+        {
+            @event.Subscribe<CacheDataBeforeEvent>(OnCacheDataBefore);
+        }
+
+        private void OnCacheDataBefore()
         {
             foreach (var definition in Definitions)
             {

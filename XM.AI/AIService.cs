@@ -1,14 +1,19 @@
 ﻿using Anvil.Services;
+using XM.Core.EventManagement;
 using XM.Core.EventManagement.XMEvent;
 
 namespace XM.AI
 {
     [ServiceBinding(typeof(AIService))]
-    internal class AIService: ISpawnCreatedEvent
+    internal class AIService
     {
         private const string AIFlagsVariable = "AI_FLAGS";
 
-        public void OnSpawnCreated()
+        public AIService(XMEventService @event)
+        {
+            @event.Subscribe<SpawnCreatedEvent>(OnSpawnCreated);
+        }
+        private void OnSpawnCreated()
         {
             var creature = OBJECT_SELF;
             SetAIFlag(creature, AIFlag.ReturnHome);

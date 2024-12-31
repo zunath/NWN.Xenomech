@@ -1,7 +1,8 @@
-﻿namespace XM.Progression.Stat.Event
+﻿using XM.Core.EventManagement;
+
+namespace XM.Progression.Stat.Event
 {
-    internal interface IPlayerHPAdjustedEvent
+    internal sealed class PlayerHPAdjustedEvent: IXMEvent
     {
-        void OnPlayerHPAdjusted();
     }
 }

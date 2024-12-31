@@ -1,20 +1,23 @@
 ﻿using Anvil.Services;
 using NLog;
 using System.Collections.Generic;
+using XM.Core.EventManagement;
 using XM.Core.EventManagement.XMEvent;
 
 namespace XM.Area
 {
     [ServiceBinding(typeof(AreaCacheService))]
-    public class AreaCacheService: ICacheDataBeforeEvent
+    public class AreaCacheService
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         private readonly Dictionary<string, uint> _areasByResref;
 
-        public AreaCacheService()
+        public AreaCacheService(XMEventService @event)
         {
             _areasByResref = new Dictionary<string, uint>();
+
+            @event.Subscribe<CacheDataBeforeEvent>(OnCacheDataBefore);
         }
 
         /// <summary>
@@ -30,7 +33,7 @@ namespace XM.Area
             return _areasByResref[resref];
         }
 
-        public void OnCacheDataBefore()
+        private void OnCacheDataBefore()
         {
             CacheAreasByResref();
         }

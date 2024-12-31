@@ -6,6 +6,7 @@ using Anvil.API.Events;
 using Anvil.Services;
 using NLog;
 using XM.Core;
+using XM.Core.EventManagement;
 using XM.Core.EventManagement.AreaEvent;
 using XM.Core.EventManagement.XMEvent;
 using XM.Data;
@@ -15,16 +16,11 @@ using XM.UI.Event;
 using XM.UI.UI;
 using XM.UI.UI.RefreshEvent;
 using Action = System.Action;
-using EventScriptType = XM.API.Constants.EventScriptType;
 
 namespace XM.UI
 {
     [ServiceBinding(typeof(GuiService))]
-    [ServiceBinding(typeof(ICacheDataBeforeEvent))]
-    [ServiceBinding(typeof(IAreaEnterEvent))]
-    public class GuiService: 
-        ICacheDataBeforeEvent,
-        IAreaEnterEvent
+    public class GuiService
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -38,9 +34,12 @@ namespace XM.UI
         public IList<IGuiWindowDefinition> Definitions { get; set; }
 
         private readonly DBService _db;
-        public GuiService(DBService db)
+        public GuiService(DBService db, XMEventService @event)
         {
             _db = db;
+
+            @event.Subscribe<CacheDataBeforeEvent>(OnCacheDataBefore);
+            @event.Subscribe<AreaEnterEvent>(OnAreaEnter);
 
             HookEvents();
         }
@@ -68,12 +67,12 @@ namespace XM.UI
             HandleNuiWatchEvent();
         }
 
-        public void OnCacheDataBefore()
+        private void OnCacheDataBefore()
         {
             LoadWindowTemplates();
             LoadRefreshableViewModels();
         }
-        public void OnAreaEnter()
+        private void OnAreaEnter()
         {
             CloseAllWindows();
         }

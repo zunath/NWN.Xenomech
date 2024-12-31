@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using XM.Combat.Entity;
 using XM.Core;
+using XM.Core.EventManagement;
 using XM.Core.EventManagement.XMEvent;
 using XM.Core.Extension;
 using XM.Data;
@@ -14,7 +15,7 @@ using XM.Progression.Stat;
 namespace XM.Combat.Recast
 {
     [ServiceBinding(typeof(RecastService))]
-    internal class RecastService: ICacheDataBeforeEvent
+    internal class RecastService
     {
         private static readonly Dictionary<RecastGroup, LocaleString> _recastDescriptions = new();
         private readonly DBService _db;
@@ -24,14 +25,17 @@ namespace XM.Combat.Recast
         public RecastService(
             DBService db, 
             TimeService time,
-            StatService stat)
+            StatService stat,
+            XMEventService @event)
         {
             _db = db;
             _time = time;
             _stat = stat;
+
+            @event.Subscribe<CacheDataBeforeEvent>(OnCacheDataBefore);
         }
 
-        public void OnCacheDataBefore()
+        private void OnCacheDataBefore()
         {
             Console.WriteLine($"data cache before running for recast service");
 

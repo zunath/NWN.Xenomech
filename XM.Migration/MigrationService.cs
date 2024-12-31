@@ -3,23 +3,18 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Anvil.API;
-using Anvil.API.Events;
 using XM.Data;
 using XM.Migration.Entity;
 using NLog;
 using XM.API.NWNX.AdminPlugin;
 using XM.Core.EventManagement;
+using XM.Core.EventManagement.ModuleEvent;
 using XM.Core.EventManagement.XMEvent;
 
 namespace XM.Migration
 {
     [ServiceBinding(typeof(MigrationService))]
-    [ServiceBinding(typeof(ICacheDataAfterEvent))]
-    [ServiceBinding(typeof(IDatabaseLoadedEvent))]
-    internal class MigrationService :
-        ICacheDataAfterEvent,
-        IDatabaseLoadedEvent
+    internal class MigrationService
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -31,25 +26,27 @@ namespace XM.Migration
 
         private readonly DBService _db;
 
-        public MigrationService(DBService db)
+        public MigrationService(DBService db, XMEventService @event)
         {
             _db = db;
 
-            NwModule.Instance.OnClientEnter += OnModuleEnter;
+            @event.Subscribe<ModuleOnPlayerEnterEvent>(OnModuleEnter);
+            @event.Subscribe<CacheDataAfterEvent>(OnCacheDataAfter);
+            @event.Subscribe<DatabaseLoadedEvent>(OnDatabaseLoaded);
         }
 
-        private void OnModuleEnter(ModuleEvents.OnClientEnter obj)
+        private void OnModuleEnter()
         {
             RunPlayerMigrations();
         }
 
-        public void OnCacheDataAfter()
+        private void OnCacheDataAfter()
         {
             RunServerMigrationsPostCache();
             UpdateMigrationVersion();
         }
 
-        public void OnDatabaseLoaded()
+        private void OnDatabaseLoaded()
         {
             var config = GetServerConfiguration();
             _currentMigrationVersion = config.MigrationVersion;

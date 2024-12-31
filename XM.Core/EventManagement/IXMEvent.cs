@@ -1,6 +1,6 @@
 ﻿namespace XM.Core.EventManagement
 {
-    public interface IXMEvent
+    public abstract class IXMEvent
     {
     }
 }

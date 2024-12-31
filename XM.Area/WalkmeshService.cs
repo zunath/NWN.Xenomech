@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Numerics;
 using Anvil.Services;
 using NLog;
+using XM.API.BaseTypes;
 using XM.API.Constants;
 using XM.API.NWNX.ObjectPlugin;
 using XM.Core;
 using XM.Core.Entity;
+using XM.Core.EventManagement;
 using XM.Core.EventManagement.ModuleEvent;
 using XM.Core.EventManagement.XMEvent;
 using XM.Data;
@@ -15,11 +17,7 @@ using Location = XM.API.BaseTypes.Location;
 namespace XM.Area
 {
     [ServiceBinding(typeof(WalkmeshService))]
-    [ServiceBinding(typeof(IModuleContentChangedEvent))]
-    [ServiceBinding(typeof(IModuleOnLoadEvent))]
-    public class WalkmeshService: 
-        IModuleContentChangedEvent,
-        IModuleOnLoadEvent
+    public class WalkmeshService
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -29,12 +27,23 @@ namespace XM.Area
         private bool _bakingRan;
 
         private readonly DBService _db;
-        public WalkmeshService(DBService db)
+        private readonly XMEventService _event;
+
+        public WalkmeshService(DBService db, XMEventService @event)
         {
             _db = db;
+            _event = @event;
+
+            SubscribeEvents();
         }
 
-        public void OnModuleLoad()
+        private void SubscribeEvents()
+        {
+            _event.Subscribe<ModuleOnLoadEvent>(OnModuleLoad);
+            _event.Subscribe<ModuleContentChangedEvent>(OnModuleContentChanged);
+        }
+
+        private void OnModuleLoad()
         {
             if (_bakingRan)
                 return;
@@ -44,7 +53,7 @@ namespace XM.Area
             _logger.Info($"Loaded {_walkmeshesByArea.Count} area walkmeshes.");
         }
 
-        public void OnModuleContentChanged()
+        private void OnModuleContentChanged()
         {
             LoadWalkmeshes();
         }

@@ -18,16 +18,7 @@ using ObjectPlugin = XM.API.NWNX.ObjectPlugin.ObjectPlugin;
 namespace XM.Spawn
 {
     [ServiceBinding(typeof(SpawnService))]
-    [ServiceBinding(typeof(IAreaEnterEvent))]
-    [ServiceBinding(typeof(IAreaExitEvent))]
-    [ServiceBinding(typeof(ICreatureOnDeathBeforeEvent))]
-    [ServiceBinding(typeof(IServerHeartbeatEvent))]
-    internal class SpawnService : 
-        IInitializable, 
-        IAreaEnterEvent,
-        IAreaExitEvent,
-        ICreatureOnDeathBeforeEvent,
-        IServerHeartbeatEvent
+    internal class SpawnService : IInitializable
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -45,10 +36,22 @@ namespace XM.Spawn
         [Inject] public IList<ISpawnListDefinition> Definitions { get; set; }
 
         private readonly WalkmeshService _walkmesh;
+        private readonly XMEventService _event;
 
-        public SpawnService(WalkmeshService walkmesh)
+        public SpawnService(WalkmeshService walkmesh, XMEventService @event)
         {
             _walkmesh = walkmesh;
+            _event = @event;
+
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            _event.Subscribe<AreaEnterEvent>(OnAreaEnter);
+            _event.Subscribe<AreaExitEvent>(OnAreaExit);
+            _event.Subscribe<CreatureOnDeathBeforeEvent>(CreatureOnDeathBefore);
+            _event.Subscribe<ServerHeartbeatEvent>(OnXMServerHeartbeat);
         }
 
         public void Init()
@@ -290,12 +293,12 @@ namespace XM.Spawn
             }
         }
 
-        public void OnAreaEnter()
+        private void OnAreaEnter()
         {
             SpawnArea();
         }
 
-        public void OnAreaExit()
+        private void OnAreaExit()
         {
             QueueDespawnArea();
         }
@@ -346,7 +349,7 @@ namespace XM.Spawn
             _queuedSpawnsByArea[spawnDetail.Area].Remove(queuedSpawn);
         }
 
-        public void CreatureOnDeathBefore()
+        private void CreatureOnDeathBefore()
         {
             QueueRespawn();
         }
@@ -366,7 +369,7 @@ namespace XM.Spawn
             SetLocalInt(creature, "RESPAWN_QUEUED", 1);
         }
 
-        public void OnXMServerHeartbeat()
+        private void OnXMServerHeartbeat()
         {
             ProcessQueuedSpawns();
             ProcessDespawnAreas();

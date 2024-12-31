@@ -2,6 +2,7 @@
 using Anvil.API.Events;
 using Anvil.Services;
 using NWN.Core.NWNX;
+using XM.Core.EventManagement;
 using XM.Core.EventManagement.AreaEvent;
 using XM.Core.EventManagement.NWNXEvent;
 using XM.Core.EventManagement.PlayerEvent;
@@ -11,30 +12,27 @@ using XM.UI;
 namespace XM.Progression.Stat.UI.PlayerStatus
 {
     [ServiceBinding(typeof(PlayerStatusWindowService))]
-    [ServiceBinding(typeof(IPlayerOnDamagedEvent))]
-    [ServiceBinding(typeof(IPlayerEPAdjustedEvent))]
-    [ServiceBinding(typeof(IHealAfterEvent))]
-    [ServiceBinding(typeof(IAreaEnterEvent))]
-    internal class PlayerStatusWindowService :
-        IPlayerOnDamagedEvent,
-        IPlayerEPAdjustedEvent,
-        IHealAfterEvent,
-        IAreaEnterEvent
+    internal class PlayerStatusWindowService
     {
         private readonly GuiService _gui;
+        private readonly XMEventService _event;
 
-        public PlayerStatusWindowService(GuiService gui)
+        public PlayerStatusWindowService(GuiService gui, XMEventService @event)
         {
             _gui = gui;
+            _event = @event;
             
-            HookEvents();
+            SubscribeEvents();
         }
 
-        private void HookEvents()
+        private void SubscribeEvents()
         {
-            NwModule.Instance.OnItemEquip += OnNWNXEquipItem;
-            NwModule.Instance.OnItemUnequip += OnNWNXUnequipItem;
-
+            _event.Subscribe<ItemEquipBeforeEvent>(OnNWNXEquipItem);
+            _event.Subscribe<ItemUnequipBeforeEvent>(OnNWNXUnequipItem);
+            _event.Subscribe<PlayerOnDamagedEvent>(OnPlayerOnDamaged);
+            _event.Subscribe<PlayerEPAdjustedEvent>(OnPlayerEPAdjusted);
+            _event.Subscribe<HealAfterEvent>(OnHealAfter);
+            _event.Subscribe<AreaEnterEvent>(OnAreaEnter);
         }
 
         private void PublishEvents(uint target)
@@ -46,16 +44,16 @@ namespace XM.Progression.Stat.UI.PlayerStatus
             _gui.PublishRefreshEvent(target, new PlayerStatusRefreshEvent(PlayerStatusRefreshEvent.StatType.EP));
         }
 
-        private void OnNWNXEquipItem(OnItemEquip obj)
+        private void OnNWNXEquipItem()
         {
             PublishEvents(OBJECT_SELF);
         }
-        private void OnNWNXUnequipItem(OnItemUnequip obj)
+        private void OnNWNXUnequipItem()
         {
             PublishEvents(OBJECT_SELF);
         }
 
-        public void PlayerOnDamaged()
+        public void OnPlayerOnDamaged()
         {
             PublishEvents(OBJECT_SELF);
         }

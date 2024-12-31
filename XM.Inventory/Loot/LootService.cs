@@ -4,13 +4,13 @@ using System;
 using System.Collections.Generic;
 using XM.Core;
 using XM.API.Constants;
+using XM.Core.EventManagement;
 using XM.Core.EventManagement.CreatureEvent;
 
 namespace XM.Inventory.Loot
 {
     [ServiceBinding(typeof(LootService))]
-    [ServiceBinding(typeof(ICreatureOnDeathBeforeEvent))]
-    internal class LootService: IInitializable, ICreatureOnDeathBeforeEvent
+    internal class LootService: IInitializable
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -29,10 +29,12 @@ namespace XM.Inventory.Loot
 
         private readonly InventoryService _inventory;
 
-        public LootService(InventoryService inventory)
+        public LootService(InventoryService inventory, XMEventService @event)
         {
             _inventory = inventory;
             _lootTables = new Dictionary<string, LootTable>();
+
+            @event.Subscribe<CreatureOnDeathBeforeEvent>(CreatureOnDeathBefore);
         }
 
         public void Init()
@@ -294,7 +296,7 @@ namespace XM.Inventory.Loot
             });
         }
 
-        public void CreatureOnDeathBefore()
+        private void CreatureOnDeathBefore()
         {
             ProcessCorpse();
         }

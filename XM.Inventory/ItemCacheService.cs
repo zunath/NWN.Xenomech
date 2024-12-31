@@ -3,33 +3,40 @@ using NLog;
 using System.Collections.Generic;
 using XM.API.NWNX.UtilPlugin;
 using XM.Core.Entity;
+using XM.Core.EventManagement;
 using XM.Core.EventManagement.XMEvent;
 using XM.Data;
 
 namespace XM.Inventory
 {
     [ServiceBinding(typeof(ItemCacheService))]
-    [ServiceBinding(typeof(IModuleContentChangedEvent))]
-    [ServiceBinding(typeof(ICacheDataBeforeEvent))]
-    public class ItemCacheService: 
-        IModuleContentChangedEvent, 
-        ICacheDataBeforeEvent
+    public class ItemCacheService
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         private const string TempStoragePlaceableTag = "TEMP_ITEM_STORAGE";
 
         private readonly DBService _db;
+        private readonly XMEventService _event;
         private bool _cachedThisRun;
         private Dictionary<string, string> _itemNamesByResref;
 
-        public ItemCacheService(DBService db)
+        public ItemCacheService(DBService db, XMEventService @event)
         {
             _db = db;
+            _event = @event;
             _itemNamesByResref = new Dictionary<string, string>();
+
+            SubscribeEvents();
         }
 
-        public void OnModuleContentChanged()
+        private void SubscribeEvents()
+        {
+            _event.Subscribe<ModuleContentChangedEvent>(OnModuleContentChanged);
+            _event.Subscribe<CacheDataBeforeEvent>(OnCacheDataBefore);
+        }
+
+        private void OnModuleContentChanged()
         {
             var resref = UtilPlugin.GetFirstResRef(ResRefType.Item);
 

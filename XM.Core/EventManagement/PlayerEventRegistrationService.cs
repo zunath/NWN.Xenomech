@@ -2,93 +2,51 @@
 using Anvil.API;
 using Anvil.API.Events;
 using Anvil.Services;
+using NLog;
+using XM.Core.EventManagement.ModuleEvent;
 using XM.Core.EventManagement.PlayerEvent;
 using EventScriptType = XM.API.Constants.EventScriptType;
 
 namespace XM.Core.EventManagement
 {
     [ServiceBinding(typeof(PlayerEventRegistrationService))]
-    internal class PlayerEventRegistrationService: EventRegistrationServiceBase
+    internal class PlayerEventRegistrationService
     {
-        [Inject]
-        public IList<IPlayerOnHeartbeatEvent> PlayerOnHeartbeatSubscriptions { get; set; }
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-        [Inject]
-        public IList<IPlayerOnNoticeEvent> PlayerOnNoticeSubscriptions { get; set; }
+        private readonly XMEventService _event;
 
-        [Inject]
-        public IList<IPlayerOnSpellCastAtEvent> PlayerOnSpellCastAtSubscriptions { get; set; }
-
-        [Inject]
-        public IList<IPlayerOnMeleeAttackedEvent> PlayerOnMeleeAttackedSubscriptions { get; set; }
-
-        [Inject]
-        public IList<IPlayerOnDamagedEvent> PlayerOnDamagedSubscriptions { get; set; }
-
-        [Inject]
-        public IList<IPlayerOnDisturbedEvent> PlayerOnDisturbedSubscriptions { get; set; }
-
-        [Inject]
-        public IList<IPlayerOnEndCombatRoundEvent> PlayerOnEndCombatRoundSubscriptions { get; set; }
-
-        [Inject]
-        public IList<IPlayerOnSpawnInEvent> PlayerOnSpawnInSubscriptions { get; set; }
-
-        [Inject]
-        public IList<IPlayerOnRestedEvent> PlayerOnRestedSubscriptions { get; set; }
-
-        [Inject]
-        public IList<IPlayerOnDeathEvent> PlayerOnDeathSubscriptions { get; set; }
-
-        [Inject]
-        public IList<IPlayerOnUserDefinedEvent> PlayerOnUserDefinedSubscriptions { get; set; }
-
-        [Inject]
-        public IList<IPlayerOnBlockedByDoorEvent> PlayerOnBlockedByDoorSubscriptions { get; set; }
-
-
-        [ScriptHandler(EventScript.PlayerOnHeartbeatScript)]
-        public void HandlePlayerOnHeartbeat() => HandleEvent(PlayerOnHeartbeatSubscriptions, (subscription) => subscription.PlayerOnHeartbeat());
-
-        [ScriptHandler(EventScript.PlayerOnNoticeScript)]
-        public void HandlePlayerOnNotice() => HandleEvent(PlayerOnNoticeSubscriptions, (subscription) => subscription.PlayerOnNotice());
-
-        [ScriptHandler(EventScript.PlayerOnSpellCastAtScript)]
-        public void HandlePlayerOnSpellCastAt() => HandleEvent(PlayerOnSpellCastAtSubscriptions, (subscription) => subscription.PlayerOnSpellCastAt());
-
-        [ScriptHandler(EventScript.PlayerOnMeleeAttackedScript)]
-        public void HandlePlayerOnMeleeAttacked() => HandleEvent(PlayerOnMeleeAttackedSubscriptions, (subscription) => subscription.PlayerOnMeleeAttacked());
-
-        [ScriptHandler(EventScript.PlayerOnDamagedScript)]
-        public void HandlePlayerOnDamaged() => HandleEvent(PlayerOnDamagedSubscriptions, (subscription) => subscription.PlayerOnDamaged());
-
-        [ScriptHandler(EventScript.PlayerOnDisturbedScript)]
-        public void HandlePlayerOnDisturbed() => HandleEvent(PlayerOnDisturbedSubscriptions, (subscription) => subscription.PlayerOnDisturbed());
-
-        [ScriptHandler(EventScript.PlayerOnEndCombatRoundScript)]
-        public void HandlePlayerOnEndCombatRound() => HandleEvent(PlayerOnEndCombatRoundSubscriptions, (subscription) => subscription.PlayerOnEndCombatRound());
-
-        [ScriptHandler(EventScript.PlayerOnSpawnInScript)]
-        public void HandlePlayerOnSpawnIn() => HandleEvent(PlayerOnSpawnInSubscriptions, (subscription) => subscription.PlayerOnSpawnIn());
-
-        [ScriptHandler(EventScript.PlayerOnRestedScript)]
-        public void HandlePlayerOnRested() => HandleEvent(PlayerOnRestedSubscriptions, (subscription) => subscription.PlayerOnRested());
-
-        [ScriptHandler(EventScript.PlayerOnDeathScript)]
-        public void HandlePlayerOnDeath() => HandleEvent(PlayerOnDeathSubscriptions, (subscription) => subscription.PlayerOnDeath());
-
-        [ScriptHandler(EventScript.PlayerOnUserDefinedScript)]
-        public void HandlePlayerOnUserDefined() => HandleEvent(PlayerOnUserDefinedSubscriptions, (subscription) => subscription.PlayerOnUserDefined());
-
-        [ScriptHandler(EventScript.PlayerOnBlockedByDoorScript)]
-        public void HandlePlayerOnBlockedByDoor() => HandleEvent(PlayerOnBlockedByDoorSubscriptions, (subscription) => subscription.PlayerOnBlockedByDoor());
-
-        public PlayerEventRegistrationService()
+        public PlayerEventRegistrationService(XMEventService @event)
         {
-            NwModule.Instance.OnClientEnter += OnClientEnter;
+            _event = @event;
+
+            _logger.Info($"Registering player events...");
+            RegisterEvents();
+            SubscribeEvents();
         }
 
-        private void OnClientEnter(ModuleEvents.OnClientEnter obj)
+        private void RegisterEvents()
+        {
+            _event.RegisterEvent<PlayerOnHeartbeatEvent>(EventScript.PlayerOnHeartbeatScript);
+            _event.RegisterEvent<PlayerOnNoticeEvent>(EventScript.PlayerOnNoticeScript);
+            _event.RegisterEvent<PlayerOnSpellCastAtEvent>(EventScript.PlayerOnSpellCastAtScript);
+            _event.RegisterEvent<PlayerOnMeleeAttackedEvent>(EventScript.PlayerOnMeleeAttackedScript);
+            _event.RegisterEvent<PlayerOnDamagedEvent>(EventScript.PlayerOnDamagedScript);
+            _event.RegisterEvent<PlayerOnDisturbedEvent>(EventScript.PlayerOnDisturbedScript);
+            _event.RegisterEvent<PlayerOnEndCombatRoundEvent>(EventScript.PlayerOnEndCombatRoundScript);
+            _event.RegisterEvent<PlayerOnSpawnInEvent>(EventScript.PlayerOnSpawnInScript);
+            _event.RegisterEvent<PlayerOnRestedEvent>(EventScript.PlayerOnRestedScript);
+            _event.RegisterEvent<PlayerOnDeathEvent>(EventScript.PlayerOnDeathScript);
+            _event.RegisterEvent<PlayerOnUserDefinedEvent>(EventScript.PlayerOnUserDefinedScript);
+            _event.RegisterEvent<PlayerOnBlockedByDoorEvent>(EventScript.PlayerOnBlockedByDoorScript);
+        }
+
+        private void SubscribeEvents()
+        {
+            _event.Subscribe<ModuleOnPlayerEnterEvent>(OnClientEnter);
+        }
+
+        private void OnClientEnter()
         {
             var player = GetEnteringObject();
             SetPlayerScripts(player);

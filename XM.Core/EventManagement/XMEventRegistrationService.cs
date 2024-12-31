@@ -11,82 +11,45 @@ using XM.Data;
 namespace XM.Core.EventManagement
 {
     [ServiceBinding(typeof(XMEventRegistrationService))]
-    [ServiceBinding(typeof(IModulePreloadEvent))]
-    internal class XMEventRegistrationService: EventRegistrationServiceBase, IModulePreloadEvent
+    internal class XMEventRegistrationService
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         private readonly DBService _db;
         private readonly SchedulerService _scheduler;
-
-        [Inject]
-        public IList<IServerHeartbeatEvent> OnServerHeartbeatSubscriptions { get; set; }
-
-        [Inject]
-        public IList<ISpawnCreatedEvent> OnSpawnCreatedSubscriptions { get; set; }
-
-        [Inject]
-        public IList<IAreaCreatedEvent> OnAreaCreatedSubscriptions { get; set; }
-
-        [Inject]
-        public IList<IModuleContentChangedEvent> OnModuleContentChangedSubscriptions { get; set; }
-
-        [Inject]
-        public IList<ICacheDataBeforeEvent> OnCacheDataBeforeSubscriptions { get; set; }
-
-        [Inject]
-        public IList<ICacheDataAfterEvent> OnCacheDataAfterSubscriptions { get; set; }
-
-        [Inject]
-        public IList<IDatabaseLoadedEvent> OnDatabaseLoadedSubscriptions { get; set; }
-
-        [Inject]
-        public IList<IPCInitializedEvent> OnPCInitializedSubscriptions { get; set; }
-
-        [Inject]
-        public IList<IPlayerMigrationBeforeEvent> OnPlayerMigrationBeforeSubscriptions { get; set; }
-        [Inject]
-        public IList<IPlayerMigrationAfterEvent> OnPlayerMigrationAfterSubscriptions { get; set; }
-
-
-        [ScriptHandler(EventScript.OnXMServerHeartbeatScript)]
-        public void HandleXMServerHeartbeat() => HandleEvent(OnServerHeartbeatSubscriptions, (subscription) => subscription.OnXMServerHeartbeat());
-
-        [ScriptHandler(EventScript.OnXMSpawnCreatedScript)]
-        public void HandleXMSpawnCreated() => HandleEvent(OnSpawnCreatedSubscriptions, (subscription) => subscription.OnSpawnCreated());
-
-        [ScriptHandler(EventScript.OnXMAreaCreatedScript)]
-        public void HandleXMAreaCreated() => HandleEvent(OnAreaCreatedSubscriptions, (subscription) => subscription.OnAreaCreated());
-
-        [ScriptHandler(EventScript.OnXMModuleChangedScript)]
-        public void HandleModuleChanged() => HandleEvent(OnModuleContentChangedSubscriptions, (subscription) => subscription.OnModuleContentChanged());
-
-        [ScriptHandler(EventScript.OnXMCacheDataBeforeScript)]
-        public void HandleCacheDataBefore() => HandleEvent(OnCacheDataBeforeSubscriptions, (subscription) => subscription.OnCacheDataBefore());
-
-        [ScriptHandler(EventScript.OnXMCacheDataAfterScript)]
-        public void HandleCacheDataAfter() => HandleEvent(OnCacheDataAfterSubscriptions, (subscription) => subscription.OnCacheDataAfter());
-
-        [ScriptHandler(EventScript.OnXMDatabaseLoadedScript)]
-        public void HandleDatabaseLoaded() => HandleEvent(OnDatabaseLoadedSubscriptions, (subscription) => subscription.OnDatabaseLoaded());
-
-        [ScriptHandler(EventScript.OnXMPCInitializedScript)]
-        public void HandlePlayerInitialized() => HandleEvent(OnPCInitializedSubscriptions, (subscription) => subscription.OnPCInitialized());
-
-        [ScriptHandler(EventScript.OnXMPlayerMigrationBeforeScript)]
-        public void HandlePlayerMigrationBefore() => HandleEvent(OnPlayerMigrationBeforeSubscriptions, (subscription) => subscription.OnPlayerMigrationBefore());
-
-        [ScriptHandler(EventScript.OnXMPlayerMigrationAfterScript)]
-        public void HandlePlayerMigrationAfter() => HandleEvent(OnPlayerMigrationAfterSubscriptions, (subscription) => subscription.OnPlayerMigrationAfter());
+        private readonly XMEventService _event;
 
         public XMEventRegistrationService(
             DBService db,
-            SchedulerService scheduler)
+            SchedulerService scheduler,
+            XMEventService @event)
         {
             _db = db;
             _scheduler = scheduler;
+            _event = @event;
 
+            RegisterEvents();
+            SubscribeEvents();
             ScheduleXMHeartbeatEvent();
+        }
+
+        private void RegisterEvents()
+        {
+            _event.RegisterEvent<ServerHeartbeatEvent>(EventScript.OnXMServerHeartbeatScript);
+            _event.RegisterEvent<SpawnCreatedEvent>(EventScript.OnXMSpawnCreatedScript);
+            _event.RegisterEvent<AreaCreatedEvent>(EventScript.OnXMAreaCreatedScript);
+            _event.RegisterEvent<ModuleContentChangedEvent>(EventScript.OnXMModuleChangedScript);
+            _event.RegisterEvent<CacheDataBeforeEvent>(EventScript.OnXMCacheDataBeforeScript);
+            _event.RegisterEvent<CacheDataAfterEvent>(EventScript.OnXMCacheDataAfterScript);
+            _event.RegisterEvent<DatabaseLoadedEvent>(EventScript.OnXMDatabaseLoadedScript);
+            _event.RegisterEvent<PCInitializedEvent>(EventScript.OnXMPCInitializedScript);
+            _event.RegisterEvent<PlayerMigrationBeforeEvent>(EventScript.OnXMPlayerMigrationBeforeScript);
+            _event.RegisterEvent<PlayerMigrationAfterEvent>(EventScript.OnXMPlayerMigrationAfterScript);
+        }
+
+        private void SubscribeEvents()
+        {
+            _event.Subscribe<ModulePreloadEvent>(OnModulePreload);
         }
 
         private void ScheduleXMHeartbeatEvent()
@@ -97,7 +60,7 @@ namespace XM.Core.EventManagement
             }, TimeSpan.FromSeconds(6));
         }
 
-        public void OnModulePreload()
+        private void OnModulePreload()
         {
             DetermineContentChange();
             ExecuteScript(EventScript.OnXMCacheDataBeforeScript);

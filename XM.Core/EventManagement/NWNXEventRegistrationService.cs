@@ -1,21 +1,288 @@
-﻿using System.Collections.Generic;
-using Anvil.Services;
+﻿using Anvil.Services;
+using NLog;
 using NWN.Core.NWNX;
 using XM.Core.EventManagement.NWNXEvent;
 
 namespace XM.Core.EventManagement
 {
     [ServiceBinding(typeof(NWNXEventRegistrationService))]
-    internal class NWNXEventRegistrationService: 
-        EventRegistrationServiceBase
+    internal class NWNXEventRegistrationService
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-        public NWNXEventRegistrationService()
+        private readonly XMEventService _event;
+
+        public NWNXEventRegistrationService(XMEventService @event)
         {
+            _event = @event;
+
+            _logger.Info($"Registering NWNX events...");
+            RegisterEvents();
             HookNWNXEvents();
         }
 
-        public void HookNWNXEvents()
+        private void RegisterEvents()
+        {
+            _event.RegisterEvent<ModulePreloadEvent>(EventScript.NWNXOnModulePreloadScript);
+            _event.RegisterEvent<AddAssociateBeforeEvent>(EventScript.NWNXOnAddAssociateBeforeScript);
+            _event.RegisterEvent<AddAssociateAfterEvent>(EventScript.NWNXOnAddAssociateAfterScript);
+            _event.RegisterEvent<RemoveAssociateBeforeEvent>(EventScript.NWNXOnRemoveAssociateBeforeScript);
+            _event.RegisterEvent<RemoveAssociateAfterEvent>(EventScript.NWNXOnRemoveAssociateAfterScript);
+            _event.RegisterEvent<StealthEnterBeforeEvent>(EventScript.NWNXOnStealthEnterBeforeScript);
+            _event.RegisterEvent<StealthEnterAfterEvent>(EventScript.NWNXOnStealthEnterAfterScript);
+            _event.RegisterEvent<StealthExitBeforeEvent>(EventScript.NWNXOnStealthExitBeforeScript);
+            _event.RegisterEvent<StealthExitAfterEvent>(EventScript.NWNXOnStealthExitAfterScript);
+            _event.RegisterEvent<ExamineObjectBeforeEvent>(EventScript.NWNXOnExamineObjectBeforeScript);
+            _event.RegisterEvent<ExamineObjectAfterEvent>(EventScript.NWNXOnExamineObjectAfterScript);
+            _event.RegisterEvent<ValidateUseItemBeforeEvent>(EventScript.NWNXOnValidateUseItemBeforeScript);
+            _event.RegisterEvent<ValidateUseItemAfterEvent>(EventScript.NWNXOnValidateUseItemAfterScript);
+            _event.RegisterEvent<UseItemBeforeEvent>(EventScript.NWNXOnUseItemBeforeScript);
+            _event.RegisterEvent<UseItemAfterEvent>(EventScript.NWNXOnUseItemAfterScript);
+            _event.RegisterEvent<ItemInventoryOpenBeforeEvent>(EventScript.NWNXOnItemInventoryOpenBeforeScript);
+            _event.RegisterEvent<ItemInventoryOpenAfterEvent>(EventScript.NWNXOnItemInventoryOpenAfterScript);
+            _event.RegisterEvent<ItemInventoryCloseBeforeEvent>(EventScript.NWNXOnItemInventoryCloseBeforeScript);
+            _event.RegisterEvent<ItemInventoryCloseAfterEvent>(EventScript.NWNXOnItemInventoryCloseAfterScript);
+            _event.RegisterEvent<ItemAmmoReloadBeforeEvent>(EventScript.NWNXOnItemAmmoReloadBeforeScript);
+            _event.RegisterEvent<ItemAmmoReloadAfterEvent>(EventScript.NWNXOnItemAmmoReloadAfterScript);
+            _event.RegisterEvent<ItemScrollLearnBeforeEvent>(EventScript.NWNXOnItemScrollLearnBeforeScript);
+            _event.RegisterEvent<ItemScrollLearnAfterEvent>(EventScript.NWNXOnItemScrollLearnAfterScript);
+            _event.RegisterEvent<ValidateItemEquipBeforeEvent>(EventScript.NWNXOnValidateItemEquipBeforeScript);
+            _event.RegisterEvent<ValidateItemEquipAfterEvent>(EventScript.NWNXOnValidateItemEquipAfterScript);
+            _event.RegisterEvent<ItemEquipBeforeEvent>(EventScript.NWNXOnItemEquipBeforeScript);
+            _event.RegisterEvent<ItemEquipAfterEvent>(EventScript.NWNXOnItemEquipAfterScript);
+            _event.RegisterEvent<ItemUnequipBeforeEvent>(EventScript.NWNXOnItemUnequipBeforeScript);
+            _event.RegisterEvent<ItemUnequipAfterEvent>(EventScript.NWNXOnItemUnequipAfterScript);
+            _event.RegisterEvent<ItemDestroyObjectBeforeEvent>(EventScript.NWNXOnItemDestroyObjectBeforeScript);
+            _event.RegisterEvent<ItemDestroyObjectAfterEvent>(EventScript.NWNXOnItemDestroyObjectAfterScript);
+            _event.RegisterEvent<ItemDecrementStacksizeBeforeEvent>(EventScript.NWNXOnItemDecrementStacksizeBeforeScript);
+            _event.RegisterEvent<ItemDecrementStacksizeAfterEvent>(EventScript.NWNXOnItemDecrementStacksizeAfterScript);
+            _event.RegisterEvent<ItemUseLoreBeforeEvent>(EventScript.NWNXOnItemUseLoreBeforeScript);
+            _event.RegisterEvent<ItemUseLoreAfterEvent>(EventScript.NWNXOnItemUseLoreAfterScript);
+            _event.RegisterEvent<ItemPayToIdentifyBeforeEvent>(EventScript.NWNXOnItemPayToIdentifyBeforeScript);
+            _event.RegisterEvent<ItemPayToIdentifyAfterEvent>(EventScript.NWNXOnItemPayToIdentifyAfterScript);
+            _event.RegisterEvent<ItemSplitBeforeEvent>(EventScript.NWNXOnItemSplitBeforeScript);
+            _event.RegisterEvent<ItemSplitAfterEvent>(EventScript.NWNXOnItemSplitAfterScript);
+            _event.RegisterEvent<ItemMergeBeforeEvent>(EventScript.NWNXOnItemMergeBeforeScript);
+            _event.RegisterEvent<ItemMergeAfterEvent>(EventScript.NWNXOnItemMergeAfterScript);
+            _event.RegisterEvent<ItemAcquireBeforeEvent>(EventScript.NWNXOnItemAcquireBeforeScript);
+            _event.RegisterEvent<ItemAcquireAfterEvent>(EventScript.NWNXOnItemAcquireAfterScript);
+            _event.RegisterEvent<UseFeatBeforeEvent>(EventScript.NWNXOnUseFeatBeforeScript);
+            _event.RegisterEvent<UseFeatAfterEvent>(EventScript.NWNXOnUseFeatAfterScript);
+            _event.RegisterEvent<DmGiveGoldBeforeEvent>(EventScript.NWNXOnDmGiveGoldBeforeScript);
+            _event.RegisterEvent<DmGiveGoldAfterEvent>(EventScript.NWNXOnDmGiveGoldAfterScript);
+            _event.RegisterEvent<DmGiveXpBeforeEvent>(EventScript.NWNXOnDmGiveXpBeforeScript);
+            _event.RegisterEvent<DmGiveXpAfterEvent>(EventScript.NWNXOnDmGiveXpAfterScript);
+            _event.RegisterEvent<DmGiveLevelBeforeEvent>(EventScript.NWNXOnDmGiveLevelBeforeScript);
+            _event.RegisterEvent<DmGiveLevelAfterEvent>(EventScript.NWNXOnDmGiveLevelAfterScript);
+            _event.RegisterEvent<DmGiveAlignmentBeforeEvent>(EventScript.NWNXOnDmGiveAlignmentBeforeScript);
+            _event.RegisterEvent<DmGiveAlignmentAfterEvent>(EventScript.NWNXOnDmGiveAlignmentAfterScript);
+            _event.RegisterEvent<DmSpawnObjectBeforeEvent>(EventScript.NWNXOnDmSpawnObjectBeforeScript);
+            _event.RegisterEvent<DmSpawnObjectAfterEvent>(EventScript.NWNXOnDmSpawnObjectAfterScript);
+            _event.RegisterEvent<DmGiveItemBeforeEvent>(EventScript.NWNXOnDmGiveItemBeforeScript);
+            _event.RegisterEvent<DmGiveItemAfterEvent>(EventScript.NWNXOnDmGiveItemAfterScript);
+            _event.RegisterEvent<DmHealBeforeEvent>(EventScript.NWNXOnDmHealBeforeScript);
+            _event.RegisterEvent<DmHealAfterEvent>(EventScript.NWNXOnDmHealAfterScript);
+            _event.RegisterEvent<DmKillBeforeEvent>(EventScript.NWNXOnDmKillBeforeScript);
+            _event.RegisterEvent<DmKillAfterEvent>(EventScript.NWNXOnDmKillAfterScript);
+            _event.RegisterEvent<DmToggleInvulnerableBeforeEvent>(EventScript.NWNXOnDmToggleInvulnerableBeforeScript);
+            _event.RegisterEvent<DmToggleInvulnerableAfterEvent>(EventScript.NWNXOnDmToggleInvulnerableAfterScript);
+            _event.RegisterEvent<DmForceRestBeforeEvent>(EventScript.NWNXOnDmForceRestBeforeScript);
+            _event.RegisterEvent<DmForceRestAfterEvent>(EventScript.NWNXOnDmForceRestAfterScript);
+            _event.RegisterEvent<DmLimboBeforeEvent>(EventScript.NWNXOnDmLimboBeforeScript);
+            _event.RegisterEvent<DmLimboAfterEvent>(EventScript.NWNXOnDmLimboAfterScript);
+            _event.RegisterEvent<DmToggleAiBeforeEvent>(EventScript.NWNXOnDmToggleAiBeforeScript);
+            _event.RegisterEvent<DmToggleAiAfterEvent>(EventScript.NWNXOnDmToggleAiAfterScript);
+            _event.RegisterEvent<DmToggleImmortalBeforeEvent>(EventScript.NWNXOnDmToggleImmortalBeforeScript);
+            _event.RegisterEvent<DmToggleImmortalAfterEvent>(EventScript.NWNXOnDmToggleImmortalAfterScript);
+            _event.RegisterEvent<DmGotoBeforeEvent>(EventScript.NWNXOnDmGotoBeforeScript);
+            _event.RegisterEvent<DmGotoAfterEvent>(EventScript.NWNXOnDmGotoAfterScript);
+            _event.RegisterEvent<DmPossessBeforeEvent>(EventScript.NWNXOnDmPossessBeforeScript);
+            _event.RegisterEvent<DmPossessAfterEvent>(EventScript.NWNXOnDmPossessAfterScript);
+            _event.RegisterEvent<DmPossessFullPowerBeforeEvent>(EventScript.NWNXOnDmPossessFullPowerBeforeScript);
+            _event.RegisterEvent<DmPossessFullPowerAfterEvent>(EventScript.NWNXOnDmPossessFullPowerAfterScript);
+            _event.RegisterEvent<DmToggleLockBeforeEvent>(EventScript.NWNXOnDmToggleLockBeforeScript);
+            _event.RegisterEvent<DmToggleLockAfterEvent>(EventScript.NWNXOnDmToggleLockAfterScript);
+            _event.RegisterEvent<DmDisableTrapBeforeEvent>(EventScript.NWNXOnDmDisableTrapBeforeScript);
+            _event.RegisterEvent<DmDisableTrapAfterEvent>(EventScript.NWNXOnDmDisableTrapAfterScript);
+            _event.RegisterEvent<DmJumpToPointBeforeEvent>(EventScript.NWNXOnDmJumpToPointBeforeScript);
+            _event.RegisterEvent<DmJumpToPointAfterEvent>(EventScript.NWNXOnDmJumpToPointAfterScript);
+            _event.RegisterEvent<DmJumpTargetToPointBeforeEvent>(EventScript.NWNXOnDmJumpTargetToPointBeforeScript);
+            _event.RegisterEvent<DmJumpTargetToPointAfterEvent>(EventScript.NWNXOnDmJumpTargetToPointAfterScript);
+            _event.RegisterEvent<DmJumpAllPlayersToPointBeforeEvent>(EventScript.NWNXOnDmJumpAllPlayersToPointBeforeScript);
+            _event.RegisterEvent<DmJumpAllPlayersToPointAfterEvent>(EventScript.NWNXOnDmJumpAllPlayersToPointAfterScript);
+            _event.RegisterEvent<DmChangeDifficultyBeforeEvent>(EventScript.NWNXOnDmChangeDifficultyBeforeScript);
+            _event.RegisterEvent<DmChangeDifficultyAfterEvent>(EventScript.NWNXOnDmChangeDifficultyAfterScript);
+            _event.RegisterEvent<DmViewInventoryBeforeEvent>(EventScript.NWNXOnDmViewInventoryBeforeScript);
+            _event.RegisterEvent<DmViewInventoryAfterEvent>(EventScript.NWNXOnDmViewInventoryAfterScript);
+            _event.RegisterEvent<DmSpawnTrapOnObjectBeforeEvent>(EventScript.NWNXOnDmSpawnTrapOnObjectBeforeScript);
+            _event.RegisterEvent<DmSpawnTrapOnObjectAfterEvent>(EventScript.NWNXOnDmSpawnTrapOnObjectAfterScript);
+            _event.RegisterEvent<DmDumpLocalsBeforeEvent>(EventScript.NWNXOnDmDumpLocalsBeforeScript);
+            _event.RegisterEvent<DmDumpLocalsAfterEvent>(EventScript.NWNXOnDmDumpLocalsAfterScript);
+            _event.RegisterEvent<DmAppearBeforeEvent>(EventScript.NWNXOnDmAppearBeforeScript);
+            _event.RegisterEvent<DmAppearAfterEvent>(EventScript.NWNXOnDmAppearAfterScript);
+            _event.RegisterEvent<DmDisappearBeforeEvent>(EventScript.NWNXOnDmDisappearBeforeScript);
+            _event.RegisterEvent<DmDisappearAfterEvent>(EventScript.NWNXOnDmDisappearAfterScript);
+            _event.RegisterEvent<DmSetFactionBeforeEvent>(EventScript.NWNXOnDmSetFactionBeforeScript);
+            _event.RegisterEvent<DmSetFactionAfterEvent>(EventScript.NWNXOnDmSetFactionAfterScript);
+            _event.RegisterEvent<DmTakeItemBeforeEvent>(EventScript.NWNXOnDmTakeItemBeforeScript);
+            _event.RegisterEvent<DmTakeItemAfterEvent>(EventScript.NWNXOnDmTakeItemAfterScript);
+            _event.RegisterEvent<DmSetStatBeforeEvent>(EventScript.NWNXOnDmSetStatBeforeScript);
+            _event.RegisterEvent<DmSetStatAfterEvent>(EventScript.NWNXOnDmSetStatAfterScript);
+            _event.RegisterEvent<DmGetVariableBeforeEvent>(EventScript.NWNXOnDmGetVariableBeforeScript);
+            _event.RegisterEvent<DmGetVariableAfterEvent>(EventScript.NWNXOnDmGetVariableAfterScript);
+            _event.RegisterEvent<DmSetVariableBeforeEvent>(EventScript.NWNXOnDmSetVariableBeforeScript);
+            _event.RegisterEvent<DmSetVariableAfterEvent>(EventScript.NWNXOnDmSetVariableAfterScript);
+            _event.RegisterEvent<DmSetTimeBeforeEvent>(EventScript.NWNXOnDmSetTimeBeforeScript);
+            _event.RegisterEvent<DmSetTimeAfterEvent>(EventScript.NWNXOnDmSetTimeAfterScript);
+            _event.RegisterEvent<DmSetDateBeforeEvent>(EventScript.NWNXOnDmSetDateBeforeScript);
+            _event.RegisterEvent<DmSetDateAfterEvent>(EventScript.NWNXOnDmSetDateAfterScript);
+            _event.RegisterEvent<DmSetFactionReputationBeforeEvent>(EventScript.NWNXOnDmSetFactionReputationBeforeScript);
+            _event.RegisterEvent<DmSetFactionReputationAfterEvent>(EventScript.NWNXOnDmSetFactionReputationAfterScript);
+            _event.RegisterEvent<DmGetFactionReputationBeforeEvent>(EventScript.NWNXOnDmGetFactionReputationBeforeScript);
+            _event.RegisterEvent<DmGetFactionReputationAfterEvent>(EventScript.NWNXOnDmGetFactionReputationAfterScript);
+            _event.RegisterEvent<ClientDisconnectBeforeEvent>(EventScript.NWNXOnClientDisconnectBeforeScript);
+            _event.RegisterEvent<ClientDisconnectAfterEvent>(EventScript.NWNXOnClientDisconnectAfterScript);
+            _event.RegisterEvent<ClientConnectBeforeEvent>(EventScript.NWNXOnClientConnectBeforeScript);
+            _event.RegisterEvent<ClientConnectAfterEvent>(EventScript.NWNXOnClientConnectAfterScript);
+            _event.RegisterEvent<StartCombatRoundBeforeEvent>(EventScript.NWNXOnStartCombatRoundBeforeScript);
+            _event.RegisterEvent<StartCombatRoundAfterEvent>(EventScript.NWNXOnStartCombatRoundAfterScript);
+            _event.RegisterEvent<CastSpellBeforeEvent>(EventScript.NWNXOnCastSpellBeforeScript);
+            _event.RegisterEvent<CastSpellAfterEvent>(EventScript.NWNXOnCastSpellAfterScript);
+            _event.RegisterEvent<SetMemorizedSpellSlotBeforeEvent>(EventScript.NWNXSetMemorizedSpellSlotBeforeScript);
+            _event.RegisterEvent<SetMemorizedSpellSlotAfterEvent>(EventScript.NWNXSetMemorizedSpellSlotAfterScript);
+            _event.RegisterEvent<ClearMemorizedSpellSlotBeforeEvent>(EventScript.NWNXClearMemorizedSpellSlotBeforeScript);
+            _event.RegisterEvent<ClearMemorizedSpellSlotAfterEvent>(EventScript.NWNXClearMemorizedSpellSlotAfterScript);
+            _event.RegisterEvent<HealerKitBeforeEvent>(EventScript.NWNXOnHealerKitBeforeScript);
+            _event.RegisterEvent<HealerKitAfterEvent>(EventScript.NWNXOnHealerKitAfterScript);
+            _event.RegisterEvent<HealBeforeEvent>(EventScript.NWNXOnHealBeforeScript);
+            _event.RegisterEvent<HealAfterEvent>(EventScript.NWNXOnHealAfterScript);
+            _event.RegisterEvent<PartyLeaveBeforeEvent>(EventScript.NWNXOnPartyLeaveBeforeScript);
+            _event.RegisterEvent<PartyLeaveAfterEvent>(EventScript.NWNXOnPartyLeaveAfterScript);
+            _event.RegisterEvent<PartyKickBeforeEvent>(EventScript.NWNXOnPartyKickBeforeScript);
+            _event.RegisterEvent<PartyKickAfterEvent>(EventScript.NWNXOnPartyKickAfterScript);
+            _event.RegisterEvent<PartyTransferLeadershipBeforeEvent>(EventScript.NWNXOnPartyTransferLeadershipBeforeScript);
+            _event.RegisterEvent<PartyTransferLeadershipAfterEvent>(EventScript.NWNXOnPartyTransferLeadershipAfterScript);
+            _event.RegisterEvent<PartyInviteBeforeEvent>(EventScript.NWNXOnPartyInviteBeforeScript);
+            _event.RegisterEvent<PartyInviteAfterEvent>(EventScript.NWNXOnPartyInviteAfterScript);
+            _event.RegisterEvent<PartyIgnoreInvitationBeforeEvent>(EventScript.NWNXOnPartyIgnoreInvitationBeforeScript);
+            _event.RegisterEvent<PartyIgnoreInvitationAfterEvent>(EventScript.NWNXOnPartyIgnoreInvitationAfterScript);
+            _event.RegisterEvent<PartyAcceptInvitationBeforeEvent>(EventScript.NWNXOnPartyAcceptInvitationBeforeScript);
+            _event.RegisterEvent<PartyAcceptInvitationAfterEvent>(EventScript.NWNXOnPartyAcceptInvitationAfterScript);
+            _event.RegisterEvent<PartyRejectInvitationBeforeEvent>(EventScript.NWNXOnPartyRejectInvitationBeforeScript);
+            _event.RegisterEvent<PartyRejectInvitationAfterEvent>(EventScript.NWNXOnPartyRejectInvitationAfterScript);
+            _event.RegisterEvent<PartyKickHenchmanBeforeEvent>(EventScript.NWNXOnPartyKickHenchmanBeforeScript);
+            _event.RegisterEvent<PartyKickHenchmanAfterEvent>(EventScript.NWNXOnPartyKickHenchmanAfterScript);
+            _event.RegisterEvent<CombatModeOnEvent>(EventScript.NWNXOnCombatModeOnScript);
+            _event.RegisterEvent<CombatModeOffEvent>(EventScript.NWNXOnCombatModeOffScript);
+            _event.RegisterEvent<UseSkillBeforeEvent>(EventScript.NWNXOnUseSkillBeforeScript);
+            _event.RegisterEvent<UseSkillAfterEvent>(EventScript.NWNXOnUseSkillAfterScript);
+            _event.RegisterEvent<MapPinAddPinBeforeEvent>(EventScript.NWNXOnMapPinAddPinBeforeScript);
+            _event.RegisterEvent<MapPinAddPinAfterEvent>(EventScript.NWNXOnMapPinAddPinAfterScript);
+            _event.RegisterEvent<MapPinChangePinBeforeEvent>(EventScript.NWNXOnMapPinChangePinBeforeScript);
+            _event.RegisterEvent<MapPinChangePinAfterEvent>(EventScript.NWNXOnMapPinChangePinAfterScript);
+            _event.RegisterEvent<MapPinDestroyPinBeforeEvent>(EventScript.NWNXOnMapPinDestroyPinBeforeScript);
+            _event.RegisterEvent<MapPinDestroyPinAfterEvent>(EventScript.NWNXOnMapPinDestroyPinAfterScript);
+            _event.RegisterEvent<DoListenDetectionBeforeEvent>(EventScript.NWNXOnDoListenDetectionBeforeScript);
+            _event.RegisterEvent<DoListenDetectionAfterEvent>(EventScript.NWNXOnDoListenDetectionAfterScript);
+            _event.RegisterEvent<DoSpotDetectionBeforeEvent>(EventScript.NWNXOnDoSpotDetectionBeforeScript);
+            _event.RegisterEvent<DoSpotDetectionAfterEvent>(EventScript.NWNXOnDoSpotDetectionAfterScript);
+            _event.RegisterEvent<PolymorphBeforeEvent>(EventScript.NWNXOnPolymorphBeforeScript);
+            _event.RegisterEvent<PolymorphAfterEvent>(EventScript.NWNXOnPolymorphAfterScript);
+            _event.RegisterEvent<UnpolymorphBeforeEvent>(EventScript.NWNXOnUnpolymorphBeforeScript);
+            _event.RegisterEvent<UnpolymorphAfterEvent>(EventScript.NWNXOnUnpolymorphAfterScript);
+            _event.RegisterEvent<EffectAppliedBeforeEvent>(EventScript.NWNXOnEffectAppliedBeforeScript);
+            _event.RegisterEvent<EffectAppliedAfterEvent>(EventScript.NWNXOnEffectAppliedAfterScript);
+            _event.RegisterEvent<EffectRemovedBeforeEvent>(EventScript.NWNXOnEffectRemovedBeforeScript);
+            _event.RegisterEvent<EffectRemovedAfterEvent>(EventScript.NWNXOnEffectRemovedAfterScript);
+            _event.RegisterEvent<QuickchatBeforeEvent>(EventScript.NWNXOnQuickchatBeforeScript);
+            _event.RegisterEvent<QuickchatAfterEvent>(EventScript.NWNXOnQuickchatAfterScript);
+            _event.RegisterEvent<InventoryOpenBeforeEvent>(EventScript.NWNXOnInventoryOpenBeforeScript);
+            _event.RegisterEvent<InventoryOpenAfterEvent>(EventScript.NWNXOnInventoryOpenAfterScript);
+            _event.RegisterEvent<InventorySelectPanelBeforeEvent>(EventScript.NWNXOnInventorySelectPanelBeforeScript);
+            _event.RegisterEvent<InventorySelectPanelAfterEvent>(EventScript.NWNXOnInventorySelectPanelAfterScript);
+            _event.RegisterEvent<BarterStartBeforeEvent>(EventScript.NWNXOnBarterStartBeforeScript);
+            _event.RegisterEvent<BarterStartAfterEvent>(EventScript.NWNXOnBarterStartAfterScript);
+            _event.RegisterEvent<BarterEndBeforeEvent>(EventScript.NWNXOnBarterEndBeforeScript);
+            _event.RegisterEvent<BarterEndAfterEvent>(EventScript.NWNXOnBarterEndAfterScript);
+            _event.RegisterEvent<TrapDisarmBeforeEvent>(EventScript.NWNXOnTrapDisarmBeforeScript);
+            _event.RegisterEvent<TrapDisarmAfterEvent>(EventScript.NWNXOnTrapDisarmAfterScript);
+            _event.RegisterEvent<TrapEnterBeforeEvent>(EventScript.NWNXOnTrapEnterBeforeScript);
+            _event.RegisterEvent<TrapEnterAfterEvent>(EventScript.NWNXOnTrapEnterAfterScript);
+            _event.RegisterEvent<TrapExamineBeforeEvent>(EventScript.NWNXOnTrapExamineBeforeScript);
+            _event.RegisterEvent<TrapExamineAfterEvent>(EventScript.NWNXOnTrapExamineAfterScript);
+            _event.RegisterEvent<TrapFlagBeforeEvent>(EventScript.NWNXOnTrapFlagBeforeScript);
+            _event.RegisterEvent<TrapFlagAfterEvent>(EventScript.NWNXOnTrapFlagAfterScript);
+            _event.RegisterEvent<TrapRecoverBeforeEvent>(EventScript.NWNXOnTrapRecoverBeforeScript);
+            _event.RegisterEvent<TrapRecoverAfterEvent>(EventScript.NWNXOnTrapRecoverAfterScript);
+            _event.RegisterEvent<TrapSetBeforeEvent>(EventScript.NWNXOnTrapSetBeforeScript);
+            _event.RegisterEvent<TrapSetAfterEvent>(EventScript.NWNXOnTrapSetAfterScript);
+            _event.RegisterEvent<TimingBarStartBeforeEvent>(EventScript.NWNXOnTimingBarStartBeforeScript);
+            _event.RegisterEvent<TimingBarStartAfterEvent>(EventScript.NWNXOnTimingBarStartAfterScript);
+            _event.RegisterEvent<TimingBarStopBeforeEvent>(EventScript.NWNXOnTimingBarStopBeforeScript);
+            _event.RegisterEvent<TimingBarStopAfterEvent>(EventScript.NWNXOnTimingBarStopAfterScript);
+            _event.RegisterEvent<TimingBarCancelBeforeEvent>(EventScript.NWNXOnTimingBarCancelBeforeScript);
+            _event.RegisterEvent<TimingBarCancelAfterEvent>(EventScript.NWNXOnTimingBarCancelAfterScript);
+            _event.RegisterEvent<WebhookSuccessEvent>(EventScript.NWNXOnWebhookSuccessScript);
+            _event.RegisterEvent<WebhookFailureEvent>(EventScript.NWNXOnWebhookFailureScript);
+            _event.RegisterEvent<CheckStickyPlayerNameReservedBeforeEvent>(EventScript.NWNXOnCheckStickyPlayerNameReservedBeforeScript);
+            _event.RegisterEvent<CheckStickyPlayerNameReservedAfterEvent>(EventScript.NWNXOnCheckStickyPlayerNameReservedAfterScript);
+            _event.RegisterEvent<LevelUpBeforeEvent>(EventScript.NWNXOnLevelUpBeforeScript);
+            _event.RegisterEvent<LevelUpAfterEvent>(EventScript.NWNXOnLevelUpAfterScript);
+            _event.RegisterEvent<LevelUpAutomaticBeforeEvent>(EventScript.NWNXOnLevelUpAutomaticBeforeScript);
+            _event.RegisterEvent<LevelUpAutomaticAfterEvent>(EventScript.NWNXOnLevelUpAutomaticAfterScript);
+            _event.RegisterEvent<LevelDownBeforeEvent>(EventScript.NWNXOnLevelDownBeforeScript);
+            _event.RegisterEvent<LevelDownAfterEvent>(EventScript.NWNXOnLevelDownAfterScript);
+            _event.RegisterEvent<InventoryAddItemBeforeEvent>(EventScript.NWNXOnInventoryAddItemBeforeScript);
+            _event.RegisterEvent<InventoryAddItemAfterEvent>(EventScript.NWNXOnInventoryAddItemAfterScript);
+            _event.RegisterEvent<InventoryRemoveItemBeforeEvent>(EventScript.NWNXOnInventoryRemoveItemBeforeScript);
+            _event.RegisterEvent<InventoryRemoveItemAfterEvent>(EventScript.NWNXOnInventoryRemoveItemAfterScript);
+            _event.RegisterEvent<InventoryAddGoldBeforeEvent>(EventScript.NWNXOnInventoryAddGoldBeforeScript);
+            _event.RegisterEvent<InventoryAddGoldAfterEvent>(EventScript.NWNXOnInventoryAddGoldAfterScript);
+            _event.RegisterEvent<InventoryRemoveGoldBeforeEvent>(EventScript.NWNXOnInventoryRemoveGoldBeforeScript);
+            _event.RegisterEvent<InventoryRemoveGoldAfterEvent>(EventScript.NWNXOnInventoryRemoveGoldAfterScript);
+            _event.RegisterEvent<PvpAttitudeChangeBeforeEvent>(EventScript.NWNXOnPvpAttitudeChangeBeforeScript);
+            _event.RegisterEvent<PvpAttitudeChangeAfterEvent>(EventScript.NWNXOnPvpAttitudeChangeAfterScript);
+            _event.RegisterEvent<InputWalkToWaypointBeforeEvent>(EventScript.NWNXOnInputWalkToWaypointBeforeScript);
+            _event.RegisterEvent<InputWalkToWaypointAfterEvent>(EventScript.NWNXOnInputWalkToWaypointAfterScript);
+            _event.RegisterEvent<MaterialChangeBeforeEvent>(EventScript.NWNXOnMaterialChangeBeforeScript);
+            _event.RegisterEvent<MaterialChangeAfterEvent>(EventScript.NWNXOnMaterialChangeAfterScript);
+            _event.RegisterEvent<InputAttackObjectBeforeEvent>(EventScript.NWNXOnInputAttackObjectBeforeScript);
+            _event.RegisterEvent<InputAttackObjectAfterEvent>(EventScript.NWNXOnInputAttackObjectAfterScript);
+            _event.RegisterEvent<ObjectLockBeforeEvent>(EventScript.NWNXOnObjectLockBeforeScript);
+            _event.RegisterEvent<ObjectLockAfterEvent>(EventScript.NWNXOnObjectLockAfterScript);
+            _event.RegisterEvent<ObjectUnlockBeforeEvent>(EventScript.NWNXOnObjectUnlockBeforeScript);
+            _event.RegisterEvent<ObjectUnlockAfterEvent>(EventScript.NWNXOnObjectUnlockAfterScript);
+            _event.RegisterEvent<UuidCollisionBeforeEvent>(EventScript.NWNXOnUuidCollisionBeforeScript);
+            _event.RegisterEvent<UuidCollisionAfterEvent>(EventScript.NWNXOnUuidCollisionAfterScript);
+            _event.RegisterEvent<ElcValidateCharacterBeforeEvent>(EventScript.NWNXOnElcValidateCharacterBeforeScript);
+            _event.RegisterEvent<ElcValidateCharacterAfterEvent>(EventScript.NWNXOnElcValidateCharacterAfterScript);
+            _event.RegisterEvent<QuickbarSetButtonBeforeEvent>(EventScript.NWNXOnQuickbarSetButtonBeforeScript);
+            _event.RegisterEvent<QuickbarSetButtonAfterEvent>(EventScript.NWNXOnQuickbarSetButtonAfterScript);
+            _event.RegisterEvent<CalendarHourEvent>(EventScript.NWNXOnCalendarHourScript);
+            _event.RegisterEvent<CalendarDayEvent>(EventScript.NWNXOnCalendarDayScript);
+            _event.RegisterEvent<CalendarMonthEvent>(EventScript.NWNXOnCalendarMonthScript);
+            _event.RegisterEvent<CalendarYearEvent>(EventScript.NWNXOnCalendarYearScript);
+            _event.RegisterEvent<CalendarDawnEvent>(EventScript.NWNXOnCalendarDawnScript);
+            _event.RegisterEvent<CalendarDuskEvent>(EventScript.NWNXOnCalendarDuskScript);
+            _event.RegisterEvent<BroadcastCastSpellBeforeEvent>(EventScript.NWNXOnBroadcastCastSpellBeforeScript);
+            _event.RegisterEvent<BroadcastCastSpellAfterEvent>(EventScript.NWNXOnBroadcastCastSpellAfterScript);
+            _event.RegisterEvent<DebugRunScriptBeforeEvent>(EventScript.NWNXOnDebugRunScriptBeforeScript);
+            _event.RegisterEvent<DebugRunScriptAfterEvent>(EventScript.NWNXOnDebugRunScriptAfterScript);
+            _event.RegisterEvent<DebugRunScriptChunkBeforeEvent>(EventScript.NWNXOnDebugRunScriptChunkBeforeScript);
+            _event.RegisterEvent<DebugRunScriptChunkAfterEvent>(EventScript.NWNXOnDebugRunScriptChunkAfterScript);
+            _event.RegisterEvent<StoreRequestBuyBeforeEvent>(EventScript.NWNXOnStoreRequestBuyBeforeScript);
+            _event.RegisterEvent<StoreRequestBuyAfterEvent>(EventScript.NWNXOnStoreRequestBuyAfterScript);
+            _event.RegisterEvent<StoreRequestSellBeforeEvent>(EventScript.NWNXOnStoreRequestSellBeforeScript);
+            _event.RegisterEvent<StoreRequestSellAfterEvent>(EventScript.NWNXOnStoreRequestSellAfterScript);
+            _event.RegisterEvent<InputDropItemBeforeEvent>(EventScript.NWNXOnInputDropItemBeforeScript);
+            _event.RegisterEvent<InputDropItemAfterEvent>(EventScript.NWNXOnInputDropItemAfterScript);
+            _event.RegisterEvent<BroadcastAttackOfOpportunityBeforeEvent>(EventScript.NWNXOnBroadcastAttackOfOpportunityBeforeScript);
+            _event.RegisterEvent<BroadcastAttackOfOpportunityAfterEvent>(EventScript.NWNXOnBroadcastAttackOfOpportunityAfterScript);
+            _event.RegisterEvent<CombatAttackOfOpportunityBeforeEvent>(EventScript.NWNXOnCombatAttackOfOpportunityBeforeScript);
+            _event.RegisterEvent<CombatAttackOfOpportunityAfterEvent>(EventScript.NWNXOnCombatAttackOfOpportunityAfterScript);
+        }
+
+        private void HookNWNXEvents()
         {
             // Associate events
             EventsPlugin.SubscribeEvent(EventsPlugin.NWNX_ON_ADD_ASSOCIATE_BEFORE, EventScript.NWNXOnAddAssociateBeforeScript);
@@ -417,1564 +684,6 @@ namespace XM.Core.EventManagement
             EventsPlugin.SubscribeEvent(EventsPlugin.NWNX_ON_COMBAT_ATTACK_OF_OPPORTUNITY_AFTER, EventScript.NWNXOnCombatAttackOfOpportunityAfterScript);
 
         }
-
-        [Inject]
-        public IList<IModulePreloadEvent> OnModulePreloadSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnModulePreloadScript)]
-        public void HandleModulePreload() => HandleEvent(OnModulePreloadSubscriptions, (subscription) => subscription.OnModulePreload());
-        
-        [Inject]
-        public IList<IAddAssociateBeforeEvent> OnAddAssociateBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnAddAssociateBeforeScript)]
-        public void HandleAddAssociateBefore() => HandleEvent(OnAddAssociateBeforeSubscriptions, (subscription) => subscription.OnAddAssociateBefore());
-
-        [Inject]
-        public IList<IAddAssociateAfterEvent> OnAddAssociateAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnAddAssociateAfterScript)]
-        public void HandleAddAssociateAfter() => HandleEvent(OnAddAssociateAfterSubscriptions, (subscription) => subscription.OnAddAssociateAfter());
-
-        [Inject]
-        public IList<IRemoveAssociateBeforeEvent> OnRemoveAssociateBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnRemoveAssociateBeforeScript)]
-        public void HandleRemoveAssociateBefore() => HandleEvent(OnRemoveAssociateBeforeSubscriptions, (subscription) => subscription.OnRemoveAssociateBefore());
-
-        [Inject]
-        public IList<IRemoveAssociateAfterEvent> OnRemoveAssociateAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnRemoveAssociateAfterScript)]
-        public void HandleRemoveAssociateAfter() => HandleEvent(OnRemoveAssociateAfterSubscriptions, (subscription) => subscription.OnRemoveAssociateAfter());
-
-        [Inject]
-        public IList<IStealthEnterBeforeEvent> OnStealthEnterBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnStealthEnterBeforeScript)]
-        public void HandleStealthEnterBefore() => HandleEvent(OnStealthEnterBeforeSubscriptions, (subscription) => subscription.OnStealthEnterBefore());
-
-        [Inject]
-        public IList<IStealthEnterAfterEvent> OnStealthEnterAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnStealthEnterAfterScript)]
-        public void HandleStealthEnterAfter() => HandleEvent(OnStealthEnterAfterSubscriptions, (subscription) => subscription.OnStealthEnterAfter());
-
-        [Inject]
-        public IList<IStealthExitBeforeEvent> OnStealthExitBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnStealthExitBeforeScript)]
-        public void HandleStealthExitBefore() => HandleEvent(OnStealthExitBeforeSubscriptions, (subscription) => subscription.OnStealthExitBefore());
-
-        [Inject]
-        public IList<IStealthExitAfterEvent> OnStealthExitAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnStealthExitAfterScript)]
-        public void HandleStealthExitAfter() => HandleEvent(OnStealthExitAfterSubscriptions, (subscription) => subscription.OnStealthExitAfter());
-
-        [Inject]
-        public IList<IExamineObjectBeforeEvent> OnExamineObjectBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnExamineObjectBeforeScript)]
-        public void HandleExamineObjectBefore() => HandleEvent(OnExamineObjectBeforeSubscriptions, (subscription) => subscription.OnExamineObjectBefore());
-
-        [Inject]
-        public IList<IExamineObjectAfterEvent> OnExamineObjectAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnExamineObjectAfterScript)]
-        public void HandleExamineObjectAfter() => HandleEvent(OnExamineObjectAfterSubscriptions, (subscription) => subscription.OnExamineObjectAfter());
-
-        [Inject]
-        public IList<IValidateUseItemBeforeEvent> OnValidateUseItemBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnValidateUseItemBeforeScript)]
-        public void HandleValidateUseItemBefore() => HandleEvent(OnValidateUseItemBeforeSubscriptions, (subscription) => subscription.OnValidateUseItemBefore());
-
-        [Inject]
-        public IList<IValidateUseItemAfterEvent> OnValidateUseItemAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnValidateUseItemAfterScript)]
-        public void HandleValidateUseItemAfter() => HandleEvent(OnValidateUseItemAfterSubscriptions, (subscription) => subscription.OnValidateUseItemAfter());
-
-        [Inject]
-        public IList<IUseItemBeforeEvent> OnUseItemBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnUseItemBeforeScript)]
-        public void HandleUseItemBefore() => HandleEvent(OnUseItemBeforeSubscriptions, (subscription) => subscription.OnUseItemBefore());
-
-        [Inject]
-        public IList<IUseItemAfterEvent> OnUseItemAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnUseItemAfterScript)]
-        public void HandleUseItemAfter() => HandleEvent(OnUseItemAfterSubscriptions, (subscription) => subscription.OnUseItemAfter());
-
-        [Inject]
-        public IList<IItemInventoryOpenBeforeEvent> OnItemInventoryOpenBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemInventoryOpenBeforeScript)]
-        public void HandleItemInventoryOpenBefore() => HandleEvent(OnItemInventoryOpenBeforeSubscriptions, (subscription) => subscription.OnItemInventoryOpenBefore());
-
-        [Inject]
-        public IList<IItemInventoryOpenAfterEvent> OnItemInventoryOpenAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemInventoryOpenAfterScript)]
-        public void HandleItemInventoryOpenAfter() => HandleEvent(OnItemInventoryOpenAfterSubscriptions, (subscription) => subscription.OnItemInventoryOpenAfter());
-
-        [Inject]
-        public IList<IItemInventoryCloseBeforeEvent> OnItemInventoryCloseBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemInventoryCloseBeforeScript)]
-        public void HandleItemInventoryCloseBefore() => HandleEvent(OnItemInventoryCloseBeforeSubscriptions, (subscription) => subscription.OnItemInventoryCloseBefore());
-
-        [Inject]
-        public IList<IItemInventoryCloseAfterEvent> OnItemInventoryCloseAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemInventoryCloseAfterScript)]
-        public void HandleItemInventoryCloseAfter() => HandleEvent(OnItemInventoryCloseAfterSubscriptions, (subscription) => subscription.OnItemInventoryCloseAfter());
-
-        [Inject]
-        public IList<IItemAmmoReloadBeforeEvent> OnItemAmmoReloadBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemAmmoReloadBeforeScript)]
-        public void HandleItemAmmoReloadBefore() => HandleEvent(OnItemAmmoReloadBeforeSubscriptions, (subscription) => subscription.OnItemAmmoReloadBefore());
-
-        [Inject]
-        public IList<IItemAmmoReloadAfterEvent> OnItemAmmoReloadAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemAmmoReloadAfterScript)]
-        public void HandleItemAmmoReloadAfter() => HandleEvent(OnItemAmmoReloadAfterSubscriptions, (subscription) => subscription.OnItemAmmoReloadAfter());
-
-        [Inject]
-        public IList<IItemScrollLearnBeforeEvent> OnItemScrollLearnBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemScrollLearnBeforeScript)]
-        public void HandleItemScrollLearnBefore() => HandleEvent(OnItemScrollLearnBeforeSubscriptions, (subscription) => subscription.OnItemScrollLearnBefore());
-
-        [Inject]
-        public IList<IItemScrollLearnAfterEvent> OnItemScrollLearnAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemScrollLearnAfterScript)]
-        public void HandleItemScrollLearnAfter() => HandleEvent(OnItemScrollLearnAfterSubscriptions, (subscription) => subscription.OnItemScrollLearnAfter());
-
-        [Inject]
-        public IList<IValidateItemEquipBeforeEvent> OnValidateItemEquipBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnValidateItemEquipBeforeScript)]
-        public void HandleValidateItemEquipBefore() => HandleEvent(OnValidateItemEquipBeforeSubscriptions, (subscription) => subscription.OnValidateItemEquipBefore());
-
-        [Inject]
-        public IList<IValidateItemEquipAfterEvent> OnValidateItemEquipAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnValidateItemEquipAfterScript)]
-        public void HandleValidateItemEquipAfter() => HandleEvent(OnValidateItemEquipAfterSubscriptions, (subscription) => subscription.OnValidateItemEquipAfter());
-
-        [Inject]
-        public IList<IItemEquipBeforeEvent> OnItemEquipBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemEquipBeforeScript)]
-        public void HandleItemEquipBefore() => HandleEvent(OnItemEquipBeforeSubscriptions, (subscription) => subscription.OnItemEquipBefore());
-
-        [Inject]
-        public IList<IItemEquipAfterEvent> OnItemEquipAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemEquipAfterScript)]
-        public void HandleItemEquipAfter() => HandleEvent(OnItemEquipAfterSubscriptions, (subscription) => subscription.OnItemEquipAfter());
-
-        [Inject]
-        public IList<IItemUnequipBeforeEvent> OnItemUnequipBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemUnequipBeforeScript)]
-        public void HandleItemUnequipBefore() => HandleEvent(OnItemUnequipBeforeSubscriptions, (subscription) => subscription.OnItemUnequipBefore());
-
-        [Inject]
-        public IList<IItemUnequipAfterEvent> OnItemUnequipAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemUnequipAfterScript)]
-        public void HandleItemUnequipAfter() => HandleEvent(OnItemUnequipAfterSubscriptions, (subscription) => subscription.OnItemUnequipAfter());
-
-        [Inject]
-        public IList<IItemDestroyObjectBeforeEvent> OnItemDestroyObjectBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemDestroyObjectBeforeScript)]
-        public void HandleItemDestroyObjectBefore() => HandleEvent(OnItemDestroyObjectBeforeSubscriptions, (subscription) => subscription.OnItemDestroyObjectBefore());
-
-        [Inject]
-        public IList<IItemDestroyObjectAfterEvent> OnItemDestroyObjectAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemDestroyObjectAfterScript)]
-        public void HandleItemDestroyObjectAfter() => HandleEvent(OnItemDestroyObjectAfterSubscriptions, (subscription) => subscription.OnItemDestroyObjectAfter());
-
-        [Inject]
-        public IList<IItemDecrementStacksizeBeforeEvent> OnItemDecrementStacksizeBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemDecrementStacksizeBeforeScript)]
-        public void HandleItemDecrementStacksizeBefore() => HandleEvent(OnItemDecrementStacksizeBeforeSubscriptions, (subscription) => subscription.OnItemDecrementStacksizeBefore());
-
-        [Inject]
-        public IList<IItemDecrementStacksizeAfterEvent> OnItemDecrementStacksizeAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemDecrementStacksizeAfterScript)]
-        public void HandleItemDecrementStacksizeAfter() => HandleEvent(OnItemDecrementStacksizeAfterSubscriptions, (subscription) => subscription.OnItemDecrementStacksizeAfter());
-
-        [Inject]
-        public IList<IItemUseLoreBeforeEvent> OnItemUseLoreBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemUseLoreBeforeScript)]
-        public void HandleItemUseLoreBefore() => HandleEvent(OnItemUseLoreBeforeSubscriptions, (subscription) => subscription.OnItemUseLoreBefore());
-
-        [Inject]
-        public IList<IItemUseLoreAfterEvent> OnItemUseLoreAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemUseLoreAfterScript)]
-        public void HandleItemUseLoreAfter() => HandleEvent(OnItemUseLoreAfterSubscriptions, (subscription) => subscription.OnItemUseLoreAfter());
-
-
-        [Inject]
-        public IList<IItemPayToIdentifyBeforeEvent> OnItemPayToIdentifyBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemPayToIdentifyBeforeScript)]
-        public void HandleItemPayToIdentifyBefore() => HandleEvent(OnItemPayToIdentifyBeforeSubscriptions, (subscription) => subscription.OnItemPayToIdentifyBefore());
-
-        [Inject]
-        public IList<IItemPayToIdentifyAfterEvent> OnItemPayToIdentifyAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemPayToIdentifyAfterScript)]
-        public void HandleItemPayToIdentifyAfter() => HandleEvent(OnItemPayToIdentifyAfterSubscriptions, (subscription) => subscription.OnItemPayToIdentifyAfter());
-
-
-        [Inject]
-        public IList<IItemSplitBeforeEvent> OnItemSplitBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemSplitBeforeScript)]
-        public void HandleItemSplitBefore() => HandleEvent(OnItemSplitBeforeSubscriptions, (subscription) => subscription.OnItemSplitBefore());
-
-        [Inject]
-        public IList<IItemSplitAfterEvent> OnItemSplitAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemSplitAfterScript)]
-        public void HandleItemSplitAfter() => HandleEvent(OnItemSplitAfterSubscriptions, (subscription) => subscription.OnItemSplitAfter());
-
-
-        [Inject]
-        public IList<IItemMergeBeforeEvent> OnItemMergeBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemMergeBeforeScript)]
-        public void HandleItemMergeBefore() => HandleEvent(OnItemMergeBeforeSubscriptions, (subscription) => subscription.OnItemMergeBefore());
-
-        [Inject]
-        public IList<IItemMergeAfterEvent> OnItemMergeAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemMergeAfterScript)]
-        public void HandleItemMergeAfter() => HandleEvent(OnItemMergeAfterSubscriptions, (subscription) => subscription.OnItemMergeAfter());
-
-
-        [Inject]
-        public IList<IItemAcquireBeforeEvent> OnItemAcquireBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemAcquireBeforeScript)]
-        public void HandleItemAcquireBefore() => HandleEvent(OnItemAcquireBeforeSubscriptions, (subscription) => subscription.OnItemAcquireBefore());
-
-        [Inject]
-        public IList<IItemAcquireAfterEvent> OnItemAcquireAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnItemAcquireAfterScript)]
-        public void HandleItemAcquireAfter() => HandleEvent(OnItemAcquireAfterSubscriptions, (subscription) => subscription.OnItemAcquireAfter());
-
-
-        [Inject]
-        public IList<IUseFeatBeforeEvent> OnUseFeatBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnUseFeatBeforeScript)]
-        public void HandleUseFeatBefore() => HandleEvent(OnUseFeatBeforeSubscriptions, (subscription) => subscription.OnUseFeatBefore());
-
-        [Inject]
-        public IList<IUseFeatAfterEvent> OnUseFeatAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnUseFeatAfterScript)]
-        public void HandleUseFeatAfter() => HandleEvent(OnUseFeatAfterSubscriptions, (subscription) => subscription.OnUseFeatAfter());
-        [Inject]
-        public IList<IDmGiveGoldBeforeEvent> OnDmGiveGoldBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmGiveGoldBeforeScript)]
-        public void HandleDmGiveGoldBefore() => HandleEvent(OnDmGiveGoldBeforeSubscriptions, (subscription) => subscription.OnDmGiveGoldBefore());
-
-        [Inject]
-        public IList<IDmGiveGoldAfterEvent> OnDmGiveGoldAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmGiveGoldAfterScript)]
-        public void HandleDmGiveGoldAfter() => HandleEvent(OnDmGiveGoldAfterSubscriptions, (subscription) => subscription.OnDmGiveGoldAfter());
-
-        [Inject]
-        public IList<IDmGiveXpBeforeEvent> OnDmGiveXpBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmGiveXpBeforeScript)]
-        public void HandleDmGiveXpBefore() => HandleEvent(OnDmGiveXpBeforeSubscriptions, (subscription) => subscription.OnDmGiveXpBefore());
-
-        [Inject]
-        public IList<IDmGiveXpAfterEvent> OnDmGiveXpAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmGiveXpAfterScript)]
-        public void HandleDmGiveXpAfter() => HandleEvent(OnDmGiveXpAfterSubscriptions, (subscription) => subscription.OnDmGiveXpAfter());
-
-        [Inject]
-        public IList<IDmGiveLevelBeforeEvent> OnDmGiveLevelBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmGiveLevelBeforeScript)]
-        public void HandleDmGiveLevelBefore() => HandleEvent(OnDmGiveLevelBeforeSubscriptions, (subscription) => subscription.OnDmGiveLevelBefore());
-
-        [Inject]
-        public IList<IDmGiveLevelAfterEvent> OnDmGiveLevelAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmGiveLevelAfterScript)]
-        public void HandleDmGiveLevelAfter() => HandleEvent(OnDmGiveLevelAfterSubscriptions, (subscription) => subscription.OnDmGiveLevelAfter());
-
-        [Inject]
-        public IList<IDmGiveAlignmentBeforeEvent> OnDmGiveAlignmentBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmGiveAlignmentBeforeScript)]
-        public void HandleDmGiveAlignmentBefore() => HandleEvent(OnDmGiveAlignmentBeforeSubscriptions, (subscription) => subscription.OnDmGiveAlignmentBefore());
-
-        [Inject]
-        public IList<IDmGiveAlignmentAfterEvent> OnDmGiveAlignmentAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmGiveAlignmentAfterScript)]
-        public void HandleDmGiveAlignmentAfter() => HandleEvent(OnDmGiveAlignmentAfterSubscriptions, (subscription) => subscription.OnDmGiveAlignmentAfter());
-
-        [Inject]
-        public IList<IDmSpawnObjectBeforeEvent> OnDmSpawnObjectBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmSpawnObjectBeforeScript)]
-        public void HandleDmSpawnObjectBefore() => HandleEvent(OnDmSpawnObjectBeforeSubscriptions, (subscription) => subscription.OnDmSpawnObjectBefore());
-
-        [Inject]
-        public IList<IDmSpawnObjectAfterEvent> OnDmSpawnObjectAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmSpawnObjectAfterScript)]
-        public void HandleDmSpawnObjectAfter() => HandleEvent(OnDmSpawnObjectAfterSubscriptions, (subscription) => subscription.OnDmSpawnObjectAfter());
-
-        [Inject]
-        public IList<IDmGiveItemBeforeEvent> OnDmGiveItemBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmGiveItemBeforeScript)]
-        public void HandleDmGiveItemBefore() => HandleEvent(OnDmGiveItemBeforeSubscriptions, (subscription) => subscription.OnDmGiveItemBefore());
-
-        [Inject]
-        public IList<IDmGiveItemAfterEvent> OnDmGiveItemAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmGiveItemAfterScript)]
-        public void HandleDmGiveItemAfter() => HandleEvent(OnDmGiveItemAfterSubscriptions, (subscription) => subscription.OnDmGiveItemAfter());
-        [Inject]
-        public IList<IDmHealBeforeEvent> OnDmHealBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmHealBeforeScript)]
-        public void HandleDmHealBefore() => HandleEvent(OnDmHealBeforeSubscriptions, (subscription) => subscription.OnDmHealBefore());
-
-        [Inject]
-        public IList<IDmHealAfterEvent> OnDmHealAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmHealAfterScript)]
-        public void HandleDmHealAfter() => HandleEvent(OnDmHealAfterSubscriptions, (subscription) => subscription.OnDmHealAfter());
-
-        [Inject]
-        public IList<IDmKillBeforeEvent> OnDmKillBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmKillBeforeScript)]
-        public void HandleDmKillBefore() => HandleEvent(OnDmKillBeforeSubscriptions, (subscription) => subscription.OnDmKillBefore());
-
-        [Inject]
-        public IList<IDmKillAfterEvent> OnDmKillAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmKillAfterScript)]
-        public void HandleDmKillAfter() => HandleEvent(OnDmKillAfterSubscriptions, (subscription) => subscription.OnDmKillAfter());
-
-        [Inject]
-        public IList<IDmToggleInvulnerableBeforeEvent> OnDmToggleInvulnerableBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmToggleInvulnerableBeforeScript)]
-        public void HandleDmToggleInvulnerableBefore() => HandleEvent(OnDmToggleInvulnerableBeforeSubscriptions, (subscription) => subscription.OnDmToggleInvulnerableBefore());
-
-        [Inject]
-        public IList<IDmToggleInvulnerableAfterEvent> OnDmToggleInvulnerableAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmToggleInvulnerableAfterScript)]
-        public void HandleDmToggleInvulnerableAfter() => HandleEvent(OnDmToggleInvulnerableAfterSubscriptions, (subscription) => subscription.OnDmToggleInvulnerableAfter());
-
-        [Inject]
-        public IList<IDmForceRestBeforeEvent> OnDmForceRestBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmForceRestBeforeScript)]
-        public void HandleDmForceRestBefore() => HandleEvent(OnDmForceRestBeforeSubscriptions, (subscription) => subscription.OnDmForceRestBefore());
-
-        [Inject]
-        public IList<IDmForceRestAfterEvent> OnDmForceRestAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmForceRestAfterScript)]
-        public void HandleDmForceRestAfter() => HandleEvent(OnDmForceRestAfterSubscriptions, (subscription) => subscription.OnDmForceRestAfter());
-
-        [Inject]
-        public IList<IDmLimboBeforeEvent> OnDmLimboBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmLimboBeforeScript)]
-        public void HandleDmLimboBefore() => HandleEvent(OnDmLimboBeforeSubscriptions, (subscription) => subscription.OnDmLimboBefore());
-
-        [Inject]
-        public IList<IDmLimboAfterEvent> OnDmLimboAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmLimboAfterScript)]
-        public void HandleDmLimboAfter() => HandleEvent(OnDmLimboAfterSubscriptions, (subscription) => subscription.OnDmLimboAfter());
-
-        [Inject]
-        public IList<IDmToggleAiBeforeEvent> OnDmToggleAiBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmToggleAiBeforeScript)]
-        public void HandleDmToggleAiBefore() => HandleEvent(OnDmToggleAiBeforeSubscriptions, (subscription) => subscription.OnDmToggleAiBefore());
-
-        [Inject]
-        public IList<IDmToggleAiAfterEvent> OnDmToggleAiAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmToggleAiAfterScript)]
-        public void HandleDmToggleAiAfter() => HandleEvent(OnDmToggleAiAfterSubscriptions, (subscription) => subscription.OnDmToggleAiAfter());
-
-        [Inject]
-        public IList<IDmToggleImmortalBeforeEvent> OnDmToggleImmortalBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmToggleImmortalBeforeScript)]
-        public void HandleDmToggleImmortalBefore() => HandleEvent(OnDmToggleImmortalBeforeSubscriptions, (subscription) => subscription.OnDmToggleImmortalBefore());
-
-        [Inject]
-        public IList<IDmToggleImmortalAfterEvent> OnDmToggleImmortalAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmToggleImmortalAfterScript)]
-        public void HandleDmToggleImmortalAfter() => HandleEvent(OnDmToggleImmortalAfterSubscriptions, (subscription) => subscription.OnDmToggleImmortalAfter());
-        [Inject]
-        public IList<IDmGotoBeforeEvent> OnDmGotoBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmGotoBeforeScript)]
-        public void HandleDmGotoBefore() => HandleEvent(OnDmGotoBeforeSubscriptions, (subscription) => subscription.OnDmGotoBefore());
-
-        [Inject]
-        public IList<IDmGotoAfterEvent> OnDmGotoAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmGotoAfterScript)]
-        public void HandleDmGotoAfter() => HandleEvent(OnDmGotoAfterSubscriptions, (subscription) => subscription.OnDmGotoAfter());
-
-        [Inject]
-        public IList<IDmPossessBeforeEvent> OnDmPossessBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmPossessBeforeScript)]
-        public void HandleDmPossessBefore() => HandleEvent(OnDmPossessBeforeSubscriptions, (subscription) => subscription.OnDmPossessBefore());
-
-        [Inject]
-        public IList<IDmPossessAfterEvent> OnDmPossessAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmPossessAfterScript)]
-        public void HandleDmPossessAfter() => HandleEvent(OnDmPossessAfterSubscriptions, (subscription) => subscription.OnDmPossessAfter());
-
-        [Inject]
-        public IList<IDmPossessFullPowerBeforeEvent> OnDmPossessFullPowerBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmPossessFullPowerBeforeScript)]
-        public void HandleDmPossessFullPowerBefore() => HandleEvent(OnDmPossessFullPowerBeforeSubscriptions, (subscription) => subscription.OnDmPossessFullPowerBefore());
-
-        [Inject]
-        public IList<IDmPossessFullPowerAfterEvent> OnDmPossessFullPowerAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmPossessFullPowerAfterScript)]
-        public void HandleDmPossessFullPowerAfter() => HandleEvent(OnDmPossessFullPowerAfterSubscriptions, (subscription) => subscription.OnDmPossessFullPowerAfter());
-
-        [Inject]
-        public IList<IDmToggleLockBeforeEvent> OnDmToggleLockBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmToggleLockBeforeScript)]
-        public void HandleDmToggleLockBefore() => HandleEvent(OnDmToggleLockBeforeSubscriptions, (subscription) => subscription.OnDmToggleLockBefore());
-
-        [Inject]
-        public IList<IDmToggleLockAfterEvent> OnDmToggleLockAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmToggleLockAfterScript)]
-        public void HandleDmToggleLockAfter() => HandleEvent(OnDmToggleLockAfterSubscriptions, (subscription) => subscription.OnDmToggleLockAfter());
-
-        [Inject]
-        public IList<IDmDisableTrapBeforeEvent> OnDmDisableTrapBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmDisableTrapBeforeScript)]
-        public void HandleDmDisableTrapBefore() => HandleEvent(OnDmDisableTrapBeforeSubscriptions, (subscription) => subscription.OnDmDisableTrapBefore());
-
-        [Inject]
-        public IList<IDmDisableTrapAfterEvent> OnDmDisableTrapAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmDisableTrapAfterScript)]
-        public void HandleDmDisableTrapAfter() => HandleEvent(OnDmDisableTrapAfterSubscriptions, (subscription) => subscription.OnDmDisableTrapAfter());
-
-        [Inject]
-        public IList<IDmJumpToPointBeforeEvent> OnDmJumpToPointBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmJumpToPointBeforeScript)]
-        public void HandleDmJumpToPointBefore() => HandleEvent(OnDmJumpToPointBeforeSubscriptions, (subscription) => subscription.OnDmJumpToPointBefore());
-
-        [Inject]
-        public IList<IDmJumpToPointAfterEvent> OnDmJumpToPointAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmJumpToPointAfterScript)]
-        public void HandleDmJumpToPointAfter() => HandleEvent(OnDmJumpToPointAfterSubscriptions, (subscription) => subscription.OnDmJumpToPointAfter());
-
-        [Inject]
-        public IList<IDmJumpTargetToPointBeforeEvent> OnDmJumpTargetToPointBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmJumpTargetToPointBeforeScript)]
-        public void HandleDmJumpTargetToPointBefore() => HandleEvent(OnDmJumpTargetToPointBeforeSubscriptions, (subscription) => subscription.OnDmJumpTargetToPointBefore());
-
-        [Inject]
-        public IList<IDmJumpTargetToPointAfterEvent> OnDmJumpTargetToPointAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmJumpTargetToPointAfterScript)]
-        public void HandleDmJumpTargetToPointAfter() => HandleEvent(OnDmJumpTargetToPointAfterSubscriptions, (subscription) => subscription.OnDmJumpTargetToPointAfter());
-
-        [Inject]
-        public IList<IDmJumpAllPlayersToPointBeforeEvent> OnDmJumpAllPlayersToPointBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmJumpAllPlayersToPointBeforeScript)]
-        public void HandleDmJumpAllPlayersToPointBefore() => HandleEvent(OnDmJumpAllPlayersToPointBeforeSubscriptions, (subscription) => subscription.OnDmJumpAllPlayersToPointBefore());
-
-        [Inject]
-        public IList<IDmJumpAllPlayersToPointAfterEvent> OnDmJumpAllPlayersToPointAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmJumpAllPlayersToPointAfterScript)]
-        public void HandleDmJumpAllPlayersToPointAfter() => HandleEvent(OnDmJumpAllPlayersToPointAfterSubscriptions, (subscription) => subscription.OnDmJumpAllPlayersToPointAfter());
-        [Inject]
-        public IList<IDmChangeDifficultyBeforeEvent> OnDmChangeDifficultyBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmChangeDifficultyBeforeScript)]
-        public void HandleDmChangeDifficultyBefore() => HandleEvent(OnDmChangeDifficultyBeforeSubscriptions, (subscription) => subscription.OnDmChangeDifficultyBefore());
-
-        [Inject]
-        public IList<IDmChangeDifficultyAfterEvent> OnDmChangeDifficultyAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmChangeDifficultyAfterScript)]
-        public void HandleDmChangeDifficultyAfter() => HandleEvent(OnDmChangeDifficultyAfterSubscriptions, (subscription) => subscription.OnDmChangeDifficultyAfter());
-
-        [Inject]
-        public IList<IDmViewInventoryBeforeEvent> OnDmViewInventoryBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmViewInventoryBeforeScript)]
-        public void HandleDmViewInventoryBefore() => HandleEvent(OnDmViewInventoryBeforeSubscriptions, (subscription) => subscription.OnDmViewInventoryBefore());
-
-        [Inject]
-        public IList<IDmViewInventoryAfterEvent> OnDmViewInventoryAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmViewInventoryAfterScript)]
-        public void HandleDmViewInventoryAfter() => HandleEvent(OnDmViewInventoryAfterSubscriptions, (subscription) => subscription.OnDmViewInventoryAfter());
-
-        [Inject]
-        public IList<IDmSpawnTrapOnObjectBeforeEvent> OnDmSpawnTrapOnObjectBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmSpawnTrapOnObjectBeforeScript)]
-        public void HandleDmSpawnTrapOnObjectBefore() => HandleEvent(OnDmSpawnTrapOnObjectBeforeSubscriptions, (subscription) => subscription.OnDmSpawnTrapOnObjectBefore());
-
-        [Inject]
-        public IList<IDmSpawnTrapOnObjectAfterEvent> OnDmSpawnTrapOnObjectAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmSpawnTrapOnObjectAfterScript)]
-        public void HandleDmSpawnTrapOnObjectAfter() => HandleEvent(OnDmSpawnTrapOnObjectAfterSubscriptions, (subscription) => subscription.OnDmSpawnTrapOnObjectAfter());
-
-        [Inject]
-        public IList<IDmDumpLocalsBeforeEvent> OnDmDumpLocalsBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmDumpLocalsBeforeScript)]
-        public void HandleDmDumpLocalsBefore() => HandleEvent(OnDmDumpLocalsBeforeSubscriptions, (subscription) => subscription.OnDmDumpLocalsBefore());
-
-        [Inject]
-        public IList<IDmDumpLocalsAfterEvent> OnDmDumpLocalsAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmDumpLocalsAfterScript)]
-        public void HandleDmDumpLocalsAfter() => HandleEvent(OnDmDumpLocalsAfterSubscriptions, (subscription) => subscription.OnDmDumpLocalsAfter());
-
-        [Inject]
-        public IList<IDmAppearBeforeEvent> OnDmAppearBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmAppearBeforeScript)]
-        public void HandleDmAppearBefore() => HandleEvent(OnDmAppearBeforeSubscriptions, (subscription) => subscription.OnDmAppearBefore());
-
-        [Inject]
-        public IList<IDmAppearAfterEvent> OnDmAppearAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmAppearAfterScript)]
-        public void HandleDmAppearAfter() => HandleEvent(OnDmAppearAfterSubscriptions, (subscription) => subscription.OnDmAppearAfter());
-
-        [Inject]
-        public IList<IDmDisappearBeforeEvent> OnDmDisappearBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmDisappearBeforeScript)]
-        public void HandleDmDisappearBefore() => HandleEvent(OnDmDisappearBeforeSubscriptions, (subscription) => subscription.OnDmDisappearBefore());
-
-        [Inject]
-        public IList<IDmDisappearAfterEvent> OnDmDisappearAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmDisappearAfterScript)]
-        public void HandleDmDisappearAfter() => HandleEvent(OnDmDisappearAfterSubscriptions, (subscription) => subscription.OnDmDisappearAfter());
-
-        [Inject]
-        public IList<IDmSetFactionBeforeEvent> OnDmSetFactionBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmSetFactionBeforeScript)]
-        public void HandleDmSetFactionBefore() => HandleEvent(OnDmSetFactionBeforeSubscriptions, (subscription) => subscription.OnDmSetFactionBefore());
-
-        [Inject]
-        public IList<IDmSetFactionAfterEvent> OnDmSetFactionAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmSetFactionAfterScript)]
-        public void HandleDmSetFactionAfter() => HandleEvent(OnDmSetFactionAfterSubscriptions, (subscription) => subscription.OnDmSetFactionAfter());
-        [Inject]
-        public IList<IDmTakeItemBeforeEvent> OnDmTakeItemBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmTakeItemBeforeScript)]
-        public void HandleDmTakeItemBefore() => HandleEvent(OnDmTakeItemBeforeSubscriptions, (subscription) => subscription.OnDmTakeItemBefore());
-
-        [Inject]
-        public IList<IDmTakeItemAfterEvent> OnDmTakeItemAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmTakeItemAfterScript)]
-        public void HandleDmTakeItemAfter() => HandleEvent(OnDmTakeItemAfterSubscriptions, (subscription) => subscription.OnDmTakeItemAfter());
-
-        [Inject]
-        public IList<IDmSetStatBeforeEvent> OnDmSetStatBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmSetStatBeforeScript)]
-        public void HandleDmSetStatBefore() => HandleEvent(OnDmSetStatBeforeSubscriptions, (subscription) => subscription.OnDmSetStatBefore());
-
-        [Inject]
-        public IList<IDmSetStatAfterEvent> OnDmSetStatAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmSetStatAfterScript)]
-        public void HandleDmSetStatAfter() => HandleEvent(OnDmSetStatAfterSubscriptions, (subscription) => subscription.OnDmSetStatAfter());
-
-        [Inject]
-        public IList<IDmGetVariableBeforeEvent> OnDmGetVariableBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmGetVariableBeforeScript)]
-        public void HandleDmGetVariableBefore() => HandleEvent(OnDmGetVariableBeforeSubscriptions, (subscription) => subscription.OnDmGetVariableBefore());
-
-        [Inject]
-        public IList<IDmGetVariableAfterEvent> OnDmGetVariableAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmGetVariableAfterScript)]
-        public void HandleDmGetVariableAfter() => HandleEvent(OnDmGetVariableAfterSubscriptions, (subscription) => subscription.OnDmGetVariableAfter());
-
-        [Inject]
-        public IList<IDmSetVariableBeforeEvent> OnDmSetVariableBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmSetVariableBeforeScript)]
-        public void HandleDmSetVariableBefore() => HandleEvent(OnDmSetVariableBeforeSubscriptions, (subscription) => subscription.OnDmSetVariableBefore());
-
-        [Inject]
-        public IList<IDmSetVariableAfterEvent> OnDmSetVariableAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmSetVariableAfterScript)]
-        public void HandleDmSetVariableAfter() => HandleEvent(OnDmSetVariableAfterSubscriptions, (subscription) => subscription.OnDmSetVariableAfter());
-
-        [Inject]
-        public IList<IDmSetTimeBeforeEvent> OnDmSetTimeBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmSetTimeBeforeScript)]
-        public void HandleDmSetTimeBefore() => HandleEvent(OnDmSetTimeBeforeSubscriptions, (subscription) => subscription.OnDmSetTimeBefore());
-
-        [Inject]
-        public IList<IDmSetTimeAfterEvent> OnDmSetTimeAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmSetTimeAfterScript)]
-        public void HandleDmSetTimeAfter() => HandleEvent(OnDmSetTimeAfterSubscriptions, (subscription) => subscription.OnDmSetTimeAfter());
-
-        [Inject]
-        public IList<IDmSetDateBeforeEvent> OnDmSetDateBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmSetDateBeforeScript)]
-        public void HandleDmSetDateBefore() => HandleEvent(OnDmSetDateBeforeSubscriptions, (subscription) => subscription.OnDmSetDateBefore());
-
-        [Inject]
-        public IList<IDmSetDateAfterEvent> OnDmSetDateAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmSetDateAfterScript)]
-        public void HandleDmSetDateAfter() => HandleEvent(OnDmSetDateAfterSubscriptions, (subscription) => subscription.OnDmSetDateAfter());
-
-        [Inject]
-        public IList<IDmSetFactionReputationBeforeEvent> OnDmSetFactionReputationBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmSetFactionReputationBeforeScript)]
-        public void HandleDmSetFactionReputationBefore() => HandleEvent(OnDmSetFactionReputationBeforeSubscriptions, (subscription) => subscription.OnDmSetFactionReputationBefore());
-
-        [Inject]
-        public IList<IDmSetFactionReputationAfterEvent> OnDmSetFactionReputationAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmSetFactionReputationAfterScript)]
-        public void HandleDmSetFactionReputationAfter() => HandleEvent(OnDmSetFactionReputationAfterSubscriptions, (subscription) => subscription.OnDmSetFactionReputationAfter());
-
-        [Inject]
-        public IList<IDmGetFactionReputationBeforeEvent> OnDmGetFactionReputationBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmGetFactionReputationBeforeScript)]
-        public void HandleDmGetFactionReputationBefore() => HandleEvent(OnDmGetFactionReputationBeforeSubscriptions, (subscription) => subscription.OnDmGetFactionReputationBefore());
-
-        [Inject]
-        public IList<IDmGetFactionReputationAfterEvent> OnDmGetFactionReputationAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDmGetFactionReputationAfterScript)]
-        public void HandleDmGetFactionReputationAfter() => HandleEvent(OnDmGetFactionReputationAfterSubscriptions, (subscription) => subscription.OnDmGetFactionReputationAfter());
-
-        [Inject]
-        public IList<IClientDisconnectBeforeEvent> OnClientDisconnectBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnClientDisconnectBeforeScript)]
-        public void HandleClientDisconnectBefore() => HandleEvent(OnClientDisconnectBeforeSubscriptions, (subscription) => subscription.OnClientDisconnectBefore());
-
-        [Inject]
-        public IList<IClientDisconnectAfterEvent> OnClientDisconnectAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnClientDisconnectAfterScript)]
-        public void HandleClientDisconnectAfter() => HandleEvent(OnClientDisconnectAfterSubscriptions, (subscription) => subscription.OnClientDisconnectAfter());
-
-        [Inject]
-        public IList<IClientConnectBeforeEvent> OnClientConnectBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnClientConnectBeforeScript)]
-        public void HandleClientConnectBefore() => HandleEvent(OnClientConnectBeforeSubscriptions, (subscription) => subscription.OnClientConnectBefore());
-
-        [Inject]
-        public IList<IClientConnectAfterEvent> OnClientConnectAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnClientConnectAfterScript)]
-        public void HandleClientConnectAfter() => HandleEvent(OnClientConnectAfterSubscriptions, (subscription) => subscription.OnClientConnectAfter());
-
-        [Inject]
-        public IList<IStartCombatRoundBeforeEvent> OnStartCombatRoundBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnStartCombatRoundBeforeScript)]
-        public void HandleStartCombatRoundBefore() => HandleEvent(OnStartCombatRoundBeforeSubscriptions, (subscription) => subscription.OnStartCombatRoundBefore());
-
-        [Inject]
-        public IList<IStartCombatRoundAfterEvent> OnStartCombatRoundAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnStartCombatRoundAfterScript)]
-        public void HandleStartCombatRoundAfter() => HandleEvent(OnStartCombatRoundAfterSubscriptions, (subscription) => subscription.OnStartCombatRoundAfter());
-        [Inject]
-        public IList<ICastSpellBeforeEvent> OnCastSpellBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnCastSpellBeforeScript)]
-        public void HandleCastSpellBefore() => HandleEvent(OnCastSpellBeforeSubscriptions, (subscription) => subscription.OnCastSpellBefore());
-
-        [Inject]
-        public IList<ICastSpellAfterEvent> OnCastSpellAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnCastSpellAfterScript)]
-        public void HandleCastSpellAfter() => HandleEvent(OnCastSpellAfterSubscriptions, (subscription) => subscription.OnCastSpellAfter());
-
-        [Inject]
-        public IList<ISetMemorizedSpellSlotBeforeEvent> OnSetMemorizedSpellSlotBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXSetMemorizedSpellSlotBeforeScript)]
-        public void HandleSetMemorizedSpellSlotBefore() => HandleEvent(OnSetMemorizedSpellSlotBeforeSubscriptions, (subscription) => subscription.OnSetMemorizedSpellSlotBefore());
-
-        [Inject]
-        public IList<ISetMemorizedSpellSlotAfterEvent> OnSetMemorizedSpellSlotAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXSetMemorizedSpellSlotAfterScript)]
-        public void HandleSetMemorizedSpellSlotAfter() => HandleEvent(OnSetMemorizedSpellSlotAfterSubscriptions, (subscription) => subscription.OnSetMemorizedSpellSlotAfter());
-
-        [Inject]
-        public IList<IClearMemorizedSpellSlotBeforeEvent> OnClearMemorizedSpellSlotBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXClearMemorizedSpellSlotBeforeScript)]
-        public void HandleClearMemorizedSpellSlotBefore() => HandleEvent(OnClearMemorizedSpellSlotBeforeSubscriptions, (subscription) => subscription.OnClearMemorizedSpellSlotBefore());
-
-        [Inject]
-        public IList<IClearMemorizedSpellSlotAfterEvent> OnClearMemorizedSpellSlotAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXClearMemorizedSpellSlotAfterScript)]
-        public void HandleClearMemorizedSpellSlotAfter() => HandleEvent(OnClearMemorizedSpellSlotAfterSubscriptions, (subscription) => subscription.OnClearMemorizedSpellSlotAfter());
-
-        [Inject]
-        public IList<IHealerKitBeforeEvent> OnHealerKitBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnHealerKitBeforeScript)]
-        public void HandleHealerKitBefore() => HandleEvent(OnHealerKitBeforeSubscriptions, (subscription) => subscription.OnHealerKitBefore());
-
-        [Inject]
-        public IList<IHealerKitAfterEvent> OnHealerKitAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnHealerKitAfterScript)]
-        public void HandleHealerKitAfter() => HandleEvent(OnHealerKitAfterSubscriptions, (subscription) => subscription.OnHealerKitAfter());
-
-        [Inject]
-        public IList<IHealBeforeEvent> OnHealBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnHealBeforeScript)]
-        public void HandleHealBefore() => HandleEvent(OnHealBeforeSubscriptions, (subscription) => subscription.OnHealBefore());
-
-        [Inject]
-        public IList<IHealAfterEvent> OnHealAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnHealAfterScript)]
-        public void HandleHealAfter() => HandleEvent(OnHealAfterSubscriptions, (subscription) => subscription.OnHealAfter());
-        [Inject]
-        public IList<IPartyLeaveBeforeEvent> OnPartyLeaveBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnPartyLeaveBeforeScript)]
-        public void HandleOnPartyLeaveBefore() => HandleEvent(OnPartyLeaveBeforeSubscriptions, (subscription) => subscription.OnPartyLeaveBefore());
-
-        [Inject]
-        public IList<IPartyLeaveAfterEvent> OnPartyLeaveAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnPartyLeaveAfterScript)]
-        public void HandleOnPartyLeaveAfter() => HandleEvent(OnPartyLeaveAfterSubscriptions, (subscription) => subscription.OnPartyLeaveAfter());
-
-        [Inject]
-        public IList<IPartyKickBeforeEvent> OnPartyKickBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnPartyKickBeforeScript)]
-        public void HandleOnPartyKickBefore() => HandleEvent(OnPartyKickBeforeSubscriptions, (subscription) => subscription.OnPartyKickBefore());
-
-        [Inject]
-        public IList<IPartyKickAfterEvent> OnPartyKickAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnPartyKickAfterScript)]
-        public void HandleOnPartyKickAfter() => HandleEvent(OnPartyKickAfterSubscriptions, (subscription) => subscription.OnPartyKickAfter());
-
-        [Inject]
-        public IList<IPartyTransferLeadershipBeforeEvent> OnPartyTransferLeadershipBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnPartyTransferLeadershipBeforeScript)]
-        public void HandleOnPartyTransferLeadershipBefore() => HandleEvent(OnPartyTransferLeadershipBeforeSubscriptions, (subscription) => subscription.OnPartyTransferLeadershipBefore());
-
-        [Inject]
-        public IList<IPartyTransferLeadershipAfterEvent> OnPartyTransferLeadershipAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnPartyTransferLeadershipAfterScript)]
-        public void HandleOnPartyTransferLeadershipAfter() => HandleEvent(OnPartyTransferLeadershipAfterSubscriptions, (subscription) => subscription.OnPartyTransferLeadershipAfter());
-
-        [Inject]
-        public IList<IPartyInviteBeforeEvent> OnPartyInviteBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnPartyInviteBeforeScript)]
-        public void HandleOnPartyInviteBefore() => HandleEvent(OnPartyInviteBeforeSubscriptions, (subscription) => subscription.OnPartyInviteBefore());
-
-        [Inject]
-        public IList<IPartyInviteAfterEvent> OnPartyInviteAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnPartyInviteAfterScript)]
-        public void HandleOnPartyInviteAfter() => HandleEvent(OnPartyInviteAfterSubscriptions, (subscription) => subscription.OnPartyInviteAfter());
-
-        [Inject]
-        public IList<IPartyIgnoreInvitationBeforeEvent> OnPartyIgnoreInvitationBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnPartyIgnoreInvitationBeforeScript)]
-        public void HandleOnPartyIgnoreInvitationBefore() => HandleEvent(OnPartyIgnoreInvitationBeforeSubscriptions, (subscription) => subscription.OnPartyIgnoreInvitationBefore());
-
-        [Inject]
-        public IList<IPartyIgnoreInvitationAfterEvent> OnPartyIgnoreInvitationAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnPartyIgnoreInvitationAfterScript)]
-        public void HandleOnPartyIgnoreInvitationAfter() => HandleEvent(OnPartyIgnoreInvitationAfterSubscriptions, (subscription) => subscription.OnPartyIgnoreInvitationAfter());
-
-        [Inject]
-        public IList<IPartyAcceptInvitationBeforeEvent> OnPartyAcceptInvitationBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnPartyAcceptInvitationBeforeScript)]
-        public void HandleOnPartyAcceptInvitationBefore() => HandleEvent(OnPartyAcceptInvitationBeforeSubscriptions, (subscription) => subscription.OnPartyAcceptInvitationBefore());
-
-        [Inject]
-        public IList<IPartyAcceptInvitationAfterEvent> OnPartyAcceptInvitationAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnPartyAcceptInvitationAfterScript)]
-        public void HandleOnPartyAcceptInvitationAfter() => HandleEvent(OnPartyAcceptInvitationAfterSubscriptions, (subscription) => subscription.OnPartyAcceptInvitationAfter());
-
-        [Inject]
-        public IList<IPartyRejectInvitationBeforeEvent> OnPartyRejectInvitationBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnPartyRejectInvitationBeforeScript)]
-        public void HandleOnPartyRejectInvitationBefore() => HandleEvent(OnPartyRejectInvitationBeforeSubscriptions, (subscription) => subscription.OnPartyRejectInvitationBefore());
-
-        [Inject]
-        public IList<IPartyRejectInvitationAfterEvent> OnPartyRejectInvitationAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnPartyRejectInvitationAfterScript)]
-        public void HandleOnPartyRejectInvitationAfter() => HandleEvent(OnPartyRejectInvitationAfterSubscriptions, (subscription) => subscription.OnPartyRejectInvitationAfter());
-
-        [Inject]
-        public IList<IPartyKickHenchmanBeforeEvent> OnPartyKickHenchmanBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnPartyKickHenchmanBeforeScript)]
-        public void HandleOnPartyKickHenchmanBefore() => HandleEvent(OnPartyKickHenchmanBeforeSubscriptions, (subscription) => subscription.OnPartyKickHenchmanBefore());
-
-        [Inject]
-        public IList<IPartyKickHenchmanAfterEvent> OnPartyKickHenchmanAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnPartyKickHenchmanAfterScript)]
-        public void HandleOnPartyKickHenchmanAfter() => HandleEvent(OnPartyKickHenchmanAfterSubscriptions, (subscription) => subscription.OnPartyKickHenchmanAfter());
-        [Inject]
-        public IList<ICombatModeOnEvent> CombatModeOnSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnCombatModeOnScript)]
-        public void HandleCombatModeOn() => HandleEvent(CombatModeOnSubscriptions, (subscription) => subscription.OnCombatModeOn());
-
-        [Inject]
-        public IList<ICombatModeOffEvent> CombatModeOffSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnCombatModeOffScript)]
-        public void HandleCombatModeOff() => HandleEvent(CombatModeOffSubscriptions, (subscription) => subscription.OnCombatModeOff());
-
-        [Inject]
-        public IList<IUseSkillBeforeEvent> UseSkillBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnUseSkillBeforeScript)]
-        public void HandleUseSkillBefore() => HandleEvent(UseSkillBeforeSubscriptions, (subscription) => subscription.OnUseSkillBefore());
-
-        [Inject]
-        public IList<IUseSkillAfterEvent> UseSkillAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnUseSkillAfterScript)]
-        public void HandleUseSkillAfter() => HandleEvent(UseSkillAfterSubscriptions, (subscription) => subscription.OnUseSkillAfter());
-
-        [Inject]
-        public IList<IMapPinAddPinBeforeEvent> MapPinAddPinBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnMapPinAddPinBeforeScript)]
-        public void HandleMapPinAddPinBefore() => HandleEvent(MapPinAddPinBeforeSubscriptions, (subscription) => subscription.OnMapPinAddPinBefore());
-
-        [Inject]
-        public IList<IMapPinAddPinAfterEvent> MapPinAddPinAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnMapPinAddPinAfterScript)]
-        public void HandleMapPinAddPinAfter() => HandleEvent(MapPinAddPinAfterSubscriptions, (subscription) => subscription.OnMapPinAddPinAfter());
-
-        [Inject]
-        public IList<IMapPinChangePinBeforeEvent> MapPinChangePinBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnMapPinChangePinBeforeScript)]
-        public void HandleMapPinChangePinBefore() => HandleEvent(MapPinChangePinBeforeSubscriptions, (subscription) => subscription.OnMapPinChangePinBefore());
-
-        [Inject]
-        public IList<IMapPinChangePinAfterEvent> MapPinChangePinAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnMapPinChangePinAfterScript)]
-        public void HandleMapPinChangePinAfter() => HandleEvent(MapPinChangePinAfterSubscriptions, (subscription) => subscription.OnMapPinChangePinAfter());
-
-        [Inject]
-        public IList<IMapPinDestroyPinBeforeEvent> MapPinDestroyPinBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnMapPinDestroyPinBeforeScript)]
-        public void HandleMapPinDestroyPinBefore() => HandleEvent(MapPinDestroyPinBeforeSubscriptions, (subscription) => subscription.OnMapPinDestroyPinBefore());
-
-        [Inject]
-        public IList<IMapPinDestroyPinAfterEvent> MapPinDestroyPinAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnMapPinDestroyPinAfterScript)]
-        public void HandleMapPinDestroyPinAfter() => HandleEvent(MapPinDestroyPinAfterSubscriptions, (subscription) => subscription.OnMapPinDestroyPinAfter());
-
-        [Inject]
-        public IList<IDoListenDetectionBeforeEvent> DoListenDetectionBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDoListenDetectionBeforeScript)]
-        public void HandleDoListenDetectionBefore() => HandleEvent(DoListenDetectionBeforeSubscriptions, (subscription) => subscription.OnDoListenDetectionBefore());
-
-        [Inject]
-        public IList<IDoListenDetectionAfterEvent> DoListenDetectionAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDoListenDetectionAfterScript)]
-        public void HandleDoListenDetectionAfter() => HandleEvent(DoListenDetectionAfterSubscriptions, (subscription) => subscription.OnDoListenDetectionAfter());
-
-        [Inject]
-        public IList<IDoSpotDetectionBeforeEvent> DoSpotDetectionBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDoSpotDetectionBeforeScript)]
-        public void HandleDoSpotDetectionBefore() => HandleEvent(DoSpotDetectionBeforeSubscriptions, (subscription) => subscription.OnDoSpotDetectionBefore());
-
-        [Inject]
-        public IList<IDoSpotDetectionAfterEvent> DoSpotDetectionAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDoSpotDetectionAfterScript)]
-        public void HandleDoSpotDetectionAfter() => HandleEvent(DoSpotDetectionAfterSubscriptions, (subscription) => subscription.OnDoSpotDetectionAfter());
-        [Inject]
-        public IList<IPolymorphBeforeEvent> PolymorphBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnPolymorphBeforeScript)]
-        public void HandlePolymorphBefore() => HandleEvent(PolymorphBeforeSubscriptions, (subscription) => subscription.OnPolymorphBefore());
-
-        [Inject]
-        public IList<IPolymorphAfterEvent> PolymorphAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnPolymorphAfterScript)]
-        public void HandlePolymorphAfter() => HandleEvent(PolymorphAfterSubscriptions, (subscription) => subscription.OnPolymorphAfter());
-
-        [Inject]
-        public IList<IUnpolymorphBeforeEvent> UnpolymorphBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnUnpolymorphBeforeScript)]
-        public void HandleUnpolymorphBefore() => HandleEvent(UnpolymorphBeforeSubscriptions, (subscription) => subscription.OnUnpolymorphBefore());
-
-        [Inject]
-        public IList<IUnpolymorphAfterEvent> UnpolymorphAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnUnpolymorphAfterScript)]
-        public void HandleUnpolymorphAfter() => HandleEvent(UnpolymorphAfterSubscriptions, (subscription) => subscription.OnUnpolymorphAfter());
-
-        [Inject]
-        public IList<IEffectAppliedBeforeEvent> EffectAppliedBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnEffectAppliedBeforeScript)]
-        public void HandleEffectAppliedBefore() => HandleEvent(EffectAppliedBeforeSubscriptions, (subscription) => subscription.OnEffectAppliedBefore());
-
-        [Inject]
-        public IList<IEffectAppliedAfterEvent> EffectAppliedAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnEffectAppliedAfterScript)]
-        public void HandleEffectAppliedAfter() => HandleEvent(EffectAppliedAfterSubscriptions, (subscription) => subscription.OnEffectAppliedAfter());
-
-        [Inject]
-        public IList<IEffectRemovedBeforeEvent> EffectRemovedBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnEffectRemovedBeforeScript)]
-        public void HandleEffectRemovedBefore() => HandleEvent(EffectRemovedBeforeSubscriptions, (subscription) => subscription.OnEffectRemovedBefore());
-
-        [Inject]
-        public IList<IEffectRemovedAfterEvent> EffectRemovedAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnEffectRemovedAfterScript)]
-        public void HandleEffectRemovedAfter() => HandleEvent(EffectRemovedAfterSubscriptions, (subscription) => subscription.OnEffectRemovedAfter());
-
-        [Inject]
-        public IList<IQuickchatBeforeEvent> QuickchatBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnQuickchatBeforeScript)]
-        public void HandleQuickchatBefore() => HandleEvent(QuickchatBeforeSubscriptions, (subscription) => subscription.OnQuickchatBefore());
-
-        [Inject]
-        public IList<IQuickchatAfterEvent> QuickchatAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnQuickchatAfterScript)]
-        public void HandleQuickchatAfter() => HandleEvent(QuickchatAfterSubscriptions, (subscription) => subscription.OnQuickchatAfter());
-
-        [Inject]
-        public IList<IInventoryOpenBeforeEvent> InventoryOpenBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnInventoryOpenBeforeScript)]
-        public void HandleInventoryOpenBefore() => HandleEvent(InventoryOpenBeforeSubscriptions, (subscription) => subscription.OnInventoryOpenBefore());
-
-        [Inject]
-        public IList<IInventoryOpenAfterEvent> InventoryOpenAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnInventoryOpenAfterScript)]
-        public void HandleInventoryOpenAfter() => HandleEvent(InventoryOpenAfterSubscriptions, (subscription) => subscription.OnInventoryOpenAfter());
-
-        [Inject]
-        public IList<IInventorySelectPanelBeforeEvent> InventorySelectPanelBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnInventorySelectPanelBeforeScript)]
-        public void HandleInventorySelectPanelBefore() => HandleEvent(InventorySelectPanelBeforeSubscriptions, (subscription) => subscription.OnInventorySelectPanelBefore());
-
-        [Inject]
-        public IList<IInventorySelectPanelAfterEvent> InventorySelectPanelAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnInventorySelectPanelAfterScript)]
-        public void HandleInventorySelectPanelAfter() => HandleEvent(InventorySelectPanelAfterSubscriptions, (subscription) => subscription.OnInventorySelectPanelAfter());
-
-        [Inject]
-        public IList<IBarterStartBeforeEvent> BarterStartBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnBarterStartBeforeScript)]
-        public void HandleBarterStartBefore() => HandleEvent(BarterStartBeforeSubscriptions, (subscription) => subscription.OnBarterStartBefore());
-
-        [Inject]
-        public IList<IBarterStartAfterEvent> BarterStartAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnBarterStartAfterScript)]
-        public void HandleBarterStartAfter() => HandleEvent(BarterStartAfterSubscriptions, (subscription) => subscription.OnBarterStartAfter());
-
-        [Inject]
-        public IList<IBarterEndBeforeEvent> BarterEndBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnBarterEndBeforeScript)]
-        public void HandleBarterEndBefore() => HandleEvent(BarterEndBeforeSubscriptions, (subscription) => subscription.OnBarterEndBefore());
-
-        [Inject]
-        public IList<IBarterEndAfterEvent> BarterEndAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnBarterEndAfterScript)]
-        public void HandleBarterEndAfter() => HandleEvent(BarterEndAfterSubscriptions, (subscription) => subscription.OnBarterEndAfter());
-        [Inject]
-        public IList<ITrapDisarmBeforeEvent> TrapDisarmBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnTrapDisarmBeforeScript)]
-        public void HandleTrapDisarmBefore() => HandleEvent(TrapDisarmBeforeSubscriptions, (subscription) => subscription.OnTrapDisarmBefore());
-
-        [Inject]
-        public IList<ITrapDisarmAfterEvent> TrapDisarmAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnTrapDisarmAfterScript)]
-        public void HandleTrapDisarmAfter() => HandleEvent(TrapDisarmAfterSubscriptions, (subscription) => subscription.OnTrapDisarmAfter());
-
-        [Inject]
-        public IList<ITrapEnterBeforeEvent> TrapEnterBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnTrapEnterBeforeScript)]
-        public void HandleTrapEnterBefore() => HandleEvent(TrapEnterBeforeSubscriptions, (subscription) => subscription.OnTrapEnterBefore());
-
-        [Inject]
-        public IList<ITrapEnterAfterEvent> TrapEnterAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnTrapEnterAfterScript)]
-        public void HandleTrapEnterAfter() => HandleEvent(TrapEnterAfterSubscriptions, (subscription) => subscription.OnTrapEnterAfter());
-
-        [Inject]
-        public IList<ITrapExamineBeforeEvent> TrapExamineBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnTrapExamineBeforeScript)]
-        public void HandleTrapExamineBefore() => HandleEvent(TrapExamineBeforeSubscriptions, (subscription) => subscription.OnTrapExamineBefore());
-
-        [Inject]
-        public IList<ITrapExamineAfterEvent> TrapExamineAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnTrapExamineAfterScript)]
-        public void HandleTrapExamineAfter() => HandleEvent(TrapExamineAfterSubscriptions, (subscription) => subscription.OnTrapExamineAfter());
-
-        [Inject]
-        public IList<ITrapFlagBeforeEvent> TrapFlagBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnTrapFlagBeforeScript)]
-        public void HandleTrapFlagBefore() => HandleEvent(TrapFlagBeforeSubscriptions, (subscription) => subscription.OnTrapFlagBefore());
-
-        [Inject]
-        public IList<ITrapFlagAfterEvent> TrapFlagAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnTrapFlagAfterScript)]
-        public void HandleTrapFlagAfter() => HandleEvent(TrapFlagAfterSubscriptions, (subscription) => subscription.OnTrapFlagAfter());
-
-        [Inject]
-        public IList<ITrapRecoverBeforeEvent> TrapRecoverBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnTrapRecoverBeforeScript)]
-        public void HandleTrapRecoverBefore() => HandleEvent(TrapRecoverBeforeSubscriptions, (subscription) => subscription.OnTrapRecoverBefore());
-
-        [Inject]
-        public IList<ITrapRecoverAfterEvent> TrapRecoverAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnTrapRecoverAfterScript)]
-        public void HandleTrapRecoverAfter() => HandleEvent(TrapRecoverAfterSubscriptions, (subscription) => subscription.OnTrapRecoverAfter());
-
-        [Inject]
-        public IList<ITrapSetBeforeEvent> TrapSetBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnTrapSetBeforeScript)]
-        public void HandleTrapSetBefore() => HandleEvent(TrapSetBeforeSubscriptions, (subscription) => subscription.OnTrapSetBefore());
-
-        [Inject]
-        public IList<ITrapSetAfterEvent> TrapSetAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnTrapSetAfterScript)]
-        public void HandleTrapSetAfter() => HandleEvent(TrapSetAfterSubscriptions, (subscription) => subscription.OnTrapSetAfter());
-
-        [Inject]
-        public IList<ITimingBarStartBeforeEvent> TimingBarStartBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnTimingBarStartBeforeScript)]
-        public void HandleTimingBarStartBefore() => HandleEvent(TimingBarStartBeforeSubscriptions, (subscription) => subscription.OnTimingBarStartBefore());
-
-        [Inject]
-        public IList<ITimingBarStartAfterEvent> TimingBarStartAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnTimingBarStartAfterScript)]
-        public void HandleTimingBarStartAfter() => HandleEvent(TimingBarStartAfterSubscriptions, (subscription) => subscription.OnTimingBarStartAfter());
-
-        [Inject]
-        public IList<ITimingBarStopBeforeEvent> TimingBarStopBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnTimingBarStopBeforeScript)]
-        public void HandleTimingBarStopBefore() => HandleEvent(TimingBarStopBeforeSubscriptions, (subscription) => subscription.OnTimingBarStopBefore());
-
-        [Inject]
-        public IList<ITimingBarStopAfterEvent> TimingBarStopAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnTimingBarStopAfterScript)]
-        public void HandleTimingBarStopAfter() => HandleEvent(TimingBarStopAfterSubscriptions, (subscription) => subscription.OnTimingBarStopAfter());
-
-        [Inject]
-        public IList<ITimingBarCancelBeforeEvent> TimingBarCancelBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnTimingBarCancelBeforeScript)]
-        public void HandleTimingBarCancelBefore() => HandleEvent(TimingBarCancelBeforeSubscriptions, (subscription) => subscription.OnTimingBarCancelBefore());
-
-        [Inject]
-        public IList<ITimingBarCancelAfterEvent> TimingBarCancelAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnTimingBarCancelAfterScript)]
-        public void HandleTimingBarCancelAfter() => HandleEvent(TimingBarCancelAfterSubscriptions, (subscription) => subscription.OnTimingBarCancelAfter());
-        [Inject]
-        public IList<IWebhookSuccessEvent> WebhookSuccessSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnWebhookSuccessScript)]
-        public void HandleWebhookSuccess() => HandleEvent(WebhookSuccessSubscriptions, (subscription) => subscription.OnWebhookSuccess());
-
-        [Inject]
-        public IList<IWebhookFailureEvent> WebhookFailureSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnWebhookFailureScript)]
-        public void HandleWebhookFailure() => HandleEvent(WebhookFailureSubscriptions, (subscription) => subscription.OnWebhookFailure());
-
-        [Inject]
-        public IList<ICheckStickyPlayerNameReservedBeforeEvent> CheckStickyPlayerNameReservedBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnCheckStickyPlayerNameReservedBeforeScript)]
-        public void HandleCheckStickyPlayerNameReservedBefore() => HandleEvent(CheckStickyPlayerNameReservedBeforeSubscriptions, (subscription) => subscription.OnCheckStickyPlayerNameReservedBefore());
-
-        [Inject]
-        public IList<ICheckStickyPlayerNameReservedAfterEvent> CheckStickyPlayerNameReservedAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnCheckStickyPlayerNameReservedAfterScript)]
-        public void HandleCheckStickyPlayerNameReservedAfter() => HandleEvent(CheckStickyPlayerNameReservedAfterSubscriptions, (subscription) => subscription.OnCheckStickyPlayerNameReservedAfter());
-
-        [Inject]
-        public IList<ILevelUpBeforeEvent> LevelUpBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnLevelUpBeforeScript)]
-        public void HandleLevelUpBefore() => HandleEvent(LevelUpBeforeSubscriptions, (subscription) => subscription.OnLevelUpBefore());
-
-        [Inject]
-        public IList<ILevelUpAfterEvent> LevelUpAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnLevelUpAfterScript)]
-        public void HandleLevelUpAfter() => HandleEvent(LevelUpAfterSubscriptions, (subscription) => subscription.OnLevelUpAfter());
-
-        [Inject]
-        public IList<ILevelUpAutomaticBeforeEvent> LevelUpAutomaticBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnLevelUpAutomaticBeforeScript)]
-        public void HandleLevelUpAutomaticBefore() => HandleEvent(LevelUpAutomaticBeforeSubscriptions, (subscription) => subscription.OnLevelUpAutomaticBefore());
-
-        [Inject]
-        public IList<ILevelUpAutomaticAfterEvent> LevelUpAutomaticAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnLevelUpAutomaticAfterScript)]
-        public void HandleLevelUpAutomaticAfter() => HandleEvent(LevelUpAutomaticAfterSubscriptions, (subscription) => subscription.OnLevelUpAutomaticAfter());
-
-        [Inject]
-        public IList<ILevelDownBeforeEvent> LevelDownBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnLevelDownBeforeScript)]
-        public void HandleLevelDownBefore() => HandleEvent(LevelDownBeforeSubscriptions, (subscription) => subscription.OnLevelDownBefore());
-
-        [Inject]
-        public IList<ILevelDownAfterEvent> LevelDownAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnLevelDownAfterScript)]
-        public void HandleLevelDownAfter() => HandleEvent(LevelDownAfterSubscriptions, (subscription) => subscription.OnLevelDownAfter());
-
-        [Inject]
-        public IList<IInventoryAddItemBeforeEvent> InventoryAddItemBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnInventoryAddItemBeforeScript)]
-        public void HandleInventoryAddItemBefore() => HandleEvent(InventoryAddItemBeforeSubscriptions, (subscription) => subscription.OnInventoryAddItemBefore());
-
-        [Inject]
-        public IList<IInventoryAddItemAfterEvent> InventoryAddItemAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnInventoryAddItemAfterScript)]
-        public void HandleInventoryAddItemAfter() => HandleEvent(InventoryAddItemAfterSubscriptions, (subscription) => subscription.OnInventoryAddItemAfter());
-
-        [Inject]
-        public IList<IInventoryRemoveItemBeforeEvent> InventoryRemoveItemBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnInventoryRemoveItemBeforeScript)]
-        public void HandleInventoryRemoveItemBefore() => HandleEvent(InventoryRemoveItemBeforeSubscriptions, (subscription) => subscription.OnInventoryRemoveItemBefore());
-
-        [Inject]
-        public IList<IInventoryRemoveItemAfterEvent> InventoryRemoveItemAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnInventoryRemoveItemAfterScript)]
-        public void HandleInventoryRemoveItemAfter() => HandleEvent(InventoryRemoveItemAfterSubscriptions, (subscription) => subscription.OnInventoryRemoveItemAfter());
-        [Inject]
-        public IList<IInventoryAddGoldBeforeEvent> InventoryAddGoldBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnInventoryAddGoldBeforeScript)]
-        public void HandleInventoryAddGoldBefore() => HandleEvent(InventoryAddGoldBeforeSubscriptions, (subscription) => subscription.OnInventoryAddGoldBefore());
-
-        [Inject]
-        public IList<IInventoryAddGoldAfterEvent> InventoryAddGoldAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnInventoryAddGoldAfterScript)]
-        public void HandleInventoryAddGoldAfter() => HandleEvent(InventoryAddGoldAfterSubscriptions, (subscription) => subscription.OnInventoryAddGoldAfter());
-
-        [Inject]
-        public IList<IInventoryRemoveGoldBeforeEvent> InventoryRemoveGoldBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnInventoryRemoveGoldBeforeScript)]
-        public void HandleInventoryRemoveGoldBefore() => HandleEvent(InventoryRemoveGoldBeforeSubscriptions, (subscription) => subscription.OnInventoryRemoveGoldBefore());
-
-        [Inject]
-        public IList<IInventoryRemoveGoldAfterEvent> InventoryRemoveGoldAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnInventoryRemoveGoldAfterScript)]
-        public void HandleInventoryRemoveGoldAfter() => HandleEvent(InventoryRemoveGoldAfterSubscriptions, (subscription) => subscription.OnInventoryRemoveGoldAfter());
-
-        [Inject]
-        public IList<IPvpAttitudeChangeBeforeEvent> PvpAttitudeChangeBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnPvpAttitudeChangeBeforeScript)]
-        public void HandlePvpAttitudeChangeBefore() => HandleEvent(PvpAttitudeChangeBeforeSubscriptions, (subscription) => subscription.OnPvpAttitudeChangeBefore());
-
-        [Inject]
-        public IList<IPvpAttitudeChangeAfterEvent> PvpAttitudeChangeAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnPvpAttitudeChangeAfterScript)]
-        public void HandlePvpAttitudeChangeAfter() => HandleEvent(PvpAttitudeChangeAfterSubscriptions, (subscription) => subscription.OnPvpAttitudeChangeAfter());
-
-        [Inject]
-        public IList<IInputWalkToWaypointBeforeEvent> InputWalkToWaypointBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnInputWalkToWaypointBeforeScript)]
-        public void HandleInputWalkToWaypointBefore() => HandleEvent(InputWalkToWaypointBeforeSubscriptions, (subscription) => subscription.OnInputWalkToWaypointBefore());
-
-        [Inject]
-        public IList<IInputWalkToWaypointAfterEvent> InputWalkToWaypointAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnInputWalkToWaypointAfterScript)]
-        public void HandleInputWalkToWaypointAfter() => HandleEvent(InputWalkToWaypointAfterSubscriptions, (subscription) => subscription.OnInputWalkToWaypointAfter());
-
-        [Inject]
-        public IList<IMaterialChangeBeforeEvent> MaterialChangeBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnMaterialChangeBeforeScript)]
-        public void HandleMaterialChangeBefore() => HandleEvent(MaterialChangeBeforeSubscriptions, (subscription) => subscription.OnMaterialChangeBefore());
-
-        [Inject]
-        public IList<IMaterialChangeAfterEvent> MaterialChangeAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnMaterialChangeAfterScript)]
-        public void HandleMaterialChangeAfter() => HandleEvent(MaterialChangeAfterSubscriptions, (subscription) => subscription.OnMaterialChangeAfter());
-
-        [Inject]
-        public IList<IInputAttackObjectBeforeEvent> InputAttackObjectBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnInputAttackObjectBeforeScript)]
-        public void HandleInputAttackObjectBefore() => HandleEvent(InputAttackObjectBeforeSubscriptions, (subscription) => subscription.OnInputAttackObjectBefore());
-
-        [Inject]
-        public IList<IInputAttackObjectAfterEvent> InputAttackObjectAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnInputAttackObjectAfterScript)]
-        public void HandleInputAttackObjectAfter() => HandleEvent(InputAttackObjectAfterSubscriptions, (subscription) => subscription.OnInputAttackObjectAfter());
-        [Inject]
-        public IList<IObjectLockBeforeEvent> ObjectLockBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnObjectLockBeforeScript)]
-        public void HandleObjectLockBefore() => HandleEvent(ObjectLockBeforeSubscriptions, (subscription) => subscription.OnObjectLockBefore());
-
-        [Inject]
-        public IList<IObjectLockAfterEvent> ObjectLockAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnObjectLockAfterScript)]
-        public void HandleObjectLockAfter() => HandleEvent(ObjectLockAfterSubscriptions, (subscription) => subscription.OnObjectLockAfter());
-
-        [Inject]
-        public IList<IObjectUnlockBeforeEvent> ObjectUnlockBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnObjectUnlockBeforeScript)]
-        public void HandleObjectUnlockBefore() => HandleEvent(ObjectUnlockBeforeSubscriptions, (subscription) => subscription.OnObjectUnlockBefore());
-
-        [Inject]
-        public IList<IObjectUnlockAfterEvent> ObjectUnlockAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnObjectUnlockAfterScript)]
-        public void HandleObjectUnlockAfter() => HandleEvent(ObjectUnlockAfterSubscriptions, (subscription) => subscription.OnObjectUnlockAfter());
-
-        [Inject]
-        public IList<IUuidCollisionBeforeEvent> UuidCollisionBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnUuidCollisionBeforeScript)]
-        public void HandleUuidCollisionBefore() => HandleEvent(UuidCollisionBeforeSubscriptions, (subscription) => subscription.OnUuidCollisionBefore());
-
-        [Inject]
-        public IList<IUuidCollisionAfterEvent> UuidCollisionAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnUuidCollisionAfterScript)]
-        public void HandleUuidCollisionAfter() => HandleEvent(UuidCollisionAfterSubscriptions, (subscription) => subscription.OnUuidCollisionAfter());
-        [Inject]
-        public IList<IElcValidateCharacterBeforeEvent> ElcValidateCharacterBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnElcValidateCharacterBeforeScript)]
-        public void HandleElcValidateCharacterBefore() => HandleEvent(ElcValidateCharacterBeforeSubscriptions, (subscription) => subscription.OnElcValidateCharacterBefore());
-
-
-        [Inject]
-        public IList<IElcValidateCharacterAfterEvent> ElcValidateCharacterAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnElcValidateCharacterAfterScript)]
-        public void HandleElcValidateCharacterAfter() => HandleEvent(ElcValidateCharacterAfterSubscriptions, (subscription) => subscription.OnElcValidateCharacterAfter());
-
-
-        [Inject]
-        public IList<IQuickbarSetButtonBeforeEvent> QuickbarSetButtonBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnQuickbarSetButtonBeforeScript)]
-        public void HandleQuickbarSetButtonBefore() => HandleEvent(QuickbarSetButtonBeforeSubscriptions, (subscription) => subscription.OnQuickbarSetButtonBefore());
-
-
-        [Inject]
-        public IList<IQuickbarSetButtonAfterEvent> QuickbarSetButtonAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnQuickbarSetButtonAfterScript)]
-        public void HandleQuickbarSetButtonAfter() => HandleEvent(QuickbarSetButtonAfterSubscriptions, (subscription) => subscription.OnQuickbarSetButtonAfter());
-
-
-        [Inject]
-        public IList<ICalendarHourEvent> CalendarHourSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnCalendarHourScript)]
-        public void HandleCalendarHour() => HandleEvent(CalendarHourSubscriptions, (subscription) => subscription.OnCalendarHour());
-
-
-        [Inject]
-        public IList<ICalendarDayEvent> CalendarDaySubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnCalendarDayScript)]
-        public void HandleCalendarDay() => HandleEvent(CalendarDaySubscriptions, (subscription) => subscription.OnCalendarDay());
-
-
-        [Inject]
-        public IList<ICalendarMonthEvent> CalendarMonthSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnCalendarMonthScript)]
-        public void HandleCalendarMonth() => HandleEvent(CalendarMonthSubscriptions, (subscription) => subscription.OnCalendarMonth());
-
-
-        [Inject]
-        public IList<ICalendarYearEvent> CalendarYearSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnCalendarYearScript)]
-        public void HandleCalendarYear() => HandleEvent(CalendarYearSubscriptions, (subscription) => subscription.OnCalendarYear());
-
-
-        [Inject]
-        public IList<ICalendarDawnEvent> CalendarDawnSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnCalendarDawnScript)]
-        public void HandleCalendarDawn() => HandleEvent(CalendarDawnSubscriptions, (subscription) => subscription.OnCalendarDawn());
-
-
-        [Inject]
-        public IList<ICalendarDuskEvent> CalendarDuskSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnCalendarDuskScript)]
-        public void HandleCalendarDusk() => HandleEvent(CalendarDuskSubscriptions, (subscription) => subscription.OnCalendarDusk());
-
-
-        [Inject]
-        public IList<IBroadcastCastSpellBeforeEvent> BroadcastCastSpellBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnBroadcastCastSpellBeforeScript)]
-        public void HandleBroadcastCastSpellBefore() => HandleEvent(BroadcastCastSpellBeforeSubscriptions, (subscription) => subscription.OnBroadcastCastSpellBefore());
-
-
-        [Inject]
-        public IList<IBroadcastCastSpellAfterEvent> BroadcastCastSpellAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnBroadcastCastSpellAfterScript)]
-        public void HandleBroadcastCastSpellAfter() => HandleEvent(BroadcastCastSpellAfterSubscriptions, (subscription) => subscription.OnBroadcastCastSpellAfter());
-
-
-        [Inject]
-        public IList<IDebugRunScriptBeforeEvent> DebugRunScriptBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDebugRunScriptBeforeScript)]
-        public void HandleDebugRunScriptBefore() => HandleEvent(DebugRunScriptBeforeSubscriptions, (subscription) => subscription.OnDebugRunScriptBefore());
-
-
-        [Inject]
-        public IList<IDebugRunScriptAfterEvent> DebugRunScriptAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDebugRunScriptAfterScript)]
-        public void HandleDebugRunScriptAfter() => HandleEvent(DebugRunScriptAfterSubscriptions, (subscription) => subscription.OnDebugRunScriptAfter());
-
-
-        [Inject]
-        public IList<IDebugRunScriptChunkBeforeEvent> DebugRunScriptChunkBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDebugRunScriptChunkBeforeScript)]
-        public void HandleDebugRunScriptChunkBefore() => HandleEvent(DebugRunScriptChunkBeforeSubscriptions, (subscription) => subscription.OnDebugRunScriptChunkBefore());
-
-
-        [Inject]
-        public IList<IDebugRunScriptChunkAfterEvent> DebugRunScriptChunkAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnDebugRunScriptChunkAfterScript)]
-        public void HandleDebugRunScriptChunkAfter() => HandleEvent(DebugRunScriptChunkAfterSubscriptions, (subscription) => subscription.OnDebugRunScriptChunkAfter());
-
-
-        [Inject]
-        public IList<IStoreRequestBuyBeforeEvent> StoreRequestBuyBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnStoreRequestBuyBeforeScript)]
-        public void HandleStoreRequestBuyBefore() => HandleEvent(StoreRequestBuyBeforeSubscriptions, (subscription) => subscription.OnStoreRequestBuyBefore());
-
-
-        [Inject]
-        public IList<IStoreRequestBuyAfterEvent> StoreRequestBuyAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnStoreRequestBuyAfterScript)]
-        public void HandleStoreRequestBuyAfter() => HandleEvent(StoreRequestBuyAfterSubscriptions, (subscription) => subscription.OnStoreRequestBuyAfter());
-
-
-        [Inject]
-        public IList<IStoreRequestSellBeforeEvent> StoreRequestSellBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnStoreRequestSellBeforeScript)]
-        public void HandleStoreRequestSellBefore() => HandleEvent(StoreRequestSellBeforeSubscriptions, (subscription) => subscription.OnStoreRequestSellBefore());
-
-
-        [Inject]
-        public IList<IStoreRequestSellAfterEvent> StoreRequestSellAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnStoreRequestSellAfterScript)]
-        public void HandleStoreRequestSellAfter() => HandleEvent(StoreRequestSellAfterSubscriptions, (subscription) => subscription.OnStoreRequestSellAfter());
-
-
-        [Inject]
-        public IList<IInputDropItemBeforeEvent> InputDropItemBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnInputDropItemBeforeScript)]
-        public void HandleInputDropItemBefore() => HandleEvent(InputDropItemBeforeSubscriptions, (subscription) => subscription.OnInputDropItemBefore());
-
-
-        [Inject]
-        public IList<IInputDropItemAfterEvent> InputDropItemAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnInputDropItemAfterScript)]
-        public void HandleInputDropItemAfter() => HandleEvent(InputDropItemAfterSubscriptions, (subscription) => subscription.OnInputDropItemAfter());
-
-
-        [Inject]
-        public IList<IBroadcastAttackOfOpportunityBeforeEvent> BroadcastAttackOfOpportunityBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnBroadcastAttackOfOpportunityBeforeScript)]
-        public void HandleBroadcastAttackOfOpportunityBefore() => HandleEvent(BroadcastAttackOfOpportunityBeforeSubscriptions, (subscription) => subscription.OnBroadcastAttackOfOpportunityBefore());
-
-
-        [Inject]
-        public IList<IBroadcastAttackOfOpportunityAfterEvent> BroadcastAttackOfOpportunityAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnBroadcastAttackOfOpportunityAfterScript)]
-        public void HandleBroadcastAttackOfOpportunityAfter() => HandleEvent(BroadcastAttackOfOpportunityAfterSubscriptions, (subscription) => subscription.OnBroadcastAttackOfOpportunityAfter());
-
-
-        [Inject]
-        public IList<ICombatAttackOfOpportunityBeforeEvent> CombatAttackOfOpportunityBeforeSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnCombatAttackOfOpportunityBeforeScript)]
-        public void HandleCombatAttackOfOpportunityBefore() => HandleEvent(CombatAttackOfOpportunityBeforeSubscriptions, (subscription) => subscription.OnCombatAttackOfOpportunityBefore());
-
-
-        [Inject]
-        public IList<ICombatAttackOfOpportunityAfterEvent> CombatAttackOfOpportunityAfterSubscriptions { get; set; }
-
-        [ScriptHandler(EventScript.NWNXOnCombatAttackOfOpportunityAfterScript)]
-        public void HandleCombatAttackOfOpportunityAfter() => HandleEvent(CombatAttackOfOpportunityAfterSubscriptions, (subscription) => subscription.OnCombatAttackOfOpportunityAfter());
 
     }
 }

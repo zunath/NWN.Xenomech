@@ -1,8 +1,6 @@
 ﻿using Anvil.Services;
 using NLog;
 using System.Collections.Generic;
-using Anvil.API;
-using Anvil.API.Events;
 using XM.Quest.Objective;
 using XM.API.NWNX.PlayerPlugin;
 using XM.Data;
@@ -16,6 +14,8 @@ using XM.Inventory;
 using CreatureType = XM.API.Constants.CreatureType;
 using InventoryDisturbType = XM.API.Constants.InventoryDisturbType;
 using System;
+using XM.Core.EventManagement;
+using XM.Core.EventManagement.ModuleEvent;
 using XM.Core.EventManagement.XMEvent;
 using XM.Core.Extension;
 using XM.Quest.Event;
@@ -23,11 +23,7 @@ using XM.Quest.Event;
 namespace XM.Quest
 {
     [ServiceBinding(typeof(QuestService))]
-    [ServiceBinding(typeof(ICacheDataBeforeEvent))]
-    [ServiceBinding(typeof(ICreatureOnDeathBeforeEvent))]
-    internal class QuestService: 
-        ICacheDataBeforeEvent,
-        ICreatureOnDeathBeforeEvent
+    internal class QuestService
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -42,25 +38,41 @@ namespace XM.Quest
         private readonly InventoryService _inventory;
         private readonly ActivityService _activity;
         private readonly IServiceManager _serviceManager;
+        private readonly XMEventService _event;
 
         public QuestService(
             DBService db, 
             ItemCacheService itemCache,
             InventoryService inventory,
             ActivityService activity,
-            IServiceManager serviceManager)
+            IServiceManager serviceManager,
+            XMEventService @event)
         {
             _db = db;
             _itemCache = itemCache;
             _inventory = inventory;
             _activity = activity;
             _serviceManager = serviceManager;
+            _event = @event;
 
-            NwModule.Instance.OnClientEnter += OnPlayerEnter;
+            RegisterEvents();
+            SubscribeEvents();
         }
 
+        private void RegisterEvents()
+        {
+            _event.RegisterEvent<QuestCompletedEvent>(QuestEventScript.OnQuestCompletedScript);
+        }
 
-        public void OnCacheDataBefore()
+        private void SubscribeEvents()
+        {
+            _event.Subscribe<ModuleOnPlayerEnterEvent>(OnPlayerEnter);
+            _event.Subscribe<CacheDataBeforeEvent>(OnCacheDataBefore);
+            _event.Subscribe<CreatureOnDeathBeforeEvent>(CreatureOnDeathBefore);
+
+        }
+
+        private void OnCacheDataBefore()
         {
             LoadQuests();
             LoadQuestNPCGroups();
@@ -117,7 +129,7 @@ namespace XM.Quest
             _logger.Info($"Loaded {_npcGroups.Count} NPC groups.");
         }
 
-        private void OnPlayerEnter(ModuleEvents.OnClientEnter obj)
+        private void OnPlayerEnter()
         {
             var player = GetEnteringObject();
             if (!GetIsPC(player) || GetIsDM(player)) return;
@@ -254,7 +266,7 @@ namespace XM.Quest
             AssignCommand(player, () => ActionInteractObject(collector));
         }
 
-        public void CreatureOnDeathBefore()
+        private void CreatureOnDeathBefore()
         {
             ProgressKillTargetObjectives();
         }

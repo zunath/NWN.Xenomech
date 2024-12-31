@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using Anvil.API;
-using Anvil.API.Events;
 using Anvil.Services;
 using NLog;
 using XM.API.Constants;
+using XM.Core.EventManagement;
+using XM.Core.EventManagement.ModuleEvent;
 using XM.Core.EventManagement.XMEvent;
 using XM.Dialog.Event;
 using EventScriptType = XM.API.Constants.EventScriptType;
@@ -14,8 +13,7 @@ using EventScriptType = XM.API.Constants.EventScriptType;
 namespace XM.Dialog
 {
     [ServiceBinding(typeof(DialogService))]
-    [ServiceBinding(typeof(ICacheDataBeforeEvent))]
-    public class DialogService: ICacheDataBeforeEvent
+    public class DialogService
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -30,18 +28,19 @@ namespace XM.Dialog
 
         private readonly IServiceManager _serviceManager;
 
-        public DialogService(IServiceManager serviceManager)
+        public DialogService(IServiceManager serviceManager, XMEventService @event)
         {
             _serviceManager = serviceManager;
 
-            NwModule.Instance.OnModuleLoad += OnModuleLoad;
+            @event.Subscribe<CacheDataBeforeEvent>(OnCacheDataBefore);
+            @event.Subscribe<ModuleOnLoadEvent>(OnModuleLoad);
         }
 
         /// <summary>
         /// When the module is loaded, the assembly will be searched for conversations.
         /// These will be added to the cache for use at a later time.
         /// </summary>
-        public void OnCacheDataBefore()
+        private void OnCacheDataBefore()
         {
             // Use reflection to get all of the conversation implementations.
             var classes = AppDomain.CurrentDomain.GetAssemblies()
@@ -62,7 +61,7 @@ namespace XM.Dialog
             Console.WriteLine($"Loaded {_conversations.Count} conversations.");
         }
 
-        private void OnModuleLoad(ModuleEvents.OnModuleLoad obj)
+        private void OnModuleLoad()
         {
             InitializeDialogs();
         }
