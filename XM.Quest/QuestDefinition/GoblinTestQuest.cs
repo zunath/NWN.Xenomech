@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
 
-namespace XM.Quest.QuestDefinitions
+namespace XM.Quest.QuestDefinition
 {
     [ServiceBinding(typeof(GoblinTestQuest))]
     internal class GoblinTestQuest: QuestListDefinitionBase

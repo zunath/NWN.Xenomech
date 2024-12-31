@@ -2,6 +2,7 @@
 {
     internal class DialogEventScript
     {
+        // Dialog System
         public const string DialogStartScript = "dialog_start";
         public const string DialogAction0Script = "dialog_action_0";
         public const string DialogAction1Script = "dialog_action_1";
@@ -36,5 +37,13 @@
         public const string DialogActionBackScript = "dialog_action_b";
         public const string DialogEndScript = "dialog_end";
         public const string StartConversationScript = "start_convo";
+
+        // Snippets
+        public const string AppearScript = "appear";
+        public const string AppearsScript = "appears";
+        public const string ConditionScript = "condition";
+        public const string ConditionsScript = "conditions";
+        public const string ActionScript = "action";
+        public const string ActionsScript = "actions";
     }
 }

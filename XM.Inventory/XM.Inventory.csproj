@@ -70,6 +70,7 @@
   <ItemGroup>
     <ProjectReference Include="..\XM.API\XM.API.csproj" />
     <ProjectReference Include="..\XM.Core\XM.Core.csproj" />
+    <ProjectReference Include="..\XM.Dialog\XM.Dialog.csproj" />
     <ProjectReference Include="..\XM.Localization\XM.Localization.csproj" />
   </ItemGroup>
 

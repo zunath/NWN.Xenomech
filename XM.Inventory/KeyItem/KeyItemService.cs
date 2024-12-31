@@ -181,5 +181,31 @@ namespace XM.Inventory.KeyItem
         {
             return _allKeyItems[keyItem];
         }
+
+        /// <summary>
+        /// Retrieves a key item type by its integer Id.
+        /// Returns KeyItemType.Invalid if not found.
+        /// </summary>
+        /// <param name="keyItemId">The Id to search for</param>
+        /// <returns>A KeyItemType matching the Id.</returns>
+        public KeyItemType GetKeyItemTypeById(int keyItemId)
+        {
+            return !_keyItemsByTypeId.ContainsKey(keyItemId) ?
+                KeyItemType.Invalid :
+                _keyItemsByTypeId[keyItemId];
+        }
+
+        /// <summary>
+        /// Retrieves a key item type by its name.
+        /// Returns KeyItemType.Invalid if not found.
+        /// </summary>
+        /// <param name="name">The name to search for</param>
+        /// <returns>A KeyItemType matching the name.</returns>
+        public KeyItemType GetKeyItemTypeByName(string name)
+        {
+            return !_keyItemsByTypeName.ContainsKey(name) ?
+                KeyItemType.Invalid :
+                _keyItemsByTypeName[name];
+        }
     }
 }
