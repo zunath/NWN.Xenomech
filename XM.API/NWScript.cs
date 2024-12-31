@@ -11308,9 +11308,9 @@ namespace XM.API
         ///  A watched bind will invoke the NUI script event every time it&amp;apos;s value changes.<br/>
         ///  Be careful with binding nui data inside a watch event handler: It&amp;apos;s easy to accidentally recurse yourself into a stack overflow.
         /// </summary>
-        public static int NuiSetBindWatch(uint oPlayer, int nUiToken, string sBind, int bWatch)
+        public static int NuiSetBindWatch(uint oPlayer, int nUiToken, string sBind, bool bWatch)
         {
-            return NWN.Core.NWScript.NuiSetBindWatch(oPlayer, nUiToken, sBind, bWatch);
+            return NWN.Core.NWScript.NuiSetBindWatch(oPlayer, nUiToken, sBind, bWatch ? 1 : 0);
         }
 
         ///  Returns the nNth window token of the player, or 0.<br/>
