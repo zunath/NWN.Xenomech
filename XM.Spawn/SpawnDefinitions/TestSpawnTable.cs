@@ -2,7 +2,7 @@
 using Anvil.Services;
 using XM.API.Constants;
 
-namespace XM.Spawn.Tables
+namespace XM.Spawn.SpawnDefinitions
 {
     [ServiceBinding(typeof(TestSpawnTable))]
     [ServiceBinding(typeof(ISpawnListDefinition))]
@@ -20,7 +20,7 @@ namespace XM.Spawn.Tables
         private void TestTable()
         {
             _builder.Create("VISCARA_WILDLANDS", "Wildlands")
-                .AddSpawn(ObjectType.Creature, "nw_goblina")
+                .AddSpawn(ObjectType.Creature, "goblintest")
                 .WithFrequency(40)
                 .RandomlyWalks()
                 .ReturnsHome();
