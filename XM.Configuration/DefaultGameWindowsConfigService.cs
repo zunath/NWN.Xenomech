@@ -3,12 +3,12 @@ using Anvil.API.Events;
 using Anvil.Services;
 using XM.API.Constants;
 
-namespace XM.UI
+namespace XM.Configuration
 {
-    [ServiceBinding(typeof(DisableDefaultGameWindowsService))]
-    internal class DisableDefaultGameWindowsService
+    [ServiceBinding(typeof(DefaultGameWindowsConfigService))]
+    internal class DefaultGameWindowsConfigService
     {
-        public DisableDefaultGameWindowsService()
+        public DefaultGameWindowsConfigService()
         {
             NwModule.Instance.OnClientEnter += OnModuleEnter;
         }

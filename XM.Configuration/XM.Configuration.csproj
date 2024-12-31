@@ -67,6 +67,10 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\XM.API\XM.API.csproj" />
+  </ItemGroup>
+
 <Target Name="PostBuild" AfterTargets="PostBuildEvent">
 	<Exec Command="del /Q /F &quot;$(SolutionDir)server\server\anvil\Plugins\XM.Configuration\*.*&quot;&#xD;&#xA;xcopy &quot;$(OutDir)*.*&quot; &quot;$(SolutionDir)server\anvil\Plugins\XM.Configuration\&quot; /E /Y" />
 </Target>
