@@ -17,6 +17,14 @@ namespace XM.Dialog
     [ServiceBinding(typeof(IXMOnCacheDataBefore))]
     public class DialogService: IXMOnCacheDataBefore
     {
+
+        [ScriptHandler("bread_test")]
+        public void BreadTest()
+        {
+            var player = GetLastUsedBy();
+            StartConversation<TestDialog>(player, OBJECT_SELF);
+        }
+
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         private const int NumberOfDialogs = 255;
@@ -28,8 +36,12 @@ namespace XM.Dialog
 
         public IList<IConversation> Definitions { get; set; }
 
-        public DialogService()
+        private readonly IServiceManager _serviceManager;
+
+        public DialogService(IServiceManager serviceManager)
         {
+            _serviceManager = serviceManager;
+
             NwModule.Instance.OnModuleLoad += OnModuleLoad;
         }
 
@@ -47,7 +59,7 @@ namespace XM.Dialog
 
             foreach (var type in classes)
             {
-                var instance = Activator.CreateInstance(type, this) as IConversation;
+                var instance = _serviceManager.AnvilServiceContainer.GetInstance(type) as IConversation;
                 if (instance == null)
                 {
                     throw new NullReferenceException("Unable to activate instance of type: " + type);
