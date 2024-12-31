@@ -73,6 +73,10 @@
   <ProjectReference Include="..\XM.Data\XM.Data.csproj" />
 </ItemGroup>
 
+<ItemGroup>
+  <Folder Include="ServerMigration\" />
+</ItemGroup>
+
 <Target Name="PostBuild" AfterTargets="PostBuildEvent">
 	<Exec Command="del /Q /F &quot;$(SolutionDir)server\server\anvil\Plugins\XM.Migration\*.*&quot;&#xD;&#xA;xcopy &quot;$(OutDir)*.*&quot; &quot;$(SolutionDir)server\anvil\Plugins\XM.Migration\&quot; /E /Y" />
 </Target>
