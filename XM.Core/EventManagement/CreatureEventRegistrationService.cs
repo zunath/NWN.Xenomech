@@ -7,82 +7,82 @@ using XM.Core.EventManagement.XMEvent;
 namespace XM.Core.EventManagement
 {
     [ServiceBinding(typeof(CreatureEventRegistrationService))]
-    [ServiceBinding(typeof(IXMOnSpawnCreated))]
-    internal class CreatureEventRegistrationService : EventRegistrationServiceBase, IXMOnSpawnCreated
+    [ServiceBinding(typeof(ISpawnCreatedEvent))]
+    internal class CreatureEventRegistrationService : EventRegistrationServiceBase, ISpawnCreatedEvent
     {
         // Before subscriptions
         [Inject]
-        public IList<ICreatureOnHeartbeatBefore> CreatureOnHeartbeatBeforeSubscriptions { get; set; }
+        public IList<ICreatureOnHeartbeatBeforeEvent> CreatureOnHeartbeatBeforeSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnNoticeBefore> CreatureOnNoticeBeforeSubscriptions { get; set; }
+        public IList<ICreatureOnNoticeBeforeEvent> CreatureOnNoticeBeforeSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnSpellCastAtBefore> CreatureOnSpellCastAtBeforeSubscriptions { get; set; }
+        public IList<ICreatureOnSpellCastAtBeforeEvent> CreatureOnSpellCastAtBeforeSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnMeleeAttackedBefore> CreatureOnMeleeAttackedBeforeSubscriptions { get; set; }
+        public IList<ICreatureOnMeleeAttackedBeforeEvent> CreatureOnMeleeAttackedBeforeSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnDamagedBefore> CreatureOnDamagedBeforeSubscriptions { get; set; }
+        public IList<ICreatureOnDamagedBeforeEvent> CreatureOnDamagedBeforeSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnDisturbedBefore> CreatureOnDisturbedBeforeSubscriptions { get; set; }
+        public IList<ICreatureOnDisturbedBeforeEvent> CreatureOnDisturbedBeforeSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnEndCombatRoundBefore> CreatureOnEndCombatRoundBeforeSubscriptions { get; set; }
+        public IList<ICreatureOnEndCombatRoundBeforeEvent> CreatureOnEndCombatRoundBeforeSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnSpawnInBefore> CreatureOnSpawnInBeforeSubscriptions { get; set; }
+        public IList<ICreatureOnSpawnInBeforeEvent> CreatureOnSpawnInBeforeSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnRestedBefore> CreatureOnRestedBeforeSubscriptions { get; set; }
+        public IList<ICreatureOnRestedBeforeEvent> CreatureOnRestedBeforeSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnDeathBefore> CreatureOnDeathBeforeSubscriptions { get; set; }
+        public IList<ICreatureOnDeathBeforeEvent> CreatureOnDeathBeforeSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnUserDefinedBefore> CreatureOnUserDefinedBeforeSubscriptions { get; set; }
+        public IList<ICreatureOnUserDefinedBeforeEvent> CreatureOnUserDefinedBeforeSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnBlockedByDoorBefore> CreatureOnBlockedByDoorBeforeSubscriptions { get; set; }
+        public IList<ICreatureOnBlockedByDoorBeforeEvent> CreatureOnBlockedByDoorBeforeSubscriptions { get; set; }
 
         // After Subscriptions
         [Inject]
-        public IList<ICreatureOnHeartbeatAfter> CreatureOnHeartbeatAfterSubscriptions { get; set; }
+        public IList<ICreatureOnHeartbeatAfterEvent> CreatureOnHeartbeatAfterSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnNoticeAfter> CreatureOnNoticeAfterSubscriptions { get; set; }
+        public IList<ICreatureOnNoticeAfterEvent> CreatureOnNoticeAfterSubscriptions { get; set; }
 
         [Inject]
         public IList<ICreatureOnSpellCastAtAfter> CreatureOnSpellCastAtAfterSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnMeleeAttackedAfter> CreatureOnMeleeAttackedAfterSubscriptions { get; set; }
+        public IList<ICreatureOnMeleeAttackedAfterEvent> CreatureOnMeleeAttackedAfterSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnDamagedAfter> CreatureOnDamagedAfterSubscriptions { get; set; }
+        public IList<ICreatureOnDamagedAfterEvent> CreatureOnDamagedAfterSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnDisturbedAfter> CreatureOnDisturbedAfterSubscriptions { get; set; }
+        public IList<ICreatureOnDisturbedAfterEvent> CreatureOnDisturbedAfterSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnEndCombatRoundAfter> CreatureOnEndCombatRoundAfterSubscriptions { get; set; }
+        public IList<ICreatureOnEndCombatRoundAfterEvent> CreatureOnEndCombatRoundAfterSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnSpawnInAfter> CreatureOnSpawnInAfterSubscriptions { get; set; }
+        public IList<ICreatureOnSpawnInAfterEvent> CreatureOnSpawnInAfterSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnRestedAfter> CreatureOnRestedAfterSubscriptions { get; set; }
+        public IList<ICreatureOnRestedAfterEvent> CreatureOnRestedAfterSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnDeathAfter> CreatureOnDeathAfterSubscriptions { get; set; }
+        public IList<ICreatureOnDeathAfterEvent> CreatureOnDeathAfterSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnUserDefinedAfter> CreatureOnUserDefinedAfterSubscriptions { get; set; }
+        public IList<ICreatureOnUserDefinedAfterEvent> CreatureOnUserDefinedAfterSubscriptions { get; set; }
 
         [Inject]
-        public IList<ICreatureOnBlockedByDoorAfter> CreatureOnBlockedByDoorAfterSubscriptions { get; set; }
+        public IList<ICreatureOnBlockedByDoorAfterEvent> CreatureOnBlockedByDoorAfterSubscriptions { get; set; }
 
 
 
@@ -132,7 +132,7 @@ namespace XM.Core.EventManagement
         public void HandleCreatureOnNotice() => HandleEvent(CreatureOnNoticeAfterSubscriptions, (subscription) => subscription.CreatureOnNoticeAfter());
 
         [ScriptHandler(EventScript.CreatureOnSpellCastAtAfterScript)]
-        public void HandleCreatureOnSpellCastAt() => HandleEvent(CreatureOnSpellCastAtAfterSubscriptions, (subscription) => subscription.CreatureOnSpellCastAtAfter());
+        public void HandleCreatureOnSpellCastAt() => HandleEvent(CreatureOnSpellCastAtAfterSubscriptions, (subscription) => subscription.CreatureOnSpellCastAtAfterEvent());
 
         [ScriptHandler(EventScript.CreatureOnMeleeAttackedAfterScript)]
         public void HandleCreatureOnMeleeAttacked() => HandleEvent(CreatureOnMeleeAttackedAfterSubscriptions, (subscription) => subscription.CreatureOnMeleeAttackedAfter());

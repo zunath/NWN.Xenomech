@@ -11,8 +11,8 @@ using XM.Data;
 namespace XM.Core.EventManagement
 {
     [ServiceBinding(typeof(XMEventRegistrationService))]
-    [ServiceBinding(typeof(INWNXOnModulePreload))]
-    internal class XMEventRegistrationService: EventRegistrationServiceBase, INWNXOnModulePreload
+    [ServiceBinding(typeof(IModulePreloadEvent))]
+    internal class XMEventRegistrationService: EventRegistrationServiceBase, IModulePreloadEvent
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -20,33 +20,33 @@ namespace XM.Core.EventManagement
         private readonly SchedulerService _scheduler;
 
         [Inject]
-        public IList<IXMOnServerHeartbeat> OnServerHeartbeatSubscriptions { get; set; }
+        public IList<IServerHeartbeatEvent> OnServerHeartbeatSubscriptions { get; set; }
 
         [Inject]
-        public IList<IXMOnSpawnCreated> OnSpawnCreatedSubscriptions { get; set; }
+        public IList<ISpawnCreatedEvent> OnSpawnCreatedSubscriptions { get; set; }
 
         [Inject]
-        public IList<IXMOnAreaCreated> OnAreaCreatedSubscriptions { get; set; }
+        public IList<IAreaCreatedEvent> OnAreaCreatedSubscriptions { get; set; }
 
         [Inject]
-        public IList<IXMOnModuleContentChanged> OnModuleContentChangedSubscriptions { get; set; }
+        public IList<IModuleContentChangedEvent> OnModuleContentChangedSubscriptions { get; set; }
 
         [Inject]
-        public IList<IXMOnCacheDataBefore> OnCacheDataBeforeSubscriptions { get; set; }
+        public IList<ICacheDataBeforeEvent> OnCacheDataBeforeSubscriptions { get; set; }
 
         [Inject]
-        public IList<IXMOnCacheDataAfter> OnCacheDataAfterSubscriptions { get; set; }
+        public IList<ICacheDataAfterEvent> OnCacheDataAfterSubscriptions { get; set; }
 
         [Inject]
-        public IList<IXMOnDatabaseLoaded> OnDatabaseLoadedSubscriptions { get; set; }
+        public IList<IDatabaseLoadedEvent> OnDatabaseLoadedSubscriptions { get; set; }
 
         [Inject]
-        public IList<IXMOnPCInitialized> OnPCInitializedSubscriptions { get; set; }
+        public IList<IPCInitializedEvent> OnPCInitializedSubscriptions { get; set; }
 
         [Inject]
-        public IList<IXMPlayerMigrationBefore> OnPlayerMigrationBeforeSubscriptions { get; set; }
+        public IList<IPlayerMigrationBeforeEvent> OnPlayerMigrationBeforeSubscriptions { get; set; }
         [Inject]
-        public IList<IXMPlayerMigrationAfter> OnPlayerMigrationAfterSubscriptions { get; set; }
+        public IList<IPlayerMigrationAfterEvent> OnPlayerMigrationAfterSubscriptions { get; set; }
 
 
         [ScriptHandler(EventScript.OnXMServerHeartbeatScript)]

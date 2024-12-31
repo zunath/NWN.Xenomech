@@ -14,7 +14,7 @@ using static Anvil.API.Events.ModuleEvents;
 namespace XM.Combat
 {
     [ServiceBinding(typeof(DeathService))]
-    internal class DeathService: IXMOnPCInitialized
+    internal class DeathService: IPCInitializedEvent
     {
         private const string DefaultSpawnWaypointTag = "DTH_DEFAULT_RESPAWN_POINT";
 

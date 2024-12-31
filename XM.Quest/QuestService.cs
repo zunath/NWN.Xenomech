@@ -23,11 +23,11 @@ using XM.Quest.Event;
 namespace XM.Quest
 {
     [ServiceBinding(typeof(QuestService))]
-    [ServiceBinding(typeof(IXMOnCacheDataBefore))]
-    [ServiceBinding(typeof(ICreatureOnDeathBefore))]
+    [ServiceBinding(typeof(ICacheDataBeforeEvent))]
+    [ServiceBinding(typeof(ICreatureOnDeathBeforeEvent))]
     internal class QuestService: 
-        IXMOnCacheDataBefore,
-        ICreatureOnDeathBefore
+        ICacheDataBeforeEvent,
+        ICreatureOnDeathBeforeEvent
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 

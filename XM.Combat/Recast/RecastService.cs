@@ -9,21 +9,27 @@ using XM.Core.EventManagement.XMEvent;
 using XM.Core.Extension;
 using XM.Data;
 using XM.Localization;
+using XM.Progression.Stat;
 
 namespace XM.Combat.Recast
 {
     [ServiceBinding(typeof(RecastService))]
-    [ServiceBinding(typeof(IXMOnCacheDataBefore))]
-    internal class RecastService: IXMOnCacheDataBefore
+    [ServiceBinding(typeof(ICacheDataBeforeEvent))]
+    internal class RecastService: ICacheDataBeforeEvent
     {
         private static readonly Dictionary<RecastGroup, LocaleString> _recastDescriptions = new();
         private readonly DBService _db;
         private readonly TimeService _time;
+        private readonly StatService _stat;
 
-        public RecastService(DBService db, TimeService time)
+        public RecastService(
+            DBService db, 
+            TimeService time,
+            StatService stat)
         {
             _db = db;
             _time = time;
+            _stat = stat;
         }
 
         public void OnCacheDataBefore()
@@ -120,11 +126,11 @@ namespace XM.Combat.Recast
             else if (GetIsPC(activator) && !GetIsDM(activator))
             {
                 var playerId = GetObjectUUID(activator);
-                var dbPlayer = _db.Get<PlayerCombat>(playerId) ?? new PlayerCombat(playerId);
+                var dbPlayerCombat = _db.Get<PlayerCombat>(playerId) ?? new PlayerCombat(playerId);
 
                 if (!ignoreRecastReduction)
                 {
-                    var recastReduction = dbPlayer.AbilityRecastReduction;
+                    var recastReduction = _stat.GetAbilityRecastReduction(activator);
 
                     var recastPercentage = recastReduction * 0.01f;
                     if (recastPercentage > 0.5f)
@@ -134,9 +140,9 @@ namespace XM.Combat.Recast
                 }
 
                 var recastDate = DateTime.UtcNow.AddSeconds(delaySeconds);
-                dbPlayer.RecastTimes[group] = recastDate;
+                dbPlayerCombat.RecastTimes[group] = recastDate;
 
-                _db.Set(dbPlayer);
+                _db.Set(dbPlayerCombat);
             }
 
         }

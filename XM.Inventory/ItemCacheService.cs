@@ -9,11 +9,11 @@ using XM.Data;
 namespace XM.Inventory
 {
     [ServiceBinding(typeof(ItemCacheService))]
-    [ServiceBinding(typeof(IXMOnModuleContentChanged))]
-    [ServiceBinding(typeof(IXMOnCacheDataBefore))]
+    [ServiceBinding(typeof(IModuleContentChangedEvent))]
+    [ServiceBinding(typeof(ICacheDataBeforeEvent))]
     public class ItemCacheService: 
-        IXMOnModuleContentChanged, 
-        IXMOnCacheDataBefore
+        IModuleContentChangedEvent, 
+        ICacheDataBeforeEvent
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 

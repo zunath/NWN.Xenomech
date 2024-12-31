@@ -15,11 +15,11 @@ using XM.Core.EventManagement;
 namespace XM.Migration
 {
     [ServiceBinding(typeof(MigrationService))]
-    [ServiceBinding(typeof(IXMOnCacheDataAfter))]
-    [ServiceBinding(typeof(IXMOnDatabaseLoaded))]
+    [ServiceBinding(typeof(ICacheDataAfterEvent))]
+    [ServiceBinding(typeof(IDatabaseLoadedEvent))]
     internal class MigrationService :
-        IXMOnCacheDataAfter,
-        IXMOnDatabaseLoaded
+        ICacheDataAfterEvent,
+        IDatabaseLoadedEvent
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 

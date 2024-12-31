@@ -8,7 +8,7 @@ namespace XM.Quest.Event
     internal class QuestEventRegistrationService: EventRegistrationServiceBase
     {
         [Inject]
-        public IList<IQuestCompleted> OnQuestCompletedSubscriptions { get; set; }
+        public IList<IQuestCompletedEvent> OnQuestCompletedSubscriptions { get; set; }
 
         [ScriptHandler(QuestEventScript.OnQuestCompletedScript)]
         public void HandleQuestCompleted() => HandleEvent(OnQuestCompletedSubscriptions,

@@ -18,16 +18,16 @@ using ObjectPlugin = XM.API.NWNX.ObjectPlugin.ObjectPlugin;
 namespace XM.Spawn
 {
     [ServiceBinding(typeof(SpawnService))]
-    [ServiceBinding(typeof(IOnAreaEnter))]
-    [ServiceBinding(typeof(IOnAreaExit))]
-    [ServiceBinding(typeof(ICreatureOnDeathBefore))]
-    [ServiceBinding(typeof(IXMOnServerHeartbeat))]
+    [ServiceBinding(typeof(IAreaEnterEvent))]
+    [ServiceBinding(typeof(IAreaExitEvent))]
+    [ServiceBinding(typeof(ICreatureOnDeathBeforeEvent))]
+    [ServiceBinding(typeof(IServerHeartbeatEvent))]
     internal class SpawnService : 
         IInitializable, 
-        IOnAreaEnter,
-        IOnAreaExit,
-        ICreatureOnDeathBefore,
-        IXMOnServerHeartbeat
+        IAreaEnterEvent,
+        IAreaExitEvent,
+        ICreatureOnDeathBeforeEvent,
+        IServerHeartbeatEvent
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 

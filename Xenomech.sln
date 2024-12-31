@@ -41,6 +41,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Dialog", "XM.Dialog\XM.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Party", "XM.Party\XM.Party.csproj", "{5D242024-E184-4539-8AA0-5F5CE0C9771C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Progression", "XM.Progression\XM.Progression.csproj", "{2CE4FC05-0101-44CD-B3C9-CF532EC6D12D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +125,10 @@ Global
 		{5D242024-E184-4539-8AA0-5F5CE0C9771C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D242024-E184-4539-8AA0-5F5CE0C9771C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D242024-E184-4539-8AA0-5F5CE0C9771C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CE4FC05-0101-44CD-B3C9-CF532EC6D12D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CE4FC05-0101-44CD-B3C9-CF532EC6D12D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CE4FC05-0101-44CD-B3C9-CF532EC6D12D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CE4FC05-0101-44CD-B3C9-CF532EC6D12D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,8 +10,8 @@ using XM.Dialog.Event;
 namespace XM.Dialog.Snippet
 {
     [ServiceBinding(typeof(SnippetService))]
-    [ServiceBinding(typeof(IXMOnCacheDataBefore))]
-    public class SnippetService: IXMOnCacheDataBefore
+    [ServiceBinding(typeof(ICacheDataBeforeEvent))]
+    public class SnippetService: ICacheDataBeforeEvent
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 

@@ -9,21 +9,21 @@ using XM.Core.EventManagement.XMEvent;
 namespace XM.Core.EventManagement
 {
     [ServiceBinding(typeof(AreaEventRegistrationService))]
-    internal class AreaEventRegistrationService: EventRegistrationServiceBase, IXMOnAreaCreated
+    internal class AreaEventRegistrationService: EventRegistrationServiceBase, IAreaCreatedEvent
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         [Inject]
-        public IList<IOnAreaEnter> OnAreaEnterSubscriptions { get; set; }
+        public IList<IAreaEnterEvent> OnAreaEnterSubscriptions { get; set; }
 
         [Inject]
-        public IList<IOnAreaExit> OnAreaExitSubscriptions { get; set; }
+        public IList<IAreaExitEvent> OnAreaExitSubscriptions { get; set; }
 
         [Inject]
-        public IList<IOnAreaHeartbeat> OnAreaHeartbeatSubscriptions { get; set; }
+        public IList<IAreaHeartbeatEvent> OnAreaHeartbeatSubscriptions { get; set; }
 
         [Inject]
-        public IList<IOnAreaUserDefinedEvent> OnAreaUserDefinedEventSubscriptions { get; set; }
+        public IList<IAreaUserDefinedEvent> OnAreaUserDefinedEventSubscriptions { get; set; }
 
 
         [ScriptHandler(EventScript.AreaOnEnterScript)]

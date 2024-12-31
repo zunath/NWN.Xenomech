@@ -11,8 +11,8 @@ using XM.Localization;
 namespace XM.Inventory.KeyItem
 {
     [ServiceBinding(typeof(KeyItemService))]
-    [ServiceBinding(typeof(IXMOnCacheDataBefore))]
-    public class KeyItemService: IXMOnCacheDataBefore
+    [ServiceBinding(typeof(ICacheDataBeforeEvent))]
+    public class KeyItemService: ICacheDataBeforeEvent
     {
         // All categories/key items
         private readonly Dictionary<KeyItemCategoryType, KeyItemCategoryAttribute> _allCategories = new();

@@ -16,8 +16,8 @@ using Location = XM.API.BaseTypes.Location;
 namespace XM.Area
 {
     [ServiceBinding(typeof(WalkmeshService))]
-    [ServiceBinding(typeof(IXMOnModuleContentChanged))]
-    public class WalkmeshService: IXMOnModuleContentChanged
+    [ServiceBinding(typeof(IModuleContentChangedEvent))]
+    public class WalkmeshService: IModuleContentChangedEvent
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 

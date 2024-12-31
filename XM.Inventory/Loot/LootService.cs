@@ -9,8 +9,8 @@ using XM.Core.EventManagement.CreatureEvent;
 namespace XM.Inventory.Loot
 {
     [ServiceBinding(typeof(LootService))]
-    [ServiceBinding(typeof(ICreatureOnDeathBefore))]
-    internal class LootService: IInitializable, ICreatureOnDeathBefore
+    [ServiceBinding(typeof(ICreatureOnDeathBeforeEvent))]
+    internal class LootService: IInitializable, ICreatureOnDeathBeforeEvent
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 

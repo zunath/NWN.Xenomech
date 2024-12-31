@@ -14,8 +14,8 @@ using EventScriptType = XM.API.Constants.EventScriptType;
 namespace XM.Dialog
 {
     [ServiceBinding(typeof(DialogService))]
-    [ServiceBinding(typeof(IXMOnCacheDataBefore))]
-    public class DialogService: IXMOnCacheDataBefore
+    [ServiceBinding(typeof(ICacheDataBeforeEvent))]
+    public class DialogService: ICacheDataBeforeEvent
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 

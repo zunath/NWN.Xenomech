@@ -10,7 +10,7 @@ using XM.UI.WindowDefinition;
 namespace XM.UI
 {
     [ServiceBinding(typeof(GuiWindowBuilder<>))]
-    internal class GuiWindowBuilder<T>
+    public class GuiWindowBuilder<T>
         where T : IGuiViewModel
     {
         private GuiWindowType _type;

@@ -5,22 +5,22 @@ using Anvil.API;
 using Anvil.API.Events;
 using Anvil.Services;
 using NWN.Core.NWNX;
-using XM.Party.Event;
+using XM.Core.EventManagement.NWNXEvent;
 
 namespace XM.Party
 {
     [ServiceBinding(typeof(PartyService))]
-    [ServiceBinding(typeof(IOnPartyAcceptInvitationBefore))]
-    [ServiceBinding(typeof(IOnAddAssociateBefore))]
-    [ServiceBinding(typeof(IOnRemoveAssociateBefore))]
-    [ServiceBinding(typeof(IOnPartyLeaveBefore))]
-    [ServiceBinding(typeof(IOnPartyTransferLeadershipBefore))]
+    [ServiceBinding(typeof(IPartyAcceptInvitationBeforeEvent))]
+    [ServiceBinding(typeof(IAddAssociateBeforeEvent))]
+    [ServiceBinding(typeof(IRemoveAssociateBeforeEvent))]
+    [ServiceBinding(typeof(IPartyLeaveBeforeEvent))]
+    [ServiceBinding(typeof(IPartyTransferLeadershipBeforeEvent))]
     internal class PartyService:
-        IOnPartyAcceptInvitationBefore,
-        IOnAddAssociateBefore,
-        IOnRemoveAssociateBefore,
-        IOnPartyLeaveBefore,
-        IOnPartyTransferLeadershipBefore
+        IPartyAcceptInvitationBeforeEvent,
+        IAddAssociateBeforeEvent,
+        IRemoveAssociateBeforeEvent,
+        IPartyLeaveBeforeEvent,
+        IPartyTransferLeadershipBeforeEvent
     {
         private readonly Dictionary<Guid, List<uint>> _parties = new();
         private readonly Dictionary<uint, Guid> _creatureToParty = new();

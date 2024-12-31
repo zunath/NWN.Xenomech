@@ -13,20 +13,20 @@ using XM.Data;
 using XM.UI.Component;
 using XM.UI.Entity;
 using XM.UI.Event;
+using XM.UI.UI.Payload;
+using XM.UI.UI.RefreshEvent;
 using XM.UI.WindowDefinition;
-using XM.UI.WindowDefinition.Payload;
-using XM.UI.WindowDefinition.RefreshEvent;
 using Action = System.Action;
 using GuiEventType = XM.API.Constants.GuiEventType;
 
 namespace XM.UI
 {
     [ServiceBinding(typeof(GuiService))]
-    [ServiceBinding(typeof(IXMOnCacheDataBefore))]
-    [ServiceBinding(typeof(IOnAreaEnter))]
+    [ServiceBinding(typeof(ICacheDataBeforeEvent))]
+    [ServiceBinding(typeof(IAreaEnterEvent))]
     public class GuiService: 
-        IXMOnCacheDataBefore,
-        IOnAreaEnter
+        ICacheDataBeforeEvent,
+        IAreaEnterEvent
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -213,7 +213,7 @@ namespace XM.UI
         /// <param name="elementId">The Id of the element to register.</param>
         /// <param name="eventName">The name of the event.</param>
         /// <param name="eventAction">The action to run when the event is raised.</param>
-        public void RegisterElementEvent(string elementId, string eventName, GuiMethodDetail eventAction)
+        internal void RegisterElementEvent(string elementId, string eventName, GuiMethodDetail eventAction)
         {
             if (!_elementEvents.ContainsKey(elementId))
                 _elementEvents[elementId] = new Dictionary<string, GuiMethodDetail>();

@@ -11,40 +11,40 @@ namespace XM.Core.EventManagement
     internal class PlayerEventRegistrationService: EventRegistrationServiceBase
     {
         [Inject]
-        public IList<IPlayerOnHeartbeat> PlayerOnHeartbeatSubscriptions { get; set; }
+        public IList<IPlayerOnHeartbeatEvent> PlayerOnHeartbeatSubscriptions { get; set; }
 
         [Inject]
-        public IList<IPlayerOnNotice> PlayerOnNoticeSubscriptions { get; set; }
+        public IList<IPlayerOnNoticeEvent> PlayerOnNoticeSubscriptions { get; set; }
 
         [Inject]
-        public IList<IPlayerOnSpellCastAt> PlayerOnSpellCastAtSubscriptions { get; set; }
+        public IList<IPlayerOnSpellCastAtEvent> PlayerOnSpellCastAtSubscriptions { get; set; }
 
         [Inject]
-        public IList<IPlayerOnMeleeAttacked> PlayerOnMeleeAttackedSubscriptions { get; set; }
+        public IList<IPlayerOnMeleeAttackedEvent> PlayerOnMeleeAttackedSubscriptions { get; set; }
 
         [Inject]
-        public IList<IPlayerOnDamaged> PlayerOnDamagedSubscriptions { get; set; }
+        public IList<IPlayerOnDamagedEvent> PlayerOnDamagedSubscriptions { get; set; }
 
         [Inject]
-        public IList<IPlayerOnDisturbed> PlayerOnDisturbedSubscriptions { get; set; }
+        public IList<IPlayerOnDisturbedEvent> PlayerOnDisturbedSubscriptions { get; set; }
 
         [Inject]
-        public IList<IPlayerOnEndCombatRound> PlayerOnEndCombatRoundSubscriptions { get; set; }
+        public IList<IPlayerOnEndCombatRoundEvent> PlayerOnEndCombatRoundSubscriptions { get; set; }
 
         [Inject]
-        public IList<IPlayerOnSpawnIn> PlayerOnSpawnInSubscriptions { get; set; }
+        public IList<IPlayerOnSpawnInEvent> PlayerOnSpawnInSubscriptions { get; set; }
 
         [Inject]
-        public IList<IPlayerOnRested> PlayerOnRestedSubscriptions { get; set; }
+        public IList<IPlayerOnRestedEvent> PlayerOnRestedSubscriptions { get; set; }
 
         [Inject]
-        public IList<IPlayerOnDeath> PlayerOnDeathSubscriptions { get; set; }
+        public IList<IPlayerOnDeathEvent> PlayerOnDeathSubscriptions { get; set; }
 
         [Inject]
-        public IList<IPlayerOnUserDefined> PlayerOnUserDefinedSubscriptions { get; set; }
+        public IList<IPlayerOnUserDefinedEvent> PlayerOnUserDefinedSubscriptions { get; set; }
 
         [Inject]
-        public IList<IPlayerOnBlockedByDoor> PlayerOnBlockedByDoorSubscriptions { get; set; }
+        public IList<IPlayerOnBlockedByDoorEvent> PlayerOnBlockedByDoorSubscriptions { get; set; }
 
 
         [ScriptHandler(EventScript.PlayerOnHeartbeatScript)]

@@ -20,6 +20,6 @@ namespace XM.Combat.Entity
         }
 
         public Dictionary<RecastGroup, DateTime> RecastTimes { get; set; }
-        public int AbilityRecastReduction { get; set; }
+
     }
 }
