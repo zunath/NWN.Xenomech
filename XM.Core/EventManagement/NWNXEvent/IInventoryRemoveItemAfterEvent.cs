@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IInventoryRemoveItemAfterEvent
+    public interface IInventoryRemoveItemAfterEvent: IXMEvent
     {
         void OnInventoryRemoveItemAfter();
     }

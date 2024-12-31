@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IClearMemorizedSpellSlotAfterEvent
+    public interface IClearMemorizedSpellSlotAfterEvent: IXMEvent
     {
         void OnClearMemorizedSpellSlotAfter();
     }

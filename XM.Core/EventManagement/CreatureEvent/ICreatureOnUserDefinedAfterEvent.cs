@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.CreatureEvent
 {
-    public interface ICreatureOnUserDefinedAfterEvent
+    public interface ICreatureOnUserDefinedAfterEvent : IXMEvent
     {
         void CreatureOnUserDefinedAfter();
     }

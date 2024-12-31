@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDoSpotDetectionBeforeEvent
+    public interface IDoSpotDetectionBeforeEvent: IXMEvent
     {
         void OnDoSpotDetectionBefore();
     }

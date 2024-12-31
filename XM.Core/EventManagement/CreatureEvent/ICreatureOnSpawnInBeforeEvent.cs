@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.CreatureEvent
 {
-    public interface ICreatureOnSpawnInBeforeEvent
+    public interface ICreatureOnSpawnInBeforeEvent : IXMEvent
     {
         void CreatureOnSpawnInBefore();
     }

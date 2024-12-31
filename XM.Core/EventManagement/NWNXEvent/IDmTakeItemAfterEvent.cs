@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmTakeItemAfterEvent
+    public interface IDmTakeItemAfterEvent: IXMEvent
     {
         void OnDmTakeItemAfter();
     }

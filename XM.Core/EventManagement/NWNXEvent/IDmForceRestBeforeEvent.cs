@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmForceRestBeforeEvent
+    public interface IDmForceRestBeforeEvent: IXMEvent
     {
         void OnDmForceRestBefore();
     }

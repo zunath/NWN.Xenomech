@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.PlayerEvent
 {
-    public interface IPlayerOnBlockedByDoorEvent
+    public interface IPlayerOnBlockedByDoorEvent: IXMEvent
     {
         void PlayerOnBlockedByDoor();
     }

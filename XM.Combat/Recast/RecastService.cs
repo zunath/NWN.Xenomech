@@ -14,7 +14,6 @@ using XM.Progression.Stat;
 namespace XM.Combat.Recast
 {
     [ServiceBinding(typeof(RecastService))]
-    [ServiceBinding(typeof(ICacheDataBeforeEvent))]
     internal class RecastService: ICacheDataBeforeEvent
     {
         private static readonly Dictionary<RecastGroup, LocaleString> _recastDescriptions = new();
@@ -34,6 +33,8 @@ namespace XM.Combat.Recast
 
         public void OnCacheDataBefore()
         {
+            Console.WriteLine($"data cache before running for recast service");
+
             CacheRecastGroupNames();
         }
 

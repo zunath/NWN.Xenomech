@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmViewInventoryAfterEvent
+    public interface IDmViewInventoryAfterEvent: IXMEvent
     {
         void OnDmViewInventoryAfter();
     }

@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IBarterStartAfterEvent
+    public interface IBarterStartAfterEvent: IXMEvent
     {
         void OnBarterStartAfter();
     }

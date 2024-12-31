@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.CreatureEvent
 {
-    public interface ICreatureOnDeathBeforeEvent
+    public interface ICreatureOnDeathBeforeEvent : IXMEvent
     {
         void CreatureOnDeathBefore();
     }

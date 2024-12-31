@@ -1,6 +1,6 @@
 ﻿namespace XM.Core.EventManagement.XMEvent
 {
-    public interface IModuleContentChangedEvent
+    public interface IModuleContentChangedEvent: IXMEvent
     {
         void OnModuleContentChanged();
     }

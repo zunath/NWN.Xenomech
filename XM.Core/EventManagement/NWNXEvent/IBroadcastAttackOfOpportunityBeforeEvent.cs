@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IBroadcastAttackOfOpportunityBeforeEvent
+    public interface IBroadcastAttackOfOpportunityBeforeEvent: IXMEvent
     {
         void OnBroadcastAttackOfOpportunityBefore();
     }

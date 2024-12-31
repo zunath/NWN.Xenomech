@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IPartyTransferLeadershipAfterEvent
+    public interface IPartyTransferLeadershipAfterEvent: IXMEvent
     {
         void OnPartyTransferLeadershipAfter();
     }

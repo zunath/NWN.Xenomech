@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface ITrapDisarmAfterEvent
+    public interface ITrapDisarmAfterEvent: IXMEvent
     {
         void OnTrapDisarmAfter();
     }

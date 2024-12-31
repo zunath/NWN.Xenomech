@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IAddAssociateAfterEvent
+    public interface IAddAssociateAfterEvent: IXMEvent
     {
         void OnAddAssociateAfter();
     }

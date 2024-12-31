@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmLimboAfterEvent
+    public interface IDmLimboAfterEvent: IXMEvent
     {
         void OnDmLimboAfter();
     }

@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IInputWalkToWaypointAfterEvent
+    public interface IInputWalkToWaypointAfterEvent: IXMEvent
     {
         void OnInputWalkToWaypointAfter();
     }

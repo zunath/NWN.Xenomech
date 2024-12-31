@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmToggleLockAfterEvent
+    public interface IDmToggleLockAfterEvent: IXMEvent
     {
         void OnDmToggleLockAfter();
     }

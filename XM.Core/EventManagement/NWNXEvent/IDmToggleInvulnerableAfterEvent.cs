@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmToggleInvulnerableAfterEvent
+    public interface IDmToggleInvulnerableAfterEvent: IXMEvent
     {
         void OnDmToggleInvulnerableAfter();
     }

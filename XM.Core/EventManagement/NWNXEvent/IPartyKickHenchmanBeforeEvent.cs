@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IPartyKickHenchmanBeforeEvent
+    public interface IPartyKickHenchmanBeforeEvent: IXMEvent
     {
         void OnPartyKickHenchmanBefore();
     }

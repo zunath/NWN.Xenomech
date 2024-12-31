@@ -1,6 +1,6 @@
 ﻿namespace XM.Core.EventManagement.XMEvent
 {
-    public interface ISpawnCreatedEvent
+    public interface ISpawnCreatedEvent: IXMEvent
     {
         void OnSpawnCreated();
     }

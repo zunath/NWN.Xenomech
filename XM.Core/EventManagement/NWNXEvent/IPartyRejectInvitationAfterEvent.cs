@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IPartyRejectInvitationAfterEvent
+    public interface IPartyRejectInvitationAfterEvent: IXMEvent
     {
         void OnPartyRejectInvitationAfter();
     }

@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmHealBeforeEvent
+    public interface IDmHealBeforeEvent: IXMEvent
     {
         void OnDmHealBefore();
     }

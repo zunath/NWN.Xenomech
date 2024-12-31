@@ -1,6 +1,6 @@
 ﻿namespace XM.Core.EventManagement.XMEvent
 {
-    public interface IServerHeartbeatEvent
+    public interface IServerHeartbeatEvent: IXMEvent
     {
         void OnXMServerHeartbeat();
     }

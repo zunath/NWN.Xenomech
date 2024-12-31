@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IItemScrollLearnAfterEvent
+    public interface IItemScrollLearnAfterEvent: IXMEvent
     {
         void OnItemScrollLearnAfter();
     }

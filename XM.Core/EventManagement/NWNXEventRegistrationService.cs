@@ -423,6 +423,7 @@ namespace XM.Core.EventManagement
 
         [ScriptHandler(EventScript.NWNXOnModulePreloadScript)]
         public void HandleModulePreload() => HandleEvent(OnModulePreloadSubscriptions, (subscription) => subscription.OnModulePreload());
+        
         [Inject]
         public IList<IAddAssociateBeforeEvent> OnAddAssociateBeforeSubscriptions { get; set; }
 

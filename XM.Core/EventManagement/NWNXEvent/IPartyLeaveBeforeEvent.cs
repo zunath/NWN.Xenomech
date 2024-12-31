@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IPartyLeaveBeforeEvent
+    public interface IPartyLeaveBeforeEvent: IXMEvent
     {
         void OnPartyLeaveBefore();
     }

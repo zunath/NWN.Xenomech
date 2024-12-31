@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IInventorySelectPanelBeforeEvent
+    public interface IInventorySelectPanelBeforeEvent: IXMEvent
     {
         void OnInventorySelectPanelBefore();
     }

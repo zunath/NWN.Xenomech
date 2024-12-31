@@ -1,6 +1,6 @@
 ﻿namespace XM.Core.EventManagement.XMEvent
 {
-    public interface IDatabaseLoadedEvent
+    public interface IDatabaseLoadedEvent: IXMEvent
     {
         void OnDatabaseLoaded();
     }

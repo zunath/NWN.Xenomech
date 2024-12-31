@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IBroadcastCastSpellBeforeEvent
+    public interface IBroadcastCastSpellBeforeEvent: IXMEvent
     {
         void OnBroadcastCastSpellBefore();
     }

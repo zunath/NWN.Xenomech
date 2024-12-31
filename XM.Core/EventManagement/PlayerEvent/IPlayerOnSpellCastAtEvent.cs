@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.PlayerEvent
 {
-    public interface IPlayerOnSpellCastAtEvent
+    public interface IPlayerOnSpellCastAtEvent: IXMEvent
     {
         void PlayerOnSpellCastAt();
     }

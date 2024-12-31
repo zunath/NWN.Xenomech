@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IEffectAppliedBeforeEvent
+    public interface IEffectAppliedBeforeEvent: IXMEvent
     {
         void OnEffectAppliedBefore();
     }

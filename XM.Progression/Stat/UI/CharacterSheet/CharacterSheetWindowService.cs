@@ -2,7 +2,7 @@
 using Anvil.Services;
 using XM.API.Constants;
 using XM.UI;
-using XM.UI.WindowDefinition;
+using XM.UI.UI;
 using static Anvil.API.Events.ModuleEvents;
 using GuiEventType = XM.API.Constants.GuiEventType;
 

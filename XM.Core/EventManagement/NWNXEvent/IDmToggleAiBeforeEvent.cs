@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmToggleAiBeforeEvent
+    public interface IDmToggleAiBeforeEvent: IXMEvent
     {
         void OnDmToggleAiBefore();
     }

@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmGiveAlignmentAfterEvent
+    public interface IDmGiveAlignmentAfterEvent: IXMEvent
     {
         void OnDmGiveAlignmentAfter();
     }

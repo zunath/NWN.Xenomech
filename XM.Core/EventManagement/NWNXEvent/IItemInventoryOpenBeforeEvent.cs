@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IItemInventoryOpenBeforeEvent
+    public interface IItemInventoryOpenBeforeEvent: IXMEvent
     {
         void OnItemInventoryOpenBefore();
     }

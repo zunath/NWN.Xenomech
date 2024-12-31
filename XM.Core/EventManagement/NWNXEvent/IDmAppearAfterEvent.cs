@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmAppearAfterEvent
+    public interface IDmAppearAfterEvent: IXMEvent
     {
         void OnDmAppearAfter();
     }

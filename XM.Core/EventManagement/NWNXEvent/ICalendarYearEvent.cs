@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface ICalendarYearEvent
+    public interface ICalendarYearEvent: IXMEvent
     {
         void OnCalendarYear();
     }

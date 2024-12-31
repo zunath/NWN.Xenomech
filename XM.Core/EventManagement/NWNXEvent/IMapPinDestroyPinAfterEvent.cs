@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IMapPinDestroyPinAfterEvent
+    public interface IMapPinDestroyPinAfterEvent: IXMEvent
     {
         void OnMapPinDestroyPinAfter();
     }

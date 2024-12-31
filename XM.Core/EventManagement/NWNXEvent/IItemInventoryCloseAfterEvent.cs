@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IItemInventoryCloseAfterEvent
+    public interface IItemInventoryCloseAfterEvent: IXMEvent
     {
         void OnItemInventoryCloseAfter();
     }

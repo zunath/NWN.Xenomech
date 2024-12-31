@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmSetFactionBeforeEvent
+    public interface IDmSetFactionBeforeEvent: IXMEvent
     {
         void OnDmSetFactionBefore();
     }

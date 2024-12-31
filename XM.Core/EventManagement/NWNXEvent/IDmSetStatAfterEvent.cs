@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmSetStatAfterEvent
+    public interface IDmSetStatAfterEvent: IXMEvent
     {
         void OnDmSetStatAfter();
     }

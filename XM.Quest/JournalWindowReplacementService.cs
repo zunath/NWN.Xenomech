@@ -8,7 +8,7 @@ using Anvil.Services;
 using static Anvil.API.Events.ModuleEvents;
 using XM.API.Constants;
 using XM.UI;
-using XM.UI.WindowDefinition;
+using XM.UI.UI;
 using GuiEventType = XM.API.Constants.GuiEventType;
 
 namespace XM.Quest

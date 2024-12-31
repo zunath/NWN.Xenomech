@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IItemMergeBeforeEvent
+    public interface IItemMergeBeforeEvent: IXMEvent
     {
         void OnItemMergeBefore();
     }

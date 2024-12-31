@@ -6,7 +6,6 @@ using XM.Core.EventManagement.XMEvent;
 namespace XM.Area
 {
     [ServiceBinding(typeof(AreaCacheService))]
-    [ServiceBinding(typeof(ICacheDataBeforeEvent))]
     public class AreaCacheService: ICacheDataBeforeEvent
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();

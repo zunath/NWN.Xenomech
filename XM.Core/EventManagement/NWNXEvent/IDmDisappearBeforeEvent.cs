@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmDisappearBeforeEvent
+    public interface IDmDisappearBeforeEvent: IXMEvent
     {
         void OnDmDisappearBefore();
     }

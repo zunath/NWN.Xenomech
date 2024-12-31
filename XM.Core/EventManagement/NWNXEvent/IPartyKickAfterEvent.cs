@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IPartyKickAfterEvent
+    public interface IPartyKickAfterEvent: IXMEvent
     {
         void OnPartyKickAfter();
     }

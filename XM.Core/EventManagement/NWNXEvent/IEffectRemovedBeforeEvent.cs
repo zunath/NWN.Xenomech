@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IEffectRemovedBeforeEvent
+    public interface IEffectRemovedBeforeEvent: IXMEvent
     {
         void OnEffectRemovedBefore();
     }

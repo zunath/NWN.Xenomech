@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.CreatureEvent
 {
-    public interface ICreatureOnDisturbedAfterEvent
+    public interface ICreatureOnDisturbedAfterEvent : IXMEvent
     {
         void CreatureOnDisturbedAfter();
     }

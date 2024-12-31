@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface ICombatAttackOfOpportunityBeforeEvent
+    public interface ICombatAttackOfOpportunityBeforeEvent: IXMEvent
     {
         void OnCombatAttackOfOpportunityBefore();
     }

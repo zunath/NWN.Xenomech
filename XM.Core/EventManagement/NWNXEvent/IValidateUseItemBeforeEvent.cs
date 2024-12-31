@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IValidateUseItemBeforeEvent
+    public interface IValidateUseItemBeforeEvent: IXMEvent
     {
         void OnValidateUseItemBefore();
     }

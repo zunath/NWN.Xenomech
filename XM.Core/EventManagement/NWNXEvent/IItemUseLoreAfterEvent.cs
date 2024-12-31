@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IItemUseLoreAfterEvent
+    public interface IItemUseLoreAfterEvent: IXMEvent
     {
         void OnItemUseLoreAfter();
     }

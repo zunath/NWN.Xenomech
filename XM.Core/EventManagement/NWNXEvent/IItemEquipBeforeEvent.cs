@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IItemEquipBeforeEvent
+    public interface IItemEquipBeforeEvent: IXMEvent
     {
         void OnItemEquipBefore();
     }

@@ -5,12 +5,12 @@ using System.Diagnostics;
 using System.Linq;
 using Anvil.API;
 using Anvil.API.Events;
-using XM.Core.EventManagement.XMEvent;
 using XM.Data;
 using XM.Migration.Entity;
 using NLog;
 using XM.API.NWNX.AdminPlugin;
 using XM.Core.EventManagement;
+using XM.Core.EventManagement.XMEvent;
 
 namespace XM.Migration
 {

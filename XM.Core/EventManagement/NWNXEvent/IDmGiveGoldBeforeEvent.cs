@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmGiveGoldBeforeEvent
+    public interface IDmGiveGoldBeforeEvent: IXMEvent
     {
         void OnDmGiveGoldBefore();
     }

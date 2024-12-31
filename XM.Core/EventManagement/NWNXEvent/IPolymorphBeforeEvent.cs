@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IPolymorphBeforeEvent
+    public interface IPolymorphBeforeEvent: IXMEvent
     {
         void OnPolymorphBefore();
     }

@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IItemSplitAfterEvent
+    public interface IItemSplitAfterEvent: IXMEvent
     {
         void OnItemSplitAfter();
     }

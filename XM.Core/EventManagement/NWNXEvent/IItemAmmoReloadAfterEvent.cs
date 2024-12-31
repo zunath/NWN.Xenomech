@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IItemAmmoReloadAfterEvent
+    public interface IItemAmmoReloadAfterEvent: IXMEvent
     {
         void OnItemAmmoReloadAfter();
     }

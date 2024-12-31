@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmGetFactionReputationAfterEvent
+    public interface IDmGetFactionReputationAfterEvent: IXMEvent
     {
         void OnDmGetFactionReputationAfter();
     }

@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
-using Anvil.API;
-using Anvil.API.Events;
 using Anvil.Services;
 using NLog;
 using XM.API.Constants;
 using XM.API.NWNX.ObjectPlugin;
 using XM.Core;
 using XM.Core.Entity;
+using XM.Core.EventManagement.ModuleEvent;
 using XM.Core.EventManagement.XMEvent;
 using XM.Data;
 using Location = XM.API.BaseTypes.Location;
@@ -17,7 +16,10 @@ namespace XM.Area
 {
     [ServiceBinding(typeof(WalkmeshService))]
     [ServiceBinding(typeof(IModuleContentChangedEvent))]
-    public class WalkmeshService: IModuleContentChangedEvent
+    [ServiceBinding(typeof(IModuleOnLoadEvent))]
+    public class WalkmeshService: 
+        IModuleContentChangedEvent,
+        IModuleOnLoadEvent
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -30,11 +32,9 @@ namespace XM.Area
         public WalkmeshService(DBService db)
         {
             _db = db;
-
-            NwModule.Instance.OnModuleLoad += OnModuleLoad;
         }
 
-        private void OnModuleLoad(ModuleEvents.OnModuleLoad obj)
+        public void OnModuleLoad()
         {
             if (_bakingRan)
                 return;

@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IUseFeatAfterEvent
+    public interface IUseFeatAfterEvent: IXMEvent
     {
         void OnUseFeatAfter();
     }

@@ -1,6 +1,6 @@
 ﻿using System;
 using XM.UI.Component;
-using XM.UI.WindowDefinition;
+using XM.UI.UI;
 
 namespace XM.UI
 {

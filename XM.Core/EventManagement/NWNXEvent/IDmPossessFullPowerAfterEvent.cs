@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmPossessFullPowerAfterEvent
+    public interface IDmPossessFullPowerAfterEvent: IXMEvent
     {
         void OnDmPossessFullPowerAfter();
     }

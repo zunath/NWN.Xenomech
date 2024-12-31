@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IStealthEnterAfterEvent
+    public interface IStealthEnterAfterEvent: IXMEvent
     {
         void OnStealthEnterAfter();
     }

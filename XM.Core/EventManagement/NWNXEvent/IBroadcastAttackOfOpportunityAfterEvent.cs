@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IBroadcastAttackOfOpportunityAfterEvent
+    public interface IBroadcastAttackOfOpportunityAfterEvent: IXMEvent
     {
         void OnBroadcastAttackOfOpportunityAfter();
     }

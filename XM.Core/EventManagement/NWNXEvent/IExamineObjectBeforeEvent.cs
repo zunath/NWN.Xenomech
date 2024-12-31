@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IExamineObjectBeforeEvent
+    public interface IExamineObjectBeforeEvent: IXMEvent
     {
         void OnExamineObjectBefore();
     }

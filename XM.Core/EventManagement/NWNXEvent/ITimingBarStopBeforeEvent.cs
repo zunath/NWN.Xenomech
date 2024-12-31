@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface ITimingBarStopBeforeEvent
+    public interface ITimingBarStopBeforeEvent: IXMEvent
     {
         void OnTimingBarStopBefore();
     }

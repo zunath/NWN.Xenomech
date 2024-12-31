@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface ICalendarDayEvent
+    public interface ICalendarDayEvent: IXMEvent
     {
         void OnCalendarDay();
     }

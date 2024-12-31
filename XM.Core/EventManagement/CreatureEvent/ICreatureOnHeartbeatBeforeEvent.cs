@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.CreatureEvent
 {
-    public interface ICreatureOnHeartbeatBeforeEvent
+    public interface ICreatureOnHeartbeatBeforeEvent : IXMEvent
     {
         void CreatureOnHeartbeatBefore();
     }

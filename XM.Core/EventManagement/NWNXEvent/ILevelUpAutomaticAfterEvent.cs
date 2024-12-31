@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface ILevelUpAutomaticAfterEvent
+    public interface ILevelUpAutomaticAfterEvent: IXMEvent
     {
         void OnLevelUpAutomaticAfter();
     }

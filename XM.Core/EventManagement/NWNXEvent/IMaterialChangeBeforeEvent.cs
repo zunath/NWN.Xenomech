@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IMaterialChangeBeforeEvent
+    public interface IMaterialChangeBeforeEvent: IXMEvent
     {
         void OnMaterialChangeBefore();
     }

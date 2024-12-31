@@ -3,7 +3,6 @@ using NLog;
 using System.Collections.Generic;
 using Anvil.API;
 using Anvil.API.Events;
-using XM.Core.EventManagement.XMEvent;
 using XM.Quest.Objective;
 using XM.API.NWNX.PlayerPlugin;
 using XM.Data;
@@ -17,6 +16,7 @@ using XM.Inventory;
 using CreatureType = XM.API.Constants.CreatureType;
 using InventoryDisturbType = XM.API.Constants.InventoryDisturbType;
 using System;
+using XM.Core.EventManagement.XMEvent;
 using XM.Core.Extension;
 using XM.Quest.Event;
 

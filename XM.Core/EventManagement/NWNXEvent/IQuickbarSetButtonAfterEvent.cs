@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IQuickbarSetButtonAfterEvent
+    public interface IQuickbarSetButtonAfterEvent: IXMEvent
     {
         void OnQuickbarSetButtonAfter();
     }

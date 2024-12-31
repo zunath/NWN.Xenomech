@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IQuickchatBeforeEvent
+    public interface IQuickchatBeforeEvent: IXMEvent
     {
         void OnQuickchatBefore();
     }

@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmJumpToPointBeforeEvent
+    public interface IDmJumpToPointBeforeEvent: IXMEvent
     {
         void OnDmJumpToPointBefore();
     }

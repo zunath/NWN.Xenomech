@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IItemDecrementStacksizeBeforeEvent
+    public interface IItemDecrementStacksizeBeforeEvent: IXMEvent
     {
         void OnItemDecrementStacksizeBefore();
     }

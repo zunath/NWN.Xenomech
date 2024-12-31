@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface ICalendarMonthEvent
+    public interface ICalendarMonthEvent: IXMEvent
     {
         void OnCalendarMonth();
     }

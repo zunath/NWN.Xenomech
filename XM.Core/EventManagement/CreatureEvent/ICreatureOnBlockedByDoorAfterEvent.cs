@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.CreatureEvent
 {
-    public interface ICreatureOnBlockedByDoorAfterEvent
+    public interface ICreatureOnBlockedByDoorAfterEvent : IXMEvent
     {
         void CreatureOnBlockedByDoorAfter();
     }

@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IUuidCollisionAfterEvent
+    public interface IUuidCollisionAfterEvent: IXMEvent
     {
         void OnUuidCollisionAfter();
     }

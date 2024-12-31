@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.PlayerEvent
 {
-    public interface IPlayerOnSpawnInEvent
+    public interface IPlayerOnSpawnInEvent: IXMEvent
     {
         void PlayerOnSpawnIn();
     }

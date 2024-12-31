@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IUnpolymorphAfterEvent
+    public interface IUnpolymorphAfterEvent: IXMEvent
     {
         void OnUnpolymorphAfter();
     }

@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IElcValidateCharacterAfterEvent
+    public interface IElcValidateCharacterAfterEvent: IXMEvent
     {
         void OnElcValidateCharacterAfter();
     }

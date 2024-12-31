@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface ICombatModeOffEvent
+    public interface ICombatModeOffEvent: IXMEvent
     {
         void OnCombatModeOff();
     }

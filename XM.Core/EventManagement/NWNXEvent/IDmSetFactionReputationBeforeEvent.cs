@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmSetFactionReputationBeforeEvent
+    public interface IDmSetFactionReputationBeforeEvent: IXMEvent
     {
         void OnDmSetFactionReputationBefore();
     }

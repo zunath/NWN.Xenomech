@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface ICastSpellAfterEvent
+    public interface ICastSpellAfterEvent: IXMEvent
     {
         void OnCastSpellAfter();
     }

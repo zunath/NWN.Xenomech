@@ -1,6 +1,6 @@
 ﻿namespace XM.Core.EventManagement.XMEvent
 {
-    public interface IPlayerMigrationBeforeEvent
+    public interface IPlayerMigrationBeforeEvent: IXMEvent
     {
         void OnPlayerMigrationBefore();
     }

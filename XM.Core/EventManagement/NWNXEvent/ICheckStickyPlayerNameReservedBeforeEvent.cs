@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface ICheckStickyPlayerNameReservedBeforeEvent
+    public interface ICheckStickyPlayerNameReservedBeforeEvent: IXMEvent
     {
         void OnCheckStickyPlayerNameReservedBefore();
     }

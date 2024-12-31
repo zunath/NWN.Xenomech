@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IUseSkillBeforeEvent
+    public interface IUseSkillBeforeEvent: IXMEvent
     {
         void OnUseSkillBefore();
     }

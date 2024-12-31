@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface ITrapFlagBeforeEvent
+    public interface ITrapFlagBeforeEvent: IXMEvent
     {
         void OnTrapFlagBefore();
     }

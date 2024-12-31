@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IPvpAttitudeChangeBeforeEvent
+    public interface IPvpAttitudeChangeBeforeEvent: IXMEvent
     {
         void OnPvpAttitudeChangeBefore();
     }

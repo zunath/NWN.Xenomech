@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface ITrapRecoverAfterEvent
+    public interface ITrapRecoverAfterEvent: IXMEvent
     {
         void OnTrapRecoverAfter();
     }

@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.CreatureEvent
 {
-    public interface ICreatureOnRestedAfterEvent
+    public interface ICreatureOnRestedAfterEvent : IXMEvent
     {
         void CreatureOnRestedAfter();
     }

@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IItemUnequipAfterEvent
+    public interface IItemUnequipAfterEvent: IXMEvent
     {
         void OnItemUnequipAfter();
     }

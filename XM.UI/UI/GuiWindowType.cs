@@ -1,4 +1,4 @@
-﻿namespace XM.UI.WindowDefinition
+﻿namespace XM.UI.UI
 {
     public enum GuiWindowType
     {

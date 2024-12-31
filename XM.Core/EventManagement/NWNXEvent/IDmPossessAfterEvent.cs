@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmPossessAfterEvent
+    public interface IDmPossessAfterEvent: IXMEvent
     {
         void OnDmPossessAfter();
     }

@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.AreaEvent
 {
-    public interface IAreaUserDefinedEvent
+    public interface IAreaUserDefinedEvent: IXMEvent
     {
         void OnAreaUserDefinedEvent();
     }

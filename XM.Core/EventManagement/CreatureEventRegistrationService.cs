@@ -7,7 +7,7 @@ using XM.Core.EventManagement.XMEvent;
 namespace XM.Core.EventManagement
 {
     [ServiceBinding(typeof(CreatureEventRegistrationService))]
-    [ServiceBinding(typeof(ISpawnCreatedEvent))]
+    [ServiceBinding(typeof(IXMEvent))]
     internal class CreatureEventRegistrationService : EventRegistrationServiceBase, ISpawnCreatedEvent
     {
         // Before subscriptions

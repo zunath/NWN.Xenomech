@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmSetFactionAfterEvent
+    public interface IDmSetFactionAfterEvent: IXMEvent
     {
         void OnDmSetFactionAfter();
     }

@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.PlayerEvent
 {
-    public interface IPlayerOnDeathEvent
+    public interface IPlayerOnDeathEvent: IXMEvent
     {
         void PlayerOnDeath();
     }

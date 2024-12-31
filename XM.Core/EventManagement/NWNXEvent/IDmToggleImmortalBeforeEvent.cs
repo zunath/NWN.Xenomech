@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmToggleImmortalBeforeEvent
+    public interface IDmToggleImmortalBeforeEvent: IXMEvent
     {
         void OnDmToggleImmortalBefore();
     }

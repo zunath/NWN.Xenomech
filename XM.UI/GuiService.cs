@@ -12,8 +12,8 @@ using XM.Data;
 using XM.UI.Component;
 using XM.UI.Entity;
 using XM.UI.Event;
+using XM.UI.UI;
 using XM.UI.UI.RefreshEvent;
-using XM.UI.WindowDefinition;
 using Action = System.Action;
 using EventScriptType = XM.API.Constants.EventScriptType;
 

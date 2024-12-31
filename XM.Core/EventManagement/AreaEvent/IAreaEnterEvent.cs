@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.AreaEvent
 {
-    public interface IAreaEnterEvent
+    public interface IAreaEnterEvent : IXMEvent
     {
         void OnAreaEnter();
     }

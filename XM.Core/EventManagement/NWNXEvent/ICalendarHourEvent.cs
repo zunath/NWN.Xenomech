@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface ICalendarHourEvent
+    public interface ICalendarHourEvent: IXMEvent
     {
         void OnCalendarHour();
     }

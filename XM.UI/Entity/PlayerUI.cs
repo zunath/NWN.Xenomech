@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using XM.Data;
 using XM.UI.Component;
-using XM.UI.WindowDefinition;
+using XM.UI.UI;
 
 namespace XM.UI.Entity
 {

@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IItemPayToIdentifyAfterEvent
+    public interface IItemPayToIdentifyAfterEvent: IXMEvent
     {
         void OnItemPayToIdentifyAfter();
     }

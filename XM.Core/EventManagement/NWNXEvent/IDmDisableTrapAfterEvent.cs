@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmDisableTrapAfterEvent
+    public interface IDmDisableTrapAfterEvent: IXMEvent
     {
         void OnDmDisableTrapAfter();
     }

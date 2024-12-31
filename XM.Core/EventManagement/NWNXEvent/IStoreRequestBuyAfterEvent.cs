@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IStoreRequestBuyAfterEvent
+    public interface IStoreRequestBuyAfterEvent: IXMEvent
     {
         void OnStoreRequestBuyAfter();
     }

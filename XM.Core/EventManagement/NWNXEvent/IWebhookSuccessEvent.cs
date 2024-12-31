@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IWebhookSuccessEvent
+    public interface IWebhookSuccessEvent: IXMEvent
     {
         void OnWebhookSuccess();
     }

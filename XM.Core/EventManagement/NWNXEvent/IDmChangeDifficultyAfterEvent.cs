@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmChangeDifficultyAfterEvent
+    public interface IDmChangeDifficultyAfterEvent: IXMEvent
     {
         void OnDmChangeDifficultyAfter();
     }

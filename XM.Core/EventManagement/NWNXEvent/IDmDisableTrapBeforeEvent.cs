@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmDisableTrapBeforeEvent
+    public interface IDmDisableTrapBeforeEvent: IXMEvent
     {
         void OnDmDisableTrapBefore();
     }

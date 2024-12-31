@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmSetTimeAfterEvent
+    public interface IDmSetTimeAfterEvent: IXMEvent
     {
         void OnDmSetTimeAfter();
     }

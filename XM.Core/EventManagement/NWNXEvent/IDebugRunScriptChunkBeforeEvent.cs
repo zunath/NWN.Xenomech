@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDebugRunScriptChunkBeforeEvent
+    public interface IDebugRunScriptChunkBeforeEvent: IXMEvent
     {
         void OnDebugRunScriptChunkBefore();
     }

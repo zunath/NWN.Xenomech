@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmSpawnObjectBeforeEvent
+    public interface IDmSpawnObjectBeforeEvent: IXMEvent
     {
         void OnDmSpawnObjectBefore();
     }

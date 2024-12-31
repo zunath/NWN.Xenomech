@@ -1,6 +1,6 @@
 ﻿namespace XM.Core.EventManagement.XMEvent
 {
-    public interface ICacheDataAfterEvent
+    public interface ICacheDataAfterEvent: IXMEvent
     {
         void OnCacheDataAfter();
     }

@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using XM.UI.Component;
 using XM.UI.Properties;
-using XM.UI.WindowDefinition;
+using XM.UI.UI;
 
 namespace XM.UI
 {

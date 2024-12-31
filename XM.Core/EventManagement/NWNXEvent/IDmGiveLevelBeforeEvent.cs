@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IDmGiveLevelBeforeEvent
+    public interface IDmGiveLevelBeforeEvent: IXMEvent
     {
         void OnDmGiveLevelBefore();
     }

@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface IItemDestroyObjectAfterEvent
+    public interface IItemDestroyObjectAfterEvent: IXMEvent
     {
         void OnItemDestroyObjectAfter();
     }

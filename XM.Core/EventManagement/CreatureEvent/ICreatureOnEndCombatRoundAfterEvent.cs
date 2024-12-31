@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.CreatureEvent
 {
-    public interface ICreatureOnEndCombatRoundAfterEvent
+    public interface ICreatureOnEndCombatRoundAfterEvent : IXMEvent
     {
         void CreatureOnEndCombatRoundAfter();
     }

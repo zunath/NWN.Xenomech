@@ -1,6 +1,6 @@
 namespace XM.Core.EventManagement.NWNXEvent
 {
-    public interface ITrapExamineBeforeEvent
+    public interface ITrapExamineBeforeEvent: IXMEvent
     {
         void OnTrapExamineBefore();
     }

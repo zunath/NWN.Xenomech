@@ -1,6 +1,6 @@
 ﻿using Anvil.Services;
 using XM.UI;
-using XM.UI.WindowDefinition;
+using XM.UI.UI;
 
 namespace XM.Progression.Stat.UI.PlayerStatus
 {
