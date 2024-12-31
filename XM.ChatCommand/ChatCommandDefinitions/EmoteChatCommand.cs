@@ -1,9 +1,9 @@
-﻿using Anvil.Services;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Anvil.Services;
 using XM.API.Constants;
 using XM.Authorization;
 
-namespace XM.ChatCommand.Commands
+namespace XM.ChatCommand.ChatCommandDefinitions
 {
     [ServiceBinding(typeof(IChatCommandListDefinition))]
     public class EmoteChatCommand: IChatCommandListDefinition

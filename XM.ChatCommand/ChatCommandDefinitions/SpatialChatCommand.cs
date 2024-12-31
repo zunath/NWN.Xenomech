@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Anvil.Services;
 using XM.Authorization;
 
-namespace XM.ChatCommand.Commands
+namespace XM.ChatCommand.ChatCommandDefinitions
 {
     [ServiceBinding(typeof(IChatCommandListDefinition))]
     public class SpatialChatCommand: IChatCommandListDefinition

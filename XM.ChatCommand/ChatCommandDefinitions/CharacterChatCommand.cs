@@ -7,7 +7,7 @@ using XM.Authorization;
 using XM.Core;
 using XM.Localization;
 
-namespace XM.ChatCommand.Commands
+namespace XM.ChatCommand.ChatCommandDefinitions
 {
     [ServiceBinding(typeof(IChatCommandListDefinition))]
     internal class CharacterChatCommand: IChatCommandListDefinition
