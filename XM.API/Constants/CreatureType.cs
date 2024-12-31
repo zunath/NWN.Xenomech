@@ -4,7 +4,7 @@ namespace XM.API.Constants
     public enum CreatureType
     {
         RacialType = 0,
-        PlayerChar = 1,
+        PlayerCharacter = 1,
         Class = 2,
         Reputation = 3,
         IsAlive = 4,

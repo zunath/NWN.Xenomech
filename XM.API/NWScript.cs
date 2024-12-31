@@ -461,9 +461,9 @@ namespace XM.API
         ///    further specify the type of creature that we are looking for.
         ///  * Return value on error: OBJECT_INVALID
         /// </summary>
-        public static uint GetNearestCreature(int nFirstCriteriaType, int nFirstCriteriaValue, uint oTarget = OBJECT_INVALID, int nNth = 1, int nSecondCriteriaType = -1, int nSecondCriteriaValue = -1, int nThirdCriteriaType = -1, int nThirdCriteriaValue = -1)
+        public static uint GetNearestCreature(CreatureType nFirstCriteriaType, int nFirstCriteriaValue, uint oTarget = OBJECT_INVALID, int nNth = 1, int nSecondCriteriaType = -1, int nSecondCriteriaValue = -1, int nThirdCriteriaType = -1, int nThirdCriteriaValue = -1)
         {
-            return NWN.Core.NWScript.GetNearestCreature(nFirstCriteriaType, nFirstCriteriaValue, oTarget, nNth, nSecondCriteriaType, nSecondCriteriaValue, nThirdCriteriaType, nThirdCriteriaValue);
+            return NWN.Core.NWScript.GetNearestCreature((int)nFirstCriteriaType, nFirstCriteriaValue, oTarget, nNth, nSecondCriteriaType, nSecondCriteriaValue, nThirdCriteriaType, nThirdCriteriaValue);
         }
         /// <summary>
         ///  Add a speak action to the action subject.<br/>
@@ -9138,9 +9138,9 @@ namespace XM.API
         ///  Note: Only works on non-static placeables, creatures, doors and items.<br/>
         ///  On items, it affects interactivity when they&apos;re on the ground, and not useability in inventory.
         /// </summary>
-        public static void SetUseableFlag(uint oTarget, int nUseableFlag)
+        public static void SetUseableFlag(uint oTarget, bool nUseableFlag)
         {
-            NWN.Core.NWScript.SetUseableFlag(oTarget, nUseableFlag);
+            NWN.Core.NWScript.SetUseableFlag(oTarget, nUseableFlag ? 1 : 0);
         }
 
         /// <summary>

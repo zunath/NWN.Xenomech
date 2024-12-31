@@ -414,7 +414,21 @@ namespace XM.API.NWNX.PlayerPlugin
         /// @note In contrast to conventional nwn journal entries - this method will overwrite entries with the same tag, so the index / count of entries will only increase if you add new entries with unique tags
         public static int AddCustomJournalEntry(uint oPlayer, JournalEntry journalEntry, bool nSilentUpdate = false)
         {
-            return NWN.Core.NWNX.PlayerPlugin.AddCustomJournalEntry(oPlayer, journalEntry, nSilentUpdate ? 1 : 0);
+            var coreJournalEntry = new NWN.Core.NWNX.JournalEntry()
+            {
+                sName = journalEntry.Name,
+                sText = journalEntry.Text,
+                sTag = journalEntry.Tag,
+                nState = journalEntry.State,
+                nPriority = journalEntry.Priority,
+                nQuestCompleted = journalEntry.IsQuestCompleted ? 1 : 0,
+                nQuestDisplayed = journalEntry.IsQuestDisplayed ? 1 : 0,
+                nUpdated = journalEntry.Updated,
+                nCalendarDay = journalEntry.CalendarDay,
+                nTimeOfDay = journalEntry.TimeOfDay
+            };
+
+            return NWN.Core.NWNX.PlayerPlugin.AddCustomJournalEntry(oPlayer, coreJournalEntry, nSilentUpdate ? 1 : 0);
         }
 
         /// Returns a struct containing a journal entry that can then be modified.
@@ -425,7 +439,21 @@ namespace XM.API.NWNX.PlayerPlugin
         /// only the last matching quest tag will be returned. Eg: If you add 3 journal updates to a player, only the 3rd one will be returned as that is the active one that the player currently sees.
         public static JournalEntry GetJournalEntry(uint oPlayer, string questTag)
         {
-            return NWN.Core.NWNX.PlayerPlugin.GetJournalEntry(oPlayer, questTag);
+            var coreJournalEntry = NWN.Core.NWNX.PlayerPlugin.GetJournalEntry(oPlayer, questTag);
+
+            return new JournalEntry
+            {
+                Name = coreJournalEntry.sName,
+                Text = coreJournalEntry.sText,
+                Tag = coreJournalEntry.sTag,
+                State = coreJournalEntry.nState,
+                Priority = coreJournalEntry.nPriority,
+                IsQuestCompleted = coreJournalEntry.nQuestCompleted == 1,
+                IsQuestDisplayed = coreJournalEntry.nQuestDisplayed == 1,
+                Updated = coreJournalEntry.nUpdated,
+                CalendarDay = coreJournalEntry.nCalendarDay,
+                TimeOfDay = coreJournalEntry.nTimeOfDay
+            };
         }
 
         /// Closes any store oPlayer may have open.

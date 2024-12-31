@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace XM.Core.EventManagement
 {
-    internal abstract class EventRegistrationServiceBase
+    public abstract class EventRegistrationServiceBase
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 

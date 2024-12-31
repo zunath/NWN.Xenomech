@@ -171,5 +171,15 @@ namespace XM.Inventory.KeyItem
 
             return true;
         }
+
+        /// <summary>
+        /// Gets a key item's detail by its type.
+        /// </summary>
+        /// <param name="keyItem">The type of key item to retrieve.</param>
+        /// <returns>A key item detail</returns>
+        public KeyItemAttribute GetKeyItem(KeyItemType keyItem)
+        {
+            return _allKeyItems[keyItem];
+        }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using Anvil.Services;
+using System;
 
 namespace XM.Inventory
 {
     [ServiceBinding(typeof(InventoryService))]
-    internal class InventoryService
+    public class InventoryService
     {
         /// <summary>
         /// Returns an item to a target.
@@ -24,6 +25,42 @@ namespace XM.Inventory
             {
                 CopyItem(item, target, true);
                 DestroyObject(item);
+            }
+        }
+
+
+        /// <summary>
+        /// Reduces an item stack by a specific amount.
+        /// If there are not enough items in the stack to reduce, false will be returned.
+        /// If the stack size of the item will reach 0, the item is destroyed and true will be returned.
+        /// If the stack size will reach a number greater than 0, the item's stack size will be updated and true will be returned.
+        /// </summary>
+        /// <param name="item">The item to adjust</param>
+        /// <param name="reduceBy">The amount to reduce by. Absolute value is used to determine this value.</param>
+        /// <returns>true if successfully reduced or destroyed, false otherwise</returns>
+        public bool ReduceItemStack(uint item, int reduceBy)
+        {
+            var amount = Math.Abs(reduceBy);
+            var stackSize = GetItemStackSize(item);
+
+            // Have to reduce by at least one.
+            if (amount <= 0)
+                return false;
+
+            // Stack size cannot be smaller than the amount we're reducing by.
+            if (stackSize < reduceBy)
+                return false;
+
+            var remaining = stackSize - reduceBy;
+            if (remaining <= 0)
+            {
+                DestroyObject(item);
+                return true;
+            }
+            else
+            {
+                SetItemStackSize(item, remaining);
+                return true;
             }
         }
     }
