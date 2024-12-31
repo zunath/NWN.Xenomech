@@ -17,14 +17,6 @@ namespace XM.Dialog
     [ServiceBinding(typeof(IXMOnCacheDataBefore))]
     public class DialogService: IXMOnCacheDataBefore
     {
-
-        [ScriptHandler("bread_test")]
-        public void BreadTest()
-        {
-            var player = GetLastUsedBy();
-            StartConversation<TestDialog>(player, OBJECT_SELF);
-        }
-
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         private const int NumberOfDialogs = 255;
