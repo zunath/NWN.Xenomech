@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
 using System.Threading;
 using Anvil.Services;
@@ -14,7 +13,11 @@ using XM.Configuration;
 namespace XM.Data
 {
     [ServiceBinding(typeof(DBService))]
-    public class DBService : IDisposable, IUpdateable, IInitializable
+    [ServiceBinding(typeof(IUpdateable))]
+    public class DBService : 
+        IDisposable, 
+        IUpdateable, 
+        IInitializable
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -97,19 +100,20 @@ namespace XM.Data
             where T : IDBEntity
         {
             var keyPrefix = _keyPrefixByType[typeof(T)];
-            if (_cachedEntities.ContainsKey(id))
+            var combinedKey = $"{keyPrefix}:{id}";
+            if (_cachedEntities.ContainsKey(combinedKey))
             {
-                return (T)_cachedEntities[id];
+                return (T)_cachedEntities[combinedKey];
             }
             else
             {
-                RedisValue data = _multiplexer.GetDatabase().JsonGet($"{keyPrefix}:{id}").ToString();
+                RedisValue data = _multiplexer.GetDatabase().JsonGet(combinedKey).ToString();
 
                 if (string.IsNullOrWhiteSpace(data))
                     return default;
 
                 var entity = JsonConvert.DeserializeObject<T>(data);
-                _cachedEntities[id] = entity;
+                _cachedEntities[combinedKey] = entity;
 
                 return entity;
             }
@@ -150,7 +154,7 @@ namespace XM.Data
             }
             _searchClientsByType[type].ReplaceDocument(indexKey, indexData);
             _multiplexer.GetDatabase().JsonSet($"{keyPrefix}:{entity.Id}", data);
-            _cachedEntities[entity.Id] = entity;
+            _cachedEntities[$"{keyPrefix}:{entity.Id}"] = entity;
         }
 
 
