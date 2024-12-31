@@ -20,6 +20,22 @@
           "type": "byte",
           "value": 6
         },
+        "LIST": {
+          "type": "list",
+          "value": [
+            {
+              "__struct_id": 0,
+              "NAME": {
+                "type": "cexostring",
+                "value": "No Spawn Zone"
+              },
+              "RESREF": {
+                "type": "resref",
+                "value": "anti_spawn_trigg"
+              }
+            }
+          ]
+        },
         "STRREF": {
           "type": "dword",
           "value": 6790
@@ -46,6 +62,22 @@
               "ID": {
                 "type": "byte",
                 "value": 0
+              },
+              "LIST": {
+                "type": "list",
+                "value": [
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Quest Explore Trigger"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "quest_trigger"
+                    }
+                  }
+                ]
               },
               "STRREF": {
                 "type": "dword",

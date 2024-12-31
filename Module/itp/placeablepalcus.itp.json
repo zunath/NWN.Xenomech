@@ -124,6 +124,33 @@
                 "type": "byte",
                 "value": 0
               },
+              "LIST": {
+                "type": "list",
+                "value": [
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Quest Item Collector"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "qst_item_collect"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Quest Object"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "quest_object"
+                    }
+                  }
+                ]
+              },
               "STRREF": {
                 "type": "dword",
                 "value": 6688
