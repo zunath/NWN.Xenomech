@@ -1,7 +1,7 @@
 
 namespace XM.API.Constants
 {
-    public enum GUIPanelType
+    public enum GuiPanelType
     {
         PlayerDeath = 0,
         Minimap = 2,
@@ -9,7 +9,7 @@ namespace XM.API.Constants
         Inventory = 4,
         PlayerList = 5,
         Journal = 6,
-        Spellbook = 7,
+        SpellBook = 7,
         CharacterSheet = 8,
         LevelUp = 9,
         GoldInventory = 10,

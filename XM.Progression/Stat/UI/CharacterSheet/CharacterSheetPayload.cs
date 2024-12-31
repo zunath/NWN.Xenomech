@@ -1,6 +1,8 @@
-﻿namespace XM.UI.UI.Payload
+﻿using XM.UI;
+
+namespace XM.Progression.Stat.UI.CharacterSheet
 {
-    public class CharacterSheetPayload: GuiPayloadBase
+    internal class CharacterSheetPayload : GuiPayloadBase
     {
         public uint Target { get; set; }
         public bool IsPlayerMode { get; set; }

@@ -5,7 +5,6 @@ using Anvil.API;
 using Anvil.API.Events;
 using Anvil.Services;
 using NLog;
-using XM.API.Constants;
 using XM.Core;
 using XM.Core.EventManagement.AreaEvent;
 using XM.Core.EventManagement.XMEvent;
@@ -13,11 +12,10 @@ using XM.Data;
 using XM.UI.Component;
 using XM.UI.Entity;
 using XM.UI.Event;
-using XM.UI.UI.Payload;
 using XM.UI.UI.RefreshEvent;
 using XM.UI.WindowDefinition;
 using Action = System.Action;
-using GuiEventType = XM.API.Constants.GuiEventType;
+using EventScriptType = XM.API.Constants.EventScriptType;
 
 namespace XM.UI
 {
@@ -52,7 +50,6 @@ namespace XM.UI
             NwModule.Instance.OnClientEnter += OnModuleEnter;
             NwModule.Instance.OnClientLeave += OnModuleLeave;
             NwModule.Instance.OnNuiEvent += OnModuleNuiEvent;
-            NwModule.Instance.OnPlayerGuiEvent += OnPlayerGuiEvent;
             NwModule.Instance.OnPlayerEquipItem += OnPlayerEquipItem;
             NwModule.Instance.OnPlayerUnequipItem += OnPlayerUnequipItem;
         }
@@ -69,10 +66,6 @@ namespace XM.UI
         {
             HandleNuiEvents();
             HandleNuiWatchEvent();
-        }
-        private void OnPlayerGuiEvent(ModuleEvents.OnPlayerGuiEvent obj)
-        {
-            ReplaceNWNGuis();
         }
 
         public void OnCacheDataBefore()
@@ -424,38 +417,6 @@ namespace XM.UI
             }
         }
 
-        /// <summary>
-        /// Skips the default NWN window open events and shows the SWLOR windows instead.
-        /// Applies to the Journal and Character Sheet.
-        /// </summary>
-        private void ReplaceNWNGuis()
-        {
-            var player = GetLastGuiEventPlayer();
-            var type = GetLastGuiEventType();
-            if (type != GuiEventType.DisabledPanelAttemptOpen) return;
-            var target = GetLastGuiEventObject();
-
-            var panelType = (GUIPanelType)GetLastGuiEventInteger();
-            if (panelType == GUIPanelType.CharacterSheet)
-            {
-                // Player character sheet
-                if (target == player)
-                {
-                    var payload = new CharacterSheetPayload(player, true);
-                    TogglePlayerWindow(player, GuiWindowType.CharacterSheet, payload);
-                }
-                // Associate character sheet (droid, pet, etc.)
-                else if(GetMaster(target) == player)
-                {
-                    var payload = new CharacterSheetPayload(target, false);
-                    TogglePlayerWindow(player, GuiWindowType.CharacterSheet, payload);
-                }
-            }
-            else if (panelType == GUIPanelType.Journal)
-            {
-                TogglePlayerWindow(player, GuiWindowType.Quests);
-            }
-        }
 
         /// <summary>
         /// Retrieves the window instance of a player's window.

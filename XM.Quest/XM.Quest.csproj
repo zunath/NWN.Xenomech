@@ -72,6 +72,7 @@
   <ProjectReference Include="..\XM.Data\XM.Data.csproj" />
   <ProjectReference Include="..\XM.Dialog\XM.Dialog.csproj" />
   <ProjectReference Include="..\XM.Inventory\XM.Inventory.csproj" />
+  <ProjectReference Include="..\XM.UI\XM.UI.csproj" />
 </ItemGroup>
 
 <Target Name="PostBuild" AfterTargets="PostBuildEvent">

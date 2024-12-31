@@ -10653,9 +10653,9 @@ namespace XM.API
         ///         You can still force examine an object with ActionExamine().<br/>
         ///  * nGuiPanel: A GUI_PANEL_* constant, except GUI_PANEL_PLAYER_DEATH.
         /// </summary>
-        public static void SetGuiPanelDisabled(uint oPlayer, int nGuiPanel, bool bDisabled, uint oTarget = OBJECT_INVALID)
+        public static void SetGuiPanelDisabled(uint oPlayer, GuiPanelType nGuiPanel, bool bDisabled, uint oTarget = OBJECT_INVALID)
         {
-            NWN.Core.NWScript.SetGuiPanelDisabled(oPlayer, nGuiPanel, bDisabled ? 1 : 0, oTarget);
+            NWN.Core.NWScript.SetGuiPanelDisabled(oPlayer, (int)nGuiPanel, bDisabled ? 1 : 0, oTarget);
         }
 
         /// <summary>
