@@ -3,9 +3,6 @@ using Anvil.API.Events;
 using Anvil.Services;
 using NWN.Core.NWNX;
 using XM.Core.EventManagement;
-using XM.Core.EventManagement.AreaEvent;
-using XM.Core.EventManagement.NWNXEvent;
-using XM.Core.EventManagement.PlayerEvent;
 using XM.Progression.Stat.Event;
 using XM.UI;
 
@@ -27,12 +24,12 @@ namespace XM.Progression.Stat.UI.PlayerStatus
 
         private void SubscribeEvents()
         {
-            _event.Subscribe<ItemEquipBeforeEvent>(OnNWNXEquipItem);
-            _event.Subscribe<ItemUnequipBeforeEvent>(OnNWNXUnequipItem);
-            _event.Subscribe<PlayerOnDamagedEvent>(OnPlayerOnDamaged);
+            _event.Subscribe<NWNXEvent.OnItemEquipBefore>(OnNWNXEquipItem);
+            _event.Subscribe<NWNXEvent.OnItemUnequipBefore>(OnNWNXUnequipItem);
+            _event.Subscribe<PlayerEvent.OnDamaged>(OnPlayerOnDamaged);
             _event.Subscribe<PlayerEPAdjustedEvent>(OnPlayerEPAdjusted);
-            _event.Subscribe<HealAfterEvent>(OnHealAfter);
-            _event.Subscribe<AreaEnterEvent>(OnAreaEnter);
+            _event.Subscribe<NWNXEvent.OnHealAfter>(OnHealAfter);
+            _event.Subscribe<AreaEvent.AreaEnterEvent>(OnAreaEnter);
         }
 
         private void PublishEvents(uint target)

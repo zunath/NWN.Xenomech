@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using XM.Core;
 using XM.API.Constants;
 using XM.Core.EventManagement;
-using XM.Core.EventManagement.CreatureEvent;
 
 namespace XM.Inventory.Loot
 {
@@ -34,7 +33,7 @@ namespace XM.Inventory.Loot
             _inventory = inventory;
             _lootTables = new Dictionary<string, LootTable>();
 
-            @event.Subscribe<CreatureOnDeathBeforeEvent>(CreatureOnDeathBefore);
+            @event.Subscribe<CreatureEvent.OnDeathBefore>(CreatureOnDeathBefore);
         }
 
         public void Init()

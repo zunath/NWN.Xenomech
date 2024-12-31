@@ -5,7 +5,6 @@ using Anvil.Services;
 using NLog;
 using XM.API.NWNX.UtilPlugin;
 using XM.Core.EventManagement;
-using XM.Core.EventManagement.XMEvent;
 using XM.Dialog.Event;
 
 namespace XM.Dialog.Snippet
@@ -23,7 +22,7 @@ namespace XM.Dialog.Snippet
 
         public SnippetService(XMEventService @event)
         {
-            @event.Subscribe<CacheDataBeforeEvent>(OnCacheDataBefore);
+            @event.Subscribe<XMEvent.OnCacheDataBefore>(OnCacheDataBefore);
         }
 
         private void OnCacheDataBefore()

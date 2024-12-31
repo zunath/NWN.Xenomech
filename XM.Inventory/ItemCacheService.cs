@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using XM.API.NWNX.UtilPlugin;
 using XM.Core.Entity;
 using XM.Core.EventManagement;
-using XM.Core.EventManagement.XMEvent;
 using XM.Data;
 
 namespace XM.Inventory
@@ -32,8 +31,8 @@ namespace XM.Inventory
 
         private void SubscribeEvents()
         {
-            _event.Subscribe<ModuleContentChangedEvent>(OnModuleContentChanged);
-            _event.Subscribe<CacheDataBeforeEvent>(OnCacheDataBefore);
+            _event.Subscribe<XMEvent.OnModuleContentChanged>(OnModuleContentChanged);
+            _event.Subscribe<XMEvent.OnCacheDataBefore>(OnCacheDataBefore);
         }
 
         private void OnModuleContentChanged()

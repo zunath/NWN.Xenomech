@@ -4,13 +4,10 @@ using System;
 using System.Linq;
 using NLog;
 using XM.API.Constants;
-using XM.Core.EventManagement.AreaEvent;
-using XM.Core.EventManagement.CreatureEvent;
 using System.Numerics;
 using XM.Area;
 using XM.Core;
 using XM.Core.EventManagement;
-using XM.Core.EventManagement.XMEvent;
 using AreaPlugin = XM.API.NWNX.AreaPlugin.AreaPlugin;
 using CreaturePlugin = XM.API.NWNX.CreaturePlugin.CreaturePlugin;
 using ObjectPlugin = XM.API.NWNX.ObjectPlugin.ObjectPlugin;
@@ -48,10 +45,10 @@ namespace XM.Spawn
 
         private void SubscribeEvents()
         {
-            _event.Subscribe<AreaEnterEvent>(OnAreaEnter);
-            _event.Subscribe<AreaExitEvent>(OnAreaExit);
-            _event.Subscribe<CreatureOnDeathBeforeEvent>(CreatureOnDeathBefore);
-            _event.Subscribe<ServerHeartbeatEvent>(OnXMServerHeartbeat);
+            _event.Subscribe<AreaEvent.AreaEnterEvent>(OnAreaEnter);
+            _event.Subscribe<AreaEvent.AreaExitEvent>(OnAreaExit);
+            _event.Subscribe<CreatureEvent.OnDeathBefore>(CreatureOnDeathBefore);
+            _event.Subscribe<XMEvent.OnServerHeartbeat>(OnXMServerHeartbeat);
         }
 
         public void Init()

@@ -8,8 +8,6 @@ using XM.Migration.Entity;
 using NLog;
 using XM.API.NWNX.AdminPlugin;
 using XM.Core.EventManagement;
-using XM.Core.EventManagement.ModuleEvent;
-using XM.Core.EventManagement.XMEvent;
 
 namespace XM.Migration
 {
@@ -30,9 +28,9 @@ namespace XM.Migration
         {
             _db = db;
 
-            @event.Subscribe<ModuleOnPlayerEnterEvent>(OnModuleEnter);
-            @event.Subscribe<CacheDataAfterEvent>(OnCacheDataAfter);
-            @event.Subscribe<DatabaseLoadedEvent>(OnDatabaseLoaded);
+            @event.Subscribe<ModuleEvent.OnPlayerEnter>(OnModuleEnter);
+            @event.Subscribe<XMEvent.OnCacheDataAfter>(OnCacheDataAfter);
+            @event.Subscribe<XMEvent.OnDatabaseLoaded>(OnDatabaseLoaded);
         }
 
         private void OnModuleEnter()

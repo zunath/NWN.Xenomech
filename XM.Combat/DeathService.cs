@@ -4,8 +4,6 @@ using XM.API.Constants;
 using XM.Area;
 using XM.Combat.Entity;
 using XM.Core.EventManagement;
-using XM.Core.EventManagement.ModuleEvent;
-using XM.Core.EventManagement.XMEvent;
 using XM.Data;
 using XM.Localization;
 
@@ -36,10 +34,10 @@ namespace XM.Combat
 
         private void SubscribeEvents()
         {
-            _event.Subscribe<ModuleOnPlayerDyingEvent>(OnModuleDying);
-            _event.Subscribe<ModuleOnPlayerDeathEvent>(OnModuleDeath);
-            _event.Subscribe<ModuleOnPlayerRespawnEvent>(OnModuleRespawn);
-            _event.Subscribe<PCInitializedEvent>(OnPCInitialized);
+            _event.Subscribe<ModuleEvent.OnPlayerDying>(OnModuleDying);
+            _event.Subscribe<ModuleEvent.OnPlayerDeath>(OnModuleDeath);
+            _event.Subscribe<ModuleEvent.OnPlayerRespawn>(OnModuleRespawn);
+            _event.Subscribe<XMEvent.OnPCInitialized>(OnPCInitialized);
         }
 
 

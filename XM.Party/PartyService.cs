@@ -4,8 +4,6 @@ using System.Linq;
 using Anvil.Services;
 using NWN.Core.NWNX;
 using XM.Core.EventManagement;
-using XM.Core.EventManagement.ModuleEvent;
-using XM.Core.EventManagement.NWNXEvent;
 
 namespace XM.Party
 {
@@ -27,12 +25,12 @@ namespace XM.Party
 
         private void SubscribeEvents()
         {
-            _event.Subscribe<ModuleOnPlayerLeaveEvent>(OnModuleLeave);
-            _event.Subscribe<PartyAcceptInvitationBeforeEvent>(OnPartyAcceptInvitationBefore);
-            _event.Subscribe<AddAssociateBeforeEvent>(OnAddAssociateBefore);
-            _event.Subscribe<RemoveAssociateBeforeEvent>(OnRemoveAssociateBefore);
-            _event.Subscribe<PartyLeaveBeforeEvent>(OnPartyLeaveBefore);
-            _event.Subscribe<PartyTransferLeadershipBeforeEvent>(OnPartyTransferLeadershipBefore);
+            _event.Subscribe<ModuleEvent.OnPlayerLeave>(OnModuleLeave);
+            _event.Subscribe<NWNXEvent.OnPartyAcceptInvitationBefore>(OnPartyAcceptInvitationBefore);
+            _event.Subscribe<NWNXEvent.OnAddAssociateBefore>(OnAddAssociateBefore);
+            _event.Subscribe<NWNXEvent.OnRemoveAssociateBefore>(OnRemoveAssociateBefore);
+            _event.Subscribe<NWNXEvent.OnPartyLeaveBefore>(OnPartyLeaveBefore);
+            _event.Subscribe<NWNXEvent.OnPartyTransferLeadershipBefore>(OnPartyTransferLeadershipBefore);
         }
 
         private void OnModuleLeave()

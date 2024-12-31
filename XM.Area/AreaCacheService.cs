@@ -2,7 +2,6 @@
 using NLog;
 using System.Collections.Generic;
 using XM.Core.EventManagement;
-using XM.Core.EventManagement.XMEvent;
 
 namespace XM.Area
 {
@@ -17,7 +16,7 @@ namespace XM.Area
         {
             _areasByResref = new Dictionary<string, uint>();
 
-            @event.Subscribe<CacheDataBeforeEvent>(OnCacheDataBefore);
+            @event.Subscribe<XMEvent.OnCacheDataBefore>(OnCacheDataBefore);
         }
 
         /// <summary>

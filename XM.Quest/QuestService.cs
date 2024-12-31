@@ -9,14 +9,11 @@ using JournalEntry = XM.API.NWNX.PlayerPlugin.JournalEntry;
 using System.Linq;
 using XM.API.Constants;
 using XM.Core.Activity;
-using XM.Core.EventManagement.CreatureEvent;
 using XM.Inventory;
 using CreatureType = XM.API.Constants.CreatureType;
 using InventoryDisturbType = XM.API.Constants.InventoryDisturbType;
 using System;
 using XM.Core.EventManagement;
-using XM.Core.EventManagement.ModuleEvent;
-using XM.Core.EventManagement.XMEvent;
 using XM.Core.Extension;
 using XM.Quest.Event;
 
@@ -66,9 +63,9 @@ namespace XM.Quest
 
         private void SubscribeEvents()
         {
-            _event.Subscribe<ModuleOnPlayerEnterEvent>(OnPlayerEnter);
-            _event.Subscribe<CacheDataBeforeEvent>(OnCacheDataBefore);
-            _event.Subscribe<CreatureOnDeathBeforeEvent>(CreatureOnDeathBefore);
+            _event.Subscribe<ModuleEvent.OnPlayerEnter>(OnPlayerEnter);
+            _event.Subscribe<XMEvent.OnCacheDataBefore>(OnCacheDataBefore);
+            _event.Subscribe<CreatureEvent.OnDeathBefore>(CreatureOnDeathBefore);
 
         }
 

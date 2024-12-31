@@ -5,8 +5,6 @@ using Anvil.Services;
 using NLog;
 using XM.API.Constants;
 using XM.Core.EventManagement;
-using XM.Core.EventManagement.ModuleEvent;
-using XM.Core.EventManagement.XMEvent;
 using XM.Dialog.Event;
 using EventScriptType = XM.API.Constants.EventScriptType;
 
@@ -32,8 +30,8 @@ namespace XM.Dialog
         {
             _serviceManager = serviceManager;
 
-            @event.Subscribe<CacheDataBeforeEvent>(OnCacheDataBefore);
-            @event.Subscribe<ModuleOnLoadEvent>(OnModuleLoad);
+            @event.Subscribe<XMEvent.OnCacheDataBefore>(OnCacheDataBefore);
+            @event.Subscribe<ModuleEvent.OnLoad>(OnModuleLoad);
         }
 
         /// <summary>

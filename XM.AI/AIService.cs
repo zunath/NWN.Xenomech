@@ -1,6 +1,5 @@
 ﻿using Anvil.Services;
 using XM.Core.EventManagement;
-using XM.Core.EventManagement.XMEvent;
 
 namespace XM.AI
 {
@@ -11,7 +10,7 @@ namespace XM.AI
 
         public AIService(XMEventService @event)
         {
-            @event.Subscribe<SpawnCreatedEvent>(OnSpawnCreated);
+            @event.Subscribe<XMEvent.OnSpawnCreated>(OnSpawnCreated);
         }
         private void OnSpawnCreated()
         {

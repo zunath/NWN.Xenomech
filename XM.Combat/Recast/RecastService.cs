@@ -6,7 +6,6 @@ using System.Linq;
 using XM.Combat.Entity;
 using XM.Core;
 using XM.Core.EventManagement;
-using XM.Core.EventManagement.XMEvent;
 using XM.Core.Extension;
 using XM.Data;
 using XM.Localization;
@@ -32,13 +31,11 @@ namespace XM.Combat.Recast
             _time = time;
             _stat = stat;
 
-            @event.Subscribe<CacheDataBeforeEvent>(OnCacheDataBefore);
+            @event.Subscribe<XMEvent.OnCacheDataBefore>(OnCacheDataBefore);
         }
 
         private void OnCacheDataBefore()
         {
-            Console.WriteLine($"data cache before running for recast service");
-
             CacheRecastGroupNames();
         }
 

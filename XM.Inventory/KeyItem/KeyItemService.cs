@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using XM.Core.EventManagement;
-using XM.Core.EventManagement.XMEvent;
 using XM.Core.Extension;
 using XM.Data;
 using XM.Inventory.Entity;
@@ -34,7 +33,7 @@ namespace XM.Inventory.KeyItem
         {
             _db = db;
 
-            @event.Subscribe<CacheDataBeforeEvent>(OnCacheDataBefore);
+            @event.Subscribe<XMEvent.OnCacheDataBefore>(OnCacheDataBefore);
         }
 
         private void OnCacheDataBefore()

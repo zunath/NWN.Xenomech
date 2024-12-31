@@ -7,8 +7,6 @@ using Anvil.Services;
 using NLog;
 using XM.Core;
 using XM.Core.EventManagement;
-using XM.Core.EventManagement.AreaEvent;
-using XM.Core.EventManagement.XMEvent;
 using XM.Data;
 using XM.UI.Component;
 using XM.UI.Entity;
@@ -38,8 +36,8 @@ namespace XM.UI
         {
             _db = db;
 
-            @event.Subscribe<CacheDataBeforeEvent>(OnCacheDataBefore);
-            @event.Subscribe<AreaEnterEvent>(OnAreaEnter);
+            @event.Subscribe<XMEvent.OnCacheDataBefore>(OnCacheDataBefore);
+            @event.Subscribe<AreaEvent.AreaEnterEvent>(OnAreaEnter);
 
             HookEvents();
         }

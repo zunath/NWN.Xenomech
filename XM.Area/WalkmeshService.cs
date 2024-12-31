@@ -9,8 +9,6 @@ using XM.API.NWNX.ObjectPlugin;
 using XM.Core;
 using XM.Core.Entity;
 using XM.Core.EventManagement;
-using XM.Core.EventManagement.ModuleEvent;
-using XM.Core.EventManagement.XMEvent;
 using XM.Data;
 using Location = XM.API.BaseTypes.Location;
 
@@ -39,8 +37,8 @@ namespace XM.Area
 
         private void SubscribeEvents()
         {
-            _event.Subscribe<ModuleOnLoadEvent>(OnModuleLoad);
-            _event.Subscribe<ModuleContentChangedEvent>(OnModuleContentChanged);
+            _event.Subscribe<ModuleEvent.OnLoad>(OnModuleLoad);
+            _event.Subscribe<XMEvent.OnModuleContentChanged>(OnModuleContentChanged);
         }
 
         private void OnModuleLoad()
