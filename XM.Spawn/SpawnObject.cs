@@ -5,7 +5,6 @@ using XM.API.Constants;
 
 namespace XM.Spawn
 {
-    public delegate void OnSpawnDelegate(uint spawn);
 
     internal class SpawnObject
     {
