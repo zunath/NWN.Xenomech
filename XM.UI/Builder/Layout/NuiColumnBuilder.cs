@@ -4,16 +4,17 @@ using XM.UI.Builder.Component;
 
 namespace XM.UI.Builder.Layout
 {
-    public class NuiColumnBuilder : NuiBuilderBase<NuiColumnBuilder, NuiColumn>
+    public class NuiColumnBuilder<TViewModel> : NuiBuilderBase<NuiColumnBuilder<TViewModel>, NuiColumn, TViewModel>
+        where TViewModel: IViewModel
     {
         public NuiColumnBuilder()
             : base(new NuiColumn())
         {
         }
 
-        public NuiColumnBuilder AddRow(Action<NuiRowBuilder> row)
+        public NuiColumnBuilder<TViewModel> AddRow(Action<NuiRowBuilder<TViewModel>> row)
         {
-            var rowBuilder = new NuiRowBuilder();
+            var rowBuilder = new NuiRowBuilder<TViewModel>();
             row(rowBuilder);
 
             Element.Children.Add(rowBuilder.Build());
@@ -21,9 +22,9 @@ namespace XM.UI.Builder.Layout
             return this;
         }
 
-        public NuiColumnBuilder AddButton(Action<NuiButtonBuilder> button)
+        public NuiColumnBuilder<TViewModel> AddButton(Action<NuiButtonBuilder<TViewModel>> button)
         {
-            var buttonBuilder = new NuiButtonBuilder();
+            var buttonBuilder = new NuiButtonBuilder<TViewModel>();
             button(buttonBuilder);
 
             Element.Children.Add(buttonBuilder.Build());
@@ -31,9 +32,9 @@ namespace XM.UI.Builder.Layout
             return this;
         }
 
-        public NuiColumnBuilder AddButtonImage(Action<NuiButtonImageBuilder> buttonImage)
+        public NuiColumnBuilder<TViewModel> AddButtonImage(Action<NuiButtonImageBuilder<TViewModel>> buttonImage)
         {
-            var buttonImageBuilder = new NuiButtonImageBuilder();
+            var buttonImageBuilder = new NuiButtonImageBuilder<TViewModel>();
             buttonImage(buttonImageBuilder);
 
             Element.Children.Add(buttonImageBuilder.Build());
@@ -41,9 +42,9 @@ namespace XM.UI.Builder.Layout
             return this;
         }
 
-        public NuiColumnBuilder AddButtonSelect(Action<NuiButtonSelectBuilder> buttonSelect)
+        public NuiColumnBuilder<TViewModel> AddButtonSelect(Action<NuiButtonSelectBuilder<TViewModel>> buttonSelect)
         {
-            var buttonSelectBuilder = new NuiButtonSelectBuilder();
+            var buttonSelectBuilder = new NuiButtonSelectBuilder<TViewModel>();
             buttonSelect(buttonSelectBuilder);
 
             Element.Children.Add(buttonSelectBuilder.Build());
@@ -51,9 +52,9 @@ namespace XM.UI.Builder.Layout
             return this;
         }
 
-        public NuiColumnBuilder AddChart(Action<NuiChartBuilder> chart)
+        public NuiColumnBuilder<TViewModel> AddChart(Action<NuiChartBuilder<TViewModel>> chart)
         {
-            var chartBuilder = new NuiChartBuilder();
+            var chartBuilder = new NuiChartBuilder<TViewModel>();
             chart(chartBuilder);
 
             Element.Children.Add(chartBuilder.Build());
@@ -61,9 +62,9 @@ namespace XM.UI.Builder.Layout
             return this;
         }
 
-        public NuiColumnBuilder AddCheck(Action<NuiCheckBuilder> check)
+        public NuiColumnBuilder<TViewModel> AddCheck(Action<NuiCheckBuilder<TViewModel>> check)
         {
-            var checkBuilder = new NuiCheckBuilder();
+            var checkBuilder = new NuiCheckBuilder<TViewModel>();
             check(checkBuilder);
 
             Element.Children.Add(checkBuilder.Build());
@@ -71,9 +72,9 @@ namespace XM.UI.Builder.Layout
             return this;
         }
 
-        public NuiColumnBuilder AddColorPicker(Action<NuiColorPickerBuilder> colorPicker)
+        public NuiColumnBuilder<TViewModel> AddColorPicker(Action<NuiColorPickerBuilder<TViewModel>> colorPicker)
         {
-            var colorPickerBuilder = new NuiColorPickerBuilder();
+            var colorPickerBuilder = new NuiColorPickerBuilder<TViewModel>();
             colorPicker(colorPickerBuilder);
 
             Element.Children.Add(colorPickerBuilder.Build());
@@ -81,9 +82,9 @@ namespace XM.UI.Builder.Layout
             return this;
         }
 
-        public NuiColumnBuilder AddComboBox(Action<NuiComboBuilder> comboBox)
+        public NuiColumnBuilder<TViewModel> AddComboBox(Action<NuiComboBuilder<TViewModel>> comboBox)
         {
-            var comboBoxBuilder = new NuiComboBuilder();
+            var comboBoxBuilder = new NuiComboBuilder<TViewModel>();
             comboBox(comboBoxBuilder);
 
             Element.Children.Add(comboBoxBuilder.Build());
@@ -91,9 +92,9 @@ namespace XM.UI.Builder.Layout
             return this;
         }
 
-        public NuiColumnBuilder AddImage(Action<NuiImageBuilder> image)
+        public NuiColumnBuilder<TViewModel> AddImage(Action<NuiImageBuilder<TViewModel>> image)
         {
-            var imageBuilder = new NuiImageBuilder();
+            var imageBuilder = new NuiImageBuilder<TViewModel>();
             image(imageBuilder);
 
             Element.Children.Add(imageBuilder.Build());
@@ -101,9 +102,9 @@ namespace XM.UI.Builder.Layout
             return this;
         }
 
-        public NuiColumnBuilder AddLabel(Action<NuiLabelBuilder> label)
+        public NuiColumnBuilder<TViewModel> AddLabel(Action<NuiLabelBuilder<TViewModel>> label)
         {
-            var labelBuilder = new NuiLabelBuilder();
+            var labelBuilder = new NuiLabelBuilder<TViewModel>();
             label(labelBuilder);
 
             Element.Children.Add(labelBuilder.Build());
@@ -111,9 +112,9 @@ namespace XM.UI.Builder.Layout
             return this;
         }
 
-        public NuiColumnBuilder AddOptions(Action<NuiOptionsBuilder> options)
+        public NuiColumnBuilder<TViewModel> AddOptions(Action<NuiOptionsBuilder<TViewModel>> options)
         {
-            var optionsBuilder = new NuiOptionsBuilder();
+            var optionsBuilder = new NuiOptionsBuilder<TViewModel>();
             options(optionsBuilder);
 
             Element.Children.Add(optionsBuilder.Build());
@@ -121,9 +122,9 @@ namespace XM.UI.Builder.Layout
             return this;
         }
 
-        public NuiColumnBuilder AddProgress(Action<NuiProgressBuilder> progress)
+        public NuiColumnBuilder<TViewModel> AddProgress(Action<NuiProgressBuilder<TViewModel>> progress)
         {
-            var progressBuilder = new NuiProgressBuilder();
+            var progressBuilder = new NuiProgressBuilder<TViewModel>();
             progress(progressBuilder);
 
             Element.Children.Add(progressBuilder.Build());
@@ -131,9 +132,9 @@ namespace XM.UI.Builder.Layout
             return this;
         }
 
-        public NuiColumnBuilder AddSlider(Action<NuiSliderBuilder> slider)
+        public NuiColumnBuilder<TViewModel> AddSlider(Action<NuiSliderBuilder<TViewModel>> slider)
         {
-            var sliderBuilder = new NuiSliderBuilder();
+            var sliderBuilder = new NuiSliderBuilder<TViewModel>();
             slider(sliderBuilder);
 
             Element.Children.Add(sliderBuilder.Build());
@@ -141,9 +142,9 @@ namespace XM.UI.Builder.Layout
             return this;
         }
 
-        public NuiColumnBuilder AddSliderFloat(Action<NuiSliderFloatBuilder> sliderFloat)
+        public NuiColumnBuilder<TViewModel> AddSliderFloat(Action<NuiSliderFloatBuilder<TViewModel>> sliderFloat)
         {
-            var sliderFloatBuilder = new NuiSliderFloatBuilder();
+            var sliderFloatBuilder = new NuiSliderFloatBuilder<TViewModel>();
             sliderFloat(sliderFloatBuilder);
 
             Element.Children.Add(sliderFloatBuilder.Build());
@@ -151,17 +152,17 @@ namespace XM.UI.Builder.Layout
             return this;
         }
 
-        public NuiColumnBuilder AddSpacer()
+        public NuiColumnBuilder<TViewModel> AddSpacer()
         {
-            var spaceBuilder = new NuiSpacerBuilder();
+            var spaceBuilder = new NuiSpacerBuilder<TViewModel>();
             Element.Children.Add(spaceBuilder.Build());
 
             return this;
         }
 
-        public NuiColumnBuilder AddText(Action<NuiTextBuilder> text)
+        public NuiColumnBuilder<TViewModel> AddText(Action<NuiTextBuilder<TViewModel>> text)
         {
-            var textBuilder = new NuiTextBuilder();
+            var textBuilder = new NuiTextBuilder<TViewModel>();
             text(textBuilder);
 
             Element.Children.Add(textBuilder.Build());
@@ -169,9 +170,9 @@ namespace XM.UI.Builder.Layout
             return this;
         }
 
-        public NuiColumnBuilder AddTextEdit(Action<NuiTextEditBuilder> textEdit)
+        public NuiColumnBuilder<TViewModel> AddTextEdit(Action<NuiTextEditBuilder<TViewModel>> textEdit)
         {
-            var textEditBuilder = new NuiTextEditBuilder();
+            var textEditBuilder = new NuiTextEditBuilder<TViewModel>();
             textEdit(textEditBuilder);
 
             Element.Children.Add(textEditBuilder.Build());
@@ -179,9 +180,9 @@ namespace XM.UI.Builder.Layout
             return this;
         }
 
-        public NuiColumnBuilder AddToggles(Action<NuiTogglesBuilder> toggles)
+        public NuiColumnBuilder<TViewModel> AddToggles(Action<NuiTogglesBuilder<TViewModel>> toggles)
         {
-            var togglesBuilder = new NuiTogglesBuilder();
+            var togglesBuilder = new NuiTogglesBuilder<TViewModel>();
             toggles(togglesBuilder);
 
             Element.Children.Add(togglesBuilder.Build());

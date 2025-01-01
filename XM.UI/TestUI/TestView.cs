@@ -5,10 +5,10 @@ using XM.UI.Builder;
 
 namespace XM.UI.TestUI
 {
-    [ServiceBinding(typeof(TestView))]
-    internal class TestView
+    [ServiceBinding(typeof(IView))]
+    internal class TestView: IView
     {
-        private readonly NuiBuilder _builder = new();
+        private readonly NuiBuilder<TestViewModel> _builder = new();
 
         public TestView()
         {
@@ -29,6 +29,7 @@ namespace XM.UI.TestUI
                                 .AddButton(button =>
                                 {
                                     button.SetLabel("my new button");
+                                    button.BindLabel(model => model.TestProp1);
                                 })
                                 .AddCheck(check =>
                                 {
@@ -52,6 +53,11 @@ namespace XM.UI.TestUI
             Console.WriteLine(json);
             var player = GetLastUsedBy();
             NuiCreate(player, JsonParse(json), window.Id, "");
+        }
+
+        public IViewModel CreateViewModel(uint player)
+        {
+            return new TestViewModel();
         }
     }
 }

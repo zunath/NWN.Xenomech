@@ -2,6 +2,6 @@
 {
     public interface IView
     {
-        string Id { get; }
+
     }
 }

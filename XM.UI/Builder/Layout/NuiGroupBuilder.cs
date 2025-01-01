@@ -4,28 +4,29 @@ using XM.UI.Builder.Component;
 
 namespace XM.UI.Builder.Layout
 {
-    public class NuiGroupBuilder : NuiBuilderBase<NuiGroupBuilder, NuiGroup>
+    public class NuiGroupBuilder<TViewModel> : NuiBuilderBase<NuiGroupBuilder<TViewModel>, NuiGroup, TViewModel>
+        where TViewModel: IViewModel
     {
         public NuiGroupBuilder()
             : base(new NuiGroup())
         {
         }
 
-        public NuiGroupBuilder SetBorder(bool border)
+        public NuiGroupBuilder<TViewModel> SetBorder(bool border)
         {
             Element.Border = border;
             return this;
         }
 
-        public NuiGroupBuilder SetScrollbars(NuiScrollbars scrollbars)
+        public NuiGroupBuilder<TViewModel> SetScrollbars(NuiScrollbars scrollbars)
         {
             Element.Scrollbars = scrollbars;
             return this;
         }
 
-        public NuiGroupBuilder SetLayout(Action<NuiColumnBuilder> column)
+        public NuiGroupBuilder<TViewModel> SetLayout(Action<NuiColumnBuilder<TViewModel>> column)
         {
-            var columnBuilder = new NuiColumnBuilder();
+            var columnBuilder = new NuiColumnBuilder<TViewModel>();
             column(columnBuilder);
 
             Element.Layout = columnBuilder.Build();

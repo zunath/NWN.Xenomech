@@ -4,25 +4,26 @@ using XM.UI.Builder.Layout;
 
 namespace XM.UI.Builder
 {
-    public class NuiBuilder
+    public class NuiBuilder<TViewModel>
+        where TViewModel: IViewModel
     {
         private NuiWindowBuilder _windowBuilder;
 
-        public NuiBuilder CreateWindow(Action<NuiWindowBuilder> configure)
+        public NuiBuilder<TViewModel> CreateWindow(Action<NuiWindowBuilder> configure)
         {
-            _windowBuilder = new NuiWindowBuilder(new NuiColumnBuilder().Build(), "New Window");
+            _windowBuilder = new NuiWindowBuilder(new NuiColumnBuilder<TViewModel>().Build(), "New Window");
             configure(_windowBuilder);
             return this;
         }
 
-        public NuiBuilder SetRoot(Action<NuiColumnBuilder> configure)
+        public NuiBuilder<TViewModel> SetRoot(Action<NuiColumnBuilder<TViewModel>> configure)
         {
             if (_windowBuilder == null)
             {
                 throw new InvalidOperationException("You must create a window before adding a column.");
             }
 
-            var columnBuilder = new NuiColumnBuilder();
+            var columnBuilder = new NuiColumnBuilder<TViewModel>();
             configure(columnBuilder);
             _windowBuilder.SetRoot(columnBuilder.Build());
 
