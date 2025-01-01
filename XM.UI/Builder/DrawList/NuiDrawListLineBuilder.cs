@@ -1,9 +1,4 @@
 ﻿using Anvil.API;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace XM.UI.Builder.DrawList
 {
@@ -14,31 +9,31 @@ namespace XM.UI.Builder.DrawList
         {
         }
 
-        public NuiDrawListLineBuilder WithPointA(NuiVector pointA)
+        public NuiDrawListLineBuilder SetPointA(NuiVector pointA)
         {
             Element.PointA = pointA;
             return this;
         }
 
-        public NuiDrawListLineBuilder WithPointB(NuiVector pointB)
+        public NuiDrawListLineBuilder SetPointB(NuiVector pointB)
         {
             Element.PointB = pointB;
             return this;
         }
 
-        public NuiDrawListLineBuilder WithLineThickness(float lineThickness)
+        public NuiDrawListLineBuilder SetLineThickness(float lineThickness)
         {
             Element.LineThickness = lineThickness;
             return this;
         }
 
-        public NuiDrawListLineBuilder WithFill(bool fill)
+        public NuiDrawListLineBuilder SetFill(bool fill)
         {
             Element.Fill = fill;
             return this;
         }
 
-        public NuiDrawListLineBuilder WithColor(Color color)
+        public NuiDrawListLineBuilder SetColor(Color color)
         {
             Element.Color = color;
             return this;

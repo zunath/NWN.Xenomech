@@ -10,19 +10,19 @@ namespace XM.UI.Builder.DrawList
         {
         }
 
-        public NuiDrawListTextBuilder WithRect(NuiRect rect)
+        public NuiDrawListTextBuilder SetRect(NuiRect rect)
         {
             Element.Rect = rect;
             return this;
         }
 
-        public NuiDrawListTextBuilder WithText(string text)
+        public NuiDrawListTextBuilder SetText(string text)
         {
             Element.Text = text;
             return this;
         }
 
-        public NuiDrawListTextBuilder WithColor(Color color)
+        public NuiDrawListTextBuilder SetColor(Color color)
         {
             Element.Color = color;
             return this;

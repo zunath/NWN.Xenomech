@@ -1,20 +1,16 @@
 ﻿using Anvil.API;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace XM.UI.Builder
+namespace XM.UI.Builder.Component
 {
     public class NuiTogglesBuilder : NuiBuilderBase<NuiTogglesBuilder, NuiToggles>
     {
-        public NuiTogglesBuilder(NuiDirection direction, List<string> elements)
-            : base(new NuiToggles(direction, elements))
+        public NuiTogglesBuilder()
+            : base(new NuiToggles(NuiDirection.Horizontal, []))
         {
         }
 
-        public NuiTogglesBuilder WithDirection(NuiDirection direction)
+        public NuiTogglesBuilder SetDirection(NuiDirection direction)
         {
             Element.Direction = direction;
             return this;

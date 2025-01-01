@@ -1,15 +1,15 @@
 ﻿using Anvil.API;
 
-namespace XM.UI.Builder
+namespace XM.UI.Builder.Component
 {
     public class NuiButtonImageBuilder : NuiBuilderBase<NuiButtonImageBuilder, NuiButtonImage>
     {
-        public NuiButtonImageBuilder(string resRef)
-            : base(new NuiButtonImage(resRef))
+        public NuiButtonImageBuilder()
+            : base(new NuiButtonImage(string.Empty))
         {
         }
 
-        public NuiButtonImageBuilder WithResRef(string resRef)
+        public NuiButtonImageBuilder SetResRef(string resRef)
         {
             Element.ResRef = resRef;
             return this;

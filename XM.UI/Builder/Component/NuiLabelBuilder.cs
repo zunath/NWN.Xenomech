@@ -1,27 +1,27 @@
 ﻿using Anvil.API;
 
-namespace XM.UI.Builder
+namespace XM.UI.Builder.Component
 {
     public class NuiLabelBuilder : NuiBuilderBase<NuiLabelBuilder, NuiLabel>
     {
-        public NuiLabelBuilder(string label)
-            : base(new NuiLabel(label))
+        public NuiLabelBuilder()
+            : base(new NuiLabel(string.Empty))
         {
         }
 
-        public NuiLabelBuilder WithHorizontalAlign(NuiHAlign horizontalAlign)
+        public NuiLabelBuilder SetHorizontalAlign(NuiHAlign horizontalAlign)
         {
             Element.HorizontalAlign = horizontalAlign;
             return this;
         }
 
-        public NuiLabelBuilder WithVerticalAlign(NuiVAlign verticalAlign)
+        public NuiLabelBuilder SetVerticalAlign(NuiVAlign verticalAlign)
         {
             Element.VerticalAlign = verticalAlign;
             return this;
         }
 
-        public NuiLabelBuilder WithLabel(string label)
+        public NuiLabelBuilder SetLabel(string label)
         {
             Element.Label = label;
             return this;

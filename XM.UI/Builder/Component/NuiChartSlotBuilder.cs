@@ -1,7 +1,7 @@
 ﻿using Anvil.API;
 using System.Collections.Generic;
 
-namespace XM.UI.Builder
+namespace XM.UI.Builder.Component
 {
     public class NuiChartSlotBuilder
     {
@@ -10,25 +10,25 @@ namespace XM.UI.Builder
         private NuiProperty<Color> _color = new Color(255, 255, 255); // Default to white
         private NuiProperty<List<float>> _data = new List<float>();
 
-        public NuiChartSlotBuilder WithChartType(NuiChartType chartType)
+        public NuiChartSlotBuilder SetChartType(NuiChartType chartType)
         {
             _chartType = chartType;
             return this;
         }
 
-        public NuiChartSlotBuilder WithLegend(string legend)
+        public NuiChartSlotBuilder SetLegend(string legend)
         {
             _legend = legend;
             return this;
         }
 
-        public NuiChartSlotBuilder WithColor(Color color)
+        public NuiChartSlotBuilder SetColor(Color color)
         {
             _color = color;
             return this;
         }
 
-        public NuiChartSlotBuilder WithData(List<float> data)
+        public NuiChartSlotBuilder SetData(List<float> data)
         {
             _data = data;
             return this;

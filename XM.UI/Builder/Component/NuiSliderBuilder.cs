@@ -1,33 +1,33 @@
 ﻿using Anvil.API;
 
-namespace XM.UI.Builder
+namespace XM.UI.Builder.Component
 {
     public class NuiSliderBuilder : NuiBuilderBase<NuiSliderBuilder, NuiSlider>
     {
-        public NuiSliderBuilder(int value, int min, int max)
-            : base(new NuiSlider(value, min, max))
+        public NuiSliderBuilder()
+            : base(new NuiSlider(0, 0,0))
         {
         }
 
-        public NuiSliderBuilder WithValue(int value)
+        public NuiSliderBuilder SetValue(int value)
         {
             Element.Value = value;
             return this;
         }
 
-        public NuiSliderBuilder WithMin(int min)
+        public NuiSliderBuilder SetMin(int min)
         {
             Element.Min = min;
             return this;
         }
 
-        public NuiSliderBuilder WithMax(int max)
+        public NuiSliderBuilder SetMax(int max)
         {
             Element.Max = max;
             return this;
         }
 
-        public NuiSliderBuilder WithStep(int step)
+        public NuiSliderBuilder SetStep(int step)
         {
             Element.Step = step;
             return this;

@@ -13,37 +13,37 @@ namespace XM.UI.Builder.DrawList
             Element = element;
         }
 
-        public TBuilder WithColor(NuiProperty<Color>? color)
+        public TBuilder SetColor(NuiProperty<Color>? color)
         {
             Element.Color = color;
             return (TBuilder)this;
         }
 
-        public TBuilder WithEnabled(NuiProperty<bool> enabled)
+        public TBuilder SetEnabled(NuiProperty<bool> enabled)
         {
             Element.Enabled = enabled;
             return (TBuilder)this;
         }
 
-        public TBuilder WithFill(NuiProperty<bool>? fill)
+        public TBuilder SetFill(NuiProperty<bool>? fill)
         {
             Element.Fill = fill;
             return (TBuilder)this;
         }
 
-        public TBuilder WithLineThickness(NuiProperty<float>? lineThickness)
+        public TBuilder SetLineThickness(NuiProperty<float>? lineThickness)
         {
             Element.LineThickness = lineThickness;
             return (TBuilder)this;
         }
 
-        public TBuilder WithOrder(NuiDrawListItemOrder order)
+        public TBuilder SetOrder(NuiDrawListItemOrder order)
         {
             Element.Order = order;
             return (TBuilder)this;
         }
 
-        public TBuilder WithRender(NuiDrawListItemRender render)
+        public TBuilder SetRender(NuiDrawListItemRender render)
         {
             Element.Render = render;
             return (TBuilder)this;

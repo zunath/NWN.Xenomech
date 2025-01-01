@@ -1,16 +1,15 @@
 ﻿using Anvil.API;
-using System.Xml.Linq;
 
-namespace XM.UI.Builder
+namespace XM.UI.Builder.Component
 {
     public class NuiButtonBuilder : NuiBuilderBase<NuiButtonBuilder, NuiButton>
     {
-        public NuiButtonBuilder(string label)
-            : base(new NuiButton(label))
+        public NuiButtonBuilder()
+            : base(new NuiButton(string.Empty))
         {
         }
 
-        public NuiButtonBuilder WithLabel(string label)
+        public NuiButtonBuilder SetLabel(string label)
         {
             Element.Label = label;
             return this;

@@ -1,21 +1,21 @@
 ﻿using Anvil.API;
 
-namespace XM.UI.Builder
+namespace XM.UI.Builder.Component
 {
     public class NuiCheckBuilder : NuiBuilderBase<NuiCheckBuilder, NuiCheck>
     {
-        public NuiCheckBuilder(string label, bool selected)
-            : base(new NuiCheck(label, selected))
+        public NuiCheckBuilder()
+            : base(new NuiCheck(string.Empty, false))
         {
         }
 
-        public NuiCheckBuilder WithLabel(string label)
+        public NuiCheckBuilder SetLabel(string label)
         {
             Element.Label = label;
             return this;
         }
 
-        public NuiCheckBuilder WithSelected(bool selected)
+        public NuiCheckBuilder SetSelected(bool selected)
         {
             Element.Selected = selected;
             return this;

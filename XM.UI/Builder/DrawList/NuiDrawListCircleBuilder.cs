@@ -13,7 +13,7 @@ namespace XM.UI.Builder.DrawList
         {
         }
 
-        public NuiDrawListCircleBuilder WithRect(NuiRect rect)
+        public NuiDrawListCircleBuilder SetRect(NuiRect rect)
         {
             Element.Rect = rect;
             return this;

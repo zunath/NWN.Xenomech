@@ -1,39 +1,39 @@
 ﻿using Anvil.API;
 
-namespace XM.UI.Builder
+namespace XM.UI.Builder.Component
 {
     public class NuiTextEditBuilder : NuiBuilderBase<NuiTextEditBuilder, NuiTextEdit>
     {
-        public NuiTextEditBuilder(string label, string value, ushort maxLength, bool multiLine)
-            : base(new NuiTextEdit(label, value, maxLength, multiLine))
+        public NuiTextEditBuilder()
+            : base(new NuiTextEdit(string.Empty, string.Empty, 1000, false))
         {
         }
 
-        public NuiTextEditBuilder WithLabel(string label)
+        public NuiTextEditBuilder SetLabel(string label)
         {
             Element.Label = label;
             return this;
         }
 
-        public NuiTextEditBuilder WithValue(string value)
+        public NuiTextEditBuilder SetValue(string value)
         {
             Element.Value = value;
             return this;
         }
 
-        public NuiTextEditBuilder WithMaxLength(ushort maxLength)
+        public NuiTextEditBuilder SetMaxLength(ushort maxLength)
         {
             Element.MaxLength = maxLength;
             return this;
         }
 
-        public NuiTextEditBuilder WithMultiLine(bool multiLine)
+        public NuiTextEditBuilder SetMultiLine(bool multiLine)
         {
             Element.MultiLine = multiLine;
             return this;
         }
 
-        public NuiTextEditBuilder WithWordWrap(bool wordWrap)
+        public NuiTextEditBuilder SetWordWrap(bool wordWrap)
         {
             Element.WordWrap = wordWrap;
             return this;

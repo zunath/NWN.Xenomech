@@ -1,6 +1,6 @@
 ﻿using Anvil.API;
 
-namespace XM.UI.Builder
+namespace XM.UI.Builder.Component
 {
     public class NuiSpacerBuilder : NuiBuilderBase<NuiSpacerBuilder, NuiSpacer>
     {

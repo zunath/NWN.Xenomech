@@ -1,21 +1,21 @@
 ﻿using Anvil.API;
 
-namespace XM.UI.Builder
+namespace XM.UI.Builder.Component
 {
     public class NuiButtonSelectBuilder : NuiBuilderBase<NuiButtonSelectBuilder, NuiButtonSelect>
     {
-        public NuiButtonSelectBuilder(string label, bool selected)
-            : base(new NuiButtonSelect(label, selected))
+        public NuiButtonSelectBuilder()
+            : base(new NuiButtonSelect(string.Empty, false))
         {
         }
 
-        public NuiButtonSelectBuilder WithLabel(string label)
+        public NuiButtonSelectBuilder SetLabel(string label)
         {
             Element.Label = label;
             return this;
         }
 
-        public NuiButtonSelectBuilder WithSelected(bool selected)
+        public NuiButtonSelectBuilder SetSelected(bool selected)
         {
             Element.Selected = selected;
             return this;

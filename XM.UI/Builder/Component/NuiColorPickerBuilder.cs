@@ -1,15 +1,15 @@
 ﻿using Anvil.API;
 
-namespace XM.UI.Builder
+namespace XM.UI.Builder.Component
 {
     public class NuiColorPickerBuilder : NuiBuilderBase<NuiColorPickerBuilder, NuiColorPicker>
     {
-        public NuiColorPickerBuilder(Color color)
-            : base(new NuiColorPicker(color))
+        public NuiColorPickerBuilder()
+            : base(new NuiColorPicker(Color.FromRGBA(0)))
         {
         }
 
-        public NuiColorPickerBuilder WithColor(Color color)
+        public NuiColorPickerBuilder SetColor(Color color)
         {
             Element.Color = color;
             return this;

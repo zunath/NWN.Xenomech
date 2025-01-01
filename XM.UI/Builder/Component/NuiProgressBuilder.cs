@@ -1,15 +1,15 @@
 ﻿using Anvil.API;
 
-namespace XM.UI.Builder
+namespace XM.UI.Builder.Component
 {
     public class NuiProgressBuilder : NuiBuilderBase<NuiProgressBuilder, NuiProgress>
     {
-        public NuiProgressBuilder(float value)
-            : base(new NuiProgress(value))
+        public NuiProgressBuilder()
+            : base(new NuiProgress(0f))
         {
         }
 
-        public NuiProgressBuilder WithValue(float value)
+        public NuiProgressBuilder SetValue(float value)
         {
             Element.Value = value;
             return this;

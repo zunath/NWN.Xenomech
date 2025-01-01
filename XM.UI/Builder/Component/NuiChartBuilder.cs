@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace XM.UI.Builder
+namespace XM.UI.Builder.Component
 {
     public class NuiChartBuilder : NuiBuilderBase<NuiChartBuilder, NuiChart>
     {
@@ -11,7 +11,7 @@ namespace XM.UI.Builder
         {
         }
 
-        public NuiChartBuilder WithChartSlots(IEnumerable<NuiChartSlot> chartSlots)
+        public NuiChartBuilder SetChartSlots(IEnumerable<NuiChartSlot> chartSlots)
         {
             Element.ChartSlots = chartSlots?.ToList();
             return this;

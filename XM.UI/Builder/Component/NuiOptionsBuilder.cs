@@ -1,6 +1,6 @@
 ﻿using Anvil.API;
 
-namespace XM.UI.Builder
+namespace XM.UI.Builder.Component
 {
     public class NuiOptionsBuilder : NuiBuilderBase<NuiOptionsBuilder, NuiOptions>
     {
@@ -9,7 +9,7 @@ namespace XM.UI.Builder
         {
         }
 
-        public NuiOptionsBuilder WithDirection(NuiDirection direction)
+        public NuiOptionsBuilder SetDirection(NuiDirection direction)
         {
             Element.Direction = direction;
             return this;
@@ -21,7 +21,7 @@ namespace XM.UI.Builder
             return this;
         }
 
-        public NuiOptionsBuilder WithSelection(int selection)
+        public NuiOptionsBuilder SetSelection(int selection)
         {
             Element.Selection = selection;
             return this;

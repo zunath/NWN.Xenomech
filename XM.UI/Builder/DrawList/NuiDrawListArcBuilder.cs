@@ -16,25 +16,25 @@ namespace XM.UI.Builder.DrawList
         {
         }
 
-        public NuiDrawListArcBuilder WithAngleMax(float angleMax)
+        public NuiDrawListArcBuilder SetAngleMax(float angleMax)
         {
             Element.AngleMax = angleMax;
             return this;
         }
 
-        public NuiDrawListArcBuilder WithAngleMin(float angleMin)
+        public NuiDrawListArcBuilder SetAngleMin(float angleMin)
         {
             Element.AngleMin = angleMin;
             return this;
         }
 
-        public NuiDrawListArcBuilder WithCenter(NuiVector center)
+        public NuiDrawListArcBuilder SetCenter(NuiVector center)
         {
             Element.Center = center;
             return this;
         }
 
-        public NuiDrawListArcBuilder WithRadius(float radius)
+        public NuiDrawListArcBuilder SetRadius(float radius)
         {
             Element.Radius = radius;
             return this;

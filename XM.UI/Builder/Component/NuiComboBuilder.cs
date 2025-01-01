@@ -1,7 +1,7 @@
 ﻿using Anvil.API;
 using System.Collections.Generic;
 
-namespace XM.UI.Builder
+namespace XM.UI.Builder.Component
 {
     public class NuiComboBuilder : NuiBuilderBase<NuiComboBuilder, NuiCombo>
     {
@@ -21,7 +21,7 @@ namespace XM.UI.Builder
             return this;
         }
 
-        public NuiComboBuilder WithSelected(int selected)
+        public NuiComboBuilder SetSelected(int selected)
         {
             Element.Selected = selected;
             Element.Entries = _entries;

@@ -9,37 +9,37 @@ namespace XM.UI.Builder.DrawList
         {
         }
 
-        public NuiDrawListImageBuilder WithAspect(NuiAspect aspect)
+        public NuiDrawListImageBuilder SetAspect(NuiAspect aspect)
         {
             Element.Aspect = aspect;
             return this;
         }
 
-        public NuiDrawListImageBuilder WithHorizontalAlign(NuiHAlign horizontalAlign)
+        public NuiDrawListImageBuilder SetHorizontalAlign(NuiHAlign horizontalAlign)
         {
             Element.HorizontalAlign = horizontalAlign;
             return this;
         }
 
-        public NuiDrawListImageBuilder WithVerticalAlign(NuiVAlign verticalAlign)
+        public NuiDrawListImageBuilder SetVerticalAlign(NuiVAlign verticalAlign)
         {
             Element.VerticalAlign = verticalAlign;
             return this;
         }
 
-        public NuiDrawListImageBuilder WithRect(NuiRect rect)
+        public NuiDrawListImageBuilder SetRect(NuiRect rect)
         {
             Element.Rect = rect;
             return this;
         }
 
-        public NuiDrawListImageBuilder WithResRef(string resRef)
+        public NuiDrawListImageBuilder SetResRef(string resRef)
         {
             Element.ResRef = resRef;
             return this;
         }
 
-        public NuiDrawListImageBuilder WithImageRegion(NuiRect? imageRegion)
+        public NuiDrawListImageBuilder SetImageRegion(NuiRect? imageRegion)
         {
             Element.ImageRegion = imageRegion;
             return this;
