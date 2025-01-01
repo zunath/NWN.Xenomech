@@ -6,20 +6,25 @@ using XM.UI.Builder;
 namespace XM.UI.TestUI
 {
     [ServiceBinding(typeof(IView))]
-    internal class TestView: IView
+    internal class TestView : IView
     {
         private readonly NuiBuilder<TestViewModel> _builder = new();
 
-        public TestView()
+        public IViewModel CreateViewModel(uint player)
         {
-            _builder.CreateWindow(window =>
+            return new TestViewModel();
+        }
+
+        public NuiWindow Build()
+        {
+            return _builder.CreateWindow(window =>
                 {
                     window
                         .SetTitle("Test Window")
                         .SetResizable(true)
                         .SetInitialGeometry(0, 0, 200f, 200f);
                 })
-            .SetRoot(col =>
+                .SetRoot(col =>
                 {
                     col
                         .AddRow(row =>
@@ -40,24 +45,7 @@ namespace XM.UI.TestUI
                         })
                         ;
 
-                });
-
-
-        }
-
-        [ScriptHandler("bread_test")]
-        public void ShowWindow()
-        {
-            var window = _builder.Build();
-            var json = JsonUtility.ToJson(window);
-            Console.WriteLine(json);
-            var player = GetLastUsedBy();
-            NuiCreate(player, JsonParse(json), window.Id, "");
-        }
-
-        public IViewModel CreateViewModel(uint player)
-        {
-            return new TestViewModel();
+                }).Build();
         }
     }
 }

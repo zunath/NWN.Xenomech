@@ -1,8 +1,11 @@
 ﻿using Anvil.API;
+using System.Linq.Expressions;
+using System;
 
 namespace XM.UI.Builder
 {
-    public class NuiWindowBuilder
+    public class NuiWindowBuilder<TViewModel>: NuiBindable<TViewModel>
+        where TViewModel: IViewModel
     {
         private readonly NuiWindow _window;
 
@@ -11,65 +14,124 @@ namespace XM.UI.Builder
             _window = new NuiWindow(root, title);
         }
 
-        public NuiWindowBuilder SetBorder(bool border)
+        public NuiWindowBuilder<TViewModel> SetBorder(bool border)
         {
             _window.Border = border;
             return this;
         }
 
-        public NuiWindowBuilder SetClosable(bool closable)
+        public NuiWindowBuilder<TViewModel> SetClosable(bool closable)
         {
             _window.Closable = closable;
             return this;
         }
 
-        public NuiWindowBuilder SetCollapsed(bool? collapsed)
+        public NuiWindowBuilder<TViewModel> SetCollapsed(bool? collapsed)
         {
             _window.Collapsed = collapsed;
             return this;
         }
 
-        public NuiWindowBuilder SetInitialGeometry(float x, float y, float width, float height)
+        public NuiWindowBuilder<TViewModel> SetInitialGeometry(float x, float y, float width, float height)
         {
             _window.Geometry = new NuiRect(x, y, width, height);
             return this;
         }
 
-        public NuiWindowBuilder SetId(string id)
-        {
-            _window.Id = id;
-            return this;
-        }
-
-        public NuiWindowBuilder SetResizable(bool resizable)
+        public NuiWindowBuilder<TViewModel> SetResizable(bool resizable)
         {
             _window.Resizable = resizable;
             return this;
         }
 
-        public NuiWindowBuilder SetRoot(NuiLayout root)
+        public NuiWindowBuilder<TViewModel> SetRoot(NuiLayout root)
         {
             _window.Root = root;
             return this;
         }
 
-        public NuiWindowBuilder SetTitle(string title)
+        public NuiWindowBuilder<TViewModel> SetTitle(string title)
         {
             _window.Title = title;
             return this;
         }
 
-        public NuiWindowBuilder SetTransparent(bool transparent)
+        public NuiWindowBuilder<TViewModel> SetTransparent(bool transparent)
         {
             _window.Transparent = transparent;
             return this;
         }
 
-        public NuiWindowBuilder SetAcceptsInput(bool acceptsInput)
+        public NuiWindowBuilder<TViewModel> SetAcceptsInput(bool acceptsInput)
         {
             _window.AcceptsInput = acceptsInput;
             return this;
         }
+
+        public NuiWindowBuilder<TViewModel> BindBorder(Expression<Func<TViewModel, bool>> expression)
+        {
+            var bindName = GetBindName(expression);
+            var bind = new NuiBind<bool>(bindName);
+            _window.Border = bind;
+            return this;
+        }
+
+        public NuiWindowBuilder<TViewModel> BindClosable(Expression<Func<TViewModel, bool>> expression)
+        {
+            var bindName = GetBindName(expression);
+            var bind = new NuiBind<bool>(bindName);
+            _window.Closable = bind;
+            return this;
+        }
+
+        public NuiWindowBuilder<TViewModel> BindCollapsed(Expression<Func<TViewModel, bool?>> expression)
+        {
+            var bindName = GetBindName(expression);
+            var bind = new NuiBind<bool>(bindName);
+            _window.Collapsed = bind;
+            return this;
+        }
+
+        public NuiWindowBuilder<TViewModel> BindInitialGeometry(Expression<Func<TViewModel, NuiRect>> expression)
+        {
+            var bindName = GetBindName(expression);
+            var bind = new NuiBind<NuiRect>(bindName);
+            _window.Geometry = bind;
+            return this;
+        }
+
+        public NuiWindowBuilder<TViewModel> BindResizable(Expression<Func<TViewModel, bool>> expression)
+        {
+            var bindName = GetBindName(expression);
+            var bind = new NuiBind<bool>(bindName);
+            _window.Resizable = bind;
+            return this;
+        }
+
+        public NuiWindowBuilder<TViewModel> BindTitle(Expression<Func<TViewModel, string>> expression)
+        {
+            var bindName = GetBindName(expression);
+            var bind = new NuiBind<string>(bindName);
+            _window.Title = bind;
+            return this;
+        }
+
+        public NuiWindowBuilder<TViewModel> BindTransparent(Expression<Func<TViewModel, bool>> expression)
+        {
+            var bindName = GetBindName(expression);
+            var bind = new NuiBind<bool>(bindName);
+            _window.Transparent = bind;
+            return this;
+        }
+
+        public NuiWindowBuilder<TViewModel> BindAcceptsInput(Expression<Func<TViewModel, bool>> expression)
+        {
+            var bindName = GetBindName(expression);
+            var bind = new NuiBind<bool>(bindName);
+            _window.AcceptsInput = bind;
+            return this;
+        }
+
 
         public NuiWindow Build()
         {

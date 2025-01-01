@@ -7,11 +7,11 @@ namespace XM.UI.Builder
     public class NuiBuilder<TViewModel>
         where TViewModel: IViewModel
     {
-        private NuiWindowBuilder _windowBuilder;
+        private NuiWindowBuilder<TViewModel> _windowBuilder;
 
-        public NuiBuilder<TViewModel> CreateWindow(Action<NuiWindowBuilder> configure)
+        public NuiBuilder<TViewModel> CreateWindow(Action<NuiWindowBuilder<TViewModel>> configure)
         {
-            _windowBuilder = new NuiWindowBuilder(new NuiColumnBuilder<TViewModel>().Build(), "New Window");
+            _windowBuilder = new NuiWindowBuilder<TViewModel>(new NuiColumnBuilder<TViewModel>().Build(), "New Window");
             configure(_windowBuilder);
             return this;
         }

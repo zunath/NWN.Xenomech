@@ -10,6 +10,7 @@ namespace XM.UI.Builder.Layout
         public NuiColumnBuilder()
             : base(new NuiColumn())
         {
+            Element.Id = typeof(TViewModel).FullName;
         }
 
         public NuiColumnBuilder<TViewModel> AddRow(Action<NuiRowBuilder<TViewModel>> row)
