@@ -15,7 +15,7 @@ namespace XM.UI.Builder
             return this;
         }
 
-        public NuiBuilder AddColumn(Action<NuiColumnBuilder> configure)
+        public NuiBuilder SetRoot(Action<NuiColumnBuilder> configure)
         {
             if (_windowBuilder == null)
             {
@@ -24,8 +24,7 @@ namespace XM.UI.Builder
 
             var columnBuilder = new NuiColumnBuilder();
             configure(columnBuilder);
-            
-            // todo add col
+            _windowBuilder.SetRoot(columnBuilder.Build());
 
             return this;
         }

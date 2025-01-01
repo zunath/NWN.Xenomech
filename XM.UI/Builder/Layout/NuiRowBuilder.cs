@@ -151,11 +151,9 @@ namespace XM.UI.Builder.Layout
             return this;
         }
 
-        public NuiRowBuilder AddSpace(Action<NuiSpacerBuilder> space)
+        public NuiRowBuilder AddSpacer()
         {
             var spaceBuilder = new NuiSpacerBuilder();
-            space(spaceBuilder);
-
             Element.Children.Add(spaceBuilder.Build());
 
             return this;

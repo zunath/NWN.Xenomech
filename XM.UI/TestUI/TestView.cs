@@ -1,8 +1,11 @@
-﻿using Anvil.API;
+﻿using System;
+using Anvil.API;
+using Anvil.Services;
 using XM.UI.Builder;
 
 namespace XM.UI.TestUI
 {
+    [ServiceBinding(typeof(TestView))]
     internal class TestView
     {
         private readonly NuiBuilder _builder = new();
@@ -11,25 +14,44 @@ namespace XM.UI.TestUI
         {
             _builder.CreateWindow(window =>
                 {
-                    window.SetTitle("Test Window");
-                    window.SetResizable(true);
+                    window
+                        .SetTitle("Test Window")
+                        .SetResizable(true)
+                        .SetInitialGeometry(0, 0, 200f, 200f);
                 })
-            .AddColumn(col =>
+            .SetRoot(col =>
                 {
                     col
-                        .AddButton(button =>
+                        .AddRow(row =>
                         {
-                            button.SetLabel("my new button");
+                            row
+                                .AddSpacer()
+                                .AddButton(button =>
+                                {
+                                    button.SetLabel("my new button");
+                                })
+                                .AddCheck(check =>
+                                {
+                                    check.SetLabel("my check");
+                                    check.SetSelected(true);
+                                })
+                                .AddSpacer();
                         })
-                        .AddCheck(check =>
-                        {
-                            check.SetLabel("my check");
-                            check.SetSelected(true);
-                        })
-                        
                         ;
 
                 });
+
+
+        }
+
+        [ScriptHandler("bread_test")]
+        public void ShowWindow()
+        {
+            var window = _builder.Build();
+            var json = JsonUtility.ToJson(window);
+            Console.WriteLine(json);
+            var player = GetLastUsedBy();
+            NuiCreate(player, JsonParse(json), window.Id, "");
         }
     }
 }

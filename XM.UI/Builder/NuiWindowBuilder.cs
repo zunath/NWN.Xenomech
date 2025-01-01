@@ -29,13 +29,13 @@ namespace XM.UI.Builder
             return this;
         }
 
-        public NuiWindowBuilder SetGeometry(NuiRect geometry)
+        public NuiWindowBuilder SetInitialGeometry(float x, float y, float width, float height)
         {
-            _window.Geometry = geometry;
+            _window.Geometry = new NuiRect(x, y, width, height);
             return this;
         }
 
-        public NuiWindowBuilder SetId(string? id)
+        public NuiWindowBuilder SetId(string id)
         {
             _window.Id = id;
             return this;
