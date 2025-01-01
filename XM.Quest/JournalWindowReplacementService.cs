@@ -2,7 +2,6 @@
 using XM.API.Constants;
 using XM.Core.EventManagement;
 using XM.UI;
-using XM.UI.UI;
 using GuiEventType = XM.API.Constants.GuiEventType;
 
 namespace XM.Quest
@@ -44,7 +43,7 @@ namespace XM.Quest
             var panelType = (GuiPanelType)GetLastGuiEventInteger();
             if (panelType == GuiPanelType.Journal)
             {
-                _gui.TogglePlayerWindow(player, GuiWindowType.Quests);
+                //_gui.TogglePlayerWindow(player, GuiWindowType.Quests);
             }
         }
     }

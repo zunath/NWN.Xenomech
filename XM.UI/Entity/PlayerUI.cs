@@ -1,8 +1,7 @@
 ﻿using Anvil.Services;
 using System.Collections.Generic;
+using Anvil.API;
 using XM.Data;
-using XM.UI.Component;
-using XM.UI.UI;
 
 namespace XM.UI.Entity
 {
@@ -11,16 +10,20 @@ namespace XM.UI.Entity
     {
         public PlayerUI()
         {
-            WindowGeometries = new Dictionary<GuiWindowType, GuiRectangle>();
-
+            Init();
         }
 
         public PlayerUI(string playerId)
         {
             Id = playerId;
-            WindowGeometries = new Dictionary<GuiWindowType, GuiRectangle>();
+            Init();
         }
 
-        public Dictionary<GuiWindowType, GuiRectangle> WindowGeometries { get; set; }
+        private void Init()
+        {
+            WindowGeometries = new Dictionary<string, NuiRect>();
+        }
+
+        public Dictionary<string, NuiRect> WindowGeometries { get; set; }
     }
 }
