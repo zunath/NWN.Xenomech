@@ -1,6 +1,7 @@
 ﻿using Anvil.API;
 using System.Linq.Expressions;
 using System;
+using System.Xml.Linq;
 
 namespace XM.UI.Builder
 {
@@ -12,6 +13,7 @@ namespace XM.UI.Builder
         public NuiWindowBuilder(NuiLayout root, string title)
         {
             _window = new NuiWindow(root, title);
+            _window.Id = typeof(TViewModel).FullName;
         }
 
         public NuiWindowBuilder<TViewModel> SetBorder(bool border)

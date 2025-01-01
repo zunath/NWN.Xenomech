@@ -13,17 +13,15 @@ namespace XM.UI
         [Inject]
         public IList<IView> Views { get; set; }
 
-        private readonly Dictionary<Type, NuiWindow> _windows;
-        private readonly Dictionary<Type, Json> _serializedWindows;
+        private readonly Dictionary<Type, IView> _viewsByType = new();
+        private readonly Dictionary<Type, NuiWindow> _windows = new();
+        private readonly Dictionary<Type, Json> _serializedWindows = new();
         
         private readonly XMEventService _event;
 
         public GuiService(XMEventService @event)
         {
             _event = @event;
-
-            _windows = new Dictionary<Type, NuiWindow>();
-            _serializedWindows = new Dictionary<Type, Json>();
 
             SubscribeEvents();
         }
@@ -47,6 +45,7 @@ namespace XM.UI
                 var json = JsonUtility.ToJson(window);
                 _serializedWindows[type] = JsonParse(json);
                 _windows[type] = window;
+                _viewsByType[type] = view;
             }
         }
 
@@ -54,11 +53,18 @@ namespace XM.UI
             where TView : IView
         {
             var type = typeof(TView);
-            var json = _serializedWindows[type];
             var window = _windows[type];
 
-            NuiCreate(player, json, window.Id);
+            if (NuiFindWindow(player, window.Id) == 0)
+            {
+                var view = _viewsByType[type];
+                var json = _serializedWindows[type];
+                var viewModel = view.CreateViewModel(player);
 
+                var windowToken = NuiCreate(player, json, window.Id);
+                viewModel.Bind(player, windowToken);
+                viewModel.OnOpen();
+            }
         }
 
 
