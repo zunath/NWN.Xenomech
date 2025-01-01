@@ -7,9 +7,16 @@ namespace XM.UI
     [ServiceBinding(typeof(DefaultGameWindowsConfigService))]
     internal class DefaultGameWindowsConfigService
     {
-        private XMEventService _event;
+        private readonly XMEventService _event;
 
         public DefaultGameWindowsConfigService(XMEventService @event)
+        {
+            _event = @event;
+
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
         {
             _event.Subscribe<ModuleEvent.OnPlayerEnter>(OnModuleEnter);
         }
