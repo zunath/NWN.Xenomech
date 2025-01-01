@@ -1,7 +1,6 @@
 ﻿using Anvil.API;
 using System.Linq.Expressions;
 using System;
-using XM.API;
 
 namespace XM.UI.Builder.Component
 {

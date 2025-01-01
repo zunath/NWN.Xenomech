@@ -38,8 +38,5 @@ namespace XM.UI.Builder.Component
 
             return this;
         }
-
     }
-
-
 }

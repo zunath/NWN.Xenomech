@@ -1,6 +1,6 @@
-﻿using Anvil.API;
+﻿using System;
+using Anvil.API;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace XM.UI.Builder.Component
 {
@@ -12,18 +12,14 @@ namespace XM.UI.Builder.Component
         {
         }
 
-        public NuiChartBuilder<TViewModel> SetChartSlots(IEnumerable<NuiChartSlot> chartSlots)
-        {
-            Element.ChartSlots = chartSlots?.ToList();
-            return this;
-        }
-
-        public NuiChartBuilder<TViewModel> AddChartSlot(NuiChartSlot chartSlot)
+        public NuiChartBuilder<TViewModel> AddChartSlot(Action<NuiChartSlotBuilder<TViewModel>> chartSlot)
         {
             Element.ChartSlots ??= new List<NuiChartSlot>();
-            Element.ChartSlots.Add(chartSlot);
+
+            var nuiChartSlotBuilder = new NuiChartSlotBuilder<TViewModel>();
+            chartSlot(nuiChartSlotBuilder);
+            Element.ChartSlots.Add(nuiChartSlotBuilder.Build());
             return this;
         }
     }
-
 }
