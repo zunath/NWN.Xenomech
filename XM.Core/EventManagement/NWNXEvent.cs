@@ -2,6 +2,9 @@
 {
     public class NWNXEvent
     {
+        public struct OnNWNXChat : IXMEvent
+        {
+        }
         public struct OnModulePreload : IXMEvent
         {
         }

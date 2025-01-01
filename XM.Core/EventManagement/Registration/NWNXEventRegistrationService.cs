@@ -22,6 +22,7 @@ namespace XM.Core.EventManagement.Registration
 
         private void RegisterEvents()
         {
+            _event.RegisterEvent<NWNXEvent.OnNWNXChat>(EventScript.NWNXOnChat);
             _event.RegisterEvent<NWNXEvent.OnModulePreload>(EventScript.NWNXOnModulePreloadScript);
             _event.RegisterEvent<NWNXEvent.OnAddAssociateBefore>(EventScript.NWNXOnAddAssociateBeforeScript);
             _event.RegisterEvent<NWNXEvent.OnAddAssociateAfter>(EventScript.NWNXOnAddAssociateAfterScript);
@@ -283,6 +284,9 @@ namespace XM.Core.EventManagement.Registration
 
         private void HookNWNXEvents()
         {
+            // Chat event
+            ChatPlugin.RegisterChatScript(EventScript.NWNXOnChat);
+
             // Associate events
             EventsPlugin.SubscribeEvent(EventsPlugin.NWNX_ON_ADD_ASSOCIATE_BEFORE, EventScript.NWNXOnAddAssociateBeforeScript);
             EventsPlugin.SubscribeEvent(EventsPlugin.NWNX_ON_ADD_ASSOCIATE_AFTER, EventScript.NWNXOnAddAssociateAfterScript);

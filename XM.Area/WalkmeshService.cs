@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Numerics;
 using Anvil.Services;
 using NLog;
-using XM.API.BaseTypes;
 using XM.API.Constants;
 using XM.API.NWNX.ObjectPlugin;
 using XM.Core;

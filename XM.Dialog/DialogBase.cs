@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Anvil.Services;
 
 namespace XM.Dialog
 {

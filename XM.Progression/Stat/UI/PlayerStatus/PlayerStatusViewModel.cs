@@ -6,7 +6,7 @@ using XM.UI.Component;
 
 namespace XM.Progression.Stat.UI.PlayerStatus
 {
-    //[ServiceBinding(typeof(PlayerStatusViewModel))]
+    [ServiceBinding(typeof(PlayerStatusViewModel))]
     internal class PlayerStatusViewModel : 
         GuiViewModelBase<PlayerStatusViewModel, GuiPayloadBase>,
         IGuiRefreshable<PlayerStatusRefreshEvent>

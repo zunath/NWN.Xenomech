@@ -1,6 +1,4 @@
-﻿using Anvil.API;
-using Anvil.API.Events;
-using Anvil.Services;
+﻿using Anvil.Services;
 using XM.API.Constants;
 using XM.API.NWNX.CreaturePlugin;
 using XM.Core.EventManagement;
@@ -14,21 +12,26 @@ namespace XM.Migration
     {
         private readonly DBService _db;
         private readonly MigrationService _migration;
+        private readonly XMEventService _event;
 
-        public PCInitializationService(DBService db, MigrationService migration)
+        public PCInitializationService(
+            DBService db, 
+            MigrationService migration,
+            XMEventService @event)
         {
             _db = db;
             _migration = migration;
+            _event = @event;
 
-            HookEvents();
+            SubscribeEvents();
         }
 
-        private void HookEvents()
+        private void SubscribeEvents()
         {
-            NwModule.Instance.OnClientEnter += OnModuleEnter;
+            _event.Subscribe<ModuleEvent.OnPlayerEnter>(OnModuleEnter);
         }
 
-        private void OnModuleEnter(ModuleEvents.OnClientEnter obj)
+        private void OnModuleEnter()
         {
             var player = GetEnteringObject();
 

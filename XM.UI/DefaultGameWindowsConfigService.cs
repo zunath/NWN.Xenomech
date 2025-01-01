@@ -1,19 +1,20 @@
-﻿using Anvil.API;
-using Anvil.API.Events;
-using Anvil.Services;
+﻿using Anvil.Services;
 using XM.API.Constants;
+using XM.Core.EventManagement;
 
-namespace XM.Configuration
+namespace XM.UI
 {
     [ServiceBinding(typeof(DefaultGameWindowsConfigService))]
     internal class DefaultGameWindowsConfigService
     {
-        public DefaultGameWindowsConfigService()
+        private XMEventService _event;
+
+        public DefaultGameWindowsConfigService(XMEventService @event)
         {
-            NwModule.Instance.OnClientEnter += OnModuleEnter;
+            _event.Subscribe<ModuleEvent.OnPlayerEnter>(OnModuleEnter);
         }
 
-        private void OnModuleEnter(ModuleEvents.OnClientEnter obj)
+        private void OnModuleEnter()
         {
             var player = GetEnteringObject();
             if (!GetIsPC(player) || GetIsDM(player))

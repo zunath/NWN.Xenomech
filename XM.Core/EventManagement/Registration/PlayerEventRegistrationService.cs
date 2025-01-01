@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using Anvil.API;
-using Anvil.API.Events;
-using Anvil.Services;
+﻿using Anvil.Services;
 using NLog;
 using EventScriptType = XM.API.Constants.EventScriptType;
 

@@ -1,9 +1,8 @@
-﻿using Anvil.API;
-using Anvil.Services;
+﻿using Anvil.Services;
 using XM.API.Constants;
+using XM.Core.EventManagement;
 using XM.UI;
 using XM.UI.UI;
-using static Anvil.API.Events.ModuleEvents;
 using GuiEventType = XM.API.Constants.GuiEventType;
 
 namespace XM.Progression.Stat.UI.CharacterSheet
@@ -12,15 +11,22 @@ namespace XM.Progression.Stat.UI.CharacterSheet
     internal class CharacterSheetWindowService
     {
         private readonly GuiService _gui;
+        private readonly XMEventService _event;
 
-        public CharacterSheetWindowService(GuiService gui)
+        public CharacterSheetWindowService(GuiService gui, XMEventService @event)
         {
             _gui = gui;
+            _event = @event;
 
-            NwModule.Instance.OnPlayerGuiEvent += OnPlayerGuiEvent;
+            SubscribeEvents();
         }
 
-        private void OnPlayerGuiEvent(OnPlayerGuiEvent obj)
+        private void SubscribeEvents()
+        {
+            _event.Subscribe<ModuleEvent.OnPlayerGui>(OnPlayerGuiEvent);
+        }
+
+        private void OnPlayerGuiEvent()
         {
             ReplaceNWNGuis();
         }

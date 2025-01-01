@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Anvil.API;
-using Anvil.API.Events;
 using Anvil.Services;
 using NLog;
+using XM.API.NWNX.ChatPlugin;
 using XM.Authorization;
 using XM.Configuration;
 using XM.Core;
+using XM.Core.EventManagement;
 using XM.Localization;
 using Location = XM.API.BaseTypes.Location;
 
@@ -27,11 +27,13 @@ namespace XM.ChatCommand
         private readonly XMSettingsService _settings;
         private readonly AuthorizationService _authorization;
         private readonly ChatCommandHelpService _help;
+        private readonly XMEventService _event;
 
         public ChatCommandService(
             XMSettingsService settings, 
             AuthorizationService authorization,
-            ChatCommandHelpService help)
+            ChatCommandHelpService help,
+            XMEventService @event)
         {
             _chatCommands = new Dictionary<string, ChatCommandDetail>();
             EmoteCommands = new Dictionary<string, ChatCommandDetail>();
@@ -39,19 +41,20 @@ namespace XM.ChatCommand
             _settings = settings;
             _authorization = authorization;
             _help = help;
+            _event = @event;
 
             HookEvents();
         }
 
         private void HookEvents()
         {
-            NwModule.Instance.OnChatMessageSend += OnPlayerChat;
+            _event.Subscribe<NWNXEvent.OnNWNXChat>(OnPlayerChat);
         }
 
 
-        private void OnPlayerChat(OnChatMessageSend obj)
+        private void OnPlayerChat()
         {
-            var sender = obj.Sender;
+            var sender = OBJECT_SELF;
             var originalMessage = GetPCChatMessage().Trim();
 
             if (!CanHandleChat(sender, originalMessage))
@@ -69,7 +72,7 @@ namespace XM.ChatCommand
             var command = split[0].Substring(1, split[0].Length - 1);
             split.RemoveAt(0);
 
-            obj.Skip = true;
+            ChatPlugin.SkipMessage();
 
             if (!_chatCommands.ContainsKey(command))
             {

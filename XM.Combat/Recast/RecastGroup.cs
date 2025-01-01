@@ -1,5 +1,4 @@
-﻿using System;
-using XM.Localization;
+﻿using XM.Localization;
 
 namespace XM.Combat.Recast
 {

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Anvil.API;
-using Anvil.Services;
-using static Anvil.API.Events.ModuleEvents;
+﻿using Anvil.Services;
 using XM.API.Constants;
+using XM.Core.EventManagement;
 using XM.UI;
 using XM.UI.UI;
 using GuiEventType = XM.API.Constants.GuiEventType;
@@ -17,15 +11,22 @@ namespace XM.Quest
     internal class JournalWindowReplacementService
     {
         private readonly GuiService _gui;
+        private readonly XMEventService _event;
 
-        public JournalWindowReplacementService(GuiService gui)
+        public JournalWindowReplacementService(GuiService gui, XMEventService @event)
         {
             _gui = gui;
+            _event = @event;
 
-            NwModule.Instance.OnPlayerGuiEvent += OnPlayerGuiEvent;
+            SubscribeEvents();
         }
 
-        private void OnPlayerGuiEvent(OnPlayerGuiEvent obj)
+        private void SubscribeEvents()
+        {
+            _event.Subscribe<ModuleEvent.OnPlayerGui>(OnPlayerGuiEvent);
+        }
+
+        private void OnPlayerGuiEvent()
         {
             ReplaceNWNGuis();
         }

@@ -73,6 +73,7 @@
         public const string PlayerOnBlockedByDoorScript = "pc_blocked";
 
         // NWNX scripts
+        public const string NWNXOnChat = "on_nwnx_chat";
         public const string NWNXOnModulePreloadScript = "mod_preload";
         public const string NWNXOnAddAssociateBeforeScript = "asso_add_bef";
         public const string NWNXOnAddAssociateAfterScript = "asso_add_aft";

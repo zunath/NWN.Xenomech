@@ -1,10 +1,9 @@
 ﻿using System.Linq;
-using Anvil.API;
-using Anvil.API.Events;
 using Anvil.Services;
 using NLog;
 using XM.Authorization.Entity;
 using XM.Configuration;
+using XM.Core.EventManagement;
 using XM.Data;
 using XM.Localization;
 
@@ -17,23 +16,26 @@ namespace XM.Authorization
 
         private readonly DBService _db;
         private readonly XMSettingsService _settings;
+        private readonly XMEventService _event;
 
         public AuthorizationService(
             DBService db, 
-            XMSettingsService settings)
+            XMSettingsService settings,
+            XMEventService @event)
         {
             _db = db;
             _settings = settings;
+            _event = @event;
 
-            HookEvents();
+            SubscribeEvents();
         }
 
-        private void HookEvents()
+        private void SubscribeEvents()
         {
-            NwModule.Instance.OnClientEnter += OnModuleEnter;
+            _event.Subscribe<ModuleEvent.OnPlayerEnter>(OnPlayerEnter);
         }
 
-        private void OnModuleEnter(ModuleEvents.OnClientEnter obj)
+        private void OnPlayerEnter()
         {
             var dm = GetEnteringObject();
             if (!GetIsDM(dm) && !GetIsDMPossessed(dm)) 

@@ -1,6 +1,5 @@
-﻿using Anvil.API;
-using Anvil.API.Events;
-using Anvil.Services;
+﻿using Anvil.Services;
+using XM.Core.EventManagement;
 
 namespace XM.Core.Activity
 {
@@ -9,11 +8,19 @@ namespace XM.Core.Activity
     {
         private const string IsBusyVariable = "IS_BUSY";
         private const string BusyTypeVariable = "BUSY_TYPE";
+        private readonly XMEventService _event;
 
-        public ActivityService()
+        public ActivityService(XMEventService @event)
         {
-            NwModule.Instance.OnClientEnter += OnModuleEnter;
-            NwModule.Instance.OnPlayerDeath += OnPlayerDeath;
+            _event = @event;
+
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            _event.Subscribe<ModuleEvent.OnPlayerEnter>(OnModuleEnter);
+            _event.Subscribe<ModuleEvent.OnPlayerDeath>(OnPlayerDeath);
         }
 
         /// <summary>
@@ -64,7 +71,7 @@ namespace XM.Core.Activity
         /// <summary>
         /// When a player enters the module, wipe their temporary "busy" status.
         /// </summary>
-        private void OnModuleEnter(ModuleEvents.OnClientEnter obj)
+        private void OnModuleEnter()
         {
             var player = GetEnteringObject();
             ClearBusy(player);
@@ -73,7 +80,7 @@ namespace XM.Core.Activity
         /// <summary>
         /// When a player dies, wipe their temporary "busy" status.
         /// </summary>
-        private void OnPlayerDeath(ModuleEvents.OnPlayerDeath obj)
+        private void OnPlayerDeath()
         {
             var player = GetLastPlayerDied();
             ClearBusy(player);

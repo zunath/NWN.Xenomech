@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Anvil.API;
-using Anvil.API.Events;
 using Anvil.Services;
 using NLog;
 using XM.Core;
@@ -32,34 +30,38 @@ namespace XM.UI
         public IList<IGuiWindowDefinition> Definitions { get; set; }
 
         private readonly DBService _db;
-        public GuiService(DBService db, XMEventService @event)
+        private readonly XMEventService _event;
+        public GuiService(
+            DBService db, 
+            XMEventService @event)
         {
             _db = db;
+            _event = @event;
 
-            @event.Subscribe<XMEvent.OnCacheDataBefore>(OnCacheDataBefore);
-            @event.Subscribe<AreaEvent.AreaEnterEvent>(OnAreaEnter);
-
-            HookEvents();
+            SubscribeEvents();
         }
 
-        private void HookEvents()
+        private void SubscribeEvents()
         {
-            NwModule.Instance.OnClientEnter += OnModuleEnter;
-            NwModule.Instance.OnClientLeave += OnModuleLeave;
-            NwModule.Instance.OnNuiEvent += OnModuleNuiEvent;
-            NwModule.Instance.OnPlayerEquipItem += OnPlayerEquipItem;
-            NwModule.Instance.OnPlayerUnequipItem += OnPlayerUnequipItem;
+            _event.Subscribe<XMEvent.OnCacheDataBefore>(OnCacheDataBefore);
+            _event.Subscribe<AreaEvent.AreaEnterEvent>(OnAreaEnter);
+
+            _event.Subscribe<ModuleEvent.OnPlayerEnter>(OnModuleEnter);
+            _event.Subscribe<ModuleEvent.OnPlayerLeave>(OnModuleLeave);
+            _event.Subscribe<ModuleEvent.OnNuiEvent>(OnModuleNuiEvent);
+            _event.Subscribe<ModuleEvent.OnEquipItem>(OnPlayerEquipItem);
+            _event.Subscribe<ModuleEvent.OnUnequipItem>(OnPlayerUnequipItem);
         }
 
-        private void OnModuleEnter(ModuleEvents.OnClientEnter obj)
+        private void OnModuleEnter()
         {
             CreatePlayerWindows();
         }
-        private void OnModuleLeave(ModuleEvents.OnClientLeave obj)
+        private void OnModuleLeave()
         {
             SavePlayerWindowGeometry();
         }
-        private void OnModuleNuiEvent(ModuleEvents.OnNuiEvent obj)
+        private void OnModuleNuiEvent()
         {
             HandleNuiEvents();
             HandleNuiWatchEvent();
@@ -74,11 +76,11 @@ namespace XM.UI
         {
             CloseAllWindows();
         }
-        private void OnPlayerEquipItem(ModuleEvents.OnPlayerEquipItem obj)
+        private void OnPlayerEquipItem()
         {
             RefreshOnEquip();
         }
-        private void OnPlayerUnequipItem(ModuleEvents.OnPlayerUnequipItem obj)
+        private void OnPlayerUnequipItem()
         {
             RefreshOnUnequip();
         }

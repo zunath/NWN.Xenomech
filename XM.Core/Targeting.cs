@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Anvil.API;
-using Anvil.API.Events;
 using Anvil.Services;
 using XM.API;
 using XM.API.Constants;
+using XM.Core.EventManagement;
 
 namespace XM.Core
 {
@@ -12,21 +11,24 @@ namespace XM.Core
     public class Targeting
     {
         private static readonly Dictionary<uint, Action<uint>> _playerTargetingActions = new();
+        private readonly XMEventService _event;
 
-        public Targeting()
+        public Targeting(XMEventService @event)
         {
-            HookEvents();
+            _event = @event;
+
+            SubscribeEvents();
         }
 
-        private void HookEvents()
+        private void SubscribeEvents()
         {
-            NwModule.Instance.OnPlayerTarget += RunTargetedItemAction;
+            _event.Subscribe<ModuleEvent.OnPlayerTarget>(RunTargetedItemAction);
         }
 
         /// <summary>
         /// When a player targets an object, execute the assigned action.
         /// </summary>
-        private void RunTargetedItemAction(ModuleEvents.OnPlayerTarget obj)
+        private void RunTargetedItemAction()
         {
             var player = GetLastPlayerToSelectTarget();
             if (!_playerTargetingActions.ContainsKey(player))

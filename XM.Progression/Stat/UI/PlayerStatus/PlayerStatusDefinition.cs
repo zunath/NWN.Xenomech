@@ -4,7 +4,8 @@ using XM.UI.UI;
 
 namespace XM.Progression.Stat.UI.PlayerStatus
 {
-    //[ServiceBinding(typeof(PlayerStatusDefinition))]
+    [ServiceBinding(typeof(PlayerStatusDefinition))]
+    [ServiceBinding(typeof(IGuiWindowDefinition))]
     internal class PlayerStatusDefinition : IGuiWindowDefinition
     {
         private readonly GuiWindowBuilder<PlayerStatusViewModel> _builder;
