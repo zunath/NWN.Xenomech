@@ -7,30 +7,30 @@ namespace XM.UI.Builder.Component
     public class NuiLabelBuilder<TViewModel> : NuiBuilderBase<NuiLabelBuilder<TViewModel>, NuiLabel, TViewModel>
         where TViewModel: IViewModel
     {
-        public NuiLabelBuilder()
-            : base(new NuiLabel(string.Empty))
+        public NuiLabelBuilder(NuiEventCollection eventCollection)
+            : base(new NuiLabel(string.Empty), eventCollection)
         {
         }
 
-        public NuiLabelBuilder<TViewModel> SetHorizontalAlign(NuiHAlign horizontalAlign)
+        public NuiLabelBuilder<TViewModel> HorizontalAlign(NuiHAlign horizontalAlign)
         {
             Element.HorizontalAlign = horizontalAlign;
             return this;
         }
 
-        public NuiLabelBuilder<TViewModel> SetVerticalAlign(NuiVAlign verticalAlign)
+        public NuiLabelBuilder<TViewModel> VerticalAlign(NuiVAlign verticalAlign)
         {
             Element.VerticalAlign = verticalAlign;
             return this;
         }
 
-        public NuiLabelBuilder<TViewModel> SetLabel(string label)
+        public NuiLabelBuilder<TViewModel> Label(string label)
         {
             Element.Label = label;
             return this;
         }
 
-        public NuiLabelBuilder<TViewModel> BindHorizontalAlign(Expression<Func<TViewModel, NuiHAlign>> expression)
+        public NuiLabelBuilder<TViewModel> HorizontalAlign(Expression<Func<TViewModel, NuiHAlign>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<NuiHAlign>(bindName);
@@ -39,7 +39,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiLabelBuilder<TViewModel> BindVerticalAlign(Expression<Func<TViewModel, NuiVAlign>> expression)
+        public NuiLabelBuilder<TViewModel> VerticalAlign(Expression<Func<TViewModel, NuiVAlign>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<NuiVAlign>(bindName);
@@ -48,7 +48,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiLabelBuilder<TViewModel> BindLabel(Expression<Func<TViewModel, object>> expression)
+        public NuiLabelBuilder<TViewModel> Label(Expression<Func<TViewModel, object>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<string>(bindName);

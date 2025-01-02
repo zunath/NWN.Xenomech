@@ -1,7 +1,6 @@
 ﻿using Anvil.API;
 using System.Linq.Expressions;
 using System;
-using System.Xml.Linq;
 
 namespace XM.UI.Builder
 {
@@ -10,7 +9,8 @@ namespace XM.UI.Builder
     {
         private readonly NuiWindow _window;
 
-        public NuiWindowBuilder(NuiLayout root, string title)
+        public NuiWindowBuilder(NuiLayout root, string title, NuiEventCollection eventCollection) 
+            : base(eventCollection)
         {
             _window = new NuiWindow(root, title);
             _window.Id = typeof(TViewModel).FullName;
@@ -135,7 +135,7 @@ namespace XM.UI.Builder
         }
 
 
-        public NuiWindow Build()
+        internal NuiWindow Build()
         {
             return _window;
         }

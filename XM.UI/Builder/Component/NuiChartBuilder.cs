@@ -7,8 +7,8 @@ namespace XM.UI.Builder.Component
     public class NuiChartBuilder<TViewModel> : NuiBuilderBase<NuiChartBuilder<TViewModel>, NuiChart, TViewModel>
         where TViewModel: IViewModel
     {
-        public NuiChartBuilder()
-            : base(new NuiChart())
+        public NuiChartBuilder(NuiEventCollection eventCollection)
+            : base(new NuiChart(), eventCollection)
         {
         }
 
@@ -16,7 +16,7 @@ namespace XM.UI.Builder.Component
         {
             Element.ChartSlots ??= new List<NuiChartSlot>();
 
-            var nuiChartSlotBuilder = new NuiChartSlotBuilder<TViewModel>();
+            var nuiChartSlotBuilder = new NuiChartSlotBuilder<TViewModel>(RegisteredEvents);
             chartSlot(nuiChartSlotBuilder);
             Element.ChartSlots.Add(nuiChartSlotBuilder.Build());
             return this;

@@ -7,41 +7,41 @@ namespace XM.UI.Builder.Component
     public class NuiTextEditBuilder<TViewModel> : NuiBuilderBase<NuiTextEditBuilder<TViewModel>, NuiTextEdit, TViewModel>
         where TViewModel: IViewModel
     {
-        public NuiTextEditBuilder()
-            : base(new NuiTextEdit(string.Empty, string.Empty, 1000, false))
+        public NuiTextEditBuilder(NuiEventCollection eventCollection)
+            : base(new NuiTextEdit(string.Empty, string.Empty, 1000, false), eventCollection)
         {
         }
 
-        public NuiTextEditBuilder<TViewModel> SetLabel(string label)
+        public NuiTextEditBuilder<TViewModel> Label(string label)
         {
             Element.Label = label;
             return this;
         }
 
-        public NuiTextEditBuilder<TViewModel> SetValue(string value)
+        public NuiTextEditBuilder<TViewModel> Value(string value)
         {
             Element.Value = value;
             return this;
         }
 
-        public NuiTextEditBuilder<TViewModel> SetMaxLength(ushort maxLength)
+        public NuiTextEditBuilder<TViewModel> MaxLength(ushort maxLength)
         {
             Element.MaxLength = maxLength;
             return this;
         }
 
-        public NuiTextEditBuilder<TViewModel> SetMultiLine(bool multiLine)
+        public NuiTextEditBuilder<TViewModel> MultiLine(bool multiLine)
         {
             Element.MultiLine = multiLine;
             return this;
         }
 
-        public NuiTextEditBuilder<TViewModel> SetWordWrap(bool wordWrap)
+        public NuiTextEditBuilder<TViewModel> WordWrap(bool wordWrap)
         {
             Element.WordWrap = wordWrap;
             return this;
         }
-        public NuiTextEditBuilder<TViewModel> BindLabel(Expression<Func<TViewModel, object>> expression)
+        public NuiTextEditBuilder<TViewModel> Label(Expression<Func<TViewModel, object>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<string>(bindName);
@@ -50,7 +50,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiTextEditBuilder<TViewModel> BindValue(Expression<Func<TViewModel, object>> expression)
+        public NuiTextEditBuilder<TViewModel> Value(Expression<Func<TViewModel, object>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<string>(bindName);
@@ -59,7 +59,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiTextEditBuilder<TViewModel> BindWordWrap(Expression<Func<TViewModel, object>> expression)
+        public NuiTextEditBuilder<TViewModel> WordWrap(Expression<Func<TViewModel, object>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<bool>(bindName);

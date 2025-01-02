@@ -7,8 +7,8 @@ namespace XM.UI.Builder.Layout
     public class NuiGroupBuilder<TViewModel> : NuiBuilderBase<NuiGroupBuilder<TViewModel>, NuiGroup, TViewModel>
         where TViewModel: IViewModel
     {
-        public NuiGroupBuilder()
-            : base(new NuiGroup())
+        public NuiGroupBuilder(NuiEventCollection eventCollection)
+            : base(new NuiGroup(), eventCollection)
         {
         }
 
@@ -26,7 +26,7 @@ namespace XM.UI.Builder.Layout
 
         public NuiGroupBuilder<TViewModel> SetLayout(Action<NuiColumnBuilder<TViewModel>> column)
         {
-            var columnBuilder = new NuiColumnBuilder<TViewModel>();
+            var columnBuilder = new NuiColumnBuilder<TViewModel>(RegisteredEvents);
             column(columnBuilder);
 
             Element.Layout = columnBuilder.Build();

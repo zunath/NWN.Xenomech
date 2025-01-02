@@ -6,24 +6,24 @@ namespace XM.UI.Builder.Component
     public class NuiTogglesBuilder<TViewModel> : NuiBuilderBase<NuiTogglesBuilder<TViewModel>, NuiToggles, TViewModel>
         where TViewModel: IViewModel
     {
-        public NuiTogglesBuilder()
-            : base(new NuiToggles(NuiDirection.Horizontal, []))
+        public NuiTogglesBuilder(NuiEventCollection eventCollection)
+            : base(new NuiToggles(NuiDirection.Horizontal, []), eventCollection)
         {
         }
 
-        public NuiTogglesBuilder<TViewModel> SetDirection(NuiDirection direction)
+        public NuiTogglesBuilder<TViewModel> Direction(NuiDirection direction)
         {
             Element.Direction = direction;
             return this;
         }
 
-        public NuiTogglesBuilder<TViewModel> AddElement(string element)
+        public NuiTogglesBuilder<TViewModel> Option(string element)
         {
             Element.Elements.Add(element);
             return this;
         }
 
-        public NuiTogglesBuilder<TViewModel> AddElements(IEnumerable<string> elements)
+        public NuiTogglesBuilder<TViewModel> Option(IEnumerable<string> elements)
         {
             Element.Elements.AddRange(elements);
             return this;

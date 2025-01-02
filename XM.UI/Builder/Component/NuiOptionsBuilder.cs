@@ -7,30 +7,30 @@ namespace XM.UI.Builder.Component
     public class NuiOptionsBuilder<TViewModel> : NuiBuilderBase<NuiOptionsBuilder<TViewModel>, NuiOptions, TViewModel>
         where TViewModel: IViewModel
     {
-        public NuiOptionsBuilder()
-            : base(new NuiOptions())
+        public NuiOptionsBuilder(NuiEventCollection eventCollection)
+            : base(new NuiOptions(), eventCollection)
         {
         }
 
-        public NuiOptionsBuilder<TViewModel> SetDirection(NuiDirection direction)
+        public NuiOptionsBuilder<TViewModel> Direction(NuiDirection direction)
         {
             Element.Direction = direction;
             return this;
         }
 
-        public NuiOptionsBuilder<TViewModel> AddOption(string option)
+        public NuiOptionsBuilder<TViewModel> Option(string option)
         {
             Element.Options.Add(option);
             return this;
         }
 
-        public NuiOptionsBuilder<TViewModel> SetSelection(int selection)
+        public NuiOptionsBuilder<TViewModel> Selection(int selection)
         {
             Element.Selection = selection;
             return this;
         }
 
-        public NuiOptionsBuilder<TViewModel> BindSelection(Expression<Func<TViewModel, int>> expression)
+        public NuiOptionsBuilder<TViewModel> Selection(Expression<Func<TViewModel, int>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<int>(bindName);

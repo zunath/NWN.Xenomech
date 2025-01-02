@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Action = System.Action;
 
 namespace XM.UI.Builder.Component
 {
@@ -12,97 +13,100 @@ namespace XM.UI.Builder.Component
     {
         protected readonly TElement Element;
 
-        protected NuiBuilderBase(TElement element)
+        protected NuiBuilderBase(TElement element, NuiEventCollection eventCollection) 
+            : base(eventCollection)
         {
             Element = element;
         }
 
-        public TBuilder SetAspect(float? aspect)
+
+        public TBuilder Aspect(float? aspect)
         {
             Element.Aspect = aspect;
             return (TBuilder)this;
         }
 
-        public TBuilder SetEnabled(bool enabled)
+        public TBuilder IsEnabled(bool enabled)
         {
             Element.Enabled = enabled;
             return (TBuilder)this;
         }
 
-        public TBuilder SetForegroundColor(Color foregroundColor)
+        public TBuilder ForegroundColor(Color foregroundColor)
         {
             Element.ForegroundColor = foregroundColor;
             return (TBuilder)this;
         }
 
-        public TBuilder SetHeight(float? height)
+        public TBuilder Height(float? height)
         {
             Element.Height = height;
             return (TBuilder)this;
         }
 
-        public TBuilder SetId(string id)
+        public TBuilder Id(string id)
         {
             Element.Id = id;
             return (TBuilder)this;
         }
 
-        public TBuilder SetMargin(float? margin)
+        public TBuilder Margin(float? margin)
         {
             Element.Margin = margin;
             return (TBuilder)this;
         }
 
-        public TBuilder SetPadding(float? padding)
+        public TBuilder Padding(float? padding)
         {
             Element.Padding = padding;
             return (TBuilder)this;
         }
 
-        public TBuilder SetTooltip(string tooltip)
+        public TBuilder TooltipText(string tooltip)
         {
             Element.Tooltip = tooltip;
             return (TBuilder)this;
         }
 
-        public TBuilder SetVisible(bool visible)
+        public TBuilder IsVisible(bool visible)
         {
             Element.Visible = visible;
             return (TBuilder)this;
         }
 
-        public TBuilder SetWidth(float? width)
+        public TBuilder Width(float? width)
         {
             Element.Width = width;
             return (TBuilder)this;
         }
 
-        public TBuilder SetDrawList(List<NuiDrawListItem> drawList)
+        public TBuilder DrawList(List<NuiDrawListItem> drawList)
         {
             Element.DrawList = drawList;
             return (TBuilder)this;
         }
 
-        public TBuilder SetScissor(bool scissor)
+        public TBuilder Scissor(bool scissor)
         {
             Element.Scissor = scissor;
             return (TBuilder)this;
         }
 
-        public TBuilder SetDisabledTooltip(string disabledTooltip)
+        public TBuilder DisabledTooltipText(string disabledTooltip)
         {
             Element.DisabledTooltip = disabledTooltip;
             return (TBuilder)this;
         }
 
-        public TBuilder SetEncouraged(bool encouraged)
+        public TBuilder IsEncouraged(bool encouraged)
         {
             Element.Encouraged = encouraged;
             return (TBuilder)this;
         }
 
+        
 
-        public TBuilder BindEnabled(Expression<Func<TViewModel, object>> expression)
+        public TBuilder IsEnabled(Expression<Func<TViewModel, object>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<bool>(bindName);
@@ -110,7 +114,7 @@ namespace XM.UI.Builder.Component
             return (TBuilder)this;
         }
 
-        public TBuilder BindForegroundColor(Expression<Func<TViewModel, object>> expression)
+        public TBuilder ForegroundColor(Expression<Func<TViewModel, object>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<Color>(bindName);
@@ -118,7 +122,7 @@ namespace XM.UI.Builder.Component
             return (TBuilder)this;
         }
 
-        public TBuilder BindTooltip(Expression<Func<TViewModel, object>> expression)
+        public TBuilder TooltipText(Expression<Func<TViewModel, object>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<string>(bindName);
@@ -126,7 +130,7 @@ namespace XM.UI.Builder.Component
             return (TBuilder)this;
         }
 
-        public TBuilder BindVisible(Expression<Func<TViewModel, object>> expression)
+        public TBuilder IsVisible(Expression<Func<TViewModel, object>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<bool>(bindName);
@@ -135,7 +139,7 @@ namespace XM.UI.Builder.Component
         }
 
 
-        public TBuilder BindScissor(Expression<Func<TViewModel, object>> expression)
+        public TBuilder Scissor(Expression<Func<TViewModel, object>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<bool>(bindName);
@@ -143,7 +147,7 @@ namespace XM.UI.Builder.Component
             return (TBuilder)this;
         }
 
-        public TBuilder BindDisabledTooltip(Expression<Func<TViewModel, object>> expression)
+        public TBuilder DisabledTooltipText(Expression<Func<TViewModel, object>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<string>(bindName);
@@ -151,7 +155,7 @@ namespace XM.UI.Builder.Component
             return (TBuilder)this;
         }
 
-        public TBuilder BindEncouraged(Expression<Func<TViewModel, object>> expression)
+        public TBuilder IsEncouraged(Expression<Func<TViewModel, object>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<bool>(bindName);
@@ -159,8 +163,37 @@ namespace XM.UI.Builder.Component
             return (TBuilder)this;
         }
 
+        private void BindAction(NuiEventType eventType, Expression<Func<TViewModel, Action>> expression)
+        {
+            if (string.IsNullOrWhiteSpace(Element.Id))
+                Element.Id = Guid.NewGuid().ToString();
+
+            RaisesNuiEvents = true;
+            var methodName = GetBindName(expression);
+            //_boundActions[eventType].Add(methodName);
+
+            if (!RegisteredEvents.ContainsKey(Element.Id))
+                RegisteredEvents[Element.Id] = new Dictionary<NuiEventType, string>();
+
+            RegisteredEvents[Element.Id][eventType] = methodName;
+        }
+
+        public TBuilder OnClick(Expression<Func<TViewModel, Action>> expression)
+        {
+            BindAction(NuiEventType.Click, expression);
+            return (TBuilder)this;
+        }
+
         public virtual TElement Build()
         {
+            // Events only get raised in NUI if the element has an Id.
+            // Ensure one is assigned if it wasn't set previously.
+            if (string.IsNullOrWhiteSpace(Element.Id) &&
+                RaisesNuiEvents)
+            {
+                Element.Id = Guid.NewGuid().ToString();
+            }
+
             return Element;
         }
 

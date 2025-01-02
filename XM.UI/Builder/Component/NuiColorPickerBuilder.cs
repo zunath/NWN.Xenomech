@@ -7,17 +7,17 @@ namespace XM.UI.Builder.Component
     public class NuiColorPickerBuilder<TViewModel> : NuiBuilderBase<NuiColorPickerBuilder<TViewModel>, NuiColorPicker, TViewModel>
         where TViewModel: IViewModel
     {
-        public NuiColorPickerBuilder()
-            : base(new NuiColorPicker(Color.FromRGBA(0)))
+        public NuiColorPickerBuilder(NuiEventCollection eventCollection)
+            : base(new NuiColorPicker(Anvil.API.Color.FromRGBA(0)), eventCollection)
         {
         }
 
-        public NuiColorPickerBuilder<TViewModel> SetColor(Color color)
+        public NuiColorPickerBuilder<TViewModel> Color(Color color)
         {
             Element.Color = color;
             return this;
         }
-        public NuiColorPickerBuilder<TViewModel> BindColor(Expression<Func<TViewModel, Color>> expression)
+        public NuiColorPickerBuilder<TViewModel> Color(Expression<Func<TViewModel, Color>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<Color>(bindName);

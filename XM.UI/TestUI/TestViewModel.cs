@@ -1,4 +1,6 @@
-﻿namespace XM.UI.TestUI
+﻿using System;
+
+namespace XM.UI.TestUI
 {
     internal class TestViewModel : ViewModel
     {
@@ -12,5 +14,20 @@
         {
             TestProp1 = "my new test value from OnOpen";
         }
+
+        public override void OnClose()
+        {
+            
+        }
+
+        public Action TestMethodToRun => () => 
+        {
+            Console.WriteLine($"TEstmethodtorun running");
+        };
+
+        public Action TestMethodToRun2 => () =>
+        {
+            Console.WriteLine($"test method 2 running");
+        };
     }
 }

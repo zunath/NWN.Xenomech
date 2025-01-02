@@ -69,14 +69,13 @@ namespace XM.UI
             OnPropertyChanged(propertyName);
         }
 
-        public virtual void OnOpen()
+        public abstract void OnOpen();
+
+        public void OnCloseInternal()
         {
 
         }
 
-        public virtual void OnClose()
-        {
-
-        }
+        public abstract void OnClose();
     }
 }

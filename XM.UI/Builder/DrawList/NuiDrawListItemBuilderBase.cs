@@ -11,48 +11,49 @@ namespace XM.UI.Builder.DrawList
     {
         protected readonly TElement Element;
 
-        protected NuiDrawListItemBuilderBase(TElement element)
+        protected NuiDrawListItemBuilderBase(TElement element, NuiEventCollection eventCollection) 
+            : base(eventCollection)
         {
             Element = element;
         }
 
-        public TBuilder SetColor(Color color)
+        public TBuilder Color(Color color)
         {
             Element.Color = color;
             return (TBuilder)this;
         }
 
-        public TBuilder SetEnabled(bool enabled)
+        public TBuilder Enabled(bool enabled)
         {
             Element.Enabled = enabled;
             return (TBuilder)this;
         }
 
-        public TBuilder SetFill(bool fill)
+        public TBuilder Fill(bool fill)
         {
             Element.Fill = fill;
             return (TBuilder)this;
         }
 
-        public TBuilder SetLineThickness(float lineThickness)
+        public TBuilder LineThickness(float lineThickness)
         {
             Element.LineThickness = lineThickness;
             return (TBuilder)this;
         }
 
-        public TBuilder SetOrder(NuiDrawListItemOrder order)
+        public TBuilder Order(NuiDrawListItemOrder order)
         {
             Element.Order = order;
             return (TBuilder)this;
         }
 
-        public TBuilder SetRender(NuiDrawListItemRender render)
+        public TBuilder Render(NuiDrawListItemRender render)
         {
             Element.Render = render;
             return (TBuilder)this;
         }
 
-        public TBuilder BindColor(Expression<Func<TViewModel, Color>> expression)
+        public TBuilder Color(Expression<Func<TViewModel, Color>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<Color>(bindName);
@@ -60,7 +61,7 @@ namespace XM.UI.Builder.DrawList
             return (TBuilder)this;
         }
 
-        public TBuilder BindEnabled(Expression<Func<TViewModel, bool>> expression)
+        public TBuilder Enabled(Expression<Func<TViewModel, bool>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<bool>(bindName);
@@ -68,7 +69,7 @@ namespace XM.UI.Builder.DrawList
             return (TBuilder)this;
         }
 
-        public TBuilder BindFill(Expression<Func<TViewModel, bool>> expression)
+        public TBuilder Fill(Expression<Func<TViewModel, bool>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<bool>(bindName);
@@ -76,7 +77,7 @@ namespace XM.UI.Builder.DrawList
             return (TBuilder)this;
         }
 
-        public TBuilder BindLineThickness(Expression<Func<TViewModel, float>> expression)
+        public TBuilder LineThickness(Expression<Func<TViewModel, float>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<float>(bindName);

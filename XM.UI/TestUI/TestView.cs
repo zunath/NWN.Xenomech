@@ -10,12 +10,12 @@ namespace XM.UI.TestUI
     {
         private readonly NuiBuilder<TestViewModel> _builder = new();
 
-        public IViewModel CreateViewModel(uint player)
+        public IViewModel CreateViewModel()
         {
             return new TestViewModel();
         }
 
-        public NuiWindow Build()
+        public NuiBuildResult Build()
         {
             return _builder.CreateWindow(window =>
                 {
@@ -33,13 +33,15 @@ namespace XM.UI.TestUI
                                 .AddSpacer()
                                 .AddButton(button =>
                                 {
-                                    button.SetLabel("my new button");
-                                    button.BindLabel(model => model.TestProp1);
+                                    button
+                                        .OnClick(model => model.TestMethodToRun);
+
                                 })
                                 .AddCheck(check =>
                                 {
-                                    check.SetLabel("my check");
-                                    check.SetSelected(true);
+                                    check.Label("my check");
+                                    check.Selected(true);
+                                    check.OnClick(model => model.TestMethodToRun2);
                                 })
                                 .AddSpacer();
                         })

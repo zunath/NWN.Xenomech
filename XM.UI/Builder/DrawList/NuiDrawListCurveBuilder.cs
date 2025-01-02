@@ -13,35 +13,36 @@ namespace XM.UI.Builder.DrawList
             NuiVector pointA,
             NuiVector pointB,
             NuiVector control0,
-            NuiVector control1)
-            : base(new NuiDrawListCurve(color, lineThickness, pointA, pointB, control0, control1))
+            NuiVector control1,
+            NuiEventCollection eventCollection)
+            : base(new NuiDrawListCurve(color, lineThickness, pointA, pointB, control0, control1), eventCollection)
         {
         }
 
-        public NuiDrawListCurveBuilder<TViewModel> SetControl0(NuiVector control0)
+        public NuiDrawListCurveBuilder<TViewModel> Control0(NuiVector control0)
         {
             Element.Control0 = control0;
             return this;
         }
 
-        public NuiDrawListCurveBuilder<TViewModel> SetControl1(NuiVector control1)
+        public NuiDrawListCurveBuilder<TViewModel> Control1(NuiVector control1)
         {
             Element.Control1 = control1;
             return this;
         }
 
-        public NuiDrawListCurveBuilder<TViewModel> SetPointA(NuiVector pointA)
+        public NuiDrawListCurveBuilder<TViewModel> PointA(NuiVector pointA)
         {
             Element.PointA = pointA;
             return this;
         }
 
-        public NuiDrawListCurveBuilder<TViewModel> SetPointB(NuiVector pointB)
+        public NuiDrawListCurveBuilder<TViewModel> PointB(NuiVector pointB)
         {
             Element.PointB = pointB;
             return this;
         }
-        public NuiDrawListCurveBuilder<TViewModel> BindControl0(Expression<Func<TViewModel, NuiVector>> expression)
+        public NuiDrawListCurveBuilder<TViewModel> Control0(Expression<Func<TViewModel, NuiVector>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<NuiVector>(bindName);
@@ -50,7 +51,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListCurveBuilder<TViewModel> BindControl1(Expression<Func<TViewModel, NuiVector>> expression)
+        public NuiDrawListCurveBuilder<TViewModel> Control1(Expression<Func<TViewModel, NuiVector>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<NuiVector>(bindName);
@@ -59,7 +60,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListCurveBuilder<TViewModel> BindPointA(Expression<Func<TViewModel, NuiVector>> expression)
+        public NuiDrawListCurveBuilder<TViewModel> PointA(Expression<Func<TViewModel, NuiVector>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<NuiVector>(bindName);
@@ -68,7 +69,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListCurveBuilder<TViewModel> BindPointB(Expression<Func<TViewModel, NuiVector>> expression)
+        public NuiDrawListCurveBuilder<TViewModel> PointB(Expression<Func<TViewModel, NuiVector>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<NuiVector>(bindName);

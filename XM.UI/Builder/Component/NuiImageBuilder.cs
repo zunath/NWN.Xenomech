@@ -7,41 +7,41 @@ namespace XM.UI.Builder.Component
     public class NuiImageBuilder<TViewModel> : NuiBuilderBase<NuiImageBuilder<TViewModel>, NuiImage, TViewModel>
         where TViewModel: IViewModel
     {
-        public NuiImageBuilder()
-            : base(new NuiImage(string.Empty))
+        public NuiImageBuilder(NuiEventCollection eventCollection)
+            : base(new NuiImage(string.Empty), eventCollection)
         {
         }
 
-        public NuiImageBuilder<TViewModel> SetHorizontalAlign(NuiHAlign horizontalAlign)
+        public NuiImageBuilder<TViewModel> HorizontalAlign(NuiHAlign horizontalAlign)
         {
             Element.HorizontalAlign = horizontalAlign;
             return this;
         }
 
-        public NuiImageBuilder<TViewModel> SetVerticalAlign(NuiVAlign verticalAlign)
+        public NuiImageBuilder<TViewModel> VerticalAlign(NuiVAlign verticalAlign)
         {
             Element.VerticalAlign = verticalAlign;
             return this;
         }
 
-        public NuiImageBuilder<TViewModel> SetImageAspect(NuiAspect aspect)
+        public NuiImageBuilder<TViewModel> ImageAspect(NuiAspect aspect)
         {
             Element.ImageAspect = aspect;
             return this;
         }
 
-        public NuiImageBuilder<TViewModel> SetImageRegion(NuiRect region)
+        public NuiImageBuilder<TViewModel> ImageRegion(NuiRect region)
         {
             Element.ImageRegion = region;
             return this;
         }
 
-        public NuiImageBuilder<TViewModel> SetResRef(string resRef)
+        public NuiImageBuilder<TViewModel> ResRef(string resRef)
         {
             Element.ResRef = resRef;
             return this;
         }
-        public NuiImageBuilder<TViewModel> BindHorizontalAlign(Expression<Func<TViewModel, NuiHAlign>> expression)
+        public NuiImageBuilder<TViewModel> HorizontalAlign(Expression<Func<TViewModel, NuiHAlign>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<NuiHAlign>(bindName);
@@ -50,7 +50,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiImageBuilder<TViewModel> BindVerticalAlign(Expression<Func<TViewModel, NuiVAlign>> expression)
+        public NuiImageBuilder<TViewModel> VerticalAlign(Expression<Func<TViewModel, NuiVAlign>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<NuiVAlign>(bindName);
@@ -59,7 +59,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiImageBuilder<TViewModel> BindImageAspect(Expression<Func<TViewModel, NuiAspect>> expression)
+        public NuiImageBuilder<TViewModel> ImageAspect(Expression<Func<TViewModel, NuiAspect>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<NuiAspect>(bindName);
@@ -68,7 +68,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiImageBuilder<TViewModel> BindImageRegion(Expression<Func<TViewModel, NuiRect>> expression)
+        public NuiImageBuilder<TViewModel> ImageRegion(Expression<Func<TViewModel, NuiRect>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<NuiRect>(bindName);
@@ -77,7 +77,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiImageBuilder<TViewModel> BindResRef(Expression<Func<TViewModel, object>> expression)
+        public NuiImageBuilder<TViewModel> ResRef(Expression<Func<TViewModel, object>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<string>(bindName);

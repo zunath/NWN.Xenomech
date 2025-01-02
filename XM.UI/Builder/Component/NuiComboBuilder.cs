@@ -10,12 +10,12 @@ namespace XM.UI.Builder.Component
     {
         private readonly List<NuiComboEntry> _entries = new();
 
-        public NuiComboBuilder()
-            : base(new NuiCombo())
+        public NuiComboBuilder(NuiEventCollection eventCollection)
+            : base(new NuiCombo(), eventCollection)
         {
         }
 
-        public NuiComboBuilder<TViewModel> AddOption(string label, int value)
+        public NuiComboBuilder<TViewModel> Option(string label, int value)
         {
             var entry = new NuiComboEntry(label, value);
 
@@ -24,13 +24,13 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiComboBuilder<TViewModel> SetSelected(int selected)
+        public NuiComboBuilder<TViewModel> IsSelected(int selected)
         {
             Element.Selected = selected;
 
             return this;
         }
-        public NuiComboBuilder<TViewModel> BindSelected(Expression<Func<TViewModel, int>> expression)
+        public NuiComboBuilder<TViewModel> IsSelected(Expression<Func<TViewModel, int>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<int>(bindName);
@@ -39,7 +39,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiComboBuilder<TViewModel> BindOptions(Expression<Func<TViewModel, List<NuiComboEntry>>> expression)
+        public NuiComboBuilder<TViewModel> Option(Expression<Func<TViewModel, List<NuiComboEntry>>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<List<NuiComboEntry>>(bindName);

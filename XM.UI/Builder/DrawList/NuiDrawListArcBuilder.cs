@@ -14,35 +14,36 @@ namespace XM.UI.Builder.DrawList
             NuiVector center,
             float radius,
             float angleMin,
-            float angleMax)
-            : base(new NuiDrawListArc(color, fill, lineThickness, center, radius, angleMin, angleMax))
+            float angleMax,
+            NuiEventCollection eventCollection)
+            : base(new NuiDrawListArc(color, fill, lineThickness, center, radius, angleMin, angleMax), eventCollection)
         {
         }
 
-        public NuiDrawListArcBuilder<TViewModel> SetAngleMax(float angleMax)
+        public NuiDrawListArcBuilder<TViewModel> AngleMax(float angleMax)
         {
             Element.AngleMax = angleMax;
             return this;
         }
 
-        public NuiDrawListArcBuilder<TViewModel> SetAngleMin(float angleMin)
+        public NuiDrawListArcBuilder<TViewModel> AngleMin(float angleMin)
         {
             Element.AngleMin = angleMin;
             return this;
         }
 
-        public NuiDrawListArcBuilder<TViewModel> SetCenter(NuiVector center)
+        public NuiDrawListArcBuilder<TViewModel> Center(NuiVector center)
         {
             Element.Center = center;
             return this;
         }
 
-        public NuiDrawListArcBuilder<TViewModel> SetRadius(float radius)
+        public NuiDrawListArcBuilder<TViewModel> Radius(float radius)
         {
             Element.Radius = radius;
             return this;
         }
-        public NuiDrawListArcBuilder<TViewModel> BindAngleMax(Expression<Func<TViewModel, float>> expression)
+        public NuiDrawListArcBuilder<TViewModel> AngleMax(Expression<Func<TViewModel, float>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<float>(bindName);
@@ -51,7 +52,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListArcBuilder<TViewModel> BindAngleMin(Expression<Func<TViewModel, float>> expression)
+        public NuiDrawListArcBuilder<TViewModel> AngleMin(Expression<Func<TViewModel, float>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<float>(bindName);
@@ -60,7 +61,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListArcBuilder<TViewModel> BindCenter(Expression<Func<TViewModel, NuiVector>> expression)
+        public NuiDrawListArcBuilder<TViewModel> Center(Expression<Func<TViewModel, NuiVector>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<NuiVector>(bindName);
@@ -69,7 +70,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListArcBuilder<TViewModel> BindRadius(Expression<Func<TViewModel, float>> expression)
+        public NuiDrawListArcBuilder<TViewModel> Radius(Expression<Func<TViewModel, float>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<float>(bindName);

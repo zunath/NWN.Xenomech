@@ -7,41 +7,44 @@ namespace XM.UI.Builder.DrawList
     public class NuiDrawListImageBuilder<TViewModel> : NuiDrawListItemBuilderBase<NuiDrawListImageBuilder<TViewModel>, NuiDrawListImage, TViewModel>
         where TViewModel: IViewModel
     {
-        public NuiDrawListImageBuilder(string resRef, NuiRect rect)
-            : base(new NuiDrawListImage(resRef, rect))
+        public NuiDrawListImageBuilder(
+            string resRef, 
+            NuiRect rect,
+            NuiEventCollection eventCollection)
+            : base(new NuiDrawListImage(resRef, rect), eventCollection)
         {
         }
 
-        public NuiDrawListImageBuilder<TViewModel> SetAspect(NuiAspect aspect)
+        public NuiDrawListImageBuilder<TViewModel> Aspect(NuiAspect aspect)
         {
             Element.Aspect = aspect;
             return this;
         }
 
-        public NuiDrawListImageBuilder<TViewModel> SetHorizontalAlign(NuiHAlign horizontalAlign)
+        public NuiDrawListImageBuilder<TViewModel> HorizontalAlign(NuiHAlign horizontalAlign)
         {
             Element.HorizontalAlign = horizontalAlign;
             return this;
         }
 
-        public NuiDrawListImageBuilder<TViewModel> SetVerticalAlign(NuiVAlign verticalAlign)
+        public NuiDrawListImageBuilder<TViewModel> VerticalAlign(NuiVAlign verticalAlign)
         {
             Element.VerticalAlign = verticalAlign;
             return this;
         }
 
-        public NuiDrawListImageBuilder<TViewModel> SetRect(NuiRect rect)
+        public NuiDrawListImageBuilder<TViewModel> Rect(NuiRect rect)
         {
             Element.Rect = rect;
             return this;
         }
 
-        public NuiDrawListImageBuilder<TViewModel> SetResRef(string resRef)
+        public NuiDrawListImageBuilder<TViewModel> ResRef(string resRef)
         {
             Element.ResRef = resRef;
             return this;
         }
-        public NuiDrawListImageBuilder<TViewModel> BindAspect(Expression<Func<TViewModel, NuiAspect>> expression)
+        public NuiDrawListImageBuilder<TViewModel> Aspect(Expression<Func<TViewModel, NuiAspect>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<NuiAspect>(bindName);
@@ -50,7 +53,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListImageBuilder<TViewModel> BindHorizontalAlign(Expression<Func<TViewModel, NuiHAlign>> expression)
+        public NuiDrawListImageBuilder<TViewModel> HorizontalAlign(Expression<Func<TViewModel, NuiHAlign>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<NuiHAlign>(bindName);
@@ -59,7 +62,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListImageBuilder<TViewModel> BindVerticalAlign(Expression<Func<TViewModel, NuiVAlign>> expression)
+        public NuiDrawListImageBuilder<TViewModel> VerticalAlign(Expression<Func<TViewModel, NuiVAlign>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<NuiVAlign>(bindName);
@@ -68,7 +71,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListImageBuilder<TViewModel> BindRect(Expression<Func<TViewModel, NuiRect>> expression)
+        public NuiDrawListImageBuilder<TViewModel> Rect(Expression<Func<TViewModel, NuiRect>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<NuiRect>(bindName);
@@ -77,7 +80,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListImageBuilder<TViewModel> BindResRef(Expression<Func<TViewModel, object>> expression)
+        public NuiDrawListImageBuilder<TViewModel> ResRef(Expression<Func<TViewModel, object>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<string>(bindName);
@@ -86,7 +89,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListImageBuilder<TViewModel> SetImageRegion(NuiRect? imageRegion)
+        public NuiDrawListImageBuilder<TViewModel> ImageRegion(NuiRect? imageRegion)
         {
             Element.ImageRegion = imageRegion;
             return this;

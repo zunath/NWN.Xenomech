@@ -13,31 +13,36 @@ namespace XM.UI.Builder.Component
         private NuiProperty<Color> _color = new Color(255, 255, 255); // Default to white
         private NuiProperty<List<float>> _data = new List<float>();
 
-        public NuiChartSlotBuilder<TViewModel> SetChartType(NuiChartType chartType)
+        public NuiChartSlotBuilder(NuiEventCollection registeredEvents) 
+            : base(registeredEvents)
+        {
+        }
+
+        public NuiChartSlotBuilder<TViewModel> ChartType(NuiChartType chartType)
         {
             _chartType = chartType;
             return this;
         }
 
-        public NuiChartSlotBuilder<TViewModel> SetLegend(string legend)
+        public NuiChartSlotBuilder<TViewModel> Legend(string legend)
         {
             _legend = legend;
             return this;
         }
 
-        public NuiChartSlotBuilder<TViewModel> SetColor(Color color)
+        public NuiChartSlotBuilder<TViewModel> Color(Color color)
         {
             _color = color;
             return this;
         }
 
-        public NuiChartSlotBuilder<TViewModel> SetData(List<float> data)
+        public NuiChartSlotBuilder<TViewModel> Data(List<float> data)
         {
             _data = data;
             return this;
         }
 
-        public NuiChartSlotBuilder<TViewModel> BindLegend(Expression<Func<TViewModel, object>> expression)
+        public NuiChartSlotBuilder<TViewModel> Legend(Expression<Func<TViewModel, object>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<string>(bindName);
@@ -46,7 +51,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiChartSlotBuilder<TViewModel> BindColor(Expression<Func<TViewModel, object>> expression)
+        public NuiChartSlotBuilder<TViewModel> Color(Expression<Func<TViewModel, object>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<Color>(bindName);
@@ -55,7 +60,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiChartSlotBuilder<TViewModel> BindData(Expression<Func<TViewModel, object>> expression)
+        public NuiChartSlotBuilder<TViewModel> Data(Expression<Func<TViewModel, object>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<List<float>>(bindName);
@@ -69,6 +74,7 @@ namespace XM.UI.Builder.Component
         {
             return new NuiChartSlot(_chartType, _legend, _color, _data);
         }
+
     }
 
 }

@@ -7,17 +7,17 @@ namespace XM.UI.Builder.Component
     public class NuiButtonImageBuilder<TViewModel> : NuiBuilderBase<NuiButtonImageBuilder<TViewModel>, NuiButtonImage, TViewModel>
         where TViewModel: IViewModel
     {
-        public NuiButtonImageBuilder()
-            : base(new NuiButtonImage(string.Empty))
+        public NuiButtonImageBuilder(NuiEventCollection eventCollection)
+            : base(new NuiButtonImage(string.Empty), eventCollection)
         {
         }
 
-        public NuiButtonImageBuilder<TViewModel> SetResRef(string resRef)
+        public NuiButtonImageBuilder<TViewModel> ResRef(string resRef)
         {
             Element.ResRef = resRef;
             return this;
         }
-        public NuiButtonImageBuilder<TViewModel> BindResRef(Expression<Func<TViewModel, string>> expression)
+        public NuiButtonImageBuilder<TViewModel> ResRef(Expression<Func<TViewModel, string>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<string>(bindName);

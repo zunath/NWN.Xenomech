@@ -11,18 +11,19 @@ namespace XM.UI.Builder.DrawList
             Color color,
             bool fill,
             float lineThickness,
-            NuiRect rect)
-            : base(new NuiDrawListCircle(color, fill, lineThickness, rect))
+            NuiRect rect,
+            NuiEventCollection eventCollection)
+            : base(new NuiDrawListCircle(color, fill, lineThickness, rect), eventCollection)
         {
         }
 
-        public NuiDrawListCircleBuilder<TViewModel> SetRect(NuiRect rect)
+        public NuiDrawListCircleBuilder<TViewModel> Rect(NuiRect rect)
         {
             Element.Rect = rect;
             return this;
         }
 
-        public NuiDrawListCircleBuilder<TViewModel> BindRect(Expression<Func<TViewModel, NuiRect>> expression)
+        public NuiDrawListCircleBuilder<TViewModel> Rect(Expression<Func<TViewModel, NuiRect>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<NuiRect>(bindName);

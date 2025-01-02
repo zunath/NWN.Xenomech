@@ -7,35 +7,35 @@ namespace XM.UI.Builder.Component
     public class NuiSliderBuilder<TViewModel> : NuiBuilderBase<NuiSliderBuilder<TViewModel>, NuiSlider, TViewModel>
         where TViewModel: IViewModel
     {
-        public NuiSliderBuilder()
-            : base(new NuiSlider(0, 0,0))
+        public NuiSliderBuilder(NuiEventCollection eventCollection)
+            : base(new NuiSlider(0, 0,0), eventCollection)
         {
         }
 
-        public NuiSliderBuilder<TViewModel> SetValue(int value)
+        public NuiSliderBuilder<TViewModel> Value(int value)
         {
             Element.Value = value;
             return this;
         }
 
-        public NuiSliderBuilder<TViewModel> SetMin(int min)
+        public NuiSliderBuilder<TViewModel> Min(int min)
         {
             Element.Min = min;
             return this;
         }
 
-        public NuiSliderBuilder<TViewModel> SetMax(int max)
+        public NuiSliderBuilder<TViewModel> Max(int max)
         {
             Element.Max = max;
             return this;
         }
 
-        public NuiSliderBuilder<TViewModel> SetStep(int step)
+        public NuiSliderBuilder<TViewModel> Step(int step)
         {
             Element.Step = step;
             return this;
         }
-        public NuiSliderBuilder<TViewModel> BindValue(Expression<Func<TViewModel, int>> expression)
+        public NuiSliderBuilder<TViewModel> Value(Expression<Func<TViewModel, int>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<int>(bindName);
@@ -44,7 +44,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiSliderBuilder<TViewModel> BindMin(Expression<Func<TViewModel, int>> expression)
+        public NuiSliderBuilder<TViewModel> Min(Expression<Func<TViewModel, int>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<int>(bindName);
@@ -53,7 +53,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiSliderBuilder<TViewModel> BindMax(Expression<Func<TViewModel, int>> expression)
+        public NuiSliderBuilder<TViewModel> Max(Expression<Func<TViewModel, int>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<int>(bindName);
@@ -62,7 +62,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiSliderBuilder<TViewModel> BindStep(Expression<Func<TViewModel, int>> expression)
+        public NuiSliderBuilder<TViewModel> Step(Expression<Func<TViewModel, int>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<int>(bindName);

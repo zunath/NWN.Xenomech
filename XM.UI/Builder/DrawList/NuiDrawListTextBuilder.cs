@@ -8,29 +8,28 @@ namespace XM.UI.Builder.DrawList
     public class NuiDrawListTextBuilder<TViewModel> : NuiDrawListItemBuilderBase<NuiDrawListTextBuilder<TViewModel>, NuiDrawListText, TViewModel>
         where TViewModel: IViewModel
     {
-        public NuiDrawListTextBuilder(Color color, NuiRect rect, string text)
-            : base(new NuiDrawListText(color, rect, text))
+        public NuiDrawListTextBuilder(
+            Color color, 
+            NuiRect rect, 
+            string text,
+            NuiEventCollection eventCollection)
+            : base(new NuiDrawListText(color, rect, text), eventCollection)
         {
         }
 
-        public NuiDrawListTextBuilder<TViewModel> SetRect(NuiRect rect)
+        public NuiDrawListTextBuilder<TViewModel> Rect(NuiRect rect)
         {
             Element.Rect = rect;
             return this;
         }
 
-        public NuiDrawListTextBuilder<TViewModel> SetText(string text)
+        public NuiDrawListTextBuilder<TViewModel> Text(string text)
         {
             Element.Text = text;
             return this;
         }
 
-        public NuiDrawListTextBuilder<TViewModel> SetColor(Color color)
-        {
-            Element.Color = color;
-            return this;
-        }
-        public NuiDrawListTextBuilder<TViewModel> BindRect(Expression<Func<TViewModel, NuiRect>> expression)
+        public NuiDrawListTextBuilder<TViewModel> Rect(Expression<Func<TViewModel, NuiRect>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<NuiRect>(bindName);
@@ -39,7 +38,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListTextBuilder<TViewModel> BindText(Expression<Func<TViewModel, object>> expression)
+        public NuiDrawListTextBuilder<TViewModel> Text(Expression<Func<TViewModel, object>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<string>(bindName);
@@ -48,7 +47,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListTextBuilder<TViewModel> BindColor(Expression<Func<TViewModel, object>> expression)
+        public NuiDrawListTextBuilder<TViewModel> Color(Expression<Func<TViewModel, object>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<Color>(bindName);

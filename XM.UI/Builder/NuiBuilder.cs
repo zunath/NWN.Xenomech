@@ -1,17 +1,22 @@
-﻿using Anvil.API;
-using System;
+﻿using System;
 using XM.UI.Builder.Layout;
 
 namespace XM.UI.Builder
 {
-    public class NuiBuilder<TViewModel>
+    public class NuiBuilder<TViewModel>: NuiBindable<TViewModel>
         where TViewModel: IViewModel
     {
         private NuiWindowBuilder<TViewModel> _windowBuilder;
 
+        public NuiBuilder() 
+            : base(new NuiEventCollection())
+        {
+        }
+
         public NuiBuilder<TViewModel> CreateWindow(Action<NuiWindowBuilder<TViewModel>> configure)
         {
-            _windowBuilder = new NuiWindowBuilder<TViewModel>(new NuiColumnBuilder<TViewModel>().Build(), "New Window");
+            var root = new NuiColumnBuilder<TViewModel>(RegisteredEvents).Build();
+            _windowBuilder = new NuiWindowBuilder<TViewModel>(root, "New Window", RegisteredEvents);
             configure(_windowBuilder);
             return this;
         }
@@ -23,23 +28,25 @@ namespace XM.UI.Builder
                 throw new InvalidOperationException("You must create a window before adding a column.");
             }
 
-            var columnBuilder = new NuiColumnBuilder<TViewModel>();
+            var columnBuilder = new NuiColumnBuilder<TViewModel>(RegisteredEvents);
             configure(columnBuilder);
             _windowBuilder.SetRoot(columnBuilder.Build());
 
             return this;
         }
 
-        public NuiWindow Build()
+        public NuiBuildResult Build()
         {
             if (_windowBuilder == null)
             {
                 throw new InvalidOperationException("No window has been created.");
             }
 
-            return _windowBuilder.Build();
+            var window = _windowBuilder.Build();
+            var buildResult = new NuiBuildResult(window, RegisteredEvents);
+
+            return buildResult;
         }
+
     }
-
-
 }

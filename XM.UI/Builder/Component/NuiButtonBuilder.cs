@@ -7,18 +7,18 @@ namespace XM.UI.Builder.Component
     public class NuiButtonBuilder<TViewModel> : NuiBuilderBase<NuiButtonBuilder<TViewModel>, NuiButton, TViewModel>
         where TViewModel: IViewModel
     {
-        public NuiButtonBuilder()
-            : base(new NuiButton(string.Empty))
+        public NuiButtonBuilder(NuiEventCollection eventCollection)
+            : base(new NuiButton(string.Empty), eventCollection)
         {
         }
 
-        public NuiButtonBuilder<TViewModel> SetLabel(string label)
+        public NuiButtonBuilder<TViewModel> Label(string label)
         {
             Element.Label = label;
             return this;
         }
 
-        public NuiButtonBuilder<TViewModel> BindLabel(Expression<Func<TViewModel, string>> expression)
+        public NuiButtonBuilder<TViewModel> Label(Expression<Func<TViewModel, string>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<string>(bindName);
