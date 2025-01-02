@@ -41,7 +41,7 @@ namespace XM.UI.Builder.Component
             Element.WordWrap = wordWrap;
             return this;
         }
-        public NuiTextEditBuilder<TViewModel> Label(Expression<Func<TViewModel, object>> expression)
+        public NuiTextEditBuilder<TViewModel> Label(Expression<Func<TViewModel, string>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<string>(bindName);
@@ -50,7 +50,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiTextEditBuilder<TViewModel> Value(Expression<Func<TViewModel, object>> expression)
+        public NuiTextEditBuilder<TViewModel> Value(Expression<Func<TViewModel, string>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<string>(bindName);
@@ -59,7 +59,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiTextEditBuilder<TViewModel> WordWrap(Expression<Func<TViewModel, object>> expression)
+        public NuiTextEditBuilder<TViewModel> WordWrap(Expression<Func<TViewModel, bool>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<bool>(bindName);

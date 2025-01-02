@@ -29,7 +29,7 @@ namespace XM.UI.Builder.Component
             Element.Scrollbars = scrollbars;
             return this;
         }
-        public NuiTextBuilder<TViewModel> Text(Expression<Func<TViewModel, object>> expression)
+        public NuiTextBuilder<TViewModel> Text(Expression<Func<TViewModel, string>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<string>(bindName);

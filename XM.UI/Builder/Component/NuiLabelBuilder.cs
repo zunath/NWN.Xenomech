@@ -48,7 +48,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiLabelBuilder<TViewModel> Label(Expression<Func<TViewModel, object>> expression)
+        public NuiLabelBuilder<TViewModel> Label(Expression<Func<TViewModel, string>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<string>(bindName);

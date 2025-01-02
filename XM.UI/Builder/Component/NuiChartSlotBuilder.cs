@@ -42,7 +42,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiChartSlotBuilder<TViewModel> Legend(Expression<Func<TViewModel, object>> expression)
+        public NuiChartSlotBuilder<TViewModel> Legend(Expression<Func<TViewModel, string>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<string>(bindName);
@@ -51,7 +51,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiChartSlotBuilder<TViewModel> Color(Expression<Func<TViewModel, object>> expression)
+        public NuiChartSlotBuilder<TViewModel> Color(Expression<Func<TViewModel, Color>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<Color>(bindName);
@@ -60,7 +60,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiChartSlotBuilder<TViewModel> Data(Expression<Func<TViewModel, object>> expression)
+        public NuiChartSlotBuilder<TViewModel> Data(Expression<Func<TViewModel, float>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<List<float>>(bindName);

@@ -77,7 +77,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiImageBuilder<TViewModel> ResRef(Expression<Func<TViewModel, object>> expression)
+        public NuiImageBuilder<TViewModel> ResRef(Expression<Func<TViewModel, string>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<string>(bindName);

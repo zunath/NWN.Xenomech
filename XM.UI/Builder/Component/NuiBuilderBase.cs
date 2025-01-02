@@ -106,7 +106,7 @@ namespace XM.UI.Builder.Component
 
         
 
-        public TBuilder IsEnabled(Expression<Func<TViewModel, object>> expression)
+        public TBuilder IsEnabled(Expression<Func<TViewModel, bool>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<bool>(bindName);
@@ -114,7 +114,7 @@ namespace XM.UI.Builder.Component
             return (TBuilder)this;
         }
 
-        public TBuilder ForegroundColor(Expression<Func<TViewModel, object>> expression)
+        public TBuilder ForegroundColor(Expression<Func<TViewModel, Color>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<Color>(bindName);
@@ -122,7 +122,7 @@ namespace XM.UI.Builder.Component
             return (TBuilder)this;
         }
 
-        public TBuilder TooltipText(Expression<Func<TViewModel, object>> expression)
+        public TBuilder TooltipText(Expression<Func<TViewModel, string>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<string>(bindName);
@@ -130,7 +130,7 @@ namespace XM.UI.Builder.Component
             return (TBuilder)this;
         }
 
-        public TBuilder IsVisible(Expression<Func<TViewModel, object>> expression)
+        public TBuilder IsVisible(Expression<Func<TViewModel, bool>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<bool>(bindName);
@@ -139,7 +139,7 @@ namespace XM.UI.Builder.Component
         }
 
 
-        public TBuilder Scissor(Expression<Func<TViewModel, object>> expression)
+        public TBuilder Scissor(Expression<Func<TViewModel, bool>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<bool>(bindName);
@@ -147,7 +147,7 @@ namespace XM.UI.Builder.Component
             return (TBuilder)this;
         }
 
-        public TBuilder DisabledTooltipText(Expression<Func<TViewModel, object>> expression)
+        public TBuilder DisabledTooltipText(Expression<Func<TViewModel, string>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<string>(bindName);
@@ -155,7 +155,7 @@ namespace XM.UI.Builder.Component
             return (TBuilder)this;
         }
 
-        public TBuilder IsEncouraged(Expression<Func<TViewModel, object>> expression)
+        public TBuilder IsEncouraged(Expression<Func<TViewModel, bool>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<bool>(bindName);
