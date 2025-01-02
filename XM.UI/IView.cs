@@ -1,11 +1,12 @@
-﻿using Anvil.API;
+﻿using System;
+using Anvil.API;
 using XM.UI.Builder;
 
 namespace XM.UI
 {
     public interface IView
     {
-        IViewModel CreateViewModel();
+        Type ViewModel { get; }
         NuiBuildResult Build();
     }
 }

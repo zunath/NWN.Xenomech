@@ -1,5 +1,4 @@
 ﻿using System;
-using Anvil.API;
 using Anvil.Services;
 using XM.UI.Builder;
 
@@ -10,10 +9,7 @@ namespace XM.UI.TestUI
     {
         private readonly NuiBuilder<TestViewModel> _builder = new();
 
-        public IViewModel CreateViewModel()
-        {
-            return new TestViewModel();
-        }
+        public Type ViewModel => typeof(TestViewModel);
 
         public NuiBuildResult Build()
         {
@@ -34,6 +30,7 @@ namespace XM.UI.TestUI
                                 .AddButton(button =>
                                 {
                                     button
+                                        .Label(model => model.TestProp1)
                                         .OnClick(model => model.TestMethodToRun);
 
                                 })

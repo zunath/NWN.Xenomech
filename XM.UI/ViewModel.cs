@@ -71,11 +71,6 @@ namespace XM.UI
 
         public abstract void OnOpen();
 
-        public void OnCloseInternal()
-        {
-
-        }
-
         public abstract void OnClose();
     }
 }
