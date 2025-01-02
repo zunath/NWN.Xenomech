@@ -9,7 +9,10 @@ namespace XM.UI.TestUI
     {
         private readonly NuiBuilder<TestViewModel> _builder = new();
 
-        public Type ViewModel => typeof(TestViewModel);
+        public IViewModel CreateViewModel()
+        {
+            return new TestViewModel();
+        }
 
         public NuiBuildResult Build()
         {

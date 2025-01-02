@@ -4,7 +4,9 @@ using System.Reflection;
 using Anvil.API;
 using Anvil.Services;
 using XM.Core.EventManagement;
+using XM.Data;
 using XM.UI.Builder;
+using XM.UI.Entity;
 using XM.UI.TestUI;
 using Action = System.Action;
 
@@ -23,12 +25,17 @@ namespace XM.UI
         private readonly Dictionary<int, IViewModel> _playerViewModels = new();
 
         private readonly XMEventService _event;
-        private readonly IServiceManager _serviceManager;
+        private readonly InjectionService _injection;
+        private readonly DBService _db;
 
-        public GuiService(XMEventService @event, IServiceManager serviceManager)
+        public GuiService(
+            XMEventService @event, 
+            InjectionService injection,
+            DBService db)
         {
             _event = @event;
-            _serviceManager = serviceManager;
+            _injection = injection;
+            _db = db;
 
             SubscribeEvents();
         }
@@ -49,9 +56,6 @@ namespace XM.UI
             {
                 case "click":
                     RunUserEvent(elementId, NuiEventType.Click, windowToken);
-                    break;
-                case "watch":
-                    RunUserEvent(elementId, NuiEventType.Watch, windowToken);
                     break;
                 case "open":
                     RunOpenWindow();
@@ -108,12 +112,27 @@ namespace XM.UI
 
         private void RunCloseWindow()
         {
+            var player = NuiGetEventPlayer();
             var windowToken = NuiGetEventWindow();
             var viewModel = _playerViewModels[windowToken];
 
             viewModel.OnClose();
+            SaveWindowLocation(player, windowToken);
             _playerViewModels.Remove(windowToken);
         }
+
+        private void SaveWindowLocation(uint player, int windowToken)
+        {
+            var playerId = GetObjectUUID(player);
+            var dbPlayerUI = _db.Get<PlayerUI>(playerId) ?? new(playerId);
+            var viewModel = _playerViewModels[windowToken];
+            var windowId = NuiGetWindowId(player, windowToken);
+
+            dbPlayerUI.WindowGeometries[windowId] = viewModel.Geometry;
+
+            _db.Set(dbPlayerUI);
+        }
+
 
         private void OnModulePreload()
         {
@@ -157,7 +176,8 @@ namespace XM.UI
             {
                 var view = _viewsByType[type];
                 var json = _serializedWindowsByType[type];
-                var viewModel = (IViewModel)_serviceManager.AnvilServiceContainer.Create(view.ViewModel);
+                var viewModel = view.CreateViewModel();
+                viewModel = _injection.Inject(viewModel);
                 
                 var windowToken = NuiCreate(player, json, window.Id);
                 viewModel.Bind(player, windowToken);

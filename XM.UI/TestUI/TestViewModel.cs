@@ -14,11 +14,12 @@ namespace XM.UI.TestUI
             set => Set(value);
         }
 
-        private GuiService _gui;
+        [Inject]
+        public GuiService Gui { get; set; }
 
-        public TestViewModel(GuiService gui)
+        public TestViewModel()
         {
-            _gui = gui;
+            
         }
 
         public override void OnOpen()
