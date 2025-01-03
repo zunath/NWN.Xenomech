@@ -33,5 +33,4 @@ namespace XM.UI.Builder.Layout
             return this;
         }
     }
-
 }

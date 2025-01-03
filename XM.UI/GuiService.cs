@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Anvil.API;
 using Anvil.Services;
 using XM.Core;
@@ -196,7 +195,6 @@ namespace XM.UI
                 
                 var windowToken = NuiCreate(player, json, window.Id);
                 viewModel.Bind(player, windowToken, geometry, tetherObject);
-                viewModel.OnOpen();
 
                 _playerViewModels[windowToken] = viewModel;
             }

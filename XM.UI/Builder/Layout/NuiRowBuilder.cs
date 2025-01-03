@@ -189,6 +189,15 @@ namespace XM.UI.Builder.Layout
 
             return this;
         }
-    }
 
+        public NuiRowBuilder<TViewModel> AddList(Action<NuiListBuilder<TViewModel>> list)
+        {
+            var listBuilder = new NuiListBuilder<TViewModel>(RegisteredEvents);
+            list(listBuilder);
+
+            Element.Children.Add(listBuilder.Build());
+
+            return this;
+        }
+    }
 }

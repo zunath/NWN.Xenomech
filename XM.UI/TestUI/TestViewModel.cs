@@ -14,17 +14,33 @@ namespace XM.UI.TestUI
             set => Set(value);
         }
 
+        public GuiBindingList<string> ButtonNames
+        {
+            get => Get<GuiBindingList<string>>();
+            set => Set(value);
+        }
+
         [Inject]
         public GuiService Gui { get; set; }
 
         public TestViewModel()
         {
-            
+            ButtonNames = new GuiBindingList<string>();
         }
 
         public override void OnOpen()
         {
             TestProp1 = "my new test value from OnOpen";
+
+            var buttonNames = new GuiBindingList<string>();
+            buttonNames.Add("item 1");
+            buttonNames.Add("item 2");
+            buttonNames.Add("item 3");
+            buttonNames.Add("item 4");
+            buttonNames.Add("item 5");
+            buttonNames.Add("item 6");
+
+            ButtonNames = buttonNames;
         }
 
         public override void OnClose()

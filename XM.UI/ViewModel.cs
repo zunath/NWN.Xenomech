@@ -6,7 +6,6 @@ using System.Runtime.CompilerServices;
 using Anvil.API;
 using Anvil.Services;
 using Newtonsoft.Json;
-using XM.API.Constants;
 using XM.Core.EventManagement;
 
 namespace XM.UI
@@ -21,6 +20,7 @@ namespace XM.UI
 
         private Guid _onNuiEventToken;
         private readonly Dictionary<string, object> _backingData = new();
+        private readonly Dictionary<string, IGuiBindingList> _boundLists = new();
 
         [Inject]
         public XMEventService Event { get; set; }
@@ -48,6 +48,11 @@ namespace XM.UI
         public void Unbind()
         {
             Event.Unsubscribe<ModuleEvent.OnNuiEvent>(_onNuiEventToken);
+
+            foreach (var (propertyName, list) in _boundLists)
+            {
+                UnbindList(list, propertyName);
+            }
         }
 
         private void BindGeometry(NuiRect geometry)
@@ -67,7 +72,7 @@ namespace XM.UI
                 var jsonString = JsonDump(bind);
                 var type = GetType().GetProperty(propertyName)!.PropertyType;
 
-                var value = JsonConvert.DeserializeObject(jsonString, type);
+                var value = JsonConvert.DeserializeObject(jsonString, type); // todo this will cause problems with hot reloading.
                 _backingData[propertyName] = value;
             }
         }
@@ -77,12 +82,22 @@ namespace XM.UI
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+            var value = _backingData[propertyName!];
+            var json = JsonUtility.ToJson(value);
+            NuiSetBind(Player, WindowToken, propertyName, JsonParse(json));
+
+            if (_boundLists.ContainsKey(propertyName))
+            {
+                var list = _boundLists[propertyName];
+                NuiSetBind(Player, WindowToken, propertyName + "_" + nameof(NuiList.RowCount), JsonInt(list.Count));
+            }
         }
 
         protected T Get<T>([CallerMemberName] string propertyName = null)
         {
             if (string.IsNullOrWhiteSpace(propertyName))
-                return default(T);
+                return default;
 
             if (_backingData.ContainsKey(propertyName))
                 return (T)_backingData[propertyName];
@@ -95,8 +110,45 @@ namespace XM.UI
             SetField(value, propertyName);
             var serialized = JsonUtility.ToJson(value);
             var json = JsonParse(serialized);
-            NuiSetBind(Player, WindowToken, propertyName, json);
+
+            if (typeof(IGuiBindingList).IsAssignableFrom(typeof(T)))
+            {
+                RegisterList((IGuiBindingList)value, propertyName);
+                
+            }
+
+
+            OnPropertyChanged(propertyName);
         }
+
+        private void BindList(IGuiBindingList list, string propertyName)
+        {
+            list.ListChanged += OnListChanged;
+            _boundLists[propertyName] = list;
+        }
+
+        private void UnbindList(IGuiBindingList list, string propertyName)
+        {
+            list.ListChanged -= OnListChanged;
+            list.PropertyName = string.Empty;
+            _boundLists.Remove(propertyName);
+        }
+
+        private void RegisterList(IGuiBindingList list, string propertyName)
+        {
+            if (!_boundLists.ContainsKey(propertyName))
+            {
+                BindList(list, propertyName);
+                list.PropertyName = propertyName;
+            }
+
+            if (!ReferenceEquals(_boundLists[propertyName], list))
+            {
+                UnbindList(_boundLists[propertyName], propertyName);
+                BindList(list, propertyName);
+            }
+        }
+
 
         private void SetField<T>(T value, [CallerMemberName] string propertyName = null)
         {
@@ -127,6 +179,27 @@ namespace XM.UI
             var propertyName = memberExpression.Member.Name;
 
             NuiSetBindWatch(Player, WindowToken, propertyName, true);
+        }
+
+
+        private void OnListChanged(object sender, ListChangedEventArgs e)
+        {
+            var list = (IGuiBindingList)sender;
+
+            switch (e.ListChangedType)
+            {
+                case ListChangedType.ItemAdded:
+                    OnPropertyChanged(list.PropertyName);
+                    break;
+                case ListChangedType.ItemDeleted:
+                    OnPropertyChanged(list.PropertyName);
+                    break;
+                case ListChangedType.ItemChanged:
+                    OnPropertyChanged(e.PropertyDescriptor!.Name);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         public abstract void OnOpen();

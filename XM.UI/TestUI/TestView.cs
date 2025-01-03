@@ -1,5 +1,4 @@
-﻿using System;
-using Anvil.Services;
+﻿using Anvil.Services;
 using XM.UI.Builder;
 
 namespace XM.UI.TestUI
@@ -44,6 +43,21 @@ namespace XM.UI.TestUI
                                     check.OnClick(model => model.TestMethodToRun2);
                                 })
                                 .AddSpacer();
+                        })
+                        .AddRow(row =>
+                        {
+                            row.AddList(list =>
+                            {
+                                list.AddTemplate(template =>
+                                {
+                                    template.AddButton(button =>
+                                    {
+                                        button.Label(model => model.ButtonNames);
+                                    });
+                                })
+                                    .RowCount(model => model.ButtonNames);
+                                
+                            });
                         })
                         ;
 
