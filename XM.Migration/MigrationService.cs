@@ -8,6 +8,7 @@ using XM.Migration.Entity;
 using NLog;
 using XM.API.NWNX.AdminPlugin;
 using XM.Core.EventManagement;
+using XM.Core;
 
 namespace XM.Migration
 {
@@ -145,7 +146,7 @@ namespace XM.Migration
                 return;
 
             var sw = new Stopwatch();
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayerMigration = _db.Get<PlayerMigrationStatus>(playerId) ?? new PlayerMigrationStatus(playerId);
 
             var migrations = _playerMigrations

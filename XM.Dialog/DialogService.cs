@@ -4,6 +4,7 @@ using System.Linq;
 using Anvil.Services;
 using NLog;
 using XM.API.Constants;
+using XM.Core;
 using XM.Core.EventManagement;
 using XM.Dialog.Event;
 using EventScriptType = XM.API.Constants.EventScriptType;
@@ -323,7 +324,7 @@ namespace XM.Dialog
         public void End()
         {
             var player = GetPCSpeaker();
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             if (!HasPlayerDialog(playerId)) return;
 
             var dialog = LoadPlayerDialog(playerId);
@@ -348,7 +349,7 @@ namespace XM.Dialog
         private bool AppearsWhen(int nodeType, int nodeId)
         {
             var player = GetPCSpeaker();
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var hasDialog = HasPlayerDialog(playerId);
             if (!hasDialog) return false;
             var dialog = LoadPlayerDialog(playerId);
@@ -449,7 +450,7 @@ namespace XM.Dialog
         private void ActionsTaken(int nodeId)
         {
             var player = GetPCSpeaker();
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dialog = LoadPlayerDialog(playerId);
 
             var selectionNumber = nodeId + 1;
@@ -536,7 +537,7 @@ namespace XM.Dialog
                 return;
             }
 
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             LoadConversation(player, talkTo, @class, -1);
             var dialog = PlayerDialogs[playerId];
 
@@ -614,7 +615,7 @@ namespace XM.Dialog
 
             var convo = GetConversation(@class);
             var dialog = convo.SetUp(player);
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
 
             if (dialog == null)
             {
@@ -666,7 +667,7 @@ namespace XM.Dialog
         /// <param name="player">The player to end the conversation for.</param>
         public void EndConversation(uint player)
         {
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var playerDialog = LoadPlayerDialog(playerId);
             playerDialog.IsEnding = true;
             StorePlayerDialog(playerId, playerDialog);

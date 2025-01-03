@@ -9,7 +9,10 @@ namespace XM.UI
         internal void Bind(
             uint player, 
             int windowToken,
+            NuiRect geometry,
             uint tetherObject = OBJECT_INVALID);
+
+        internal void Unbind();
 
         public void OnOpen();
 

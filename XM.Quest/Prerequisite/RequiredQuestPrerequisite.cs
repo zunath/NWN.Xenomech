@@ -1,4 +1,5 @@
-﻿using XM.Data;
+﻿using XM.Core;
+using XM.Data;
 using XM.Quest.Entity;
 
 namespace XM.Quest.Prerequisite
@@ -16,7 +17,7 @@ namespace XM.Quest.Prerequisite
 
         public bool MeetsPrerequisite(uint player)
         {
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayer = _db.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
             var timesCompleted = dbPlayer.Quests.ContainsKey(QuestId) ? dbPlayer.Quests[QuestId].TimesCompleted : 0;
             return timesCompleted > 0;

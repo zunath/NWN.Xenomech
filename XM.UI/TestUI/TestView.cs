@@ -14,7 +14,7 @@ namespace XM.UI.TestUI
             return new TestViewModel();
         }
 
-        public NuiBuildResult Build()
+        public NuiBuiltWindow Build()
         {
             return _builder.CreateWindow(window =>
                 {

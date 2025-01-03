@@ -1,4 +1,5 @@
 ﻿using Anvil.Services;
+using XM.Core;
 using XM.Data;
 
 namespace XM.Quest.Reward
@@ -19,7 +20,7 @@ namespace XM.Quest.Reward
 
         public void GiveReward(uint player)
         {
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
 
 
             // todo: Need to update with new class system

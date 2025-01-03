@@ -35,15 +35,15 @@ namespace XM.UI.Builder
             return this;
         }
 
-        public NuiBuildResult Build()
+        public NuiBuiltWindow Build()
         {
             if (_windowBuilder == null)
             {
                 throw new InvalidOperationException("No window has been created.");
             }
 
-            var window = _windowBuilder.Build();
-            var buildResult = new NuiBuildResult(window, RegisteredEvents);
+            var windowBuildResult = _windowBuilder.Build();
+            var buildResult = new NuiBuiltWindow(windowBuildResult.Window, RegisteredEvents, windowBuildResult.DefaultGeometry);
 
             return buildResult;
         }

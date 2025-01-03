@@ -5,6 +5,8 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using Anvil.API;
 using Anvil.Services;
+using Newtonsoft.Json;
+using XM.API.Constants;
 using XM.Core.EventManagement;
 
 namespace XM.UI
@@ -17,6 +19,7 @@ namespace XM.UI
         protected uint TetherObject { get; private set; }
         private int WindowToken { get; set; }
 
+        private Guid _onNuiEventToken;
         private readonly Dictionary<string, object> _backingData = new();
 
         [Inject]
@@ -31,14 +34,26 @@ namespace XM.UI
         public void Bind(
             uint player, 
             int windowToken,
+            NuiRect geometry,
             uint tetherObject = OBJECT_INVALID)
         {
             Player = player;
             WindowToken = windowToken;
             TetherObject = tetherObject;
 
+            BindGeometry(geometry);
+            _onNuiEventToken = Event.Subscribe<ModuleEvent.OnNuiEvent>(OnWatchEvent);
+        }
+
+        public void Unbind()
+        {
+            Event.Unsubscribe<ModuleEvent.OnNuiEvent>(_onNuiEventToken);
+        }
+
+        private void BindGeometry(NuiRect geometry)
+        {
+            Geometry = geometry;
             WatchOnClient(model => model.Geometry);
-            Event.Subscribe<ModuleEvent.OnNuiEvent>(OnWatchEvent);
         }
 
         private void OnWatchEvent()
@@ -48,10 +63,14 @@ namespace XM.UI
 
             if (@event == "watch")
             {
-                Console.WriteLine($"watch = {propertyName}");
+                var bind = NuiGetBind(Player, WindowToken, propertyName);
+                var jsonString = JsonDump(bind);
+                var type = GetType().GetProperty(propertyName)!.PropertyType;
+
+                var value = JsonConvert.DeserializeObject(jsonString, type);
+                _backingData[propertyName] = value;
             }
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -107,8 +126,6 @@ namespace XM.UI
             var memberExpression = (MemberExpression)expression.Body;
             var propertyName = memberExpression.Member.Name;
 
-            var json = JsonParse(JsonUtility.ToJson(Geometry));
-            NuiSetBind(Player, WindowToken, propertyName, json);
             NuiSetBindWatch(Player, WindowToken, propertyName, true);
         }
 

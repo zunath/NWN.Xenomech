@@ -16,6 +16,7 @@ using System;
 using XM.Core.EventManagement;
 using XM.Core.Extension;
 using XM.Quest.Event;
+using XM.Core;
 
 namespace XM.Quest
 {
@@ -131,7 +132,7 @@ namespace XM.Quest
             var player = GetEnteringObject();
             if (!GetIsPC(player) || GetIsDM(player)) return;
 
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayer = _db.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
 
             // Reapply quest journal entries on log-in.
@@ -232,7 +233,7 @@ namespace XM.Quest
         /// <param name="questId">The quest to collect items for.</param>
         public void RequestItemsFromPlayer(uint player, string questId)
         {
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayer = _db.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
 
             if (!dbPlayer.Quests.ContainsKey(questId))
@@ -295,7 +296,7 @@ namespace XM.Quest
                 if (GetDistanceBetween(member, creature) > 50f)
                     continue;
 
-                var playerId = GetObjectUUID(member);
+                var playerId = PlayerId.Get(member);
                 var dbPlayer = _db.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
 
                 // Need to iterate over every possible quest this creature is a part of.
@@ -342,7 +343,7 @@ namespace XM.Quest
 
             var questId = GetLocalString(container, "QUEST_ID");
             var player = GetLastOpenedBy();
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
 
             var dbPlayer = _db.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
 
@@ -400,7 +401,7 @@ namespace XM.Quest
             var container = OBJECT_SELF;
             var owner = GetLocalObject(container, "QUEST_OWNER");
             var player = GetLastDisturbed();
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayerQuest = _db.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
             var item = GetInventoryDisturbItem();
             var resref = GetResRef(item);
@@ -501,7 +502,7 @@ namespace XM.Quest
                 return;
             }
 
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayer = _db.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
 
             if (!dbPlayer.Quests.ContainsKey(questId)) return;

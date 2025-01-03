@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Anvil.Services;
 using XM.API.NWNX.PlayerPlugin;
+using XM.Core;
 using XM.Data;
 using XM.Quest.Conversation;
 using XM.Quest.Entity;
@@ -79,7 +80,7 @@ namespace XM.Quest
         {
             // Retrieve the player's current quest status for this quest.
             // If they haven't accepted it yet, this will be null.
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayer = DB.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
             var quest = dbPlayer.Quests.ContainsKey(QuestId) ? dbPlayer.Quests[QuestId] : null;
 
@@ -125,7 +126,7 @@ namespace XM.Quest
         public bool CanComplete(uint player)
         {
             // Has the player even accepted this quest?
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayer = DB.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
             var quest = dbPlayer.Quests.ContainsKey(QuestId) ? dbPlayer.Quests[QuestId] : null;
 
@@ -199,7 +200,7 @@ namespace XM.Quest
         {
             if (!GetIsPC(player) || GetIsDM(player)) return;
 
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayer = DB.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
             if (!dbPlayer.Quests.ContainsKey(QuestId))
                 return;
@@ -240,7 +241,7 @@ namespace XM.Quest
             }
 
             // By this point, it's assumed the player will accept the quest.
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayer = DB.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
             var quest = Quest.GetQuestById(QuestId);
             var playerQuest = dbPlayer.Quests.ContainsKey(QuestId) ? dbPlayer.Quests[QuestId] : new PlayerQuestDetail();
@@ -294,7 +295,7 @@ namespace XM.Quest
             if (!GetIsPC(player) || GetIsDM(player)) return;
 
             // Retrieve the player's current quest state.
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayer = DB.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
             var quest = Quest.GetQuestById(QuestId);
             var playerQuest = dbPlayer.Quests.ContainsKey(QuestId) ? dbPlayer.Quests[QuestId] : new PlayerQuestDetail();
@@ -384,7 +385,7 @@ namespace XM.Quest
             if (!GetIsPC(player) || GetIsDM(player)) return;
             if (!CanComplete(player)) return;
 
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayer = DB.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
             var quest = dbPlayer.Quests.ContainsKey(QuestId) ? dbPlayer.Quests[QuestId] : new PlayerQuestDetail();
 

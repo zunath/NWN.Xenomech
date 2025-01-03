@@ -5,6 +5,6 @@ namespace XM.UI
     public interface IView
     {
         IViewModel CreateViewModel();
-        NuiBuildResult Build();
+        NuiBuiltWindow Build();
     }
 }

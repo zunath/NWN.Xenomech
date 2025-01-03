@@ -1,6 +1,7 @@
 ﻿using Anvil.Services;
 using XM.API.Constants;
 using XM.API.NWNX.CreaturePlugin;
+using XM.Core;
 using XM.Core.EventManagement;
 using XM.Data;
 using XM.Migration.Entity;
@@ -37,7 +38,7 @@ namespace XM.Migration
 
             if (!GetIsPC(player) || GetIsDM(player)) return;
 
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayer = _db.Get<PlayerMigrationStatus>(playerId) ?? new PlayerMigrationStatus(playerId);
 
             // Already been initialized. Don't do it again.

@@ -8,12 +8,15 @@ namespace XM.UI.Builder
         where TViewModel: IViewModel
     {
         private readonly NuiWindow _window;
+        private NuiRect _defaultGeometry;
 
         public NuiWindowBuilder(NuiLayout root, string title, NuiEventCollection eventCollection) 
             : base(eventCollection)
         {
             _window = new NuiWindow(root, title);
             _window.Id = typeof(TViewModel).FullName;
+
+            _window.Geometry = new NuiBind<NuiRect>(nameof(IViewModel.Geometry));
         }
 
         public NuiWindowBuilder<TViewModel> SetBorder(bool border)
@@ -36,7 +39,7 @@ namespace XM.UI.Builder
 
         public NuiWindowBuilder<TViewModel> SetInitialGeometry(float x, float y, float width, float height)
         {
-            _window.Geometry = new NuiRect(x, y, width, height);
+            _defaultGeometry = new NuiRect(x, y, width, height);
             return this;
         }
 
@@ -135,9 +138,9 @@ namespace XM.UI.Builder
         }
 
 
-        internal NuiWindow Build()
+        internal NuiWindowBuildResult Build()
         {
-            return _window;
+            return new NuiWindowBuildResult(_window, _defaultGeometry);
         }
     }
 }

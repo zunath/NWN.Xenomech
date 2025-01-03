@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using XM.Core;
 using XM.Core.EventManagement;
 using XM.Core.Extension;
 using XM.Data;
@@ -91,7 +92,7 @@ namespace XM.Inventory.KeyItem
         {
             if (!GetIsPC(player) || GetIsDM(player)) return;
 
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayerKeyItem = _db.Get<PlayerKeyItem>(playerId);
 
             if (dbPlayerKeyItem.KeyItems.ContainsKey(keyItem))
@@ -116,7 +117,7 @@ namespace XM.Inventory.KeyItem
         {
             if (!GetIsPC(player) || GetIsDM(player)) return;
 
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayer = _db.Get<PlayerKeyItem>(playerId);
 
             if (!dbPlayer.KeyItems.ContainsKey(keyItem))
@@ -140,7 +141,7 @@ namespace XM.Inventory.KeyItem
         {
             if (!GetIsPC(player) || GetIsDM(player)) return false;
 
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayer = _db.Get<PlayerKeyItem>(playerId);
 
             return dbPlayer.KeyItems.ContainsKey(keyItem);
@@ -161,7 +162,7 @@ namespace XM.Inventory.KeyItem
             if (keyItems == null)
                 return true;
 
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayer = _db.Get<PlayerKeyItem>(playerId);
 
             foreach (var ki in keyItems)

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
 using NLog;
+using XM.Core;
 using XM.Data;
 using XM.Dialog.Snippet;
 using XM.Quest.Entity;
@@ -53,7 +54,7 @@ namespace XM.Quest.SnippetDefinition
 
                     foreach (var questId in args)
                     {
-                        var playerId = GetObjectUUID(player);
+                        var playerId = PlayerId.Get(player);
                         var dbPlayer = _db.Get<PlayerQuest>(playerId);
 
                         // Doesn't have the quest at all.
@@ -83,7 +84,7 @@ namespace XM.Quest.SnippetDefinition
                     }
 
                     var questId = args[0];
-                    var playerId = GetObjectUUID(player);
+                    var playerId = PlayerId.Get(player);
                     var dbPlayer = _db.Get<PlayerQuest>(playerId);
 
                     return dbPlayer.Quests.ContainsKey(questId) && dbPlayer.Quests[questId].DateLastCompleted == null;
@@ -105,7 +106,7 @@ namespace XM.Quest.SnippetDefinition
                     }
 
                     var questId = args[0];
-                    var playerId = GetObjectUUID(player);
+                    var playerId = PlayerId.Get(player);
                     var dbPlayer = _db.Get<PlayerQuest>(playerId);
                     if (!dbPlayer.Quests.ContainsKey(questId)) 
                         return false;
