@@ -48,15 +48,33 @@ namespace XM.UI.TestUI
                         {
                             row.AddList(list =>
                             {
+                                list.RowHeight(40f);
                                 list.AddTemplate(template =>
                                 {
-                                    template.AddButton(button =>
+                                    template.AddGroup(group =>
                                     {
-                                        button.Label(model => model.ButtonNames);
+                                        group.SetLayout(col =>
+                                        {
+                                            col.AddRow(row =>
+                                            {
+                                                row.AddButton(button =>
+                                                {
+                                                    button.Label("button 1");
+                                                    button.Height(20f);
+                                                });
+
+                                                row.AddButton(button =>
+                                                {
+                                                    button.Label("button 2");
+                                                    button.Height(20f);
+                                                });
+                                            });
+                                        });
                                     });
-                                })
-                                    .RowCount(model => model.ButtonNames);
-                                
+
+                                    
+                                }, model => model.ButtonNames);
+
                             });
                         })
                         ;

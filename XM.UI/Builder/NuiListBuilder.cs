@@ -10,21 +10,27 @@ namespace XM.UI.Builder
     public class NuiListBuilder<TViewModel> : NuiBuilderBase<NuiListBuilder<TViewModel>, NuiList, TViewModel>
         where TViewModel : IViewModel
     {
+        private string _bindName;
+
         public NuiListBuilder(NuiEventCollection eventCollection)
             : base(new NuiList(new List<NuiListTemplateCell>(), 0), eventCollection)
         {
         }
 
-        public NuiListBuilder<TViewModel> AddTemplate(Action<NuiListTemplateCellBuilder<TViewModel>> template)
+        public NuiListBuilder<TViewModel> AddTemplate(
+            Action<NuiListTemplateCellBuilder<TViewModel>> template,
+            Expression<Func<TViewModel, IBindingList>> targetList)
         {
             var templateBuilder = new NuiListTemplateCellBuilder<TViewModel>(RegisteredEvents);
             template(templateBuilder);
+
+            if (string.IsNullOrWhiteSpace(_bindName))
+                _bindName = GetBindName(targetList);
 
             Element.RowTemplate.Add(templateBuilder.Build());
 
             return this;
         }
-
         public NuiListBuilder<TViewModel> RowHeight(float rowHeight)
         {
             Element.RowHeight = rowHeight;
@@ -37,16 +43,19 @@ namespace XM.UI.Builder
             return this;
         }
 
-        public NuiListBuilder<TViewModel> RowCount(Expression<Func<TViewModel, IBindingList>> expression)
+        private void CreateListBind()
         {
-            var bindName = GetBindName(expression);
-            var bind = new NuiBind<int>(bindName + "_" + nameof(NuiList.RowCount));
+            var bind = new NuiBind<int>(_bindName + "_" + nameof(NuiList.RowCount));
             Element.RowCount = bind;
-
-            return this;
         }
 
+        public override NuiList Build()
+        {
+            CreateListBind();
 
+
+            return base.Build();
+        }
     }
 
 }
