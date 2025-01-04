@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+﻿using System.Collections.Generic;
 using Anvil.API;
 using Action = System.Action;
 
@@ -12,8 +10,6 @@ namespace XM.UI
         internal const string ModalPartialId = "%%XM_WINDOW_MODAL_PARTIAL%%";
         internal const string UserPartialId = "%%XM_WINDOW_USER_PARTIAL%%";
 
-        internal Guid CurrentRequestId { get; set; }
-
         public NuiRect Geometry { get; protected set; }
 
         internal Dictionary<string, Json> PartialViews { get; set; }
@@ -23,6 +19,7 @@ namespace XM.UI
             int windowToken,
             NuiRect geometry,
             Dictionary<string, Json> partialViews,
+            object initialData = default,
             uint tetherObject = OBJECT_INVALID);
 
         internal void Unbind();

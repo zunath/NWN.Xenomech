@@ -17,9 +17,9 @@ namespace XM.UI
         protected uint Player { get; private set; }
         protected uint TetherObject { get; private set; }
         private int WindowToken { get; set; }
+        private object InitialData { get; set; }
 
         public Dictionary<string, Json> PartialViews { get; set; }
-
 
         private Guid _onNuiEventToken;
         private readonly Dictionary<string, object> _backingData = new();
@@ -27,8 +27,6 @@ namespace XM.UI
 
         [Inject]
         public XMEventService Event { get; set; }
-
-        public Guid CurrentRequestId { get; set; }
 
         public NuiRect Geometry
         {
@@ -41,13 +39,14 @@ namespace XM.UI
             int windowToken,
             NuiRect geometry,
             Dictionary<string, Json> partialViews,
+            object initialData = default,
             uint tetherObject = OBJECT_INVALID)
         {
             Player = player;
             WindowToken = windowToken;
             TetherObject = tetherObject;
             PartialViews = partialViews;
-            CurrentRequestId = Guid.NewGuid();
+            InitialData = initialData;
 
             BindGeometry(geometry);
             _onNuiEventToken = Event.Subscribe<ModuleEvent.OnNuiEvent>(OnWatchEvent);
@@ -212,6 +211,11 @@ namespace XM.UI
             }
         }
 
+        protected TData GetInitialData<TData>()
+            where TData: class
+        {
+            return InitialData as TData;
+        }
 
         public abstract void OnOpen();
 

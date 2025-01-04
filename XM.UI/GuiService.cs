@@ -185,7 +185,10 @@ namespace XM.UI
             }
         }
 
-        public void ShowWindow<TView>(uint player, uint tetherObject = OBJECT_INVALID)
+        public void ShowWindow<TView>(
+            uint player, 
+            object initialData = default,
+            uint tetherObject = OBJECT_INVALID)
             where TView : IView
         {
             var type = typeof(TView);
