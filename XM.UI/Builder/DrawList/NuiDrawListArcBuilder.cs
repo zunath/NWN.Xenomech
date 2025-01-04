@@ -7,16 +7,15 @@ namespace XM.UI.Builder.DrawList
     public class NuiDrawListArcBuilder<TViewModel> : NuiDrawListItemBuilderBase<NuiDrawListArcBuilder<TViewModel>, NuiDrawListArc, TViewModel>
         where TViewModel: IViewModel
     {
-        public NuiDrawListArcBuilder(
-            Color color,
-            bool fill,
-            float lineThickness,
-            NuiVector center,
-            float radius,
-            float angleMin,
-            float angleMax,
-            NuiEventCollection eventCollection)
-            : base(new NuiDrawListArc(color, fill, lineThickness, center, radius, angleMin, angleMax), eventCollection)
+        public NuiDrawListArcBuilder()
+            : base(new NuiDrawListArc(
+                Anvil.API.Color.FromRGBA(0), 
+                false, 
+                0f, 
+                new NuiVector(), 
+                0f, 
+                0f, 
+                0f))
         {
         }
 

@@ -7,11 +7,10 @@ namespace XM.UI.Builder.DrawList
     public class NuiDrawListImageBuilder<TViewModel> : NuiDrawListItemBuilderBase<NuiDrawListImageBuilder<TViewModel>, NuiDrawListImage, TViewModel>
         where TViewModel: IViewModel
     {
-        public NuiDrawListImageBuilder(
-            string resRef, 
-            NuiRect rect,
-            NuiEventCollection eventCollection)
-            : base(new NuiDrawListImage(resRef, rect), eventCollection)
+        public NuiDrawListImageBuilder()
+            : base(new NuiDrawListImage(
+                string.Empty, 
+                new NuiRect()))
         {
         }
 
@@ -33,7 +32,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListImageBuilder<TViewModel> Rect(NuiRect rect)
+        public NuiDrawListImageBuilder<TViewModel> Bounds(NuiRect rect)
         {
             Element.Rect = rect;
             return this;
@@ -71,7 +70,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListImageBuilder<TViewModel> Rect(Expression<Func<TViewModel, NuiRect>> expression)
+        public NuiDrawListImageBuilder<TViewModel> Bounds(Expression<Func<TViewModel, NuiRect>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<NuiRect>(bindName);
@@ -80,7 +79,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListImageBuilder<TViewModel> ResRef(Expression<Func<TViewModel, object>> expression)
+        public NuiDrawListImageBuilder<TViewModel> ResRef(Expression<Func<TViewModel, string>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<string>(bindName);

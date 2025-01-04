@@ -7,15 +7,14 @@ namespace XM.UI.Builder.DrawList
     public class NuiDrawListCurveBuilder<TViewModel> : NuiDrawListItemBuilderBase<NuiDrawListCurveBuilder<TViewModel>, NuiDrawListCurve, TViewModel>
         where TViewModel: IViewModel
     {
-        public NuiDrawListCurveBuilder(
-            Color color,
-            float lineThickness,
-            NuiVector pointA,
-            NuiVector pointB,
-            NuiVector control0,
-            NuiVector control1,
-            NuiEventCollection eventCollection)
-            : base(new NuiDrawListCurve(color, lineThickness, pointA, pointB, control0, control1), eventCollection)
+        public NuiDrawListCurveBuilder()
+            : base(new NuiDrawListCurve(
+                Anvil.API.Color.FromRGBA(0), 
+                0f, 
+                new NuiVector(),
+                new NuiVector(),
+                new NuiVector(),
+                new NuiVector()))
         {
         }
 

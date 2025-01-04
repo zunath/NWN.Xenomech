@@ -196,9 +196,6 @@ namespace XM.UI.Builder
             foreach (var (partialId, layout) in _partialViews)
             {
                 var json = JsonUtility.ToJson(layout);
-
-                Console.WriteLine(json);
-
                 serializedPartials[partialId] = JsonParse(json);
             }
 

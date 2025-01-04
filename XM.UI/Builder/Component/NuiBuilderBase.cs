@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using XM.UI.Builder.DrawList;
 using Action = System.Action;
 
 namespace XM.UI.Builder.Component
@@ -16,6 +17,7 @@ namespace XM.UI.Builder.Component
         protected NuiBuilderBase(TElement element, NuiEventCollection eventCollection) 
             : base(eventCollection)
         {
+            element.DrawList = new List<NuiDrawListItem>();
             Element = element;
         }
 
@@ -80,9 +82,11 @@ namespace XM.UI.Builder.Component
             return (TBuilder)this;
         }
 
-        public TBuilder DrawList(List<NuiDrawListItem> drawList)
+        public TBuilder DrawList(Action<NuiDrawListBuilder<TViewModel>> drawList)
         {
-            Element.DrawList = drawList;
+            var drawListBuilder = new NuiDrawListBuilder<TViewModel>();
+            drawList(drawListBuilder);
+            Element.DrawList!.AddRange(drawListBuilder.Build());
             return (TBuilder)this;
         }
 
@@ -103,8 +107,6 @@ namespace XM.UI.Builder.Component
             Element.Encouraged = encouraged;
             return (TBuilder)this;
         }
-
-        
 
         public TBuilder IsEnabled(Expression<Func<TViewModel, bool>> expression)
         {

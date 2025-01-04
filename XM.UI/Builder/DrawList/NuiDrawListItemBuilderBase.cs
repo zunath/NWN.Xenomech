@@ -11,10 +11,16 @@ namespace XM.UI.Builder.DrawList
     {
         protected readonly TElement Element;
 
-        protected NuiDrawListItemBuilderBase(TElement element, NuiEventCollection eventCollection) 
-            : base(eventCollection)
+        protected NuiDrawListItemBuilderBase(TElement element) 
+            : base(new NuiEventCollection())
         {
             Element = element;
+        }
+
+        public TBuilder Color(byte r, byte g, byte b, byte alpha = 255)
+        {
+            Element.Color = new Color(r, g, b, alpha);
+            return (TBuilder)this;
         }
 
         public TBuilder Color(Color color)

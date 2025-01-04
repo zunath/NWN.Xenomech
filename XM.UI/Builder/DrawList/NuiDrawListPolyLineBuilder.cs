@@ -8,13 +8,12 @@ namespace XM.UI.Builder.DrawList
     public class NuiDrawListPolyLineBuilder<TViewModel> : NuiDrawListItemBuilderBase<NuiDrawListPolyLineBuilder<TViewModel>, NuiDrawListPolyLine, TViewModel>
         where TViewModel: IViewModel
     {
-        public NuiDrawListPolyLineBuilder(
-            Color color, 
-            bool fill, 
-            float lineThickness, 
-            List<float> points,
-            NuiEventCollection eventCollection)
-            : base(new NuiDrawListPolyLine(color, fill, lineThickness, points), eventCollection)
+        public NuiDrawListPolyLineBuilder()
+            : base(new NuiDrawListPolyLine(
+                Anvil.API.Color.FromRGBA(0), 
+                false, 
+                0f, 
+                new List<float>()))
         {
         }
 
@@ -27,7 +26,7 @@ namespace XM.UI.Builder.DrawList
         // todo: BindPoints
 
 
-        public NuiDrawListPolyLineBuilder<TViewModel> LineThickness(Expression<Func<TViewModel, object>> expression)
+        public NuiDrawListPolyLineBuilder<TViewModel> LineThickness(Expression<Func<TViewModel, float>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<float>(bindName);
@@ -36,7 +35,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListPolyLineBuilder<TViewModel> Fill(Expression<Func<TViewModel, object>> expression)
+        public NuiDrawListPolyLineBuilder<TViewModel> Fill(Expression<Func<TViewModel, bool>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<bool>(bindName);
@@ -45,7 +44,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListPolyLineBuilder<TViewModel> Color(Expression<Func<TViewModel, object>> expression)
+        public NuiDrawListPolyLineBuilder<TViewModel> Color(Expression<Func<TViewModel, Color>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<Color>(bindName);

@@ -7,14 +7,13 @@ namespace XM.UI.Builder.DrawList
     public class NuiDrawListLineBuilder<TViewModel> : NuiDrawListItemBuilderBase<NuiDrawListLineBuilder<TViewModel>, NuiDrawListLine, TViewModel>
         where TViewModel: IViewModel
     {
-        public NuiDrawListLineBuilder(
-            Color color, 
-            bool fill, 
-            float lineThickness, 
-            NuiVector pointA, 
-            NuiVector pointB,
-            NuiEventCollection eventCollection)
-            : base(new NuiDrawListLine(color, fill, lineThickness, pointA, pointB), eventCollection)
+        public NuiDrawListLineBuilder()
+            : base(new NuiDrawListLine(
+                Anvil.API.Color.FromRGBA(0), 
+                false, 
+                0f, 
+                new NuiVector(), 
+                new NuiVector()))
         {
         }
 
@@ -30,23 +29,6 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListLineBuilder<TViewModel> LineThickness(float lineThickness)
-        {
-            Element.LineThickness = lineThickness;
-            return this;
-        }
-
-        public NuiDrawListLineBuilder<TViewModel> Fill(bool fill)
-        {
-            Element.Fill = fill;
-            return this;
-        }
-
-        public NuiDrawListLineBuilder<TViewModel> Color(Color color)
-        {
-            Element.Color = color;
-            return this;
-        }
         public NuiDrawListLineBuilder<TViewModel> PointA(Expression<Func<TViewModel, NuiVector>> expression)
         {
             var bindName = GetBindName(expression);
@@ -65,7 +47,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListLineBuilder<TViewModel> LineThickness(Expression<Func<TViewModel, object>> expression)
+        public NuiDrawListLineBuilder<TViewModel> LineThickness(Expression<Func<TViewModel, float>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<float>(bindName);
@@ -74,7 +56,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListLineBuilder<TViewModel> Fill(Expression<Func<TViewModel, object>> expression)
+        public NuiDrawListLineBuilder<TViewModel> Fill(Expression<Func<TViewModel, bool>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<bool>(bindName);
@@ -83,7 +65,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListLineBuilder<TViewModel> Color(Expression<Func<TViewModel, object>> expression)
+        public NuiDrawListLineBuilder<TViewModel> Color(Expression<Func<TViewModel, Color>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<Color>(bindName);
