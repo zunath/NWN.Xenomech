@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Anvil.API;
 using Anvil.Services;
+using NLog;
 using XM.Core;
 using XM.Core.EventManagement;
 using XM.Data;
@@ -14,8 +14,11 @@ using Action = System.Action;
 namespace XM.UI
 {
     [ServiceBinding(typeof(GuiService))]
-    public class GuiService
+    [ServiceBinding(typeof(IUpdateable))]
+    public class GuiService: IUpdateable
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
+
         [Inject]
         public IList<IView> Views { get; set; }
 
@@ -29,6 +32,12 @@ namespace XM.UI
         private readonly XMEventService _event;
         private readonly InjectionService _injection;
         private readonly DBService _db;
+
+        private Guid _currentRequestId;
+        private readonly Queue<KeyValuePair<IViewModel, Action>> _eventQueue = new();
+        private readonly Dictionary<IViewModel, DateTime> _lastEventTimestamps = new();
+        private readonly TimeSpan _debounceTime = TimeSpan.FromMilliseconds(350);
+
 
         public GuiService(
             XMEventService @event, 
@@ -50,6 +59,9 @@ namespace XM.UI
 
         private void OnNuiEvent()
         {
+            if (_currentRequestId == Guid.Empty)
+                _currentRequestId = Guid.NewGuid();
+
             var elementId = NuiGetEventElement();
             var @event = NuiGetEventType();
             var windowToken = NuiGetEventWindow();
@@ -95,12 +107,12 @@ namespace XM.UI
             var methodName = _registeredEvents[elementId][type];
             var viewModel = _playerViewModels[windowToken];
             var vmType = viewModel.GetType();
-
+            
             var property = vmType.GetProperty(methodName);
             if (property != null)
             {
                 var action = (Action)property.GetValue(viewModel);
-                action?.Invoke();
+                EnqueueUIAction(viewModel, action);
             }
             else
             {
@@ -108,7 +120,7 @@ namespace XM.UI
                 if (method != null)
                 {
                     var action = (Action)method.Invoke(viewModel, null);
-                    action?.Invoke();
+                    EnqueueUIAction(viewModel, action);
                 }
             }
         }
@@ -131,6 +143,9 @@ namespace XM.UI
             viewModel.OnClose();
             SaveWindowLocation(player, windowToken);
             _playerViewModels.Remove(windowToken);
+            
+            if(_lastEventTimestamps.ContainsKey(viewModel))
+                _lastEventTimestamps.Remove(viewModel);
         }
 
         private void SaveWindowLocation(uint player, int windowToken)
@@ -222,6 +237,46 @@ namespace XM.UI
         {
             var player = GetLastUsedBy();
             ShowWindow<TestView>(player);
+        }
+
+        private void EnqueueUIAction(IViewModel viewModel, Action action)
+        {
+            if (_lastEventTimestamps.TryGetValue(viewModel, out var lastTimestamp))
+            {
+                if (DateTime.UtcNow - lastTimestamp < _debounceTime)
+                    return;
+            }
+
+            _lastEventTimestamps[viewModel] = DateTime.UtcNow;
+            _eventQueue.Enqueue(new KeyValuePair<IViewModel, Action>(viewModel, action));
+        }
+
+        private void ProcessUIEvents()
+        {
+            while (_eventQueue.TryDequeue(out var @event))
+            {
+                if (_viewModelsProcessedThisFrame.Contains(@event.Key))
+                    continue;
+
+                try
+                {
+                    @event.Value();
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex);
+                }
+
+                _viewModelsProcessedThisFrame.Add(@event.Key);
+            }
+
+            _viewModelsProcessedThisFrame.Clear();
+        }
+
+        private readonly HashSet<IViewModel> _viewModelsProcessedThisFrame = new();
+        public void Update()
+        {
+            ProcessUIEvents();
         }
     }
 }

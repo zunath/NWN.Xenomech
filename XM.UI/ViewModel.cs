@@ -28,6 +28,8 @@ namespace XM.UI
         [Inject]
         public XMEventService Event { get; set; }
 
+        public Guid CurrentRequestId { get; set; }
+
         public NuiRect Geometry
         {
             get => Get<NuiRect>();
@@ -45,6 +47,7 @@ namespace XM.UI
             WindowToken = windowToken;
             TetherObject = tetherObject;
             PartialViews = partialViews;
+            CurrentRequestId = Guid.NewGuid();
 
             BindGeometry(geometry);
             _onNuiEventToken = Event.Subscribe<ModuleEvent.OnNuiEvent>(OnWatchEvent);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Anvil.API;
 using Action = System.Action;
@@ -10,6 +11,8 @@ namespace XM.UI
         internal const string MainViewElementId = "%%XM_WINDOW_MAIN_VIEW_ELEMENT_ID%%";
         internal const string ModalPartialId = "%%XM_WINDOW_MODAL_PARTIAL%%";
         internal const string UserPartialId = "%%XM_WINDOW_USER_PARTIAL%%";
+
+        internal Guid CurrentRequestId { get; set; }
 
         public NuiRect Geometry { get; protected set; }
 

@@ -20,9 +20,6 @@ namespace XM.UI.TestUI
             set => Set(value);
         }
 
-        [Inject]
-        public GuiService Gui { get; set; }
-
         public TestViewModel()
         {
             ButtonNames = new GuiBindingList<string>();
