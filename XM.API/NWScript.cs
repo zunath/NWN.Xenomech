@@ -10689,7 +10689,7 @@ namespace XM.API
         ///  NB: The parsed string needs to be in game-local encoding, but the generated json structure<br/>
         ///      will contain UTF-8 data.
         /// </summary>
-        public static Json JsonParse(string sJson)
+        public static Anvil.API.Json JsonParse(string sJson)
         {
             return NWN.Core.NWScript.JsonParse(sJson);
         }
@@ -10700,7 +10700,7 @@ namespace XM.API
         ///  Returns a string describing JSON_TYPE_NULL on error, or if oObject is not serializable, with JsonGetError() filled in.<br/>
         ///  NB: The dumped string is in game-local encoding, with all non-ascii characters escaped.
         /// </summary>
-        public static string JsonDump(Json jValue, int nIndent = -1)
+        public static string JsonDump(Anvil.API.Json jValue, int nIndent = -1)
         {
             return NWN.Core.NWScript.JsonDump(jValue, nIndent);
         }
@@ -10709,7 +10709,7 @@ namespace XM.API
         ///  Describes the type of the given json value.<br/>
         ///  Returns JSON_TYPE_NULL if the value is empty.
         /// </summary>
-        public static JsonType JsonGetType(Json jValue)
+        public static JsonType JsonGetType(Anvil.API.Json jValue)
         {
             return (JsonType)NWN.Core.NWScript.JsonGetType(jValue);
         }
@@ -10721,7 +10721,7 @@ namespace XM.API
         ///  Null types are of size 0.<br/>
         ///  All other types return 1.
         /// </summary>
-        public static int JsonGetLength(Json jValue)
+        public static int JsonGetLength(Anvil.API.Json jValue)
         {
             return NWN.Core.NWScript.JsonGetLength(jValue);
         }
@@ -10730,7 +10730,7 @@ namespace XM.API
         ///  Returns the error message if the value has errored out.<br/>
         ///  Currently only describes parse errors.
         /// </summary>
-        public static string JsonGetError(Json jValue)
+        public static string JsonGetError(Anvil.API.Json jValue)
         {
             return NWN.Core.NWScript.JsonGetError(jValue);
         }
@@ -10739,7 +10739,7 @@ namespace XM.API
         ///  Create a NULL json value, seeded with a optional error message for JsonGetError().<br/>
         ///  You can say JSON_NULL for default parameters on functions to initialise with a null value.
         /// </summary>
-        public static Json JsonNull(string sError = "")
+        public static Anvil.API.Json JsonNull(string sError = "")
         {
             return NWN.Core.NWScript.JsonNull(sError);
         }
@@ -10748,7 +10748,7 @@ namespace XM.API
         ///  Create a empty json object.<br/>
         ///  You can say JSON_OBJECT for default parameters on functions to initialise with an empty object.
         /// </summary>
-        public static Json JsonObject()
+        public static Anvil.API.Json JsonObject()
         {
             return NWN.Core.NWScript.JsonObject();
         }
@@ -10757,7 +10757,7 @@ namespace XM.API
         ///  Create a empty json array.<br/>
         ///  You can say JSON_ARRAY for default parameters on functions to initialise with an empty array.
         /// </summary>
-        public static Json JsonArray()
+        public static Anvil.API.Json JsonArray()
         {
             return NWN.Core.NWScript.JsonArray();
         }
@@ -10767,7 +10767,7 @@ namespace XM.API
         ///  You can say JSON_STRING for default parameters on functions to initialise with a empty string.<br/>
         ///  NB: Strings are encoded to UTF-8 from the game-local charset.
         /// </summary>
-        public static Json JsonString(string sValue)
+        public static Anvil.API.Json JsonString(string sValue)
         {
             return NWN.Core.NWScript.JsonString(sValue);
         }
@@ -10775,7 +10775,7 @@ namespace XM.API
         /// <summary>
         ///  Create a json integer value.
         /// </summary>
-        public static Json JsonInt(int nValue)
+        public static Anvil.API.Json JsonInt(int nValue)
         {
             return NWN.Core.NWScript.JsonInt(nValue);
         }
@@ -10783,7 +10783,7 @@ namespace XM.API
         /// <summary>
         ///  Create a json floating point value.
         /// </summary>
-        public static Json JsonFloat(float fValue)
+        public static Anvil.API.Json JsonFloat(float fValue)
         {
             return NWN.Core.NWScript.JsonFloat(fValue);
         }
@@ -10792,7 +10792,7 @@ namespace XM.API
         ///  Create a json bool valye.<br/>
         ///  You can say JSON_TRUE or JSON_FALSE for default parameters on functions to initialise with a bool.
         /// </summary>
-        public static Json JsonBool(bool bValue)
+        public static Anvil.API.Json JsonBool(bool bValue)
         {
             return NWN.Core.NWScript.JsonBool(bValue ? 1 : 0);
         }
@@ -10802,7 +10802,7 @@ namespace XM.API
         ///  Returns "" if the value cannot be represented as a string, or is empty.<br/>
         ///  NB: Strings are decoded from UTF-8 to the game-local charset.
         /// </summary>
-        public static string JsonGetString(Json jValue)
+        public static string JsonGetString(Anvil.API.Json jValue)
         {
             return NWN.Core.NWScript.JsonGetString(jValue);
         }
@@ -10815,7 +10815,7 @@ namespace XM.API
         ///      If you are trying to read a 64 bit or unsigned integer that doesn't fit into int32, you will lose data.<br/>
         ///      You will not lose data if you keep the value as a json element (via Object/ArrayGet).
         /// </summary>
-        public static int JsonGetInt(Json jValue)
+        public static int JsonGetInt(Anvil.API.Json jValue)
         {
             return NWN.Core.NWScript.JsonGetInt(jValue);
         }
@@ -10827,7 +10827,7 @@ namespace XM.API
         ///      If you are trying to read a double, you will potentially lose precision.<br/>
         ///      You will not lose data if you keep the value as a json element (via Object/ArrayGet).
         /// </summary>
-        public static float JsonGetFloat(Json jValue)
+        public static float JsonGetFloat(Anvil.API.Json jValue)
         {
             return NWN.Core.NWScript.JsonGetFloat(jValue);
         }
@@ -10836,7 +10836,7 @@ namespace XM.API
         ///  Returns a json array containing all keys of jObject.<br/>
         ///  Returns a empty array if the object is empty or not a json object, with JsonGetError() filled in.
         /// </summary>
-        public static Json JsonObjectKeys(Json jObject)
+        public static Anvil.API.Json JsonObjectKeys(Anvil.API.Json jObject)
         {
             return NWN.Core.NWScript.JsonObjectKeys(jObject);
         }
@@ -10845,7 +10845,7 @@ namespace XM.API
         ///  Returns the key value of sKey on the object jObect.<br/>
         ///  Returns a json null value if jObject is not a object or sKey does not exist on the object, with JsonGetError() filled in.
         /// </summary>
-        public static Json JsonObjectGet(Json jObject, string sKey)
+        public static Anvil.API.Json JsonObjectGet(Anvil.API.Json jObject, string sKey)
         {
             return NWN.Core.NWScript.JsonObjectGet(jObject, sKey);
         }
@@ -10854,7 +10854,7 @@ namespace XM.API
         ///  Returns a modified copy of jObject with the key at sKey set to jValue.<br/>
         ///  Returns a json null value if jObject is not a object, with JsonGetError() filled in.
         /// </summary>
-        public static Json JsonObjectSet(Json jObject, string sKey, Json jValue)
+        public static Anvil.API.Json JsonObjectSet(Anvil.API.Json jObject, string sKey, Anvil.API.Json jValue)
         {
             return NWN.Core.NWScript.JsonObjectSet(jObject, sKey, jValue);
         }
@@ -10863,7 +10863,7 @@ namespace XM.API
         ///  Returns a modified copy of jObject with the key at sKey deleted.<br/>
         ///  Returns a json null value if jObject is not a object, with JsonGetError() filled in.
         /// </summary>
-        public static Json JsonObjectDel(Json jObject, string sKey)
+        public static Anvil.API.Json JsonObjectDel(Anvil.API.Json jObject, string sKey)
         {
             return NWN.Core.NWScript.JsonObjectDel(jObject, sKey);
         }
@@ -10872,7 +10872,7 @@ namespace XM.API
         ///  Gets the json object at jArray index position nIndex.<br/>
         ///  Returns a json null value if the index is out of bounds, with JsonGetError() filled in.
         /// </summary>
-        public static Json JsonArrayGet(Json jArray, int nIndex)
+        public static Anvil.API.Json JsonArrayGet(Anvil.API.Json jArray, int nIndex)
         {
             return NWN.Core.NWScript.JsonArrayGet(jArray, nIndex);
         }
@@ -10882,7 +10882,7 @@ namespace XM.API
         ///  Returns a json null value if jArray is not actually an array, with JsonGetError() filled in.<br/>
         ///  Returns a json null value if nIndex is out of bounds, with JsonGetError() filled in.
         /// </summary>
-        public static Json JsonArraySet(Json jArray, int nIndex, Json jValue)
+        public static Anvil.API.Json JsonArraySet(Anvil.API.Json jArray, int nIndex, Anvil.API.Json jValue)
         {
             return NWN.Core.NWScript.JsonArraySet(jArray, nIndex, jValue);
         }
@@ -10895,7 +10895,7 @@ namespace XM.API
         ///  Returns a json null value if jArray is not actually an array, with JsonGetError() filled in.<br/>
         ///  Returns a json null value if nIndex is not 0 or -1 and out of bounds, with JsonGetError() filled in.
         /// </summary>
-        public static Json JsonArrayInsert(Json jArray, Json jValue, int nIndex = -1)
+        public static Anvil.API.Json JsonArrayInsert(Anvil.API.Json jArray, Anvil.API.Json jValue, int nIndex = -1)
         {
             return NWN.Core.NWScript.JsonArrayInsert(jArray, jValue, nIndex);
         }
@@ -10906,7 +10906,7 @@ namespace XM.API
         ///  Returns a json null value if jArray is not actually an array, with JsonGetError() filled in.<br/>
         ///  Returns a json null value if nIndex is out of bounds, with JsonGetError() filled in.
         /// </summary>
-        public static Json JsonArrayDel(Json jArray, int nIndex)
+        public static Anvil.API.Json JsonArrayDel(Anvil.API.Json jArray, int nIndex)
         {
             return NWN.Core.NWScript.JsonArrayDel(jArray, nIndex);
         }
@@ -10919,7 +10919,7 @@ namespace XM.API
         ///  If bSaveObjectState is true, local vars, effects, action queue, and transition info (triggers, doors) are saved out<br/>
         ///  (except for Combined Area Format, which always has object state saved out).
         /// </summary>
-        public static Json ObjectToJson(uint oObject, bool bSaveObjectState = false)
+        public static Anvil.API.Json ObjectToJson(uint oObject, bool bSaveObjectState = false)
         {
             return NWN.Core.NWScript.ObjectToJson(oObject, bSaveObjectState ? 1 : 0);
         }
@@ -10931,7 +10931,7 @@ namespace XM.API
         ///  For areas, locLocation is ignored.<br/>
         ///  If bLoadObjectState is true, local vars, effects, action queue, and transition info (triggers, doors) are read in.
         /// </summary>
-        public static uint JsonToObject(Json jObject, Json locLocation, uint oOwner = OBJECT_INVALID, bool bLoadObjectState = false)
+        public static uint JsonToObject(Anvil.API.Json jObject, Anvil.API.Json locLocation, uint oOwner = OBJECT_INVALID, bool bLoadObjectState = false)
         {
             return NWN.Core.NWScript.JsonToObject(jObject, locLocation, oOwner, bLoadObjectState ? 1 : 0);
         }
@@ -10967,7 +10967,7 @@ namespace XM.API
         ///  See https://datatracker.ietf.org/doc/html/rfc6901 for more details.
         ///  Returns a json null value on error, with JsonGetError() filled in.
         /// </summary>
-        public static Json JsonPointer(Json jData, string sPointer)
+        public static Anvil.API.Json JsonPointer(Anvil.API.Json jData, string sPointer)
         {
             return NWN.Core.NWScript.JsonPointer(jData, sPointer);
         }
@@ -10985,7 +10985,7 @@ namespace XM.API
         ///  Valid operations are: add, remove, replace, move, copy, test<br/>
         ///  See https://datatracker.ietf.org/doc/html/rfc7386 for more details on the patch rules.
         /// </summary>
-        public static Json JsonPatch(Json jData, Json jPatch)
+        public static Anvil.API.Json JsonPatch(Anvil.API.Json jData, Anvil.API.Json jPatch)
         {
             return NWN.Core.NWScript.JsonPatch(jData, jPatch);
         }
@@ -10994,7 +10994,7 @@ namespace XM.API
         ///  Returns the diff (described as a json structure you can pass into JsonPatch) between the two objects.<br/>
         ///  Returns a json null value on error, with JsonGetError() filled in.
         /// </summary>
-        public static Json JsonDiff(Json jLHS, Json jRHS)
+        public static Anvil.API.Json JsonDiff(Anvil.API.Json jLHS, Anvil.API.Json jRHS)
         {
             return NWN.Core.NWScript.JsonDiff(jLHS, jRHS);
         }
@@ -11005,7 +11005,7 @@ namespace XM.API
         ///  See https://datatracker.ietf.org/doc/html/rfc7386 for details.<br/>
         ///  Returns a json null value on error, with JsonGetError() filled in.
         /// </summary>
-        public static Json JsonMerge(Json jData, Json jMerge)
+        public static Anvil.API.Json JsonMerge(Anvil.API.Json jData, Anvil.API.Json jMerge)
         {
             return NWN.Core.NWScript.JsonMerge(jData, jMerge);
         }
@@ -11014,7 +11014,7 @@ namespace XM.API
         ///  Get oObject's local json variable sVarName<br/>
         ///  * Return value on error: json null type
         /// </summary>
-        public static Json GetLocalJson(uint oObject, string sVarName)
+        public static Anvil.API.Json GetLocalJson(uint oObject, string sVarName)
         {
             return NWN.Core.NWScript.GetLocalJson(oObject, sVarName);
         }
@@ -11022,7 +11022,7 @@ namespace XM.API
         /// <summary>
         ///  Set oObject's local json variable sVarName to jValue
         /// </summary>
-        public static void SetLocalJson(uint oObject, string sVarName, Json jValue)
+        public static void SetLocalJson(uint oObject, string sVarName, Anvil.API.Json jValue)
         {
             NWN.Core.NWScript.SetLocalJson(oObject, sVarName, jValue);
         }
@@ -11043,7 +11043,7 @@ namespace XM.API
         ///    SqlBindJson(v, "@myjson", myJsonObject);<br/>
         ///    SqlStep(v);
         /// </summary>
-        public static void SqlBindJson(Json sqlQuery, string sParam, Json jValue)
+        public static void SqlBindJson(Anvil.API.Json sqlQuery, string sParam, Anvil.API.Json jValue)
         {
             NWN.Core.NWScript.SqlBindJson(sqlQuery, sParam, jValue);
         }
@@ -11054,7 +11054,7 @@ namespace XM.API
         ///  In case of error, a json null value will be returned.<br/>
         ///  In traditional fashion, nIndex starts at 0.
         /// </summary>
-        public static Json SqlGetJson(Json sqlQuery, int nIndex)
+        public static Anvil.API.Json SqlGetJson(Anvil.API.Json sqlQuery, int nIndex)
         {
             return NWN.Core.NWScript.SqlGetJson(sqlQuery, nIndex);
         }
@@ -11067,7 +11067,7 @@ namespace XM.API
         ///  The var name must be unique across the entire database, regardless of the variable type.<br/>
         ///  If you want a variable to pertain to a specific player in the game, provide a player object.
         /// </summary>
-        public static void SetCampaignJson(string sCampaignName, string sVarName, Json jValue, uint oPlayer = OBJECT_INVALID)
+        public static void SetCampaignJson(string sCampaignName, string sVarName, Anvil.API.Json jValue, uint oPlayer = OBJECT_INVALID)
         {
             NWN.Core.NWScript.SetCampaignJson(sCampaignName, sVarName, jValue, oPlayer);
         }
@@ -11080,7 +11080,7 @@ namespace XM.API
         ///  The var name must be unique across the entire database, regardless of the variable type.<br/>
         ///  If you want a variable to pertain to a specific player in the game, provide a player object.
         /// </summary>
-        public static Json GetCampaignJson(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
+        public static Anvil.API.Json GetCampaignJson(string sCampaignName, string sVarName, uint oPlayer = OBJECT_INVALID)
         {
             return NWN.Core.NWScript.GetCampaignJson(sCampaignName, sVarName, oPlayer);
         }
@@ -11136,7 +11136,7 @@ namespace XM.API
         ///  * RESTYPE_GFF<br/>
         ///  Returns a valid gff-type json structure, or a null value with JsonGetError() set.
         /// </summary>
-        public static Json TemplateToJson(string sResRef, int nResType)
+        public static Anvil.API.Json TemplateToJson(string sResRef, int nResType)
         {
             return NWN.Core.NWScript.TemplateToJson(sResRef, nResType);
         }
@@ -11187,7 +11187,7 @@ namespace XM.API
         ///  * See nw_inc_nui.nss for full documentation.<br/>
         ///  Returns the window token on success (>0), or 0 on error.
         /// </summary>
-        public static int NuiCreate(uint oPlayer, Json jNui, string sWindowId = "", string sEventScript = "")
+        public static int NuiCreate(uint oPlayer, Anvil.API.Json jNui, string sWindowId = "", string sEventScript = "")
         {
             return NWN.Core.NWScript.NuiCreate(oPlayer, jNui, sWindowId, sEventScript);
         }
@@ -11272,7 +11272,7 @@ namespace XM.API
         ///    No auto-conversion happens.<br/>
         ///  Returns a json null value if the bind does not exist.
         /// </summary>
-        public static Json NuiGetBind(uint oPlayer, int nUiToken, string sBindName)
+        public static Anvil.API.Json NuiGetBind(uint oPlayer, int nUiToken, string sBindName)
         {
             return NWN.Core.NWScript.NuiGetBind(oPlayer, nUiToken, sBindName);
         }
@@ -11289,7 +11289,7 @@ namespace XM.API
         ///    unless you enjoy stack overflows.<br/>
         ///  Does nothing if the given player+token is invalid.
         /// </summary>
-        public static void NuiSetBind(uint oPlayer, int nUiToken, string sBindName, Json jValue)
+        public static void NuiSetBind(uint oPlayer, int nUiToken, string sBindName, Anvil.API.Json jValue)
         {
             NWN.Core.NWScript.NuiSetBind(oPlayer, nUiToken, sBindName, jValue);
         }
@@ -11298,7 +11298,7 @@ namespace XM.API
         ///  Swaps out the given element (by id) with the given nui layout (partial).<br/>
         ///  * This currently only works with the &amp;quot;group&amp;quot; element type, and the special &amp;quot;_window_&amp;quot; root group.
         /// </summary>
-        public static void NuiSetGroupLayout(uint oPlayer, int nUiToken, string sElement, Json jNui)
+        public static void NuiSetGroupLayout(uint oPlayer, int nUiToken, string sElement, Anvil.API.Json jNui)
         {
             NWN.Core.NWScript.NuiSetGroupLayout(oPlayer, nUiToken, sElement, jNui);
         }
@@ -11335,7 +11335,7 @@ namespace XM.API
         ///  Returns the event payload, specific to the event.<br/>
         ///  Returns JsonNull if event has no payload.
         /// </summary>
-        public static Json NuiGetEventPayload()
+        public static Anvil.API.Json NuiGetEventPayload()
         {
             return NWN.Core.NWScript.NuiGetEventPayload();
         }
@@ -11344,7 +11344,7 @@ namespace XM.API
         ///  Get the userdata of the given window token.<br/>
         ///  Returns JsonNull if the window does not exist on the given player, or has no userdata set.
         /// </summary>
-        public static Json NuiGetUserData(uint oPlayer, int nToken)
+        public static Anvil.API.Json NuiGetUserData(uint oPlayer, int nToken)
         {
             return NWN.Core.NWScript.NuiGetUserData(oPlayer, nToken);
         }
@@ -11355,7 +11355,7 @@ namespace XM.API
         ///  This mechanism only exists as a convenience for the programmer to store data bound to a windows' lifecycle.<br/>
         ///  Will do nothing if the window does not exist.
         /// </summary>
-        public static void NuiSetUserData(uint oPlayer, int nToken, Json jUserData)
+        public static void NuiSetUserData(uint oPlayer, int nToken, Anvil.API.Json jUserData)
         {
             NWN.Core.NWScript.NuiSetUserData(oPlayer, nToken, jUserData);
         }
@@ -11387,7 +11387,7 @@ namespace XM.API
         ///  * JSON_ARRAY_COALESCE<br/>
         ///    Returns the first non-null entry. Empty-ish values (e.g. "", 0) are not considered null, only the json scalar type.
         /// </summary>
-        public static Json JsonArrayTransform(Json jArray, int nTransform)
+        public static Anvil.API.Json JsonArrayTransform(Anvil.API.Json jArray, int nTransform)
         {
             return NWN.Core.NWScript.JsonArrayTransform(jArray, nTransform);
         }
@@ -11398,7 +11398,7 @@ namespace XM.API
         ///  Ordering behaviour for objects is unspecified.<br/>
         ///  Return null when not found or on any error.
         /// </summary>
-        public static Json JsonFind(Json jHaystack, Json jNeedle, int nNth = 0, JsonFindType nConditional = JsonFindType.Equal)
+        public static Anvil.API.Json JsonFind(Anvil.API.Json jHaystack, Anvil.API.Json jNeedle, int nNth = 0, JsonFindType nConditional = JsonFindType.Equal)
         {
             return NWN.Core.NWScript.JsonFind(jHaystack, jNeedle, nNth, (int)nConditional);
         }
@@ -11417,7 +11417,7 @@ namespace XM.API
         ///   JsonArrayGetRange(a, 1, 1)    // => [1]<br/>
         ///  Returns a null type on error, including type mismatches.
         /// </summary>
-        public static Json JsonArrayGetRange(Json jArray, int nBeginIndex, int nEndIndex)
+        public static Anvil.API.Json JsonArrayGetRange(Anvil.API.Json jArray, int nBeginIndex, int nEndIndex)
         {
             return NWN.Core.NWScript.JsonArrayGetRange(jArray, nBeginIndex, nEndIndex);
         }
@@ -11436,7 +11436,7 @@ namespace XM.API
         ///  * JSON_SET_SYMMETRIC_DIFFERENCE (v ^ o):<br/>
         ///    Returns a new array containing all elements present in either array, but not both.
         /// </summary>
-        public static Json JsonSetOp(Json jValue, int nOp, Json jOther)
+        public static Anvil.API.Json JsonSetOp(Anvil.API.Json jValue, int nOp, Anvil.API.Json jOther)
         {
             return NWN.Core.NWScript.JsonSetOp(jValue, nOp, jOther);
         }
@@ -11464,7 +11464,7 @@ namespace XM.API
         ///  Unyielding effects are not removed by resting, death or dispel magic, only by RemoveEffect().<br/>
         ///  Note: effects that modify state, Stunned/Knockdown/Deaf etc, WILL be removed on death.
         /// </summary>
-        public static Json UnyieldingEffect(Effect eEffect)
+        public static Anvil.API.Json UnyieldingEffect(Effect eEffect)
         {
             return NWN.Core.NWScript.UnyieldingEffect(eEffect);
         }
@@ -11472,7 +11472,7 @@ namespace XM.API
         /// <summary>
         ///  Set eEffect to ignore immunities and return eEffect.
         /// </summary>
-        public static Json IgnoreEffectImmunity(Effect eEffect)
+        public static Anvil.API.Json IgnoreEffectImmunity(Effect eEffect)
         {
             return NWN.Core.NWScript.IgnoreEffectImmunity(eEffect);
         }
@@ -11825,7 +11825,7 @@ namespace XM.API
         ///  * RegExpMatch("^test", "test value")         -> ["test"]<br/>
         ///  * RegExpMatch("^(test) (.+)$", "test value") -> ["test value", "test", "value"]
         /// </summary>
-        public static Json RegExpMatch(string sRegExp, string sValue, RegExpGrammarType nSyntaxFlags = RegExpGrammarType.ECMAScript, RegExpFormatFlagType nMatchFlags = RegExpFormatFlagType.Default)
+        public static Anvil.API.Json RegExpMatch(string sRegExp, string sValue, RegExpGrammarType nSyntaxFlags = RegExpGrammarType.ECMAScript, RegExpFormatFlagType nMatchFlags = RegExpFormatFlagType.Default)
         {
             return NWN.Core.NWScript.RegExpMatch(sRegExp, sValue, (int)nSyntaxFlags, (int)nMatchFlags);
         }
@@ -11839,7 +11839,7 @@ namespace XM.API
         ///  * nMatchFlags is a mask of REGEXP_MATCH_* and REGEXP_FORMAT_*.<br/>
         ///  Example: RegExpIterate("(\\d)(\\S+)", "1i 2am 3 4asentence"); -> [["1i", "1", "i"], ["2am", "2", "am"], ["4sentence", "4", "sentence"]]
         /// </summary>
-        public static Json RegExpIterate(string sRegExp, string sValue, RegExpGrammarType nSyntaxFlags = RegExpGrammarType.ECMAScript, RegExpFormatFlagType nMatchFlags = RegExpFormatFlagType.Default)
+        public static Anvil.API.Json RegExpIterate(string sRegExp, string sValue, RegExpGrammarType nSyntaxFlags = RegExpGrammarType.ECMAScript, RegExpFormatFlagType nMatchFlags = RegExpFormatFlagType.Default)
         {
             return NWN.Core.NWScript.RegExpIterate(sRegExp, sValue, (int)nSyntaxFlags, (int)nMatchFlags);
         }
@@ -12052,7 +12052,7 @@ namespace XM.API
         ///      "data": type-specific payload. Not all type info is rendered in the interest of brevity.<br/>
         ///              Only enough for you to re-identify which variable this might belong to.
         /// </summary>
-        public static Json GetScriptBacktrace(bool bIncludeStack = true)
+        public static Anvil.API.Json GetScriptBacktrace(bool bIncludeStack = true)
         {
             return NWN.Core.NWScript.GetScriptBacktrace(bIncludeStack ? 1 : 0);
         }
@@ -12272,7 +12272,7 @@ namespace XM.API
         ///              Warning: only use this if you really know what you&apos;re doing, it&apos;s very easy to break things badly.<br/>
         ///                       Make sure jTileData changes *all* tiles in the area and to a tile id that&apos;s supported by sTileset.
         /// </summary>
-        public static void SetTileJson(uint oArea, Json jTileData, SetTileFlagType nFlags = SetTileFlagType.RecomputeLighting, string sTileset = "")
+        public static void SetTileJson(uint oArea, Anvil.API.Json jTileData, SetTileFlagType nFlags = SetTileFlagType.RecomputeLighting, string sTileset = "")
         {
             NWN.Core.NWScript.SetTileJson(oArea, jTileData, (int)nFlags, sTileset);
         }
@@ -12592,7 +12592,7 @@ namespace XM.API
         ///  * Any target file in TEMP: will be overwritten, even if the serialisation is not successful.<br/>
         ///    JsonToTemplate(JSON_NULL, ..) can be used to delete a previously-generated file.
         /// </summary>
-        public static int JsonToTemplate(Json jTemplateSpec, string sResRef, int nResType)
+        public static int JsonToTemplate(Anvil.API.Json jTemplateSpec, string sResRef, int nResType)
         {
             return NWN.Core.NWScript.JsonToTemplate(jTemplateSpec, sResRef, nResType);
         }
@@ -12601,7 +12601,7 @@ namespace XM.API
         ///  Modifies jObject in-place (with no memory copies of the full object).<br/>
         ///  jObject will have the key at sKey set to jValue.
         /// </summary>
-        public static void JsonObjectSetInplace(Json jObject, string sKey, Json jValue)
+        public static void JsonObjectSetInplace(Anvil.API.Json jObject, string sKey, Anvil.API.Json jValue)
         {
             NWN.Core.NWScript.JsonObjectSetInplace(jObject, sKey, jValue);
         }
@@ -12611,7 +12611,7 @@ namespace XM.API
         ///  jObject will have the element at the key sKey removed.<br/>
         ///  Will do nothing if jObject is not a object, or sKey does not exist on the object.
         /// </summary>
-        public static void JsonObjectDelInplace(Json jObject, string sKey)
+        public static void JsonObjectDelInplace(Anvil.API.Json jObject, string sKey)
         {
             NWN.Core.NWScript.JsonObjectDelInplace(jObject, sKey);
         }
@@ -12623,7 +12623,7 @@ namespace XM.API
         ///  By default (-1), inserts elements at the end of the array (&quot;push&quot;).<br/>
         ///  nIndex = 0 inserts at the beginning of the array.
         /// </summary>
-        public static void JsonArrayInsertInplace(Json jArray, Json jValue, int nIndex = -1)
+        public static void JsonArrayInsertInplace(Anvil.API.Json jArray, Anvil.API.Json jValue, int nIndex = -1)
         {
             NWN.Core.NWScript.JsonArrayInsertInplace(jArray, jValue, nIndex);
         }
@@ -12633,7 +12633,7 @@ namespace XM.API
         ///  jArray will have jValue set at position nIndex.<br/>
         ///  Will do nothing if jArray is not an array or nIndex is out of range.
         /// </summary>
-        public static void JsonArraySetInplace(Json jArray, int nIndex, Json jValue)
+        public static void JsonArraySetInplace(Anvil.API.Json jArray, int nIndex, Anvil.API.Json jValue)
         {
             NWN.Core.NWScript.JsonArraySetInplace(jArray, nIndex, jValue);
         }
@@ -12643,7 +12643,7 @@ namespace XM.API
         ///  jArray will have the element at nIndex removed, and the array will be resized accordingly.<br/>
         ///  Will do nothing if jArray is not an array or nIndex is out of range.
         /// </summary>
-        public static void JsonArrayDelInplace(Json jArray, int nIndex)
+        public static void JsonArrayDelInplace(Anvil.API.Json jArray, int nIndex)
         {
             NWN.Core.NWScript.JsonArrayDelInplace(jArray, nIndex);
         }

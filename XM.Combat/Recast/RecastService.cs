@@ -80,7 +80,7 @@ namespace XM.Combat.Recast
             // Players
             if (GetIsPC(creature) && !GetIsDMPossessed(creature))
             {
-                var playerId = GetObjectUUID(creature);
+                var playerId = PlayerId.Get(creature);
                 var dbPlayer = _db.Get<PlayerCombat>(playerId) ?? new PlayerCombat(playerId);
 
                 if (!dbPlayer.RecastTimes.ContainsKey(recastGroup)) return (false, string.Empty);
@@ -127,7 +127,7 @@ namespace XM.Combat.Recast
             // Players
             else if (GetIsPC(activator) && !GetIsDM(activator))
             {
-                var playerId = GetObjectUUID(activator);
+                var playerId = PlayerId.Get(activator);
                 var dbPlayerCombat = _db.Get<PlayerCombat>(playerId) ?? new PlayerCombat(playerId);
 
                 if (!ignoreRecastReduction)

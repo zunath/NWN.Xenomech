@@ -1,5 +1,6 @@
 ﻿using System;
 using Anvil.Services;
+using XM.Core;
 using XM.Core.EventManagement;
 using XM.Data;
 using XM.Progression.Stat.Entity;
@@ -43,7 +44,7 @@ namespace XM.Progression.Stat
             // Players
             if (GetIsPC(creature) && !GetIsDM(creature))
             {
-                var playerId = GetObjectUUID(creature);
+                var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId);
                 return dbPlayerStat.EP;
             }
@@ -59,7 +60,7 @@ namespace XM.Progression.Stat
             // Players
             if (GetIsPC(creature) && !GetIsDM(creature))
             {
-                var playerId = GetObjectUUID(creature);
+                var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId);
                 return dbPlayerStat.MaxEP;
             }
@@ -75,7 +76,7 @@ namespace XM.Progression.Stat
             if (!GetIsPC(creature) || GetIsDMPossessed(creature))
                 throw new Exception($"Only PCs have ability recast reduction.");
 
-            var playerId = GetObjectUUID(creature);
+            var playerId = PlayerId.Get(creature);
             var dbPlayerStat = _db.Get<PlayerStat>(playerId);
             return dbPlayerStat.AbilityRecastReduction;
         }

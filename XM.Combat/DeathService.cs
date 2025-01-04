@@ -3,6 +3,7 @@ using NLog;
 using XM.API.Constants;
 using XM.Area;
 using XM.Combat.Entity;
+using XM.Core;
 using XM.Core.EventManagement;
 using XM.Data;
 using XM.Localization;
@@ -85,7 +86,7 @@ namespace XM.Combat
         /// <param name="player">The player to teleport</param>
         private void SendToHomePoint(uint player)
         {
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var entity = _db.Get<PlayerRespawn>(playerId);
             var area = _areaCache.GetAreaByResref(entity.RespawnAreaResref);
             var position = Vector(
@@ -142,7 +143,7 @@ namespace XM.Combat
             if (!GetIsPC(player) || GetIsDM(player)) 
                 return;
 
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayerRespawn = _db.Get<PlayerRespawn>(playerId) ?? new PlayerRespawn(playerId);
 
             var waypoint = GetWaypointByTag(DefaultSpawnWaypointTag);

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XM.Core;
 
 namespace XM.Dialog
 {
@@ -28,7 +29,7 @@ namespace XM.Dialog
         protected uint GetDialogTarget()
         {
             var player = GetPC();
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dialog = Dialog.LoadPlayerDialog(playerId);
             return dialog.DialogTarget;
         }
@@ -42,7 +43,7 @@ namespace XM.Dialog
             where T: class
         {
             var player = GetPC();
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dialog = Dialog.LoadPlayerDialog(playerId);
             return dialog.DataModel as T;
         }
@@ -55,7 +56,7 @@ namespace XM.Dialog
         protected void ChangePage(string pageName, bool updateNavigationStack = true)
         {
             var player = GetPC();
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dialog = Dialog.LoadPlayerDialog(playerId);
 
             if (updateNavigationStack && dialog.EnableBackButton)
@@ -73,7 +74,7 @@ namespace XM.Dialog
         protected void SwitchConversation(string conversationName, bool maintainNavigationStack = true)
         {
             var player = GetPC();
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dialog = Dialog.LoadPlayerDialog(playerId);
             Stack<DialogNavigation> navigationStack = null;
 
@@ -106,7 +107,7 @@ namespace XM.Dialog
         protected void ToggleBackButton(bool isOn)
         {
             var player = GetPC();
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dialog = Dialog.LoadPlayerDialog(playerId);
             dialog.EnableBackButton = isOn;
             dialog.NavigationStack.Clear();
@@ -120,14 +121,14 @@ namespace XM.Dialog
             get
             {
                 var player = GetPC();
-                var playerId = GetObjectUUID(player);
+                var playerId = PlayerId.Get(player);
                 var dialog = Dialog.LoadPlayerDialog(playerId);
                 return dialog.NavigationStack;
             }
             set
             {
                 var player = GetPC();
-                var playerId = GetObjectUUID(player);
+                var playerId = PlayerId.Get(player);
                 var dialog = Dialog.LoadPlayerDialog(playerId);
                 dialog.NavigationStack = value;
             }
@@ -139,7 +140,7 @@ namespace XM.Dialog
         protected void ClearNavigationStack()
         {
             var player = GetPC();
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dialog = Dialog.LoadPlayerDialog(playerId);
             dialog.NavigationStack.Clear();
         }

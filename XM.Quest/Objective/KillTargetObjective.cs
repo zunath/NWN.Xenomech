@@ -26,7 +26,7 @@
 
         public void Initialize(uint player, string questId)
         {
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayer = _db.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
             var quest = dbPlayer.Quests.ContainsKey(questId) ? dbPlayer.Quests[questId] : new PlayerQuestDetail();
 
@@ -37,7 +37,7 @@
 
         public void Advance(uint player, string questId)
         {
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayer = _db.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
             var quest = dbPlayer.Quests.ContainsKey(questId) ? dbPlayer.Quests[questId] : null;
 
@@ -63,7 +63,7 @@
 
         public bool IsComplete(uint player, string questId)
         {
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayer = _db.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
             var quest = dbPlayer.Quests.ContainsKey(questId) ? dbPlayer.Quests[questId] : null;
 
@@ -80,7 +80,7 @@
 
         public string GetCurrentStateText(uint player, string questId)
         {
-            var playerId = GetObjectUUID(player);
+            var playerId = PlayerId.Get(player);
             var dbPlayer = _db.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
             if (!dbPlayer.Quests.ContainsKey(questId))
                 return "N/A";
