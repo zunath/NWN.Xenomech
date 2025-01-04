@@ -170,7 +170,6 @@ namespace XM.UI.Builder.Component
 
             RaisesNuiEvents = true;
             var methodName = GetBindName(expression);
-            //_boundActions[eventType].Add(methodName);
 
             if (!RegisteredEvents.ContainsKey(Element.Id))
                 RegisteredEvents[Element.Id] = new Dictionary<NuiEventType, string>();
@@ -181,6 +180,24 @@ namespace XM.UI.Builder.Component
         public TBuilder OnClick(Expression<Func<TViewModel, Action>> expression)
         {
             BindAction(NuiEventType.Click, expression);
+            return (TBuilder)this;
+        }
+
+        public TBuilder OnBlur(Expression<Func<TViewModel, Action>> expression)
+        {
+            BindAction(NuiEventType.Blur, expression);
+            return (TBuilder)this;
+        }
+
+        public TBuilder OnMouseDown(Expression<Func<TViewModel, Action>> expression)
+        {
+            BindAction(NuiEventType.MouseDown, expression);
+            return (TBuilder)this;
+        }
+
+        public TBuilder OnMouseUp(Expression<Func<TViewModel, Action>> expression)
+        {
+            BindAction(NuiEventType.MouseUp, expression);
             return (TBuilder)this;
         }
 

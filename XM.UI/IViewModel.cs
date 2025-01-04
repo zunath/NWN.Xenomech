@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Anvil.API;
 using Action = System.Action;
 
@@ -33,7 +34,6 @@ namespace XM.UI
 
         string ModalCancelButtonText { get; }
 
-        internal Action OnModalClose();
         public Action OnModalConfirm();
         public Action OnModalCancel();
 

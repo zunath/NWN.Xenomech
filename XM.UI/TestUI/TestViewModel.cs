@@ -45,13 +45,18 @@ namespace XM.UI.TestUI
 
         public override void OnClose()
         {
-            
         }
 
         public Action TestMethodToRun => () =>
         {
             _counter++;
-            ChangePartialView(IViewModel.MainViewElementId, "partial_test");
+            ShowModal("are ya sure?", () =>
+            {
+                Console.WriteLine($"confirming");
+            }, () =>
+            {
+                Console.WriteLine($"cancelling");
+            });
         };
 
         public Action TestMethodToRun2 => () =>

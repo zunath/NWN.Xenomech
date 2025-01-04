@@ -18,5 +18,9 @@
         Empty = 16,
         YouAcquireKeyItem = 18,
         YouLostKeyItem = 19,
+        DefaultModalMessage = 20,
+        Yes = 21,
+        No = 22,
+
     }
 }

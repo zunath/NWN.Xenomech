@@ -173,13 +173,13 @@ namespace XM.UI.Builder
                         row.AddButton(button =>
                         {
                             button.Label(model => model.ModalConfirmButtonText);
-                            //button.OnClick(model => model.OnModalConfirm());
+                            button.OnClick(model => model.OnModalConfirm());
                         });
 
                         row.AddButton(button =>
                         {
                             button.Label(model => model.ModalCancelButtonText);
-                            //button.OnClick(model => model.OnModalCancel());
+                            button.OnClick(model => model.OnModalCancel());
                         });
 
                         row.AddSpacer();
@@ -196,6 +196,9 @@ namespace XM.UI.Builder
             foreach (var (partialId, layout) in _partialViews)
             {
                 var json = JsonUtility.ToJson(layout);
+
+                Console.WriteLine(json);
+
                 serializedPartials[partialId] = JsonParse(json);
             }
 

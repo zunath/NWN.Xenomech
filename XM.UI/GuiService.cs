@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Anvil.API;
 using Anvil.Services;
 using XM.Core;
@@ -100,6 +101,15 @@ namespace XM.UI
             {
                 var action = (Action)property.GetValue(viewModel);
                 action?.Invoke();
+            }
+            else
+            {
+                var method = vmType.GetMethod(methodName);
+                if (method != null)
+                {
+                    var action = (Action)method.Invoke(viewModel, null);
+                    action?.Invoke();
+                }
             }
         }
 

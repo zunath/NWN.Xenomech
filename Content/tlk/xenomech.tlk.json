@@ -32,6 +32,62 @@
     {
       "id": 7,
       "text": "Character Info:\nPublic CD Key: {0}\nPlayer Id: {1}"
+    },
+    {
+      "id": 8,
+      "text": "You have died. Wait for another player to revive you or respawn to go to your registered cloning facility."
+    },
+    {
+      "id": 9,
+      "text": "Invalid"
+    },
+    {
+      "id": 10,
+      "text": "Maps"
+    },
+    {
+      "id": 11,
+      "text": "Quest Items"
+    },
+    {
+      "id": 12,
+      "text": "Documents"
+    },
+    {
+      "id": 13,
+      "text": "Blueprints"
+    },
+    {
+      "id": 14,
+      "text": "Keys"
+    },
+    {
+      "id": 15,
+      "text": "**Leave Tlk Entry 16 Empty**"
+    },
+    {
+      "id": 17,
+      "text": "**Leave Tlk Entry 16 Empty**"
+    },
+    {
+      "id": 18,
+      "text": "You acquire the '{0}' key item."
+    },
+    {
+      "id": 19,
+      "text": "You lost the '{0}' key item."
+    },
+    {
+      "id": 20,
+      "text": "Are you sure?"
+    },
+    {
+      "id": 21,
+      "text": "Yes"
+    },
+    {
+      "id": 22,
+      "text": "No"
     }
   ]
 }

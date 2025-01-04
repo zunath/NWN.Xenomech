@@ -7,11 +7,10 @@ using Anvil.API;
 using Anvil.Services;
 using Newtonsoft.Json;
 using XM.Core.EventManagement;
-using Action = System.Action;
 
 namespace XM.UI
 {
-    public abstract class ViewModel: 
+    public abstract partial class ViewModel: 
         IViewModel, 
         INotifyPropertyChanged
     {
@@ -209,38 +208,6 @@ namespace XM.UI
                     throw new ArgumentOutOfRangeException();
             }
         }
-
-
-        public string ModalPromptText
-        {
-            get => Get<string>();
-            private set => Set(value);
-        }
-
-        public string ModalConfirmButtonText
-        {
-            get => Get<string>();
-            private set => Set(value);
-        }
-
-        public string ModalCancelButtonText
-        {
-            get => Get<string>();
-            private set => Set(value);
-        }
-
-        public Action OnModalClose() => () =>
-        {
-            
-        };
-
-        public Action OnModalConfirm() => () =>
-        {
-        };
-
-        public Action OnModalCancel() => () =>
-        {
-        };
 
 
         public abstract void OnOpen();

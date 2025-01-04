@@ -28,49 +28,42 @@ namespace XM.UI.Builder
         /// <typeparam name="TProperty">The type of property being targeted.</typeparam>
         /// <param name="expression">Expression to target the property.</param>
         /// <returns>The name of the property.</returns>
-        private static string GetMemberName<TProperty>(Expression<Func<TViewModel, TProperty>> expression)
+        private static string GetMemberName<TInterface, TProperty>(Expression<Func<TInterface, TProperty>> expression)
         {
             // Case 1: If the expression refers to a property or field
-            var member = expression.Body as MemberExpression;
-            if (member != null)
+            if (expression.Body is MemberExpression member)
             {
-                var propInfo = member.Member as PropertyInfo;
-                if (propInfo != null)
+                if (member.Member is PropertyInfo propInfo)
                 {
                     return propInfo.Name; // Property name
                 }
 
-                var fieldInfo = member.Member as FieldInfo;
-                if (fieldInfo != null)
+                if (member.Member is FieldInfo fieldInfo)
                 {
                     return fieldInfo.Name; // Field name
                 }
             }
 
-            // Case 2: If the expression refers to a delegate (e.g., Action or Func)
-            var unaryExpression = expression.Body as UnaryExpression;
-            if (unaryExpression != null)
+            // Case 2: If the expression refers to a method (Action or Func)
+            if (expression.Body is MethodCallExpression methodCall)
+            {
+                return methodCall.Method.Name; // Method name
+            }
+
+            // Case 3: If the expression is a delegate (e.g., Action or Func)
+            if (expression.Body is UnaryExpression unaryExpression)
             {
                 // Compile the expression into a delegate
                 var compiledDelegate = Expression.Lambda(unaryExpression.Operand).Compile();
 
-                // Extract MethodInfo from the delegate
                 if (compiledDelegate is Delegate del)
                 {
-                    // Check if it's an Action (it will not return a value)
-                    if (del is Action)
-                    {
-                        return del.Method.Name; // Method name from Action delegate
-                    }
-                    // You can handle Func here similarly if needed
-                    else if (del is Func<object> || del is Delegate)
-                    {
-                        return del.Method.Name; // Method name from other delegates
-                    }
+                    return del.Method.Name; // Method name from delegate
                 }
             }
 
             throw new ArgumentException($"Expression '{expression}' is neither a property, field, nor method.");
         }
+
     }
 }
