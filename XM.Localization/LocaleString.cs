@@ -21,6 +21,8 @@
         DefaultModalMessage = 20,
         Yes = 21,
         No = 22,
+        HP = 23,
+        EP = 24,
 
     }
 }

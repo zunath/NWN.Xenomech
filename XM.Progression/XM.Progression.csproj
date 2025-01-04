@@ -61,6 +61,12 @@
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Stat\UI\**" />
+    <EmbeddedResource Remove="Stat\UI\**" />
+    <None Remove="Stat\UI\**" />
+  </ItemGroup>
+
 <ItemGroup>
 	<PackageReference Include="NWN.Anvil" Version="8193.36.2-dev.19.r9bb01d93" ExcludeAssets="runtime" PrivateAssets="all">
 		<IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -71,11 +77,6 @@
   <ProjectReference Include="..\XM.API\XM.API.csproj" />
   <ProjectReference Include="..\XM.Core\XM.Core.csproj" />
   <ProjectReference Include="..\XM.UI\XM.UI.csproj" />
-</ItemGroup>
-
-<ItemGroup>
-  <Folder Include="Stat\UI\CharacterSheet\" />
-  <Folder Include="Stat\UI\PlayerStatus\" />
 </ItemGroup>
 
 <Target Name="PostBuild" AfterTargets="PostBuildEvent">

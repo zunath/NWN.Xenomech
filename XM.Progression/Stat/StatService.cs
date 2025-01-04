@@ -45,7 +45,7 @@ namespace XM.Progression.Stat
             if (GetIsPC(creature) && !GetIsDM(creature))
             {
                 var playerId = PlayerId.Get(creature);
-                var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
                 return dbPlayerStat.EP;
             }
             // NPCs
@@ -61,7 +61,7 @@ namespace XM.Progression.Stat
             if (GetIsPC(creature) && !GetIsDM(creature))
             {
                 var playerId = PlayerId.Get(creature);
-                var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
                 return dbPlayerStat.MaxEP;
             }
             // NPCs
@@ -77,7 +77,7 @@ namespace XM.Progression.Stat
                 throw new Exception($"Only PCs have ability recast reduction.");
 
             var playerId = PlayerId.Get(creature);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
             return dbPlayerStat.AbilityRecastReduction;
         }
     }
