@@ -51,7 +51,7 @@ namespace XM.UI.TestUI
         public Action TestMethodToRun => () =>
         {
             _counter++;
-            ButtonNames[0] = $"item {_counter}";
+            ChangePartialView(IViewModel.MainViewElementId, "partial_test");
         };
 
         public Action TestMethodToRun2 => () =>

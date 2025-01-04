@@ -1,14 +1,18 @@
 ﻿using Anvil.API;
 using System.Linq.Expressions;
 using System;
+using System.Collections.Generic;
+using XM.UI.Builder.Layout;
 
 namespace XM.UI.Builder
 {
     public class NuiWindowBuilder<TViewModel>: NuiBindable<TViewModel>
         where TViewModel: IViewModel
     {
+
         private readonly NuiWindow _window;
         private NuiRect _defaultGeometry;
+        private readonly Dictionary<string, NuiLayout> _partialViews;
 
         public NuiWindowBuilder(NuiLayout root, string title, NuiEventCollection eventCollection) 
             : base(eventCollection)
@@ -17,33 +21,43 @@ namespace XM.UI.Builder
             _window.Id = typeof(TViewModel).FullName;
 
             _window.Geometry = new NuiBind<NuiRect>(nameof(IViewModel.Geometry));
+            _partialViews = new Dictionary<string, NuiLayout>();
         }
 
-        public NuiWindowBuilder<TViewModel> SetBorder(bool border)
+        public NuiWindowBuilder<TViewModel> DefinePartialView(string id, Action<NuiGroupBuilder<TViewModel>> configure)
+        {
+            var groupBuilder = new NuiGroupBuilder<TViewModel>(RegisteredEvents);
+            configure(groupBuilder);
+
+            _partialViews[id] = groupBuilder.Build();
+            return this;
+        }
+
+        public NuiWindowBuilder<TViewModel> Border(bool border)
         {
             _window.Border = border;
             return this;
         }
 
-        public NuiWindowBuilder<TViewModel> SetClosable(bool closable)
+        public NuiWindowBuilder<TViewModel> IsClosable(bool closable)
         {
             _window.Closable = closable;
             return this;
         }
 
-        public NuiWindowBuilder<TViewModel> SetCollapsed(bool? collapsed)
+        public NuiWindowBuilder<TViewModel> IsCollapsed(bool? collapsed)
         {
             _window.Collapsed = collapsed;
             return this;
         }
 
-        public NuiWindowBuilder<TViewModel> SetInitialGeometry(float x, float y, float width, float height)
+        public NuiWindowBuilder<TViewModel> InitialGeometry(float x, float y, float width, float height)
         {
             _defaultGeometry = new NuiRect(x, y, width, height);
             return this;
         }
 
-        public NuiWindowBuilder<TViewModel> SetResizable(bool resizable)
+        public NuiWindowBuilder<TViewModel> IsResizable(bool resizable)
         {
             _window.Resizable = resizable;
             return this;
@@ -51,29 +65,37 @@ namespace XM.UI.Builder
 
         public NuiWindowBuilder<TViewModel> SetRoot(NuiLayout root)
         {
-            _window.Root = root;
+            _partialViews[IViewModel.UserPartialId] = root;
+            var group = new NuiGroup
+            {
+                Id = IViewModel.MainViewElementId,
+                Scrollbars = NuiScrollbars.None,
+                Border = false
+            };
+
+            _window.Root = group;
             return this;
         }
 
-        public NuiWindowBuilder<TViewModel> SetTitle(string title)
+        public NuiWindowBuilder<TViewModel> Title(string title)
         {
             _window.Title = title;
             return this;
         }
 
-        public NuiWindowBuilder<TViewModel> SetTransparent(bool transparent)
+        public NuiWindowBuilder<TViewModel> IsTransparent(bool transparent)
         {
             _window.Transparent = transparent;
             return this;
         }
 
-        public NuiWindowBuilder<TViewModel> SetAcceptsInput(bool acceptsInput)
+        public NuiWindowBuilder<TViewModel> AcceptsInput(bool acceptsInput)
         {
             _window.AcceptsInput = acceptsInput;
             return this;
         }
 
-        public NuiWindowBuilder<TViewModel> BindBorder(Expression<Func<TViewModel, bool>> expression)
+        public NuiWindowBuilder<TViewModel> Border(Expression<Func<TViewModel, bool>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<bool>(bindName);
@@ -81,7 +103,7 @@ namespace XM.UI.Builder
             return this;
         }
 
-        public NuiWindowBuilder<TViewModel> BindClosable(Expression<Func<TViewModel, bool>> expression)
+        public NuiWindowBuilder<TViewModel> IsClosable(Expression<Func<TViewModel, bool>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<bool>(bindName);
@@ -89,7 +111,7 @@ namespace XM.UI.Builder
             return this;
         }
 
-        public NuiWindowBuilder<TViewModel> BindCollapsed(Expression<Func<TViewModel, bool?>> expression)
+        public NuiWindowBuilder<TViewModel> IsCollapsed(Expression<Func<TViewModel, bool?>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<bool>(bindName);
@@ -97,15 +119,7 @@ namespace XM.UI.Builder
             return this;
         }
 
-        public NuiWindowBuilder<TViewModel> BindInitialGeometry(Expression<Func<TViewModel, NuiRect>> expression)
-        {
-            var bindName = GetBindName(expression);
-            var bind = new NuiBind<NuiRect>(bindName);
-            _window.Geometry = bind;
-            return this;
-        }
-
-        public NuiWindowBuilder<TViewModel> BindResizable(Expression<Func<TViewModel, bool>> expression)
+        public NuiWindowBuilder<TViewModel> IsResizable(Expression<Func<TViewModel, bool>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<bool>(bindName);
@@ -113,7 +127,7 @@ namespace XM.UI.Builder
             return this;
         }
 
-        public NuiWindowBuilder<TViewModel> BindTitle(Expression<Func<TViewModel, string>> expression)
+        public NuiWindowBuilder<TViewModel> Title(Expression<Func<TViewModel, string>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<string>(bindName);
@@ -121,7 +135,7 @@ namespace XM.UI.Builder
             return this;
         }
 
-        public NuiWindowBuilder<TViewModel> BindTransparent(Expression<Func<TViewModel, bool>> expression)
+        public NuiWindowBuilder<TViewModel> IsTransparent(Expression<Func<TViewModel, bool>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<bool>(bindName);
@@ -129,7 +143,7 @@ namespace XM.UI.Builder
             return this;
         }
 
-        public NuiWindowBuilder<TViewModel> BindAcceptsInput(Expression<Func<TViewModel, bool>> expression)
+        public NuiWindowBuilder<TViewModel> AcceptsInput(Expression<Func<TViewModel, bool>> expression)
         {
             var bindName = GetBindName(expression);
             var bind = new NuiBind<bool>(bindName);
@@ -137,10 +151,58 @@ namespace XM.UI.Builder
             return this;
         }
 
-
-        internal NuiWindowBuildResult Build()
+        private void BuildModalPartial()
         {
-            return new NuiWindowBuildResult(_window, _defaultGeometry);
+            DefinePartialView(IViewModel.ModalPartialId, group =>
+            {
+                group.SetBorder(false);
+                group.SetScrollbars(NuiScrollbars.None);
+                group.SetLayout(col =>
+                {
+                    col.AddRow(row =>
+                    {
+                        row.AddText(text =>
+                        {
+                            text.Text(model => model.ModalPromptText);
+                        });
+                    });
+                    col.AddRow(row =>
+                    {
+                        row.AddSpacer();
+
+                        row.AddButton(button =>
+                        {
+                            button.Label(model => model.ModalConfirmButtonText);
+                            //button.OnClick(model => model.OnModalConfirm());
+                        });
+
+                        row.AddButton(button =>
+                        {
+                            button.Label(model => model.ModalCancelButtonText);
+                            //button.OnClick(model => model.OnModalCancel());
+                        });
+
+                        row.AddSpacer();
+                    });
+                });
+            });
+        }
+
+        internal NuiBuiltWindow Build()
+        {
+            BuildModalPartial();
+
+            var serializedPartials = new Dictionary<string, Json>();
+            foreach (var (partialId, layout) in _partialViews)
+            {
+                var json = JsonUtility.ToJson(layout);
+                serializedPartials[partialId] = JsonParse(json);
+            }
+
+            return new NuiBuiltWindow(
+                _window, 
+                _defaultGeometry,
+                serializedPartials);
         }
     }
 }

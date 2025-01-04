@@ -1,21 +1,23 @@
 ﻿using Anvil.API;
+using System.Collections.Generic;
 
 namespace XM.UI.Builder
 {
     public class NuiBuiltWindow
     {
         public NuiWindow Window { get; }
-        public NuiEventCollection EventCollection { get; }
+        public NuiEventCollection EventCollection { get; internal set; }
         public NuiRect DefaultGeometry { get; }
+        public Dictionary<string, Json> PartialViews { get; }
 
         public NuiBuiltWindow(
             NuiWindow window, 
-            NuiEventCollection eventCollection,
-            NuiRect defaultGeometry)
+            NuiRect defaultGeometry,
+            Dictionary<string, Json> partialViews)
         {
             Window = window;
-            EventCollection = eventCollection;
             DefaultGeometry = defaultGeometry;
+            PartialViews = partialViews;
         }
     }
 }

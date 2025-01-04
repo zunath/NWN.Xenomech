@@ -7,6 +7,7 @@ using Anvil.API;
 using Anvil.Services;
 using Newtonsoft.Json;
 using XM.Core.EventManagement;
+using Action = System.Action;
 
 namespace XM.UI
 {
@@ -17,6 +18,9 @@ namespace XM.UI
         protected uint Player { get; private set; }
         protected uint TetherObject { get; private set; }
         private int WindowToken { get; set; }
+
+        public Dictionary<string, Json> PartialViews { get; set; }
+
 
         private Guid _onNuiEventToken;
         private readonly Dictionary<string, object> _backingData = new();
@@ -35,14 +39,24 @@ namespace XM.UI
             uint player, 
             int windowToken,
             NuiRect geometry,
+            Dictionary<string, Json> partialViews,
             uint tetherObject = OBJECT_INVALID)
         {
             Player = player;
             WindowToken = windowToken;
             TetherObject = tetherObject;
+            PartialViews = partialViews;
 
             BindGeometry(geometry);
             _onNuiEventToken = Event.Subscribe<ModuleEvent.OnNuiEvent>(OnWatchEvent);
+
+            ChangePartialView(IViewModel.MainViewElementId, IViewModel.UserPartialId);
+        }
+
+        protected void ChangePartialView(string elementId, string partialViewId)
+        {
+            var json = PartialViews[partialViewId];
+            NuiSetGroupLayout(Player, WindowToken, elementId, json);
         }
 
         public void Unbind()
@@ -195,6 +209,39 @@ namespace XM.UI
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+
+        public string ModalPromptText
+        {
+            get => Get<string>();
+            private set => Set(value);
+        }
+
+        public string ModalConfirmButtonText
+        {
+            get => Get<string>();
+            private set => Set(value);
+        }
+
+        public string ModalCancelButtonText
+        {
+            get => Get<string>();
+            private set => Set(value);
+        }
+
+        public Action OnModalClose() => () =>
+        {
+            
+        };
+
+        public Action OnModalConfirm() => () =>
+        {
+        };
+
+        public Action OnModalCancel() => () =>
+        {
+        };
+
 
         public abstract void OnOpen();
 

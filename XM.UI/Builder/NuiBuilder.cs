@@ -1,4 +1,5 @@
 ﻿using System;
+using Anvil.API;
 using XM.UI.Builder.Layout;
 
 namespace XM.UI.Builder
@@ -6,6 +7,7 @@ namespace XM.UI.Builder
     public class NuiBuilder<TViewModel>: NuiBindable<TViewModel>
         where TViewModel: IViewModel
     {
+
         private NuiWindowBuilder<TViewModel> _windowBuilder;
 
         public NuiBuilder() 
@@ -42,10 +44,10 @@ namespace XM.UI.Builder
                 throw new InvalidOperationException("No window has been created.");
             }
 
-            var windowBuildResult = _windowBuilder.Build();
-            var buildResult = new NuiBuiltWindow(windowBuildResult.Window, RegisteredEvents, windowBuildResult.DefaultGeometry);
+            var builtWindow = _windowBuilder.Build();
+            builtWindow.EventCollection = RegisteredEvents;
 
-            return buildResult;
+            return builtWindow;
         }
 
     }

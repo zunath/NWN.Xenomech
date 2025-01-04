@@ -18,9 +18,19 @@ namespace XM.UI.TestUI
             return _builder.CreateWindow(window =>
                 {
                     window
-                        .SetTitle("Test Window")
-                        .SetResizable(true)
-                        .SetInitialGeometry(0, 0, 200f, 200f);
+                        .DefinePartialView("partial_test", group =>
+                        {
+                            group.SetLayout(col =>
+                            {
+                                col.AddLabel(label =>
+                                {
+                                    label.Label("from partial_test");
+                                });
+                            });
+                        })
+                        .Title("Test Window")
+                        .IsResizable(true)
+                        .InitialGeometry(0, 0, 200f, 200f);
                 })
                 .SetRoot(col =>
                 {

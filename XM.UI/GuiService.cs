@@ -185,6 +185,7 @@ namespace XM.UI
 
                 var windowId = viewModel.GetType().FullName!;
                 var geometry = _builtWindowsByType[type].DefaultGeometry;
+                var partialViews = _builtWindowsByType[type].PartialViews;
                 var playerId = PlayerId.Get(player);
                 var playerUI = _db.Get<PlayerUI>(playerId);
 
@@ -194,7 +195,12 @@ namespace XM.UI
                 }
                 
                 var windowToken = NuiCreate(player, json, window.Id);
-                viewModel.Bind(player, windowToken, geometry, tetherObject);
+                viewModel.Bind(
+                    player, 
+                    windowToken, 
+                    geometry, 
+                    partialViews,
+                    tetherObject);
 
                 _playerViewModels[windowToken] = viewModel;
             }
