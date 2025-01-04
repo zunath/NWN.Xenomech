@@ -108,15 +108,13 @@ namespace XM.UI
         protected void Set<T>(T value, [CallerMemberName] string propertyName = null)
         {
             SetField(value, propertyName);
-            var serialized = JsonUtility.ToJson(value);
-            var json = JsonParse(serialized);
 
             if (typeof(IGuiBindingList).IsAssignableFrom(typeof(T)))
             {
-                RegisterList((IGuiBindingList)value, propertyName);
-                
+                var list = (IGuiBindingList)value;
+                list.PropertyName = propertyName;
+                RegisterList(list, propertyName);
             }
-
 
             OnPropertyChanged(propertyName);
         }
@@ -189,13 +187,9 @@ namespace XM.UI
             switch (e.ListChangedType)
             {
                 case ListChangedType.ItemAdded:
-                    OnPropertyChanged(list.PropertyName);
-                    break;
                 case ListChangedType.ItemDeleted:
-                    OnPropertyChanged(list.PropertyName);
-                    break;
                 case ListChangedType.ItemChanged:
-                    OnPropertyChanged(e.PropertyDescriptor!.Name);
+                    OnPropertyChanged(list.PropertyName);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

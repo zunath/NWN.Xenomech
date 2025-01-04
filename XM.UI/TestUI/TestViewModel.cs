@@ -51,7 +51,7 @@ namespace XM.UI.TestUI
         public Action TestMethodToRun => () =>
         {
             _counter++;
-            TestProp1 = $"val: {_counter}";
+            ButtonNames[0] = $"item {_counter}";
         };
 
         public Action TestMethodToRun2 => () =>
