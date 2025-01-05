@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Plugin.Combat", "XM.Plug
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Plugin.Migration", "XM.Plugin.Migration\XM.Plugin.Migration.csproj", "{1E30C887-B95A-4900-A6F1-62814A93DC01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Quest", "XM.Quest\XM.Quest.csproj", "{B47AD0C2-79CD-44F9-A4F9-DF8646004D7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Plugin.Quest", "XM.Plugin.Quest\XM.Plugin.Quest.csproj", "{B47AD0C2-79CD-44F9-A4F9-DF8646004D7E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Shared.Progression", "XM.Shared.Progression\XM.Shared.Progression.csproj", "{2CE4FC05-0101-44CD-B3C9-CF532EC6D12D}"
 EndProject
