@@ -208,7 +208,6 @@ namespace XM.UI
                 }
                 
                 var windowToken = NuiCreate(player, json, window.Id);
-                _playerViewModels[windowToken] = viewModel;
                 viewModel.Bind(
                     player, 
                     windowToken, 
@@ -216,6 +215,7 @@ namespace XM.UI
                     partialViews,
                     tetherObject);
 
+                _playerViewModels[windowToken] = viewModel;
             }
         }
 

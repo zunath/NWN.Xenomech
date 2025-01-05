@@ -75,7 +75,7 @@ namespace XM.UI.Builder
                 Border = false
             };
 
-            _window.Root = group;
+            _window.Root = root;
             return this;
         }
 
