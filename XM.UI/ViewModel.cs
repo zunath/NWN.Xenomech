@@ -8,6 +8,7 @@ using Anvil.Services;
 using Newtonsoft.Json;
 using XM.Shared.Core;
 using XM.Shared.Core.EventManagement;
+using XM.Shared.Core.Json;
 
 namespace XM.UI
 {

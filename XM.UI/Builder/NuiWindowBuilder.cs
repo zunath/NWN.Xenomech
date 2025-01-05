@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using System;
 using System.Collections.Generic;
 using XM.Shared.Core;
+using XM.Shared.Core.Json;
 using XM.UI.Builder.Layout;
 
 namespace XM.UI.Builder
