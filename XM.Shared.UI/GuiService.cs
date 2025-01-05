@@ -6,6 +6,7 @@ using NLog;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
+using XM.Shared.Core.Json;
 using XM.UI.Builder;
 using XM.UI.Entity;
 using Action = System.Action;
@@ -14,7 +15,8 @@ namespace XM.UI
 {
     [ServiceBinding(typeof(GuiService))]
     [ServiceBinding(typeof(IUpdateable))]
-    public partial class GuiService: IUpdateable
+    [ServiceBinding(typeof(IInitializable))]
+    public partial class GuiService: IUpdateable, IInitializable
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -46,7 +48,6 @@ namespace XM.UI
 
         private void SubscribeEvents()
         {
-            _event.Subscribe<NWNXEvent.OnModulePreload>(OnModulePreload);
             _event.Subscribe<ModuleEvent.OnNuiEvent>(OnNuiEvent);
         }
 
@@ -150,39 +151,33 @@ namespace XM.UI
             _db.Set(dbPlayerUI);
         }
 
-
-        private void OnModulePreload()
-        {
-            CacheViews();
-        }
-
         private void CacheViews()
         {
-            //foreach (var view in Views)
-            //{
-            //    var type = view.GetType();
-            //    var builtWindow = view.Build();
-            //    var window = builtWindow.Window;
-            //    var elementEvents = builtWindow.EventCollection;
-            //    var json = XMJsonUtility.ToJson(window);
+            foreach (var view in Views)
+            {
+                var type = view.GetType();
+                var builtWindow = view.Build();
+                var window = builtWindow.Window;
+                var elementEvents = builtWindow.EventCollection;
+                var json = XMJsonUtility.Serialize(window);
 
-            //    _builtWindowsByType[type] = builtWindow;
-            //    _serializedWindowsByType[type] = JsonParse(json);
-            //    _windowsByType[type] = window;
-            //    _viewsByType[type] = view;
+                _builtWindowsByType[type] = builtWindow;
+                _serializedWindowsByType[type] = JsonParse(json);
+                _windowsByType[type] = window;
+                _viewsByType[type] = view;
 
-            //    foreach (var (elementId, eventCollection) in elementEvents)
-            //    {
-            //        if (!_registeredEvents.ContainsKey(elementId))
-            //            _registeredEvents[elementId] = new Dictionary<NuiEventType, string>();
+                foreach (var (elementId, eventCollection) in elementEvents)
+                {
+                    if (!_registeredEvents.ContainsKey(elementId))
+                        _registeredEvents[elementId] = new Dictionary<NuiEventType, string>();
 
-            //        foreach (var (eventType, methodName) in eventCollection)
-            //        {
-            //            _registeredEvents[elementId][eventType] = methodName;
-            //        }
+                    foreach (var (eventType, methodName) in eventCollection)
+                    {
+                        _registeredEvents[elementId][eventType] = methodName;
+                    }
 
-            //    }
-            //}
+                }
+            }
         }
 
         public void ShowWindow<TView>(
@@ -213,6 +208,7 @@ namespace XM.UI
                 }
                 
                 var windowToken = NuiCreate(player, json, window.Id);
+                _playerViewModels[windowToken] = viewModel;
                 viewModel.Bind(
                     player, 
                     windowToken, 
@@ -220,8 +216,12 @@ namespace XM.UI
                     partialViews,
                     tetherObject);
 
-                _playerViewModels[windowToken] = viewModel;
             }
+        }
+
+        public void Init()
+        {
+            CacheViews();
         }
     }
 }
