@@ -1,9 +1,9 @@
-﻿using Anvil.Services;
+﻿using System.Collections.Generic;
+using Anvil.Services;
 using NLog;
-using System.Collections.Generic;
 using XM.Shared.Core.EventManagement;
 
-namespace XM.Area
+namespace XM.Shared.Core.Caching
 {
     [ServiceBinding(typeof(AreaCacheService))]
     public class AreaCacheService

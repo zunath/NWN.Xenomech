@@ -4,7 +4,6 @@ using System;
 using System.Linq;
 using NLog;
 using System.Numerics;
-using XM.Area;
 using AreaPlugin = XM.Shared.API.NWNX.AreaPlugin.AreaPlugin;
 using CreaturePlugin = XM.Shared.API.NWNX.CreaturePlugin.CreaturePlugin;
 using ObjectPlugin = XM.Shared.API.NWNX.ObjectPlugin.ObjectPlugin;

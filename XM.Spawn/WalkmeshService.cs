@@ -11,7 +11,7 @@ using XM.Shared.Core.Entity;
 using XM.Shared.Core.EventManagement;
 using Location = XM.Shared.API.BaseTypes.Location;
 
-namespace XM.Area
+namespace XM.Spawn
 {
     [ServiceBinding(typeof(WalkmeshService))]
     public class WalkmeshService

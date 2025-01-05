@@ -1,9 +1,9 @@
 ﻿using Anvil.Services;
 using NLog;
-using XM.Area;
 using XM.Combat.Entity;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
+using XM.Shared.Core.Caching;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
