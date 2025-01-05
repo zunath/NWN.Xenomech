@@ -1,1 +1,1 @@
-XM.CLI.exe -k
+XM.App.CLI.exe -k

@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "NWN.Xenomech.CLI": {
-      "commandName": "Project",
-      "commandLineArgs": "-o"
-    }
-  }
-}

@@ -1,3 +1,3 @@
 cd ../Tools/
-XM.CLI.exe -u "../Module/Xenomech.mod"
+XM.App.CLI.exe -u "../Module/Xenomech.mod"
 cd ../Module/
