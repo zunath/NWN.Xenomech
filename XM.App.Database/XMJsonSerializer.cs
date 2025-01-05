@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
-using NReJSON;
+﻿using NReJSON;
 using StackExchange.Redis;
+using XM.Shared.Core.Json;
 
 namespace XM.App.Database
 {
@@ -8,12 +8,12 @@ namespace XM.App.Database
     {
         public TResult Deserialize<TResult>(RedisResult serializedValue)
         {
-            return JsonConvert.DeserializeObject<TResult>(serializedValue.ToString());
+            return XMJsonUtility.Deserialize<TResult>(serializedValue.ToString());
         }
 
         public string Serialize<TObjectType>(TObjectType obj)
         {
-            return JsonConvert.SerializeObject(obj);
+            return XMJsonUtility.Serialize(obj);
         }
     }
 }

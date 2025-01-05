@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Dynamic;
 
 namespace XM.Shared.Core.Data
 {
@@ -11,7 +12,7 @@ namespace XM.Shared.Core.Data
         public List<string> EntitiesList { get; set; }
         public string Message { get; set; }
         public List<IndexedProperty> IndexedProperties { get; set; }
-        public Dictionary<string, object> IndexData { get; set; }
+        public Dictionary<string, string> IndexData { get; set; }
 
         public DBQuery<IDBEntity> Query { get; set; }
 
