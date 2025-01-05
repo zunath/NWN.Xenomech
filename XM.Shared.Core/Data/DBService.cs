@@ -6,14 +6,14 @@ using System.Text;
 using Anvil.Services;
 using NLog;
 using XM.Shared.Configuration;
+using XM.Shared.Core.Json;
 
 namespace XM.Shared.Core.Data
 {
     [ServiceBinding(typeof(DBService))]
     [ServiceBinding(typeof(IInitializable))]
     public class DBService :
-        IInitializable,
-        IDisposable
+        IInitializable
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly string _socketPath;
@@ -258,11 +258,6 @@ namespace XM.Shared.Core.Data
                 //Console.WriteLine($"SendCommand json response: {responseJson}");
                 return XMJsonUtility.Deserialize<DBServerCommand>(responseJson);
             }
-        }
-
-        public void Dispose()
-        {
-            Console.WriteLine($"disposing database");
         }
     }
 }

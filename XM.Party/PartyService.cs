@@ -25,7 +25,6 @@ namespace XM.Party
 
         private void SubscribeEvents()
         {
-            Console.WriteLine($"subscribing partyService 22");
             _event.Subscribe<ModuleEvent.OnPlayerLeave>(OnModuleLeave);
             _event.Subscribe<NWNXEvent.OnPartyAcceptInvitationBefore>(OnPartyAcceptInvitationBefore);
             _event.Subscribe<NWNXEvent.OnAddAssociateBefore>(OnAddAssociateBefore);
