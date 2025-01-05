@@ -36,7 +36,6 @@ namespace XM.Spawn
 
         public SpawnService(WalkmeshService walkmesh, XMEventService @event)
         {
-            Console.WriteLine($"hot reloading!");
             _walkmesh = walkmesh;
             _event = @event;
 

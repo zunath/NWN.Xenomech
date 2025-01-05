@@ -308,8 +308,6 @@ namespace XM.App.Database
             var data = XMJsonUtility.Serialize(entity);
             var indexKey = $"Index:{type}:{key}";
 
-            Console.WriteLine($"indexData = {XMJsonUtility.Serialize(indexData)}");
-
             var redisData = new Dictionary<string, RedisValue>();
             foreach (var index in indexData)
             {
