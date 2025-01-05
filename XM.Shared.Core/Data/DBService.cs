@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
@@ -148,7 +149,7 @@ namespace XM.Shared.Core.Data
             where T : IDBEntity
         {
             var type = typeof(T);
-            var indexData = new Dictionary<string, object>();
+            var indexData = new Dictionary<string, string>();
 
             foreach (var prop in _indexedPropertiesByType[type])
             {
@@ -157,16 +158,26 @@ namespace XM.Shared.Core.Data
 
                 if (value != null)
                 {
-                    value = prop.Type switch
+                    string indexValue;
+                    switch (prop.Type)
                     {
-                        // Convert enums to numeric values
-                        IndexedPropertyType.Enum => (int)value,
-                        IndexedPropertyType.Guid => RedisTokenHelper.EscapeTokens(((Guid)value).ToString()),
-                        IndexedPropertyType.Text => RedisTokenHelper.EscapeTokens((string)value),
-                        _ => value
-                    };
+                        case IndexedPropertyType.Enum:
+                            indexValue = Convert.ToInt32(value).ToString();
+                            break;
+                        case IndexedPropertyType.Guid:
+                            indexValue = RedisTokenHelper.EscapeTokens(((Guid)value).ToString());
+                            break;
+                        case IndexedPropertyType.Text:
+                            indexValue = RedisTokenHelper.EscapeTokens((string)value);
+                            break;
+                        case IndexedPropertyType.Numeric:
+                            indexValue = Convert.ToInt32(value).ToString();
+                            break;
+                        default:
+                            throw new Exception("Unable to determine property type.");
+                    }
 
-                    indexData[prop.Name] =  (dynamic)value;
+                    indexData[prop.Name] = indexValue;
                 }
             }
 

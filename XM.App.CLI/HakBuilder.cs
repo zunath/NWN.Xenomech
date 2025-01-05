@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
-using Newtonsoft.Json;
 using XM.App.CLI.Model;
+using XM.Shared.Core.Json;
 
 namespace XM.App.CLI
 {
@@ -53,7 +53,7 @@ namespace XM.App.CLI
             }
 
             var json = File.ReadAllText(ConfigFilePath);
-            return JsonConvert.DeserializeObject<HakBuilderConfig>(json);
+            return XMJsonUtility.Deserialize<HakBuilderConfig>(json);
         }
 
         /// <summary>

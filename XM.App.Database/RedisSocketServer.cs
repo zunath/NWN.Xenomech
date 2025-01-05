@@ -1,10 +1,12 @@
-﻿using System.Net.Sockets;
+﻿using System.Dynamic;
+using System.Net.Sockets;
 using System.Text;
-using Newtonsoft.Json;
 using NRediSearch;
 using NReJSON;
 using StackExchange.Redis;
 using XM.Shared.Core.Data;
+using XM.Shared.Core.Extension;
+using XM.Shared.Core.Json;
 
 namespace XM.App.Database
 {
@@ -15,7 +17,6 @@ namespace XM.App.Database
         private readonly string _ipAddress;
 
         private readonly Dictionary<string, Client> _searchClientsByType = new();
-        //private readonly DBServerCommandConverter _dbCommandConverter = new();
 
         public RedisSocketServer(string ipAddress)
         {
@@ -103,10 +104,10 @@ namespace XM.App.Database
 
                     //Console.WriteLine($"json = {json}");
 
-                    var command = JsonConvert.DeserializeObject<DBServerCommand>(json);
+                    var command = XMJsonUtility.Deserialize<DBServerCommand>(json);
                     var response = HandleCommand(command);
 
-                    var responseJson = JsonConvert.SerializeObject(response);
+                    var responseJson = XMJsonUtility.Serialize(response);
 
                     //Console.WriteLine($"responseJson = {responseJson}");
 
@@ -159,6 +160,7 @@ namespace XM.App.Database
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"{nameof(HandleCommand)} exception: {ex.ToMessageAndCompleteStacktrace()}");
                 return new DBServerCommand { CommandType = DBServerCommandType.Error, Message = ex.Message };
             }
         }
@@ -301,17 +303,18 @@ namespace XM.App.Database
             return data;
         }
 
-        private void Set(string key, string entity, string type, Dictionary<string, object> indexData)
+        private void Set(string key, string entity, string type, Dictionary<string, string> indexData)
         {
-            var data = JsonConvert.SerializeObject(entity);
+            var data = XMJsonUtility.Serialize(entity);
             var indexKey = $"Index:{type}:{key}";
+
+            Console.WriteLine($"indexData = {XMJsonUtility.Serialize(indexData)}");
 
             var redisData = new Dictionary<string, RedisValue>();
             foreach (var index in indexData)
             {
+                Console.WriteLine($"Processing index: Key = {index.Key}, Value = {index.Value}, Type = {index.Value?.GetType()}");
                 redisData[index.Key] = RedisValue.Unbox(index.Value);
-
-                
             }
 
             _searchClientsByType[type].ReplaceDocument(indexKey, redisData);
