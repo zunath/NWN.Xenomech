@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\XM.Core\XM.Core.csproj" />
+    <ProjectReference Include="..\XM.Shared.Core\XM.Shared.Core.csproj" />
   </ItemGroup>
 
 </Project>

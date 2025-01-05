@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace XM.CLI
+namespace XM.App.CLI
 {
     public static class ChecksumUtil
     {

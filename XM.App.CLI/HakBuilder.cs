@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using Newtonsoft.Json;
-using XM.CLI.Model;
+using XM.App.CLI.Model;
 
-namespace XM.CLI
+namespace XM.App.CLI
 {
     public class HakBuilder
     {

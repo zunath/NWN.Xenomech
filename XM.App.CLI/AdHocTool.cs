@@ -1,5 +1,4 @@
-﻿
-namespace XM.CLI
+﻿namespace XM.App.CLI
 {
     internal class AdHocTool
     {

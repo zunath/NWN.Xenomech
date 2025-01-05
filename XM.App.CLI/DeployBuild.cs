@@ -1,4 +1,4 @@
-﻿namespace XM.CLI
+﻿namespace XM.App.CLI
 {
     internal class DeployBuild
     {
@@ -28,7 +28,7 @@
             Directory.CreateDirectory(ModulesPath);
             Directory.CreateDirectory(TlkPath);
 
-            var source = new DirectoryInfo("../XM.Runner/Docker");
+            var source = new DirectoryInfo("../XM.App.Runner/Docker");
             var target = new DirectoryInfo(ServerPath);
 
             CopyAll(source, target, "nwserver.env");
@@ -60,7 +60,7 @@
             {
                 if (excludeFiles.Contains(fi.Name))
                     continue;
-                
+
                 var targetPath = Path.Combine(target.FullName, fi.Name);
 
                 if (File.Exists(targetPath) && fi.Name == preventOverwriteFile)

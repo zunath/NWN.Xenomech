@@ -1,7 +1,7 @@
 ﻿using Anvil.Services;
-using XM.API.Constants;
 using XM.Core.EventManagement;
-using GuiEventType = XM.API.Constants.GuiEventType;
+using XM.Shared.API.Constants;
+using GuiEventType = XM.Shared.API.Constants.GuiEventType;
 
 namespace XM.Quest
 {

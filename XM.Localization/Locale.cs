@@ -1,6 +1,4 @@
-﻿using XM.API;
-
-namespace XM.Localization
+﻿namespace XM.Localization
 {
     public static class Locale
     {
@@ -23,7 +21,7 @@ namespace XM.Localization
             if (tlkId < CustomTlkIdStart)
                 tlkId += CustomTlkIdStart;
 
-            var text = string.Format(NWScript.GetStringByStrRef(tlkId), args);
+            var text = string.Format(GetStringByStrRef(tlkId), args);
             return text;
         }
     }

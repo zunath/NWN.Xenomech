@@ -1,6 +1,6 @@
 ﻿using Anvil.Services;
-using XM.API.Constants;
 using XM.Core.EventManagement;
+using XM.Shared.API.Constants;
 
 namespace XM.UI
 {

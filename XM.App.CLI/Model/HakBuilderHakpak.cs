@@ -1,4 +1,4 @@
-﻿namespace XM.CLI.Model
+﻿namespace XM.App.CLI.Model
 {
     public class HakBuilderHakpak
     {

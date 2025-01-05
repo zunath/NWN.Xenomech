@@ -1,6 +1,7 @@
 ﻿using System;
+using XM.UI;
 
-namespace XM.UI.TestUI
+namespace XM.Progression.UI
 {
     //[ServiceBinding(typeof(IViewModel))]
     internal class TestViewModel : ViewModel

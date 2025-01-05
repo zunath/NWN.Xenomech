@@ -1,10 +1,10 @@
 ﻿using Anvil.Services;
 using NLog;
 using System.Collections.Generic;
-using XM.API.NWNX.UtilPlugin;
 using XM.Core.Data;
 using XM.Core.Entity;
 using XM.Core.EventManagement;
+using XM.Shared.API.NWNX.UtilPlugin;
 
 namespace XM.Inventory
 {

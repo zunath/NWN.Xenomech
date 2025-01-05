@@ -1,6 +1,7 @@
-﻿using XM.UI.Builder;
+﻿using XM.UI;
+using XM.UI.Builder;
 
-namespace XM.UI.TestUI
+namespace XM.Progression.UI
 {
     //[ServiceBinding(typeof(IView))]
     internal class TestView : IView
@@ -81,7 +82,7 @@ namespace XM.UI.TestUI
                                         });
                                     });
 
-                                    
+
                                 }, model => model.ButtonNames);
 
                             });

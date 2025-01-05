@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace XM.CLI
+namespace XM.App.CLI
 {
     public class ModulePacker
     {

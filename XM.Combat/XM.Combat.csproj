@@ -68,11 +68,11 @@
 </ItemGroup>
 
 <ItemGroup>
-  <ProjectReference Include="..\XM.API\XM.API.csproj" />
   <ProjectReference Include="..\XM.Area\XM.Area.csproj" />
-  <ProjectReference Include="..\XM.Core\XM.Core.csproj" />
   <ProjectReference Include="..\XM.Localization\XM.Localization.csproj" />
   <ProjectReference Include="..\XM.Progression\XM.Progression.csproj" />
+  <ProjectReference Include="..\XM.Shared.API\XM.Shared.API.csproj" />
+  <ProjectReference Include="..\XM.Shared.Core\XM.Shared.Core.csproj" />
   <ProjectReference Include="..\XM.UI\XM.UI.csproj" />
 </ItemGroup>
 

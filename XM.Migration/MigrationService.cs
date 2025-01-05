@@ -5,10 +5,10 @@ using System.Diagnostics;
 using System.Linq;
 using XM.Migration.Entity;
 using NLog;
-using XM.API.NWNX.AdminPlugin;
 using XM.Core.EventManagement;
 using XM.Core;
 using XM.Core.Data;
+using XM.Shared.API.NWNX.AdminPlugin;
 
 namespace XM.Migration
 {

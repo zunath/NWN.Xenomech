@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
 using NLog;
-using XM.API;
-using XM.API.Constants;
+using XM.Shared.API;
+using XM.Shared.API.Constants;
 
 namespace XM.Dialog.Snippet.SnippetDefinition
 {

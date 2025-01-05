@@ -3,8 +3,8 @@ using NLog;
 using System;
 using System.Collections.Generic;
 using XM.Core;
-using XM.API.Constants;
 using XM.Core.EventManagement;
+using XM.Shared.API.Constants;
 
 namespace XM.Inventory.Loot
 {

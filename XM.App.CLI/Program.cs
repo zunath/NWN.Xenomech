@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.CommandLineUtils;
 
-namespace XM.CLI
+namespace XM.App.CLI
 {
     internal class Program
     {
