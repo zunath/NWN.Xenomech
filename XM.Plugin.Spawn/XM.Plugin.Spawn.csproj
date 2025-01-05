@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <LangVersion>default</LangVersion>
@@ -14,7 +14,7 @@
     <NoWarn>1591</NoWarn>
     <Nullable>disable</Nullable>
 
-    <RootNamespace>XM.Area</RootNamespace>
+    <RootNamespace>XM.Spawn</RootNamespace>
   </PropertyGroup>
 
 <!--Uncomment and fill to build a NuGet package for your plugin.-->
@@ -68,11 +68,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\XM.Shared.AI\XM.Shared.AI.csproj" />
     <ProjectReference Include="..\XM.Shared.API\XM.Shared.API.csproj" />
     <ProjectReference Include="..\XM.Shared.Core\XM.Shared.Core.csproj" />
   </ItemGroup>
 
 <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	<Exec Command="del /Q /F &quot;$(SolutionDir)server\server\anvil\Plugins\XM.Area\*.*&quot;&#xD;&#xA;xcopy &quot;$(OutDir)*.*&quot; &quot;$(SolutionDir)server\anvil\Plugins\XM.Area\&quot; /E /Y" />
+	<Exec Command="del /Q /F &quot;$(SolutionDir)server\server\anvil\Plugins\XM.Spawn\*.*&quot;&#xD;&#xA;xcopy &quot;$(OutDir)*.*&quot; &quot;$(SolutionDir)server\anvil\Plugins\XM.Spawn\&quot; /E /Y" />
 </Target>
 </Project>

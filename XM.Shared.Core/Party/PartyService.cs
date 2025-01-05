@@ -5,7 +5,7 @@ using Anvil.Services;
 using NWN.Core.NWNX;
 using XM.Shared.Core.EventManagement;
 
-namespace XM.Party
+namespace XM.Shared.Core.Party
 {
     [ServiceBinding(typeof(PartyService))]
     internal class PartyService
