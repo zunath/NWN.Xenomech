@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System;
 using XM.Combat.Recast;
-using XM.Data;
+using XM.Data.Shared;
 
 namespace XM.Combat.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
-    internal class PlayerCombat: EntityBase
+    public class PlayerCombat: EntityBase
     {
         public PlayerCombat()
         {

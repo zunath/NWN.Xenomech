@@ -1,5 +1,5 @@
 ﻿using Anvil.Services;
-using XM.Data;
+using XM.Data.Shared;
 
 namespace XM.Authorization.Entity
 {

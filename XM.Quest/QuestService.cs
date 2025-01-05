@@ -3,7 +3,6 @@ using NLog;
 using System.Collections.Generic;
 using XM.Quest.Objective;
 using XM.API.NWNX.PlayerPlugin;
-using XM.Data;
 using XM.Quest.Entity;
 using JournalEntry = XM.API.NWNX.PlayerPlugin.JournalEntry;
 using System.Linq;

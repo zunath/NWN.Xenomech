@@ -1,5 +1,4 @@
-﻿using Anvil.Services;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System;
 using System.Linq;
@@ -7,13 +6,12 @@ using XM.Combat.Entity;
 using XM.Core;
 using XM.Core.EventManagement;
 using XM.Core.Extension;
-using XM.Data;
 using XM.Localization;
 using XM.Progression.Stat;
 
 namespace XM.Combat.Recast
 {
-    [ServiceBinding(typeof(RecastService))]
+    //[ServiceBinding(typeof(RecastService))]
     internal class RecastService
     {
         private static readonly Dictionary<RecastGroup, LocaleString> _recastDescriptions = new();

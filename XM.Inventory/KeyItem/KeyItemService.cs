@@ -5,7 +5,6 @@ using System.Linq;
 using XM.Core;
 using XM.Core.EventManagement;
 using XM.Core.Extension;
-using XM.Data;
 using XM.Inventory.Entity;
 using XM.Localization;
 

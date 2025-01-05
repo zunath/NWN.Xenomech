@@ -1,9 +1,8 @@
 ﻿using System;
-using Anvil.Services;
 
 namespace XM.UI.TestUI
 {
-    [ServiceBinding(typeof(IViewModel))]
+    //[ServiceBinding(typeof(IViewModel))]
     internal class TestViewModel : ViewModel
     {
         private int _counter;

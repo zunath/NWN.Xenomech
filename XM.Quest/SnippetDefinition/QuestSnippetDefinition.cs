@@ -2,7 +2,6 @@
 using Anvil.Services;
 using NLog;
 using XM.Core;
-using XM.Data;
 using XM.Dialog.Snippet;
 using XM.Quest.Entity;
 

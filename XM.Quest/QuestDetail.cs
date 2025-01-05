@@ -4,7 +4,6 @@ using System.Linq;
 using Anvil.Services;
 using XM.API.NWNX.PlayerPlugin;
 using XM.Core;
-using XM.Data;
 using XM.Quest.Conversation;
 using XM.Quest.Entity;
 using XM.Quest.Event;

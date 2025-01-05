@@ -8,6 +8,7 @@ namespace XM.Configuration
     {
         public string SuperAdminCDKey { get; }
         public string RedisIPAddress { get; }
+        public string DatabaseSocketPath { get; }
         public bool IsGameServerContext { get; }
         public ServerEnvironmentType ServerEnvironment { get; }
 
@@ -15,6 +16,7 @@ namespace XM.Configuration
         {
             SuperAdminCDKey = Environment.GetEnvironmentVariable("XM_SUPER_ADMIN_CD_KEY");
             RedisIPAddress = Environment.GetEnvironmentVariable("NWNX_REDIS_HOST");
+            DatabaseSocketPath = Environment.GetEnvironmentVariable("XM_DATABASE_SOCKET_PATH");
             IsGameServerContext = Convert.ToBoolean(Environment.GetEnvironmentVariable("XM_GAME_SERVER_CONTEXT"));
 
             var environment = Environment.GetEnvironmentVariable("XM_ENVIRONMENT");

@@ -5,7 +5,6 @@ using XM.Area;
 using XM.Combat.Entity;
 using XM.Core;
 using XM.Core.EventManagement;
-using XM.Data;
 using XM.Localization;
 
 namespace XM.Combat

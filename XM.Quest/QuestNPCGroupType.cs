@@ -2,7 +2,7 @@
 
 namespace XM.Quest
 {
-    internal enum QuestNPCGroupType
+    public enum QuestNPCGroupType
     {
         [QuestNPCGroup(LocaleString.Invalid)]
         Invalid = 0,

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace XM.Data
+namespace XM.Data.Shared
 {
     public class IndexedAttribute: Attribute
     {

@@ -8,7 +8,6 @@ using XM.API.NWNX.ObjectPlugin;
 using XM.Core;
 using XM.Core.Entity;
 using XM.Core.EventManagement;
-using XM.Data;
 using Location = XM.API.BaseTypes.Location;
 
 namespace XM.Area

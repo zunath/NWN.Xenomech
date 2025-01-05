@@ -2,7 +2,7 @@
 using NReJSON;
 using StackExchange.Redis;
 
-namespace XM.Data
+namespace XM.App.Database
 {
     internal class XMJsonSerializer : ISerializerProxy
     {

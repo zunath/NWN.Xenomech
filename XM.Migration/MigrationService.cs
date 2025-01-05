@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using XM.Data;
 using XM.Migration.Entity;
 using NLog;
 using XM.API.NWNX.AdminPlugin;

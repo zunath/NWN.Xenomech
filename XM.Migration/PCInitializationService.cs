@@ -3,7 +3,6 @@ using XM.API.Constants;
 using XM.API.NWNX.CreaturePlugin;
 using XM.Core;
 using XM.Core.EventManagement;
-using XM.Data;
 using XM.Migration.Entity;
 
 namespace XM.Migration

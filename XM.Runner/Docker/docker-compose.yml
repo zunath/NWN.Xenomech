@@ -18,9 +18,22 @@ services:
             - "8081:8081"
         depends_on:
             - redis
-
+            
+    db:
+        hostname: db
+        privileged: true
+        image: xmappdatabase:latest
+        user: "0:0"
+        restart: unless-stopped
+        depends_on:
+            - redis
+        volumes:
+            - socket:/tmp/xm-sockets
+                
     anvil:
         container_name: anvil
+        privileged: true
+        user: "0:0"
         hostname: anvil
         stop_signal: SIGINT
         image: zunath/anvil-debugger:8193.36.2-dev.19.r9bb01d93
@@ -29,13 +42,14 @@ services:
         stdin_open: true
         tty: true
         volumes:
+            - socket:/tmp/xm-sockets
             - ${PWD-.}/logs:/nwn/run/logs.0
             - ${PWD-.}/:/nwn/home
             - ${PWD-.}/logs:/nwn/data/bin/linux-x86/logs.0
         ports:
             - '5121:5121/udp'
         depends_on:
-            - redis
+            - db
                 
     influxdb:
         hostname: influxdb
@@ -73,3 +87,5 @@ services:
 volumes:
     influxdb:
     grafana:
+    socket:
+        driver: local

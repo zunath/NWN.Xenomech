@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using Anvil.API;
 using Anvil.Services;
 using Newtonsoft.Json;
+using XM.Core;
 using XM.Core.EventManagement;
 
 namespace XM.UI
@@ -87,7 +88,7 @@ namespace XM.UI
                 var jsonString = JsonDump(bind);
                 var type = GetType().GetProperty(propertyName)!.PropertyType;
 
-                var value = JsonConvert.DeserializeObject(jsonString, type); // todo this will cause problems with hot reloading.
+                var value = XMJsonUtility.DeserializeObject(jsonString, type);
                 _backingData[propertyName] = value;
             }
         }
@@ -99,7 +100,7 @@ namespace XM.UI
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
             var value = _backingData[propertyName!];
-            var json = JsonUtility.ToJson(value);
+            var json = XMJsonUtility.Serialize(value);
             NuiSetBind(Player, WindowToken, propertyName, JsonParse(json));
 
             if (_boundLists.ContainsKey(propertyName))
@@ -197,6 +198,7 @@ namespace XM.UI
 
         private void OnListChanged(object sender, ListChangedEventArgs e)
         {
+            Console.WriteLine($"test");
             var list = (IGuiBindingList)sender;
 
             switch (e.ListChangedType)
@@ -215,6 +217,11 @@ namespace XM.UI
             where TData: class
         {
             return InitialData as TData;
+        }
+
+        public void NotifyChange<T>(uint player)
+        {
+
         }
 
         public abstract void OnOpen();

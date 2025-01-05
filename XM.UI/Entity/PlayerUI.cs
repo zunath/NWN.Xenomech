@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Anvil.API;
 using XM.Data;
+using XM.Data.Shared;
 
 namespace XM.UI.Entity
 {

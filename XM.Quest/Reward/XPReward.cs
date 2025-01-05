@@ -1,6 +1,5 @@
 ﻿using Anvil.Services;
 using XM.Core;
-using XM.Data;
 
 namespace XM.Quest.Reward
 {

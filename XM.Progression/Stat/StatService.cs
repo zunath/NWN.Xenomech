@@ -1,14 +1,12 @@
 ﻿using System;
-using Anvil.Services;
 using XM.Core;
 using XM.Core.EventManagement;
-using XM.Data;
 using XM.Progression.Stat.Entity;
 using XM.Progression.Stat.Event;
 
 namespace XM.Progression.Stat
 {
-    [ServiceBinding(typeof(StatService))]
+    //[ServiceBinding(typeof(StatService))]
     public class StatService
     {
         private readonly DBService _db;

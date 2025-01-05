@@ -158,31 +158,31 @@ namespace XM.UI
 
         private void CacheViews()
         {
-            foreach (var view in Views)
-            {
-                var type = view.GetType();
-                var builtWindow = view.Build();
-                var window = builtWindow.Window;
-                var elementEvents = builtWindow.EventCollection;
-                var json = JsonUtility.ToJson(window);
+            //foreach (var view in Views)
+            //{
+            //    var type = view.GetType();
+            //    var builtWindow = view.Build();
+            //    var window = builtWindow.Window;
+            //    var elementEvents = builtWindow.EventCollection;
+            //    var json = XMJsonUtility.ToJson(window);
 
-                _builtWindowsByType[type] = builtWindow;
-                _serializedWindowsByType[type] = JsonParse(json);
-                _windowsByType[type] = window;
-                _viewsByType[type] = view;
+            //    _builtWindowsByType[type] = builtWindow;
+            //    _serializedWindowsByType[type] = JsonParse(json);
+            //    _windowsByType[type] = window;
+            //    _viewsByType[type] = view;
 
-                foreach (var (elementId, eventCollection) in elementEvents)
-                {
-                    if (!_registeredEvents.ContainsKey(elementId))
-                        _registeredEvents[elementId] = new Dictionary<NuiEventType, string>();
+            //    foreach (var (elementId, eventCollection) in elementEvents)
+            //    {
+            //        if (!_registeredEvents.ContainsKey(elementId))
+            //            _registeredEvents[elementId] = new Dictionary<NuiEventType, string>();
 
-                    foreach (var (eventType, methodName) in eventCollection)
-                    {
-                        _registeredEvents[elementId][eventType] = methodName;
-                    }
+            //        foreach (var (eventType, methodName) in eventCollection)
+            //        {
+            //            _registeredEvents[elementId][eventType] = methodName;
+            //        }
 
-                }
-            }
+            //    }
+            //}
         }
 
         public void ShowWindow<TView>(

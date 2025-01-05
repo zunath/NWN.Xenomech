@@ -1,10 +1,10 @@
 ﻿using Anvil.Services;
-using XM.Data;
+using XM.Data.Shared;
 
 namespace XM.Migration.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
-    internal class PlayerMigrationStatus: EntityBase
+    public class PlayerMigrationStatus: EntityBase
     {
         public PlayerMigrationStatus()
         {

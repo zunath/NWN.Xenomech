@@ -1,7 +1,6 @@
 ﻿using Anvil.Services;
 using XM.API.Constants;
 using XM.Core.EventManagement;
-using XM.UI;
 using GuiEventType = XM.API.Constants.GuiEventType;
 
 namespace XM.Quest
@@ -9,12 +8,10 @@ namespace XM.Quest
     [ServiceBinding(typeof(JournalWindowReplacementService))]
     internal class JournalWindowReplacementService
     {
-        private readonly GuiService _gui;
         private readonly XMEventService _event;
 
-        public JournalWindowReplacementService(GuiService gui, XMEventService @event)
+        public JournalWindowReplacementService(XMEventService @event)
         {
-            _gui = gui;
             _event = @event;
 
             SubscribeEvents();

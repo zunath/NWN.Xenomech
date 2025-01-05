@@ -1,5 +1,4 @@
 ﻿using Anvil.API;
-using XM.API.BaseTypes;
 
 namespace XM.API.NUI
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace XM.Quest
 {
-    internal class PlayerQuestDetail
+    public class PlayerQuestDetail
     {
         public int CurrentState { get; set; }
         public int TimesCompleted { get; set; }

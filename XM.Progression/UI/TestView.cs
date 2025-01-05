@@ -1,9 +1,8 @@
-﻿using Anvil.Services;
-using XM.UI.Builder;
+﻿using XM.UI.Builder;
 
 namespace XM.UI.TestUI
 {
-    [ServiceBinding(typeof(IView))]
+    //[ServiceBinding(typeof(IView))]
     internal class TestView : IView
     {
         private readonly NuiBuilder<TestViewModel> _builder = new();

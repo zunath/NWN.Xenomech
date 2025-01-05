@@ -3,8 +3,9 @@ using Anvil.Services;
 using NLog;
 using XM.Authorization.Entity;
 using XM.Configuration;
+using XM.Core;
 using XM.Core.EventManagement;
-using XM.Data;
+using XM.Data.Shared;
 using XM.Localization;
 
 namespace XM.Authorization
@@ -94,9 +95,9 @@ namespace XM.Authorization
                     return AuthorizationLevel.Admin;
             }
 
-            var query = new DBQuery<AuthorizedDM>()
+            var query = new DBQuery<IDBEntity>()
                 .AddFieldSearch(nameof(AuthorizedDM.CDKey), cdKey, false);
-            var existing = _db.Search(query).FirstOrDefault();
+            var existing = _db.Search<AuthorizedDM>(query).FirstOrDefault();
             if (existing == null)
                 return AuthorizationLevel.Player;
 
