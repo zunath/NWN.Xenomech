@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using NRediSearch;
 using NReJSON;
 using StackExchange.Redis;
-using XM.Data.Shared;
+using XM.Core.Data;
 
 namespace XM.App.Database
 {
@@ -101,14 +101,14 @@ namespace XM.App.Database
 
                     var json = Encoding.UTF8.GetString(buffer);
 
-                    Console.WriteLine($"json = {json}");
+                    //Console.WriteLine($"json = {json}");
 
                     var command = JsonConvert.DeserializeObject<DBServerCommand>(json);
                     var response = HandleCommand(command);
 
                     var responseJson = JsonConvert.SerializeObject(response);
 
-                    Console.WriteLine($"responseJson = {responseJson}");
+                    //Console.WriteLine($"responseJson = {responseJson}");
 
                     var responseBytes = Encoding.UTF8.GetBytes(responseJson);
                     var responseLengthBytes = BitConverter.GetBytes(responseBytes.Length);
@@ -141,8 +141,6 @@ namespace XM.App.Database
 
         private DBServerCommand HandleCommand(DBServerCommand command)
         {
-            Console.WriteLine($"Command received: {JsonConvert.SerializeObject(command)}");
-
             try
             {
                 switch (command.CommandType)
@@ -303,18 +301,20 @@ namespace XM.App.Database
             return data;
         }
 
-        private void Set(string key, string entity, string type, Dictionary<string, RedisValue> indexData)
+        private void Set(string key, string entity, string type, Dictionary<string, object> indexData)
         {
             var data = JsonConvert.SerializeObject(entity);
             var indexKey = $"Index:{type}:{key}";
 
-            //var redisData = new Dictionary<string, RedisValue>();
-            //foreach (var index in indexData)
-            //{
-            //    redisData[index.Key] = index.Value;
-            //}
+            var redisData = new Dictionary<string, RedisValue>();
+            foreach (var index in indexData)
+            {
+                redisData[index.Key] = RedisValue.Unbox(index.Value);
 
-            _searchClientsByType[type].ReplaceDocument(indexKey, indexData);
+                
+            }
+
+            _searchClientsByType[type].ReplaceDocument(indexKey, redisData);
             _multiplexer.GetDatabase().JsonSet($"{type}:{key}", data);
         }
     }

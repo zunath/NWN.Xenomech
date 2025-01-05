@@ -1,4 +1,5 @@
 ﻿using XM.Core;
+using XM.Core.Data;
 using XM.Quest.Entity;
 
 namespace XM.Quest.Prerequisite

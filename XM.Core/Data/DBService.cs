@@ -7,9 +7,8 @@ using Anvil.Services;
 using NLog;
 using StackExchange.Redis;
 using XM.Configuration;
-using XM.Data.Shared;
 
-namespace XM.Core
+namespace XM.Core.Data
 {
     [ServiceBinding(typeof(DBService))]
     [ServiceBinding(typeof(IInitializable))]
@@ -59,7 +58,7 @@ namespace XM.Core
                     {
                         indexedProperty.Type = IndexedPropertyType.Numeric;
                     }
-                    else if(prop.PropertyType == typeof(string))
+                    else if (prop.PropertyType == typeof(string))
                     {
                         indexedProperty.Type = IndexedPropertyType.Text;
                     }
@@ -94,7 +93,7 @@ namespace XM.Core
                     IndexedProperties = _indexedPropertiesByType[type]
                 };
 
-                Console.WriteLine($"Sending command: {XMJsonUtility.Serialize(command)}");
+                //Console.WriteLine($"Sending command: {XMJsonUtility.Serialize(command)}");
 
                 var response = SendCommand(command);
                 if (response.CommandType != DBServerCommandType.Ok)
@@ -149,7 +148,7 @@ namespace XM.Core
             where T : IDBEntity
         {
             var type = typeof(T);
-            var indexData = new Dictionary<string, RedisValue>();
+            var indexData = new Dictionary<string, object>();
 
             foreach (var prop in _indexedPropertiesByType[type])
             {
@@ -167,7 +166,7 @@ namespace XM.Core
                         _ => value
                     };
 
-                    indexData[prop.Name] = (dynamic)value;
+                    indexData[prop.Name] =  (dynamic)value;
                 }
             }
 
@@ -247,16 +246,16 @@ namespace XM.Core
                 while (totalReceived < responseLength)
                 {
                     totalReceived += client.Receive(
-                        responseBuffer, 
-                        totalReceived, 
-                        responseLength - totalReceived, 
+                        responseBuffer,
+                        totalReceived,
+                        responseLength - totalReceived,
                         SocketFlags.None);
                 }
 
                 // Deserialize and return the response
                 var responseJson = Encoding.UTF8.GetString(responseBuffer);
 
-                Console.WriteLine($"SendCommand json response: {responseJson}");
+                //Console.WriteLine($"SendCommand json response: {responseJson}");
                 return XMJsonUtility.Deserialize<DBServerCommand>(responseJson);
             }
         }

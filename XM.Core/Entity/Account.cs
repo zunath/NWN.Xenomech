@@ -1,5 +1,5 @@
 ﻿using Anvil.Services;
-using XM.Data.Shared;
+using XM.Core.Data;
 
 namespace XM.Core.Entity
 {

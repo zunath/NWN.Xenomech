@@ -1,5 +1,6 @@
 ﻿using System;
 using XM.Core;
+using XM.Core.Data;
 using XM.Core.EventManagement;
 using XM.Progression.Stat.Entity;
 using XM.Progression.Stat.Event;

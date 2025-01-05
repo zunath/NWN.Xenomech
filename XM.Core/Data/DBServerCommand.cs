@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using StackExchange.Redis;
 
-namespace XM.Data.Shared
+namespace XM.Core.Data
 {
     public class DBServerCommand
     {
@@ -12,7 +12,7 @@ namespace XM.Data.Shared
         public List<string> EntitiesList { get; set; }
         public string Message { get; set; }
         public List<IndexedProperty> IndexedProperties { get; set; }
-        public Dictionary<string, RedisValue> IndexData { get; set; }
+        public Dictionary<string, object> IndexData { get; set; }
 
         public DBQuery<IDBEntity> Query { get; set; }
 

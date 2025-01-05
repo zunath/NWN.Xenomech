@@ -68,15 +68,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="NRediSearch" Version="2.2.79" />
 		<PackageReference Include="NWN.Anvil" Version="8193.36.2-dev.24.r0627996e" ExcludeAssets="runtime" PrivateAssets="all">
 			<IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="StackExchange.Redis" Version="2.8.24" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\XM.API\XM.API.csproj" />
 		<ProjectReference Include="..\XM.Configuration\XM.Configuration.csproj" />
-		<ProjectReference Include="..\XM.Data.Shared\XM.Data.Shared.csproj" />
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">

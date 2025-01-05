@@ -4,6 +4,7 @@ using XM.API.Constants;
 using XM.Area;
 using XM.Combat.Entity;
 using XM.Core;
+using XM.Core.Data;
 using XM.Core.EventManagement;
 using XM.Localization;
 

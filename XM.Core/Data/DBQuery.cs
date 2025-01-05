@@ -2,7 +2,7 @@
 using System.Text;
 using NRediSearch;
 
-namespace XM.Data.Shared
+namespace XM.Core.Data
 {
     public class DBQuery<T>
         where T : IDBEntity

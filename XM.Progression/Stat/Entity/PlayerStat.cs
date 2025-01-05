@@ -1,5 +1,5 @@
 ﻿using Anvil.Services;
-using XM.Data.Shared;
+using XM.Core.Data;
 using XM.Progression.Job;
 
 namespace XM.Progression.Stat.Entity

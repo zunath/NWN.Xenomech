@@ -1,4 +1,4 @@
-﻿namespace XM.Data.Shared
+﻿namespace XM.Core.Data
 {
     public enum DBServerCommandType
     {

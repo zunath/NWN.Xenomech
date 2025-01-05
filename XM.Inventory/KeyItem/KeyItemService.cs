@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using XM.Core;
+using XM.Core.Data;
 using XM.Core.EventManagement;
 using XM.Core.Extension;
 using XM.Inventory.Entity;

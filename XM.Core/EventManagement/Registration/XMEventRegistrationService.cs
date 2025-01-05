@@ -2,6 +2,7 @@
 using Anvil.Services;
 using NLog;
 using XM.API.NWNX.UtilPlugin;
+using XM.Core.Data;
 using XM.Core.Entity;
 
 namespace XM.Core.EventManagement.Registration

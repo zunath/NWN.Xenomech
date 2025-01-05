@@ -1,7 +1,7 @@
 ﻿using Anvil.Services;
 using System.Collections.Generic;
 using System;
-using XM.Data.Shared;
+using XM.Core.Data;
 using XM.Inventory.KeyItem;
 
 namespace XM.Inventory.Entity

@@ -8,6 +8,7 @@ using XM.Core.EventManagement;
 using XM.Core.Extension;
 using XM.Localization;
 using XM.Progression.Stat;
+using XM.Core.Data;
 
 namespace XM.Combat.Recast
 {

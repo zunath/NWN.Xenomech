@@ -1,8 +1,9 @@
-﻿ using Anvil.Services;
- using XM.Core;
- using XM.Quest.Entity;
+﻿using Anvil.Services;
+using XM.Core;
+using XM.Core.Data;
+using XM.Quest.Entity;
 
- namespace XM.Quest.Objective
+namespace XM.Quest.Objective
 {
     [ServiceBinding(typeof(KillTargetObjective))]
     internal class KillTargetObjective : IQuestObjective

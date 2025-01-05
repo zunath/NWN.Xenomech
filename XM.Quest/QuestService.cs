@@ -16,6 +16,7 @@ using XM.Core.EventManagement;
 using XM.Core.Extension;
 using XM.Quest.Event;
 using XM.Core;
+using XM.Core.Data;
 
 namespace XM.Quest
 {

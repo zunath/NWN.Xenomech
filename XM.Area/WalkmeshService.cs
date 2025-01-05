@@ -6,6 +6,7 @@ using NLog;
 using XM.API.Constants;
 using XM.API.NWNX.ObjectPlugin;
 using XM.Core;
+using XM.Core.Data;
 using XM.Core.Entity;
 using XM.Core.EventManagement;
 using Location = XM.API.BaseTypes.Location;

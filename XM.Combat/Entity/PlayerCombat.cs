@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System;
 using XM.Combat.Recast;
-using XM.Data.Shared;
+using XM.Core.Data;
 
 namespace XM.Combat.Entity
 {

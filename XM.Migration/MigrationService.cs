@@ -8,6 +8,7 @@ using NLog;
 using XM.API.NWNX.AdminPlugin;
 using XM.Core.EventManagement;
 using XM.Core;
+using XM.Core.Data;
 
 namespace XM.Migration
 {
