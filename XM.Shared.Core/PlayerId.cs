@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace XM.Core
+namespace XM.Shared.Core
 {
     public static class PlayerId
     {

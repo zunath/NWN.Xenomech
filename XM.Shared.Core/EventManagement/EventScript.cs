@@ -1,4 +1,4 @@
-﻿namespace XM.Core.EventManagement
+﻿namespace XM.Shared.Core.EventManagement
 {
     public class EventScript
     {

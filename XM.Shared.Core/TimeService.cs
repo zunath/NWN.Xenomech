@@ -1,7 +1,7 @@
-﻿using Anvil.Services;
-using System;
+﻿using System;
+using Anvil.Services;
 
-namespace XM.Core
+namespace XM.Shared.Core
 {
     [ServiceBinding(typeof(TimeService))]
     public class TimeService

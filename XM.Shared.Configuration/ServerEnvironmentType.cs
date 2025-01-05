@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace XM.Configuration
+namespace XM.Shared.Configuration
 {
     [Flags]
     public enum ServerEnvironmentType

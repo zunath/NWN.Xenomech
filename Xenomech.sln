@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.AI", "XM.AI\XM.AI.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Area", "XM.Area\XM.Area.csproj", "{44E26FA4-C078-48E6-B67F-7D420B4C3AC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Configuration", "XM.Configuration\XM.Configuration.csproj", "{C88F32C7-5405-4A71-BEBF-B6FAFA52D989}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Shared.Configuration", "XM.Shared.Configuration\XM.Shared.Configuration.csproj", "{C88F32C7-5405-4A71-BEBF-B6FAFA52D989}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Combat", "XM.Combat\XM.Combat.csproj", "{0FEEFDA6-2CA9-4722-A9D2-5C229C85C3E3}"
 EndProject

@@ -1,9 +1,9 @@
-﻿using Anvil.Services;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Numerics;
-using XM.Core.Data;
+using Anvil.Services;
+using XM.Shared.Core.Data;
 
-namespace XM.Core.Entity
+namespace XM.Shared.Core.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
     public class ModuleCache: EntityBase

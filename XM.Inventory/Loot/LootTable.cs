@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using XM.Core;
+using XM.Shared.Core;
 
 namespace XM.Inventory.Loot
 {

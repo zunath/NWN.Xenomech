@@ -4,7 +4,7 @@ using Anvil.API;
 using Anvil.Services;
 using Action = System.Action;
 
-namespace XM.Core.EventManagement
+namespace XM.Shared.Core.EventManagement
 {
     [ServiceBinding(typeof(XMEventService))]
     public class XMEventService

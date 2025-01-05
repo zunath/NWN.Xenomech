@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System;
 using System.Collections.Generic;
-using XM.Core;
+using XM.Shared.Core;
 using XM.UI.Builder.Layout;
 
 namespace XM.UI.Builder

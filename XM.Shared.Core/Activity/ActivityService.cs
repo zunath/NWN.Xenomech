@@ -1,7 +1,7 @@
 ﻿using Anvil.Services;
-using XM.Core.EventManagement;
+using XM.Shared.Core.EventManagement;
 
-namespace XM.Core.Activity
+namespace XM.Shared.Core.Activity
 {
     [ServiceBinding(typeof(ActivityService))]
     public class ActivityService

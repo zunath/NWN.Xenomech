@@ -5,15 +5,15 @@ using System.Reflection;
 using System.Text;
 using Anvil.Services;
 using NLog;
-using StackExchange.Redis;
-using XM.Configuration;
+using XM.Shared.Configuration;
 
-namespace XM.Core.Data
+namespace XM.Shared.Core.Data
 {
     [ServiceBinding(typeof(DBService))]
     [ServiceBinding(typeof(IInitializable))]
     public class DBService :
-        IInitializable
+        IInitializable,
+        IDisposable
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly string _socketPath;
@@ -260,5 +260,9 @@ namespace XM.Core.Data
             }
         }
 
+        public void Dispose()
+        {
+            Console.WriteLine($"disposing database");
+        }
     }
 }

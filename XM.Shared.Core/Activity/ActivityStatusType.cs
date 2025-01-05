@@ -1,4 +1,4 @@
-﻿namespace XM.Core.Activity
+﻿namespace XM.Shared.Core.Activity
 {
     public enum ActivityStatusType
     {

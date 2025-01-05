@@ -14,7 +14,7 @@
 		<NoWarn>1591</NoWarn>
 		<Nullable>disable</Nullable>
 
-		<RootNamespace>XM.Core</RootNamespace>
+		<RootNamespace>XM.Shared.Core</RootNamespace>
 	</PropertyGroup>
 
 	<!--Uncomment and fill to build a NuGet package for your plugin.-->
@@ -76,8 +76,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\XM.Configuration\XM.Configuration.csproj" />
 		<ProjectReference Include="..\XM.Shared.API\XM.Shared.API.csproj" />
+		<ProjectReference Include="..\XM.Shared.Configuration\XM.Shared.Configuration.csproj" />
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">

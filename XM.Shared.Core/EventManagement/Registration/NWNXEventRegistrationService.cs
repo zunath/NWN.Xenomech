@@ -2,7 +2,7 @@
 using NLog;
 using NWN.Core.NWNX;
 
-namespace XM.Core.EventManagement.Registration
+namespace XM.Shared.Core.EventManagement.Registration
 {
     [ServiceBinding(typeof(NWNXEventRegistrationService))]
     internal class NWNXEventRegistrationService

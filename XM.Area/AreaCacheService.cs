@@ -1,7 +1,7 @@
 ﻿using Anvil.Services;
 using NLog;
 using System.Collections.Generic;
-using XM.Core.EventManagement;
+using XM.Shared.Core.EventManagement;
 
 namespace XM.Area
 {

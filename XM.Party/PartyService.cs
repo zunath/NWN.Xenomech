@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Anvil.Services;
 using NWN.Core.NWNX;
-using XM.Core.EventManagement;
+using XM.Shared.Core.EventManagement;
 
 namespace XM.Party
 {

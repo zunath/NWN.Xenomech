@@ -1,11 +1,11 @@
 ﻿using System;
 using Anvil.Services;
 using NLog;
-using XM.Core.Data;
-using XM.Core.Entity;
 using XM.Shared.API.NWNX.UtilPlugin;
+using XM.Shared.Core.Data;
+using XM.Shared.Core.Entity;
 
-namespace XM.Core.EventManagement.Registration
+namespace XM.Shared.Core.EventManagement.Registration
 {
     [ServiceBinding(typeof(XMEventRegistrationService))]
     internal class XMEventRegistrationService

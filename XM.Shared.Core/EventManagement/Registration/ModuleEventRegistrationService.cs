@@ -2,7 +2,7 @@
 using NLog;
 using XM.Shared.API.Constants;
 
-namespace XM.Core.EventManagement.Registration
+namespace XM.Shared.Core.EventManagement.Registration
 {
     [ServiceBinding(typeof(ModuleEventRegistrationService))]
     internal class ModuleEventRegistrationService

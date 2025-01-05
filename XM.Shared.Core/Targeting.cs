@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Anvil.Services;
-using XM.Core.EventManagement;
 using XM.Shared.API;
 using XM.Shared.API.Constants;
+using XM.Shared.Core.EventManagement;
 
-namespace XM.Core
+namespace XM.Shared.Core
 {
     [ServiceBinding(typeof(Targeting))]
     public class Targeting

@@ -2,7 +2,7 @@
 using NLog;
 using EventScriptType = XM.Shared.API.Constants.EventScriptType;
 
-namespace XM.Core.EventManagement.Registration
+namespace XM.Shared.Core.EventManagement.Registration
 {
     [ServiceBinding(typeof(PlayerEventRegistrationService))]
     internal class PlayerEventRegistrationService

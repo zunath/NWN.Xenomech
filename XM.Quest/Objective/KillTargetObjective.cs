@@ -1,7 +1,7 @@
 ﻿using Anvil.Services;
-using XM.Core;
-using XM.Core.Data;
 using XM.Quest.Entity;
+using XM.Shared.Core;
+using XM.Shared.Core.Data;
 
 namespace XM.Quest.Objective
 {

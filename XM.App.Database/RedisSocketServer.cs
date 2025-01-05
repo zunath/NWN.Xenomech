@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using NRediSearch;
 using NReJSON;
 using StackExchange.Redis;
-using XM.Core.Data;
+using XM.Shared.Core.Data;
 
 namespace XM.App.Database
 {

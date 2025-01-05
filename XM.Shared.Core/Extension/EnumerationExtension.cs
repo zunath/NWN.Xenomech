@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 
-namespace XM.Core.Extension
+namespace XM.Shared.Core.Extension
 {
     public static class EnumerationExtension
     {

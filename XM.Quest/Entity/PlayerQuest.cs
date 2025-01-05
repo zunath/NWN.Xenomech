@@ -1,6 +1,6 @@
 ﻿using Anvil.Services;
 using System.Collections.Generic;
-using XM.Core.Data;
+using XM.Shared.Core.Data;
 
 namespace XM.Quest.Entity
 {

@@ -1,4 +1,4 @@
-﻿namespace XM.Core.Data
+﻿namespace XM.Shared.Core.Data
 {
     public enum IndexedPropertyType
     {

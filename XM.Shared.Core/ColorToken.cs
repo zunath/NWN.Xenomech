@@ -1,7 +1,6 @@
 ﻿using System;
-using XM.Shared.API;
 
-namespace XM.Core
+namespace XM.Shared.Core
 {
     /// <summary>
     ///      *

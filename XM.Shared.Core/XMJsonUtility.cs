@@ -1,7 +1,7 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json;
 
-namespace XM.Core
+namespace XM.Shared.Core
 {
     public static class XMJsonUtility
     {
@@ -13,7 +13,9 @@ namespace XM.Core
         /// <returns>The deserialized object.</returns>
         public static T Deserialize<T>(string json)
         {
-            return JsonConvert.DeserializeObject<T>(json);
+            //return JsonConvert.DeserializeObject<T>(json);
+
+            return JsonSerializer.Deserialize<T>(json);
         }
 
         /// <summary>
@@ -24,12 +26,16 @@ namespace XM.Core
         /// <returns>A JSON string representing the value.</returns>
         public static string Serialize<T>(T value)
         {
-            return JsonConvert.SerializeObject(value);
+            //return JsonConvert.SerializeObject(value);
+
+            return JsonSerializer.Serialize(value);
         }
 
         public static object DeserializeObject(string json, Type type)
         {
-            return JsonConvert.DeserializeObject(json, type);
+            //return JsonConvert.DeserializeObject(json, type);
+
+            return JsonSerializer.Deserialize(json, type);
         }
 
     }

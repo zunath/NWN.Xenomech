@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Anvil.Services;
 using NLog;
-using XM.Core;
-using XM.Core.EventManagement;
 using XM.Dialog.Event;
 using XM.Shared.API.Constants;
+using XM.Shared.Core;
+using XM.Shared.Core.EventManagement;
 using EventScriptType = XM.Shared.API.Constants.EventScriptType;
 
 namespace XM.Dialog

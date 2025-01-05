@@ -1,4 +1,4 @@
-﻿namespace XM.Core
+﻿namespace XM.Shared.Core
 {
     public static class XMRandom
     {

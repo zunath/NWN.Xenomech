@@ -1,7 +1,7 @@
 ﻿using Anvil.Services;
 using XM.Shared.API.Constants;
 
-namespace XM.Core.EventManagement.Registration
+namespace XM.Shared.Core.EventManagement.Registration
 {
     [ServiceBinding(typeof(CreatureEventRegistrationService))]
     internal class CreatureEventRegistrationService

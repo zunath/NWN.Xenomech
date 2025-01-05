@@ -1,4 +1,4 @@
-﻿using XM.Core.EventManagement;
+﻿using XM.Shared.Core.EventManagement;
 using XM.UI;
 
 namespace XM.Progression.UI.PlayerStatusUI

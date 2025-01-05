@@ -2,10 +2,10 @@
 using Anvil.Services;
 using NLog;
 using XM.Authorization.Entity;
-using XM.Configuration;
-using XM.Core.Data;
-using XM.Core.EventManagement;
 using XM.Localization;
+using XM.Shared.Configuration;
+using XM.Shared.Core.Data;
+using XM.Shared.Core.EventManagement;
 
 namespace XM.Authorization
 {

@@ -5,18 +5,18 @@ using XM.Quest.Objective;
 using XM.Quest.Entity;
 using JournalEntry = XM.Shared.API.NWNX.PlayerPlugin.JournalEntry;
 using System.Linq;
-using XM.Core.Activity;
 using XM.Inventory;
 using CreatureType = XM.Shared.API.Constants.CreatureType;
 using InventoryDisturbType = XM.Shared.API.Constants.InventoryDisturbType;
 using System;
-using XM.Core.EventManagement;
-using XM.Core.Extension;
 using XM.Quest.Event;
-using XM.Core;
-using XM.Core.Data;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.PlayerPlugin;
+using XM.Shared.Core;
+using XM.Shared.Core.Activity;
+using XM.Shared.Core.Data;
+using XM.Shared.Core.EventManagement;
+using XM.Shared.Core.Extension;
 
 namespace XM.Quest
 {

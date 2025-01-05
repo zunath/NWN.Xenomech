@@ -1,4 +1,4 @@
-﻿using XM.Core.EventManagement;
+﻿using XM.Shared.Core.EventManagement;
 
 namespace XM.Quest.Event
 {

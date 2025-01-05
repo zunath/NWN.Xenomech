@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Anvil.Services;
 using NLog;
-using XM.Core.EventManagement;
 using XM.Dialog.Event;
 using XM.Shared.API.NWNX.UtilPlugin;
+using XM.Shared.Core.EventManagement;
 
 namespace XM.Dialog.Snippet
 {
