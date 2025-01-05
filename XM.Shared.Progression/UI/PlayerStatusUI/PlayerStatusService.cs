@@ -1,9 +1,10 @@
-﻿using XM.Shared.Core.EventManagement;
+﻿using Anvil.Services;
+using XM.Shared.Core.EventManagement;
 using XM.UI;
 
 namespace XM.Progression.UI.PlayerStatusUI
 {
-    //[ServiceBinding(typeof(PlayerStatusService))]
+    [ServiceBinding(typeof(PlayerStatusService))]
     internal class PlayerStatusService
     {
         private readonly GuiService _gui;

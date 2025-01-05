@@ -1,10 +1,11 @@
-﻿using XM.UI;
+﻿using Anvil.Services;
+using XM.UI;
 using XM.UI.Builder;
 using XM.UI.Builder.Layout;
 
 namespace XM.Progression.UI.PlayerStatusUI
 {
-    //[ServiceBinding(typeof(IView))]
+    [ServiceBinding(typeof(IView))]
     internal class PlayerStatusView: IView
     {
         private readonly NuiBuilder<PlayerStatusViewModel> _builder = new();
