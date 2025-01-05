@@ -1,10 +1,21 @@
 ﻿using System;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace XM.Shared.Core.Json
 {
     public static class XMJsonUtility
     {
+        private static readonly JsonSerializerOptions _options;
+
+        static XMJsonUtility()
+        {
+            _options = new JsonSerializerOptions()
+            {
+                NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals
+            };
+        }
+
         /// <summary>
         /// Deserializes a JSON string.
         /// </summary>
@@ -13,7 +24,7 @@ namespace XM.Shared.Core.Json
         /// <returns>The deserialized object.</returns>
         public static T Deserialize<T>(string json)
         {
-            return JsonSerializer.Deserialize<T>(json);
+            return JsonSerializer.Deserialize<T>(json, _options);
         }
 
         /// <summary>
@@ -24,12 +35,12 @@ namespace XM.Shared.Core.Json
         /// <returns>A JSON string representing the value.</returns>
         public static string Serialize<T>(T value)
         {
-            return JsonSerializer.Serialize(value); 
+            return JsonSerializer.Serialize(value, _options); 
         }
 
         public static object DeserializeObject(string json, Type type)
         {
-            return JsonSerializer.Deserialize(json, type);
+            return JsonSerializer.Deserialize(json, type, _options);
         }
 
     }
