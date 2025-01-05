@@ -2,12 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using XM.Core;
-using XM.Core.EventManagement;
-using XM.Core.Extension;
-using XM.Data;
 using XM.Inventory.Entity;
 using XM.Localization;
+using XM.Shared.Core;
+using XM.Shared.Core.Data;
+using XM.Shared.Core.EventManagement;
+using XM.Shared.Core.Extension;
 
 namespace XM.Inventory.KeyItem
 {

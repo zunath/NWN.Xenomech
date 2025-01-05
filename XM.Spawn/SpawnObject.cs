@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using XM.AI;
-using XM.API.Constants;
+using XM.Shared.API.Constants;
 
 namespace XM.Spawn
 {

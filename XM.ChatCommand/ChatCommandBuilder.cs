@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using XM.API.Constants;
 using XM.Authorization;
+using XM.Shared.API.Constants;
 
 namespace XM.ChatCommand
 {

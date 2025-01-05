@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Runner", "XM.Runner\XM.Runner.csproj", "{6235C3D6-967E-4DD1-97D5-D59643B6E8CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.App.Runner", "XM.App.Runner\XM.App.Runner.csproj", "{6235C3D6-967E-4DD1-97D5-D59643B6E8CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.CLI", "XM.CLI\XM.CLI.csproj", "{1CC0F210-5F61-4763-AECA-C5D769A1DD13}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.App.CLI", "XM.App.CLI\XM.App.CLI.csproj", "{1CC0F210-5F61-4763-AECA-C5D769A1DD13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.API", "XM.API\XM.API.csproj", "{DA720873-0E02-4FFE-B0A8-E795F27BA2B4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Shared.API", "XM.Shared.API\XM.Shared.API.csproj", "{DA720873-0E02-4FFE-B0A8-E795F27BA2B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Core", "XM.Core\XM.Core.csproj", "{EFBD34CF-106F-43A6-B395-B017A35BD62E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Data", "XM.Data\XM.Data.csproj", "{65B4C2A8-EFE6-47FF-AD49-7D21BA6A9F5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Shared.Core", "XM.Shared.Core\XM.Shared.Core.csproj", "{EFBD34CF-106F-43A6-B395-B017A35BD62E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Authorization", "XM.Authorization\XM.Authorization.csproj", "{E13C756F-63B8-4476-B65B-03580540B537}"
 EndProject
@@ -29,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.AI", "XM.AI\XM.AI.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Area", "XM.Area\XM.Area.csproj", "{44E26FA4-C078-48E6-B67F-7D420B4C3AC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Configuration", "XM.Configuration\XM.Configuration.csproj", "{C88F32C7-5405-4A71-BEBF-B6FAFA52D989}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Shared.Configuration", "XM.Shared.Configuration\XM.Shared.Configuration.csproj", "{C88F32C7-5405-4A71-BEBF-B6FAFA52D989}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Combat", "XM.Combat\XM.Combat.csproj", "{0FEEFDA6-2CA9-4722-A9D2-5C229C85C3E3}"
 EndProject
@@ -42,6 +40,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Party", "XM.Party\XM.Party.csproj", "{5D242024-E184-4539-8AA0-5F5CE0C9771C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Progression", "XM.Progression\XM.Progression.csproj", "{2CE4FC05-0101-44CD-B3C9-CF532EC6D12D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.App.Database", "XM.App.Database\XM.App.Database.csproj", "{AFA0A7B9-3F91-42DA-A4C0-57BB529205D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,10 +65,6 @@ Global
 		{EFBD34CF-106F-43A6-B395-B017A35BD62E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFBD34CF-106F-43A6-B395-B017A35BD62E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFBD34CF-106F-43A6-B395-B017A35BD62E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{65B4C2A8-EFE6-47FF-AD49-7D21BA6A9F5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{65B4C2A8-EFE6-47FF-AD49-7D21BA6A9F5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{65B4C2A8-EFE6-47FF-AD49-7D21BA6A9F5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{65B4C2A8-EFE6-47FF-AD49-7D21BA6A9F5C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E13C756F-63B8-4476-B65B-03580540B537}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E13C756F-63B8-4476-B65B-03580540B537}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E13C756F-63B8-4476-B65B-03580540B537}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -129,6 +125,10 @@ Global
 		{2CE4FC05-0101-44CD-B3C9-CF532EC6D12D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CE4FC05-0101-44CD-B3C9-CF532EC6D12D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CE4FC05-0101-44CD-B3C9-CF532EC6D12D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFA0A7B9-3F91-42DA-A4C0-57BB529205D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFA0A7B9-3F91-42DA-A4C0-57BB529205D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFA0A7B9-3F91-42DA-A4C0-57BB529205D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFA0A7B9-3F91-42DA-A4C0-57BB529205D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

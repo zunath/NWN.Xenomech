@@ -1,13 +1,13 @@
 ﻿using Anvil.Services;
 using System.Collections.Generic;
 using System;
-using XM.Data;
 using XM.Inventory.KeyItem;
+using XM.Shared.Core.Data;
 
 namespace XM.Inventory.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
-    internal class PlayerKeyItem: EntityBase
+    public class PlayerKeyItem: EntityBase
     {
         public Dictionary<KeyItemType, DateTime> KeyItems { get; set; }
 

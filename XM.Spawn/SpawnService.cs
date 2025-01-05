@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using NLog;
-using XM.API.Constants;
 using System.Numerics;
 using XM.Area;
-using XM.Core;
-using XM.Core.EventManagement;
-using AreaPlugin = XM.API.NWNX.AreaPlugin.AreaPlugin;
-using CreaturePlugin = XM.API.NWNX.CreaturePlugin.CreaturePlugin;
-using ObjectPlugin = XM.API.NWNX.ObjectPlugin.ObjectPlugin;
+using AreaPlugin = XM.Shared.API.NWNX.AreaPlugin.AreaPlugin;
+using CreaturePlugin = XM.Shared.API.NWNX.CreaturePlugin.CreaturePlugin;
+using ObjectPlugin = XM.Shared.API.NWNX.ObjectPlugin.ObjectPlugin;
+using XM.Shared.API.Constants;
+using XM.Shared.Core;
+using XM.Shared.Core.EventManagement;
 
 namespace XM.Spawn
 {

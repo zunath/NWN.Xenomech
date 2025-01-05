@@ -1,6 +1,6 @@
-﻿using XM.API.BaseTypes;
-using XM.API.Constants;
-using XM.Authorization;
+﻿using XM.Authorization;
+using XM.Shared.API.BaseTypes;
+using XM.Shared.API.Constants;
 
 namespace XM.ChatCommand
 {

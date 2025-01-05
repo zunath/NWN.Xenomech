@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Numerics;
 using Anvil.Services;
 using NLog;
-using XM.API.Constants;
-using XM.API.NWNX.ObjectPlugin;
-using XM.Core;
-using XM.Core.Entity;
-using XM.Core.EventManagement;
-using XM.Data;
-using Location = XM.API.BaseTypes.Location;
+using XM.Shared.API.Constants;
+using XM.Shared.API.NWNX.ObjectPlugin;
+using XM.Shared.Core;
+using XM.Shared.Core.Data;
+using XM.Shared.Core.Entity;
+using XM.Shared.Core.EventManagement;
+using Location = XM.Shared.API.BaseTypes.Location;
 
 namespace XM.Area
 {

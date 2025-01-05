@@ -1,11 +1,11 @@
 ﻿using Anvil.Services;
-using XM.Data;
 using XM.Progression.Job;
+using XM.Shared.Core.Data;
 
 namespace XM.Progression.Stat.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
-    internal class PlayerStat : EntityBase
+    public class PlayerStat : EntityBase
     {
         public PlayerStat()
         {

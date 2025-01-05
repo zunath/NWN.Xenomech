@@ -1,10 +1,10 @@
 ﻿using Anvil.Services;
-using XM.API.Constants;
-using XM.API.NWNX.CreaturePlugin;
-using XM.Core;
-using XM.Core.EventManagement;
-using XM.Data;
 using XM.Migration.Entity;
+using XM.Shared.API.Constants;
+using XM.Shared.API.NWNX.CreaturePlugin;
+using XM.Shared.Core;
+using XM.Shared.Core.Data;
+using XM.Shared.Core.EventManagement;
 
 namespace XM.Migration
 {

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "XM.App.Database": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}

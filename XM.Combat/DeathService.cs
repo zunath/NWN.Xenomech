@@ -1,12 +1,12 @@
 ﻿using Anvil.Services;
 using NLog;
-using XM.API.Constants;
 using XM.Area;
 using XM.Combat.Entity;
-using XM.Core;
-using XM.Core.EventManagement;
-using XM.Data;
 using XM.Localization;
+using XM.Shared.API.Constants;
+using XM.Shared.Core;
+using XM.Shared.Core.Data;
+using XM.Shared.Core.EventManagement;
 
 namespace XM.Combat
 {

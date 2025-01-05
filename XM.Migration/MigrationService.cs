@@ -3,12 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using XM.Data;
 using XM.Migration.Entity;
 using NLog;
-using XM.API.NWNX.AdminPlugin;
-using XM.Core.EventManagement;
-using XM.Core;
+using XM.Shared.API.NWNX.AdminPlugin;
+using XM.Shared.Core;
+using XM.Shared.Core.Data;
+using XM.Shared.Core.EventManagement;
 
 namespace XM.Migration
 {

@@ -2,9 +2,9 @@
 using NLog;
 using System;
 using System.Collections.Generic;
-using XM.Core;
-using XM.API.Constants;
-using XM.Core.EventManagement;
+using XM.Shared.API.Constants;
+using XM.Shared.Core;
+using XM.Shared.Core.EventManagement;
 
 namespace XM.Inventory.Loot
 {

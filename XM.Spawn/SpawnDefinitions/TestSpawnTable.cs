@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
-using XM.API.Constants;
+using XM.Shared.API.Constants;
 
 namespace XM.Spawn.SpawnDefinitions
 {

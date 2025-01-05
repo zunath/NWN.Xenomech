@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System;
 using System.Collections.Generic;
+using XM.Shared.Core;
 using XM.UI.Builder.Layout;
 
 namespace XM.UI.Builder
@@ -195,7 +196,7 @@ namespace XM.UI.Builder
             var serializedPartials = new Dictionary<string, Json>();
             foreach (var (partialId, layout) in _partialViews)
             {
-                var json = JsonUtility.ToJson(layout);
+                var json = XMJsonUtility.Serialize(layout);
                 serializedPartials[partialId] = JsonParse(json);
             }
 

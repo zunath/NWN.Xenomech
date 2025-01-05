@@ -1,5 +1,5 @@
 ﻿using Anvil.Services;
-using XM.Core.EventManagement;
+using XM.Shared.Core.EventManagement;
 
 namespace XM.AI
 {

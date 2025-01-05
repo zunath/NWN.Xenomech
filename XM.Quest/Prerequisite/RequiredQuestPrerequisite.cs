@@ -1,6 +1,6 @@
-﻿using XM.Core;
-using XM.Data;
-using XM.Quest.Entity;
+﻿using XM.Quest.Entity;
+using XM.Shared.Core;
+using XM.Shared.Core.Data;
 
 namespace XM.Quest.Prerequisite
 {

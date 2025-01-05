@@ -1,9 +1,9 @@
-﻿using Anvil.Services;
+﻿using XM.UI;
 using XM.UI.Builder;
 
-namespace XM.UI.TestUI
+namespace XM.Progression.UI
 {
-    [ServiceBinding(typeof(IView))]
+    //[ServiceBinding(typeof(IView))]
     internal class TestView : IView
     {
         private readonly NuiBuilder<TestViewModel> _builder = new();
@@ -82,7 +82,7 @@ namespace XM.UI.TestUI
                                         });
                                     });
 
-                                    
+
                                 }, model => model.ButtonNames);
 
                             });

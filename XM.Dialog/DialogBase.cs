@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using XM.Core;
+using XM.Shared.Core;
 
 namespace XM.Dialog
 {

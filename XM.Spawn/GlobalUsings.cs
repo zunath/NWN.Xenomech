@@ -1,1 +1,1 @@
-﻿global using static XM.API.NWScript;
+﻿global using static XM.Shared.API.NWScript;

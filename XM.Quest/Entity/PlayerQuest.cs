@@ -1,11 +1,11 @@
 ﻿using Anvil.Services;
 using System.Collections.Generic;
-using XM.Data;
+using XM.Shared.Core.Data;
 
 namespace XM.Quest.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
-    internal class PlayerQuest: EntityBase
+    public class PlayerQuest: EntityBase
     {
         public Dictionary<string, PlayerQuestDetail> Quests { get; set; }
 

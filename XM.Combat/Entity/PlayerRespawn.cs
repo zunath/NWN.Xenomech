@@ -1,10 +1,10 @@
 ﻿using Anvil.Services;
-using XM.Data;
+using XM.Shared.Core.Data;
 
 namespace XM.Combat.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
-    internal class PlayerRespawn: EntityBase
+    public class PlayerRespawn: EntityBase
     {
         public float RespawnLocationX { get; set; }
         public float RespawnLocationY { get; set; }

@@ -1,10 +1,10 @@
 ﻿using Anvil.Services;
-using XM.Data;
+using XM.Shared.Core.Data;
 
 namespace XM.Migration.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
-    internal class ServerMigrationStatus: EntityBase
+    public class ServerMigrationStatus: EntityBase
     {
         public const string MigrationIdName = "SERVER_MIGRATION";
 
