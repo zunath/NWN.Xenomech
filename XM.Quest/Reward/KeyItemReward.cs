@@ -1,6 +1,6 @@
 ﻿using Anvil.Services;
 using XM.Inventory.KeyItem;
-using XM.Localization;
+using XM.Shared.Core.Localization;
 
 namespace XM.Quest.Reward
 {

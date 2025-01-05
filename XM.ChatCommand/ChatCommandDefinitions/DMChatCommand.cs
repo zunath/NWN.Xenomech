@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using Anvil.Services;
 using NWN.Core;
-using XM.Authorization;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.AdminPlugin;
 using XM.Shared.Core;
+using XM.Shared.Core.Authorization;
 
 namespace XM.ChatCommand.ChatCommandDefinitions
 {

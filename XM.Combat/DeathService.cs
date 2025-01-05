@@ -2,11 +2,11 @@
 using NLog;
 using XM.Area;
 using XM.Combat.Entity;
-using XM.Localization;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
+using XM.Shared.Core.Localization;
 
 namespace XM.Combat
 {

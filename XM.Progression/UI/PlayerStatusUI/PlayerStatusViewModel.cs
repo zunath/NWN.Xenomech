@@ -1,8 +1,8 @@
 ﻿using Anvil.API;
 using Anvil.Services;
-using XM.Localization;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
+using XM.Shared.Core.Localization;
 using XM.UI;
 
 namespace XM.Progression.UI.PlayerStatusUI

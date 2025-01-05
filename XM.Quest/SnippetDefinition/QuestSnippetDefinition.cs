@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
 using NLog;
-using XM.Dialog.Snippet;
 using XM.Quest.Entity;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
+using XM.Shared.Core.Dialog.Snippet;
 
 namespace XM.Quest.SnippetDefinition
 {

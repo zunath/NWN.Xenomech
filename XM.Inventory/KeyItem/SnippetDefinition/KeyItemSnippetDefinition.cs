@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
 using NLog;
-using XM.Dialog.Snippet;
+using XM.Shared.Core.Dialog.Snippet;
 
 namespace XM.Inventory.KeyItem.SnippetDefinition
 {

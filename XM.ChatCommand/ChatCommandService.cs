@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Anvil.Services;
 using NLog;
-using XM.Authorization;
-using XM.Localization;
 using XM.Shared.API.NWNX.ChatPlugin;
-using XM.Shared.Configuration;
 using XM.Shared.Core;
+using XM.Shared.Core.Authorization;
+using XM.Shared.Core.Configuration;
 using XM.Shared.Core.EventManagement;
+using XM.Shared.Core.Localization;
 using Location = XM.Shared.API.BaseTypes.Location;
 
 namespace XM.ChatCommand

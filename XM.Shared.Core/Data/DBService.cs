@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using Anvil.Services;
 using NLog;
-using XM.Shared.Configuration;
+using XM.Shared.Core.Configuration;
 using XM.Shared.Core.Json;
 
 namespace XM.Shared.Core.Data

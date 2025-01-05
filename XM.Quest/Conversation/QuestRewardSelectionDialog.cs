@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using Anvil.Services;
-using XM.Dialog;
 using XM.Quest.Reward;
-using DialogService = XM.Dialog.DialogService;
+using XM.Shared.Core.Dialog;
+using DialogService = XM.Shared.Core.Dialog.DialogService;
 
 namespace XM.Quest.Conversation
 {

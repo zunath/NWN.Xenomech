@@ -1,5 +1,5 @@
 ﻿using System;
-using XM.Localization;
+using XM.Shared.Core.Localization;
 
 namespace XM.Combat.Recast
 {

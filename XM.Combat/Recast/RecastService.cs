@@ -3,12 +3,12 @@ using System.Globalization;
 using System;
 using System.Linq;
 using XM.Combat.Entity;
-using XM.Localization;
 using XM.Progression.Stat;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Extension;
+using XM.Shared.Core.Localization;
 
 namespace XM.Combat.Recast
 {

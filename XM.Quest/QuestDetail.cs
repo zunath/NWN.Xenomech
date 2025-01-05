@@ -10,7 +10,7 @@ using XM.Quest.Reward;
 using XM.Shared.API.NWNX.PlayerPlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
-using DialogService = XM.Dialog.DialogService;
+using DialogService = XM.Shared.Core.Dialog.DialogService;
 
 namespace XM.Quest
 {

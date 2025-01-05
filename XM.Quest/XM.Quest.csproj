@@ -68,7 +68,6 @@
 </ItemGroup>
 
 <ItemGroup>
-  <ProjectReference Include="..\XM.Dialog\XM.Dialog.csproj" />
   <ProjectReference Include="..\XM.Inventory\XM.Inventory.csproj" />
   <ProjectReference Include="..\XM.Shared.API\XM.Shared.API.csproj" />
   <ProjectReference Include="..\XM.UI\XM.UI.csproj" />

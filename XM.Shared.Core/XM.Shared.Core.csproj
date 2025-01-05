@@ -77,7 +77,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\XM.Shared.API\XM.Shared.API.csproj" />
-		<ProjectReference Include="..\XM.Shared.Configuration\XM.Shared.Configuration.csproj" />
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">

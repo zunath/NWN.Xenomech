@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
-using XM.Authorization;
-using XM.Shared.Configuration;
+using XM.Shared.Core.Authorization;
+using XM.Shared.Core.Configuration;
 
 namespace XM.ChatCommand.ChatCommandDefinitions
 {
