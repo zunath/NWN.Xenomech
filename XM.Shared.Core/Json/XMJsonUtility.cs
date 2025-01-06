@@ -3,12 +3,14 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using XM.Shared.Core.Json.Converter;
-using XM.Shared.Core.Json.Converter.Binding;
-using XM.Shared.Core.Json.Converter.Factory;
-using XM.Shared.Core.Json.Converter.Layout;
-using XM.Shared.Core.Json.Converter.Widget;
-using XM.Shared.Core.Json.Converter.Widget.DrawList;
-using NuiValueStrRefConverter = XM.Shared.Core.Json.Converter.Binding.NuiValueStrRefConverter;
+using XM.Shared.Core.Json.Converter.UI.Factory;
+using XM.Shared.Core.Json.Converter.UI.Layout;
+using XM.Shared.Core.Json.Converter.UI;
+using XM.Shared.Core.Json.Converter.UI.Binding;
+using XM.Shared.Core.Json.Converter.UI.Layout;
+using XM.Shared.Core.Json.Converter.UI.Widget;
+using XM.Shared.Core.Json.Converter.UI.Widget.DrawList;
+using NuiValueStrRefConverter = XM.Shared.Core.Json.Converter.UI.Binding.NuiValueStrRefConverter;
 
 namespace XM.Shared.Core.Json
 {
@@ -33,6 +35,7 @@ namespace XM.Shared.Core.Json
             RegisterWidgetConverters();
             RegisterDrawListConverters();
             RegisterElementConverters();
+            RegisterOtherConverters();
         }
 
         private static void RegisterBindingConverters()
@@ -98,6 +101,12 @@ namespace XM.Shared.Core.Json
                 new NuiRectConverter(),
                 new NuiVectorConverter(),
                 new NuiWindowConverter()]);
+        }
+
+        private static void RegisterOtherConverters()
+        {
+            _options.Converters.AddRange([
+                new ColorConverter()]);
         }
 
         /// <summary>

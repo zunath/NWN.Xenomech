@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using XM.Shared.API;
+using XM.Shared.API.NUI;
 using XM.UI.Builder.DrawList;
 using Action = System.Action;
 
