@@ -1,14 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using Anvil.API;
+using XM.Shared.API.NUI;
 using XM.UI.Builder.Component;
 
 namespace XM.UI.Builder.Layout
 {
-    public class NuiColumnBuilder<TViewModel> : NuiBuilderBase<NuiColumnBuilder<TViewModel>, NuiColumn, TViewModel>
+    public class NuiColumnBuilder<TViewModel> 
+        : NuiBuilderBase<NuiColumnBuilder<TViewModel>, TViewModel>
         where TViewModel: IViewModel
     {
-        public NuiColumnBuilder(NuiEventCollection eventCollection)
-            : base(new NuiColumn(), eventCollection)
+        private readonly List<INuiComponentBuilder> _children = new();
+
+        public NuiColumnBuilder(NuiEventCollection eventCollection) 
+            : base(eventCollection)
         {
         }
 
@@ -17,7 +22,7 @@ namespace XM.UI.Builder.Layout
             var rowBuilder = new NuiRowBuilder<TViewModel>(RegisteredEvents);
             row(rowBuilder);
 
-            Element.Children.Add(rowBuilder.Build());
+            _children.Add(rowBuilder);
 
             return this;
         }
@@ -27,27 +32,25 @@ namespace XM.UI.Builder.Layout
             var buttonBuilder = new NuiButtonBuilder<TViewModel>(RegisteredEvents);
             button(buttonBuilder);
 
-            Element.Children.Add(buttonBuilder.Build());
+            _children.Add(buttonBuilder);
 
             return this;
         }
-
         public NuiColumnBuilder<TViewModel> AddButtonImage(Action<NuiButtonImageBuilder<TViewModel>> buttonImage)
         {
             var buttonImageBuilder = new NuiButtonImageBuilder<TViewModel>(RegisteredEvents);
             buttonImage(buttonImageBuilder);
 
-            Element.Children.Add(buttonImageBuilder.Build());
+            _children.Add(buttonImageBuilder);
 
             return this;
         }
-
         public NuiColumnBuilder<TViewModel> AddButtonSelect(Action<NuiButtonSelectBuilder<TViewModel>> buttonSelect)
         {
             var buttonSelectBuilder = new NuiButtonSelectBuilder<TViewModel>(RegisteredEvents);
             buttonSelect(buttonSelectBuilder);
 
-            Element.Children.Add(buttonSelectBuilder.Build());
+            _children.Add(buttonSelectBuilder);
 
             return this;
         }
@@ -57,7 +60,7 @@ namespace XM.UI.Builder.Layout
             var chartBuilder = new NuiChartBuilder<TViewModel>(RegisteredEvents);
             chart(chartBuilder);
 
-            Element.Children.Add(chartBuilder.Build());
+            _children.Add(chartBuilder);
 
             return this;
         }
@@ -67,7 +70,7 @@ namespace XM.UI.Builder.Layout
             var checkBuilder = new NuiCheckBuilder<TViewModel>(RegisteredEvents);
             check(checkBuilder);
 
-            Element.Children.Add(checkBuilder.Build());
+            _children.Add(checkBuilder);
 
             return this;
         }
@@ -77,7 +80,7 @@ namespace XM.UI.Builder.Layout
             var colorPickerBuilder = new NuiColorPickerBuilder<TViewModel>(RegisteredEvents);
             colorPicker(colorPickerBuilder);
 
-            Element.Children.Add(colorPickerBuilder.Build());
+            _children.Add(colorPickerBuilder);
 
             return this;
         }
@@ -87,7 +90,7 @@ namespace XM.UI.Builder.Layout
             var comboBoxBuilder = new NuiComboBuilder<TViewModel>(RegisteredEvents);
             comboBox(comboBoxBuilder);
 
-            Element.Children.Add(comboBoxBuilder.Build());
+            _children.Add(comboBoxBuilder);
 
             return this;
         }
@@ -97,7 +100,7 @@ namespace XM.UI.Builder.Layout
             var imageBuilder = new NuiImageBuilder<TViewModel>(RegisteredEvents);
             image(imageBuilder);
 
-            Element.Children.Add(imageBuilder.Build());
+            _children.Add(imageBuilder);
 
             return this;
         }
@@ -107,7 +110,7 @@ namespace XM.UI.Builder.Layout
             var labelBuilder = new NuiLabelBuilder<TViewModel>(RegisteredEvents);
             label(labelBuilder);
 
-            Element.Children.Add(labelBuilder.Build());
+            _children.Add(labelBuilder);
 
             return this;
         }
@@ -117,7 +120,7 @@ namespace XM.UI.Builder.Layout
             var optionsBuilder = new NuiOptionsBuilder<TViewModel>(RegisteredEvents);
             options(optionsBuilder);
 
-            Element.Children.Add(optionsBuilder.Build());
+            _children.Add(optionsBuilder);
 
             return this;
         }
@@ -127,7 +130,7 @@ namespace XM.UI.Builder.Layout
             var progressBuilder = new NuiProgressBuilder<TViewModel>(RegisteredEvents);
             progress(progressBuilder);
 
-            Element.Children.Add(progressBuilder.Build());
+            _children.Add(progressBuilder);
 
             return this;
         }
@@ -137,7 +140,7 @@ namespace XM.UI.Builder.Layout
             var sliderBuilder = new NuiSliderBuilder<TViewModel>(RegisteredEvents);
             slider(sliderBuilder);
 
-            Element.Children.Add(sliderBuilder.Build());
+            _children.Add(sliderBuilder);
 
             return this;
         }
@@ -147,7 +150,7 @@ namespace XM.UI.Builder.Layout
             var sliderFloatBuilder = new NuiSliderFloatBuilder<TViewModel>(RegisteredEvents);
             sliderFloat(sliderFloatBuilder);
 
-            Element.Children.Add(sliderFloatBuilder.Build());
+            _children.Add(sliderFloatBuilder);
 
             return this;
         }
@@ -155,7 +158,7 @@ namespace XM.UI.Builder.Layout
         public NuiColumnBuilder<TViewModel> AddSpacer()
         {
             var spaceBuilder = new NuiSpacerBuilder<TViewModel>(RegisteredEvents);
-            Element.Children.Add(spaceBuilder.Build());
+            _children.Add(spaceBuilder);
 
             return this;
         }
@@ -165,7 +168,7 @@ namespace XM.UI.Builder.Layout
             var textBuilder = new NuiTextBuilder<TViewModel>(RegisteredEvents);
             text(textBuilder);
 
-            Element.Children.Add(textBuilder.Build());
+            _children.Add(textBuilder);
 
             return this;
         }
@@ -175,7 +178,7 @@ namespace XM.UI.Builder.Layout
             var textEditBuilder = new NuiTextEditBuilder<TViewModel>(RegisteredEvents);
             textEdit(textEditBuilder);
 
-            Element.Children.Add(textEditBuilder.Build());
+            _children.Add(textEditBuilder);
 
             return this;
         }
@@ -185,7 +188,7 @@ namespace XM.UI.Builder.Layout
             var togglesBuilder = new NuiTogglesBuilder<TViewModel>(RegisteredEvents);
             toggles(togglesBuilder);
 
-            Element.Children.Add(togglesBuilder.Build());
+            _children.Add(togglesBuilder);
 
             return this;
         }
@@ -195,10 +198,21 @@ namespace XM.UI.Builder.Layout
             var listBuilder = new NuiListBuilder<TViewModel>(RegisteredEvents);
             list(listBuilder);
 
-            Element.Children.Add(listBuilder.Build());
+            _children.Add(listBuilder);
 
             return this;
         }
 
+        public override Json BuildEntity()
+        {
+            var column = JsonArray();
+
+            foreach (var item in _children)
+            {
+                column = JsonArrayInsert(column, item.Build());
+            }
+
+            return Nui.Column(column);
+        }
     }
 }

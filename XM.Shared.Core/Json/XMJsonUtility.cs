@@ -2,16 +2,6 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using XM.Shared.Core.Json.Converter;
-using XM.Shared.Core.Json.Converter.UI.Factory;
-using XM.Shared.Core.Json.Converter.UI.Layout;
-using XM.Shared.Core.Json.Converter.UI;
-using XM.Shared.Core.Json.Converter.UI.Binding;
-using XM.Shared.Core.Json.Converter.UI.Layout;
-using XM.Shared.Core.Json.Converter.UI.Widget;
-using XM.Shared.Core.Json.Converter.UI.Widget.DrawList;
-using NuiValueStrRefConverter = XM.Shared.Core.Json.Converter.UI.Binding.NuiValueStrRefConverter;
-
 namespace XM.Shared.Core.Json
 {
     public static class XMJsonUtility
@@ -25,88 +15,6 @@ namespace XM.Shared.Core.Json
                 NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals,
             };
 
-            RegisterConverters();
-        }
-
-        private static void RegisterConverters()
-        {
-            RegisterBindingConverters();
-            RegisterLayoutConverters();
-            RegisterWidgetConverters();
-            RegisterDrawListConverters();
-            RegisterElementConverters();
-            RegisterOtherConverters();
-        }
-
-        private static void RegisterBindingConverters()
-        {
-            _options.Converters.AddRange([
-                new NuiBindConverterFactory(),
-                new NuiBindStrRefConverter(),
-                new NuiPropertyConverterFactory(),
-                new NuiValueConverterFactory(),
-                new NuiValueStrRefConverter()]);
-        }
-
-        private static void RegisterLayoutConverters()
-        {
-            _options.Converters.AddRange([
-                new NuiColumnConverter(),
-                new NuiGroupConverter(),
-                new NuiLayoutConverter(),
-                new NuiRowConverter()]);
-        }
-
-        private static void RegisterDrawListConverters()
-        {
-            _options.Converters.AddRange([
-                new NuiDrawListArcConverter(),
-                new NuiDrawListCircleConverter(),
-                new NuiDrawListCurveConverter(),
-                new NuiDrawListImageConverter(),
-                new NuiDrawListItemConverter(),
-                new NuiDrawListLineConverter(),
-                new NuiDrawListPolyLineConverter(),
-                new NuiDrawListTextConverter()]);
-        }
-
-        private static void RegisterWidgetConverters()
-        {
-            _options.Converters.AddRange([
-                new NuiButtonConverter(),
-                new NuiButtonImageConverter(),
-                new NuiButtonSelectConverter(),
-                new NuiChartConverter(),
-                new NuiChartSlotConverter(),
-                new NuiCheckConverter(),
-                new NuiColorPickerConverter(),
-                new NuiComboConverter(),
-                new NuiComboEntryConverter(),
-                new NuiImageConverter(),
-                new NuiLabelConverter(),
-                new NuiOptionsConverter(),
-                new NuiProgressConverter(),
-                new NuiSliderConverter(),
-                new NuiSliderFloatConverter(),
-                new NuiSpacerConverter(),
-                new NuiTextConverter(),
-                new NuiTextConverter(),
-                new NuiTogglesConverter()]);
-        }
-
-        private static void RegisterElementConverters()
-        {
-            _options.Converters.AddRange([
-                new NuiElementConverter(),
-                new NuiRectConverter(),
-                new NuiVectorConverter(),
-                new NuiWindowConverter()]);
-        }
-
-        private static void RegisterOtherConverters()
-        {
-            _options.Converters.AddRange([
-                new ColorConverter()]);
         }
 
         /// <summary>

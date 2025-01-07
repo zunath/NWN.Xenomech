@@ -1,77 +1,97 @@
 ﻿using Anvil.API;
 using System.Linq.Expressions;
 using System;
+using XM.Shared.API.NUI;
 
 namespace XM.UI.Builder.Component
 {
-    public class NuiSliderBuilder<TViewModel> : NuiBuilderBase<NuiSliderBuilder<TViewModel>, NuiSlider, TViewModel>
-        where TViewModel: IViewModel
+    public class NuiSliderBuilder<TViewModel> : NuiBuilderBase<NuiSliderBuilder<TViewModel>, TViewModel>
+        where TViewModel : IViewModel
     {
+        private int _value;
+        private string _valueBind;
+
+        private int _min;
+        private string _minBind;
+
+        private int _max;
+        private string _maxBind;
+
+        private int _step;
+        private string _stepBind;
+
         public NuiSliderBuilder(NuiEventCollection eventCollection)
-            : base(new NuiSlider(0, 0,0), eventCollection)
+            : base(eventCollection)
         {
         }
 
         public NuiSliderBuilder<TViewModel> Value(int value)
         {
-            Element.Value = value;
+            _value = value;
             return this;
         }
 
         public NuiSliderBuilder<TViewModel> Min(int min)
         {
-            Element.Min = min;
+            _min = min;
             return this;
         }
 
         public NuiSliderBuilder<TViewModel> Max(int max)
         {
-            Element.Max = max;
+            _max = max;
             return this;
         }
 
         public NuiSliderBuilder<TViewModel> Step(int step)
         {
-            Element.Step = step;
+            _step = step;
             return this;
         }
+
         public NuiSliderBuilder<TViewModel> Value(Expression<Func<TViewModel, int>> expression)
         {
-            var bindName = GetBindName(expression);
-            var bind = new NuiBind<int>(bindName);
-            Element.Value = bind;
-
+            _valueBind = GetBindName(expression);
             return this;
         }
 
         public NuiSliderBuilder<TViewModel> Min(Expression<Func<TViewModel, int>> expression)
         {
-            var bindName = GetBindName(expression);
-            var bind = new NuiBind<int>(bindName);
-            Element.Min = bind;
-
+            _minBind = GetBindName(expression);
             return this;
         }
 
         public NuiSliderBuilder<TViewModel> Max(Expression<Func<TViewModel, int>> expression)
         {
-            var bindName = GetBindName(expression);
-            var bind = new NuiBind<int>(bindName);
-            Element.Max = bind;
-
+            _maxBind = GetBindName(expression);
             return this;
         }
 
         public NuiSliderBuilder<TViewModel> Step(Expression<Func<TViewModel, int>> expression)
         {
-            var bindName = GetBindName(expression);
-            var bind = new NuiBind<int>(bindName);
-            Element.Step = bind;
-
+            _stepBind = GetBindName(expression);
             return this;
         }
 
+        public override Json BuildEntity()
+        {
+            var value = string.IsNullOrWhiteSpace(_valueBind)
+                ? JsonInt(_value)
+                : Nui.Bind(_valueBind);
+
+            var min = string.IsNullOrWhiteSpace(_minBind)
+                ? JsonInt(_min)
+                : Nui.Bind(_minBind);
+
+            var max = string.IsNullOrWhiteSpace(_maxBind)
+                ? JsonInt(_max)
+                : Nui.Bind(_maxBind);
+
+            var step = string.IsNullOrWhiteSpace(_stepBind)
+                ? JsonInt(_step)
+                : Nui.Bind(_stepBind);
+
+            return Nui.Slider(value, min, max, step);
+        }
     }
-
-
 }

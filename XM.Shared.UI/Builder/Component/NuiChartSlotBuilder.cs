@@ -1,17 +1,26 @@
-﻿using Anvil.API;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Anvil.API;
+using XM.Shared.API.NUI;
+using NuiChartType = XM.Shared.API.NUI.NuiChartType;
 
 namespace XM.UI.Builder.Component
 {
-    public class NuiChartSlotBuilder<TViewModel>: NuiBindable<TViewModel>
+    public class NuiChartSlotBuilder<TViewModel>
+        : NuiBindable<TViewModel>, INuiComponentBuilder
         where TViewModel: IViewModel
     {
         private NuiChartType _chartType;
-        private NuiProperty<string> _legend = string.Empty;
-        private NuiProperty<Color> _color = new Color(255, 255, 255); // Default to white
-        private NuiProperty<List<float>> _data = new List<float>();
+        
+        private string _legend = string.Empty;
+        private string _legendBind;
+
+        private Color _color = new(255, 255, 255);
+        private string _colorBind;
+
+        private List<float> _data = new();
+        private string _dataBind;
 
         public NuiChartSlotBuilder(NuiEventCollection registeredEvents) 
             : base(registeredEvents)
@@ -45,8 +54,7 @@ namespace XM.UI.Builder.Component
         public NuiChartSlotBuilder<TViewModel> Legend(Expression<Func<TViewModel, string>> expression)
         {
             var bindName = GetBindName(expression);
-            var bind = new NuiBind<string>(bindName);
-            _legend = bind;
+            _legendBind = bindName;
 
             return this;
         }
@@ -54,8 +62,7 @@ namespace XM.UI.Builder.Component
         public NuiChartSlotBuilder<TViewModel> Color(Expression<Func<TViewModel, Color>> expression)
         {
             var bindName = GetBindName(expression);
-            var bind = new NuiBind<Color>(bindName);
-            _color = bind;
+            _colorBind = bindName;
 
             return this;
         }
@@ -63,16 +70,37 @@ namespace XM.UI.Builder.Component
         public NuiChartSlotBuilder<TViewModel> Data(Expression<Func<TViewModel, float>> expression)
         {
             var bindName = GetBindName(expression);
-            var bind = new NuiBind<List<float>>(bindName);
-            _data = bind;
+            _dataBind = bindName;
 
             return this;
         }
 
 
-        public NuiChartSlot Build()
+        public Json Build()
         {
-            return new NuiChartSlot(_chartType, _legend, _color, _data);
+            var legend = string.IsNullOrWhiteSpace(_legendBind)
+                ? JsonString(_legend)
+                : Nui.Bind(_legendBind);
+
+            var color = string.IsNullOrWhiteSpace(_colorBind)
+                ? Nui.Color(_color.Red, _color.Green, _color.Blue, _color.Alpha)
+                : Nui.Bind(_colorBind);
+            
+            var data = JsonArray();
+
+            if (string.IsNullOrWhiteSpace(_dataBind))
+            {
+                foreach (var d in _data)
+                {
+                    data = JsonArrayInsert(data, JsonFloat(d));
+                }
+            }
+            else
+            {
+                data = Nui.Bind(_dataBind);
+            }
+
+            return Nui.ChartSlot(_chartType, legend, color, data);
         }
 
     }

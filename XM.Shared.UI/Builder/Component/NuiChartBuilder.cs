@@ -1,25 +1,39 @@
 ﻿using System;
 using Anvil.API;
 using System.Collections.Generic;
+using XM.Shared.API.NUI;
 
 namespace XM.UI.Builder.Component
 {
-    public class NuiChartBuilder<TViewModel> : NuiBuilderBase<NuiChartBuilder<TViewModel>, NuiChart, TViewModel>
-        where TViewModel: IViewModel
+    public class NuiChartBuilder<TViewModel> 
+        : NuiBuilderBase<NuiChartBuilder<TViewModel>, TViewModel>
+        where TViewModel : IViewModel
     {
+        private readonly List<NuiChartSlotBuilder<TViewModel>> _chartSlots = new();
+
         public NuiChartBuilder(NuiEventCollection eventCollection)
-            : base(new NuiChart(), eventCollection)
+            : base(eventCollection)
         {
         }
 
         public NuiChartBuilder<TViewModel> AddChartSlot(Action<NuiChartSlotBuilder<TViewModel>> chartSlot)
         {
-            Element.ChartSlots ??= new List<NuiChartSlot>();
-
             var nuiChartSlotBuilder = new NuiChartSlotBuilder<TViewModel>(RegisteredEvents);
             chartSlot(nuiChartSlotBuilder);
-            Element.ChartSlots.Add(nuiChartSlotBuilder.Build());
+            _chartSlots.Add(nuiChartSlotBuilder);
             return this;
+        }
+
+        public override Json BuildEntity()
+        {
+            var chartSlots = JsonArray();
+
+            foreach (var slot in _chartSlots)
+            {
+                chartSlots = JsonArrayInsert(chartSlots, slot.Build());
+            }
+
+            return Nui.Chart(chartSlots);
         }
     }
 }

@@ -2,60 +2,85 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Xml.Linq;
 using Anvil.API;
+using XM.Shared.API.NUI;
 using XM.UI.Builder.Component;
+using NuiScrollbars = XM.Shared.API.NUI.NuiScrollbars;
+using NuiStyle = XM.Shared.API.NUI.NuiStyle;
 
 namespace XM.UI.Builder
 {
-    public class NuiListBuilder<TViewModel> : NuiBuilderBase<NuiListBuilder<TViewModel>, NuiList, TViewModel>
+    public class NuiListBuilder<TViewModel> : NuiBindable<TViewModel>, INuiComponentBuilder
         where TViewModel : IViewModel
     {
-        private string _bindName;
+        private readonly List<NuiListTemplateCellBuilder<TViewModel>> _template = new();
+        private string _rowCountBind;
 
-        public NuiListBuilder(NuiEventCollection eventCollection)
-            : base(new NuiList(new List<NuiListTemplateCell>(), 0), eventCollection)
+        private float _rowHeight = NuiStyle.RowHeight;
+        private bool _border = true;
+        private NuiScrollbars _scrollbars = NuiScrollbars.Y;
+
+        public NuiListBuilder(NuiEventCollection registeredEvents) 
+            : base(registeredEvents)
         {
         }
 
-        public NuiListBuilder<TViewModel> AddTemplate(
-            Action<NuiListTemplateCellBuilder<TViewModel>> template,
+        public NuiListBuilder<TViewModel> AddTemplateCell(
+            Action<NuiListTemplateCellBuilder<TViewModel>> templateCell,
             Expression<Func<TViewModel, IBindingList>> targetList)
         {
-            var templateBuilder = new NuiListTemplateCellBuilder<TViewModel>(RegisteredEvents);
-            template(templateBuilder);
+            if (_template.Count >= 16)
+                throw new InvalidOperationException("Maximum of 16 template cells allowed.");
 
-            if (string.IsNullOrWhiteSpace(_bindName))
-                _bindName = GetBindName(targetList);
+            var builder = new NuiListTemplateCellBuilder<TViewModel>(RegisteredEvents);
+            templateCell(builder);
+            _template.Add(builder);
 
-            Element.RowTemplate.Add(templateBuilder.Build());
+            if (string.IsNullOrWhiteSpace(_rowCountBind))
+                _rowCountBind = GetBindName(targetList);
 
             return this;
         }
+
         public NuiListBuilder<TViewModel> RowHeight(float rowHeight)
         {
-            Element.RowHeight = rowHeight;
+            _rowHeight = rowHeight;
+            return this;
+        }
+
+        public NuiListBuilder<TViewModel> Border(bool border)
+        {
+            _border = border;
             return this;
         }
 
         public NuiListBuilder<TViewModel> Scrollbars(NuiScrollbars scrollbars)
         {
-            Element.Scrollbars = scrollbars;
+            if (scrollbars == NuiScrollbars.Auto)
+                throw new InvalidOperationException("Scrollbars cannot be set to AUTO for NuiList.");
+
+            _scrollbars = scrollbars;
             return this;
         }
 
-        private void CreateListBind()
+        public Json Build()
         {
-            var bind = new NuiBind<int>(_bindName + "_" + nameof(NuiList.RowCount));
-            Element.RowCount = bind;
-        }
+            var template = JsonArray();
 
-        public override NuiList Build()
-        {
-            CreateListBind();
+            foreach (var element in _template)
+            {
+                template = JsonArrayInsert(template, element.Build());
+            }
 
+            var rowCount = Nui.Bind(_rowCountBind + "_" + nameof(NuiList.RowCount));
 
-            return base.Build();
+            return Nui.List(
+                template, 
+                rowCount, 
+                _rowHeight, 
+                _border, 
+                _scrollbars);
         }
     }
-
 }

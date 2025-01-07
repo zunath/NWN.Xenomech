@@ -24,15 +24,20 @@ namespace XM.Progression.UI.PlayerStatusUI
                     .Title(string.Empty)
                     .IsClosable(false)
                     .IsResizable(false)
-                    .IsCollapsed(false)
+                    .IsCollapsible(false)
                     .IsTransparent(false)
                     .Border(true)
-                    .AcceptsInput(false);
-            })
-            .SetRoot(col =>
-            {
-                HPBar(col);
-                EPBar(col);
+                    .AcceptsInput(false)
+                    .Root(col =>
+                    {
+                        col.AddButton(button =>
+                        {
+                            button.Label("testing");
+                        });
+
+                        HPBar(col);
+                        EPBar(col);
+                    });
             });
 
             return _builder.Build();
