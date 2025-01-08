@@ -23,10 +23,5 @@ namespace XM.Progression.UI.PlayerStatusUI
             _gui.ShowWindow<PlayerStatusView>(player);
         }
 
-        [ScriptHandler("bread_test")]
-        public void BreadTest()
-        {
-            _gui.ShowWindow<TestView>(GetLastUsedBy());
-        }
     }
 }

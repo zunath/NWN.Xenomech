@@ -15,17 +15,23 @@ namespace XM.UI
     [ServiceBinding(typeof(GuiService))]
     [ServiceBinding(typeof(IUpdateable))]
     [ServiceBinding(typeof(IInitializable))]
-    public partial class GuiService: IUpdateable, IInitializable
+    public partial class GuiService: 
+        IUpdateable, 
+        IInitializable
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         [Inject]
         public IList<IView> Views { get; set; }
 
+        [Inject]
+        public IList<IViewModel> ViewModels { get; set; }
+
         private readonly Dictionary<Type, IView> _viewsByType = new();
         private readonly Dictionary<Type, NuiBuiltWindow> _builtWindowsByType = new();
         private readonly NuiEventCollection _registeredEvents = new();
         private readonly Dictionary<int, IViewModel> _playerViewModels = new();
+        private readonly Dictionary<uint, int> _playerToWindowToken = new();
 
         private readonly XMEventService _event;
         private readonly InjectionService _injection;
@@ -131,6 +137,7 @@ namespace XM.UI
             viewModel.OnClose();
             SaveWindowLocation(player, windowToken);
             _playerViewModels.Remove(windowToken);
+            _playerToWindowToken.Remove(player);
             
             if(_lastEventTimestamps.ContainsKey(viewModel))
                 _lastEventTimestamps.Remove(viewModel);
@@ -203,6 +210,7 @@ namespace XM.UI
                 
                 var windowToken = NuiCreate(player, json, window.WindowId);
                 _playerViewModels[windowToken] = viewModel;
+                _playerToWindowToken[player] = windowToken;
 
                 viewModel.Bind(
                     player, 
@@ -216,6 +224,7 @@ namespace XM.UI
         public void Init()
         {
             CacheViews();
+            CacheRefreshables();
         }
     }
 }

@@ -8,7 +8,8 @@ using XM.UI;
 namespace XM.Progression.UI.PlayerStatusUI
 {
     [ServiceBinding(typeof(IViewModel))]
-    internal class PlayerStatusViewModel: ViewModel
+    internal class PlayerStatusViewModel: 
+        ViewModel
     {
         private int _screenHeight;
         private int _screenWidth;

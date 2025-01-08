@@ -215,11 +215,6 @@ namespace XM.UI
             return InitialData as TData;
         }
 
-        public void NotifyChange<T>(uint player)
-        {
-
-        }
-
         public abstract void OnOpen();
 
         public abstract void OnClose();
