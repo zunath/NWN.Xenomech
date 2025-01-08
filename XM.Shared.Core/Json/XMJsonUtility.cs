@@ -1,5 +1,4 @@
-﻿using Anvil.API;
-using System;
+﻿using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 namespace XM.Shared.Core.Json
@@ -12,9 +11,11 @@ namespace XM.Shared.Core.Json
         {
             _options = new JsonSerializerOptions()
             {
-                NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals,
+                NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals, 
+                WriteIndented = true
             };
 
+            _options.Converters.Add(new NuiRectConverter());
         }
 
         /// <summary>
