@@ -52,6 +52,7 @@ namespace XM.UI.Builder.Component
         protected NuiBuilderBase(NuiEventCollection eventCollection) 
             : base(eventCollection)
         {
+            _drawList = new NuiDrawListBuilder<TViewModel>(eventCollection);
         }
 
         public TBuilder Aspect(float aspect)
@@ -246,7 +247,9 @@ namespace XM.UI.Builder.Component
             }
 
             var element = BuildEntity();
-            element = Nui.Id(element, _id);
+
+            if(!string.IsNullOrWhiteSpace(_id))
+                element = Nui.Id(element, _id);
 
             // Width
             if (_width > 0f)
@@ -342,13 +345,14 @@ namespace XM.UI.Builder.Component
             }
             else if (_foregroundColor != null)
             {
+                var color = _foregroundColor.Value;
                 element = Nui.StyleForegroundColor(
                     element, 
                     Nui.Color(
-                        _foregroundColor.Value.Red, 
-                        _foregroundColor.Value.Green, 
-                        _foregroundColor.Value.Blue, 
-                        _foregroundColor.Value.Alpha));
+                        color.Red, 
+                        color.Green, 
+                        color.Blue, 
+                        color.Alpha));
             }
 
             var scissor = string.IsNullOrWhiteSpace(_scissorBind)

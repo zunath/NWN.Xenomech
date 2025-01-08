@@ -17,19 +17,19 @@ namespace XM.UI.Builder
         private string _title;
         private string _titleBind;
 
-        private bool _resizable = true;
+        private bool _resizable;
         private string _resizableBind;
 
         private bool _collapsed;
         private string _collapsedBind;
 
-        private bool _closable = true;
+        private bool _closable;
         private string _closableBind;
 
         private bool _transparent;
         private string _transparentBind;
 
-        private bool _border = true;
+        private bool _border;
         private string _borderBind;
 
         private bool _acceptsInput = true;
@@ -40,6 +40,13 @@ namespace XM.UI.Builder
 
         public NuiWindowBuilder(NuiEventCollection registeredEvents) : base(registeredEvents)
         {
+            _title = "New Window";
+            _defaultGeometry = new NuiRect(0f, 0f, 400f, 400f);
+            _resizable = true;
+            _collapsed = false;
+            _closable = true;
+            _transparent = false;
+            _border = true;
         }
 
         public NuiWindowBuilder<TViewModel> DefinePartialView(string id, Action<NuiGroupBuilder<TViewModel>> configure)

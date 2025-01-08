@@ -10,7 +10,7 @@ namespace XM.UI.Builder.DrawList
         : NuiBindable<TViewModel>, INuiDrawListItemBuilder
         where TViewModel : IViewModel
     {
-        private bool _isEnabled;
+        private bool _isEnabled = true;
         private string _isEnabledBind;
 
         private string _resRef;

@@ -8,7 +8,7 @@ namespace XM.UI.Builder.DrawList
     public class NuiDrawListArcBuilder<TViewModel> : NuiBindable<TViewModel>, INuiDrawListItemBuilder
         where TViewModel: IViewModel
     {
-        private bool _isEnabled;
+        private bool _isEnabled = true;
         private string _isEnabledBind;
 
         private Color _color;

@@ -21,7 +21,10 @@ namespace XM.Progression.UI
                 window.Title("new window");
                 window.Root(root =>
                 {
-                    
+                    root.AddButton(button =>
+                    {
+                        button.Label("My button");
+                    });
                 });
             }).Build();
 

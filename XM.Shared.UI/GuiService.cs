@@ -206,7 +206,7 @@ namespace XM.UI
                 viewModel.Bind(
                     player, 
                     windowToken, 
-                    geometry, 
+                    geometry,
                     partialViews,
                     tetherObject);
 
