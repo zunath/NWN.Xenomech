@@ -5,8 +5,6 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using Anvil.API;
 using Anvil.Services;
-using Newtonsoft.Json;
-using XM.Shared.Core;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Json;
 
@@ -53,7 +51,7 @@ namespace XM.UI
             BindGeometry(geometry);
             _onNuiEventToken = Event.Subscribe<ModuleEvent.OnNuiEvent>(OnWatchEvent);
 
-            //ChangePartialView(IViewModel.MainViewElementId, IViewModel.UserPartialId);
+            ChangePartialView(IViewModel.MainViewElementId, IViewModel.UserPartialId);
         }
 
         protected void ChangePartialView(string elementId, string partialViewId)
@@ -199,7 +197,6 @@ namespace XM.UI
 
         private void OnListChanged(object sender, ListChangedEventArgs e)
         {
-            Console.WriteLine($"test");
             var list = (IGuiBindingList)sender;
 
             switch (e.ListChangedType)

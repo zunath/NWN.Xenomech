@@ -67,6 +67,12 @@ namespace XM.UI.Builder.Component
             return (TBuilder)this;
         }
 
+        public TBuilder ForegroundColor(byte red, byte green, byte blue, byte alpha = 255)
+        {
+            _foregroundColor = new Color(red, green, blue, alpha);
+            return (TBuilder)this;
+        }
+
         public TBuilder ForegroundColor(Color foregroundColor)
         {
             _foregroundColor = foregroundColor;

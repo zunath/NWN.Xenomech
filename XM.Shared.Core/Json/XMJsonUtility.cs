@@ -15,7 +15,8 @@ namespace XM.Shared.Core.Json
                 WriteIndented = true
             };
 
-            _options.Converters.Add(new NuiRectConverter());
+            _options.Converters.Add(new NuiRectJsonConverter());
+            _options.Converters.Add(new ColorJsonConverter());
         }
 
         /// <summary>

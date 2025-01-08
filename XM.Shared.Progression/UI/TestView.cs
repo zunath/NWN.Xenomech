@@ -18,14 +18,19 @@ namespace XM.Progression.UI
         {
             return _builder.CreateWindow(window =>
             {
-                window.Title("new window");
-                window.Root(root =>
-                {
-                    root.AddButton(button =>
+                window.Title("new window")
+                    .InitialGeometry(20, 20, 500, 500)
+                    .IsResizable(true)
+                    .Root(root =>
                     {
-                        button.Label("My button");
+                        root.AddRow(row =>
+                        {
+                            row.AddButton(button =>
+                            {
+                                button.Label("My button");
+                            });
+                        });
                     });
-                });
             }).Build();
 
 

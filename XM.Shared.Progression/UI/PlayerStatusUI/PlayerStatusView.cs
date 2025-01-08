@@ -30,11 +30,6 @@ namespace XM.Progression.UI.PlayerStatusUI
                     .AcceptsInput(false)
                     .Root(col =>
                     {
-                        col.AddButton(button =>
-                        {
-                            button.Label("testing");
-                        });
-
                         HPBar(col);
                         EPBar(col);
                     });

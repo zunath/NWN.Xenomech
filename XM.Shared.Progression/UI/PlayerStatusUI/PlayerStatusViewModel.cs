@@ -134,9 +134,14 @@ namespace XM.Progression.UI.PlayerStatusUI
         {
             var currentHP = GetCurrentHitPoints(Player);
             var maxHP = GetMaxHitPoints(Player);
+            var ratio = (float)currentHP / (float)maxHP;
 
             Bar1Value = $"{currentHP} / {maxHP}";
-            Bar1Progress = maxHP <= 0 ? 0 : (float)currentHP / (float)maxHP > 1.0f ? 1.0f : (float)currentHP / (float)maxHP;
+            Bar1Progress = maxHP <= 0 
+                ? 0 
+                : ratio > 1.0f 
+                    ? 1.0f 
+                    : ratio;
         }
 
         private void UpdateEP()

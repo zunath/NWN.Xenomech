@@ -6,7 +6,6 @@ using NLog;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
-using XM.Shared.Core.Json;
 using XM.UI.Builder;
 using XM.UI.Entity;
 using Action = System.Action;
@@ -203,14 +202,14 @@ namespace XM.UI
                 }
                 
                 var windowToken = NuiCreate(player, json, window.WindowId);
+                _playerViewModels[windowToken] = viewModel;
+
                 viewModel.Bind(
                     player, 
                     windowToken, 
                     geometry,
                     partialViews,
                     tetherObject);
-
-                _playerViewModels[windowToken] = viewModel;
             }
         }
 

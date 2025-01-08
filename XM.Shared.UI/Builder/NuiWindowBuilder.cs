@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Threading;
 using Anvil.API;
 using XM.Shared.API.NUI;
 using XM.UI.Builder.Component;
@@ -38,10 +37,10 @@ namespace XM.UI.Builder
         private readonly string _geometryBind = nameof(IViewModel.Geometry);
         private readonly Dictionary<string, NuiGroupBuilder<TViewModel>> _partialViews = new();
 
-        public NuiWindowBuilder(NuiEventCollection registeredEvents) : base(registeredEvents)
+        public NuiWindowBuilder(NuiEventCollection registeredEvents) 
+            : base(registeredEvents)
         {
             _title = "New Window";
-            _defaultGeometry = new NuiRect(0f, 0f, 400f, 400f);
             _resizable = true;
             _collapsed = false;
             _closable = true;
@@ -72,18 +71,16 @@ namespace XM.UI.Builder
 
             _partialViews[IViewModel.UserPartialId] = rootWrapperPartial;
 
-            //// A dummy group is shown initially before the view model opens up the real one upon window open.
-            //groupBuilder = new NuiGroupBuilder<TViewModel>(RegisteredEvents)
-            //    .Id(IViewModel.MainViewElementId)
-            //    .SetScrollbars(NuiScrollbars.None)
-            //    .SetBorder(false)
-            //    .SetLayout(col =>
-            //    {
-            //    });
+            // A dummy group is shown initially before the view model opens up the real one upon window open.
+            var groupBuilder = new NuiGroupBuilder<TViewModel>(RegisteredEvents)
+                .Id(IViewModel.MainViewElementId)
+                .SetScrollbars(NuiScrollbars.None)
+                .SetBorder(false)
+                .SetLayout(col =>
+                {
+                });
 
-            //_root = groupBuilder;
-
-            _root = rootBuilder;
+            _root = groupBuilder;
             return this;
         }
 
@@ -270,8 +267,6 @@ namespace XM.UI.Builder
 
             var id = typeof(TViewModel).FullName;
             window = Nui.Id(window, id);
-
-            Console.WriteLine($"window json = {JsonDump(window)}");
 
             return new NuiBuiltWindow(id, window, _defaultGeometry, partialViews);
         }

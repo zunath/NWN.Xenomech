@@ -5,7 +5,7 @@ using Anvil.API;
 
 namespace XM.Shared.Core.Json
 {
-    public class NuiRectConverter : JsonConverter<NuiRect>
+    public class NuiRectJsonConverter : JsonConverter<NuiRect>
     {
         public override NuiRect Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
