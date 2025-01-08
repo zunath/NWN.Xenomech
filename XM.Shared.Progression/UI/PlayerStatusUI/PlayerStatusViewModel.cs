@@ -142,43 +142,28 @@ namespace XM.Progression.UI.PlayerStatusUI
             var ratio = (float)currentHP / (float)maxHP;
 
             Bar1Value = $"{currentHP} / {maxHP}";
-            Bar1Progress = maxHP <= 0 
-                ? 0 
-                : ratio > 1f 
-                    ? 1f 
-                    : ratio;
+            Bar1Progress = Math.Clamp(ratio, 0f, 1f);
         }
 
         private void UpdateEP()
         {
             var currentEP = Stat.GetCurrentEP(Player);
             var maxEP = Stat.GetMaxEP(Player);
-            var ratio = (float)currentEP / (float)maxEP;
+            var ratio = maxEP > 0f
+                ? (float)currentEP / (float)maxEP
+                : 0f;
 
             Bar2Value = $"{currentEP} / {maxEP}";
-            Bar2Progress = maxEP <= 0
-                ? 0
-                : ratio > 1f 
-                    ? 1f 
-                    : ratio;
-        }
-
-        [ScriptHandler("bread_test")]
-        public void Test()
-        {
-            var player = GetLastUsedBy();
-            ApplyEffectToObject(DurationType.Instant, EffectDamage(1), player);
+            Bar2Progress = Math.Clamp(ratio, 0f, 1f);
         }
 
         public void Refresh(PlayerHPAdjustedEvent @event)
         {
-            Console.WriteLine($"refresh HP");
             UpdateHP();
         }
 
         public void Refresh(PlayerEPAdjustedEvent @event)
         {
-            Console.WriteLine($"refresh EP");
             UpdateEP();
         }
     }
