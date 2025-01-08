@@ -17,6 +17,7 @@ namespace XM.Shared.Core.Json
 
             _options.Converters.Add(new NuiRectJsonConverter());
             _options.Converters.Add(new ColorJsonConverter());
+            _options.Converters.Add(new FloatJsonConverter());
         }
 
         /// <summary>

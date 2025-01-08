@@ -139,8 +139,8 @@ namespace XM.Progression.UI.PlayerStatusUI
             Bar1Value = $"{currentHP} / {maxHP}";
             Bar1Progress = maxHP <= 0 
                 ? 0 
-                : ratio > 1.0f 
-                    ? 1.0f 
+                : ratio > 1f 
+                    ? 1f 
                     : ratio;
         }
 
@@ -151,7 +151,11 @@ namespace XM.Progression.UI.PlayerStatusUI
             var ratio = (float)currentEP / (float)maxEP;
 
             Bar2Value = $"{currentEP} / {maxEP}";
-            Bar2Progress = ratio > 1f ? 1f : ratio;
+            Bar2Progress = maxEP <= 0
+                ? 0
+                : ratio > 1f 
+                    ? 1f 
+                    : ratio;
         }
     }
 }

@@ -130,8 +130,6 @@ namespace XM.UI
                 list.PropertyName = propertyName;
                 RegisterList(list, propertyName);
             }
-
-            OnPropertyChanged(propertyName);
         }
 
         private void BindList(IGuiBindingList list, string propertyName)
