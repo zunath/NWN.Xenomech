@@ -305,7 +305,6 @@ namespace XM.App.Database
 
         private void Set(string key, string entity, string type, Dictionary<string, string> indexData)
         {
-            var data = XMJsonUtility.Serialize(entity);
             var indexKey = $"Index:{type}:{key}";
 
             var redisData = new Dictionary<string, RedisValue>();
@@ -316,7 +315,7 @@ namespace XM.App.Database
             }
 
             _searchClientsByType[type].ReplaceDocument(indexKey, redisData);
-            _multiplexer.GetDatabase().JsonSet($"{type}:{key}", data);
+            _multiplexer.GetDatabase().JsonSet($"{type}:{key}", entity);
         }
     }
 }
