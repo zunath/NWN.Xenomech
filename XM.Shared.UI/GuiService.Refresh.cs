@@ -42,13 +42,15 @@ namespace XM.UI
             if (!_windowTypesByRefreshEvent.ContainsKey(typeof(T)))
                 return;
 
-            if (!_playerToWindowToken.ContainsKey(player))
+            if (!_playerViewModels.ContainsKey(player))
                 return;
 
-            Console.WriteLine($"eventType2 = {typeof(T)}");
-
-            foreach (var viewModel in _windowTypesByRefreshEvent[typeof(T)])
+            foreach (var refreshVM in _windowTypesByRefreshEvent[typeof(T)])
             {
+                var viewModel = _playerViewModels[player]
+                    .Single(s => s.Value.GetType() == refreshVM.GetType())
+                    .Value;
+
                 var methodInfo = typeof(IRefreshable<>)
                     .MakeGenericType(typeof(T))
                     .GetMethod(nameof(IRefreshable<IXMEvent>.Refresh));

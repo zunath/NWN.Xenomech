@@ -1,6 +1,8 @@
-﻿using Anvil.API;
+﻿using System;
+using Anvil.API;
 using Anvil.Services;
 using XM.Progression.Stat;
+using XM.Progression.Stat.Event;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 using XM.UI;
@@ -9,7 +11,9 @@ namespace XM.Progression.UI.PlayerStatusUI
 {
     [ServiceBinding(typeof(IViewModel))]
     internal class PlayerStatusViewModel: 
-        ViewModel
+        ViewModel,
+        IRefreshable<PlayerHPAdjustedEvent>,
+        IRefreshable<PlayerEPAdjustedEvent>
     {
         private int _screenHeight;
         private int _screenWidth;
@@ -157,6 +161,25 @@ namespace XM.Progression.UI.PlayerStatusUI
                 : ratio > 1f 
                     ? 1f 
                     : ratio;
+        }
+
+        [ScriptHandler("bread_test")]
+        public void Test()
+        {
+            var player = GetLastUsedBy();
+            ApplyEffectToObject(DurationType.Instant, EffectDamage(1), player);
+        }
+
+        public void Refresh(PlayerHPAdjustedEvent @event)
+        {
+            Console.WriteLine($"refresh HP");
+            UpdateHP();
+        }
+
+        public void Refresh(PlayerEPAdjustedEvent @event)
+        {
+            Console.WriteLine($"refresh EP");
+            UpdateEP();
         }
     }
 }

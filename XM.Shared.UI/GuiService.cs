@@ -30,8 +30,8 @@ namespace XM.UI
         private readonly Dictionary<Type, IView> _viewsByType = new();
         private readonly Dictionary<Type, NuiBuiltWindow> _builtWindowsByType = new();
         private readonly NuiEventCollection _registeredEvents = new();
-        private readonly Dictionary<int, IViewModel> _playerViewModels = new();
-        private readonly Dictionary<uint, int> _playerToWindowToken = new();
+        private readonly Dictionary<int, uint> _tokenToPlayer = new();
+        private readonly Dictionary<uint, Dictionary<int, IViewModel>> _playerViewModels = new();
 
         private readonly XMEventService _event;
         private readonly InjectionService _injection;
@@ -99,7 +99,8 @@ namespace XM.UI
                 return;
 
             var methodName = _registeredEvents[elementId][type];
-            var viewModel = _playerViewModels[windowToken];
+            var player = _tokenToPlayer[windowToken];
+            var viewModel = _playerViewModels[player][windowToken];
             var vmType = viewModel.GetType();
             
             var property = vmType.GetProperty(methodName);
@@ -122,7 +123,8 @@ namespace XM.UI
         private void RunOpenWindow()
         {
             var windowToken = NuiGetEventWindow();
-            var viewModel = _playerViewModels[windowToken];
+            var player = _tokenToPlayer[windowToken];
+            var viewModel = _playerViewModels[player][windowToken];
 
             viewModel.OnOpen();
         }
@@ -131,13 +133,13 @@ namespace XM.UI
         {
             var player = NuiGetEventPlayer();
             var windowToken = NuiGetEventWindow();
-            var viewModel = _playerViewModels[windowToken];
+            var viewModel = _playerViewModels[player][windowToken];
 
             viewModel.Unbind();
             viewModel.OnClose();
             SaveWindowLocation(player, windowToken);
-            _playerViewModels.Remove(windowToken);
-            _playerToWindowToken.Remove(player);
+            _playerViewModels[player].Remove(windowToken);
+            _tokenToPlayer.Remove(windowToken);
             
             if(_lastEventTimestamps.ContainsKey(viewModel))
                 _lastEventTimestamps.Remove(viewModel);
@@ -147,7 +149,7 @@ namespace XM.UI
         {
             var playerId = PlayerId.Get(player);
             var dbPlayerUI = _db.Get<PlayerUI>(playerId) ?? new(playerId);
-            var viewModel = _playerViewModels[windowToken];
+            var viewModel = _playerViewModels[player][windowToken];
             var windowId = NuiGetWindowId(player, windowToken);
 
             dbPlayerUI.WindowGeometries[windowId] = viewModel.Geometry;
@@ -209,8 +211,12 @@ namespace XM.UI
                 }
                 
                 var windowToken = NuiCreate(player, json, window.WindowId);
-                _playerViewModels[windowToken] = viewModel;
-                _playerToWindowToken[player] = windowToken;
+
+                if (!_playerViewModels.ContainsKey(player))
+                    _playerViewModels[player] = new Dictionary<int, IViewModel>();
+
+                _playerViewModels[player][windowToken] = viewModel;
+                _tokenToPlayer[windowToken] = player;
 
                 viewModel.Bind(
                     player, 
