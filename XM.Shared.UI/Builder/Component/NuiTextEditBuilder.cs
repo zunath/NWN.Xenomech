@@ -1,72 +1,82 @@
 ﻿using Anvil.API;
 using System.Linq.Expressions;
 using System;
+using XM.Shared.API.NUI;
 
 namespace XM.UI.Builder.Component
 {
-    public class NuiTextEditBuilder<TViewModel> : NuiBuilderBase<NuiTextEditBuilder<TViewModel>, NuiTextEdit, TViewModel>
-        where TViewModel: IViewModel
+    public class NuiTextEditBuilder<TViewModel> : NuiBuilderBase<NuiTextEditBuilder<TViewModel>, TViewModel>
+        where TViewModel : IViewModel
     {
+        private string _label;
+        private string _labelBind;
+
+        private string _value;
+        private string _valueBind;
+
+        private ushort _maxLength;
+        private bool _multiLine;
+        private bool _wordWrap;
+
         public NuiTextEditBuilder(NuiEventCollection eventCollection)
-            : base(new NuiTextEdit(string.Empty, string.Empty, 1000, false), eventCollection)
+            : base(eventCollection)
         {
         }
 
         public NuiTextEditBuilder<TViewModel> Label(string label)
         {
-            Element.Label = label;
+            _label = label;
             return this;
         }
 
         public NuiTextEditBuilder<TViewModel> Value(string value)
         {
-            Element.Value = value;
+            _value = value;
             return this;
         }
 
         public NuiTextEditBuilder<TViewModel> MaxLength(ushort maxLength)
         {
-            Element.MaxLength = maxLength;
+            _maxLength = maxLength;
             return this;
         }
 
         public NuiTextEditBuilder<TViewModel> MultiLine(bool multiLine)
         {
-            Element.MultiLine = multiLine;
+            _multiLine = multiLine;
             return this;
         }
 
         public NuiTextEditBuilder<TViewModel> WordWrap(bool wordWrap)
         {
-            Element.WordWrap = wordWrap;
+            _wordWrap = wordWrap;
             return this;
         }
+
         public NuiTextEditBuilder<TViewModel> Label(Expression<Func<TViewModel, string>> expression)
         {
-            var bindName = GetBindName(expression);
-            var bind = new NuiBind<string>(bindName);
-            Element.Label = bind;
-
+            _labelBind = GetBindName(expression);
             return this;
         }
 
         public NuiTextEditBuilder<TViewModel> Value(Expression<Func<TViewModel, string>> expression)
         {
-            var bindName = GetBindName(expression);
-            var bind = new NuiBind<string>(bindName);
-            Element.Value = bind;
-
+            _valueBind = GetBindName(expression);
             return this;
         }
 
-        public NuiTextEditBuilder<TViewModel> WordWrap(Expression<Func<TViewModel, bool>> expression)
+        public override Json BuildEntity()
         {
-            var bindName = GetBindName(expression);
-            var bind = new NuiBind<bool>(bindName);
-            Element.WordWrap = bind;
+            var label = string.IsNullOrWhiteSpace(_labelBind)
+                ? JsonString(_label)
+                : Nui.Bind(_labelBind);
 
-            return this;
+            var value = string.IsNullOrWhiteSpace(_valueBind)
+                ? JsonString(_value)
+                : Nui.Bind(_valueBind);
+
+
+            return Nui.TextEdit(label, value, _maxLength, _multiLine, _wordWrap);
         }
-
     }
 }

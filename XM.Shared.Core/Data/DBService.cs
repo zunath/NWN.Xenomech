@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
@@ -137,10 +136,10 @@ namespace XM.Shared.Core.Data
                 throw new Exception($"Failed to get entity: {response.Message}");
             }
 
-            if (string.IsNullOrWhiteSpace(command.EntitySingle))
+            if (string.IsNullOrWhiteSpace(response.EntitySingle))
                 return default;
 
-            var entity = XMJsonUtility.Deserialize<T>(command.EntitySingle);
+            var entity = XMJsonUtility.Deserialize<T>(response.EntitySingle);
             return entity;
         }
 

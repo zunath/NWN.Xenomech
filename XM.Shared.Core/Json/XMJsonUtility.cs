@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-
 namespace XM.Shared.Core.Json
 {
     public static class XMJsonUtility
@@ -12,8 +11,12 @@ namespace XM.Shared.Core.Json
         {
             _options = new JsonSerializerOptions()
             {
-                NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals
+                NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals, 
+                WriteIndented = true
             };
+
+            _options.Converters.Add(new NuiRectJsonConverter());
+            _options.Converters.Add(new ColorJsonConverter());
         }
 
         /// <summary>

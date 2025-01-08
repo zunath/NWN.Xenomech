@@ -1,31 +1,41 @@
 ﻿using Anvil.API;
 using System.Linq.Expressions;
 using System;
+using XM.Shared.API.NUI;
 
 namespace XM.UI.Builder.Component
 {
-    public class NuiButtonImageBuilder<TViewModel> : NuiBuilderBase<NuiButtonImageBuilder<TViewModel>, NuiButtonImage, TViewModel>
+    public class NuiButtonImageBuilder<TViewModel> 
+        : NuiBuilderBase<NuiButtonImageBuilder<TViewModel>, TViewModel>
         where TViewModel: IViewModel
     {
+        private string _resRef;
+        private string _resRefBind;
+
         public NuiButtonImageBuilder(NuiEventCollection eventCollection)
-            : base(new NuiButtonImage(string.Empty), eventCollection)
+            : base(eventCollection)
         {
         }
 
         public NuiButtonImageBuilder<TViewModel> ResRef(string resRef)
         {
-            Element.ResRef = resRef;
+            _resRef = resRef;
             return this;
         }
         public NuiButtonImageBuilder<TViewModel> ResRef(Expression<Func<TViewModel, string>> expression)
         {
-            var bindName = GetBindName(expression);
-            var bind = new NuiBind<string>(bindName);
-            Element.ResRef = bind;
-
+            _resRefBind = GetBindName(expression);
             return this;
         }
 
+        public override Json BuildEntity()
+        {
+            var resRef = string.IsNullOrWhiteSpace(_resRefBind)
+                ? JsonString(_resRef)
+                : Nui.Bind(_resRefBind);
+
+            return Nui.ButtonImage(resRef);
+        }
     }
 
 }

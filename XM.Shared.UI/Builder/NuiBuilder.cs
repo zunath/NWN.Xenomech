@@ -17,23 +17,8 @@ namespace XM.UI.Builder
 
         public NuiBuilder<TViewModel> CreateWindow(Action<NuiWindowBuilder<TViewModel>> configure)
         {
-            var root = new NuiColumnBuilder<TViewModel>(RegisteredEvents).Build();
-            _windowBuilder = new NuiWindowBuilder<TViewModel>(root, "New Window", RegisteredEvents);
+            _windowBuilder = new NuiWindowBuilder<TViewModel>(RegisteredEvents);
             configure(_windowBuilder);
-            return this;
-        }
-
-        public NuiBuilder<TViewModel> SetRoot(Action<NuiColumnBuilder<TViewModel>> configure)
-        {
-            if (_windowBuilder == null)
-            {
-                throw new InvalidOperationException("You must create a window before adding a column.");
-            }
-
-            var columnBuilder = new NuiColumnBuilder<TViewModel>(RegisteredEvents);
-            configure(columnBuilder);
-            _windowBuilder.SetRoot(columnBuilder.Build());
-
             return this;
         }
 
@@ -44,7 +29,7 @@ namespace XM.UI.Builder
                 throw new InvalidOperationException("No window has been created.");
             }
 
-            var builtWindow = _windowBuilder.Build();
+            var builtWindow = _windowBuilder.BuildWindow();
             builtWindow.EventCollection = RegisteredEvents;
 
             return builtWindow;

@@ -1,41 +1,56 @@
 ﻿using Anvil.API;
 using System.Linq.Expressions;
 using System;
+using XM.Shared.API.NUI;
+using NuiScrollbars = XM.Shared.API.NUI.NuiScrollbars;
 
 namespace XM.UI.Builder.Component
 {
-    public class NuiTextBuilder<TViewModel> : NuiBuilderBase<NuiTextBuilder<TViewModel>, NuiText, TViewModel>
-        where TViewModel: IViewModel
+    public class NuiTextBuilder<TViewModel> : NuiBuilderBase<NuiTextBuilder<TViewModel>, TViewModel>
+        where TViewModel : IViewModel
     {
+        private string _text;
+        private string _textBind;
+
+        private bool _border;
+        private NuiScrollbars _scrollbars;
+
         public NuiTextBuilder(NuiEventCollection eventCollection)
-            : base(new NuiText(string.Empty), eventCollection)
+            : base(eventCollection)
         {
         }
 
         public NuiTextBuilder<TViewModel> Text(string text)
         {
-            Element.Text = text;
+            _text = text;
             return this;
         }
 
         public NuiTextBuilder<TViewModel> Border(bool border)
         {
-            Element.Border = border;
+            _border = border;
             return this;
         }
 
         public NuiTextBuilder<TViewModel> Scrollbars(NuiScrollbars scrollbars)
         {
-            Element.Scrollbars = scrollbars;
+            _scrollbars = scrollbars;
             return this;
         }
+
         public NuiTextBuilder<TViewModel> Text(Expression<Func<TViewModel, string>> expression)
         {
-            var bindName = GetBindName(expression);
-            var bind = new NuiBind<string>(bindName);
-            Element.Text = bind;
-
+            _textBind = GetBindName(expression);
             return this;
+        }
+
+        public override Json BuildEntity()
+        {
+            var text = string.IsNullOrWhiteSpace(_textBind)
+                ? JsonString(_text)
+                : Nui.Bind(_textBind);
+
+            return Nui.Text(text, _border, _scrollbars);
         }
     }
 }

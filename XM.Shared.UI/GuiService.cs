@@ -6,7 +6,6 @@ using NLog;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
-using XM.Shared.Core.Json;
 using XM.UI.Builder;
 using XM.UI.Entity;
 using Action = System.Action;
@@ -24,9 +23,7 @@ namespace XM.UI
         public IList<IView> Views { get; set; }
 
         private readonly Dictionary<Type, IView> _viewsByType = new();
-        private readonly Dictionary<Type, NuiWindow> _windowsByType = new();
         private readonly Dictionary<Type, NuiBuiltWindow> _builtWindowsByType = new();
-        private readonly Dictionary<Type, Json> _serializedWindowsByType = new();
         private readonly NuiEventCollection _registeredEvents = new();
         private readonly Dictionary<int, IViewModel> _playerViewModels = new();
 
@@ -157,13 +154,10 @@ namespace XM.UI
             {
                 var type = view.GetType();
                 var builtWindow = view.Build();
-                var window = builtWindow.Window;
+                
                 var elementEvents = builtWindow.EventCollection;
-                var json = XMJsonUtility.Serialize(window);
 
                 _builtWindowsByType[type] = builtWindow;
-                _serializedWindowsByType[type] = JsonParse(json);
-                _windowsByType[type] = window;
                 _viewsByType[type] = view;
 
                 foreach (var (elementId, eventCollection) in elementEvents)
@@ -187,12 +181,12 @@ namespace XM.UI
             where TView : IView
         {
             var type = typeof(TView);
-            var window = _windowsByType[type];
+            var window = _builtWindowsByType[type];
 
-            if (NuiFindWindow(player, window.Id) == 0)
+            if (NuiFindWindow(player, window.WindowId) == 0)
             {
                 var view = _viewsByType[type];
-                var json = _serializedWindowsByType[type];
+                var json = _builtWindowsByType[type].Window;
                 var viewModel = view.CreateViewModel();
                 viewModel = _injection.Inject(viewModel);
 
@@ -207,15 +201,15 @@ namespace XM.UI
                     geometry = playerUI.WindowGeometries[windowId];
                 }
                 
-                var windowToken = NuiCreate(player, json, window.Id);
+                var windowToken = NuiCreate(player, json, window.WindowId);
                 _playerViewModels[windowToken] = viewModel;
+
                 viewModel.Bind(
                     player, 
                     windowToken, 
-                    geometry, 
+                    geometry,
                     partialViews,
                     tetherObject);
-
             }
         }
 

@@ -24,15 +24,15 @@ namespace XM.Progression.UI.PlayerStatusUI
                     .Title(string.Empty)
                     .IsClosable(false)
                     .IsResizable(false)
-                    .IsCollapsed(false)
+                    .IsCollapsible(false)
                     .IsTransparent(false)
                     .Border(true)
-                    .AcceptsInput(false);
-            })
-            .SetRoot(col =>
-            {
-                HPBar(col);
-                EPBar(col);
+                    .AcceptsInput(false)
+                    .Root(col =>
+                    {
+                        HPBar(col);
+                        EPBar(col);
+                    });
             });
 
             return _builder.Build();
@@ -75,7 +75,7 @@ namespace XM.Progression.UI.PlayerStatusUI
                 row.AddProgress(progress =>
                 {
                     progress
-                        .Value(model => model.Bar1Progress)
+                        .Value(model => model.Bar2Progress)
                         .ForegroundColor(model => model.Bar2Color)
                         .Height(20f)
                         .DrawList(drawList =>

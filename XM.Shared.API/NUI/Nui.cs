@@ -573,7 +573,8 @@ namespace XM.Shared.API.NUI
             Json jFill,
             Json jLineThickness,
             NuiDrawListItemOrderType nOrder = NuiDrawListItemOrderType.After,
-            NuiDrawListItemRenderType nRender = NuiDrawListItemRenderType.Always)
+            NuiDrawListItemRenderType nRender = NuiDrawListItemRenderType.Always,
+            bool nBindArrays = false)
         {
             var ret = JsonObject();
             ret = JsonObjectSet(ret, "type", JsonInt((int)nType));
@@ -583,6 +584,7 @@ namespace XM.Shared.API.NUI
             ret = JsonObjectSet(ret, "line_thickness", jLineThickness);
             ret = JsonObjectSet(ret, "order", JsonInt((int)nOrder));
             ret = JsonObjectSet(ret, "render", JsonInt((int)nRender));
+            ret = JsonObjectSet(ret, "arrayBinds", JsonBool(nBindArrays));
             return ret;
         }
 
@@ -596,6 +598,7 @@ namespace XM.Shared.API.NUI
         /// <param name="jPoints">Bind:Float[]    Always provide points in pairs</param>
         /// <param name="nOrder">Int:NUI_DRAW_LIST_ITEM_ORDER_*</param>
         /// <param name="nRender">Int:NUI_DRAW_LIST_ITEM_RENDER_*</param>
+        /// <param name="nBindArrays"></param>
         public static Json DrawListPolyLine(
             Json jEnabled,
             Json jColor,
@@ -603,9 +606,10 @@ namespace XM.Shared.API.NUI
             Json jLineThickness,
             Json jPoints,
             NuiDrawListItemOrderType nOrder = NuiDrawListItemOrderType.After,
-            NuiDrawListItemRenderType nRender = NuiDrawListItemRenderType.Always)
+            NuiDrawListItemRenderType nRender = NuiDrawListItemRenderType.Always,
+            bool nBindArrays = false)
         {
-            var ret = NuiDrawListItem(NuiDrawListItemType.PolyLine, jEnabled, jColor, jFill, jLineThickness, nOrder, nRender);
+            var ret = NuiDrawListItem(NuiDrawListItemType.PolyLine, jEnabled, jColor, jFill, jLineThickness, nOrder, nRender, nBindArrays);
             ret = JsonObjectSet(ret, "points", jPoints);
             return ret;
         }
@@ -622,6 +626,7 @@ namespace XM.Shared.API.NUI
         /// <param name="jCtrl1">Bind:Vec2</param>
         /// <param name="nOrder">Int:NUI_DRAW_LIST_ITEM_ORDER_*</param>
         /// <param name="nRender">Int:NUI_DRAW_LIST_ITEM_RENDER_*</param>
+        /// <param name="nBindArrays">Values in binds are considered arrays-of-values</param>
         public static Json DrawListCurve(
             Json jEnabled,
             Json jColor,
@@ -631,9 +636,10 @@ namespace XM.Shared.API.NUI
             Json jCtrl0,
             Json jCtrl1,
             NuiDrawListItemOrderType nOrder = NuiDrawListItemOrderType.After,
-            NuiDrawListItemRenderType nRender = NuiDrawListItemRenderType.Always)
+            NuiDrawListItemRenderType nRender = NuiDrawListItemRenderType.Always,
+            bool nBindArrays = false)
         {
-            var ret = NuiDrawListItem(NuiDrawListItemType.Curve, jEnabled, jColor, JsonBool(false), jLineThickness, nOrder, nRender);
+            var ret = NuiDrawListItem(NuiDrawListItemType.Curve, jEnabled, jColor, JsonBool(false), jLineThickness, nOrder, nRender, nBindArrays);
             ret = JsonObjectSet(ret, "a", jA);
             ret = JsonObjectSet(ret, "b", jB);
             ret = JsonObjectSet(ret, "ctrl0", jCtrl0);
@@ -651,6 +657,7 @@ namespace XM.Shared.API.NUI
         /// <param name="jRect">Bind:Rect</param>
         /// <param name="nOrder">Int:NUI_DRAW_LIST_ITEM_ORDER_*</param>
         /// <param name="nRender">Int:NUI_DRAW_LIST_ITEM_RENDER_*</param>
+        /// <param name="nBindArrays">Values in binds are considered arrays-of-values</param>
         public static Json DrawListCircle(
             Json jEnabled,
             Json jColor,
@@ -658,9 +665,10 @@ namespace XM.Shared.API.NUI
             Json jLineThickness,
             Json jRect,
             NuiDrawListItemOrderType nOrder = NuiDrawListItemOrderType.After,
-            NuiDrawListItemRenderType nRender = NuiDrawListItemRenderType.Always)
+            NuiDrawListItemRenderType nRender = NuiDrawListItemRenderType.Always,
+            bool nBindArrays = false)
         {
-            var ret = NuiDrawListItem(NuiDrawListItemType.Circle, jEnabled, jColor, jFill, jLineThickness, nOrder, nRender);
+            var ret = NuiDrawListItem(NuiDrawListItemType.Circle, jEnabled, jColor, jFill, jLineThickness, nOrder, nRender, nBindArrays);
             ret = JsonObjectSet(ret, "rect", jRect);
             return ret;
         }
@@ -678,6 +686,7 @@ namespace XM.Shared.API.NUI
         /// <param name="jAMax">Bind:Float</param>
         /// <param name="nOrder">Int:NUI_DRAW_LIST_ITEM_ORDER_*</param>
         /// <param name="nRender">Int:NUI_DRAW_LIST_ITEM_RENDER_*</param>
+        /// <param name="nBindArrays">Values in binds are considered arrays-of-values</param>
         public static Json DrawListArc(
             Json jEnabled,
             Json jColor,
@@ -688,9 +697,10 @@ namespace XM.Shared.API.NUI
             Json jAMin,
             Json jAMax,
             NuiDrawListItemOrderType nOrder = NuiDrawListItemOrderType.After,
-            NuiDrawListItemRenderType nRender = NuiDrawListItemRenderType.Always)
+            NuiDrawListItemRenderType nRender = NuiDrawListItemRenderType.Always,
+            bool nBindArrays = false)
         {
-            var ret = NuiDrawListItem(NuiDrawListItemType.Arc, jEnabled, jColor, jFill, jLineThickness, nOrder, nRender);
+            var ret = NuiDrawListItem(NuiDrawListItemType.Arc, jEnabled, jColor, jFill, jLineThickness, nOrder, nRender, nBindArrays);
             ret = JsonObjectSet(ret, "c", jCenter);
             ret = JsonObjectSet(ret, "radius", jRadius);
             ret = JsonObjectSet(ret, "amin", jAMin);
@@ -707,15 +717,17 @@ namespace XM.Shared.API.NUI
         /// <param name="jText">Bind:String</param>
         /// <param name="nOrder">Int:NUI_DRAW_LIST_ITEM_ORDER_*</param>
         /// <param name="nRender">Int:NUI_DRAW_LIST_ITEM_RENDER_*</param>
+        /// <param name="nBindArrays">Values in binds are considered arrays-of-values</param>
         public static Json DrawListText(
             Json jEnabled,
             Json jColor,
             Json jRect,
             Json jText,
             NuiDrawListItemOrderType nOrder = NuiDrawListItemOrderType.After,
-            NuiDrawListItemRenderType nRender = NuiDrawListItemRenderType.Always)
+            NuiDrawListItemRenderType nRender = NuiDrawListItemRenderType.Always,
+            bool nBindArrays = false)
         {
-            var ret = NuiDrawListItem(NuiDrawListItemType.Text, jEnabled, jColor, JsonNull(), JsonNull(), nOrder, nRender);
+            var ret = NuiDrawListItem(NuiDrawListItemType.Text, jEnabled, jColor, JsonNull(), JsonNull(), nOrder, nRender, nBindArrays);
             ret = JsonObjectSet(ret, "rect", jRect);
             ret = JsonObjectSet(ret, "text", jText);
             return ret;
@@ -732,6 +744,7 @@ namespace XM.Shared.API.NUI
         /// <param name="jVAlign">Bind:Int:NUI_VALIGN_*</param>
         /// <param name="nOrder">Int:NUI_DRAW_LIST_ITEM_ORDER_*</param>
         /// <param name="nRender">Int:NUI_DRAW_LIST_ITEM_RENDER_*</param>
+        /// <param name="nBindArrays">Values in binds are considered arrays-of-values</param>
         public static Json DrawListImage(
             Json jEnabled,
             Json jResRef,
@@ -740,9 +753,10 @@ namespace XM.Shared.API.NUI
             Json jHAlign,
             Json jVAlign,
             NuiDrawListItemOrderType nOrder = NuiDrawListItemOrderType.After,
-            NuiDrawListItemRenderType nRender = NuiDrawListItemRenderType.Always)
+            NuiDrawListItemRenderType nRender = NuiDrawListItemRenderType.Always,
+            bool nBindArrays = false)
         {
-            var ret = NuiDrawListItem(NuiDrawListItemType.Image, jEnabled, JsonNull(), JsonNull(), JsonNull(), nOrder, nRender);
+            var ret = NuiDrawListItem(NuiDrawListItemType.Image, jEnabled, JsonNull(), JsonNull(), JsonNull(), nOrder, nRender, nBindArrays);
             ret = JsonObjectSet(ret, "image", jResRef);
             ret = JsonObjectSet(ret, "rect", jRect);
             ret = JsonObjectSet(ret, "image_aspect", jAspect);
@@ -766,17 +780,19 @@ namespace XM.Shared.API.NUI
         /// <param name="jB">Bind:Vec2</param>
         /// <param name="nOrder">Int:NUI_DRAW_LIST_ITEM_ORDER_*</param>
         /// <param name="nRender">Int:NUI_DRAW_LIST_ITEM_RENDER_*</param>
-        public static Json NuiDrawListLine(
+        /// <param name="nBindArrays">Values in binds are considered arrays-of-values</param>
+        public static Json DrawListLine(
             Json jEnabled,
             Json jColor,
             Json jLineThickness,
             Json jA,
             Json jB,
             NuiDrawListItemOrderType nOrder = NuiDrawListItemOrderType.After,
-            NuiDrawListItemRenderType nRender = NuiDrawListItemRenderType.Always
+            NuiDrawListItemRenderType nRender = NuiDrawListItemRenderType.Always,
+            bool nBindArrays = false
             )
         {
-            Json ret = NuiDrawListItem(NuiDrawListItemType.Line, jEnabled, jColor, JsonNull(), jLineThickness, nOrder, nRender);
+            Json ret = NuiDrawListItem(NuiDrawListItemType.Line, jEnabled, jColor, JsonNull(), jLineThickness, nOrder, nRender, nBindArrays);
             ret = JsonObjectSet(ret, "a", jA);
             ret = JsonObjectSet(ret, "b", jB);
             return ret;

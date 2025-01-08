@@ -5,16 +5,19 @@ namespace XM.UI.Builder
 {
     public class NuiBuiltWindow
     {
-        public NuiWindow Window { get; }
+        public string WindowId { get; }
+        public Json Window { get; }
         public NuiEventCollection EventCollection { get; internal set; }
         public NuiRect DefaultGeometry { get; }
         public Dictionary<string, Json> PartialViews { get; }
 
         public NuiBuiltWindow(
-            NuiWindow window, 
+            string windowId,
+            Json window, 
             NuiRect defaultGeometry,
             Dictionary<string, Json> partialViews)
         {
+            WindowId = windowId;
             Window = window;
             DefaultGeometry = defaultGeometry;
             PartialViews = partialViews;

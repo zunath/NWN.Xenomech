@@ -26,6 +26,7 @@ namespace XM.UI.Builder
         /// Retrieves the name of the property targeted in an expression.
         /// </summary>
         /// <typeparam name="TProperty">The type of property being targeted.</typeparam>
+        /// <typeparam name="TInterface">The type of interface being targeted.</typeparam>
         /// <param name="expression">Expression to target the property.</param>
         /// <returns>The name of the property.</returns>
         private static string GetMemberName<TInterface, TProperty>(Expression<Func<TInterface, TProperty>> expression)
