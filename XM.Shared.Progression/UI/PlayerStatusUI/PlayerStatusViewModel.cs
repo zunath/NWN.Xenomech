@@ -12,61 +12,27 @@ namespace XM.Progression.UI.PlayerStatusUI
     [ServiceBinding(typeof(IViewModel))]
     internal class PlayerStatusViewModel: 
         ViewModel,
-        IRefreshable<PlayerHPAdjustedEvent>,
         IRefreshable<PlayerEPAdjustedEvent>
     {
         private int _screenHeight;
         private int _screenWidth;
         private int _screenScale;
 
-        private static readonly Color _hpColor = new(139, 0, 0);
         private static readonly Color _epColor = new(3, 87, 152);
 
-        public Color Bar1Color
+        public Color EPBarColor
         {
             get => Get<Color>();
             set => Set(value);
         }
-
-        public Color Bar2Color
-        {
-            get => Get<Color>();
-            set => Set(value);
-        }
-        public string Bar1Label
+        public string EPValue
         {
             get => Get<string>();
             set => Set(value);
         }
-        public string Bar2Label
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-        public string Bar1Value
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-        public string Bar2Value
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-        public float Bar1Progress
+        public float EPProgress
         {
             get => Get<float>();
-            set => Set(value);
-        }
-        public float Bar2Progress
-        {
-            get => Get<float>();
-            set => Set(value);
-        }
-
-        public NuiRect RelativeValuePosition
-        {
-            get => Get<NuiRect>();
             set => Set(value);
         }
 
@@ -100,23 +66,20 @@ namespace XM.Progression.UI.PlayerStatusUI
                 _screenWidth != screenWidth ||
                 _screenScale != screenScale)
             {
-                const float WidgetWidth = 200f;
-                const float WidgetHeight = 70f;
-                const float XOffset = 255f;
-                const float YOffset = 130f;
+                const float WidgetWidth = 76f;
+                const float WidgetHeight = 35f;
+                const float XOffset = 0f;
+                const float YOffset = 77f;
 
                 var scale = screenScale / 100f;
-                var x = screenWidth - XOffset * scale;
-                var y = screenHeight - YOffset * scale;
+                var x = (screenWidth - XOffset) * scale;
+                var y = YOffset * scale;
 
                 Geometry = new NuiRect(
                     x,
                     y,
                     WidgetWidth,
                     WidgetHeight);
-
-                x = 60f * scale;
-                RelativeValuePosition = new NuiRect(x, 2f, 110f, 50f);
 
                 _screenHeight = screenHeight;
                 _screenWidth = screenWidth;
@@ -126,23 +89,8 @@ namespace XM.Progression.UI.PlayerStatusUI
 
         private void UpdateAllData()
         {
-            Bar1Label = Locale.GetString(LocaleString.HP) + ":";
-            Bar1Color = _hpColor;
-            UpdateHP();
-
-            Bar2Label = Locale.GetString(LocaleString.EP) + ":";
-            Bar2Color = _epColor;
+            EPBarColor = _epColor;
             UpdateEP();
-        }
-
-        private void UpdateHP()
-        {
-            var currentHP = GetCurrentHitPoints(Player);
-            var maxHP = GetMaxHitPoints(Player);
-            var ratio = (float)currentHP / (float)maxHP;
-
-            Bar1Value = $"{currentHP} / {maxHP}";
-            Bar1Progress = Math.Clamp(ratio, 0f, 1f);
         }
 
         private void UpdateEP()
@@ -153,13 +101,8 @@ namespace XM.Progression.UI.PlayerStatusUI
                 ? (float)currentEP / (float)maxEP
                 : 0f;
 
-            Bar2Value = $"{currentEP} / {maxEP}";
-            Bar2Progress = Math.Clamp(ratio, 0f, 1f);
-        }
-
-        public void Refresh(PlayerHPAdjustedEvent @event)
-        {
-            UpdateHP();
+            EPValue = $"{currentEP}";
+            EPProgress = Math.Clamp(ratio, 0f, 1f);
         }
 
         public void Refresh(PlayerEPAdjustedEvent @event)
