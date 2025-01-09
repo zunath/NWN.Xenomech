@@ -243,16 +243,40 @@ namespace XM.UI
             where TView: IView
         {
             var type = typeof(TView);
+
+            if (!_playerToTokens.ContainsKey(player))
+                return;
+
+            if (!_playerToTokens[player].ContainsKey(type))
+                return;
+
             var windowToken = _playerToTokens[player][type];
             
             DoCloseWindow(player, windowToken);
             NuiDestroy(player, windowToken);
         }
 
+        private void ClearOpenPlayerWindows()
+        {
+            for (var player = GetFirstPC(); GetIsObjectValid(player); player = GetNextPC())
+            {
+                var nth = 0;
+                var windowToken = NuiGetNthWindow(player, nth);
+                while (windowToken != 0)
+                {
+                    NuiDestroy(player, windowToken);
+
+                    nth++;
+                    windowToken = NuiGetNthWindow(player, nth);
+                }
+            }
+        }
+
         public void Init()
         {
             CacheViews();
             CacheRefreshables();
+            ClearOpenPlayerWindows();
         }
     }
 }
