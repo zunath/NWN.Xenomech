@@ -2,6 +2,7 @@
 using NWN.Core.NWNX;
 using XM.Progression.Stat.Event;
 using XM.Shared.API.BaseTypes;
+using XM.Shared.API.Constants;
 using XM.Shared.Core.EventManagement;
 using XM.UI;
 
@@ -25,6 +26,8 @@ namespace XM.Progression.UI.PlayerStatusUI
 
         private void SubscribeEvents()
         {
+            _event.Subscribe<ModuleEvent.OnPlayerGui>(TestWindow);
+
             _event.Subscribe<ModuleEvent.OnPlayerEnter>(OnPlayerEnter);
             _event.Subscribe<AreaEvent.AreaEnterEvent>(OnPlayerEnter);
 
@@ -34,6 +37,22 @@ namespace XM.Progression.UI.PlayerStatusUI
 
             _event.Subscribe<NWNXEvent.OnItemEquipAfter>(OnPlayerEquipItem);
             _event.Subscribe<NWNXEvent.OnItemUnequipAfter>(OnPlayerUnequipItem);
+        }
+
+        private void TestWindow()
+        {
+            var type = GetLastGuiEventType();
+            if (type != GuiEventType.DisabledPanelAttemptOpen) 
+                return;
+
+            var player = GetLastGuiEventPlayer();
+            var panelType = (GuiPanelType)GetLastGuiEventInteger();
+            if (panelType != GuiPanelType.CharacterSheet)
+                return;
+
+            _gui.CloseWindow<PlayerStatusView>(player);
+            _gui.ShowWindow<PlayerStatusView>(player);
+
         }
 
         private void OnPlayerEnter()

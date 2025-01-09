@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using Anvil.API;
 using Anvil.Services;
 using NLog;
@@ -31,6 +32,7 @@ namespace XM.UI
         private readonly Dictionary<Type, NuiBuiltWindow> _builtWindowsByType = new();
         private readonly NuiEventCollection _registeredEvents = new();
         private readonly Dictionary<int, uint> _tokenToPlayer = new();
+        private readonly Dictionary<uint, Dictionary<Type, int>> _playerToTokens = new();
         private readonly Dictionary<uint, Dictionary<int, IViewModel>> _playerViewModels = new();
 
         private readonly XMEventService _event;
@@ -133,6 +135,11 @@ namespace XM.UI
         {
             var player = NuiGetEventPlayer();
             var windowToken = NuiGetEventWindow();
+            DoCloseWindow(player, windowToken);
+        }
+
+        private void DoCloseWindow(uint player, int windowToken)
+        {
             var viewModel = _playerViewModels[player][windowToken];
 
             viewModel.Unbind();
@@ -140,8 +147,8 @@ namespace XM.UI
             SaveWindowLocation(player, windowToken);
             _playerViewModels[player].Remove(windowToken);
             _tokenToPlayer.Remove(windowToken);
-            
-            if(_lastEventTimestamps.ContainsKey(viewModel))
+
+            if (_lastEventTimestamps.ContainsKey(viewModel))
                 _lastEventTimestamps.Remove(viewModel);
         }
 
@@ -218,6 +225,11 @@ namespace XM.UI
                 _playerViewModels[player][windowToken] = viewModel;
                 _tokenToPlayer[windowToken] = player;
 
+                if (!_playerToTokens.ContainsKey(player))
+                    _playerToTokens[player] = new Dictionary<Type, int>();
+
+                _playerToTokens[player][type] = windowToken;
+
                 viewModel.Bind(
                     player, 
                     windowToken, 
@@ -225,6 +237,16 @@ namespace XM.UI
                     partialViews,
                     tetherObject);
             }
+        }
+
+        public void CloseWindow<TView>(uint player)
+            where TView: IView
+        {
+            var type = typeof(TView);
+            var windowToken = _playerToTokens[player][type];
+            
+            DoCloseWindow(player, windowToken);
+            NuiDestroy(player, windowToken);
         }
 
         public void Init()
