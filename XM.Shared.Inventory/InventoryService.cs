@@ -1,5 +1,6 @@
 ﻿using Anvil.Services;
 using System;
+using XM.Shared.API.Constants;
 
 namespace XM.Inventory
 {
@@ -61,6 +62,22 @@ namespace XM.Inventory
             {
                 SetItemStackSize(item, remaining);
                 return true;
+            }
+        }
+
+        public void UnequipAllItems(uint creature)
+        {
+            for (var slot = 0; slot < GeneralConstants.NumberOfInventorySlots; slot++)
+            {
+                var inventory = (InventorySlotType)slot;
+                if (inventory == InventorySlotType.CreatureArmor ||
+                    inventory == InventorySlotType.CreatureWeaponBite ||
+                    inventory == InventorySlotType.CreatureWeaponRight ||
+                    inventory == InventorySlotType.CreatureWeaponLeft)
+                    continue;
+
+                var item = GetItemInSlot(inventory, creature);
+                AssignCommand(creature, () => ActionUnequipItem(item));
             }
         }
     }
