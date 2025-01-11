@@ -62,7 +62,7 @@ namespace XM.Shared.Core.EventManagement
                 throw new Exception($"Type {type} is unregistered.");
 
             if (!_scriptActionRegistrations[type].ContainsKey(id))
-                throw new Exception($"Id '{id}' not found in registrations.");
+                return;
 
             _scriptActionRegistrations[type].Remove(id);
         }
