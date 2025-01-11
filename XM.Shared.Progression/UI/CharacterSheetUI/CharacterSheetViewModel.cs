@@ -58,6 +58,9 @@ namespace XM.Progression.UI.CharacterSheetUI
         [Inject]
         public JobService Job { get; set; }
 
+        [Inject]
+        public XPChart XP { get; set; }
+
         public CharacterSheetViewModel()
         {
             SelectedTab = 0;
@@ -97,7 +100,9 @@ namespace XM.Progression.UI.CharacterSheetUI
                 jobNames.Add(Locale.GetString(definition.Name));
                 jobLevels.Add($"{lvText} {dbPlayerJob.JobLevels[job]}");
                 jobIcons.Add(definition.IconResref);
-                jobProgresses.Add(0.5f);
+
+                var ratio = dbPlayerJob.JobXP[job] / XP[dbPlayerJob.JobLevels[job]];
+                jobProgresses.Add(Math.Clamp(ratio, 0f, 1f));
             }
             
             JobNames = jobNames;
