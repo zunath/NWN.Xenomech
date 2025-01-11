@@ -4,6 +4,8 @@ namespace XM.Progression.Job.JobDefinition
 {
     internal class HunterJobDefinition: IJobDefinition
     {
+        public bool IsVisibleToPlayers => true;
+
         public LocaleString Name => LocaleString.Hunter;
 
         public string IconResref => "hunter_icon";

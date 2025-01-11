@@ -4,6 +4,8 @@ namespace XM.Progression.Job.JobDefinition
 {
     internal class InvalidJobDefinition : IJobDefinition
     {
+        public bool IsVisibleToPlayers => false;
+
         public LocaleString Name => LocaleString.Empty;
 
         public string IconResref => string.Empty;

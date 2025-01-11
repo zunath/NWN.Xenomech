@@ -4,6 +4,8 @@ namespace XM.Progression.Job.JobDefinition
 {
     internal class TechweaverJobDefinition: IJobDefinition
     {
+        public bool IsVisibleToPlayers => true;
+
         public LocaleString Name => LocaleString.Techweaver;
 
         public string IconResref => "techweaver_icon";

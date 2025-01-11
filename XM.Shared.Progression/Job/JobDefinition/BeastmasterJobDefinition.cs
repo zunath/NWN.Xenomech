@@ -4,6 +4,8 @@ namespace XM.Progression.Job.JobDefinition
 {
     internal class BeastmasterJobDefinition: IJobDefinition
     {
+        public bool IsVisibleToPlayers => true;
+
         public LocaleString Name => LocaleString.Beastmaster;
 
         public string IconResref => "beast_icon";

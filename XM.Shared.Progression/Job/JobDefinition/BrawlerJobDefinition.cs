@@ -4,6 +4,8 @@ namespace XM.Progression.Job.JobDefinition
 {
     internal class BrawlerJobDefinition: IJobDefinition
     {
+        public bool IsVisibleToPlayers => true;
+
         public LocaleString Name => LocaleString.Brawler;
 
         public string IconResref => "brawler_icon";

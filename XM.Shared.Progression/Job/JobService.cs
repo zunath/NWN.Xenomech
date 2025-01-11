@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Anvil.API;
 using Anvil.Services;
 using XM.Inventory;
@@ -18,6 +19,8 @@ namespace XM.Progression.Job
     [ServiceBinding(typeof(JobService))]
     public class JobService
     {
+        public const int JobCount = 8;
+
         private readonly Dictionary<GradeType, int> _baseHPByGrade = new()
         {
             { GradeType.A, 19},
@@ -121,6 +124,11 @@ namespace XM.Progression.Job
             _inventory = inventory;
             _db = db;
             _stat = stat;
+        }
+
+        internal Dictionary<JobType, IJobDefinition> GetAllJobDefinitions()
+        {
+            return _jobDefinitions.ToDictionary(x => x.Key, y => y.Value);
         }
 
         internal IJobDefinition GetJobDefinition(JobType job)

@@ -4,6 +4,8 @@ namespace XM.Progression.Job.JobDefinition
 {
     internal class MenderJobDefinition: IJobDefinition
     {
+        public bool IsVisibleToPlayers => true;
+
         public LocaleString Name => LocaleString.Mender;
 
         public string IconResref => "mender_icon";

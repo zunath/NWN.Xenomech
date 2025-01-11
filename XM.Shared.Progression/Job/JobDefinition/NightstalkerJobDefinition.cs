@@ -4,6 +4,8 @@ namespace XM.Progression.Job.JobDefinition
 {
     internal class NightstalkerJobDefinition: IJobDefinition
     {
+        public bool IsVisibleToPlayers => true;
+
         public LocaleString Name => LocaleString.Nightstalker;
 
         public string IconResref => "night_icon";

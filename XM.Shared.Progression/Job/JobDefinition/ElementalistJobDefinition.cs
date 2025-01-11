@@ -4,6 +4,8 @@ namespace XM.Progression.Job.JobDefinition
 {
     internal class ElementalistJobDefinition: IJobDefinition
     {
+        public bool IsVisibleToPlayers => true;
+
         public LocaleString Name => LocaleString.Elementalist;
 
         public string IconResref => "elem_icon";

@@ -4,6 +4,8 @@ namespace XM.Progression.Job.JobDefinition
 {
     internal class KeeperJobDefinition: IJobDefinition
     {
+        public bool IsVisibleToPlayers => true;
+
         public LocaleString Name => LocaleString.Keeper;
 
         public string IconResref => "keeper_icon";
