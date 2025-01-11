@@ -28,7 +28,7 @@ namespace XM.UI
         private readonly Dictionary<string, object> _backingData = new();
         private readonly Dictionary<string, IGuiBindingList> _boundLists = new();
 
-        private List<string> _watches = new();
+        private readonly List<string> _watches = new();
 
         [Inject]
         public XMEventService Event { get; set; }
@@ -63,6 +63,8 @@ namespace XM.UI
         {
             var json = PartialViews[partialViewId];
             NuiSetGroupLayout(Player, WindowToken, elementId, json);
+
+            ApplyRefreshBugFix();
         }
 
         public void Unbind()
@@ -112,7 +114,11 @@ namespace XM.UI
             var value = _backingData[propertyName!];
             var json = XMJsonUtility.Serialize(value);
             NuiSetBind(Player, WindowToken, propertyName, JsonParse(json));
+            UpdateRowCount(propertyName);
+        }
 
+        private void UpdateRowCount(string propertyName)
+        {
             if (_boundLists.ContainsKey(propertyName))
             {
                 var list = _boundLists[propertyName];
@@ -140,6 +146,7 @@ namespace XM.UI
                 var list = (IGuiBindingList)value;
                 list.PropertyName = propertyName;
                 RegisterList(list, propertyName);
+                UpdateRowCount(propertyName);
             }
         }
 
@@ -241,6 +248,30 @@ namespace XM.UI
         public void Dispose()
         {
             ClearWatches();
+            Event.Unsubscribe<ModuleEvent.OnNuiEvent>(_onNuiEventToken);
+        }
+
+        // The following method works around a NUI issue where the new partial view won't display on screen until the window resizes.
+        // We force a change to the geometry of the window to ensure it redraws appropriately.
+        // If/when a fix is implemented by Beamdog, this can be removed.
+        private void ApplyRefreshBugFix()
+        {
+            Geometry = new NuiRect(
+                Geometry.X,
+                Geometry.Y,
+                Geometry.Width,
+                Geometry.Height + 1);
+            BindGeometry(Geometry);
+
+            DelayCommand(0.0f, () =>
+            {
+                Geometry = new NuiRect(
+                    Geometry.X,
+                    Geometry.Y,
+                    Geometry.Width,
+                    Geometry.Height - 1);
+                BindGeometry(Geometry);
+            });
         }
     }
 }

@@ -29,11 +29,11 @@ namespace XM.UI
 
         public void OnClose();
 
-        LocaleString ModalPromptText { get; }
+        string ModalPromptText { get; }
 
-        LocaleString ModalConfirmButtonText { get; }
+        string ModalConfirmButtonText { get; }
 
-        LocaleString ModalCancelButtonText { get; }
+        string ModalCancelButtonText { get; }
 
         public Action OnModalConfirm();
         public Action OnModalCancel();

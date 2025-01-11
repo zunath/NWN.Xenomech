@@ -7,21 +7,21 @@ namespace XM.UI
         where TViewModel: IViewModel
     {
 
-        public LocaleString ModalPromptText
+        public string ModalPromptText
         {
-            get => Get<LocaleString>();
+            get => Get<string>();
             private set => Set(value);
         }
 
-        public LocaleString ModalConfirmButtonText
+        public string ModalConfirmButtonText
         {
-            get => Get<LocaleString>();
+            get => Get<string>();
             private set => Set(value);
         }
 
-        public LocaleString ModalCancelButtonText
+        public string ModalCancelButtonText
         {
-            get => Get<LocaleString>();
+            get => Get<string>();
             private set => Set(value);
         }
 
@@ -45,15 +45,15 @@ namespace XM.UI
         };
 
         protected void ShowModal(
-            LocaleString prompt,
+            string prompt,
             Action confirmAction,
             Action cancelAction = null,
             LocaleString confirmText = LocaleString.Yes,
             LocaleString cancelText = LocaleString.No)
         {
             ModalPromptText = prompt;
-            ModalConfirmButtonText = confirmText;
-            ModalCancelButtonText = cancelText;
+            ModalConfirmButtonText = Locale.GetString(confirmText);
+            ModalCancelButtonText = Locale.GetString(cancelText);
             _callerConfirmAction = confirmAction;
             _callerCancelAction = cancelAction;
 
