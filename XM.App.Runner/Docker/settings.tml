@@ -30,7 +30,7 @@
 				ocsp-stapling = false
 	[net.udp]
 		[net.udp.window]
-			timeout = 60000
+			timeout = 300000
 [nwscript]
 	[nwscript.debugger]
 		address = "127.0.0.1"
