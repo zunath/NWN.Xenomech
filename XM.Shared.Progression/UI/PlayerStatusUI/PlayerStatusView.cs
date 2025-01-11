@@ -1,4 +1,5 @@
 ﻿using Anvil.Services;
+using XM.Shared.Core.Localization;
 using XM.UI;
 using XM.UI.Builder;
 using XM.UI.Builder.Layout;
@@ -21,10 +22,10 @@ namespace XM.Progression.UI.PlayerStatusUI
             {
                 window
                     .InitialGeometry(0, 0, 90f, 35f)
-                    .Title(string.Empty)
+                    .Title(LocaleString.Empty)
                     .IsClosable(false)
                     .IsResizable(false)
-                    .IsCollapsible(false)
+                    .IsCollapsible(WindowCollapsibleType.Disabled)
                     .IsTransparent(true)
                     .Border(false)
                     .AcceptsInput(false)

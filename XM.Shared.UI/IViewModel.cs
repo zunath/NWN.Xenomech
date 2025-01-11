@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Anvil.API;
+using XM.Shared.Core.Localization;
 using Action = System.Action;
 
 namespace XM.UI
@@ -28,11 +29,11 @@ namespace XM.UI
 
         public void OnClose();
 
-        string ModalPromptText { get; }
+        LocaleString ModalPromptText { get; }
 
-        string ModalConfirmButtonText { get; }
+        LocaleString ModalConfirmButtonText { get; }
 
-        string ModalCancelButtonText { get; }
+        LocaleString ModalCancelButtonText { get; }
 
         public Action OnModalConfirm();
         public Action OnModalCancel();

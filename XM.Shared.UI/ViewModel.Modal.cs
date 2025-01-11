@@ -3,24 +3,25 @@ using XM.Shared.Core.Localization;
 
 namespace XM.UI
 {
-    public abstract partial class ViewModel
+    public abstract partial class ViewModel<TViewModel>
+        where TViewModel: IViewModel
     {
 
-        public string ModalPromptText
+        public LocaleString ModalPromptText
         {
-            get => Get<string>();
+            get => Get<LocaleString>();
             private set => Set(value);
         }
 
-        public string ModalConfirmButtonText
+        public LocaleString ModalConfirmButtonText
         {
-            get => Get<string>();
+            get => Get<LocaleString>();
             private set => Set(value);
         }
 
-        public string ModalCancelButtonText
+        public LocaleString ModalCancelButtonText
         {
-            get => Get<string>();
+            get => Get<LocaleString>();
             private set => Set(value);
         }
 
@@ -44,15 +45,15 @@ namespace XM.UI
         };
 
         protected void ShowModal(
-            string prompt,
+            LocaleString prompt,
             Action confirmAction,
             Action cancelAction = null,
             LocaleString confirmText = LocaleString.Yes,
             LocaleString cancelText = LocaleString.No)
         {
             ModalPromptText = prompt;
-            ModalConfirmButtonText = Locale.GetString(confirmText);
-            ModalCancelButtonText = Locale.GetString(cancelText);
+            ModalConfirmButtonText = confirmText;
+            ModalCancelButtonText = cancelText;
             _callerConfirmAction = confirmAction;
             _callerCancelAction = cancelAction;
 

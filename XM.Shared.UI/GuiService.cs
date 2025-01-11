@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Numerics;
 using Anvil.API;
 using Anvil.Services;
 using NLog;
@@ -32,6 +31,7 @@ namespace XM.UI
         private readonly Dictionary<Type, NuiBuiltWindow> _builtWindowsByType = new();
         private readonly NuiEventCollection _registeredEvents = new();
         private readonly Dictionary<int, uint> _tokenToPlayer = new();
+        private readonly Dictionary<int, Type> _tokenToType = new();
         private readonly Dictionary<uint, Dictionary<Type, int>> _playerToTokens = new();
         private readonly Dictionary<uint, Dictionary<int, IViewModel>> _playerViewModels = new();
 
@@ -141,12 +141,15 @@ namespace XM.UI
         private void DoCloseWindow(uint player, int windowToken)
         {
             var viewModel = _playerViewModels[player][windowToken];
+            var type = _tokenToType[windowToken];
 
             viewModel.Unbind();
             viewModel.OnClose();
             SaveWindowLocation(player, windowToken);
             _playerViewModels[player].Remove(windowToken);
             _tokenToPlayer.Remove(windowToken);
+            _playerToTokens[player].Remove(type);
+            _tokenToType.Remove(windowToken);
 
             if (_lastEventTimestamps.ContainsKey(viewModel))
                 _lastEventTimestamps.Remove(viewModel);
@@ -224,6 +227,7 @@ namespace XM.UI
 
                 _playerViewModels[player][windowToken] = viewModel;
                 _tokenToPlayer[windowToken] = player;
+                _tokenToType[windowToken] = type;
 
                 if (!_playerToTokens.ContainsKey(player))
                     _playerToTokens[player] = new Dictionary<Type, int>();
@@ -254,6 +258,22 @@ namespace XM.UI
             
             DoCloseWindow(player, windowToken);
             NuiDestroy(player, windowToken);
+        }
+
+        public void ToggleWindow<TView>(uint player)
+            where TView: IView
+        {
+            var type = typeof(TView);
+
+            if (_playerToTokens.ContainsKey(player) &&
+                _playerToTokens[player].ContainsKey(type))
+            {
+                CloseWindow<TView>(player);
+            }
+            else
+            {
+                ShowWindow<TView>(player);
+            }
         }
 
         private void ClearOpenPlayerWindows()

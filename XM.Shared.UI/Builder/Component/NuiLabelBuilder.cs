@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System;
 using XM.Shared.API.NUI;
+using XM.Shared.Core.Localization;
 
 namespace XM.UI.Builder.Component
 {
@@ -14,7 +15,7 @@ namespace XM.UI.Builder.Component
         private NuiVAlign _verticalAlign;
         private string _verticalAlignBind;
 
-        private string _label;
+        private LocaleString _label;
         private string _labelBind;
 
         public NuiLabelBuilder(NuiEventCollection eventCollection)
@@ -34,7 +35,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiLabelBuilder<TViewModel> Label(string label)
+        public NuiLabelBuilder<TViewModel> Label(LocaleString label)
         {
             _label = label;
             return this;
@@ -68,8 +69,9 @@ namespace XM.UI.Builder.Component
                 ? JsonInt((int)_verticalAlign)
                 : Nui.Bind(_verticalAlignBind);
 
+            var labelText = Locale.GetString(_label);
             var label = string.IsNullOrWhiteSpace(_labelBind)
-                ? JsonString(_label)
+                ? JsonString(labelText)
                 : Nui.Bind(_labelBind);
 
             return Nui.Label(label, horizontalAlign, verticalAlign);

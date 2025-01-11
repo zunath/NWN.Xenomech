@@ -10,9 +10,12 @@ using XM.Shared.Core.Json;
 
 namespace XM.UI
 {
-    public abstract partial class ViewModel: 
-        IViewModel, 
-        INotifyPropertyChanged
+    [ServiceBinding(typeof(IDisposable))]
+    public abstract partial class ViewModel<TViewModel>:
+        IViewModel,
+        INotifyPropertyChanged,
+        IDisposable
+        where TViewModel : IViewModel
     {
         protected uint Player { get; private set; }
         protected uint TetherObject { get; private set; }
@@ -24,6 +27,8 @@ namespace XM.UI
         private Guid _onNuiEventToken;
         private readonly Dictionary<string, object> _backingData = new();
         private readonly Dictionary<string, IGuiBindingList> _boundLists = new();
+
+        private List<string> _watches = new();
 
         [Inject]
         public XMEventService Event { get; set; }
@@ -68,6 +73,8 @@ namespace XM.UI
             {
                 UnbindList(list, propertyName);
             }
+
+            ClearWatches();
         }
 
         private void BindGeometry(NuiRect geometry)
@@ -80,12 +87,16 @@ namespace XM.UI
         {
             var @event = NuiGetEventType();
             var propertyName = NuiGetEventElement();
+            var windowToken = NuiGetEventWindow();
+            if (windowToken != WindowToken)
+                return;
 
             if (@event == "watch")
             {
                 var bind = NuiGetBind(Player, WindowToken, propertyName);
                 var jsonString = JsonDump(bind);
-                var type = GetType().GetProperty(propertyName)!.PropertyType;
+                var property = GetType().GetProperty(propertyName);
+                var type = property!.PropertyType;
 
                 var value = XMJsonUtility.DeserializeObject(jsonString, type);
                 _backingData[propertyName] = value;
@@ -184,10 +195,11 @@ namespace XM.UI
         /// </summary>
         /// <typeparam name="TProperty">The property of the view model.</typeparam>
         /// <param name="expression">Expression to target the property.</param>
-        protected void WatchOnClient<TProperty>(Expression<Func<IViewModel, TProperty>> expression)
+        protected void WatchOnClient<TProperty>(Expression<Func<TViewModel, TProperty>> expression)
         {
             var memberExpression = (MemberExpression)expression.Body;
             var propertyName = memberExpression.Member.Name;
+            _watches.Add(propertyName);
 
             NuiSetBindWatch(Player, WindowToken, propertyName, true);
         }
@@ -215,8 +227,20 @@ namespace XM.UI
             return InitialData as TData;
         }
 
+        private void ClearWatches()
+        {
+            foreach (var watch in _watches)
+            {
+                NuiSetBindWatch(Player, WindowToken, watch, false);
+            }
+        }
+
         public abstract void OnOpen();
 
         public abstract void OnClose();
+        public void Dispose()
+        {
+            ClearWatches();
+        }
     }
 }

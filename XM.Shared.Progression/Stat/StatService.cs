@@ -2,6 +2,7 @@
 using Anvil.Services;
 using XM.Progression.Stat.Entity;
 using XM.Progression.Stat.Event;
+using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.CreaturePlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
@@ -45,17 +46,26 @@ namespace XM.Progression.Stat
         /// Increases or decreases a player's HP by a specified amount.
         /// There is a cap of 255 HP per NWN level. Players are auto-leveled to 40 by default, so this
         /// gives 255 * 40 = 10,200 HP maximum. If the player's HP would go over this amount, it will be set to 10,200.
-        /// This method will not persist the changes so be sure you call DB.Set after calling this.
         /// </summary>
         /// <param name="player">The player to adjust</param>
         /// <param name="adjustBy">The amount to adjust by.</param>
         public void AdjustPlayerMaxHP(uint player, int adjustBy)
         {
+            var playerId = PlayerId.Get(player);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+            dbPlayerStat.MaxHP += adjustBy;
+
+            SetPlayerMaxHP(player, dbPlayerStat.MaxHP);
+            _db.Set(dbPlayerStat);
+        }
+
+        public void SetPlayerMaxHP(uint player, int amount)
+        {
             const int MaxHPPerLevel = 254;
 
             var playerId = PlayerId.Get(player);
             var dbPlayerStat = _db.Get<PlayerStat>(playerId);
-            dbPlayerStat.MaxHP += adjustBy;
+            dbPlayerStat.MaxHP = amount;
             var nwnLevelCount = GetLevelByPosition(1, player) +
                                 GetLevelByPosition(2, player) +
                                 GetLevelByPosition(3, player);
@@ -265,6 +275,23 @@ namespace XM.Progression.Stat
             var playerId = PlayerId.Get(creature);
             var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
             return dbPlayerStat.AbilityRecastReduction;
+        }
+
+        public void SetPlayerMaxEP(uint player, int amount)
+        {
+            var playerId = PlayerId.Get(player);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+            dbPlayerStat.MaxEP = amount;
+
+            if (dbPlayerStat.EP > dbPlayerStat.MaxEP)
+                dbPlayerStat.EP = dbPlayerStat.MaxEP;
+
+            _db.Set(dbPlayerStat);
+        }
+
+        public void SetPlayerAttribute(uint player, AbilityType type, int amount)
+        {
+            CreaturePlugin.SetRawAbilityScore(player, type, amount);
         }
     }
 }

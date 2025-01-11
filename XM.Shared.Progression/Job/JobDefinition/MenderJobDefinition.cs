@@ -1,7 +1,13 @@
-﻿namespace XM.Progression.Job.JobDefinition
+﻿using XM.Shared.Core.Localization;
+
+namespace XM.Progression.Job.JobDefinition
 {
     internal class MenderJobDefinition: IJobDefinition
     {
+        public LocaleString Name => LocaleString.Mender;
+
+        public string IconResref => "mender_icon";
+
         public JobGrade Grades { get; } = new()
         {
             HP = GradeType.E,

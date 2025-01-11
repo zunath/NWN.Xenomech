@@ -88,6 +88,138 @@
     {
       "id": 22,
       "text": "No"
+    },
+    {
+      "id": 23,
+      "text": "HP"
+    },
+    {
+      "id": 24,
+      "text": "EP"
+    },
+    {
+      "id": 25,
+      "text": "Beastmaster"
+    },
+    {
+      "id": 26,
+      "text": "Brawler"
+    },
+    {
+      "id": 27,
+      "text": "Elementalist"
+    },
+    {
+      "id": 28,
+      "text": "Hunter"
+    },
+    {
+      "id": 29,
+      "text": "Keeper"
+    },
+    {
+      "id": 30,
+      "text": "Mender"
+    },
+    {
+      "id": 31,
+      "text": "Nightstalker"
+    },
+    {
+      "id": 32,
+      "text": "Techweaver"
+    },
+    {
+      "id": 33,
+      "text": "Job"
+    },
+    {
+      "id": 34,
+      "text": "New Window"
+    },
+    {
+      "id": 35,
+      "text": "Character Sheet"
+    },
+    {
+      "id": 36,
+      "text": "Might"
+    },
+    {
+      "id": 37,
+      "text": "Vitality"
+    },
+    {
+      "id": 38,
+      "text": "Perception"
+    },
+    {
+      "id": 39,
+      "text": "Willpower"
+    },
+    {
+      "id": 40,
+      "text": "Agility"
+    },
+    {
+      "id": 41,
+      "text": "Social"
+    },
+    {
+      "id": 42,
+      "text": "MGT"
+    },
+    {
+      "id": 43,
+      "text": "VIT"
+    },
+    {
+      "id": 44,
+      "text": "PER"
+    },
+    {
+      "id": 45,
+      "text": "WIL"
+    },
+    {
+      "id": 46,
+      "text": "AGI"
+    },
+    {
+      "id": 47,
+      "text": "SOC"
+    },
+    {
+      "id": 48,
+      "text": "Stat"
+    },
+    {
+      "id": 49,
+      "text": "Quests"
+    },
+    {
+      "id": 50,
+      "text": "Appearance"
+    },
+    {
+      "id": 51,
+      "text": "Key Items"
+    },
+    {
+      "id": 52,
+      "text": "Open Trash"
+    },
+    {
+      "id": 53,
+      "text": "Settings"
+    },
+    {
+      "id": 54,
+      "text": "Level"
+    },
+    {
+      "id": 55,
+      "text": "Lv."
     }
   ]
 }

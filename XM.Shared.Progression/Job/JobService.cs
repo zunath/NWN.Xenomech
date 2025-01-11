@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using Anvil.API;
 using Anvil.Services;
 using XM.Inventory;
 using XM.Progression.Job.Entity;
+using XM.Progression.Job.Event;
 using XM.Progression.Job.JobDefinition;
 using XM.Progression.Stat;
 using XM.Progression.Stat.Entity;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
+using XM.Shared.Core.Localization;
 
 namespace XM.Progression.Job
 {
@@ -94,6 +97,7 @@ namespace XM.Progression.Job
 
         private readonly Dictionary<JobType, IJobDefinition> _jobDefinitions = new()
         {
+            { JobType.Invalid, new InvalidJobDefinition()},
             { JobType.Beastmaster , new BeastmasterJobDefinition()},
             { JobType.Brawler , new BrawlerJobDefinition()},
             { JobType.Elementalist , new ElementalistJobDefinition()},
@@ -188,6 +192,19 @@ namespace XM.Progression.Job
                          dbPlayerStat.BaseAttributes[AbilityType.Social] + 
                          dbPlayerStat.Attributes[AbilityType.Social];
 
+            _stat.SetPlayerMaxHP(player, hp);
+            _stat.SetPlayerMaxEP(player, ep);
+            _stat.SetPlayerAttribute(player, AbilityType.Might, might);
+            _stat.SetPlayerAttribute(player, AbilityType.Perception, perception);
+            _stat.SetPlayerAttribute(player, AbilityType.Vitality, vitality);
+            _stat.SetPlayerAttribute(player, AbilityType.Agility, agility);
+            _stat.SetPlayerAttribute(player, AbilityType.Willpower, willpower);
+            _stat.SetPlayerAttribute(player, AbilityType.Social, social);
+
+            var name = Locale.GetString(definition.Name);
+            SendMessageToPC(player, $"Job changed to: {ColorToken.Green(name)}");
+
+            ExecuteScript(JobEventScript.PlayerChangedJobScript, player);
         }
     }
 }

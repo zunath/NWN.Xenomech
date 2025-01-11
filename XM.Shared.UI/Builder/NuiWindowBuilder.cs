@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Anvil.API;
 using XM.Shared.API.NUI;
+using XM.Shared.Core.Localization;
 using XM.UI.Builder.Component;
 using XM.UI.Builder.Layout;
 using NuiScrollbars = XM.Shared.API.NUI.NuiScrollbars;
@@ -13,13 +14,13 @@ namespace XM.UI.Builder
         where TViewModel : IViewModel
     {
         private INuiComponentBuilder _root;
-        private string _title;
+        private LocaleString _title;
         private string _titleBind;
 
         private bool _resizable;
         private string _resizableBind;
 
-        private bool _collapsed;
+        private WindowCollapsibleType _collapsed;
         private string _collapsedBind;
 
         private bool _closable;
@@ -40,9 +41,9 @@ namespace XM.UI.Builder
         public NuiWindowBuilder(NuiEventCollection registeredEvents) 
             : base(registeredEvents)
         {
-            _title = "New Window";
+            _title = LocaleString.NewWindow;
             _resizable = true;
-            _collapsed = false;
+            _collapsed = WindowCollapsibleType.UserCollapsible;
             _closable = true;
             _transparent = false;
             _border = true;
@@ -84,13 +85,13 @@ namespace XM.UI.Builder
             return this;
         }
 
-        public NuiWindowBuilder<TViewModel> Title(string title)
+        public NuiWindowBuilder<TViewModel> Title(LocaleString title)
         {
             _title = title;
             return this;
         }
 
-        public NuiWindowBuilder<TViewModel> Title(Expression<Func<TViewModel, string>> expression)
+        public NuiWindowBuilder<TViewModel> Title(Expression<Func<TViewModel, LocaleString>> expression)
         {
             _titleBind = GetBindName(expression);
             return this;
@@ -120,7 +121,7 @@ namespace XM.UI.Builder
             return this;
         }
 
-        public NuiWindowBuilder<TViewModel> IsCollapsible(bool collapsed)
+        public NuiWindowBuilder<TViewModel> IsCollapsible(WindowCollapsibleType collapsed)
         {
             _collapsed = collapsed;
             return this;
@@ -220,7 +221,7 @@ namespace XM.UI.Builder
             var root = _root.Build();
             
             var title = string.IsNullOrWhiteSpace(_titleBind) 
-                ? JsonString(_title) 
+                ? JsonString(Locale.GetString(_title)) 
                 : Nui.Bind(_titleBind);
 
             var geometry = Nui.Bind(_geometryBind);
@@ -229,8 +230,24 @@ namespace XM.UI.Builder
                 ? JsonBool(_resizable) 
                 : Nui.Bind(_resizableBind);
 
+            Json collapsedValue;
+            switch (_collapsed)
+            {
+                case WindowCollapsibleType.CollapsedInitially:
+                    collapsedValue = JsonBool(true);
+                    break;
+                case WindowCollapsibleType.UserCollapsible:
+                    collapsedValue = JsonNull();
+                    break;
+                case WindowCollapsibleType.Disabled:
+                    collapsedValue = JsonBool(false);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
             var collapsed = string.IsNullOrWhiteSpace(_collapsedBind) 
-                ? JsonBool(_collapsed) 
+                ? collapsedValue 
                 : Nui.Bind(_collapsedBind);
 
             var closable = string.IsNullOrWhiteSpace(_closableBind) 

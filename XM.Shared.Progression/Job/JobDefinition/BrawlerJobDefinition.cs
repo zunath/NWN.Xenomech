@@ -1,7 +1,13 @@
-﻿namespace XM.Progression.Job.JobDefinition
+﻿using XM.Shared.Core.Localization;
+
+namespace XM.Progression.Job.JobDefinition
 {
     internal class BrawlerJobDefinition: IJobDefinition
     {
+        public LocaleString Name => LocaleString.Brawler;
+
+        public string IconResref => "brawler_icon";
+
         public JobGrade Grades { get; } = new()
         {
             HP = GradeType.A,

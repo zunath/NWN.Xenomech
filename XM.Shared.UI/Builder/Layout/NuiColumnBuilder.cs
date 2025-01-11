@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Anvil.API;
 using XM.Shared.API.NUI;
 using XM.UI.Builder.Component;
+using NuiScrollbars = XM.Shared.API.NUI.NuiScrollbars;
 
 namespace XM.UI.Builder.Layout
 {
@@ -23,6 +24,29 @@ namespace XM.UI.Builder.Layout
             row(rowBuilder);
 
             _children.Add(rowBuilder);
+
+            return this;
+        }
+
+        public NuiColumnBuilder<TViewModel> AddGroup(Action<NuiGroupBuilder<TViewModel>> group)
+        {
+            var groupBuilder = new NuiGroupBuilder<TViewModel>(RegisteredEvents);
+            group(groupBuilder);
+
+            _children.Add(groupBuilder);
+
+            return this;
+        }
+
+        public NuiColumnBuilder<TViewModel> AddPartialPlaceholder(string id)
+        {
+            var groupBuilder = new NuiGroupBuilder<TViewModel>(RegisteredEvents);
+            groupBuilder
+                .SetLayout(col => { })
+                .SetBorder(false)
+                .SetScrollbars(NuiScrollbars.None);
+
+            _children.Add(groupBuilder);
 
             return this;
         }

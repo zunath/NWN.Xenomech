@@ -1,7 +1,13 @@
-﻿namespace XM.Progression.Job.JobDefinition
+﻿using XM.Shared.Core.Localization;
+
+namespace XM.Progression.Job.JobDefinition
 {
     internal class ElementalistJobDefinition: IJobDefinition
     {
+        public LocaleString Name => LocaleString.Elementalist;
+
+        public string IconResref => "elem_icon";
+
         public JobGrade Grades { get; } = new()
         {
             HP = GradeType.F,

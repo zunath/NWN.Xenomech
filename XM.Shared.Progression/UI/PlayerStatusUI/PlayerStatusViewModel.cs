@@ -4,14 +4,13 @@ using Anvil.Services;
 using XM.Progression.Stat;
 using XM.Progression.Stat.Event;
 using XM.Shared.API.Constants;
-using XM.Shared.Core.Localization;
 using XM.UI;
 
 namespace XM.Progression.UI.PlayerStatusUI
 {
     [ServiceBinding(typeof(IViewModel))]
     internal class PlayerStatusViewModel: 
-        ViewModel,
+        ViewModel<PlayerStatusViewModel>,
         IRefreshable<PlayerEPAdjustedEvent>
     {
         private int _screenHeight;
