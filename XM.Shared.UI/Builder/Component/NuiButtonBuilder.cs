@@ -24,7 +24,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiButtonBuilder<TViewModel> Label(Expression<Func<TViewModel, LocaleString>> expression)
+        public NuiButtonBuilder<TViewModel> Label(Expression<Func<TViewModel, string>> expression)
         {
             _labelBind = GetBindName(expression);
             return this;

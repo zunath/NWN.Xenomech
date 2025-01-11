@@ -58,6 +58,11 @@ namespace XM.UI.Builder.Component
             _labelBind = GetBindName(expression);
             return this;
         }
+        public NuiLabelBuilder<TViewModel> Label(Expression<Func<TViewModel, GuiBindingList<string>>> expression)
+        {
+            _labelBind = GetBindName(expression);
+            return this;
+        }
 
         public override Json BuildEntity()
         {

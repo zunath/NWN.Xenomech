@@ -88,6 +88,11 @@ namespace XM.UI.Builder.Component
             _resRefBind = GetBindName(expression);
             return this;
         }
+        public NuiImageBuilder<TViewModel> ResRef(Expression<Func<TViewModel, GuiBindingList<string>>> expression)
+        {
+            _resRefBind = GetBindName(expression);
+            return this;
+        }
 
         public override Json BuildEntity()
         {

@@ -39,7 +39,12 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiTextBuilder<TViewModel> Text(Expression<Func<TViewModel, LocaleString>> expression)
+        public NuiTextBuilder<TViewModel> Text(Expression<Func<TViewModel, string>> expression)
+        {
+            _textBind = GetBindName(expression);
+            return this;
+        }
+        public NuiTextBuilder<TViewModel> Text(Expression<Func<TViewModel, GuiBindingList<string>>> expression)
         {
             _textBind = GetBindName(expression);
             return this;
