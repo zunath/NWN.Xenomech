@@ -28,49 +28,35 @@ namespace XM.Progression.UI.CharacterSheetUI
             set => Set(value);
         }
 
-        public string KeeperLevel
+        public GuiBindingList<string> JobNames
         {
-            get => Get<string>();
-            set => Set(value);
-        }
-        public string MenderLevel
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-        public string BrawlerLevel
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-        public string BeastmasterLevel
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-        public string TechweaverLevel
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-        public string ElementalistLevel
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-        public string NightstalkerLevel
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-        public string HunterLevel
-        {
-            get => Get<string>();
+            get => Get<GuiBindingList<string>>();
             set => Set(value);
         }
 
+        public GuiBindingList<string> JobLevels
+        {
+            get => Get<GuiBindingList<string>>();
+            set => Set(value);
+        }
+
+        public GuiBindingList<string> JobIcons
+        {
+            get => Get<GuiBindingList<string>>();
+            set => Set(value);
+        }
+        public GuiBindingList<float> JobProgresses
+        {
+            get => Get<GuiBindingList<float>>();
+            set => Set(value);
+        }
+
+
         [Inject]
         public DBService DB { get; set; }
+
+        [Inject]
+        public JobService Job { get; set; }
 
         public CharacterSheetViewModel()
         {
@@ -79,7 +65,7 @@ namespace XM.Progression.UI.CharacterSheetUI
 
         public override void OnOpen()
         {
-            LoadJobData();
+            
 
             WatchOnClient(model => model.SelectedTab);
         }
@@ -89,20 +75,35 @@ namespace XM.Progression.UI.CharacterSheetUI
             
         }
 
-        private void LoadJobData()
+        private void LoadJobView()
         {
+            ChangePartialView(MainView, JobPartialId);
+
             var playerId = PlayerId.Get(Player);
             var dbPlayerJob = DB.Get<PlayerJob>(playerId) ?? new PlayerJob(playerId);
+            var allJobs = Job.GetAllJobDefinitions();
 
             var lvText = Locale.GetString(LocaleString.Lv);
-            KeeperLevel = $"{lvText} {dbPlayerJob.JobLevels[JobType.Keeper]}";
-            MenderLevel = $"{lvText} {dbPlayerJob.JobLevels[JobType.Mender]}";
-            BrawlerLevel = $"{lvText} {dbPlayerJob.JobLevels[JobType.Brawler]}";
-            BeastmasterLevel = $"{lvText} {dbPlayerJob.JobLevels[JobType.Beastmaster]}";
-            TechweaverLevel = $"{lvText} {dbPlayerJob.JobLevels[JobType.Techweaver]}";
-            ElementalistLevel = $"{lvText} {dbPlayerJob.JobLevels[JobType.Elementalist]}";
-            NightstalkerLevel = $"{lvText} {dbPlayerJob.JobLevels[JobType.Nightstalker]}";
-            HunterLevel = $"{lvText} {dbPlayerJob.JobLevels[JobType.Hunter]}";
+            var jobNames = new GuiBindingList<string>();
+            var jobLevels = new GuiBindingList<string>();
+            var jobIcons = new GuiBindingList<string>();
+            var jobProgresses = new GuiBindingList<float>();
+
+            foreach (var (job, definition) in allJobs)
+            {
+                if(!definition.IsVisibleToPlayers)
+                    continue;
+
+                jobNames.Add(Locale.GetString(definition.Name));
+                jobLevels.Add($"{lvText} {dbPlayerJob.JobLevels[job]}");
+                jobIcons.Add(definition.IconResref);
+                jobProgresses.Add(0.5f);
+            }
+            
+            JobNames = jobNames;
+            JobLevels = jobLevels;
+            JobIcons = jobIcons;
+            JobProgresses = jobProgresses;
         }
 
         public Action OnChangeTab => () =>
@@ -113,7 +114,7 @@ namespace XM.Progression.UI.CharacterSheetUI
                     ChangePartialView(MainView, StatPartialId);
                     break;
                 case 1: // 1 = Job
-                    ChangePartialView(MainView, JobPartialId);
+                    LoadJobView();
                     break;
                 case 2: // 2 = Settings
                     ChangePartialView(MainView, SettingsPartialId);

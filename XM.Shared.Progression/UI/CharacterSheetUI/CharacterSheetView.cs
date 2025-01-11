@@ -102,84 +102,115 @@ namespace XM.Progression.UI.CharacterSheetUI
             });
         }
 
-        private void BuildJobPartial(NuiGroupBuilder<CharacterSheetViewModel> group)
+        private void BuildJobPartial(NuiGroupBuilder<CharacterSheetViewModel> partial)
         {
-            group
+            partial
                 .SetBorder(false)
                 .SetScrollbars(NuiScrollbars.Auto)
-                .SetLayout(col =>
+                .SetLayout(layout =>
                 {
-                    col.AddRow(row =>
+                    layout.AddList(list =>
                     {
-                        BuildJobDetail(row, JobType.Keeper, model => model.KeeperLevel);
-                        BuildJobDetail(row, JobType.Mender, model => model.MenderLevel);
-                    });
-                    col.AddRow(row =>
-                    {
-                        BuildJobDetail(row, JobType.Brawler, model => model.BrawlerLevel);
-                        BuildJobDetail(row, JobType.Beastmaster, model => model.BeastmasterLevel);
-                    });
-                    col.AddRow(row =>
-                    {
-                        BuildJobDetail(row, JobType.Techweaver, model => model.TechweaverLevel);
-                        BuildJobDetail(row, JobType.Elementalist, model => model.ElementalistLevel);
-                    });
-                    col.AddRow(row =>
-                    {
-                        BuildJobDetail(row, JobType.Nightstalker, model => model.NightstalkerLevel);
-                        BuildJobDetail(row, JobType.Hunter, model => model.HunterLevel);
+                        list.RowHeight(70f);
+                        list.AddTemplateCell(cell =>
+                        {
+                            cell.Width(70f);
+                            cell.IsVariable(false);
+                            cell.AddGroup(group =>
+                            {
+                                group.SetLayout(cellLayout =>
+                                {
+                                    cellLayout.AddRow(cellLayoutRow =>
+                                    {
+                                        cellLayoutRow.AddColumn(col =>
+                                        {
+                                            col.AddGroup(imageGroup =>
+                                            {
+                                                imageGroup.SetLayout(layout =>
+                                                {
+                                                    layout.AddImage(image =>
+                                                    {
+                                                        image
+                                                            .HorizontalAlign(NuiHAlign.Center)
+                                                            .VerticalAlign(NuiVAlign.Top)
+                                                            .ResRef(model => model.JobIcons)
+                                                            .Height(64f)
+                                                            .Width(64f);
+                                                    });
+                                                });
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        }, model => model.JobNames);
+
+                        list.AddTemplateCell(cell =>
+                        {
+                            cell.Width(16f);
+                            cell.IsVariable(false);
+                            cell.AddGroup(group =>
+                            {
+                                group.SetLayout(layout =>
+                                {
+                                    layout.AddSpacer();
+                                });
+                            });
+                        }, model => model.JobNames);
+
+                        list.AddTemplateCell(cell =>
+                        {
+                            cell.Width(200f);
+                            cell.IsVariable(false);
+                            cell.AddGroup(group =>
+                            {
+                                group.SetLayout(col =>
+                                {
+                                    col.AddRow(row =>
+                                    {
+                                        row.AddText(label =>
+                                        {
+                                            label
+                                                .Text(model => model.JobNames);
+                                        });
+                                    });
+                                    col.AddRow(row =>
+                                    {
+                                        row.AddText(label =>
+                                        {
+                                            label
+                                                .Text(model => model.JobLevels);
+                                        });
+                                    });
+                                });
+                            });
+                        }, model => model.JobNames);
+
+                        list.AddTemplateCell(cell =>
+                        {
+                            cell.AddGroup(group =>
+                            {
+                                group.SetLayout(col =>
+                                {
+                                    col.AddRow(row =>
+                                    {
+                                        row.Height(10f);
+                                        row.AddSpacer();
+                                    });
+                                    col.AddRow(row =>
+                                    {
+                                        row.AddProgress(progress =>
+                                        {
+                                            progress.Value(model => model.JobProgresses);
+                                        });
+                                    });
+                                });
+                            });
+                        }, model => model.JobNames);
                     });
                 });
         }
 
-        private void BuildJobDetail(
-            NuiRowBuilder<CharacterSheetViewModel> row, 
-            JobType job,
-            Expression<Func<CharacterSheetViewModel, string>> levelExpression)
-        {
-            var definition = _job.GetJobDefinition(job);
-
-            row.AddSpacer();
-            if (job == JobType.Invalid)
-            {
-                return;
-            }
-
-            row.AddColumn(col =>
-            {
-                col.AddImage(image =>
-                {
-                    image
-                        .HorizontalAlign(NuiHAlign.Center)
-                        .VerticalAlign(NuiVAlign.Top)
-                        .ResRef(definition.IconResref)
-                        .Height(64f)
-                        .Width(64f);
-                });
-            });
-
-            row.AddColumn(col =>
-            {
-                col.AddRow(row =>
-                {
-                    row.AddLabel(label =>
-                    {
-                        label
-                            .Label(definition.Name)
-                            .HorizontalAlign(NuiHAlign.Left)
-                            .VerticalAlign(NuiVAlign.Top);
-                    });
-
-                    row.AddLabel(label =>
-                    {
-                        label
-                            .Label(levelExpression);
-                    });
-                });
-            });
-
-            row.AddSpacer();
-        }
 
         private void BuildButtons(NuiGroupBuilder<CharacterSheetViewModel> group)
         {
@@ -188,16 +219,16 @@ namespace XM.Progression.UI.CharacterSheetUI
                 col.AddButton(button =>
                 {
                     button
-                        .Label(LocaleString.Quests)
+                        .Label(LocaleString.Appearance)
                         .Width(100f)
-                        .OnClick(model => model.OnClickQuests);
+                        .OnClick(model => model.OnClickAppearance);
                 });
                 col.AddButton(button =>
                 {
                     button
-                        .Label(LocaleString.Appearance)
+                        .Label(LocaleString.Quests)
                         .Width(100f)
-                        .OnClick(model => model.OnClickAppearance);
+                        .OnClick(model => model.OnClickQuests);
                 });
                 col.AddButton(button =>
                 {
