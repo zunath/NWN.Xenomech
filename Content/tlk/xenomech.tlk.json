@@ -220,6 +220,70 @@
     {
       "id": 55,
       "text": "Lv."
+    },
+    {
+      "id": 56,
+      "text": "Human"
+    },
+    {
+      "id": 57,
+      "text": "Main Hand"
+    },
+    {
+      "id": 58,
+      "text": "Off Hand"
+    },
+    {
+      "id": 59,
+      "text": "Attack"
+    },
+    {
+      "id": 60,
+      "text": "Accuracy"
+    },
+    {
+      "id": 61,
+      "text": "Evasion"
+    },
+    {
+      "id": 62,
+      "text": "Defense"
+    },
+    {
+      "id": 63,
+      "text": "Fire Resist"
+    },
+    {
+      "id": 64,
+      "text": "Ice Resist"
+    },
+    {
+      "id": 65,
+      "text": "Wind Resist"
+    },
+    {
+      "id": 66,
+      "text": "Earth Resist"
+    },
+    {
+      "id": 67,
+      "text": "Lightning Resist"
+    },
+    {
+      "id": 68,
+      "text": "Water Resist"
+    },
+    {
+      "id": 69,
+      "text": "Light Resist"
+    },
+    {
+      "id": 70,
+      "text": "Darkness Resist"
+    },
+    {
+      "id": 71,
+      "text": "Mind Resist"
     }
   ]
 }
