@@ -70,5 +70,15 @@
         LightResist = 69,
         DarknessResist = 70,
         MindResist = 71,
+        Attributes = 72,
+        Character = 73,
+        Combat = 74,
+        Defenses = 75,
+        Resists = 76,
+        EtherAttack = 77,
+        HPRegen = 78,
+        EPRegen = 79,
+        RecastReduction = 80,
+        DMG = 81,
     }
 }

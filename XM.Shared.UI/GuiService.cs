@@ -128,7 +128,7 @@ namespace XM.UI
             var player = _tokenToPlayer[windowToken];
             var viewModel = _playerViewModels[player][windowToken];
 
-            viewModel.OnOpen();
+            viewModel.OnOpenInternal();
         }
 
         private void RunCloseWindow()

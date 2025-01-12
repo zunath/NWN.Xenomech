@@ -67,16 +67,16 @@ namespace XM.UI.Builder
             var rootWrapperPartial = new NuiGroupBuilder<TViewModel>(RegisteredEvents);
             rootWrapperPartial
                 .SetLayout(rootBuilder)
-                .SetBorder(false)
-                .SetScrollbars(NuiScrollbars.None);
+                .Border(false)
+                .Scrollbars(NuiScrollbars.None);
 
             _partialViews[IViewModel.UserPartialId] = rootWrapperPartial;
 
             // A dummy group is shown initially before the view model opens up the real one upon window open.
             var groupBuilder = new NuiGroupBuilder<TViewModel>(RegisteredEvents)
                 .Id(IViewModel.MainViewElementId)
-                .SetScrollbars(NuiScrollbars.None)
-                .SetBorder(false)
+                .Scrollbars(NuiScrollbars.None)
+                .Border(false)
                 .SetLayout(col =>
                 {
                 });
@@ -178,8 +178,8 @@ namespace XM.UI.Builder
         {
             DefinePartialView(IViewModel.ModalPartialId, group =>
             {
-                group.SetBorder(false);
-                group.SetScrollbars(NuiScrollbars.None);
+                group.Border(false);
+                group.Scrollbars(NuiScrollbars.None);
                 group.SetLayout(col =>
                 {
                     col.AddRow(row =>

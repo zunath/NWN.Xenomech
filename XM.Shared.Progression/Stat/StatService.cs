@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Anvil.Services;
 using XM.Progression.Stat.Entity;
 using XM.Progression.Stat.Event;
+using XM.Progression.Stat.ResistDefinition;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.CreaturePlugin;
 using XM.Shared.Core;
@@ -16,6 +19,19 @@ namespace XM.Progression.Stat
         private readonly DBService _db;
         private const string NPCEPStatVariable = "EP";
         private readonly XMEventService _event;
+
+        private Dictionary<ResistType, IResistDefinition> _resistDefinitions = new()
+        {
+            { ResistType.Darkness, new DarknessResistDefinition()},
+            { ResistType.Earth, new EarthResistDefinition()},
+            { ResistType.Fire, new FireResistDefinition()},
+            { ResistType.Ice, new IceResistDefinition()},
+            { ResistType.Lightning, new LightningResistDefinition()},
+            { ResistType.Light, new LightResistDefinition()},
+            { ResistType.Mind, new MindResistDefinition()},
+            { ResistType.Water, new WaterResistDefinition()},
+            { ResistType.Wind, new WindResistDefinition()},
+        };
 
         public StatService(DBService db, XMEventService @event)
         {
@@ -41,6 +57,10 @@ namespace XM.Progression.Stat
             return GetMaxHitPoints(creature);
         }
 
+        public Dictionary<ResistType, IResistDefinition> GetAllResistDefinitions()
+        {
+            return _resistDefinitions.ToDictionary(x => x.Key, y => y.Value);
+        }
 
         /// <summary>
         /// Increases or decreases a player's HP by a specified amount.
@@ -141,6 +161,33 @@ namespace XM.Progression.Stat
             else
             {
                 return GetLocalInt(creature, NPCEPStatVariable);
+            }
+        }
+
+        public int GetHPRegen(uint creature)
+        {
+            if (GetIsPC(creature) && !GetIsDM(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+                return dbPlayerStat.HPRegen;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        public int GetEPRegen(uint creature)
+        {
+            if (GetIsPC(creature) && !GetIsDM(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+                return dbPlayerStat.EPRegen;
+            }
+            else
+            {
+                return 0;
             }
         }
 
@@ -289,9 +336,56 @@ namespace XM.Progression.Stat
             _db.Set(dbPlayerStat);
         }
 
+        public int GetAttribute(uint player, AbilityType type)
+        {
+            return GetAbilityScore(player, type);
+        }
+
         public void SetPlayerAttribute(uint player, AbilityType type, int amount)
         {
             CreaturePlugin.SetRawAbilityScore(player, type, amount);
+        }
+
+        public int GetAttack(uint player)
+        {
+            return 0; // todo
+        }
+        public int GetEtherAttack(uint player)
+        {
+            return 0; // todo
+        }
+
+        public int GetAccuracy(uint player)
+        {
+            return 0; // todo
+        }
+        public int GetEvasion(uint player)
+        {
+            return 0; // todo
+        }
+        public int GetDefense(uint player)
+        {
+            return 0; // todo
+        }
+        public int GetMainHandDMG(uint player)
+        {
+            return 0; // todo
+        }
+        public int GetOffHandDMG(uint player)
+        {
+            return 0; // todo
+        }
+
+        public int GetResist(uint player, ResistType resist)
+        {
+            var playerId = PlayerId.Get(player);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+
+            if (!dbPlayerStat.Resists.ContainsKey(resist))
+                return 0;
+
+            var value = dbPlayerStat.Resists[resist];
+            return Math.Clamp(value, 0, 100);
         }
     }
 }

@@ -2,8 +2,10 @@
 using Anvil.Services;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
+using XM.Progression.Stat;
 using XM.Progression.Stat.Entity;
 using XM.Progression.Stat.Event;
+using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.Localization;
@@ -25,6 +27,156 @@ namespace XM.Progression.UI.CharacterSheetUI
         public int SelectedTab
         {
             get => Get<int>();
+            set => Set(value);
+        }
+
+        public string CharacterName
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public string PortraitResref
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public string HP
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string HPRegen
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string EP
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string EPRegen
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string Might
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string Perception
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string Vitality
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string Willpower
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string Agility
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string Social
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string RecastReduction
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+
+        public string MainHand
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string OffHand
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string Attack
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string EtherAttack
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string Accuracy
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string Evasion
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string Defense
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string FireResist
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string IceResist
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string EarthResist
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string WindResist
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string WaterResist
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string LightningResist
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string MindResist
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string LightResist
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string DarknessResist
+        {
+            get => Get<string>();
             set => Set(value);
         }
 
@@ -61,6 +213,9 @@ namespace XM.Progression.UI.CharacterSheetUI
         [Inject]
         public XPChart XP { get; set; }
 
+        [Inject]
+        public StatService Stat { get; set; }
+
         public CharacterSheetViewModel()
         {
             SelectedTab = 0;
@@ -68,14 +223,50 @@ namespace XM.Progression.UI.CharacterSheetUI
 
         public override void OnOpen()
         {
-            
-
+            LoadCharacterView();
             WatchOnClient(model => model.SelectedTab);
         }
 
         public override void OnClose()
         {
             
+        }
+
+        private void LoadCharacterView()
+        {
+            ChangePartialView(MainView, StatPartialId);
+
+            CharacterName = GetName(Player);
+            PortraitResref = GetPortraitResRef(Player) + "l";
+            HP = Stat.GetCurrentHP(Player) + " / " + Stat.GetMaxHP(Player);
+            HPRegen = Stat.GetHPRegen(Player).ToString();
+            EP = Stat.GetCurrentEP(Player) + " / " + Stat.GetMaxEP(Player);
+            EPRegen = Stat.GetEPRegen(Player).ToString();
+            Might = Stat.GetAttribute(Player, AbilityType.Might).ToString();
+            Perception = Stat.GetAttribute(Player, AbilityType.Perception).ToString();
+            Vitality = Stat.GetAttribute(Player, AbilityType.Vitality).ToString();
+            Willpower = Stat.GetAttribute(Player, AbilityType.Willpower).ToString();
+            Agility = Stat.GetAttribute(Player, AbilityType.Agility).ToString();
+            Social = Stat.GetAttribute(Player, AbilityType.Social).ToString();
+            RecastReduction = Stat.GetAbilityRecastReduction(Player).ToString();
+
+            MainHand = $"{Stat.GetMainHandDMG(Player)} {Locale.GetString(LocaleString.DMG)}";
+            OffHand = $"{Stat.GetOffHandDMG(Player)} {Locale.GetString(LocaleString.DMG)}";
+            Attack = Stat.GetAttack(Player).ToString();
+            EtherAttack = Stat.GetEtherAttack(Player).ToString();
+            Accuracy = Stat.GetAccuracy(Player).ToString();
+            Evasion = Stat.GetEvasion(Player).ToString();
+            Defense = Stat.GetDefense(Player).ToString();
+
+            FireResist = Stat.GetResist(Player, ResistType.Fire) + "%";
+            IceResist = Stat.GetResist(Player, ResistType.Ice) + "%";
+            EarthResist = Stat.GetResist(Player, ResistType.Earth) + "%";
+            WindResist = Stat.GetResist(Player, ResistType.Wind) + "%";
+            LightningResist = Stat.GetResist(Player, ResistType.Lightning) + "%";
+            LightResist = Stat.GetResist(Player, ResistType.Light) + "%";
+            DarknessResist = Stat.GetResist(Player, ResistType.Darkness) + "%";
+            WaterResist = Stat.GetResist(Player, ResistType.Water) + "%";
+            MindResist = Stat.GetResist(Player, ResistType.Mind) + "%";
         }
 
         private void LoadJobView()
@@ -111,18 +302,23 @@ namespace XM.Progression.UI.CharacterSheetUI
             JobProgresses = jobProgresses;
         }
 
+        private void LoadSettingsView()
+        {
+            ChangePartialView(MainView, SettingsPartialId);
+        }
+
         public Action OnChangeTab => () =>
         {
             switch (SelectedTab)
             {
-                case 0: // 0 = Stats
-                    ChangePartialView(MainView, StatPartialId);
+                case 0: // 0 = Character
+                    LoadCharacterView();
                     break;
                 case 1: // 1 = Job
                     LoadJobView();
                     break;
                 case 2: // 2 = Settings
-                    ChangePartialView(MainView, SettingsPartialId);
+                    LoadSettingsView();
                     break;
             }
         };

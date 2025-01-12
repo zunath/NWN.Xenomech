@@ -55,8 +55,6 @@ namespace XM.UI
 
             BindGeometry(geometry);
             _onNuiEventToken = Event.Subscribe<ModuleEvent.OnNuiEvent>(OnWatchEvent);
-
-            ChangePartialView(IViewModel.MainViewElementId, IViewModel.UserPartialId);
         }
 
         protected void ChangePartialView(string elementId, string partialViewId)
@@ -77,6 +75,12 @@ namespace XM.UI
             }
 
             ClearWatches();
+        }
+
+        public void OnOpenInternal()
+        {
+            ChangePartialView(IViewModel.MainViewElementId, IViewModel.UserPartialId);
+            OnOpen();
         }
 
         private void BindGeometry(NuiRect geometry)

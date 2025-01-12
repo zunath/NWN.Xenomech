@@ -43,8 +43,8 @@ namespace XM.UI.Builder.Layout
             var groupBuilder = new NuiGroupBuilder<TViewModel>(RegisteredEvents);
             groupBuilder
                 .SetLayout(col => { })
-                .SetBorder(false)
-                .SetScrollbars(NuiScrollbars.None);
+                .Border(false)
+                .Scrollbars(NuiScrollbars.None);
 
             _children.Add(groupBuilder);
 

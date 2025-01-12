@@ -284,6 +284,46 @@
     {
       "id": 71,
       "text": "Mind Resist"
+    },
+    {
+      "id": 72,
+      "text": "Attributes"
+    },
+    {
+      "id": 73,
+      "text": "Character"
+    },
+    {
+      "id": 74,
+      "text": "Combat"
+    },
+    {
+      "id": 75,
+      "text": "Defenses"
+    },
+    {
+      "id": 76,
+      "text": "Resists"
+    },
+    {
+      "id": 77,
+      "text": "Ether Attack"
+    },
+    {
+      "id": 78,
+      "text": "HP Regen"
+    },
+    {
+      "id": 79,
+      "text": "EP Regen"
+    },
+    {
+      "id": 80,
+      "text": "Recast Reduction"
+    },
+    {
+      "id": 81,
+      "text": "DMG"
     }
   ]
 }

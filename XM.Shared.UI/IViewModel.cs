@@ -25,6 +25,7 @@ namespace XM.UI
 
         internal void Unbind();
 
+        internal void OnOpenInternal();
         public void OnOpen();
 
         public void OnClose();

@@ -40,6 +40,19 @@ namespace XM.Progression.Stat.Entity
                 {AbilityType.Willpower, 0},
                 {AbilityType.Social, 0},
             };
+
+            Resists = new Dictionary<ResistType, int>
+            {
+                { ResistType.Fire, 0},
+                { ResistType.Ice, 0},
+                { ResistType.Wind, 0},
+                { ResistType.Earth, 0},
+                { ResistType.Lightning, 0},
+                { ResistType.Water, 0},
+                { ResistType.Light, 0},
+                { ResistType.Darkness, 0},
+                { ResistType.Mind, 0},
+            };
         }
 
         public int MaxHP { get; set; }
@@ -56,6 +69,7 @@ namespace XM.Progression.Stat.Entity
         public int EtherAttack { get; set; }
         public Dictionary<AbilityType, int> BaseAttributes { get; set; }
         public Dictionary<AbilityType, int> Attributes { get; set; }
+        public Dictionary<ResistType, int> Resists { get; set; }
 
     }
 }
