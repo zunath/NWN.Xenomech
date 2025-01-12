@@ -4,7 +4,6 @@ using XM.Shared.Core.Localization;
 
 namespace XM.Quest.Reward
 {
-    [ServiceBinding(typeof(KeyItemReward))]
     internal class KeyItemReward : IQuestReward
     {
         public bool IsSelectable { get; set; }

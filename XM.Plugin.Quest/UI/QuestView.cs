@@ -1,0 +1,135 @@
+﻿using Anvil.API;
+using Anvil.Services;
+using XM.Shared.Core.Localization;
+using XM.UI;
+using XM.UI.Builder;
+using XM.UI.Builder.Layout;
+using NuiDirection = XM.Shared.API.NUI.NuiDirection;
+
+namespace XM.Quest.UI
+{
+    [ServiceBinding(typeof(IView))]
+    internal class QuestView : IView
+    {
+        private readonly NuiBuilder<QuestViewModel> _builder = new();
+        public IViewModel CreateViewModel()
+        {
+            return new QuestViewModel();
+        }
+
+        public NuiBuiltWindow Build()
+        {
+            return _builder.CreateWindow(window =>
+            {
+                window.IsResizable(true)
+                    .IsCollapsible(WindowCollapsibleType.UserCollapsible)
+                    .InitialGeometry(0, 0, 545f, 295f)
+                    .Title(LocaleString.Quests)
+                    .Root(root =>
+                    {
+                        BuildSearch(root);
+                        BuildActiveQuestDetails(root);
+                    });
+            }).Build();
+        }
+
+        private void BuildSearch(NuiColumnBuilder<QuestViewModel> col)
+        {
+            col.AddRow(row =>
+            {
+                row.AddColumn(col =>
+                {
+                    col.AddRow(row =>
+                    {
+                        row.AddTextEdit(edit =>
+                        {
+                            edit
+                                .Value(model => model.SearchText)
+                                .Label(LocaleString.SearchByName);
+                        });
+
+                        row.AddButton(button =>
+                        {
+                            button
+                                .Label(LocaleString.X)
+                                .Height(35f)
+                                .Width(35f)
+                                .OnClick(model => model.OnClearSearch);
+                        });
+
+                        row.AddButton(button =>
+                        {
+                            button
+                                .Label(LocaleString.Search)
+                                .Height(35f)
+                                .Width(60f)
+                                .OnClick(model => model.OnSearch);
+                        });
+                    });
+
+                    col.AddRow(row =>
+                    {
+                        row.AddList(list =>
+                        {
+                            list.AddTemplateCell(cell =>
+                            {
+                                cell.AddGroup(group =>
+                                {
+                                    group.SetLayout(layout =>
+                                    {
+                                        layout.AddToggles(toggle =>
+                                        {
+                                            toggle
+                                                .Direction(NuiDirection.Vertical)
+                                                .SelectedValue(model => model.SelectedQuest)
+                                                .TooltipText(model => model.QuestNames);
+                                        });
+                                    });
+                                });
+                            }, model => model.QuestNames);
+                        });
+                    });
+                });
+            });
+        }
+
+        private void BuildActiveQuestDetails(NuiColumnBuilder<QuestViewModel> col)
+        {
+            col.AddRow(row =>
+            {
+                row.AddLabel(label =>
+                {
+                    label
+                        .Label(model => model.ActiveQuestName)
+                        .Height(20f)
+                        .HorizontalAlign(NuiHAlign.Center)
+                        .VerticalAlign(NuiVAlign.Top);
+                });
+            });
+
+            col.AddRow(row =>
+            {
+                row.AddText(text =>
+                {
+                    text.Text(model => model.ActiveQuestDescription);
+                });
+            });
+
+            col.AddRow(row =>
+            {
+                row.AddSpacer();
+
+                row.AddButton(button =>
+                {
+                    button
+                        .Label(LocaleString.AbandonQuest)
+                        .Height(32f)
+                        .OnClick(model => model.OnAbandonQuest)
+                        .IsEnabled(model => model.IsAbandonQuestEnabled);
+                });
+
+                row.AddSpacer();
+            });
+        }
+    }
+}

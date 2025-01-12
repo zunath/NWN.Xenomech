@@ -5,7 +5,6 @@ using XM.Shared.Core.Data;
 
 namespace XM.Quest.Objective
 {
-    [ServiceBinding(typeof(KillTargetObjective))]
     internal class KillTargetObjective : IQuestObjective
     {
         public QuestNPCGroupType Group { get; set; }

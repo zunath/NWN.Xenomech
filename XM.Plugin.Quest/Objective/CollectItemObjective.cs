@@ -6,7 +6,6 @@ using XM.Shared.Core.Data;
 
 namespace XM.Quest.Objective
 {
-    [ServiceBinding(typeof(CollectItemObjective))]
     internal class CollectItemObjective : IQuestObjective
     {
         public string Resref { get; set; }

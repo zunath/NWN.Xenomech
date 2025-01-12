@@ -2,7 +2,6 @@
 
 namespace XM.Quest.Reward
 {
-    [ServiceBinding(typeof(GoldReward))]
     internal class GoldReward : IQuestReward
     {
         public int Amount { get; set;  }

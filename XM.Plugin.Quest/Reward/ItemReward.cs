@@ -3,7 +3,6 @@ using XM.Inventory;
 
 namespace XM.Quest.Reward
 {
-    [ServiceBinding(typeof(ItemReward))]
     internal class ItemReward : IQuestReward
     {
         public bool IsSelectable { get; set;  }

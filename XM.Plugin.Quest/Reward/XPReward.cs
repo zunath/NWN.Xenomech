@@ -4,7 +4,6 @@ using XM.Shared.Core.Data;
 
 namespace XM.Quest.Reward
 {
-    [ServiceBinding(typeof(XPReward))]
     internal class XPReward : IQuestReward
     {
         public int Amount { get; set; }

@@ -3,7 +3,6 @@ using XM.Inventory.KeyItem;
 
 namespace XM.Quest.Prerequisite
 {
-    [ServiceBinding(typeof(RequiredKeyItemPrerequisite))]
     internal class RequiredKeyItemPrerequisite : IQuestPrerequisite
     {
         public KeyItemType KeyItemType { get; set; }

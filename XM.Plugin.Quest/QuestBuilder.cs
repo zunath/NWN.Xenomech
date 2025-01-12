@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Anvil.Services;
+using XM.Inventory;
 using XM.Inventory.KeyItem;
 using XM.Quest.Objective;
 using XM.Quest.Prerequisite;
 using XM.Quest.Reward;
+using XM.Shared.Core.Data;
 
 namespace XM.Quest
 {
@@ -14,14 +16,21 @@ namespace XM.Quest
         private readonly Dictionary<string, QuestDetail> _quests = new();
         private QuestDetail _activeQuest;
         private QuestStateDetail _activeState;
-
+        private readonly DBService _db;
         private readonly QuestService _quest;
-        private readonly IServiceManager _serviceManager;
+        private readonly ItemCacheService _itemCache;
+        private readonly KeyItemService _keyItem;
 
-        public QuestBuilder(QuestService quest, IServiceManager serviceManager)
+        public QuestBuilder(
+            DBService db,
+            QuestService quest,
+            ItemCacheService itemCache,
+            KeyItemService keyItem)
         {
+            _db = db;
             _quest = quest;
-            _serviceManager = serviceManager;
+            _itemCache = itemCache;
+            _keyItem = keyItem;
         }
 
         /// <summary>
@@ -38,7 +47,7 @@ namespace XM.Quest
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException($"{nameof(name)} cannot be null or whitespace.");
 
-            _activeQuest = _serviceManager.AnvilServiceContainer.Create(typeof(QuestDetail)) as QuestDetail;
+            _activeQuest = new QuestDetail();
             if (_activeQuest == null)
                 throw new Exception($"Unable to locate {typeof(QuestDetail)}");
 
@@ -83,10 +92,12 @@ namespace XM.Quest
         /// <returns>A QuestBuilder with the configured options.</returns>
         public QuestBuilder AddItemReward(string itemResref, int quantity, bool isSelectable = true)
         {
-            var reward = _serviceManager.AnvilServiceContainer.Create(typeof(ItemReward)) as ItemReward;
-            reward!.Resref = itemResref;
-            reward!.Quantity = quantity;
-            reward!.IsSelectable = isSelectable;
+            var reward = new ItemReward(_itemCache)
+            {
+                Resref = itemResref,
+                Quantity = quantity,
+                IsSelectable = isSelectable
+            };
 
             _activeQuest.Rewards.Add(reward);
 
@@ -102,7 +113,7 @@ namespace XM.Quest
         /// <returns>A QuestBuilder with the configured options.</returns>
         public QuestBuilder AddGoldReward(int amount, bool isSelectable = true)
         {
-            var reward = _serviceManager.AnvilServiceContainer.Create(typeof(GoldReward)) as GoldReward;
+            var reward = new GoldReward(_quest);
             reward!.Amount = amount;
             reward!.IsSelectable = isSelectable;
 
@@ -120,9 +131,11 @@ namespace XM.Quest
         /// <returns>A QuestBuilder with the configured options.</returns>
         public QuestBuilder AddXPReward(int amount, bool isSelectable = true)
         {
-            var reward = _serviceManager.AnvilServiceContainer.Create(typeof(XPReward)) as XPReward;
-            reward!.Amount = amount;
-            reward!.IsSelectable = isSelectable;
+            var reward = new XPReward(_db)
+            {
+                Amount = amount,
+                IsSelectable = isSelectable
+            };
 
             _activeQuest.Rewards.Add(reward);
 
@@ -137,7 +150,7 @@ namespace XM.Quest
         /// <returns>A QuestBuilder with the configured options.</returns>
         public QuestBuilder AddKeyItemReward(KeyItemType keyItemType, bool isSelectable = true)
         {
-            var reward = _serviceManager.AnvilServiceContainer.Create(typeof(KeyItemReward)) as KeyItemReward;
+            var reward = new KeyItemReward(_keyItem);
             reward!.KeyItemType = keyItemType;
             reward!.IsSelectable = isSelectable;
 
@@ -153,9 +166,11 @@ namespace XM.Quest
         /// <returns>A QuestBuilder with the configured options.</returns>
         public QuestBuilder PrerequisiteQuest(string prerequisiteQuestId)
         {
-            var prereq = _serviceManager.AnvilServiceContainer.Create(typeof(RequiredQuestPrerequisite)) as RequiredQuestPrerequisite;
-            prereq!.QuestId = prerequisiteQuestId;
-            _activeQuest.Prerequisites.Add(prereq);
+            var prerequisite = new RequiredQuestPrerequisite(_db)
+            {
+                QuestId = prerequisiteQuestId
+            };
+            _activeQuest.Prerequisites.Add(prerequisite);
 
             return this;
         }
@@ -167,9 +182,11 @@ namespace XM.Quest
         /// <returns>A QuestBuilder with the configured options.</returns>
         public QuestBuilder PrerequisiteKeyItem(KeyItemType keyItemType)
         {
-            var prereq = _serviceManager.AnvilServiceContainer.Create(typeof(RequiredKeyItemPrerequisite)) as RequiredKeyItemPrerequisite;
-            prereq.KeyItemType = keyItemType;
-            _activeQuest.Prerequisites.Add(prereq);
+            var prerequisite = new RequiredKeyItemPrerequisite(_keyItem)
+            {
+                KeyItemType = keyItemType
+            };
+            _activeQuest.Prerequisites.Add(prerequisite);
 
             return this;
         }
@@ -254,9 +271,11 @@ namespace XM.Quest
         /// <returns>A QuestBuilder with the configured options.</returns>
         public QuestBuilder AddKillObjective(QuestNPCGroupType group, int quantity)
         {
-            var killObjective = _serviceManager.AnvilServiceContainer.Create(typeof(KillTargetObjective)) as KillTargetObjective;
-            killObjective!.Group = group;
-            killObjective!.Quantity = quantity;
+            var killObjective = new KillTargetObjective(_db, _quest)
+            {
+                Group = group,
+                Quantity = quantity
+            };
 
             _activeState.AddObjective(killObjective);
 
@@ -271,9 +290,11 @@ namespace XM.Quest
         /// <returns>A QuestBuilder with the configured options.</returns>
         public QuestBuilder AddCollectItemObjective(string resref, int quantity)
         {
-            var collectItemObjective = _serviceManager.AnvilServiceContainer.Create(typeof(CollectItemObjective)) as CollectItemObjective;
-            collectItemObjective!.Resref = resref;
-            collectItemObjective!.Quantity = quantity;
+            var collectItemObjective = new CollectItemObjective(_db, _itemCache, _quest)
+            {
+                Resref = resref,
+                Quantity = quantity
+            };
 
             _activeState.AddObjective(collectItemObjective);
 
