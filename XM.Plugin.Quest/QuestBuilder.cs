@@ -17,20 +17,20 @@ namespace XM.Quest
         private QuestDetail _activeQuest;
         private QuestStateDetail _activeState;
         private readonly DBService _db;
-        private readonly QuestService _quest;
         private readonly ItemCacheService _itemCache;
         private readonly KeyItemService _keyItem;
+        private readonly QuestNPCService _questNPC;
 
         public QuestBuilder(
             DBService db,
-            QuestService quest,
             ItemCacheService itemCache,
-            KeyItemService keyItem)
+            KeyItemService keyItem,
+            QuestNPCService questNPC)
         {
             _db = db;
-            _quest = quest;
             _itemCache = itemCache;
             _keyItem = keyItem;
+            _questNPC = questNPC;
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace XM.Quest
         /// <returns>A QuestBuilder with the configured options.</returns>
         public QuestBuilder AddGoldReward(int amount, bool isSelectable = true)
         {
-            var reward = new GoldReward(_quest);
+            var reward = new GoldReward();
             reward!.Amount = amount;
             reward!.IsSelectable = isSelectable;
 
@@ -271,7 +271,7 @@ namespace XM.Quest
         /// <returns>A QuestBuilder with the configured options.</returns>
         public QuestBuilder AddKillObjective(QuestNPCGroupType group, int quantity)
         {
-            var killObjective = new KillTargetObjective(_db, _quest)
+            var killObjective = new KillTargetObjective(_db, _questNPC)
             {
                 Group = group,
                 Quantity = quantity
@@ -290,7 +290,7 @@ namespace XM.Quest
         /// <returns>A QuestBuilder with the configured options.</returns>
         public QuestBuilder AddCollectItemObjective(string resref, int quantity)
         {
-            var collectItemObjective = new CollectItemObjective(_db, _itemCache, _quest)
+            var collectItemObjective = new CollectItemObjective(_db, _itemCache)
             {
                 Resref = resref,
                 Quantity = quantity

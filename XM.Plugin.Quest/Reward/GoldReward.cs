@@ -1,4 +1,5 @@
 ﻿using Anvil.Services;
+using XM.Shared.API.Constants;
 
 namespace XM.Quest.Reward
 {
@@ -8,17 +9,19 @@ namespace XM.Quest.Reward
         public bool IsSelectable { get; set; }
         public string MenuName => Amount + " Credits";
 
-        private readonly QuestService _quest;
-
-        public GoldReward(QuestService quest)
-        {
-            _quest = quest;
-        }
-
         public void GiveReward(uint player)
         {
-            var amount = _quest.CalculateQuestGoldReward(player, Amount);
+            var amount = CalculateQuestGoldReward(player, Amount);
             GiveGoldToCreature(player, amount);
+        }
+
+
+        private int CalculateQuestGoldReward(uint player, int baseAmount)
+        {
+            // 5% credit bonus per social modifier.
+            var social = GetAbilityModifier(AbilityType.Social, player) * 0.05f;
+            var amount = baseAmount + (int)(baseAmount * social);
+            return amount;
         }
     }
 

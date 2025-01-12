@@ -1,5 +1,4 @@
-﻿using Anvil.Services;
-using NLog;
+﻿using NLog;
 using System.Collections.Generic;
 using XM.Quest.Objective;
 using XM.Quest.Entity;
@@ -16,42 +15,45 @@ using XM.Shared.Core;
 using XM.Shared.Core.Activity;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
-using XM.Shared.Core.Extension;
+using Anvil.Services;
+using XM.Quest.Reward;
+using XM.Quest.Conversation;
+using DialogService = XM.Shared.Core.Dialog.DialogService;
 
 namespace XM.Quest
 {
     [ServiceBinding(typeof(QuestService))]
-    internal class QuestService
+    internal class QuestService: IInitializable
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         private readonly Dictionary<string, QuestDetail> _quests = new();
         private readonly Dictionary<QuestNPCGroupType, List<string>> _npcsWithKillQuests = new();
-        private static readonly Dictionary<QuestNPCGroupType, QuestNPCGroupAttribute> _npcGroups = new();
 
+        [Inject]
         public IList<IQuestListDefinition> Definitions { get; set; }
 
         private readonly DBService _db;
         private readonly ItemCacheService _itemCache;
         private readonly InventoryService _inventory;
         private readonly ActivityService _activity;
-        private readonly IServiceManager _serviceManager;
         private readonly XMEventService _event;
+        private readonly DialogService _dialog;
 
         public QuestService(
             DBService db, 
             ItemCacheService itemCache,
             InventoryService inventory,
             ActivityService activity,
-            IServiceManager serviceManager,
-            XMEventService @event)
+            XMEventService @event,
+            DialogService dialog)
         {
             _db = db;
             _itemCache = itemCache;
             _inventory = inventory;
             _activity = activity;
-            _serviceManager = serviceManager;
             _event = @event;
+            _dialog = dialog;
 
             RegisterEvents();
             SubscribeEvents();
@@ -65,32 +67,14 @@ namespace XM.Quest
         private void SubscribeEvents()
         {
             _event.Subscribe<ModuleEvent.OnPlayerEnter>(OnPlayerEnter);
-            _event.Subscribe<XMEvent.OnCacheDataBefore>(OnCacheDataBefore);
             _event.Subscribe<CreatureEvent.OnDeathBefore>(CreatureOnDeathBefore);
-
         }
 
-        private void OnCacheDataBefore()
+        public void Init()
         {
-            LoadQuests();
-            LoadQuestNPCGroups();
-        }
-
-        private void LoadQuests()
-        {
-            // Organize quests to make later reads quicker.
-            var types = AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(assembly => assembly.GetTypes())
-                .Where(p => typeof(IQuestListDefinition).IsAssignableFrom(p) && p.IsClass && !p.IsAbstract)
-                .ToArray();
-
-            foreach (var type in types)
+            foreach (var definition in Definitions)
             {
-                var instance = _serviceManager.AnvilServiceContainer.GetInstance(type) as IQuestListDefinition;
-                if (instance == null)
-                    continue;
-
-                var quests = instance.BuildQuests();
+                var quests = definition.BuildQuests();
 
                 foreach (var (questId, quest) in quests)
                 {
@@ -115,17 +99,6 @@ namespace XM.Quest
             }
         }
 
-        private void LoadQuestNPCGroups()
-        {
-            var npcGroups = Enum.GetValues(typeof(QuestNPCGroupType)).Cast<QuestNPCGroupType>();
-            foreach (var npcGroupType in npcGroups)
-            {
-                var npcGroupDetail = npcGroupType.GetAttribute<QuestNPCGroupType, QuestNPCGroupAttribute>();
-                _npcGroups[npcGroupType] = npcGroupDetail;
-            }
-
-            _logger.Info($"Loaded {_npcGroups.Count} NPC groups.");
-        }
 
         private void OnPlayerEnter()
         {
@@ -161,15 +134,6 @@ namespace XM.Quest
             });
         }
 
-        /// <summary>
-        /// Retrieves an NPC group detail by the type.
-        /// </summary>
-        /// <param name="type">The type of NPC group to retrieve.</param>
-        /// <returns>An NPC group detail</returns>
-        public QuestNPCGroupAttribute GetQuestNPCGroup(QuestNPCGroupType type)
-        {
-            return _npcGroups[type];
-        }
 
         /// <summary>
         /// Retrieves a quest by its Id. If the quest has not been registered, a KeyNotFoundException will be thrown.
@@ -197,35 +161,6 @@ namespace XM.Quest
 
             return _npcsWithKillQuests[npcGroupType];
         }
-
-        public void AbandonQuest(uint player, string questId)
-        {
-            _quests[questId].Abandon(player);
-        }
-
-        /// <summary>
-        /// Makes a player accept a quest by the specified Id.
-        /// If the quest Id is invalid, an exception will be thrown.
-        /// </summary>
-        /// <param name="player">The player who is accepting the quest</param>
-        /// <param name="questId">The Id of the quest to accept.</param>
-        public void AcceptQuest(uint player, string questId)
-        {
-            _quests[questId].Accept(player, OBJECT_SELF);
-        }
-
-        /// <summary>
-        /// Makes a player advance to the next state of the quest.
-        /// If there are no additional states, the quest will be treated as completed.
-        /// </summary>
-        /// <param name="player">The player who is advancing to the next state of the quest.</param>
-        /// <param name="questSource">The source of the quest. Typically an NPC or object.</param>
-        /// <param name="questId">The Id of the quest to advance.</param>
-        public void AdvanceQuest(uint player, uint questSource, string questId)
-        {
-            _quests[questId].Advance(player, questSource);
-        }
-
         /// <summary>
         /// Forces a player to open a collection placeable in which they will put items needed for the quest.
         /// </summary>
@@ -326,7 +261,7 @@ namespace XM.Quest
                     // Attempt to advance the quest detail. It's possible this will fail because objectives aren't all done. This is OK.
                     if (killRequiredForQuestAndState)
                     {
-                        questDetail.Advance(member, creature);
+                        AdvanceQuest(member, questId, creature);
                     }
                 }
             }
@@ -441,7 +376,7 @@ namespace XM.Quest
 
             // Attempt to advance the quest.
             // If player hasn't completed the other objectives, nothing will happen when this is called.
-            AdvanceQuest(player, owner, questId);
+            AdvanceQuest(player, questId, owner);
 
             // If no more items are necessary for this quest, force the player to speak with the NPC again.
             var itemsRequired = dbPlayerQuest.Quests[questId].ItemProgresses.Sum(x => x.Value);
@@ -522,16 +457,358 @@ namespace XM.Quest
                 });
             }
 
-            var quest = GetQuestById(questId);
-            quest.Advance(player, triggerOrPlaceable);
+            AdvanceQuest(player, questId, triggerOrPlaceable);
         }
 
-        public int CalculateQuestGoldReward(uint player, int baseAmount)
+
+
+
+        /// <summary>
+        /// Returns true if player can accept this quest. Returns false otherwise.
+        /// </summary>
+        /// <param name="player">The player to check</param>
+        /// <returns>true if player can accept, false otherwise</returns>
+        private bool CanAcceptQuest(uint player, string questId)
         {
-            // 5% credit bonus per social modifier.
-            var social = GetAbilityModifier(AbilityType.Social, player) * 0.05f;
-            var amount = baseAmount + (int)(baseAmount * social);
-            return amount;
+            // Retrieve the player's current quest status for this quest.
+            // If they haven't accepted it yet, this will be null.
+            var playerId = PlayerId.Get(player);
+            var dbPlayer = _db.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
+            var quest = dbPlayer.Quests.ContainsKey(questId) ? dbPlayer.Quests[questId] : null;
+            var questDetail = _quests[questId];
+
+            // If the status is null, it's assumed that the player hasn't accepted it yet.
+            if (quest != null)
+            {
+                // If the quest isn't repeatable, prevent the player from accepting it after it's already been completed.
+                if (quest.TimesCompleted > 0)
+                {
+                    // If it's repeatable, then we don't care if they've already completed it.
+                    if (!questDetail.IsRepeatable)
+                    {
+                        SendMessageToPC(player, "You have already completed this quest.");
+                        return false;
+                    }
+                }
+                // If the player already accepted the quest, prevent them from accepting it again.
+                else
+                {
+                    SendMessageToPC(player, "You have already accepted this quest.");
+                    return false;
+                }
+            }
+
+            // Check whether the player meets all necessary prerequisites.
+            foreach (var prereq in questDetail.Prerequisites)
+            {
+                if (!prereq.MeetsPrerequisite(player))
+                {
+                    SendMessageToPC(player, "You do not meet the prerequisites necessary to accept this quest.");
+                    return false;
+                }
+            }
+
+            return true;
         }
+
+        /// <summary>
+        /// Returns true if player can complete this quest. Returns false otherwise.
+        /// </summary>
+        /// <param name="player">The player to check</param>
+        /// <returns>true if player can complete, false otherwise</returns>
+        public bool CanCompleteQuest(uint player, string questId)
+        {
+            // Has the player even accepted this quest?
+            var playerId = PlayerId.Get(player);
+            var dbPlayer = _db.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
+            var quest = dbPlayer.Quests.ContainsKey(questId) ? dbPlayer.Quests[questId] : null;
+
+            if (quest == null) return false;
+            var questDetail = _quests[questId];
+
+            // Is the player on the final state of this quest?
+            if (quest.CurrentState != questDetail.States.Count) return false;
+
+            var state = questDetail.States[quest.CurrentState];
+            // Are all objectives complete?
+            foreach (var objective in state.GetObjectives())
+            {
+                if (!objective.IsComplete(player, questId))
+                {
+                    return false;
+                }
+            }
+
+            // Met all requirements. We can complete this quest.
+            return true;
+        }
+
+        /// <summary>
+        /// Opens the reward selection menu wherein players can select the reward they want.
+        /// If quest is not configured to allow reward selection, quest will be marked complete instead
+        /// and all rewards will be given to the player.
+        /// </summary>
+        /// <param name="player">The player to request a reward from</param>
+        /// <param name="questSource">The source of the quest reward giver</param>
+        private void RequestRewardSelectionFromPC(uint player, string questId, uint questSource)
+        {
+            if (!GetIsPC(player) || GetIsDM(player)) return;
+
+            var questDetail = _quests[questId];
+            if (questDetail.AllowRewardSelection)
+            {
+                SetLocalString(player, "QST_REWARD_SELECTION_QUEST_ID", questId);
+                _dialog.StartConversation<QuestRewardSelectionDialog>(player, player);
+            }
+            else
+            {
+                CompleteQuest(player, questId, questSource, null);
+            }
+        }
+
+
+        /// <summary>
+        /// Abandons a quest.
+        /// </summary>
+        /// <param name="player">The player abandoning a quest.</param>
+        public void AbandonQuest(uint player, string questId)
+        {
+            if (!GetIsPC(player) || GetIsDM(player)) return;
+
+            var playerId = PlayerId.Get(player);
+            var dbPlayer = _db.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
+            if (!dbPlayer.Quests.ContainsKey(questId))
+                return;
+            var questDetail = _quests[questId];
+
+            // This is a repeatable quest. Mark the completion date to now
+            // so that we don't lose how many times it's been completed.
+            if (dbPlayer.Quests[questId].TimesCompleted > 0)
+            {
+                dbPlayer.Quests[questId].DateLastCompleted = DateTime.UtcNow;
+            }
+            // This quest hasn't been completed yet. It's safe to remove it completely.
+            else
+            {
+                dbPlayer.Quests.Remove(questId);
+            }
+
+            _db.Set(dbPlayer);
+            SendMessageToPC(player, $"Quest '{questDetail.Name}' has been abandoned!");
+
+            foreach (var action in questDetail.OnAbandonActions)
+            {
+                action.Invoke(player);
+            }
+        }
+
+        /// <summary>
+        /// Accepts a quest using the configured settings.
+        /// </summary>
+        /// <param name="player">The player accepting the quest.</param>
+        /// <param name="questSource">The source of the quest giver</param>
+        public void AcceptQuest(uint player, string questId, uint questSource)
+        {
+            if (!GetIsPC(player) || GetIsDM(player)) return;
+
+            if (!CanAcceptQuest(player, questId))
+            {
+                return;
+            }
+
+            // By this point, it's assumed the player will accept the quest.
+            var playerId = PlayerId.Get(player);
+            var dbPlayer = _db.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
+            var questDetail = _quests[questId];
+            var playerQuest = dbPlayer.Quests.ContainsKey(questId) ? dbPlayer.Quests[questId] : new PlayerQuestDetail();
+
+            // Retrieve the first quest state for this quest.
+            playerQuest.CurrentState = 1;
+            playerQuest.DateLastCompleted = null;
+            dbPlayer.Quests[questId] = playerQuest;
+            _db.Set(dbPlayer);
+
+            var state = questDetail.States[1];
+            foreach (var objective in state.GetObjectives())
+            {
+                objective.Initialize(player, questId);
+            }
+
+            // Add the journal entry to the player.
+            PlayerPlugin.AddCustomJournalEntry(player, new JournalEntry()
+            {
+                Name = questDetail.Name,
+                Text = state.JournalText,
+                Tag = questId,
+                State = playerQuest.CurrentState,
+                Priority = 1,
+                IsQuestCompleted = false,
+                IsQuestDisplayed = true,
+                Updated = 0,
+                CalendarDay = GetCalendarDay(),
+                TimeOfDay = GetTimeHour()
+            });
+
+            // Notify them that they've accepted a quest.
+            SendMessageToPC(player, "Quest '" + questDetail.Name + "' accepted. Refer to your journal for more information on this quest.");
+
+            // Run any quest-specific code.
+            foreach (var action in questDetail.OnAcceptActions)
+            {
+                action.Invoke(player, questSource);
+            }
+
+            //Gui.PublishRefreshEvent(player, new QuestAcquiredRefreshEvent(QuestId));
+        }
+
+        /// <summary>
+        /// Advances the player to the next quest state.
+        /// </summary>
+        /// <param name="player">The player advancing to the next quest state</param>
+        /// <param name="questSource">The source of quest advancement</param>
+        public void AdvanceQuest(uint player, string questId, uint questSource)
+        {
+            if (!GetIsPC(player) || GetIsDM(player)) return;
+
+            // Retrieve the player's current quest state.
+            var playerId = PlayerId.Get(player);
+            var dbPlayer = _db.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
+            var questDetail = _quests[questId];
+            var playerQuest = dbPlayer.Quests.ContainsKey(questId) ? dbPlayer.Quests[questId] : new PlayerQuestDetail();
+
+            // Can't find a state? Notify the player they haven't accepted the quest.
+            if (playerQuest.CurrentState <= 0)
+            {
+                SendMessageToPC(player, "You have not accepted this quest yet.");
+                return;
+            }
+
+            // If this quest has already been completed, exit early.
+            // This is used in case a module builder incorrectly configures a quest.
+            // We don't want to risk giving duplicate rewards.
+            if (playerQuest.TimesCompleted > 0 && !questDetail.IsRepeatable) return;
+
+            var currentState = questDetail.States[playerQuest.CurrentState];
+
+            // Check quest objectives. If not complete, exit early.
+            foreach (var objective in currentState.GetObjectives())
+            {
+                if (!objective.IsComplete(player, questId))
+                    return;
+            }
+
+            var lastState = questDetail.States.Last();
+
+            // If this is the last state, the assumption is that it's time to complete the quest.
+            if (playerQuest.CurrentState == lastState.Key)
+            {
+                RequestRewardSelectionFromPC(player, questId, questSource);
+            }
+            else
+            {
+                // Progress player's quest status to the next state.
+                playerQuest.CurrentState++;
+                var nextState = questDetail.States[playerQuest.CurrentState];
+
+                // Update the player's journal
+                PlayerPlugin.AddCustomJournalEntry(player, new JournalEntry
+                {
+                    Name = questDetail.Name,
+                    Text = currentState.JournalText,
+                    Tag = questId,
+                    State = playerQuest.CurrentState,
+                    Priority = 1,
+                    IsQuestCompleted = false,
+                    IsQuestDisplayed = true,
+                    Updated = 0,
+                    CalendarDay = GetCalendarDay(),
+                    TimeOfDay = GetTimeHour()
+                });
+
+                // Notify the player they've progressed.
+                SendMessageToPC(player, "Objective for quest '" + questDetail.Name + "' complete! Check your journal for information on the next objective.");
+
+                // Save changes
+                dbPlayer.Quests[questId] = playerQuest;
+                _db.Set(dbPlayer);
+
+                // Create any extended data entries for the next state of the quest.
+                foreach (var objective in nextState.GetObjectives())
+                {
+                    objective.Initialize(player, questId);
+                }
+
+                // Run any quest-specific code.
+                foreach (var action in questDetail.OnAdvanceActions)
+                {
+                    action.Invoke(player, questSource, playerQuest.CurrentState);
+                }
+
+                //Gui.PublishRefreshEvent(player, new QuestProgressedRefreshEvent(QuestId));
+            }
+
+        }
+
+        /// <summary>
+        /// Completes a quest for a player. If a reward is selected, that reward will be given to the player.
+        /// Otherwise, all rewards configured for this quest will be given to the player.
+        /// </summary>
+        /// <param name="player">The player completing the quest.</param>
+        /// <param name="questSource">The source of the quest completion</param>
+        /// <param name="selectedReward">The reward selected by the player</param>
+        public void CompleteQuest(uint player, string questId, uint questSource, IQuestReward selectedReward)
+        {
+            if (!GetIsPC(player) || GetIsDM(player)) return;
+            if (!CanCompleteQuest(player, questId)) return;
+
+            var playerId = PlayerId.Get(player);
+            var dbPlayer = _db.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
+            var quest = dbPlayer.Quests.ContainsKey(questId) ? dbPlayer.Quests[questId] : new PlayerQuestDetail();
+            var questDetail = _quests[questId];
+
+            // Mark player as being on the last state of the quest.
+            quest.CurrentState = questDetail.States.Count;
+            quest.TimesCompleted++;
+
+            // Note - we must update the database before we give rewards.  Otherwise rewards that update the
+            // database (e.g. key items) will be discarded when we commit this change.
+            quest.ItemProgresses.Clear();
+            quest.KillProgresses.Clear();
+            quest.DateLastCompleted = DateTime.UtcNow;
+            dbPlayer.Quests[questId] = quest;
+            _db.Set(dbPlayer);
+
+            // No selected reward, simply give all available rewards to the player.
+            if (selectedReward == null)
+            {
+                foreach (var reward in questDetail.Rewards)
+                {
+                    reward.GiveReward(player);
+                }
+            }
+            // There is a selected reward. Give that reward and any rewards which are not selectable to the player.
+            else
+            {
+                // Non-selectable rewards (gold, GP, etc) are granted to the player.
+                foreach (var reward in questDetail.Rewards.Where(x => !x.IsSelectable))
+                {
+                    reward.GiveReward(player);
+                }
+
+                selectedReward.GiveReward(player);
+            }
+
+            foreach (var action in questDetail.OnCompleteActions)
+            {
+                action.Invoke(player, questSource);
+            }
+
+            SendMessageToPC(player, "Quest '" + questDetail.Name + "' complete!");
+            RemoveJournalQuestEntry(questId, player, false);
+
+            ExecuteScript(QuestEventScript.OnQuestCompletedScript, player);
+            //Gui.PublishRefreshEvent(player, new QuestCompletedRefreshEvent(QuestId));
+        }
+
     }
 }

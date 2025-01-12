@@ -13,16 +13,13 @@ namespace XM.Quest.Objective
 
         private readonly DBService _db;
         private readonly ItemCacheService _itemCache;
-        private readonly QuestService _quest;
 
         public CollectItemObjective(
             DBService db,
-            ItemCacheService itemCache,
-            QuestService quest)
+            ItemCacheService itemCache)
         {
             _db = db;
             _itemCache = itemCache;
-            _quest = quest;
         }
 
         public void Initialize(uint player, string questId)
@@ -49,10 +46,9 @@ namespace XM.Quest.Objective
             quest.ItemProgresses[Resref]--;
             _db.Set(dbPlayer);
 
-            var questDetail = _quest.GetQuestById(questId);
             var itemName = _itemCache.GetItemNameByResref(Resref);
 
-            var statusMessage = $"[{questDetail.Name}] {itemName} remaining: {quest.ItemProgresses[Resref]}";
+            var statusMessage = $"[{itemName} remaining: {quest.ItemProgresses[Resref]}";
 
             if (quest.ItemProgresses[Resref] <= 0)
             {

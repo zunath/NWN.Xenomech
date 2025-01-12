@@ -1,17 +1,11 @@
 ﻿using System.Collections.Generic;
+using Anvil.Services;
 
 namespace XM.Quest
 {
+    [ServiceBinding(typeof(IQuestListDefinition))]
     internal abstract class QuestListDefinitionBase: IQuestListDefinition
     {
-        protected QuestBuilder Builder { get; private set; }
-
         public abstract Dictionary<string, QuestDetail> BuildQuests();
-
-
-        protected QuestListDefinitionBase(QuestBuilder builder)
-        {
-            Builder = builder;
-        }
     }
 }

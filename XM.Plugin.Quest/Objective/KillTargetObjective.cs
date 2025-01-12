@@ -12,15 +12,14 @@ namespace XM.Quest.Objective
 
 
         private readonly DBService _db;
-
-        private readonly QuestService _quest;
+        private readonly QuestNPCService _questNPC;
 
         public KillTargetObjective(
             DBService db,
-            QuestService quest)
+            QuestNPCService questNPC)
         {
             _db = db;
-            _quest = quest;
+            _questNPC = questNPC;
         }
 
         public void Initialize(uint player, string questId)
@@ -47,10 +46,9 @@ namespace XM.Quest.Objective
             quest.KillProgresses[Group]--;
             _db.Set(dbPlayer);
 
-            var npcGroup = _quest.GetQuestNPCGroup(Group);
-            var questDetail = _quest.GetQuestById(questId);
+            var npcGroup = _questNPC.GetQuestNPCGroup(Group);
 
-            var statusMessage = $"[{questDetail.Name}] {npcGroup.Name} remaining: {quest.KillProgresses[Group]}";
+            var statusMessage = $"[{npcGroup.Name} remaining: {quest.KillProgresses[Group]}";
 
             if (quest.KillProgresses[Group] <= 0)
             {
@@ -84,7 +82,7 @@ namespace XM.Quest.Objective
             if (!dbPlayer.Quests.ContainsKey(questId))
                 return "N/A";
 
-            var npcGroup = _quest.GetQuestNPCGroup(Group);
+            var npcGroup = _questNPC.GetQuestNPCGroup(Group);
             var numberRemaining = dbPlayer.Quests[questId].KillProgresses[Group];
 
             return $"{Quantity - numberRemaining} / {Quantity} {npcGroup.Name}";

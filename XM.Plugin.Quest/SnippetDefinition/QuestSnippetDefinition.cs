@@ -153,7 +153,7 @@ namespace XM.Quest.SnippetDefinition
                     }
 
                     var questId = args[0];
-                    _quest.AcceptQuest(player, questId);
+                    _quest.AcceptQuest(player, questId, player);
                 });
         }
 
@@ -172,7 +172,7 @@ namespace XM.Quest.SnippetDefinition
                     }
 
                     var questId = args[0];
-                    _quest.AdvanceQuest(player, OBJECT_SELF, questId);
+                    _quest.AdvanceQuest(player, questId, OBJECT_SELF);
                 });
         }
 

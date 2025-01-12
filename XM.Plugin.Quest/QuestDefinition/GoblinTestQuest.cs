@@ -3,14 +3,12 @@ using Anvil.Services;
 
 namespace XM.Quest.QuestDefinition
 {
-    [ServiceBinding(typeof(GoblinTestQuest))]
+    [ServiceBinding(typeof(IQuestListDefinition))]
     internal class GoblinTestQuest: QuestListDefinitionBase
     {
-        public GoblinTestQuest(QuestBuilder builder) 
-            : base(builder)
-        {
-        }
 
+        [Inject]
+        private QuestBuilder Builder { get; set; }
 
         public override Dictionary<string, QuestDetail> BuildQuests()
         {

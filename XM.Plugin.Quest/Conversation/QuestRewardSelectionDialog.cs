@@ -53,7 +53,7 @@ namespace XM.Quest.Conversation
 
             void HandleRewardSelection(IQuestReward reward)
             {
-                quest.Complete(GetPC(), GetPC(), reward);
+                _quest.CompleteQuest(GetPC(), model.QuestId, GetPC(), reward);
                 EndConversation();
             }
             page.Header = "Please select a reward.";
