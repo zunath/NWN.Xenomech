@@ -168,8 +168,8 @@ namespace XM.Progression.UI.CharacterSheetUI
                     group.Scrollbars(NuiScrollbars.Y);
                     group.SetLayout(col =>
                     {
-                        BuildStatEntry(col, LocaleString.HP, model => model.HP, "icon_hp", new Color(189, 0, 0));
-                        BuildStatEntry(col, LocaleString.HPRegen, model => model.HPRegen, "icon_hpregen", new Color(189, 0, 0));
+                        BuildStatEntry(col, LocaleString.HP, model => model.HP, "icon_hp", new Color(255, 80, 80));
+                        BuildStatEntry(col, LocaleString.HPRegen, model => model.HPRegen, "icon_hpregen", new Color(255, 80, 80));
                         BuildStatEntry(col, LocaleString.EP, model => model.EP, "icon_ep", new Color(0, 138, 250));
                         BuildStatEntry(col, LocaleString.EPRegen, model => model.EPRegen, "icon_epregen", new Color(0, 138, 250));
                         BuildStatEntry(col, LocaleString.Might, model => model.Might, "icon_might");
