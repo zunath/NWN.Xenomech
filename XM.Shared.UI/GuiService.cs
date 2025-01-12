@@ -15,7 +15,6 @@ namespace XM.UI
     [ServiceBinding(typeof(GuiService))]
     [ServiceBinding(typeof(IUpdateable))]
     [ServiceBinding(typeof(IInitializable))]
-    [ServiceBinding(typeof(IDisposable))]
     public partial class GuiService: 
         IUpdateable, 
         IInitializable,
@@ -296,6 +295,9 @@ namespace XM.UI
 
         public void Dispose()
         {
+            ViewModels.Clear();
+            Views.Clear();
+
             _eventQueue.Clear();
             _lastEventTimestamps.Clear();
             _windowTypesByRefreshEvent.Clear();
