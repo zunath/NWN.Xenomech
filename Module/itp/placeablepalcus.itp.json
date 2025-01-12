@@ -148,6 +148,17 @@
                       "type": "resref",
                       "value": "quest_object"
                     }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trash Can"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "reo_trash_can"
+                    }
                   }
                 ]
               },

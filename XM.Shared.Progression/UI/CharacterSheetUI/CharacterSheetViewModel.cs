@@ -364,7 +364,10 @@ namespace XM.Progression.UI.CharacterSheetUI
         };
         public Action OnClickOpenTrash => () =>
         {
-
+            var location = GetLocation(Player);
+            var trash = CreateObject(ObjectType.Placeable, "reo_trash_can", location);
+            AssignCommand(Player, () => ActionInteractObject(trash));
+            DelayCommand(0.2f, () => SetUseableFlag(trash, false));
         };
 
         public void Refresh(PlayerHPAdjustedEvent @event)

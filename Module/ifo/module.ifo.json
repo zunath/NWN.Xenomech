@@ -120,6 +120,13 @@
         "__struct_id": 8,
         "Mod_Hak": {
           "type": "cexostring",
+          "value": "xm_job"
+        }
+      },
+      {
+        "__struct_id": 8,
+        "Mod_Hak": {
+          "type": "cexostring",
           "value": "xm_mechs"
         }
       }
