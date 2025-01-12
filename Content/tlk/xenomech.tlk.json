@@ -332,6 +332,22 @@
     {
       "id": 83,
       "text": "<All Categories>"
+    },
+    {
+      "id": 84,
+      "text": "Search by Name"
+    },
+    {
+      "id": 85,
+      "text": "X"
+    },
+    {
+      "id": 86,
+      "text": "Search"
+    },
+    {
+      "id": 87,
+      "text": "Abandon Quest"
     }
   ]
 }

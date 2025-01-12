@@ -85,5 +85,9 @@ namespace XM.Shared.Core.Localization
         DMG = 81,
         DisplayServerResetReminders = 82,
         AllCategories = 83,
+        SearchByName = 84,
+        X = 85,
+        Search = 86,
+        AbandonQuest = 87,
     }
 }
