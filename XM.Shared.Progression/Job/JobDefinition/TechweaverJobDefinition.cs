@@ -1,7 +1,15 @@
-﻿namespace XM.Progression.Job.JobDefinition
+﻿using XM.Shared.Core.Localization;
+
+namespace XM.Progression.Job.JobDefinition
 {
     internal class TechweaverJobDefinition: IJobDefinition
     {
+        public bool IsVisibleToPlayers => true;
+
+        public LocaleString Name => LocaleString.Techweaver;
+
+        public string IconResref => "techweaver_icon";
+
         public JobGrade Grades { get; } = new()
         {
             HP = GradeType.D,

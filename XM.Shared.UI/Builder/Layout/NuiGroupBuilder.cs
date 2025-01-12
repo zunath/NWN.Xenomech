@@ -18,13 +18,13 @@ namespace XM.UI.Builder.Layout
         {
         }
 
-        public NuiGroupBuilder<TViewModel> SetBorder(bool border)
+        public NuiGroupBuilder<TViewModel> Border(bool border)
         {
             _border = border;
             return this;
         }
 
-        public NuiGroupBuilder<TViewModel> SetScrollbars(NuiScrollbars scrollbars)
+        public NuiGroupBuilder<TViewModel> Scrollbars(NuiScrollbars scrollbars)
         {
             _scrollbars = scrollbars;
             return this;

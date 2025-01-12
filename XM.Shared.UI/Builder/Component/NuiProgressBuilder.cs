@@ -28,6 +28,11 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
+        public NuiProgressBuilder<TViewModel> Value(Expression<Func<TViewModel, GuiBindingList<float>>> expression)
+        {
+            _valueBind = GetBindName(expression);
+            return this;
+        }
         public override Json BuildEntity()
         {
             var value = string.IsNullOrWhiteSpace(_valueBind)

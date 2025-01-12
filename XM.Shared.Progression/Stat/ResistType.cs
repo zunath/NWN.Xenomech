@@ -1,0 +1,16 @@
+﻿namespace XM.Progression.Stat
+{
+    public enum ResistType
+    {
+        Invalid = 0,
+        Fire = 1,
+        Ice = 2,
+        Wind = 3,
+        Earth = 4,
+        Lightning = 5,
+        Water = 6,
+        Light = 7,
+        Darkness = 8,
+        Mind = 9,
+    }
+}

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Anvil.API;
+using XM.Shared.Core.Localization;
 using Action = System.Action;
 
 namespace XM.UI
@@ -24,6 +25,7 @@ namespace XM.UI
 
         internal void Unbind();
 
+        internal void OnOpenInternal();
         public void OnOpen();
 
         public void OnClose();

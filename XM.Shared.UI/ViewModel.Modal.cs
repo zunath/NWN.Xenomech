@@ -3,7 +3,8 @@ using XM.Shared.Core.Localization;
 
 namespace XM.UI
 {
-    public abstract partial class ViewModel
+    public abstract partial class ViewModel<TViewModel>
+        where TViewModel: IViewModel
     {
 
         public string ModalPromptText

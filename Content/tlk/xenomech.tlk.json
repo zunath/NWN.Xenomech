@@ -88,6 +88,246 @@
     {
       "id": 22,
       "text": "No"
+    },
+    {
+      "id": 23,
+      "text": "HP"
+    },
+    {
+      "id": 24,
+      "text": "EP"
+    },
+    {
+      "id": 25,
+      "text": "Beastmaster"
+    },
+    {
+      "id": 26,
+      "text": "Brawler"
+    },
+    {
+      "id": 27,
+      "text": "Elementalist"
+    },
+    {
+      "id": 28,
+      "text": "Hunter"
+    },
+    {
+      "id": 29,
+      "text": "Keeper"
+    },
+    {
+      "id": 30,
+      "text": "Mender"
+    },
+    {
+      "id": 31,
+      "text": "Nightstalker"
+    },
+    {
+      "id": 32,
+      "text": "Techweaver"
+    },
+    {
+      "id": 33,
+      "text": "Job"
+    },
+    {
+      "id": 34,
+      "text": "New Window"
+    },
+    {
+      "id": 35,
+      "text": "Character Sheet"
+    },
+    {
+      "id": 36,
+      "text": "Might"
+    },
+    {
+      "id": 37,
+      "text": "Vitality"
+    },
+    {
+      "id": 38,
+      "text": "Perception"
+    },
+    {
+      "id": 39,
+      "text": "Willpower"
+    },
+    {
+      "id": 40,
+      "text": "Agility"
+    },
+    {
+      "id": 41,
+      "text": "Social"
+    },
+    {
+      "id": 42,
+      "text": "MGT"
+    },
+    {
+      "id": 43,
+      "text": "VIT"
+    },
+    {
+      "id": 44,
+      "text": "PER"
+    },
+    {
+      "id": 45,
+      "text": "WIL"
+    },
+    {
+      "id": 46,
+      "text": "AGI"
+    },
+    {
+      "id": 47,
+      "text": "SOC"
+    },
+    {
+      "id": 48,
+      "text": "Stat"
+    },
+    {
+      "id": 49,
+      "text": "Quests"
+    },
+    {
+      "id": 50,
+      "text": "Appearance"
+    },
+    {
+      "id": 51,
+      "text": "Key Items"
+    },
+    {
+      "id": 52,
+      "text": "Open Trash"
+    },
+    {
+      "id": 53,
+      "text": "Settings"
+    },
+    {
+      "id": 54,
+      "text": "Level"
+    },
+    {
+      "id": 55,
+      "text": "Lv."
+    },
+    {
+      "id": 56,
+      "text": "Human"
+    },
+    {
+      "id": 57,
+      "text": "Main Hand"
+    },
+    {
+      "id": 58,
+      "text": "Off Hand"
+    },
+    {
+      "id": 59,
+      "text": "Attack"
+    },
+    {
+      "id": 60,
+      "text": "Accuracy"
+    },
+    {
+      "id": 61,
+      "text": "Evasion"
+    },
+    {
+      "id": 62,
+      "text": "Defense"
+    },
+    {
+      "id": 63,
+      "text": "Fire Resist"
+    },
+    {
+      "id": 64,
+      "text": "Ice Resist"
+    },
+    {
+      "id": 65,
+      "text": "Wind Resist"
+    },
+    {
+      "id": 66,
+      "text": "Earth Resist"
+    },
+    {
+      "id": 67,
+      "text": "Lightning Resist"
+    },
+    {
+      "id": 68,
+      "text": "Water Resist"
+    },
+    {
+      "id": 69,
+      "text": "Light Resist"
+    },
+    {
+      "id": 70,
+      "text": "Darkness Resist"
+    },
+    {
+      "id": 71,
+      "text": "Mind Resist"
+    },
+    {
+      "id": 72,
+      "text": "Attributes"
+    },
+    {
+      "id": 73,
+      "text": "Character"
+    },
+    {
+      "id": 74,
+      "text": "Combat"
+    },
+    {
+      "id": 75,
+      "text": "Defenses"
+    },
+    {
+      "id": 76,
+      "text": "Resists"
+    },
+    {
+      "id": 77,
+      "text": "Ether Attack"
+    },
+    {
+      "id": 78,
+      "text": "HP Regen"
+    },
+    {
+      "id": 79,
+      "text": "EP Regen"
+    },
+    {
+      "id": 80,
+      "text": "Recast Reduction"
+    },
+    {
+      "id": 81,
+      "text": "DMG"
+    },
+    {
+      "id": 82,
+      "text": "Display Server Reset Reminders"
     }
   ]
 }

@@ -1,20 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Anvil.API;
 using Anvil.Services;
 using XM.Inventory;
 using XM.Progression.Job.Entity;
+using XM.Progression.Job.Event;
 using XM.Progression.Job.JobDefinition;
 using XM.Progression.Stat;
 using XM.Progression.Stat.Entity;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
+using XM.Shared.Core.Localization;
 
 namespace XM.Progression.Job
 {
     [ServiceBinding(typeof(JobService))]
     public class JobService
     {
+        public const int JobCount = 8;
+
         private readonly Dictionary<GradeType, int> _baseHPByGrade = new()
         {
             { GradeType.A, 19},
@@ -94,6 +100,7 @@ namespace XM.Progression.Job
 
         private readonly Dictionary<JobType, IJobDefinition> _jobDefinitions = new()
         {
+            { JobType.Invalid, new InvalidJobDefinition()},
             { JobType.Beastmaster , new BeastmasterJobDefinition()},
             { JobType.Brawler , new BrawlerJobDefinition()},
             { JobType.Elementalist , new ElementalistJobDefinition()},
@@ -117,6 +124,11 @@ namespace XM.Progression.Job
             _inventory = inventory;
             _db = db;
             _stat = stat;
+        }
+
+        internal Dictionary<JobType, IJobDefinition> GetAllJobDefinitions()
+        {
+            return _jobDefinitions.ToDictionary(x => x.Key, y => y.Value);
         }
 
         internal IJobDefinition GetJobDefinition(JobType job)
@@ -188,6 +200,19 @@ namespace XM.Progression.Job
                          dbPlayerStat.BaseAttributes[AbilityType.Social] + 
                          dbPlayerStat.Attributes[AbilityType.Social];
 
+            _stat.SetPlayerMaxHP(player, hp);
+            _stat.SetPlayerMaxEP(player, ep);
+            _stat.SetPlayerAttribute(player, AbilityType.Might, might);
+            _stat.SetPlayerAttribute(player, AbilityType.Perception, perception);
+            _stat.SetPlayerAttribute(player, AbilityType.Vitality, vitality);
+            _stat.SetPlayerAttribute(player, AbilityType.Agility, agility);
+            _stat.SetPlayerAttribute(player, AbilityType.Willpower, willpower);
+            _stat.SetPlayerAttribute(player, AbilityType.Social, social);
+
+            var name = Locale.GetString(definition.Name);
+            SendMessageToPC(player, $"Job changed to: {ColorToken.Green(name)}");
+
+            ExecuteScript(JobEventScript.PlayerChangedJobScript, player);
         }
     }
 }

@@ -73,7 +73,8 @@ namespace XM.UI.Builder
                 template = JsonArrayInsert(template, element.Build());
             }
 
-            var rowCount = Nui.Bind(_rowCountBind + "_" + nameof(NuiList.RowCount));
+            var rowCountBindName = _rowCountBind + "_" + nameof(NuiList.RowCount);
+            var rowCount = Nui.Bind(rowCountBindName);
 
             return Nui.List(
                 template, 

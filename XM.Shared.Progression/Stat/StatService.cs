@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Anvil.Services;
 using XM.Progression.Stat.Entity;
 using XM.Progression.Stat.Event;
+using XM.Progression.Stat.ResistDefinition;
+using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.CreaturePlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
@@ -15,6 +19,19 @@ namespace XM.Progression.Stat
         private readonly DBService _db;
         private const string NPCEPStatVariable = "EP";
         private readonly XMEventService _event;
+
+        private Dictionary<ResistType, IResistDefinition> _resistDefinitions = new()
+        {
+            { ResistType.Darkness, new DarknessResistDefinition()},
+            { ResistType.Earth, new EarthResistDefinition()},
+            { ResistType.Fire, new FireResistDefinition()},
+            { ResistType.Ice, new IceResistDefinition()},
+            { ResistType.Lightning, new LightningResistDefinition()},
+            { ResistType.Light, new LightResistDefinition()},
+            { ResistType.Mind, new MindResistDefinition()},
+            { ResistType.Water, new WaterResistDefinition()},
+            { ResistType.Wind, new WindResistDefinition()},
+        };
 
         public StatService(DBService db, XMEventService @event)
         {
@@ -40,22 +57,35 @@ namespace XM.Progression.Stat
             return GetMaxHitPoints(creature);
         }
 
+        public Dictionary<ResistType, IResistDefinition> GetAllResistDefinitions()
+        {
+            return _resistDefinitions.ToDictionary(x => x.Key, y => y.Value);
+        }
 
         /// <summary>
         /// Increases or decreases a player's HP by a specified amount.
         /// There is a cap of 255 HP per NWN level. Players are auto-leveled to 40 by default, so this
         /// gives 255 * 40 = 10,200 HP maximum. If the player's HP would go over this amount, it will be set to 10,200.
-        /// This method will not persist the changes so be sure you call DB.Set after calling this.
         /// </summary>
         /// <param name="player">The player to adjust</param>
         /// <param name="adjustBy">The amount to adjust by.</param>
         public void AdjustPlayerMaxHP(uint player, int adjustBy)
         {
+            var playerId = PlayerId.Get(player);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+            dbPlayerStat.MaxHP += adjustBy;
+
+            SetPlayerMaxHP(player, dbPlayerStat.MaxHP);
+            _db.Set(dbPlayerStat);
+        }
+
+        public void SetPlayerMaxHP(uint player, int amount)
+        {
             const int MaxHPPerLevel = 254;
 
             var playerId = PlayerId.Get(player);
             var dbPlayerStat = _db.Get<PlayerStat>(playerId);
-            dbPlayerStat.MaxHP += adjustBy;
+            dbPlayerStat.MaxHP = amount;
             var nwnLevelCount = GetLevelByPosition(1, player) +
                                 GetLevelByPosition(2, player) +
                                 GetLevelByPosition(3, player);
@@ -131,6 +161,33 @@ namespace XM.Progression.Stat
             else
             {
                 return GetLocalInt(creature, NPCEPStatVariable);
+            }
+        }
+
+        public int GetHPRegen(uint creature)
+        {
+            if (GetIsPC(creature) && !GetIsDM(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+                return dbPlayerStat.HPRegen;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        public int GetEPRegen(uint creature)
+        {
+            if (GetIsPC(creature) && !GetIsDM(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+                return dbPlayerStat.EPRegen;
+            }
+            else
+            {
+                return 0;
             }
         }
 
@@ -265,6 +322,70 @@ namespace XM.Progression.Stat
             var playerId = PlayerId.Get(creature);
             var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
             return dbPlayerStat.AbilityRecastReduction;
+        }
+
+        public void SetPlayerMaxEP(uint player, int amount)
+        {
+            var playerId = PlayerId.Get(player);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+            dbPlayerStat.MaxEP = amount;
+
+            if (dbPlayerStat.EP > dbPlayerStat.MaxEP)
+                dbPlayerStat.EP = dbPlayerStat.MaxEP;
+
+            _db.Set(dbPlayerStat);
+        }
+
+        public int GetAttribute(uint player, AbilityType type)
+        {
+            return GetAbilityScore(player, type);
+        }
+
+        public void SetPlayerAttribute(uint player, AbilityType type, int amount)
+        {
+            CreaturePlugin.SetRawAbilityScore(player, type, amount);
+        }
+
+        public int GetAttack(uint player)
+        {
+            return 0; // todo
+        }
+        public int GetEtherAttack(uint player)
+        {
+            return 0; // todo
+        }
+
+        public int GetAccuracy(uint player)
+        {
+            return 0; // todo
+        }
+        public int GetEvasion(uint player)
+        {
+            return 0; // todo
+        }
+        public int GetDefense(uint player)
+        {
+            return 0; // todo
+        }
+        public int GetMainHandDMG(uint player)
+        {
+            return 0; // todo
+        }
+        public int GetOffHandDMG(uint player)
+        {
+            return 0; // todo
+        }
+
+        public int GetResist(uint player, ResistType resist)
+        {
+            var playerId = PlayerId.Get(player);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+
+            if (!dbPlayerStat.Resists.ContainsKey(resist))
+                return 0;
+
+            var value = dbPlayerStat.Resists[resist];
+            return Math.Clamp(value, 0, 100);
         }
     }
 }

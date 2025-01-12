@@ -3,13 +3,14 @@ using System.Linq.Expressions;
 using System;
 using XM.Shared.API.NUI;
 using NuiScrollbars = XM.Shared.API.NUI.NuiScrollbars;
+using XM.Shared.Core.Localization;
 
 namespace XM.UI.Builder.Component
 {
     public class NuiTextBuilder<TViewModel> : NuiBuilderBase<NuiTextBuilder<TViewModel>, TViewModel>
         where TViewModel : IViewModel
     {
-        private string _text;
+        private LocaleString _text;
         private string _textBind;
 
         private bool _border;
@@ -20,7 +21,7 @@ namespace XM.UI.Builder.Component
         {
         }
 
-        public NuiTextBuilder<TViewModel> Text(string text)
+        public NuiTextBuilder<TViewModel> Text(LocaleString text)
         {
             _text = text;
             return this;
@@ -43,11 +44,17 @@ namespace XM.UI.Builder.Component
             _textBind = GetBindName(expression);
             return this;
         }
+        public NuiTextBuilder<TViewModel> Text(Expression<Func<TViewModel, GuiBindingList<string>>> expression)
+        {
+            _textBind = GetBindName(expression);
+            return this;
+        }
 
         public override Json BuildEntity()
         {
+            var textValue = Locale.GetString(_text);
             var text = string.IsNullOrWhiteSpace(_textBind)
-                ? JsonString(_text)
+                ? JsonString(textValue)
                 : Nui.Bind(_textBind);
 
             return Nui.Text(text, _border, _scrollbars);

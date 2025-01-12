@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Anvil.API;
 using XM.Shared.API.NUI;
+using XM.Shared.Core.Localization;
 using NuiDirection = XM.Shared.API.NUI.NuiDirection;
 
 namespace XM.UI.Builder.Component
@@ -11,7 +12,7 @@ namespace XM.UI.Builder.Component
         where TViewModel : IViewModel
     {
         private NuiDirection _direction;
-        private List<string> _optionLabels = new();
+        private readonly List<LocaleString> _optionLabels = new();
 
         private int _selectedValue;
         private string _selectedValueBind;
@@ -22,7 +23,7 @@ namespace XM.UI.Builder.Component
         {
         }
 
-        public NuiTogglesBuilder<TViewModel> AddOption(string label)
+        public NuiTogglesBuilder<TViewModel> AddOption(LocaleString label)
         {
             _optionLabels.Add(label);
             return this;
@@ -55,7 +56,8 @@ namespace XM.UI.Builder.Component
             var optionLabels = JsonArray();
             foreach (var option in _optionLabels)
             {
-                optionLabels = JsonArrayInsert(optionLabels, JsonString(option));
+                var optionText = Locale.GetString(option);
+                optionLabels = JsonArrayInsert(optionLabels, JsonString(optionText));
             }
 
             return Nui.Toggles(_direction, optionLabels, selectedValue);
