@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System;
 using XM.Shared.API.NUI;
+using XM.Shared.Core;
 
 namespace XM.UI.Builder.Component
 {
@@ -32,6 +33,11 @@ namespace XM.UI.Builder.Component
             return this;
         }
         public NuiButtonSelectBuilder<TViewModel> Label(Expression<Func<TViewModel, string>> expression)
+        {
+            _labelBind = GetBindName(expression);
+            return this;
+        }
+        public NuiButtonSelectBuilder<TViewModel> Label(Expression<Func<TViewModel, XMBindingList<string>>> expression)
         {
             _labelBind = GetBindName(expression);
             return this;

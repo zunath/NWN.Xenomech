@@ -171,6 +171,11 @@ namespace XM.UI.Builder.Component
             _tooltipTextBind = GetBindName(expression);
             return (TBuilder)this;
         }
+        public TBuilder TooltipText(Expression<Func<TViewModel, XMBindingList<string>>> expression)
+        {
+            _tooltipTextBind = GetBindName(expression);
+            return (TBuilder)this;
+        }
 
         public TBuilder IsVisible(Expression<Func<TViewModel, bool>> expression)
         {

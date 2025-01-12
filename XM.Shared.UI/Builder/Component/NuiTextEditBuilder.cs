@@ -2,13 +2,14 @@
 using System.Linq.Expressions;
 using System;
 using XM.Shared.API.NUI;
+using XM.Shared.Core.Localization;
 
 namespace XM.UI.Builder.Component
 {
     public class NuiTextEditBuilder<TViewModel> : NuiBuilderBase<NuiTextEditBuilder<TViewModel>, TViewModel>
         where TViewModel : IViewModel
     {
-        private string _label;
+        private LocaleString _label;
         private string _labelBind;
 
         private string _value;
@@ -23,7 +24,7 @@ namespace XM.UI.Builder.Component
         {
         }
 
-        public NuiTextEditBuilder<TViewModel> Label(string label)
+        public NuiTextEditBuilder<TViewModel> Label(LocaleString label)
         {
             _label = label;
             return this;
@@ -68,7 +69,7 @@ namespace XM.UI.Builder.Component
         public override Json BuildEntity()
         {
             var label = string.IsNullOrWhiteSpace(_labelBind)
-                ? JsonString(_label)
+                ? JsonString(_label.ToLocalizedString())
                 : Nui.Bind(_labelBind);
 
             var value = string.IsNullOrWhiteSpace(_valueBind)
