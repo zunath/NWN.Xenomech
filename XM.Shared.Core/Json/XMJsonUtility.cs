@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Anvil.API;
+
 namespace XM.Shared.Core.Json
 {
     public static class XMJsonUtility
@@ -18,6 +20,11 @@ namespace XM.Shared.Core.Json
             _options.Converters.Add(new NuiRectJsonConverter());
             _options.Converters.Add(new ColorJsonConverter());
             _options.Converters.Add(new FloatJsonConverter());
+            _options.Converters.Add(new NuiComboEntryConverter());
+            _options.Converters.Add(new XMBindingListConverter<NuiComboEntry>(new JsonSerializerOptions()
+            {
+                Converters = { new NuiComboEntryConverter() }
+            }));
         }
 
         /// <summary>

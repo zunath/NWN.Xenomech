@@ -1,4 +1,5 @@
-﻿namespace XM.Shared.Core.Localization
+﻿// ReSharper disable InconsistentNaming
+namespace XM.Shared.Core.Localization
 {
     // Values correspond to the .tlk file
     public enum LocaleString
@@ -7,6 +8,8 @@
         NotAuthorizedToLogin = 1,
         InvalidChatCommand = 2,
         SelectTargetForChatCommand = 3,
+        Mech = 4,
+        mech = 5,
         CharacterChatCommandResult = 7,
         DeathPrompt = 8,
         Invalid = 9,
@@ -81,5 +84,6 @@
         RecastReduction = 80,
         DMG = 81,
         DisplayServerResetReminders = 82,
+        AllCategories = 83,
     }
 }

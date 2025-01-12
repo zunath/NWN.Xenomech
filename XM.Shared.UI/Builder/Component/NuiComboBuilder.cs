@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using XM.Shared.API.NUI;
+using XM.Shared.Core;
 
 namespace XM.UI.Builder.Component
 {
@@ -29,19 +30,19 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiComboBuilder<TViewModel> IsSelected(int selected)
+        public NuiComboBuilder<TViewModel> Selection(int selected)
         {
             _selected = selected;
             return this;
         }
 
-        public NuiComboBuilder<TViewModel> IsSelected(Expression<Func<TViewModel, int>> expression)
+        public NuiComboBuilder<TViewModel> Selection(Expression<Func<TViewModel, int>> expression)
         {
             _selectedBind = GetBindName(expression);
             return this;
         }
 
-        public NuiComboBuilder<TViewModel> Option(Expression<Func<TViewModel, List<NuiComboEntry>>> expression)
+        public NuiComboBuilder<TViewModel> Option(Expression<Func<TViewModel, XMBindingList<NuiComboEntry>>> expression)
         {
             _entriesBind = GetBindName(expression);
             return this;

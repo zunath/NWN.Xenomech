@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System;
 using XM.Shared.API.NUI;
+using XM.Shared.Core;
 using NuiScrollbars = XM.Shared.API.NUI.NuiScrollbars;
 using XM.Shared.Core.Localization;
 
@@ -44,7 +45,7 @@ namespace XM.UI.Builder.Component
             _textBind = GetBindName(expression);
             return this;
         }
-        public NuiTextBuilder<TViewModel> Text(Expression<Func<TViewModel, GuiBindingList<string>>> expression)
+        public NuiTextBuilder<TViewModel> Text(Expression<Func<TViewModel, XMBindingList<string>>> expression)
         {
             _textBind = GetBindName(expression);
             return this;

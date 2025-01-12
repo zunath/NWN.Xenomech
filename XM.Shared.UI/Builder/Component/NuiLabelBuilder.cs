@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System;
 using XM.Shared.API.NUI;
+using XM.Shared.Core;
 using XM.Shared.Core.Localization;
 
 namespace XM.UI.Builder.Component
@@ -58,7 +59,7 @@ namespace XM.UI.Builder.Component
             _labelBind = GetBindName(expression);
             return this;
         }
-        public NuiLabelBuilder<TViewModel> Label(Expression<Func<TViewModel, GuiBindingList<string>>> expression)
+        public NuiLabelBuilder<TViewModel> Label(Expression<Func<TViewModel, XMBindingList<string>>> expression)
         {
             _labelBind = GetBindName(expression);
             return this;

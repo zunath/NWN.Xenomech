@@ -426,5 +426,7 @@
         public const string OnXMPCInitializedScript = "xm_pc_init";
         public const string OnXMPlayerMigrationBeforeScript = "xm_migrate_bef";
         public const string OnXMPlayerMigrationAfterScript = "xm_migrate_aft";
+        public const string OnXMPlayerOpenedQuestsMenuScript = "xm_open_quests";
+        public const string OnXMPlayerOpenedAppearanceMenuScript = "xm_open_appear";
     }
 }

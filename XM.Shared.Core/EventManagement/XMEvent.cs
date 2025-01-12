@@ -32,6 +32,12 @@
         public struct OnSpawnCreated : IXMEvent
         {
         }
-
+        public struct OnPlayerOpenQuestsMenu : IXMEvent
+        {
+        }
+        public struct OnPlayerOpenAppearanceMenu : IXMEvent
+        {
+        }
+        
     }
 }

@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel;
 
-namespace XM.UI
+namespace XM.Shared.Core
 {
-    public class GuiBindingList<T>: BindingList<T>, IGuiBindingList
+    public class XMBindingList<T>: BindingList<T>, IXMBindingList
     {
         public string PropertyName { get; set; }
 
-        public GuiBindingList()
+        public XMBindingList()
         {
             PropertyName = string.Empty;
         }

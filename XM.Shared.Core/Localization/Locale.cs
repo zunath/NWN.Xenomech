@@ -24,5 +24,10 @@
             var text = string.Format(GetStringByStrRef(tlkId), args);
             return text;
         }
+
+        public static string ToLocalizedString(this LocaleString localeString)
+        {
+            return GetString(localeString);
+        }
     }
 }

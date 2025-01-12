@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Linq;
+using Anvil.API;
 using Anvil.Services;
+using XM.Inventory.Entity;
+using XM.Inventory.KeyItem;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
 using XM.Progression.Stat;
@@ -9,8 +13,10 @@ using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.Entity;
+using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 using XM.UI;
+using Action = System.Action;
 
 namespace XM.Progression.UI.CharacterSheetUI
 {
@@ -21,7 +27,9 @@ namespace XM.Progression.UI.CharacterSheetUI
         IRefreshable<PlayerEPAdjustedEvent>
     {
         internal const string StatPartialId = "STAT_PARTIAL";
+        internal const string MechPartialId = "MECH_PARTIAL";
         internal const string JobPartialId = "JOB_PARTIAL";
+        internal const string KeyItemsPartialId = "KEYITEMS_PARTIAL";
         internal const string SettingsPartialId = "SETTINGS_PARTIAL";
         internal const string MainView = "MAIN_VIEW";
 
@@ -181,26 +189,54 @@ namespace XM.Progression.UI.CharacterSheetUI
             set => Set(value);
         }
 
-        public GuiBindingList<string> JobNames
+        public XMBindingList<string> JobNames
         {
-            get => Get<GuiBindingList<string>>();
+            get => Get<XMBindingList<string>>();
             set => Set(value);
         }
 
-        public GuiBindingList<string> JobLevels
+        public XMBindingList<string> JobLevels
         {
-            get => Get<GuiBindingList<string>>();
+            get => Get<XMBindingList<string>>();
             set => Set(value);
         }
 
-        public GuiBindingList<string> JobIcons
+        public XMBindingList<string> JobIcons
         {
-            get => Get<GuiBindingList<string>>();
+            get => Get<XMBindingList<string>>();
             set => Set(value);
         }
-        public GuiBindingList<float> JobProgresses
+        public XMBindingList<float> JobProgresses
         {
-            get => Get<GuiBindingList<float>>();
+            get => Get<XMBindingList<float>>();
+            set => Set(value);
+        }
+
+        public XMBindingList<NuiComboEntry> KeyItemCategories
+        {
+            get => Get<XMBindingList<NuiComboEntry>>();
+            set => Set(value);
+        }
+
+        public int SelectedKeyItemCategory
+        {
+            get => Get<int>();
+            set
+            {
+                Set(value);
+                LoadKeyItems();
+            }
+        }
+
+        public XMBindingList<string> KeyItemNames
+        {
+            get => Get<XMBindingList<string>>();
+            set => Set(value);
+        }
+
+        public XMBindingList<string> KeyItemDescriptions
+        {
+            get => Get<XMBindingList<string>>();
             set => Set(value);
         }
 
@@ -222,6 +258,9 @@ namespace XM.Progression.UI.CharacterSheetUI
 
         [Inject]
         public StatService Stat { get; set; }
+
+        [Inject]
+        public KeyItemService KeyItem { get; set; }
 
         public CharacterSheetViewModel()
         {
@@ -286,6 +325,12 @@ namespace XM.Progression.UI.CharacterSheetUI
             EPRegen = Stat.GetEPRegen(Player).ToString();
         }
 
+        private void LoadMechView()
+        {
+            ChangePartialView(MainView, MechPartialId);
+
+        }
+
         private void LoadJobView()
         {
             ChangePartialView(MainView, JobPartialId);
@@ -295,10 +340,10 @@ namespace XM.Progression.UI.CharacterSheetUI
             var allJobs = Job.GetAllJobDefinitions();
 
             var lvText = Locale.GetString(LocaleString.Lv);
-            var jobNames = new GuiBindingList<string>();
-            var jobLevels = new GuiBindingList<string>();
-            var jobIcons = new GuiBindingList<string>();
-            var jobProgresses = new GuiBindingList<float>();
+            var jobNames = new XMBindingList<string>();
+            var jobLevels = new XMBindingList<string>();
+            var jobIcons = new XMBindingList<string>();
+            var jobProgresses = new XMBindingList<float>();
 
             foreach (var (job, definition) in allJobs)
             {
@@ -319,9 +364,63 @@ namespace XM.Progression.UI.CharacterSheetUI
             JobProgresses = jobProgresses;
         }
 
+        private void LoadKeyItemsView()
+        {
+            ChangePartialView(MainView, KeyItemsPartialId);
+
+            var categoryOptions = new XMBindingList<NuiComboEntry>();
+            var categories = KeyItem.GetActiveCategories();
+
+            var allCategoriesText = Locale.GetString(LocaleString.AllCategories);
+            categoryOptions.Add(new NuiComboEntry(allCategoriesText, -1));
+            foreach (var (type, detail) in categories)
+            {
+                if (!detail.IsActive)
+                    continue;
+
+                var text = Locale.GetString(detail.Name);
+                var typeId = (int)type;
+                categoryOptions.Add(new NuiComboEntry(text, typeId));
+            }
+
+            KeyItemCategories = categoryOptions;
+
+            SelectedKeyItemCategory = -1;
+            LoadKeyItems();
+            WatchOnClient(model => model.SelectedKeyItemCategory);
+        }
+
+        private void LoadKeyItems()
+        {
+            var playerId = PlayerId.Get(Player);
+            var dbPlayerKeyItems = DB.Get<PlayerKeyItem>(playerId) ?? new PlayerKeyItem(playerId);
+
+            var keyItemNames = new XMBindingList<string>();
+            var keyItemDescriptions = new XMBindingList<string>();
+
+            foreach (var (type, _) in dbPlayerKeyItems.KeyItems)
+            {
+                var detail = KeyItem.GetKeyItem(type);
+                if (SelectedKeyItemCategory > -1 &&
+                    detail.Category != (KeyItemCategoryType)SelectedKeyItemCategory)
+                    continue;
+
+                keyItemNames.Add(detail.Name.ToLocalizedString());
+                keyItemDescriptions.Add(detail.Description.ToLocalizedString());
+            }
+
+            KeyItemNames = keyItemNames;
+            KeyItemDescriptions = keyItemDescriptions;
+        }
+
         private void LoadSettingsView()
         {
             ChangePartialView(MainView, SettingsPartialId);
+
+            var playerId = PlayerId.Get(Player);
+            var dbPlayerSettings = DB.Get<PlayerSettings>(playerId);
+            IsDisplayServerResetRemindersChecked = dbPlayerSettings.DisplayServerResetReminders;
+
             WatchOnClient(model => model.IsDisplayServerResetRemindersChecked);
         }
 
@@ -332,10 +431,16 @@ namespace XM.Progression.UI.CharacterSheetUI
                 case 0: // 0 = Character
                     LoadCharacterView();
                     break;
-                case 1: // 1 = Job
+                case 1: // 1 = Mech
+                    LoadMechView();
+                    break;
+                case 2: // 2 = Job
                     LoadJobView();
                     break;
-                case 2: // 2 = Settings
+                case 3: // 3 = Key Items
+                    LoadKeyItemsView();
+                    break;
+                case 4: // 4 = Settings
                     LoadSettingsView();
                     break;
             }
@@ -352,15 +457,11 @@ namespace XM.Progression.UI.CharacterSheetUI
 
         public Action OnClickQuests => () =>
         {
-
+            ExecuteScript(EventScript.OnXMPlayerOpenedQuestsMenuScript, Player);
         };
         public Action OnClickAppearance => () =>
         {
-
-        };
-        public Action OnClickKeyItems => () =>
-        {
-
+            ExecuteScript(EventScript.OnXMPlayerOpenedAppearanceMenuScript, Player);
         };
         public Action OnClickOpenTrash => () =>
         {

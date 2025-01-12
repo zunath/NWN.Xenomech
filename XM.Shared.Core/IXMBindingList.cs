@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 
-namespace XM.UI
+namespace XM.Shared.Core
 {
-    public interface IGuiBindingList: IBindingList
+    public interface IXMBindingList: IBindingList
     {
         string PropertyName { get; set; }
     }

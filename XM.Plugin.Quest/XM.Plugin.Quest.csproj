@@ -70,6 +70,7 @@
 <ItemGroup>
   <ProjectReference Include="..\XM.Shared.API\XM.Shared.API.csproj" />
   <ProjectReference Include="..\XM.Shared.Inventory\XM.Shared.Inventory.csproj" />
+  <ProjectReference Include="..\XM.Shared.Progression\XM.Shared.Progression.csproj" />
   <ProjectReference Include="..\XM.Shared.UI\XM.Shared.UI.csproj" />
 </ItemGroup>
 

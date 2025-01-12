@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using Anvil.API;
 using Anvil.Services;
+using XM.Shared.Core;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Json;
 
@@ -26,7 +27,7 @@ namespace XM.UI
 
         private Guid _onNuiEventToken;
         private readonly Dictionary<string, object> _backingData = new();
-        private readonly Dictionary<string, IGuiBindingList> _boundLists = new();
+        private readonly Dictionary<string, IXMBindingList> _boundLists = new();
 
         private readonly List<string> _watches = new();
 
@@ -105,7 +106,8 @@ namespace XM.UI
                 var type = property!.PropertyType;
 
                 var value = XMJsonUtility.DeserializeObject(jsonString, type);
-                _backingData[propertyName] = value;
+                
+                property.SetValue(this, value);
             }
         }
 
@@ -145,29 +147,29 @@ namespace XM.UI
         {
             SetField(value, propertyName);
 
-            if (typeof(IGuiBindingList).IsAssignableFrom(typeof(T)))
+            if (typeof(IXMBindingList).IsAssignableFrom(typeof(T)))
             {
-                var list = (IGuiBindingList)value;
+                var list = (IXMBindingList)value;
                 list.PropertyName = propertyName;
                 RegisterList(list, propertyName);
                 UpdateRowCount(propertyName);
             }
         }
 
-        private void BindList(IGuiBindingList list, string propertyName)
+        private void BindList(IXMBindingList list, string propertyName)
         {
             list.ListChanged += OnListChanged;
             _boundLists[propertyName] = list;
         }
 
-        private void UnbindList(IGuiBindingList list, string propertyName)
+        private void UnbindList(IXMBindingList list, string propertyName)
         {
             list.ListChanged -= OnListChanged;
             list.PropertyName = string.Empty;
             _boundLists.Remove(propertyName);
         }
 
-        private void RegisterList(IGuiBindingList list, string propertyName)
+        private void RegisterList(IXMBindingList list, string propertyName)
         {
             if (!_boundLists.ContainsKey(propertyName))
             {
@@ -218,7 +220,7 @@ namespace XM.UI
 
         private void OnListChanged(object sender, ListChangedEventArgs e)
         {
-            var list = (IGuiBindingList)sender;
+            var list = (IXMBindingList)sender;
 
             switch (e.ListChangedType)
             {

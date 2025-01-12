@@ -328,6 +328,10 @@
     {
       "id": 82,
       "text": "Display Server Reset Reminders"
+    },
+    {
+      "id": 83,
+      "text": "<All Categories>"
     }
   ]
 }

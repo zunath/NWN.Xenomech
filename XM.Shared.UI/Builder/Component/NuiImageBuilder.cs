@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System;
 using XM.Shared.API.NUI;
+using XM.Shared.Core;
 using NuiAspect = XM.Shared.API.NUI.NuiAspect;
 
 namespace XM.UI.Builder.Component
@@ -88,7 +89,7 @@ namespace XM.UI.Builder.Component
             _resRefBind = GetBindName(expression);
             return this;
         }
-        public NuiImageBuilder<TViewModel> ResRef(Expression<Func<TViewModel, GuiBindingList<string>>> expression)
+        public NuiImageBuilder<TViewModel> ResRef(Expression<Func<TViewModel, XMBindingList<string>>> expression)
         {
             _resRefBind = GetBindName(expression);
             return this;

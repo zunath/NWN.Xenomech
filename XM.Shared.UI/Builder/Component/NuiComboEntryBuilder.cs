@@ -1,5 +1,6 @@
 ﻿using Anvil.API;
 using XM.Shared.API.NUI;
+using XM.Shared.Core.Localization;
 
 namespace XM.UI.Builder.Component
 {
@@ -7,7 +8,7 @@ namespace XM.UI.Builder.Component
         : NuiBuilderBase<NuiComboEntryBuilder<TViewModel>, TViewModel>
         where TViewModel: IViewModel
     {
-        private string _label;
+        private LocaleString _label;
         private int _value;
 
         public NuiComboEntryBuilder(NuiEventCollection eventCollection) 
@@ -15,7 +16,7 @@ namespace XM.UI.Builder.Component
         {
         }
 
-        public NuiComboEntryBuilder<TViewModel> Label(string label)
+        public NuiComboEntryBuilder<TViewModel> Label(LocaleString label)
         {
             _label = label;
             return this;
@@ -29,7 +30,8 @@ namespace XM.UI.Builder.Component
 
         public override Json BuildEntity()
         {
-            return Nui.ComboEntry(_label, _value);
+            var label = Locale.GetString(_label);
+            return Nui.ComboEntry(label, _value);
         }
     }
 }

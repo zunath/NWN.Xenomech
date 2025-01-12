@@ -2,8 +2,6 @@
 using System.Linq.Expressions;
 using Anvil.API;
 using Anvil.Services;
-using NLog.Layouts;
-using XM.Progression.Job;
 using XM.Shared.Core.Localization;
 using XM.UI;
 using XM.UI.Builder;
@@ -14,15 +12,9 @@ using NuiScrollbars = XM.Shared.API.NUI.NuiScrollbars;
 namespace XM.Progression.UI.CharacterSheetUI
 {
     [ServiceBinding(typeof(IView))]
-    internal class CharacterSheetView: IView
+    internal class CharacterSheetView : IView
     {
         private readonly NuiBuilder<CharacterSheetViewModel> _builder = new();
-        private readonly JobService _job;
-
-        public CharacterSheetView(JobService job)
-        {
-            _job = job;
-        }
 
         public IViewModel CreateViewModel()
         {
@@ -56,7 +48,9 @@ namespace XM.Progression.UI.CharacterSheetUI
                         });
                     })
                     .DefinePartialView(CharacterSheetViewModel.StatPartialId, BuildCharacterPartial)
+                    .DefinePartialView(CharacterSheetViewModel.MechPartialId, BuildMechPartial)
                     .DefinePartialView(CharacterSheetViewModel.JobPartialId, BuildJobPartial)
+                    .DefinePartialView(CharacterSheetViewModel.KeyItemsPartialId, BuildKeyItemsPartial)
                     .DefinePartialView(CharacterSheetViewModel.SettingsPartialId, BuildSettingsPartial);
             }).Build();
         }
@@ -67,7 +61,9 @@ namespace XM.Progression.UI.CharacterSheetUI
             {
                 toggle
                     .AddOption(LocaleString.Character)
+                    .AddOption(LocaleString.Mech)
                     .AddOption(LocaleString.Job)
+                    .AddOption(LocaleString.KeyItems)
                     .AddOption(LocaleString.Settings)
                     .SelectedValue(model => model.SelectedTab)
                     .OnMouseDown(model => model.OnChangeTab);
@@ -109,7 +105,7 @@ namespace XM.Progression.UI.CharacterSheetUI
 
             void BuildStatEntry(
                 NuiColumnBuilder<CharacterSheetViewModel> layout,
-                LocaleString label, 
+                LocaleString label,
                 Expression<Func<CharacterSheetViewModel, string>> value,
                 string iconResref,
                 Color color = default)
@@ -231,7 +227,7 @@ namespace XM.Progression.UI.CharacterSheetUI
                     layoutRow.AddColumn(BuildStatsColumn1);
                     layoutRow.AddColumn(BuildStatsColumn2);
                 });
-                
+
             });
         }
 
@@ -254,6 +250,17 @@ namespace XM.Progression.UI.CharacterSheetUI
                     row.AddSpacer();
                 });
             });
+        }
+
+        private void BuildMechPartial(NuiGroupBuilder<CharacterSheetViewModel> partial)
+        {
+            partial
+                .Border(false)
+                .Scrollbars(NuiScrollbars.Auto)
+                .SetLayout(col =>
+                {
+
+                });
         }
 
         private void BuildJobPartial(NuiGroupBuilder<CharacterSheetViewModel> partial)
@@ -365,6 +372,63 @@ namespace XM.Progression.UI.CharacterSheetUI
                 });
         }
 
+        private void BuildKeyItemsPartial(NuiGroupBuilder<CharacterSheetViewModel> partial)
+        {
+            partial
+                .Border(false)
+                .Scrollbars(NuiScrollbars.Auto)
+                .SetLayout(col =>
+                {
+                    col.AddRow(row =>
+                    {
+                        row.AddSpacer();
+                        row.AddComboBox(comboBox =>
+                        {
+                            comboBox
+                                .Option(model => model.KeyItemCategories)
+                                .Selection(model => model.SelectedKeyItemCategory)
+                                .Width(200f);
+                        });
+                        row.AddSpacer();
+                    });
+
+                    col.AddList(list =>
+                    {
+                        list.RowHeight(50f);
+                        list.AddTemplateCell(template =>
+                        {
+                            template
+                                .IsVariable(false)
+                                .Width(100f);
+                            template.AddGroup(group =>
+                            {
+                                group.SetLayout(layout =>
+                                {
+                                    layout.AddText(text =>
+                                    {
+                                        text.Text(model => model.KeyItemNames);
+                                    });
+                                });
+                            });
+                        }, model => model.KeyItemNames);
+
+                        list.AddTemplateCell(template =>
+                        {
+                            template.AddGroup(group =>
+                            {
+                                group.SetLayout(layout =>
+                                {
+                                    layout.AddText(text =>
+                                    {
+                                        text.Scrollbars(NuiScrollbars.Auto);
+                                        text.Text(model => model.KeyItemDescriptions);
+                                    });
+                                });
+                            });
+                        }, model => model.KeyItemNames);
+                    });
+                });
+        }
 
         private void BuildButtons(NuiGroupBuilder<CharacterSheetViewModel> group)
         {
@@ -387,13 +451,6 @@ namespace XM.Progression.UI.CharacterSheetUI
                         .Label(LocaleString.Quests)
                         .Width(ButtonWidth)
                         .OnClick(model => model.OnClickQuests);
-                });
-                col.AddButton(button =>
-                {
-                    button
-                        .Label(LocaleString.KeyItems)
-                        .Width(ButtonWidth)
-                        .OnClick(model => model.OnClickKeyItems);
                 });
                 col.AddButton(button =>
                 {

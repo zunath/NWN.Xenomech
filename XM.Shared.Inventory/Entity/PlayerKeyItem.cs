@@ -15,5 +15,11 @@ namespace XM.Inventory.Entity
         {
             KeyItems = new Dictionary<KeyItemType, DateTime>();
         }
+
+        public PlayerKeyItem(string playerId)
+        {
+            Id = playerId;
+            KeyItems = new Dictionary<KeyItemType, DateTime>();
+        }
     }
 }

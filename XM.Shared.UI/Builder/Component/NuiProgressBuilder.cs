@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System;
 using XM.Shared.API.NUI;
+using XM.Shared.Core;
 
 namespace XM.UI.Builder.Component
 {
@@ -28,7 +29,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiProgressBuilder<TViewModel> Value(Expression<Func<TViewModel, GuiBindingList<float>>> expression)
+        public NuiProgressBuilder<TViewModel> Value(Expression<Func<TViewModel, XMBindingList<float>>> expression)
         {
             _valueBind = GetBindName(expression);
             return this;

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using XM.Shared.API.NUI;
+using XM.Shared.Core;
 using XM.UI.Builder.DrawList;
 using Action = System.Action;
 
@@ -135,7 +136,7 @@ namespace XM.UI.Builder.Component
             return (TBuilder)this;
         }
 
-        public TBuilder DrawList(Expression<Func<TViewModel, GuiBindingList<NuiDrawListItem>>> expression)
+        public TBuilder DrawList(Expression<Func<TViewModel, XMBindingList<NuiDrawListItem>>> expression)
         {
             _drawListBind = GetBindName(expression);
             return (TBuilder)this;

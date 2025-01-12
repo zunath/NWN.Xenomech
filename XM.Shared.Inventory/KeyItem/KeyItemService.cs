@@ -12,7 +12,7 @@ using XM.Shared.Core.Localization;
 namespace XM.Inventory.KeyItem
 {
     [ServiceBinding(typeof(KeyItemService))]
-    public class KeyItemService
+    public class KeyItemService: IInitializable
     {
         // All categories/key items
         private readonly Dictionary<KeyItemCategoryType, KeyItemCategoryAttribute> _allCategories = new();
@@ -33,11 +33,9 @@ namespace XM.Inventory.KeyItem
         public KeyItemService(DBService db, XMEventService @event)
         {
             _db = db;
-
-            @event.Subscribe<XMEvent.OnCacheDataBefore>(OnCacheDataBefore);
         }
 
-        private void OnCacheDataBefore()
+        public void Init()
         {
             // Organize categories
             var categories = Enum.GetValues(typeof(KeyItemCategoryType)).Cast<KeyItemCategoryType>();
@@ -93,7 +91,7 @@ namespace XM.Inventory.KeyItem
             if (!GetIsPC(player) || GetIsDM(player)) return;
 
             var playerId = PlayerId.Get(player);
-            var dbPlayerKeyItem = _db.Get<PlayerKeyItem>(playerId);
+            var dbPlayerKeyItem = _db.Get<PlayerKeyItem>(playerId) ?? new PlayerKeyItem(playerId);
 
             if (dbPlayerKeyItem.KeyItems.ContainsKey(keyItem))
                 return;
@@ -174,6 +172,16 @@ namespace XM.Inventory.KeyItem
             return true;
         }
 
+        public Dictionary<KeyItemType, KeyItemAttribute> GetActiveKeyItems()
+        {
+            return _activeKeyItems.ToDictionary(x => x.Key, y => y.Value);
+        }
+
+        public Dictionary<KeyItemType, KeyItemAttribute> GetActiveKeyItemsByCategory(KeyItemCategoryType category)
+        {
+            return _activeKeyItemsByCategory[category].ToDictionary(x => x.Key, y => y.Value);
+        }
+
         /// <summary>
         /// Gets a key item's detail by its type.
         /// </summary>
@@ -209,5 +217,11 @@ namespace XM.Inventory.KeyItem
                 KeyItemType.Invalid :
                 _keyItemsByTypeName[name];
         }
+
+        public Dictionary<KeyItemCategoryType, KeyItemCategoryAttribute> GetActiveCategories()
+        {
+            return _activeKeyItemCategories.ToDictionary(x => x.Key, y => y.Value);
+        }
+
     }
 }

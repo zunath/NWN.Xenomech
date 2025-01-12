@@ -3,7 +3,7 @@ using XM.Shared.Core.Localization;
 
 namespace XM.Inventory.KeyItem
 {
-    internal class KeyItemCategoryAttribute: Attribute
+    public class KeyItemCategoryAttribute: Attribute
     {
         public LocaleString Name { get; private set; }
         public bool IsActive { get; private set; }
