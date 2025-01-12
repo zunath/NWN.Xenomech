@@ -80,5 +80,6 @@
         EPRegen = 79,
         RecastReduction = 80,
         DMG = 81,
+        DisplayServerResetReminders = 82,
     }
 }

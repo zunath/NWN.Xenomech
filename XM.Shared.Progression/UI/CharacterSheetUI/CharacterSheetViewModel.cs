@@ -8,6 +8,7 @@ using XM.Progression.Stat.Event;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
+using XM.Shared.Core.Entity;
 using XM.Shared.Core.Localization;
 using XM.UI;
 
@@ -203,6 +204,12 @@ namespace XM.Progression.UI.CharacterSheetUI
             set => Set(value);
         }
 
+        public bool IsDisplayServerResetRemindersChecked
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
 
         [Inject]
         public DBService DB { get; set; }
@@ -238,10 +245,8 @@ namespace XM.Progression.UI.CharacterSheetUI
 
             CharacterName = GetName(Player);
             PortraitResref = GetPortraitResRef(Player) + "l";
-            HP = Stat.GetCurrentHP(Player) + " / " + Stat.GetMaxHP(Player);
-            HPRegen = Stat.GetHPRegen(Player).ToString();
-            EP = Stat.GetCurrentEP(Player) + " / " + Stat.GetMaxEP(Player);
-            EPRegen = Stat.GetEPRegen(Player).ToString();
+            RefreshHP();
+            RefreshEP();
             Might = Stat.GetAttribute(Player, AbilityType.Might).ToString();
             Perception = Stat.GetAttribute(Player, AbilityType.Perception).ToString();
             Vitality = Stat.GetAttribute(Player, AbilityType.Vitality).ToString();
@@ -267,6 +272,18 @@ namespace XM.Progression.UI.CharacterSheetUI
             DarknessResist = Stat.GetResist(Player, ResistType.Darkness) + "%";
             WaterResist = Stat.GetResist(Player, ResistType.Water) + "%";
             MindResist = Stat.GetResist(Player, ResistType.Mind) + "%";
+        }
+
+        private void RefreshHP()
+        {
+            HP = Stat.GetCurrentHP(Player) + " / " + Stat.GetMaxHP(Player);
+            HPRegen = Stat.GetHPRegen(Player).ToString();
+        }
+
+        private void RefreshEP()
+        {
+            EP = Stat.GetCurrentEP(Player) + " / " + Stat.GetMaxEP(Player);
+            EPRegen = Stat.GetEPRegen(Player).ToString();
         }
 
         private void LoadJobView()
@@ -305,6 +322,7 @@ namespace XM.Progression.UI.CharacterSheetUI
         private void LoadSettingsView()
         {
             ChangePartialView(MainView, SettingsPartialId);
+            WatchOnClient(model => model.IsDisplayServerResetRemindersChecked);
         }
 
         public Action OnChangeTab => () =>
@@ -321,6 +339,15 @@ namespace XM.Progression.UI.CharacterSheetUI
                     LoadSettingsView();
                     break;
             }
+        };
+
+        public Action OnClickDisplayServerReminders => () =>
+        {
+            var playerId = PlayerId.Get(Player);
+            var dbPlayerSettings = DB.Get<PlayerSettings>(playerId) ?? new PlayerSettings(playerId);
+
+            dbPlayerSettings.DisplayServerResetReminders = IsDisplayServerResetRemindersChecked;
+            DB.Set(dbPlayerSettings);
         };
 
         public Action OnClickQuests => () =>
@@ -342,12 +369,12 @@ namespace XM.Progression.UI.CharacterSheetUI
 
         public void Refresh(PlayerHPAdjustedEvent @event)
         {
-            
+            RefreshHP();
         }
 
         public void Refresh(PlayerEPAdjustedEvent @event)
         {
-            
+            RefreshEP();
         }
     }
 }

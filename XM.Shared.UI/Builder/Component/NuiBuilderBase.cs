@@ -201,7 +201,7 @@ namespace XM.UI.Builder.Component
         private void BindAction(NuiEventType eventType, Expression<Func<TViewModel, Action>> expression)
         {
             if (!HasId())
-                _id = new Guid().ToString();
+                _id = Guid.NewGuid().ToString();
 
             RaisesNuiEvents = true;
             var methodName = GetBindName(expression);

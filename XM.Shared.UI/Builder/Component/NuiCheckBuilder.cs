@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System;
 using XM.Shared.API.NUI;
+using XM.Shared.Core.Localization;
 
 namespace XM.UI.Builder.Component
 {
@@ -9,7 +10,7 @@ namespace XM.UI.Builder.Component
         : NuiBuilderBase<NuiCheckBuilder<TViewModel>, TViewModel>
         where TViewModel : IViewModel
     {
-        private string _label;
+        private LocaleString _label;
         private string _labelBind;
 
         private bool _selected;
@@ -20,7 +21,7 @@ namespace XM.UI.Builder.Component
         {
         }
 
-        public NuiCheckBuilder<TViewModel> Label(string label)
+        public NuiCheckBuilder<TViewModel> Label(LocaleString label)
         {
             _label = label;
             return this;
@@ -46,8 +47,9 @@ namespace XM.UI.Builder.Component
 
         public override Json BuildEntity()
         {
+            var labelText = Locale.GetString(_label);
             var label = string.IsNullOrWhiteSpace(_labelBind)
-                ? JsonString(_label)
+                ? JsonString(labelText)
                 : Nui.Bind(_labelBind);
 
             var selected = string.IsNullOrWhiteSpace(_selectedBind)

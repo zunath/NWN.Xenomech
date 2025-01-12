@@ -239,6 +239,20 @@ namespace XM.Progression.UI.CharacterSheetUI
         {
             group.SetLayout(layoutCol =>
             {
+                layoutCol.AddRow(row =>
+                {
+                    row.AddSpacer();
+                    row.AddCheck(check =>
+                    {
+                        check
+                            .Label(LocaleString.DisplayServerResetReminders)
+                            .Selected(model => model.IsDisplayServerResetRemindersChecked)
+                            .OnMouseDown(model => model.OnClickDisplayServerReminders)
+                            .Width(500f);
+
+                    });
+                    row.AddSpacer();
+                });
             });
         }
 
