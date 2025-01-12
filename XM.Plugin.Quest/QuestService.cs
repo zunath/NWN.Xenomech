@@ -23,7 +23,10 @@ using DialogService = XM.Shared.Core.Dialog.DialogService;
 namespace XM.Quest
 {
     [ServiceBinding(typeof(QuestService))]
-    internal class QuestService: IInitializable
+    [ServiceBinding(typeof(IDisposable))]
+    internal class QuestService: 
+        IInitializable,
+        IDisposable
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -810,5 +813,10 @@ namespace XM.Quest
             //Gui.PublishRefreshEvent(player, new QuestCompletedRefreshEvent(QuestId));
         }
 
+        public void Dispose()
+        {
+            _quests.Clear();
+            _npcsWithKillQuests.Clear();
+        }
     }
 }

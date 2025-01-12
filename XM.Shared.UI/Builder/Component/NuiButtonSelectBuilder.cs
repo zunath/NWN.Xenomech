@@ -48,6 +48,11 @@ namespace XM.UI.Builder.Component
             _isSelectedBind = GetBindName(expression);
             return this;
         }
+        public NuiButtonSelectBuilder<TViewModel> IsSelected(Expression<Func<TViewModel, XMBindingList<bool>>> expression)
+        {
+            _isSelectedBind = GetBindName(expression);
+            return this;
+        }
 
 
         public override Json BuildEntity()

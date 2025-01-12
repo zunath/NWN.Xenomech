@@ -1,10 +1,12 @@
 ﻿using Anvil.API;
 using Anvil.Services;
+using NLog.Layouts;
 using XM.Shared.Core.Localization;
 using XM.UI;
 using XM.UI.Builder;
 using XM.UI.Builder.Layout;
 using NuiDirection = XM.Shared.API.NUI.NuiDirection;
+using NuiScrollbars = XM.Shared.API.NUI.NuiScrollbars;
 
 namespace XM.Quest.UI
 {
@@ -27,8 +29,11 @@ namespace XM.Quest.UI
                     .Title(LocaleString.Quests)
                     .Root(root =>
                     {
-                        BuildSearch(root);
-                        BuildActiveQuestDetails(root);
+                        root.AddRow(row =>
+                        {
+                            row.AddColumn(BuildSearch);
+                            row.AddColumn(BuildActiveQuestDetails);
+                        });
                     });
             }).Build();
         }
@@ -67,27 +72,22 @@ namespace XM.Quest.UI
                         });
                     });
 
-                    col.AddRow(row =>
+                    col.AddList(list =>
                     {
-                        row.AddList(list =>
+                        list.AddTemplateCell(template =>
                         {
-                            list.AddTemplateCell(cell =>
+                            template.AddRow(row =>
                             {
-                                cell.AddGroup(group =>
+                                row.AddButtonSelect(button =>
                                 {
-                                    group.SetLayout(layout =>
-                                    {
-                                        layout.AddToggles(toggle =>
-                                        {
-                                            toggle
-                                                .Direction(NuiDirection.Vertical)
-                                                .SelectedValue(model => model.SelectedQuest)
-                                                .TooltipText(model => model.QuestNames);
-                                        });
-                                    });
+                                    button
+                                        .IsSelected(model => model.QuestToggles)
+                                        .Label(model => model.QuestNames)
+                                        .TooltipText(model => model.QuestNames)
+                                        .OnClick(model => model.OnSelectQuest);
                                 });
-                            }, model => model.QuestNames);
-                        });
+                            });
+                        }, model => model.QuestNames);
                     });
                 });
             });
@@ -111,7 +111,10 @@ namespace XM.Quest.UI
             {
                 row.AddText(text =>
                 {
-                    text.Text(model => model.ActiveQuestDescription);
+                    text
+                        .Text(model => model.ActiveQuestDescription)
+                        .Border(true)
+                        .Scrollbars(NuiScrollbars.Y);
                 });
             });
 

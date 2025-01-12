@@ -103,11 +103,12 @@ namespace XM.UI
                 var bind = NuiGetBind(Player, WindowToken, propertyName);
                 var jsonString = JsonDump(bind);
                 var property = GetType().GetProperty(propertyName);
-                var type = property!.PropertyType;
+                if (property == null)
+                    return;
 
+                var type = property.PropertyType;
                 var value = XMJsonUtility.DeserializeObject(jsonString, type);
-                
-                property.SetValue(this, value);
+                _backingData[propertyName] = value;
             }
         }
 
@@ -212,7 +213,9 @@ namespace XM.UI
         {
             var memberExpression = (MemberExpression)expression.Body;
             var propertyName = memberExpression.Member.Name;
-            _watches.Add(propertyName);
+            
+            if(!_watches.Contains(propertyName))
+                _watches.Add(propertyName);
 
             NuiSetBindWatch(Player, WindowToken, propertyName, true);
         }

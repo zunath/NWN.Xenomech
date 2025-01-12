@@ -15,9 +15,11 @@ namespace XM.UI
     [ServiceBinding(typeof(GuiService))]
     [ServiceBinding(typeof(IUpdateable))]
     [ServiceBinding(typeof(IInitializable))]
+    [ServiceBinding(typeof(IDisposable))]
     public partial class GuiService: 
         IUpdateable, 
-        IInitializable
+        IInitializable,
+        IDisposable
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -56,6 +58,11 @@ namespace XM.UI
             _event.Subscribe<ModuleEvent.OnNuiEvent>(OnNuiEvent);
         }
 
+        public void Init()
+        {
+            CacheViews();
+            CacheRefreshables();
+        }
         private void OnNuiEvent()
         {
             var elementId = NuiGetEventElement();
@@ -173,7 +180,7 @@ namespace XM.UI
             {
                 var type = view.GetType();
                 var builtWindow = view.Build();
-                
+
                 var elementEvents = builtWindow.EventCollection;
 
                 _builtWindowsByType[type] = builtWindow;
@@ -278,25 +285,30 @@ namespace XM.UI
 
         private void ClearOpenPlayerWindows()
         {
-            for (var player = GetFirstPC(); GetIsObjectValid(player); player = GetNextPC())
+            foreach (var (player, tokens) in _playerToTokens)
             {
-                var nth = 0;
-                var windowToken = NuiGetNthWindow(player, nth);
-                while (windowToken != 0)
+                foreach (var (_, windowToken) in tokens)
                 {
                     NuiDestroy(player, windowToken);
-
-                    nth++;
-                    windowToken = NuiGetNthWindow(player, nth);
                 }
             }
         }
 
-        public void Init()
+        public void Dispose()
         {
-            CacheViews();
-            CacheRefreshables();
+            _eventQueue.Clear();
+            _lastEventTimestamps.Clear();
+            _windowTypesByRefreshEvent.Clear();
+
             ClearOpenPlayerWindows();
+
+            _playerViewModels.Clear();
+            _playerToTokens.Clear();
+            _tokenToType.Clear();
+            _tokenToPlayer.Clear();
+            _registeredEvents.Clear();
+            _builtWindowsByType.Clear();
+            _viewsByType.Clear();
         }
     }
 }

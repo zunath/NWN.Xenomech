@@ -9,13 +9,12 @@ namespace XM.UI.Builder.Component
     public class NuiTextEditBuilder<TViewModel> : NuiBuilderBase<NuiTextEditBuilder<TViewModel>, TViewModel>
         where TViewModel : IViewModel
     {
-        private LocaleString _label;
-        private string _labelBind;
+        private LocaleString _placeholder;
+        private string _placeholderBind;
 
-        private string _value;
         private string _valueBind;
 
-        private ushort _maxLength;
+        private ushort _maxLength = 32;
         private bool _multiLine;
         private bool _wordWrap;
 
@@ -26,13 +25,7 @@ namespace XM.UI.Builder.Component
 
         public NuiTextEditBuilder<TViewModel> Label(LocaleString label)
         {
-            _label = label;
-            return this;
-        }
-
-        public NuiTextEditBuilder<TViewModel> Value(string value)
-        {
-            _value = value;
+            _placeholder = label;
             return this;
         }
 
@@ -56,28 +49,26 @@ namespace XM.UI.Builder.Component
 
         public NuiTextEditBuilder<TViewModel> Label(Expression<Func<TViewModel, string>> expression)
         {
-            _labelBind = GetBindName(expression);
+            _placeholderBind = GetBindName(expression);
             return this;
         }
 
         public NuiTextEditBuilder<TViewModel> Value(Expression<Func<TViewModel, string>> expression)
         {
+            AssignId();
             _valueBind = GetBindName(expression);
             return this;
         }
 
         public override Json BuildEntity()
         {
-            var label = string.IsNullOrWhiteSpace(_labelBind)
-                ? JsonString(_label.ToLocalizedString())
-                : Nui.Bind(_labelBind);
+            var placeholder = string.IsNullOrWhiteSpace(_placeholderBind)
+                ? JsonString(_placeholder.ToLocalizedString())
+                : Nui.Bind(_placeholderBind);
 
-            var value = string.IsNullOrWhiteSpace(_valueBind)
-                ? JsonString(_value)
-                : Nui.Bind(_valueBind);
+            var value = Nui.Bind(_valueBind);
 
-
-            return Nui.TextEdit(label, value, _maxLength, _multiLine, _wordWrap);
+            return Nui.TextEdit(placeholder, value, _maxLength, _multiLine, _wordWrap);
         }
     }
 }

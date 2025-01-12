@@ -206,9 +206,7 @@ namespace XM.UI.Builder.Component
 
         private void BindAction(NuiEventType eventType, Expression<Func<TViewModel, Action>> expression)
         {
-            if (!HasId())
-                _id = Guid.NewGuid().ToString();
-
+            AssignId();
             RaisesNuiEvents = true;
             var methodName = GetBindName(expression);
 
@@ -247,20 +245,28 @@ namespace XM.UI.Builder.Component
             return !string.IsNullOrWhiteSpace(_id);
         }
 
+        protected void AssignId()
+        {
+            if (!HasId())
+            {
+                _id = Guid.NewGuid().ToString();
+            }
+        }
+
         public abstract Json BuildEntity();
 
         public virtual Json Build()
         {
             // Events only get raised in NUI if the element has an Id.
             // Ensure one is assigned if it wasn't set previously.
-            if (!HasId() && RaisesNuiEvents)
+            if (RaisesNuiEvents)
             {
-                _id = Guid.NewGuid().ToString();
+                AssignId();
             }
 
             var element = BuildEntity();
 
-            if(!string.IsNullOrWhiteSpace(_id))
+            if (!string.IsNullOrWhiteSpace(_id))
                 element = Nui.Id(element, _id);
 
             // Width

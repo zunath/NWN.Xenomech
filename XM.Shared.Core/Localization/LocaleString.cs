@@ -89,5 +89,8 @@ namespace XM.Shared.Core.Localization
         X = 85,
         Search = 86,
         AbandonQuest = 87,
+        AbandonQuestConfirmation = 88,
+        YouAreBusy = 89,
+        SelectAQuest = 90,
     }
 }

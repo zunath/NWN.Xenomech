@@ -27,6 +27,22 @@ namespace XM.UI.Builder
 
             return this;
         }
+        public NuiListTemplateCellBuilder<TViewModel> AddColumn(Action<NuiColumnBuilder<TViewModel>> group)
+        {
+            var columnBuilder = new NuiColumnBuilder<TViewModel>(RegisteredEvents);
+            group(columnBuilder);
+            _element = columnBuilder;
+
+            return this;
+        }
+        public NuiListTemplateCellBuilder<TViewModel> AddRow(Action<NuiRowBuilder<TViewModel>> group)
+        {
+            var columnBuilder = new NuiRowBuilder<TViewModel>(RegisteredEvents);
+            group(columnBuilder);
+            _element = columnBuilder;
+
+            return this;
+        }
 
         public NuiListTemplateCellBuilder<TViewModel> Width(float width)
         {
