@@ -23,6 +23,8 @@ using DialogService = XM.Shared.Core.Dialog.DialogService;
 namespace XM.Quest
 {
     [ServiceBinding(typeof(QuestService))]
+    [ServiceBinding(typeof(IInitializable))]
+    [ServiceBinding(typeof(IDisposable))]
     internal class QuestService: 
         IInitializable,
         IDisposable
@@ -814,6 +816,7 @@ namespace XM.Quest
 
         public void Dispose()
         {
+            Console.WriteLine($"Disposing {nameof(QuestService)}");
             Definitions.Clear();
             _quests.Clear();
             _npcsWithKillQuests.Clear();

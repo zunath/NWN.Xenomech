@@ -82,6 +82,27 @@ namespace XM.Shared.API.Constants
         ArcaneSpellFailure = 84,
         Material = 85,
         Quality = 86,
-        Additional = 87
+        Additional = 87,
+
+        // Custom Item Properties follow
+        
+        // 88-89 are open
+        HPBonus = 90,
+        EP = 91,
+        // 92 is open
+        DMG = 93,
+        Defense = 94,
+        // 95 is open
+        NPCHP = 96,
+        Accuracy = 97,
+        // 98 is free
+        NPCLevel = 99,
+        // 100-110 are open
+        Attack = 111,
+        EtherAttack = 112,
+        // 113-116 are open
+        Evasion = 117,
+        AbilityRecastReduction = 118,
+        EPRegen = 119,
     }
 }

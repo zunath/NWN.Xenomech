@@ -20,7 +20,7 @@ namespace XM.Progression.Stat
         private const string NPCEPStatVariable = "EP";
         private readonly XMEventService _event;
 
-        private Dictionary<ResistType, IResistDefinition> _resistDefinitions = new()
+        private readonly Dictionary<ResistType, IResistDefinition> _resistDefinitions = new()
         {
             { ResistType.Darkness, new DarknessResistDefinition()},
             { ResistType.Earth, new EarthResistDefinition()},
@@ -72,7 +72,7 @@ namespace XM.Progression.Stat
         public void AdjustPlayerMaxHP(uint player, int adjustBy)
         {
             var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
             dbPlayerStat.MaxHP += adjustBy;
 
             SetPlayerMaxHP(player, dbPlayerStat.MaxHP);
@@ -84,7 +84,7 @@ namespace XM.Progression.Stat
             const int MaxHPPerLevel = 254;
 
             var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
             dbPlayerStat.MaxHP = amount;
             var nwnLevelCount = GetLevelByPosition(1, player) +
                                 GetLevelByPosition(2, player) +
@@ -199,7 +199,7 @@ namespace XM.Progression.Stat
             if (GetIsPC(creature) && !GetIsDM(creature))
             {
                 var playerId = PlayerId.Get(creature);
-                var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
 
                 dbPlayerStat.EP -= reduceBy;
 
@@ -232,7 +232,7 @@ namespace XM.Progression.Stat
             if (GetIsPC(creature) && !GetIsDM(creature))
             {
                 var playerId = PlayerId.Get(creature);
-                var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
 
                 dbPlayerStat.EP += amount;
 
@@ -261,7 +261,7 @@ namespace XM.Progression.Stat
             // Note: It's possible for HP Regen to drop to a negative number. This is expected to ensure calculations stay in sync.
             // If there are any visual indicators (GUI elements for example) be sure to account for this scenario.
             var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
             dbPlayerStat.HPRegen += adjustBy;
             _db.Set(dbPlayerStat);
         }
@@ -271,7 +271,7 @@ namespace XM.Progression.Stat
             // Note: It's possible for EP Regen to drop to a negative number. This is expected to ensure calculations stay in sync.
             // If there are any visual indicators (GUI elements for example) be sure to account for this scenario.
             var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
             dbPlayerStat.EPRegen += adjustBy;
             _db.Set(dbPlayerStat);
         }
@@ -279,14 +279,14 @@ namespace XM.Progression.Stat
         public void AdjustDefense(uint player, int adjustBy)
         {
             var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
             dbPlayerStat.Defense += adjustBy;
             _db.Set(dbPlayerStat);
         }
         public void AdjustEvasion(uint player, int adjustBy)
         {
             var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
             dbPlayerStat.Evasion += adjustBy;
             _db.Set(dbPlayerStat);
         }
@@ -294,14 +294,14 @@ namespace XM.Progression.Stat
         public void AdjustAttack(uint player, int adjustBy)
         {
             var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
             dbPlayerStat.Attack += adjustBy;
             _db.Set(dbPlayerStat);
         }
         public void AdjustEtherAttack(uint player, int adjustBy)
         {
             var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
             dbPlayerStat.EtherAttack += adjustBy;
             _db.Set(dbPlayerStat);
         }
@@ -309,7 +309,7 @@ namespace XM.Progression.Stat
         public void AdjustAccuracy(uint player, int adjustBy)
         {
             var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
             dbPlayerStat.Accuracy += adjustBy;
             _db.Set(dbPlayerStat);
         }
@@ -327,7 +327,7 @@ namespace XM.Progression.Stat
         public void SetPlayerMaxEP(uint player, int amount)
         {
             var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
             dbPlayerStat.MaxEP = amount;
 
             if (dbPlayerStat.EP > dbPlayerStat.MaxEP)
@@ -348,24 +348,35 @@ namespace XM.Progression.Stat
 
         public int GetAttack(uint player)
         {
-            return 0; // todo
+            var playerId = PlayerId.Get(player);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+            
+            return dbPlayerStat.Attack;
         }
         public int GetEtherAttack(uint player)
         {
-            return 0; // todo
+            var playerId = PlayerId.Get(player);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+            return dbPlayerStat.EtherAttack;
         }
 
         public int GetAccuracy(uint player)
         {
-            return 0; // todo
+            var playerId = PlayerId.Get(player);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+            return dbPlayerStat.Accuracy;
         }
         public int GetEvasion(uint player)
         {
-            return 0; // todo
+            var playerId = PlayerId.Get(player);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+            return dbPlayerStat.Evasion;
         }
         public int GetDefense(uint player)
         {
-            return 0; // todo
+            var playerId = PlayerId.Get(player);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+            return dbPlayerStat.Defense;
         }
         public int GetMainHandDMG(uint player)
         {
