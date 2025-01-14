@@ -93,14 +93,17 @@ namespace XM.Shared.API
             NWN.Core.NWScript.DelayCommand(fSeconds, aActionToDelay);
         }
 
+
+        // Note: ExecuteScript has been commented out to avoid confusion with the ExecuteScript call found in XMEventService
+
         /// <summary>
         ///  Make oTarget run sScript and then return execution to the calling script.
         ///  If sScript does not specify a compiled script, nothing happens.
         /// </summary>
-        public static void ExecuteScript(string sScript, uint oTarget = NWN.Core.NWScript.OBJECT_INVALID)
-        {
-            NWN.Core.NWScript.ExecuteScript(sScript, oTarget);
-        }
+        //public static void ExecuteScript(string sScript, uint oTarget = NWN.Core.NWScript.OBJECT_INVALID)
+        //{
+        //    NWN.Core.NWScript.ExecuteScript(sScript, oTarget);
+        //}
 
         /// <summary>
         ///  Clear all the actions of the caller.

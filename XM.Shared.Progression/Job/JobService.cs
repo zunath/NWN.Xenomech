@@ -12,6 +12,7 @@ using XM.Progression.Stat.Entity;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
+using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 
 namespace XM.Progression.Job
@@ -115,15 +116,18 @@ namespace XM.Progression.Job
         private readonly InventoryService _inventory;
         private readonly DBService _db;
         private readonly StatService _stat;
+        private readonly XMEventService _event;
 
         public JobService(
             InventoryService inventory, 
             DBService db,
-            StatService stat)
+            StatService stat,
+            XMEventService @event)
         {
             _inventory = inventory;
             _db = db;
             _stat = stat;
+            _event = @event;
         }
 
         internal Dictionary<JobType, IJobDefinition> GetAllJobDefinitions()
@@ -212,7 +216,7 @@ namespace XM.Progression.Job
             var name = Locale.GetString(definition.Name);
             SendMessageToPC(player, $"Job changed to: {ColorToken.Green(name)}");
 
-            ExecuteScript(JobEventScript.PlayerChangedJobScript, player);
+            _event.ExecuteScript(JobEventScript.PlayerChangedJobScript, player);
         }
     }
 }

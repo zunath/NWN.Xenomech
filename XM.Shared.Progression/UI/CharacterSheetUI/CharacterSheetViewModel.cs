@@ -263,6 +263,7 @@ namespace XM.Progression.UI.CharacterSheetUI
         [Inject]
         public KeyItemService KeyItem { get; set; }
 
+
         public CharacterSheetViewModel()
         {
             SelectedTab = 0;
@@ -462,7 +463,7 @@ namespace XM.Progression.UI.CharacterSheetUI
         };
         public Action OnClickAppearance => () =>
         {
-            ExecuteScript(EventScript.OnXMPlayerOpenedAppearanceMenuScript, Player);
+            Event.ExecuteScript(EventScript.OnXMPlayerOpenedAppearanceMenuScript, Player);
         };
         public Action OnClickOpenTrash => () =>
         {

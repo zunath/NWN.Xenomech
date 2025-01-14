@@ -810,7 +810,7 @@ namespace XM.Quest
             SendMessageToPC(player, "Quest '" + questDetail.Name + "' complete!");
             RemoveJournalQuestEntry(questId, player, false);
 
-            ExecuteScript(QuestEventScript.OnQuestCompletedScript, player);
+            _event.ExecuteScript(QuestEventScript.OnQuestCompletedScript, player);
             //Gui.PublishRefreshEvent(player, new QuestCompletedRefreshEvent(QuestId));
         }
 
