@@ -218,7 +218,7 @@ namespace XM.Progression.Stat
                 SetLocalInt(creature, NPCEPStatVariable, ep);
             }
 
-            ExecuteScript(ProgressionEventScript.OnPlayerEPAdjustedScript, creature);
+            _event.ExecuteScript(ProgressionEventScript.OnPlayerEPAdjustedScript, creature);
         }
 
         public void RestoreEP(uint creature, int amount)
@@ -253,7 +253,7 @@ namespace XM.Progression.Stat
                 SetLocalInt(creature, NPCEPStatVariable, fp);
             }
 
-            ExecuteScript(ProgressionEventScript.OnPlayerEPAdjustedScript, creature);
+            _event.ExecuteScript(ProgressionEventScript.OnPlayerEPAdjustedScript, creature);
         }
 
         public void AdjustHPRegen(uint player, int adjustBy)

@@ -24,10 +24,12 @@ namespace XM.Migration
         private readonly Dictionary<int, IPlayerMigration> _playerMigrations = new();
 
         private readonly DBService _db;
+        private readonly XMEventService _event;
 
         public MigrationService(DBService db, XMEventService @event)
         {
             _db = db;
+            _event = @event;
 
             @event.Subscribe<ModuleEvent.OnPlayerEnter>(OnModuleEnter);
             @event.Subscribe<XMEvent.OnCacheDataAfter>(OnCacheDataAfter);
@@ -178,7 +180,7 @@ namespace XM.Migration
             dbPlayerMigration.MigrationVersion = newVersion;
             _db.Set(dbPlayerMigration);
 
-            ExecuteScript(EventScript.OnXMPlayerMigrationAfterScript, player);
+            _event.ExecuteScript(EventScript.OnXMPlayerMigrationAfterScript, player);
         }
 
         private void LoadServerMigrations()

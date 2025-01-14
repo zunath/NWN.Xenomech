@@ -440,7 +440,7 @@ namespace XM.Spawn
                     {
                         foreach (var activeSpawn in _activeSpawnsByArea[area])
                         {
-                            ExecuteScript("spawn_despawn", activeSpawn.SpawnObject);
+                            _event.ExecuteScript("spawn_despawn", activeSpawn.SpawnObject);
                             DestroyObject(activeSpawn.SpawnObject);
                         }
                     }
@@ -567,7 +567,7 @@ namespace XM.Spawn
                     action(spawn);
                 }
 
-                ExecuteScript(EventScript.OnXMSpawnCreatedScript, spawn);
+                _event.ExecuteScript(EventScript.OnXMSpawnCreatedScript, spawn);
 
                 return spawn;
             }

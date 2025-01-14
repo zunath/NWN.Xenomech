@@ -6,6 +6,7 @@ using System.Text;
 using Anvil.Services;
 using NLog;
 using XM.Shared.Core.Configuration;
+using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Json;
 
 namespace XM.Shared.Core.Data
@@ -25,9 +26,12 @@ namespace XM.Shared.Core.Data
         [Inject]
         public IList<IDBEntity> Entities { get; set; }
 
-        public DBService(XMSettingsService settings)
+        private readonly XMEventService _event;
+
+        public DBService(XMSettingsService settings, XMEventService @event)
         {
             _settings = settings;
+            _event = @event;
             _socketPath = settings.DatabaseSocketPath;
         }
 
@@ -110,7 +114,7 @@ namespace XM.Shared.Core.Data
             // CLI tools also use this class and don't have access to the NWN context.
             // Perform an environment variable check to ensure we're in the game server context before executing the event.
             if (_settings.IsGameServerContext)
-                ExecuteScript(DBLoadedEventScript, OBJECT_SELF);
+                _event.ExecuteScript(DBLoadedEventScript, OBJECT_SELF);
         }
 
 

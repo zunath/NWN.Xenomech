@@ -44,7 +44,7 @@ namespace XM.Migration
             // Already been initialized. Don't do it again.
             if (dbPlayer.MigrationVersion >= 1)
             {
-                ExecuteScript(EventScript.OnXMPlayerMigrationBeforeScript, player);
+                _event.ExecuteScript(EventScript.OnXMPlayerMigrationBeforeScript, player);
                 return;
             }
 
@@ -63,8 +63,8 @@ namespace XM.Migration
             dbPlayer.MigrationVersion = _migration.GetLatestPlayerVersion();
             _db.Set(dbPlayer);
 
-            ExecuteScript(EventScript.OnXMPCInitializedScript, player);
-            ExecuteScript(EventScript.OnXMPlayerMigrationBeforeScript, player);
+            _event.ExecuteScript(EventScript.OnXMPCInitializedScript, player);
+            _event.ExecuteScript(EventScript.OnXMPlayerMigrationBeforeScript, player);
         }
 
         private void AutoLevelPlayer(uint player)
