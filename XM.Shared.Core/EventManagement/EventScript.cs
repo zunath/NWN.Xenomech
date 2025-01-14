@@ -420,8 +420,6 @@
         public const string OnXMSpawnCreatedScript = "xm_spawn_created";
         public const string OnXMAreaCreatedScript = "xm_area_created";
         public const string OnXMModuleChangedScript = "xm_mod_changed";
-        public const string OnXMCacheDataBeforeScript = "xm_cache_bef";
-        public const string OnXMCacheDataAfterScript = "xm_cache_aft";
         public const string OnXMDatabaseLoadedScript = "xm_db_loaded";
         public const string OnXMPCInitializedScript = "xm_pc_init";
         public const string OnXMPlayerMigrationBeforeScript = "xm_migrate_bef";

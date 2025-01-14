@@ -36,8 +36,6 @@ namespace XM.Shared.Core.EventManagement.Registration
             _event.RegisterEvent<XMEvent.OnSpawnCreated>(EventScript.OnXMSpawnCreatedScript);
             _event.RegisterEvent<XMEvent.OnAreaCreated>(EventScript.OnXMAreaCreatedScript);
             _event.RegisterEvent<XMEvent.OnModuleContentChanged>(EventScript.OnXMModuleChangedScript);
-            _event.RegisterEvent<XMEvent.OnCacheDataBefore>(EventScript.OnXMCacheDataBeforeScript);
-            _event.RegisterEvent<XMEvent.OnCacheDataAfter>(EventScript.OnXMCacheDataAfterScript);
             _event.RegisterEvent<XMEvent.OnDatabaseLoaded>(EventScript.OnXMDatabaseLoadedScript);
             _event.RegisterEvent<XMEvent.OnPCInitialized>(EventScript.OnXMPCInitializedScript);
             _event.RegisterEvent<XMEvent.OnPlayerMigrationBefore>(EventScript.OnXMPlayerMigrationBeforeScript);
@@ -62,8 +60,6 @@ namespace XM.Shared.Core.EventManagement.Registration
         private void OnModulePreload()
         {
             DetermineContentChange();
-            ExecuteScript(EventScript.OnXMCacheDataBeforeScript);
-            ExecuteScript(EventScript.OnXMCacheDataAfterScript);
         }
 
         private void DetermineContentChange()
