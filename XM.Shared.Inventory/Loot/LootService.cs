@@ -295,7 +295,7 @@ namespace XM.Inventory.Loot
             });
         }
 
-        private void CreatureOnDeathBefore()
+        private void CreatureOnDeathBefore(uint objectSelf)
         {
             ProcessCorpse();
         }

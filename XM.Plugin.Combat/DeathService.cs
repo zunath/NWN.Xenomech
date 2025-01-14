@@ -42,11 +42,11 @@ namespace XM.Combat
         }
 
 
-        private void OnModuleDying()
+        private void OnModuleDying(uint objectSelf)
         {
             ApplyEffectToObject(DurationType.Instant, EffectDeath(), GetLastPlayerDying());
         }
-        private void OnModuleDeath()
+        private void OnModuleDeath(uint objectSelf)
         {
             var player = GetLastPlayerDied();
             var hostile = GetLastHostileActor(player);
@@ -67,7 +67,7 @@ namespace XM.Combat
             WriteDeathAudit(player);
         }
 
-        private void OnModuleRespawn()
+        private void OnModuleRespawn(uint objectSelf)
         {
             var player = GetLastRespawnButtonPresser();
             var maxHP = GetMaxHitPoints(player);
@@ -136,7 +136,7 @@ namespace XM.Combat
             _logger.Info(log);
         }
 
-        public void OnPCInitialized()
+        public void OnPCInitialized(uint objectSelf)
         {
             var player = OBJECT_SELF;
 

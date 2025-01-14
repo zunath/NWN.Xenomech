@@ -289,12 +289,12 @@ namespace XM.Spawn
             }
         }
 
-        private void OnAreaEnter()
+        private void OnAreaEnter(uint objectSelf)
         {
             SpawnArea();
         }
 
-        private void OnAreaExit()
+        private void OnAreaExit(uint objectSelf)
         {
             QueueDespawnArea();
         }
@@ -345,7 +345,7 @@ namespace XM.Spawn
             _queuedSpawnsByArea[spawnDetail.Area].Remove(queuedSpawn);
         }
 
-        private void CreatureOnDeathBefore()
+        private void CreatureOnDeathBefore(uint objectSelf)
         {
             QueueRespawn();
         }
@@ -365,7 +365,7 @@ namespace XM.Spawn
             SetLocalInt(creature, "RESPAWN_QUEUED", 1);
         }
 
-        private void OnXMServerHeartbeat()
+        private void OnXMServerHeartbeat(uint objectSelf)
         {
             ProcessQueuedSpawns();
             ProcessDespawnAreas();

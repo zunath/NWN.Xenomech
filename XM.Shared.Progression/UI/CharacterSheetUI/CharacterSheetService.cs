@@ -26,7 +26,7 @@ namespace XM.Progression.UI.CharacterSheetUI
             _event.Subscribe<ModuleEvent.OnPlayerGui>(ToggleCharacterSheetWindow);
         }
 
-        private void ToggleCharacterSheetWindow()
+        private void ToggleCharacterSheetWindow(uint objectSelf)
         {
             var type = GetLastGuiEventType();
             if (type != GuiEventType.DisabledPanelAttemptOpen)

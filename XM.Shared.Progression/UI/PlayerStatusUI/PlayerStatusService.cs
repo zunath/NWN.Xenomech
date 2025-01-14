@@ -37,7 +37,7 @@ namespace XM.Progression.UI.PlayerStatusUI
         }
 
 
-        private void OnPlayerEnter()
+        private void OnPlayerEnter(uint objectSelf)
         {
             var player = GetEnteringObject();
             if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
@@ -46,7 +46,7 @@ namespace XM.Progression.UI.PlayerStatusUI
             _gui.ShowWindow<PlayerStatusView>(player);
         }
 
-        private void OnPlayerEquipItem()
+        private void OnPlayerEquipItem(uint objectSelf)
         {
             var player = OBJECT_SELF;
             if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
@@ -56,7 +56,7 @@ namespace XM.Progression.UI.PlayerStatusUI
             _gui.PublishRefreshEvent(player, new PlayerEPAdjustedEvent());
         }
 
-        private void OnPlayerUnequipItem()
+        private void OnPlayerUnequipItem(uint objectSelf)
         {
             var player = OBJECT_SELF;
             if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
@@ -66,7 +66,7 @@ namespace XM.Progression.UI.PlayerStatusUI
             _gui.PublishRefreshEvent(player, new PlayerEPAdjustedEvent());
         }
 
-        private void OnPlayerHealed()
+        private void OnPlayerHealed(uint objectSelf)
         {
             var player = StringToObject(EventsPlugin.GetEventData("TARGET_OBJECT_ID"));
             if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
@@ -76,7 +76,7 @@ namespace XM.Progression.UI.PlayerStatusUI
             _gui.PublishRefreshEvent(player, new PlayerHPAdjustedEvent());
         }
 
-        private void OnPlayerEPAdjusted()
+        private void OnPlayerEPAdjusted(uint objectSelf)
         {
             var player = OBJECT_SELF;
             if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
@@ -85,7 +85,7 @@ namespace XM.Progression.UI.PlayerStatusUI
             _gui.PublishRefreshEvent(player, new PlayerEPAdjustedEvent());
         }
 
-        private void OnPlayerDamaged()
+        private void OnPlayerDamaged(uint objectSelf)
         {
             var player = OBJECT_SELF;
             if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))

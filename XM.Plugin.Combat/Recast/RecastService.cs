@@ -33,7 +33,7 @@ namespace XM.Combat.Recast
             @event.Subscribe<XMEvent.OnCacheDataBefore>(OnCacheDataBefore);
         }
 
-        private void OnCacheDataBefore()
+        private void OnCacheDataBefore(uint objectSelf)
         {
             CacheRecastGroupNames();
         }

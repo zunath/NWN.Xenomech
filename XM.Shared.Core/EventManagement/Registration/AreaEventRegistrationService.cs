@@ -50,7 +50,7 @@ namespace XM.Shared.Core.EventManagement.Registration
             _event.Subscribe<XMEvent.OnAreaCreated>(OnAreaCreated);
         }
 
-        public void OnAreaCreated()
+        public void OnAreaCreated(uint objectSelf)
         {
             var area = OBJECT_SELF;
             SetAreaScripts(area);

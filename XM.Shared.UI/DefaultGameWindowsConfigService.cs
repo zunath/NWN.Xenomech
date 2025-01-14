@@ -21,7 +21,7 @@ namespace XM.UI
             _event.Subscribe<ModuleEvent.OnPlayerEnter>(OnModuleEnter);
         }
 
-        private void OnModuleEnter()
+        private void OnModuleEnter(uint objectSelf)
         {
             var player = GetEnteringObject();
             if (!GetIsPC(player) || GetIsDM(player))

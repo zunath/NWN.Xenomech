@@ -35,7 +35,7 @@ namespace XM.Inventory
             _event.Subscribe<XMEvent.OnCacheDataBefore>(OnCacheDataBefore);
         }
 
-        private void OnModuleContentChanged()
+        private void OnModuleContentChanged(uint objectSelf)
         {
             var resref = UtilPlugin.GetFirstResRef(ResRefType.Item);
 
@@ -78,7 +78,7 @@ namespace XM.Inventory
             DestroyObject(item);
         }
 
-        public void OnCacheDataBefore()
+        public void OnCacheDataBefore(uint objectSelf)
         {
             LoadItemCache();
         }

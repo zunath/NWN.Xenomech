@@ -25,7 +25,7 @@ namespace XM.Shared.Core.Dialog.Snippet
             @event.Subscribe<XMEvent.OnCacheDataBefore>(OnCacheDataBefore);
         }
 
-        private void OnCacheDataBefore()
+        private void OnCacheDataBefore(uint objectSelf)
         {
             foreach (var definition in Definitions)
             {

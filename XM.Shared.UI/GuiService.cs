@@ -63,7 +63,7 @@ namespace XM.UI
             CacheViews();
             CacheRefreshables();
         }
-        private void OnNuiEvent()
+        private void OnNuiEvent(uint objectSelf)
         {
             var elementId = NuiGetEventElement();
             var @event = NuiGetEventType();

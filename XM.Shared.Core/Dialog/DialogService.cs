@@ -38,7 +38,7 @@ namespace XM.Shared.Core.Dialog
         /// When the module is loaded, the assembly will be searched for conversations.
         /// These will be added to the cache for use at a later time.
         /// </summary>
-        private void OnCacheDataBefore()
+        private void OnCacheDataBefore(uint objectSelf)
         {
             // Use reflection to get all of the conversation implementations.
             var classes = AppDomain.CurrentDomain.GetAssemblies()
@@ -59,7 +59,7 @@ namespace XM.Shared.Core.Dialog
             Console.WriteLine($"Loaded {_conversations.Count} conversations.");
         }
 
-        private void OnModuleLoad()
+        private void OnModuleLoad(uint objectSelf)
         {
             InitializeDialogs();
         }

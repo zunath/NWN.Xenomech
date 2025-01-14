@@ -34,18 +34,18 @@ namespace XM.Migration
             @event.Subscribe<XMEvent.OnDatabaseLoaded>(OnDatabaseLoaded);
         }
 
-        private void OnModuleEnter()
+        private void OnModuleEnter(uint objectSelf)
         {
             RunPlayerMigrations();
         }
 
-        private void OnCacheDataAfter()
+        private void OnCacheDataAfter(uint objectSelf)
         {
             RunServerMigrationsPostCache();
             UpdateMigrationVersion();
         }
 
-        private void OnDatabaseLoaded()
+        private void OnDatabaseLoaded(uint objectSelf)
         {
             var config = GetServerConfiguration();
             _currentMigrationVersion = config.MigrationVersion;

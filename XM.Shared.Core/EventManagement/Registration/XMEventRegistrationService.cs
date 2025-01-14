@@ -57,7 +57,7 @@ namespace XM.Shared.Core.EventManagement.Registration
             }, TimeSpan.FromSeconds(6));
         }
 
-        private void OnModulePreload()
+        private void OnModulePreload(uint objectSelf)
         {
             DetermineContentChange();
         }

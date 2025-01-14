@@ -32,7 +32,7 @@ namespace XM.Shared.Core.Caching
             return _areasByResref[resref];
         }
 
-        private void OnCacheDataBefore()
+        private void OnCacheDataBefore(uint objectSelf)
         {
             CacheAreasByResref();
         }

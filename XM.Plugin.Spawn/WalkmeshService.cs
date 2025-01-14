@@ -40,7 +40,7 @@ namespace XM.Spawn
             _event.Subscribe<XMEvent.OnModuleContentChanged>(OnModuleContentChanged);
         }
 
-        private void OnModuleLoad()
+        private void OnModuleLoad(uint objectSelf)
         {
             if (_bakingRan)
                 return;
@@ -50,7 +50,7 @@ namespace XM.Spawn
             _logger.Info($"Loaded {_walkmeshesByArea.Count} area walkmeshes.");
         }
 
-        private void OnModuleContentChanged()
+        private void OnModuleContentChanged(uint objectSelf)
         {
             LoadWalkmeshes();
         }

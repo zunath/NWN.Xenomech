@@ -104,7 +104,7 @@ namespace XM.Quest
         }
 
 
-        private void OnPlayerEnter()
+        private void OnPlayerEnter(uint objectSelf)
         {
             var player = GetEnteringObject();
             if (!GetIsPC(player) || GetIsDM(player)) return;
@@ -203,7 +203,7 @@ namespace XM.Quest
             AssignCommand(player, () => ActionInteractObject(collector));
         }
 
-        private void CreatureOnDeathBefore()
+        private void CreatureOnDeathBefore(uint objectSelf)
         {
             ProgressKillTargetObjectives();
         }

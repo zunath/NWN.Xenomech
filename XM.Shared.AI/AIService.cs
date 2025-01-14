@@ -12,7 +12,7 @@ namespace XM.AI
         {
             @event.Subscribe<XMEvent.OnSpawnCreated>(OnSpawnCreated);
         }
-        private void OnSpawnCreated()
+        private void OnSpawnCreated(uint objectSelf)
         {
             var creature = OBJECT_SELF;
             SetAIFlag(creature, AIFlag.ReturnHome);

@@ -35,7 +35,7 @@ namespace XM.Shared.Core.Authorization
             _event.Subscribe<ModuleEvent.OnPlayerEnter>(OnPlayerEnter);
         }
 
-        private void OnPlayerEnter()
+        private void OnPlayerEnter(uint objectSelf)
         {
             var dm = GetEnteringObject();
             if (!GetIsDM(dm) && !GetIsDMPossessed(dm)) 

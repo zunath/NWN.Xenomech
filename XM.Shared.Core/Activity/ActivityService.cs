@@ -71,7 +71,7 @@ namespace XM.Shared.Core.Activity
         /// <summary>
         /// When a player enters the module, wipe their temporary "busy" status.
         /// </summary>
-        private void OnModuleEnter()
+        private void OnModuleEnter(uint objectSelf)
         {
             var player = GetEnteringObject();
             ClearBusy(player);
@@ -80,7 +80,7 @@ namespace XM.Shared.Core.Activity
         /// <summary>
         /// When a player dies, wipe their temporary "busy" status.
         /// </summary>
-        private void OnPlayerDeath()
+        private void OnPlayerDeath(uint objectSelf)
         {
             var player = GetLastPlayerDied();
             ClearBusy(player);

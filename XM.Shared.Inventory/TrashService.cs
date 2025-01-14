@@ -14,7 +14,7 @@ namespace XM.Inventory
             @event.Subscribe<NWNXEvent.OnInputDropItemBefore>(PreventItemDrops);
         }
         
-        private void PreventItemDrops()
+        private void PreventItemDrops(uint objectSelf)
         {
             var player = OBJECT_SELF;
             if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))

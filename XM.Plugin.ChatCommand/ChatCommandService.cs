@@ -52,7 +52,7 @@ namespace XM.ChatCommand
         }
 
 
-        private void OnPlayerChat()
+        private void OnPlayerChat(uint objectSelf)
         {
             var sender = OBJECT_SELF;
             var originalMessage = GetPCChatMessage().Trim();

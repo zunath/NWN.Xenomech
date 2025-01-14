@@ -41,7 +41,7 @@ namespace XM.Shared.Core.EventManagement.Registration
             _event.Subscribe<ModuleEvent.OnPlayerEnter>(OnClientEnter);
         }
 
-        private void OnClientEnter()
+        private void OnClientEnter(uint objectSelf)
         {
             var player = GetEnteringObject();
             SetPlayerScripts(player);

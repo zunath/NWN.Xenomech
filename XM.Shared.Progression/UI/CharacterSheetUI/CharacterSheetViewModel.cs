@@ -2,6 +2,7 @@
 using System.Linq;
 using Anvil.API;
 using Anvil.Services;
+using NWN.Core.NWNX;
 using XM.Inventory.Entity;
 using XM.Inventory.KeyItem;
 using XM.Progression.Job;
@@ -457,7 +458,7 @@ namespace XM.Progression.UI.CharacterSheetUI
 
         public Action OnClickQuests => () =>
         {
-            ExecuteScript(EventScript.OnXMPlayerOpenedQuestsMenuScript, Player);
+            Event.ExecuteScript(EventScript.OnXMPlayerOpenedQuestsMenuScript, Player);
         };
         public Action OnClickAppearance => () =>
         {

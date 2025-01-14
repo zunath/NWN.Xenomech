@@ -22,7 +22,7 @@ namespace XM.Quest
             _event.Subscribe<ModuleEvent.OnPlayerGui>(OnPlayerGuiEvent);
         }
 
-        private void OnPlayerGuiEvent()
+        private void OnPlayerGuiEvent(uint objectSelf)
         {
             ReplaceNWNGuis();
         }

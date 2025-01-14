@@ -1,51 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using Anvil.API;
 using Anvil.Services;
-using Action = System.Action;
+using NLog;
 
 namespace XM.Shared.Core.EventManagement
 {
     [ServiceBinding(typeof(XMEventService))]
-    public class XMEventService
+    [ServiceBinding(typeof(IScriptDispatcher))]
+    public class XMEventService: IScriptDispatcher
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly Dictionary<string, Type> _scriptToTypes = new();
-        private readonly Dictionary<Type, Dictionary<Guid, Action>> _scriptActionRegistrations = new();
-
-        private readonly ScriptHandleFactory _scriptHandleFactory;
-
-        public XMEventService(ScriptHandleFactory scriptHandleFactory)
-        {
-            _scriptHandleFactory = scriptHandleFactory;
-        }
+        private readonly Dictionary<Type, Dictionary<Guid, Action<uint>>> _scriptActionRegistrations = new();
 
         public void RegisterEvent<T>(string scriptName)
             where T : IXMEvent
         {
-            _scriptHandleFactory.RegisterScriptHandler(scriptName, HandleScript);
-
             if (!_scriptToTypes.ContainsKey(scriptName))
             {
                 _scriptToTypes[scriptName] = typeof(T);
             }
         }
 
-        private ScriptHandleResult HandleScript(CallInfo arg)
-        {
-            var type = _scriptToTypes[arg.ScriptName];
-
-            RunEventHandlers(type);
-
-            return ScriptHandleResult.Handled;
-        }
-
-        public Guid Subscribe<T>(Action action)
+        public Guid Subscribe<T>(Action<uint> action)
             where T: IXMEvent
         {
             var type = typeof(T);
             if (!_scriptActionRegistrations.ContainsKey(type))
             {
-                _scriptActionRegistrations[type] = new Dictionary<Guid, Action>();
+                _scriptActionRegistrations[type] = new Dictionary<Guid, Action<uint>>();
             }
 
             var id = Guid.NewGuid();
@@ -67,15 +50,34 @@ namespace XM.Shared.Core.EventManagement
             _scriptActionRegistrations[type].Remove(id);
         }
 
-        private void RunEventHandlers(Type type)
+        private void RunEventHandlers(uint objectSelf, Type type)
         {
             if (!_scriptActionRegistrations.ContainsKey(type))
                 return;
 
             foreach (var (_, action) in _scriptActionRegistrations[type])
             {
-                action();
+                try
+                {
+                    action(objectSelf);
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex);
+                }
             }
         }
+
+        public ScriptHandleResult ExecuteScript(string scriptName, uint objectSelf)
+        {
+            if (!_scriptToTypes.ContainsKey(scriptName)) 
+                return ScriptHandleResult.NotHandled;
+
+            var type = _scriptToTypes[scriptName];
+            RunEventHandlers(objectSelf, type);
+            return ScriptHandleResult.Handled;
+        }
+
+        public int ExecutionOrder => 0;
     }
 }

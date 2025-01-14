@@ -79,7 +79,7 @@ namespace XM.Shared.Core.EventManagement.Registration
             SetEventScript(spawn, EventScriptType.CreatureOnUserDefinedEvent, StandardUserDefined);
         }
 
-        private void OnSpawnCreated()
+        private void OnSpawnCreated(uint objectSelf)
         {
             var spawn = OBJECT_SELF;
             SetCreatureScripts(spawn);

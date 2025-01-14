@@ -90,7 +90,7 @@ namespace XM.UI
             WatchOnClient(model => model.Geometry);
         }
 
-        private void OnWatchEvent()
+        private void OnWatchEvent(uint objectSelf)
         {
             var @event = NuiGetEventType();
             var propertyName = NuiGetEventElement();

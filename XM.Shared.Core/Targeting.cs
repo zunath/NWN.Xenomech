@@ -28,7 +28,7 @@ namespace XM.Shared.Core
         /// <summary>
         /// When a player targets an object, execute the assigned action.
         /// </summary>
-        private void RunTargetedItemAction()
+        private void RunTargetedItemAction(uint objectSelf)
         {
             var player = GetLastPlayerToSelectTarget();
             if (!_playerTargetingActions.ContainsKey(player))

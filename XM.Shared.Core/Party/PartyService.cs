@@ -33,13 +33,13 @@ namespace XM.Shared.Core.Party
             _event.Subscribe<NWNXEvent.OnPartyTransferLeadershipBefore>(OnPartyTransferLeadershipBefore);
         }
 
-        private void OnModuleLeave()
+        private void OnModuleLeave(uint objectSelf)
         {
             var creature = GetExitingObject();
             RemoveCreatureFromParty(creature);
         }
 
-        private void OnPartyAcceptInvitationBefore()
+        private void OnPartyAcceptInvitationBefore(uint objectSelf)
         {
             var creature = OBJECT_SELF;
             var requester = StringToObject(EventsPlugin.GetEventData("INVITED_BY"));
@@ -47,7 +47,7 @@ namespace XM.Shared.Core.Party
             AddToParty(requester, creature);
         }
 
-        private void OnAddAssociateBefore()
+        private void OnAddAssociateBefore(uint objectSelf)
         {
             var owner = OBJECT_SELF;
             var associate = StringToObject(EventsPlugin.GetEventData("ASSOCIATE_OBJECT_ID"));
@@ -55,19 +55,19 @@ namespace XM.Shared.Core.Party
             AddToParty(owner, associate);
         }
 
-        private void OnRemoveAssociateBefore()
+        private void OnRemoveAssociateBefore(uint objectSelf)
         {
             var associate = StringToObject(EventsPlugin.GetEventData("ASSOCIATE_OBJECT_ID"));
             RemoveCreatureFromParty(associate);
         }
 
-        private void OnPartyLeaveBefore()
+        private void OnPartyLeaveBefore(uint objectSelf)
         {
             var creature = StringToObject(EventsPlugin.GetEventData("LEAVING"));
             RemoveCreatureFromParty(creature);
         }
 
-        private void OnPartyTransferLeadershipBefore()
+        private void OnPartyTransferLeadershipBefore(uint objectSelf)
         {
             var creature = StringToObject(EventsPlugin.GetEventData("NEW_LEADER"));
             var partyId = _creatureToParty[creature];
