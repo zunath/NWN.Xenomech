@@ -22,9 +22,9 @@ namespace XM.AI.AITrees
             }
         }
 
-        protected AITreeBase(uint creature)
+        protected AITreeBase(uint creature, AIService ai)
         {
-            Creature = new CreatureAIContext(creature);
+            Creature = new CreatureAIContext(creature, ai);
             Tree = CreateTree();
         }
 

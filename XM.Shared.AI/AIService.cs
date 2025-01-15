@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Anvil.API;
 using Anvil.Services;
 using XM.AI.AITrees;
 using XM.Shared.API.Constants;
@@ -10,7 +9,10 @@ namespace XM.AI
 {
     [ServiceBinding(typeof(AIService))]
     [ServiceBinding(typeof(IUpdateable))]
-    internal class AIService: IUpdateable
+    [ServiceBinding(typeof(IDisposable))]
+    internal class AIService: 
+        IUpdateable,
+        IDisposable
     {
         private const string AIFlagsVariable = "AI_FLAGS";
 
@@ -23,9 +25,9 @@ namespace XM.AI
         }
         private void OnSpawnCreated(uint creature)
         {
-            SetAIFlag(creature, AIFlag.ReturnHome);
+            SetAIFlags(creature, AIFlag.ReturnHome);
 
-            _creatureAITrees[creature] = new TestAITree(creature);
+            _creatureAITrees[creature] = new TestAITree(creature, this);
         }
 
         private void OnCreatureDeath(uint creature)
@@ -34,10 +36,16 @@ namespace XM.AI
                 _creatureAITrees.Remove(creature);
         }
 
-        private void SetAIFlag(uint creature, AIFlag flags)
+        private void SetAIFlags(uint creature, AIFlag flags)
         {
             var flagValue = (int)flags;
             SetLocalInt(creature, AIFlagsVariable, flagValue);
+        }
+
+        public AIFlag GetAIFlags(uint creature)
+        {
+            var flagValue = GetLocalInt(creature, AIFlagsVariable);
+            return (AIFlag)flagValue;
         }
 
         public void Update()
@@ -55,6 +63,11 @@ namespace XM.AI
             ApplyEffectToObject(DurationType.Instant, EffectDamage(1), npc);
 
             SendMessageToPC(GetLastUsedBy(), $"goblin: {GetCurrentHitPoints(npc)} / {GetMaxHitPoints(npc)}");
+        }
+
+        public void Dispose()
+        {
+            _creatureAITrees.Clear();
         }
     }
 }

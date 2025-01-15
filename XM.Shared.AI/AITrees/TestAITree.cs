@@ -10,8 +10,8 @@ namespace XM.AI.AITrees
 {
     internal class TestAITree: AITreeBase
     {
-        public TestAITree(uint creature) 
-            : base(creature)
+        public TestAITree(uint creature, AIService ai) 
+            : base(creature, ai)
         {
         }
 
@@ -20,7 +20,7 @@ namespace XM.AI.AITrees
             return FluentBuilder.Create<CreatureAIContext>()
                 .PrioritySelector("root")
                     .Subtree(LowHealthBehavior())
-                    .Subtree(SitBehavior())
+                    .Subtree(ReturnHomeBehavior())
                 .End()
                 .Build();
         }
@@ -39,15 +39,15 @@ namespace XM.AI.AITrees
                 .Build();
         }
 
-        private IBehavior<CreatureAIContext> SitBehavior()
+        private IBehavior<CreatureAIContext> ReturnHomeBehavior()
         {
             return FluentBuilder.Create<CreatureAIContext>()
-                .Sequence("sit")
-                .Condition("not sitting", context => GetCurrentAction(context.Creature) != ActionType.Sit)
-                    .DoPlayAnimation(AnimationType.LoopingSitCross, 1f, 2.1f)    
+                .Sequence("Return Home")
+                    .ConditionDistanceAwayFromHome(15f)
+                    .DoMoveHome()
                 .End()
                 .Build();
-
         }
+
     }
 }
