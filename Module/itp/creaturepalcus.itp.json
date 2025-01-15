@@ -215,11 +215,11 @@
                           "__struct_id": 0,
                           "CR": {
                             "type": "float",
-                            "value": 0.25
+                            "value": 1.0
                           },
                           "FACTION": {
                             "type": "cexostring",
-                            "value": "Hostile"
+                            "value": "Commoner"
                           },
                           "NAME": {
                             "type": "cexostring",

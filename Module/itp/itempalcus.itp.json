@@ -371,6 +371,22 @@
                 "type": "byte",
                 "value": 24
               },
+              "LIST": {
+                "type": "list",
+                "value": [
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Potion"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "potion"
+                    }
+                  }
+                ]
+              },
               "STRREF": {
                 "type": "dword",
                 "value": 6753
