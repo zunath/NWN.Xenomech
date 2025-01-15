@@ -1,21 +1,34 @@
-﻿using XM.AI.BehaviorTree;
+﻿using Anvil.API;
+using System;
+using XM.AI.BehaviorTree;
+using XM.AI.Context;
 
 namespace XM.AI.AITrees
 {
     internal abstract class AITreeBase: IAITree
     {
-        public abstract IBehaviorTreeNode Tree { get; }
+        private const int FrequencySeconds = 2;
+        protected CreatureAIContext Creature { get; }
 
-        protected uint Creature { get; }
+        private DateTime _lastTick = DateTime.UtcNow;
+
+        public IBehavior<CreatureAIContext> Tree { get; }
+        public void Update(DateTime now)
+        {
+            if (now - _lastTick > TimeSpan.FromSeconds(FrequencySeconds))
+            {
+                Tree.Tick(Creature);
+                _lastTick = now;
+            }
+        }
 
         protected AITreeBase(uint creature)
         {
-            Creature = creature;
+            Creature = new CreatureAIContext(creature);
+            Tree = CreateTree();
         }
 
-        public void Update(float deltaTime)
-        {
-            Tree.Tick(new TimeData(deltaTime));
-        }
+        protected abstract IBehavior<CreatureAIContext> CreateTree();
+
     }
 }

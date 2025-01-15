@@ -1,10 +1,9 @@
-﻿using XM.AI.BehaviorTree;
+﻿using System;
 
 namespace XM.AI.AITrees
 {
     internal interface IAITree
     {
-        IBehaviorTreeNode Tree { get; }
-        void Update(float deltaTime);
+        void Update(DateTime now);
     }
 }

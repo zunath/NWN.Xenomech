@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Anvil.API;
 using Anvil.Services;
 using XM.AI.AITrees;
+using XM.Shared.API.Constants;
 using XM.Shared.Core.EventManagement;
 
 namespace XM.AI
@@ -22,10 +23,9 @@ namespace XM.AI
         }
         private void OnSpawnCreated(uint creature)
         {
-            Console.WriteLine($"OBJECT_SELF = {OBJECT_SELF}, creature = {creature}, name = {GetName(creature)}");
             SetAIFlag(creature, AIFlag.ReturnHome);
 
-            _creatureAITrees[creature] = new TestAI(creature);
+            _creatureAITrees[creature] = new TestAITree(creature);
         }
 
         private void OnCreatureDeath(uint creature)
@@ -42,10 +42,19 @@ namespace XM.AI
 
         public void Update()
         {
-            foreach (var (_, tree) in _creatureAITrees)
+            foreach (var (_, ai) in _creatureAITrees)
             {
-                tree.Update((float)Time.DeltaTime.TotalSeconds);
+                ai.Update(DateTime.UtcNow);
             }
+        }
+
+        [ScriptHandler("bread_test")]
+        public void Test()
+        {
+            var npc = GetObjectByTag("goblintest");
+            ApplyEffectToObject(DurationType.Instant, EffectDamage(1), npc);
+
+            SendMessageToPC(GetLastUsedBy(), $"goblin: {GetCurrentHitPoints(npc)} / {GetMaxHitPoints(npc)}");
         }
     }
 }
