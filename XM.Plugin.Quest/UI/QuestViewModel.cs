@@ -78,15 +78,6 @@ namespace XM.Quest.UI
             
         }
 
-        [ScriptHandler("bread_test")]
-        public void Test()
-        {
-            var player = GetLastUsedBy();
-            Quest.AcceptQuest(player, "goblin_test", OBJECT_SELF);
-            Quest.AcceptQuest(player, "goblin_test2", OBJECT_SELF);
-            Quest.AcceptQuest(player, "goblin_test3", OBJECT_SELF);
-        }
-
         private void Search()
         {
             var playerId = PlayerId.Get(Player);
