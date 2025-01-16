@@ -6,9 +6,30 @@ namespace XM.Shared.Core.EventManagement.Registration
     [ServiceBinding(typeof(CreatureEventRegistrationService))]
     internal class CreatureEventRegistrationService
     {
+        private readonly XMEventService _event;
+
         public CreatureEventRegistrationService(XMEventService @event)
         {
+            _event = @event;
+            RegisterEvents();
+
             @event.Subscribe<XMEvent.OnSpawnCreated>(OnSpawnCreated);
+        }
+
+        private void RegisterEvents()
+        {
+            _event.RegisterEvent<CreatureEvent.OnHeartbeat>(EventScript.CreatureOnHeartbeatScript);
+            _event.RegisterEvent<CreatureEvent.OnPerception>(EventScript.CreatureOnNoticeScript);
+            _event.RegisterEvent<CreatureEvent.OnSpellCastAt>(EventScript.CreatureOnSpellCastAtScript);
+            _event.RegisterEvent<CreatureEvent.OnMeleeAttacked>(EventScript.CreatureOnMeleeAttackedScript);
+            _event.RegisterEvent<CreatureEvent.OnDamaged>(EventScript.CreatureOnDamagedScript);
+            _event.RegisterEvent<CreatureEvent.OnDisturbed>(EventScript.CreatureOnDisturbedScript);
+            _event.RegisterEvent<CreatureEvent.OnEndCombatRound>(EventScript.CreatureOnEndCombatRoundScript);
+            _event.RegisterEvent<CreatureEvent.OnSpawn>(EventScript.CreatureOnSpawnInScript);
+            _event.RegisterEvent<CreatureEvent.OnRested>(EventScript.CreatureOnRestedScript);
+            _event.RegisterEvent<CreatureEvent.OnDeath>(EventScript.CreatureOnDeathScript);
+            _event.RegisterEvent<CreatureEvent.OnUserDefined>(EventScript.CreatureOnUserDefinedScript);
+            _event.RegisterEvent<CreatureEvent.OnBlockedByDoor>(EventScript.CreatureOnBlockedByDoorScript);
         }
 
         /// <summary>
@@ -18,23 +39,24 @@ namespace XM.Shared.Core.EventManagement.Registration
         /// <param name="spawn">The targeted creature that will have their scripts updated</param>
         private void SetCreatureScripts(uint spawn)
         {
-            SetEventScript(spawn, EventScriptType.CreatureOnBlockedByDoor, string.Empty);
-            SetEventScript(spawn, EventScriptType.CreatureOnEndCombatRound, string.Empty);
-            SetEventScript(spawn, EventScriptType.CreatureOnDamaged, string.Empty);
-            SetEventScript(spawn, EventScriptType.CreatureOnDeath, string.Empty);
-            SetEventScript(spawn, EventScriptType.CreatureOnDisturbed, string.Empty);
-            SetEventScript(spawn, EventScriptType.CreatureOnHeartbeat, string.Empty);
-            SetEventScript(spawn, EventScriptType.CreatureOnNotice, string.Empty);
-            SetEventScript(spawn, EventScriptType.CreatureOnMeleeAttacked, string.Empty);
-            SetEventScript(spawn, EventScriptType.CreatureOnRested, string.Empty);
-            SetEventScript(spawn, EventScriptType.CreatureOnSpawnIn, string.Empty);
-            SetEventScript(spawn, EventScriptType.CreatureOnSpellCastAt, string.Empty);
-            SetEventScript(spawn, EventScriptType.CreatureOnUserDefinedEvent, string.Empty);
+            SetEventScript(spawn, EventScriptType.CreatureOnBlockedByDoor, EventScript.CreatureOnBlockedByDoorScript);
+            SetEventScript(spawn, EventScriptType.CreatureOnEndCombatRound, EventScript.CreatureOnEndCombatRoundScript);
+            SetEventScript(spawn, EventScriptType.CreatureOnDamaged, EventScript.CreatureOnDamagedScript);
+            SetEventScript(spawn, EventScriptType.CreatureOnDeath, EventScript.CreatureOnDeathScript);
+            SetEventScript(spawn, EventScriptType.CreatureOnDisturbed, EventScript.CreatureOnDisturbedScript);
+            SetEventScript(spawn, EventScriptType.CreatureOnHeartbeat, EventScript.CreatureOnHeartbeatScript);
+            SetEventScript(spawn, EventScriptType.CreatureOnNotice, EventScript.CreatureOnNoticeScript);
+            SetEventScript(spawn, EventScriptType.CreatureOnMeleeAttacked, EventScript.CreatureOnMeleeAttackedScript);
+            SetEventScript(spawn, EventScriptType.CreatureOnRested, EventScript.CreatureOnRestedScript);
+            SetEventScript(spawn, EventScriptType.CreatureOnSpawnIn, EventScript.CreatureOnSpawnInScript);
+            SetEventScript(spawn, EventScriptType.CreatureOnSpellCastAt, EventScript.CreatureOnSpellCastAtScript);
+            SetEventScript(spawn, EventScriptType.CreatureOnUserDefinedEvent, EventScript.CreatureOnUserDefinedScript);
         }
 
         private void OnSpawnCreated(uint objectSelf)
         {
-            SetCreatureScripts(objectSelf);
+            var spawn = OBJECT_SELF;
+            SetCreatureScripts(spawn);
         }
     }
 }

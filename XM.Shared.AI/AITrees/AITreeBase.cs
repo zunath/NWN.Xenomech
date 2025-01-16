@@ -2,29 +2,22 @@
 using System;
 using XM.AI.BehaviorTree;
 using XM.AI.Context;
+using XM.AI.Enmity;
 
 namespace XM.AI.AITrees
 {
     internal abstract class AITreeBase: IAITree
     {
-        private const int FrequencySeconds = 2;
         protected CreatureAIContext Creature { get; }
-
-        private DateTime _lastTick = DateTime.UtcNow;
-
         public IBehavior<CreatureAIContext> Tree { get; }
         public void Update(DateTime now)
         {
-            if (now - _lastTick > TimeSpan.FromSeconds(FrequencySeconds))
-            {
-                Tree.Tick(Creature);
-                _lastTick = now;
-            }
+            Tree.Tick(Creature);
         }
 
-        protected AITreeBase(uint creature, AIService ai)
+        protected AITreeBase(uint creature, AIService ai, EnmityService enmity)
         {
-            Creature = new CreatureAIContext(creature, ai);
+            Creature = new CreatureAIContext(creature, ai, enmity);
             Tree = CreateTree();
         }
 

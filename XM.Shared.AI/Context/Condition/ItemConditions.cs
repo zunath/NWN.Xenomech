@@ -5,7 +5,7 @@ namespace XM.AI.Context.Condition
 {
     internal static class ItemConditions
     {
-        public static FluentBuilder<CreatureAIContext> ConditionHasAnyItem(
+        public static FluentBuilder<CreatureAIContext> ConditionSelectHasAnyItem(
             this FluentBuilder<CreatureAIContext> builder, 
             params string[] resrefs)
         {

@@ -33,7 +33,7 @@ namespace XM.Inventory.Loot
             _inventory = inventory;
             _lootTables = new Dictionary<string, LootTable>();
 
-            @event.Subscribe<CreatureEvent.OnDeathBefore>(CreatureOnDeathBefore);
+            @event.Subscribe<CreatureEvent.OnDeath>(CreatureOnDeathBefore);
         }
 
         public void Init()

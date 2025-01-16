@@ -2,32 +2,49 @@
 using System.Collections.Generic;
 using Anvil.Services;
 using XM.AI.AITrees;
-using XM.Shared.API.Constants;
+using XM.AI.Enmity;
 using XM.Shared.Core.EventManagement;
 
 namespace XM.AI
 {
     [ServiceBinding(typeof(AIService))]
-    [ServiceBinding(typeof(IUpdateable))]
     [ServiceBinding(typeof(IDisposable))]
     internal class AIService: 
-        IUpdateable,
         IDisposable
     {
         private const string AIFlagsVariable = "AI_FLAGS";
 
         private readonly Dictionary<uint, IAITree> _creatureAITrees = new();
 
-        public AIService(XMEventService @event)
+        private readonly EnmityService _enmity;
+
+        public AIService(
+            XMEventService @event, 
+            EnmityService enmity,
+            SchedulerService scheduler)
         {
+            _enmity = enmity;
+
             @event.Subscribe<XMEvent.OnSpawnCreated>(OnSpawnCreated);
-            @event.Subscribe<CreatureEvent.OnDeathBefore>(OnCreatureDeath);
+            @event.Subscribe<CreatureEvent.OnDeath>(OnCreatureDeath);
+
+            scheduler.ScheduleRepeating(ProcessBehaviorTrees, TimeSpan.FromSeconds(2));
         }
+
+        private void ProcessBehaviorTrees()
+        {
+            foreach (var (creature, ai) in _creatureAITrees)
+            {
+                _enmity.TickVolatileEnmity(creature);
+                ai.Update(DateTime.UtcNow);
+            }
+        }
+
         private void OnSpawnCreated(uint creature)
         {
             SetAIFlags(creature, AIFlag.ReturnHome);
 
-            _creatureAITrees[creature] = new TestAITree(creature, this);
+            _creatureAITrees[creature] = new TestAITree(creature, this, _enmity);
         }
 
         private void OnCreatureDeath(uint creature)
@@ -48,26 +65,38 @@ namespace XM.AI
             return (AIFlag)flagValue;
         }
 
-        public void Update()
+        public void Dispose()
         {
-            foreach (var (_, ai) in _creatureAITrees)
-            {
-                ai.Update(DateTime.UtcNow);
-            }
+            _creatureAITrees.Clear();
         }
+
+
+
+
+
 
         [ScriptHandler("bread_test")]
         public void Test()
         {
             var npc = GetObjectByTag("goblintest");
-            ApplyEffectToObject(DurationType.Instant, EffectDamage(1), npc);
+            var boy = GetObjectByTag("boy");
 
-            SendMessageToPC(GetLastUsedBy(), $"goblin: {GetCurrentHitPoints(npc)} / {GetMaxHitPoints(npc)}");
+            _enmity.ModifyEnmity(boy, npc, EnmityType.Volatile, 500);
+
+            var table = _enmity.GetEnmityTable(npc);
+            SendMessageToPC(GetLastUsedBy(), $"Boy enmity = {table[boy].TotalEnmity}");
         }
-
-        public void Dispose()
+        [ScriptHandler("bread_test2")]
+        public void Test2()
         {
-            _creatureAITrees.Clear();
+            var npc = GetObjectByTag("goblintest");
+            var girl = GetObjectByTag("girl");
+
+            _enmity.ModifyEnmity(girl, npc, EnmityType.Volatile, 500);
+
+            var table = _enmity.GetEnmityTable(npc);
+            SendMessageToPC(GetLastUsedBy(), $"Girl enmity = {table[girl].TotalEnmity}");
         }
+
     }
 }

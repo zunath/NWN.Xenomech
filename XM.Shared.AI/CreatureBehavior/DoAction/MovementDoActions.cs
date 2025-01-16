@@ -1,7 +1,6 @@
 ﻿using XM.AI.BehaviorTree;
 using XM.AI.BehaviorTree.FluentBuilder;
 using XM.AI.Context;
-using XM.Shared.API.Constants;
 
 namespace XM.AI.CreatureBehavior.DoAction
 {
@@ -13,7 +12,7 @@ namespace XM.AI.CreatureBehavior.DoAction
             return builder.Do("Move Home", context =>
             {
                 AssignCommand(context.Creature, () => ActionMoveToLocation(context.HomeLocation));
-                return BehaviorStatus.Running;
+                return BehaviorStatus.Succeeded;
             });
         }
     }

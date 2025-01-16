@@ -2,16 +2,16 @@
 {
     public class AreaEvent
     {
-        public struct AreaEnterEvent : IXMEvent
+        public struct OnAreaEnter : IXMEvent
         {
         }
-        public struct AreaExitEvent : IXMEvent
+        public struct OnAreaExit : IXMEvent
         {
         }
-        public struct AreaHeartbeatEvent : IXMEvent
+        public struct OnAreaHeartbeat : IXMEvent
         {
         }
-        public struct AreaUserDefinedEvent : IXMEvent
+        public struct OnAreaUserDefinedEvent : IXMEvent
         {
         }
     }

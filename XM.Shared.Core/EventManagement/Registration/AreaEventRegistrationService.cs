@@ -23,10 +23,10 @@ namespace XM.Shared.Core.EventManagement.Registration
 
         private void RegisterEvents()
         {
-            _event.RegisterEvent<AreaEvent.AreaEnterEvent>(EventScript.AreaOnEnterScript);
-            _event.RegisterEvent<AreaEvent.AreaExitEvent>(EventScript.AreaOnExitScript);
-            _event.RegisterEvent<AreaEvent.AreaHeartbeatEvent>(EventScript.AreaOnHeartbeatScript);
-            _event.RegisterEvent<AreaEvent.AreaUserDefinedEvent>(EventScript.AreaOnUserDefinedEventScript);
+            _event.RegisterEvent<AreaEvent.OnAreaEnter>(EventScript.AreaOnEnterScript);
+            _event.RegisterEvent<AreaEvent.OnAreaExit>(EventScript.AreaOnExitScript);
+            _event.RegisterEvent<AreaEvent.OnAreaHeartbeat>(EventScript.AreaOnHeartbeatScript);
+            _event.RegisterEvent<AreaEvent.OnAreaUserDefinedEvent>(EventScript.AreaOnUserDefinedEventScript);
         }
 
         private void HookAreaScripts()

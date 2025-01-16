@@ -44,9 +44,9 @@ namespace XM.Spawn
 
         private void SubscribeEvents()
         {
-            _event.Subscribe<AreaEvent.AreaEnterEvent>(OnAreaEnter);
-            _event.Subscribe<AreaEvent.AreaExitEvent>(OnAreaExit);
-            _event.Subscribe<CreatureEvent.OnDeathBefore>(CreatureOnDeathBefore);
+            _event.Subscribe<AreaEvent.OnAreaEnter>(OnAreaEnter);
+            _event.Subscribe<AreaEvent.OnAreaExit>(OnAreaExit);
+            _event.Subscribe<CreatureEvent.OnDeath>(CreatureOnDeathBefore);
             _event.Subscribe<XMEvent.OnServerHeartbeat>(OnXMServerHeartbeat);
         }
 

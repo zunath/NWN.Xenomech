@@ -26,7 +26,7 @@ namespace XM.Progression.UI.PlayerStatusUI
         {
 
             _event.Subscribe<ModuleEvent.OnPlayerEnter>(OnPlayerEnter);
-            _event.Subscribe<AreaEvent.AreaEnterEvent>(OnPlayerEnter);
+            _event.Subscribe<AreaEvent.OnAreaEnter>(OnPlayerEnter);
 
             _event.Subscribe<NWNXEvent.OnHealAfter>(OnPlayerHealed);
             _event.Subscribe<PlayerEPAdjustedEvent>(OnPlayerEPAdjusted);

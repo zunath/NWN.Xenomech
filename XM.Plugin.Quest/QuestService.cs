@@ -71,7 +71,7 @@ namespace XM.Quest
         private void SubscribeEvents()
         {
             _event.Subscribe<ModuleEvent.OnPlayerEnter>(OnPlayerEnter);
-            _event.Subscribe<CreatureEvent.OnDeathBefore>(CreatureOnDeathBefore);
+            _event.Subscribe<CreatureEvent.OnDeath>(CreatureOnDeathBefore);
         }
 
         public void Init()

@@ -398,5 +398,45 @@ namespace XM.Progression.Stat
             var value = dbPlayerStat.Resists[resist];
             return Math.Clamp(value, 0, 100);
         }
+
+        public NPCStats GetNPCStats(uint npc)
+        {
+            var npcStats = new NPCStats();
+
+            var skin = GetItemInSlot(InventorySlotType.CreatureArmor, npc);
+            if (!GetIsObjectValid(skin))
+                return npcStats;
+
+            for (var ip = GetFirstItemProperty(skin); GetIsItemPropertyValid(ip); ip = GetNextItemProperty(skin))
+            {
+                var type = GetItemPropertyType(ip);
+                if (type == ItemPropertyType.NPCLevel)
+                {
+                    npcStats.Level = GetItemPropertyCostTableValue(ip);
+                }
+                else if (type == ItemPropertyType.Defense)
+                {
+                    npcStats.Defense = GetItemPropertyCostTableValue(ip);
+                }
+                else if (type == ItemPropertyType.Attack)
+                {
+                    npcStats.Attack = GetItemPropertyCostTableValue(ip);
+                }
+                else if (type == ItemPropertyType.EtherAttack)
+                {
+                    npcStats.EtherAttack = GetItemPropertyCostTableValue(ip);
+                }
+                else if (type == ItemPropertyType.Evasion)
+                {
+                    npcStats.Evasion = GetItemPropertyCostTableValue(ip);
+                }
+                else if (type == ItemPropertyType.EP)
+                {
+                    npcStats.EP = GetItemPropertyCostTableValue(ip);
+                }
+            }
+
+            return npcStats;
+        }
     }
 }

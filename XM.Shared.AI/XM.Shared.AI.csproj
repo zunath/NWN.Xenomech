@@ -70,6 +70,7 @@
   <ItemGroup>
     <ProjectReference Include="..\XM.Shared.API\XM.Shared.API.csproj" />
     <ProjectReference Include="..\XM.Shared.Core\XM.Shared.Core.csproj" />
+    <ProjectReference Include="..\XM.Shared.Progression\XM.Shared.Progression.csproj" />
   </ItemGroup>
 
 <Target Name="PostBuild" AfterTargets="PostBuildEvent">
