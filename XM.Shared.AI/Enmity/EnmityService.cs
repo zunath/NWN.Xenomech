@@ -1,4 +1,5 @@
-﻿using Anvil.Services;
+﻿using Anvil.API;
+using Anvil.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,22 +33,27 @@ namespace XM.AI.Enmity
             _party = party;
             _stat = stat;
 
-            _event.Subscribe<CreatureEvent.OnDamaged>(OnDamaged);
-            _event.Subscribe<CreatureEvent.OnMeleeAttacked>(OnAttacked);
-            _event.Subscribe<CreatureEvent.OnDeath>(OnDeath);
+            _event.Subscribe<CreatureEvent.OnDamaged>(OnCreatureDamaged);
+            _event.Subscribe<CreatureEvent.OnMeleeAttacked>(OnCreatureAttacked);
+            _event.Subscribe<CreatureEvent.OnDeath>(OnCreatureDeath);
             _event.Subscribe<ModuleEvent.OnPlayerDeath>(OnPlayerDeath);
             _event.Subscribe<PlayerEvent.OnDamaged>(OnPlayerDamaged);
             _event.Subscribe<ModuleEvent.OnPlayerLeave>(OnPlayerExit);
             _event.Subscribe<AreaEvent.OnAreaExit>(OnPlayerExit);
         }
 
+        private void ReduceCumulativeEnmity(uint creature, uint enemy, int damage)
+        {
+            var maxHP = _stat.GetMaxHP(creature);
+            var cumulativeLoss = (int)(1800 * damage / (float)maxHP);
+            ModifyEnmity(creature, enemy, EnmityType.Cumulative, -cumulativeLoss);
+        }
+
         private void OnPlayerDamaged(uint player)
         {
             var enemy = GetLastDamager(player);
             var damage = GetTotalDamageDealt();
-            var maxHP = _stat.GetMaxHP(player);
-            var cumulativeLoss = 1800 * damage / maxHP;
-            ModifyEnmity(player, enemy, EnmityType.Cumulative, -cumulativeLoss);
+            ReduceCumulativeEnmity(player, enemy, damage);
         }
 
         private void OnPlayerExit(uint obj)
@@ -62,13 +68,13 @@ namespace XM.AI.Enmity
             RemoveCreatureEnmity(player);
         }
 
-        private void OnDeath(uint enemy)
+        private void OnCreatureDeath(uint enemy)
         {
             ClearEnmityTables(enemy);
             RemoveCreatureEnmity(enemy);
         }
 
-        private void OnAttacked(uint enemy)
+        private void OnCreatureAttacked(uint enemy)
         {
             var attacker = GetLastAttacker(enemy);
 
@@ -76,18 +82,20 @@ namespace XM.AI.Enmity
             ModifyEnmity(attacker, enemy, EnmityType.Cumulative, 1);
         }
 
-        private void OnDamaged(uint enemy)
+        private void OnCreatureDamaged(uint creature)
         {
-            var npcStats = _stat.GetNPCStats(enemy);
-            var damager = GetLastDamager(enemy);
+            var npcStats = _stat.GetNPCStats(creature);
+            var enemy = GetLastDamager(creature);
             var damage = GetTotalDamageDealt();
             var targetLevel = npcStats.Level; 
 
             var cumulative = CalculateCumulativeEnmityGain(targetLevel, damage);
             var @volatile = cumulative * 3;
 
-            ModifyEnmity(damager, enemy, EnmityType.Cumulative, cumulative);
-            ModifyEnmity(damager, enemy, EnmityType.Volatile, @volatile);
+            ModifyEnmity(enemy, creature, EnmityType.Cumulative, cumulative);
+            ModifyEnmity(enemy, creature, EnmityType.Volatile, @volatile);
+
+            ReduceCumulativeEnmity(creature, enemy, damage);
         }
 
         private int CalculateCumulativeEnmityGain(int targetLevel, int damageDealt)
