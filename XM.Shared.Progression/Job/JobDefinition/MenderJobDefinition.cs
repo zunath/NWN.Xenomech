@@ -1,16 +1,18 @@
-﻿using XM.Shared.Core.Localization;
+﻿using System.Collections.Generic;
+using XM.Shared.API.Constants;
+using XM.Shared.Core.Localization;
 
 namespace XM.Progression.Job.JobDefinition
 {
-    internal class MenderJobDefinition: IJobDefinition
+    internal class MenderJobDefinition: JobDefinitionBase
     {
-        public bool IsVisibleToPlayers => true;
+        public override bool IsVisibleToPlayers => true;
 
-        public LocaleString Name => LocaleString.Mender;
+        public override LocaleString Name => LocaleString.Mender;
 
-        public string IconResref => "mender_icon";
+        public override string IconResref => "mender_icon";
 
-        public JobGrade Grades { get; } = new()
+        public override JobGrade Grades { get; } = new()
         {
             HP = GradeType.E,
             EP = GradeType.C,
@@ -20,6 +22,11 @@ namespace XM.Progression.Job.JobDefinition
             Agility = GradeType.E,
             Willpower = GradeType.A,
             Social = GradeType.C
+        };
+
+        public override Dictionary<int, FeatType> FeatAcquisitionLevels => new()
+        {
+
         };
     }
 }

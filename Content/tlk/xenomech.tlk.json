@@ -1584,6 +1584,42 @@
     {
       "id": 396,
       "text": "10000"
+    },
+    {
+      "id": 397,
+      "text": "You do not meet the prerequisites to use this ability."
+    },
+    {
+      "id": 398,
+      "text": "You are dead."
+    },
+    {
+      "id": 399,
+      "text": "You cannot take actions at this time."
+    },
+    {
+      "id": 400,
+      "text": "You cannot see your target."
+    },
+    {
+      "id": 401,
+      "text": "This ability can be used in {0}."
+    },
+    {
+      "id": 402,
+      "text": "You are out of range. This ability has a range of {0} meters."
+    },
+    {
+      "id": 403,
+      "text": "You may only use this ability on enemies."
+    },
+    {
+      "id": 404,
+      "text": "Insufficient EP."
+    },
+    {
+      "id": 405,
+      "text": "Insufficient level."
     }
   ]
 }

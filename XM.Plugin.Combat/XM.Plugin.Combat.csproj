@@ -61,6 +61,12 @@
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Event\**" />
+    <EmbeddedResource Remove="Event\**" />
+    <None Remove="Event\**" />
+  </ItemGroup>
+
 <ItemGroup>
 	<PackageReference Include="NWN.Anvil" Version="8193.36.2-dev.24.r0627996e" ExcludeAssets="runtime" PrivateAssets="all">
 		<IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -72,10 +78,6 @@
   <ProjectReference Include="..\XM.Shared.Core\XM.Shared.Core.csproj" />
   <ProjectReference Include="..\XM.Shared.Progression\XM.Shared.Progression.csproj" />
   <ProjectReference Include="..\XM.Shared.UI\XM.Shared.UI.csproj" />
-</ItemGroup>
-
-<ItemGroup>
-  <Folder Include="Event\" />
 </ItemGroup>
 
 <Target Name="PostBuild" AfterTargets="PostBuildEvent">

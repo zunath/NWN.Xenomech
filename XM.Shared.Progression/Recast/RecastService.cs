@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
-using System;
 using System.Linq;
-using XM.Combat.Entity;
+using Anvil.Services;
+using XM.Progression.Entity;
 using XM.Progression.Stat;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
@@ -10,9 +11,9 @@ using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Extension;
 using XM.Shared.Core.Localization;
 
-namespace XM.Combat.Recast
+namespace XM.Progression.Recast
 {
-    //[ServiceBinding(typeof(RecastService))]
+    [ServiceBinding(typeof(RecastService))]
     internal class RecastService
     {
         private static readonly Dictionary<RecastGroup, LocaleString> _recastDescriptions = new();
@@ -23,8 +24,8 @@ namespace XM.Combat.Recast
         public RecastService(
             DBService db, 
             TimeService time,
-            StatService stat,
-            XMEventService @event)
+            XMEventService @event,
+            StatService stat)
         {
             _db = db;
             _time = time;
@@ -80,7 +81,7 @@ namespace XM.Combat.Recast
             if (GetIsPC(creature) && !GetIsDMPossessed(creature))
             {
                 var playerId = PlayerId.Get(creature);
-                var dbPlayer = _db.Get<PlayerCombat>(playerId) ?? new PlayerCombat(playerId);
+                var dbPlayer = _db.Get<PlayerRecast>(playerId) ?? new PlayerRecast(playerId);
 
                 if (!dbPlayer.RecastTimes.ContainsKey(recastGroup)) return (false, string.Empty);
 
@@ -127,7 +128,7 @@ namespace XM.Combat.Recast
             else if (GetIsPC(activator) && !GetIsDM(activator))
             {
                 var playerId = PlayerId.Get(activator);
-                var dbPlayerCombat = _db.Get<PlayerCombat>(playerId) ?? new PlayerCombat(playerId);
+                var dbPlayerCombat = _db.Get<PlayerRecast>(playerId) ?? new PlayerRecast(playerId);
 
                 if (!ignoreRecastReduction)
                 {

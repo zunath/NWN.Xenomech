@@ -1,16 +1,18 @@
-﻿using XM.Shared.Core.Localization;
+﻿using System.Collections.Generic;
+using XM.Shared.API.Constants;
+using XM.Shared.Core.Localization;
 
 namespace XM.Progression.Job.JobDefinition
 {
-    internal class HunterJobDefinition: IJobDefinition
+    internal class HunterJobDefinition: JobDefinitionBase
     {
-        public bool IsVisibleToPlayers => true;
+        public override bool IsVisibleToPlayers => true;
 
-        public LocaleString Name => LocaleString.Hunter;
+        public override LocaleString Name => LocaleString.Hunter;
 
-        public string IconResref => "hunter_icon";
+        public override string IconResref => "hunter_icon";
 
-        public JobGrade Grades { get; } = new()
+        public override JobGrade Grades { get; } = new()
         {
             HP = GradeType.E,
             EP = GradeType.G,
@@ -20,6 +22,11 @@ namespace XM.Progression.Job.JobDefinition
             Agility = GradeType.A,
             Willpower = GradeType.D,
             Social = GradeType.E
+        };
+
+        public override Dictionary<int, FeatType> FeatAcquisitionLevels => new()
+        {
+
         };
     }
 }

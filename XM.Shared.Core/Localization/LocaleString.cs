@@ -92,5 +92,15 @@ namespace XM.Shared.Core.Localization
         AbandonQuestConfirmation = 88,
         YouAreBusy = 89,
         SelectAQuest = 90,
+
+        YouDoNotMeetThePrerequisitesToUseThisAbility = 397,
+        YouAreDead = 398,
+        YouCannotTakeActionsAtThisTime = 399,
+        YouCannotSeeYourTarget = 400,
+        ThisAbilityCanBeUsedIn = 401,
+        YouAreOutOfRangeThisAbilityHasARangeOfXMeters = 402,
+        YouMayOnlyUseThisAbilityOnEnemies = 403,
+        InsufficientEP = 404,
+        InsufficientLevel = 405,
     }
 }

@@ -7968,9 +7968,9 @@ namespace XM.Shared.API
         /// <summary>
         ///  Sets the status of modes ACTION_MODE_* on a creature.
         /// </summary>
-        public static void SetActionMode(uint oCreature, int nMode, int nStatus)
+        public static void SetActionMode(uint oCreature, ActionModeType nMode, bool nStatus)
         {
-            NWN.Core.NWScript.SetActionMode(oCreature, nMode, nStatus);
+            NWN.Core.NWScript.SetActionMode(oCreature, (int)nMode, nStatus ? 1 : 0);
         }
 
         /// <summary>

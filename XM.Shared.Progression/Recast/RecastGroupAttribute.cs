@@ -1,7 +1,7 @@
 ﻿using System;
 using XM.Shared.Core.Localization;
 
-namespace XM.Combat.Recast
+namespace XM.Progression.Recast
 {
     public class RecastGroupAttribute : Attribute
     {

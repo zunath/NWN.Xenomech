@@ -14,6 +14,7 @@ using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
+using ArgumentException = System.ArgumentException;
 
 namespace XM.Progression.Job
 {
@@ -138,6 +139,29 @@ namespace XM.Progression.Job
         internal IJobDefinition GetJobDefinition(JobType job)
         {
             return _jobDefinitions[job];
+        }
+
+        public JobType GetActiveJob(uint player)
+        {
+            if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
+                throw new ArgumentException("Only PCs can have jobs.");
+
+            var playerId = PlayerId.Get(player);
+            var dbPlayerJob = _db.Get<PlayerJob>(playerId) ?? new PlayerJob(playerId);
+            return dbPlayerJob.ActiveJob;
+        }
+
+        public int GetJobLevel(uint player, JobType job)
+        {
+            if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
+                throw new ArgumentException("Only PCs can have jobs.");
+
+            var playerId = PlayerId.Get(player);
+            var dbPlayerJob = _db.Get<PlayerJob>(playerId) ?? new PlayerJob(playerId);
+            var level = dbPlayerJob.JobLevels.ContainsKey(job)
+                ? dbPlayerJob.JobLevels[job]
+                : 0;
+            return level;
         }
 
         internal int CalculateHP(int level, GradeType grade)

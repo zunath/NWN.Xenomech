@@ -1,16 +1,18 @@
-﻿using XM.Shared.Core.Localization;
+﻿using System.Collections.Generic;
+using XM.Shared.API.Constants;
+using XM.Shared.Core.Localization;
 
 namespace XM.Progression.Job.JobDefinition
 {
-    internal class TechweaverJobDefinition: IJobDefinition
+    internal class TechweaverJobDefinition: JobDefinitionBase
     {
-        public bool IsVisibleToPlayers => true;
+        public override bool IsVisibleToPlayers => true;
 
-        public LocaleString Name => LocaleString.Techweaver;
+        public override LocaleString Name => LocaleString.Techweaver;
 
-        public string IconResref => "techweaver_icon";
+        public override string IconResref => "techweaver_icon";
 
-        public JobGrade Grades { get; } = new()
+        public override JobGrade Grades { get; } = new()
         {
             HP = GradeType.D,
             EP = GradeType.D,
@@ -20,6 +22,11 @@ namespace XM.Progression.Job.JobDefinition
             Agility = GradeType.E,
             Willpower = GradeType.C,
             Social = GradeType.D
+        };
+
+        public override Dictionary<int, FeatType> FeatAcquisitionLevels => new()
+        {
+
         };
     }
 }

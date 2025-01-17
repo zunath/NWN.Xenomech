@@ -25,9 +25,9 @@
             return text;
         }
 
-        public static string ToLocalizedString(this LocaleString localeString)
+        public static string ToLocalizedString(this LocaleString localeString, params object[] args)
         {
-            return GetString(localeString);
+            return GetString(localeString, args);
         }
     }
 }

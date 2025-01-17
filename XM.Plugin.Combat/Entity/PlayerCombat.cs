@@ -1,7 +1,7 @@
 ﻿using Anvil.Services;
 using System.Collections.Generic;
 using System;
-using XM.Combat.Recast;
+using XM.Progression.Recast;
 using XM.Shared.Core.Data;
 
 namespace XM.Combat.Entity
@@ -11,7 +11,6 @@ namespace XM.Combat.Entity
     {
         public PlayerCombat()
         {
-            RecastTimes = new Dictionary<RecastGroup, DateTime>();
         }
 
         public PlayerCombat(string id)
@@ -19,7 +18,6 @@ namespace XM.Combat.Entity
             Id = id;
         }
 
-        public Dictionary<RecastGroup, DateTime> RecastTimes { get; set; }
 
     }
 }
