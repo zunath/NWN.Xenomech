@@ -1,18 +1,17 @@
-﻿using System;
-using XM.AI.BehaviorTree;
+﻿using XM.AI.BehaviorTree;
 using XM.AI.BehaviorTree.FluentBuilder;
 using XM.AI.Context;
 using XM.AI.Context.Condition;
-using XM.AI.CreatureBehavior.DoAction;
+using XM.AI.Context.DoAction;
 using XM.AI.Enmity;
-using XM.Shared.API.Constants;
+using XM.Progression.Stat;
 
 namespace XM.AI.AITrees
 {
-    internal class TestAITree: AITreeBase
+    internal class StandardAITree: AITreeBase
     {
-        public TestAITree(uint creature, AIService ai, EnmityService enmity) 
-            : base(creature, ai, enmity)
+        public StandardAITree(uint creature, AIService ai, EnmityService enmity, StatService stat) 
+            : base(creature, ai, enmity, stat)
         {
         }
 
@@ -20,14 +19,42 @@ namespace XM.AI.AITrees
         {
             return FluentBuilder.Create<CreatureAIContext>()
                 .PrioritySelector("root")
+                    .Subtree(CombatBehavior())
+                    .Subtree(SelfPreservationBehavior())
+                    .Subtree(OutOfCombatBehavior())
+                .End()
+                .Build();
+        }
+
+        private IBehavior<CreatureAIContext> CombatBehavior()
+        {
+            return FluentBuilder.Create<CreatureAIContext>()
+                .PrioritySelector("Combat")
+                    .ConditionHasEnmity()
+                    .Subtree(TargetingBehavior())
+                .End()
+                .Build();
+        }
+
+        private IBehavior<CreatureAIContext> SelfPreservationBehavior()
+        {
+            return FluentBuilder.Create<CreatureAIContext>()
+                .PrioritySelector("Self Preservation")
                     .Subtree(LowHealthBehavior())
-                    .Subtree(EnmityBehavior())
+                .End()
+                .Build();
+        }
+
+        private IBehavior<CreatureAIContext> OutOfCombatBehavior()
+        {
+            return FluentBuilder.Create<CreatureAIContext>()
+                .PrioritySelector("Out of Combat")
                     .Subtree(ReturnHomeBehavior())
                 .End()
                 .Build();
         }
 
-        private IBehavior<CreatureAIContext> EnmityBehavior()
+        private IBehavior<CreatureAIContext> TargetingBehavior()
         {
             return FluentBuilder.Create<CreatureAIContext>()
                 .Sequence("Attack Highest Enmity")
@@ -40,9 +67,9 @@ namespace XM.AI.AITrees
         private IBehavior<CreatureAIContext> LowHealthBehavior()
         {
             return FluentBuilder.Create<CreatureAIContext>()
-                .Sequence("recover HP with potion")
+                .Sequence("Use Potion")
                     .ConditionHasHPPercentage(0.5f)
-                    .Sequence("find and use potion")
+                    .Sequence("Find and Use Potion")
                         .ConditionSelectHasAnyItem("potion")
                         .DoUseSelectedItem()
                     .End()

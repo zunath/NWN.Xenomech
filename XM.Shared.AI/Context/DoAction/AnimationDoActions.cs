@@ -3,7 +3,7 @@ using XM.AI.BehaviorTree.FluentBuilder;
 using XM.AI.Context;
 using XM.Shared.API.Constants;
 
-namespace XM.AI.CreatureBehavior.DoAction
+namespace XM.AI.Context.DoAction
 {
     internal static class AnimationDoActions
     {

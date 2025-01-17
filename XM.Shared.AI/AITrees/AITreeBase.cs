@@ -3,6 +3,7 @@ using System;
 using XM.AI.BehaviorTree;
 using XM.AI.Context;
 using XM.AI.Enmity;
+using XM.Progression.Stat;
 
 namespace XM.AI.AITrees
 {
@@ -15,9 +16,13 @@ namespace XM.AI.AITrees
             Tree.Tick(Creature);
         }
 
-        protected AITreeBase(uint creature, AIService ai, EnmityService enmity)
+        protected AITreeBase(
+            uint creature, 
+            AIService ai, 
+            EnmityService enmity,
+            StatService stat)
         {
-            Creature = new CreatureAIContext(creature, ai, enmity);
+            Creature = new CreatureAIContext(creature, ai, enmity, stat);
             Tree = CreateTree();
         }
 

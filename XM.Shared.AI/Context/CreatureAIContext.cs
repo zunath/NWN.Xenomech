@@ -1,5 +1,6 @@
 ﻿using XM.AI.BehaviorTree;
 using XM.AI.Enmity;
+using XM.Progression.Stat;
 using XM.Shared.API.BaseTypes;
 using Time = Anvil.API.Time;
 
@@ -10,6 +11,8 @@ namespace XM.AI.Context
         public AIService AIService { get; }
 
         public EnmityService EnmityService { get; }
+
+        public StatService StatService { get; }
 
         public uint Creature { get; }
 
@@ -24,10 +27,12 @@ namespace XM.AI.Context
         public CreatureAIContext(
             uint creature, 
             AIService ai,
-            EnmityService enmity)
+            EnmityService enmity,
+            StatService stat)
         {
             AIService = ai;
             EnmityService = enmity;
+            StatService = stat;
             Creature = creature;
             AIFlag = ai.GetAIFlags(creature);
             HomeLocation = GetLocation(creature);

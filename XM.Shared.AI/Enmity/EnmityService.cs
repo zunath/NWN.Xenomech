@@ -213,5 +213,10 @@ namespace XM.AI.Enmity
             // Remove this creature from the targetToCreatures cache.
             _creatureToEnemies.Remove(creature);
         }
+        public bool HasEnmity(uint creature)
+        {
+            return _creatureToEnemies.ContainsKey(creature)
+                   && _creatureToEnemies[creature].Count > 0;
+        }
     }
 }

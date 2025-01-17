@@ -2,7 +2,7 @@
 using XM.AI.BehaviorTree.FluentBuilder;
 using XM.AI.Context;
 
-namespace XM.AI.CreatureBehavior.DoAction
+namespace XM.AI.Context.DoAction
 {
     internal static class CombatDoActions
     {
@@ -11,7 +11,7 @@ namespace XM.AI.CreatureBehavior.DoAction
         {
             return builder.Do("Attack Selected Target", context =>
             {
-                if(GetAttackTarget(context.Creature) != context.SelectedTarget)
+                if (GetAttackTarget(context.Creature) != context.SelectedTarget)
                     AssignCommand(context.Creature, () => ClearAllActions());
 
                 AssignCommand(context.Creature, () => ActionAttack(context.SelectedTarget));

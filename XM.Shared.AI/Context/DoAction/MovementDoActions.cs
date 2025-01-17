@@ -2,7 +2,7 @@
 using XM.AI.BehaviorTree.FluentBuilder;
 using XM.AI.Context;
 
-namespace XM.AI.CreatureBehavior.DoAction
+namespace XM.AI.Context.DoAction
 {
     internal static class MovementDoActions
     {

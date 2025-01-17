@@ -2,8 +2,15 @@
 
 namespace XM.AI.Context.Condition
 {
-    internal static class EnmityConditions
+    internal static class TargetingConditions
     {
+        public static FluentBuilder<CreatureAIContext> ConditionHasEnmity(
+            this FluentBuilder<CreatureAIContext> builder)
+        {
+            return builder.Condition("Has Enmity", context => 
+                context.EnmityService.HasEnmity(context.Creature));
+        }
+
         public static FluentBuilder<CreatureAIContext> ConditionSelectHighestEnmityTarget(
             this FluentBuilder<CreatureAIContext> builder)
         {
@@ -11,7 +18,8 @@ namespace XM.AI.Context.Condition
             {
                 var target = context.EnmityService.GetHighestEnmityTarget(context.Creature);
 
-                if (!GetIsObjectValid(target))
+                // Target is invalid or target is the same as last check
+                if (!GetIsObjectValid(target) || target == context.SelectedTarget)
                     return false;
 
                 context.SelectedTarget = target;
