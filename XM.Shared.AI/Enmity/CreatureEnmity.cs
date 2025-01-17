@@ -10,7 +10,7 @@
         public CreatureEnmity()
         {
             CumulativeEnmity = 1;
-            VolatileEnmity = 1;
+            VolatileEnmity = 0;
         }
 
         public int CumulativeEnmity
@@ -34,8 +34,8 @@
                 _volatileEnmity = value;
                 if (_volatileEnmity > EnmityCap)
                     _volatileEnmity = EnmityCap;
-                else if (_volatileEnmity < 1)
-                    _volatileEnmity = 1;
+                else if (_volatileEnmity < 0)
+                    _volatileEnmity = 0;
             }
         }
 

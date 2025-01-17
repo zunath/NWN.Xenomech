@@ -1,4 +1,5 @@
 ﻿using Anvil.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using XM.Progression.Stat;
@@ -35,8 +36,18 @@ namespace XM.AI.Enmity
             _event.Subscribe<CreatureEvent.OnMeleeAttacked>(OnAttacked);
             _event.Subscribe<CreatureEvent.OnDeath>(OnDeath);
             _event.Subscribe<ModuleEvent.OnPlayerDeath>(OnPlayerDeath);
+            _event.Subscribe<PlayerEvent.OnDamaged>(OnPlayerDamaged);
             _event.Subscribe<ModuleEvent.OnPlayerLeave>(OnPlayerExit);
             _event.Subscribe<AreaEvent.OnAreaExit>(OnPlayerExit);
+        }
+
+        private void OnPlayerDamaged(uint player)
+        {
+            var enemy = GetLastDamager(player);
+            var damage = GetTotalDamageDealt();
+            var maxHP = _stat.GetMaxHP(player);
+            var cumulativeLoss = 1800 * damage / maxHP;
+            ModifyEnmity(player, enemy, EnmityType.Cumulative, -cumulativeLoss);
         }
 
         private void OnPlayerExit(uint obj)
