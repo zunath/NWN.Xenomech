@@ -48,8 +48,11 @@ namespace XM.UI
             foreach (var refreshVM in _windowTypesByRefreshEvent[typeof(T)])
             {
                 var viewModel = _playerViewModels[player]
-                    .Single(s => s.Value.GetType() == refreshVM.GetType())
+                    .SingleOrDefault(s => s.Value.GetType() == refreshVM.GetType())
                     .Value;
+
+                if (viewModel == null)
+                    continue;
 
                 var methodInfo = typeof(IRefreshable<>)
                     .MakeGenericType(typeof(T))
