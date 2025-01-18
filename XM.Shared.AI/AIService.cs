@@ -192,5 +192,13 @@ namespace XM.AI
 
             SendMessageToPC(GetLastUsedBy(), $"Goblin HP: {GetCurrentHitPoints(npc)} / {GetMaxHitPoints(npc)}");
         }
+
+        [ScriptHandler("bread_test4")]
+        public void Test4()
+        {
+            var savingThrow = GetFortitudeSavingThrow(GetLastUsedBy());
+
+            SendMessageToPC(GetLastUsedBy(), $"saving throw = {savingThrow}");
+        }
     }
 }
