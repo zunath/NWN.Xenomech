@@ -10,7 +10,7 @@ namespace XM.Combat.NativeOverride
     internal sealed unsafe class GetFortitudeSavingThrowOverrideService
     {
         [NativeFunction("_ZN17CNWSCreatureStats18GetFortSavingThrowEi", "")]
-        private delegate sbyte GetFortitudeSavingThrowHook(void* thisPtr, int bExcludeEffectBonus);
+        private delegate byte GetFortitudeSavingThrowHook(void* thisPtr, int bExcludeEffectBonus);
 
         // ReSharper disable once NotAccessedField.Local
         private readonly FunctionHook<GetFortitudeSavingThrowHook> _getFortitudeFunctionHook;
@@ -20,13 +20,13 @@ namespace XM.Combat.NativeOverride
             _getFortitudeFunctionHook = hook.RequestHook<GetFortitudeSavingThrowHook>(OnGetFortitudeSavingThrow, HookOrder.Late);
         }
 
-        private sbyte OnGetFortitudeSavingThrow(void* thisPtr, int bExcludeEffectBonus)
+        private byte OnGetFortitudeSavingThrow(void* thisPtr, int bExcludeEffectBonus)
         {
             var stats = CNWSCreatureStats.FromPointer(thisPtr);
             var rules = NWNXLib.Rules();
 
             var effectBonus = 0;
-            sbyte modifier = 0;
+            byte modifier = 0;
 
             if (bExcludeEffectBonus == 0)
                 effectBonus = stats.m_pBaseCreature
@@ -37,13 +37,13 @@ namespace XM.Combat.NativeOverride
                         (int)SavingThrow.Fortitude);
 
             if (stats.HasFeat((ushort)FeatType.LuckOfHeroes) == 1)
-                modifier += (sbyte)rules.GetRulesetIntEntry(
+                modifier += (byte)rules.GetRulesetIntEntry(
                     new CRulesKeyHash("LUCKOFHEROES_SAVE_BONUS"), 1);
 
             if (stats.HasFeat((ushort)FeatType.PrestigeDarkBlessing) == 1)
-                modifier += (sbyte)stats.m_nCharismaModifier;
+                modifier += (byte)stats.m_nCharismaModifier;
 
-            return (sbyte)(stats.m_nStrengthModifier +
+            return (byte)(stats.m_nStrengthModifier +
                            stats.GetBaseFortSavingThrow() +
                            stats.m_nFortSavingThrowMisc +
                            effectBonus +
