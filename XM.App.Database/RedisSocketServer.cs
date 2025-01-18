@@ -102,14 +102,10 @@ namespace XM.App.Database
 
                     var json = Encoding.UTF8.GetString(buffer);
 
-                    //Console.WriteLine($"json = {json}");
-
                     var command = XMJsonUtility.Deserialize<DBServerCommand>(json);
                     var response = HandleCommand(command);
 
                     var responseJson = XMJsonUtility.Serialize(response);
-
-                    //Console.WriteLine($"responseJson = {responseJson}");
 
                     var responseBytes = Encoding.UTF8.GetBytes(responseJson);
                     var responseLengthBytes = BitConverter.GetBytes(responseBytes.Length);
@@ -310,7 +306,6 @@ namespace XM.App.Database
             var redisData = new Dictionary<string, RedisValue>();
             foreach (var index in indexData)
             {
-                Console.WriteLine($"Processing index: Key = {index.Key}, Value = {index.Value}, Type = {index.Value?.GetType()}");
                 redisData[index.Key] = RedisValue.Unbox(index.Value);
             }
 
