@@ -111,5 +111,8 @@ namespace XM.Shared.Core.Localization
         PlayerReadiesAbilityOnTarget = 416,
         PlayerReadiesAbility = 417,
         PlayerRestoresXHPToTarget = 418,
+        YourWeaponAbilityXIsNoLongerQueued = 419,
+        PlayerNoLongerHasWeaponAbilityXReadied = 420,
+        PlayersAbilityHasBeenInterrupted = 421,
     }
 }

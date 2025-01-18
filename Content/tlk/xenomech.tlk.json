@@ -1672,6 +1672,18 @@
     {
       "id": 418,
       "text": "{0} restores {1} HP to {2}."
+    },
+    {
+      "id": 419,
+      "text": "Your weapon ability {0} is no longer queued."
+    },
+    {
+      "id": 420,
+      "text": "{0} no longer has weapon ability {1} readied."
+    },
+    {
+      "id": 421,
+      "text": "{0}'s ability has been interrupted."
     }
   ]
 }

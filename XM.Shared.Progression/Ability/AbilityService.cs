@@ -283,7 +283,7 @@ namespace XM.Progression.Ability
                 {
                     RemoveEffectByTag(activator, "ACTIVATION_VFX");
                     PlayerPlugin.StopGuiTimingBar(activator, string.Empty);
-                    Messaging.SendMessageNearbyToPlayers(activator, $"{GetName(activator)}'s ability has been interrupted.");
+                    Messaging.SendMessageNearbyToPlayers(activator, LocaleString.PlayersAbilityHasBeenInterrupted.ToLocalizedString(GetName(activator)));
                     SetLocalInt(activator, activationId, (int)ActivationStatus.Interrupted);
                     return;
                 }
@@ -387,10 +387,10 @@ namespace XM.Progression.Ability
             DeleteLocalInt(target, ActiveAbilityEffectivePerkLevelName);
 
             // Notify the activator and nearby players
-            SendMessageToPC(target, $"Your weapon ability {abilityDetail.Name} is no longer queued.");
+            SendMessageToPC(target, LocaleString.YourWeaponAbilityXIsNoLongerQueued.ToLocalizedString(abilityDetail.Name.ToLocalizedString()));
 
             if (sendMessage)
-                Messaging.SendMessageNearbyToPlayers(target, $"{GetName(target)} no longer has weapon ability {abilityDetail.Name} readied.");
+                Messaging.SendMessageNearbyToPlayers(target, LocaleString.PlayerNoLongerHasWeaponAbilityXReadied.ToLocalizedString(GetName(target), abilityDetail.Name.ToLocalizedString()));
         }
 
         private void ApplyRequirementEffects(uint activator, AbilityDetail ability)
