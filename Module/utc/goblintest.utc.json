@@ -84,6 +84,13 @@
           "type": "resref",
           "value": "nw_wblms001"
         }
+      },
+      {
+        "__struct_id": 131072,
+        "EquippedRes": {
+          "type": "resref",
+          "value": "test_gob_skin"
+        }
       }
     ]
   },
@@ -99,6 +106,13 @@
         "Feat": {
           "type": "word",
           "value": 0
+        }
+      },
+      {
+        "__struct_id": 1,
+        "Feat": {
+          "type": "word",
+          "value": 1116
         }
       },
       {

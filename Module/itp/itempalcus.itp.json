@@ -181,6 +181,22 @@
                 "type": "byte",
                 "value": 14
               },
+              "LIST": {
+                "type": "list",
+                "value": [
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Test Goblin Skin"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "test_gob_skin"
+                    }
+                  }
+                ]
+              },
               "STRREF": {
                 "type": "dword",
                 "value": 6809
