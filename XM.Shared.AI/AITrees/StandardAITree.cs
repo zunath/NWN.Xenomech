@@ -5,6 +5,7 @@ using XM.AI.Context.Condition;
 using XM.AI.Context.DoAction;
 using XM.AI.Enmity;
 using XM.Progression.Stat;
+using XM.Shared.API.Constants;
 
 namespace XM.AI.AITrees
 {
@@ -67,8 +68,12 @@ namespace XM.AI.AITrees
         private IBehavior<CreatureAIContext> LowHealthBehavior()
         {
             return FluentBuilder.Create<CreatureAIContext>()
-                .Sequence("Use Potion")
+                .Sequence("Recover HP")
                     .ConditionHasHPPercentage(0.5f)
+                    .Sequence("Ether Bloom")
+                        .ConditionHasFeat(FeatType.EtherBloom1)
+                        .DoUseAbilityOnSelf(FeatType.EtherBloom1)
+                    .End()
                     .Sequence("Find and Use Potion")
                         .ConditionSelectHasAnyItem("potion")
                         .DoUseSelectedItem()

@@ -1,4 +1,5 @@
-﻿using XM.AI.BehaviorTree.FluentBuilder;
+﻿using System;
+using XM.AI.BehaviorTree.FluentBuilder;
 
 namespace XM.AI.Context.Condition
 {
@@ -7,8 +8,10 @@ namespace XM.AI.Context.Condition
         public static FluentBuilder<CreatureAIContext> ConditionHasEnmity(
             this FluentBuilder<CreatureAIContext> builder)
         {
-            return builder.Condition("Has Enmity", context => 
-                context.EnmityService.HasEnmity(context.Creature));
+            return builder.Condition("Has Enmity", context =>
+            {
+                return context.EnmityService.HasEnmity(context.Creature);
+            });
         }
 
         public static FluentBuilder<CreatureAIContext> ConditionSelectHighestEnmityTarget(

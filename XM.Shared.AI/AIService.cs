@@ -5,6 +5,7 @@ using Microsoft.VisualBasic;
 using XM.AI.AITrees;
 using XM.AI.Enmity;
 using XM.Progression.Stat;
+using XM.Shared.API.Constants;
 using XM.Shared.Core.EventManagement;
 
 namespace XM.AI
@@ -126,5 +127,13 @@ namespace XM.AI
             SendMessageToPC(GetLastUsedBy(), $"Girl enmity = {table[girl].TotalEnmity}");
         }
 
+        [ScriptHandler("bread_test3")]
+        public void Test3()
+        {
+            var npc = GetObjectByTag("goblintest");
+            ApplyEffectToObject(DurationType.Instant, EffectDamage(1), npc);
+
+            SendMessageToPC(GetLastUsedBy(), $"Goblin HP: {GetCurrentHitPoints(npc)} / {GetMaxHitPoints(npc)}");
+        }
     }
 }

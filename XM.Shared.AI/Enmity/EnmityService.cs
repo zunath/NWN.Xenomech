@@ -4,13 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using XM.Progression.Stat;
+using XM.Shared.API.Constants;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Party;
 
 namespace XM.AI.Enmity
 {
     [ServiceBinding(typeof(EnmityService))]
-    internal class EnmityService
+    public class EnmityService
     {
         // Enemy -> Creature -> EnmityAmount mapping
         private readonly Dictionary<uint, Dictionary<uint, CreatureEnmity>> _enemyEnmityTables = new();
@@ -18,7 +19,7 @@ namespace XM.AI.Enmity
         // Creature -> EnemyList mapping
         private readonly Dictionary<uint, List<uint>> _creatureToEnemies = new();
 
-        private readonly EnmityLevelModifier _levelModifiers = new();
+        private readonly EnmityTables _enmityTables = new();
 
         private readonly XMEventService _event;
         private readonly PartyService _party;
@@ -89,8 +90,8 @@ namespace XM.AI.Enmity
             var damage = GetTotalDamageDealt();
             var targetLevel = npcStats.Level; 
 
-            var cumulative = CalculateCumulativeEnmityGain(targetLevel, damage);
-            var @volatile = cumulative * 3;
+            var cumulative = CalculateCumulativeDamageEnmityGain(targetLevel, damage);
+            var @volatile = CalculateVolatileDamageEnmityGain(targetLevel, damage);
 
             ModifyEnmity(enemy, creature, EnmityType.Cumulative, cumulative);
             ModifyEnmity(enemy, creature, EnmityType.Volatile, @volatile);
@@ -98,12 +99,49 @@ namespace XM.AI.Enmity
             ReduceCumulativeEnmity(creature, enemy, damage);
         }
 
-        private int CalculateCumulativeEnmityGain(int targetLevel, int damageDealt)
+        // source: https://www.bg-wiki.com/ffxi/Enmity
+        private int CalculateCumulativeDamageEnmityGain(int targetLevel, int damageDealt)
         {
-            // todo: specific enmity calculations based on attacker's level and DMG ratings
-            // todo: source: https://www.bg-wiki.com/ffxi/Enmity
-            var scalingFactor = _levelModifiers.GetModifier(targetLevel);
-            return (int)(scalingFactor * 80 * damageDealt);
+            var scalingFactor = _enmityTables.GetCEDamageModifier(targetLevel);
+            return (int)(scalingFactor * damageDealt);
+        }
+
+        private int CalculateVolatileDamageEnmityGain(int targetLevel, int damageDealt)
+        {
+            var scalingFactor = _enmityTables.GetVEDamageModifier(targetLevel);
+            return (int)(scalingFactor * damageDealt);
+        }
+
+        private int CalculateCumulativeHealingEnmityGain(int targetLevel, int damageHealed)
+        {
+            var scalingFactor = _enmityTables.GetCEHealingModifier(targetLevel);
+            return (int)(scalingFactor * damageHealed);
+        }
+
+        private int CalculateVolatileHealingEnmityGain(int targetLevel, int damageHealed)
+        {
+            var scalingFactor = _enmityTables.GetVEHealingModifier(targetLevel);
+            return (int)(scalingFactor * damageHealed);
+        }
+
+        public void ApplyHealingEnmity(uint healer, int damageHealed)
+        {
+            if (!_creatureToEnemies.ContainsKey(healer))
+                return;
+
+            var enemies = _creatureToEnemies[healer];
+
+            foreach (var enemy in enemies)
+            {
+                var npcStats = _stat.GetNPCStats(enemy);
+                var level = npcStats.Level;
+
+                var cumulative = CalculateCumulativeHealingEnmityGain(level, damageHealed);
+                var @volatile = CalculateVolatileHealingEnmityGain(level, damageHealed);
+
+                ModifyEnmity(healer, enemy, EnmityType.Cumulative, cumulative);
+                ModifyEnmity(healer, enemy, EnmityType.Volatile, @volatile);
+            }
         }
 
         internal Dictionary<uint, CreatureEnmity> GetEnmityTable(uint enemy)
@@ -115,7 +153,7 @@ namespace XM.AI.Enmity
                 .ToDictionary(x => x.Key, y => y.Value);
         }
 
-        public uint GetHighestEnmityTarget(uint enemy)
+        internal uint GetHighestEnmityTarget(uint enemy)
         {
             var enmityTable = GetEnmityTable(enemy);
             var target = enmityTable.Count <= 0
@@ -127,6 +165,10 @@ namespace XM.AI.Enmity
 
         public void ModifyEnmity(uint creature, uint enemy, EnmityType type, int amount)
         {
+            if (GetObjectType(creature) != ObjectType.Creature ||
+                GetObjectType(enemy) != ObjectType.Creature)
+                return;
+
             if (GetIsPC(enemy))
                 return;
 
@@ -186,7 +228,23 @@ namespace XM.AI.Enmity
             _creatureToEnemies[creature] = enemyList;
         }
 
-        public void TickVolatileEnmity(uint enemy)
+        public void ModifyEnmityOnAll(uint creature, EnmityType type, int amount)
+        {
+            // Value is zero, no action necessary.
+            if (amount == 0) 
+                return;
+
+            // Creature has no enemies.
+            if (!_creatureToEnemies.ContainsKey(creature)) 
+                return;
+
+            foreach (var enemy in _creatureToEnemies[creature])
+            {
+                ModifyEnmity(creature, enemy, type, amount);
+            }
+        }
+
+        internal void TickVolatileEnmity(uint enemy)
         {
             var table = GetEnmityTable(enemy);
 

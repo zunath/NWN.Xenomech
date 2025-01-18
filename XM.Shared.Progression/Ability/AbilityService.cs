@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using Anvil.API;
 using Anvil.Services;
 using NWN.Core.NWNX;
 using XM.Progression.Job;
@@ -11,7 +12,6 @@ using XM.Shared.Core;
 using XM.Shared.Core.Activity;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
-using Location = XM.Shared.API.BaseTypes.Location;
 
 namespace XM.Progression.Ability
 {
@@ -199,7 +199,7 @@ namespace XM.Progression.Ability
                 if (CanUseAbility(activator, target, feat, targetLocation))
                 {
                     if (ability.DisplaysActivationMessage)
-                        Messaging.SendMessageNearbyToPlayers(activator, $"{GetName(activator)} queues {ability.Name} for the next attack.");
+                        Messaging.SendMessageNearbyToPlayers(activator, LocaleString.PlayerQueuesAbilityForTheNextAttack.ToLocalizedString(GetName(activator), ability.Name));
                     QueueWeaponAbility(activator, ability, feat);
                 }
             }
@@ -211,12 +211,12 @@ namespace XM.Progression.Ability
                     if (GetIsObjectValid(target))
                     {
                         if (ability.DisplaysActivationMessage)
-                            Messaging.SendMessageNearbyToPlayers(activator, $"{GetName(activator)} readies {ability.Name} on {GetName(target)}.");
+                            Messaging.SendMessageNearbyToPlayers(activator, LocaleString.PlayerReadiesAbilityOnTarget.ToLocalizedString(GetName(activator), ability.Name, GetName(target)));
                     }
                     else
                     {
                         if (ability.DisplaysActivationMessage)
-                            Messaging.SendMessageNearbyToPlayers(activator, $"{GetName(activator)} readies {ability.Name}.");
+                            Messaging.SendMessageNearbyToPlayers(activator, LocaleString.PlayerReadiesAbility.ToLocalizedString(GetName(activator), ability.Name));
                     }
 
                     ActivateAbility(activator, target, feat, ability, targetLocation);

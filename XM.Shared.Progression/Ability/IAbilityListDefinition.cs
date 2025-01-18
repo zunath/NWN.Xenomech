@@ -3,7 +3,7 @@ using XM.Shared.API.Constants;
 
 namespace XM.Progression.Ability
 {
-    internal interface IAbilityListDefinition
+    public interface IAbilityListDefinition
     {
         public Dictionary<FeatType, AbilityDetail> BuildAbilities();
     }

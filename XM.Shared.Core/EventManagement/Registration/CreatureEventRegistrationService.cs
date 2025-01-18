@@ -55,8 +55,7 @@ namespace XM.Shared.Core.EventManagement.Registration
 
         private void OnSpawnCreated(uint objectSelf)
         {
-            var spawn = OBJECT_SELF;
-            SetCreatureScripts(spawn);
+            SetCreatureScripts(objectSelf);
         }
     }
 }

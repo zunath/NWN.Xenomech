@@ -1,6 +1,7 @@
-﻿using XM.AI.BehaviorTree;
+﻿using System;
+using XM.AI.BehaviorTree;
 using XM.AI.BehaviorTree.FluentBuilder;
-using XM.AI.Context;
+using XM.Shared.API.Constants;
 
 namespace XM.AI.Context.DoAction
 {
@@ -15,6 +16,29 @@ namespace XM.AI.Context.DoAction
                     AssignCommand(context.Creature, () => ClearAllActions());
 
                 AssignCommand(context.Creature, () => ActionAttack(context.SelectedTarget));
+
+                return BehaviorStatus.Succeeded;
+            });
+        }
+
+        public static FluentBuilder<CreatureAIContext> DoUseAbilityOnSelectedTarget(
+            this FluentBuilder<CreatureAIContext> builder,
+            FeatType feat)
+        {
+            return builder.Do("Use Ability on Selected Target", context =>
+            {
+                AssignCommand(context.Creature, () => ActionUseFeat(feat, context.SelectedTarget));
+
+                return BehaviorStatus.Succeeded;
+            });
+        }
+        public static FluentBuilder<CreatureAIContext> DoUseAbilityOnSelf(
+            this FluentBuilder<CreatureAIContext> builder,
+            FeatType feat)
+        {
+            return builder.Do("Use Ability on Self", context =>
+            {
+                AssignCommand(context.Creature, () => ActionUseFeat(feat, context.Creature));
 
                 return BehaviorStatus.Succeeded;
             });

@@ -1,6 +1,6 @@
 ﻿namespace XM.Progression.Ability
 {
-    internal enum AbilityActivationType
+    public enum AbilityActivationType
     {
         Invalid = 0,
         Casted = 1,

@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using XM.Progression.Recast;
 using XM.Shared.API.Constants;
+using XM.Shared.Core.Localization;
 
 namespace XM.Progression.Ability
 {
-    internal class AbilityBuilder
+    public class AbilityBuilder
     {
         private readonly Dictionary<FeatType, AbilityDetail> _abilities = new Dictionary<FeatType, AbilityDetail>();
         private AbilityDetail _activeAbility;
@@ -27,7 +28,7 @@ namespace XM.Progression.Ability
         /// </summary>
         /// <param name="name">The name of the ability to set.</param>
         /// <returns>An ability builder with the configured options</returns>
-        public AbilityBuilder Name(string name)
+        public AbilityBuilder Name(LocaleString name)
         {
             _activeAbility.Name = name;
 
@@ -86,7 +87,7 @@ namespace XM.Progression.Ability
         /// </summary>
         /// <param name="vfx">The visual effect to display.</param>
         /// <returns>An ability builder with the configured options</returns>
-        public AbilityBuilder DisplaysVisualEffectWhenActivating(VisualEffectType vfx = VisualEffectType.DurIounstoneYellow)
+        public AbilityBuilder DisplaysVisualEffectWhenActivating(VisualEffectType vfx = VisualEffectType.DurElementalShield)
         {
             _activeAbility.ActivationVisualEffect = vfx;
 

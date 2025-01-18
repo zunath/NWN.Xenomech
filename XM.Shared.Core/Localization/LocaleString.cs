@@ -102,5 +102,14 @@ namespace XM.Shared.Core.Localization
         YouMayOnlyUseThisAbilityOnEnemies = 403,
         InsufficientEP = 404,
         InsufficientLevel = 405,
+        EtherBloomI = 406,
+        EtherBloomII = 408,
+        EtherBloomIII = 410,
+        EtherBloomIV = 412,
+        EtherBloom = 414,
+        PlayerQueuesAbilityForTheNextAttack = 415,
+        PlayerReadiesAbilityOnTarget = 416,
+        PlayerReadiesAbility = 417,
+        PlayerRestoresXHPToTarget = 418,
     }
 }

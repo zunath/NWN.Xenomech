@@ -7,5 +7,7 @@ namespace XM.Progression.Recast
     {
         [RecastGroup(LocaleString.Invalid, LocaleString.Invalid, false)]
         Invalid = 0,
+        [RecastGroup(LocaleString.EtherBloom, LocaleString.EtherBloom, true)]
+        EtherBloom = 1,
     }
 }

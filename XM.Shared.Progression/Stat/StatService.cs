@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using Anvil.Services;
+using XM.Progression.Job.Entity;
 using XM.Progression.Stat.Entity;
 using XM.Progression.Stat.Event;
 using XM.Progression.Stat.ResistDefinition;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.CreaturePlugin;
+using XM.Shared.API.NWNX.ObjectPlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
@@ -39,12 +41,48 @@ namespace XM.Progression.Stat
             _event = @event;
 
             RegisterEvents();
+            SubscribeEvents();
         }
 
         private void RegisterEvents()
         {
             _event.RegisterEvent<PlayerHPAdjustedEvent>(ProgressionEventScript.OnPlayerHPAdjustedScript);
             _event.RegisterEvent<PlayerEPAdjustedEvent>(ProgressionEventScript.OnPlayerEPAdjustedScript);
+        }
+
+        private void SubscribeEvents()
+        {
+            Console.WriteLine($"subscribing creature event stat service");
+            _event.Subscribe<CreatureEvent.OnSpawn>(OnSpawnCreature);
+        }
+
+        private void OnSpawnCreature(uint creature)
+        {
+            LoadNPCStats(creature);
+        }
+        private void LoadNPCStats(uint creature)
+        {
+            var skin = GetItemInSlot(InventorySlotType.CreatureArmor, creature);
+
+            var maxHP = 0;
+            for (var ip = GetFirstItemProperty(skin); GetIsItemPropertyValid(ip); ip = GetNextItemProperty(skin))
+            {
+                if (GetItemPropertyType(ip) == ItemPropertyType.NPCHP)
+                {
+                    maxHP += GetItemPropertyCostTableValue(ip);
+                }
+            }
+
+            if (maxHP > 30000)
+                maxHP = 30000;
+
+            if (maxHP > 0)
+            {
+                ObjectPlugin.SetMaxHitPoints(creature, maxHP);
+                ObjectPlugin.SetCurrentHitPoints(creature, maxHP);
+            }
+
+            SetLocalInt(creature, NPCEPStatVariable, GetMaxEP(creature));
         }
 
         public int GetCurrentHP(uint creature)
@@ -160,7 +198,8 @@ namespace XM.Progression.Stat
             // NPCs
             else
             {
-                return GetLocalInt(creature, NPCEPStatVariable);
+                var npcStats = GetNPCStats(creature);
+                return npcStats.EP;
             }
         }
 
@@ -437,6 +476,23 @@ namespace XM.Progression.Stat
             }
 
             return npcStats;
+        }
+
+        public int GetLevel(uint creature)
+        {
+            if (GetIsPC(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerJob = _db.Get<PlayerJob>(playerId);
+                var activeJob = dbPlayerJob.ActiveJob;
+
+                return dbPlayerJob.JobLevels[activeJob];
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                return npcStats.Level;
+            }
         }
     }
 }

@@ -1620,6 +1620,58 @@
     {
       "id": 405,
       "text": "Insufficient level."
+    },
+    {
+      "id": 406,
+      "text": "Ether Bloom I"
+    },
+    {
+      "id": 407,
+      "text": "Ether Bloom I Description"
+    },
+    {
+      "id": 408,
+      "text": "Ether Bloom II"
+    },
+    {
+      "id": 409,
+      "text": "Ether Bloom II Description"
+    },
+    {
+      "id": 410,
+      "text": "Ether Bloom III"
+    },
+    {
+      "id": 411,
+      "text": "Ether Bloom III Description"
+    },
+    {
+      "id": 412,
+      "text": "Ether Bloom IV"
+    },
+    {
+      "id": 413,
+      "text": "Ether Bloom IV Description"
+    },
+    {
+      "id": 414,
+      "text": "Ether Bloom"
+    },
+    {
+      "id": 415,
+      "text": "{0} queues {1} for the next attack."
+    },
+    {
+      "id": 416,
+      "text": "{0} readies {1} on {2}."
+    },
+    {
+      "id": 417,
+      "text": "{0} readies {1}."
+    },
+    {
+      "id": 418,
+      "text": "{0} restores {1} HP to {2}."
     }
   ]
 }

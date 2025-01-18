@@ -1,11 +1,12 @@
 ﻿using XM.Progression.Recast;
 using XM.Shared.API.Constants;
+using XM.Shared.Core.Localization;
 
 namespace XM.Progression.Ability
 {
-    internal class AbilityDetail
+    public class AbilityDetail
     {
-        public string Name { get; set; }
+        public LocaleString Name { get; set; }
         public AbilityActivationAction ActivationAction { get; set; }
         public AbilityImpactAction ImpactAction { get; set; }
         public AbilityActivationDelayAction ActivationDelay { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace XM.AI.Enmity
 {
-    internal enum EnmityType
+    public enum EnmityType
     {
         Invalid = 0,
         Cumulative = 1,

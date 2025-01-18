@@ -9,10 +9,7 @@ namespace XM.AI.Context.Condition
             this FluentBuilder<CreatureAIContext> builder,
             ActionType action)
         {
-            return builder.Condition("Has Action", context =>
-            {
-                return GetCurrentAction(context.Creature) == ActionType.Invalid;
-            });
+            return builder.Condition("Has Action", context => GetCurrentAction(context.Creature) == ActionType.Invalid);
         }
     }
 }
