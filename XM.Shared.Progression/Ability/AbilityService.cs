@@ -199,7 +199,7 @@ namespace XM.Progression.Ability
                 if (CanUseAbility(activator, target, feat, targetLocation))
                 {
                     if (ability.DisplaysActivationMessage)
-                        Messaging.SendMessageNearbyToPlayers(activator, LocaleString.PlayerQueuesAbilityForTheNextAttack.ToLocalizedString(GetName(activator), ability.Name));
+                        Messaging.SendMessageNearbyToPlayers(activator, LocaleString.PlayerQueuesAbilityForTheNextAttack.ToLocalizedString(GetName(activator), ability.Name.ToLocalizedString()));
                     QueueWeaponAbility(activator, ability, feat);
                 }
             }
@@ -211,12 +211,12 @@ namespace XM.Progression.Ability
                     if (GetIsObjectValid(target))
                     {
                         if (ability.DisplaysActivationMessage)
-                            Messaging.SendMessageNearbyToPlayers(activator, LocaleString.PlayerReadiesAbilityOnTarget.ToLocalizedString(GetName(activator), ability.Name, GetName(target)));
+                            Messaging.SendMessageNearbyToPlayers(activator, LocaleString.PlayerReadiesAbilityOnTarget.ToLocalizedString(GetName(activator), ability.Name.ToLocalizedString(), GetName(target)));
                     }
                     else
                     {
                         if (ability.DisplaysActivationMessage)
-                            Messaging.SendMessageNearbyToPlayers(activator, LocaleString.PlayerReadiesAbility.ToLocalizedString(GetName(activator), ability.Name));
+                            Messaging.SendMessageNearbyToPlayers(activator, LocaleString.PlayerReadiesAbility.ToLocalizedString(GetName(activator), ability.Name.ToLocalizedString()));
                     }
 
                     ActivateAbility(activator, target, feat, ability, targetLocation);
