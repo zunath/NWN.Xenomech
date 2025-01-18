@@ -1,5 +1,4 @@
-﻿using Anvil.API;
-using System;
+﻿using System;
 using XM.AI.BehaviorTree;
 using XM.AI.Context;
 using XM.AI.Enmity;
@@ -9,11 +8,33 @@ namespace XM.AI.AITrees
 {
     internal abstract class AITreeBase: IAITree
     {
-        protected CreatureAIContext Creature { get; }
+        protected CreatureAIContext Context { get; }
         public IBehavior<CreatureAIContext> Tree { get; }
         public void Update(DateTime now)
         {
-            Tree.Tick(Creature);
+            Tree.Tick(Context);
+        }
+
+        public void AddFriendly(uint creature)
+        {
+            if (GetIsEnemy(Context.Creature, creature))
+                return;
+
+            if (Context.Creature == creature)
+                return;
+
+            Context.NearbyFriendlies.Add(creature);
+        }
+
+        public void RemoveFriendly(uint creature)
+        {
+            Context.NearbyFriendlies.Remove(creature);
+        }
+
+        public bool ToggleAI()
+        {
+            Context.IsAIEnabled = !Context.IsAIEnabled;
+            return Context.IsAIEnabled;
         }
 
         protected AITreeBase(
@@ -22,7 +43,7 @@ namespace XM.AI.AITrees
             EnmityService enmity,
             StatService stat)
         {
-            Creature = new CreatureAIContext(creature, ai, enmity, stat);
+            Context = new CreatureAIContext(creature, ai, enmity, stat);
             Tree = CreateTree();
         }
 

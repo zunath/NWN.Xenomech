@@ -11,7 +11,11 @@ namespace XM.AI.AITrees
 {
     internal class StandardAITree: AITreeBase
     {
-        public StandardAITree(uint creature, AIService ai, EnmityService enmity, StatService stat) 
+        public StandardAITree(
+            uint creature, 
+            AIService ai, 
+            EnmityService enmity, 
+            StatService stat) 
             : base(creature, ai, enmity, stat)
         {
         }
@@ -19,10 +23,13 @@ namespace XM.AI.AITrees
         protected override IBehavior<CreatureAIContext> CreateTree()
         {
             return FluentBuilder.Create<CreatureAIContext>()
-                .PrioritySelector("root")
-                    .Subtree(CombatBehavior())
-                    .Subtree(SelfPreservationBehavior())
-                    .Subtree(OutOfCombatBehavior())
+                .Sequence("root")
+                    .ConditionAIEnabled()
+                    .PrioritySelector("actions")
+                        .Subtree(CombatBehavior())
+                        .Subtree(SelfPreservationBehavior())
+                        .Subtree(OutOfCombatBehavior())
+                    .End()
                 .End()
                 .Build();
         }

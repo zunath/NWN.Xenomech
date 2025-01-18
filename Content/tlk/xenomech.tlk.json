@@ -1684,6 +1684,26 @@
     {
       "id": 421,
       "text": "{0}'s ability has been interrupted."
+    },
+    {
+      "id": 422,
+      "text": "{0} AI = {1}"
+    },
+    {
+      "id": 423,
+      "text": "Enabled"
+    },
+    {
+      "id": 424,
+      "text": "Disabled"
+    },
+    {
+      "id": 425,
+      "text": "ENABLED"
+    },
+    {
+      "id": 426,
+      "text": "DISABLED"
     }
   ]
 }

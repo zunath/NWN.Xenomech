@@ -1876,9 +1876,9 @@ namespace XM.Shared.API
         ///  Create an Area Of Effect effect in the area of the creature it is applied to.<br/>
         ///  If the scripts are not specified, default ones will be used.
         /// </summary>
-        public static Effect EffectAreaOfEffect(int nAreaEffectId, string sOnEnterScript = "", string sHeartbeatScript = "", string sOnExitScript = "")
+        public static Effect EffectAreaOfEffect(AreaOfEffectType nAreaEffectId, string sOnEnterScript = "", string sHeartbeatScript = "", string sOnExitScript = "")
         {
-            return NWN.Core.NWScript.EffectAreaOfEffect(nAreaEffectId, sOnEnterScript, sHeartbeatScript, sOnExitScript);
+            return NWN.Core.NWScript.EffectAreaOfEffect((int)nAreaEffectId, sOnEnterScript, sHeartbeatScript, sOnExitScript);
         }
         /// <summary>
         ///  * Returns true if the Faction Ids of the two objects are the same

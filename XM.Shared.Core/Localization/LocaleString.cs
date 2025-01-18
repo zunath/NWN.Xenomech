@@ -114,5 +114,10 @@ namespace XM.Shared.Core.Localization
         YourWeaponAbilityXIsNoLongerQueued = 419,
         PlayerNoLongerHasWeaponAbilityXReadied = 420,
         PlayersAbilityHasBeenInterrupted = 421,
+        AIForCreatureXHasBeenY = 422,
+        Enabled = 423,
+        Disabled = 424,
+        ENABLED = 425,
+        DISABLED = 426,
     }
 }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Anvil.Services;
+using XM.Progression.Event;
 using XM.Progression.Job.Entity;
 using XM.Progression.Stat.Entity;
-using XM.Progression.Stat.Event;
 using XM.Progression.Stat.ResistDefinition;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.CreaturePlugin;
@@ -46,8 +46,8 @@ namespace XM.Progression.Stat
 
         private void RegisterEvents()
         {
-            _event.RegisterEvent<PlayerHPAdjustedEvent>(ProgressionEventScript.OnPlayerHPAdjustedScript);
-            _event.RegisterEvent<PlayerEPAdjustedEvent>(ProgressionEventScript.OnPlayerEPAdjustedScript);
+            _event.RegisterEvent<StatEvent.PlayerHPAdjustedEvent>(ProgressionEventScript.OnPlayerHPAdjustedScript);
+            _event.RegisterEvent<StatEvent.PlayerEPAdjustedEvent>(ProgressionEventScript.OnPlayerEPAdjustedScript);
         }
 
         private void SubscribeEvents()

@@ -3,7 +3,7 @@ using XM.Shared.API.Constants;
 
 namespace XM.AI.Context.Condition
 {
-    internal static class AIFlagConditions
+    internal static class AIConditions
     {
         public static FluentBuilder<CreatureAIContext> ConditionHasAIFlag(
             this FluentBuilder<CreatureAIContext> builder,
@@ -12,5 +12,10 @@ namespace XM.AI.Context.Condition
             return builder.Condition("Has Flag", context => context.AIFlag.HasFlag(flag));
         }
 
+        public static FluentBuilder<CreatureAIContext> ConditionAIEnabled(
+            this FluentBuilder<CreatureAIContext> builder)
+        {
+            return builder.Condition("Has AI Enabled", context => context.IsAIEnabled);
+        }
     }
 }

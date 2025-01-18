@@ -4,8 +4,8 @@ using System.Linq;
 using Anvil.API;
 using Anvil.Services;
 using XM.Inventory;
+using XM.Progression.Event;
 using XM.Progression.Job.Entity;
-using XM.Progression.Job.Event;
 using XM.Progression.Job.JobDefinition;
 using XM.Progression.Stat;
 using XM.Progression.Stat.Entity;
@@ -240,7 +240,7 @@ namespace XM.Progression.Job
             var name = Locale.GetString(definition.Name);
             SendMessageToPC(player, $"Job changed to: {ColorToken.Green(name)}");
 
-            _event.ExecuteScript(JobEventScript.PlayerChangedJobScript, player);
+            _event.ExecuteScript(ProgressionEventScript.PlayerChangedJobScript, player);
         }
     }
 }

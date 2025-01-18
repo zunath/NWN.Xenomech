@@ -1,14 +1,15 @@
-﻿using Anvil.API;
+﻿using System.Collections.Generic;
+using Anvil.API;
 using XM.AI.BehaviorTree;
 using XM.AI.Enmity;
 using XM.Progression.Stat;
-using XM.Shared.API.BaseTypes;
 using Time = Anvil.API.Time;
 
 namespace XM.AI.Context
 {
     internal class CreatureAIContext : IClock
     {
+        public bool IsAIEnabled { get; set; }
         public AIService AIService { get; }
 
         public EnmityService EnmityService { get; }
@@ -25,18 +26,22 @@ namespace XM.AI.Context
 
         public uint SelectedTarget { get; set; }
 
+        public HashSet<uint> NearbyFriendlies { get; set; }
+
         public CreatureAIContext(
             uint creature, 
             AIService ai,
             EnmityService enmity,
             StatService stat)
         {
+            IsAIEnabled = true;
             AIService = ai;
             EnmityService = enmity;
             StatService = stat;
             Creature = creature;
             AIFlag = ai.GetAIFlags(creature);
             HomeLocation = GetLocation(creature);
+            NearbyFriendlies = new HashSet<uint>();
         }
 
         public long GetTimeStampInMilliseconds()

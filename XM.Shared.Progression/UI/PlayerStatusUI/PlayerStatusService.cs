@@ -1,6 +1,6 @@
 ﻿using Anvil.Services;
 using NWN.Core.NWNX;
-using XM.Progression.Stat.Event;
+using XM.Progression.Event;
 using XM.Shared.Core.EventManagement;
 using XM.UI;
 
@@ -29,7 +29,7 @@ namespace XM.Progression.UI.PlayerStatusUI
             _event.Subscribe<AreaEvent.OnAreaEnter>(OnPlayerEnter);
 
             _event.Subscribe<NWNXEvent.OnHealAfter>(OnPlayerHealed);
-            _event.Subscribe<PlayerEPAdjustedEvent>(OnPlayerEPAdjusted);
+            _event.Subscribe<StatEvent.PlayerEPAdjustedEvent>(OnPlayerEPAdjusted);
             _event.Subscribe<PlayerEvent.OnDamaged>(OnPlayerDamaged);
 
             _event.Subscribe<NWNXEvent.OnItemEquipAfter>(OnPlayerEquipItem);
@@ -52,8 +52,8 @@ namespace XM.Progression.UI.PlayerStatusUI
             if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
                 return;
 
-            _gui.PublishRefreshEvent(player, new PlayerHPAdjustedEvent());
-            _gui.PublishRefreshEvent(player, new PlayerEPAdjustedEvent());
+            _gui.PublishRefreshEvent(player, new StatEvent.PlayerHPAdjustedEvent());
+            _gui.PublishRefreshEvent(player, new StatEvent.PlayerEPAdjustedEvent());
         }
 
         private void OnPlayerUnequipItem(uint objectSelf)
@@ -62,8 +62,8 @@ namespace XM.Progression.UI.PlayerStatusUI
             if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
                 return;
 
-            _gui.PublishRefreshEvent(player, new PlayerHPAdjustedEvent());
-            _gui.PublishRefreshEvent(player, new PlayerEPAdjustedEvent());
+            _gui.PublishRefreshEvent(player, new StatEvent.PlayerHPAdjustedEvent());
+            _gui.PublishRefreshEvent(player, new StatEvent.PlayerEPAdjustedEvent());
         }
 
         private void OnPlayerHealed(uint objectSelf)
@@ -73,7 +73,7 @@ namespace XM.Progression.UI.PlayerStatusUI
                 return;
 
 
-            _gui.PublishRefreshEvent(player, new PlayerHPAdjustedEvent());
+            _gui.PublishRefreshEvent(player, new StatEvent.PlayerHPAdjustedEvent());
         }
 
         private void OnPlayerEPAdjusted(uint objectSelf)
@@ -82,7 +82,7 @@ namespace XM.Progression.UI.PlayerStatusUI
             if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
                 return;
 
-            _gui.PublishRefreshEvent(player, new PlayerEPAdjustedEvent());
+            _gui.PublishRefreshEvent(player, new StatEvent.PlayerEPAdjustedEvent());
         }
 
         private void OnPlayerDamaged(uint objectSelf)
@@ -91,7 +91,7 @@ namespace XM.Progression.UI.PlayerStatusUI
             if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
                 return;
 
-            _gui.PublishRefreshEvent(player, new PlayerHPAdjustedEvent());
+            _gui.PublishRefreshEvent(player, new StatEvent.PlayerHPAdjustedEvent());
         }
 
 
