@@ -44,9 +44,9 @@ namespace XM.Spawn
 
         private void SubscribeEvents()
         {
-            _event.Subscribe<AreaEvent.AreaEnterEvent>(OnAreaEnter);
-            _event.Subscribe<AreaEvent.AreaExitEvent>(OnAreaExit);
-            _event.Subscribe<CreatureEvent.OnDeathBefore>(CreatureOnDeathBefore);
+            _event.Subscribe<AreaEvent.OnAreaEnter>(OnAreaEnter);
+            _event.Subscribe<AreaEvent.OnAreaExit>(OnAreaExit);
+            _event.Subscribe<CreatureEvent.OnDeath>(CreatureOnDeathBefore);
             _event.Subscribe<XMEvent.OnServerHeartbeat>(OnXMServerHeartbeat);
         }
 
@@ -54,6 +54,15 @@ namespace XM.Spawn
         {
             LoadSpawnTables();
             StoreSpawns();
+            SpawnAreasForLoggedInPlayers();
+        }
+
+        private void SpawnAreasForLoggedInPlayers()
+        {
+            for (var player = GetFirstPC(); GetIsObjectValid(player); player = GetNextPC())
+            {
+                SpawnArea(GetArea(player));
+            }
         }
 
         private void LoadSpawnTables()
@@ -259,13 +268,8 @@ namespace XM.Spawn
             return count;
         }
 
-        private void SpawnArea()
+        private void SpawnArea(uint area)
         {
-            var player = GetEnteringObject();
-            if (!GetIsPC(player) && !GetIsDM(player)) return;
-
-            var area = OBJECT_SELF;
-
             // Area isn't registered. Could be an instanced area? No need to spawn.
             if (!_allSpawnsByArea.ContainsKey(area)) return;
 
@@ -291,7 +295,11 @@ namespace XM.Spawn
 
         private void OnAreaEnter(uint objectSelf)
         {
-            SpawnArea();
+            var player = GetEnteringObject();
+            if (!GetIsPC(player) && !GetIsDM(player)) 
+                return;
+
+            SpawnArea(objectSelf);
         }
 
         private void OnAreaExit(uint objectSelf)
@@ -534,6 +542,8 @@ namespace XM.Spawn
                 AssignCommand(deserialized, () => SetFacing(facing));
                 SetLocalString(deserialized, "SPAWN_ID", spawnId.ToString());
                 AdjustStats(deserialized);
+
+                _event.ExecuteScript(EventScript.OnXMSpawnCreatedScript, deserialized);
 
                 return deserialized;
             }

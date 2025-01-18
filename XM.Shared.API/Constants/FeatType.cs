@@ -1029,5 +1029,10 @@ namespace XM.Shared.API.Constants
         PlayerTool08 = 1113,
         PlayerTool09 = 1114,
         PlayerTool10 = 1115,
+
+        EtherBloom1 = 1116,
+        EtherBloom2 = 1117,
+        EtherBloom3 = 1118,
+        EtherBloom4 = 1119,
     }
 }

@@ -1584,6 +1584,126 @@
     {
       "id": 396,
       "text": "10000"
+    },
+    {
+      "id": 397,
+      "text": "You do not meet the prerequisites to use this ability."
+    },
+    {
+      "id": 398,
+      "text": "You are dead."
+    },
+    {
+      "id": 399,
+      "text": "You cannot take actions at this time."
+    },
+    {
+      "id": 400,
+      "text": "You cannot see your target."
+    },
+    {
+      "id": 401,
+      "text": "This ability can be used in {0}."
+    },
+    {
+      "id": 402,
+      "text": "You are out of range. This ability has a range of {0} meters."
+    },
+    {
+      "id": 403,
+      "text": "You may only use this ability on enemies."
+    },
+    {
+      "id": 404,
+      "text": "Insufficient EP."
+    },
+    {
+      "id": 405,
+      "text": "Insufficient level."
+    },
+    {
+      "id": 406,
+      "text": "Ether Bloom I"
+    },
+    {
+      "id": 407,
+      "text": "Ether Bloom I Description"
+    },
+    {
+      "id": 408,
+      "text": "Ether Bloom II"
+    },
+    {
+      "id": 409,
+      "text": "Ether Bloom II Description"
+    },
+    {
+      "id": 410,
+      "text": "Ether Bloom III"
+    },
+    {
+      "id": 411,
+      "text": "Ether Bloom III Description"
+    },
+    {
+      "id": 412,
+      "text": "Ether Bloom IV"
+    },
+    {
+      "id": 413,
+      "text": "Ether Bloom IV Description"
+    },
+    {
+      "id": 414,
+      "text": "Ether Bloom"
+    },
+    {
+      "id": 415,
+      "text": "{0} queues {1} for the next attack."
+    },
+    {
+      "id": 416,
+      "text": "{0} readies {1} on {2}."
+    },
+    {
+      "id": 417,
+      "text": "{0} readies {1}."
+    },
+    {
+      "id": 418,
+      "text": "{0} restores {1} HP to {2}."
+    },
+    {
+      "id": 419,
+      "text": "Your weapon ability {0} is no longer queued."
+    },
+    {
+      "id": 420,
+      "text": "{0} no longer has weapon ability {1} readied."
+    },
+    {
+      "id": 421,
+      "text": "{0}'s ability has been interrupted."
+    },
+    {
+      "id": 422,
+      "text": "{0} AI = {1}"
+    },
+    {
+      "id": 423,
+      "text": "Enabled"
+    },
+    {
+      "id": 424,
+      "text": "Disabled"
+    },
+    {
+      "id": 425,
+      "text": "ENABLED"
+    },
+    {
+      "id": 426,
+      "text": "DISABLED"
     }
   ]
 }

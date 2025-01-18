@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Anvil.API;
 using Anvil.Services;
 using NLog;
 using XM.Shared.API.NWNX.ChatPlugin;
@@ -9,7 +10,6 @@ using XM.Shared.Core.Authorization;
 using XM.Shared.Core.Configuration;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
-using Location = XM.Shared.API.BaseTypes.Location;
 
 namespace XM.ChatCommand
 {
@@ -227,7 +227,7 @@ namespace XM.ChatCommand
             var command = _chatCommands[commandName];
             if (targetLocation == null)
             {
-                targetLocation = new Location(IntPtr.Zero);
+                targetLocation = LOCATION_INVALID;
             }
 
             var authorization = _authorization.GetAuthorizationLevel(sender);

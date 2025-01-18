@@ -8,7 +8,7 @@ using XM.Shared.Core.EventManagement;
 namespace XM.Shared.Core.Party
 {
     [ServiceBinding(typeof(PartyService))]
-    internal class PartyService
+    public class PartyService
     {
         private readonly Dictionary<Guid, List<uint>> _parties = new();
         private readonly Dictionary<uint, Guid> _creatureToParty = new();

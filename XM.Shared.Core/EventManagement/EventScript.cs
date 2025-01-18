@@ -9,31 +9,18 @@
         public const string AreaOnUserDefinedEventScript = "area_user_def";
 
         // Creature scripts
-        public const string CreatureOnHeartbeatBeforeScript = "crea_hb_bef";
-        public const string CreatureOnNoticeBeforeScript = "crea_perc_bef";
-        public const string CreatureOnSpellCastAtBeforeScript = "crea_splcast_bef";
-        public const string CreatureOnMeleeAttackedBeforeScript = "crea_attack_bef";
-        public const string CreatureOnDamagedBeforeScript = "crea_damaged_bef";
-        public const string CreatureOnDisturbedBeforeScript = "crea_disturb_bef";
-        public const string CreatureOnEndCombatRoundBeforeScript = "crea_rndend_bef";
-        public const string CreatureOnSpawnInBeforeScript = "crea_spawn_bef";
-        public const string CreatureOnRestedBeforeScript = "crea_rest_bef";
-        public const string CreatureOnDeathBeforeScript = "crea_death_bef";
-        public const string CreatureOnUserDefinedBeforeScript = "crea_userdef_bef";
-        public const string CreatureOnBlockedByDoorBeforeScript = "crea_block_bef";
-
-        public const string CreatureOnHeartbeatAfterScript = "crea_hb_aft";
-        public const string CreatureOnNoticeAfterScript = "crea_perc_aft";
-        public const string CreatureOnSpellCastAtAfterScript = "crea_splcast_aft";
-        public const string CreatureOnMeleeAttackedAfterScript = "crea_attack_aft";
-        public const string CreatureOnDamagedAfterScript = "crea_damaged_aft";
-        public const string CreatureOnDisturbedAfterScript = "crea_disturb_aft";
-        public const string CreatureOnEndCombatRoundAfterScript = "crea_rndend_aft";
-        public const string CreatureOnSpawnInAfterScript = "crea_spawn_aft";
-        public const string CreatureOnRestedAfterScript = "crea_rest_aft";
-        public const string CreatureOnDeathAfterScript = "crea_death_aft";
-        public const string CreatureOnUserDefinedAfterScript = "crea_userdef_aft";
-        public const string CreatureOnBlockedByDoorAfterScript = "crea_block_aft";
+        public const string CreatureOnHeartbeatScript = "ai_heartbeat";
+        public const string CreatureOnNoticeScript = "ai_perception";
+        public const string CreatureOnSpellCastAtScript = "ai_spellcast";
+        public const string CreatureOnMeleeAttackedScript = "ai_attacked";
+        public const string CreatureOnDamagedScript = "ai_damaged";
+        public const string CreatureOnDisturbedScript = "ai_disturbed";
+        public const string CreatureOnEndCombatRoundScript = "ai_roundend";
+        public const string CreatureOnSpawnInScript = "ai_spawn";
+        public const string CreatureOnRestedScript = "ai_rested";
+        public const string CreatureOnDeathScript = "ai_death";
+        public const string CreatureOnUserDefinedScript = "ai_userdefined";
+        public const string CreatureOnBlockedByDoorScript = "ai_blocked";
 
         // Module scripts
         public const string OnModuleAcquireItemScript = "mod_acquire";

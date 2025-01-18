@@ -1,16 +1,18 @@
-﻿using XM.Shared.Core.Localization;
+﻿using System.Collections.Generic;
+using XM.Shared.API.Constants;
+using XM.Shared.Core.Localization;
 
 namespace XM.Progression.Job.JobDefinition
 {
-    internal class ElementalistJobDefinition: IJobDefinition
+    internal class ElementalistJobDefinition: JobDefinitionBase
     {
-        public bool IsVisibleToPlayers => true;
+        public override bool IsVisibleToPlayers => true;
 
-        public LocaleString Name => LocaleString.Elementalist;
+        public override LocaleString Name => LocaleString.Elementalist;
 
-        public string IconResref => "elem_icon";
+        public override string IconResref => "elem_icon";
 
-        public JobGrade Grades { get; } = new()
+        public override JobGrade Grades { get; } = new()
         {
             HP = GradeType.F,
             EP = GradeType.B,
@@ -20,6 +22,11 @@ namespace XM.Progression.Job.JobDefinition
             Agility = GradeType.C,
             Willpower = GradeType.A,
             Social = GradeType.D
+        };
+
+        public override Dictionary<int, FeatType> FeatAcquisitionLevels => new()
+        {
+
         };
     }
 }

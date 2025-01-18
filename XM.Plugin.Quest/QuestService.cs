@@ -29,8 +29,6 @@ namespace XM.Quest
         IInitializable,
         IDisposable
     {
-        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
-
         private readonly Dictionary<string, QuestDetail> _quests = new();
         private readonly Dictionary<QuestNPCGroupType, List<string>> _npcsWithKillQuests = new();
 
@@ -59,19 +57,13 @@ namespace XM.Quest
             _event = @event;
             _dialog = dialog;
 
-            RegisterEvents();
             SubscribeEvents();
-        }
-
-        private void RegisterEvents()
-        {
-            _event.RegisterEvent<QuestCompletedEvent>(QuestEventScript.OnQuestCompletedScript);
         }
 
         private void SubscribeEvents()
         {
             _event.Subscribe<ModuleEvent.OnPlayerEnter>(OnPlayerEnter);
-            _event.Subscribe<CreatureEvent.OnDeathBefore>(CreatureOnDeathBefore);
+            _event.Subscribe<CreatureEvent.OnDeath>(CreatureOnDeathBefore);
         }
 
         public void Init()

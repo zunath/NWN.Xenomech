@@ -1,7 +1,18 @@
 ﻿using System.Numerics;
-using NWN.Core.NWNX;
+using Anvil.API;
 using XM.Shared.API.BaseTypes;
 using XM.Shared.API.Constants;
+using AnimalCompanionCreatureType = XM.Shared.API.Constants.AnimalCompanionCreatureType;
+using AssociateType = XM.Shared.API.Constants.AssociateType;
+using BaseItemType = XM.Shared.API.Constants.BaseItemType;
+using ClassType = XM.Shared.API.Constants.ClassType;
+using FamiliarCreatureType = XM.Shared.API.Constants.FamiliarCreatureType;
+using ImmunityType = XM.Shared.API.Constants.ImmunityType;
+using PackageType = XM.Shared.API.Constants.PackageType;
+using ProjectilePathType = XM.Shared.API.Constants.ProjectilePathType;
+using RacialType = XM.Shared.API.Constants.RacialType;
+using SavingThrowType = XM.Shared.API.Constants.SavingThrowType;
+using SpecialAbility = NWN.Core.NWNX.SpecialAbility;
 
 namespace XM.Shared.API.NWNX.CreaturePlugin
 {

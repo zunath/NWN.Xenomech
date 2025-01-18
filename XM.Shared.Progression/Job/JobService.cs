@@ -4,8 +4,8 @@ using System.Linq;
 using Anvil.API;
 using Anvil.Services;
 using XM.Inventory;
+using XM.Progression.Event;
 using XM.Progression.Job.Entity;
-using XM.Progression.Job.Event;
 using XM.Progression.Job.JobDefinition;
 using XM.Progression.Stat;
 using XM.Progression.Stat.Entity;
@@ -14,6 +14,7 @@ using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
+using ArgumentException = System.ArgumentException;
 
 namespace XM.Progression.Job
 {
@@ -140,6 +141,29 @@ namespace XM.Progression.Job
             return _jobDefinitions[job];
         }
 
+        public JobType GetActiveJob(uint player)
+        {
+            if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
+                throw new ArgumentException("Only PCs can have jobs.");
+
+            var playerId = PlayerId.Get(player);
+            var dbPlayerJob = _db.Get<PlayerJob>(playerId) ?? new PlayerJob(playerId);
+            return dbPlayerJob.ActiveJob;
+        }
+
+        public int GetJobLevel(uint player, JobType job)
+        {
+            if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
+                throw new ArgumentException("Only PCs can have jobs.");
+
+            var playerId = PlayerId.Get(player);
+            var dbPlayerJob = _db.Get<PlayerJob>(playerId) ?? new PlayerJob(playerId);
+            var level = dbPlayerJob.JobLevels.ContainsKey(job)
+                ? dbPlayerJob.JobLevels[job]
+                : 0;
+            return level;
+        }
+
         internal int CalculateHP(int level, GradeType grade)
         {
             var hpScale = _growthHPByGrade[grade];
@@ -216,7 +240,7 @@ namespace XM.Progression.Job
             var name = Locale.GetString(definition.Name);
             SendMessageToPC(player, $"Job changed to: {ColorToken.Green(name)}");
 
-            _event.ExecuteScript(JobEventScript.PlayerChangedJobScript, player);
+            _event.ExecuteScript(ProgressionEventScript.PlayerChangedJobScript, player);
         }
     }
 }

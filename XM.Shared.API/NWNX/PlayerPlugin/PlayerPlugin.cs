@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Anvil.API;
 using NWN.Core.NWNX;
 using XM.Shared.API.BaseTypes;
 using XM.Shared.API.Constants;

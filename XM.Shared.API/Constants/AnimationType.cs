@@ -2,8 +2,8 @@
 {
     public enum AnimationType
     {
+        Invalid = -1,
         // Looping
-        LoopingInvalid = -1,
         LoopingPause = 0,
         LoopingPause2 = 1,
         LoopingListen = 2,

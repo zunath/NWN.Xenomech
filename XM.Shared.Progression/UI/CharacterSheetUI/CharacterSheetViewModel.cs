@@ -5,11 +5,11 @@ using Anvil.Services;
 using NWN.Core.NWNX;
 using XM.Inventory.Entity;
 using XM.Inventory.KeyItem;
+using XM.Progression.Event;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
 using XM.Progression.Stat;
 using XM.Progression.Stat.Entity;
-using XM.Progression.Stat.Event;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
@@ -24,8 +24,8 @@ namespace XM.Progression.UI.CharacterSheetUI
     [ServiceBinding(typeof(IViewModel))]
     internal class CharacterSheetViewModel : 
         ViewModel<CharacterSheetViewModel>,
-        IRefreshable<PlayerHPAdjustedEvent>,
-        IRefreshable<PlayerEPAdjustedEvent>
+        IRefreshable<StatEvent.PlayerHPAdjustedEvent>,
+        IRefreshable<StatEvent.PlayerEPAdjustedEvent>
     {
         internal const string StatPartialId = "STAT_PARTIAL";
         internal const string MechPartialId = "MECH_PARTIAL";
@@ -473,12 +473,12 @@ namespace XM.Progression.UI.CharacterSheetUI
             DelayCommand(0.2f, () => SetUseableFlag(trash, false));
         };
 
-        public void Refresh(PlayerHPAdjustedEvent @event)
+        public void Refresh(StatEvent.PlayerHPAdjustedEvent @event)
         {
             RefreshHP();
         }
 
-        public void Refresh(PlayerEPAdjustedEvent @event)
+        public void Refresh(StatEvent.PlayerEPAdjustedEvent @event)
         {
             RefreshEP();
         }

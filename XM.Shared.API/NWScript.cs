@@ -1,10 +1,47 @@
 using System.Numerics;
+using Anvil.API;
 using XM.Shared.API.BaseTypes;
 using XM.Shared.API.Constants;
+using AnimalCompanionCreatureType = XM.Shared.API.Constants.AnimalCompanionCreatureType;
+using AppearanceType = XM.Shared.API.Constants.AppearanceType;
+using AssociateType = XM.Shared.API.Constants.AssociateType;
+using BaseItemType = XM.Shared.API.Constants.BaseItemType;
+using CameraTransitionType = XM.Shared.API.Constants.CameraTransitionType;
+using Cassowary = XM.Shared.API.BaseTypes.Cassowary;
 using ClassType = XM.Shared.API.Constants.ClassType;
+using CreatureTailType = XM.Shared.API.Constants.CreatureTailType;
+using CreatureType = XM.Shared.API.Constants.CreatureType;
+using CreatureWingType = XM.Shared.API.Constants.CreatureWingType;
+using DamageType = XM.Shared.API.Constants.DamageType;
+using DiseaseType = XM.Shared.API.Constants.DiseaseType;
+using Effect = XM.Shared.API.BaseTypes.Effect;
+using EffectSubType = XM.Shared.API.Constants.EffectSubType;
+using EffectType = XM.Shared.API.Constants.EffectType;
+using EventScriptType = XM.Shared.API.Constants.EventScriptType;
+using FamiliarCreatureType = XM.Shared.API.Constants.FamiliarCreatureType;
+using FogType = XM.Shared.API.Constants.FogType;
+using FootstepType = XM.Shared.API.Constants.FootstepType;
+using GuiEventType = XM.Shared.API.Constants.GuiEventType;
+using ImmunityType = XM.Shared.API.Constants.ImmunityType;
+using InventoryDisturbType = XM.Shared.API.Constants.InventoryDisturbType;
+using InvisibilityType = XM.Shared.API.Constants.InvisibilityType;
+using ItemAppearanceType = XM.Shared.API.Constants.ItemAppearanceType;
+using ItemProperty = XM.Shared.API.BaseTypes.ItemProperty;
+using ItemPropertyType = XM.Shared.API.Constants.ItemPropertyType;
 using MissChanceType = XM.Shared.API.Constants.MissChanceType;
+using PackageType = XM.Shared.API.Constants.PackageType;
+using Phenotype = XM.Shared.API.Constants.Phenotype;
+using PoisonType = XM.Shared.API.Constants.PoisonType;
 using ProjectilePathType = XM.Shared.API.Constants.ProjectilePathType;
+using RacialType = XM.Shared.API.Constants.RacialType;
+using RestEventType = XM.Shared.API.Constants.RestEventType;
 using SavingThrowType = XM.Shared.API.Constants.SavingThrowType;
+using SQLQuery = XM.Shared.API.BaseTypes.SQLQuery;
+using Talent = XM.Shared.API.BaseTypes.Talent;
+using TalentType = XM.Shared.API.Constants.TalentType;
+using TrapBaseType = XM.Shared.API.Constants.TrapBaseType;
+using VoiceChatType = XM.Shared.API.Constants.VoiceChatType;
+using WeatherType = XM.Shared.API.Constants.WeatherType;
 
 namespace XM.Shared.API
 {
@@ -113,9 +150,9 @@ namespace XM.Shared.API
         ///    on a creature, which will stop the combat music and allow them to rest,
         ///    engage in dialog, or other actions that they would normally have to wait for.
         /// </summary>
-        public static void ClearAllActions(int nClearCombatState = NWN.Core.NWScript.FALSE)
+        public static void ClearAllActions(bool nClearCombatState = false)
         {
-            NWN.Core.NWScript.ClearAllActions(nClearCombatState);
+            NWN.Core.NWScript.ClearAllActions(nClearCombatState ? 1 : 0);
         }
 
         /// <summary>
@@ -1839,9 +1876,9 @@ namespace XM.Shared.API
         ///  Create an Area Of Effect effect in the area of the creature it is applied to.<br/>
         ///  If the scripts are not specified, default ones will be used.
         /// </summary>
-        public static Effect EffectAreaOfEffect(int nAreaEffectId, string sOnEnterScript = "", string sHeartbeatScript = "", string sOnExitScript = "")
+        public static Effect EffectAreaOfEffect(AreaOfEffectType nAreaEffectId, string sOnEnterScript = "", string sHeartbeatScript = "", string sOnExitScript = "")
         {
-            return NWN.Core.NWScript.EffectAreaOfEffect(nAreaEffectId, sOnEnterScript, sHeartbeatScript, sOnExitScript);
+            return NWN.Core.NWScript.EffectAreaOfEffect((int)nAreaEffectId, sOnEnterScript, sHeartbeatScript, sOnExitScript);
         }
         /// <summary>
         ///  * Returns true if the Faction Ids of the two objects are the same
@@ -2999,9 +3036,9 @@ namespace XM.Shared.API
         ///  - oCreature<br/>
         ///  - bIgnoreUses: Will check if the creature has the given feat even if it has no uses remaining
         /// </summary>
-        public static bool GetHasFeat(int nFeat, uint oCreature = OBJECT_INVALID, bool bIgnoreUses = false)
+        public static bool GetHasFeat(FeatType nFeat, uint oCreature = OBJECT_INVALID, bool bIgnoreUses = false)
         {
-            return NWN.Core.NWScript.GetHasFeat(nFeat, oCreature, bIgnoreUses ? 1 : 0) == 1;
+            return NWN.Core.NWScript.GetHasFeat((int)nFeat, oCreature, bIgnoreUses ? 1 : 0) == 1;
         }
 
         /// <summary>
@@ -3023,9 +3060,9 @@ namespace XM.Shared.API
         ///         - spells.2da line of the subdial spell, eg 708 for Dragon Shape: Blue Dragon when using FEAT_EPIC_WILD_SHAPE_DRAGON<br/>
         ///  - lTarget: The location to use the feat at. oTarget must be OBJECT_INVALID for this to be used.
         /// </summary>
-        public static void ActionUseFeat(int nFeat, uint oTarget = OBJECT_INVALID, int nSubFeat = 0, Location lTarget = default)
+        public static void ActionUseFeat(FeatType nFeat, uint oTarget = OBJECT_INVALID, int nSubFeat = 0, Location lTarget = default)
         {
-            NWN.Core.NWScript.ActionUseFeat(nFeat, oTarget, nSubFeat, lTarget);
+            NWN.Core.NWScript.ActionUseFeat((int)nFeat, oTarget, nSubFeat, lTarget == null ? IntPtr.Zero : lTarget);
         }
 
         /// <summary>
@@ -7968,9 +8005,9 @@ namespace XM.Shared.API
         /// <summary>
         ///  Sets the status of modes ACTION_MODE_* on a creature.
         /// </summary>
-        public static void SetActionMode(uint oCreature, int nMode, int nStatus)
+        public static void SetActionMode(uint oCreature, ActionModeType nMode, bool nStatus)
         {
-            NWN.Core.NWScript.SetActionMode(oCreature, nMode, nStatus);
+            NWN.Core.NWScript.SetActionMode(oCreature, (int)nMode, nStatus ? 1 : 0);
         }
 
         /// <summary>

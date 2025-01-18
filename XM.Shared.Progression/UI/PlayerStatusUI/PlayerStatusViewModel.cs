@@ -1,8 +1,8 @@
 ﻿using System;
 using Anvil.API;
 using Anvil.Services;
+using XM.Progression.Event;
 using XM.Progression.Stat;
-using XM.Progression.Stat.Event;
 using XM.Shared.API.Constants;
 using XM.UI;
 
@@ -11,7 +11,7 @@ namespace XM.Progression.UI.PlayerStatusUI
     [ServiceBinding(typeof(IViewModel))]
     internal class PlayerStatusViewModel: 
         ViewModel<PlayerStatusViewModel>,
-        IRefreshable<PlayerEPAdjustedEvent>
+        IRefreshable<StatEvent.PlayerEPAdjustedEvent>
     {
         private int _screenHeight;
         private int _screenWidth;
@@ -104,7 +104,7 @@ namespace XM.Progression.UI.PlayerStatusUI
             EPProgress = Math.Clamp(ratio, 0f, 1f);
         }
 
-        public void Refresh(PlayerEPAdjustedEvent @event)
+        public void Refresh(StatEvent.PlayerEPAdjustedEvent @event)
         {
             UpdateEP();
         }
