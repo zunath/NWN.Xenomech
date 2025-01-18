@@ -6,8 +6,8 @@ using SavingThrow = Anvil.API.SavingThrow;
 
 namespace XM.Combat.NativeOverride
 {
-    [ServiceBinding(typeof(GetFortitudeSavingThrowOverrideService))]
-    internal sealed unsafe class GetFortitudeSavingThrowOverrideService
+    [ServiceBinding(typeof(OnFortitudeSavingThrow))]
+    internal sealed unsafe class OnFortitudeSavingThrow
     {
         [NativeFunction("_ZN17CNWSCreatureStats18GetFortSavingThrowEi", "")]
         private delegate byte GetFortitudeSavingThrowHook(void* thisPtr, int bExcludeEffectBonus);
@@ -15,7 +15,7 @@ namespace XM.Combat.NativeOverride
         // ReSharper disable once NotAccessedField.Local
         private readonly FunctionHook<GetFortitudeSavingThrowHook> _getFortitudeFunctionHook;
 
-        public GetFortitudeSavingThrowOverrideService(HookService hook)
+        public OnFortitudeSavingThrow(HookService hook)
         {
             _getFortitudeFunctionHook = hook.RequestHook<GetFortitudeSavingThrowHook>(OnGetFortitudeSavingThrow, HookOrder.Late);
         }
