@@ -26,6 +26,11 @@
       "Name":  "xm_job",
       "Path": "../Content/xm_job/",
       "CompileModels": false
+    },
+    {
+      "Name":  "xm_placeables",
+      "Path": "../Content/xm_placeables/",
+      "CompileModels": false
     }
   ]
 }

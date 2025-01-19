@@ -129,12 +129,19 @@
           "type": "cexostring",
           "value": "xm_mechs"
         }
+      },
+      {
+        "__struct_id": 8,
+        "Mod_Hak": {
+          "type": "cexostring",
+          "value": "xm_placeables"
+        }
       }
     ]
   },
   "Mod_ID": {
     "type": "void",
-    "value": "ÿÿÿÿ\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+    "value": "ÿÿÿÿ\u0001\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
   },
   "Mod_IsSaveGame": {
     "type": "byte",
