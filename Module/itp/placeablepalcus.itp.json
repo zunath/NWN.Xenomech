@@ -131,6 +131,17 @@
                     "__struct_id": 0,
                     "NAME": {
                       "type": "cexostring",
+                      "value": "Corpse"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "corpse"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
                       "value": "Quest Item Collector"
                     },
                     "RESREF": {
@@ -173,6 +184,2464 @@
                 "type": "byte",
                 "value": 1
               },
+              "LIST": {
+                "type": "list",
+                "value": [
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Ammo Box 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw087"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Animal Pen 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw112"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Auction House 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw026"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Auction House 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw027"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Backpack 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw050"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Bar 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw084"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Bar 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw124"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Bar 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw127"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Bar 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw148"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Bar 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw149"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Bar 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw152"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Bar 006"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw153"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Bar 007"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw154"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Bar 008"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw155"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Bar 009"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw167"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Barrel 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw128"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Barrel 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw129"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Barrel 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw210"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Bech 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw068"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Biomatter Storage 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw045"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Bottle 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw125"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Bottle 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw126"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Building 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw011"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Building 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw012"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Building 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw015"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Building 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw021"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Building 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw022"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Building 006"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw023"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Building 007"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw101"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Burlap Sack 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw048"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Burlap Sack 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw049"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Bus Stop 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw070"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Canopy 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw069"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Canopy 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw079"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Canopy 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw085"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Canopy 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw095"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Canopy 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw156"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Chair 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw130"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Chair 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw150"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Computer 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw114"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Computer 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw115"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Computer 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw138"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Computer 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw180"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Computer 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw219"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Computer 006"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw220"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Construction Crane 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw212"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Container 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw072"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Container 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw071"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Container 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw073"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Container 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw074"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Container 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw075"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Container 006"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw136"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Container 007"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw137"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Container 008"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw209"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Conveyor 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw123"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Conveyor with TV 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw121"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Conveyor with TV 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw122"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Crystal 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw054"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Crystal 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw056"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Cup 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw108"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Dancefloor 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw165"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Datapad 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw035"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Debris Pile 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw215"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Decal: Paper 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw083"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Dumpster 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw060"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Dumpster 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw119"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Dumpster 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw120"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Elevator 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw106"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Elevator 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw214"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Fence 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw116"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Fence 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw198"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Fence 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw199"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Fence 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw200"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Fence 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw201"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Fence 006"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw202"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Fence 007"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw203"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Fence 008"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw204"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Fence 009"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw205"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Fence 010"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw206"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Floor 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw024"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Floor 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw102"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Floor 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw103"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Floor 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw104"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Floor 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw105"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Floor 006"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw166"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Floor 007"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw197"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Flower 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw042"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Flower 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw043"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Generator 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw008"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Generator 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw009"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Generator 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw213"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Grate 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw100"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Gun Rack 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw051"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Holo Tree 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw028"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Holo Tree 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw029"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Holo Tree 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw067"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hologram 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw001"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hologram 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw002"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hologram 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw003"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hologram 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw005"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hologram 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw017"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hologram 006"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw019"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hologram 007"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw020"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hologram 008"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw168"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hologram 009"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw169"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hologram 010"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw170"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hutt Throne 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw157"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Imperial Med Facility 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw164"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Junk Pile 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw039"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Junk pile 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw047"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Kiosk 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw221"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Kiosk 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw222"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Kiosk 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw223"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Kiosk 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw224"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Kiosk 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw225"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Kiosk 006"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw226"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Lamp 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw052"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Library 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw182"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Library 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw183"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Library 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw184"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Library 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw185"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Library 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw186"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Library 006"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw187"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Mailbox 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw063"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Market Item 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw057"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Market Item 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw058"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Market Stand 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw030"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Market Stand 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw031"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Market Stand 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw080"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Market Stand 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw081"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Market Stand 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw089"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Market Stand 006"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw090"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Market Stand 007"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw091"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Market Stand 008"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw092"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Market Stand 009"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw093"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Market Stand 010"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw094"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Mine 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw086"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Pallet 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw098"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Parking Meter 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw096"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Phonebooth 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw064"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Pickaxe 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw088"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Pillar 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw113"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Pillar 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw171"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Pillar 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw172"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Pillar 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw173"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Pillar 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw174"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Pillar 006"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw188"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Pipes 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw135"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Pipes 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw146"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Planets 032"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_planet0"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plant 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw037"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Planter 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw033"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Poster 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw006"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Poster 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw007"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "PowerCore Shielded 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw097"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "PowerCore Shielded 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw099"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Projector 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw004"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Projector 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw010"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Projector 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw013"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Projector 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw014"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Projector 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw016"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Projector 006"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw018"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Resurrection Point 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw163"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Rug 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw078"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Rug 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw082"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Rug 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw117"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Rug 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw118"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Rug 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw158"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Saber remote 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw053"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Safebox 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw041"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Salvage Wreckage 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw038"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Scaffold 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw207"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Scaffold 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw208"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Scaffold 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw211"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Slot Machine 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw140"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Slot Machine 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw141"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Slot Machine 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw142"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Slot Machine 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw143"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Slot Machine 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw144"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Slot Machine 006"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw145"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Sofa 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw151"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Sofa 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw175"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Sofa 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw181"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Statue 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw176"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Statue 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw177"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Stimpack 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw044"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Stool 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw110"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Street Light 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw025"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Table 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw109"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Table 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw107"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Table 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw111"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Table 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw159"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Table 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw160"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Table 006"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw178"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Table 007"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw179"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Tablet 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw055"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Tool 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw076"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Toolbox 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw046"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Toy 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw034"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Training Dummy 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw161"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Training Dummy 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw162"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trashcan 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw062"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Vehicle 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw189"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Vehicle 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw190"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Vehicle 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw191"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Vehicle 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw192"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Vehicle 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw193"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Vehicle 006"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw194"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Vehicle 007"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw195"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Vehicle 008"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw196"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Vendor Bank 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw061"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Vendor Sign 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw065"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Vendor Sign 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw066"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Vendor Sign 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw139"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Wardrobe 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw131"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Wardrobe 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw132"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Wardrobe 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw133"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Wardrobe 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw134"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Waterfall 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw147"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Workbench 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw077"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Workbench 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw216"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Workbench 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw217"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Workbench 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "daf_sw218"
+                    }
+                  }
+                ]
+              },
               "STRREF": {
                 "type": "dword",
                 "value": 6689
@@ -205,22 +2674,6 @@
               "ID": {
                 "type": "byte",
                 "value": 4
-              },
-              "LIST": {
-                "type": "list",
-                "value": [
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Corpse"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "corpse"
-                    }
-                  }
-                ]
               },
               "STRREF": {
                 "type": "dword",

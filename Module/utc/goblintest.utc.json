@@ -82,7 +82,7 @@
         "__struct_id": 16,
         "EquippedRes": {
           "type": "resref",
-          "value": "nw_wblms001"
+          "value": "dagger_test"
         }
       },
       {
@@ -164,7 +164,7 @@
   },
   "IsImmortal": {
     "type": "byte",
-    "value": 0
+    "value": 1
   },
   "IsPC": {
     "type": "byte",

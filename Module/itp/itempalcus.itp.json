@@ -632,6 +632,22 @@
                       "type": "byte",
                       "value": 34
                     },
+                    "LIST": {
+                      "type": "list",
+                      "value": [
+                        {
+                          "__struct_id": 0,
+                          "NAME": {
+                            "type": "cexostring",
+                            "value": "Dagger Test"
+                          },
+                          "RESREF": {
+                            "type": "resref",
+                            "value": "dagger_test"
+                          }
+                        }
+                      ]
+                    },
                     "STRREF": {
                       "type": "dword",
                       "value": 6765
