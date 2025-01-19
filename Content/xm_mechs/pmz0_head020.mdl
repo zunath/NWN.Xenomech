@@ -256,7 +256,7 @@ node trimesh head2
   rotatetexture 0
   alpha 1.0
   transparencyhint 0
-  selfillumcolor 0.8 0.8 0.8 
+  selfillumcolor 0 0 0 
   ambient 1.0 1.0 1.0 
   Diffuse 1.0 1.0 1.0 
   Specular 0.0 0.0 0.0 
