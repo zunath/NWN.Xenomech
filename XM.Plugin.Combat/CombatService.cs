@@ -1,6 +1,5 @@
 ﻿using Anvil.Services;
 using System;
-using NWN.Core.NWNX;
 using XM.Inventory;
 using XM.Progression.Job;
 using XM.Progression.Stat;
@@ -9,6 +8,8 @@ using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.Localization;
 using CreaturePlugin = XM.Shared.API.NWNX.CreaturePlugin.CreaturePlugin;
+using XM.Shared.API.NWNX.FeedbackPlugin;
+using FeedbackPlugin = XM.Shared.API.NWNX.FeedbackPlugin.FeedbackPlugin;
 
 namespace XM.Combat
 {
@@ -33,7 +34,13 @@ namespace XM.Combat
         }
         public void Init()
         {
-            
+            DisableDefaultCombatMessages();
+        }
+
+        private void DisableDefaultCombatMessages()
+        {
+            FeedbackPlugin.SetCombatLogMessageHidden(FeedbackCombatLogType.Initiative, true);
+            FeedbackPlugin.SetCombatLogMessageHidden(FeedbackCombatLogType.ComplexAttack, true);
         }
 
         public int CalculateHitRate(

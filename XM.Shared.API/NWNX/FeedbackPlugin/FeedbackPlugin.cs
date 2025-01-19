@@ -1,6 +1,6 @@
 ﻿namespace XM.Shared.API.NWNX.FeedbackPlugin
 {
-    internal static class FeedbackPlugin
+    public static class FeedbackPlugin
     {
         /// <summary>
         /// Gets whether a feedback message is hidden.
