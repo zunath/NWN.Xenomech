@@ -1744,6 +1744,330 @@
     {
       "id": 436,
       "text": "Manhole"
+    },
+    {
+      "id": 437,
+      "text": "Freelancer"
+    },
+    {
+      "id": 438,
+      "text": "Freelancers"
+    },
+    {
+      "id": 439,
+      "text": "freelancer"
+    },
+    {
+      "id": 440,
+      "text": "The basic class assigned to all characters. You will be able to change your job once you enter the game world."
+    },
+    {
+      "id": 441,
+      "text": "FRL"
+    },
+    {
+      "id": 442,
+      "text": "Humans in Xenomech are versatile and adaptive, embodying the essence of survival and ingenuity amidst the challenges of Arcanis. As one of the most populous and diverse races, Humans thrive in various roles, from scholars and explorers to warriors and innovators. Their natural resilience, ambition, and resourcefulness make them a cornerstone in the factional power struggles and Ether-fueled advancements that define the world."
+    },
+    {
+      "id": 443,
+      "text": "Alignments are not in use on this server. Please click OK to continue."
+    },
+    {
+      "id": 444,
+      "text": "Welcome to Xenomech!\n\nPlease join us on our Discord at: https://discord.gg/UrkUzuVCJK\n\nPress OK to continue."
+    },
+    {
+      "id": 445,
+      "text": "Increased Might By"
+    },
+    {
+      "id": 446,
+      "text": "Increased Perception By"
+    },
+    {
+      "id": 447,
+      "text": "Increased Vitality By"
+    },
+    {
+      "id": 448,
+      "text": "Increased Willpower By"
+    },
+    {
+      "id": 449,
+      "text": "Increased Social By"
+    },
+    {
+      "id": 450,
+      "text": "Increased Agility By"
+    },
+    {
+      "id": 451,
+      "text": "Might Information"
+    },
+    {
+      "id": 452,
+      "text": "Perception Information"
+    },
+    {
+      "id": 453,
+      "text": "Vitality Information"
+    },
+    {
+      "id": 454,
+      "text": "Willpower Information"
+    },
+    {
+      "id": 455,
+      "text": "Agility Information"
+    },
+    {
+      "id": 456,
+      "text": "Social Information"
+    },
+    {
+      "id": 457,
+      "text": "Your character is guided by six core attributes: Might, Vitality, Perception, Willpower, Agility, and Social.\n\nMight: Improves damage dealt by melee weapons and increases carrying capacity.\nVitality: Improves your max hit points (HP) and reduces damage received.\nPerception: Improves damage dealt by ranged and finesse weapons and increases physical accuracy.\nWillpower: Improves your ether attack, ether defense, and max ether points (EP).\nAgility: Improves ranged accuracy, evasion, and critical hits.\nSocial: Improves your XP gain and leadership capabilities.\n\n"
+    },
+    {
+      "id": 458,
+      "text": "Might improves damage dealt by melee weapons and increases carrying capacity.\n\nOther Notes:\n\nImproves damage dealt by melee weapons.\nIncreases Fortitude saving throws.\nImproves natural HP regen."
+    },
+    {
+      "id": 459,
+      "text": "Perception improves damage dealt by ranged and finesse weapons and increases physical accuracy.\n\nOther Notes:\n\nImproves accuracy of melee weapons.\nIncreases Reflex saving throws."
+    },
+    {
+      "id": 460,
+      "text": "Vitality improves your max hit points and reduces damage received.\n\nOther Notes:\n\nIncreases maximum HP.\nImproves physical defense (reducing damage taken).\nImproves rest recovery."
+    },
+    {
+      "id": 461,
+      "text": "Willpower improves your ether attack, ether defense, max ether points, and first aid capabilities.\n\nOther Notes:\n\nIncreases maximum EP.\nImproves ether defense (reducing damage taken).\nIncreases Will saving throws."
+    },
+    {
+      "id": 462,
+      "text": "Agility improves accuracy of ranged weapons, evasion, and critical rates.\n\nOther Notes:\n\nImproves evasion.\nImproves accuracy of ranged weapons.\nImproves critical rates."
+    },
+    {
+      "id": 463,
+      "text": "Social improves your XP gain and leadership capabilities.\n\nOther Notes:\n\nImproves quest credit rewards.\nImproves XP gain.\nReduces XP debt on death.\nReduces mech repair bills."
+    },
+    {
+      "id": 464,
+      "text": "Credit"
+    },
+    {
+      "id": 465,
+      "text": "Poison"
+    },
+    {
+      "id": 466,
+      "text": "Give credits."
+    },
+    {
+      "id": 467,
+      "text": "The Credit Standard, or simply the 'credit', is the main form of currency throughout Arcanis."
+    },
+    {
+      "id": 468,
+      "text": "Credits"
+    },
+    {
+      "id": 469,
+      "text": "Drop or give credits, etc."
+    },
+    {
+      "id": 470,
+      "text": "Resting"
+    },
+    {
+      "id": 471,
+      "text": "Horrified"
+    },
+    {
+      "id": 472,
+      "text": "Accuracy Increased"
+    },
+    {
+      "id": 473,
+      "text": "Accuracy Decreased"
+    },
+    {
+      "id": 474,
+      "text": "Defense Increased"
+    },
+    {
+      "id": 475,
+      "text": "Defense Decreased"
+    },
+    {
+      "id": 476,
+      "text": "Evasion Increased"
+    },
+    {
+      "id": 477,
+      "text": "Evasion Decreased"
+    },
+    {
+      "id": 478,
+      "text": "Ether Drained"
+    },
+    {
+      "id": 479,
+      "text": "Might Increased"
+    },
+    {
+      "id": 480,
+      "text": "Might Decreased"
+    },
+    {
+      "id": 481,
+      "text": "Perception Increased"
+    },
+    {
+      "id": 482,
+      "text": "Perception Decreased"
+    },
+    {
+      "id": 483,
+      "text": "Vitality Increased"
+    },
+    {
+      "id": 484,
+      "text": "Vitality Decreased"
+    },
+    {
+      "id": 485,
+      "text": "Agility Increased"
+    },
+    {
+      "id": 486,
+      "text": "Agility Decreased"
+    },
+    {
+      "id": 487,
+      "text": "Willpower Increased"
+    },
+    {
+      "id": 488,
+      "text": "Willpower Decreased"
+    },
+    {
+      "id": 489,
+      "text": "Social Increased"
+    },
+    {
+      "id": 490,
+      "text": "Social Decreased"
+    },
+    {
+      "id": 491,
+      "text": "Sell <CUSTOM0> for <CUSTOM1>cr"
+    },
+    {
+      "id": 492,
+      "text": "Buy <CUSTOM0> for <CUSTOM1>cr"
+    },
+    {
+      "id": 493,
+      "text": "Acquired <CUSTOM0> credits"
+    },
+    {
+      "id": 494,
+      "text": "Lost <CUSTOM0> credits"
+    },
+    {
+      "id": 495,
+      "text": "Premonition"
+    },
+    {
+      "id": 496,
+      "text": "Global"
+    },
+    {
+      "id": 497,
+      "text": "Comms"
+    },
+    {
+      "id": 498,
+      "text": "Codex"
+    },
+    {
+      "id": 499,
+      "text": "Accuracy and Damage Penalty"
+    },
+    {
+      "id": 500,
+      "text": "Accuracy vs. Alignment Group"
+    },
+    {
+      "id": 501,
+      "text": "Decreased Accuracy"
+    },
+    {
+      "id": 502,
+      "text": "Accuracy vs. Racial Group"
+    },
+    {
+      "id": 503,
+      "text": "Accuracy vs. Specific Alignment"
+    },
+    {
+      "id": 504,
+      "text": "Select a race for this creature. This is used for preferred enemy and/or accuracy bonus vs race calculations."
+    },
+    {
+      "id": 505,
+      "text": "Accuracy: This property grants an enhancement bonus to attack rolls made with the weapon, but does not improve the damage dealt by the weapon on a successful hit."
+    },
+    {
+      "id": 506,
+      "text": "Accuracy vs. Monster Type: This property grants an enhancement bonus to attack rolls made with the weapon, but does not improve the damage dealt by the weapon on a successful hit. It grants this bonus only against a specific monster type, such as giants, undead, or shapeshifters."
+    },
+    {
+      "id": 507,
+      "text": "Accuracy vs. Specific Alignment: This property grants an enhancement bonus to attack rolls made with the weapon, but does not improve the damage dealt by the weapon on a successful hit. It grants this bonus only when used against creatures of a specific alignment, such as chaotic neutral, lawful evil, or neutral good."
+    },
+    {
+      "id": 508,
+      "text": "Accuracy vs. Alignment Group: This property grants an enhancement bonus to attack rolls made with the weapon, but does not improve the damage dealt by the weapon on a successful hit. It grants this bonus only when used against creatures from a specific alignment group, such as evil or lawful creatures."
+    },
+    {
+      "id": 509,
+      "text": "Accuracy Penalty: This property inflicts a penalty on the wielder's attack rolls made with the weapon."
+    },
+    {
+      "id": 510,
+      "text": "Accuracy Penalty: This property inflicts a penalty on the wielder's attack and damage rolls made with the weapon."
+    },
+    {
+      "id": 511,
+      "text": "Accuracy Bonus"
+    },
+    {
+      "id": 512,
+      "text": "Accuracy Bonus:"
+    },
+    {
+      "id": 513,
+      "text": "Accuracy Bonus vs.:"
+    },
+    {
+      "id": 514,
+      "text": "Accuracy Penalty:"
+    },
+    {
+      "id": 515,
+      "text": "Enemy Accuracy Bonus"
+    },
+    {
+      "id": 516,
+      "text": "Total Base Accuracy Bonus is %d, but must have at least %d"
+    },
+    {
+      "id": 517,
+      "text": "Accuracy bonus: "
     }
   ]
 }
