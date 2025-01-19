@@ -8,6 +8,6 @@
         public int Evasion { get; set; }
         public int EP { get; set; }
         public int Defense { get; set; }
-
+        public int Accuracy { get; set; }
     }
 }

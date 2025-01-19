@@ -164,6 +164,20 @@ namespace XM.Progression.Job
             return level;
         }
 
+        public int GetLevel(uint creature)
+        {
+            if (GetIsPC(creature))
+            {
+                var activeJob = GetActiveJob(creature);
+                return GetJobLevel(creature, activeJob);
+            }
+            else
+            {
+                var npcStats = _stat.GetNPCStats(creature);
+                return npcStats.Level;
+            }
+        }
+
         internal int CalculateHP(int level, GradeType grade)
         {
             var hpScale = _growthHPByGrade[grade];

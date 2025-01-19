@@ -1704,6 +1704,26 @@
     {
       "id": 426,
       "text": "DISABLED"
+    },
+    {
+      "id": 427,
+      "text": "{0} attacks {1} {2} : ({3}% chance to hit)"
+    },
+    {
+      "id": 428,
+      "text": "*hit*"
+    },
+    {
+      "id": 429,
+      "text": "*critical*"
+    },
+    {
+      "id": 430,
+      "text": "*miss*"
+    },
+    {
+      "id": 431,
+      "text": "*deflect*"
     }
   ]
 }
