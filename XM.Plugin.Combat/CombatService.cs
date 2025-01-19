@@ -1,5 +1,6 @@
 ﻿using Anvil.Services;
 using System;
+using NWN.Core.NWNX;
 using XM.Inventory;
 using XM.Progression.Job;
 using XM.Progression.Stat;
@@ -9,6 +10,7 @@ using XM.Shared.Core.Data;
 using XM.Shared.Core.Localization;
 using CreaturePlugin = XM.Shared.API.NWNX.CreaturePlugin.CreaturePlugin;
 using XM.Shared.API.NWNX.FeedbackPlugin;
+using XM.Shared.Core.EventManagement;
 using FeedbackPlugin = XM.Shared.API.NWNX.FeedbackPlugin.FeedbackPlugin;
 
 namespace XM.Combat
@@ -22,6 +24,7 @@ namespace XM.Combat
         private readonly ItemTypeService _itemType;
 
         public CombatService(
+            XMEventService @event,
             DBService db,
             JobService job,
             StatService stat,
@@ -31,6 +34,8 @@ namespace XM.Combat
             _job = job;
             _stat = stat;
             _itemType = itemType;
+
+            @event.Subscribe<NWNXEvent.OnBroadcastAttackOfOpportunityBefore>(DisableAttacksOfOpportunity);
         }
         public void Init()
         {
@@ -41,6 +46,11 @@ namespace XM.Combat
         {
             FeedbackPlugin.SetCombatLogMessageHidden(FeedbackCombatLogType.Initiative, true);
             FeedbackPlugin.SetCombatLogMessageHidden(FeedbackCombatLogType.ComplexAttack, true);
+        }
+
+        private void DisableAttacksOfOpportunity(uint objectSelf)
+        {
+            EventsPlugin.SkipEvent();
         }
 
         public int CalculateHitRate(
