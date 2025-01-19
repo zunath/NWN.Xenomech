@@ -1,0 +1,8 @@
+// Shaders
+renderhint NormalAndSpecMapped
+// textures0 overwrites bitmap and texture0 values in mdl
+texture0 xenocamdesert
+// Used by normal and spec mapping shaders
+texture1 xeno_n
+texture2 xeno_s
+texture3 xeno_r
