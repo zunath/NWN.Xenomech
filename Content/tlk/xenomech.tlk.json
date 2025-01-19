@@ -1724,6 +1724,26 @@
     {
       "id": 431,
       "text": "*deflect*"
+    },
+    {
+      "id": 432,
+      "text": "Bay Door/GarageDoor"
+    },
+    {
+      "id": 433,
+      "text": "Sliding Glass Doors"
+    },
+    {
+      "id": 434,
+      "text": "Elevator Doors"
+    },
+    {
+      "id": 435,
+      "text": "Wood Glass Reflect"
+    },
+    {
+      "id": 436,
+      "text": "Manhole"
     }
   ]
 }

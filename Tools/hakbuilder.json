@@ -31,6 +31,11 @@
       "Name":  "xm_placeables",
       "Path": "../Content/xm_placeables/",
       "CompileModels": false
+    },
+    {
+      "Name":  "xm_ts_d20mm",
+      "Path": "../Content/xm_ts_d20mm/",
+      "CompileModels": false
     }
   ]
 }

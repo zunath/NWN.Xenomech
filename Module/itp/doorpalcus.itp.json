@@ -92,6 +92,1133 @@
                 "type": "byte",
                 "value": 6
               },
+              "LIST": {
+                "type": "list",
+                "value": [
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "alien_door1"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_127"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "alien_door2"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_128"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "alien_door3"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_129"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Bay_Door"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_033"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "ctp_curtain01"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_118"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "ctp_curtain02"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_119"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "ctp_curtain03"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_120"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "ctp_curtain04"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_121"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "ctp_curtain05"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_122"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "ctp_curtain06"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_123"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Elevator_Doors"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_035"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Elevator_Doors"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_062"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "fci_Door_01"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_057"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "fci_Door_02"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_058"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "fci_Door_03"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_059"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "fci_Door_04"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_060"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "fence"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_126"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "gao_Barrel"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_046"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "gao_Beholder"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_045"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "gao_DrowCrys"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_044"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "gao_FoldGrate"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_043"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "gao_Lantern"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_048"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "gao_Mimosa"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_042"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "gao_PullGate"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_039"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "gao_Science"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_047"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "gao_Science2"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_061"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "gao_StoneMech"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_041"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "gao_WoodCentre"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_040"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "GateMtlBlk"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_105"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Glass_Window"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_038"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Green"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_104"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "House1"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_097"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "House2"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_098"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "House3"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_099"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "IntBrown"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_100"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "IntGreen"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_095"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "IntGreen2"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_096"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "intoff_wide"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_124"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "intoff_wide"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_125"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "IntOld"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_103"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "IntRed"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_102"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "IntWhite"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_101"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Manhole"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_037"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Rusted-NWN"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_117"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Ship_Door_01"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_028"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Ship_Door_02"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_029"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Ship_Door_03"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_030"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Ship_Door_04"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_031"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Ship_Door_05"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_032"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Sliding_Glass_Door"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_034"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "tndoor_01_wd"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_049"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "tndoor_02_wd"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_050"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "tndoor_03_wd"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_051"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "tndoor_04_mt"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_052"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "tndoor_05_st"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_053"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "tndoor_05_st"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_054"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "tndoor_07_mt"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_055"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "tndoor_trans"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_056"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_elev"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_116"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_fence"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_074"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_gargr1"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_089"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_gargr2"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_088"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_garol1"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_087"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_garol2"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_086"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_garut1"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_091"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_garut2"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_090"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_garwh1"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_085"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_garwh2"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_084"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_intoff"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_107"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_intoff1"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_108"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_intoff2"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_109"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_intoff2d"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_110"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_intoff3"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_111"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_intoff3d"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_112"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_intoff4"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_113"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_intoff4d"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_114"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_intoff5"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_115"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_manhole"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_073"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_ohfire"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_083"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_ohfire2"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_106"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_rear1"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_092"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_rear2"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_093"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_rear3"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_094"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_resfr11"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_079"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_resfr12"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_080"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_resfr21"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_081"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_resfr22"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_082"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_resgrn1"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_063"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_resgrn2"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_065"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_resold1"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_075"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_resold2"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_076"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_resred1"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_064"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_resred2"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_066"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_reswht1"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_077"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_reswht2"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_078"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_screen"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_067"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_sliding"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_072"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_store1_1"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_068"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_store1_2"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_069"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_store2_1"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_070"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "udp1_store2_2"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_071"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Wood_Glass_Reflect"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "xm_door_036"
+                    }
+                  }
+                ]
+              },
               "STRREF": {
                 "type": "dword",
                 "value": 6736

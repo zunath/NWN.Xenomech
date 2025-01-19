@@ -136,6 +136,13 @@
           "type": "cexostring",
           "value": "xm_placeables"
         }
+      },
+      {
+        "__struct_id": 8,
+        "Mod_Hak": {
+          "type": "cexostring",
+          "value": "xm_ts_d20mm"
+        }
       }
     ]
   },
