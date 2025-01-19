@@ -38,7 +38,6 @@ namespace XM.Combat.NativeOverride
                 var attacker = CNWSCreature.FromPointer(thisPtr);
                 var round = attacker.m_pcCombatRound;
 
-                LogAttackDetails(attacker, target);
                 var attackData = round.GetAttack(attacker.m_pcCombatRound.m_nCurrentAttack);
 
                 if (IsNonCreatureTarget(target, attackData))
@@ -64,13 +63,6 @@ namespace XM.Combat.NativeOverride
             });
         }
 
-
-        private void LogAttackDetails(CNWSCreature attacker, CNWSObject target)
-        {
-            var attackerName = attacker.GetFirstName().GetSimple(0);
-            var targetName = target.GetFirstName().GetSimple(0);
-        }
-
         private bool IsNonCreatureTarget(CNWSObject target, CNWSCombatAttackData attackData)
         {
             if (target.m_nObjectType != (byte)ObjectType.Creature)
@@ -89,7 +81,6 @@ namespace XM.Combat.NativeOverride
             }
             return AttackType.Melee;
         }
-
 
         private void AssignAttackValues(CNWSCombatAttackData attackData, HitResultType hitType)
         {

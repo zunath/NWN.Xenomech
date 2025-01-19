@@ -238,5 +238,100 @@ namespace XM.Combat
             return ColorToken.Combat(message);
         }
 
+        private int CalculateAttack(uint attacker, AttackType attackType)
+        {
+            var attack = _stat.GetAttack(attacker);
+            var stat = attackType == AttackType.Melee
+                ? _stat.GetAttribute(attacker, AbilityType.Might)
+                : _stat.GetAttribute(attacker, AbilityType.Agility);
+            var level = _stat.GetLevel(attacker);
+
+            return 8 + (2 * level) + stat + attack;
+        }
+
+        private int CalculateDefense(uint defender)
+        {
+            var defense = _stat.GetDefense(defender);
+            var stat = _stat.GetAttribute(defender, AbilityType.Vitality);
+            var level = _stat.GetLevel(defender);
+
+            return (int)(8 + (stat * 1.5f) + level + defense);
+        }
+
+        private float CalculateDamageRatio(uint attacker, uint defender, AttackType attackType)
+        {
+            const float RatioMax = 3.625f;
+            const float RatioMin = 0.01f;
+
+            var attackerAttack = CalculateAttack(attacker, attackType);
+            var defenderDefense = CalculateDefense(defender);
+            if (defenderDefense < 1)
+                defenderDefense = 1;
+
+            var ratio = (float)attackerAttack / (float)defenderDefense;
+
+            if (ratio > RatioMax)
+                ratio = RatioMax;
+            else if (ratio < RatioMin)
+                ratio = RatioMin;
+
+            return ratio;
+        }
+
+        private int CalculateDamageStatDelta(uint attacker, uint defender, AttackType attackType)
+        {
+            var attackerStat = attackType == AttackType.Melee
+                ? _stat.GetAttribute(attacker, AbilityType.Might)
+                : _stat.GetAttribute(attacker, AbilityType.Agility);
+            var defenderStat = _stat.GetAttribute(defender, AbilityType.Vitality);
+            var delta = attackerStat - defenderStat;
+
+            if (delta >= 12)
+                return (delta + 4) / 4;
+            else if (delta >= 6)
+                return (delta + 6) / 4;
+            else if (delta >= 1)
+                return (delta + 7) / 4;
+            else if (delta >= -2)
+                return (delta + 8) / 4;
+            else if (delta >= -7)
+                return (delta + 9) / 4;
+            else if (delta >= -15)
+                return (delta + 10) / 4;
+            else if (delta >= -21)
+                return (delta + 12) / 4;
+            else
+                return (delta + 13) / 4;
+        }
+
+        private (int, int) CalculateDamageRange(uint attacker, uint defender, uint attackerWeapon, AttackType attackType)
+        {
+            var delta = CalculateDamageStatDelta(attacker, defender, attackType);
+            var ratio = CalculateDamageRatio(attacker, defender, attackType);
+            var attackerDMG = _stat.GetDMG(attackerWeapon);
+            var baseDMG = attackerDMG + delta;
+
+            var maxDamage = baseDMG * ratio;
+            var minDamage = maxDamage * 0.7f;
+
+            return ((int)minDamage, (int)maxDamage);
+        }
+
+        public int DetermineDamage(
+            uint attacker, 
+            uint defender,
+            uint attackerWeapon,
+            AttackType attackType,
+            HitResultType hitResult)
+        {
+            var (minDamage, maxDamage) = CalculateDamageRange(attacker, defender, attackerWeapon, attackType);
+            var damage = XMRandom.Next(minDamage, maxDamage);
+
+            if (hitResult == HitResultType.Critical)
+                damage = (int)(damage * 0.25f);
+
+            return damage;
+        }
+
     }
 }

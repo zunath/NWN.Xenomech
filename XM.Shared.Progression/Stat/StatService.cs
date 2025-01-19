@@ -458,13 +458,37 @@ namespace XM.Progression.Stat
                 return npcStats.Defense;
             }
         }
-        public int GetMainHandDMG(uint player)
+
+        public int GetDMG(uint item)
         {
-            return 0; // todo
+            if (!GetIsObjectValid(item))
+                return 3; // Base DMG of 3 for unarmed
+
+            var dmg = 0;
+            for (var ip = GetFirstItemProperty(item); GetIsItemPropertyValid(ip); ip = GetNextItemProperty(item))
+            {
+                if (GetItemPropertyType(ip) == ItemPropertyType.DMG)
+                {
+                    dmg += GetItemPropertyCostTableValue(ip);
+                }
+            }
+
+            if (dmg < 1)
+                dmg = 1;
+
+            return dmg;
         }
-        public int GetOffHandDMG(uint player)
+
+        public int GetMainHandDMG(uint creature)
         {
-            return 0; // todo
+            var item = GetItemInSlot(InventorySlotType.RightHand, creature);
+            return GetDMG(item);
+        }
+
+        public int GetOffHandDMG(uint creature)
+        {
+            var item = GetItemInSlot(InventorySlotType.LeftHand, creature);
+            return GetDMG(item);
         }
 
         public int GetResist(uint player, ResistType resist)
