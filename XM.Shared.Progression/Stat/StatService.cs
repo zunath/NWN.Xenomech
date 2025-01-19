@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Anvil.Services;
 using XM.Progression.Event;
+using XM.Progression.Job;
 using XM.Progression.Job.Entity;
 using XM.Progression.Stat.Entity;
 using XM.Progression.Stat.ResistDefinition;
@@ -375,9 +376,9 @@ namespace XM.Progression.Stat
             _db.Set(dbPlayerStat);
         }
 
-        public int GetAttribute(uint player, AbilityType type)
+        public int GetAttribute(uint creature, AbilityType type)
         {
-            return GetAbilityScore(player, type);
+            return GetAbilityScore(creature, type);
         }
 
         public void SetPlayerAttribute(uint player, AbilityType type, int amount)
@@ -385,37 +386,77 @@ namespace XM.Progression.Stat
             CreaturePlugin.SetRawAbilityScore(player, type, amount);
         }
 
-        public int GetAttack(uint player)
+        public int GetAttack(uint creature)
         {
-            var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-            
-            return dbPlayerStat.Attack;
+            if (GetIsPC(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+
+                return dbPlayerStat.Attack;
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                return npcStats.Attack;
+            }
         }
-        public int GetEtherAttack(uint player)
+        public int GetEtherAttack(uint creature)
         {
-            var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-            return dbPlayerStat.EtherAttack;
+            if (GetIsPC(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+                return dbPlayerStat.EtherAttack;
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                return npcStats.EtherAttack;
+            }
         }
 
-        public int GetAccuracy(uint player)
+        public int GetAccuracy(uint creature)
         {
-            var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-            return dbPlayerStat.Accuracy;
+            if (GetIsPC(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+                return dbPlayerStat.Accuracy;
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                return npcStats.Accuracy;
+            }
         }
-        public int GetEvasion(uint player)
+        public int GetEvasion(uint creature)
         {
-            var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-            return dbPlayerStat.Evasion;
+            if (GetIsPC(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+                return dbPlayerStat.Evasion;
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                return npcStats.Evasion;
+            }
         }
-        public int GetDefense(uint player)
+        public int GetDefense(uint creature)
         {
-            var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-            return dbPlayerStat.Defense;
+            if (GetIsPC(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+                return dbPlayerStat.Defense;
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                return npcStats.Defense;
+            }
         }
         public int GetMainHandDMG(uint player)
         {
@@ -473,6 +514,10 @@ namespace XM.Progression.Stat
                 {
                     npcStats.EP = GetItemPropertyCostTableValue(ip);
                 }
+                else if (type == ItemPropertyType.Accuracy)
+                {
+                    npcStats.Accuracy = GetItemPropertyCostTableValue(ip);
+                }
             }
 
             return npcStats;
@@ -483,10 +528,12 @@ namespace XM.Progression.Stat
             if (GetIsPC(creature))
             {
                 var playerId = PlayerId.Get(creature);
-                var dbPlayerJob = _db.Get<PlayerJob>(playerId);
+                var dbPlayerJob = _db.Get<PlayerJob>(playerId) ?? new PlayerJob(playerId);
                 var activeJob = dbPlayerJob.ActiveJob;
 
-                return dbPlayerJob.JobLevels[activeJob];
+                return activeJob == JobType.Invalid 
+                    ? 1 
+                    : dbPlayerJob.JobLevels[activeJob];
             }
             else
             {

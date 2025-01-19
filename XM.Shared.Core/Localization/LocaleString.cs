@@ -119,5 +119,10 @@ namespace XM.Shared.Core.Localization
         Disabled = 424,
         ENABLED = 425,
         DISABLED = 426,
+        AttackerAttacksDefender = 427,
+        Hit = 428,
+        Critical = 429,
+        Miss = 430,
+        Deflect = 431,
     }
 }
