@@ -1,0 +1,274 @@
+Reading source texture: "C:\Projects\NWN.Xenomech\Tools\nwn_crunch_windows64_EE\in\xeno_n.tga"
+Texture successfully loaded in 0.009s
+Source texture: 1024x1024, Levels: 1, Faces: 1, Format: R8G8B8
+Apparent type: Normal map, Flags: R G B Non-Flipped 
+Flipping texture on Y axis
+Generating mipmaps using filter "kaiser"
+Generated 10 mipmap levels in 0.087s
+Converting texture format from R8G8B8 to DXN
+
+Texture format conversion took 1.080s
+Writing texture to file: "out\xeno_n.dds"
+Texture successfully written in 1.081s
+Texture successfully processed in 1.170s
+
+Total time: 1.189s
+1 total file(s) successfully processed, 0 file(s) skipped, 0 file(s) failed.
+Reading source texture: "C:\Projects\NWN.Xenomech\Tools\nwn_crunch_windows64_EE\in\xeno_r.tga"
+Texture successfully loaded in 0.011s
+Source texture: 1024x1024, Levels: 1, Faces: 1, Format: A8L8
+Apparent type: 2D map, Flags: R G B A Grayscale Non-Flipped 
+Flipping texture on Y axis
+Output pixel format is swizzled or not RGB, disabling perceptual color metrics
+Generating mipmaps using filter "kaiser"
+Generated 10 mipmap levels in 0.093s
+Converting texture format from A8L8 to DXT5A
+
+Texture format conversion took 1.088s
+Writing texture to file: "out\xeno_r.dds"
+Texture successfully written in 1.089s
+Texture successfully processed in 1.184s
+
+Total time: 1.198s
+1 total file(s) successfully processed, 0 file(s) skipped, 0 file(s) failed.
+Reading source texture: "C:\Projects\NWN.Xenomech\Tools\nwn_crunch_windows64_EE\in\xeno_s.tga"
+Texture successfully loaded in 0.014s
+Source texture: 1024x1024, Levels: 1, Faces: 1, Format: A8R8G8B8
+Apparent type: 2D map, Flags: R G B A Non-Flipped 
+Flipping texture on Y axis
+Output pixel format is swizzled or not RGB, disabling perceptual color metrics
+Generating mipmaps using filter "kaiser"
+Generated 10 mipmap levels in 0.093s
+Converting texture format from A8R8G8B8 to DXT5A
+
+Texture format conversion took 0.616s
+Writing texture to file: "out\xeno_s.dds"
+Texture successfully written in 0.617s
+Texture successfully processed in 0.712s
+
+Total time: 0.729s
+1 total file(s) successfully processed, 0 file(s) skipped, 0 file(s) failed.
+Reading source texture: "C:\Projects\NWN.Xenomech\Tools\nwn_crunch_windows64_EE\in\xenoblack.tga"
+Texture successfully loaded in 0.010s
+Source texture: 1024x1024, Levels: 1, Faces: 1, Format: R8G8B8
+Apparent type: 2D map, Flags: R G B Non-Flipped 
+Flipping texture on Y axis
+Generating mipmaps using filter "kaiser"
+Generated 10 mipmap levels in 0.085s
+Converting texture format from R8G8B8 to DXT1
+
+Texture format conversion took 0.426s
+Writing texture to file: "out\xenoblack.dds"
+Texture successfully written in 0.426s
+Texture successfully processed in 0.514s
+
+Total time: 0.525s
+1 total file(s) successfully processed, 0 file(s) skipped, 0 file(s) failed.
+Reading source texture: "C:\Projects\NWN.Xenomech\Tools\nwn_crunch_windows64_EE\in\xenoblue.tga"
+Texture successfully loaded in 0.010s
+Source texture: 1024x1024, Levels: 1, Faces: 1, Format: R8G8B8
+Apparent type: 2D map, Flags: R G B Non-Flipped 
+Flipping texture on Y axis
+Generating mipmaps using filter "kaiser"
+Generated 10 mipmap levels in 0.084s
+Converting texture format from R8G8B8 to DXT1
+
+Texture format conversion took 0.447s
+Writing texture to file: "out\xenoblue.dds"
+Texture successfully written in 0.448s
+Texture successfully processed in 0.534s
+
+Total time: 0.545s
+1 total file(s) successfully processed, 0 file(s) skipped, 0 file(s) failed.
+Reading source texture: "C:\Projects\NWN.Xenomech\Tools\nwn_crunch_windows64_EE\in\xenocamblack.tga"
+Texture successfully loaded in 0.011s
+Source texture: 1024x1024, Levels: 1, Faces: 1, Format: R8G8B8
+Apparent type: 2D map, Flags: R G B Non-Flipped 
+Flipping texture on Y axis
+Generating mipmaps using filter "kaiser"
+Generated 10 mipmap levels in 0.089s
+Converting texture format from R8G8B8 to DXT1
+
+Texture format conversion took 0.534s
+Writing texture to file: "out\xenocamblack.dds"
+Texture successfully written in 0.535s
+Texture successfully processed in 0.626s
+
+Total time: 0.638s
+1 total file(s) successfully processed, 0 file(s) skipped, 0 file(s) failed.
+Reading source texture: "C:\Projects\NWN.Xenomech\Tools\nwn_crunch_windows64_EE\in\xenocamdesert.tga"
+Texture successfully loaded in 0.011s
+Source texture: 1024x1024, Levels: 1, Faces: 1, Format: R8G8B8
+Apparent type: 2D map, Flags: R G B Non-Flipped 
+Flipping texture on Y axis
+Generating mipmaps using filter "kaiser"
+Generated 10 mipmap levels in 0.087s
+Converting texture format from R8G8B8 to DXT1
+
+Texture format conversion took 0.547s
+Writing texture to file: "out\xenocamdesert.dds"
+Texture successfully written in 0.548s
+Texture successfully processed in 0.637s
+
+Total time: 0.649s
+1 total file(s) successfully processed, 0 file(s) skipped, 0 file(s) failed.
+Reading source texture: "C:\Projects\NWN.Xenomech\Tools\nwn_crunch_windows64_EE\in\xenocamgray.tga"
+Texture successfully loaded in 0.011s
+Source texture: 1024x1024, Levels: 1, Faces: 1, Format: R8G8B8
+Apparent type: 2D map, Flags: R G B Non-Flipped 
+Flipping texture on Y axis
+Generating mipmaps using filter "kaiser"
+Generated 10 mipmap levels in 0.086s
+Converting texture format from R8G8B8 to DXT1
+
+Texture format conversion took 0.591s
+Writing texture to file: "out\xenocamgray.dds"
+Texture successfully written in 0.592s
+Texture successfully processed in 0.680s
+
+Total time: 0.693s
+1 total file(s) successfully processed, 0 file(s) skipped, 0 file(s) failed.
+Reading source texture: "C:\Projects\NWN.Xenomech\Tools\nwn_crunch_windows64_EE\in\xenocamjungle.tga"
+Texture successfully loaded in 0.011s
+Source texture: 1024x1024, Levels: 1, Faces: 1, Format: R8G8B8
+Apparent type: 2D map, Flags: R G B Non-Flipped 
+Flipping texture on Y axis
+Generating mipmaps using filter "kaiser"
+Generated 10 mipmap levels in 0.091s
+Converting texture format from R8G8B8 to DXT1
+
+Texture format conversion took 0.574s
+Writing texture to file: "out\xenocamjungle.dds"
+Texture successfully written in 0.575s
+Texture successfully processed in 0.668s
+
+Total time: 0.681s
+1 total file(s) successfully processed, 0 file(s) skipped, 0 file(s) failed.
+Reading source texture: "C:\Projects\NWN.Xenomech\Tools\nwn_crunch_windows64_EE\in\xenocamred.tga"
+Texture successfully loaded in 0.011s
+Source texture: 1024x1024, Levels: 1, Faces: 1, Format: R8G8B8
+Apparent type: 2D map, Flags: R G B Non-Flipped 
+Flipping texture on Y axis
+Generating mipmaps using filter "kaiser"
+Generated 10 mipmap levels in 0.095s
+Converting texture format from R8G8B8 to DXT1
+
+Texture format conversion took 0.554s
+Writing texture to file: "out\xenocamred.dds"
+Texture successfully written in 0.555s
+Texture successfully processed in 0.652s
+
+Total time: 0.665s
+1 total file(s) successfully processed, 0 file(s) skipped, 0 file(s) failed.
+Reading source texture: "C:\Projects\NWN.Xenomech\Tools\nwn_crunch_windows64_EE\in\xenocamteal.tga"
+Texture successfully loaded in 0.011s
+Source texture: 1024x1024, Levels: 1, Faces: 1, Format: R8G8B8
+Apparent type: 2D map, Flags: R G B Non-Flipped 
+Flipping texture on Y axis
+Generating mipmaps using filter "kaiser"
+Generated 10 mipmap levels in 0.088s
+Converting texture format from R8G8B8 to DXT1
+
+Texture format conversion took 0.578s
+Writing texture to file: "out\xenocamteal.dds"
+Texture successfully written in 0.579s
+Texture successfully processed in 0.668s
+
+Total time: 0.680s
+1 total file(s) successfully processed, 0 file(s) skipped, 0 file(s) failed.
+Reading source texture: "C:\Projects\NWN.Xenomech\Tools\nwn_crunch_windows64_EE\in\xenodead.tga"
+Texture successfully loaded in 0.010s
+Source texture: 1024x1024, Levels: 1, Faces: 1, Format: R8G8B8
+Apparent type: 2D map, Flags: R G B Non-Flipped 
+Flipping texture on Y axis
+Generating mipmaps using filter "kaiser"
+Generated 10 mipmap levels in 0.086s
+Converting texture format from R8G8B8 to DXT1
+
+Texture format conversion took 0.402s
+Writing texture to file: "out\xenodead.dds"
+Texture successfully written in 0.403s
+Texture successfully processed in 0.491s
+
+Total time: 0.502s
+1 total file(s) successfully processed, 0 file(s) skipped, 0 file(s) failed.
+Reading source texture: "C:\Projects\NWN.Xenomech\Tools\nwn_crunch_windows64_EE\in\xenogreen.tga"
+Texture successfully loaded in 0.010s
+Source texture: 1024x1024, Levels: 1, Faces: 1, Format: R8G8B8
+Apparent type: 2D map, Flags: R G B Non-Flipped 
+Flipping texture on Y axis
+Generating mipmaps using filter "kaiser"
+Generated 10 mipmap levels in 0.088s
+Converting texture format from R8G8B8 to DXT1
+
+Texture format conversion took 0.462s
+Writing texture to file: "out\xenogreen.dds"
+Texture successfully written in 0.463s
+Texture successfully processed in 0.553s
+
+Total time: 0.564s
+1 total file(s) successfully processed, 0 file(s) skipped, 0 file(s) failed.
+Reading source texture: "C:\Projects\NWN.Xenomech\Tools\nwn_crunch_windows64_EE\in\xenored.tga"
+Texture successfully loaded in 0.010s
+Source texture: 1024x1024, Levels: 1, Faces: 1, Format: R8G8B8
+Apparent type: 2D map, Flags: R G B Non-Flipped 
+Flipping texture on Y axis
+Generating mipmaps using filter "kaiser"
+Generated 10 mipmap levels in 0.089s
+Converting texture format from R8G8B8 to DXT1
+
+Texture format conversion took 0.469s
+Writing texture to file: "out\xenored.dds"
+Texture successfully written in 0.470s
+Texture successfully processed in 0.561s
+
+Total time: 0.572s
+1 total file(s) successfully processed, 0 file(s) skipped, 0 file(s) failed.
+Reading source texture: "C:\Projects\NWN.Xenomech\Tools\nwn_crunch_windows64_EE\in\xenorust.tga"
+Texture successfully loaded in 0.010s
+Source texture: 1024x1024, Levels: 1, Faces: 1, Format: R8G8B8
+Apparent type: 2D map, Flags: R G B Non-Flipped 
+Flipping texture on Y axis
+Generating mipmaps using filter "kaiser"
+Generated 10 mipmap levels in 0.087s
+Converting texture format from R8G8B8 to DXT1
+
+Texture format conversion took 0.402s
+Writing texture to file: "out\xenorust.dds"
+Texture successfully written in 0.403s
+Texture successfully processed in 0.493s
+
+Total time: 0.504s
+1 total file(s) successfully processed, 0 file(s) skipped, 0 file(s) failed.
+Reading source texture: "C:\Projects\NWN.Xenomech\Tools\nwn_crunch_windows64_EE\in\xenowhite.tga"
+Texture successfully loaded in 0.010s
+Source texture: 1024x1024, Levels: 1, Faces: 1, Format: R8G8B8
+Apparent type: 2D map, Flags: R G B Non-Flipped 
+Flipping texture on Y axis
+Generating mipmaps using filter "kaiser"
+Generated 10 mipmap levels in 0.096s
+Converting texture format from R8G8B8 to DXT1
+
+Texture format conversion took 0.461s
+Writing texture to file: "out\xenowhite.dds"
+Texture successfully written in 0.462s
+Texture successfully processed in 0.559s
+
+Total time: 0.571s
+1 total file(s) successfully processed, 0 file(s) skipped, 0 file(s) failed.
+Reading source texture: "C:\Projects\NWN.Xenomech\Tools\nwn_crunch_windows64_EE\in\xenoyellow.tga"
+Texture successfully loaded in 0.010s
+Source texture: 1024x1024, Levels: 1, Faces: 1, Format: R8G8B8
+Apparent type: 2D map, Flags: R G B Non-Flipped 
+Flipping texture on Y axis
+Generating mipmaps using filter "kaiser"
+Generated 10 mipmap levels in 0.091s
+Converting texture format from R8G8B8 to DXT1
+
+Texture format conversion took 0.485s
+Writing texture to file: "out\xenoyellow.dds"
+Texture successfully written in 0.486s
+Texture successfully processed in 0.580s
+
+Total time: 0.591s
+1 total file(s) successfully processed, 0 file(s) skipped, 0 file(s) failed.

@@ -1,68 +1,73 @@
-# Exported from NWMax Plus v6.11.28 at 6/29/2021 10:20:55 PM
+# Exported from NWmax 0.8 c00 at 1/18/2025 7:25:20 PM
 # mdl file
 #
-#NWMax Plus MODEL  ASCII
+#NWmax MODEL ASCII
 # model: pmz0_neck001
+#local file: Unknown
 filedependancy Unknown
 newmodel pmz0_neck001
 setsupermodel pmz0_neck001 NULL
 classification Character
 setanimationscale 1.0
-#NWMax Plus GEOM  ASCII
+#NWmax GEOM  ASCII
 beginmodelgeom pmz0_neck001
 node dummy pmz0_neck001
   parent NULL
 endnode
 node trimesh neck
   parent pmz0_neck001
-  position -5.15737e-007 0.0 0.0
+  position 0.0 0.0 0.0
   orientation 1.0 0.0 0.0 0.0
   wirecolor 0.8 0.8 0.8 
   tilefade 0
   scale 1.0
   render 1
-  Shadow 1
+  Shadow 0
   beaming 0
   inheritcolor 0
   rotatetexture 0
   alpha 1.0
   transparencyhint 0
-  selfIllumColor 0.0 0.0 0.0 
+  selfillumcolor 0.0 0.0 0.0 
   ambient 1.0 1.0 1.0 
   Diffuse 1.0 1.0 1.0 
   Specular 0.0 0.0 0.0 
-  shininess 0
-  center 0.0 -0.944 11.9624 
-  bitmap pmz0_neck001
+  shininess 1
+  center -1.38283e-005 -0.938396 11.9752 
+  bitmap xenoyellow
   verts 8
-    0.149474 0.0712572 -0.383847
-    -0.149475 0.0712572 -0.383847
-    0.107243 0.18856 0.575629
-    -0.107242 0.18856 0.575629
-    0.107244 -0.0901336 0.623094
-    -0.107241 -0.0901336 0.623094
-    0.149475 -0.20744 -0.336383
-    -0.149474 -0.20744 -0.336383
-  faces 8
+    0.149474 0.0712668 -0.383889
+    -0.149475 0.0712668 -0.383889
+    0.107243 0.188663 0.575929
+    -0.107242 0.188663 0.575929
+    0.107243 -0.0900311 0.623394
+    -0.107242 -0.0900311 0.623394
+    0.149474 -0.207431 -0.336425
+    -0.149475 -0.207431 -0.336425
+  faces 12
     0 1 3  1  0 1 2  1
     3 2 0  1  2 3 0  1
     4 5 7  1  4 5 6  1
     7 6 4  1  6 7 4  1
-    1 7 5  1  1 6 5  1
-    5 3 1  1  5 2 1  1
-    6 0 2  1  7 8 9  1
-    2 4 6  1  9 4 7  1
+    1 7 5  2  1 6 5  1
+    5 3 1  2  5 2 1  1
+    6 0 2  2  7 8 9  1
+    2 4 6  2  9 4 7  1
+    6 7 1  4  7 6 1  2
+    1 0 6  4  1 0 7  2
+    5 4 2  4  5 4 9  2
+    2 3 5  4  9 2 5  2
   tverts 10
-    0.151724 0.925464 0
-    0.168662 0.699379 0
-    0.730487 0.768511 0
-    0.718371 0.930639 0
-    0.793342 0.396464 0
-    0.760339 0.556101 0
-    0.198514 0.486861 0
-    0.244488 0.264369 0
-    0.301475 0.0568488 0
-    0.850329 0.188889 0
+    0.5693 0.838428 0
+    0.570192 0.825713 0
+    0.599778 0.829601 0
+    0.59914 0.838719 0
+    0.603088 0.808677 0
+    0.60135 0.817655 0
+    0.571764 0.813761 0
+    0.574185 0.801248 0
+    0.577186 0.789577 0
+    0.606089 0.797003 0
 endnode
 endmodelgeom pmz0_neck001
 donemodel pmz0_neck001
