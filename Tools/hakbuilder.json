@@ -41,6 +41,11 @@
       "Name":  "xm_items",
       "Path": "../Content/xm_items/",
       "CompileModels": false
+    },
+    {
+      "Name":  "xm_clothes",
+      "Path": "../Content/xm_clothes/",
+      "CompileModels": false
     }
   ]
 }
