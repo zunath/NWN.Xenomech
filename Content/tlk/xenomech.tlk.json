@@ -2323,1258 +2323,1278 @@
     },
     {
       "id": 581,
-      "text": "Ether Bloom"
+      "text": "Resonance Node VI"
     },
     {
       "id": 582,
-      "text": "Ether Bloom I"
+      "text": "Resonance Node VI Description"
     },
     {
       "id": 583,
-      "text": "Ether Bloom I Description"
+      "text": "Resonance Node VII"
     },
     {
       "id": 584,
-      "text": "Ether Bloom II"
+      "text": "Resonance Node VII Description"
     },
     {
       "id": 585,
-      "text": "Ether Bloom II Description"
+      "text": "Resonance Node VIII"
     },
     {
       "id": 586,
-      "text": "Ether Bloom III"
+      "text": "Resonance Node VIII Description"
     },
     {
       "id": 587,
-      "text": "Ether Bloom III Description"
+      "text": "Resonance Node IX"
     },
     {
       "id": 588,
-      "text": "Ether Bloom IV"
+      "text": "Resonance Node IX Description"
     },
     {
       "id": 589,
-      "text": "Ether Bloom IV Description"
+      "text": "Resonance Node X"
     },
     {
       "id": 590,
-      "text": "Antidote"
+      "text": "Resonance Node X Description"
     },
     {
       "id": 591,
-      "text": "Antidote Description"
+      "text": "Antidote"
     },
     {
       "id": 592,
-      "text": "Protection"
+      "text": "Antidote Description"
     },
     {
       "id": 593,
-      "text": "Protection I"
+      "text": "Protection"
     },
     {
       "id": 594,
-      "text": "Protection I Description"
+      "text": "Protection I"
     },
     {
       "id": 595,
-      "text": "Protection II"
+      "text": "Protection I Description"
     },
     {
       "id": 596,
-      "text": "Protection II Description"
+      "text": "Protection II"
     },
     {
       "id": 597,
-      "text": "Protection III"
+      "text": "Protection II Description"
     },
     {
       "id": 598,
-      "text": "Protection III Description"
+      "text": "Protection III"
     },
     {
       "id": 599,
-      "text": "Divine Seal"
+      "text": "Protection III Description"
     },
     {
       "id": 600,
-      "text": "Divine Seal Description"
+      "text": "Divine Seal"
     },
     {
       "id": 601,
-      "text": "Auto Regen I"
+      "text": "Divine Seal Description"
     },
     {
       "id": 602,
-      "text": "Auto Regen II"
+      "text": "Auto Regen I"
     },
     {
       "id": 603,
-      "text": "Ether Blast"
+      "text": "Auto Regen II"
     },
     {
       "id": 604,
-      "text": "Ether Blast I"
+      "text": "Ether Blast"
     },
     {
       "id": 605,
-      "text": "Ether Blast I Description"
+      "text": "Ether Blast I"
     },
     {
       "id": 606,
-      "text": "Ether Blast II"
+      "text": "Ether Blast I Description"
     },
     {
       "id": 607,
-      "text": "Ether Blast II Description"
+      "text": "Ether Blast II"
     },
     {
       "id": 608,
-      "text": "Regen"
+      "text": "Ether Blast II Description"
     },
     {
       "id": 609,
-      "text": "Regen I"
+      "text": "Regen"
     },
     {
       "id": 610,
-      "text": "Regen I Description"
+      "text": "Regen I"
     },
     {
       "id": 611,
-      "text": "Regen II"
+      "text": "Regen I Description"
     },
     {
       "id": 612,
-      "text": "Regen II Description"
+      "text": "Regen II"
     },
     {
       "id": 613,
-      "text": "Revive"
+      "text": "Regen II Description"
     },
     {
       "id": 614,
-      "text": "Revive Description"
+      "text": "Revive"
     },
     {
       "id": 615,
-      "text": "Fire Protection"
+      "text": "Revive Description"
     },
     {
       "id": 616,
-      "text": "Fire Protection Description"
+      "text": "Fire Protection"
     },
     {
       "id": 617,
-      "text": "Tsu"
+      "text": "Fire Protection Description"
     },
     {
       "id": 618,
-      "text": "Tsu Description"
+      "text": "Tsu"
     },
     {
       "id": 619,
-      "text": "Erase"
+      "text": "Tsu Description"
     },
     {
       "id": 620,
-      "text": "Erase Description"
+      "text": "Erase"
     },
     {
       "id": 621,
-      "text": "Haste"
+      "text": "Erase Description"
     },
     {
       "id": 622,
-      "text": "Haste Description"
+      "text": "Haste"
     },
     {
       "id": 623,
-      "text": "Benediction"
+      "text": "Haste Description"
     },
     {
       "id": 624,
-      "text": "Benediction Description"
+      "text": "Benediction"
     },
     {
       "id": 625,
-      "text": "Tame"
+      "text": "Benediction Description"
     },
     {
       "id": 626,
-      "text": "Tame Description"
+      "text": "Tame"
     },
     {
       "id": 627,
-      "text": "Reward"
+      "text": "Tame Description"
     },
     {
       "id": 628,
-      "text": "Reward I"
+      "text": "Reward"
     },
     {
       "id": 629,
-      "text": "Reward I Description"
+      "text": "Reward I"
     },
     {
       "id": 630,
-      "text": "Reward II"
+      "text": "Reward I Description"
     },
     {
       "id": 631,
-      "text": "Reward II Description"
+      "text": "Reward II"
     },
     {
       "id": 632,
-      "text": "Reward III"
+      "text": "Reward II Description"
     },
     {
       "id": 633,
-      "text": "Reward III Description"
+      "text": "Reward III"
     },
     {
       "id": 634,
-      "text": "Crescent Moon"
+      "text": "Reward III Description"
     },
     {
       "id": 635,
-      "text": "Crescent Moon I"
+      "text": "Crescent Moon"
     },
     {
       "id": 636,
-      "text": "Crescent Moon I Description"
+      "text": "Crescent Moon I"
     },
     {
       "id": 637,
-      "text": "Crescent Moon II"
+      "text": "Crescent Moon I Description"
     },
     {
       "id": 638,
-      "text": "Crescent Moon II Description"
+      "text": "Crescent Moon II"
     },
     {
       "id": 639,
-      "text": "Crescent Moon III"
+      "text": "Crescent Moon II Description"
     },
     {
       "id": 640,
-      "text": "Crescent Moon III Description"
+      "text": "Crescent Moon III"
     },
     {
       "id": 641,
-      "text": "Sic"
+      "text": "Crescent Moon III Description"
     },
     {
       "id": 642,
-      "text": "Sic Description"
+      "text": "Sic"
     },
     {
       "id": 643,
-      "text": "Mercy Strike"
+      "text": "Sic Description"
     },
     {
       "id": 644,
-      "text": "Mercy Strike I"
+      "text": "Mercy Strike"
     },
     {
       "id": 645,
-      "text": "Mercy Strike I Description"
+      "text": "Mercy Strike I"
     },
     {
       "id": 646,
-      "text": "Mercy Strike II"
+      "text": "Mercy Strike I Description"
     },
     {
       "id": 647,
-      "text": "Mercy Strike II Description"
+      "text": "Mercy Strike II"
     },
     {
       "id": 648,
-      "text": "Snarl"
+      "text": "Mercy Strike II Description"
     },
     {
       "id": 649,
-      "text": "Snarl Description"
+      "text": "Snarl"
     },
     {
       "id": 650,
-      "text": "Resist Poison"
+      "text": "Snarl Description"
     },
     {
       "id": 651,
-      "text": "Resist Poison Description"
+      "text": "Resist Poison"
     },
     {
       "id": 652,
-      "text": "Third Eye"
+      "text": "Resist Poison Description"
     },
     {
       "id": 653,
-      "text": "Third Eye Description"
+      "text": "Third Eye"
     },
     {
       "id": 654,
-      "text": "Earth Protection"
+      "text": "Third Eye Description"
     },
     {
       "id": 655,
-      "text": "Earth Protection Description"
+      "text": "Earth Protection"
     },
     {
       "id": 656,
-      "text": "Feral Howl"
+      "text": "Earth Protection Description"
     },
     {
       "id": 657,
-      "text": "Feral Howl Description"
+      "text": "Feral Howl"
     },
     {
       "id": 658,
-      "text": "Quickness"
+      "text": "Feral Howl Description"
     },
     {
       "id": 659,
-      "text": "Quickness Description"
+      "text": "Quickness"
     },
     {
       "id": 660,
-      "text": "Assault"
+      "text": "Quickness Description"
     },
     {
       "id": 661,
-      "text": "Assault Description"
+      "text": "Assault"
     },
     {
       "id": 662,
-      "text": "Killer Instinct"
+      "text": "Assault Description"
     },
     {
       "id": 663,
-      "text": "Killer Instinct Description"
+      "text": "Killer Instinct"
     },
     {
       "id": 664,
-      "text": "Beast Speed"
+      "text": "Killer Instinct Description"
     },
     {
       "id": 665,
-      "text": "Beast Speed Description"
+      "text": "Beast Speed"
     },
     {
       "id": 666,
-      "text": "Ether Link"
+      "text": "Beast Speed Description"
     },
     {
       "id": 667,
-      "text": "Ether Link Description"
+      "text": "Ether Link"
     },
     {
       "id": 668,
-      "text": "Familiar"
+      "text": "Ether Link Description"
     },
     {
       "id": 669,
-      "text": "Familiar Description"
+      "text": "Familiar"
     },
     {
       "id": 670,
-      "text": "Electric Fist"
+      "text": "Familiar Description"
     },
     {
       "id": 671,
-      "text": "Electric Fist I"
+      "text": "Electric Fist"
     },
     {
       "id": 672,
-      "text": "Electric Fist I Description"
+      "text": "Electric Fist I"
     },
     {
       "id": 673,
-      "text": "Electric Fist II"
+      "text": "Electric Fist I Description"
     },
     {
       "id": 674,
-      "text": "Electric Fist II Description"
+      "text": "Electric Fist II"
     },
     {
       "id": 675,
-      "text": "Electric Fist III"
+      "text": "Electric Fist II Description"
     },
     {
       "id": 676,
-      "text": "Electric Fist III Description"
+      "text": "Electric Fist III"
     },
     {
       "id": 677,
-      "text": "Striking Cobra"
+      "text": "Electric Fist III Description"
     },
     {
       "id": 678,
-      "text": "Striking Cobra I"
+      "text": "Striking Cobra"
     },
     {
       "id": 679,
-      "text": "Striking Cobra I Description"
+      "text": "Striking Cobra I"
     },
     {
       "id": 680,
-      "text": "Striking Cobra II"
+      "text": "Striking Cobra I Description"
     },
     {
       "id": 681,
-      "text": "Striking Cobra II Description"
+      "text": "Striking Cobra II"
     },
     {
       "id": 682,
-      "text": "Flash"
+      "text": "Striking Cobra II Description"
     },
     {
       "id": 683,
-      "text": "Flash Description"
+      "text": "Flash"
     },
     {
       "id": 684,
-      "text": "Parry I"
+      "text": "Flash Description"
     },
     {
       "id": 685,
-      "text": "Parry I Description"
+      "text": "Parry I"
     },
     {
       "id": 686,
-      "text": "Parry II"
+      "text": "Parry I Description"
     },
     {
       "id": 687,
-      "text": "Parry II Description"
+      "text": "Parry II"
     },
     {
       "id": 688,
-      "text": "Parry III"
+      "text": "Parry II Description"
     },
     {
       "id": 689,
-      "text": "Parry III Description"
+      "text": "Parry III"
     },
     {
       "id": 690,
-      "text": "Attack Bonus I"
+      "text": "Parry III Description"
     },
     {
       "id": 691,
-      "text": "Attack Bonus I Description"
+      "text": "Attack Bonus I"
     },
     {
       "id": 692,
-      "text": "Attack Bonus II"
+      "text": "Attack Bonus I Description"
     },
     {
       "id": 693,
-      "text": "Attack Bonus II Description"
+      "text": "Attack Bonus II"
     },
     {
       "id": 694,
-      "text": "Power Attack I"
+      "text": "Attack Bonus II Description"
     },
     {
       "id": 695,
-      "text": "Power Attack I Description"
+      "text": "Power Attack I"
     },
     {
       "id": 696,
-      "text": "Power Attack II"
+      "text": "Power Attack I Description"
     },
     {
       "id": 697,
-      "text": "Power Attack II Description"
+      "text": "Power Attack II"
     },
     {
       "id": 698,
-      "text": "Shadowstrike"
+      "text": "Power Attack II Description"
     },
     {
       "id": 699,
-      "text": "Shadowstrike I"
+      "text": "Shadowstrike"
     },
     {
       "id": 700,
-      "text": "Shadowstrike I Description"
+      "text": "Shadowstrike I"
     },
     {
       "id": 701,
-      "text": "Shadowstrike II"
+      "text": "Shadowstrike I Description"
     },
     {
       "id": 702,
-      "text": "Shadowstrike II Description"
+      "text": "Shadowstrike II"
     },
     {
       "id": 703,
-      "text": "Warcry"
+      "text": "Shadowstrike II Description"
     },
     {
       "id": 704,
-      "text": "Warcry Description"
+      "text": "Warcry"
     },
     {
       "id": 705,
-      "text": "Chi"
+      "text": "Warcry Description"
     },
     {
       "id": 706,
-      "text": "Chi I"
+      "text": "Chi"
     },
     {
       "id": 707,
-      "text": "Chi I Description"
+      "text": "Chi I"
     },
     {
       "id": 708,
-      "text": "Wind Protection"
+      "text": "Chi I Description"
     },
     {
       "id": 709,
-      "text": "Wind Protection Description"
+      "text": "Chi II"
     },
     {
       "id": 710,
-      "text": "Martial Arts"
+      "text": "Chi II Description"
     },
     {
       "id": 711,
-      "text": "Martial Arts Description"
+      "text": "Wind Protection"
     },
     {
       "id": 712,
-      "text": "Hundred Fists"
+      "text": "Wind Protection Description"
     },
     {
       "id": 713,
-      "text": "Hundred Fists Description"
+      "text": "Martial Arts"
     },
     {
       "id": 714,
-      "text": "Back Attack I"
+      "text": "Martial Arts Description"
     },
     {
       "id": 715,
-      "text": "Back Attack I Description"
+      "text": "Hundred Fists"
     },
     {
       "id": 716,
-      "text": "Back Attack II"
+      "text": "Hundred Fists Description"
     },
     {
       "id": 717,
-      "text": "Back Attack II Description"
+      "text": "Back Attack I"
     },
     {
       "id": 718,
-      "text": "Back Attack III"
+      "text": "Back Attack I Description"
     },
     {
       "id": 719,
-      "text": "Back Attack III Description"
+      "text": "Back Attack II"
     },
     {
       "id": 720,
-      "text": "Back Attack IV"
+      "text": "Back Attack II Description"
     },
     {
       "id": 721,
-      "text": "Back Attack IV Description"
+      "text": "Back Attack III"
     },
     {
       "id": 722,
-      "text": "Steal"
+      "text": "Back Attack III Description"
     },
     {
       "id": 723,
-      "text": "Steal Description"
+      "text": "Back Attack IV"
     },
     {
       "id": 724,
-      "text": "Creditfinder"
+      "text": "Back Attack IV Description"
     },
     {
       "id": 725,
-      "text": "Creditfinder Description"
+      "text": "Steal"
     },
     {
       "id": 726,
-      "text": "Sneak Attack"
+      "text": "Steal Description"
     },
     {
       "id": 727,
-      "text": "Sneak Attack I"
+      "text": "Creditfinder"
     },
     {
       "id": 728,
-      "text": "Sneak Attack I Description"
+      "text": "Creditfinder Description"
     },
     {
       "id": 729,
-      "text": "Sneak Attack II"
+      "text": "Sneak Attack"
     },
     {
       "id": 730,
-      "text": "Sneak Attack II Description"
+      "text": "Sneak Attack I"
     },
     {
       "id": 731,
-      "text": "Sneak Attack III"
+      "text": "Sneak Attack I Description"
     },
     {
       "id": 732,
-      "text": "Sneak Attack III Description"
+      "text": "Sneak Attack II"
     },
     {
       "id": 733,
-      "text": "Subtle Blow I"
+      "text": "Sneak Attack II Description"
     },
     {
       "id": 734,
-      "text": "Subtle Blow I Description"
+      "text": "Sneak Attack III"
     },
     {
       "id": 735,
-      "text": "Subtle Blow II"
+      "text": "Sneak Attack III Description"
     },
     {
       "id": 736,
-      "text": "Subtle Blow II Description"
+      "text": "Subtle Blow I"
     },
     {
       "id": 737,
-      "text": "Treasure Hunter I"
+      "text": "Subtle Blow I Description"
     },
     {
       "id": 738,
-      "text": "Treasure Hunter I Description"
+      "text": "Subtle Blow II"
     },
     {
       "id": 739,
-      "text": "Treasure Hunter II"
+      "text": "Subtle Blow II Description"
     },
     {
       "id": 740,
-      "text": "Treasure Hunter II Description"
+      "text": "Treasure Hunter I"
     },
     {
       "id": 741,
-      "text": "Venom Stab"
+      "text": "Treasure Hunter I Description"
     },
     {
       "id": 742,
-      "text": "Venom Stab Description"
+      "text": "Treasure Hunter II"
     },
     {
       "id": 743,
-      "text": "Critical Bonus I"
+      "text": "Treasure Hunter II Description"
     },
     {
       "id": 744,
-      "text": "Critical Bonus I Description"
+      "text": "Venom Stab"
     },
     {
       "id": 745,
-      "text": "Critical Bonus II"
+      "text": "Venom Stab Description"
     },
     {
       "id": 746,
-      "text": "Critical Bonus II Description"
+      "text": "Critical Bonus I"
     },
     {
       "id": 747,
-      "text": "Light Protection"
+      "text": "Critical Bonus I Description"
     },
     {
       "id": 748,
-      "text": "Light Protection Description"
+      "text": "Critical Bonus II"
     },
     {
       "id": 749,
-      "text": "Flee"
+      "text": "Critical Bonus II Description"
     },
     {
       "id": 750,
-      "text": "Flee Description"
+      "text": "Light Protection"
     },
     {
       "id": 751,
-      "text": "Stasis Field"
+      "text": "Light Protection Description"
     },
     {
       "id": 752,
-      "text": "Stasis Field Description"
+      "text": "Flee"
     },
     {
       "id": 753,
-      "text": "Hide"
+      "text": "Flee Description"
     },
     {
       "id": 754,
-      "text": "Hide Description"
+      "text": "Stasis Field"
     },
     {
       "id": 755,
-      "text": "Perfect Dodge"
+      "text": "Stasis Field Description"
     },
     {
       "id": 756,
-      "text": "Perfect Dodge Description"
+      "text": "Hide"
     },
     {
       "id": 757,
-      "text": "Cryo Venom"
+      "text": "Hide Description"
     },
     {
       "id": 758,
-      "text": "Cryo Venom I"
+      "text": "Perfect Dodge"
     },
     {
       "id": 759,
-      "text": "Cryo Venom I Description"
+      "text": "Perfect Dodge Description"
     },
     {
       "id": 760,
-      "text": "Cryo Venom II"
+      "text": "Cryo Venom"
     },
     {
       "id": 761,
-      "text": "Cryo Venom II Description"
+      "text": "Cryo Venom I"
     },
     {
       "id": 762,
-      "text": "Freezing Shot"
+      "text": "Cryo Venom I Description"
     },
     {
       "id": 763,
-      "text": "Freezing Shot I"
+      "text": "Cryo Venom II"
     },
     {
       "id": 764,
-      "text": "Freezing Shot I Description"
+      "text": "Cryo Venom II Description"
     },
     {
       "id": 765,
-      "text": "Freezing Shot II"
+      "text": "Freezing Shot"
     },
     {
       "id": 766,
-      "text": "Freezing Shot II Description"
+      "text": "Freezing Shot I"
     },
     {
       "id": 767,
-      "text": "Freezing Shot III"
+      "text": "Freezing Shot I Description"
     },
     {
       "id": 768,
-      "text": "Freezing Shot III Description"
+      "text": "Freezing Shot II"
     },
     {
       "id": 769,
-      "text": "Volley"
+      "text": "Freezing Shot II Description"
     },
     {
       "id": 770,
-      "text": "Volley I"
+      "text": "Freezing Shot III"
     },
     {
       "id": 771,
-      "text": "Volley I Description"
+      "text": "Freezing Shot III Description"
     },
     {
       "id": 772,
-      "text": "Volley II"
+      "text": "Volley"
     },
     {
       "id": 773,
-      "text": "Volley II Description"
+      "text": "Volley I"
     },
     {
       "id": 774,
-      "text": "Volley III"
+      "text": "Volley I Description"
     },
     {
       "id": 775,
-      "text": "Volley III Description"
+      "text": "Volley II"
     },
     {
       "id": 776,
-      "text": "Choking Shot"
+      "text": "Volley II Description"
     },
     {
       "id": 777,
-      "text": "Choking Shot I"
+      "text": "Volley III"
     },
     {
       "id": 778,
-      "text": "Choking Shot I Description"
+      "text": "Volley III Description"
     },
     {
       "id": 779,
-      "text": "Choking Shot II"
+      "text": "Choking Shot"
     },
     {
       "id": 780,
-      "text": "Choking Shot II Description"
+      "text": "Choking Shot I"
     },
     {
       "id": 781,
-      "text": "Accuracy Bonus I"
+      "text": "Choking Shot I Description"
     },
     {
       "id": 782,
-      "text": "Accuracy Bonus I Description"
+      "text": "Choking Shot II"
     },
     {
       "id": 783,
-      "text": "Accuracy Bonus II"
+      "text": "Choking Shot II Description"
     },
     {
       "id": 784,
-      "text": "Accuracy Bonus II Description"
+      "text": "Accuracy Bonus I"
     },
     {
       "id": 785,
-      "text": "Cripple"
+      "text": "Accuracy Bonus I Description"
     },
     {
       "id": 786,
-      "text": "Cripple I"
+      "text": "Accuracy Bonus II"
     },
     {
       "id": 787,
-      "text": "Cripple I Description"
+      "text": "Accuracy Bonus II Description"
     },
     {
       "id": 788,
-      "text": "Recycle I"
+      "text": "Cripple"
     },
     {
       "id": 789,
-      "text": "Recycle I Description"
+      "text": "Cripple I"
     },
     {
       "id": 790,
-      "text": "Recycle II"
+      "text": "Cripple I Description"
     },
     {
       "id": 791,
-      "text": "Recycle II Description"
+      "text": "Cripple II"
     },
     {
       "id": 792,
-      "text": "Ice Protection"
+      "text": "Cripple II Description"
     },
     {
       "id": 793,
-      "text": "Ice Protection Description"
+      "text": "Recycle I"
     },
     {
       "id": 794,
-      "text": "Sharpshot"
+      "text": "Recycle I Description"
     },
     {
       "id": 795,
-      "text": "Sharpshot Description"
+      "text": "Recycle II"
     },
     {
       "id": 796,
-      "text": "Reflex Bonus"
+      "text": "Recycle II Description"
     },
     {
       "id": 797,
-      "text": "Reflex Bonus Description"
+      "text": "Ice Protection"
     },
     {
       "id": 798,
-      "text": "Barrage"
+      "text": "Ice Protection Description"
     },
     {
       "id": 799,
-      "text": "Barrage Description"
+      "text": "Sharpshot"
     },
     {
       "id": 800,
-      "text": "Eagle Eye Shot"
+      "text": "Sharpshot Description"
     },
     {
       "id": 801,
-      "text": "Eagle Eye Shot Description"
+      "text": "Reflex Bonus"
     },
     {
       "id": 802,
-      "text": "Flame"
+      "text": "Reflex Bonus Description"
     },
     {
       "id": 803,
-      "text": "Flame I"
+      "text": "Barrage"
     },
     {
       "id": 804,
-      "text": "Flame I Description"
+      "text": "Barrage Description"
     },
     {
       "id": 805,
-      "text": "Flame II"
+      "text": "Eagle Eye Shot"
     },
     {
       "id": 806,
-      "text": "Flame II Description"
+      "text": "Eagle Eye Shot Description"
     },
     {
       "id": 807,
-      "text": "Flame III"
+      "text": "Flame"
     },
     {
       "id": 808,
-      "text": "Flame III Description"
+      "text": "Flame I"
     },
     {
       "id": 809,
-      "text": "Neurotoxin"
+      "text": "Flame I Description"
     },
     {
       "id": 810,
-      "text": "Neurotoxin Description"
+      "text": "Flame II"
     },
     {
       "id": 811,
-      "text": "Clear Mind"
+      "text": "Flame II Description"
     },
     {
       "id": 812,
-      "text": "Clear Mind Description"
+      "text": "Flame III"
     },
     {
       "id": 813,
-      "text": "Drown"
+      "text": "Flame III Description"
     },
     {
       "id": 814,
-      "text": "Drown I"
+      "text": "Neurotoxin"
     },
     {
       "id": 815,
-      "text": "Drown I Description"
+      "text": "Neurotoxin Description"
     },
     {
       "id": 816,
-      "text": "Drown II"
+      "text": "Clear Mind"
     },
     {
       "id": 817,
-      "text": "Drown II Description"
+      "text": "Clear Mind Description"
     },
     {
       "id": 818,
-      "text": "Ether Attack Bonus I"
+      "text": "Drown"
     },
     {
       "id": 819,
-      "text": "Ether Attack Bonus I Description"
+      "text": "Drown I"
     },
     {
       "id": 820,
-      "text": "Ether Attack Bonus II"
+      "text": "Drown I Description"
     },
     {
       "id": 821,
-      "text": "Ether Attack Bonus II Description"
+      "text": "Drown II"
     },
     {
       "id": 822,
-      "text": "Shockwave Surge"
+      "text": "Drown II Description"
     },
     {
       "id": 823,
-      "text": "Shockwave Surge I"
+      "text": "Ether Attack Bonus I"
     },
     {
       "id": 824,
-      "text": "Shockwave Surge I Description"
+      "text": "Ether Attack Bonus I Description"
     },
     {
       "id": 825,
-      "text": "Shockwave Surge II"
+      "text": "Ether Attack Bonus II"
     },
     {
       "id": 826,
-      "text": "Shockwave Surge II Description"
+      "text": "Ether Attack Bonus II Description"
     },
     {
       "id": 827,
-      "text": "Shocking Circle"
+      "text": "Shockwave Surge"
     },
     {
       "id": 828,
-      "text": "Shocking Circle Description"
+      "text": "Shockwave Surge I"
     },
     {
       "id": 829,
-      "text": "Abyssal Veil"
+      "text": "Shockwave Surge I Description"
     },
     {
       "id": 830,
-      "text": "Abyssal Veil I"
+      "text": "Shockwave Surge II"
     },
     {
       "id": 831,
-      "text": "Abyssal Veil I Description"
+      "text": "Shockwave Surge II Description"
     },
     {
       "id": 832,
-      "text": "Abyssal Veil II"
+      "text": "Shocking Circle"
     },
     {
       "id": 833,
-      "text": "Abyssal Veil II Description"
+      "text": "Shocking Circle Description"
     },
     {
       "id": 834,
-      "text": "Elemental Seal"
+      "text": "Abyssal Veil"
     },
     {
       "id": 835,
-      "text": "Elemental Seal Description"
+      "text": "Abyssal Veil I"
     },
     {
       "id": 836,
-      "text": "Lightning Protection"
+      "text": "Abyssal Veil I Description"
     },
     {
       "id": 837,
-      "text": "Lightning Protection Description"
+      "text": "Abyssal Veil II"
     },
     {
       "id": 838,
-      "text": "Escape"
+      "text": "Abyssal Veil II Description"
     },
     {
       "id": 839,
-      "text": "Escape Description"
+      "text": "Elemental Seal"
     },
     {
       "id": 840,
-      "text": "Zephyr Shroud"
+      "text": "Elemental Seal Description"
     },
     {
       "id": 841,
-      "text": "Zephyr Shroud Description"
+      "text": "Lightning Protection"
     },
     {
       "id": 842,
-      "text": "Ether Wall"
+      "text": "Lightning Protection Description"
     },
     {
       "id": 843,
-      "text": "Ether Wall Description"
+      "text": "Escape"
     },
     {
       "id": 844,
-      "text": "Graviton Field"
+      "text": "Escape Description"
     },
     {
       "id": 845,
-      "text": "Graviton Field Description"
+      "text": "Zephyr Shroud"
     },
     {
       "id": 846,
-      "text": "Manafont"
+      "text": "Zephyr Shroud Description"
     },
     {
       "id": 847,
-      "text": "Manafont Description"
+      "text": "Ether Wall"
     },
     {
       "id": 848,
-      "text": "Neural Cascade"
+      "text": "Ether Wall Description"
     },
     {
       "id": 849,
-      "text": "Neural Cascade I"
+      "text": "Graviton Field"
     },
     {
       "id": 850,
-      "text": "Neural Cascade I Description"
+      "text": "Graviton Field Description"
     },
     {
       "id": 851,
-      "text": "Neural Cascade II"
+      "text": "Manafont"
     },
     {
       "id": 852,
-      "text": "Neural Cascade II Description"
+      "text": "Manafont Description"
     },
     {
       "id": 853,
-      "text": "Null Lance"
+      "text": "Neural Cascade"
     },
     {
       "id": 854,
-      "text": "Null Lance I"
+      "text": "Neural Cascade I"
     },
     {
       "id": 855,
-      "text": "Null Lance I Description"
+      "text": "Neural Cascade I Description"
     },
     {
       "id": 856,
-      "text": "Null Lance II"
+      "text": "Neural Cascade II"
     },
     {
       "id": 857,
-      "text": "Null Lance II Description"
+      "text": "Neural Cascade II Description"
     },
     {
       "id": 858,
-      "text": "Null Lance III"
+      "text": "Null Lance"
     },
     {
       "id": 859,
-      "text": "Null Lance III Description"
+      "text": "Null Lance I"
     },
     {
       "id": 860,
-      "text": "Synaptic Shock"
+      "text": "Null Lance I Description"
     },
     {
       "id": 861,
-      "text": "Synaptic Shock Description"
+      "text": "Null Lance II"
     },
     {
       "id": 862,
-      "text": "Rupture"
+      "text": "Null Lance II Description"
     },
     {
       "id": 863,
-      "text": "Rupture Description"
+      "text": "Null Lance III"
     },
     {
       "id": 864,
-      "text": "Cerebral Spike"
+      "text": "Null Lance III Description"
     },
     {
       "id": 865,
-      "text": "Cerebral Spike I"
+      "text": "Synaptic Shock"
     },
     {
       "id": 866,
-      "text": "Cerebral Spike I Description"
+      "text": "Synaptic Shock Description"
     },
     {
       "id": 867,
-      "text": "Cerebral Spike II"
+      "text": "Rupture"
     },
     {
       "id": 868,
-      "text": "Cerebral Spike II Description"
+      "text": "Rupture Description"
     },
     {
       "id": 869,
-      "text": "Auto Refresh I"
+      "text": "Cerebral Spike"
     },
     {
       "id": 870,
-      "text": "Auto Refresh I Description"
+      "text": "Cerebral Spike I"
     },
     {
       "id": 871,
-      "text": "Auto Refresh II"
+      "text": "Cerebral Spike I Description"
     },
     {
       "id": 872,
-      "text": "Auto Refresh II Description"
+      "text": "Cerebral Spike II"
     },
     {
       "id": 873,
-      "text": "EP Bonus I"
+      "text": "Cerebral Spike II Description"
     },
     {
       "id": 874,
-      "text": "EP Bonus I Description"
+      "text": "Auto Refresh I"
     },
     {
       "id": 875,
-      "text": "EP Bonus II"
+      "text": "Auto Refresh I Description"
     },
     {
       "id": 876,
-      "text": "EP Bonus II Description"
+      "text": "Auto Refresh II"
     },
     {
       "id": 877,
-      "text": "Aurion Infusion"
+      "text": "Auto Refresh II Description"
     },
     {
       "id": 878,
-      "text": "Aurion Infusion I"
+      "text": "EP Bonus I"
     },
     {
       "id": 879,
-      "text": "Aurion Infusion I Description"
+      "text": "EP Bonus I Description"
     },
     {
       "id": 880,
-      "text": "Aurion Infusion II"
+      "text": "EP Bonus II"
     },
     {
       "id": 881,
-      "text": "Aurion Infusion II Description"
+      "text": "EP Bonus II Description"
     },
     {
       "id": 882,
-      "text": "Mindstream"
+      "text": "Aurion Infusion"
     },
     {
       "id": 883,
-      "text": "Mindstream I"
+      "text": "Aurion Infusion I"
     },
     {
       "id": 884,
-      "text": "Mindstream I Description"
+      "text": "Aurion Infusion I Description"
     },
     {
       "id": 885,
-      "text": "Mindstream II"
+      "text": "Aurion Infusion II"
     },
     {
       "id": 886,
-      "text": "Mindstream II Description"
+      "text": "Aurion Infusion II Description"
     },
     {
       "id": 887,
-      "text": "Mind Protection"
+      "text": "Mindstream"
     },
     {
       "id": 888,
-      "text": "Mind Protection Description"
+      "text": "Mindstream I"
     },
     {
       "id": 889,
-      "text": "Neural Stasis"
+      "text": "Mindstream I Description"
     },
     {
       "id": 890,
-      "text": "Neural Stasis Description"
+      "text": "Mindstream II"
     },
     {
       "id": 891,
-      "text": "Convert"
+      "text": "Mindstream II Description"
     },
     {
       "id": 892,
-      "text": "Convert Description"
+      "text": "Mind Protection"
     },
     {
       "id": 893,
-      "text": "Etherwarp"
+      "text": "Mind Protection Description"
     },
     {
       "id": 894,
+      "text": "Neural Stasis"
+    },
+    {
+      "id": 895,
+      "text": "Neural Stasis Description"
+    },
+    {
+      "id": 896,
+      "text": "Convert"
+    },
+    {
+      "id": 897,
+      "text": "Convert Description"
+    },
+    {
+      "id": 898,
+      "text": "Etherwarp"
+    },
+    {
+      "id": 899,
       "text": "Etherwarp Description"
     }
   ]
