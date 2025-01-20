@@ -85,7 +85,7 @@ namespace XM.Combat.StatusEffect
         {
             var effects = _creatureEffects[creature];
 
-            foreach (var effect in effects.ToList())
+            foreach (var effect in effects.GetAllEffects())
             {
                 if (effect.IsFlaggedForRemoval)
                 {
@@ -96,6 +96,13 @@ namespace XM.Combat.StatusEffect
                     effect.TickEffect(creature);
                 }
             }
+        }
+
+        public CreatureStatusEffect GetCreatureStatusEffects(uint creature)
+        {
+            return !_creatureEffects.ContainsKey(creature) 
+                ? new CreatureStatusEffect() 
+                : _creatureEffects[creature];
         }
 
         public void ApplyPermanentStatusEffect<T>(uint creature)
@@ -139,7 +146,7 @@ namespace XM.Combat.StatusEffect
         private void RemoveStatusEffect(Type type, uint creature)
         {
             var hasSentMessage = false;
-            var statusEffects = _creatureEffects[creature].ToList();
+            var statusEffects = _creatureEffects[creature].GetAllEffects();
             foreach (var statusEffect in statusEffects)
             {
                 if (statusEffect.GetType() == type)

@@ -1,12 +1,12 @@
 ﻿using Anvil.Services;
 using System;
 using NWN.Core.NWNX;
+using XM.Combat.StatusEffect;
 using XM.Inventory;
 using XM.Progression.Job;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
-using XM.Shared.Core.Data;
 using XM.Shared.Core.Localization;
 using CreaturePlugin = XM.Shared.API.NWNX.CreaturePlugin.CreaturePlugin;
 using XM.Shared.API.NWNX.FeedbackPlugin;
@@ -18,22 +18,22 @@ namespace XM.Combat
     [ServiceBinding(typeof(CombatService))]
     internal class CombatService: IInitializable
     {
-        private readonly DBService _db;
         private readonly JobService _job;
         private readonly StatService _stat;
         private readonly ItemTypeService _itemType;
+        private readonly StatusEffectService _statusEffect;
 
         public CombatService(
             XMEventService @event,
-            DBService db,
             JobService job,
             StatService stat,
-            ItemTypeService itemType)
+            ItemTypeService itemType,
+            StatusEffectService statusEffect)
         {
-            _db = db;
             _job = job;
             _stat = stat;
             _itemType = itemType;
+            _statusEffect = statusEffect;
 
             @event.Subscribe<NWNXEvent.OnBroadcastAttackOfOpportunityBefore>(DisableAttacksOfOpportunity);
         }
@@ -90,7 +90,8 @@ namespace XM.Combat
             AttackType attackType, 
             CombatModeType combatMode)
         {
-            var bonus = _stat.GetAccuracy(attacker);
+            var attackerStatusEffects = _statusEffect.GetCreatureStatusEffects(attacker);
+            var bonus = _stat.GetAccuracy(attacker) + attackerStatusEffects.Accuracy;
             var perception = _stat.GetAttribute(attacker, AbilityType.Perception);
             var level = _job.GetLevel(attacker);
             var modifiers = 0;
@@ -110,9 +111,10 @@ namespace XM.Combat
 
         private int CalculateEvasion(uint creature)
         {
+            var statusEffects = _statusEffect.GetCreatureStatusEffects(creature);
             var agility = _stat.GetAttribute(creature, AbilityType.Agility);
             var baseEvasion = CreaturePlugin.GetBaseAC(creature) * 5;
-            var evasionBonus = _stat.GetEvasion(creature);
+            var evasionBonus = _stat.GetEvasion(creature) + statusEffects.Evasion;
             var level = _stat.GetLevel(creature);
 
             return agility * 3 + level + baseEvasion + evasionBonus;
@@ -257,7 +259,8 @@ namespace XM.Combat
 
         private int CalculateAttack(uint attacker, AttackType attackType)
         {
-            var attack = _stat.GetAttack(attacker);
+            var attackerStatusEffects = _statusEffect.GetCreatureStatusEffects(attacker);
+            var attack = _stat.GetAttack(attacker) + attackerStatusEffects.Attack;
             var stat = attackType == AttackType.Melee
                 ? _stat.GetAttribute(attacker, AbilityType.Might)
                 : _stat.GetAttribute(attacker, AbilityType.Agility);
@@ -268,7 +271,8 @@ namespace XM.Combat
 
         private int CalculateDefense(uint defender)
         {
-            var defense = _stat.GetDefense(defender);
+            var defenderStatusEffects = _statusEffect.GetCreatureStatusEffects(defender);
+            var defense = _stat.GetDefense(defender) + defenderStatusEffects.Defense;
             var stat = _stat.GetAttribute(defender, AbilityType.Vitality);
             var level = _stat.GetLevel(defender);
 

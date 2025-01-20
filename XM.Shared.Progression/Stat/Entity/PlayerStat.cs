@@ -41,18 +41,7 @@ namespace XM.Progression.Stat.Entity
                 {AbilityType.Social, 0},
             };
 
-            Resists = new Dictionary<ResistType, int>
-            {
-                { ResistType.Fire, 0},
-                { ResistType.Ice, 0},
-                { ResistType.Wind, 0},
-                { ResistType.Earth, 0},
-                { ResistType.Lightning, 0},
-                { ResistType.Water, 0},
-                { ResistType.Light, 0},
-                { ResistType.Darkness, 0},
-                { ResistType.Mind, 0},
-            };
+            Resists = new ResistCollection();
         }
 
         public int MaxHP { get; set; }
