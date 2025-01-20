@@ -2096,6 +2096,1486 @@
     {
       "id": 524,
       "text": "{0}'s {1} effect has worn off."
+    },
+    {
+      "id": 525,
+      "text": "Provoke"
+    },
+    {
+      "id": 526,
+      "text": "Provoke I"
+    },
+    {
+      "id": 527,
+      "text": "Provoke I Description"
+    },
+    {
+      "id": 528,
+      "text": "Provoke II"
+    },
+    {
+      "id": 529,
+      "text": "Provoke II Description"
+    },
+    {
+      "id": 530,
+      "text": "Defense Bonus I"
+    },
+    {
+      "id": 531,
+      "text": "Defense Bonus I Description"
+    },
+    {
+      "id": 532,
+      "text": "Defense Bonus II"
+    },
+    {
+      "id": 533,
+      "text": "Defense Bonus II Description"
+    },
+    {
+      "id": 534,
+      "text": "Defense Bonus III"
+    },
+    {
+      "id": 535,
+      "text": "Defense Bonus III Description"
+    },
+    {
+      "id": 536,
+      "text": "Defense Bonus IV"
+    },
+    {
+      "id": 537,
+      "text": "Defense Bonus IV Description"
+    },
+    {
+      "id": 538,
+      "text": "Resonance Node I"
+    },
+    {
+      "id": 539,
+      "text": "Resonance Node I Description"
+    },
+    {
+      "id": 540,
+      "text": "Resonance Node II"
+    },
+    {
+      "id": 541,
+      "text": "Resonance Node II Description"
+    },
+    {
+      "id": 542,
+      "text": "Resonance Node III"
+    },
+    {
+      "id": 543,
+      "text": "Resonance Node III Description"
+    },
+    {
+      "id": 544,
+      "text": "Resonance Node IV"
+    },
+    {
+      "id": 545,
+      "text": "Resonance Node IV Description"
+    },
+    {
+      "id": 546,
+      "text": "Resonance Node V"
+    },
+    {
+      "id": 547,
+      "text": "Resonance Node V Description"
+    },
+    {
+      "id": 548,
+      "text": "Restoration"
+    },
+    {
+      "id": 549,
+      "text": "Restoration I"
+    },
+    {
+      "id": 550,
+      "text": "Restoration I Description"
+    },
+    {
+      "id": 551,
+      "text": "Restoration II"
+    },
+    {
+      "id": 552,
+      "text": "Restoration II Description"
+    },
+    {
+      "id": 553,
+      "text": "Restoration III"
+    },
+    {
+      "id": 554,
+      "text": "Restoration III Description"
+    },
+    {
+      "id": 555,
+      "text": "Shield Mastery I"
+    },
+    {
+      "id": 556,
+      "text": "Shield Mastery I Description"
+    },
+    {
+      "id": 557,
+      "text": "Shield Mastery II"
+    },
+    {
+      "id": 558,
+      "text": "Shield Mastery II Description"
+    },
+    {
+      "id": 559,
+      "text": "Aggressor"
+    },
+    {
+      "id": 560,
+      "text": "Aggressor I"
+    },
+    {
+      "id": 561,
+      "text": "Aggressor I Description"
+    },
+    {
+      "id": 562,
+      "text": "Aggressor II"
+    },
+    {
+      "id": 563,
+      "text": "Aggressor II Description"
+    },
+    {
+      "id": 564,
+      "text": "Radiant Blast"
+    },
+    {
+      "id": 565,
+      "text": "Radiant Blast I"
+    },
+    {
+      "id": 566,
+      "text": "Radiant Blast I Description"
+    },
+    {
+      "id": 567,
+      "text": "Radiant Blast II"
+    },
+    {
+      "id": 568,
+      "text": "Radiant Blast II Description"
+    },
+    {
+      "id": 569,
+      "text": "HP Bonus I"
+    },
+    {
+      "id": 570,
+      "text": "HP Bonus I Description"
+    },
+    {
+      "id": 571,
+      "text": "HP Bonus II"
+    },
+    {
+      "id": 572,
+      "text": "HP Bonus II Description"
+    },
+    {
+      "id": 573,
+      "text": "Darkness Protection"
+    },
+    {
+      "id": 574,
+      "text": "Darkness Protection Description"
+    },
+    {
+      "id": 575,
+      "text": "Rampart"
+    },
+    {
+      "id": 576,
+      "text": "Rampart Description"
+    },
+    {
+      "id": 577,
+      "text": "Raise"
+    },
+    {
+      "id": 578,
+      "text": "Raise Description"
+    },
+    {
+      "id": 579,
+      "text": "Mighty Strikes"
+    },
+    {
+      "id": 580,
+      "text": "Mighty Strikes Description"
+    },
+    {
+      "id": 581,
+      "text": "Ether Bloom"
+    },
+    {
+      "id": 582,
+      "text": "Ether Bloom I"
+    },
+    {
+      "id": 583,
+      "text": "Ether Bloom I Description"
+    },
+    {
+      "id": 584,
+      "text": "Ether Bloom II"
+    },
+    {
+      "id": 585,
+      "text": "Ether Bloom II Description"
+    },
+    {
+      "id": 586,
+      "text": "Ether Bloom III"
+    },
+    {
+      "id": 587,
+      "text": "Ether Bloom III Description"
+    },
+    {
+      "id": 588,
+      "text": "Ether Bloom IV"
+    },
+    {
+      "id": 589,
+      "text": "Ether Bloom IV Description"
+    },
+    {
+      "id": 590,
+      "text": "Antidote"
+    },
+    {
+      "id": 591,
+      "text": "Antidote Description"
+    },
+    {
+      "id": 592,
+      "text": "Protection"
+    },
+    {
+      "id": 593,
+      "text": "Protection I"
+    },
+    {
+      "id": 594,
+      "text": "Protection I Description"
+    },
+    {
+      "id": 595,
+      "text": "Protection II"
+    },
+    {
+      "id": 596,
+      "text": "Protection II Description"
+    },
+    {
+      "id": 597,
+      "text": "Protection III"
+    },
+    {
+      "id": 598,
+      "text": "Protection III Description"
+    },
+    {
+      "id": 599,
+      "text": "Divine Seal"
+    },
+    {
+      "id": 600,
+      "text": "Divine Seal Description"
+    },
+    {
+      "id": 601,
+      "text": "Auto Regen I"
+    },
+    {
+      "id": 602,
+      "text": "Auto Regen II"
+    },
+    {
+      "id": 603,
+      "text": "Ether Blast"
+    },
+    {
+      "id": 604,
+      "text": "Ether Blast I"
+    },
+    {
+      "id": 605,
+      "text": "Ether Blast I Description"
+    },
+    {
+      "id": 606,
+      "text": "Ether Blast II"
+    },
+    {
+      "id": 607,
+      "text": "Ether Blast II Description"
+    },
+    {
+      "id": 608,
+      "text": "Regen"
+    },
+    {
+      "id": 609,
+      "text": "Regen I"
+    },
+    {
+      "id": 610,
+      "text": "Regen I Description"
+    },
+    {
+      "id": 611,
+      "text": "Regen II"
+    },
+    {
+      "id": 612,
+      "text": "Regen II Description"
+    },
+    {
+      "id": 613,
+      "text": "Revive"
+    },
+    {
+      "id": 614,
+      "text": "Revive Description"
+    },
+    {
+      "id": 615,
+      "text": "Fire Protection"
+    },
+    {
+      "id": 616,
+      "text": "Fire Protection Description"
+    },
+    {
+      "id": 617,
+      "text": "Tsu"
+    },
+    {
+      "id": 618,
+      "text": "Tsu Description"
+    },
+    {
+      "id": 619,
+      "text": "Erase"
+    },
+    {
+      "id": 620,
+      "text": "Erase Description"
+    },
+    {
+      "id": 621,
+      "text": "Haste"
+    },
+    {
+      "id": 622,
+      "text": "Haste Description"
+    },
+    {
+      "id": 623,
+      "text": "Benediction"
+    },
+    {
+      "id": 624,
+      "text": "Benediction Description"
+    },
+    {
+      "id": 625,
+      "text": "Tame"
+    },
+    {
+      "id": 626,
+      "text": "Tame Description"
+    },
+    {
+      "id": 627,
+      "text": "Reward"
+    },
+    {
+      "id": 628,
+      "text": "Reward I"
+    },
+    {
+      "id": 629,
+      "text": "Reward I Description"
+    },
+    {
+      "id": 630,
+      "text": "Reward II"
+    },
+    {
+      "id": 631,
+      "text": "Reward II Description"
+    },
+    {
+      "id": 632,
+      "text": "Reward III"
+    },
+    {
+      "id": 633,
+      "text": "Reward III Description"
+    },
+    {
+      "id": 634,
+      "text": "Crescent Moon"
+    },
+    {
+      "id": 635,
+      "text": "Crescent Moon I"
+    },
+    {
+      "id": 636,
+      "text": "Crescent Moon I Description"
+    },
+    {
+      "id": 637,
+      "text": "Crescent Moon II"
+    },
+    {
+      "id": 638,
+      "text": "Crescent Moon II Description"
+    },
+    {
+      "id": 639,
+      "text": "Crescent Moon III"
+    },
+    {
+      "id": 640,
+      "text": "Crescent Moon III Description"
+    },
+    {
+      "id": 641,
+      "text": "Sic"
+    },
+    {
+      "id": 642,
+      "text": "Sic Description"
+    },
+    {
+      "id": 643,
+      "text": "Mercy Strike"
+    },
+    {
+      "id": 644,
+      "text": "Mercy Strike I"
+    },
+    {
+      "id": 645,
+      "text": "Mercy Strike I Description"
+    },
+    {
+      "id": 646,
+      "text": "Mercy Strike II"
+    },
+    {
+      "id": 647,
+      "text": "Mercy Strike II Description"
+    },
+    {
+      "id": 648,
+      "text": "Snarl"
+    },
+    {
+      "id": 649,
+      "text": "Snarl Description"
+    },
+    {
+      "id": 650,
+      "text": "Resist Poison"
+    },
+    {
+      "id": 651,
+      "text": "Resist Poison Description"
+    },
+    {
+      "id": 652,
+      "text": "Third Eye"
+    },
+    {
+      "id": 653,
+      "text": "Third Eye Description"
+    },
+    {
+      "id": 654,
+      "text": "Earth Protection"
+    },
+    {
+      "id": 655,
+      "text": "Earth Protection Description"
+    },
+    {
+      "id": 656,
+      "text": "Feral Howl"
+    },
+    {
+      "id": 657,
+      "text": "Feral Howl Description"
+    },
+    {
+      "id": 658,
+      "text": "Quickness"
+    },
+    {
+      "id": 659,
+      "text": "Quickness Description"
+    },
+    {
+      "id": 660,
+      "text": "Assault"
+    },
+    {
+      "id": 661,
+      "text": "Assault Description"
+    },
+    {
+      "id": 662,
+      "text": "Killer Instinct"
+    },
+    {
+      "id": 663,
+      "text": "Killer Instinct Description"
+    },
+    {
+      "id": 664,
+      "text": "Beast Speed"
+    },
+    {
+      "id": 665,
+      "text": "Beast Speed Description"
+    },
+    {
+      "id": 666,
+      "text": "Ether Link"
+    },
+    {
+      "id": 667,
+      "text": "Ether Link Description"
+    },
+    {
+      "id": 668,
+      "text": "Familiar"
+    },
+    {
+      "id": 669,
+      "text": "Familiar Description"
+    },
+    {
+      "id": 670,
+      "text": "Electric Fist"
+    },
+    {
+      "id": 671,
+      "text": "Electric Fist I"
+    },
+    {
+      "id": 672,
+      "text": "Electric Fist I Description"
+    },
+    {
+      "id": 673,
+      "text": "Electric Fist II"
+    },
+    {
+      "id": 674,
+      "text": "Electric Fist II Description"
+    },
+    {
+      "id": 675,
+      "text": "Electric Fist III"
+    },
+    {
+      "id": 676,
+      "text": "Electric Fist III Description"
+    },
+    {
+      "id": 677,
+      "text": "Striking Cobra"
+    },
+    {
+      "id": 678,
+      "text": "Striking Cobra I"
+    },
+    {
+      "id": 679,
+      "text": "Striking Cobra I Description"
+    },
+    {
+      "id": 680,
+      "text": "Striking Cobra II"
+    },
+    {
+      "id": 681,
+      "text": "Striking Cobra II Description"
+    },
+    {
+      "id": 682,
+      "text": "Flash"
+    },
+    {
+      "id": 683,
+      "text": "Flash Description"
+    },
+    {
+      "id": 684,
+      "text": "Parry I"
+    },
+    {
+      "id": 685,
+      "text": "Parry I Description"
+    },
+    {
+      "id": 686,
+      "text": "Parry II"
+    },
+    {
+      "id": 687,
+      "text": "Parry II Description"
+    },
+    {
+      "id": 688,
+      "text": "Parry III"
+    },
+    {
+      "id": 689,
+      "text": "Parry III Description"
+    },
+    {
+      "id": 690,
+      "text": "Attack Bonus I"
+    },
+    {
+      "id": 691,
+      "text": "Attack Bonus I Description"
+    },
+    {
+      "id": 692,
+      "text": "Attack Bonus II"
+    },
+    {
+      "id": 693,
+      "text": "Attack Bonus II Description"
+    },
+    {
+      "id": 694,
+      "text": "Power Attack I"
+    },
+    {
+      "id": 695,
+      "text": "Power Attack I Description"
+    },
+    {
+      "id": 696,
+      "text": "Power Attack II"
+    },
+    {
+      "id": 697,
+      "text": "Power Attack II Description"
+    },
+    {
+      "id": 698,
+      "text": "Shadowstrike"
+    },
+    {
+      "id": 699,
+      "text": "Shadowstrike I"
+    },
+    {
+      "id": 700,
+      "text": "Shadowstrike I Description"
+    },
+    {
+      "id": 701,
+      "text": "Shadowstrike II"
+    },
+    {
+      "id": 702,
+      "text": "Shadowstrike II Description"
+    },
+    {
+      "id": 703,
+      "text": "Warcry"
+    },
+    {
+      "id": 704,
+      "text": "Warcry Description"
+    },
+    {
+      "id": 705,
+      "text": "Chi"
+    },
+    {
+      "id": 706,
+      "text": "Chi I"
+    },
+    {
+      "id": 707,
+      "text": "Chi I Description"
+    },
+    {
+      "id": 708,
+      "text": "Wind Protection"
+    },
+    {
+      "id": 709,
+      "text": "Wind Protection Description"
+    },
+    {
+      "id": 710,
+      "text": "Martial Arts"
+    },
+    {
+      "id": 711,
+      "text": "Martial Arts Description"
+    },
+    {
+      "id": 712,
+      "text": "Hundred Fists"
+    },
+    {
+      "id": 713,
+      "text": "Hundred Fists Description"
+    },
+    {
+      "id": 714,
+      "text": "Back Attack I"
+    },
+    {
+      "id": 715,
+      "text": "Back Attack I Description"
+    },
+    {
+      "id": 716,
+      "text": "Back Attack II"
+    },
+    {
+      "id": 717,
+      "text": "Back Attack II Description"
+    },
+    {
+      "id": 718,
+      "text": "Back Attack III"
+    },
+    {
+      "id": 719,
+      "text": "Back Attack III Description"
+    },
+    {
+      "id": 720,
+      "text": "Back Attack IV"
+    },
+    {
+      "id": 721,
+      "text": "Back Attack IV Description"
+    },
+    {
+      "id": 722,
+      "text": "Steal"
+    },
+    {
+      "id": 723,
+      "text": "Steal Description"
+    },
+    {
+      "id": 724,
+      "text": "Creditfinder"
+    },
+    {
+      "id": 725,
+      "text": "Creditfinder Description"
+    },
+    {
+      "id": 726,
+      "text": "Sneak Attack"
+    },
+    {
+      "id": 727,
+      "text": "Sneak Attack I"
+    },
+    {
+      "id": 728,
+      "text": "Sneak Attack I Description"
+    },
+    {
+      "id": 729,
+      "text": "Sneak Attack II"
+    },
+    {
+      "id": 730,
+      "text": "Sneak Attack II Description"
+    },
+    {
+      "id": 731,
+      "text": "Sneak Attack III"
+    },
+    {
+      "id": 732,
+      "text": "Sneak Attack III Description"
+    },
+    {
+      "id": 733,
+      "text": "Subtle Blow I"
+    },
+    {
+      "id": 734,
+      "text": "Subtle Blow I Description"
+    },
+    {
+      "id": 735,
+      "text": "Subtle Blow II"
+    },
+    {
+      "id": 736,
+      "text": "Subtle Blow II Description"
+    },
+    {
+      "id": 737,
+      "text": "Treasure Hunter I"
+    },
+    {
+      "id": 738,
+      "text": "Treasure Hunter I Description"
+    },
+    {
+      "id": 739,
+      "text": "Treasure Hunter II"
+    },
+    {
+      "id": 740,
+      "text": "Treasure Hunter II Description"
+    },
+    {
+      "id": 741,
+      "text": "Venom Stab"
+    },
+    {
+      "id": 742,
+      "text": "Venom Stab Description"
+    },
+    {
+      "id": 743,
+      "text": "Critical Bonus I"
+    },
+    {
+      "id": 744,
+      "text": "Critical Bonus I Description"
+    },
+    {
+      "id": 745,
+      "text": "Critical Bonus II"
+    },
+    {
+      "id": 746,
+      "text": "Critical Bonus II Description"
+    },
+    {
+      "id": 747,
+      "text": "Light Protection"
+    },
+    {
+      "id": 748,
+      "text": "Light Protection Description"
+    },
+    {
+      "id": 749,
+      "text": "Flee"
+    },
+    {
+      "id": 750,
+      "text": "Flee Description"
+    },
+    {
+      "id": 751,
+      "text": "Stasis Field"
+    },
+    {
+      "id": 752,
+      "text": "Stasis Field Description"
+    },
+    {
+      "id": 753,
+      "text": "Hide"
+    },
+    {
+      "id": 754,
+      "text": "Hide Description"
+    },
+    {
+      "id": 755,
+      "text": "Perfect Dodge"
+    },
+    {
+      "id": 756,
+      "text": "Perfect Dodge Description"
+    },
+    {
+      "id": 757,
+      "text": "Cryo Venom"
+    },
+    {
+      "id": 758,
+      "text": "Cryo Venom I"
+    },
+    {
+      "id": 759,
+      "text": "Cryo Venom I Description"
+    },
+    {
+      "id": 760,
+      "text": "Cryo Venom II"
+    },
+    {
+      "id": 761,
+      "text": "Cryo Venom II Description"
+    },
+    {
+      "id": 762,
+      "text": "Freezing Shot"
+    },
+    {
+      "id": 763,
+      "text": "Freezing Shot I"
+    },
+    {
+      "id": 764,
+      "text": "Freezing Shot I Description"
+    },
+    {
+      "id": 765,
+      "text": "Freezing Shot II"
+    },
+    {
+      "id": 766,
+      "text": "Freezing Shot II Description"
+    },
+    {
+      "id": 767,
+      "text": "Freezing Shot III"
+    },
+    {
+      "id": 768,
+      "text": "Freezing Shot III Description"
+    },
+    {
+      "id": 769,
+      "text": "Volley"
+    },
+    {
+      "id": 770,
+      "text": "Volley I"
+    },
+    {
+      "id": 771,
+      "text": "Volley I Description"
+    },
+    {
+      "id": 772,
+      "text": "Volley II"
+    },
+    {
+      "id": 773,
+      "text": "Volley II Description"
+    },
+    {
+      "id": 774,
+      "text": "Volley III"
+    },
+    {
+      "id": 775,
+      "text": "Volley III Description"
+    },
+    {
+      "id": 776,
+      "text": "Choking Shot"
+    },
+    {
+      "id": 777,
+      "text": "Choking Shot I"
+    },
+    {
+      "id": 778,
+      "text": "Choking Shot I Description"
+    },
+    {
+      "id": 779,
+      "text": "Choking Shot II"
+    },
+    {
+      "id": 780,
+      "text": "Choking Shot II Description"
+    },
+    {
+      "id": 781,
+      "text": "Accuracy Bonus I"
+    },
+    {
+      "id": 782,
+      "text": "Accuracy Bonus I Description"
+    },
+    {
+      "id": 783,
+      "text": "Accuracy Bonus II"
+    },
+    {
+      "id": 784,
+      "text": "Accuracy Bonus II Description"
+    },
+    {
+      "id": 785,
+      "text": "Cripple"
+    },
+    {
+      "id": 786,
+      "text": "Cripple I"
+    },
+    {
+      "id": 787,
+      "text": "Cripple I Description"
+    },
+    {
+      "id": 788,
+      "text": "Recycle I"
+    },
+    {
+      "id": 789,
+      "text": "Recycle I Description"
+    },
+    {
+      "id": 790,
+      "text": "Recycle II"
+    },
+    {
+      "id": 791,
+      "text": "Recycle II Description"
+    },
+    {
+      "id": 792,
+      "text": "Ice Protection"
+    },
+    {
+      "id": 793,
+      "text": "Ice Protection Description"
+    },
+    {
+      "id": 794,
+      "text": "Sharpshot"
+    },
+    {
+      "id": 795,
+      "text": "Sharpshot Description"
+    },
+    {
+      "id": 796,
+      "text": "Reflex Bonus"
+    },
+    {
+      "id": 797,
+      "text": "Reflex Bonus Description"
+    },
+    {
+      "id": 798,
+      "text": "Barrage"
+    },
+    {
+      "id": 799,
+      "text": "Barrage Description"
+    },
+    {
+      "id": 800,
+      "text": "Eagle Eye Shot"
+    },
+    {
+      "id": 801,
+      "text": "Eagle Eye Shot Description"
+    },
+    {
+      "id": 802,
+      "text": "Flame"
+    },
+    {
+      "id": 803,
+      "text": "Flame I"
+    },
+    {
+      "id": 804,
+      "text": "Flame I Description"
+    },
+    {
+      "id": 805,
+      "text": "Flame II"
+    },
+    {
+      "id": 806,
+      "text": "Flame II Description"
+    },
+    {
+      "id": 807,
+      "text": "Flame III"
+    },
+    {
+      "id": 808,
+      "text": "Flame III Description"
+    },
+    {
+      "id": 809,
+      "text": "Neurotoxin"
+    },
+    {
+      "id": 810,
+      "text": "Neurotoxin Description"
+    },
+    {
+      "id": 811,
+      "text": "Clear Mind"
+    },
+    {
+      "id": 812,
+      "text": "Clear Mind Description"
+    },
+    {
+      "id": 813,
+      "text": "Drown"
+    },
+    {
+      "id": 814,
+      "text": "Drown I"
+    },
+    {
+      "id": 815,
+      "text": "Drown I Description"
+    },
+    {
+      "id": 816,
+      "text": "Drown II"
+    },
+    {
+      "id": 817,
+      "text": "Drown II Description"
+    },
+    {
+      "id": 818,
+      "text": "Ether Attack Bonus I"
+    },
+    {
+      "id": 819,
+      "text": "Ether Attack Bonus I Description"
+    },
+    {
+      "id": 820,
+      "text": "Ether Attack Bonus II"
+    },
+    {
+      "id": 821,
+      "text": "Ether Attack Bonus II Description"
+    },
+    {
+      "id": 822,
+      "text": "Shockwave Surge"
+    },
+    {
+      "id": 823,
+      "text": "Shockwave Surge I"
+    },
+    {
+      "id": 824,
+      "text": "Shockwave Surge I Description"
+    },
+    {
+      "id": 825,
+      "text": "Shockwave Surge II"
+    },
+    {
+      "id": 826,
+      "text": "Shockwave Surge II Description"
+    },
+    {
+      "id": 827,
+      "text": "Shocking Circle"
+    },
+    {
+      "id": 828,
+      "text": "Shocking Circle Description"
+    },
+    {
+      "id": 829,
+      "text": "Abyssal Veil"
+    },
+    {
+      "id": 830,
+      "text": "Abyssal Veil I"
+    },
+    {
+      "id": 831,
+      "text": "Abyssal Veil I Description"
+    },
+    {
+      "id": 832,
+      "text": "Abyssal Veil II"
+    },
+    {
+      "id": 833,
+      "text": "Abyssal Veil II Description"
+    },
+    {
+      "id": 834,
+      "text": "Elemental Seal"
+    },
+    {
+      "id": 835,
+      "text": "Elemental Seal Description"
+    },
+    {
+      "id": 836,
+      "text": "Lightning Protection"
+    },
+    {
+      "id": 837,
+      "text": "Lightning Protection Description"
+    },
+    {
+      "id": 838,
+      "text": "Escape"
+    },
+    {
+      "id": 839,
+      "text": "Escape Description"
+    },
+    {
+      "id": 840,
+      "text": "Zephyr Shroud"
+    },
+    {
+      "id": 841,
+      "text": "Zephyr Shroud Description"
+    },
+    {
+      "id": 842,
+      "text": "Ether Wall"
+    },
+    {
+      "id": 843,
+      "text": "Ether Wall Description"
+    },
+    {
+      "id": 844,
+      "text": "Graviton Field"
+    },
+    {
+      "id": 845,
+      "text": "Graviton Field Description"
+    },
+    {
+      "id": 846,
+      "text": "Manafont"
+    },
+    {
+      "id": 847,
+      "text": "Manafont Description"
+    },
+    {
+      "id": 848,
+      "text": "Neural Cascade"
+    },
+    {
+      "id": 849,
+      "text": "Neural Cascade I"
+    },
+    {
+      "id": 850,
+      "text": "Neural Cascade I Description"
+    },
+    {
+      "id": 851,
+      "text": "Neural Cascade II"
+    },
+    {
+      "id": 852,
+      "text": "Neural Cascade II Description"
+    },
+    {
+      "id": 853,
+      "text": "Null Lance"
+    },
+    {
+      "id": 854,
+      "text": "Null Lance I"
+    },
+    {
+      "id": 855,
+      "text": "Null Lance I Description"
+    },
+    {
+      "id": 856,
+      "text": "Null Lance II"
+    },
+    {
+      "id": 857,
+      "text": "Null Lance II Description"
+    },
+    {
+      "id": 858,
+      "text": "Null Lance III"
+    },
+    {
+      "id": 859,
+      "text": "Null Lance III Description"
+    },
+    {
+      "id": 860,
+      "text": "Synaptic Shock"
+    },
+    {
+      "id": 861,
+      "text": "Synaptic Shock Description"
+    },
+    {
+      "id": 862,
+      "text": "Rupture"
+    },
+    {
+      "id": 863,
+      "text": "Rupture Description"
+    },
+    {
+      "id": 864,
+      "text": "Cerebral Spike"
+    },
+    {
+      "id": 865,
+      "text": "Cerebral Spike I"
+    },
+    {
+      "id": 866,
+      "text": "Cerebral Spike I Description"
+    },
+    {
+      "id": 867,
+      "text": "Cerebral Spike II"
+    },
+    {
+      "id": 868,
+      "text": "Cerebral Spike II Description"
+    },
+    {
+      "id": 869,
+      "text": "Auto Refresh I"
+    },
+    {
+      "id": 870,
+      "text": "Auto Refresh I Description"
+    },
+    {
+      "id": 871,
+      "text": "Auto Refresh II"
+    },
+    {
+      "id": 872,
+      "text": "Auto Refresh II Description"
+    },
+    {
+      "id": 873,
+      "text": "EP Bonus I"
+    },
+    {
+      "id": 874,
+      "text": "EP Bonus I Description"
+    },
+    {
+      "id": 875,
+      "text": "EP Bonus II"
+    },
+    {
+      "id": 876,
+      "text": "EP Bonus II Description"
+    },
+    {
+      "id": 877,
+      "text": "Aurion Infusion"
+    },
+    {
+      "id": 878,
+      "text": "Aurion Infusion I"
+    },
+    {
+      "id": 879,
+      "text": "Aurion Infusion I Description"
+    },
+    {
+      "id": 880,
+      "text": "Aurion Infusion II"
+    },
+    {
+      "id": 881,
+      "text": "Aurion Infusion II Description"
+    },
+    {
+      "id": 882,
+      "text": "Mindstream"
+    },
+    {
+      "id": 883,
+      "text": "Mindstream I"
+    },
+    {
+      "id": 884,
+      "text": "Mindstream I Description"
+    },
+    {
+      "id": 885,
+      "text": "Mindstream II"
+    },
+    {
+      "id": 886,
+      "text": "Mindstream II Description"
+    },
+    {
+      "id": 887,
+      "text": "Mind Protection"
+    },
+    {
+      "id": 888,
+      "text": "Mind Protection Description"
+    },
+    {
+      "id": 889,
+      "text": "Neural Stasis"
+    },
+    {
+      "id": 890,
+      "text": "Neural Stasis Description"
+    },
+    {
+      "id": 891,
+      "text": "Convert"
+    },
+    {
+      "id": 892,
+      "text": "Convert Description"
+    },
+    {
+      "id": 893,
+      "text": "Etherwarp"
+    },
+    {
+      "id": 894,
+      "text": "Etherwarp Description"
     }
   ]
 }
