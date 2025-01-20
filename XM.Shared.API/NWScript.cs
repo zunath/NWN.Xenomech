@@ -10629,9 +10629,9 @@ namespace XM.Shared.API
         ///             Using the icon for Poison/Disease will also color the health bar green/brown, useful to simulate custom poisons/diseases.<br/>
         ///  Returns an effect of type EFFECT_TYPE_INVALIDEFFECT when nIconID is < 1 or > 255.
         /// </summary>
-        public static Effect EffectIcon(int nIconID)
+        public static Effect EffectIcon(EffectIconType nIconID)
         {
-            return NWN.Core.NWScript.EffectIcon(nIconID);
+            return NWN.Core.NWScript.EffectIcon((int)nIconID);
         }
 
         /// <summary>

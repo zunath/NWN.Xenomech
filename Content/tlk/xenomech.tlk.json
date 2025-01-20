@@ -2076,6 +2076,26 @@
     {
       "id": 519,
       "text": "Discord"
+    },
+    {
+      "id": 520,
+      "text": "You cannot rest during combat."
+    },
+    {
+      "id": 521,
+      "text": "You cannot rest while enemies are nearby."
+    },
+    {
+      "id": 522,
+      "text": "Rest"
+    },
+    {
+      "id": 523,
+      "text": "{0} receives the effect of {1}."
+    },
+    {
+      "id": 524,
+      "text": "{0}'s {1} effect has worn off."
     }
   ]
 }

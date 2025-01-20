@@ -198,5 +198,13 @@ namespace XM.Shared.Core.Localization
         EnemyAccuracyBonus = 515,
         TotalBaseAccuracyBonusIs = 516,
         AccuracybonusColon = 517,
+        Background = 518,
+        Discord = 519,
+        YouCannotRestDuringCombat = 520,
+        YouCannotRestWhileEnemiesAreNearby = 521,
+        Rest = 522,
+        CreatureReceivesTheEffectOfX = 523,
+        CreaturesXEffectHasWornOff = 524,
+
     }
 }
