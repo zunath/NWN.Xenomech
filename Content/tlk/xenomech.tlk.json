@@ -3596,6 +3596,14 @@
     {
       "id": 899,
       "text": "Etherwarp Description"
+    },
+    {
+      "id": 900,
+      "text": "Capstone"
+    },
+    {
+      "id": 901,
+      "text": "Elemental Protection"
     }
   ]
 }
