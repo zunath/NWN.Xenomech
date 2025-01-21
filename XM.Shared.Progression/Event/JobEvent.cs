@@ -2,7 +2,7 @@
 
 namespace XM.Progression.Event
 {
-    internal class JobEvent
+    public class JobEvent
     {
         public struct PlayerChangedJobEvent : IXMEvent
         {

@@ -2,7 +2,7 @@
 
 namespace XM.Progression.Event
 {
-    internal class StatEvent
+    public class StatEvent
     {
         public struct PlayerEPAdjustedEvent : IXMEvent
         {
