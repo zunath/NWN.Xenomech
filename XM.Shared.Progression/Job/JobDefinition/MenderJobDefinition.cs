@@ -26,7 +26,27 @@ namespace XM.Progression.Job.JobDefinition
 
         public override Dictionary<int, FeatType> FeatAcquisitionLevels => new()
         {
-
+            {2, FeatType.EtherBloom1},
+            {4, FeatType.Antidote},
+            {8, FeatType.Protection1},
+            {10, FeatType.DivineSeal},
+            {12, FeatType.EtherBloom2},
+            {14, FeatType.AutoRegen1},
+            {18, FeatType.EtherBlast1},
+            {20, FeatType.Regen1},
+            {22, FeatType.Revive},
+            {24, FeatType.EtherBloom3},
+            {25, FeatType.FireProtection},
+            {26, FeatType.Protection2},
+            {30, FeatType.Tsu},
+            {32, FeatType.EtherBlast2},
+            {34, FeatType.Erase},
+            {36, FeatType.AutoRegen2},
+            {40, FeatType.Haste},
+            {42, FeatType.EtherBloom4},
+            {44, FeatType.Regen2},
+            {48, FeatType.Protection3},
+            {50, FeatType.Benediction},
         };
     }
 }

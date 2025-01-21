@@ -26,7 +26,27 @@ namespace XM.Progression.Job.JobDefinition
 
         public override Dictionary<int, FeatType> FeatAcquisitionLevels => new()
         {
-
+            {2, FeatType.NeuralCascade1},
+            {4, FeatType.NullLance1},
+            {8, FeatType.SynapticShock},
+            {10, FeatType.Rupture},
+            {12, FeatType.CerebralSpike1},
+            {14, FeatType.AutoRefresh1},
+            {18, FeatType.EPBonus1},
+            {20, FeatType.AurionInfusion1},
+            {22, FeatType.NullLance2},
+            {24, FeatType.Mindstream1},
+            {25, FeatType.MindProtection},
+            {26, FeatType.NeuralStasis},
+            {30, FeatType.NeuralCascade2},
+            {32, FeatType.EPBonus2},
+            {34, FeatType.CerebralSpike2},
+            {36, FeatType.AutoRefresh2},
+            {40, FeatType.AurionInfusion2},
+            {42, FeatType.Convert},
+            {44, FeatType.NullLance3},
+            {48, FeatType.Mindstream2},
+            {50, FeatType.Etherwarp},
         };
     }
 }
