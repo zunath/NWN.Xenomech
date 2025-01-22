@@ -3604,6 +3604,78 @@
     {
       "id": 901,
       "text": "Elemental Protection"
+    },
+    {
+      "id": 902,
+      "text": "Call Beast"
+    },
+    {
+      "id": 903,
+      "text": "Call Beast Description"
+    },
+    {
+      "id": 904,
+      "text": "Longsword Lore"
+    },
+    {
+      "id": 905,
+      "text": "Longsword Lore Description"
+    },
+    {
+      "id": 906,
+      "text": "Club Lore"
+    },
+    {
+      "id": 907,
+      "text": "Club Lore Description"
+    },
+    {
+      "id": 908,
+      "text": "Axe Lore"
+    },
+    {
+      "id": 909,
+      "text": "Axe Lore Description"
+    },
+    {
+      "id": 910,
+      "text": "Hand-to-Hand Lore"
+    },
+    {
+      "id": 911,
+      "text": "Hand-to-Hand Lore Description"
+    },
+    {
+      "id": 912,
+      "text": "Dagger Lore"
+    },
+    {
+      "id": 913,
+      "text": "Dagger Lore Description"
+    },
+    {
+      "id": 914,
+      "text": "Bow Lore"
+    },
+    {
+      "id": 915,
+      "text": "Bow Lore Description"
+    },
+    {
+      "id": 916,
+      "text": "Staff Lore"
+    },
+    {
+      "id": 917,
+      "text": "Staff Lore Description"
+    },
+    {
+      "id": 918,
+      "text": "Polearm Lore"
+    },
+    {
+      "id": 919,
+      "text": "Polearm Lore Description"
     }
   ]
 }
