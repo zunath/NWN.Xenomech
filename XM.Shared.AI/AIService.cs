@@ -198,6 +198,8 @@ namespace XM.AI
         {
             var savingThrow = GetFortitudeSavingThrow(GetLastUsedBy());
 
+            CreaturePlugin.SetBaseAttackBonus(GetLastUsedBy(), 1);
+
             SendMessageToPC(GetLastUsedBy(), $"saving throw = {savingThrow}");
         }
     }

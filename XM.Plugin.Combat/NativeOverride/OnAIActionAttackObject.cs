@@ -41,12 +41,18 @@ namespace XM.Combat.NativeOverride
             var pCreature = CNWSCreature.FromPointer(creature);
             var pNode = CNWSObjectActionNode.FromPointer(node);
 
-            uint oidAttackTarget = (uint)pNode.m_pParameter[0];
-            var pArea = pCreature.GetArea();
+            uint oidAttackTarget, oidArea;
 
+            CNWSArea pArea = pCreature.GetArea();
+
+            // This action was just run... reset
+            // the combat round update time.
+            // - BKH - May/21/02
             pCreature.m_nLastCombatRoundUpdate = 6000;
 
-            if (pCreature.GetDead() == 1 || pCreature.GetIsPCDying() == 1 ||
+            /*	inline BOOL        IsAIState(uint16_t nAIState)                 {return ((m_nAIState & nAIState) == nAIState);}*/
+            if (pCreature.GetDead() == 1 ||
+                pCreature.GetIsPCDying() == 1 ||
                 !IsAIState(AISTATE_CREATURE_ABLE_TO_GO_HOSTILE, pCreature) ||
                 !IsAIState(AISTATE_CREATURE_USE_HANDS, pCreature))
             {
@@ -54,44 +60,58 @@ namespace XM.Combat.NativeOverride
                 return ACTION_FAILED;
             }
 
+            oidAttackTarget = (uint)pNode.m_pParameter[0];
+
+            // You cannot attack yourself
             if (oidAttackTarget == pCreature.m_idSelf)
             {
                 pCreature.SetAnimation(NWANIMBASE_ANIM_PAUSE);
                 return ACTION_FAILED;
             }
 
-            var pGameObject = (CGameObject)NWNXLib.g_pAppManager.m_pServerExoApp.GetGameObject(oidAttackTarget);
-            if (pGameObject == null)
-            {
-                pCreature.ChangeAttackTarget(pNode, OBJECT_INVALID);
-                return ACTION_FAILED;
-            }
+            CGameObject pGameObject = (CGameObject)NWNXLib.g_pAppManager.m_pServerExoApp.GetGameObject(oidAttackTarget);
 
             bool bTargetActive = false;
-            var pTarget = pGameObject.AsNWSObject();
-            if (pTarget != null && pTarget.GetDead() == 0)
+            if (pGameObject != null)
             {
-                bTargetActive = true;
-            }
-
-            var pCreatureTarget = pGameObject.AsNWSCreature();
-            if (pCreatureTarget != null && pCreatureTarget.GetDead() == 0 && pCreatureTarget.m_bPlayerCharacter == 1 && pCreatureTarget.GetIsPCDying() == 1)
-            {
-                bTargetActive = true;
-            }
-
-            var pVisNode = pCreature.GetVisibleListElement(oidAttackTarget);
-            if (pVisNode != null)
-            {
-                if (pVisNode.m_nSanctuary == SANCTUARY_SAVE_FAILED ||
-                    (pVisNode.m_bInvisible == 1 && pVisNode.m_bHeard == 0 && pVisNode.m_bSeen == 0))
+                if (pGameObject.AsNWSObject() != null)
                 {
-                    bTargetActive = false;
+                    if (pGameObject.AsNWSObject().GetDead() == 0)
+                    {
+                        bTargetActive = true;
+                    }
+
+                    if (pGameObject.AsNWSCreature() != null &&
+                        pGameObject.AsNWSCreature().GetDead() == 0 &&
+                        pGameObject.AsNWSCreature().m_bPlayerCharacter == 1 &&
+                        pGameObject.AsNWSCreature().GetIsPCDying() == 1)
+                    {
+                        bTargetActive = true;
+                    }
+
+                    // If the target is invisible and we can't see or hear them,
+                    // then they aren't an acceptable target.
+                    CNWVisibilityNode pVisNode = pCreature.GetVisibleListElement(oidAttackTarget);
+                    if (pVisNode != null)
+                    {
+                        if (pVisNode.m_nSanctuary == SANCTUARY_SAVE_FAILED ||
+                            (pVisNode.m_bInvisible == 1 &&
+                             pVisNode.m_bHeard == 0 &&
+                             pVisNode.m_bSeen == 0))
+                        {
+                            bTargetActive = false;
+                        }
+                    }
+                    else
+                    {
+                        if (pGameObject.AsNWSCreature() != null &&
+                            pCreature.m_bPlayerCharacter == 1)
+                            //pCreature.GetIsDM() == false)
+                        {
+                            bTargetActive = false;
+                        }
+                    }
                 }
-            }
-            else if (pCreatureTarget != null && pCreature.m_bPlayerCharacter == 1)
-            {
-                bTargetActive = false;
             }
 
             if (!bTargetActive)
@@ -100,16 +120,131 @@ namespace XM.Combat.NativeOverride
                 return ACTION_FAILED;
             }
 
-            var pTargetArea = pTarget.GetArea();
-            var vTargetPosition = pTarget.m_vPosition;
-            var fMaxAttackRange = pCreature.MaxAttackRange(oidAttackTarget);
+            CNWSObject pTarget = pGameObject.AsNWSObject();
+            Vector vTargetPosition = pTarget.m_vPosition;
+            CNWSArea pTargetArea = pTarget.GetArea();
 
-            if (ShouldRepositionForAttack(pArea, pTargetArea, vTargetPosition, fMaxAttackRange, pCreature))
+            float fMaxAttackRange = pCreature.MaxAttackRange(oidAttackTarget);
+            float fDesiredAttackRange = pCreature.DesiredAttackRange(oidAttackTarget);
+            if (pCreature.m_oidAttemptedAttackTarget == OBJECT_INVALID)
             {
-                if (HandleRepositioning(pNode, oidAttackTarget, pTarget, vTargetPosition, pTargetArea, fMaxAttackRange, pCreature))
+                pCreature.m_oidAttemptedAttackTarget = oidAttackTarget;
+            }
+
+            int bClearLineOfAttack = 0;
+
+            if (pArea != null && pArea == pTargetArea)
+            {
+                bClearLineOfAttack = pCreature.CheckAttackClearLineToTarget(oidAttackTarget, vTargetPosition, pArea);
+            }
+
+            bool bOutsideAttackRange = (pTargetArea != pArea ||
+                                        DistanceSquared(pCreature.m_vPosition, vTargetPosition) > Math.Pow(fMaxAttackRange + CNW_PATHFIND_TOLERANCE, 2));
+
+            if (bOutsideAttackRange || bClearLineOfAttack == 0)
+            {
+                if (pCreature.m_bPassiveAttackBehaviour == 1)
                 {
-                    return ACTION_IN_PROGRESS;
+                    CNWSCreature newTarget = pCreature.GetNewCombatTarget(oidAttackTarget);
+                    oidAttackTarget = OBJECT_INVALID;
+
+                    if (newTarget != null)
+                    {
+                        oidAttackTarget = newTarget.m_idSelf;
+                        pCreature.m_bPassiveAttackBehaviour = 1;
+                    }
+
+                    pCreature.ChangeAttackTarget(pNode, oidAttackTarget);
+                    return (oidAttackTarget != OBJECT_INVALID ? ACTION_IN_PROGRESS : ACTION_FAILED);
                 }
+
+                if (pTargetArea != null)
+                {
+                    oidArea = pTargetArea.m_idSelf;
+                }
+                else
+                {
+                    if (pTarget.AsNWSCreature() != null && pCreature.m_oidEncounter == OBJECT_INVALID)
+                    {
+                        oidArea = pTarget.AsNWSCreature().m_oidDesiredArea;
+                        vTargetPosition = pTarget.AsNWSCreature().m_vDesiredAreaLocation;
+                    }
+                    else
+                    {
+                        CNWSCreature newTarget = pCreature.GetNewCombatTarget(oidAttackTarget);
+                        oidAttackTarget = OBJECT_INVALID;
+
+                        if (newTarget != null)
+                        {
+                            oidAttackTarget = newTarget.m_idSelf;
+                            pCreature.m_bPassiveAttackBehaviour = 1;
+                        }
+
+                        pCreature.ChangeAttackTarget(pNode, oidAttackTarget);
+                        return (oidAttackTarget != OBJECT_INVALID ? ACTION_IN_PROGRESS : ACTION_FAILED);
+                    }
+                }
+
+                if (pCreature.m_vLastAttackPosition != new Vector() && pCreature.m_vLastAttackPosition == pCreature.m_vPosition)
+                {
+                    if (pCreature.m_bPlayerCharacter == 1)
+                    {
+                        pCreature.SendFeedbackMessage(FEEDBACK_ACTION_CANT_REACH_TARGET);
+                    }
+
+                    CNWSCreature newTarget = null;
+
+                    if (pCreature.GetRangeWeaponEquipped() == 0)
+                    {
+                        newTarget = pCreature.GetNewCombatTarget(oidAttackTarget);
+                    }
+
+                    bool bUpdateTarget = false;
+                    if (newTarget != null)
+                    {
+                        oidAttackTarget = newTarget.m_idSelf;
+                        pCreature.m_bPassiveAttackBehaviour = 1;
+                        bUpdateTarget = true;
+                    }
+                    else if (pCreature.m_bPlayerCharacter == 1)
+                    {
+                        oidAttackTarget = OBJECT_INVALID;
+                        bUpdateTarget = true;
+                    }
+
+                    if (bUpdateTarget)
+                    {
+                        pCreature.ChangeAttackTarget(pNode, oidAttackTarget);
+                        return (oidAttackTarget != OBJECT_INVALID ? ACTION_IN_PROGRESS : ACTION_FAILED);
+                    }
+                }
+                else
+                {
+                    pCreature.m_vLastAttackPosition = pCreature.m_vPosition;
+                }
+
+                float fMoveToTargetRange = fDesiredAttackRange;
+                float fMoveToTargetMaxRange = fMaxAttackRange;
+
+                if (bClearLineOfAttack == 0)
+                {
+                    if (!bOutsideAttackRange)
+                    {
+                        if (pTarget.AsNWSCreature() != null)
+                        {
+                            fMoveToTargetRange = pCreature.m_pcPathfindInformation.m_fCreaturePersonalSpace +
+                                                 pTarget.AsNWSCreature().m_pcPathfindInformation.m_fCreaturePersonalSpace;
+                        }
+                        else
+                        {
+                            fMoveToTargetRange = pCreature.m_pcPathfindInformation.m_fPersonalSpace;
+                        }
+                    }
+
+                    pCreature.m_pcPathfindInformation.m_bUsePlotGridPath = 1;
+                }
+
+                pCreature.AddMoveToPointActionToFront(pNode.m_nGroupActionId, vTargetPosition, oidArea, oidAttackTarget, 1, fMoveToTargetRange);
                 return ACTION_COMPLETE;
             }
 
@@ -119,93 +254,36 @@ namespace XM.Combat.NativeOverride
                 return ACTION_FAILED;
             }
 
+            pCreature.m_vLastAttackPosition = new Vector();
+
             if (pCreature.m_pcCombatRound.m_bRoundStarted == 0)
             {
                 pCreature.m_pcCombatRound.StartCombatRound(oidAttackTarget);
             }
 
-            if (pCreature.m_pcCombatRound.m_bRoundPaused == 0 && pCreature.m_pcCombatRound.GetActionPending() == 1)
+            if (pCreature.m_pcCombatRound.m_bRoundPaused == 0)
             {
-                HandleCombatAction(pNode, oidAttackTarget, pCreature);
+                if (pCreature.m_pcCombatRound.GetActionPending() == 1)
+                {
+                    CNWSCombatRoundAction pPendingAction = pCreature.m_pcCombatRound.GetAction();
+
+                    if (pPendingAction != null)
+                    {
+                        uint oidTarget = pPendingAction.m_oidTarget;
+                        if (oidAttackTarget != oidTarget && pPendingAction.m_bActionRetargettable == 1)
+                        {
+                            oidTarget = oidAttackTarget;
+                        }
+
+                        pCreature.m_pcCombatRound.SetRoundPaused(1);
+                        pCreature.m_pcCombatRound.SetPauseTimer(pPendingAction.m_nAnimationTime);
+                        pCreature.SetAnimation(pPendingAction.m_nAnimation);
+                        pCreature.ResolveAttack(oidTarget, pPendingAction.m_nNumAttacks, pPendingAction.m_nAnimationTime);
+                    }
+                }
             }
 
-            if (pCreature.m_vLastAttackPosition == pCreature.m_vPosition)
-            {
-                pCreature.SendFeedbackMessage(FEEDBACK_ACTION_CANT_REACH_TARGET);
-                oidAttackTarget = AssignNewTarget(pNode, oidAttackTarget, pCreature);
-                return oidAttackTarget != OBJECT_INVALID ? ACTION_IN_PROGRESS : ACTION_FAILED;
-            }
-
-            pCreature.m_vLastAttackPosition = pCreature.m_vPosition;
-            pCreature.ChangeAttackTarget(pNode, oidAttackTarget);
             return ACTION_IN_PROGRESS;
-        }
-
-        private bool ShouldRepositionForAttack(CNWSArea pArea, CNWSArea pTargetArea, Vector vTargetPosition, float fMaxAttackRange, CNWSCreature pCreature)
-        {
-            return pArea != pTargetArea ||
-                   DistanceSquared(pCreature.m_vPosition, vTargetPosition) > (fMaxAttackRange + CNW_PATHFIND_TOLERANCE) * (fMaxAttackRange + CNW_PATHFIND_TOLERANCE) ||
-                   pCreature.CheckAttackClearLineToTarget(pCreature.m_oidAttackTarget, vTargetPosition, pArea) == 0;
-        }
-
-        private bool HandleRepositioning(CNWSObjectActionNode pNode, uint oidAttackTarget, CNWSObject pTarget, Vector vTargetPosition, CNWSArea pTargetArea, float fMaxAttackRange, CNWSCreature pCreature)
-        {
-            float fMoveToTargetRange = pCreature.DesiredAttackRange(oidAttackTarget);
-            if (pTarget.AsNWSCreature() != null)
-            {
-                fMoveToTargetRange += pCreature.m_pcPathfindInformation.m_fCreaturePersonalSpace;
-                fMoveToTargetRange += pTarget.AsNWSCreature().m_pcPathfindInformation.m_fCreaturePersonalSpace;
-            }
-            else
-            {
-                fMoveToTargetRange += pCreature.m_pcPathfindInformation.m_fPersonalSpace;
-            }
-
-            pCreature.m_pcPathfindInformation.m_bUsePlotGridPath = 1;
-
-            pCreature.AddMoveToPointActionToFront(
-                pNode.m_nGroupActionId,
-                vTargetPosition,
-                pTargetArea != null ? pTargetArea.m_idSelf : OBJECT_INVALID,
-                oidAttackTarget,
-                1,
-                fMoveToTargetRange);
-
-            return true;
-        }
-
-        private uint AssignNewTarget(CNWSObjectActionNode pNode, uint oidAttackTarget, CNWSCreature pCreature)
-        {
-            var newTarget = pCreature.GetNewCombatTarget(oidAttackTarget);
-            if (newTarget != null)
-            {
-                oidAttackTarget = newTarget.m_idSelf;
-                pCreature.m_bPassiveAttackBehaviour = 1;
-            }
-            else
-            {
-                oidAttackTarget = OBJECT_INVALID;
-            }
-
-            pCreature.ChangeAttackTarget(pNode, oidAttackTarget);
-            return oidAttackTarget;
-        }
-
-        private void HandleCombatAction(CNWSObjectActionNode pNode, uint oidAttackTarget, CNWSCreature pCreature)
-        {
-            var pPendingAction = pCreature.m_pcCombatRound.GetAction();
-            if (pPendingAction == null) return;
-
-            var oidTarget = pPendingAction.m_oidTarget;
-            if (oidTarget != oidAttackTarget && pPendingAction.m_bActionRetargettable == 1)
-            {
-                oidTarget = oidAttackTarget;
-            }
-
-            pCreature.m_pcCombatRound.SetRoundPaused(1);
-            pCreature.m_pcCombatRound.SetPauseTimer(pPendingAction.m_nAnimationTime);
-            pCreature.SetAnimation(pPendingAction.m_nAnimation);
-            pCreature.ResolveAttack(oidTarget, pPendingAction.m_nNumAttacks, pPendingAction.m_nAnimationTime);
         }
 
         private float DistanceSquared(Vector v1, Vector v2)
