@@ -48,6 +48,9 @@ namespace XM.Combat.NativeOverride
         private const int NWANIMBASE_ANIM_ATTACK = 9;
 
 
+        private DateTime _lastCombatRoundUpdate = DateTime.MinValue;
+        private const int CustomDelayMilliseconds = 18000;
+
 
         [NativeFunction("_ZN12CNWSCreature20AIActionAttackObjectEP20CNWSObjectActionNode", "")]
         private delegate int AIActionAttackObjectHook(void* pCreature, void* pNode);
@@ -71,7 +74,7 @@ namespace XM.Combat.NativeOverride
 
             uint oidAttackTarget, oidArea;
 
-            CNWSArea pArea = pCreature.GetArea();
+            var pArea = pCreature.GetArea();
 
             // This action was just run... reset
             // the combat round update time.
@@ -97,9 +100,9 @@ namespace XM.Combat.NativeOverride
                 return ACTION_FAILED;
             }
 
-            CGameObject pGameObject = (CGameObject)NWNXLib.g_pAppManager.m_pServerExoApp.GetGameObject(oidAttackTarget);
+            var pGameObject = (CGameObject)NWNXLib.g_pAppManager.m_pServerExoApp.GetGameObject(oidAttackTarget);
 
-            bool bTargetActive = false;
+            var bTargetActive = false;
             if (pGameObject != null)
             {
                 if (pGameObject.AsNWSObject() != null)
@@ -119,7 +122,7 @@ namespace XM.Combat.NativeOverride
 
                     // If the target is invisible and we can't see or hear them,
                     // then they aren't an acceptable target.
-                    CNWVisibilityNode pVisNode = pCreature.GetVisibleListElement(oidAttackTarget);
+                    var pVisNode = pCreature.GetVisibleListElement(oidAttackTarget);
                     if (pVisNode != null)
                     {
                         if (pVisNode.m_nSanctuary == SANCTUARY_SAVE_FAILED ||
@@ -144,22 +147,22 @@ namespace XM.Combat.NativeOverride
 
             if (bTargetActive)
             {
-                CNWSObject pTarget = pGameObject.AsNWSObject();
-                Vector vTargetPosition = pTarget.m_vPosition;
-                CNWSArea pTargetArea = pTarget.GetArea();
+                var pTarget = pGameObject.AsNWSObject();
+                var vTargetPosition = pTarget.m_vPosition;
+                var pTargetArea = pTarget.GetArea();
 
-                float fMaxAttackRange = pCreature.MaxAttackRange(oidAttackTarget);
-                float fDesiredAttackRange = pCreature.DesiredAttackRange(oidAttackTarget);
+                var fMaxAttackRange = pCreature.MaxAttackRange(oidAttackTarget);
+                var fDesiredAttackRange = pCreature.DesiredAttackRange(oidAttackTarget);
                 if (pCreature.m_oidAttemptedAttackTarget == OBJECT_INVALID)
                 {
                     pCreature.m_oidAttemptedAttackTarget = oidAttackTarget;
                 }
 
-                float fUseRange = 0;
+                const float fUseRange = 0;
 
                 if (pGameObject.AsNWSCreature() != null)
                 {
-                    IntPtr pFUseRange = Marshal.AllocHGlobal(sizeof(float));
+                    var pFUseRange = Marshal.AllocHGlobal(sizeof(float));
 
                     try
                     {
@@ -172,7 +175,7 @@ namespace XM.Combat.NativeOverride
                     }
                 }
 
-                int bClearLineOfAttack = 0;
+                var bClearLineOfAttack = 0;
 
                 if (pArea != null && pArea == pTargetArea)
                 {
@@ -184,14 +187,14 @@ namespace XM.Combat.NativeOverride
                         pCreature.m_vPosition.y - vTargetPosition.y,
                         pCreature.m_vPosition.z - vTargetPosition.z
                     );
-                bool bOutsideAttackRange = (pTargetArea != pArea ||
-                                            MagnitudeSquared(vDelta) > Sqr(fMaxAttackRange + CNW_PATHFIND_TOLERANCE));
+                var bOutsideAttackRange = (pTargetArea != pArea ||
+                                           MagnitudeSquared(vDelta) > Sqr(fMaxAttackRange + CNW_PATHFIND_TOLERANCE));
 
                 if (bOutsideAttackRange || bClearLineOfAttack == 0)
                 {
                     if (pCreature.m_bPassiveAttackBehaviour == 1)
                     {
-                        CNWSCreature newTarget = pCreature.GetNewCombatTarget(oidAttackTarget);
+                        var newTarget = pCreature.GetNewCombatTarget(oidAttackTarget);
                         oidAttackTarget = OBJECT_INVALID;
 
                         if (newTarget != null)
@@ -217,7 +220,7 @@ namespace XM.Combat.NativeOverride
                         }
                         else
                         {
-                            CNWSCreature newTarget = pCreature.GetNewCombatTarget(oidAttackTarget);
+                            var newTarget = pCreature.GetNewCombatTarget(oidAttackTarget);
                             oidAttackTarget = OBJECT_INVALID;
 
                             if (newTarget != null)
@@ -246,7 +249,7 @@ namespace XM.Combat.NativeOverride
                             newTarget = pCreature.GetNewCombatTarget(oidAttackTarget);
                         }
 
-                        bool bUpdateTarget = false;
+                        var bUpdateTarget = false;
                         if (newTarget != null)
                         {
                             oidAttackTarget = newTarget.m_idSelf;
@@ -270,8 +273,8 @@ namespace XM.Combat.NativeOverride
                         pCreature.m_vLastAttackPosition = pCreature.m_vPosition;
                     }
 
-                    float fMoveToTargetRange = fDesiredAttackRange;
-                    float fMoveToTargetMaxRange = fMaxAttackRange;
+                    var fMoveToTargetRange = fDesiredAttackRange;
+                    var fMoveToTargetMaxRange = fMaxAttackRange;
 
                     if (bClearLineOfAttack == 0)
                     {
@@ -361,7 +364,7 @@ namespace XM.Combat.NativeOverride
             {
                 if (pCreature.m_pcCombatRound.GetActionPending() == 1)
                 {
-                    CNWSCombatRoundAction pPendingAction = pCreature.m_pcCombatRound.GetAction();
+                    var pPendingAction = pCreature.m_pcCombatRound.GetAction();
 
                     if (pPendingAction != null)
                     {
@@ -384,7 +387,14 @@ namespace XM.Combat.NativeOverride
                         {
                             case CNWSCOMBATROUND_TYPE_ATTACK:
                             {
-                                pCreature.SetAnimation(nAnimation);
+
+                                if ((DateTime.UtcNow - _lastCombatRoundUpdate).TotalMilliseconds < CustomDelayMilliseconds)
+                                {
+                                    return ACTION_IN_PROGRESS;
+                                }
+
+                                _lastCombatRoundUpdate = DateTime.UtcNow;
+                                    pCreature.SetAnimation(nAnimation);
                                 if (oidAttackTarget != oidTarget)
                                 {
                                     if (pPendingAction.m_bActionRetargettable == 1)
@@ -448,11 +458,11 @@ namespace XM.Combat.NativeOverride
                                     pCreature.m_pcCombatRound.SetRoundPaused(1, pCreature.m_idSelf);
                                     if (nActionType == CNWSCOMBATROUND_TYPE_COMSTEPFB)
                                     {
-                                        pCreature.DoCombatStep(COMBAT_STEP_TYPE_ADJUST, nTimeAnimation, oidTarget);
+                                        //pCreature.DoCombatStep(COMBAT_STEP_TYPE_ADJUST, nTimeAnimation, oidTarget);
                                     }
                                     else
                                     {
-                                        pCreature.DoCombatStep(COMBAT_STEP_TYPE_APPROPRIATE, nTimeAnimation, oidTarget);
+                                        //pCreature.DoCombatStep(COMBAT_STEP_TYPE_APPROPRIATE, nTimeAnimation, oidTarget);
                                     }
                                 }
                                 break;
