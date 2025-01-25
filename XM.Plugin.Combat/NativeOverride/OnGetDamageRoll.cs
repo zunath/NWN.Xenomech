@@ -49,7 +49,6 @@ namespace XM.Combat.NativeOverride
                 var attacker = CNWSCreature.FromPointer(attackerStats.m_pBaseCreature);
                 var round = attacker.m_pcCombatRound;
                 var attackData = round.GetAttack(round.m_nCurrentAttack);
-                var weapon = round.GetCurrentAttackWeapon();
                 var attackType = attackData.m_bRangedAttack == 1
                     ? AttackType.Ranged
                     : AttackType.Melee;
@@ -60,7 +59,6 @@ namespace XM.Combat.NativeOverride
                 return _combat.DetermineDamage(
                     attacker.m_idSelf,
                     defender.m_idSelf,
-                    weapon == null ? OBJECT_INVALID : weapon.m_idSelf,
                     attackType,
                     hitResult);
             });

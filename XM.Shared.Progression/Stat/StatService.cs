@@ -459,10 +459,10 @@ namespace XM.Progression.Stat
             }
         }
 
-        public int GetDMG(uint item)
+        private int GetDMG(uint item)
         {
             if (!GetIsObjectValid(item))
-                return 3; // Base DMG of 3 for unarmed
+                return 0;
 
             var dmg = 0;
             for (var ip = GetFirstItemProperty(item); GetIsItemPropertyValid(ip); ip = GetNextItemProperty(item))
@@ -473,21 +473,28 @@ namespace XM.Progression.Stat
                 }
             }
 
-            if (dmg < 1)
-                dmg = 1;
-
             return dmg;
         }
 
         public int GetMainHandDMG(uint creature)
         {
             var item = GetItemInSlot(InventorySlotType.RightHand, creature);
-            return GetDMG(item);
+            if (!GetIsObjectValid(item))
+                return 3; // Base DMG of 3 for unarmed
+
+            var dmg =  GetDMG(item);
+            if (dmg < 1)
+                dmg = 1;
+
+            return dmg;
         }
 
         public int GetOffHandDMG(uint creature)
         {
             var item = GetItemInSlot(InventorySlotType.LeftHand, creature);
+            if (!GetIsObjectValid(item))
+                return 0;
+
             return GetDMG(item);
         }
 

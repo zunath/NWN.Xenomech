@@ -105,7 +105,9 @@ namespace XM.Combat
             var attackerStatusEffects = _statusEffect.GetCreatureStatusEffects(attacker);
             var bonus = _stat.GetAccuracy(attacker) + attackerStatusEffects.Accuracy;
             var perception = _stat.GetAttribute(attacker, AbilityType.Perception);
-            var level = _job.GetLevel(attacker);
+            var attackerLevel = _stat.GetLevel(attacker);
+            var defenderLevel = _stat.GetLevel(defender);
+            var levelDelta = attackerLevel - defenderLevel;
             var modifiers = 0;
 
             if (attackType == AttackType.Ranged)
@@ -118,7 +120,9 @@ namespace XM.Combat
                 modifiers += CalculateCombatModeAccuracyModifier(combatMode);
             }
 
-            return perception * 3 + level + bonus + modifiers;
+            modifiers += levelDelta * 4;
+
+            return perception * 3 + attackerLevel + bonus + modifiers;
         }
 
         private int CalculateEvasion(uint creature)
@@ -337,11 +341,11 @@ namespace XM.Combat
                 return (delta + 13) / 4;
         }
 
-        private (int, int) CalculateDamageRange(uint attacker, uint defender, uint attackerWeapon, AttackType attackType)
+        private (int, int) CalculateDamageRange(uint attacker, uint defender, AttackType attackType)
         {
             var delta = CalculateDamageStatDelta(attacker, defender, attackType);
             var ratio = CalculateDamageRatio(attacker, defender, attackType);
-            var attackerDMG = _stat.GetDMG(attackerWeapon);
+            var attackerDMG = _stat.GetMainHandDMG(attacker) + _stat.GetOffHandDMG(attacker);
             var baseDMG = attackerDMG + delta;
 
             var maxDamage = baseDMG * ratio;
@@ -353,11 +357,10 @@ namespace XM.Combat
         public int DetermineDamage(
             uint attacker, 
             uint defender,
-            uint attackerWeapon,
             AttackType attackType,
             HitResultType hitResult)
         {
-            var (minDamage, maxDamage) = CalculateDamageRange(attacker, defender, attackerWeapon, attackType);
+            var (minDamage, maxDamage) = CalculateDamageRange(attacker, defender, attackType);
             var damage = XMRandom.Next(minDamage, maxDamage);
 
             if (hitResult == HitResultType.Critical)
