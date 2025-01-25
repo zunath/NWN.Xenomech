@@ -5204,6 +5204,62 @@
     {
       "id": 1301,
       "text": "Radiant Arrow Description"
+    },
+    {
+      "id": 1302,
+      "text": "Longsword"
+    },
+    {
+      "id": 1303,
+      "text": "Great Sword"
+    },
+    {
+      "id": 1304,
+      "text": "Pistol"
+    },
+    {
+      "id": 1305,
+      "text": "Dagger"
+    },
+    {
+      "id": 1306,
+      "text": "Throwing"
+    },
+    {
+      "id": 1307,
+      "text": "Great Axe"
+    },
+    {
+      "id": 1308,
+      "text": "Hand-to-Hand"
+    },
+    {
+      "id": 1309,
+      "text": "Rifle"
+    },
+    {
+      "id": 1310,
+      "text": "Club"
+    },
+    {
+      "id": 1311,
+      "text": "Staff"
+    },
+    {
+      "id": 1312,
+      "text": "Axe"
+    },
+    {
+      "id": 1313,
+      "text": "Short Sword"
+    },
+    {
+      "id": 1314,
+      "text": "Polearm"
+    },
+    {
+      "id": 1315,
+      "text": "Bow"
     }
   ]
 }
