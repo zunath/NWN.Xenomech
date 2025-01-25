@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace XM.Progression.Stat
 {
@@ -6,15 +8,10 @@ namespace XM.Progression.Stat
     {
         public ResistCollection()
         {
-            this[ResistType.Fire] = 0;
-            this[ResistType.Ice] = 0;
-            this[ResistType.Wind] = 0;
-            this[ResistType.Earth] = 0;
-            this[ResistType.Lightning] = 0;
-            this[ResistType.Water] = 0;
-            this[ResistType.Light] = 0;
-            this[ResistType.Darkness] = 0;
-            this[ResistType.Mind] = 0;
+            foreach (var resist in Enum.GetValues(typeof(ResistType)).Cast<ResistType>())
+            {
+                this[resist] = 0;
+            }
         }
     }
 }

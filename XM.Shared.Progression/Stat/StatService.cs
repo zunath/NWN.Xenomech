@@ -17,32 +17,39 @@ using XM.Shared.Core.EventManagement;
 namespace XM.Progression.Stat
 {
     [ServiceBinding(typeof(StatService))]
-    public class StatService
+    public class StatService: IInitializable
     {
         private readonly DBService _db;
         private const string NPCEPStatVariable = "EP";
         private readonly XMEventService _event;
 
-        private readonly Dictionary<ResistType, IResistDefinition> _resistDefinitions = new()
-        {
-            { ResistType.Darkness, new DarknessResistDefinition()},
-            { ResistType.Earth, new EarthResistDefinition()},
-            { ResistType.Fire, new FireResistDefinition()},
-            { ResistType.Ice, new IceResistDefinition()},
-            { ResistType.Lightning, new LightningResistDefinition()},
-            { ResistType.Light, new LightResistDefinition()},
-            { ResistType.Mind, new MindResistDefinition()},
-            { ResistType.Water, new WaterResistDefinition()},
-            { ResistType.Wind, new WindResistDefinition()},
-        };
+        private readonly IList<IResistDefinition> _resists;
+        private readonly Dictionary<ResistType, IResistDefinition> _resistDefinitions = new();
 
-        public StatService(DBService db, XMEventService @event)
+        public StatService(
+            DBService db, 
+            XMEventService @event,
+            IList<IResistDefinition> resistDefinitions)
         {
             _db = db;
             _event = @event;
+            _resists = resistDefinitions;
 
             RegisterEvents();
             SubscribeEvents();
+        }
+
+        public void Init()
+        {
+            LoadResistDefinitions();
+        }
+
+        private void LoadResistDefinitions()
+        {
+            foreach (var definition in _resists)
+            {
+                _resistDefinitions[definition.Type] = definition;
+            }
         }
 
         private void RegisterEvents()
@@ -53,7 +60,6 @@ namespace XM.Progression.Stat
 
         private void SubscribeEvents()
         {
-            Console.WriteLine($"subscribing creature event stat service");
             _event.Subscribe<CreatureEvent.OnSpawn>(OnSpawnCreature);
         }
 

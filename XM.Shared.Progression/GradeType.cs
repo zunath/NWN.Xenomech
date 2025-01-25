@@ -1,4 +1,4 @@
-﻿namespace XM.Progression.Job
+﻿namespace XM.Progression
 {
     internal enum GradeType
     {
