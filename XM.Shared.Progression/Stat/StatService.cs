@@ -544,6 +544,37 @@ namespace XM.Progression.Stat
                 }
             }
 
+            var clawRight = GetItemInSlot(InventorySlotType.CreatureWeaponRight, npc);
+            var clawLeft = GetItemInSlot(InventorySlotType.CreatureWeaponLeft, npc);
+            var rightHand = GetItemInSlot(InventorySlotType.RightHand, npc);
+            var leftHand = GetItemInSlot(InventorySlotType.LeftHand, npc);
+
+            var mainHand = GetIsObjectValid(rightHand)
+                ? rightHand
+                : clawRight;
+            var offHand = GetIsObjectValid(leftHand)
+                ? leftHand
+                : clawLeft;
+
+            for (var ip = GetFirstItemProperty(mainHand); GetIsItemPropertyValid(ip); ip = GetNextItemProperty(mainHand))
+            {
+                var type = GetItemPropertyType(ip);
+                if (type == ItemPropertyType.Delay)
+                {
+                    npcStats.MainHandDelay += GetItemPropertyCostTableValue(ip) * 10;
+                }
+            }
+
+            for (var ip = GetFirstItemProperty(offHand); GetIsItemPropertyValid(ip); ip = GetNextItemProperty(offHand))
+            {
+                var type = GetItemPropertyType(ip);
+                if (type == ItemPropertyType.Delay)
+                {
+                    npcStats.OffHandDelay += GetItemPropertyCostTableValue(ip) * 10;
+                }
+            }
+
+
             return npcStats;
         }
 

@@ -1,7 +1,4 @@
 ﻿using Anvil.Services;
-using System.Collections.Generic;
-using System;
-using XM.Progression.Recast;
 using XM.Shared.Core.Data;
 
 namespace XM.Combat.Entity
@@ -18,6 +15,9 @@ namespace XM.Combat.Entity
             Id = id;
         }
 
+        public int MainHandDelay { get; set; }
+
+        public int OffHandDelay { get; set; }
 
     }
 }

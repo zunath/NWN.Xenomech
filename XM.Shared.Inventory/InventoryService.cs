@@ -81,21 +81,24 @@ namespace XM.Inventory
             }
         }
 
-        public int GetDMG(uint item)
+        public ItemDetails GetItemDetails(uint item)
         {
-            var dmg = 0;
+            var itemDetails = new ItemDetails(item);
             for (var ip = GetFirstItemProperty(item); GetIsItemPropertyValid(ip); ip = GetNextItemProperty(item))
             {
-                if (GetItemPropertyType(ip) == ItemPropertyType.DMG)
+                var type = GetItemPropertyType(ip);
+
+                if (type == ItemPropertyType.DMG)
                 {
-                    dmg += GetItemPropertyCostTableValue(ip);
+                    itemDetails.DMG += GetItemPropertyCostTableValue(ip);
+                }
+                else if (type == ItemPropertyType.Delay)
+                {
+                    itemDetails.Delay += GetItemPropertyCostTableValue(ip) * 10;
                 }
             }
 
-            if (dmg < 1)
-                dmg = 1;
-
-            return dmg;
+            return itemDetails;
         }
     }
 }
