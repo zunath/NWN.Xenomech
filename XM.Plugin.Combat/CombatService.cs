@@ -1,6 +1,7 @@
 ﻿using Anvil.Services;
 using System;
 using NWN.Core.NWNX;
+using XM.Combat.Entity;
 using XM.Combat.StatusEffect;
 using XM.Inventory;
 using XM.Progression.Job;
@@ -10,6 +11,7 @@ using XM.Shared.Core;
 using XM.Shared.Core.Localization;
 using CreaturePlugin = XM.Shared.API.NWNX.CreaturePlugin.CreaturePlugin;
 using XM.Shared.API.NWNX.FeedbackPlugin;
+using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using FeedbackPlugin = XM.Shared.API.NWNX.FeedbackPlugin.FeedbackPlugin;
 
@@ -20,23 +22,33 @@ namespace XM.Combat
     {
         private readonly JobService _job;
         private readonly StatService _stat;
+        private readonly InventoryService _inventory;
         private readonly ItemTypeService _itemType;
         private readonly StatusEffectService _statusEffect;
+        private readonly DBService _db;
 
         public CombatService(
             XMEventService @event,
             JobService job,
             StatService stat,
+            InventoryService inventory,
             ItemTypeService itemType,
-            StatusEffectService statusEffect)
+            StatusEffectService statusEffect,
+            DBService db)
         {
             _job = job;
             _stat = stat;
+            _inventory = inventory;
             _itemType = itemType;
             _statusEffect = statusEffect;
+            _db = db;
 
             @event.Subscribe<NWNXEvent.OnBroadcastAttackOfOpportunityBefore>(DisableAttacksOfOpportunity);
+            @event.Subscribe<ModuleEvent.OnEquipItem>(OnModuleEquipItem);
+            @event.Subscribe<ModuleEvent.OnUnequipItem>(OnModuleUnequipItem);
         }
+
+
         public void Init()
         {
             DisableDefaultCombatMessages();
@@ -93,7 +105,9 @@ namespace XM.Combat
             var attackerStatusEffects = _statusEffect.GetCreatureStatusEffects(attacker);
             var bonus = _stat.GetAccuracy(attacker) + attackerStatusEffects.Accuracy;
             var perception = _stat.GetAttribute(attacker, AbilityType.Perception);
-            var level = _job.GetLevel(attacker);
+            var attackerLevel = _stat.GetLevel(attacker);
+            var defenderLevel = _stat.GetLevel(defender);
+            var levelDelta = attackerLevel - defenderLevel;
             var modifiers = 0;
 
             if (attackType == AttackType.Ranged)
@@ -106,7 +120,9 @@ namespace XM.Combat
                 modifiers += CalculateCombatModeAccuracyModifier(combatMode);
             }
 
-            return perception * 3 + level + bonus + modifiers;
+            modifiers += levelDelta * 4;
+
+            return perception * 3 + attackerLevel + bonus + modifiers;
         }
 
         private int CalculateEvasion(uint creature)
@@ -325,11 +341,11 @@ namespace XM.Combat
                 return (delta + 13) / 4;
         }
 
-        private (int, int) CalculateDamageRange(uint attacker, uint defender, uint attackerWeapon, AttackType attackType)
+        private (int, int) CalculateDamageRange(uint attacker, uint defender, AttackType attackType)
         {
             var delta = CalculateDamageStatDelta(attacker, defender, attackType);
             var ratio = CalculateDamageRatio(attacker, defender, attackType);
-            var attackerDMG = _stat.GetDMG(attackerWeapon);
+            var attackerDMG = _stat.GetMainHandDMG(attacker) + _stat.GetOffHandDMG(attacker);
             var baseDMG = attackerDMG + delta;
 
             var maxDamage = baseDMG * ratio;
@@ -341,11 +357,10 @@ namespace XM.Combat
         public int DetermineDamage(
             uint attacker, 
             uint defender,
-            uint attackerWeapon,
             AttackType attackType,
             HitResultType hitResult)
         {
-            var (minDamage, maxDamage) = CalculateDamageRange(attacker, defender, attackerWeapon, attackType);
+            var (minDamage, maxDamage) = CalculateDamageRange(attacker, defender, attackType);
             var damage = XMRandom.Next(minDamage, maxDamage);
 
             if (hitResult == HitResultType.Critical)
@@ -354,5 +369,68 @@ namespace XM.Combat
             return damage;
         }
 
+        public int CalculateAttackDelay(uint attacker)
+        {
+            float delay;
+            if (GetIsPC(attacker) && !GetIsDMPossessed(attacker))
+            {
+                var playerId = PlayerId.Get(attacker);
+                var dbPlayerCombat = _db.Get<PlayerCombat>(playerId);
+                delay = dbPlayerCombat.MainHandDelay + dbPlayerCombat.OffHandDelay;
+            }
+            else
+            {
+                var npcStats = _stat.GetNPCStats(attacker);
+                delay = npcStats.MainHandDelay + npcStats.OffHandDelay;
+            }
+
+            return (int)(delay / 60f * 1000);
+        }
+
+        private void OnModuleEquipItem(uint module)
+        {
+            var player = GetPCItemLastEquippedBy();
+            if (!GetIsPC(player))
+                return;
+
+            var item = GetPCItemLastEquipped();
+            var itemDetails = _inventory.GetItemDetails(item);
+            var slot = GetPCItemLastEquippedSlot();
+            var playerId = PlayerId.Get(player);
+            var dbPlayerCombat = _db.Get<PlayerCombat>(playerId);
+
+            if (slot == InventorySlotType.RightHand)
+            {
+                dbPlayerCombat.MainHandDelay = itemDetails.Delay;
+            }
+            else if (slot == InventorySlotType.LeftHand)
+            {
+                dbPlayerCombat.OffHandDelay = itemDetails.Delay;
+            }
+
+            _db.Set(dbPlayerCombat);
+        }
+        private void OnModuleUnequipItem(uint module)
+        {
+            var player = GetPCItemLastUnequippedBy();
+            var slot = GetPCItemLastUnequippedSlot();
+            if (!GetIsPC(player))
+                return;
+
+            var playerId = PlayerId.Get(player);
+            var dbPlayerCombat = _db.Get<PlayerCombat>(playerId);
+
+            if (slot == InventorySlotType.RightHand)
+            {
+                dbPlayerCombat.MainHandDelay = 0;
+            }
+
+            if (slot == InventorySlotType.LeftHand)
+            {
+                dbPlayerCombat.OffHandDelay = 0;
+            }
+
+            _db.Set(dbPlayerCombat);
+        }
     }
 }

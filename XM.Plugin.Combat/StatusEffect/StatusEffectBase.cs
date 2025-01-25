@@ -20,6 +20,7 @@ namespace XM.Combat.StatusEffect
         public abstract bool SendsApplicationMessage { get; }
         public abstract bool SendsWornOffMessage { get; }
         public abstract float Frequency { get; }
+        public virtual bool IsRemovedOnJobChange => true;
         public virtual int HPRegen => 0;
         public virtual int EPRegen => 0;
         public virtual int Defense => 0;

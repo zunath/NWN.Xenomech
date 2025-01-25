@@ -122,7 +122,7 @@ namespace XM.Migration
         /// Initializes all player NWN skills to zero.
         /// </summary>
         /// <param name="player">The player to modify</param>
-        public void InitializeSkills(uint player)
+        private void InitializeSkills(uint player)
         {
             for (var iCurSkill = 1; iCurSkill <= 27; iCurSkill++)
             {
@@ -135,7 +135,7 @@ namespace XM.Migration
         /// Initializes all player saving throws to zero.
         /// </summary>
         /// <param name="player">The player to modify</param>
-        public void InitializeSavingThrows(uint player)
+        private void InitializeSavingThrows(uint player)
         {
             CreaturePlugin.SetBaseSavingThrow(player, SavingThrowCategoryType.Fortitude, 0);
             CreaturePlugin.SetBaseSavingThrow(player, SavingThrowCategoryType.Will, 0);
@@ -155,7 +155,7 @@ namespace XM.Migration
             }
         }
 
-        public void ClearFeats(uint player)
+        private void ClearFeats(uint player)
         {
             var numberOfFeats = CreaturePlugin.GetFeatCount(player);
             for (var currentFeat = numberOfFeats; currentFeat >= 0; currentFeat--)
@@ -164,7 +164,7 @@ namespace XM.Migration
             }
         }
 
-        public void GrantBasicFeats(uint player)
+        private void GrantBasicFeats(uint player)
         {
             CreaturePlugin.AddFeatByLevel(player, FeatType.ArmorProficiencyLight, 1);
             CreaturePlugin.AddFeatByLevel(player, FeatType.ArmorProficiencyMedium, 1);
@@ -189,12 +189,11 @@ namespace XM.Migration
         /// Modifies the player's alignment to Neutral/Neutral since we don't use alignment at all here.
         /// </summary>
         /// <param name="player">The player to object.</param>
-        public void AdjustAlignment(uint player)
+        private void AdjustAlignment(uint player)
         {
             CreaturePlugin.SetAlignmentLawChaos(player, 50);
             CreaturePlugin.SetAlignmentGoodEvil(player, 50);
         }
-
 
         /// <summary>
         /// Gives the starting items to the player.
@@ -202,12 +201,8 @@ namespace XM.Migration
         /// <param name="player">The player to receive the starting items.</param>
         private void GiveStartingItems(uint player)
         {
-            var race = GetRacialType(player);
             var item = CreateItemOnObject("survival_knife", player);
             SetName(item, GetName(player) + "'s Survival Knife");
-            SetItemCursedFlag(item, true);
-
-            item = CreateItemOnObject("fresh_bread", player);
             SetItemCursedFlag(item, true);
 
             var clothes = "travelers_clothes";

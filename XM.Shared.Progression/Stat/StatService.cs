@@ -459,10 +459,10 @@ namespace XM.Progression.Stat
             }
         }
 
-        public int GetDMG(uint item)
+        private int GetDMG(uint item)
         {
             if (!GetIsObjectValid(item))
-                return 3; // Base DMG of 3 for unarmed
+                return 0;
 
             var dmg = 0;
             for (var ip = GetFirstItemProperty(item); GetIsItemPropertyValid(ip); ip = GetNextItemProperty(item))
@@ -473,21 +473,28 @@ namespace XM.Progression.Stat
                 }
             }
 
-            if (dmg < 1)
-                dmg = 1;
-
             return dmg;
         }
 
         public int GetMainHandDMG(uint creature)
         {
             var item = GetItemInSlot(InventorySlotType.RightHand, creature);
-            return GetDMG(item);
+            if (!GetIsObjectValid(item))
+                return 3; // Base DMG of 3 for unarmed
+
+            var dmg =  GetDMG(item);
+            if (dmg < 1)
+                dmg = 1;
+
+            return dmg;
         }
 
         public int GetOffHandDMG(uint creature)
         {
             var item = GetItemInSlot(InventorySlotType.LeftHand, creature);
+            if (!GetIsObjectValid(item))
+                return 0;
+
             return GetDMG(item);
         }
 
@@ -543,6 +550,37 @@ namespace XM.Progression.Stat
                     npcStats.Accuracy = GetItemPropertyCostTableValue(ip);
                 }
             }
+
+            var clawRight = GetItemInSlot(InventorySlotType.CreatureWeaponRight, npc);
+            var clawLeft = GetItemInSlot(InventorySlotType.CreatureWeaponLeft, npc);
+            var rightHand = GetItemInSlot(InventorySlotType.RightHand, npc);
+            var leftHand = GetItemInSlot(InventorySlotType.LeftHand, npc);
+
+            var mainHand = GetIsObjectValid(rightHand)
+                ? rightHand
+                : clawRight;
+            var offHand = GetIsObjectValid(leftHand)
+                ? leftHand
+                : clawLeft;
+
+            for (var ip = GetFirstItemProperty(mainHand); GetIsItemPropertyValid(ip); ip = GetNextItemProperty(mainHand))
+            {
+                var type = GetItemPropertyType(ip);
+                if (type == ItemPropertyType.Delay)
+                {
+                    npcStats.MainHandDelay += GetItemPropertyCostTableValue(ip) * 10;
+                }
+            }
+
+            for (var ip = GetFirstItemProperty(offHand); GetIsItemPropertyValid(ip); ip = GetNextItemProperty(offHand))
+            {
+                var type = GetItemPropertyType(ip);
+                if (type == ItemPropertyType.Delay)
+                {
+                    npcStats.OffHandDelay += GetItemPropertyCostTableValue(ip) * 10;
+                }
+            }
+
 
             return npcStats;
         }

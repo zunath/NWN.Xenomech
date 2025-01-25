@@ -26,7 +26,27 @@ namespace XM.Progression.Job.JobDefinition
 
         public override Dictionary<int, FeatType> FeatAcquisitionLevels => new()
         {
-
+            {2, FeatType.Provoke1},
+            {4, FeatType.DefenseBonus1},
+            {8, FeatType.Restoration1},
+            {10, FeatType.ShieldMastery1},
+            {12, FeatType.Aggressor1},
+            {14, FeatType.DefenseBonus2},
+            {18, FeatType.Provoke2},
+            {20, FeatType.RadiantBlast1},
+            {22, FeatType.Restoration2},
+            {24, FeatType.HPBonus1},
+            {25, FeatType.DarknessProtection},
+            {26, FeatType.Rampart},
+            {30, FeatType.DefenseBonus3},
+            {32, FeatType.Raise},
+            {34, FeatType.ShieldMastery2},
+            {36, FeatType.Aggressor2},
+            {40, FeatType.RadiantBlast2},
+            {42, FeatType.Restoration3},
+            {44, FeatType.HPBonus2},
+            {48, FeatType.DefenseBonus4},
+            {50, FeatType.MightyStrikes},
         };
     }
 }

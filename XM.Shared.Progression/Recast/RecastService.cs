@@ -1,22 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using Anvil.Services;
 using XM.Progression.Entity;
 using XM.Progression.Stat;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
-using XM.Shared.Core.EventManagement;
-using XM.Shared.Core.Extension;
-using XM.Shared.Core.Localization;
 
 namespace XM.Progression.Recast
 {
     [ServiceBinding(typeof(RecastService))]
     internal class RecastService
     {
-        private static readonly Dictionary<RecastGroup, LocaleString> _recastDescriptions = new();
         private readonly DBService _db;
         private readonly TimeService _time;
         private readonly StatService _stat;
@@ -24,46 +18,12 @@ namespace XM.Progression.Recast
         public RecastService(
             DBService db, 
             TimeService time,
-            XMEventService @event,
             StatService stat)
         {
             _db = db;
             _time = time;
             _stat = stat;
-
-            @event.Subscribe<XMEvent.OnCacheDataBefore>(OnCacheDataBefore);
         }
-
-        private void OnCacheDataBefore(uint objectSelf)
-        {
-            CacheRecastGroupNames();
-        }
-
-        /// <summary>
-        /// Reads all of the enum values on the RecastGroup enumeration and stores their short name into the cache.
-        /// </summary>
-        private static void CacheRecastGroupNames()
-        {
-            foreach (var recast in Enum.GetValues(typeof(RecastGroup)).Cast<RecastGroup>())
-            {
-                var attr = recast.GetAttribute<RecastGroup, RecastGroupAttribute>();
-                _recastDescriptions[recast] = attr.ShortName;
-            }
-        }
-
-        /// <summary>
-        /// Retrieves the human-readable name of a recast group.
-        /// </summary>
-        /// <param name="recastGroup">The recast group to retrieve.</param>
-        /// <returns>The name of a recast group.</returns>
-        public string GetRecastGroupName(RecastGroup recastGroup)
-        {
-            if (!_recastDescriptions.ContainsKey(recastGroup))
-                throw new KeyNotFoundException($"Recast group {recastGroup} has not been registered. Did you forget the Description attribute?");
-
-            return Locale.GetString(_recastDescriptions[recastGroup]);
-        }
-
 
         /// <summary>
         /// Returns true if a recast delay has not expired yet.

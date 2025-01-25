@@ -13,7 +13,21 @@ namespace XM.Progression.Job.JobDefinition
         public abstract JobGrade Grades { get; }
         public abstract Dictionary<int, FeatType> FeatAcquisitionLevels { get; }
 
-        private Dictionary<FeatType, int> _featsByLevel = new();
+        private readonly Dictionary<FeatType, int> _featsByLevel = new();
+
+        private readonly Dictionary<int, FeatType> _resonanceNodeLevels = new()
+        {
+            {5, FeatType.ResonanceNode1},
+            {10, FeatType.ResonanceNode2},
+            {15, FeatType.ResonanceNode3},
+            {20, FeatType.ResonanceNode4},
+            {25, FeatType.ResonanceNode5},
+            {30, FeatType.ResonanceNode6},
+            {35, FeatType.ResonanceNode7},
+            {40, FeatType.ResonanceNode8},
+            {45, FeatType.ResonanceNode9},
+            {50, FeatType.ResonanceNode10}
+        };
 
         protected JobDefinitionBase()
         {

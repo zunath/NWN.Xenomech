@@ -86,7 +86,8 @@ namespace XM.Shared.API.Constants
 
         // Custom Item Properties follow
         
-        // 88-89 are open
+        Delay = 88,
+        // 89 is open
         HPBonus = 90,
         EP = 91,
         // 92 is open

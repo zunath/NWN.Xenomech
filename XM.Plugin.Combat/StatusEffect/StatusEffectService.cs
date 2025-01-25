@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Anvil.Services;
 using XM.Combat.Event;
+using XM.Progression.Event;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.EventManagement;
@@ -19,7 +19,7 @@ namespace XM.Combat.StatusEffect
         private readonly Dictionary<uint, CreatureStatusEffect> _creatureEffects = new();
 
         private readonly XMEventService _event;
-        private InjectionService _injection;
+        private readonly InjectionService _injection;
 
         public StatusEffectService(
             XMEventService @event,
@@ -46,6 +46,8 @@ namespace XM.Combat.StatusEffect
             _event.Subscribe<StatusEffectEvent.OnStatusEffectInterval>(OnNWNStatusEffectInterval);
 
             _event.Subscribe<ModuleEvent.OnPlayerEnter>(OnPlayerEnter);
+
+            _event.Subscribe<JobEvent.PlayerChangedJobEvent>(OnChangeJobs);
         }
 
         private void OnPlayerEnter(uint module)
@@ -173,6 +175,21 @@ namespace XM.Combat.StatusEffect
         {
             var type = typeof(T);
             RemoveStatusEffect(type, creature);
+        }
+
+
+        private void OnChangeJobs(uint player)
+        {
+            if (!_creatureEffects.ContainsKey(player))
+                return;
+
+            foreach (var effect in _creatureEffects[player].GetAllEffects())
+            {
+                if (effect.IsRemovedOnJobChange)
+                {
+                    RemoveStatusEffect(effect.GetType(), player);
+                }
+            }
         }
     }
 }

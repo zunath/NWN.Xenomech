@@ -78,6 +78,17 @@
   <ProjectReference Include="..\XM.Shared.UI\XM.Shared.UI.csproj" />
 </ItemGroup>
 
+<ItemGroup>
+  <Folder Include="AbilityDefinition\Keeper\" />
+  <Folder Include="AbilityDefinition\Beastmaster\" />
+  <Folder Include="AbilityDefinition\Brawler\" />
+  <Folder Include="AbilityDefinition\Hunter\" />
+  <Folder Include="AbilityDefinition\Elementalist\" />
+  <Folder Include="AbilityDefinition\NPC\" />
+  <Folder Include="AbilityDefinition\Techweaver\" />
+  <Folder Include="AbilityDefinition\Nightstalker\" />
+</ItemGroup>
+
 <Target Name="PostBuild" AfterTargets="PostBuildEvent">
 	<Exec Command="del /Q /F &quot;$(SolutionDir)server\server\anvil\Plugins\XM.Plugin.Combat\*.*&quot;&#xD;&#xA;xcopy &quot;$(OutDir)*.*&quot; &quot;$(SolutionDir)server\anvil\Plugins\XM.Plugin.Combat\&quot; /E /Y" />
 </Target>

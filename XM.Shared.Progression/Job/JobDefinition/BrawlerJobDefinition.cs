@@ -26,7 +26,27 @@ namespace XM.Progression.Job.JobDefinition
 
         public override Dictionary<int, FeatType> FeatAcquisitionLevels => new()
         {
-
+            {2, FeatType.ElectricFist1},
+            {4, FeatType.StrikingCobra1},
+            {8, FeatType.Flash},
+            {10, FeatType.Parry1},
+            {12, FeatType.AttackBonus1},
+            {14, FeatType.PowerAttack1},
+            {18, FeatType.Shadowstrike1},
+            {20, FeatType.ElectricFist2},
+            {22, FeatType.Warcry},
+            {24, FeatType.Chi1},
+            {25, FeatType.WindProtection},
+            {26, FeatType.Parry2},
+            {30, FeatType.StrikingCobra2},
+            {32, FeatType.AttackBonus2},
+            {34, FeatType.PowerAttack2},
+            {36, FeatType.ElectricFist3},
+            {40, FeatType.Chi2},
+            {42, FeatType.Shadowstrike2},
+            {44, FeatType.Parry3},
+            {48, FeatType.MartialArts},
+            {50, FeatType.HundredFists},
         };
     }
 }

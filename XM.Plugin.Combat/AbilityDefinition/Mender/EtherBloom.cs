@@ -9,7 +9,7 @@ using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Localization;
 
-namespace XM.Combat.AbilityDefinition.Healing
+namespace XM.Combat.AbilityDefinition.Mender
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
     internal class EtherBloom: IAbilityListDefinition

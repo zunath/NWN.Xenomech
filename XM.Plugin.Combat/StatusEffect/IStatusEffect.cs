@@ -15,6 +15,7 @@ namespace XM.Combat.StatusEffect
         bool IsFlaggedForRemoval { get; }
         bool SendsApplicationMessage { get; }
         bool SendsWornOffMessage { get; }
+        bool IsRemovedOnJobChange { get; }
         float Frequency { get; }
         int HPRegen { get; }
         int EPRegen { get; }
