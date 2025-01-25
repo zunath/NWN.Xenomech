@@ -4084,6 +4084,1126 @@
     {
       "id": 1021,
       "text": "1000"
+    },
+    {
+      "id": 1022,
+      "text": "Fast Blade"
+    },
+    {
+      "id": 1023,
+      "text": "Fast Blade Description"
+    },
+    {
+      "id": 1024,
+      "text": "Burning Blade"
+    },
+    {
+      "id": 1025,
+      "text": "Burning Blade Description"
+    },
+    {
+      "id": 1026,
+      "text": "Red Lotus Blade"
+    },
+    {
+      "id": 1027,
+      "text": "Red Lotus Blade Description"
+    },
+    {
+      "id": 1028,
+      "text": "Flat Blade"
+    },
+    {
+      "id": 1029,
+      "text": "Flat Blade Description"
+    },
+    {
+      "id": 1030,
+      "text": "Shining Blade"
+    },
+    {
+      "id": 1031,
+      "text": "Shining Blade Description"
+    },
+    {
+      "id": 1032,
+      "text": "Seraph Blade"
+    },
+    {
+      "id": 1033,
+      "text": "Seraph Blade Description"
+    },
+    {
+      "id": 1034,
+      "text": "Vorpal Blade"
+    },
+    {
+      "id": 1035,
+      "text": "Vorpal Blade Description"
+    },
+    {
+      "id": 1036,
+      "text": "Swift Blade"
+    },
+    {
+      "id": 1037,
+      "text": "Swift Blade Description"
+    },
+    {
+      "id": 1038,
+      "text": "Sanguine Blade"
+    },
+    {
+      "id": 1039,
+      "text": "Sanguine Blade Description"
+    },
+    {
+      "id": 1040,
+      "text": "Atonement"
+    },
+    {
+      "id": 1041,
+      "text": "Atonement Description"
+    },
+    {
+      "id": 1042,
+      "text": "Hard Slash"
+    },
+    {
+      "id": 1043,
+      "text": "Hard Slash Description"
+    },
+    {
+      "id": 1044,
+      "text": "Power Slash"
+    },
+    {
+      "id": 1045,
+      "text": "Power Slash Description"
+    },
+    {
+      "id": 1046,
+      "text": "Frostbite"
+    },
+    {
+      "id": 1047,
+      "text": "Frostbite Description"
+    },
+    {
+      "id": 1048,
+      "text": "Shock Slash"
+    },
+    {
+      "id": 1049,
+      "text": "Shock Slash Description"
+    },
+    {
+      "id": 1050,
+      "text": "Sickle Moon"
+    },
+    {
+      "id": 1051,
+      "text": "Sickle Moon Description"
+    },
+    {
+      "id": 1052,
+      "text": "Ground Strike"
+    },
+    {
+      "id": 1053,
+      "text": "Ground Strike Description"
+    },
+    {
+      "id": 1054,
+      "text": "Freezebite"
+    },
+    {
+      "id": 1055,
+      "text": "Freezebite Description"
+    },
+    {
+      "id": 1056,
+      "text": "Heculean Slash"
+    },
+    {
+      "id": 1057,
+      "text": "Heculean Slash Description"
+    },
+    {
+      "id": 1058,
+      "text": "Spinning Slash"
+    },
+    {
+      "id": 1059,
+      "text": "Spinning Slash Description"
+    },
+    {
+      "id": 1060,
+      "text": "Scourge"
+    },
+    {
+      "id": 1061,
+      "text": "Scourge Description"
+    },
+    {
+      "id": 1062,
+      "text": "Quick Draw"
+    },
+    {
+      "id": 1063,
+      "text": "Quick Draw Description"
+    },
+    {
+      "id": 1064,
+      "text": "Ricochet"
+    },
+    {
+      "id": 1065,
+      "text": "Ricochet Description"
+    },
+    {
+      "id": 1066,
+      "text": "Trick Shot"
+    },
+    {
+      "id": 1067,
+      "text": "Trick Shot Description"
+    },
+    {
+      "id": 1068,
+      "text": "Crack Shot"
+    },
+    {
+      "id": 1069,
+      "text": "Crack Shot Description"
+    },
+    {
+      "id": 1070,
+      "text": "Burning Shot"
+    },
+    {
+      "id": 1071,
+      "text": "Burning Shot Description"
+    },
+    {
+      "id": 1072,
+      "text": "Freezing Shot"
+    },
+    {
+      "id": 1073,
+      "text": "Freezing Shot Description"
+    },
+    {
+      "id": 1074,
+      "text": "Shadow Barrage"
+    },
+    {
+      "id": 1075,
+      "text": "Shadow Barrage Description"
+    },
+    {
+      "id": 1076,
+      "text": "Piercing Shot"
+    },
+    {
+      "id": 1077,
+      "text": "Piercing Shot Description"
+    },
+    {
+      "id": 1078,
+      "text": "True Shot"
+    },
+    {
+      "id": 1079,
+      "text": "True Shot Description"
+    },
+    {
+      "id": 1080,
+      "text": "Deadeye"
+    },
+    {
+      "id": 1081,
+      "text": "Deadeye Description"
+    },
+    {
+      "id": 1082,
+      "text": "Wasp Sting"
+    },
+    {
+      "id": 1083,
+      "text": "Wasp Sting Description"
+    },
+    {
+      "id": 1084,
+      "text": "Gust Slash"
+    },
+    {
+      "id": 1085,
+      "text": "Gust Slash Description"
+    },
+    {
+      "id": 1086,
+      "text": "Shadowstitch"
+    },
+    {
+      "id": 1087,
+      "text": "Shadowstitch Description"
+    },
+    {
+      "id": 1088,
+      "text": "Cyclone"
+    },
+    {
+      "id": 1089,
+      "text": "Cyclone Description"
+    },
+    {
+      "id": 1090,
+      "text": "Energy Drain"
+    },
+    {
+      "id": 1091,
+      "text": "Energy Drain Description"
+    },
+    {
+      "id": 1092,
+      "text": "Evisceration"
+    },
+    {
+      "id": 1093,
+      "text": "Evisceration Description"
+    },
+    {
+      "id": 1094,
+      "text": "Mercy Stroke"
+    },
+    {
+      "id": 1095,
+      "text": "Mercy Stroke Description"
+    },
+    {
+      "id": 1096,
+      "text": "Ruthless Stroke"
+    },
+    {
+      "id": 1097,
+      "text": "Ruthless Stroke Description"
+    },
+    {
+      "id": 1098,
+      "text": "Shark Bite"
+    },
+    {
+      "id": 1099,
+      "text": "Shark Bite Description"
+    },
+    {
+      "id": 1100,
+      "text": "Dancing Edge"
+    },
+    {
+      "id": 1101,
+      "text": "Dancing Edge Description"
+    },
+    {
+      "id": 1102,
+      "text": "Stone Toss"
+    },
+    {
+      "id": 1103,
+      "text": "Stone Toss Description"
+    },
+    {
+      "id": 1104,
+      "text": "Wind Slash"
+    },
+    {
+      "id": 1105,
+      "text": "Wind Slash Description"
+    },
+    {
+      "id": 1106,
+      "text": "Shuriken Storm"
+    },
+    {
+      "id": 1107,
+      "text": "Shuriken Storm Description"
+    },
+    {
+      "id": 1108,
+      "text": "Gale Cutter"
+    },
+    {
+      "id": 1109,
+      "text": "Gale Cutter Description"
+    },
+    {
+      "id": 1110,
+      "text": "Flame Toss"
+    },
+    {
+      "id": 1111,
+      "text": "Flame Toss Description"
+    },
+    {
+      "id": 1112,
+      "text": "Frost Dart"
+    },
+    {
+      "id": 1113,
+      "text": "Frost Dart Description"
+    },
+    {
+      "id": 1114,
+      "text": "Shock Bomb"
+    },
+    {
+      "id": 1115,
+      "text": "Shock Bomb Description"
+    },
+    {
+      "id": 1116,
+      "text": "Shadow Throw"
+    },
+    {
+      "id": 1117,
+      "text": "Shadow Throw Description"
+    },
+    {
+      "id": 1118,
+      "text": "Star Strike"
+    },
+    {
+      "id": 1119,
+      "text": "Star Strike Description"
+    },
+    {
+      "id": 1120,
+      "text": "Phantom Hurl"
+    },
+    {
+      "id": 1121,
+      "text": "Phantom Hurl Description"
+    },
+    {
+      "id": 1122,
+      "text": "Shield Break"
+    },
+    {
+      "id": 1123,
+      "text": "Shield Break Description"
+    },
+    {
+      "id": 1124,
+      "text": "Iron Tempest"
+    },
+    {
+      "id": 1125,
+      "text": "Iron Tempest Description"
+    },
+    {
+      "id": 1126,
+      "text": "Sturmwind"
+    },
+    {
+      "id": 1127,
+      "text": "Sturmwind Description"
+    },
+    {
+      "id": 1128,
+      "text": "Keen Edge"
+    },
+    {
+      "id": 1129,
+      "text": "Keen Edge Description"
+    },
+    {
+      "id": 1130,
+      "text": "Raging Rush"
+    },
+    {
+      "id": 1131,
+      "text": "Raging Rush Description"
+    },
+    {
+      "id": 1132,
+      "text": "Fell Cleave"
+    },
+    {
+      "id": 1133,
+      "text": "Fell Cleave Description"
+    },
+    {
+      "id": 1134,
+      "text": "Upheaval"
+    },
+    {
+      "id": 1135,
+      "text": "Upheaval Description"
+    },
+    {
+      "id": 1136,
+      "text": "Knockout"
+    },
+    {
+      "id": 1137,
+      "text": "Knockout Description"
+    },
+    {
+      "id": 1138,
+      "text": "Fury Slash"
+    },
+    {
+      "id": 1139,
+      "text": "Fury Slash Description"
+    },
+    {
+      "id": 1140,
+      "text": "Grand Slash"
+    },
+    {
+      "id": 1141,
+      "text": "Grand Slash Description"
+    },
+    {
+      "id": 1142,
+      "text": "Combo"
+    },
+    {
+      "id": 1143,
+      "text": "Combo Description"
+    },
+    {
+      "id": 1144,
+      "text": "One Inch Punch"
+    },
+    {
+      "id": 1145,
+      "text": "One Inch Punch Description"
+    },
+    {
+      "id": 1146,
+      "text": "Backhand Blow"
+    },
+    {
+      "id": 1147,
+      "text": "Backhand Blow Description"
+    },
+    {
+      "id": 1148,
+      "text": "Raging Fists"
+    },
+    {
+      "id": 1149,
+      "text": "Raging Fists Description"
+    },
+    {
+      "id": 1150,
+      "text": "Spinning Attack"
+    },
+    {
+      "id": 1151,
+      "text": "Spinning Attack Description"
+    },
+    {
+      "id": 1152,
+      "text": "Howling Fist"
+    },
+    {
+      "id": 1153,
+      "text": "Howling Fist Description"
+    },
+    {
+      "id": 1154,
+      "text": "Paradise Strike"
+    },
+    {
+      "id": 1155,
+      "text": "Paradise Strike Description"
+    },
+    {
+      "id": 1156,
+      "text": "Dragon Blow"
+    },
+    {
+      "id": 1157,
+      "text": "Dragon Blow Description"
+    },
+    {
+      "id": 1158,
+      "text": "Final Heaven"
+    },
+    {
+      "id": 1159,
+      "text": "Final Heaven Description"
+    },
+    {
+      "id": 1160,
+      "text": "Asuran Fists"
+    },
+    {
+      "id": 1161,
+      "text": "Asuran Fists Description"
+    },
+    {
+      "id": 1162,
+      "text": "Hot Shot"
+    },
+    {
+      "id": 1163,
+      "text": "Hot Shot Description"
+    },
+    {
+      "id": 1164,
+      "text": "Split Shot"
+    },
+    {
+      "id": 1165,
+      "text": "Split Shot Description"
+    },
+    {
+      "id": 1166,
+      "text": "Sniper Shot"
+    },
+    {
+      "id": 1167,
+      "text": "Sniper Shot Description"
+    },
+    {
+      "id": 1168,
+      "text": "Slug Shot"
+    },
+    {
+      "id": 1169,
+      "text": "Slug Shot Description"
+    },
+    {
+      "id": 1170,
+      "text": "Blast Shot"
+    },
+    {
+      "id": 1171,
+      "text": "Blast Shot Description"
+    },
+    {
+      "id": 1172,
+      "text": "Heavy Shot"
+    },
+    {
+      "id": 1173,
+      "text": "Heavy Shot Description"
+    },
+    {
+      "id": 1174,
+      "text": "Detonator"
+    },
+    {
+      "id": 1175,
+      "text": "Detonator Description"
+    },
+    {
+      "id": 1176,
+      "text": "Numbing Shot"
+    },
+    {
+      "id": 1177,
+      "text": "Numbing Shot Description"
+    },
+    {
+      "id": 1178,
+      "text": "Trueflight"
+    },
+    {
+      "id": 1179,
+      "text": "Trueflight Description"
+    },
+    {
+      "id": 1180,
+      "text": "Last Stand"
+    },
+    {
+      "id": 1181,
+      "text": "Last Stand Description"
+    },
+    {
+      "id": 1182,
+      "text": "Shining Strike"
+    },
+    {
+      "id": 1183,
+      "text": "Shining Strike Description"
+    },
+    {
+      "id": 1184,
+      "text": "Seraph Strike"
+    },
+    {
+      "id": 1185,
+      "text": "Seraph Strike Description"
+    },
+    {
+      "id": 1186,
+      "text": "Brainshaker"
+    },
+    {
+      "id": 1187,
+      "text": "Brainshaker Description"
+    },
+    {
+      "id": 1188,
+      "text": "Starlight"
+    },
+    {
+      "id": 1189,
+      "text": "Starlight Description"
+    },
+    {
+      "id": 1190,
+      "text": "Moonlight"
+    },
+    {
+      "id": 1191,
+      "text": "Moonlight Description"
+    },
+    {
+      "id": 1192,
+      "text": "Skullbreaker"
+    },
+    {
+      "id": 1193,
+      "text": "Skullbreaker Description"
+    },
+    {
+      "id": 1194,
+      "text": "Judgment"
+    },
+    {
+      "id": 1195,
+      "text": "Judgment Description"
+    },
+    {
+      "id": 1196,
+      "text": "Hexa Strike"
+    },
+    {
+      "id": 1197,
+      "text": "Hexa Strike Description"
+    },
+    {
+      "id": 1198,
+      "text": "Black Halo"
+    },
+    {
+      "id": 1199,
+      "text": "Black Halo Description"
+    },
+    {
+      "id": 1200,
+      "text": "Flash Nova"
+    },
+    {
+      "id": 1201,
+      "text": "Flash Nova Description"
+    },
+    {
+      "id": 1202,
+      "text": "Heavy Swing"
+    },
+    {
+      "id": 1203,
+      "text": "Heavy Swing Description"
+    },
+    {
+      "id": 1204,
+      "text": "Rock Crusher"
+    },
+    {
+      "id": 1205,
+      "text": "Rock Crusher Description"
+    },
+    {
+      "id": 1206,
+      "text": "Earth Crusher"
+    },
+    {
+      "id": 1207,
+      "text": "Earth Crusher Description"
+    },
+    {
+      "id": 1208,
+      "text": "Starburst"
+    },
+    {
+      "id": 1209,
+      "text": "Starburst Description"
+    },
+    {
+      "id": 1210,
+      "text": "Sunburst"
+    },
+    {
+      "id": 1211,
+      "text": "Sunburst Description"
+    },
+    {
+      "id": 1212,
+      "text": "Spirit Taker"
+    },
+    {
+      "id": 1213,
+      "text": "Spirit Taker Description"
+    },
+    {
+      "id": 1214,
+      "text": "Retribution"
+    },
+    {
+      "id": 1215,
+      "text": "Retribution Description"
+    },
+    {
+      "id": 1216,
+      "text": "Omniscience"
+    },
+    {
+      "id": 1217,
+      "text": "Omniscience Description"
+    },
+    {
+      "id": 1218,
+      "text": "Cataclysm"
+    },
+    {
+      "id": 1219,
+      "text": "Cataclysm Description"
+    },
+    {
+      "id": 1220,
+      "text": "Shattersoul"
+    },
+    {
+      "id": 1221,
+      "text": "Shattersoul Description"
+    },
+    {
+      "id": 1222,
+      "text": "Raging Axe"
+    },
+    {
+      "id": 1223,
+      "text": "Raging Axe Description"
+    },
+    {
+      "id": 1224,
+      "text": "Smash Axe"
+    },
+    {
+      "id": 1225,
+      "text": "Smash Axe Description"
+    },
+    {
+      "id": 1226,
+      "text": "Gale Axe"
+    },
+    {
+      "id": 1227,
+      "text": "Gale Axe Description"
+    },
+    {
+      "id": 1228,
+      "text": "Avalance Axe"
+    },
+    {
+      "id": 1229,
+      "text": "Avalance Axe Description"
+    },
+    {
+      "id": 1230,
+      "text": "Spinning Axe"
+    },
+    {
+      "id": 1231,
+      "text": "Spinning Axe Description"
+    },
+    {
+      "id": 1232,
+      "text": "Rampage"
+    },
+    {
+      "id": 1233,
+      "text": "Rampage Description"
+    },
+    {
+      "id": 1234,
+      "text": "Calamity"
+    },
+    {
+      "id": 1235,
+      "text": "Calamity Description"
+    },
+    {
+      "id": 1236,
+      "text": "Mistral Axe"
+    },
+    {
+      "id": 1237,
+      "text": "Mistral Axe Description"
+    },
+    {
+      "id": 1238,
+      "text": "Decimation"
+    },
+    {
+      "id": 1239,
+      "text": "Decimation Description"
+    },
+    {
+      "id": 1240,
+      "text": "Primal Rend"
+    },
+    {
+      "id": 1241,
+      "text": "Primal Rend Description"
+    },
+    {
+      "id": 1242,
+      "text": "Piercing Blade"
+    },
+    {
+      "id": 1243,
+      "text": "Piercing Blade Description"
+    },
+    {
+      "id": 1244,
+      "text": "Burning Edge"
+    },
+    {
+      "id": 1245,
+      "text": "Burning Edge Description"
+    },
+    {
+      "id": 1246,
+      "text": "Shadow Strike"
+    },
+    {
+      "id": 1247,
+      "text": "Shadow Strike Description"
+    },
+    {
+      "id": 1248,
+      "text": "Ice Fang"
+    },
+    {
+      "id": 1249,
+      "text": "Ice Fang Description"
+    },
+    {
+      "id": 1250,
+      "text": "Sonic Slash"
+    },
+    {
+      "id": 1251,
+      "text": "Sonic Slash Description"
+    },
+    {
+      "id": 1252,
+      "text": "Ember Fang"
+    },
+    {
+      "id": 1253,
+      "text": "Ember Fang Description"
+    },
+    {
+      "id": 1254,
+      "text": "Lightfang"
+    },
+    {
+      "id": 1255,
+      "text": "Lightfang Description"
+    },
+    {
+      "id": 1256,
+      "text": "Frostbite Blade"
+    },
+    {
+      "id": 1257,
+      "text": "Frostbite Blade Description"
+    },
+    {
+      "id": 1258,
+      "text": "Thunder Slash"
+    },
+    {
+      "id": 1259,
+      "text": "Thunder Slash Description"
+    },
+    {
+      "id": 1260,
+      "text": "Soul Blade"
+    },
+    {
+      "id": 1261,
+      "text": "Soul Blade Description"
+    },
+    {
+      "id": 1262,
+      "text": "Double Thrust"
+    },
+    {
+      "id": 1263,
+      "text": "Double Thrust Description"
+    },
+    {
+      "id": 1264,
+      "text": "Thunder Thrust"
+    },
+    {
+      "id": 1265,
+      "text": "Thunder Thrust Description"
+    },
+    {
+      "id": 1266,
+      "text": "Raiden Thrust"
+    },
+    {
+      "id": 1267,
+      "text": "Raiden Thrust Description"
+    },
+    {
+      "id": 1268,
+      "text": "Penta Thrust"
+    },
+    {
+      "id": 1269,
+      "text": "Penta Thrust Description"
+    },
+    {
+      "id": 1270,
+      "text": "Vorpal Thrust"
+    },
+    {
+      "id": 1271,
+      "text": "Vorpal Thrust Description"
+    },
+    {
+      "id": 1272,
+      "text": "Sonic Thrust"
+    },
+    {
+      "id": 1273,
+      "text": "Sonic Thrust Description"
+    },
+    {
+      "id": 1274,
+      "text": "Drakesbane"
+    },
+    {
+      "id": 1275,
+      "text": "Drakesbane Description"
+    },
+    {
+      "id": 1276,
+      "text": "Wheeling Thrust"
+    },
+    {
+      "id": 1277,
+      "text": "Wheeling Thrust Description"
+    },
+    {
+      "id": 1278,
+      "text": "Stardiver"
+    },
+    {
+      "id": 1279,
+      "text": "Stardiver Description"
+    },
+    {
+      "id": 1280,
+      "text": "Skewer"
+    },
+    {
+      "id": 1281,
+      "text": "Skewer Description"
+    },
+    {
+      "id": 1282,
+      "text": "Flaming Arrow"
+    },
+    {
+      "id": 1283,
+      "text": "Flaming Arrow Description"
+    },
+    {
+      "id": 1284,
+      "text": "Piercing Arrow"
+    },
+    {
+      "id": 1285,
+      "text": "Piercing Arrow Description"
+    },
+    {
+      "id": 1286,
+      "text": "Dulling Arrow"
+    },
+    {
+      "id": 1287,
+      "text": "Dulling Arrow Description"
+    },
+    {
+      "id": 1288,
+      "text": "Sidewinder"
+    },
+    {
+      "id": 1289,
+      "text": "Sidewinder Description"
+    },
+    {
+      "id": 1290,
+      "text": "Blast Arrow"
+    },
+    {
+      "id": 1291,
+      "text": "Blast Arrow Description"
+    },
+    {
+      "id": 1292,
+      "text": "Arching Arrow"
+    },
+    {
+      "id": 1293,
+      "text": "Arching Arrow Description"
+    },
+    {
+      "id": 1294,
+      "text": "Empyreal Arrow"
+    },
+    {
+      "id": 1295,
+      "text": "Empyreal Arrow Description"
+    },
+    {
+      "id": 1296,
+      "text": "Namas Arrow"
+    },
+    {
+      "id": 1297,
+      "text": "Namas Arrow Description"
+    },
+    {
+      "id": 1298,
+      "text": "Apex Arrow"
+    },
+    {
+      "id": 1299,
+      "text": "Apex Arrow Description"
+    },
+    {
+      "id": 1300,
+      "text": "Radiant Arrow"
+    },
+    {
+      "id": 1301,
+      "text": "Radiant Arrow Description"
     }
   ]
 }
