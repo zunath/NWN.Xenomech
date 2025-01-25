@@ -141,7 +141,11 @@ namespace XM.Shared.Core.Data
             }
 
             if (string.IsNullOrWhiteSpace(response.EntitySingle))
-                return default;
+            {
+                var newObj = Activator.CreateInstance<T>();
+                newObj.Id = id;
+                return newObj;
+            }
 
             var entity = XMJsonUtility.Deserialize<T>(response.EntitySingle);
             return entity;
