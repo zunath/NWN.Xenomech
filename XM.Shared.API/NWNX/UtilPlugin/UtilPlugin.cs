@@ -1,5 +1,6 @@
 ﻿using NWN.Core;
 using NWN.Core.NWNX;
+using NWNX.NET;
 using XM.Shared.API.BaseTypes;
 
 namespace XM.Shared.API.NWNX.UtilPlugin
@@ -41,10 +42,7 @@ namespace XM.Shared.API.NWNX.UtilPlugin
         /// <returns>The mtime of the module file.</returns>
         public static int GetModuleMTime()
         {
-            // NWN.Core methods are broken, overwritten here to temporarily fix until PR is merged.
-            VM.NWNX.SetFunction("NWNX_Util", "GetModuleMtime");
-            VM.NWNX.Call();
-            return VM.NWNX.StackPopInt();
+            return NWN.Core.NWNX.UtilPlugin.GetModuleMtime();
         }
 
         /// <summary>
@@ -53,10 +51,7 @@ namespace XM.Shared.API.NWNX.UtilPlugin
         /// <returns>The module file as a string.</returns>
         public static string GetModuleFile()
         {
-            // NWN.Core methods are broken, overwritten here to temporarily fix until PR is merged.
-            VM.NWNX.SetFunction("NWNX_Util", "GetModuleFile");
-            VM.NWNX.Call();
-            return VM.NWNX.StackPopString();
+            return NWN.Core.NWNX.UtilPlugin.GetModuleFile();
         }
 
         /// <summary>
@@ -261,17 +256,6 @@ namespace XM.Shared.API.NWNX.UtilPlugin
         public static void UnregisterServerConsoleCommand(string sCommand)
         {
             NWN.Core.NWNX.UtilPlugin.UnregisterServerConsoleCommand(sCommand);
-        }
-
-        /// <summary>
-        /// Determines if the given plugin exists and is enabled.
-        /// </summary>
-        /// <param name="sPlugin">The name of the plugin to check.</param>
-        /// <returns>TRUE if the plugin exists and is enabled, otherwise FALSE.</returns>
-        public static int PluginExists(string sPlugin)
-        {
-            WriteTimestampedLogEntry("WARNING:  NWNX_Util_PluginExists is deprecated.  You should migrate to NWNX_PluginExists.");
-            return NWN.Core.NWNX.UtilPlugin.PluginExists(sPlugin);
         }
 
         /// <summary>

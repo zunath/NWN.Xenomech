@@ -44,13 +44,32 @@ namespace XM.Progression.UI.PlayerStatusUI
                     progress
                         .Value(model => model.EPProgress)
                         .ForegroundColor(model => model.EPBarColor)
-                        .Height(20f)
+                        .Height(15f)
                         .DrawList(drawList =>
                         {
                             drawList.AddText(text =>
                             {
                                 text.Text(model => model.EPValue);
-                                text.Bounds(15, 2, 110f, 50f);
+                                text.Bounds(15, -1, 110f, 50f);
+                                text.Color(255, 255, 255);
+                            });
+                        });
+                });
+            });
+            col.AddRow(row =>
+            {
+                row.AddProgress(progress =>
+                {
+                    progress
+                        .Value(model => model.EPProgress)
+                        .ForegroundColor(model => model.EPBarColor)
+                        .Height(15f)
+                        .DrawList(drawList =>
+                        {
+                            drawList.AddText(text =>
+                            {
+                                text.Text(model => model.EPValue);
+                                text.Bounds(15, -1, 110f, 50f);
                                 text.Color(255, 255, 255);
                             });
                         });

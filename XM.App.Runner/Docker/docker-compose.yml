@@ -1,4 +1,3 @@
-version: "3.7"
 services:
     redis:
         hostname: redis
@@ -36,7 +35,7 @@ services:
         user: "0:0"
         hostname: anvil
         stop_signal: SIGINT
-        image: zunath/anvil-debugger:8193.36.2-dev.19.r9bb01d93
+        image: zunath/anvil-debugger:8193.37.0-dev.3.r307e2d6
         env_file:
             - ./nwserver.env
         stdin_open: true

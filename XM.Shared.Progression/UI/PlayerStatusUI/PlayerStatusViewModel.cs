@@ -66,9 +66,9 @@ namespace XM.Progression.UI.PlayerStatusUI
                 _screenScale != screenScale)
             {
                 const float WidgetWidth = 76f;
-                const float WidgetHeight = 35f;
+                const float WidgetHeight = 70f;
                 const float XOffset = 0f;
-                const float YOffset = 77f;
+                const float YOffset = 48f;
 
                 var scale = screenScale / 100f;
                 var x = (screenWidth - XOffset) * scale;
