@@ -8,6 +8,7 @@ using XM.Inventory.KeyItem;
 using XM.Progression.Event;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
+using XM.Progression.Skill;
 using XM.Progression.Stat;
 using XM.Progression.Stat.Entity;
 using XM.Shared.API.Constants;
@@ -30,6 +31,7 @@ namespace XM.Progression.UI.CharacterSheetUI
         internal const string StatPartialId = "STAT_PARTIAL";
         internal const string MechPartialId = "MECH_PARTIAL";
         internal const string JobPartialId = "JOB_PARTIAL";
+        internal const string SkillsPartialId = "SKILLS_PARTIAL";
         internal const string KeyItemsPartialId = "KEYITEMS_PARTIAL";
         internal const string SettingsPartialId = "SETTINGS_PARTIAL";
         internal const string MainView = "MAIN_VIEW";
@@ -213,6 +215,30 @@ namespace XM.Progression.UI.CharacterSheetUI
             set => Set(value);
         }
 
+        public XMBindingList<string> SkillNames
+        {
+            get => Get<XMBindingList<string>>();
+            set => Set(value);
+        }
+
+        public XMBindingList<string> SkillLevels
+        {
+            get => Get<XMBindingList<string>>();
+            set => Set(value);
+        }
+
+        public XMBindingList<string> SkillIcons
+        {
+            get => Get<XMBindingList<string>>();
+            set => Set(value);
+        }
+
+        public XMBindingList<float> SkillProgresses
+        {
+            get => Get<XMBindingList<float>>();
+            set => Set(value);
+        }
+
         public XMBindingList<NuiComboEntry> KeyItemCategories
         {
             get => Get<XMBindingList<NuiComboEntry>>();
@@ -262,6 +288,9 @@ namespace XM.Progression.UI.CharacterSheetUI
 
         [Inject]
         public KeyItemService KeyItem { get; set; }
+
+        [Inject]
+        public SkillService Skill { get; set; }
 
 
         public CharacterSheetViewModel()
@@ -366,6 +395,46 @@ namespace XM.Progression.UI.CharacterSheetUI
             JobProgresses = jobProgresses;
         }
 
+        private void LoadSkillsView()
+        {
+            ChangePartialView(MainView, SkillsPartialId);
+
+            var playerId = PlayerId.Get(Player);
+            var dbPlayerSkill = DB.Get<PlayerSkill>(playerId);
+            var job = Job.GetActiveJob(Player);
+            var jobLevel = Stat.GetLevel(Player);
+
+            var skillNames = new XMBindingList<string>();
+            var skillIcons = new XMBindingList<string>();
+            var skillLevels = new XMBindingList<string>();
+            var skillProgresses = new XMBindingList<float>();
+
+            var skills = Skill.GetAllSkillDefinitions();
+            foreach (var skill in skills)
+            {
+                var level = 0;
+                if (dbPlayerSkill.Skills.ContainsKey(skill.Type))
+                    level = dbPlayerSkill.Skills[skill.Type];
+
+                var grade = Skill.GetGrade(Player, job, skill);
+                var skillCap = Skill.GetSkillCap(grade, jobLevel);
+                if (skillCap <= 0)
+                    continue;
+
+                var progress = (float)level / (float)skillCap;
+
+                skillNames.Add(skill.Name.ToLocalizedString());
+                skillIcons.Add(skill.IconResref);
+                skillLevels.Add($"{level} / {skillCap}");
+                skillProgresses.Add(progress);
+            }
+
+            SkillNames = skillNames;
+            SkillIcons = skillIcons;
+            SkillLevels = skillLevels;
+            SkillProgresses = skillProgresses;
+        }
+
         private void LoadKeyItemsView()
         {
             ChangePartialView(MainView, KeyItemsPartialId);
@@ -439,10 +508,13 @@ namespace XM.Progression.UI.CharacterSheetUI
                 case 2: // 2 = Job
                     LoadJobView();
                     break;
-                case 3: // 3 = Key Items
+                case 3: // 3 = Skills
+                    LoadSkillsView();
+                    break;
+                case 4: // 4 = Key Items
                     LoadKeyItemsView();
                     break;
-                case 4: // 4 = Settings
+                case 5: // 5 = Settings
                     LoadSettingsView();
                     break;
             }

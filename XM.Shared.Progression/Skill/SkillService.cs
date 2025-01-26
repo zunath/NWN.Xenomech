@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Anvil.Services;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
@@ -115,7 +116,7 @@ namespace XM.Progression.Skill
             }
         }
 
-        private GradeType GetGrade(
+        public GradeType GetGrade(
             uint player, 
             IJobDefinition job,
             ISkillDefinition skill)
@@ -130,7 +131,7 @@ namespace XM.Progression.Skill
             return grade;
         }
 
-        private int GetSkillCap(
+        public int GetSkillCap(
             GradeType grade,
             int jobLevel)
         {
@@ -158,6 +159,11 @@ namespace XM.Progression.Skill
                 return false;
 
             return true;
+        }
+
+        public List<ISkillDefinition> GetAllSkillDefinitions()
+        {
+            return _skillDefinitions.ToList();
         }
 
         public SkillType GetSkillOfWeapon(uint weapon)
