@@ -371,7 +371,9 @@ namespace XM.Combat
             var damage = XMRandom.Next(minDamage, maxDamage);
 
             if (hitResult == HitResultType.Critical)
-                damage = (int)(damage * 0.25f);
+            {
+                damage += (int)(damage * 0.25f);
+            }
 
             return damage;
         }
