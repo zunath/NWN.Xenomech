@@ -11,13 +11,15 @@ namespace XM.Progression.UI.PlayerStatusUI
     [ServiceBinding(typeof(IViewModel))]
     internal class PlayerStatusViewModel: 
         ViewModel<PlayerStatusViewModel>,
-        IRefreshable<StatEvent.PlayerEPAdjustedEvent>
+        IRefreshable<StatEvent.PlayerEPAdjustedEvent>,
+        IRefreshable<StatEvent.PlayerTPAdjustedEvent>
     {
         private int _screenHeight;
         private int _screenWidth;
         private int _screenScale;
 
         private static readonly Color _epColor = new(3, 87, 152);
+        private static readonly Color _tpColor = new(0, 139, 0);
 
         public Color EPBarColor
         {
@@ -30,6 +32,24 @@ namespace XM.Progression.UI.PlayerStatusUI
             set => Set(value);
         }
         public float EPProgress
+        {
+            get => Get<float>();
+            set => Set(value);
+        }
+
+        public Color TPBarColor
+        {
+            get => Get<Color>();
+            set => Set(value);
+        }
+
+        public string TPValue
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public float TPProgress
         {
             get => Get<float>();
             set => Set(value);
@@ -65,10 +85,10 @@ namespace XM.Progression.UI.PlayerStatusUI
                 _screenWidth != screenWidth ||
                 _screenScale != screenScale)
             {
-                const float WidgetWidth = 76f;
-                const float WidgetHeight = 70f;
-                const float XOffset = 0f;
-                const float YOffset = 48f;
+                const float WidgetWidth = 72f;
+                const float WidgetHeight = 60f;
+                const float XOffset = 4f;
+                const float YOffset = 66f;
 
                 var scale = screenScale / 100f;
                 var x = (screenWidth - XOffset) * scale;
@@ -89,7 +109,10 @@ namespace XM.Progression.UI.PlayerStatusUI
         private void UpdateAllData()
         {
             EPBarColor = _epColor;
+            TPBarColor = _tpColor;
+
             UpdateEP();
+            UpdateTP();
         }
 
         private void UpdateEP()
@@ -104,9 +127,25 @@ namespace XM.Progression.UI.PlayerStatusUI
             EPProgress = Math.Clamp(ratio, 0f, 1f);
         }
 
+        private void UpdateTP()
+        {
+            var currentTP = Stat.GetCurrentTP(Player);
+            var ratio = StatService.MaxTP > 0f
+                ? (float)currentTP / (float)StatService.MaxTP
+                : 0f;
+
+            TPValue = $"{currentTP}";
+            TPProgress = Math.Clamp(ratio, 0f, 1f);
+        }
+
         public void Refresh(StatEvent.PlayerEPAdjustedEvent @event)
         {
             UpdateEP();
+        }
+
+        public void Refresh(StatEvent.PlayerTPAdjustedEvent @event)
+        {
+            UpdateTP();
         }
     }
 }

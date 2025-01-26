@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Anvil.Services;
-using XM.Inventory;
 using XM.Progression.Event;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
@@ -23,10 +22,13 @@ namespace XM.Progression.Stat
     {
         private readonly DBService _db;
         private const string NPCEPStatVariable = "EP";
+        private const string NPCTPStatVariable = "TP";
         private readonly XMEventService _event;
 
         private readonly IList<IResistDefinition> _resists;
         private readonly Dictionary<ResistType, IResistDefinition> _resistDefinitions = new();
+
+        public const int MaxTP = 3000;
 
         public StatService(
             DBService db, 
@@ -270,6 +272,22 @@ namespace XM.Progression.Stat
             {
                 var npcStats = GetNPCStats(creature);
                 return npcStats.EP;
+            }
+        }
+
+        public int GetCurrentTP(uint creature)
+        {
+            // Players
+            if (GetIsPC(creature) && !GetIsDM(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+                return dbPlayerStat.TP;
+            }
+            // NPCs
+            else
+            {
+                return GetLocalInt(creature, NPCTPStatVariable);
             }
         }
 

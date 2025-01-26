@@ -40,6 +40,7 @@ namespace XM.Progression.Stat.Entity
         public int MaxEP { get; set; }
         public int HP { get; set; }
         public int EP { get; set; }
+        public int TP { get; set; }
         public ItemStatCollection EquippedItemStats { get; set; }
         public Dictionary<AbilityType, int> BaseAttributes { get; set; }
 
