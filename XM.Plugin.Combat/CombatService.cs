@@ -1,10 +1,8 @@
 ﻿using Anvil.Services;
 using System;
 using NWN.Core.NWNX;
-using XM.Combat.Entity;
 using XM.Combat.StatusEffect;
 using XM.Inventory;
-using XM.Progression.Job;
 using XM.Progression.Skill;
 using XM.Progression.Stat;
 using XM.Progression.Stat.Entity;
@@ -24,7 +22,6 @@ namespace XM.Combat
     {
         private readonly SkillService _skill;
         private readonly StatService _stat;
-        private readonly InventoryService _inventory;
         private readonly ItemTypeService _itemType;
         private readonly StatusEffectService _statusEffect;
         private readonly DBService _db;
@@ -32,16 +29,13 @@ namespace XM.Combat
         public CombatService(
             SkillService skill,
             XMEventService @event,
-            JobService job,
             StatService stat,
-            InventoryService inventory,
             ItemTypeService itemType,
             StatusEffectService statusEffect,
             DBService db)
         {
             _skill = skill;
             _stat = stat;
-            _inventory = inventory;
             _itemType = itemType;
             _statusEffect = statusEffect;
             _db = db;
