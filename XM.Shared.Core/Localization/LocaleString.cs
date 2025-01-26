@@ -1023,7 +1023,7 @@ namespace XM.Shared.Core.Localization
         E = 1341,
         F = 1342,
         G = 1343,
-
+        YouLearnedXWeaponSkillY = 1344
 
     }
 }

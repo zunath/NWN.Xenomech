@@ -5372,6 +5372,10 @@
     {
       "id": 1343,
       "text": "G"
+    },
+    {
+      "id": 1344,
+      "text": "You learned {0} weapon skill '{1}'!"
     }
   ]
 }

@@ -7,6 +7,7 @@ using XM.Progression.Job.JobDefinition;
 using XM.Progression.Skill.SkillDefinition;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
+using XM.Shared.API.NWNX.CreaturePlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
@@ -79,7 +80,7 @@ namespace XM.Progression.Skill
             if (!CanGainSkill(player, skillType, playerSkillCap, targetSkillCap))
                 return;
 
-            const int IncreaseChance = 15; // 1.5%
+            const int IncreaseChance = 55; // 5.5%
             var roll = XMRandom.Next(1000);
             if (roll <= IncreaseChance)
             {
@@ -95,12 +96,23 @@ namespace XM.Progression.Skill
                 dbPlayerSkill.Skills[skillType] = 0;
             const int IncreaseBy = 1;
 
-            dbPlayerSkill.Skills[skillType] += IncreaseBy;
+            var newLevel = dbPlayerSkill.Skills[skillType] += IncreaseBy;
+            dbPlayerSkill.Skills[skillType] = newLevel;
 
             _db.Set(dbPlayerSkill);
 
             var definition = _skills[skillType];
             SendMessageToPC(player, LocaleString.YourXSkillIncreasesToY.ToLocalizedString(definition.Name.ToLocalizedString(), dbPlayerSkill.Skills[skillType]));
+
+            if (definition.WeaponSkillAcquisitionLevels.ContainsKey(newLevel))
+            {
+                var feat = definition.WeaponSkillAcquisitionLevels[newLevel];
+                var featNameId = Convert.ToInt32(Get2DAString("feat", "FEAT", (int)feat));
+                var featName = GetStringByStrRef(featNameId);
+                CreaturePlugin.AddFeatByLevel(player, feat, 1);
+                var message = LocaleString.YouLearnedXWeaponSkillY.ToLocalizedString(definition.Name.ToLocalizedString(), featName);
+                SendMessageToPC(player, message);
+            }
         }
 
         private GradeType GetGrade(
