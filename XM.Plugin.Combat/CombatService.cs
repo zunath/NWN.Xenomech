@@ -13,6 +13,7 @@ using XM.Shared.Core.Localization;
 using XM.Shared.API.NWNX.FeedbackPlugin;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
+using FeedbackPlugin = XM.Shared.API.NWNX.FeedbackPlugin.FeedbackPlugin;
 
 
 namespace XM.Combat
@@ -57,8 +58,8 @@ namespace XM.Combat
 
         private void DisableDefaultCombatMessages()
         {
-            //FeedbackPlugin.SetCombatLogMessageHidden(FeedbackCombatLogType.Initiative, true);
-            //FeedbackPlugin.SetCombatLogMessageHidden(FeedbackCombatLogType.ComplexAttack, true);
+            FeedbackPlugin.SetCombatLogMessageHidden(FeedbackCombatLogType.Initiative, true);
+            FeedbackPlugin.SetCombatLogMessageHidden(FeedbackCombatLogType.ComplexAttack, true);
         }
 
         private void DisableAttacksOfOpportunity(uint objectSelf)
