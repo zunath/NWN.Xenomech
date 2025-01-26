@@ -17,5 +17,7 @@
         ShortSword = 12,
         Polearm = 13,
         Bow = 14,
+
+        Evasion = 100,
     }
 }

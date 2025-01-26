@@ -55,10 +55,12 @@ namespace XM.Combat.NativeOverride
                 var hitResult = bCritical == 1
                     ? HitResultType.Critical
                     : HitResultType.Hit;
+                var weapon = round.GetCurrentAttackWeapon();
 
                 return _combat.DetermineDamage(
                     attacker.m_idSelf,
                     defender.m_idSelf,
+                    weapon.m_idSelf,
                     attackType,
                     hitResult);
             });

@@ -148,6 +148,45 @@ namespace XM.Progression.Skill
             return true;
         }
 
+        public SkillType GetSkillOfWeapon(uint weapon)
+        {
+            var baseItemType = GetBaseItemType(weapon);
+            return _weaponToSkills.ContainsKey(baseItemType)
+                ? _weaponToSkills[baseItemType]
+                : SkillType.Invalid;
+        }
+
+        public int GetSkillLevel(uint player, SkillType skillType)
+        {
+            if (!GetIsPC(player) || GetIsDM(player))
+                return 0;
+
+            var playerId = PlayerId.Get(player);
+            var dbPlayerSkill = _db.Get<PlayerSkill>(playerId);
+
+            if (!dbPlayerSkill.Skills.ContainsKey(skillType))
+                dbPlayerSkill.Skills[skillType] = 0;
+
+            return dbPlayerSkill.Skills[skillType];
+        }
+
+        public int GetEvasionSkill(uint creature)
+        {
+            if (GetIsPC(creature))
+            {
+                var job = _job.GetActiveJob(creature);
+                var level = _stat.GetLevel(creature);
+                var grade = job.Grades.Evasion;
+                return _skillGrades.GetSkillCap(grade, level);
+            }
+            else
+            {
+                var npcStats = _stat.GetNPCStats(creature);
+                var grade = npcStats.EvasionGrade;
+                return _skillGrades.GetSkillCap(grade, npcStats.Level);
+            }
+        }
+
         public void Init()
         {
             LoadSkillDefinitions();

@@ -5286,6 +5286,10 @@
       "text": "Skill: Pistol"
     },
     {
+      "id": 1322,
+      "text": "NPC Evasion Grade"
+    },
+    {
       "id": 1323,
       "text": "Ranged firearm"
     },
@@ -5340,6 +5344,34 @@
     {
       "id": 1336,
       "text": "Throwing Lore Description"
+    },
+    {
+      "id": 1337,
+      "text": "A"
+    },
+    {
+      "id": 1338,
+      "text": "B"
+    },
+    {
+      "id": 1339,
+      "text": "C"
+    },
+    {
+      "id": 1340,
+      "text": "D"
+    },
+    {
+      "id": 1341,
+      "text": "E"
+    },
+    {
+      "id": 1342,
+      "text": "F"
+    },
+    {
+      "id": 1343,
+      "text": "G"
     }
   ]
 }

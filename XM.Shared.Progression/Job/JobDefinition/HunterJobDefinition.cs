@@ -25,6 +25,8 @@ namespace XM.Progression.Job.JobDefinition
             Willpower = GradeType.D,
             Social = GradeType.E,
 
+            Evasion = GradeType.E,
+
             SkillGrades = new Dictionary<SkillType, GradeType>
             {
                 { SkillType.Bow, GradeType.A},

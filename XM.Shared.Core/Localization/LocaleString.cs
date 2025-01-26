@@ -1016,7 +1016,14 @@ namespace XM.Shared.Core.Localization
         ShortSwordLoreDescription = 1334,
         ThrowingLore = 1335,
         ThrowingLoreDescription = 1336,
+        A = 1337,
+        B = 1338,
+        C = 1339,
+        D = 1340,
+        E = 1341,
+        F = 1342,
+        G = 1343,
 
-        
+
     }
 }

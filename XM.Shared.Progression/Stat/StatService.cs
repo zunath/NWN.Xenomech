@@ -556,6 +556,31 @@ namespace XM.Progression.Stat
                 {
                     npcStats.Accuracy = GetItemPropertyCostTableValue(ip);
                 }
+                else if (type == ItemPropertyType.NPCEvasionGrade)
+                {
+                    var gradeId = GetItemPropertyCostTableValue(ip);
+                    switch (gradeId)
+                    {
+                        case 1:
+                            npcStats.EvasionGrade = GradeType.A;
+                            break;
+                        case 2:
+                            npcStats.EvasionGrade = GradeType.B;
+                            break;
+                        case 3:
+                            npcStats.EvasionGrade = GradeType.C;
+                            break;
+                        case 4:
+                            npcStats.EvasionGrade = GradeType.D;
+                            break;
+                        case 5:
+                            npcStats.EvasionGrade = GradeType.E;
+                            break;
+                        case 6:
+                            npcStats.EvasionGrade = GradeType.F;
+                            break;
+                    }
+                }
             }
 
             var clawRight = GetItemInSlot(InventorySlotType.CreatureWeaponRight, npc);

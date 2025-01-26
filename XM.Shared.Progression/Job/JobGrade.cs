@@ -14,6 +14,8 @@ namespace XM.Progression.Job
         public GradeType Willpower { get; set; }
         public GradeType Social { get; set; }
 
+        public GradeType Evasion { get; set; }
+
         public Dictionary<SkillType, GradeType> SkillGrades { get; set; }
 
         public JobGrade()
