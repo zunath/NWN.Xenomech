@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Anvil.Services;
+using XM.Inventory;
 using XM.Progression.Event;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
@@ -62,12 +63,15 @@ namespace XM.Progression.Stat
         private void SubscribeEvents()
         {
             _event.Subscribe<CreatureEvent.OnSpawn>(OnSpawnCreature);
+            _event.Subscribe<ModuleEvent.OnEquipItem>(OnEquipItem);
+            _event.Subscribe<ModuleEvent.OnUnequipItem>(OnUnequipItem);
         }
 
         private void OnSpawnCreature(uint creature)
         {
             LoadNPCStats(creature);
         }
+
         private void LoadNPCStats(uint creature)
         {
             var skin = GetItemInSlot(InventorySlotType.CreatureArmor, creature);
@@ -93,6 +97,81 @@ namespace XM.Progression.Stat
             SetLocalInt(creature, NPCEPStatVariable, GetMaxEP(creature));
         }
 
+        private ItemStat BuildItemStat(uint item)
+        {
+            var itemStat = new ItemStat();
+            for (var ip = GetFirstItemProperty(item); GetIsItemPropertyValid(ip); ip = GetNextItemProperty(item))
+            {
+                var type = GetItemPropertyType(ip);
+
+                switch (type)
+                {
+                    case ItemPropertyType.DMG:
+                        itemStat.DMG += GetItemPropertyCostTableValue(ip);
+                        break;
+                    case ItemPropertyType.Delay:
+                        itemStat.Delay += GetItemPropertyCostTableValue(ip) * 10;
+                        break;
+                    case ItemPropertyType.HPBonus:
+                        itemStat.HP += GetItemPropertyCostTableValue(ip);
+                        break;
+                    case ItemPropertyType.EP:
+                        itemStat.EP += GetItemPropertyCostTableValue(ip);
+                        break;
+                    case ItemPropertyType.EPRegen:
+                        itemStat.EPRegen += GetItemPropertyCostTableValue(ip);
+                        break;
+                    case ItemPropertyType.AbilityRecastReduction:
+                        itemStat.RecastReduction += GetItemPropertyCostTableValue(ip);
+                        break;
+                    case ItemPropertyType.Defense:
+                        itemStat.Defense += GetItemPropertyCostTableValue(ip);
+                        break;
+                    case ItemPropertyType.Evasion:
+                        itemStat.Evasion += GetItemPropertyCostTableValue(ip);
+                        break;
+                    case ItemPropertyType.Accuracy:
+                        itemStat.Accuracy += GetItemPropertyCostTableValue(ip);
+                        break;
+                    case ItemPropertyType.Attack:
+                        itemStat.Attack += GetItemPropertyCostTableValue(ip);
+                        break;
+                    case ItemPropertyType.EtherAttack:
+                        itemStat.EtherAttack += GetItemPropertyCostTableValue(ip);
+                        break;
+                }
+            }
+
+            return itemStat;
+        }
+
+        private void OnEquipItem(uint module)
+        {
+            var player = GetPCItemLastEquippedBy();
+            var item = GetPCItemLastEquipped();
+            var slot = GetPCItemLastEquippedSlot();
+            var playerId = PlayerId.Get(player);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+
+            var itemStat = BuildItemStat(item);
+            dbPlayerStat.EquippedItemStats[slot] = itemStat;
+
+            _db.Set(dbPlayerStat);
+        }
+        private void OnUnequipItem(uint module)
+        {
+            var player = GetPCItemLastUnequippedBy();
+            var slot = GetPCItemLastUnequippedSlot();
+            var playerId = PlayerId.Get(player);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+
+            if (dbPlayerStat.EquippedItemStats.ContainsKey(slot))
+            {
+                dbPlayerStat.EquippedItemStats[slot] = new ItemStat();
+            }
+
+            _db.Set(dbPlayerStat);
+        }
         public int GetCurrentHP(uint creature)
         {
             return GetCurrentHitPoints(creature);
@@ -106,23 +185,6 @@ namespace XM.Progression.Stat
         public Dictionary<ResistType, IResistDefinition> GetAllResistDefinitions()
         {
             return _resistDefinitions.ToDictionary(x => x.Key, y => y.Value);
-        }
-
-        /// <summary>
-        /// Increases or decreases a player's HP by a specified amount.
-        /// There is a cap of 255 HP per NWN level. Players are auto-leveled to 40 by default, so this
-        /// gives 255 * 40 = 10,200 HP maximum. If the player's HP would go over this amount, it will be set to 10,200.
-        /// </summary>
-        /// <param name="player">The player to adjust</param>
-        /// <param name="adjustBy">The amount to adjust by.</param>
-        public void AdjustPlayerMaxHP(uint player, int adjustBy)
-        {
-            var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-            dbPlayerStat.MaxHP += adjustBy;
-
-            SetPlayerMaxHP(player, dbPlayerStat.MaxHP);
-            _db.Set(dbPlayerStat);
         }
 
         public void SetPlayerMaxHP(uint player, int amount)
@@ -217,7 +279,10 @@ namespace XM.Progression.Stat
             {
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-                return dbPlayerStat.HPRegen;
+                var itemHPRegen = dbPlayerStat.EquippedItemStats.CalculateHPRegen();
+                var hpRegen = itemHPRegen;
+
+                return hpRegen;
             }
             else
             {
@@ -230,7 +295,10 @@ namespace XM.Progression.Stat
             {
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-                return dbPlayerStat.EPRegen;
+                var itemEPRegen = dbPlayerStat.EquippedItemStats.CalculateEPRegen();
+                var epRegen = itemEPRegen;
+
+                return epRegen;
             }
             else
             {
@@ -303,64 +371,6 @@ namespace XM.Progression.Stat
             _event.ExecuteScript(ProgressionEventScript.OnPlayerEPAdjustedScript, creature);
         }
 
-        public void AdjustHPRegen(uint player, int adjustBy)
-        {
-            // Note: It's possible for HP Regen to drop to a negative number. This is expected to ensure calculations stay in sync.
-            // If there are any visual indicators (GUI elements for example) be sure to account for this scenario.
-            var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-            dbPlayerStat.HPRegen += adjustBy;
-            _db.Set(dbPlayerStat);
-        }
-
-        public void AdjustEPRegen(uint player, int adjustBy)
-        {
-            // Note: It's possible for EP Regen to drop to a negative number. This is expected to ensure calculations stay in sync.
-            // If there are any visual indicators (GUI elements for example) be sure to account for this scenario.
-            var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-            dbPlayerStat.EPRegen += adjustBy;
-            _db.Set(dbPlayerStat);
-        }
-
-        public void AdjustDefense(uint player, int adjustBy)
-        {
-            var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-            dbPlayerStat.Defense += adjustBy;
-            _db.Set(dbPlayerStat);
-        }
-        public void AdjustEvasion(uint player, int adjustBy)
-        {
-            var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-            dbPlayerStat.Evasion += adjustBy;
-            _db.Set(dbPlayerStat);
-        }
-
-        public void AdjustAttack(uint player, int adjustBy)
-        {
-            var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-            dbPlayerStat.Attack += adjustBy;
-            _db.Set(dbPlayerStat);
-        }
-        public void AdjustEtherAttack(uint player, int adjustBy)
-        {
-            var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-            dbPlayerStat.EtherAttack += adjustBy;
-            _db.Set(dbPlayerStat);
-        }
-
-        public void AdjustAccuracy(uint player, int adjustBy)
-        {
-            var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-            dbPlayerStat.Accuracy += adjustBy;
-            _db.Set(dbPlayerStat);
-        }
-
         public int GetAbilityRecastReduction(uint creature)
         {
             if (!GetIsPC(creature) || GetIsDMPossessed(creature))
@@ -368,7 +378,10 @@ namespace XM.Progression.Stat
 
             var playerId = PlayerId.Get(creature);
             var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-            return dbPlayerStat.AbilityRecastReduction;
+            var itemRecastReduction = dbPlayerStat.EquippedItemStats.CalculateRecastReduction();
+            var recastReduction = itemRecastReduction;
+
+            return recastReduction;
         }
 
         public void SetPlayerMaxEP(uint player, int amount)
@@ -399,8 +412,10 @@ namespace XM.Progression.Stat
             {
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+                var itemAttack = dbPlayerStat.EquippedItemStats.CalculateAttack();
+                var attack = itemAttack;
 
-                return dbPlayerStat.Attack;
+                return attack;
             }
             else
             {
@@ -414,7 +429,10 @@ namespace XM.Progression.Stat
             {
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-                return dbPlayerStat.EtherAttack;
+                var itemEtherAttack = dbPlayerStat.EquippedItemStats.CalculateEtherAttack();
+                var etherAttack = itemEtherAttack;
+
+                return etherAttack;
             }
             else
             {
@@ -429,7 +447,10 @@ namespace XM.Progression.Stat
             {
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-                return dbPlayerStat.Accuracy;
+                var itemAccuracy = dbPlayerStat.EquippedItemStats.CalculateAccuracy();
+                var accuracy = itemAccuracy;
+
+                return accuracy;
             }
             else
             {
@@ -443,7 +464,10 @@ namespace XM.Progression.Stat
             {
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-                return dbPlayerStat.Evasion;
+                var itemEvasion = dbPlayerStat.EquippedItemStats.CalculateEvasion();
+                var evasion = itemEvasion;
+
+                return evasion;
             }
             else
             {
@@ -457,7 +481,10 @@ namespace XM.Progression.Stat
             {
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-                return dbPlayerStat.Defense;
+                var itemDefense = dbPlayerStat.EquippedItemStats.CalculateDefense();
+                var defense = itemDefense;
+
+                return defense;
             }
             else
             {
@@ -509,12 +536,9 @@ namespace XM.Progression.Stat
         {
             var playerId = PlayerId.Get(player);
             var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-
-            if (!dbPlayerStat.Resists.ContainsKey(resist))
-                return 0;
-
-            var value = dbPlayerStat.Resists[resist];
-            return Math.Clamp(value, 0, 100);
+            var equipmentResist = dbPlayerStat.EquippedItemStats.CalculateResist(resist);
+            
+            return Math.Clamp(equipmentResist, 0, 100);
         }
 
         public NPCStats GetNPCStats(uint npc)

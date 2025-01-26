@@ -204,29 +204,23 @@ namespace XM.Progression.Job
 
             var hp = CalculateHP(level, definition.Grades.HP) + dbPlayerStat.HP;
             var ep = CalculateEP(level, definition.Grades.EP) + dbPlayerStat.EP;
-            var might = CalculateStat(level, definition.Grades.Might) + 
-                        dbPlayerStat.BaseAttributes[AbilityType.Might] + 
-                        dbPlayerStat.Attributes[AbilityType.Might];
+            var might = CalculateStat(level, definition.Grades.Might) +
+                        dbPlayerStat.BaseAttributes[AbilityType.Might];
 
-            var perception = CalculateStat(level, definition.Grades.Perception) + 
-                             dbPlayerStat.BaseAttributes[AbilityType.Perception] + 
-                             dbPlayerStat.Attributes[AbilityType.Perception];
+            var perception = CalculateStat(level, definition.Grades.Perception) +
+                             dbPlayerStat.BaseAttributes[AbilityType.Perception];
 
-            var vitality = CalculateStat(level, definition.Grades.Vitality) + 
-                           dbPlayerStat.BaseAttributes[AbilityType.Vitality] + 
-                           dbPlayerStat.Attributes[AbilityType.Vitality];
+            var vitality = CalculateStat(level, definition.Grades.Vitality) +
+                           dbPlayerStat.BaseAttributes[AbilityType.Vitality];
 
-            var agility = CalculateStat(level, definition.Grades.Agility) + 
-                          dbPlayerStat.BaseAttributes[AbilityType.Agility] + 
-                          dbPlayerStat.Attributes[AbilityType.Agility];
+            var agility = CalculateStat(level, definition.Grades.Agility) +
+                          dbPlayerStat.BaseAttributes[AbilityType.Agility];
 
-            var willpower = CalculateStat(level, definition.Grades.Willpower) + 
-                            dbPlayerStat.BaseAttributes[AbilityType.Willpower] + 
-                            dbPlayerStat.Attributes[AbilityType.Willpower];
+            var willpower = CalculateStat(level, definition.Grades.Willpower) +
+                            dbPlayerStat.BaseAttributes[AbilityType.Willpower];
 
-            var social = CalculateStat(level, definition.Grades.Social) + 
-                         dbPlayerStat.BaseAttributes[AbilityType.Social] + 
-                         dbPlayerStat.Attributes[AbilityType.Social];
+            var social = CalculateStat(level, definition.Grades.Social) +
+                         dbPlayerStat.BaseAttributes[AbilityType.Social];
 
             _stat.SetPlayerMaxHP(player, hp);
             _stat.SetPlayerMaxEP(player, ep);

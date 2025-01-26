@@ -7,6 +7,7 @@ using XM.Inventory;
 using XM.Progression.Job;
 using XM.Progression.Skill;
 using XM.Progression.Stat;
+using XM.Progression.Stat.Entity;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Localization;
@@ -46,8 +47,6 @@ namespace XM.Combat
             _db = db;
 
             @event.Subscribe<NWNXEvent.OnBroadcastAttackOfOpportunityBefore>(DisableAttacksOfOpportunity);
-            @event.Subscribe<ModuleEvent.OnEquipItem>(OnModuleEquipItem);
-            @event.Subscribe<ModuleEvent.OnUnequipItem>(OnModuleUnequipItem);
         }
 
 
@@ -383,8 +382,9 @@ namespace XM.Combat
             if (GetIsPC(attacker) && !GetIsDMPossessed(attacker))
             {
                 var playerId = PlayerId.Get(attacker);
-                var dbPlayerCombat = _db.Get<PlayerCombat>(playerId);
-                delay = dbPlayerCombat.MainHandDelay + dbPlayerCombat.OffHandDelay;
+                var dbPlayerCombat = _db.Get<PlayerStat>(playerId);
+                delay = dbPlayerCombat.EquippedItemStats[InventorySlotType.RightHand].Delay +
+                        dbPlayerCombat.EquippedItemStats[InventorySlotType.LeftHand].Delay;
             }
             else
             {
@@ -393,52 +393,6 @@ namespace XM.Combat
             }
 
             return (int)(delay / 60f * 1000);
-        }
-
-        private void OnModuleEquipItem(uint module)
-        {
-            var player = GetPCItemLastEquippedBy();
-            if (!GetIsPC(player))
-                return;
-
-            var item = GetPCItemLastEquipped();
-            var itemDetails = _inventory.GetItemDetails(item);
-            var slot = GetPCItemLastEquippedSlot();
-            var playerId = PlayerId.Get(player);
-            var dbPlayerCombat = _db.Get<PlayerCombat>(playerId);
-
-            if (slot == InventorySlotType.RightHand)
-            {
-                dbPlayerCombat.MainHandDelay = itemDetails.Delay;
-            }
-            else if (slot == InventorySlotType.LeftHand)
-            {
-                dbPlayerCombat.OffHandDelay = itemDetails.Delay;
-            }
-
-            _db.Set(dbPlayerCombat);
-        }
-        private void OnModuleUnequipItem(uint module)
-        {
-            var player = GetPCItemLastUnequippedBy();
-            var slot = GetPCItemLastUnequippedSlot();
-            if (!GetIsPC(player))
-                return;
-
-            var playerId = PlayerId.Get(player);
-            var dbPlayerCombat = _db.Get<PlayerCombat>(playerId);
-
-            if (slot == InventorySlotType.RightHand)
-            {
-                dbPlayerCombat.MainHandDelay = 0;
-            }
-
-            if (slot == InventorySlotType.LeftHand)
-            {
-                dbPlayerCombat.OffHandDelay = 0;
-            }
-
-            _db.Set(dbPlayerCombat);
         }
     }
 }
