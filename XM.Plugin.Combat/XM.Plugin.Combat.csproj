@@ -64,11 +64,10 @@
   </PropertyGroup>
 
 <ItemGroup>
-	<PackageReference Include="NWN.Anvil" Version="8193.37.0-dev.3.r3075e2d6" ExcludeAssets="runtime" PrivateAssets="all">
+	<PackageReference Include="NWN.Anvil" Version="8193.36.1" ExcludeAssets="runtime" PrivateAssets="all">
 		<IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	</PackageReference>
-	<PackageReference Include="NWN.Native" Version="8193.37.1" />
-	<PackageReference Include="NWNX.NET" Version="1.0.2" />
+	<PackageReference Include="NWN.Native" Version="8193.36.7" />
 </ItemGroup>
 
 <ItemGroup>

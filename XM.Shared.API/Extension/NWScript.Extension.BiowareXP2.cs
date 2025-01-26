@@ -1,5 +1,7 @@
-﻿using XM.Shared.API.BaseTypes;
+﻿using Anvil.API;
+using XM.Shared.API.BaseTypes;
 using XM.Shared.API.Constants;
+using ItemPropertyType = XM.Shared.API.Constants.ItemPropertyType;
 
 // ReSharper disable once CheckNamespace
 namespace XM.Shared.API

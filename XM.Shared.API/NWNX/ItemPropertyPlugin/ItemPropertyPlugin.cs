@@ -1,4 +1,5 @@
-﻿using NWN.Core.NWNX;
+﻿using Anvil.API;
+using NWN.Core.NWNX;
 using XM.Shared.API.BaseTypes;
 
 namespace XM.Shared.API.NWNX.ItemPropertyPlugin
