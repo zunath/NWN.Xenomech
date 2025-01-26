@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
+using SkillType = XM.Progression.Skill.SkillType;
 
 namespace XM.Progression.Job.JobDefinition
 {
     internal class ElementalistJobDefinition: JobDefinitionBase
     {
+        public override JobType Type => JobType.Elementalist;
         public override bool IsVisibleToPlayers => true;
 
         public override LocaleString Name => LocaleString.Elementalist;
@@ -21,7 +23,16 @@ namespace XM.Progression.Job.JobDefinition
             Vitality = GradeType.F,
             Agility = GradeType.C,
             Willpower = GradeType.A,
-            Social = GradeType.D
+            Social = GradeType.D,
+
+            Evasion = GradeType.E,
+
+            SkillGrades = new Dictionary<SkillType, GradeType>
+            {
+                { SkillType.Staff, GradeType.A},
+                { SkillType.Club, GradeType.B},
+                { SkillType.Throwing, GradeType.C},
+            }
         };
 
         public override Dictionary<int, FeatType> FeatAcquisitionLevels => new()

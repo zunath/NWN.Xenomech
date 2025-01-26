@@ -1,51 +1,46 @@
 ﻿using Anvil.Services;
 using System;
 using NWN.Core.NWNX;
-using XM.Combat.Entity;
 using XM.Combat.StatusEffect;
 using XM.Inventory;
-using XM.Progression.Job;
+using XM.Progression.Skill;
 using XM.Progression.Stat;
+using XM.Progression.Stat.Entity;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Localization;
-using CreaturePlugin = XM.Shared.API.NWNX.CreaturePlugin.CreaturePlugin;
 using XM.Shared.API.NWNX.FeedbackPlugin;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using FeedbackPlugin = XM.Shared.API.NWNX.FeedbackPlugin.FeedbackPlugin;
+
 
 namespace XM.Combat
 {
     [ServiceBinding(typeof(CombatService))]
     internal class CombatService: IInitializable
     {
-        private readonly JobService _job;
+        private readonly SkillService _skill;
         private readonly StatService _stat;
-        private readonly InventoryService _inventory;
         private readonly ItemTypeService _itemType;
         private readonly StatusEffectService _statusEffect;
         private readonly DBService _db;
 
         public CombatService(
+            SkillService skill,
             XMEventService @event,
-            JobService job,
             StatService stat,
-            InventoryService inventory,
             ItemTypeService itemType,
             StatusEffectService statusEffect,
             DBService db)
         {
-            _job = job;
+            _skill = skill;
             _stat = stat;
-            _inventory = inventory;
             _itemType = itemType;
             _statusEffect = statusEffect;
             _db = db;
 
             @event.Subscribe<NWNXEvent.OnBroadcastAttackOfOpportunityBefore>(DisableAttacksOfOpportunity);
-            @event.Subscribe<ModuleEvent.OnEquipItem>(OnModuleEquipItem);
-            @event.Subscribe<ModuleEvent.OnUnequipItem>(OnModuleUnequipItem);
         }
 
 
@@ -129,10 +124,10 @@ namespace XM.Combat
         {
             var statusEffects = _statusEffect.GetCreatureStatusEffects(creature);
             var agility = _stat.GetAttribute(creature, AbilityType.Agility);
-            var baseEvasion = CreaturePlugin.GetBaseAC(creature) * 5;
+            var baseEvasion = _skill.GetEvasionSkill(creature) / 10;
             var evasionBonus = _stat.GetEvasion(creature) + statusEffects.Evasion;
             var level = _stat.GetLevel(creature);
-
+            
             return agility * 3 + level + baseEvasion + evasionBonus;
         }
 
@@ -273,7 +268,7 @@ namespace XM.Combat
             return ColorToken.Combat(message);
         }
 
-        private int CalculateAttack(uint attacker, AttackType attackType)
+        private int CalculateAttack(uint attacker, uint weapon, AttackType attackType)
         {
             var attackerStatusEffects = _statusEffect.GetCreatureStatusEffects(attacker);
             var attack = _stat.GetAttack(attacker) + attackerStatusEffects.Attack;
@@ -281,8 +276,10 @@ namespace XM.Combat
                 ? _stat.GetAttribute(attacker, AbilityType.Might)
                 : _stat.GetAttribute(attacker, AbilityType.Agility);
             var level = _stat.GetLevel(attacker);
+            var skillType = _skill.GetSkillOfWeapon(weapon);
+            var skillLevel = _skill.GetSkillLevel(attacker, skillType) / 10;
 
-            return 8 + (2 * level) + stat + attack;
+            return 8 + (2 * level) + stat + (attack + skillLevel);
         }
 
         private int CalculateDefense(uint defender)
@@ -295,12 +292,12 @@ namespace XM.Combat
             return (int)(8 + (stat * 1.5f) + level + defense);
         }
 
-        private float CalculateDamageRatio(uint attacker, uint defender, AttackType attackType)
+        private float CalculateDamageRatio(uint attacker, uint defender, uint weapon, AttackType attackType)
         {
             const float RatioMax = 3.625f;
             const float RatioMin = 0.01f;
 
-            var attackerAttack = CalculateAttack(attacker, attackType);
+            var attackerAttack = CalculateAttack(attacker, weapon, attackType);
             var defenderDefense = CalculateDefense(defender);
             if (defenderDefense < 1)
                 defenderDefense = 1;
@@ -341,10 +338,10 @@ namespace XM.Combat
                 return (delta + 13) / 4;
         }
 
-        private (int, int) CalculateDamageRange(uint attacker, uint defender, AttackType attackType)
+        private (int, int) CalculateDamageRange(uint attacker, uint defender, uint weapon, AttackType attackType)
         {
             var delta = CalculateDamageStatDelta(attacker, defender, attackType);
-            var ratio = CalculateDamageRatio(attacker, defender, attackType);
+            var ratio = CalculateDamageRatio(attacker, defender, weapon, attackType);
             var attackerDMG = _stat.GetMainHandDMG(attacker) + _stat.GetOffHandDMG(attacker);
             var baseDMG = attackerDMG + delta;
 
@@ -357,14 +354,18 @@ namespace XM.Combat
         public int DetermineDamage(
             uint attacker, 
             uint defender,
+            uint weapon,
             AttackType attackType,
             HitResultType hitResult)
         {
-            var (minDamage, maxDamage) = CalculateDamageRange(attacker, defender, attackType);
+            
+            var (minDamage, maxDamage) = CalculateDamageRange(attacker, defender, weapon, attackType);
             var damage = XMRandom.Next(minDamage, maxDamage);
 
             if (hitResult == HitResultType.Critical)
-                damage = (int)(damage * 0.25f);
+            {
+                damage += (int)(damage * 0.25f);
+            }
 
             return damage;
         }
@@ -375,8 +376,9 @@ namespace XM.Combat
             if (GetIsPC(attacker) && !GetIsDMPossessed(attacker))
             {
                 var playerId = PlayerId.Get(attacker);
-                var dbPlayerCombat = _db.Get<PlayerCombat>(playerId);
-                delay = dbPlayerCombat.MainHandDelay + dbPlayerCombat.OffHandDelay;
+                var dbPlayerCombat = _db.Get<PlayerStat>(playerId);
+                delay = dbPlayerCombat.EquippedItemStats[InventorySlotType.RightHand].Delay +
+                        dbPlayerCombat.EquippedItemStats[InventorySlotType.LeftHand].Delay;
             }
             else
             {
@@ -385,52 +387,6 @@ namespace XM.Combat
             }
 
             return (int)(delay / 60f * 1000);
-        }
-
-        private void OnModuleEquipItem(uint module)
-        {
-            var player = GetPCItemLastEquippedBy();
-            if (!GetIsPC(player))
-                return;
-
-            var item = GetPCItemLastEquipped();
-            var itemDetails = _inventory.GetItemDetails(item);
-            var slot = GetPCItemLastEquippedSlot();
-            var playerId = PlayerId.Get(player);
-            var dbPlayerCombat = _db.Get<PlayerCombat>(playerId);
-
-            if (slot == InventorySlotType.RightHand)
-            {
-                dbPlayerCombat.MainHandDelay = itemDetails.Delay;
-            }
-            else if (slot == InventorySlotType.LeftHand)
-            {
-                dbPlayerCombat.OffHandDelay = itemDetails.Delay;
-            }
-
-            _db.Set(dbPlayerCombat);
-        }
-        private void OnModuleUnequipItem(uint module)
-        {
-            var player = GetPCItemLastUnequippedBy();
-            var slot = GetPCItemLastUnequippedSlot();
-            if (!GetIsPC(player))
-                return;
-
-            var playerId = PlayerId.Get(player);
-            var dbPlayerCombat = _db.Get<PlayerCombat>(playerId);
-
-            if (slot == InventorySlotType.RightHand)
-            {
-                dbPlayerCombat.MainHandDelay = 0;
-            }
-
-            if (slot == InventorySlotType.LeftHand)
-            {
-                dbPlayerCombat.OffHandDelay = 0;
-            }
-
-            _db.Set(dbPlayerCombat);
         }
     }
 }

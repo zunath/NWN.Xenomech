@@ -92,6 +92,10 @@ namespace XM.Shared.API.Constants
         CraftMaterialMedium = 109,
         CraftMaterialSmall = 110,
         Whip = 111,
+        CraftBase = 112,
+        Claw = 113,
+        Pistol = 114,
+        Rifle = 115,
         Invalid = 256
     }
 }

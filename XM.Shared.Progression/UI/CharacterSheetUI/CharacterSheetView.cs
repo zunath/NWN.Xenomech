@@ -50,6 +50,7 @@ namespace XM.Progression.UI.CharacterSheetUI
                     .DefinePartialView(CharacterSheetViewModel.StatPartialId, BuildCharacterPartial)
                     .DefinePartialView(CharacterSheetViewModel.MechPartialId, BuildMechPartial)
                     .DefinePartialView(CharacterSheetViewModel.JobPartialId, BuildJobPartial)
+                    .DefinePartialView(CharacterSheetViewModel.SkillsPartialId, BuildSkillsPartial)
                     .DefinePartialView(CharacterSheetViewModel.KeyItemsPartialId, BuildKeyItemsPartial)
                     .DefinePartialView(CharacterSheetViewModel.SettingsPartialId, BuildSettingsPartial);
             }).Build();
@@ -63,6 +64,7 @@ namespace XM.Progression.UI.CharacterSheetUI
                     .AddOption(LocaleString.Character)
                     .AddOption(LocaleString.Mech)
                     .AddOption(LocaleString.Job)
+                    .AddOption(LocaleString.Skills)
                     .AddOption(LocaleString.KeyItems)
                     .AddOption(LocaleString.Settings)
                     .SelectedValue(model => model.SelectedTab)
@@ -368,6 +370,115 @@ namespace XM.Progression.UI.CharacterSheetUI
                                 });
                             });
                         }, model => model.JobNames);
+                    });
+                });
+        }
+
+        private void BuildSkillsPartial(NuiGroupBuilder<CharacterSheetViewModel> partial)
+        {
+            partial
+                .Border(false)
+                .Scrollbars(NuiScrollbars.Auto)
+                .SetLayout(layout =>
+                {
+                    layout.AddList(list =>
+                    {
+                        list.RowHeight(70f);
+                        list.AddTemplateCell(cell =>
+                        {
+                            cell.Width(70f);
+                            cell.IsVariable(false);
+                            cell.AddGroup(group =>
+                            {
+                                group.SetLayout(cellLayout =>
+                                {
+                                    cellLayout.AddRow(cellLayoutRow =>
+                                    {
+                                        cellLayoutRow.AddColumn(col =>
+                                        {
+                                            col.AddGroup(imageGroup =>
+                                            {
+                                                imageGroup.SetLayout(layout =>
+                                                {
+                                                    layout.AddImage(image =>
+                                                    {
+                                                        image
+                                                            .HorizontalAlign(NuiHAlign.Center)
+                                                            .VerticalAlign(NuiVAlign.Top)
+                                                            .ResRef(model => model.SkillIcons)
+                                                            .Height(64f)
+                                                            .Width(64f);
+                                                    });
+                                                });
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        }, model => model.SkillNames);
+
+                        list.AddTemplateCell(cell =>
+                        {
+                            cell.Width(16f);
+                            cell.IsVariable(false);
+                            cell.AddGroup(group =>
+                            {
+                                group.SetLayout(layout =>
+                                {
+                                    layout.AddSpacer();
+                                });
+                            });
+                        }, model => model.SkillNames);
+
+                        list.AddTemplateCell(cell =>
+                        {
+                            cell.Width(200f);
+                            cell.IsVariable(false);
+                            cell.AddGroup(group =>
+                            {
+                                group.SetLayout(col =>
+                                {
+                                    col.AddRow(row =>
+                                    {
+                                        row.AddText(label =>
+                                        {
+                                            label
+                                                .Text(model => model.SkillNames);
+                                        });
+                                    });
+                                    col.AddRow(row =>
+                                    {
+                                        row.AddText(label =>
+                                        {
+                                            label
+                                                .Text(model => model.SkillLevels);
+                                        });
+                                    });
+                                });
+                            });
+                        }, model => model.SkillNames);
+
+                        list.AddTemplateCell(cell =>
+                        {
+                            cell.AddGroup(group =>
+                            {
+                                group.SetLayout(col =>
+                                {
+                                    col.AddRow(row =>
+                                    {
+                                        row.Height(10f);
+                                        row.AddSpacer();
+                                    });
+                                    col.AddRow(row =>
+                                    {
+                                        row.AddProgress(progress =>
+                                        {
+                                            progress.Value(model => model.SkillProgresses);
+                                        });
+                                    });
+                                });
+                            });
+                        }, model => model.SkillNames);
                     });
                 });
         }

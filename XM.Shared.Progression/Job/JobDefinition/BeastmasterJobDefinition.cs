@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
+using SkillType = XM.Progression.Skill.SkillType;
 
 namespace XM.Progression.Job.JobDefinition
 {
     internal class BeastmasterJobDefinition: JobDefinitionBase
     {
+        public override JobType Type => JobType.Beastmaster;
         public override bool IsVisibleToPlayers => true;
 
         public override LocaleString Name => LocaleString.Beastmaster;
@@ -21,7 +23,16 @@ namespace XM.Progression.Job.JobDefinition
             Vitality = GradeType.D,
             Agility = GradeType.F,
             Willpower = GradeType.E,
-            Social = GradeType.A
+            Social = GradeType.A,
+
+            Evasion = GradeType.C,
+
+            SkillGrades = new Dictionary<SkillType, GradeType>
+            {
+                { SkillType.Axe, GradeType.A},
+                { SkillType.GreatAxe, GradeType.B},
+                { SkillType.Bow, GradeType.C},
+            }
         };
 
         public override Dictionary<int, FeatType> FeatAcquisitionLevels => new()

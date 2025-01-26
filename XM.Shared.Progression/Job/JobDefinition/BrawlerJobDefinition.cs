@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
+using SkillType = XM.Progression.Skill.SkillType;
 
 namespace XM.Progression.Job.JobDefinition
 {
     internal class BrawlerJobDefinition: JobDefinitionBase
     {
+        public override JobType Type => JobType.Brawler;
         public override bool IsVisibleToPlayers => true;
 
         public override LocaleString Name => LocaleString.Brawler;
@@ -21,7 +23,16 @@ namespace XM.Progression.Job.JobDefinition
             Vitality = GradeType.A,
             Agility = GradeType.F,
             Willpower = GradeType.D,
-            Social = GradeType.E
+            Social = GradeType.E,
+
+            Evasion = GradeType.B,
+
+            SkillGrades = new Dictionary<SkillType, GradeType>
+            {
+                { SkillType.HandToHand, GradeType.A},
+                { SkillType.Staff, GradeType.B},
+                { SkillType.Club, GradeType.C},
+            }
         };
 
         public override Dictionary<int, FeatType> FeatAcquisitionLevels => new()

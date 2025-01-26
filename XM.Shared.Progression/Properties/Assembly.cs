@@ -1,1 +1,1 @@
-﻿[assembly: Anvil.Plugins.PluginInfo(Isolated = false)]
+﻿[assembly: Anvil.Plugins.PluginInfo()]

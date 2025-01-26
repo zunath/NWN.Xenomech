@@ -80,25 +80,5 @@ namespace XM.Inventory
                 AssignCommand(creature, () => ActionUnequipItem(item));
             }
         }
-
-        public ItemDetails GetItemDetails(uint item)
-        {
-            var itemDetails = new ItemDetails(item);
-            for (var ip = GetFirstItemProperty(item); GetIsItemPropertyValid(ip); ip = GetNextItemProperty(item))
-            {
-                var type = GetItemPropertyType(ip);
-
-                if (type == ItemPropertyType.DMG)
-                {
-                    itemDetails.DMG += GetItemPropertyCostTableValue(ip);
-                }
-                else if (type == ItemPropertyType.Delay)
-                {
-                    itemDetails.Delay += GetItemPropertyCostTableValue(ip) * 10;
-                }
-            }
-
-            return itemDetails;
-        }
     }
 }

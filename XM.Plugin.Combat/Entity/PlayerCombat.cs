@@ -15,9 +15,5 @@ namespace XM.Combat.Entity
             Id = id;
         }
 
-        public int MainHandDelay { get; set; }
-
-        public int OffHandDelay { get; set; }
-
     }
 }

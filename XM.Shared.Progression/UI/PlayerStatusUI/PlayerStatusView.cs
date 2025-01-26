@@ -1,4 +1,6 @@
 ﻿using Anvil.Services;
+using NRediSearch.Aggregation;
+using XM.Shared.API.NUI;
 using XM.Shared.Core.Localization;
 using XM.UI;
 using XM.UI.Builder;
@@ -37,24 +39,40 @@ namespace XM.Progression.UI.PlayerStatusUI
 
         private void EPBar(NuiColumnBuilder<PlayerStatusViewModel> col)
         {
-            col.AddRow(row =>
+            col.AddProgress(progress =>
             {
-                row.AddProgress(progress =>
-                {
-                    progress
-                        .Value(model => model.EPProgress)
-                        .ForegroundColor(model => model.EPBarColor)
-                        .Height(20f)
-                        .DrawList(drawList =>
+                progress
+                    .Value(model => model.EPProgress)
+                    .ForegroundColor(model => model.EPBarColor)
+                    .Padding(0)
+                    .Height(15f)
+                    .DrawList(drawList =>
+                    {
+                        drawList.AddText(text =>
                         {
-                            drawList.AddText(text =>
-                            {
-                                text.Text(model => model.EPValue);
-                                text.Bounds(15, 2, 110f, 50f);
-                                text.Color(255, 255, 255);
-                            });
+                            text.Text(model => model.EPValue);
+                            text.Bounds(15, -1, 110f, 50f);
+                            text.Color(255, 255, 255);
                         });
-                });
+                    });
+            });
+
+            col.AddProgress(progress =>
+            {
+                progress
+                    .Value(model => model.TPProgress)
+                    .ForegroundColor(model => model.TPBarColor)
+                    .Padding(0)
+                    .Height(15f)
+                    .DrawList(drawList =>
+                    {
+                        drawList.AddText(text =>
+                        {
+                            text.Text(model => model.TPValue);
+                            text.Bounds(15, -1, 110f, 50f);
+                            text.Color(255, 255, 255);
+                        });
+                    });
             });
         }
     }

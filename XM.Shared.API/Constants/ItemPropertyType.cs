@@ -93,7 +93,7 @@ namespace XM.Shared.API.Constants
         // 92 is open
         DMG = 93,
         Defense = 94,
-        // 95 is open
+        NPCEvasionGrade = 95,
         NPCHP = 96,
         Accuracy = 97,
         // 98 is free

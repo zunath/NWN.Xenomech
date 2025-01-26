@@ -1,6 +1,6 @@
-﻿using NWN.Core;
+﻿using Anvil.API;
+using NWN.Core;
 using NWN.Core.NWNX;
-using XM.Shared.API.BaseTypes;
 
 namespace XM.Shared.API.NWNX.UtilPlugin
 {
@@ -261,17 +261,6 @@ namespace XM.Shared.API.NWNX.UtilPlugin
         public static void UnregisterServerConsoleCommand(string sCommand)
         {
             NWN.Core.NWNX.UtilPlugin.UnregisterServerConsoleCommand(sCommand);
-        }
-
-        /// <summary>
-        /// Determines if the given plugin exists and is enabled.
-        /// </summary>
-        /// <param name="sPlugin">The name of the plugin to check.</param>
-        /// <returns>TRUE if the plugin exists and is enabled, otherwise FALSE.</returns>
-        public static int PluginExists(string sPlugin)
-        {
-            WriteTimestampedLogEntry("WARNING:  NWNX_Util_PluginExists is deprecated.  You should migrate to NWNX_PluginExists.");
-            return NWN.Core.NWNX.UtilPlugin.PluginExists(sPlugin);
         }
 
         /// <summary>
