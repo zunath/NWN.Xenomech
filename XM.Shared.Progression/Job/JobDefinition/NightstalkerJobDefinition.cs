@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
+using SkillType = XM.Progression.Skill.SkillType;
 
 namespace XM.Progression.Job.JobDefinition
 {
     internal class NightstalkerJobDefinition: JobDefinitionBase
     {
+        public override JobType Type => JobType.Nightstalker;
         public override bool IsVisibleToPlayers => true;
 
         public override LocaleString Name => LocaleString.Nightstalker;
@@ -21,7 +23,14 @@ namespace XM.Progression.Job.JobDefinition
             Vitality = GradeType.D,
             Agility = GradeType.B,
             Willpower = GradeType.G,
-            Social = GradeType.G
+            Social = GradeType.G,
+
+            SkillGrades = new Dictionary<SkillType, GradeType>
+            {
+                { SkillType.Dagger, GradeType.A},
+                { SkillType.ShortSword, GradeType.B},
+                { SkillType.Pistol, GradeType.C},
+            }
         };
 
         public override Dictionary<int, FeatType> FeatAcquisitionLevels => new()

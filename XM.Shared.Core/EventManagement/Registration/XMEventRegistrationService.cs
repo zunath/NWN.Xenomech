@@ -42,6 +42,7 @@ namespace XM.Shared.Core.EventManagement.Registration
             _event.RegisterEvent<XMEvent.OnPlayerMigrationAfter>(EventScript.OnXMPlayerMigrationAfterScript);
             _event.RegisterEvent<XMEvent.OnPlayerOpenAppearanceMenu>(EventScript.OnXMPlayerOpenedAppearanceMenuScript);
             _event.RegisterEvent<XMEvent.OnPlayerOpenQuestsMenu>(EventScript.OnXMPlayerOpenedQuestsMenuScript);
+            _event.RegisterEvent<XMEvent.OnItemHit>(EventScript.OnXMItemHitScript);
         }
 
         private void SubscribeEvents()

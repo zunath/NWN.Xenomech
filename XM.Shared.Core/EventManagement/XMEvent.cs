@@ -38,6 +38,11 @@
         public struct OnPlayerOpenAppearanceMenu : IXMEvent
         {
         }
+
+        public struct OnItemHit : IXMEvent
+        {
+
+        }
         
     }
 }

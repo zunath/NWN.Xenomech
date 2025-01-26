@@ -1,6 +1,9 @@
-﻿namespace XM.Progression.Job
+﻿using System.Collections.Generic;
+using XM.Progression.Skill;
+
+namespace XM.Progression.Job
 {
-    internal class JobGrade
+    public class JobGrade
     {
         public GradeType HP { get; set; }
         public GradeType EP { get; set; }
@@ -10,5 +13,12 @@
         public GradeType Agility { get; set; }
         public GradeType Willpower { get; set; }
         public GradeType Social { get; set; }
+
+        public Dictionary<SkillType, GradeType> SkillGrades { get; set; }
+
+        public JobGrade()
+        {
+            SkillGrades = new Dictionary<SkillType, GradeType>();
+        }
     }
 }

@@ -7981,9 +7981,9 @@ namespace XM.Shared.API
         ///  when a successful strike is made, or (when applied to armor) is struck by an opponent.<br/>
         ///  - nSpell uses the IP_CONST_ONHIT_CASTSPELL_* constants
         /// </summary>
-        public static ItemProperty ItemPropertyOnHitCastSpell(int nSpell, int nLevel)
+        public static ItemProperty ItemPropertyOnHitCastSpell(IPConstOnHitCastSpellType nSpell, int nLevel)
         {
-            return NWN.Core.NWScript.ItemPropertyOnHitCastSpell(nSpell, nLevel);
+            return NWN.Core.NWScript.ItemPropertyOnHitCastSpell((int)nSpell, nLevel);
         }
 
         /// <summary>

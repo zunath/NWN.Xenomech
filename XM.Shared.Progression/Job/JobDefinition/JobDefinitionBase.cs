@@ -7,6 +7,7 @@ namespace XM.Progression.Job.JobDefinition
 {
     internal abstract class JobDefinitionBase: IJobDefinition
     {
+        public abstract JobType Type { get; }
         public abstract bool IsVisibleToPlayers { get; }
         public abstract LocaleString Name { get; }
         public abstract string IconResref { get; }

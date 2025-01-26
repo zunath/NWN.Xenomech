@@ -995,5 +995,28 @@ namespace XM.Shared.Core.Localization
         ShortSword = 1313,
         Polearm = 1314,
         Bow = 1315,
+        Claw = 1316,
+        HandToHandWeapons = 1317,
+        SkillHandToHand = 1318,
+        YourXSkillIncreasesToY = 1319,
+        RangedFirearm = 1320,
+        SkillPistol = 1321,
+        // 1322 is free
+        SkillRifle = 1323,
+        SkillRifleDescription = 1324,
+        GreatAxeLore = 1325,
+        GreatAxeLoreDescription = 1326,
+        GreatSwordLore = 1327,
+        GreatSwordLoreDescription = 1328,
+        PistolLore = 1329,
+        PistolLoreDescription = 1330,
+        RifleLore = 1331,
+        RifleLoreDescription = 1332,
+        ShortSwordLore = 1333,
+        ShortSwordLoreDescription = 1334,
+        ThrowingLore = 1335,
+        ThrowingLoreDescription = 1336,
+
+        
     }
 }

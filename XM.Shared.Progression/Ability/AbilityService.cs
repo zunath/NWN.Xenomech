@@ -80,10 +80,9 @@ namespace XM.Progression.Ability
                 !GetIsDM(activator) && 
                 !GetIsDMPossessed(activator))
             {
+                var level = _stat.GetLevel(activator);
                 var job = _job.GetActiveJob(activator);
-                var level = _job.GetJobLevel(activator, job);
-                var definition = _job.GetJobDefinition(job);
-                var levelAcquired = definition.GetFeatAcquiredLevel(feat);
+                var levelAcquired = job.GetFeatAcquiredLevel(feat);
 
                 if (level < levelAcquired)
                 {

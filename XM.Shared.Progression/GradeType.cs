@@ -1,7 +1,8 @@
 ﻿namespace XM.Progression
 {
-    internal enum GradeType
+    public enum GradeType
     {
+        Invalid = 0,
         A = 1,
         B = 2,
         C = 3,

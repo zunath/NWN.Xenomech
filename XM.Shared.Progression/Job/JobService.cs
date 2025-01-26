@@ -141,14 +141,14 @@ namespace XM.Progression.Job
             return _jobDefinitions[job];
         }
 
-        public JobType GetActiveJob(uint player)
+        public IJobDefinition GetActiveJob(uint player)
         {
             if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
                 throw new ArgumentException("Only PCs can have jobs.");
 
             var playerId = PlayerId.Get(player);
             var dbPlayerJob = _db.Get<PlayerJob>(playerId) ?? new PlayerJob(playerId);
-            return dbPlayerJob.ActiveJob;
+            return _jobDefinitions[dbPlayerJob.ActiveJob];
         }
 
         public int GetJobLevel(uint player, JobType job)
@@ -162,20 +162,6 @@ namespace XM.Progression.Job
                 ? dbPlayerJob.JobLevels[job]
                 : 0;
             return level;
-        }
-
-        public int GetLevel(uint creature)
-        {
-            if (GetIsPC(creature))
-            {
-                var activeJob = GetActiveJob(creature);
-                return GetJobLevel(creature, activeJob);
-            }
-            else
-            {
-                var npcStats = _stat.GetNPCStats(creature);
-                return npcStats.Level;
-            }
         }
 
         internal int CalculateHP(int level, GradeType grade)
@@ -253,8 +239,26 @@ namespace XM.Progression.Job
 
             var name = Locale.GetString(definition.Name);
             SendMessageToPC(player, $"Job changed to: {ColorToken.Green(name)}");
+            dbPlayerJob.ActiveJob = job;
+            _db.Set(dbPlayerJob);
 
             _event.ExecuteScript(ProgressionEventScript.PlayerChangedJobScript, player);
+        }
+
+        [ScriptHandler("bread_test5")]
+        public void Test5()
+        {
+            var jobId = GetLocalInt(OBJECT_SELF, "JOB") + 1;
+
+            if (jobId > 8)
+                jobId = 1;
+            else if (jobId < 1)
+                jobId = 1;
+
+            var job = (JobType)jobId;
+            ChangeJob(GetLastUsedBy(), job);
+
+            SendMessageToPC(GetLastUsedBy(), $"Job = {job}");
         }
     }
 }

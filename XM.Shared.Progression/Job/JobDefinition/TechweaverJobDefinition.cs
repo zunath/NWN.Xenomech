@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
+using SkillType = XM.Progression.Skill.SkillType;
 
 namespace XM.Progression.Job.JobDefinition
 {
     internal class TechweaverJobDefinition: JobDefinitionBase
     {
+        public override JobType Type => JobType.Techweaver;
         public override bool IsVisibleToPlayers => true;
 
         public override LocaleString Name => LocaleString.Techweaver;
@@ -21,7 +23,13 @@ namespace XM.Progression.Job.JobDefinition
             Vitality = GradeType.E,
             Agility = GradeType.E,
             Willpower = GradeType.C,
-            Social = GradeType.D
+            Social = GradeType.D,
+
+            SkillGrades = new Dictionary<SkillType, GradeType>
+            {
+                { SkillType.Polearm, GradeType.A},
+                { SkillType.Throwing, GradeType.B}
+            }
         };
 
         public override Dictionary<int, FeatType> FeatAcquisitionLevels => new()

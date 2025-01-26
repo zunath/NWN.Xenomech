@@ -6,7 +6,7 @@ using XM.Shared.Core.Data;
 namespace XM.Progression.Job.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
-    public class PlayerSkill: EntityBase
+    public class PlayerSkill : EntityBase
     {
         public PlayerSkill()
         {

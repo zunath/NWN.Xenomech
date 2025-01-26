@@ -1,4 +1,6 @@
-﻿using XM.Shared.Core.Localization;
+﻿using System.Collections.Generic;
+using XM.Shared.API.Constants;
+using XM.Shared.Core.Localization;
 
 namespace XM.Progression.Skill.SkillDefinition
 {
@@ -7,5 +9,8 @@ namespace XM.Progression.Skill.SkillDefinition
         SkillType Type { get; }
         LocaleString Name { get; }
         string IconResref { get; }
+        FeatType LoreFeat { get; }
+        List<BaseItemType> BaseItems { get; }
+        Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; }
     }
 }

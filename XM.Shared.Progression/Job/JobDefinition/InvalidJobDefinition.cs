@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
+using SkillType = XM.Progression.Skill.SkillType;
 
 namespace XM.Progression.Job.JobDefinition
 {
     internal class InvalidJobDefinition : JobDefinitionBase
     {
+        public override JobType Type => JobType.Invalid;
         public override bool IsVisibleToPlayers => false;
 
         public override LocaleString Name => LocaleString.Empty;
@@ -21,7 +23,11 @@ namespace XM.Progression.Job.JobDefinition
             Vitality = GradeType.G,
             Agility = GradeType.G,
             Willpower = GradeType.G,
-            Social = GradeType.G
+            Social = GradeType.G,
+
+            SkillGrades = new Dictionary<SkillType, GradeType>
+            {
+            }
         };
 
         public override Dictionary<int, FeatType> FeatAcquisitionLevels => new()

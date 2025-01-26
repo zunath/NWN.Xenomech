@@ -4223,11 +4223,11 @@
     },
     {
       "id": 1056,
-      "text": "Heculean Slash"
+      "text": "Herculean Slash"
     },
     {
       "id": 1057,
-      "text": "Heculean Slash Description"
+      "text": "Herculean Slash Description"
     },
     {
       "id": 1058,
@@ -5260,6 +5260,86 @@
     {
       "id": 1315,
       "text": "Bow"
+    },
+    {
+      "id": 1316,
+      "text": "Claw"
+    },
+    {
+      "id": 1317,
+      "text": "Hand-to-Hand weapons"
+    },
+    {
+      "id": 1318,
+      "text": "Skill: Hand-to-Hand"
+    },
+    {
+      "id": 1319,
+      "text": "Your {0} skill increases to {1}!"
+    },
+    {
+      "id": 1320,
+      "text": "Ranged firearm"
+    },
+    {
+      "id": 1321,
+      "text": "Skill: Pistol"
+    },
+    {
+      "id": 1323,
+      "text": "Ranged firearm"
+    },
+    {
+      "id": 1324,
+      "text": "Skill: Rifle"
+    },
+    {
+      "id": 1325,
+      "text": "Great Axe Lore"
+    },
+    {
+      "id": 1326,
+      "text": "Great Axe Lore Description"
+    },
+    {
+      "id": 1327,
+      "text": "Great Sword Lore"
+    },
+    {
+      "id": 1328,
+      "text": "Great Sword Lore Description"
+    },
+    {
+      "id": 1329,
+      "text": "Pistol Lore"
+    },
+    {
+      "id": 1330,
+      "text": "Pistol Lore Description"
+    },
+    {
+      "id": 1331,
+      "text": "Rifle Lore"
+    },
+    {
+      "id": 1332,
+      "text": "Rifle Lore Description"
+    },
+    {
+      "id": 1333,
+      "text": "Short Sword Lore"
+    },
+    {
+      "id": 1334,
+      "text": "Short Sword Lore Description"
+    },
+    {
+      "id": 1335,
+      "text": "Throwing Lore"
+    },
+    {
+      "id": 1336,
+      "text": "Throwing Lore Description"
     }
   ]
 }

@@ -17,6 +17,7 @@ using XM.Shared.Core.EventManagement;
 namespace XM.Progression.Stat
 {
     [ServiceBinding(typeof(StatService))]
+    [ServiceBinding(typeof(IInitializable))]
     public class StatService: IInitializable
     {
         private readonly DBService _db;
