@@ -60,7 +60,7 @@ namespace XM.Combat.NativeOverride
                 var damage = _combat.DetermineDamage(
                     attacker.m_idSelf,
                     defender.m_idSelf,
-                    weapon.m_idSelf,
+                    weapon == null ? OBJECT_INVALID : weapon.m_idSelf,
                     attackType,
                     hitResult);
 
