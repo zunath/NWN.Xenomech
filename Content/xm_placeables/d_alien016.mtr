@@ -1,0 +1,11 @@
+ // Shaders
+
+renderhint NormalAndSpecMapped
+ 
+// Textures 
+texture1 d_alien016_n
+texture2 d_alien016_m
+texture3 d_alien016_r
+
+twosided 1
+transparency 1

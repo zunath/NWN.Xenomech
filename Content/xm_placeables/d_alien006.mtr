@@ -1,0 +1,7 @@
+ // Shaders
+
+renderhint NormalAndSpecMapped
+ 
+// Textures 
+texture1 d_alien006_n
+texture2 d_alien006_m

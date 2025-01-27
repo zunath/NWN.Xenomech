@@ -1,0 +1,10 @@
+ 
+renderhint NormalTangents
+ 
+// Textures 
+texture0 d_alien046
+texture1 d_alien046_n
+texture2 d_alien046_s
+texture3 null
+texture4 null
+texture5 null
