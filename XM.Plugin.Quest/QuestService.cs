@@ -19,6 +19,8 @@ using Anvil.Services;
 using XM.Quest.Reward;
 using XM.Quest.Conversation;
 using DialogService = XM.Shared.Core.Dialog.DialogService;
+using Anvil.API;
+using XM.Progression.Event;
 
 namespace XM.Quest
 {
@@ -802,8 +804,7 @@ namespace XM.Quest
             SendMessageToPC(player, "Quest '" + questDetail.Name + "' complete!");
             RemoveJournalQuestEntry(questId, player, false);
 
-            _event.ExecuteScript(QuestEventScript.OnQuestCompletedScript, player);
-            //Gui.PublishRefreshEvent(player, new QuestCompletedRefreshEvent(QuestId));
+            _event.PublishEvent<QuestEvent.QuestCompletedEvent>(player);
         }
 
         public void Dispose()

@@ -13,6 +13,8 @@ using XM.Shared.API.NWNX.ObjectPlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
+using XM.UI;
+using XM.UI.Event;
 
 namespace XM.Progression.Stat
 {
@@ -60,6 +62,7 @@ namespace XM.Progression.Stat
         {
             _event.RegisterEvent<StatEvent.PlayerHPAdjustedEvent>(ProgressionEventScript.OnPlayerHPAdjustedScript);
             _event.RegisterEvent<StatEvent.PlayerEPAdjustedEvent>(ProgressionEventScript.OnPlayerEPAdjustedScript);
+            _event.RegisterEvent<StatEvent.PlayerTPAdjustedEvent>(ProgressionEventScript.OnPlayerTPAdjustedScript);
         }
 
         private void SubscribeEvents()
@@ -156,6 +159,7 @@ namespace XM.Progression.Stat
             var dbPlayerStat = _db.Get<PlayerStat>(playerId);
 
             var itemStat = BuildItemStat(item);
+            itemStat.IsEquipped = true;
             dbPlayerStat.EquippedItemStats[slot] = itemStat;
 
             _db.Set(dbPlayerStat);
@@ -351,7 +355,7 @@ namespace XM.Progression.Stat
                 SetLocalInt(creature, NPCEPStatVariable, ep);
             }
 
-            _event.ExecuteScript(ProgressionEventScript.OnPlayerEPAdjustedScript, creature);
+            _event.PublishEvent<StatEvent.PlayerEPAdjustedEvent>(creature);
         }
 
         public void RestoreEP(uint creature, int amount)
@@ -386,7 +390,7 @@ namespace XM.Progression.Stat
                 SetLocalInt(creature, NPCEPStatVariable, fp);
             }
 
-            _event.ExecuteScript(ProgressionEventScript.OnPlayerEPAdjustedScript, creature);
+            _event.PublishEvent<StatEvent.PlayerEPAdjustedEvent>(creature);
         }
 
         public int GetAbilityRecastReduction(uint creature)
@@ -508,6 +512,40 @@ namespace XM.Progression.Stat
             {
                 var npcStats = GetNPCStats(creature);
                 return npcStats.Defense;
+            }
+        }
+
+        public int GetTPGain(uint creature)
+        {
+            if (!GetIsPC(creature))
+                return 0;
+
+            var playerId = PlayerId.Get(creature);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+            var itemTPGain = dbPlayerStat.EquippedItemStats.CalculateTPGain();
+            var tpGain = itemTPGain;
+
+            return tpGain;
+        }
+
+        public void SetTP(uint creature, int amount)
+        {
+            if (amount > MaxTP)
+                amount = MaxTP;
+
+            if (GetIsPC(creature) && !GetIsDMPossessed(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+                dbPlayerStat.TP = amount;
+
+                _db.Set(dbPlayerStat);
+
+                _event.PublishEvent<UIEvent.UIRefreshEvent>(creature);
+            }
+            else
+            {
+                SetLocalInt(creature, NPCTPStatVariable, amount);
             }
         }
 

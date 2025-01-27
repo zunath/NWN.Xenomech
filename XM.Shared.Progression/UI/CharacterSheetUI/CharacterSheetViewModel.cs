@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Linq;
 using Anvil.API;
 using Anvil.Services;
-using NWN.Core.NWNX;
 using XM.Inventory.Entity;
 using XM.Inventory.KeyItem;
-using XM.Progression.Event;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
 using XM.Progression.Skill;
 using XM.Progression.Stat;
-using XM.Progression.Stat.Entity;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
@@ -23,10 +19,10 @@ using Action = System.Action;
 namespace XM.Progression.UI.CharacterSheetUI
 {
     [ServiceBinding(typeof(IViewModel))]
+    [ServiceBinding(typeof(IRefreshable))]
     internal class CharacterSheetViewModel : 
         ViewModel<CharacterSheetViewModel>,
-        IRefreshable<StatEvent.PlayerHPAdjustedEvent>,
-        IRefreshable<StatEvent.PlayerEPAdjustedEvent>
+        IRefreshable
     {
         internal const string StatPartialId = "STAT_PARTIAL";
         internal const string MechPartialId = "MECH_PARTIAL";
@@ -531,11 +527,11 @@ namespace XM.Progression.UI.CharacterSheetUI
 
         public Action OnClickQuests => () =>
         {
-            Event.ExecuteScript(EventScript.OnXMPlayerOpenedQuestsMenuScript, Player);
+            Event.PublishEvent<XMEvent.OnPlayerOpenQuestsMenu>(Player);
         };
         public Action OnClickAppearance => () =>
         {
-            Event.ExecuteScript(EventScript.OnXMPlayerOpenedAppearanceMenuScript, Player);
+            Event.PublishEvent<XMEvent.OnPlayerOpenAppearanceMenu>(Player);
         };
         public Action OnClickOpenTrash => () =>
         {
@@ -545,13 +541,9 @@ namespace XM.Progression.UI.CharacterSheetUI
             DelayCommand(0.2f, () => SetUseableFlag(trash, false));
         };
 
-        public void Refresh(StatEvent.PlayerHPAdjustedEvent @event)
+        public void Refresh()
         {
             RefreshHP();
-        }
-
-        public void Refresh(StatEvent.PlayerEPAdjustedEvent @event)
-        {
             RefreshEP();
         }
     }

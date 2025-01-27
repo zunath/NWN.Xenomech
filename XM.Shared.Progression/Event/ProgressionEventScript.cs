@@ -8,5 +8,6 @@
         // Stats
         public const string OnPlayerHPAdjustedScript = "pc_hp_adjusted";
         public const string OnPlayerEPAdjustedScript = "pc_ep_adjusted";
+        public const string OnPlayerTPAdjustedScript = "pc_tp_adjusted";
     }
 }

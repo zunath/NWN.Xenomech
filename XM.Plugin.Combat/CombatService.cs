@@ -20,6 +20,7 @@ namespace XM.Combat
     [ServiceBinding(typeof(CombatService))]
     internal class CombatService: IInitializable
     {
+        private readonly XMEventService _event;
         private readonly SkillService _skill;
         private readonly StatService _stat;
         private readonly ItemTypeService _itemType;
@@ -35,12 +36,13 @@ namespace XM.Combat
             DBService db)
         {
             _skill = skill;
+            _event = @event;
             _stat = stat;
             _itemType = itemType;
             _statusEffect = statusEffect;
             _db = db;
 
-            @event.Subscribe<NWNXEvent.OnBroadcastAttackOfOpportunityBefore>(DisableAttacksOfOpportunity);
+            _event.Subscribe<NWNXEvent.OnBroadcastAttackOfOpportunityBefore>(DisableAttacksOfOpportunity);
         }
 
 
@@ -387,6 +389,74 @@ namespace XM.Combat
             }
 
             return (int)(delay / 60f * 1000);
+        }
+
+        private int CalculateTPGainPlayer(uint player)
+        {
+            var playerId = PlayerId.Get(player);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+            var main = dbPlayerStat.EquippedItemStats[InventorySlotType.RightHand];
+            var off = dbPlayerStat.EquippedItemStats[InventorySlotType.LeftHand];
+            var mainDelay = main.Delay;
+            var offDelay = off.Delay;
+            var totalDelay = mainDelay + offDelay;
+            var equipmentBonus = _stat.GetTPGain(player);
+
+            if (main.IsEquipped && off.IsEquipped)
+                totalDelay /= 2;
+
+            int tpGain;
+            if (totalDelay <= 180)
+                tpGain = 61 + ((totalDelay - 180) * 63 / 360);
+            else if (totalDelay <= 540)
+                tpGain = 61 + ((totalDelay - 180) * 88 / 360);
+            else if (totalDelay <= 630)
+                tpGain = 149 + ((totalDelay - 540) * 22 / 360);
+            else if (totalDelay <= 720)
+                tpGain = 154 + ((totalDelay - 630) * 28 / 360);
+            else if (totalDelay <= 900)
+                tpGain = 161 + ((totalDelay - 720) * 24 / 360);
+            else
+                tpGain = 173 + ((totalDelay - 900) * 28 / 360);
+
+            var totalTP = dbPlayerStat.TP + tpGain + equipmentBonus;
+            return totalTP;
+        }
+
+        private int CalculateTPGainNPC(uint npc)
+        {
+            var npcStats = _stat.GetNPCStats(npc);
+            var totalDelay = npcStats.MainHandDelay + npcStats.OffHandDelay;
+
+            if (npcStats.MainHandDelay > 0 && npcStats.OffHandDelay > 0)
+                totalDelay /= 2;
+
+            int tpGain;
+
+            if (totalDelay <= 180)
+                tpGain = 80 + ((totalDelay - 180) * 15) / 180;
+            else if (totalDelay <= 450)
+                tpGain = 80 + ((totalDelay - 180) * 65) / 270;
+            else if (totalDelay <= 480)
+                tpGain = 145 + ((totalDelay - 250) * 15) / 30;
+            else if (totalDelay <= 530)
+                tpGain = 160 + ((totalDelay - 480) * 15) / 30;
+            else 
+                tpGain = 175 + ((totalDelay - 530) * 35) / 470;
+
+            var totalTP = _stat.GetCurrentTP(npc) + tpGain;
+
+            return totalTP;
+        }
+
+        public void GainTP(uint attacker)
+        {
+            var isPlayer = GetIsPC(attacker) && !GetIsDMPossessed(attacker);
+            var tp = isPlayer 
+                ? CalculateTPGainPlayer(attacker) 
+                : CalculateTPGainNPC(attacker);
+
+            _stat.SetTP(attacker, tp);
         }
     }
 }

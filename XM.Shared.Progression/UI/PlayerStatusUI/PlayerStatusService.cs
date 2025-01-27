@@ -3,6 +3,7 @@ using NWN.Core.NWNX;
 using XM.Progression.Event;
 using XM.Shared.Core.EventManagement;
 using XM.UI;
+using XM.UI.Event;
 
 namespace XM.Progression.UI.PlayerStatusUI
 {
@@ -52,8 +53,7 @@ namespace XM.Progression.UI.PlayerStatusUI
             if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
                 return;
 
-            _gui.PublishRefreshEvent(player, new StatEvent.PlayerHPAdjustedEvent());
-            _gui.PublishRefreshEvent(player, new StatEvent.PlayerEPAdjustedEvent());
+            _event.PublishEvent<UIEvent.UIRefreshEvent>(player);
         }
 
         private void OnPlayerUnequipItem(uint objectSelf)
@@ -62,8 +62,7 @@ namespace XM.Progression.UI.PlayerStatusUI
             if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
                 return;
 
-            _gui.PublishRefreshEvent(player, new StatEvent.PlayerHPAdjustedEvent());
-            _gui.PublishRefreshEvent(player, new StatEvent.PlayerEPAdjustedEvent());
+            _event.PublishEvent<UIEvent.UIRefreshEvent>(player);
         }
 
         private void OnPlayerHealed(uint objectSelf)
@@ -72,8 +71,7 @@ namespace XM.Progression.UI.PlayerStatusUI
             if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
                 return;
 
-
-            _gui.PublishRefreshEvent(player, new StatEvent.PlayerHPAdjustedEvent());
+            _event.PublishEvent<UIEvent.UIRefreshEvent>(player);
         }
 
         private void OnPlayerEPAdjusted(uint objectSelf)
@@ -82,7 +80,7 @@ namespace XM.Progression.UI.PlayerStatusUI
             if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
                 return;
 
-            _gui.PublishRefreshEvent(player, new StatEvent.PlayerEPAdjustedEvent());
+            _event.PublishEvent<UIEvent.UIRefreshEvent>(player);
         }
 
         private void OnPlayerDamaged(uint objectSelf)
@@ -91,7 +89,7 @@ namespace XM.Progression.UI.PlayerStatusUI
             if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
                 return;
 
-            _gui.PublishRefreshEvent(player, new StatEvent.PlayerHPAdjustedEvent());
+            _event.PublishEvent<UIEvent.UIRefreshEvent>(player);
         }
 
 

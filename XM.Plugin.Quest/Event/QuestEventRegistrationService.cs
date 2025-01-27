@@ -15,7 +15,7 @@ namespace XM.Quest.Event
 
         private void RegisterEvents()
         {
-            _event.RegisterEvent<QuestCompletedEvent>(QuestEventScript.OnQuestCompletedScript);
+            _event.RegisterEvent<QuestEvent.QuestCompletedEvent>(QuestEventScript.OnQuestCompletedScript);
         }
 
     }

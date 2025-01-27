@@ -54,7 +54,7 @@ namespace XM.Shared.Core.EventManagement.Registration
         {
             _scheduler.ScheduleRepeating(() =>
             {
-                _event.ExecuteScript(EventScript.OnXMServerHeartbeatScript, GetModule());
+                _event.PublishEvent<XMEvent.OnServerHeartbeat>(GetModule());
             }, TimeSpan.FromSeconds(6));
         }
 
@@ -76,7 +76,7 @@ namespace XM.Shared.Core.EventManagement.Registration
                 serverConfig.LastModuleMTime = UtilPlugin.GetModuleMTime();
                 _db.Set(serverConfig);
 
-                _event.ExecuteScript(EventScript.OnXMModuleChangedScript, GetModule());
+                _event.PublishEvent<XMEvent.OnModuleContentChanged>(GetModule());
             }
         }
     }

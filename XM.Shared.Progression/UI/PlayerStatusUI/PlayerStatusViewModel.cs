@@ -9,10 +9,10 @@ using XM.UI;
 namespace XM.Progression.UI.PlayerStatusUI
 {
     [ServiceBinding(typeof(IViewModel))]
+    [ServiceBinding(typeof(IRefreshable))]
     internal class PlayerStatusViewModel: 
         ViewModel<PlayerStatusViewModel>,
-        IRefreshable<StatEvent.PlayerEPAdjustedEvent>,
-        IRefreshable<StatEvent.PlayerTPAdjustedEvent>
+        IRefreshable
     {
         private int _screenHeight;
         private int _screenWidth;
@@ -130,21 +130,15 @@ namespace XM.Progression.UI.PlayerStatusUI
         private void UpdateTP()
         {
             var currentTP = Stat.GetCurrentTP(Player);
-            var ratio = StatService.MaxTP > 0f
-                ? (float)currentTP / (float)StatService.MaxTP
-                : 0f;
+            var ratio = (float)currentTP / (float)StatService.MaxTP;
 
             TPValue = $"{currentTP}";
             TPProgress = Math.Clamp(ratio, 0f, 1f);
         }
 
-        public void Refresh(StatEvent.PlayerEPAdjustedEvent @event)
+        public void Refresh()
         {
             UpdateEP();
-        }
-
-        public void Refresh(StatEvent.PlayerTPAdjustedEvent @event)
-        {
             UpdateTP();
         }
     }

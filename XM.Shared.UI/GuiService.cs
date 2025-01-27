@@ -8,6 +8,7 @@ using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using XM.UI.Builder;
 using XM.UI.Entity;
+using XM.UI.Event;
 using Action = System.Action;
 
 namespace XM.UI
@@ -23,11 +24,8 @@ namespace XM.UI
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-        [Inject]
-        public IList<IView> Views { get; set; }
-
-        [Inject]
-        public IList<IViewModel> ViewModels { get; set; }
+        private readonly IList<IView> _views;
+        private readonly IList<IViewModel> _viewModels;
 
         private readonly Dictionary<Type, IView> _viewsByType = new();
         private readonly Dictionary<Type, NuiBuiltWindow> _builtWindowsByType = new();
@@ -44,18 +42,29 @@ namespace XM.UI
         public GuiService(
             XMEventService @event, 
             InjectionService injection,
-            DBService db)
+            DBService db,
+            IList<IView> views,
+            IList<IViewModel> viewModels)
         {
             _event = @event;
             _injection = injection;
             _db = db;
+            _views = views;
+            _viewModels = viewModels;
 
+            RegisterEvents();
             SubscribeEvents();
+        }
+
+        private void RegisterEvents()
+        {
+            _event.RegisterEvent<UIEvent.UIRefreshEvent>(UIEventScript.RefreshUIScript);
         }
 
         private void SubscribeEvents()
         {
             _event.Subscribe<ModuleEvent.OnNuiEvent>(OnNuiEvent);
+            _event.Subscribe<UIEvent.UIRefreshEvent>(OnRefreshUI);
         }
 
         public void Init()
@@ -176,7 +185,7 @@ namespace XM.UI
 
         private void CacheViews()
         {
-            foreach (var view in Views)
+            foreach (var view in _views)
             {
                 var type = view.GetType();
                 var builtWindow = view.Build();
@@ -297,12 +306,12 @@ namespace XM.UI
         public void Dispose()
         {
             Console.WriteLine($"Disposing {nameof(GuiService)}");
-            ViewModels.Clear();
-            Views.Clear();
+            _viewModels.Clear();
+            _views.Clear();
 
             _eventQueue.Clear();
             _lastEventTimestamps.Clear();
-            _windowTypesByRefreshEvent.Clear();
+            _windowTypesWithRefresh.Clear();
 
             ClearOpenPlayerWindows();
 
