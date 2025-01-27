@@ -13,6 +13,8 @@ using XM.Shared.API.NWNX.ObjectPlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
+using XM.UI;
+using XM.UI.Event;
 
 namespace XM.Progression.Stat
 {
@@ -60,6 +62,7 @@ namespace XM.Progression.Stat
         {
             _event.RegisterEvent<StatEvent.PlayerHPAdjustedEvent>(ProgressionEventScript.OnPlayerHPAdjustedScript);
             _event.RegisterEvent<StatEvent.PlayerEPAdjustedEvent>(ProgressionEventScript.OnPlayerEPAdjustedScript);
+            _event.RegisterEvent<StatEvent.PlayerTPAdjustedEvent>(ProgressionEventScript.OnPlayerTPAdjustedScript);
         }
 
         private void SubscribeEvents()
@@ -67,7 +70,10 @@ namespace XM.Progression.Stat
             _event.Subscribe<CreatureEvent.OnSpawn>(OnSpawnCreature);
             _event.Subscribe<ModuleEvent.OnEquipItem>(OnEquipItem);
             _event.Subscribe<ModuleEvent.OnUnequipItem>(OnUnequipItem);
+            _event.Subscribe<ModuleEvent.OnPlayerDeath>(OnPlayerDeath);
+            _event.Subscribe<ModuleEvent.OnPlayerLeave>(OnPlayerLeave);
         }
+
 
         private void OnSpawnCreature(uint creature)
         {
@@ -149,6 +155,10 @@ namespace XM.Progression.Stat
 
         private void OnEquipItem(uint module)
         {
+            UpdateItemStatOnEquip();
+        }
+        private void UpdateItemStatOnEquip()
+        {
             var player = GetPCItemLastEquippedBy();
             var item = GetPCItemLastEquipped();
             var slot = GetPCItemLastEquippedSlot();
@@ -156,11 +166,19 @@ namespace XM.Progression.Stat
             var dbPlayerStat = _db.Get<PlayerStat>(playerId);
 
             var itemStat = BuildItemStat(item);
+            itemStat.IsEquipped = true;
             dbPlayerStat.EquippedItemStats[slot] = itemStat;
 
             _db.Set(dbPlayerStat);
         }
+
         private void OnUnequipItem(uint module)
+        {
+            UpdateItemStatOnUnequip();
+            ClearTPOnUnequipWeapon();
+        }
+
+        private void UpdateItemStatOnUnequip()
         {
             var player = GetPCItemLastUnequippedBy();
             var slot = GetPCItemLastUnequippedSlot();
@@ -174,6 +192,18 @@ namespace XM.Progression.Stat
 
             _db.Set(dbPlayerStat);
         }
+
+        private void ClearTPOnUnequipWeapon()
+        {
+            var player = GetPCItemLastUnequippedBy();
+            var slot = GetPCItemLastUnequippedSlot();
+            if (slot != InventorySlotType.RightHand &&
+                slot != InventorySlotType.LeftHand)
+                return;
+
+            SetTP(player, 0);
+        }
+
         public int GetCurrentHP(uint creature)
         {
             return GetCurrentHitPoints(creature);
@@ -351,7 +381,7 @@ namespace XM.Progression.Stat
                 SetLocalInt(creature, NPCEPStatVariable, ep);
             }
 
-            _event.ExecuteScript(ProgressionEventScript.OnPlayerEPAdjustedScript, creature);
+            _event.PublishEvent<StatEvent.PlayerEPAdjustedEvent>(creature);
         }
 
         public void RestoreEP(uint creature, int amount)
@@ -386,7 +416,7 @@ namespace XM.Progression.Stat
                 SetLocalInt(creature, NPCEPStatVariable, fp);
             }
 
-            _event.ExecuteScript(ProgressionEventScript.OnPlayerEPAdjustedScript, creature);
+            _event.PublishEvent<StatEvent.PlayerEPAdjustedEvent>(creature);
         }
 
         public int GetAbilityRecastReduction(uint creature)
@@ -508,6 +538,40 @@ namespace XM.Progression.Stat
             {
                 var npcStats = GetNPCStats(creature);
                 return npcStats.Defense;
+            }
+        }
+
+        public int GetTPGain(uint creature)
+        {
+            if (!GetIsPC(creature))
+                return 0;
+
+            var playerId = PlayerId.Get(creature);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+            var itemTPGain = dbPlayerStat.EquippedItemStats.CalculateTPGain();
+            var tpGain = itemTPGain;
+
+            return tpGain;
+        }
+
+        public void SetTP(uint creature, int amount)
+        {
+            if (amount > MaxTP)
+                amount = MaxTP;
+
+            if (GetIsPC(creature) && !GetIsDMPossessed(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+                dbPlayerStat.TP = amount;
+
+                _db.Set(dbPlayerStat);
+
+                _event.PublishEvent<UIEvent.UIRefreshEvent>(creature);
+            }
+            else
+            {
+                SetLocalInt(creature, NPCTPStatVariable, amount);
             }
         }
 
@@ -676,6 +740,16 @@ namespace XM.Progression.Stat
                 var npcStats = GetNPCStats(creature);
                 return npcStats.Level;
             }
+        }
+        private void OnPlayerDeath(uint module)
+        {
+            var player = GetLastPlayerDied();
+            SetTP(player, 0);
+        }
+        private void OnPlayerLeave(uint module)
+        {
+            var player = GetExitingObject();
+            SetTP(player, 0);
         }
     }
 }

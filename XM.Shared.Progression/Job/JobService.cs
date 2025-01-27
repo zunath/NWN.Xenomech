@@ -236,7 +236,7 @@ namespace XM.Progression.Job
             dbPlayerJob.ActiveJob = job;
             _db.Set(dbPlayerJob);
 
-            _event.ExecuteScript(ProgressionEventScript.PlayerChangedJobScript, player);
+            _event.PublishEvent<JobEvent.PlayerChangedJobEvent>(player);
         }
 
         [ScriptHandler("bread_test5")]

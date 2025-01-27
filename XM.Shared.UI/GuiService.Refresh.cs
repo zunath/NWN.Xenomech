@@ -1,64 +1,52 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Linq;
-using XM.Shared.Core.EventManagement;
+using XM.UI.Event;
 
 namespace XM.UI
 {
     public partial class GuiService
     {
-        private readonly Dictionary<Type, List<IViewModel>> _windowTypesByRefreshEvent = new();
+        private readonly HashSet<Type> _windowTypesWithRefresh = new();
 
         private void CacheRefreshables()
         {
-            foreach (var vm in ViewModels)
+            foreach (var vm in _viewModels)
             {
-                var vmType = vm.GetType();
-
-                var refreshables = vmType
-                    .GetInterfaces()
-                    .Where(x => x.IsGenericType &&
-                                x.GetGenericTypeDefinition() == typeof(IRefreshable<>));
-
-                foreach (var refreshable in refreshables)
+                if (vm is IRefreshable)
                 {
-                    var eventType = refreshable.GenericTypeArguments[0];
-                    if (!_windowTypesByRefreshEvent.ContainsKey(eventType))
-                    {
-                        _windowTypesByRefreshEvent[eventType] = new List<IViewModel>();
-                    }
-
-                    _windowTypesByRefreshEvent[eventType].Add(vm);
+                    var vmType = vm.GetType();
+                    _windowTypesWithRefresh.Add(vmType);
                 }
             }
         }
 
-        public void PublishRefreshEvent<T>(uint player, T payload)
-            where T: IXMEvent
+        private void OnRefreshUI(uint player)
+        {
+            PublishRefreshEvent(player);
+        }
+
+        private void PublishRefreshEvent(uint player)
         {
             if (!GetIsPC(player))
-                return;
-
-            if (!_windowTypesByRefreshEvent.ContainsKey(typeof(T)))
                 return;
 
             if (!_playerViewModels.ContainsKey(player))
                 return;
 
-            foreach (var refreshVM in _windowTypesByRefreshEvent[typeof(T)])
+            foreach (var type in _windowTypesWithRefresh)
             {
                 var viewModel = _playerViewModels[player]
-                    .SingleOrDefault(s => s.Value.GetType() == refreshVM.GetType())
+                    .SingleOrDefault(s => s.Value.GetType() == type)
                     .Value;
 
                 if (viewModel == null)
                     continue;
 
-                var methodInfo = typeof(IRefreshable<>)
-                    .MakeGenericType(typeof(T))
-                    .GetMethod(nameof(IRefreshable<IXMEvent>.Refresh));
+                var methodInfo = typeof(IRefreshable)
+                    .GetMethod(nameof(IRefreshable.Refresh));
 
-                methodInfo?.Invoke(viewModel, [payload]);
+                methodInfo?.Invoke(viewModel, []);
             }
         }
     }

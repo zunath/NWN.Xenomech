@@ -1,10 +1,7 @@
-﻿using XM.Shared.Core.EventManagement;
-
-namespace XM.UI
+﻿namespace XM.UI
 {
-    public interface IRefreshable<T>
-        where T: IXMEvent
+    public interface IRefreshable
     {
-        void Refresh(T @event);
+        void Refresh();
     }
 }

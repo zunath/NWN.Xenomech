@@ -1,26 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
+using Anvil.API;
 using Anvil.Services;
 using NLog;
+using NWN.Core.NWNX;
+using XM.Shared.Core.Json;
 
 namespace XM.Shared.Core.EventManagement
 {
     [ServiceBinding(typeof(XMEventService))]
-    [ServiceBinding(typeof(IScriptDispatcher))]
-    public class XMEventService: IScriptDispatcher
+    public class XMEventService
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly Dictionary<string, Type> _scriptToTypes = new();
         private readonly Dictionary<Type, Dictionary<Guid, Action<uint>>> _scriptActionRegistrations = new();
+        private readonly ScriptHandleFactory _factory;
+
+        public XMEventService(ScriptHandleFactory factory)
+        {
+            _factory = factory;
+        }
 
         public void RegisterEvent<T>(string scriptName)
             where T : IXMEvent
         {
             if (!_scriptToTypes.ContainsKey(scriptName))
             {
-                _scriptToTypes[scriptName] = typeof(T);
+                var type = typeof(T);
+                _scriptToTypes[scriptName] = type;
+
+                _factory.RegisterScriptHandler(scriptName, HandleNWNScript);
+
+                EventsPlugin.SubscribeEvent(type.FullName!, scriptName);
             }
         }
+
+        private ScriptHandleResult HandleNWNScript(CallInfo arg)
+        {
+            if (!_scriptToTypes.ContainsKey(arg.ScriptName))
+                return ScriptHandleResult.NotHandled;
+
+            var type = _scriptToTypes[arg.ScriptName];
+            RunEventHandlers(arg.ObjectSelf, type);
+            return ScriptHandleResult.Handled;
+        }
+
 
         public Guid Subscribe<T>(Action<uint> action)
             where T: IXMEvent
@@ -68,14 +92,22 @@ namespace XM.Shared.Core.EventManagement
             }
         }
 
-        public ScriptHandleResult ExecuteScript(string scriptName, uint objectSelf)
+        public void PublishEvent<T>(uint target, T data = default)
+            where T : IXMEvent
         {
-            if (!_scriptToTypes.ContainsKey(scriptName)) 
-                return ScriptHandleResult.NotHandled;
+            var type = typeof(T);
 
-            var type = _scriptToTypes[scriptName];
-            RunEventHandlers(objectSelf, type);
-            return ScriptHandleResult.Handled;
+            if(data != null)
+                EventsPlugin.PushEventData("DATA", XMJsonUtility.Serialize(data));
+
+            EventsPlugin.SignalEvent(type.FullName!, target);
+        }
+
+        public T GetEventData<T>()
+            where T : IXMEvent
+        {
+            var jsonData = EventsPlugin.GetEventData("DATA");
+            return XMJsonUtility.Deserialize<T>(jsonData);
         }
 
         public int ExecutionOrder => 0;

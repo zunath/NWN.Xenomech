@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace XM.Progression.Stat
+﻿namespace XM.Progression.Stat
 {
     public class ItemStat
     {
+        public bool IsEquipped { get; set; }
         public int DMG { get; set; }
         public int Delay { get; set; }
         public int HP { get; set; }
@@ -16,6 +15,7 @@ namespace XM.Progression.Stat
         public int Accuracy { get; set; }
         public int Attack { get; set; }
         public int EtherAttack { get; set; }
+        public int TPGain { get; set; }
         public ResistCollection Resists { get; set; }
 
         public ItemStat()

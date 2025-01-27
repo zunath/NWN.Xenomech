@@ -52,7 +52,6 @@ namespace XM.Shared.Core.Authorization
             }
 
             LogDMAuthorization(true);
-            _event.ExecuteScript("dmfi_onclienter", OBJECT_SELF);
         }
 
         /// <summary>

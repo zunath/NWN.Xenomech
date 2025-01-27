@@ -57,12 +57,19 @@ namespace XM.Combat.NativeOverride
                     : HitResultType.Hit;
                 var weapon = round.GetCurrentAttackWeapon();
 
-                return _combat.DetermineDamage(
+                var damage = _combat.DetermineDamage(
                     attacker.m_idSelf,
                     defender.m_idSelf,
-                    weapon.m_idSelf,
+                    weapon == null ? OBJECT_INVALID : weapon.m_idSelf,
                     attackType,
                     hitResult);
+
+                if (damage > 0)
+                {
+                    _combat.GainTP(attacker.m_idSelf);
+                }
+
+                return damage;
             });
         }
     }

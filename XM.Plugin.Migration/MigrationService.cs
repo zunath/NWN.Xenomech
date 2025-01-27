@@ -180,7 +180,7 @@ namespace XM.Migration
             dbPlayerMigration.MigrationVersion = newVersion;
             _db.Set(dbPlayerMigration);
 
-            _event.ExecuteScript(EventScript.OnXMPlayerMigrationAfterScript, player);
+            _event.PublishEvent<XMEvent.OnPlayerMigrationAfter>(player);
         }
 
         private void LoadServerMigrations()

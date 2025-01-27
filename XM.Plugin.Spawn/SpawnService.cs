@@ -10,6 +10,8 @@ using ObjectPlugin = XM.Shared.API.NWNX.ObjectPlugin.ObjectPlugin;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.EventManagement;
+using XM.Spawn.Event;
+using Anvil.API;
 
 namespace XM.Spawn
 {
@@ -29,7 +31,8 @@ namespace XM.Spawn
         private readonly Dictionary<uint, List<Guid>> _allSpawnsByArea = new();
         private readonly Dictionary<uint, List<ActiveSpawn>> _activeSpawnsByArea = new();
 
-        [Inject] public IList<ISpawnListDefinition> Definitions { get; set; }
+        [Inject] 
+        public IList<ISpawnListDefinition> Definitions { get; set; }
 
         private readonly WalkmeshService _walkmesh;
         private readonly XMEventService _event;
@@ -39,7 +42,13 @@ namespace XM.Spawn
             _walkmesh = walkmesh;
             _event = @event;
 
+            RegisterEvents();
             SubscribeEvents();
+        }
+
+        private void RegisterEvents()
+        {
+            _event.RegisterEvent<SpawnEvent.DespawnCreatureEvent>(SpawnEventScript.OnDespawnCreatureScript);
         }
 
         private void SubscribeEvents()
@@ -448,7 +457,7 @@ namespace XM.Spawn
                     {
                         foreach (var activeSpawn in _activeSpawnsByArea[area])
                         {
-                            _event.ExecuteScript("spawn_despawn", activeSpawn.SpawnObject);
+                            _event.PublishEvent<SpawnEvent.DespawnCreatureEvent>(activeSpawn.SpawnObject);
                             DestroyObject(activeSpawn.SpawnObject);
                         }
                     }
@@ -543,7 +552,7 @@ namespace XM.Spawn
                 SetLocalString(deserialized, "SPAWN_ID", spawnId.ToString());
                 AdjustStats(deserialized);
 
-                _event.ExecuteScript(EventScript.OnXMSpawnCreatedScript, deserialized);
+                _event.PublishEvent<XMEvent.OnSpawnCreated>(deserialized);
 
                 return deserialized;
             }
@@ -577,7 +586,7 @@ namespace XM.Spawn
                     action(spawn);
                 }
 
-                _event.ExecuteScript(EventScript.OnXMSpawnCreatedScript, spawn);
+                _event.PublishEvent<XMEvent.OnSpawnCreated>(spawn);
 
                 return spawn;
             }

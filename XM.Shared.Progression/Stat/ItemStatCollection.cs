@@ -123,6 +123,17 @@ namespace XM.Progression.Stat
             return etherAttack;
         }
 
+        public int CalculateTPGain()
+        {
+            var tpGain = 0;
+            foreach (var (_, item) in this)
+            {
+                tpGain += item.TPGain;
+            }
+
+            return tpGain;
+        }
+
         public int CalculateResist(ResistType resistType)
         {
             var resist = 0;
