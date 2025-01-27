@@ -72,7 +72,9 @@ namespace XM.Progression.Stat
             _event.Subscribe<ModuleEvent.OnUnequipItem>(OnUnequipItem);
             _event.Subscribe<ModuleEvent.OnPlayerDeath>(OnPlayerDeath);
             _event.Subscribe<ModuleEvent.OnPlayerLeave>(OnPlayerLeave);
+            _event.Subscribe<JobEvent.PlayerChangedJobEvent>(OnPlayerChangeJob);
         }
+
 
 
         private void OnSpawnCreature(uint creature)
@@ -741,14 +743,21 @@ namespace XM.Progression.Stat
                 return npcStats.Level;
             }
         }
+
         private void OnPlayerDeath(uint module)
         {
             var player = GetLastPlayerDied();
             SetTP(player, 0);
         }
+
         private void OnPlayerLeave(uint module)
         {
             var player = GetExitingObject();
+            SetTP(player, 0);
+        }
+
+        private void OnPlayerChangeJob(uint player)
+        {
             SetTP(player, 0);
         }
     }
