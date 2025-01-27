@@ -70,7 +70,10 @@ namespace XM.Progression.Stat
             _event.Subscribe<CreatureEvent.OnSpawn>(OnSpawnCreature);
             _event.Subscribe<ModuleEvent.OnEquipItem>(OnEquipItem);
             _event.Subscribe<ModuleEvent.OnUnequipItem>(OnUnequipItem);
+            _event.Subscribe<ModuleEvent.OnPlayerDeath>(OnPlayerDeath);
+            _event.Subscribe<ModuleEvent.OnPlayerLeave>(OnPlayerLeave);
         }
+
 
         private void OnSpawnCreature(uint creature)
         {
@@ -152,6 +155,10 @@ namespace XM.Progression.Stat
 
         private void OnEquipItem(uint module)
         {
+            UpdateItemStatOnEquip();
+        }
+        private void UpdateItemStatOnEquip()
+        {
             var player = GetPCItemLastEquippedBy();
             var item = GetPCItemLastEquipped();
             var slot = GetPCItemLastEquippedSlot();
@@ -164,7 +171,14 @@ namespace XM.Progression.Stat
 
             _db.Set(dbPlayerStat);
         }
+
         private void OnUnequipItem(uint module)
+        {
+            UpdateItemStatOnUnequip();
+            ClearTPOnUnequipWeapon();
+        }
+
+        private void UpdateItemStatOnUnequip()
         {
             var player = GetPCItemLastUnequippedBy();
             var slot = GetPCItemLastUnequippedSlot();
@@ -178,6 +192,18 @@ namespace XM.Progression.Stat
 
             _db.Set(dbPlayerStat);
         }
+
+        private void ClearTPOnUnequipWeapon()
+        {
+            var player = GetPCItemLastUnequippedBy();
+            var slot = GetPCItemLastUnequippedSlot();
+            if (slot != InventorySlotType.RightHand &&
+                slot != InventorySlotType.LeftHand)
+                return;
+
+            SetTP(player, 0);
+        }
+
         public int GetCurrentHP(uint creature)
         {
             return GetCurrentHitPoints(creature);
@@ -714,6 +740,16 @@ namespace XM.Progression.Stat
                 var npcStats = GetNPCStats(creature);
                 return npcStats.Level;
             }
+        }
+        private void OnPlayerDeath(uint module)
+        {
+            var player = GetLastPlayerDied();
+            SetTP(player, 0);
+        }
+        private void OnPlayerLeave(uint module)
+        {
+            var player = GetExitingObject();
+            SetTP(player, 0);
         }
     }
 }
