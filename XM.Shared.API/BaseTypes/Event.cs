@@ -1,4 +1,5 @@
 ﻿using NWN.Core;
+using NWNX.NET;
 
 namespace XM.Shared.API.BaseTypes
 {
@@ -6,7 +7,7 @@ namespace XM.Shared.API.BaseTypes
     {
         public nint Handle;
         public Event(nint handle) => Handle = handle;
-        ~Event() { VM.FreeGameDefinedStructure((int)EngineStructure.Event, Handle); }
+        ~Event() { NWNXAPI.FreeGameDefinedStructure((int)EngineStructure.Event, Handle); }
 
         public static implicit operator nint(Event effect) => effect.Handle;
         public static implicit operator Event(nint intPtr) => new Event(intPtr);
