@@ -81,9 +81,12 @@ namespace XM.Progression.Skill
             if (!CanGainSkill(player, skillType, playerSkillCap, targetSkillCap))
                 return;
 
-            const int IncreaseChance = 55; // 5.5%
-            var roll = XMRandom.Next(1000);
-            if (roll <= IncreaseChance)
+            var increaseChance = 100 - (playerLevel * 2);
+            if (increaseChance < 1)
+                increaseChance = 1;
+
+            var roll = XMRandom.Next(100);
+            if (roll <= increaseChance)
             {
                 LevelUpSkill(player, skillType);
             }
