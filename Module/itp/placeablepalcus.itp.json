@@ -184,6 +184,1128 @@
                 "type": "byte",
                 "value": 1
               },
+              "STRREF": {
+                "type": "dword",
+                "value": 6689
+              }
+            },
+            {
+              "__struct_id": 0,
+              "ID": {
+                "type": "byte",
+                "value": 2
+              },
+              "STRREF": {
+                "type": "dword",
+                "value": 6690
+              }
+            },
+            {
+              "__struct_id": 0,
+              "ID": {
+                "type": "byte",
+                "value": 3
+              },
+              "STRREF": {
+                "type": "dword",
+                "value": 6691
+              }
+            },
+            {
+              "__struct_id": 0,
+              "ID": {
+                "type": "byte",
+                "value": 4
+              },
+              "STRREF": {
+                "type": "dword",
+                "value": 6692
+              }
+            }
+          ]
+        },
+        "STRREF": {
+          "type": "dword",
+          "value": 6687
+        }
+      },
+      {
+        "__struct_id": 0,
+        "ID": {
+          "type": "byte",
+          "value": 13
+        },
+        "STRREF": {
+          "type": "dword",
+          "value": 6788
+        }
+      },
+      {
+        "__struct_id": 0,
+        "ID": {
+          "type": "byte",
+          "value": 16
+        },
+        "LIST": {
+          "type": "list",
+          "value": [
+            {
+              "__struct_id": 0,
+              "ID": {
+                "type": "byte",
+                "value": 17
+              },
+              "STRREF": {
+                "type": "dword",
+                "value": 62485
+              }
+            },
+            {
+              "__struct_id": 0,
+              "ID": {
+                "type": "byte",
+                "value": 19
+              },
+              "STRREF": {
+                "type": "dword",
+                "value": 5836
+              }
+            },
+            {
+              "__struct_id": 0,
+              "ID": {
+                "type": "byte",
+                "value": 21
+              },
+              "STRREF": {
+                "type": "dword",
+                "value": 67585
+              }
+            },
+            {
+              "__struct_id": 0,
+              "ID": {
+                "type": "byte",
+                "value": 20
+              },
+              "STRREF": {
+                "type": "dword",
+                "value": 53151
+              }
+            },
+            {
+              "__struct_id": 0,
+              "ID": {
+                "type": "byte",
+                "value": 18
+              },
+              "STRREF": {
+                "type": "dword",
+                "value": 67132
+              }
+            }
+          ]
+        },
+        "STRREF": {
+          "type": "dword",
+          "value": 66490
+        }
+      },
+      {
+        "__struct_id": 0,
+        "ID": {
+          "type": "byte",
+          "value": 5
+        },
+        "STRREF": {
+          "type": "dword",
+          "value": 6781
+        }
+      },
+      {
+        "__struct_id": 0,
+        "LIST": {
+          "type": "list",
+          "value": [
+            {
+              "__struct_id": 0,
+              "ID": {
+                "type": "byte",
+                "value": 23
+              },
+              "LIST": {
+                "type": "list",
+                "value": [
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Alien 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien016"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Alien 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien017"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Alien 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien018"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Alien 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien019"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Alien 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien020"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Alien 006"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien021"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Alien 007"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien022"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Alien 008"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien029"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Alien 009"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien030"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Alien 010"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien036"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Alien 011"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien037"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Alien 012"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien038"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Alien 013"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien039"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Alien 014"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien040"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Alien 015"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien041"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Alien 016"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien042"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Alien 017"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien043"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Alien 019"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien047"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Alien 020"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien048"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Alien 021"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien049"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Fern 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien008"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Plants, Fern 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien009"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Rocks 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien023"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Rocks 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien024"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Rocks 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien025"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Rocks 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien026"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Rocks 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien027"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Rocks 006"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien028"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien001"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien002"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien003"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien004"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien005"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 006"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien006"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 007"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien007"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 008"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien031"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 009"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien032"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 010"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien033"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 011"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien034"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 012"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien035"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 013"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien044"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 014"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien046"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 015"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien050"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 016"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien051"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 017"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien052"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 018"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien053"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 019"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien054"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 020"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien055"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 021"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien056"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 022"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien057"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 023"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien058"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 024"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien059"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 025"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien060"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 026"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien061"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 027"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien062"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 028"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien063"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 029"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien064"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 030"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien065"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 032"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien066"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 033"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien067"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 034"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien068"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 035"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien069"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 036"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien070"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 037"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien071"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 038"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien072"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 039"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien073"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 040"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien074"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 041"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien075"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 042"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien076"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 043"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien078"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 044"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien079"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 045"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien081"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 046"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien082"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 047"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien083"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 048"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien084"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 049"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien085"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 050"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien086"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 051"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien087"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 052"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien088"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Alien 053"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien089"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Liana 001"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien010"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Liana 002"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien011"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Liana 003"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien012"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Liana 004"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien013"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Liana 005"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien014"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Trees, Liana 006"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "d_alien015"
+                    }
+                  }
+                ]
+              },
+              "STRREF": {
+                "type": "dword",
+                "value": 16778563
+              }
+            },
+            {
+              "__struct_id": 0,
+              "ID": {
+                "type": "byte",
+                "value": 24
+              },
+              "STRREF": {
+                "type": "dword",
+                "value": 16778564
+              }
+            },
+            {
+              "__struct_id": 0,
+              "ID": {
+                "type": "byte",
+                "value": 25
+              },
               "LIST": {
                 "type": "list",
                 "value": [
@@ -1863,248 +2985,6 @@
                     "__struct_id": 0,
                     "NAME": {
                       "type": "cexostring",
-                      "value": "Plants, Alien 001"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien016"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Plants, Alien 002"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien017"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Plants, Alien 003"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien018"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Plants, Alien 004"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien019"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Plants, Alien 005"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien020"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Plants, Alien 006"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien021"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Plants, Alien 007"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien022"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Plants, Alien 008"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien029"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Plants, Alien 009"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien030"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Plants, Alien 010"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien036"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Plants, Alien 011"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien037"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Plants, Alien 012"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien038"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Plants, Alien 013"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien039"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Plants, Alien 014"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien040"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Plants, Alien 015"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien041"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Plants, Alien 016"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien042"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Plants, Alien 017"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien043"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Plants, Alien 019"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien047"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Plants, Alien 020"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien048"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Plants, Alien 021"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien049"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Plants, Fern 001"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien008"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Plants, Fern 002"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien009"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
                       "value": "Poster 001"
                     },
                     "RESREF": {
@@ -2220,72 +3100,6 @@
                     "RESREF": {
                       "type": "resref",
                       "value": "daf_sw163"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Rocks 001"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien023"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Rocks 002"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien024"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Rocks 003"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien025"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Rocks 004"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien026"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Rocks 005"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien027"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Rocks 006"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien028"
                     }
                   },
                   {
@@ -2721,644 +3535,6 @@
                     "__struct_id": 0,
                     "NAME": {
                       "type": "cexostring",
-                      "value": "Trees, Alien 001"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien001"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 002"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien002"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 003"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien003"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 004"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien004"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 005"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien005"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 006"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien006"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 007"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien007"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 008"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien031"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 009"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien032"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 010"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien033"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 011"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien034"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 012"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien035"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 013"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien044"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 014"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien046"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 015"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien050"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 016"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien051"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 017"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien052"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 018"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien053"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 019"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien054"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 020"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien055"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 021"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien056"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 022"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien057"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 023"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien058"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 024"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien059"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 025"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien060"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 026"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien061"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 027"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien062"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 028"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien063"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 029"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien064"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 030"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien065"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 032"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien066"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 033"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien067"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 034"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien068"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 035"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien069"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 036"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien070"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 037"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien071"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 038"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien072"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 039"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien073"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 040"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien074"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 041"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien075"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 042"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien076"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 043"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien078"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 044"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien079"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 045"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien081"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 046"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien082"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 047"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien083"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 048"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien084"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 049"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien085"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 050"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien086"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 051"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien087"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 052"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien088"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Alien 053"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien089"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Liana 001"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien010"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Liana 002"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien011"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Liana 003"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien012"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Liana 004"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien013"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Liana 005"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien014"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
-                      "value": "Trees, Liana 006"
-                    },
-                    "RESREF": {
-                      "type": "resref",
-                      "value": "d_alien015"
-                    }
-                  },
-                  {
-                    "__struct_id": 0,
-                    "NAME": {
-                      "type": "cexostring",
                       "value": "Vehicle 001"
                     },
                     "RESREF": {
@@ -3590,140 +3766,14 @@
               },
               "STRREF": {
                 "type": "dword",
-                "value": 6689
-              }
-            },
-            {
-              "__struct_id": 0,
-              "ID": {
-                "type": "byte",
-                "value": 2
-              },
-              "STRREF": {
-                "type": "dword",
-                "value": 6690
-              }
-            },
-            {
-              "__struct_id": 0,
-              "ID": {
-                "type": "byte",
-                "value": 3
-              },
-              "STRREF": {
-                "type": "dword",
-                "value": 6691
-              }
-            },
-            {
-              "__struct_id": 0,
-              "ID": {
-                "type": "byte",
-                "value": 4
-              },
-              "STRREF": {
-                "type": "dword",
-                "value": 6692
+                "value": 16778565
               }
             }
           ]
         },
         "STRREF": {
           "type": "dword",
-          "value": 6687
-        }
-      },
-      {
-        "__struct_id": 0,
-        "ID": {
-          "type": "byte",
-          "value": 13
-        },
-        "STRREF": {
-          "type": "dword",
-          "value": 6788
-        }
-      },
-      {
-        "__struct_id": 0,
-        "ID": {
-          "type": "byte",
-          "value": 16
-        },
-        "LIST": {
-          "type": "list",
-          "value": [
-            {
-              "__struct_id": 0,
-              "ID": {
-                "type": "byte",
-                "value": 17
-              },
-              "STRREF": {
-                "type": "dword",
-                "value": 62485
-              }
-            },
-            {
-              "__struct_id": 0,
-              "ID": {
-                "type": "byte",
-                "value": 19
-              },
-              "STRREF": {
-                "type": "dword",
-                "value": 5836
-              }
-            },
-            {
-              "__struct_id": 0,
-              "ID": {
-                "type": "byte",
-                "value": 21
-              },
-              "STRREF": {
-                "type": "dword",
-                "value": 67585
-              }
-            },
-            {
-              "__struct_id": 0,
-              "ID": {
-                "type": "byte",
-                "value": 20
-              },
-              "STRREF": {
-                "type": "dword",
-                "value": 53151
-              }
-            },
-            {
-              "__struct_id": 0,
-              "ID": {
-                "type": "byte",
-                "value": 18
-              },
-              "STRREF": {
-                "type": "dword",
-                "value": 67132
-              }
-            }
-          ]
-        },
-        "STRREF": {
-          "type": "dword",
-          "value": 66490
-        }
-      },
-      {
-        "__struct_id": 0,
-        "ID": {
-          "type": "byte",
-          "value": 5
-        },
-        "STRREF": {
-          "type": "dword",
-          "value": 6781
+          "value": 16778562
         }
       }
     ]
