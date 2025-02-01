@@ -247,7 +247,7 @@ namespace XM.Progression.UI.CharacterSheetUI
             set
             {
                 Set(value);
-                LoadKeyItems();
+                RefreshKeyItems();
             }
         }
 
@@ -355,13 +355,16 @@ namespace XM.Progression.UI.CharacterSheetUI
         private void LoadMechView()
         {
             ChangePartialView(MainView, MechPartialId);
-
         }
 
         private void LoadJobView()
         {
             ChangePartialView(MainView, JobPartialId);
+            RefreshJobs();
+        }
 
+        private void RefreshJobs()
+        {
             var playerId = PlayerId.Get(Player);
             var dbPlayerJob = DB.Get<PlayerJob>(playerId) ?? new PlayerJob(playerId);
             var allJobs = Job.GetAllJobDefinitions();
@@ -374,7 +377,7 @@ namespace XM.Progression.UI.CharacterSheetUI
 
             foreach (var (job, definition) in allJobs)
             {
-                if(!definition.IsVisibleToPlayers)
+                if (!definition.IsVisibleToPlayers)
                     continue;
 
                 jobNames.Add(Locale.GetString(definition.Name));
@@ -384,7 +387,7 @@ namespace XM.Progression.UI.CharacterSheetUI
                 var ratio = dbPlayerJob.JobXP[job] / XP[dbPlayerJob.JobLevels[job]];
                 jobProgresses.Add(Math.Clamp(ratio, 0f, 1f));
             }
-            
+
             JobNames = jobNames;
             JobLevels = jobLevels;
             JobIcons = jobIcons;
@@ -395,6 +398,11 @@ namespace XM.Progression.UI.CharacterSheetUI
         {
             ChangePartialView(MainView, SkillsPartialId);
 
+            RefreshSkills();
+        }
+
+        private void RefreshSkills()
+        {
             var playerId = PlayerId.Get(Player);
             var dbPlayerSkill = DB.Get<PlayerSkill>(playerId);
             var job = Job.GetActiveJob(Player);
@@ -453,11 +461,11 @@ namespace XM.Progression.UI.CharacterSheetUI
             KeyItemCategories = categoryOptions;
 
             SelectedKeyItemCategory = -1;
-            LoadKeyItems();
+            RefreshKeyItems();
             WatchOnClient(model => model.SelectedKeyItemCategory);
         }
 
-        private void LoadKeyItems()
+        private void RefreshKeyItems()
         {
             var playerId = PlayerId.Get(Player);
             var dbPlayerKeyItems = DB.Get<PlayerKeyItem>(playerId) ?? new PlayerKeyItem(playerId);
@@ -545,6 +553,9 @@ namespace XM.Progression.UI.CharacterSheetUI
         {
             RefreshHP();
             RefreshEP();
+            RefreshSkills();
+            RefreshJobs();
+            RefreshKeyItems();
         }
     }
 }
