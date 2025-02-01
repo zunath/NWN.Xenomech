@@ -117,7 +117,7 @@ node trimesh medium004
   tilefade 0
   scale 1.0
   render 1
-  Shadow 0
+  Shadow 1
   beaming 0
   inheritcolor 0
   rotatetexture 0
