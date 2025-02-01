@@ -1005,7 +1005,7 @@ namespace XM.Shared.Core.Localization
         YourXSkillIncreasesToY = 1319,
         RangedFirearm = 1320,
         SkillPistol = 1321,
-        // 1322 is free
+        NPCEvasionGrade = 1322,
         SkillRifle = 1323,
         SkillRifleDescription = 1324,
         GreatAxeLore = 1325,
@@ -1051,5 +1051,6 @@ namespace XM.Shared.Core.Localization
         Equip = 1365,
         Unequip = 1366,
         SelectAnAbilityFromTheList = 1367,
+        Description = 1368,
     }
 }

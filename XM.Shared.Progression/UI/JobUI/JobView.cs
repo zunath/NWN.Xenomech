@@ -7,9 +7,9 @@ using XM.Shared.Core.Localization;
 using XM.UI;
 using XM.UI.Builder;
 using XM.UI.Builder.Layout;
-using NRediSearch.Aggregation;
 using Action = System.Action;
 using NuiScrollbars = XM.Shared.API.NUI.NuiScrollbars;
+using NuiAspect = XM.Shared.API.NUI.NuiAspect;
 
 namespace XM.Progression.UI.JobUI
 {
@@ -31,7 +31,7 @@ namespace XM.Progression.UI.JobUI
 
         public NuiBuiltWindow Build()
         {
-            _builder.CreateWindow(window =>
+            return _builder.CreateWindow(window =>
             {
                 window.InitialGeometry(0, 0, 200, 200)
                     .Title(LocaleString.ChangeJob)
@@ -41,20 +41,20 @@ namespace XM.Progression.UI.JobUI
                     .IsTransparent(false)
                     .Border(true)
                     .AcceptsInput(true)
-                    .Root(BuildChangeJob);
-            });
+                    .Root(BuildWindow)
 
-
-            return _builder.Build();
+                    .DefinePartialView(JobViewModel.AvailableAbilitiesPartialId, BuildAvailableAbilitiesPartial)
+                    .DefinePartialView(JobViewModel.EquippedAbilitiesPartialId, BuildEquippedAbilitiesPartial);
+            }).Build();
         }
 
-        private void BuildChangeJob(NuiColumnBuilder<JobViewModel> col)
+        private void BuildWindow(NuiColumnBuilder<JobViewModel> col)
         {
             col.AddRow(BuildJobHeader);
             col.AddRow(BuildJobSelection);
             BuildResonanceNodes(col);
-            BuildJobFilter(col);
-            BuildAbilitySection(col);
+            BuildAbilityNavigation(col);
+            BuildMainView(col);
         }
 
         private void BuildJobHeader(NuiRowBuilder<JobViewModel> row)
@@ -258,12 +258,58 @@ namespace XM.Progression.UI.JobUI
             });
         }
 
+        private void BuildAvailableAbilitiesPartial(NuiGroupBuilder<JobViewModel> group)
+        {
+            group
+                .Border(false)
+                .Scrollbars(NuiScrollbars.Auto)
+                .SetLayout(layout =>
+                {
+                    BuildJobFilter(layout);
+                    BuildAbilitySection(layout);
+                });
+        }
+
+        private void BuildEquippedAbilitiesPartial(NuiGroupBuilder<JobViewModel> group)
+        {
+            group
+                .Border(false)
+                .Scrollbars(NuiScrollbars.Auto)
+                .SetLayout(BuildEquippedAbilities);
+        }
+        private void BuildAbilityNavigation(NuiColumnBuilder<JobViewModel> col)
+        {
+            col.AddRow(row =>
+            {
+                row.AddSpacer();
+                row.AddToggles(toggle =>
+                {
+                    toggle
+                        .AddOption(LocaleString.AvailableAbilities)
+                        .AddOption(LocaleString.EquippedAbilities)
+                        .Height(32f)
+                        .SelectedValue(model => model.SelectedTab)
+                        .OnMouseDown(model => model.OnChangeTab);
+                });
+                row.AddSpacer();
+            });
+        }
+
+        private void BuildMainView(NuiColumnBuilder<JobViewModel> col)
+        {
+            col.AddRow(row =>
+            {
+                row.AddPartialPlaceholder(JobViewModel.MainView);
+            });
+        }
+
         private void BuildJobFilter(NuiColumnBuilder<JobViewModel> col)
         {
             void BuildJobFilterButton(
                 NuiRowBuilder<JobViewModel> row,
                 JobType jobType,
                 LocaleString name,
+                Expression<Func<JobViewModel, bool>> isEnabled,
                 Expression<Func<JobViewModel, bool>> isEncouraged,
                 Expression<Func<JobViewModel, Action>> onClick)
             {
@@ -274,33 +320,65 @@ namespace XM.Progression.UI.JobUI
                         .Width(32)
                         .Height(32)
                         .Margin(2f)
+                        .IsEnabled(isEnabled)
                         .IsEncouraged(isEncouraged)
                         .TooltipText(name)
                         .OnClick(onClick);
                 });
             }
-
-            col.AddRow(row =>
-            {
-                row.AddLabel(label =>
-                {
-                    label
-                        .Label(LocaleString.AvailableAbilities)
-                        .Height(20f);
-                });
-            });
             
             col.AddRow(row =>
             {
                 row.AddSpacer();
-                BuildJobFilterButton(row, JobType.Keeper, LocaleString.Keeper, model => model.IsKeeperFilterEncouraged, model => model.OnClickFilterKeeper);
-                BuildJobFilterButton(row, JobType.Mender, LocaleString.Mender, model => model.IsMenderFilterEncouraged, model => model.OnClickFilterMender);
-                BuildJobFilterButton(row, JobType.Brawler, LocaleString.Brawler, model => model.IsBrawlerFilterEncouraged, model => model.OnClickFilterBrawler);
-                BuildJobFilterButton(row, JobType.Beastmaster, LocaleString.Beastmaster, model => model.IsBeastmasterFilterEncouraged, model => model.OnClickFilterBeastmaster);
-                BuildJobFilterButton(row, JobType.Elementalist, LocaleString.Elementalist, model => model.IsElementalistFilterEncouraged, model => model.OnClickFilterElementalist);
-                BuildJobFilterButton(row, JobType.Techweaver, LocaleString.Techweaver, model => model.IsTechweaverFilterEncouraged, model => model.OnClickFilterTechweaver);
-                BuildJobFilterButton(row, JobType.Hunter, LocaleString.Hunter, model => model.IsHunterFilterEncouraged, model => model.OnClickFilterHunter);
-                BuildJobFilterButton(row, JobType.Nightstalker, LocaleString.Nightstalker, model => model.IsNightstalkerFilterEncouraged, model => model.OnClickFilterNightstalker);
+                BuildJobFilterButton(
+                    row, 
+                    JobType.Keeper, 
+                    LocaleString.Keeper, 
+                    model => model.IsKeeperFilterEnabled,
+                    model => model.IsKeeperFilterEncouraged, 
+                    model => model.OnClickFilterKeeper);
+                BuildJobFilterButton(
+                    row, JobType.Mender, 
+                    LocaleString.Mender,
+                    model => model.IsMenderFilterEnabled,
+                    model => model.IsMenderFilterEncouraged, 
+                    model => model.OnClickFilterMender);
+                BuildJobFilterButton(
+                    row, JobType.Brawler, 
+                    LocaleString.Brawler,
+                    model => model.IsBrawlerFilterEnabled,
+                    model => model.IsBrawlerFilterEncouraged, 
+                    model => model.OnClickFilterBrawler);
+                BuildJobFilterButton(
+                    row, JobType.Beastmaster, 
+                    LocaleString.Beastmaster,
+                    model => model.IsBeastmasterFilterEnabled,
+                    model => model.IsBeastmasterFilterEncouraged, 
+                    model => model.OnClickFilterBeastmaster);
+                BuildJobFilterButton(
+                    row, JobType.Elementalist, 
+                    LocaleString.Elementalist,
+                    model => model.IsElementalistFilterEnabled,
+                    model => model.IsElementalistFilterEncouraged, 
+                    model => model.OnClickFilterElementalist);
+                BuildJobFilterButton(
+                    row, JobType.Techweaver, 
+                    LocaleString.Techweaver,
+                    model => model.IsTechweaverFilterEnabled,
+                    model => model.IsTechweaverFilterEncouraged, 
+                    model => model.OnClickFilterTechweaver);
+                BuildJobFilterButton(
+                    row, JobType.Hunter, 
+                    LocaleString.Hunter,
+                    model => model.IsHunterFilterEnabled,
+                    model => model.IsHunterFilterEncouraged, 
+                    model => model.OnClickFilterHunter);
+                BuildJobFilterButton(
+                    row, JobType.Nightstalker, 
+                    LocaleString.Nightstalker,
+                    model => model.IsNightstalkerFilterEnabled,
+                    model => model.IsNightstalkerFilterEncouraged, 
+                    model => model.OnClickFilterNightstalker);
                 row.AddSpacer();
             });
         }
@@ -310,6 +388,9 @@ namespace XM.Progression.UI.JobUI
             col.AddRow(row =>
             {
                 row.AddColumn(BuildAvailableAbilityList);
+            });
+            col.AddRow(row =>
+            {
                 row.AddColumn(BuildAbilityDetailPane);
             });
         }
@@ -320,57 +401,40 @@ namespace XM.Progression.UI.JobUI
             {
                 row.AddList(list =>
                 {
-                    list.RowHeight(64f);
+                    list.RowHeight(40f);
 
                     list.AddTemplateCell(cell =>
                     {
-                        cell
-                            .Width(50f)
-                            .IsVariable(false)
-                            .AddGroup(group =>
-                            {
-                                group.SetLayout(layout =>
-                                {
-                                    layout.AddImage(image =>
-                                    {
-                                        image.ResRef(model => model.AbilityIcons);
-                                    });
-                                });
-                            });
-                    }, model => model.AbilityNames);
-
-                    list.AddTemplateCell(cell =>
-                    {
-                        cell.Width(50f)
-                            .IsVariable(false)
-                            .AddGroup(group =>
-                            {
-                                group.SetLayout(layout =>
-                                {
-                                    layout.AddLabel(label =>
-                                    {
-                                        label
-                                            .Label(model => model.AbilityLevels);
-                                    });
-                                });
-                            });
-                    }, model => model.AbilityNames);
-
-                    list.AddTemplateCell(cell =>
-                    {
-                        cell.AddGroup(group =>
+                        cell.AddRow(group =>
                         {
-                            group.SetLayout(layout =>
+                            group.AddButtonSelect(button =>
                             {
-                                layout.AddButtonSelect(button =>
-                                {
-                                    button
-                                        .Margin(4f)
-                                        .IsSelected(model => model.AbilityToggles)
-                                        .Label(model => model.AbilityNames)
-                                        .ForegroundColor(model => model.AbilityColors)
-                                        .OnClick(model => model.OnClickAbility);
-                                });
+                                button
+                                    .Margin(4f)
+                                    .Height(32f)
+                                    .IsSelected(model => model.AbilityToggles)
+                                    .Label(model => model.AbilityNames)
+                                    .ForegroundColor(model => model.AbilityColors)
+                                    .OnClick(model => model.OnClickAbility)
+                                    .DrawList(drawList =>
+                                    {
+                                        drawList.AddImage(image =>
+                                        {
+                                            image
+                                                .ResRef(model => model.AbilityIcons)
+                                                .VerticalAlign(NuiVAlign.Top)
+                                                .HorizontalAlign(NuiHAlign.Center)
+                                                .Aspect(NuiAspect.Fit)
+                                                .Position(4f, 4f, 32f, 32f);
+                                        });
+                                        drawList.AddText(text =>
+                                        {
+                                            text
+                                                .Text(model => model.AbilityLevels)
+                                                .Bounds(50f, 12f, 50f, 32f)
+                                                .Color(255, 255, 255);
+                                        });
+                                    });
                             });
                         });
                     }, model => model.AbilityNames);
@@ -380,14 +444,39 @@ namespace XM.Progression.UI.JobUI
 
         private void BuildAbilityDetailPane(NuiColumnBuilder<JobViewModel> col)
         {
-            col.AddText(text =>
+            col.AddRow(row =>
             {
-                text
-                    .Scrollbars(NuiScrollbars.Auto)
-                    .Text(model => model.SelectedAbilityDescription)
-                    .Border(true);
+                row.AddLabel(label =>
+                {
+                    label.Height(20f)
+                        .Label(LocaleString.Description);
+                });
+            });
+            col.AddRow(row =>
+            {
+                row.AddText(text =>
+                {
+                    text
+                        .Scrollbars(NuiScrollbars.Auto)
+                        .Text(model => model.SelectedAbilityDescription)
+                        .Border(true);
+                });
+            });
+            col.AddRow(row =>
+            {
+                row.AddSpacer();
+                row.AddButton(button =>
+                {
+                    button
+                        .Label(model => model.EquipUnequipButtonText)
+                        .Height(32f)
+                        .IsEnabled(model => model.IsEquipUnequipEnabled)
+                        .OnClick(model => model.OnEquipUnequipAbility);
+                });
+                row.AddSpacer();
             });
         }
+
 
         private void BuildEquippedAbilities(NuiColumnBuilder<JobViewModel> col)
         {

@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using Anvil.API;
 using XM.Shared.API.NUI;
+using XM.Shared.Core;
 using XM.Shared.Core.Localization;
 
 namespace XM.UI.Builder.DrawList
@@ -88,6 +89,11 @@ namespace XM.UI.Builder.DrawList
         }
 
         public NuiDrawListTextBuilder<TViewModel> Text(Expression<Func<TViewModel, string>> expression)
+        {
+            _textBind = GetBindName(expression);
+            return this;
+        }
+        public NuiDrawListTextBuilder<TViewModel> Text(Expression<Func<TViewModel, XMBindingList<string>>> expression)
         {
             _textBind = GetBindName(expression);
             return this;

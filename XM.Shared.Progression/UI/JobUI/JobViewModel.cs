@@ -24,6 +24,10 @@ namespace XM.Progression.UI.JobUI
         [Inject]
         public AbilityService Ability { get; set; }
 
+        internal const string AvailableAbilitiesPartialId = "AVAILABLE_ABILITIES_PARTIAL";
+        internal const string EquippedAbilitiesPartialId = "EQUIPPED_ABILITIES_PARTIAL";
+        internal const string MainView = "MAIN_VIEW";
+
         private const string PipLit = "icon_pip_lit";
         private const string PipUnlit = "icon_pip_unlit";
         private const string PipGrey = "icon_pip_grey";
@@ -172,6 +176,54 @@ namespace XM.Progression.UI.JobUI
             set => Set(value);
         }
 
+        public bool IsKeeperFilterEnabled
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public bool IsMenderFilterEnabled
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public bool IsBrawlerFilterEnabled
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public bool IsBeastmasterFilterEnabled
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public bool IsElementalistFilterEnabled
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public bool IsTechweaverFilterEnabled
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public bool IsHunterFilterEnabled
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public bool IsNightstalkerFilterEnabled
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
         public string ResonancePip1
         {
             get => Get<string>();
@@ -281,6 +333,12 @@ namespace XM.Progression.UI.JobUI
             set => Set(value);
         }
 
+        public int SelectedTab
+        {
+            get => Get<int>();
+            set => Set(value);
+        }
+
         public XMBindingList<string> AbilityIcons
         {
             get => Get<XMBindingList<string>>();
@@ -304,13 +362,8 @@ namespace XM.Progression.UI.JobUI
             set => Set(value);
         }
 
-        public XMBindingList<string> AbilityEquipUnequipTexts
-        {
-            get => Get<XMBindingList<string>>();
-            set => Set(value);
-        }
-
-        private int _selectedToggle = -1;
+        private int _selectedAbilityIndex = -1;
+        private readonly List<FeatType> _availableAbilityFeats = new();
         public XMBindingList<bool> AbilityToggles
         {
             get => Get<XMBindingList<bool>>();
@@ -323,15 +376,28 @@ namespace XM.Progression.UI.JobUI
             set => Set(value);
         }
 
+        public string EquipUnequipButtonText
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public bool IsEquipUnequipEnabled
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
         public override void OnOpen()
         {
             LoadJobLevels();
             LoadActiveJob();
+            LoadAvailableAbilitiesView();
             RefreshPips();
             RefreshAbilities();
             RefreshAbilityDetails();
 
-            WatchOnClient(model => model.AbilityToggles);
+            WatchOnClient(model => model.SelectedTab);
         }
 
         private void LoadJobLevels()
@@ -357,7 +423,7 @@ namespace XM.Progression.UI.JobUI
             var job = Job.GetActiveJob(Player);
             _selectedJob = job.Type;
             ClearAllJobEncouragedFlags();
-            ClearAllJobFilterEncouragedFlags();
+            ClearAllJobFilterFlags();
 
             switch (job.Type)
             {
@@ -507,21 +573,19 @@ namespace XM.Progression.UI.JobUI
             var abilityLevels = new XMBindingList<string>();
             var abilityNames = new XMBindingList<string>();
             var abilityColors = new XMBindingList<Color>();
-            var abilityEquipUnequipTexts = new XMBindingList<string>();
             var abilityToggles = new XMBindingList<bool>();
+            _availableAbilityFeats.Clear();
 
             foreach (var feat in feats)
             {
                 var ability = Ability.GetAbilityDetail(feat);
                 var levelAcquired = job.GetFeatAcquiredLevel(feat);
 
+                _availableAbilityFeats.Add(feat);
                 abilityIcons.Add(ability.IconResref);
                 abilityLevels.Add($"{LocaleString.Lv.ToLocalizedString()} {levelAcquired}");
                 abilityNames.Add(ability.Name.ToLocalizedString());
                 abilityColors.Add(level >= levelAcquired ? _green : _red);
-                abilityEquipUnequipTexts.Add(_equippedAbilities.Contains(feat)
-                    ? LocaleString.Unequip.ToLocalizedString()
-                    : LocaleString.Equip.ToLocalizedString());
                 abilityToggles.Add(false);
             }
 
@@ -529,17 +593,30 @@ namespace XM.Progression.UI.JobUI
             AbilityLevels = abilityLevels;
             AbilityNames = abilityNames;
             AbilityColors = abilityColors;
-            AbilityEquipUnequipTexts = abilityEquipUnequipTexts;
             AbilityToggles = abilityToggles;
         }
 
         private void RefreshAbilityDetails()
         {
-            if (_selectedToggle <= -1)
+            if (_selectedAbilityIndex <= -1)
+            {
                 SelectedAbilityDescription = LocaleString.SelectAnAbilityFromTheList.ToLocalizedString();
+                EquipUnequipButtonText = LocaleString.Equip.ToLocalizedString();
+                IsEquipUnequipEnabled = false;
+            }
+            else
+            {
+                var feat = _availableAbilityFeats[_selectedAbilityIndex];
+                var detail = Ability.GetAbilityDetail(feat);
 
+                SelectedAbilityDescription = detail.Description.ToLocalizedString();
 
+                EquipUnequipButtonText = _equippedAbilities.Contains(feat) 
+                    ? LocaleString.Unequip.ToLocalizedString() 
+                    : LocaleString.Equip.ToLocalizedString();
 
+                IsEquipUnequipEnabled = CanEquipAbility(feat);
+            }
         }
 
         private bool CanEquipAbility(FeatType type)
@@ -563,22 +640,63 @@ namespace XM.Progression.UI.JobUI
             IsHunterEncouraged = false;
             IsNightstalkerEncouraged = false;
         }
-        private void ClearAllJobFilterEncouragedFlags()
+        private void ClearAllJobFilterFlags()
         {
             IsKeeperFilterEncouraged = false;
+            IsKeeperFilterEnabled = true;
+
             IsMenderFilterEncouraged = false;
+            IsMenderFilterEnabled = true;
+
             IsBrawlerFilterEncouraged = false;
+            IsBrawlerFilterEnabled = true;
+
             IsBeastmasterFilterEncouraged = false;
+            IsBeastmasterFilterEnabled = true;
+
             IsElementalistFilterEncouraged = false;
+            IsElementalistFilterEnabled = true;
+
             IsTechweaverFilterEncouraged = false;
+            IsTechweaverFilterEnabled = true;
+
             IsHunterFilterEncouraged = false;
+            IsHunterFilterEnabled = true;
+
             IsNightstalkerFilterEncouraged = false;
+            IsNightstalkerFilterEnabled = true;
+        }
+
+        public Action OnChangeTab => () =>
+        {
+            switch (SelectedTab)
+            {
+                case 0: // 0 = Available Abilities
+                    LoadAvailableAbilitiesView();
+                    break;
+                case 1: // 1 = Equipped Abilities
+                    LoadEquippedAbilitiesView();
+                    break;
+            }
+        };
+
+        private void LoadAvailableAbilitiesView()
+        {
+            ChangePartialView(MainView, AvailableAbilitiesPartialId);
+
+            WatchOnClient(model => model.AbilityToggles);
+        }
+
+        private void LoadEquippedAbilitiesView()
+        {
+            ChangePartialView(MainView, EquippedAbilitiesPartialId);
         }
 
         public Action OnClickKeeper => () =>
         {
             ClearAllJobEncouragedFlags();
             IsKeeperEncouraged = true;
+            IsKeeperFilterEnabled = false;
             _selectedJob = JobType.Keeper;
         };
 
@@ -586,6 +704,7 @@ namespace XM.Progression.UI.JobUI
         {
             ClearAllJobEncouragedFlags();
             IsMenderEncouraged = true;
+            IsMenderFilterEnabled = false;
             _selectedJob = JobType.Mender;
         };
 
@@ -593,14 +712,15 @@ namespace XM.Progression.UI.JobUI
         {
             ClearAllJobEncouragedFlags();
             IsTechweaverEncouraged = true;
+            IsTechweaverFilterEnabled = false;
             _selectedJob = JobType.Techweaver;
-
         };
 
         public Action OnClickBeastmaster => () =>
         {
             ClearAllJobEncouragedFlags();
             IsBeastmasterEncouraged = true;
+            IsBeastmasterFilterEnabled = false;
             _selectedJob = JobType.Beastmaster;
         };
 
@@ -608,6 +728,7 @@ namespace XM.Progression.UI.JobUI
         {
             ClearAllJobEncouragedFlags();
             IsBrawlerEncouraged = true;
+            IsBrawlerFilterEnabled = false;
             _selectedJob = JobType.Brawler;
         };
 
@@ -615,6 +736,7 @@ namespace XM.Progression.UI.JobUI
         {
             ClearAllJobEncouragedFlags();
             IsNightstalkerEncouraged = true;
+            IsNightstalkerFilterEnabled = false;
             _selectedJob = JobType.Nightstalker;
         };
 
@@ -622,6 +744,7 @@ namespace XM.Progression.UI.JobUI
         {
             ClearAllJobEncouragedFlags();
             IsHunterEncouraged = true;
+            IsHunterFilterEnabled = false;
             _selectedJob = JobType.Hunter;
         };
 
@@ -629,13 +752,14 @@ namespace XM.Progression.UI.JobUI
         {
             ClearAllJobEncouragedFlags();
             IsElementalistEncouraged = true;
+            IsElementalistFilterEnabled = false;
             _selectedJob = JobType.Elementalist;
         };
 
         public Action OnClickFilterKeeper => () =>
         {
             var wasEncouraged = IsKeeperFilterEncouraged;
-            ClearAllJobFilterEncouragedFlags();
+            ClearAllJobFilterFlags();
             if(!wasEncouraged)
                 IsKeeperFilterEncouraged = true;
             _selectedJobFilter = JobType.Keeper;
@@ -645,7 +769,7 @@ namespace XM.Progression.UI.JobUI
         public Action OnClickFilterMender => () =>
         {
             var wasEncouraged = IsMenderFilterEncouraged;
-            ClearAllJobFilterEncouragedFlags();
+            ClearAllJobFilterFlags();
             if (!wasEncouraged)
                 IsMenderFilterEncouraged = true;
             _selectedJobFilter = JobType.Mender;
@@ -655,7 +779,7 @@ namespace XM.Progression.UI.JobUI
         public Action OnClickFilterTechweaver => () =>
         {
             var wasEncouraged = IsTechweaverFilterEncouraged;
-            ClearAllJobFilterEncouragedFlags();
+            ClearAllJobFilterFlags();
             if (!wasEncouraged)
                 IsTechweaverFilterEncouraged = true;
             _selectedJobFilter = JobType.Techweaver;
@@ -665,7 +789,7 @@ namespace XM.Progression.UI.JobUI
         public Action OnClickFilterBeastmaster => () =>
         {
             var wasEncouraged = IsBeastmasterFilterEncouraged;
-            ClearAllJobFilterEncouragedFlags();
+            ClearAllJobFilterFlags();
             if (!wasEncouraged)
                 IsBeastmasterFilterEncouraged = true;
             _selectedJobFilter = JobType.Beastmaster;
@@ -675,7 +799,7 @@ namespace XM.Progression.UI.JobUI
         public Action OnClickFilterBrawler => () =>
         {
             var wasEncouraged = IsBrawlerFilterEncouraged;
-            ClearAllJobFilterEncouragedFlags();
+            ClearAllJobFilterFlags();
             if (!wasEncouraged)
                 IsBrawlerFilterEncouraged = true;
             _selectedJobFilter = JobType.Brawler;
@@ -685,7 +809,7 @@ namespace XM.Progression.UI.JobUI
         public Action OnClickFilterNightstalker => () =>
         {
             var wasEncouraged = IsNightstalkerFilterEncouraged;
-            ClearAllJobFilterEncouragedFlags();
+            ClearAllJobFilterFlags();
             if (!wasEncouraged)
                 IsNightstalkerFilterEncouraged = true;
             _selectedJobFilter = JobType.Nightstalker;
@@ -695,7 +819,7 @@ namespace XM.Progression.UI.JobUI
         public Action OnClickFilterHunter => () =>
         {
             var wasEncouraged = IsHunterFilterEncouraged;
-            ClearAllJobFilterEncouragedFlags();
+            ClearAllJobFilterFlags();
             if (!wasEncouraged)
                 IsHunterFilterEncouraged = true;
             _selectedJobFilter = JobType.Hunter;
@@ -705,7 +829,7 @@ namespace XM.Progression.UI.JobUI
         public Action OnClickFilterElementalist => () =>
         {
             var wasEncouraged = IsElementalistFilterEncouraged;
-            ClearAllJobFilterEncouragedFlags();
+            ClearAllJobFilterFlags();
             if(!wasEncouraged)
                 IsElementalistFilterEncouraged = true;
             _selectedJobFilter = JobType.Elementalist;
@@ -714,10 +838,14 @@ namespace XM.Progression.UI.JobUI
 
         public Action OnClickAbility => () =>
         {
-            if (_selectedToggle > -1)
-                AbilityToggles[_selectedToggle] = false;
+            var index = NuiGetEventArrayIndex();
+            if (_selectedAbilityIndex > -1)
+                AbilityToggles[_selectedAbilityIndex] = false;
 
-            _selectedToggle = NuiGetEventArrayIndex();
+            if (_selectedAbilityIndex == index)
+                index = -1;
+
+            _selectedAbilityIndex = index;
             RefreshAbilityDetails();
         };
 
