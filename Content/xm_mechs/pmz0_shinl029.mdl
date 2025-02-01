@@ -1,10 +1,10 @@
-# Exported from NWmax 0.8 c00 at 1/12/2025 8:49:57 PM
+# Exported from NWmax 0.8 c00 at 2/1/2025 12:48:13 AM
 # mdl file
 #
 #NWmax MODEL ASCII
 # model: pmz0_shinl029
-#local file: C:\Users\ironc\Desktop\botlimbs.max
-filedependancy botlimbs.max
+#local file: Unknown
+filedependancy Unknown
 newmodel pmz0_shinl029
 setsupermodel pmz0_shinl029 NULL
 classification Character
@@ -33,7 +33,7 @@ node trimesh Box001
   Diffuse 1.0 1.0 1.0 
   Specular 0.0 0.0 0.0 
   shininess 1
-  center 3.14543 15.7203 -39.0589 
+  center 3.14545 15.7203 -39.0589 
   bitmap NULL
   verts 20
     0.2139 -0.0609782 -1.23587
@@ -122,7 +122,7 @@ endnode
 node trimesh heavy002
   parent pmz0_shinl029
   position 0.0 0.0 0.0
-  orientation 0.0 -0.894427 0.447214 0.0
+  orientation 1.0 0.0 0.0 0.0
   wirecolor 0.8 0.8 0.8 
   tilefade 0
   scale 1.0
@@ -138,10 +138,7 @@ node trimesh heavy002
   Diffuse 1.0 1.0 1.0 
   Specular 0.0 0.0 0.0 
   shininess 1
-  center 2.95927 14.2199 -39.9678 
-
-
-
+  center 2.95925 14.2199 -39.9678 
   bitmap xenoyellow
   verts 93
     -0.183146 -0.479765 -0.732498
