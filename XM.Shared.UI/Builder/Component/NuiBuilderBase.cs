@@ -161,7 +161,18 @@ namespace XM.UI.Builder.Component
             return (TBuilder)this;
         }
 
+        public TBuilder IsEnabled(Expression<Func<TViewModel, XMBindingList<bool>>> expression)
+        {
+            _isEnabledBind = GetBindName(expression);
+            return (TBuilder)this;
+        }
+
         public TBuilder ForegroundColor(Expression<Func<TViewModel, Color>> expression)
+        {
+            _foregroundColorBind = GetBindName(expression);
+            return (TBuilder)this;
+        }
+        public TBuilder ForegroundColor(Expression<Func<TViewModel, XMBindingList<Color>>> expression)
         {
             _foregroundColorBind = GetBindName(expression);
             return (TBuilder)this;

@@ -36,6 +36,18 @@ namespace XM.Progression.Ability
         }
 
         /// <summary>
+        /// Sets the description of the active ability we're building
+        /// </summary>
+        /// <param name="description">The description of the ability to set.</param>
+        /// <returns>An ability builder with the configured options.</returns>
+        public AbilityBuilder Description(LocaleString description)
+        {
+            _activeAbility.Description = description;
+
+            return this;
+        }
+
+        /// <summary>
         /// Indicates this ability is casted which fires once after the end of a configured delay (or instantly if no delay is assigned).
         /// </summary>
         /// <returns>An ability builder with the configured options.</returns>

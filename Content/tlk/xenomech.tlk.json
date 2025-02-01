@@ -5456,6 +5456,18 @@
     {
       "id": 1364,
       "text": "Available at level 50"
+    },
+    {
+      "id": 1365,
+      "text": "Equip"
+    },
+    {
+      "id": 1366,
+      "text": "Unequip"
+    },
+    {
+      "id": 1367,
+      "text": "Select an ability from the list."
     }
   ]
 }

@@ -7,6 +7,7 @@ namespace XM.Progression.Ability
     public class AbilityDetail
     {
         public LocaleString Name { get; set; }
+        public LocaleString Description { get; set; }
         public AbilityActivationAction ActivationAction { get; set; }
         public AbilityImpactAction ImpactAction { get; set; }
         public AbilityActivationDelayAction ActivationDelay { get; set; }
@@ -21,6 +22,7 @@ namespace XM.Progression.Ability
         public bool IsHostileAbility { get; set; }
         public bool DisplaysActivationMessage { get; set; }
         public int ResonanceCost { get; set; }
+        public string IconResref { get; set; }
 
         public AbilityDetail()
         {

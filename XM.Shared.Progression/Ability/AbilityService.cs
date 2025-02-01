@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Anvil.API;
 using Anvil.Services;
@@ -25,6 +26,7 @@ namespace XM.Progression.Ability
         private readonly RecastService _recast;
         private readonly JobService _job;
         private readonly IList<IAbilityListDefinition> _abilityDefinitions;
+        private readonly Dictionary<JobType, List<FeatType>> _abilitiesByJob = new();
 
         public AbilityService(
             ActivityService activity,
@@ -50,17 +52,44 @@ namespace XM.Progression.Ability
 
         private void CacheAbilities()
         {
+            var jobs = _job.GetAllJobDefinitions();
+
             foreach (var definition in _abilityDefinitions)
             {
                 var abilities = definition.BuildAbilities();
 
                 foreach (var (feat, ability) in abilities)
                 {
+                    ability.IconResref = Get2DAString("feat", "ICON", (int)feat);
                     _abilities[feat] = ability;
+
+                    foreach (var (type, job) in jobs)
+                    {
+                        var orderedFeats = job.FeatAcquisitionLevels
+                            .OrderBy(kvp => kvp.Key)
+                            .Select(kvp => kvp.Value);
+
+                        foreach (var featEntry in orderedFeats)
+                        {
+                            if (featEntry == feat)
+                            {
+                                if (!_abilitiesByJob.ContainsKey(type))
+                                    _abilitiesByJob[type] = new List<FeatType>();
+
+                                _abilitiesByJob[type].Add(feat);
+                            }
+                        }
+                    }
                 }
             }
         }
-        private AbilityDetail GetAbilityDetail(FeatType featType)
+
+        public List<FeatType> GetAbilityFeatsByJob(JobType jobType)
+        {
+            return _abilitiesByJob[jobType].ToList();
+        }
+
+        public AbilityDetail GetAbilityDetail(FeatType featType)
         {
             if (!_abilities.ContainsKey(featType))
                 throw new KeyNotFoundException($"Feat '{featType}' is not registered to an ability.");

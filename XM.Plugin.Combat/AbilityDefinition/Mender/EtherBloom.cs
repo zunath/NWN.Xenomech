@@ -112,6 +112,7 @@ namespace XM.Combat.AbilityDefinition.Mender
 
         _builder.Create(FeatType.EtherBloom1)
                 .Name(LocaleString.EtherBloomI)
+                .Description(LocaleString.EtherBloomIDescription)
                 .HasRecastDelay(RecastGroup.EtherBloom, 3f)
                 .HasActivationDelay(2f)
                 .RequirementEP(8)

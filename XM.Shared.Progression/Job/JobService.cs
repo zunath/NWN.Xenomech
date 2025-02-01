@@ -21,7 +21,7 @@ namespace XM.Progression.Job
     [ServiceBinding(typeof(JobService))]
     public class JobService
     {
-        public const int JobCount = 8;
+        public const int ResonanceNodeLevelAcquisitionRate = 5; // One every 5 levels
 
         private readonly Dictionary<GradeType, int> _baseHPByGrade = new()
         {
@@ -162,6 +162,17 @@ namespace XM.Progression.Job
                 ? dbPlayerJob.JobLevels[job]
                 : 0;
             return level;
+        }
+
+        public Dictionary<JobType, int> GetJobLevels(uint player)
+        {
+            if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
+                throw new ArgumentException("Only PCs can have jobs.");
+
+            var playerId = PlayerId.Get(player);
+            var dbPlayerJob = _db.Get<PlayerJob>(playerId) ?? new PlayerJob(playerId);
+
+            return dbPlayerJob.JobLevels.ToDictionary(x => x.Key, y => y.Value);
         }
 
         internal int CalculateHP(int level, GradeType grade)

@@ -103,9 +103,13 @@ namespace XM.Shared.Core.Localization
         InsufficientEP = 404,
         InsufficientLevel = 405,
         EtherBloomI = 406,
+        EtherBloomIDescription = 407,
         EtherBloomII = 408,
+        EtherBloomIIDescription = 409,
         EtherBloomIII = 410,
+        EtherBloomIIIDescription = 411,
         EtherBloomIV = 412,
+        EtherBloomIVDescription = 413,
         EtherBloom = 414,
         PlayerQueuesAbilityForTheNextAttack = 415,
         PlayerReadiesAbilityOnTarget = 416,
@@ -1044,5 +1048,8 @@ namespace XM.Shared.Core.Localization
         AvailableAtLevel40 = 1362,
         AvailableAtLevel45 = 1363,
         AvailableAtLevel50 = 1364,
+        Equip = 1365,
+        Unequip = 1366,
+        SelectAnAbilityFromTheList = 1367,
     }
 }

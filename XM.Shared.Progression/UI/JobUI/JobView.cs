@@ -9,6 +9,7 @@ using XM.UI.Builder;
 using XM.UI.Builder.Layout;
 using NRediSearch.Aggregation;
 using Action = System.Action;
+using NuiScrollbars = XM.Shared.API.NUI.NuiScrollbars;
 
 namespace XM.Progression.UI.JobUI
 {
@@ -53,6 +54,7 @@ namespace XM.Progression.UI.JobUI
             col.AddRow(BuildJobSelection);
             BuildResonanceNodes(col);
             BuildJobFilter(col);
+            BuildAbilitySection(col);
         }
 
         private void BuildJobHeader(NuiRowBuilder<JobViewModel> row)
@@ -73,31 +75,91 @@ namespace XM.Progression.UI.JobUI
             void BuildJobButton(
                 JobType jobType, 
                 LocaleString name,
+                Expression<Func<JobViewModel, string>> jobLevel,
                 Expression<Func<JobViewModel, bool>> isEncouraged,
                 Expression<Func<JobViewModel, Action>> onClick)
             {
-                row.AddButtonImage(button =>
+                row.AddColumn(col =>
                 {
-                    var job = _job.GetJobDefinition(jobType);
-                    button.ResRef(job.IconResref)
-                        .Width(50f)
-                        .Height(50f)
-                        .Margin(4f)
-                        .IsEncouraged(isEncouraged)
-                        .TooltipText(name)
-                        .OnClick(onClick);
+                    col.AddRow(buttonRow =>
+                    {
+                        buttonRow.AddButtonImage(button =>
+                        {
+                            var job = _job.GetJobDefinition(jobType);
+                            button.ResRef(job.IconResref)
+                                .Width(50f)
+                                .Height(50f)
+                                .Margin(4f)
+                                .IsEncouraged(isEncouraged)
+                                .TooltipText(name)
+                                .OnClick(onClick);
+                        });
+                    });
+                    col.AddRow(levelRow =>
+                    {
+                        levelRow.AddSpacer();
+                        levelRow.AddLabel(label =>
+                        {
+                            label
+                                .Label(jobLevel)
+                                .Height(20f)
+                                .VerticalAlign(NuiVAlign.Top)
+                                .HorizontalAlign(NuiHAlign.Center);
+                        });
+                        levelRow.AddSpacer();
+                    });
                 });
             }
 
             row.AddSpacer();
-            BuildJobButton(JobType.Keeper, LocaleString.Keeper, model => model.IsKeeperEncouraged, model => model.OnClickKeeper);
-            BuildJobButton(JobType.Mender, LocaleString.Mender, model => model.IsMenderEncouraged, model => model.OnClickMender);
-            BuildJobButton(JobType.Brawler, LocaleString.Brawler, model => model.IsBrawlerEncouraged, model => model.OnClickBrawler);
-            BuildJobButton(JobType.Beastmaster, LocaleString.Beastmaster, model => model.IsBeastmasterEncouraged, model => model.OnClickBeastmaster);
-            BuildJobButton(JobType.Elementalist, LocaleString.Elementalist, model => model.IsElementalistEncouraged, model => model.OnClickElementalist);
-            BuildJobButton(JobType.Techweaver, LocaleString.Techweaver, model => model.IsTechweaverEncouraged, model => model.OnClickTechweaver);
-            BuildJobButton(JobType.Hunter, LocaleString.Hunter, model => model.IsHunterEncouraged, model => model.OnClickHunter);
-            BuildJobButton(JobType.Nightstalker, LocaleString.Nightstalker, model => model.IsNightstalkerEncouraged, model => model.OnClickNightstalker);
+            BuildJobButton(
+                JobType.Keeper, 
+                LocaleString.Keeper, 
+                model => model.KeeperJobLevel,
+                model => model.IsKeeperEncouraged, 
+                model => model.OnClickKeeper);
+            BuildJobButton(
+                JobType.Mender, 
+                LocaleString.Mender, 
+                model => model.MenderJobLevel,
+                model => model.IsMenderEncouraged, 
+                model => model.OnClickMender);
+            BuildJobButton(
+                JobType.Brawler, 
+                LocaleString.Brawler, 
+                model => model.BrawlerJobLevel,
+                model => model.IsBrawlerEncouraged, 
+                model => model.OnClickBrawler);
+            BuildJobButton(
+                JobType.Beastmaster, 
+                LocaleString.Beastmaster, 
+                model => model.BeastmasterJobLevel,
+                model => model.IsBeastmasterEncouraged, 
+                model => model.OnClickBeastmaster);
+            BuildJobButton(
+                JobType.Elementalist, 
+                LocaleString.Elementalist, 
+                model => model.ElementalistJobLevel,
+                model => model.IsElementalistEncouraged, 
+                model => model.OnClickElementalist);
+            BuildJobButton(
+                JobType.Techweaver, 
+                LocaleString.Techweaver, 
+                model => model.TechweaverJobLevel,
+                model => model.IsTechweaverEncouraged, 
+                model => model.OnClickTechweaver);
+            BuildJobButton(
+                JobType.Hunter, 
+                LocaleString.Hunter, 
+                model => model.HunterJobLevel,
+                model => model.IsHunterEncouraged, 
+                model => model.OnClickHunter);
+            BuildJobButton(
+                JobType.Nightstalker, 
+                LocaleString.Nightstalker, 
+                model => model.NightstalkerJobLevel,
+                model => model.IsNightstalkerEncouraged, 
+                model => model.OnClickNightstalker);
             row.AddSpacer();
         }
 
@@ -240,6 +302,90 @@ namespace XM.Progression.UI.JobUI
                 BuildJobFilterButton(row, JobType.Hunter, LocaleString.Hunter, model => model.IsHunterFilterEncouraged, model => model.OnClickFilterHunter);
                 BuildJobFilterButton(row, JobType.Nightstalker, LocaleString.Nightstalker, model => model.IsNightstalkerFilterEncouraged, model => model.OnClickFilterNightstalker);
                 row.AddSpacer();
+            });
+        }
+
+        private void BuildAbilitySection(NuiColumnBuilder<JobViewModel> col)
+        {
+            col.AddRow(row =>
+            {
+                row.AddColumn(BuildAvailableAbilityList);
+                row.AddColumn(BuildAbilityDetailPane);
+            });
+        }
+
+        private void BuildAvailableAbilityList(NuiColumnBuilder<JobViewModel> col)
+        {
+            col.AddRow(row =>
+            {
+                row.AddList(list =>
+                {
+                    list.RowHeight(64f);
+
+                    list.AddTemplateCell(cell =>
+                    {
+                        cell
+                            .Width(50f)
+                            .IsVariable(false)
+                            .AddGroup(group =>
+                            {
+                                group.SetLayout(layout =>
+                                {
+                                    layout.AddImage(image =>
+                                    {
+                                        image.ResRef(model => model.AbilityIcons);
+                                    });
+                                });
+                            });
+                    }, model => model.AbilityNames);
+
+                    list.AddTemplateCell(cell =>
+                    {
+                        cell.Width(50f)
+                            .IsVariable(false)
+                            .AddGroup(group =>
+                            {
+                                group.SetLayout(layout =>
+                                {
+                                    layout.AddLabel(label =>
+                                    {
+                                        label
+                                            .Label(model => model.AbilityLevels);
+                                    });
+                                });
+                            });
+                    }, model => model.AbilityNames);
+
+                    list.AddTemplateCell(cell =>
+                    {
+                        cell.AddGroup(group =>
+                        {
+                            group.SetLayout(layout =>
+                            {
+                                layout.AddButtonSelect(button =>
+                                {
+                                    button
+                                        .Margin(4f)
+                                        .IsSelected(model => model.AbilityToggles)
+                                        .Label(model => model.AbilityNames)
+                                        .ForegroundColor(model => model.AbilityColors)
+                                        .OnClick(model => model.OnClickAbility);
+                                });
+                            });
+                        });
+                    }, model => model.AbilityNames);
+                });
+            });
+        }
+
+        private void BuildAbilityDetailPane(NuiColumnBuilder<JobViewModel> col)
+        {
+            col.AddText(text =>
+            {
+                text
+                    .Scrollbars(NuiScrollbars.Auto)
+                    .Text(model => model.SelectedAbilityDescription)
+                    .Border(true);
             });
         }
 
