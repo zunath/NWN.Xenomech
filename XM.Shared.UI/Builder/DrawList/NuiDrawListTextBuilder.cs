@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using Anvil.API;
 using XM.Shared.API.NUI;
+using XM.Shared.Core.Localization;
 
 namespace XM.UI.Builder.DrawList
 {
@@ -18,7 +19,7 @@ namespace XM.UI.Builder.DrawList
         private NuiRect _rect;
         private string _rectBind;
 
-        private string _text;
+        private LocaleString _text;
         private string _textBind;
 
         private NuiDrawListItemOrderType _order = NuiDrawListItemOrderType.After;
@@ -80,7 +81,7 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
-        public NuiDrawListTextBuilder<TViewModel> Text(string text)
+        public NuiDrawListTextBuilder<TViewModel> Text(LocaleString text)
         {
             _text = text;
             return this;
@@ -125,7 +126,7 @@ namespace XM.UI.Builder.DrawList
                 : Nui.Bind(_rectBind);
 
             var text = string.IsNullOrWhiteSpace(_textBind)
-                ? JsonString(_text)
+                ? JsonString(_text.ToLocalizedString())
                 : Nui.Bind(_textBind);
 
             return Nui.DrawListText(

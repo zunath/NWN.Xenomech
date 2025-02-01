@@ -5380,6 +5380,82 @@
     {
       "id": 1345,
       "text": "Skills"
+    },
+    {
+      "id": 1346,
+      "text": "Xenomech Packs"
+    },
+    {
+      "id": 1347,
+      "text": "Alien Jungle"
+    },
+    {
+      "id": 1348,
+      "text": "Sci-Fi Base"
+    },
+    {
+      "id": 1349,
+      "text": "SWTOR"
+    },
+    {
+      "id": 1350,
+      "text": "Change Job"
+    },
+    {
+      "id": 1351,
+      "text": "Resonance Nodes"
+    },
+    {
+      "id": 1352,
+      "text": "Available Abilities"
+    },
+    {
+      "id": 1353,
+      "text": "Equipped Abilities"
+    },
+    {
+      "id": 1354,
+      "text": "Select Job"
+    },
+    {
+      "id": 1355,
+      "text": "Available at level 5"
+    },
+    {
+      "id": 1356,
+      "text": "Available at level 10"
+    },
+    {
+      "id": 1357,
+      "text": "Available at level 15"
+    },
+    {
+      "id": 1358,
+      "text": "Available at level 20"
+    },
+    {
+      "id": 1359,
+      "text": "Available at level 25"
+    },
+    {
+      "id": 1360,
+      "text": "Available at level 30"
+    },
+    {
+      "id": 1361,
+      "text": "Available at level 35"
+    },
+    {
+      "id": 1362,
+      "text": "Available at level 40"
+    },
+    {
+      "id": 1363,
+      "text": "Available at level 45"
+    },
+    {
+      "id": 1364,
+      "text": "Available at level 50"
     }
   ]
 }

@@ -7,7 +7,7 @@ namespace XM.Progression.Ability
 {
     public class AbilityBuilder
     {
-        private readonly Dictionary<FeatType, AbilityDetail> _abilities = new Dictionary<FeatType, AbilityDetail>();
+        private readonly Dictionary<FeatType, AbilityDetail> _abilities = new();
         private AbilityDetail _activeAbility;
 
         /// <summary>
@@ -230,6 +230,13 @@ namespace XM.Progression.Ability
         public AbilityBuilder IsHostileAbility()
         {
             _activeAbility.IsHostileAbility = true;
+
+            return this;
+        }
+
+        public AbilityBuilder ResonanceCost(int cost)
+        {
+            _activeAbility.ResonanceCost = cost;
 
             return this;
         }

@@ -118,6 +118,7 @@ namespace XM.Combat.AbilityDefinition.Mender
                 .HasMaxRange(15f)
                 .UsesAnimation(AnimationType.LoopingConjure2)
                 .DisplaysVisualEffectWhenActivating()
+                .ResonanceCost(1)
                 .HasImpactAction((activator, target, location) =>
                 {
                     Impact(activator, target, VisualEffectType.ImpHealingSmall, GetPowerFloor, GetRate, GetHPFloor);

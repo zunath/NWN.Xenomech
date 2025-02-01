@@ -20,6 +20,7 @@ namespace XM.Progression.Ability
         public float MaxRange { get; set; }
         public bool IsHostileAbility { get; set; }
         public bool DisplaysActivationMessage { get; set; }
+        public int ResonanceCost { get; set; }
 
         public AbilityDetail()
         {
