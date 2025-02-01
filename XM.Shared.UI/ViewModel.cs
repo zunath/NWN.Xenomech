@@ -269,17 +269,21 @@ namespace XM.UI
                 Geometry.X,
                 Geometry.Y,
                 Geometry.Width,
-                Geometry.Height + 1);
-            BindGeometry(Geometry);
+            Geometry.Height + 1);
 
-            DelayCommand(0.0f, () =>
+            var json = XMJsonUtility.Serialize(Geometry);
+            NuiSetBind(Player, WindowToken, nameof(Geometry), Json.Parse(json));
+
+            DelayCommand(0.1f, () =>
             {
                 Geometry = new NuiRect(
                     Geometry.X,
                     Geometry.Y,
                     Geometry.Width,
                     Geometry.Height - 1);
-                BindGeometry(Geometry);
+
+                json = XMJsonUtility.Serialize(Geometry);
+                NuiSetBind(Player, WindowToken, nameof(Geometry), Json.Parse(json));
             });
         }
     }

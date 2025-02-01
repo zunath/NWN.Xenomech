@@ -14,11 +14,9 @@ using Action = System.Action;
 namespace XM.UI
 {
     [ServiceBinding(typeof(GuiService))]
-    [ServiceBinding(typeof(IUpdateable))]
     [ServiceBinding(typeof(IInitializable))]
     [ServiceBinding(typeof(IDisposable))]
     public partial class GuiService: 
-        IUpdateable, 
         IInitializable,
         IDisposable
     {
@@ -125,7 +123,7 @@ namespace XM.UI
             if (property != null)
             {
                 var action = (Action)property.GetValue(viewModel);
-                EnqueueUIAction(viewModel, action);
+                action!();
             }
             else
             {
@@ -133,7 +131,7 @@ namespace XM.UI
                 if (method != null)
                 {
                     var action = (Action)method.Invoke(viewModel, null);
-                    EnqueueUIAction(viewModel, action);
+                    action!();
                 }
             }
         }
@@ -166,9 +164,6 @@ namespace XM.UI
             _tokenToPlayer.Remove(windowToken);
             _playerToTokens[player].Remove(type);
             _tokenToType.Remove(windowToken);
-
-            if (_lastEventTimestamps.ContainsKey(viewModel))
-                _lastEventTimestamps.Remove(viewModel);
         }
 
         private void SaveWindowLocation(uint player, int windowToken)
@@ -309,8 +304,6 @@ namespace XM.UI
             _viewModels.Clear();
             _views.Clear();
 
-            _eventQueue.Clear();
-            _lastEventTimestamps.Clear();
             _windowTypesWithRefresh.Clear();
 
             ClearOpenPlayerWindows();
