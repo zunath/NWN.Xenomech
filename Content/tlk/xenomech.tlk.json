@@ -5472,6 +5472,18 @@
     {
       "id": 1368,
       "text": "Description"
+    },
+    {
+      "id": 1369,
+      "text": "RN:"
+    },
+    {
+      "id": 1370,
+      "text": "EQUIPPED"
+    },
+    {
+      "id": 1371,
+      "text": "UNEQUIPPED"
     }
   ]
 }

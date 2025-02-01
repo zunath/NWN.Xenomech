@@ -50,6 +50,11 @@ namespace XM.UI.Builder.DrawList
             _isEnabledBind = GetBindName(expression);
             return this;
         }
+        public NuiDrawListImageBuilder<TViewModel> IsEnabled(Expression<Func<TViewModel, XMBindingList<bool>>> expression)
+        {
+            _isEnabledBind = GetBindName(expression);
+            return this;
+        }
 
         public NuiDrawListImageBuilder<TViewModel> ResRef(string resRef)
         {

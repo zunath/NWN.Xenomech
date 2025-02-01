@@ -230,6 +230,7 @@ namespace XM.UI
                 case ListChangedType.ItemAdded:
                 case ListChangedType.ItemDeleted:
                 case ListChangedType.ItemChanged:
+                case ListChangedType.Reset:
                     OnPropertyChanged(list.PropertyName);
                     break;
                 default:

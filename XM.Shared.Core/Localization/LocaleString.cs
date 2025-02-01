@@ -1052,5 +1052,8 @@ namespace XM.Shared.Core.Localization
         Unequip = 1366,
         SelectAnAbilityFromTheList = 1367,
         Description = 1368,
+        RN = 1369,
+        EQUIPPED = 1370,
+        UNEQUIPPED = 1371,
     }
 }
