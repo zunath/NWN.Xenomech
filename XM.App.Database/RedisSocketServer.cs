@@ -152,6 +152,8 @@ namespace XM.App.Database
                         return HandleSearch(command);
                     case DBServerCommandType.SearchCount:
                         return HandleSearchCount(command);
+                    case DBServerCommandType.Delete:
+                        return HandleDelete(command);
                     default:
                         return new DBServerCommand { CommandType = DBServerCommandType.Error, Message = "Unknown command" };
                 }
@@ -202,6 +204,15 @@ namespace XM.App.Database
             {
                 CommandType = DBServerCommandType.Result,
                 SearchCount = result
+            };
+        }
+
+        private DBServerCommand HandleDelete(DBServerCommand command)
+        {
+            Delete(command.EntityType, command.Key);
+            return new DBServerCommand
+            {
+                CommandType = DBServerCommandType.Result
             };
         }
 
@@ -331,6 +342,13 @@ namespace XM.App.Database
 
             _searchClientsByType[type].ReplaceDocument(indexKey, redisData);
             _multiplexer.GetDatabase().JsonSet($"{type}:{key}", entity);
+        }
+
+        private void Delete(string type, string key)
+        {
+            var indexKey = $"Index:{type}:{key}";
+            _searchClientsByType[type].DeleteDocument(indexKey);
+            _multiplexer.GetDatabase().JsonDelete($"{type}:{key}");
         }
     }
 }

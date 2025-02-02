@@ -11,5 +11,6 @@
         Ok = 6,
         Error = 7,
         SearchCount = 8,
+        Delete = 9,
     }
 }

@@ -236,6 +236,24 @@ namespace XM.Shared.Core.Data
             return (int)response.SearchCount;
         }
 
+        public void Delete<T>(string key)
+            where T: IDBEntity
+        {
+            var type = typeof(T);
+            var command = new DBServerCommand
+            {
+                CommandType = DBServerCommandType.Delete,
+                EntityType = type.Name,
+                Key = key,
+            };
+
+            var response = SendCommand(command);
+            if (response.CommandType != DBServerCommandType.Result)
+            {
+                throw new Exception($"Failed to delete entity: {response.Message}");
+            }
+        }
+
         private DBServerCommand SendCommand(DBServerCommand command)
         {
             using (var client = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified))
