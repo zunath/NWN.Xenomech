@@ -5,14 +5,11 @@ using XM.Shared.Core;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 
-namespace XM.Plugin.Area
+namespace XM.Plugin.Area.Map
 {
     [ServiceBinding(typeof(MiniMapService))]
     internal class MiniMapService
     {
-        private const string AreaMiniMapDisabledVariable = "MINI_MAP_DISABLED";
-        private const string AreaMapKeyItemIdVariable = "MAP_KEY_ITEM_ID";
-
         private readonly XMEventService _event;
         private readonly KeyItemService _keyItem;
 
@@ -49,13 +46,13 @@ namespace XM.Plugin.Area
             if (!GetIsPC(player) || GetIsDM(player))
                 return;
 
-            var isMiniMapDisabled = GetLocalBool(area, AreaMiniMapDisabledVariable);
+            var isMiniMapDisabled = GetLocalBool(area, MapConstants.AreaMiniMapDisabledVariable);
             if (isMiniMapDisabled)
             {
                 SetGuiPanelDisabled(player, GuiPanelType.Minimap, true);
             }
 
-            var keyItemId = GetLocalInt(area, AreaMapKeyItemIdVariable);
+            var keyItemId = GetLocalInt(area, MapConstants.AreaMapKeyItemIdVariable);
             if (keyItemId > 0)
             {
                 var keyItemType = (KeyItemType)keyItemId;
@@ -81,7 +78,7 @@ namespace XM.Plugin.Area
                 return;
 
             var area = GetArea(player);
-            if (GetLocalBool(area, AreaMiniMapDisabledVariable))
+            if (GetLocalBool(area, MapConstants.AreaMiniMapDisabledVariable))
                 return;
 
             var message = ColorToken.Red(LocaleString.YouDoNotHaveAMapOfThisArea.ToLocalizedString());
