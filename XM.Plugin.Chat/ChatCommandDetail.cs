@@ -1,9 +1,8 @@
 ﻿using Anvil.API;
-using XM.Shared.API.BaseTypes;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Authorization;
 
-namespace XM.ChatCommand
+namespace XM.Chat
 {
     public class ChatCommandDetail
     {

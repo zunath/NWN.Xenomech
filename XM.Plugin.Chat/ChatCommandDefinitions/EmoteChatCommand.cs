@@ -3,7 +3,7 @@ using Anvil.Services;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Authorization;
 
-namespace XM.ChatCommand.ChatCommandDefinitions
+namespace XM.Chat.ChatCommandDefinitions
 {
     [ServiceBinding(typeof(IChatCommandListDefinition))]
     public class EmoteChatCommand: IChatCommandListDefinition

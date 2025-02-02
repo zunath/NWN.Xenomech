@@ -14,7 +14,7 @@
     <NoWarn>1591</NoWarn>
     <Nullable>disable</Nullable>
 
-    <RootNamespace>XM.ChatCommand</RootNamespace>
+    <RootNamespace>XM.Chat</RootNamespace>
   </PropertyGroup>
 
 <!--Uncomment and fill to build a NuGet package for your plugin.-->
@@ -73,7 +73,7 @@
   </ItemGroup>
 
 <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	<Exec Command="del /Q /F &quot;$(SolutionDir)server\server\anvil\Plugins\XM.Plugin.ChatCommand\*.*&quot;&#xD;&#xA;xcopy &quot;$(OutDir)*.*&quot; &quot;$(SolutionDir)server\anvil\Plugins\XM.Plugin.ChatCommand\&quot; /E /Y" />
+	<Exec Command="del /Q /F &quot;$(SolutionDir)server\server\anvil\Plugins\XM.Plugin.Chat\*.*&quot;&#xD;&#xA;xcopy &quot;$(OutDir)*.*&quot; &quot;$(SolutionDir)server\anvil\Plugins\XM.Plugin.Chat\&quot; /E /Y" />
 </Target>
 
 </Project>

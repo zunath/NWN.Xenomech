@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace XM.ChatCommand
+namespace XM.Chat
 {
     public interface IChatCommandListDefinition
     {

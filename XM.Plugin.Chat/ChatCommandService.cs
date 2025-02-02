@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Anvil.API;
 using Anvil.Services;
@@ -11,7 +10,7 @@ using XM.Shared.Core.Configuration;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 
-namespace XM.ChatCommand
+namespace XM.Chat
 {
     [ServiceBinding(typeof(ChatCommandService))]
     internal class ChatCommandService: IInitializable

@@ -3,7 +3,7 @@ using Anvil.Services;
 using XM.Shared.Core.Authorization;
 using XM.Shared.Core.Configuration;
 
-namespace XM.ChatCommand.ChatCommandDefinitions
+namespace XM.Chat.ChatCommandDefinitions
 {
     [ServiceBinding(typeof(IChatCommandListDefinition))]
     internal class SystemChatCommand : IChatCommandListDefinition

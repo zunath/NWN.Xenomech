@@ -7,7 +7,7 @@ using XM.Shared.API.NWNX.AdminPlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Authorization;
 
-namespace XM.ChatCommand.ChatCommandDefinitions
+namespace XM.Chat.ChatCommandDefinitions
 {
     [ServiceBinding(typeof(IChatCommandListDefinition))]
     public class DMChatCommand : IChatCommandListDefinition

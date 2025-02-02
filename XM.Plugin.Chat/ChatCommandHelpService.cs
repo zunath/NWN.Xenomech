@@ -1,6 +1,6 @@
 ﻿using Anvil.Services;
 
-namespace XM.ChatCommand
+namespace XM.Chat
 {
     [ServiceBinding(typeof(ChatCommandHelpService))]
     internal class ChatCommandHelpService

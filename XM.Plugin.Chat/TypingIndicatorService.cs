@@ -2,7 +2,7 @@
 using XM.Shared.API.Constants;
 using XM.Shared.Core.EventManagement;
 
-namespace XM.ChatCommand
+namespace XM.Chat
 {
     [ServiceBinding(typeof(TypingIndicatorService))]
     internal class TypingIndicatorService

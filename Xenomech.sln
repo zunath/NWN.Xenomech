@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Shared.API", "XM.Shared.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Shared.Core", "XM.Shared.Core\XM.Shared.Core.csproj", "{EFBD34CF-106F-43A6-B395-B017A35BD62E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Plugin.ChatCommand", "XM.Plugin.ChatCommand\XM.Plugin.ChatCommand.csproj", "{FAC1830F-FE6F-4CD6-9677-55E2AA3E49CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Plugin.Chat", "XM.Plugin.Chat\XM.Plugin.Chat.csproj", "{FAC1830F-FE6F-4CD6-9677-55E2AA3E49CA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Shared.UI", "XM.Shared.UI\XM.Shared.UI.csproj", "{371DDAF0-BB41-4CA0-A124-20DBE1B84A30}"
 EndProject
