@@ -1,13 +1,13 @@
 ﻿using Anvil.Services;
 using System.Globalization;
 using System;
-using XM.Chat.Roleplay.Entity;
 using XM.Progression.Job;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.ChatPlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
+using XM.Chat.Entity;
 
 namespace XM.Chat.Roleplay
 {
@@ -61,7 +61,7 @@ namespace XM.Chat.Roleplay
             if (message.Length <= 3) return;
 
             var playerId = PlayerId.Get(player);
-            var dbPlayerRoleplay = _db.Get<PlayerRoleplay>(playerId);
+            var dbPlayerRoleplay = _db.Get<PlayerChat>(playerId);
 
             // Is this an OOC message?
             var startingText = message.Substring(0, 2);
@@ -117,7 +117,7 @@ namespace XM.Chat.Roleplay
             if (!GetIsPC(player) || GetIsDM(player)) return;
 
             var playerId = PlayerId.Get(player);
-            var dbPlayerRoleplay = _db.Get<PlayerRoleplay>(playerId);
+            var dbPlayerRoleplay = _db.Get<PlayerChat>(playerId);
 
             if (dbPlayerRoleplay.RPPoints >= 50)
             {
