@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using Anvil.Services;
 using NWN.Core;
+using XM.Chat.ChatCommand;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.AdminPlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Authorization;
 
-namespace XM.Chat.ChatCommandDefinitions
+namespace XM.Chat.ChatCommand.ChatCommandDefinitions
 {
     [ServiceBinding(typeof(IChatCommandListDefinition))]
     public class DMChatCommand : IChatCommandListDefinition
@@ -562,7 +563,7 @@ namespace XM.Chat.ChatCommandDefinitions
                     {
                         return "Requires CD Key to be entered. Example: /restartserver XXXXYYYY";
                     }
-                    else if (String.IsNullOrWhiteSpace(args[0]))
+                    else if (string.IsNullOrWhiteSpace(args[0]))
                     {
                         return "Please enter your public CD Key to confirm the server reset. Use /cdkey to retrieve this. E.G: /restartserver XXXXYYYY";
                     }

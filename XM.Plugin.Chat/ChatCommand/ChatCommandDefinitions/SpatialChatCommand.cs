@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Anvil.Services;
+using XM.Chat.ChatCommand;
 using XM.Shared.Core.Authorization;
 
-namespace XM.Chat.ChatCommandDefinitions
+namespace XM.Chat.ChatCommand.ChatCommandDefinitions
 {
     [ServiceBinding(typeof(IChatCommandListDefinition))]
-    public class SpatialChatCommand: IChatCommandListDefinition
+    public class SpatialChatCommand : IChatCommandListDefinition
     {
         private readonly ChatCommandBuilder _builder = new();
 

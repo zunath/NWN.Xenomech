@@ -10,10 +10,10 @@ using XM.Shared.Core.Configuration;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 
-namespace XM.Chat
+namespace XM.Chat.ChatCommand
 {
     [ServiceBinding(typeof(ChatCommandService))]
-    internal class ChatCommandService: IInitializable
+    internal class ChatCommandService : IInitializable
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -29,7 +29,7 @@ namespace XM.Chat
         private readonly XMEventService _event;
 
         public ChatCommandService(
-            XMSettingsService settings, 
+            XMSettingsService settings,
             AuthorizationService authorization,
             ChatCommandHelpService help,
             XMEventService @event)
@@ -100,7 +100,7 @@ namespace XM.Chat
 
                 var authorization = _authorization.GetAuthorizationLevel(sender);
 
-                if ((_settings.ServerEnvironment == ServerEnvironmentType.Test && chatCommand.AvailableToAllOnTestEnvironment) ||
+                if (_settings.ServerEnvironment == ServerEnvironmentType.Test && chatCommand.AvailableToAllOnTestEnvironment ||
                     chatCommand.Authorization.HasFlag(authorization))
                 {
                     var message = Locale.GetString(LocaleString.SelectTargetForChatCommand);
@@ -217,10 +217,10 @@ namespace XM.Chat
         /// <param name="targetLocation">The target location of the command. null if no target is necessary.</param>
         /// <param name="args">User-entered arguments</param>
         private void ProcessChatCommand(
-            string commandName, 
-            uint sender, 
+            string commandName,
+            uint sender,
             uint target,
-            Location targetLocation, 
+            Location targetLocation,
             string args)
         {
             var command = _chatCommands[commandName];
@@ -231,7 +231,7 @@ namespace XM.Chat
 
             var authorization = _authorization.GetAuthorizationLevel(sender);
 
-            if ((_settings.ServerEnvironment == ServerEnvironmentType.Test && command.AvailableToAllOnTestEnvironment) ||
+            if (_settings.ServerEnvironment == ServerEnvironmentType.Test && command.AvailableToAllOnTestEnvironment ||
                 command.Authorization.HasFlag(authorization))
             {
                 var argsArr = string.IsNullOrWhiteSpace(args) ? new string[0] : args.Split(' ').ToArray();

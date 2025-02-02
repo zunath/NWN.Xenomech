@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Globalization;
 using Anvil.Services;
+using XM.Chat.ChatCommand;
 using XM.Shared.API.NWNX.AdminPlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Authorization;
 using XM.Shared.Core.Localization;
 
-namespace XM.Chat.ChatCommandDefinitions
+namespace XM.Chat.ChatCommand.ChatCommandDefinitions
 {
     [ServiceBinding(typeof(IChatCommandListDefinition))]
-    internal class CharacterChatCommand: IChatCommandListDefinition
+    internal class CharacterChatCommand : IChatCommandListDefinition
     {
         private readonly ChatCommandBuilder _builder = new();
 
@@ -42,7 +43,7 @@ namespace XM.Chat.ChatCommandDefinitions
                     var cdKey = GetPCPublicCDKey(user);
 
                     var message = ColorToken.Green(Locale.GetString(LocaleString.CharacterChatCommandResult,
-                        ColorToken.White(cdKey), 
+                        ColorToken.White(cdKey),
                         ColorToken.White(playerId)));
 
                     SendMessageToPC(user, message);
