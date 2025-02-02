@@ -5520,6 +5520,50 @@
     {
       "id": 1380,
       "text": "Server will automatically reboot in approximately {0}."
+    },
+    {
+      "id": 1381,
+      "text": "Use Limitation: Job"
+    },
+    {
+      "id": 1382,
+      "text": "Use Limitation: Job:"
+    },
+    {
+      "id": 1383,
+      "text": "Requires the active job match."
+    },
+    {
+      "id": 1384,
+      "text": "Level Required"
+    },
+    {
+      "id": 1385,
+      "text": "Level Required:"
+    },
+    {
+      "id": 1386,
+      "text": "Requires the player's active level to match."
+    },
+    {
+      "id": 1387,
+      "text": "KEY_ITEM_ID for item '{0}' is not set properly."
+    },
+    {
+      "id": 1388,
+      "text": "KEY_ITEM_ID is not configured properly on the item. Notify an admin."
+    },
+    {
+      "id": 1389,
+      "text": "You have already acquired this key item."
+    },
+    {
+      "id": 1390,
+      "text": "KEY_ITEM_ID '{0}' for item '{1}' is not assigned to a valid KeyItemType."
+    },
+    {
+      "id": 1391,
+      "text": "You move and interrupt your action."
     }
   ]
 }

@@ -87,10 +87,10 @@ namespace XM.Shared.API.Constants
         // Custom Item Properties follow
         
         Delay = 88,
-        // 89 is open
+        UseLimitationJob = 89,
         HPBonus = 90,
         EP = 91,
-        // 92 is open
+        LevelRequired = 92,
         DMG = 93,
         Defense = 94,
         NPCEvasionGrade = 95,

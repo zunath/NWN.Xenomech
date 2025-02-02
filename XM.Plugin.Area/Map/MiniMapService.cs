@@ -1,4 +1,6 @@
 ﻿using Anvil.Services;
+using Pipelines.Sockets.Unofficial.Arenas;
+using XM.Inventory.Event;
 using XM.Inventory.KeyItem;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
@@ -28,6 +30,20 @@ namespace XM.Plugin.Area.Map
             _event.Subscribe<AreaEvent.OnAreaEnter>(DisableMiniMap);
             _event.Subscribe<AreaEvent.OnAreaExit>(EnableMiniMap);
             _event.Subscribe<ModuleEvent.OnPlayerGui>(OpenMiniMap);
+            _event.Subscribe<InventoryEvent.GiveKeyItemEvent>(OnPlayerReceivesKeyItem);
+        }
+
+        private void OnPlayerReceivesKeyItem(uint player)
+        {
+            var data = _event.GetEventData<InventoryEvent.GiveKeyItemEvent>();
+            var area = GetArea(player);
+            var keyItemId = GetLocalInt(area, MapConstants.AreaMapKeyItemIdVariable);
+
+            if (keyItemId == (int)data.KeyItem)
+            {
+                ExploreAreaForPlayer(area, player);
+                SetGuiPanelDisabled(player, GuiPanelType.Minimap, false);
+            }
         }
 
 
