@@ -10,7 +10,7 @@ using XM.UI.Builder.Layout;
 using Action = System.Action;
 using NuiScrollbars = XM.Shared.API.NUI.NuiScrollbars;
 using NuiAspect = XM.Shared.API.NUI.NuiAspect;
-using NLog.Layouts;
+using XM.Shared.Core;
 
 namespace XM.Progression.UI.JobUI
 {
@@ -306,11 +306,14 @@ namespace XM.Progression.UI.JobUI
         {
             col.AddRow(row =>
             {
+                row.AddSpacer();
                 row.AddButton(button =>
                 {
                     button.Label(LocaleString.ChangeJob)
+                        .Height(32f)
                         .OnClick(model => model.OnClickChangeJob);
                 });
+                row.AddSpacer();
             });
         }
 
@@ -403,10 +406,95 @@ namespace XM.Progression.UI.JobUI
             });
         }
 
-        private void BuildAvailableAbilityList(NuiColumnBuilder<JobViewModel> col)
+        private void BuildAbilityToggle(
+            NuiRowBuilder<JobViewModel> row,
+            Expression<Func<JobViewModel, XMBindingList<bool>>> abilitySelections,
+            Expression<Func<JobViewModel, XMBindingList<string>>> abilityNames,
+            Expression<Func<JobViewModel, XMBindingList<string>>> abilityIcons,
+            Expression<Func<JobViewModel, XMBindingList<string>>> abilityLevels,
+            Expression<Func<JobViewModel, XMBindingList<Color>>> abilityColors,
+            Expression<Func<JobViewModel, XMBindingList<bool>>> abilityPip1Enabled,
+            Expression<Func<JobViewModel, XMBindingList<bool>>> abilityPip2Enabled,
+            Expression<Func<JobViewModel, XMBindingList<bool>>> abilityPip3Enabled,
+            Expression<Func<JobViewModel, XMBindingList<bool>>> abilityPip4Enabled,
+            Expression<Func<JobViewModel, Action>> onClick)
         {
             const float PipOffsetX = 100f;
             const float PipOffsetY = 9f;
+
+            row.AddButtonSelect(button =>
+            {
+                button
+                    .Margin(4f)
+                    .Height(32f)
+                    .IsSelected(abilitySelections)
+                    .Label(abilityNames)
+                    .ForegroundColor(abilityColors)
+                    .OnClick(onClick)
+                    .DrawList(drawList =>
+                    {
+                        drawList.AddImage(image =>
+                        {
+                            image
+                                .ResRef(abilityIcons)
+                                .VerticalAlign(NuiVAlign.Top)
+                                .HorizontalAlign(NuiHAlign.Center)
+                                .Aspect(NuiAspect.Fit)
+                                .Position(4f, 4f, 32f, 32f);
+                        });
+                        drawList.AddText(text =>
+                        {
+                            text
+                                .Text(abilityLevels)
+                                .Bounds(50f, 12f, 50f, 32f)
+                                .Color(255, 255, 255);
+                        });
+                        drawList.AddImage(pip1 =>
+                        {
+                            pip1
+                                .ResRef(JobViewModel.PipLit)
+                                .VerticalAlign(NuiVAlign.Top)
+                                .HorizontalAlign(NuiHAlign.Center)
+                                .Aspect(NuiAspect.Fit)
+                                .IsEnabled(abilityPip1Enabled)
+                                .Position(PipOffsetX, PipOffsetY, PipWidth / 2f, PipHeight / 2f);
+                        });
+                        drawList.AddImage(pip2 =>
+                        {
+                            pip2
+                                .ResRef(JobViewModel.PipLit)
+                                .VerticalAlign(NuiVAlign.Top)
+                                .HorizontalAlign(NuiHAlign.Center)
+                                .Aspect(NuiAspect.Fit)
+                                .IsEnabled(abilityPip2Enabled)
+                                .Position(PipOffsetX + (PipWidth / 2f), PipOffsetY, PipWidth / 2f, PipHeight / 2f);
+                        });
+                        drawList.AddImage(pip3 =>
+                        {
+                            pip3
+                                .ResRef(JobViewModel.PipLit)
+                                .VerticalAlign(NuiVAlign.Top)
+                                .HorizontalAlign(NuiHAlign.Center)
+                                .Aspect(NuiAspect.Fit)
+                                .IsEnabled(abilityPip3Enabled)
+                                .Position(PipOffsetX + (PipWidth / 2f * 2), PipOffsetY, PipWidth / 2f, PipHeight / 2f);
+                        });
+                        drawList.AddImage(pip4 =>
+                        {
+                            pip4
+                                .ResRef(JobViewModel.PipLit)
+                                .VerticalAlign(NuiVAlign.Top)
+                                .HorizontalAlign(NuiHAlign.Center)
+                                .Aspect(NuiAspect.Fit)
+                                .IsEnabled(abilityPip4Enabled)
+                                .Position(PipOffsetX + (PipWidth / 2f * 3), PipOffsetY, PipWidth / 2f, PipHeight / 2f);
+                        });
+                    });
+            });
+        }
+
+        private void BuildAvailableAbilityList(NuiColumnBuilder<JobViewModel> col)
+        {
 
             col.AddList(list =>
             {
@@ -416,75 +504,17 @@ namespace XM.Progression.UI.JobUI
                 {
                     cell.AddRow(row =>
                     {
-                        row.AddButtonSelect(button =>
-                        {
-                            button
-                                .Margin(4f)
-                                .Height(32f)
-                                .IsSelected(model => model.AbilityToggles)
-                                .Label(model => model.AbilityNames)
-                                .ForegroundColor(model => model.AbilityColors)
-                                .OnClick(model => model.OnClickAbility)
-                                .DrawList(drawList =>
-                                {
-                                    drawList.AddImage(image =>
-                                    {
-                                        image
-                                            .ResRef(model => model.AbilityIcons)
-                                            .VerticalAlign(NuiVAlign.Top)
-                                            .HorizontalAlign(NuiHAlign.Center)
-                                            .Aspect(NuiAspect.Fit)
-                                            .Position(4f, 4f, 32f, 32f);
-                                    });
-                                    drawList.AddText(text =>
-                                    {
-                                        text
-                                            .Text(model => model.AbilityLevels)
-                                            .Bounds(50f, 12f, 50f, 32f)
-                                            .Color(255, 255, 255);
-                                    });
-                                    drawList.AddImage(pip1 =>
-                                    {
-                                        pip1
-                                            .ResRef(JobViewModel.PipLit)
-                                            .VerticalAlign(NuiVAlign.Top)
-                                            .HorizontalAlign(NuiHAlign.Center)
-                                            .Aspect(NuiAspect.Fit)
-                                            .IsEnabled(model => model.AbilityPip1Enabled)
-                                            .Position(PipOffsetX, PipOffsetY, PipWidth/2f, PipHeight/2f);
-                                    });
-                                    drawList.AddImage(pip2 =>
-                                    {
-                                        pip2
-                                            .ResRef(JobViewModel.PipLit)
-                                            .VerticalAlign(NuiVAlign.Top)
-                                            .HorizontalAlign(NuiHAlign.Center)
-                                            .Aspect(NuiAspect.Fit)
-                                            .IsEnabled(model => model.AbilityPip2Enabled)
-                                            .Position(PipOffsetX + (PipWidth/2f), PipOffsetY, PipWidth/2f, PipHeight/2f);
-                                    });
-                                    drawList.AddImage(pip3 =>
-                                    {
-                                        pip3
-                                            .ResRef(JobViewModel.PipLit)
-                                            .VerticalAlign(NuiVAlign.Top)
-                                            .HorizontalAlign(NuiHAlign.Center)
-                                            .Aspect(NuiAspect.Fit)
-                                            .IsEnabled(model => model.AbilityPip3Enabled)
-                                            .Position(PipOffsetX + (PipWidth/2f * 2), PipOffsetY, PipWidth/2f, PipHeight/2f);
-                                    });
-                                    drawList.AddImage(pip4 =>
-                                    {
-                                        pip4
-                                            .ResRef(JobViewModel.PipLit)
-                                            .VerticalAlign(NuiVAlign.Top)
-                                            .HorizontalAlign(NuiHAlign.Center)
-                                            .Aspect(NuiAspect.Fit)
-                                            .IsEnabled(model => model.AbilityPip4Enabled)
-                                            .Position(PipOffsetX + (PipWidth/2f * 3), PipOffsetY, PipWidth/2f, PipHeight/2f);
-                                    });
-                                });
-                        });
+                        BuildAbilityToggle(row, 
+                            model => model.AbilityToggles,
+                            model => model.AbilityNames,
+                            model => model.AbilityIcons,
+                            model => model.AbilityLevels,
+                            model => model.AbilityColors,
+                            model => model.AbilityPip1Enabled,
+                            model => model.AbilityPip2Enabled,
+                            model => model.AbilityPip3Enabled,
+                            model => model.AbilityPip4Enabled,
+                            model => model.OnClickAbility);
                     });
                 }, model => model.AbilityNames);
             });
@@ -528,10 +558,45 @@ namespace XM.Progression.UI.JobUI
 
         private void BuildEquippedAbilities(NuiColumnBuilder<JobViewModel> col)
         {
-            col.AddLabel(label =>
+            col.AddRow(row =>
             {
-                label.Label(LocaleString.EquippedAbilities)
-                    .Height(20f);
+                row.AddList(list =>
+                {
+                    list.RowHeight(40f);
+
+                    list.AddTemplateCell(cell =>
+                    {
+                        cell.AddRow(row =>
+                        {
+                            BuildAbilityToggle(
+                                row,
+                                model => model.EquippedAbilityToggles,
+                                model => model.EquippedAbilityNames,
+                                model => model.EquippedAbilityIcons,
+                                model => model.EquippedAbilityLevels,
+                                model => model.EquippedAbilityColors,
+                                model => model.EquippedAbilityPip1Enabled,
+                                model => model.EquippedAbilityPip2Enabled,
+                                model => model.EquippedAbilityPip3Enabled,
+                                model => model.EquippedAbilityPip4Enabled,
+                                model => model.OnClickEquippedAbility);
+                        });
+                    }, model => model.EquippedAbilityNames);
+                });
+            });
+
+            col.AddRow(row =>
+            {
+                row.AddSpacer();
+                row.AddButton(button =>
+                {
+                    button
+                        .Label(LocaleString.Unequip)
+                        .Height(32f)
+                        .IsEnabled(model => model.IsUnequipAbilityEnabled)
+                        .OnClick(model => model.OnClickUnequipAbility);
+                });
+                row.AddSpacer();
             });
         }
 

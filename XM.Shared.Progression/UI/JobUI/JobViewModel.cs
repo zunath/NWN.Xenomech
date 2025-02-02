@@ -32,6 +32,7 @@ namespace XM.Progression.UI.JobUI
         private const string PipUnlit = "icon_pip_unlit";
         private const string PipGrey = "icon_pip_grey";
 
+        private readonly Color _white = new(255, 255, 255);
         private readonly Color _green = new(0, 255, 0);
         private readonly Color _red = new(255, 0, 0);
 
@@ -406,6 +407,63 @@ namespace XM.Progression.UI.JobUI
         }
 
         public bool IsEquipUnequipEnabled
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+
+        private int _selectedEquippedAbilityIndex = -1;
+        public XMBindingList<bool> EquippedAbilityToggles
+        {
+            get => Get<XMBindingList<bool>>();
+            set => Set(value);
+        }
+        public XMBindingList<string> EquippedAbilityIcons
+        {
+            get => Get<XMBindingList<string>>();
+            set => Set(value);
+        }
+        
+        public XMBindingList<string> EquippedAbilityLevels
+        {
+            get => Get<XMBindingList<string>>();
+            set => Set(value);
+        }
+
+        public XMBindingList<string> EquippedAbilityNames
+        {
+            get => Get<XMBindingList<string>>();
+            set => Set(value);
+        }
+        public XMBindingList<Color> EquippedAbilityColors
+        {
+            get => Get<XMBindingList<Color>>();
+            set => Set(value);
+        }
+
+        public XMBindingList<bool> EquippedAbilityPip1Enabled
+        {
+            get => Get<XMBindingList<bool>>();
+            set => Set(value);
+        }
+        public XMBindingList<bool> EquippedAbilityPip2Enabled
+        {
+            get => Get<XMBindingList<bool>>();
+            set => Set(value);
+        }
+        public XMBindingList<bool> EquippedAbilityPip3Enabled
+        {
+            get => Get<XMBindingList<bool>>();
+            set => Set(value);
+        }
+        public XMBindingList<bool> EquippedAbilityPip4Enabled
+        {
+            get => Get<XMBindingList<bool>>();
+            set => Set(value);
+        }
+
+        public bool IsUnequipAbilityEnabled
         {
             get => Get<bool>();
             set => Set(value);
@@ -799,100 +857,127 @@ namespace XM.Progression.UI.JobUI
         private void LoadEquippedAbilitiesView()
         {
             ChangePartialView(MainView, EquippedAbilitiesPartialId);
+            LoadEquippedAbilitiesList();
+            _selectedEquippedAbilityIndex = -1;
+            IsUnequipAbilityEnabled = false;
         }
 
-        public Action OnClickKeeper => () =>
+        private void LoadEquippedAbilitiesList()
         {
-            _selectedJob = JobType.Keeper;
+            var equippedAbilityToggles = new XMBindingList<bool>();
+            var equippedAbilityNames = new XMBindingList<string>();
+            var equippedAbilityIcons = new XMBindingList<string>();
+            var equippedAbilityLevels = new XMBindingList<string>();
+            var equippedAbilityColors = new XMBindingList<Color>();
+            var equippedAbilityPip1Enabled = new XMBindingList<bool>();
+            var equippedAbilityPip2Enabled = new XMBindingList<bool>();
+            var equippedAbilityPip3Enabled = new XMBindingList<bool>();
+            var equippedAbilityPip4Enabled = new XMBindingList<bool>();
+
+            var job = Job.GetJobDefinition(_selectedJobFilter);
+            foreach (var feat in _equippedAbilities)
+            {
+                var ability = Ability.GetAbilityDetail(feat);
+                var levelAcquired = job.GetFeatAcquiredLevel(feat);
+
+                equippedAbilityToggles.Add(false);
+                equippedAbilityNames.Add(ability.Name.ToLocalizedString());
+                equippedAbilityIcons.Add(ability.IconResref);
+                equippedAbilityLevels.Add($"{LocaleString.Lv.ToLocalizedString()} {levelAcquired}");
+                equippedAbilityColors.Add(_white);
+
+                equippedAbilityPip1Enabled.Add(ability.ResonanceCost >= 1);
+                equippedAbilityPip2Enabled.Add(ability.ResonanceCost >= 2);
+                equippedAbilityPip3Enabled.Add(ability.ResonanceCost >= 3);
+                equippedAbilityPip4Enabled.Add(ability.ResonanceCost >= 4);
+            }
+
+            EquippedAbilityToggles = equippedAbilityToggles;
+            EquippedAbilityNames = equippedAbilityNames;
+            EquippedAbilityIcons = equippedAbilityIcons;
+            EquippedAbilityLevels = equippedAbilityLevels;
+            EquippedAbilityColors = equippedAbilityColors;
+            EquippedAbilityPip1Enabled = equippedAbilityPip1Enabled;
+            EquippedAbilityPip2Enabled = equippedAbilityPip2Enabled;
+            EquippedAbilityPip3Enabled = equippedAbilityPip3Enabled;
+            EquippedAbilityPip4Enabled = equippedAbilityPip4Enabled;
+        }
+
+        private void ClearEquippedAbilities()
+        {
+            EquippedAbilityIcons.Clear();
+            EquippedAbilityLevels.Clear();
+            EquippedAbilityNames.Clear();
+            EquippedAbilityPip1Enabled.Clear();
+            EquippedAbilityPip2Enabled.Clear();
+            EquippedAbilityPip3Enabled.Clear();
+            EquippedAbilityPip4Enabled.Clear();
+            _equippedAbilities.Clear();
+        }
+
+        private void SelectNewJob(JobType type)
+        {
+            _selectedJob = type;
             _selectedAbilityIndex = -1;
             ClearAllJobEncouragedFlags();
             RefreshAllJobFilterFlags();
             ClearAbilitiesList();
             RefreshAbilityDetails();
+            ClearEquippedAbilities();
+        }
+
+        public Action OnClickKeeper => () =>
+        {
+            SelectNewJob(JobType.Keeper);
             IsKeeperEncouraged = true;
             IsKeeperFilterEnabled = false;
         };
 
         public Action OnClickMender => () =>
         {
-            _selectedJob = JobType.Mender;
-            _selectedAbilityIndex = -1;
-            ClearAllJobEncouragedFlags();
-            RefreshAllJobFilterFlags();
-            ClearAbilitiesList();
-            RefreshAbilityDetails();
+            SelectNewJob(JobType.Mender);
             IsMenderEncouraged = true;
             IsMenderFilterEnabled = false;
         };
 
         public Action OnClickTechweaver => () =>
         {
-            _selectedJob = JobType.Techweaver;
-            _selectedAbilityIndex = -1;
-            ClearAllJobEncouragedFlags();
-            RefreshAllJobFilterFlags();
-            ClearAbilitiesList();
-            RefreshAbilityDetails();
+            SelectNewJob(JobType.Techweaver);
             IsTechweaverEncouraged = true;
             IsTechweaverFilterEnabled = false;
         };
 
         public Action OnClickBeastmaster => () =>
         {
-            _selectedJob = JobType.Beastmaster;
-            _selectedAbilityIndex = -1;
-            ClearAllJobEncouragedFlags();
-            RefreshAllJobFilterFlags();
-            ClearAbilitiesList();
-            RefreshAbilityDetails();
+            SelectNewJob(JobType.Beastmaster);
             IsBeastmasterEncouraged = true;
             IsBeastmasterFilterEnabled = false;
         };
 
         public Action OnClickBrawler => () =>
         {
-            _selectedJob = JobType.Brawler;
-            _selectedAbilityIndex = -1;
-            ClearAllJobEncouragedFlags();
-            RefreshAllJobFilterFlags();
-            ClearAbilitiesList();
-            RefreshAbilityDetails();
+            SelectNewJob(JobType.Brawler);
             IsBrawlerEncouraged = true;
             IsBrawlerFilterEnabled = false;
         };
 
         public Action OnClickNightstalker => () =>
         {
-            _selectedJob = JobType.Nightstalker;
-            _selectedAbilityIndex = -1;
-            ClearAllJobEncouragedFlags();
-            RefreshAllJobFilterFlags();
-            ClearAbilitiesList();
-            RefreshAbilityDetails();
+            SelectNewJob(JobType.Nightstalker);
             IsNightstalkerEncouraged = true;
             IsNightstalkerFilterEnabled = false;
         };
 
         public Action OnClickHunter => () =>
         {
-            _selectedJob = JobType.Hunter;
-            _selectedAbilityIndex = -1;
-            ClearAllJobEncouragedFlags();
-            RefreshAllJobFilterFlags();
-            ClearAbilitiesList();
-            RefreshAbilityDetails();
+            SelectNewJob(JobType.Hunter);
             IsHunterEncouraged = true;
             IsHunterFilterEnabled = false;
         };
 
         public Action OnClickElementalist => () =>
         {
-            _selectedJob = JobType.Elementalist;
-            _selectedAbilityIndex = -1;
-            ClearAllJobEncouragedFlags();
-            RefreshAllJobFilterFlags();
-            ClearAbilitiesList();
-            RefreshAbilityDetails();
+            SelectNewJob(JobType.Elementalist);
             IsElementalistEncouraged = true;
             IsElementalistFilterEnabled = false;
         };
@@ -975,30 +1060,78 @@ namespace XM.Progression.UI.JobUI
             RefreshAbilityDetails();
         };
 
+        public Action OnClickEquippedAbility => () =>
+        {
+            var index = NuiGetEventArrayIndex();
+
+            if (_selectedEquippedAbilityIndex > -1)
+                EquippedAbilityToggles[_selectedEquippedAbilityIndex] = false;
+
+            if (_selectedEquippedAbilityIndex == index)
+                index = -1;
+
+            _selectedEquippedAbilityIndex = index;
+            IsUnequipAbilityEnabled = _selectedEquippedAbilityIndex > -1;
+        };
+
         public Action OnEquipUnequipAbility => () =>
         {
             if (_selectedAbilityIndex <= -1)
                 return;
 
             var feat = _availableAbilityFeats[_selectedAbilityIndex];
-            var ability = Ability.GetAbilityDetail(feat);
-            var nodes = ability.ResonanceCost;
 
             // Unequip
             if (_equippedAbilities.Contains(feat))
             {
-                _spentNodes -= nodes;
-                _equippedAbilities.Remove(feat);
+                UnequipAbility(feat);
             }
             // Equip
             else
             {
-                if (!CanEquipAbility(feat))
-                    return;
-
-                _spentNodes += nodes;
-                _equippedAbilities.Add(feat);
+                EquipAbility(feat);
             }
+
+            RefreshPips();
+            RefreshAbilityDetails();
+            RefreshSelectedAbility();
+        };
+
+        private void UnequipAbility(FeatType feat)
+        {
+            var ability = Ability.GetAbilityDetail(feat);
+            var nodes = ability.ResonanceCost;
+
+            _spentNodes -= nodes;
+            _equippedAbilities.Remove(feat);
+        }
+
+        private void EquipAbility(FeatType feat)
+        {
+            if (!CanEquipAbility(feat))
+                return;
+
+            var ability = Ability.GetAbilityDetail(feat);
+            var nodes = ability.ResonanceCost;
+            _spentNodes += nodes;
+            _equippedAbilities.Add(feat);
+        }
+
+        public Action OnClickUnequipAbility => () =>
+        {
+            if (_selectedEquippedAbilityIndex < 0)
+                return;
+
+            var feat = _equippedAbilities[_selectedEquippedAbilityIndex];
+            UnequipAbility(feat);
+
+            EquippedAbilityIcons.RemoveAt(_selectedEquippedAbilityIndex);
+            EquippedAbilityLevels.RemoveAt(_selectedEquippedAbilityIndex);
+            EquippedAbilityNames.RemoveAt(_selectedEquippedAbilityIndex);
+            EquippedAbilityPip1Enabled.RemoveAt(_selectedEquippedAbilityIndex);
+            EquippedAbilityPip2Enabled.RemoveAt(_selectedEquippedAbilityIndex);
+            EquippedAbilityPip3Enabled.RemoveAt(_selectedEquippedAbilityIndex);
+            EquippedAbilityPip4Enabled.RemoveAt(_selectedEquippedAbilityIndex);
 
             RefreshPips();
             RefreshAbilityDetails();
