@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using Anvil.API;
 using XM.Shared.API.NUI;
+using XM.Shared.Core;
 using NuiAspect = XM.Shared.API.NUI.NuiAspect;
 
 namespace XM.UI.Builder.DrawList
@@ -49,6 +50,11 @@ namespace XM.UI.Builder.DrawList
             _isEnabledBind = GetBindName(expression);
             return this;
         }
+        public NuiDrawListImageBuilder<TViewModel> IsEnabled(Expression<Func<TViewModel, XMBindingList<bool>>> expression)
+        {
+            _isEnabledBind = GetBindName(expression);
+            return this;
+        }
 
         public NuiDrawListImageBuilder<TViewModel> ResRef(string resRef)
         {
@@ -61,12 +67,24 @@ namespace XM.UI.Builder.DrawList
             _resRefBind = GetBindName(expression);
             return this;
         }
+        public NuiDrawListImageBuilder<TViewModel> ResRef(Expression<Func<TViewModel, XMBindingList<string>>> expression)
+        {
+            _resRefBind = GetBindName(expression);
+            return this;
+        }
 
         public NuiDrawListImageBuilder<TViewModel> Position(NuiRect position)
         {
             _position = position;
             return this;
         }
+
+        public NuiDrawListImageBuilder<TViewModel> Position(float x, float y, float width, float height)
+        {
+            _position = new NuiRect(x, y, width, height);
+            return this;
+        }
+
 
         public NuiDrawListImageBuilder<TViewModel> Position(Expression<Func<TViewModel, NuiRect>> expression)
         {

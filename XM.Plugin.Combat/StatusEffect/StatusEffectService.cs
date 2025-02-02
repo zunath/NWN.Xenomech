@@ -85,6 +85,12 @@ namespace XM.Combat.StatusEffect
 
         private void OnNWNStatusEffectInterval(uint creature)
         {
+            if (!_creatureEffects.ContainsKey(creature))
+            {
+                RemoveEffectByTag(creature, StatusEffectTag);
+                return;
+            }
+
             var effects = _creatureEffects[creature];
 
             foreach (var effect in effects.GetAllEffects())

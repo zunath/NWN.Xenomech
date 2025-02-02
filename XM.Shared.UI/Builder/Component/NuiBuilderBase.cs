@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using XM.Shared.API.NUI;
 using XM.Shared.Core;
+using XM.Shared.Core.Localization;
 using XM.UI.Builder.DrawList;
 using Action = System.Action;
 
@@ -104,9 +105,9 @@ namespace XM.UI.Builder.Component
             return (TBuilder)this;
         }
 
-        public TBuilder TooltipText(string tooltipText)
+        public TBuilder TooltipText(LocaleString tooltipText)
         {
-            _tooltipText = tooltipText;
+            _tooltipText = tooltipText.ToLocalizedString();
             return (TBuilder)this;
         }
 
@@ -160,7 +161,18 @@ namespace XM.UI.Builder.Component
             return (TBuilder)this;
         }
 
+        public TBuilder IsEnabled(Expression<Func<TViewModel, XMBindingList<bool>>> expression)
+        {
+            _isEnabledBind = GetBindName(expression);
+            return (TBuilder)this;
+        }
+
         public TBuilder ForegroundColor(Expression<Func<TViewModel, Color>> expression)
+        {
+            _foregroundColorBind = GetBindName(expression);
+            return (TBuilder)this;
+        }
+        public TBuilder ForegroundColor(Expression<Func<TViewModel, XMBindingList<Color>>> expression)
         {
             _foregroundColorBind = GetBindName(expression);
             return (TBuilder)this;

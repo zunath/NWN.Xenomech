@@ -7,7 +7,7 @@ namespace XM.Progression.Ability
 {
     public class AbilityBuilder
     {
-        private readonly Dictionary<FeatType, AbilityDetail> _abilities = new Dictionary<FeatType, AbilityDetail>();
+        private readonly Dictionary<FeatType, AbilityDetail> _abilities = new();
         private AbilityDetail _activeAbility;
 
         /// <summary>
@@ -31,6 +31,18 @@ namespace XM.Progression.Ability
         public AbilityBuilder Name(LocaleString name)
         {
             _activeAbility.Name = name;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the description of the active ability we're building
+        /// </summary>
+        /// <param name="description">The description of the ability to set.</param>
+        /// <returns>An ability builder with the configured options.</returns>
+        public AbilityBuilder Description(LocaleString description)
+        {
+            _activeAbility.Description = description;
 
             return this;
         }
@@ -142,6 +154,36 @@ namespace XM.Progression.Ability
         }
 
         /// <summary>
+        /// Assigns an equip action on the active ability we're building.
+        /// Calling this more than once will replace the previous action.
+        /// Equip actions are fired when a player changes jobs and can be a result of a natural job ability
+        /// or a resonance ability.
+        /// </summary>
+        /// <param name="action">The action to fire when an ability is equipped.</param>
+        /// <returns>An ability builder with the configured options</returns>
+        public AbilityBuilder HasEquipAction(AbilityEquippedAction action)
+        {
+            _activeAbility.AbilityEquippedAction = action;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Assigns an unequip action on the active ability we're building.
+        /// Calling this more than once will replace the previous action.
+        /// Unequip actions are fired when a player changes jobs and can be a result of a natural job ability
+        /// or a resonance ability.
+        /// </summary>
+        /// <param name="action">The action to fire when an ability is unequipped.</param>
+        /// <returns>An ability builder with the configured options</returns>
+        public AbilityBuilder HasUnequipAction(AbilityUnequippedAction action)
+        {
+            _activeAbility.AbilityUnequippedAction = action;
+
+            return this;
+        }
+
+        /// <summary>
         /// Assigns an activation delay on the active ability we're building.
         /// This is typically used for casting times.
         /// Calling this more than once will replace the previous activation delay.
@@ -230,6 +272,13 @@ namespace XM.Progression.Ability
         public AbilityBuilder IsHostileAbility()
         {
             _activeAbility.IsHostileAbility = true;
+
+            return this;
+        }
+
+        public AbilityBuilder ResonanceCost(int cost)
+        {
+            _activeAbility.ResonanceCost = cost;
 
             return this;
         }

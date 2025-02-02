@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Anvil.API;
 using Anvil.Services;
 using NWN.Core.NWNX;
+using XM.Progression.Event;
 using XM.Progression.Job;
+using XM.Progression.Job.Entity;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Activity;
+using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 
@@ -18,15 +22,20 @@ namespace XM.Progression.Ability
     [ServiceBinding(typeof(AbilityService))]
     internal class AbilityService: IInitializable
     {
-        private static readonly Dictionary<FeatType, AbilityDetail> _abilities = new();
+        private readonly Dictionary<FeatType, AbilityDetail> _abilities = new();
+        private readonly Dictionary<FeatType, int> _abilitiesByLevel = new();
 
+        private readonly DBService _db;
         private readonly ActivityService _activity;
         private readonly StatService _stat;
         private readonly RecastService _recast;
         private readonly JobService _job;
         private readonly IList<IAbilityListDefinition> _abilityDefinitions;
+        private readonly Dictionary<JobType, List<FeatType>> _abilitiesByJob = new();
+        private readonly XMEventService _event;
 
         public AbilityService(
+            DBService db,
             ActivityService activity,
             StatService stat,
             RecastService recast,
@@ -34,13 +43,22 @@ namespace XM.Progression.Ability
             IList<IAbilityListDefinition> abilityDefinitions,
             XMEventService @event)
         {
+            _db = db;
             _activity = activity;
             _stat = stat;
             _recast = recast;
             _job = job;
             _abilityDefinitions = abilityDefinitions;
+            _event = @event;
 
-            @event.Subscribe<NWNXEvent.OnUseFeatBefore>(UseAbility);
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            _event.Subscribe<NWNXEvent.OnUseFeatBefore>(UseAbility);
+            _event.Subscribe<JobEvent.JobFeatAddedEvent>(AddJobFeat);
+            _event.Subscribe<JobEvent.JobFeatRemovedEvent>(RemoveJobFeat);
         }
 
         public void Init()
@@ -50,17 +68,51 @@ namespace XM.Progression.Ability
 
         private void CacheAbilities()
         {
+            var jobs = _job.GetAllJobDefinitions();
+
             foreach (var definition in _abilityDefinitions)
             {
                 var abilities = definition.BuildAbilities();
 
                 foreach (var (feat, ability) in abilities)
                 {
+                    ability.IconResref = Get2DAString("feat", "ICON", (int)feat);
                     _abilities[feat] = ability;
+
+                    foreach (var (type, job) in jobs)
+                    {
+                        var orderedFeats = job.FeatAcquisitionLevels
+                            .OrderBy(kvp => kvp.Key)
+                            .Select(kvp => kvp.Value);
+
+                        foreach (var featEntry in orderedFeats)
+                        {
+                            if (featEntry == feat)
+                            {
+                                if (!_abilitiesByJob.ContainsKey(type))
+                                    _abilitiesByJob[type] = new List<FeatType>();
+
+                                _abilitiesByJob[type].Add(feat);
+
+                                if (_abilitiesByLevel.ContainsKey(feat))
+                                {
+                                    throw new Exception($"Feat '{feat}' has been registered across multiple jobs. Feats can only be registered to one job.");
+                                }
+
+                                _abilitiesByLevel[feat] = job.GetFeatAcquiredLevel(feat);
+                            }
+                        }
+                    }
                 }
             }
         }
-        private AbilityDetail GetAbilityDetail(FeatType featType)
+
+        public List<FeatType> GetAbilityFeatsByJob(JobType jobType)
+        {
+            return _abilitiesByJob[jobType].ToList();
+        }
+
+        public AbilityDetail GetAbilityDetail(FeatType featType)
         {
             if (!_abilities.ContainsKey(featType))
                 throw new KeyNotFoundException($"Feat '{featType}' is not registered to an ability.");
@@ -395,6 +447,41 @@ namespace XM.Progression.Ability
         private void ApplyRequirementEffects(uint activator, AbilityDetail ability)
         {
             _stat.ReduceEP(activator, ability.EPRequired);
+        }
+
+        private void AddJobFeat(uint player)
+        {
+            var data = _event.GetEventData<JobEvent.JobFeatAddedEvent>();
+            if (!_abilities.ContainsKey(data.Feat))
+                return;
+
+            var ability = _abilities[data.Feat];
+            ability.AbilityEquippedAction?.Invoke(player);
+        }
+        private void RemoveJobFeat(uint player)
+        {
+            var data = _event.GetEventData<JobEvent.JobFeatRemovedEvent>();
+            if (!_abilities.ContainsKey(data.Feat))
+                return;
+
+            var ability = _abilities[data.Feat];
+            ability.AbilityUnequippedAction?.Invoke(player);
+        }
+
+        public List<FeatType> GetPlayerResonanceAbilities(uint player)
+        {
+            var playerId = PlayerId.Get(player);
+            var dbPlayerJob = _db.Get<PlayerJob>(playerId);
+
+            return dbPlayerJob.ResonanceFeats.ToList();
+        }
+
+        public int GetLevelAcquired(FeatType feat)
+        {
+            if (!_abilitiesByLevel.ContainsKey(feat))
+                return 999;
+
+            return _abilitiesByLevel[feat];
         }
     }
 }

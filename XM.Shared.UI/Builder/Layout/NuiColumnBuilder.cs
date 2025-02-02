@@ -44,7 +44,8 @@ namespace XM.UI.Builder.Layout
             groupBuilder
                 .SetLayout(col => { })
                 .Border(false)
-                .Scrollbars(NuiScrollbars.None);
+                .Scrollbars(NuiScrollbars.None)
+                .Id(id);
 
             _children.Add(groupBuilder);
 

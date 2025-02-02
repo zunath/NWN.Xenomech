@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
+using XM.Shared.API.Constants;
 using XM.Shared.Core.Data;
 
 namespace XM.Progression.Job.Entity
@@ -42,11 +43,14 @@ namespace XM.Progression.Job.Entity
                 { JobType.Elementalist, 0},
                 { JobType.Nightstalker, 0},
                 { JobType.Hunter, 0},
-            }; ;
+            };
+
+            ResonanceFeats = new List<FeatType>();
         }
 
         public JobType ActiveJob { get; set; }
         public Dictionary<JobType, int> JobLevels { get; set; }
         public Dictionary<JobType, int> JobXP { get; set; }
+        public List<FeatType> ResonanceFeats { get; set; }
     }
 }

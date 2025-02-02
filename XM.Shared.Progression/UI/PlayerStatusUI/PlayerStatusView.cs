@@ -31,13 +31,13 @@ namespace XM.Progression.UI.PlayerStatusUI
                     .IsTransparent(true)
                     .Border(false)
                     .AcceptsInput(false)
-                    .Root(EPBar);
+                    .Root(BuildStatBars);
             });
 
             return _builder.Build();
         }
 
-        private void EPBar(NuiColumnBuilder<PlayerStatusViewModel> col)
+        private void BuildStatBars(NuiColumnBuilder<PlayerStatusViewModel> col)
         {
             col.AddProgress(progress =>
             {

@@ -230,6 +230,7 @@ namespace XM.UI
                 case ListChangedType.ItemAdded:
                 case ListChangedType.ItemDeleted:
                 case ListChangedType.ItemChanged:
+                case ListChangedType.Reset:
                     OnPropertyChanged(list.PropertyName);
                     break;
                 default:
@@ -272,7 +273,7 @@ namespace XM.UI
                 Geometry.Height + 1);
             BindGeometry(Geometry);
 
-            DelayCommand(0.0f, () =>
+            DelayCommand(0.2f, () =>
             {
                 Geometry = new NuiRect(
                     Geometry.X,

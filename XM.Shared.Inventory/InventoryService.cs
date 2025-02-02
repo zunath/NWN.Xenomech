@@ -67,6 +67,8 @@ namespace XM.Inventory
 
         public void UnequipAllItems(uint creature)
         {
+            AssignCommand(creature, () => ClearAllActions());
+
             for (var slot = 0; slot < GeneralConstants.NumberOfInventorySlots; slot++)
             {
                 var inventory = (InventorySlotType)slot;
