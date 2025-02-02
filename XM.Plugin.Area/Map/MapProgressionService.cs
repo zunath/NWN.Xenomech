@@ -57,7 +57,7 @@ namespace XM.Plugin.Area.Map
                 return;
 
             var playerId = PlayerId.Get(player);
-            var dbPlayerMap = _db.Get<PlayerMapProgression>(playerId);
+            var dbPlayerMap = _db.Get<PlayerMap>(playerId);
             var areaResref = GetResRef(area);
 
             if (string.IsNullOrWhiteSpace(areaResref)) 
@@ -81,7 +81,7 @@ namespace XM.Plugin.Area.Map
                 return;
 
             var playerId = PlayerId.Get(player);
-            var dbPlayerMap = _db.Get<PlayerMapProgression>(playerId);
+            var dbPlayerMap = _db.Get<PlayerMap>(playerId);
 
             if (!dbPlayerMap.MapProgressions.ContainsKey(areaResref))
                 return;
