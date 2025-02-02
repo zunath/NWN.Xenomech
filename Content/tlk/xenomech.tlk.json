@@ -5508,6 +5508,18 @@
     {
       "id": 1377,
       "text": "Your connection has been denied because you are on an unsupported version of Neverwinter Nights. Please upgrade your game client to {0}.{1} or higher and retry. If you have problems please reach out to us on Discord: https://discord.gg/UrkUzuVCJK"
+    },
+    {
+      "id": 1378,
+      "text": "The server is automatically restarting."
+    },
+    {
+      "id": 1379,
+      "text": "Server shutting down for automated restart."
+    },
+    {
+      "id": 1380,
+      "text": "Server will automatically reboot in approximately {0}."
     }
   ]
 }

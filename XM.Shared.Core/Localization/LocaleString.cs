@@ -1061,5 +1061,8 @@ namespace XM.Shared.Core.Localization
         YouDoNotHaveAMapOfThisArea = 1375,
         ClientVersionLogMessage = 1376,
         ClientVersionErrorMessageToPlayer = 1377,
+        TheServerIsAutomaticallyRestarting = 1378,
+        ServerShuttingDownForAutomatedRestart = 1379,
+        ServerWillAutomaticallyRebootInApproximatelyX = 1380,
     }
 }
