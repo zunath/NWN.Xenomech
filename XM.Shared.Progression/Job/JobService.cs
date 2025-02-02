@@ -201,6 +201,11 @@ namespace XM.Progression.Job
             return (int)(statScale * (level - 1) + statBase);
         }
 
+        public void GiveXP(uint player, int xp)
+        {
+            // todo fill in
+        }
+
         public void ChangeJob(
             uint player, 
             JobType job,

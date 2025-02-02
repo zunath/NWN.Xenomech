@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using Anvil.Services;
-using XM.Progression.Entity;
+using XM.Progression.Recast.Entity;
 using XM.Progression.Stat;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
@@ -73,7 +73,7 @@ namespace XM.Progression.Recast
         /// <param name="group">The recast group to put this delay under.</param>
         /// <param name="delaySeconds">The number of seconds to delay.</param>
         /// <param name="ignoreRecastReduction">If true, recast reduction bonuses are ignored.</param>
-        internal void ApplyRecastDelay(uint activator, RecastGroup group, float delaySeconds, bool ignoreRecastReduction)
+        public void ApplyRecastDelay(uint activator, RecastGroup group, float delaySeconds, bool ignoreRecastReduction)
         {
             if (!GetIsObjectValid(activator) || group == RecastGroup.Invalid || delaySeconds <= 0.0f) return;
 

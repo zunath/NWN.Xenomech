@@ -1,13 +1,12 @@
 ﻿using Anvil.Services;
 using System.Collections.Generic;
 using System;
-using XM.Progression.Recast;
 using XM.Shared.Core.Data;
 
-namespace XM.Progression.Entity
+namespace XM.Progression.Recast.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
-    internal class PlayerRecast: EntityBase
+    internal class PlayerRecast : EntityBase
     {
         public PlayerRecast()
         {
