@@ -93,9 +93,9 @@ namespace XM.Shared.Core.Authorization
                     return AuthorizationLevel.Admin;
             }
 
-            var query = new DBQuery<IDBEntity>()
+            var query = new DBQuery<AuthorizedDM>()
                 .AddFieldSearch(nameof(AuthorizedDM.CDKey), cdKey, false);
-            var existing = _db.Search<AuthorizedDM>(query).FirstOrDefault();
+            var existing = _db.Search(query).FirstOrDefault();
             if (existing == null)
                 return AuthorizationLevel.Player;
 

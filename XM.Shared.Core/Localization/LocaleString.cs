@@ -1078,5 +1078,21 @@ namespace XM.Shared.Core.Localization
         PlayersCannotUseThisChatChannel = 1392,
         SentToDMX = 1393,
         YouCannotSpeakWhileDead = 1394,
+        Miscellaneous = 1395,
+        Shield = 1396,
+        Back = 1397,
+        Waist = 1398,
+        Finger = 1399,
+        Neck = 1400,
+        Body = 1401,
+        Head = 1402,
+        Arm = 1403,
+        Feet = 1404,
+        OneCreditIsInYourMarketTill = 1405,
+        XCreditsAreInYourMarketTill = 1406,
+        Arrow = 1407,
+        Bullet = 1408,
+        Potion = 1409,
+        Container = 1410
     }
 }

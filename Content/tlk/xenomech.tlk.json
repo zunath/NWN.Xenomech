@@ -5576,6 +5576,70 @@
     {
       "id": 1394,
       "text": "You cannot speak while dead."
+    },
+    {
+      "id": 1395,
+      "text": "Miscellaneous"
+    },
+    {
+      "id": 1396,
+      "text": "Shield"
+    },
+    {
+      "id": 1397,
+      "text": "Back"
+    },
+    {
+      "id": 1398,
+      "text": "Waist"
+    },
+    {
+      "id": 1399,
+      "text": "Finger"
+    },
+    {
+      "id": 1400,
+      "text": "Neck"
+    },
+    {
+      "id": 1401,
+      "text": "Body"
+    },
+    {
+      "id": 1402,
+      "text": "Head"
+    },
+    {
+      "id": 1403,
+      "text": "Arm"
+    },
+    {
+      "id": 1404,
+      "text": "Feet"
+    },
+    {
+      "id": 1405,
+      "text": "1 credit is in your market till."
+    },
+    {
+      "id": 1406,
+      "text": "{0} credits are in your market till."
+    },
+    {
+      "id": 1407,
+      "text": "Arrow"
+    },
+    {
+      "id": 1408,
+      "text": "Bullet"
+    },
+    {
+      "id": 1409,
+      "text": "Potion"
+    },
+    {
+      "id": 1410,
+      "text": "Container"
     }
   ]
 }

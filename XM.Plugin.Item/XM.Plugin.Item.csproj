@@ -72,6 +72,11 @@
 	<ProjectReference Include="..\XM.Shared.Core\XM.Shared.Core.csproj" />
 	<ProjectReference Include="..\XM.Shared.Inventory\XM.Shared.Inventory.csproj" />
 	<ProjectReference Include="..\XM.Shared.Progression\XM.Shared.Progression.csproj" />
+	<ProjectReference Include="..\XM.Shared.UI\XM.Shared.UI.csproj" />
+</ItemGroup>
+
+<ItemGroup>
+  <Folder Include="Market\UI\" />
 </ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
