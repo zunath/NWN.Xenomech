@@ -150,6 +150,8 @@ namespace XM.App.Database
                         return HandleSet(command);
                     case DBServerCommandType.Search:
                         return HandleSearch(command);
+                    case DBServerCommandType.SearchCount:
+                        return HandleSearchCount(command);
                     default:
                         return new DBServerCommand { CommandType = DBServerCommandType.Error, Message = "Unknown command" };
                 }
@@ -190,6 +192,16 @@ namespace XM.App.Database
             {
                 CommandType = DBServerCommandType.Result,
                 EntitiesList = results.ToList()
+            };
+        }
+
+        private DBServerCommand HandleSearchCount(DBServerCommand command)
+        {
+            var result = SearchCount(command.EntityType, command.Query);
+            return new DBServerCommand
+            {
+                CommandType = DBServerCommandType.Result,
+                SearchCount = result
             };
         }
 
@@ -285,6 +297,14 @@ namespace XM.App.Database
                 yield return (string)_multiplexer.GetDatabase()
                     .JsonGet(recordId);
             }
+        }
+
+        private long SearchCount(string type, DBQuery<IDBEntity> query)
+        {
+            var result = _searchClientsByType[type]
+                .Search(query.BuildQuery(true));
+
+            return result.TotalResults;
         }
 
         private string Get(string id, string type)

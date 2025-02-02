@@ -10,5 +10,6 @@
         Result = 5,
         Ok = 6,
         Error = 7,
+        SearchCount = 8,
     }
 }

@@ -194,7 +194,7 @@ namespace XM.Shared.Core.Data
         /// <typeparam name="T">The type of entity to retrieve.</typeparam>
         /// <param name="query">The query to run.</param>
         /// <returns>An enumerable of entities matching the criteria.</returns>
-        public IEnumerable<T> Search<T>(DBQuery<IDBEntity> query)
+        public IEnumerable<T> Search<T>(DBQuery<T> query)
             where T : IDBEntity
         {
             var type = typeof(T);
@@ -202,7 +202,7 @@ namespace XM.Shared.Core.Data
             {
                 CommandType = DBServerCommandType.Search,
                 EntityType = type.Name,
-                Query = query
+                Query = query as DBQuery<IDBEntity>
             };
 
             var response = SendCommand(command);
@@ -215,6 +215,25 @@ namespace XM.Shared.Core.Data
             {
                 yield return XMJsonUtility.Deserialize<T>(result);
             }
+        }
+        public int SearchCount<T>(DBQuery<T> query)
+            where T : IDBEntity
+        {
+            var type = typeof(T);
+            var command = new DBServerCommand
+            {
+                CommandType = DBServerCommandType.SearchCount,
+                EntityType = type.Name,
+                Query = query as DBQuery<IDBEntity>
+            };
+
+            var response = SendCommand(command);
+            if (response.CommandType != DBServerCommandType.Result)
+            {
+                throw new Exception($"Failed to search entities: {response.Message}");
+            }
+
+            return (int)response.SearchCount;
         }
 
         private DBServerCommand SendCommand(DBServerCommand command)
