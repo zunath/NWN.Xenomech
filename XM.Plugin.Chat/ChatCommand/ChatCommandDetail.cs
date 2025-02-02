@@ -2,7 +2,7 @@
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Authorization;
 
-namespace XM.Chat
+namespace XM.Chat.ChatCommand
 {
     public class ChatCommandDetail
     {

@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
+using XM.Chat.ChatCommand;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Authorization;
 
-namespace XM.Chat.ChatCommandDefinitions
+namespace XM.Chat.ChatCommand.ChatCommandDefinitions
 {
     [ServiceBinding(typeof(IChatCommandListDefinition))]
-    public class EmoteChatCommand: IChatCommandListDefinition
+    public class EmoteChatCommand : IChatCommandListDefinition
     {
         public Dictionary<string, ChatCommandDetail> BuildChatCommands()
         {
@@ -21,7 +22,7 @@ namespace XM.Chat.ChatCommandDefinitions
                 .Description("Plays a bow animation.")
                 .Permissions(AuthorizationLevel.All)
                 .AnimationAction(AnimationType.FireForgetBow)
-                .IsEmote(); 
+                .IsEmote();
             builder.Create("deadback")
                 .Description("Plays a dead back animation.")
                 .Permissions(AuthorizationLevel.All)
