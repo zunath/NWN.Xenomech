@@ -1059,5 +1059,7 @@ namespace XM.Shared.Core.Localization
         AreYouSureYouWantToChangeJobs = 1373,
         InsufficientResonanceNodes = 1374,
         YouDoNotHaveAMapOfThisArea = 1375,
+        ClientVersionLogMessage = 1376,
+        ClientVersionErrorMessageToPlayer = 1377,
     }
 }
