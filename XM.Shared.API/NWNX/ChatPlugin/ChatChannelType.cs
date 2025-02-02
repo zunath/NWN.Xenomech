@@ -6,14 +6,14 @@ namespace XM.Shared.API.NWNX.ChatPlugin
         PlayerShout = NWN.Core.NWNX.ChatPlugin.NWNX_CHAT_CHANNEL_PLAYER_SHOUT,
         PlayerWhisper = NWN.Core.NWNX.ChatPlugin.NWNX_CHAT_CHANNEL_PLAYER_WHISPER,
         PlayerTell = NWN.Core.NWNX.ChatPlugin.NWNX_CHAT_CHANNEL_PLAYER_TELL,
-        ServerMsg = NWN.Core.NWNX.ChatPlugin.NWNX_CHAT_CHANNEL_SERVER_MSG,
+        ServerMessage = NWN.Core.NWNX.ChatPlugin.NWNX_CHAT_CHANNEL_SERVER_MSG,
         PlayerParty = NWN.Core.NWNX.ChatPlugin.NWNX_CHAT_CHANNEL_PLAYER_PARTY,
-        PlayerDm = NWN.Core.NWNX.ChatPlugin.NWNX_CHAT_CHANNEL_PLAYER_DM,
-        DmTalk = NWN.Core.NWNX.ChatPlugin.NWNX_CHAT_CHANNEL_DM_TALK,
-        DmShout = NWN.Core.NWNX.ChatPlugin.NWNX_CHAT_CHANNEL_DM_SHOUT,
-        DmWhisper = NWN.Core.NWNX.ChatPlugin.NWNX_CHAT_CHANNEL_DM_WHISPER,
-        DmTell = NWN.Core.NWNX.ChatPlugin.NWNX_CHAT_CHANNEL_DM_TELL,
-        DmParty = NWN.Core.NWNX.ChatPlugin.NWNX_CHAT_CHANNEL_DM_PARTY,
-        DmDm = NWN.Core.NWNX.ChatPlugin.NWNX_CHAT_CHANNEL_DM_DM
+        PlayerDM = NWN.Core.NWNX.ChatPlugin.NWNX_CHAT_CHANNEL_PLAYER_DM,
+        DMTalk = NWN.Core.NWNX.ChatPlugin.NWNX_CHAT_CHANNEL_DM_TALK,
+        DMShout = NWN.Core.NWNX.ChatPlugin.NWNX_CHAT_CHANNEL_DM_SHOUT,
+        DMWhisper = NWN.Core.NWNX.ChatPlugin.NWNX_CHAT_CHANNEL_DM_WHISPER,
+        DMTell = NWN.Core.NWNX.ChatPlugin.NWNX_CHAT_CHANNEL_DM_TELL,
+        DMParty = NWN.Core.NWNX.ChatPlugin.NWNX_CHAT_CHANNEL_DM_PARTY,
+        DMDM = NWN.Core.NWNX.ChatPlugin.NWNX_CHAT_CHANNEL_DM_DM
     }
 }

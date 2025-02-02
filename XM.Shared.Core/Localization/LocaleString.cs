@@ -1075,5 +1075,8 @@ namespace XM.Shared.Core.Localization
         YouAlreadyHaveThisKeyItem = 1389,
         KeyItemIdXForItemYIsNotAssignedToAValidKeyItemType = 1390,
         YouMoveAndInterruptYourAction = 1391,
+        PlayersCannotUseThisChatChannel = 1392,
+        SentToDMX = 1393,
+        YouCannotSpeakWhileDead = 1394,
     }
 }
