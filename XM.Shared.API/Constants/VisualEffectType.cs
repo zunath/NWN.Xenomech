@@ -481,5 +481,6 @@ namespace XM.Shared.API.Constants
         ImpStarburstGreen = 644,
         ImpStarburstRed = 645,
         ImpNightmareHeadHit = 670,
+        ChatBubble = 673
     }
 }
