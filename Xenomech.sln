@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.App.Database", "XM.App.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Plugin.Area", "XM.Plugin.Area\XM.Plugin.Area.csproj", "{20F05A36-AD39-4FD6-A2CD-1D47B1CA50B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Plugin.Item", "XM.Plugin.Item\XM.Plugin.Item.csproj", "{2E2903ED-3391-4A0F-9E42-0498F3E3F988}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{20F05A36-AD39-4FD6-A2CD-1D47B1CA50B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20F05A36-AD39-4FD6-A2CD-1D47B1CA50B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20F05A36-AD39-4FD6-A2CD-1D47B1CA50B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E2903ED-3391-4A0F-9E42-0498F3E3F988}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E2903ED-3391-4A0F-9E42-0498F3E3F988}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E2903ED-3391-4A0F-9E42-0498F3E3F988}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E2903ED-3391-4A0F-9E42-0498F3E3F988}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

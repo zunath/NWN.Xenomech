@@ -9,7 +9,7 @@ using XM.Shared.Core.Data;
 namespace XM.Progression.Recast
 {
     [ServiceBinding(typeof(RecastService))]
-    internal class RecastService
+    public class RecastService
     {
         private readonly DBService _db;
         private readonly TimeService _time;
@@ -73,7 +73,7 @@ namespace XM.Progression.Recast
         /// <param name="group">The recast group to put this delay under.</param>
         /// <param name="delaySeconds">The number of seconds to delay.</param>
         /// <param name="ignoreRecastReduction">If true, recast reduction bonuses are ignored.</param>
-        public void ApplyRecastDelay(uint activator, RecastGroup group, float delaySeconds, bool ignoreRecastReduction)
+        internal void ApplyRecastDelay(uint activator, RecastGroup group, float delaySeconds, bool ignoreRecastReduction)
         {
             if (!GetIsObjectValid(activator) || group == RecastGroup.Invalid || delaySeconds <= 0.0f) return;
 

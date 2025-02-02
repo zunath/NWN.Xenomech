@@ -3,11 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using XM.Inventory.Entity;
+using XM.Inventory.Event;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Extension;
 using XM.Shared.Core.Localization;
+using XM.UI.Event;
 
 namespace XM.Inventory.KeyItem
 {
@@ -29,10 +31,22 @@ namespace XM.Inventory.KeyItem
         private readonly Dictionary<int, KeyItemType> _keyItemsByTypeId = new();
 
         private readonly DBService _db;
+        private readonly XMEventService _event;
 
-        public KeyItemService(DBService db, XMEventService @event)
+        public KeyItemService(
+            DBService db, 
+            XMEventService @event)
         {
             _db = db;
+            _event = @event;
+
+            RegisterEvents();
+        }
+
+        private void RegisterEvents()
+        {
+            _event.RegisterEvent<InventoryEvent.GiveKeyItemEvent>(InventoryEventScript.GiveKeyItemScript);
+            _event.RegisterEvent<InventoryEvent.RemoveKeyItemEvent>(InventoryEventScript.RemoveKeyItemScript);
         }
 
         public void Init()
@@ -101,7 +115,8 @@ namespace XM.Inventory.KeyItem
 
             var keyItemDetail = _allKeyItems[keyItem];
             SendMessageToPC(player, Locale.GetString(LocaleString.YouAcquireKeyItem, keyItemDetail.Name));
-            //Gui.PublishRefreshEvent(player, new KeyItemReceivedRefreshEvent(keyItem));
+            _event.PublishEvent(player, new InventoryEvent.GiveKeyItemEvent());
+            _event.PublishEvent(player, new UIEvent.UIRefreshEvent());
         }
 
         /// <summary>
@@ -126,6 +141,8 @@ namespace XM.Inventory.KeyItem
 
             var keyItemDetail = _allKeyItems[keyItem];
             SendMessageToPC(player, Locale.GetString(LocaleString.YouLostKeyItem, keyItemDetail.Name));
+            _event.PublishEvent(player, new InventoryEvent.RemoveKeyItemEvent());
+            _event.PublishEvent(player, new UIEvent.UIRefreshEvent());
         }
 
         /// <summary>

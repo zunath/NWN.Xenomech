@@ -1064,5 +1064,16 @@ namespace XM.Shared.Core.Localization
         TheServerIsAutomaticallyRestarting = 1378,
         ServerShuttingDownForAutomatedRestart = 1379,
         ServerWillAutomaticallyRebootInApproximatelyX = 1380,
+        UseLimitationJob = 1381,
+        UseLimitationJobColon = 1382,
+        UseLimitationJobDescription = 1383,
+        LevelRequired = 1384,
+        LevelRequiredColon = 1385,
+        LevelRequiredDescription = 1386,
+        KeyItemIdForItemXIsNotSetProperly = 1387,
+        KeyItemIdIsNotConfiguredProperlyOnTheItem = 1388,
+        YouAlreadyHaveThisKeyItem = 1389,
+        KeyItemIdXForItemYIsNotAssignedToAValidKeyItemType = 1390,
+        YouMoveAndInterruptYourAction = 1391,
     }
 }
