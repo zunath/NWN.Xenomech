@@ -7,11 +7,13 @@ using Anvil.Services;
 using NWN.Core.NWNX;
 using XM.Progression.Event;
 using XM.Progression.Job;
+using XM.Progression.Job.Entity;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Activity;
+using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 
@@ -20,8 +22,10 @@ namespace XM.Progression.Ability
     [ServiceBinding(typeof(AbilityService))]
     internal class AbilityService: IInitializable
     {
-        private static readonly Dictionary<FeatType, AbilityDetail> _abilities = new();
+        private readonly Dictionary<FeatType, AbilityDetail> _abilities = new();
+        private readonly Dictionary<FeatType, int> _abilitiesByLevel = new();
 
+        private readonly DBService _db;
         private readonly ActivityService _activity;
         private readonly StatService _stat;
         private readonly RecastService _recast;
@@ -31,6 +35,7 @@ namespace XM.Progression.Ability
         private readonly XMEventService _event;
 
         public AbilityService(
+            DBService db,
             ActivityService activity,
             StatService stat,
             RecastService recast,
@@ -38,6 +43,7 @@ namespace XM.Progression.Ability
             IList<IAbilityListDefinition> abilityDefinitions,
             XMEventService @event)
         {
+            _db = db;
             _activity = activity;
             _stat = stat;
             _recast = recast;
@@ -87,6 +93,13 @@ namespace XM.Progression.Ability
                                     _abilitiesByJob[type] = new List<FeatType>();
 
                                 _abilitiesByJob[type].Add(feat);
+
+                                if (_abilitiesByLevel.ContainsKey(feat))
+                                {
+                                    throw new Exception($"Feat '{feat}' has been registered across multiple jobs. Feats can only be registered to one job.");
+                                }
+
+                                _abilitiesByLevel[feat] = job.GetFeatAcquiredLevel(feat);
                             }
                         }
                     }
@@ -453,6 +466,22 @@ namespace XM.Progression.Ability
 
             var ability = _abilities[data.Feat];
             ability.AbilityUnequippedAction?.Invoke(player);
+        }
+
+        public List<FeatType> GetPlayerResonanceAbilities(uint player)
+        {
+            var playerId = PlayerId.Get(player);
+            var dbPlayerJob = _db.Get<PlayerJob>(playerId);
+
+            return dbPlayerJob.ResonanceFeats.ToList();
+        }
+
+        public int GetLevelAcquired(FeatType feat)
+        {
+            if (!_abilitiesByLevel.ContainsKey(feat))
+                return 999;
+
+            return _abilitiesByLevel[feat];
         }
     }
 }

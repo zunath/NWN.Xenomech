@@ -218,9 +218,11 @@ namespace XM.Progression.Job
             var level = dbPlayerJob.JobLevels[job];
             var currentJob = GetActiveJob(player);
 
-            foreach (var feat in dbPlayerJob.ResonanceFeats)
+            for(var index = dbPlayerJob.ResonanceFeats.Count-1; index >= 0; index--)
             {
+                var feat = dbPlayerJob.ResonanceFeats[index];
                 CreaturePlugin.RemoveFeat(player, feat);
+                dbPlayerJob.ResonanceFeats.Remove(feat);
                 _event.PublishEvent(player, new JobEvent.JobFeatRemovedEvent(feat));
             }
 

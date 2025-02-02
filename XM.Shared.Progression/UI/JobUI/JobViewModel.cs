@@ -42,8 +42,7 @@ namespace XM.Progression.UI.JobUI
         private int _availableNodes;
         private int _spentNodes;
 
-        private readonly List<FeatType> _equippedFeats = new();
-        private readonly JobEquippedAbilityCollection _equippedAbilities = new();
+        private readonly List<FeatType> _equippedAbilities = new();
 
         public string KeeperJobLevel
         {
@@ -513,36 +512,37 @@ namespace XM.Progression.UI.JobUI
             {
                 case JobType.Keeper:
                     IsKeeperEncouraged = true;
-                    IsKeeperFilterEnabled = false;
                     break;
                 case JobType.Mender:
                     IsMenderEncouraged = true;
-                    IsMenderFilterEnabled = false;
                     break;
                 case JobType.Techweaver:
                     IsTechweaverEncouraged = true;
-                    IsTechweaverFilterEnabled = false;
                     break;
                 case JobType.Beastmaster:
                     IsBeastmasterEncouraged = true;
-                    IsBeastmasterFilterEnabled = false;
                     break;
                 case JobType.Brawler:
                     IsBrawlerEncouraged = true;
-                    IsBrawlerFilterEnabled = false;
                     break;
                 case JobType.Nightstalker:
                     IsNightstalkerEncouraged = true;
-                    IsNightstalkerFilterEnabled = false;
                     break;
                 case JobType.Hunter:
                     IsHunterEncouraged = true;
-                    IsHunterFilterEnabled = false;
                     break;
                 case JobType.Elementalist:
                     IsElementalistEncouraged = true;
-                    IsElementalistFilterEnabled = false;
                     break;
+            }
+
+            var resonanceAbilities = Ability.GetPlayerResonanceAbilities(Player);
+            foreach (var feat in resonanceAbilities)
+            {
+                var ability = Ability.GetAbilityDetail(feat);
+                _spentNodes += ability.ResonanceCost;
+
+                _equippedAbilities.Add(feat);
             }
         }
 
@@ -725,7 +725,7 @@ namespace XM.Progression.UI.JobUI
             var ability = Ability.GetAbilityDetail(feat);
             var abilityName = $"{ability.Name.ToLocalizedString()}";
 
-            if (_equippedAbilities.ContainsKey(feat))
+            if (_equippedAbilities.Contains(feat))
             {
                 abilityName += $" [{LocaleString.EQUIPPED}]";
             }
@@ -757,7 +757,7 @@ namespace XM.Progression.UI.JobUI
 
                 SelectedAbilityDescription = detail.Description.ToLocalizedString();
 
-                EquipUnequipButtonText = _equippedAbilities.ContainsKey(feat) 
+                EquipUnequipButtonText = _equippedAbilities.Contains(feat) 
                     ? LocaleString.Unequip.ToLocalizedString() 
                     : LocaleString.Equip.ToLocalizedString();
 
@@ -772,7 +772,7 @@ namespace XM.Progression.UI.JobUI
             var levelAcquired = filterJob.GetFeatAcquiredLevel(feat);
             var ability = Ability.GetAbilityDetail(feat);
 
-            if (_equippedAbilities.ContainsKey(feat))
+            if (_equippedAbilities.Contains(feat))
                 return false;
 
             if (level < levelAcquired)
@@ -787,7 +787,7 @@ namespace XM.Progression.UI.JobUI
 
         private bool CanUnequipAbility(FeatType feat)
         {
-            if (!_equippedAbilities.ContainsKey(feat))
+            if (!_equippedAbilities.Contains(feat))
                 return false;
 
             return true;
@@ -878,11 +878,10 @@ namespace XM.Progression.UI.JobUI
             var equippedAbilityPip3Enabled = new XMBindingList<bool>();
             var equippedAbilityPip4Enabled = new XMBindingList<bool>();
 
-            var job = Job.GetJobDefinition(_selectedJobFilter);
-            foreach (var (feat, _) in _equippedAbilities)
+            foreach (var feat in _equippedAbilities)
             {
                 var ability = Ability.GetAbilityDetail(feat);
-                var levelAcquired = job.GetFeatAcquiredLevel(feat);
+                var levelAcquired = Ability.GetLevelAcquired(feat);
 
                 equippedAbilityToggles.Add(false);
                 equippedAbilityNames.Add(ability.Name.ToLocalizedString());
@@ -909,15 +908,14 @@ namespace XM.Progression.UI.JobUI
 
         private void ClearEquippedAbilities()
         {
-            EquippedAbilityIcons.Clear();
-            EquippedAbilityLevels.Clear();
-            EquippedAbilityNames.Clear();
-            EquippedAbilityPip1Enabled.Clear();
-            EquippedAbilityPip2Enabled.Clear();
-            EquippedAbilityPip3Enabled.Clear();
-            EquippedAbilityPip4Enabled.Clear();
-            _equippedAbilities.Clear();
-            _equippedFeats.Clear();
+            EquippedAbilityIcons?.Clear();
+            EquippedAbilityLevels?.Clear();
+            EquippedAbilityNames?.Clear();
+            EquippedAbilityPip1Enabled?.Clear();
+            EquippedAbilityPip2Enabled?.Clear();
+            EquippedAbilityPip3Enabled?.Clear();
+            EquippedAbilityPip4Enabled?.Clear();
+            _equippedAbilities?.Clear();
         }
 
         private void SelectNewJob(JobType type)
@@ -1127,14 +1125,14 @@ namespace XM.Progression.UI.JobUI
             var feat = _availableAbilityFeats[_selectedAbilityIndex];
 
             // Unequip
-            if (_equippedAbilities.ContainsKey(feat))
+            if (_equippedAbilities.Contains(feat))
             {
                 UnequipAbility(feat);
             }
             // Equip
             else
             {
-                EquipAbility(_selectedJobFilter, feat);
+                EquipAbility(feat);
             }
 
             RefreshPips();
@@ -1151,18 +1149,15 @@ namespace XM.Progression.UI.JobUI
             _equippedAbilities.Remove(feat);
         }
 
-        private void EquipAbility(JobType job, FeatType feat)
+        private void EquipAbility(FeatType feat)
         {
             if (!CanEquipAbility(feat))
                 return;
 
-            var jobDetail = Job.GetJobDefinition(job);
-            var level = jobDetail.GetFeatAcquiredLevel(feat);
             var ability = Ability.GetAbilityDetail(feat);
             var nodes = ability.ResonanceCost;
             _spentNodes += nodes;
-            _equippedAbilities[feat] = new JobEquippedAbility(job, level);
-            _equippedFeats.Add(feat);
+            _equippedAbilities.Add(feat);
         }
 
         public Action OnClickUnequipAbility => () =>
@@ -1170,7 +1165,7 @@ namespace XM.Progression.UI.JobUI
             if (_selectedEquippedAbilityIndex < 0)
                 return;
 
-            var feat = _equippedFeats[_selectedEquippedAbilityIndex];
+            var feat = _equippedAbilities[_selectedEquippedAbilityIndex];
             UnequipAbility(feat);
 
             EquippedAbilityIcons.RemoveAt(_selectedEquippedAbilityIndex);
@@ -1199,12 +1194,13 @@ namespace XM.Progression.UI.JobUI
 
                     // Final checks to ensure player meets all requirements
                     var totalNodes = 0;
-                    foreach (var (feat, detail) in _equippedAbilities)
+                    foreach (var feat in _equippedAbilities)
                     {
                         var ability = Ability.GetAbilityDetail(feat);
+                        var abilityLevel = Ability.GetLevelAcquired(feat);
                         totalNodes += ability.ResonanceCost;
 
-                        if (level < detail.Level)
+                        if (level < abilityLevel)
                         {
                             SendMessageToPC(Player, LocaleString.InsufficientLevel.ToLocalizedString());
                             return;
@@ -1217,7 +1213,7 @@ namespace XM.Progression.UI.JobUI
                         return;
                     }
 
-                    Job.ChangeJob(Player, _selectedJob, _equippedAbilities.Keys.ToList());
+                    Job.ChangeJob(Player, _selectedJob, _equippedAbilities);
                 });
         };
 
