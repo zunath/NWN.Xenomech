@@ -11,7 +11,8 @@ using EventScriptType = XM.Shared.API.Constants.EventScriptType;
 namespace XM.Shared.Core.Dialog
 {
     [ServiceBinding(typeof(DialogService))]
-    public class DialogService
+    [ServiceBinding(typeof(IInitializable))]
+    public class DialogService: IInitializable
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -20,43 +21,21 @@ namespace XM.Shared.Core.Dialog
         private Dictionary<string, PlayerDialog> PlayerDialogs { get; } = new();
         private Dictionary<int, bool> DialogFilesInUse { get; } = new();
 
-        private readonly Dictionary<string, IConversation> _conversations = new();
+        private readonly Dictionary<string, IConversation> _conversationsByType = new();
 
-        public IList<IConversation> Definitions { get; set; }
+        private readonly IList<IConversation> _conversations;
 
         private readonly IServiceManager _serviceManager;
 
-        public DialogService(IServiceManager serviceManager, XMEventService @event)
+        public DialogService(
+            IServiceManager serviceManager, 
+            XMEventService @event,
+            IList<IConversation> conversations)
         {
             _serviceManager = serviceManager;
+            _conversations = conversations;
 
-            @event.Subscribe<XMEvent.OnCacheDataBefore>(OnCacheDataBefore);
             @event.Subscribe<ModuleEvent.OnLoad>(OnModuleLoad);
-        }
-
-        /// <summary>
-        /// When the module is loaded, the assembly will be searched for conversations.
-        /// These will be added to the cache for use at a later time.
-        /// </summary>
-        private void OnCacheDataBefore(uint objectSelf)
-        {
-            // Use reflection to get all of the conversation implementations.
-            var classes = AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(assembly => assembly.GetTypes())
-                .Where(p => typeof(IConversation).IsAssignableFrom(p) && p.IsClass && !p.IsAbstract)
-                .ToArray();
-
-            foreach (var type in classes)
-            {
-                var instance = _serviceManager.AnvilServiceContainer.GetInstance(type) as IConversation;
-                if (instance == null)
-                {
-                    throw new NullReferenceException("Unable to activate instance of type: " + type);
-                }
-                _conversations.Add(type.Name, instance);
-            }
-
-            Console.WriteLine($"Loaded {_conversations.Count} conversations.");
         }
 
         private void OnModuleLoad(uint objectSelf)
@@ -79,12 +58,12 @@ namespace XM.Shared.Core.Dialog
         /// <returns>A conversation instance</returns>
         public IConversation GetConversation(string key)
         {
-            if (!_conversations.ContainsKey(key))
+            if (!_conversationsByType.ContainsKey(key))
             {
                 throw new KeyNotFoundException("Conversation '" + key + "' is not registered. Did you create a class for it?");
             }
 
-            return _conversations[key];
+            return _conversationsByType[key];
         }
 
         /// <summary>
@@ -672,5 +651,15 @@ namespace XM.Shared.Core.Dialog
             StorePlayerDialog(playerId, playerDialog);
         }
 
+        public void Init()
+        {
+            foreach (var conversation in _conversations)
+            {
+                var type = conversation.GetType();
+                _conversationsByType.Add(type.Name, conversation);
+            }
+
+            Console.WriteLine($"Loaded {_conversations.Count} conversations.");
+        }
     }
 }

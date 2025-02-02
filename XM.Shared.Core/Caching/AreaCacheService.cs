@@ -6,7 +6,8 @@ using XM.Shared.Core.EventManagement;
 namespace XM.Shared.Core.Caching
 {
     [ServiceBinding(typeof(AreaCacheService))]
-    public class AreaCacheService
+    [ServiceBinding(typeof(IInitializable))]
+    public class AreaCacheService: IInitializable
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -15,8 +16,6 @@ namespace XM.Shared.Core.Caching
         public AreaCacheService(XMEventService @event)
         {
             _areasByResref = new Dictionary<string, uint>();
-
-            @event.Subscribe<XMEvent.OnCacheDataBefore>(OnCacheDataBefore);
         }
 
         /// <summary>
@@ -32,11 +31,6 @@ namespace XM.Shared.Core.Caching
             return _areasByResref[resref];
         }
 
-        private void OnCacheDataBefore(uint objectSelf)
-        {
-            CacheAreasByResref();
-        }
-
         /// <summary>
         /// Caches all areas by their resref.
         /// </summary>
@@ -49,6 +43,11 @@ namespace XM.Shared.Core.Caching
             }
 
             _logger.Info($"Cached {_areasByResref.Count} areas by resref.");
+        }
+
+        public void Init()
+        {
+            CacheAreasByResref();
         }
     }
 }

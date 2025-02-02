@@ -5,12 +5,12 @@ using Anvil.Services;
 using NLog;
 using XM.Shared.API.NWNX.UtilPlugin;
 using XM.Shared.Core.Dialog.Event;
-using XM.Shared.Core.EventManagement;
 
 namespace XM.Shared.Core.Dialog.Snippet
 {
     [ServiceBinding(typeof(SnippetService))]
-    public class SnippetService
+    [ServiceBinding(typeof(IInitializable))]
+    public class SnippetService: IInitializable
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -19,36 +19,6 @@ namespace XM.Shared.Core.Dialog.Snippet
 
         [Inject]
         public IList<ISnippetListDefinition> Definitions { get; set; }
-
-        public SnippetService(XMEventService @event)
-        {
-            @event.Subscribe<XMEvent.OnCacheDataBefore>(OnCacheDataBefore);
-        }
-
-        private void OnCacheDataBefore(uint objectSelf)
-        {
-            foreach (var definition in Definitions)
-            {
-                var snippets = definition.BuildSnippets();
-
-                foreach (var (key, snippet) in snippets)
-                {
-                    if (snippet.ConditionAction != null)
-                    {
-                        _appearsWhenCommands.Add(key, snippet);
-                    }
-
-                    if (snippet.ActionsTakenAction != null)
-                    {
-                        _actionsTakenCommands.Add(key, snippet);
-                    }
-
-                }
-            }
-
-            _logger.Info($"Loaded {_actionsTakenCommands.Count} action snippets.");
-            _logger.Info($"Loaded {_appearsWhenCommands.Count} condition snippets.");
-        }
 
         /// <summary>
         /// When a conversation node with this script assigned in the "Appears When" event is run,
@@ -134,5 +104,29 @@ namespace XM.Shared.Core.Dialog.Snippet
             }
         }
 
+        public void Init()
+        {
+            foreach (var definition in Definitions)
+            {
+                var snippets = definition.BuildSnippets();
+
+                foreach (var (key, snippet) in snippets)
+                {
+                    if (snippet.ConditionAction != null)
+                    {
+                        _appearsWhenCommands.Add(key, snippet);
+                    }
+
+                    if (snippet.ActionsTakenAction != null)
+                    {
+                        _actionsTakenCommands.Add(key, snippet);
+                    }
+
+                }
+            }
+
+            _logger.Info($"Loaded {_actionsTakenCommands.Count} action snippets.");
+            _logger.Info($"Loaded {_appearsWhenCommands.Count} condition snippets.");
+        }
     }
 }

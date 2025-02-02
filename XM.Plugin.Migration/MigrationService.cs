@@ -13,14 +13,14 @@ using XM.Shared.Core.EventManagement;
 namespace XM.Migration
 {
     [ServiceBinding(typeof(MigrationService))]
-    internal class MigrationService
+    [ServiceBinding(typeof(IInitializable))]
+    internal class MigrationService: IInitializable
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         private int _currentMigrationVersion;
         private int _newMigrationVersion;
-        private readonly Dictionary<int, IServerMigration> _serverMigrationsPostDatabase = new();
-        private readonly Dictionary<int, IServerMigration> _serverMigrationsPostCache = new();
+        private readonly Dictionary<int, IServerMigration> _serverMigrations = new();
         private readonly Dictionary<int, IPlayerMigration> _playerMigrations = new();
 
         private readonly DBService _db;
@@ -32,32 +32,12 @@ namespace XM.Migration
             _event = @event;
 
             @event.Subscribe<ModuleEvent.OnPlayerEnter>(OnModuleEnter);
-            @event.Subscribe<XMEvent.OnCacheDataAfter>(OnCacheDataAfter);
-            @event.Subscribe<XMEvent.OnDatabaseLoaded>(OnDatabaseLoaded);
         }
 
         private void OnModuleEnter(uint objectSelf)
         {
             RunPlayerMigrations();
         }
-
-        private void OnCacheDataAfter(uint objectSelf)
-        {
-            RunServerMigrationsPostCache();
-            UpdateMigrationVersion();
-        }
-
-        private void OnDatabaseLoaded(uint objectSelf)
-        {
-            var config = GetServerConfiguration();
-            _currentMigrationVersion = config.MigrationVersion;
-
-            LoadServerMigrations();
-            LoadPlayerMigrations();
-
-            RunServerMigrationsPostDatabase();
-        }
-
 
         private void UpdateMigrationVersion()
         {
@@ -74,34 +54,22 @@ namespace XM.Migration
             return _db.Get<ServerMigrationStatus>(ServerMigrationStatus.MigrationIdName) ?? new ServerMigrationStatus();
         }
 
-        private IEnumerable<IServerMigration> GetMigrations(MigrationExecutionType executionType)
+        private IEnumerable<IServerMigration> GetMigrations()
         {
             var serverConfig = GetServerConfiguration();
             var migrationVersion = serverConfig.MigrationVersion;
-            if (executionType == MigrationExecutionType.PostDatabaseLoad)
-            {
-                var migrations = _serverMigrationsPostDatabase
-                    .Where(x => x.Key > migrationVersion)
-                    .OrderBy(o => o.Key)
-                    .Select(s => s.Value);
+            var migrations = _serverMigrations
+                .Where(x => x.Key > migrationVersion)
+                .OrderBy(o => o.Key)
+                .Select(s => s.Value);
 
-                return migrations;
-            }
-            else
-            {
-                var migrations = _serverMigrationsPostCache
-                    .Where(x => x.Key > migrationVersion)
-                    .OrderBy(o => o.Key)
-                    .Select(s => s.Value);
-
-                return migrations;
-            }
+            return migrations;
         }
 
-        private void RunMigrations(MigrationExecutionType executionType)
+        private void RunMigrations()
         {
             var sw = new Stopwatch();
-            var migrations = GetMigrations(executionType);
+            var migrations = GetMigrations();
             var newVersion = 0;
 
             foreach (var migration in migrations)
@@ -113,12 +81,12 @@ namespace XM.Migration
                     migration.Migrate();
                     newVersion = migration.Version;
                     sw.Stop();
-                    _logger.Info($"Server migration ({executionType}) #{migration.Version} completed successfully. (Took {sw.ElapsedMilliseconds}ms)");
+                    _logger.Info($"Server migration #{migration.Version} completed successfully. (Took {sw.ElapsedMilliseconds}ms)");
                 }
                 catch (Exception ex)
                 {
                     // It's dangerous to proceed without a successful migration. Shut down the server in this situation.
-                    _logger.Error(ex, $"Server migration ({executionType}) #{migration.Version} failed to apply. Shutting down server.");
+                    _logger.Error(ex, $"Server migration #{migration.Version} failed to apply. Shutting down server.");
                     AdminPlugin.ShutdownServer();
                     break;
                 }
@@ -128,14 +96,9 @@ namespace XM.Migration
                 _newMigrationVersion = newVersion;
         }
 
-        private void RunServerMigrationsPostDatabase()
+        private void RunServerMigrations()
         {
-            RunMigrations(MigrationExecutionType.PostDatabaseLoad);
-        }
-
-        public void RunServerMigrationsPostCache()
-        {
-            RunMigrations(MigrationExecutionType.PostCacheLoad);
+            RunMigrations();
         }
 
         /// <summary>
@@ -193,10 +156,7 @@ namespace XM.Migration
             {
                 var instance = (IServerMigration)Activator.CreateInstance(type);
 
-                if (instance.ExecutionType == MigrationExecutionType.PostDatabaseLoad)
-                    _serverMigrationsPostDatabase.Add(instance.Version, instance);
-                else
-                    _serverMigrationsPostCache.Add(instance.Version, instance);
+                _serverMigrations.Add(instance.Version, instance);
             }
         }
 
@@ -221,6 +181,18 @@ namespace XM.Migration
         public int GetLatestPlayerVersion()
         {
             return _playerMigrations.Max(m => m.Key);
+        }
+
+        public void Init()
+        {
+            var config = GetServerConfiguration();
+            _currentMigrationVersion = config.MigrationVersion;
+
+            LoadServerMigrations();
+            LoadPlayerMigrations();
+
+            RunMigrations();
+            UpdateMigrationVersion();
         }
     }
 }

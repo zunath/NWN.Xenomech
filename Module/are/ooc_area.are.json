@@ -87,7 +87,7 @@
   "Name": {
     "type": "cexolocstring",
     "value": {
-      "0": "Area 001"
+      "0": "*Welcome to Xenomech!"
     }
   },
   "NoRest": {
@@ -116,7 +116,7 @@
   },
   "ResRef": {
     "type": "resref",
-    "value": "area001"
+    "value": "ooc_area"
   },
   "ShadowOpacity": {
     "type": "byte",
@@ -148,7 +148,7 @@
   },
   "Tag": {
     "type": "cexostring",
-    "value": "Area001"
+    "value": "ooc_area"
   },
   "Tile_List": {
     "type": "list",
@@ -185,7 +185,7 @@
         },
         "Tile_Orientation": {
           "type": "int",
-          "value": 0
+          "value": 1
         },
         "Tile_SrcLight1": {
           "type": "byte",
@@ -228,7 +228,7 @@
         },
         "Tile_Orientation": {
           "type": "int",
-          "value": 2
+          "value": 1
         },
         "Tile_SrcLight1": {
           "type": "byte",
@@ -337,7 +337,7 @@
   },
   "Version": {
     "type": "dword",
-    "value": 34
+    "value": 2
   },
   "Width": {
     "type": "int",

@@ -5,15 +5,6 @@
         public struct OnAreaCreated : IXMEvent
         {
         }
-        public struct OnCacheDataAfter : IXMEvent
-        {
-        }
-        public struct OnCacheDataBefore : IXMEvent
-        {
-        }
-        public struct OnDatabaseLoaded : IXMEvent
-        {
-        }
         public struct OnModuleContentChanged : IXMEvent
         {
         }

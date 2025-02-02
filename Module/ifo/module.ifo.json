@@ -27,6 +27,13 @@
           "type": "resref",
           "value": "no_access"
         }
+      },
+      {
+        "__struct_id": 6,
+        "Area_Name": {
+          "type": "resref",
+          "value": "ooc_area"
+        }
       }
     ]
   },
@@ -62,7 +69,7 @@
   },
   "Mod_Entry_Area": {
     "type": "resref",
-    "value": "area001"
+    "value": "ooc_area"
   },
   "Mod_Entry_Dir_X": {
     "type": "float",
@@ -74,15 +81,15 @@
   },
   "Mod_Entry_X": {
     "type": "float",
-    "value": 10.0
+    "value": 9.875236511230469
   },
   "Mod_Entry_Y": {
     "type": "float",
-    "value": 10.0
+    "value": 10.60599327087402
   },
   "Mod_Entry_Z": {
     "type": "float",
-    "value": 0.0
+    "value": -1.407348690918298e-006
   },
   "Mod_Expan_List": {
     "type": "list",
@@ -170,7 +177,7 @@
   },
   "Mod_MinGameVer": {
     "type": "cexostring",
-    "value": "1.88"
+    "value": "1.89"
   },
   "Mod_MinPerHour": {
     "type": "byte",

@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
-using Anvil.API;
 using Anvil.Services;
 using NLog;
 using XM.Shared.Core.Configuration;
-using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Json;
 
 namespace XM.Shared.Core.Data
@@ -20,18 +18,13 @@ namespace XM.Shared.Core.Data
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly string _socketPath;
 
-        private readonly XMSettingsService _settings;
         private readonly Dictionary<Type, List<IndexedProperty>> _indexedPropertiesByType = new();
 
         [Inject]
         public IList<IDBEntity> Entities { get; set; }
 
-        private readonly XMEventService _event;
-
-        public DBService(XMSettingsService settings, XMEventService @event)
+        public DBService(XMSettingsService settings)
         {
-            _settings = settings;
-            _event = @event;
             _socketPath = settings.DatabaseSocketPath;
         }
 

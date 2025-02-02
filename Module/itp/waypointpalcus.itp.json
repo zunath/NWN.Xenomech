@@ -89,6 +89,17 @@
                 "type": "resref",
                 "value": "dth_default_resp"
               }
+            },
+            {
+              "__struct_id": 0,
+              "NAME": {
+                "type": "cexostring",
+                "value": "Default Starting Location"
+              },
+              "RESREF": {
+                "type": "resref",
+                "value": "default_starting"
+              }
             }
           ]
         },

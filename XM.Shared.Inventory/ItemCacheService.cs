@@ -9,7 +9,8 @@ using XM.Shared.Core.EventManagement;
 namespace XM.Inventory
 {
     [ServiceBinding(typeof(ItemCacheService))]
-    public class ItemCacheService
+    [ServiceBinding(typeof(IInitializable))]
+    public class ItemCacheService: IInitializable
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -32,7 +33,6 @@ namespace XM.Inventory
         private void SubscribeEvents()
         {
             _event.Subscribe<XMEvent.OnModuleContentChanged>(OnModuleContentChanged);
-            _event.Subscribe<XMEvent.OnCacheDataBefore>(OnCacheDataBefore);
         }
 
         private void OnModuleContentChanged(uint objectSelf)
@@ -78,11 +78,6 @@ namespace XM.Inventory
             DestroyObject(item);
         }
 
-        public void OnCacheDataBefore(uint objectSelf)
-        {
-            LoadItemCache();
-        }
-
         /// <summary>
         /// Retrieves the name of an item by its resref. If resref cannot be found, an empty string will be returned.
         /// </summary>
@@ -106,5 +101,9 @@ namespace XM.Inventory
             return _itemNamesByResref[resref];
         }
 
+        public void Init()
+        {
+            LoadItemCache();
+        }
     }
 }
