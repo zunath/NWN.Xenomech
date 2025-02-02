@@ -10,6 +10,7 @@ using XM.Progression.Job.JobDefinition;
 using XM.Progression.Stat;
 using XM.Progression.Stat.Entity;
 using XM.Shared.API.Constants;
+using XM.Shared.API.NWNX.CreaturePlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
@@ -200,7 +201,10 @@ namespace XM.Progression.Job
             return (int)(statScale * (level - 1) + statBase);
         }
 
-        public void ChangeJob(uint player, JobType job)
+        public void ChangeJob(
+            uint player, 
+            JobType job,
+            List<FeatType> resonanceFeats)
         {
             if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
                 throw new ArgumentException("Only players may change jobs.");
@@ -212,6 +216,19 @@ namespace XM.Progression.Job
             var dbPlayerStat = _db.Get<PlayerStat>(playerId);
             var dbPlayerJob = _db.Get<PlayerJob>(playerId);
             var level = dbPlayerJob.JobLevels[job];
+            var currentJob = GetActiveJob(player);
+
+            foreach (var feat in dbPlayerJob.ResonanceFeats)
+            {
+                CreaturePlugin.RemoveFeat(player, feat);
+                _event.PublishEvent(player, new JobEvent.JobFeatRemovedEvent(feat));
+            }
+
+            foreach (var (_, feat) in currentJob.FeatAcquisitionLevels)
+            {
+                CreaturePlugin.RemoveFeat(player, feat);
+                _event.PublishEvent(player, new JobEvent.JobFeatRemovedEvent(feat));
+            }
 
             var hp = CalculateHP(level, definition.Grades.HP) + dbPlayerStat.HP;
             var ep = CalculateEP(level, definition.Grades.EP) + dbPlayerStat.EP;
@@ -242,28 +259,31 @@ namespace XM.Progression.Job
             _stat.SetPlayerAttribute(player, AbilityType.Willpower, willpower);
             _stat.SetPlayerAttribute(player, AbilityType.Social, social);
 
-            var name = Locale.GetString(definition.Name);
-            SendMessageToPC(player, $"Job changed to: {ColorToken.Green(name)}");
+            foreach (var feat in resonanceFeats)
+            {
+                CreaturePlugin.AddFeatByLevel(player, feat, 1);
+                dbPlayerJob.ResonanceFeats.Add(feat);
+                _event.PublishEvent(player, new JobEvent.JobFeatAddedEvent(feat));
+            }
+
+            var jobFeats = definition
+                .FeatAcquisitionLevels
+                .Where(x => x.Key <= level)
+                .Select(s => s.Value);
+
+            foreach (var feat in jobFeats)
+            {
+                CreaturePlugin.AddFeatByLevel(player, feat, 1);
+                _event.PublishEvent(player, new JobEvent.JobFeatAddedEvent(feat));
+            }
+
             dbPlayerJob.ActiveJob = job;
             _db.Set(dbPlayerJob);
 
+            var name = definition.Name.ToLocalizedString();
+            SendMessageToPC(player, $"Job changed to: {ColorToken.Green(name)}");
+
             _event.PublishEvent<JobEvent.PlayerChangedJobEvent>(player);
-        }
-
-        [ScriptHandler("bread_test5")]
-        public void Test5()
-        {
-            var jobId = GetLocalInt(OBJECT_SELF, "JOB") + 1;
-
-            if (jobId > 8)
-                jobId = 1;
-            else if (jobId < 1)
-                jobId = 1;
-
-            var job = (JobType)jobId;
-            ChangeJob(GetLastUsedBy(), job);
-
-            SendMessageToPC(GetLastUsedBy(), $"Job = {job}");
         }
     }
 }

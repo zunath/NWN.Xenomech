@@ -5484,6 +5484,18 @@
     {
       "id": 1371,
       "text": "UNEQUIPPED"
+    },
+    {
+      "id": 1372,
+      "text": "Selecting a different job will reset all your selected abilities. Are you sure you want to continue?"
+    },
+    {
+      "id": 1373,
+      "text": "Are you sure you want to change your job? All items will be unequipped and abilities will be reset."
+    },
+    {
+      "id": 1374,
+      "text": "Insufficient resonance nodes."
     }
   ]
 }

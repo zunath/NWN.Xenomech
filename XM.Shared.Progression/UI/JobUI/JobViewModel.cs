@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Anvil.API;
 using Anvil.Services;
 using XM.Progression.Ability;
@@ -40,7 +41,9 @@ namespace XM.Progression.UI.JobUI
         private JobType _selectedJobFilter;
         private int _availableNodes;
         private int _spentNodes;
-        private readonly List<FeatType> _equippedAbilities = new();
+
+        private readonly List<FeatType> _equippedFeats = new();
+        private readonly JobEquippedAbilityCollection _equippedAbilities = new();
 
         public string KeeperJobLevel
         {
@@ -655,6 +658,7 @@ namespace XM.Progression.UI.JobUI
             if (_availableAbilityFeats.Count <= 0)
                 return;
 
+            _spentNodes = 0;
             AbilityIcons.Clear();
             AbilityLevels.Clear();
             AbilityNames.Clear();
@@ -721,7 +725,7 @@ namespace XM.Progression.UI.JobUI
             var ability = Ability.GetAbilityDetail(feat);
             var abilityName = $"{ability.Name.ToLocalizedString()}";
 
-            if (_equippedAbilities.Contains(feat))
+            if (_equippedAbilities.ContainsKey(feat))
             {
                 abilityName += $" [{LocaleString.EQUIPPED}]";
             }
@@ -753,7 +757,7 @@ namespace XM.Progression.UI.JobUI
 
                 SelectedAbilityDescription = detail.Description.ToLocalizedString();
 
-                EquipUnequipButtonText = _equippedAbilities.Contains(feat) 
+                EquipUnequipButtonText = _equippedAbilities.ContainsKey(feat) 
                     ? LocaleString.Unequip.ToLocalizedString() 
                     : LocaleString.Equip.ToLocalizedString();
 
@@ -768,7 +772,7 @@ namespace XM.Progression.UI.JobUI
             var levelAcquired = filterJob.GetFeatAcquiredLevel(feat);
             var ability = Ability.GetAbilityDetail(feat);
 
-            if (_equippedAbilities.Contains(feat))
+            if (_equippedAbilities.ContainsKey(feat))
                 return false;
 
             if (level < levelAcquired)
@@ -783,7 +787,7 @@ namespace XM.Progression.UI.JobUI
 
         private bool CanUnequipAbility(FeatType feat)
         {
-            if (!_equippedAbilities.Contains(feat))
+            if (!_equippedAbilities.ContainsKey(feat))
                 return false;
 
             return true;
@@ -875,7 +879,7 @@ namespace XM.Progression.UI.JobUI
             var equippedAbilityPip4Enabled = new XMBindingList<bool>();
 
             var job = Job.GetJobDefinition(_selectedJobFilter);
-            foreach (var feat in _equippedAbilities)
+            foreach (var (feat, _) in _equippedAbilities)
             {
                 var ability = Ability.GetAbilityDetail(feat);
                 var levelAcquired = job.GetFeatAcquiredLevel(feat);
@@ -913,6 +917,7 @@ namespace XM.Progression.UI.JobUI
             EquippedAbilityPip3Enabled.Clear();
             EquippedAbilityPip4Enabled.Clear();
             _equippedAbilities.Clear();
+            _equippedFeats.Clear();
         }
 
         private void SelectNewJob(JobType type)
@@ -928,58 +933,98 @@ namespace XM.Progression.UI.JobUI
 
         public Action OnClickKeeper => () =>
         {
-            SelectNewJob(JobType.Keeper);
-            IsKeeperEncouraged = true;
-            IsKeeperFilterEnabled = false;
+            ShowModal(
+                LocaleString.ChangeJobWillResetAbilities.ToLocalizedString(),
+                () =>
+                {
+                    SelectNewJob(JobType.Keeper);
+                    IsKeeperEncouraged = true;
+                    IsKeeperFilterEnabled = false;
+                });
         };
 
         public Action OnClickMender => () =>
         {
-            SelectNewJob(JobType.Mender);
-            IsMenderEncouraged = true;
-            IsMenderFilterEnabled = false;
+            ShowModal(
+                LocaleString.ChangeJobWillResetAbilities.ToLocalizedString(),
+                () =>
+                {
+                    SelectNewJob(JobType.Mender);
+                    IsMenderEncouraged = true;
+                    IsMenderFilterEnabled = false;
+                });
         };
 
         public Action OnClickTechweaver => () =>
         {
-            SelectNewJob(JobType.Techweaver);
-            IsTechweaverEncouraged = true;
-            IsTechweaverFilterEnabled = false;
+            ShowModal(
+                LocaleString.ChangeJobWillResetAbilities.ToLocalizedString(),
+                () =>
+                {
+                    SelectNewJob(JobType.Techweaver);
+                    IsTechweaverEncouraged = true;
+                    IsTechweaverFilterEnabled = false;
+                });
         };
 
         public Action OnClickBeastmaster => () =>
         {
-            SelectNewJob(JobType.Beastmaster);
-            IsBeastmasterEncouraged = true;
-            IsBeastmasterFilterEnabled = false;
+            ShowModal(
+                LocaleString.ChangeJobWillResetAbilities.ToLocalizedString(),
+                () =>
+                {
+                    SelectNewJob(JobType.Beastmaster);
+                    IsBeastmasterEncouraged = true;
+                    IsBeastmasterFilterEnabled = false;
+                });
         };
 
         public Action OnClickBrawler => () =>
         {
-            SelectNewJob(JobType.Brawler);
-            IsBrawlerEncouraged = true;
-            IsBrawlerFilterEnabled = false;
+            ShowModal(
+                LocaleString.ChangeJobWillResetAbilities.ToLocalizedString(),
+                () =>
+                {
+                    SelectNewJob(JobType.Brawler);
+                    IsBrawlerEncouraged = true;
+                    IsBrawlerFilterEnabled = false;
+                });
         };
 
         public Action OnClickNightstalker => () =>
         {
-            SelectNewJob(JobType.Nightstalker);
-            IsNightstalkerEncouraged = true;
-            IsNightstalkerFilterEnabled = false;
+            ShowModal(
+                LocaleString.ChangeJobWillResetAbilities.ToLocalizedString(),
+                () =>
+                {
+                    SelectNewJob(JobType.Nightstalker);
+                    IsNightstalkerEncouraged = true;
+                    IsNightstalkerFilterEnabled = false;
+                });
         };
 
         public Action OnClickHunter => () =>
         {
-            SelectNewJob(JobType.Hunter);
-            IsHunterEncouraged = true;
-            IsHunterFilterEnabled = false;
+            ShowModal(
+                LocaleString.ChangeJobWillResetAbilities.ToLocalizedString(),
+                () =>
+                {
+                    SelectNewJob(JobType.Hunter);
+                    IsHunterEncouraged = true;
+                    IsHunterFilterEnabled = false;
+                });
         };
 
         public Action OnClickElementalist => () =>
         {
-            SelectNewJob(JobType.Elementalist);
-            IsElementalistEncouraged = true;
-            IsElementalistFilterEnabled = false;
+            ShowModal(
+                LocaleString.ChangeJobWillResetAbilities.ToLocalizedString(),
+                () =>
+                {
+                    SelectNewJob(JobType.Elementalist);
+                    IsElementalistEncouraged = true;
+                    IsElementalistFilterEnabled = false;
+                });
         };
 
         public Action OnClickFilterKeeper => () =>
@@ -1082,14 +1127,14 @@ namespace XM.Progression.UI.JobUI
             var feat = _availableAbilityFeats[_selectedAbilityIndex];
 
             // Unequip
-            if (_equippedAbilities.Contains(feat))
+            if (_equippedAbilities.ContainsKey(feat))
             {
                 UnequipAbility(feat);
             }
             // Equip
             else
             {
-                EquipAbility(feat);
+                EquipAbility(_selectedJobFilter, feat);
             }
 
             RefreshPips();
@@ -1101,20 +1146,23 @@ namespace XM.Progression.UI.JobUI
         {
             var ability = Ability.GetAbilityDetail(feat);
             var nodes = ability.ResonanceCost;
-
+            
             _spentNodes -= nodes;
             _equippedAbilities.Remove(feat);
         }
 
-        private void EquipAbility(FeatType feat)
+        private void EquipAbility(JobType job, FeatType feat)
         {
             if (!CanEquipAbility(feat))
                 return;
 
+            var jobDetail = Job.GetJobDefinition(job);
+            var level = jobDetail.GetFeatAcquiredLevel(feat);
             var ability = Ability.GetAbilityDetail(feat);
             var nodes = ability.ResonanceCost;
             _spentNodes += nodes;
-            _equippedAbilities.Add(feat);
+            _equippedAbilities[feat] = new JobEquippedAbility(job, level);
+            _equippedFeats.Add(feat);
         }
 
         public Action OnClickUnequipAbility => () =>
@@ -1122,7 +1170,7 @@ namespace XM.Progression.UI.JobUI
             if (_selectedEquippedAbilityIndex < 0)
                 return;
 
-            var feat = _equippedAbilities[_selectedEquippedAbilityIndex];
+            var feat = _equippedFeats[_selectedEquippedAbilityIndex];
             UnequipAbility(feat);
 
             EquippedAbilityIcons.RemoveAt(_selectedEquippedAbilityIndex);
@@ -1140,7 +1188,37 @@ namespace XM.Progression.UI.JobUI
 
         public Action OnClickChangeJob => () =>
         {
-            
+            ShowModal(LocaleString.AreYouSureYouWantToChangeJobs.ToLocalizedString(), 
+                () =>
+                {
+                    if (_selectedJob == JobType.Invalid)
+                        return;
+
+                    var level = Job.GetJobLevel(Player, _selectedJob);
+                    var availableNodes = level / JobService.ResonanceNodeLevelAcquisitionRate;
+
+                    // Final checks to ensure player meets all requirements
+                    var totalNodes = 0;
+                    foreach (var (feat, detail) in _equippedAbilities)
+                    {
+                        var ability = Ability.GetAbilityDetail(feat);
+                        totalNodes += ability.ResonanceCost;
+
+                        if (level < detail.Level)
+                        {
+                            SendMessageToPC(Player, LocaleString.InsufficientLevel.ToLocalizedString());
+                            return;
+                        }
+                    }
+
+                    if (availableNodes < totalNodes)
+                    {
+                        SendMessageToPC(Player, LocaleString.InsufficientResonanceNodes.ToLocalizedString());
+                        return;
+                    }
+
+                    Job.ChangeJob(Player, _selectedJob, _equippedAbilities.Keys.ToList());
+                });
         };
 
     }

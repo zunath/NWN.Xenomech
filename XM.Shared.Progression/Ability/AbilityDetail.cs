@@ -13,6 +13,8 @@ namespace XM.Progression.Ability
         public AbilityActivationDelayAction ActivationDelay { get; set; }
         public AbilityRecastDelayAction RecastDelay { get; set; }
         public AbilityCustomValidationAction CustomValidation { get; set; }
+        public AbilityEquippedAction AbilityEquippedAction { get; set; }
+        public AbilityUnequippedAction AbilityUnequippedAction { get; set; }
         public int EPRequired { get; set; }
         public VisualEffectType ActivationVisualEffect { get; set; }
         public RecastGroup RecastGroup { get; set; }

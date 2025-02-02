@@ -5,6 +5,7 @@ using System.Numerics;
 using Anvil.API;
 using Anvil.Services;
 using NWN.Core.NWNX;
+using XM.Progression.Event;
 using XM.Progression.Job;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
@@ -27,6 +28,7 @@ namespace XM.Progression.Ability
         private readonly JobService _job;
         private readonly IList<IAbilityListDefinition> _abilityDefinitions;
         private readonly Dictionary<JobType, List<FeatType>> _abilitiesByJob = new();
+        private readonly XMEventService _event;
 
         public AbilityService(
             ActivityService activity,
@@ -41,8 +43,16 @@ namespace XM.Progression.Ability
             _recast = recast;
             _job = job;
             _abilityDefinitions = abilityDefinitions;
+            _event = @event;
 
-            @event.Subscribe<NWNXEvent.OnUseFeatBefore>(UseAbility);
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            _event.Subscribe<NWNXEvent.OnUseFeatBefore>(UseAbility);
+            _event.Subscribe<JobEvent.JobFeatAddedEvent>(AddJobFeat);
+            _event.Subscribe<JobEvent.JobFeatRemovedEvent>(RemoveJobFeat);
         }
 
         public void Init()
@@ -424,6 +434,25 @@ namespace XM.Progression.Ability
         private void ApplyRequirementEffects(uint activator, AbilityDetail ability)
         {
             _stat.ReduceEP(activator, ability.EPRequired);
+        }
+
+        private void AddJobFeat(uint player)
+        {
+            var data = _event.GetEventData<JobEvent.JobFeatAddedEvent>();
+            if (!_abilities.ContainsKey(data.Feat))
+                return;
+
+            var ability = _abilities[data.Feat];
+            ability.AbilityEquippedAction?.Invoke(player);
+        }
+        private void RemoveJobFeat(uint player)
+        {
+            var data = _event.GetEventData<JobEvent.JobFeatRemovedEvent>();
+            if (!_abilities.ContainsKey(data.Feat))
+                return;
+
+            var ability = _abilities[data.Feat];
+            ability.AbilityUnequippedAction?.Invoke(player);
         }
     }
 }

@@ -1055,5 +1055,8 @@ namespace XM.Shared.Core.Localization
         RN = 1369,
         EQUIPPED = 1370,
         UNEQUIPPED = 1371,
+        ChangeJobWillResetAbilities = 1372,
+        AreYouSureYouWantToChangeJobs = 1373,
+        InsufficientResonanceNodes = 1374,
     }
 }
