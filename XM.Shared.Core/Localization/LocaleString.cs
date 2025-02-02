@@ -1058,5 +1058,6 @@ namespace XM.Shared.Core.Localization
         ChangeJobWillResetAbilities = 1372,
         AreYouSureYouWantToChangeJobs = 1373,
         InsufficientResonanceNodes = 1374,
+        YouDoNotHaveAMapOfThisArea = 1375,
     }
 }

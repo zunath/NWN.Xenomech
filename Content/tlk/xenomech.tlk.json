@@ -5496,6 +5496,10 @@
     {
       "id": 1374,
       "text": "Insufficient resonance nodes."
+    },
+    {
+      "id": 1375,
+      "text": "You do not have a map of this area."
     }
   ]
 }
