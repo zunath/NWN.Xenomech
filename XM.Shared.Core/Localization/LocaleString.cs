@@ -1105,5 +1105,6 @@ namespace XM.Shared.Core.Localization
         Buy = 1419,
         LessThanSymbol = 1420,
         GreaterThanSymbol = 1421,
+        PageX = 1422,
     }
 }

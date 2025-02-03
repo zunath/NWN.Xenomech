@@ -5643,7 +5643,7 @@
     },
     {
       "id": 1411,
-      "text": "Market Buy"
+      "text": "Global Market"
     },
     {
       "id": 1412,
@@ -5684,6 +5684,10 @@
     {
       "id": 1421,
       "text": ">"
+    },
+    {
+      "id": 1422,
+      "text": "Page {0}"
     }
   ]
 }

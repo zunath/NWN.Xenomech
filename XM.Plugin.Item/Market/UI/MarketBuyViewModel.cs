@@ -172,10 +172,10 @@ namespace XM.Plugin.Item.Market.UI
 
             // Always add page 1. In the event no items are for sale,
             // it still needs to be displayed.
-            pageNumbers.Add(new NuiComboEntry($"Page 1", 0));
+            pageNumbers.Add(new NuiComboEntry(LocaleString.PageX.ToLocalizedString(1), 0));
             for (var x = 2; x <= pages; x++)
             {
-                pageNumbers.Add(new NuiComboEntry($"Page {x}", x - 1));
+                pageNumbers.Add(new NuiComboEntry(LocaleString.PageX.ToLocalizedString(x), x - 1));
             }
 
             PageNumbers = pageNumbers;
