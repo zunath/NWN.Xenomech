@@ -23,7 +23,7 @@ namespace XM.UI.Builder.Component
         {
         }
 
-        public NuiTextEditBuilder<TViewModel> Label(LocaleString label)
+        public NuiTextEditBuilder<TViewModel> Placeholder(LocaleString label)
         {
             _placeholder = label;
             return this;
@@ -47,7 +47,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiTextEditBuilder<TViewModel> Label(Expression<Func<TViewModel, string>> expression)
+        public NuiTextEditBuilder<TViewModel> Placeholder(Expression<Func<TViewModel, string>> expression)
         {
             _placeholderBind = GetBindName(expression);
             return this;

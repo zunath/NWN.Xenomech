@@ -1093,6 +1093,17 @@ namespace XM.Shared.Core.Localization
         Arrow = 1407,
         Bullet = 1408,
         Potion = 1409,
-        Container = 1410
+        Container = 1410,
+        GlobalMarket = 1411,
+        AreYouSureYouWantToBuyXForYCredits = 1412,
+        ThisItemIsNoLongerAvailable = 1413,
+        YouDoNotHaveEnoughCreditsToPurchaseThisItem = 1414,
+        ThePriceOfThisItemHasChanged = 1415,
+        PurchaseLogMessage = 1416,
+        ClearFilters = 1417,
+        QuestionMark = 1418,
+        Buy = 1419,
+        LessThanSymbol = 1420,
+        GreaterThanSymbol = 1421,
     }
 }

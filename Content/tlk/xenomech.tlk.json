@@ -5640,6 +5640,50 @@
     {
       "id": 1410,
       "text": "Container"
+    },
+    {
+      "id": 1411,
+      "text": "Market Buy"
+    },
+    {
+      "id": 1412,
+      "text": "Are you sure you want to buy '{0}' for {1} credits?"
+    },
+    {
+      "id": 1413,
+      "text": "This item is no longer available. It may have been sold or removed from the market."
+    },
+    {
+      "id": 1414,
+      "text": "You do not have enough credits to purchase this item."
+    },
+    {
+      "id": 1415,
+      "text": "The price of this item has been changed by the seller. Please try again."
+    },
+    {
+      "id": 1416,
+      "text": "{0} [{1}] bought {2}x {3} from {4} for {5} credits."
+    },
+    {
+      "id": 1417,
+      "text": "Clear Filters"
+    },
+    {
+      "id": 1418,
+      "text": "?"
+    },
+    {
+      "id": 1419,
+      "text": "Buy"
+    },
+    {
+      "id": 1420,
+      "text": "<"
+    },
+    {
+      "id": 1421,
+      "text": ">"
     }
   ]
 }

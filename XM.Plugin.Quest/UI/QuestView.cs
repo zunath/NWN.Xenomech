@@ -50,7 +50,7 @@ namespace XM.Quest.UI
                         {
                             edit
                                 .Value(model => model.SearchText)
-                                .Label(LocaleString.SearchByName);
+                                .Placeholder(LocaleString.SearchByName);
                         });
 
                         row.AddButton(button =>

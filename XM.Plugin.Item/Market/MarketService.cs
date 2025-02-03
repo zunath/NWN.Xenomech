@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Anvil.Services;
 using XM.Plugin.Item.Market.Entity;
+using XM.Plugin.Item.Market.UI;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Extension;
 using XM.Shared.Core.Localization;
+using XM.UI;
 
 namespace XM.Plugin.Item.Market
 {
@@ -15,17 +17,21 @@ namespace XM.Plugin.Item.Market
     internal class MarketService: IInitializable
     {
         public const int MaxListingsPerMarket = 25;
+        public const float TaxRate = 0.09f;
         private Dictionary<MarketCategoryType, MarketCategoryAttribute> _activeMarketCategories = new();
 
         private readonly DBService _db;
         private readonly XMEventService _event;
+        private readonly GuiService _gui;
 
         public MarketService(
             DBService db,
-            XMEventService @event)
+            XMEventService @event,
+            GuiService gui)
         {
             _db = db;
             _event = @event;
+            _gui = gui;
 
             SubscribeEvents();
         }
@@ -59,10 +65,10 @@ namespace XM.Plugin.Item.Market
 
         private void RemoveOldListings()
         {
-            var query = new DBQuery<MarketItem>()
+            var query = new DBQuery()
                 .AddFieldSearch(nameof(MarketItem.IsListed), true);
-            var count = (int)_db.SearchCount(query);
-            var listings = _db.Search(query
+            var count = _db.SearchCount<MarketItem>(query);
+            var listings = _db.Search<MarketItem>(query
                 .AddPaging(count, 0));
             var now = DateTime.UtcNow;
 
@@ -83,6 +89,13 @@ namespace XM.Plugin.Item.Market
             RemoveOldListings();
         }
 
+        [ScriptHandler("market_terminal")]
+        public void UseMarketTerminal()
+        {
+            var player = GetLastUsedBy();
+            _gui.ShowWindow<MarketBuyView>(player);
+        }
+
         private void LoadMarketCategories()
         {
             var categories = Enum.GetValues(typeof(MarketCategoryType)).Cast<MarketCategoryType>();
@@ -96,6 +109,10 @@ namespace XM.Plugin.Item.Market
 
             _activeMarketCategories = _activeMarketCategories.OrderBy(o => o.Value.Name)
                 .ToDictionary(x => x.Key, y => y.Value);
+        }
+        public Dictionary<MarketCategoryType, MarketCategoryAttribute> GetActiveCategories()
+        {
+            return _activeMarketCategories.ToDictionary(x => x.Key, y => y.Value);
         }
 
         public MarketCategoryType GetItemMarketCategory(uint item)
