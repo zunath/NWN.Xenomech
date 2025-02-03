@@ -2,11 +2,10 @@
 using Anvil.Services;
 using XM.Quest.Reward;
 using XM.Shared.Core.Dialog;
-using DialogService = XM.Shared.Core.Dialog.DialogService;
 
 namespace XM.Quest.Conversation
 {
-    [ServiceBinding(typeof(QuestRewardSelectionDialog))]
+    [ServiceBinding(typeof(IConversation))]
     internal class QuestRewardSelectionDialog: DialogBase
     {
         private class Model
@@ -14,13 +13,8 @@ namespace XM.Quest.Conversation
             public string QuestId { get; set; }
         }
 
-        private readonly QuestService _quest;
-
-        public QuestRewardSelectionDialog(DialogService dialog, QuestService quest) 
-            : base(dialog)
-        {
-            _quest = quest;
-        }
+        [Inject]
+        private QuestService Quest { get; set; }
 
         private const string MainPageId = "MAIN";
 
@@ -49,11 +43,11 @@ namespace XM.Quest.Conversation
         private void MainPageInit(DialogPage page)
         {
             var model = GetDataModel<Model>();
-            var quest = _quest.GetQuestById(model.QuestId);
+            var quest = Quest.GetQuestById(model.QuestId);
 
             void HandleRewardSelection(IQuestReward reward)
             {
-                _quest.CompleteQuest(GetPC(), model.QuestId, GetPC(), reward);
+                Quest.CompleteQuest(GetPC(), model.QuestId, GetPC(), reward);
                 EndConversation();
             }
             page.Header = "Please select a reward.";
