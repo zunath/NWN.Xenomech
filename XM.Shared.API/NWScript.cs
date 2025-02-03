@@ -4148,9 +4148,9 @@ namespace XM.Shared.API
         ///  * Returns false if oItem is not a valid item, or if oItem does not have
         ///    nProperty.
         /// </summary>
-        public static bool GetItemHasItemProperty(uint oItem, int nProperty)
+        public static bool GetItemHasItemProperty(uint oItem, ItemPropertyType nProperty)
         {
-            return NWN.Core.NWScript.GetItemHasItemProperty(oItem, nProperty) == 1;
+            return NWN.Core.NWScript.GetItemHasItemProperty(oItem, (int)nProperty) == 1;
         }
 
 
@@ -11181,9 +11181,9 @@ namespace XM.Shared.API
         ///  Note for dedicated servers: Checks on the module/server side, not the client.<br/>
         ///  Returns "" if the resource does not exist in the search space.
         /// </summary>
-        public static string ResManGetAliasFor(string sResRef, int nResType)
+        public static string ResManGetAliasFor(string sResRef, ResourceType nResType)
         {
-            return NWN.Core.NWScript.ResManGetAliasFor(sResRef, nResType);
+            return NWN.Core.NWScript.ResManGetAliasFor(sResRef, (int)nResType);
         }
 
         /// <summary>
