@@ -1,5 +1,6 @@
 ﻿using Anvil.API;
 using Anvil.Services;
+using NLog.Layouts;
 using XM.Shared.Core.Localization;
 using XM.UI;
 using XM.UI.Builder;
@@ -80,19 +81,15 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
                                         template.RowHeight(32f);
                                         template.AddTemplateCell(cell =>
                                         {
-
-                                            cell.AddGroup(group =>
+                                            cell.AddRow(row =>
                                             {
-                                                group.SetLayout(layout =>
+                                                row.AddButtonSelect(button =>
                                                 {
-                                                    layout.AddButtonSelect(button =>
-                                                    {
-                                                        button
-                                                            .Label(model => model.CategoryNames)
-                                                            .IsSelected(model => model.CategoryToggles)
-                                                            .Height(30f)
-                                                            .OnClick(model => model.OnClickCategory);
-                                                    });
+                                                    button
+                                                        .Label(model => model.CategoryNames)
+                                                        .IsSelected(model => model.CategoryToggles)
+                                                        .Height(30f)
+                                                        .OnClick(model => model.OnClickCategory);
                                                 });
                                             });
                                         }, model => model.CategoryNames);
@@ -131,16 +128,13 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
 
                                         template.AddTemplateCell(cell =>
                                         {
-                                            cell.AddGroup(group =>
+                                            cell.AddRow(row =>
                                             {
-                                                group.SetLayout(layout =>
+                                                row.AddText(text =>
                                                 {
-                                                    layout.AddText(text =>
-                                                    {
-                                                        text
-                                                            .Text(model => model.ItemNames)
-                                                            .TooltipText(model => model.ItemNames);
-                                                    });
+                                                    text
+                                                        .Text(model => model.ItemNames)
+                                                        .TooltipText(model => model.ItemNames);
                                                 });
                                             });
                                         }, model => model.ItemNames);
@@ -150,33 +144,14 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
                                             cell
                                                 .IsVariable(false)
                                                 .Width(120f)
-                                                .AddGroup(group =>
+                                                .AddRow(row =>
                                                 {
-                                                    group.SetLayout(layout =>
-                                                    {
-                                                        layout.AddLabel(label =>
-                                                        {
-                                                            label
-                                                                .Label(model => model.ItemPriceNames);
-                                                        });
-                                                    });
-                                                });
-                                        }, model => model.ItemNames);
-
-                                        template.AddTemplateCell(cell =>
-                                        {
-                                            cell.AddGroup(group =>
-                                            {
-                                                group.SetLayout(layout =>
-                                                {
-                                                    layout.AddLabel(label =>
+                                                    row.AddLabel(label =>
                                                     {
                                                         label
-                                                            .Label(model => model.ItemSellerNames)
-                                                            .TooltipText(model => model.ItemSellerNames);
+                                                            .Label(model => model.ItemPriceNames);
                                                     });
                                                 });
-                                            });
                                         }, model => model.ItemNames);
 
                                         template.AddTemplateCell(cell =>
@@ -184,35 +159,29 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
                                             cell
                                                 .Width(40f)
                                                 .IsVariable(false)
-                                                .AddGroup(group =>
+                                                .AddRow(row =>
                                                 {
-                                                    group.SetLayout(layout =>
+                                                    row.AddButton(button =>
                                                     {
-                                                        layout.AddButton(button =>
-                                                        {
-                                                            button
-                                                                .Label(LocaleString.QuestionMark)
-                                                                .Width(40f)
-                                                                .Height(40f)
-                                                                .OnClick(model => model.OnClickExamine);
-                                                        });
+                                                        button
+                                                            .Label(LocaleString.QuestionMark)
+                                                            .Width(40f)
+                                                            .Height(40f)
+                                                            .OnClick(model => model.OnClickExamine);
                                                     });
                                                 });
                                         }, model => model.ItemNames);
 
                                         template.AddTemplateCell(cell =>
                                         {
-                                            cell.AddGroup(group =>
+                                            cell.AddRow(row =>
                                             {
-                                                group.SetLayout(layout =>
+                                                row.AddButton(button =>
                                                 {
-                                                    layout.AddButton(button =>
-                                                    {
-                                                        button
-                                                            .Label(LocaleString.Buy)
-                                                            .OnClick(model => model.OnClickBuy)
-                                                            .IsEnabled(model => model.ItemBuyEnabled);
-                                                    });
+                                                    button
+                                                        .Label(LocaleString.Buy)
+                                                        .OnClick(model => model.OnClickBuy)
+                                                        .IsEnabled(model => model.ItemBuyEnabled);
                                                 });
                                             });
                                         }, model => model.ItemNames);

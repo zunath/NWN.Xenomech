@@ -7,7 +7,6 @@ namespace XM.Plugin.Item.Market.Entity
     [ServiceBinding(typeof(IDBEntity))]
     internal class MarketItem: EntityBase
     {
-        public string MarketName { get; set; }
         [Indexed]
         public string PlayerId { get; set; }
         [Indexed]

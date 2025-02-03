@@ -1,6 +1,5 @@
 ﻿using Anvil.API;
 using Anvil.Services;
-using XM.Plugin.Item.Market.UI.MarketBuyMenu;
 using XM.Shared.Core.Localization;
 using XM.UI;
 using XM.UI.Builder;

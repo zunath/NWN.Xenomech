@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Anvil.Services;
+using XM.Plugin.Item.Market.Dialog;
 using XM.Plugin.Item.Market.Entity;
 using XM.Plugin.Item.Market.UI.MarketBuyMenu;
 using XM.Shared.API.Constants;
@@ -9,29 +10,30 @@ using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Extension;
 using XM.Shared.Core.Localization;
-using XM.UI;
+using DialogService = XM.Shared.Core.Dialog.DialogService;
 
 namespace XM.Plugin.Item.Market
 {
     [ServiceBinding(typeof(MarketService))]
     internal class MarketService: IInitializable
     {
-        public const int MaxListingsPerMarket = 25;
+        public const int MaxListings = 100;
         public const float TaxRate = 0.09f;
         private Dictionary<MarketCategoryType, MarketCategoryAttribute> _activeMarketCategories = new();
 
         private readonly DBService _db;
         private readonly XMEventService _event;
-        private readonly GuiService _gui;
+
+        private readonly DialogService _dialog;
 
         public MarketService(
             DBService db,
             XMEventService @event,
-            GuiService gui)
+            DialogService dialog)
         {
             _db = db;
             _event = @event;
-            _gui = gui;
+            _dialog = dialog;
 
             SubscribeEvents();
         }
@@ -93,7 +95,8 @@ namespace XM.Plugin.Item.Market
         public void UseMarketTerminal()
         {
             var player = GetLastUsedBy();
-            _gui.ShowWindow<MarketBuyView>(player);
+            var terminal = OBJECT_SELF;
+            _dialog.StartConversation<MarketDialog>(player, terminal);
         }
 
         private void LoadMarketCategories()

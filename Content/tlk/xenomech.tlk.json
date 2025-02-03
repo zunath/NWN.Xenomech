@@ -5692,6 +5692,54 @@
     {
       "id": 1423,
       "text": "Item Properties"
+    },
+    {
+      "id": 1424,
+      "text": "  Global Market [Tax Rate: {0}%]"
+    },
+    {
+      "id": 1425,
+      "text": "Till: {0} cr"
+    },
+    {
+      "id": 1426,
+      "text": "{0} / {1} Items Listed"
+    },
+    {
+      "id": 1427,
+      "text": "Please click on an item within your inventory."
+    },
+    {
+      "id": 1428,
+      "text": "Item must be in your inventory."
+    },
+    {
+      "id": 1429,
+      "text": "Containers cannot be listed."
+    },
+    {
+      "id": 1430,
+      "text": "You cannot list any more items."
+    },
+    {
+      "id": 1431,
+      "text": "This item cannot be sold on the market."
+    },
+    {
+      "id": 1432,
+      "text": "Are you sure you want to remove this item's listing? It will return to your inventory."
+    },
+    {
+      "id": 1433,
+      "text": "Your listing for '{0}' has been removed or sold already."
+    },
+    {
+      "id": 1434,
+      "text": "{0} cr"
+    },
+    {
+      "id": 1435,
+      "text": "Goods may be bought and sold on the market here. What would you like to do?"
     }
   ]
 }
