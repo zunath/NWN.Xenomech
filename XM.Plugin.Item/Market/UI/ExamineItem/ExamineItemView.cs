@@ -3,6 +3,7 @@ using Anvil.Services;
 using XM.Shared.Core.Localization;
 using XM.UI;
 using XM.UI.Builder;
+using NuiScrollbars = XM.Shared.API.NUI.NuiScrollbars;
 
 namespace XM.Plugin.Item.Market.UI.ExamineItem
 {
@@ -32,17 +33,20 @@ namespace XM.Plugin.Item.Market.UI.ExamineItem
                         {
                             row.AddGroup(group =>
                             {
-                                group.Height(26f);
-                                group.SetLayout(layout =>
-                                {
-                                    layout.AddLabel(label =>
+                                group
+                                    .Height(26f)
+                                    .Border(true)
+                                    .Scrollbars(NuiScrollbars.Auto)
+                                    .SetLayout(layout =>
                                     {
-                                        label
-                                            .Label(LocaleString.Description)
-                                            .HorizontalAlign(NuiHAlign.Center)
-                                            .VerticalAlign(NuiVAlign.Middle);
+                                        layout.AddLabel(label =>
+                                        {
+                                            label
+                                                .Label(LocaleString.Description)
+                                                .HorizontalAlign(NuiHAlign.Center)
+                                                .VerticalAlign(NuiVAlign.Middle);
+                                        });
                                     });
-                                });
                             });
                         });
 
@@ -60,16 +64,20 @@ namespace XM.Plugin.Item.Market.UI.ExamineItem
                         {
                             row.AddGroup(group =>
                             {
-                                group.SetLayout(layout =>
-                                {
-                                    layout.AddLabel(label =>
+                                group
+                                    .Height(26f)
+                                    .Border(true)
+                                    .Scrollbars(NuiScrollbars.Auto)
+                                    .SetLayout(layout => 
                                     {
-                                        label
-                                            .Label(LocaleString.ItemProperties)
-                                            .HorizontalAlign(NuiHAlign.Center)
-                                            .VerticalAlign(NuiVAlign.Middle);
+                                        layout.AddLabel(label =>
+                                        {
+                                            label
+                                                .Label(LocaleString.ItemProperties)
+                                                .HorizontalAlign(NuiHAlign.Center)
+                                                .VerticalAlign(NuiVAlign.Middle);
+                                        });
                                     });
-                                });
                             });
                         });
 
