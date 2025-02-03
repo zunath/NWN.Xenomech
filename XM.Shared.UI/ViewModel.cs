@@ -45,8 +45,8 @@ namespace XM.UI
             int windowToken,
             NuiRect geometry,
             Dictionary<string, Json> partialViews,
-            object initialData = default,
-            uint tetherObject = OBJECT_INVALID)
+            object initialData,
+            uint tetherObject)
         {
             Player = player;
             WindowToken = windowToken;

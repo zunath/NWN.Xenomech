@@ -250,6 +250,7 @@ namespace XM.UI
                     windowToken, 
                     geometry,
                     partialViews,
+                    initialData,
                     tetherObject);
             }
         }
