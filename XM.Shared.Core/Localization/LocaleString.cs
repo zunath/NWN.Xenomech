@@ -1106,5 +1106,6 @@ namespace XM.Shared.Core.Localization
         LessThanSymbol = 1420,
         GreaterThanSymbol = 1421,
         PageX = 1422,
+        ItemProperties = 1423,
     }
 }

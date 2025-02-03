@@ -4,10 +4,10 @@ using XM.Shared.Core.Localization;
 using XM.UI;
 using XM.UI.Builder;
 
-namespace XM.Plugin.Item.Market.UI
+namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
 {
     [ServiceBinding(typeof(IView))]
-    internal class MarketBuyView: IView
+    internal class MarketBuyView : IView
     {
         private readonly NuiBuilder<MarketBuyViewModel> _builder = new();
 
@@ -26,7 +26,7 @@ namespace XM.Plugin.Item.Market.UI
                     .IsTransparent(false)
                     .Title(model => model.WindowTitle)
                     .InitialGeometry(0, 0, 1000f, 1000f)
-                    
+
                     .Root(col =>
                     {
                         col.AddRow(row =>
@@ -80,7 +80,7 @@ namespace XM.Plugin.Item.Market.UI
                                         template.RowHeight(32f);
                                         template.AddTemplateCell(cell =>
                                         {
-                                            
+
                                             cell.AddGroup(group =>
                                             {
                                                 group.SetLayout(layout =>

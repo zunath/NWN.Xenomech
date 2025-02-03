@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Anvil.Services;
 using XM.Plugin.Item.Market.Entity;
-using XM.Plugin.Item.Market.UI;
+using XM.Plugin.Item.Market.UI.MarketBuyMenu;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;

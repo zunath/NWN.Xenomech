@@ -2,8 +2,9 @@
 using Anvil.API;
 using Anvil.Services;
 using NLog;
-using NLog.Fluent;
+using XM.Inventory;
 using XM.Plugin.Item.Market.Entity;
+using XM.Plugin.Item.Market.UI.ExamineItem;
 using XM.Shared.API.NWNX.ObjectPlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
@@ -11,9 +12,9 @@ using XM.Shared.Core.Localization;
 using XM.UI;
 using Action = System.Action;
 
-namespace XM.Plugin.Item.Market.UI
+namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
 {
-    internal class MarketBuyViewModel: ViewModel<MarketBuyViewModel>
+    internal class MarketBuyViewModel : ViewModel<MarketBuyViewModel>
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private const int ListingsPerPage = 20;
@@ -28,6 +29,12 @@ namespace XM.Plugin.Item.Market.UI
 
         [Inject]
         public DBService DB { get; set; }
+
+        [Inject]
+        public GuiService Gui { get; set; }
+
+        [Inject]
+        public ItemPropertyService ItemProperty { get; set; }
 
         public string WindowTitle
         {
@@ -227,11 +234,10 @@ namespace XM.Plugin.Item.Market.UI
             var itemId = _itemIds[index];
             var dbItem = DB.Get<MarketItem>(itemId);
 
-            // todo: finish below
-            //var item = ObjectPlugin.Deserialize(dbItem.Data);
-            //var payload = new ExamineItemPayload(GetName(item), GetDescription(item), Item.BuildItemPropertyString(item));
-            //Gui.TogglePlayerWindow(Player, GuiWindowType.ExamineItem, payload);
-            //DestroyObject(item);
+            var item = ObjectPlugin.Deserialize(dbItem.Data);
+            var payload = new ExamineItemPayload(GetName(item), GetDescription(item), ItemProperty.BuildItemPropertyString(item));
+            Gui.ShowWindow<ExamineItemView>(Player, payload);
+            DestroyObject(item);
         };
 
         public Action OnClickBuy => () =>
@@ -303,7 +309,7 @@ namespace XM.Plugin.Item.Market.UI
                 // Give the money to the seller.
                 var sellerPlayerId = dbItem.PlayerId;
                 var dbSeller = DB.Get<PlayerMarket>(sellerPlayerId);
-                var proceeds = (int)(price - (price * MarketService.TaxRate));
+                var proceeds = (int)(price - price * MarketService.TaxRate);
                 dbSeller.MarketTill += proceeds;
                 DB.Set(dbSeller);
             });
@@ -363,7 +369,7 @@ namespace XM.Plugin.Item.Market.UI
 
         public override void OnClose()
         {
-            
+
         }
     }
 }
