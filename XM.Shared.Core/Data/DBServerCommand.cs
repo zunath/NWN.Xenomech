@@ -14,7 +14,7 @@ namespace XM.Shared.Core.Data
         public List<IndexedProperty> IndexedProperties { get; set; }
         public Dictionary<string, string> IndexData { get; set; }
 
-        public DBQuery<IDBEntity> Query { get; set; }
+        public DBQuery Query { get; set; }
 
         public DBServerCommand()
         {

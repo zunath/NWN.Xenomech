@@ -12,5 +12,7 @@
         Error = 7,
         SearchCount = 8,
         Delete = 9,
+        IndexingStatus = 10,
+        Pending = 11,
     }
 }

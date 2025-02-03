@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using NRediSearch;
 
 namespace XM.Shared.Core.Data
 {
-    public class DBQuery<T>
-        where T : IDBEntity
+    public class DBQuery
     {
         private class SearchCriteria
         {
@@ -32,7 +32,7 @@ namespace XM.Shared.Core.Data
         /// <param name="search">The text to search for</param>
         /// <param name="allowPartialMatches">If true, partial matches are accepted.</param>
         /// <returns>A configured DBQuery</returns>
-        public DBQuery<T> AddFieldSearch(string fieldName, string search, bool allowPartialMatches)
+        public DBQuery AddFieldSearch(string fieldName, string search, bool allowPartialMatches)
         {
             if (allowPartialMatches)
                 search += "*";
@@ -49,7 +49,7 @@ namespace XM.Shared.Core.Data
         /// <param name="fieldName">The name of the field to search for</param>
         /// <param name="search">The list of Ids to search for</param>
         /// <returns>A configured DBQuery</returns>
-        public DBQuery<T> AddFieldSearch(string fieldName, IEnumerable<int> search)
+        public DBQuery AddFieldSearch(string fieldName, IEnumerable<int> search)
         {
             var searchText = string.Join("|", search);
             var criteria = new SearchCriteria(searchText)
@@ -69,7 +69,7 @@ namespace XM.Shared.Core.Data
         /// <param name="fieldName">The name of the field to search for</param>
         /// <param name="search">The list of values to search for</param>
         /// <returns>A configured DBQuery</returns>
-        public DBQuery<T> AddFieldSearch(string fieldName, IEnumerable<string> search)
+        public DBQuery AddFieldSearch(string fieldName, IEnumerable<string> search)
         {
             var list = new List<string>();
             foreach (var s in search)
@@ -94,7 +94,7 @@ namespace XM.Shared.Core.Data
         /// <param name="fieldName">The name of the field to search for</param>
         /// <param name="search">The number to search for</param>
         /// <returns>A configured DBQuery</returns>
-        public DBQuery<T> AddFieldSearch(string fieldName, int search)
+        public DBQuery AddFieldSearch(string fieldName, int search)
         {
             FieldSearches.Add(fieldName, new SearchCriteria(search.ToString()));
 
@@ -107,7 +107,7 @@ namespace XM.Shared.Core.Data
         /// <param name="fieldName">The name of the field to search for</param>
         /// <param name="search">The value to search for</param>
         /// <returns>A configured DBQuery</returns>
-        public DBQuery<T> AddFieldSearch(string fieldName, bool search)
+        public DBQuery AddFieldSearch(string fieldName, bool search)
         {
             FieldSearches.Add(fieldName, new SearchCriteria((search ? 1 : 0).ToString()));
 
@@ -120,7 +120,7 @@ namespace XM.Shared.Core.Data
         /// <param name="limit">The number of records to retrieve.</param>
         /// <param name="offset">The number of records to skip.</param>
         /// <returns>A configured DBQuery</returns>
-        public DBQuery<T> AddPaging(int limit, int offset)
+        public DBQuery AddPaging(int limit, int offset)
         {
             Limit = limit;
             Offset = offset;
@@ -134,7 +134,7 @@ namespace XM.Shared.Core.Data
         /// <param name="fieldName">The name of the field.</param>
         /// <param name="isAscending">if true, sort will be in ascending order. Otherwise, descending order will be used.</param>
         /// <returns>A configured DBQuery</returns>
-        public DBQuery<T> OrderBy(string fieldName, bool isAscending = true)
+        public DBQuery OrderBy(string fieldName, bool isAscending = true)
         {
             SortByField = fieldName;
             IsAscending = isAscending;
@@ -146,12 +146,12 @@ namespace XM.Shared.Core.Data
         /// Builds an NRedisSearch query.
         /// </summary>
         /// <returns>An NRedisSearch query.</returns>
-        public Query BuildQuery(bool countsOnly = false)
+        public Query BuildQuery(string typeName, bool countsOnly = false)
         {
             var sb = new StringBuilder();
 
             // Exact filter on this type of entity.
-            sb.Append($"@EntityType:\"{typeof(T).Name}\"");
+            sb.Append($"@EntityType:\"{typeName}\"");
 
             // Filter by name/searchText
             foreach (var (name, criteria) in FieldSearches)

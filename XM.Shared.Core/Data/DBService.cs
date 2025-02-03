@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using Anvil.Services;
 using NLog;
 using XM.Shared.Core.Configuration;
@@ -11,25 +12,22 @@ using XM.Shared.Core.Json;
 namespace XM.Shared.Core.Data
 {
     [ServiceBinding(typeof(DBService))]
-    [ServiceBinding(typeof(IInitializable))]
-    public class DBService :
-        IInitializable
+    public class DBService
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly string _socketPath;
 
         private readonly Dictionary<Type, List<IndexedProperty>> _indexedPropertiesByType = new();
 
-        [Inject]
-        public IList<IDBEntity> Entities { get; set; }
+        private readonly IList<IDBEntity> _entities;
 
-        public DBService(XMSettingsService settings)
+        public DBService(
+            XMSettingsService settings,
+            IList<IDBEntity> entities)
         {
             _socketPath = settings.DatabaseSocketPath;
-        }
+            _entities = entities;
 
-        public void Init()
-        {
             LoadEntities();
         }
 
@@ -77,7 +75,7 @@ namespace XM.Shared.Core.Data
 
         private void LoadEntities()
         {
-            foreach (var entity in Entities)
+            foreach (var entity in _entities)
             {
                 var type = entity.GetType();
                 BuildIndexedProperties(type);
@@ -99,6 +97,30 @@ namespace XM.Shared.Core.Data
 
                 _logger.Info($"Registered type '{entity.GetType()}' using key prefix {type.Name}");
             }
+
+            // Indexing can take the DB server a bit of time. We cannot continue on past here until the server gives the OK
+            // Periodically check with the server to make sure indexing is complete.
+            
+            Console.WriteLine($"Waiting for reindexing to finish...");
+            var indexing = true;
+            do
+            {
+                var indexCompleteResponse = SendCommand(new DBServerCommand
+                {
+                    CommandType = DBServerCommandType.IndexingStatus
+                });
+
+                if (indexCompleteResponse.CommandType == DBServerCommandType.Ok)
+                {
+                    indexing = false;
+                }
+                else
+                {
+                    Thread.Sleep(100);
+                }
+            } while (indexing);
+            Console.WriteLine($"Reindexing is complete!");
+
         }
 
         /// <summary>
@@ -194,7 +216,7 @@ namespace XM.Shared.Core.Data
         /// <typeparam name="T">The type of entity to retrieve.</typeparam>
         /// <param name="query">The query to run.</param>
         /// <returns>An enumerable of entities matching the criteria.</returns>
-        public IEnumerable<T> Search<T>(DBQuery<T> query)
+        public IEnumerable<T> Search<T>(DBQuery query)
             where T : IDBEntity
         {
             var type = typeof(T);
@@ -202,7 +224,7 @@ namespace XM.Shared.Core.Data
             {
                 CommandType = DBServerCommandType.Search,
                 EntityType = type.Name,
-                Query = query as DBQuery<IDBEntity>
+                Query = query
             };
 
             var response = SendCommand(command);
@@ -216,7 +238,7 @@ namespace XM.Shared.Core.Data
                 yield return XMJsonUtility.Deserialize<T>(result);
             }
         }
-        public int SearchCount<T>(DBQuery<T> query)
+        public int SearchCount<T>(DBQuery query)
             where T : IDBEntity
         {
             var type = typeof(T);
@@ -224,7 +246,7 @@ namespace XM.Shared.Core.Data
             {
                 CommandType = DBServerCommandType.SearchCount,
                 EntityType = type.Name,
-                Query = query as DBQuery<IDBEntity>
+                Query = query
             };
 
             var response = SendCommand(command);
