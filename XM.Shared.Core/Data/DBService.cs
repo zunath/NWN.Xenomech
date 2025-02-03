@@ -60,9 +60,13 @@ namespace XM.Shared.Core.Data
                     {
                         indexedProperty.Type = IndexedPropertyType.Guid;
                     }
-                    else if (prop.PropertyType == typeof(Enum))
+                    else if (prop.PropertyType.IsEnum)
                     {
                         indexedProperty.Type = IndexedPropertyType.Enum;
+                    }
+                    else if (prop.PropertyType == typeof(bool))
+                    {
+                        indexedProperty.Type = IndexedPropertyType.Boolean;
                     }
 
                     indexedProperties.Add(indexedProperty);
@@ -184,6 +188,9 @@ namespace XM.Shared.Core.Data
                             break;
                         case IndexedPropertyType.Numeric:
                             indexValue = Convert.ToInt32(value).ToString();
+                            break;
+                        case IndexedPropertyType.Boolean:
+                            indexValue = Convert.ToBoolean(value).ToString();
                             break;
                         default:
                             throw new Exception("Unable to determine property type.");
