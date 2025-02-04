@@ -1,4 +1,5 @@
-﻿using Anvil.API;
+﻿using System;
+using Anvil.API;
 using Anvil.Services;
 using NLog.Layouts;
 using XM.Shared.Core.Localization;
@@ -110,7 +111,7 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
                                             });
                                         });
 
-                                }, model => model.ItemNames);
+                                });
 
                                 template.AddTemplateCell(cell =>
                                 {
@@ -123,7 +124,7 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
                                                 .TooltipText(model => model.ItemNames);
                                         });
                                     });
-                                }, model => model.ItemNames);
+                                });
 
                                 template.AddTemplateCell(cell =>
                                 {
@@ -140,7 +141,7 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
                                         });
                                     });
 
-                                }, model => model.ItemNames);
+                                });
 
                                 template.AddTemplateCell(cell =>
                                 {
@@ -158,7 +159,7 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
 
                                         });
 
-                                }, model => model.ItemNames);
+                                });
 
                                 template.AddTemplateCell(cell =>
                                 {
@@ -173,8 +174,8 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
                                                     .OnClick(model => model.OnClickRemove);
                                             });
                                         });
-                                }, model => model.ItemNames);
-                            });
+                                });
+                            }, model => model.ItemNames);
                         });
 
                         col.AddRow(row =>

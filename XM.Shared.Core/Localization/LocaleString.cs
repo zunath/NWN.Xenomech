@@ -1124,5 +1124,10 @@ namespace XM.Shared.Core.Localization
         ForSale = 1438,
         Remove = 1439,
         SaveChanges = 1440,
+        Price = 1441,
+        ChangePrice = 1442,
+        Save = 1443,
+        Cancel = 1444,
+        PriceForX = 1445,
     }
 }

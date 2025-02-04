@@ -4,6 +4,7 @@ using System.Linq;
 using Anvil.Services;
 using XM.Plugin.Item.Market.Dialog;
 using XM.Plugin.Item.Market.Entity;
+using XM.Plugin.Item.Market.Event;
 using XM.Plugin.Item.Market.UI.MarketBuyMenu;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Data;
@@ -35,13 +36,20 @@ namespace XM.Plugin.Item.Market
             _event = @event;
             _dialog = dialog;
 
+            RegisterEvents();
             SubscribeEvents();
+        }
+
+        private void RegisterEvents()
+        {
+            _event.RegisterEvent<MarketEvent.ChangeMarketPrice>(MarketEventScript.MarketPriceChangedEventScript);
         }
 
         private void SubscribeEvents()
         {
             _event.Subscribe<ModuleEvent.OnPlayerEnter>(CheckMarketTill);
         }
+
 
         private void CheckMarketTill(uint module)
         {

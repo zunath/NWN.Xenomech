@@ -516,8 +516,8 @@ namespace XM.Progression.UI.JobUI
                             model => model.AbilityPip4Enabled,
                             model => model.OnClickAbility);
                     });
-                }, model => model.AbilityNames);
-            });
+                });
+            }, model => model.AbilityNames);
         }
 
         private void BuildAbilityDetailPane(NuiColumnBuilder<JobViewModel> col)
@@ -581,8 +581,8 @@ namespace XM.Progression.UI.JobUI
                                 model => model.EquippedAbilityPip4Enabled,
                                 model => model.OnClickEquippedAbility);
                         });
-                    }, model => model.EquippedAbilityNames);
-                });
+                    });
+                }, model => model.EquippedAbilityNames);
             });
 
             col.AddRow(row =>

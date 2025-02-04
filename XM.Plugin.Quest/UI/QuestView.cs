@@ -87,8 +87,8 @@ namespace XM.Quest.UI
                                         .OnClick(model => model.OnSelectQuest);
                                 });
                             });
-                        }, model => model.QuestNames);
-                    });
+                        });
+                    }, model => model.QuestNames);
                 });
             });
         }

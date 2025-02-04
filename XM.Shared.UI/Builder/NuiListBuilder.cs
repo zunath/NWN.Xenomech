@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq.Expressions;
-using System.Xml.Linq;
 using Anvil.API;
 using XM.Shared.API.NUI;
 using XM.UI.Builder.Component;
@@ -15,8 +12,8 @@ namespace XM.UI.Builder
         where TViewModel : IViewModel
     {
         private readonly List<NuiListTemplateCellBuilder<TViewModel>> _template = new();
-        private string _rowCountBind;
 
+        internal string ListBind { get; set; }
         private float _rowHeight = NuiStyle.RowHeight;
         private bool _border = true;
         private NuiScrollbars _scrollbars = NuiScrollbars.Y;
@@ -26,9 +23,7 @@ namespace XM.UI.Builder
         {
         }
 
-        public NuiListBuilder<TViewModel> AddTemplateCell(
-            Action<NuiListTemplateCellBuilder<TViewModel>> templateCell,
-            Expression<Func<TViewModel, IBindingList>> targetList)
+        public NuiListBuilder<TViewModel> AddTemplateCell(Action<NuiListTemplateCellBuilder<TViewModel>> templateCell)
         {
             if (_template.Count >= 16)
                 throw new InvalidOperationException("Maximum of 16 template cells allowed.");
@@ -37,8 +32,6 @@ namespace XM.UI.Builder
             templateCell(builder);
             _template.Add(builder);
 
-            if (string.IsNullOrWhiteSpace(_rowCountBind))
-                _rowCountBind = GetBindName(targetList);
 
             return this;
         }
@@ -73,7 +66,7 @@ namespace XM.UI.Builder
                 template = JsonArrayInsert(template, element.Build());
             }
 
-            var rowCountBindName = _rowCountBind + "_" + nameof(NuiList.RowCount);
+            var rowCountBindName = ListBind + "_" + nameof(NuiList.RowCount);
             var rowCount = Nui.Bind(rowCountBindName);
 
             return Nui.List(

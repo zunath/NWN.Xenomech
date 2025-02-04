@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System;
 using XM.Shared.API.NUI;
+using XM.Shared.Core;
 using XM.Shared.Core.Localization;
 
 namespace XM.UI.Builder.Component
@@ -9,7 +10,7 @@ namespace XM.UI.Builder.Component
     public class NuiTextEditBuilder<TViewModel> : NuiBuilderBase<NuiTextEditBuilder<TViewModel>, TViewModel>
         where TViewModel : IViewModel
     {
-        private LocaleString _placeholder;
+        private LocaleString _placeholder = LocaleString.Empty;
         private string _placeholderBind;
 
         private string _valueBind;
@@ -54,6 +55,12 @@ namespace XM.UI.Builder.Component
         }
 
         public NuiTextEditBuilder<TViewModel> Value(Expression<Func<TViewModel, string>> expression)
+        {
+            AssignId();
+            _valueBind = GetBindName(expression);
+            return this;
+        }
+        public NuiTextEditBuilder<TViewModel> Value(Expression<Func<TViewModel, XMBindingList<string>>> expression)
         {
             AssignId();
             _valueBind = GetBindName(expression);

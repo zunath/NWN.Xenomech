@@ -92,8 +92,8 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
                                                         .OnClick(model => model.OnClickCategory);
                                                 });
                                             });
-                                        }, model => model.CategoryNames);
-                                    });
+                                        });
+                                    }, model => model.CategoryNames);
                                 });
                             });
 
@@ -124,7 +124,7 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
                                                         });
                                                     });
                                                 });
-                                        }, model => model.ItemNames);
+                                        });
 
                                         template.AddTemplateCell(cell =>
                                         {
@@ -137,7 +137,7 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
                                                         .TooltipText(model => model.ItemNames);
                                                 });
                                             });
-                                        }, model => model.ItemNames);
+                                        });
 
                                         template.AddTemplateCell(cell =>
                                         {
@@ -152,7 +152,7 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
                                                             .Label(model => model.ItemPriceNames);
                                                     });
                                                 });
-                                        }, model => model.ItemNames);
+                                        });
 
                                         template.AddTemplateCell(cell =>
                                         {
@@ -170,7 +170,7 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
                                                             .OnClick(model => model.OnClickExamine);
                                                     });
                                                 });
-                                        }, model => model.ItemNames);
+                                        });
 
                                         template.AddTemplateCell(cell =>
                                         {
@@ -184,8 +184,8 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
                                                         .IsEnabled(model => model.ItemBuyEnabled);
                                                 });
                                             });
-                                        }, model => model.ItemNames);
-                                    });
+                                        });
+                                    }, model => model.ItemNames);
                                 });
 
                                 col2.AddRow(row2 =>

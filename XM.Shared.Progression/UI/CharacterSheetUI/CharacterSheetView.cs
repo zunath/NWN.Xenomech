@@ -306,7 +306,7 @@ namespace XM.Progression.UI.CharacterSheetUI
                                     });
                                 });
                             });
-                        }, model => model.JobNames);
+                        });
 
                         list.AddTemplateCell(cell =>
                         {
@@ -319,7 +319,7 @@ namespace XM.Progression.UI.CharacterSheetUI
                                     layout.AddSpacer();
                                 });
                             });
-                        }, model => model.JobNames);
+                        });
 
                         list.AddTemplateCell(cell =>
                         {
@@ -347,7 +347,7 @@ namespace XM.Progression.UI.CharacterSheetUI
                                     });
                                 });
                             });
-                        }, model => model.JobNames);
+                        });
 
                         list.AddTemplateCell(cell =>
                         {
@@ -369,8 +369,8 @@ namespace XM.Progression.UI.CharacterSheetUI
                                     });
                                 });
                             });
-                        }, model => model.JobNames);
-                    });
+                        });
+                    }, model => model.JobNames);
                 });
         }
 
@@ -415,7 +415,7 @@ namespace XM.Progression.UI.CharacterSheetUI
                                     });
                                 });
                             });
-                        }, model => model.SkillNames);
+                        });
 
                         list.AddTemplateCell(cell =>
                         {
@@ -428,7 +428,7 @@ namespace XM.Progression.UI.CharacterSheetUI
                                     layout.AddSpacer();
                                 });
                             });
-                        }, model => model.SkillNames);
+                        });
 
                         list.AddTemplateCell(cell =>
                         {
@@ -456,7 +456,7 @@ namespace XM.Progression.UI.CharacterSheetUI
                                     });
                                 });
                             });
-                        }, model => model.SkillNames);
+                        });
 
                         list.AddTemplateCell(cell =>
                         {
@@ -478,8 +478,8 @@ namespace XM.Progression.UI.CharacterSheetUI
                                     });
                                 });
                             });
-                        }, model => model.SkillNames);
-                    });
+                        });
+                    }, model => model.SkillNames);
                 });
         }
 
@@ -521,7 +521,7 @@ namespace XM.Progression.UI.CharacterSheetUI
                                     });
                                 });
                             });
-                        }, model => model.KeyItemNames);
+                        });
 
                         list.AddTemplateCell(template =>
                         {
@@ -536,8 +536,8 @@ namespace XM.Progression.UI.CharacterSheetUI
                                     });
                                 });
                             });
-                        }, model => model.KeyItemNames);
-                    });
+                        });
+                    }, model => model.KeyItemNames);
                 });
         }
 

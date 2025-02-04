@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Anvil.Services;
 using XM.Inventory;
 using XM.Plugin.Item.Market.Entity;
+using XM.Plugin.Item.Market.Event;
+using XM.Plugin.Item.Market.UI.PriceSelection;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.ObjectPlugin;
 using XM.Shared.Core;
@@ -21,10 +23,10 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
         public MarketService Market { get; set; }
 
         [Inject]
-        public GuiService Gui { get; set; }
+        public ItemTypeService ItemType { get; set; }
 
         [Inject]
-        public ItemTypeService ItemType { get; set; }
+        public GuiService Gui { get; set; }
 
         public string SearchText
         {
@@ -302,10 +304,7 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
 
         private void ClosePriceWindow()
         {
-            //if (Gui.IsWindowOpen(Player, GuiWindowType.PriceSelection))
-            //{
-            //    Gui.TogglePlayerWindow(Player, GuiWindowType.PriceSelection);
-            //}
+            Gui.CloseWindow<PriceSelectionView>(Player);
         }
 
         public Action OnClickChangePrice => () =>
@@ -314,35 +313,17 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
             // As a workaround, we use a button to display a price change window. 
             // The price is entered by the user and saved, which then updates this window.
             // If/when the defect gets fixed, this can be replaced in favor of a simple text edit control.
-            //var index = NuiGetEventArrayIndex();
-            //var recordId = _itemIds[index];
-            //var currentPrice = _itemPrices[index];
-            //var itemName = ItemNames[index];
-            //var payload = new PriceSelectionPayload(GuiWindowType.MarketListing, recordId, currentPrice, itemName, "Price For:");
-            //Gui.TogglePlayerWindow(Player, GuiWindowType.PriceSelection, payload);
+            var index = NuiGetEventArrayIndex();
+            var recordId = _itemIds[index];
+            var currentPrice = _itemPrices[index];
+            var itemName = ItemNames[index];
+            var payload = new PriceSelectionPayload(
+                recordId, 
+                currentPrice, 
+                itemName);
+
+            Gui.ShowWindow<PriceSelectionView>(Player, payload);
         };
-
-        public void ChangePrice(string recordId, int price)
-        {
-            var index = _itemIds.IndexOf(recordId);
-
-            // Couldn't find the record.
-            if (index <= -1)
-                return;
-
-            _itemPrices[index] = price;
-            ItemPriceNames[index] = LocaleString.XCr.ToLocalizedString(price);
-
-            if (price <= 0)
-            {
-                ListingCheckboxEnabled[index] = false;
-                ItemListed[index] = false;
-            }
-            else
-            {
-                ListingCheckboxEnabled[index] = true;
-            }
-        }
 
         public Action OnClickShopTill => () =>
         {
@@ -361,7 +342,7 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
             ShopTill = LocaleString.TillXCr.ToLocalizedString(0);
         };
 
-        public override void OnOpen()
+        private void Initialize()
         {
             var taxRate = MarketService.TaxRate * 100;
             WindowTitle = LocaleString.GlobalMarketTaxRateX.ToLocalizedString($"{taxRate:0.#}");
@@ -372,9 +353,41 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
             WatchOnClient(model => model.ItemListed);
         }
 
+        private Guid _changeMarketPriceSubscriptionId;
+
+        public override void OnOpen()
+        {
+            Initialize();
+            _changeMarketPriceSubscriptionId = Event.Subscribe<MarketEvent.ChangeMarketPrice>(ChangeMarketPrice);
+        }
+
+        private void ChangeMarketPrice(uint player)
+        {
+            var data = Event.GetEventData<MarketEvent.ChangeMarketPrice>();
+            var index = _itemIds.IndexOf(data.RecordId);
+
+            // Couldn't find the record.
+            if (index <= -1)
+                return;
+
+            _itemPrices[index] = data.Price;
+            ItemPriceNames[index] = LocaleString.XCr.ToLocalizedString(data.Price);
+
+            if (data.Price <= 0)
+            {
+                ListingCheckboxEnabled[index] = false;
+                ItemListed[index] = false;
+            }
+            else
+            {
+                ListingCheckboxEnabled[index] = true;
+            }
+
+        }
+
         public override void OnClose()
         {
-            
+            Event.Unsubscribe<MarketEvent.ChangeMarketPrice>(_changeMarketPriceSubscriptionId);
         }
     }
 }

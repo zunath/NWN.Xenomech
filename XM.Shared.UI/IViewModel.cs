@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Anvil.API;
-using XM.Shared.Core.Localization;
 using Action = System.Action;
 
 namespace XM.UI
@@ -11,11 +11,14 @@ namespace XM.UI
         internal const string ModalPartialId = "%%XM_WINDOW_MODAL_PARTIAL%%";
         internal const string UserPartialId = "%%XM_WINDOW_USER_PARTIAL%%";
 
+        internal event EventHandler<RequestCloseWindowEventArgs> OnRequestCloseWindow;
+
         public NuiRect Geometry { get; protected set; }
 
         internal Dictionary<string, Json> PartialViews { get; set; }
 
         internal void Bind(
+            Type viewType,
             uint player, 
             int windowToken,
             NuiRect geometry,
