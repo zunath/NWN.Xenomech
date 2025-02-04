@@ -190,7 +190,7 @@ namespace XM.Shared.Core.Data
                             indexValue = Convert.ToInt32(value).ToString();
                             break;
                         case IndexedPropertyType.Boolean:
-                            indexValue = Convert.ToBoolean(value).ToString();
+                            indexValue = ((bool)value) ? "1" : "0";
                             break;
                         default:
                             throw new Exception("Unable to determine property type.");

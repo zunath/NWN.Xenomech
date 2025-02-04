@@ -2,28 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using NRediSearch;
+using XM.Shared.Core.Json;
 
 namespace XM.Shared.Core.Data
 {
     public class DBQuery
     {
-        private class SearchCriteria
-        {
-            public string Text { get; set; }
-            public bool SkipEscaping { get; set; }
-
-            public SearchCriteria(string text)
-            {
-                Text = text;
-                SkipEscaping = false;
-            }
-        }
-
-        private Dictionary<string, SearchCriteria> FieldSearches { get; }
-        private int Offset { get; set; }
-        private int Limit { get; set; }
-        private string SortByField { get; set; }
-        private bool IsAscending { get; set; }
+        public DBQueryData QueryData { get; set; }
 
         /// <summary>
         /// Adds a filter based on a field's name for the given text.
@@ -37,7 +22,7 @@ namespace XM.Shared.Core.Data
             if (allowPartialMatches)
                 search += "*";
 
-            FieldSearches.Add(fieldName, new SearchCriteria(search));
+            QueryData.FieldSearches.Add(fieldName, new SearchCriteria(search));
 
             return this;
         }
@@ -57,7 +42,7 @@ namespace XM.Shared.Core.Data
                 SkipEscaping = true
             };
 
-            FieldSearches.Add(fieldName, criteria);
+            QueryData.FieldSearches.Add(fieldName, criteria);
 
             return this;
         }
@@ -83,7 +68,7 @@ namespace XM.Shared.Core.Data
                 SkipEscaping = true
             };
 
-            FieldSearches.Add(fieldName, criteria);
+            QueryData.FieldSearches.Add(fieldName, criteria);
 
             return this;
         }
@@ -96,7 +81,7 @@ namespace XM.Shared.Core.Data
         /// <returns>A configured DBQuery</returns>
         public DBQuery AddFieldSearch(string fieldName, int search)
         {
-            FieldSearches.Add(fieldName, new SearchCriteria(search.ToString()));
+            QueryData.FieldSearches.Add(fieldName, new SearchCriteria(search.ToString()));
 
             return this;
         }
@@ -109,7 +94,7 @@ namespace XM.Shared.Core.Data
         /// <returns>A configured DBQuery</returns>
         public DBQuery AddFieldSearch(string fieldName, bool search)
         {
-            FieldSearches.Add(fieldName, new SearchCriteria((search ? 1 : 0).ToString()));
+            QueryData.FieldSearches.Add(fieldName, new SearchCriteria((search ? 1 : 0).ToString()));
 
             return this;
         }
@@ -122,8 +107,8 @@ namespace XM.Shared.Core.Data
         /// <returns>A configured DBQuery</returns>
         public DBQuery AddPaging(int limit, int offset)
         {
-            Limit = limit;
-            Offset = offset;
+            QueryData.Limit = limit;
+            QueryData.Offset = offset;
 
             return this;
         }
@@ -136,8 +121,8 @@ namespace XM.Shared.Core.Data
         /// <returns>A configured DBQuery</returns>
         public DBQuery OrderBy(string fieldName, bool isAscending = true)
         {
-            SortByField = fieldName;
-            IsAscending = isAscending;
+            QueryData.SortByField = fieldName;
+            QueryData.IsAscending = isAscending;
 
             return this;
         }
@@ -154,7 +139,7 @@ namespace XM.Shared.Core.Data
             sb.Append($"@EntityType:\"{typeName}\"");
 
             // Filter by name/searchText
-            foreach (var (name, criteria) in FieldSearches)
+            foreach (var (name, criteria) in QueryData.FieldSearches)
             {
                 var search = criteria.SkipEscaping
                     ? criteria.Text
@@ -174,9 +159,9 @@ namespace XM.Shared.Core.Data
             else
             {
                 // Apply pagination
-                if (Limit > 0)
+                if (QueryData.Limit > 0)
                 {
-                    query.Limit(Offset, Limit);
+                    query.Limit(QueryData.Offset, QueryData.Limit);
                 }
                 // If no limit is specified, default to 50.
                 // The default limit is 10 which is too small for our use case.
@@ -186,9 +171,9 @@ namespace XM.Shared.Core.Data
                 }
             }
 
-            if (!string.IsNullOrWhiteSpace(SortByField))
+            if (!string.IsNullOrWhiteSpace(QueryData.SortByField))
             {
-                query.SetSortBy(SortByField, IsAscending);
+                query.SetSortBy(QueryData.SortByField, QueryData.IsAscending);
             }
 
             return query;
@@ -196,7 +181,7 @@ namespace XM.Shared.Core.Data
 
         public DBQuery()
         {
-            FieldSearches = new Dictionary<string, SearchCriteria>();
+            QueryData = new DBQueryData();
         }
     }
 }
