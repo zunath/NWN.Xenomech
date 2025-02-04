@@ -157,6 +157,7 @@ namespace XM.UI
             var viewModel = _playerViewModels[player][windowToken];
             var type = _tokenToType[windowToken];
 
+            viewModel.OnRequestCloseWindow -= UserRequestedWindowClose;
             viewModel.Unbind();
             viewModel.OnClose();
             SaveWindowLocation(player, windowToken);
@@ -210,19 +211,19 @@ namespace XM.UI
             uint tetherObject = OBJECT_INVALID)
             where TView : IView
         {
-            var type = typeof(TView);
-            var window = _builtWindowsByType[type];
+            var viewType = typeof(TView);
+            var window = _builtWindowsByType[viewType];
 
             if (NuiFindWindow(player, window.WindowId) == 0)
             {
-                var view = _viewsByType[type];
-                var json = _builtWindowsByType[type].Window;
+                var view = _viewsByType[viewType];
+                var json = _builtWindowsByType[viewType].Window;
                 var viewModel = view.CreateViewModel();
                 viewModel = _injection.Inject(viewModel);
 
                 var windowId = viewModel.GetType().FullName!;
-                var geometry = _builtWindowsByType[type].DefaultGeometry;
-                var partialViews = _builtWindowsByType[type].PartialViews;
+                var geometry = _builtWindowsByType[viewType].DefaultGeometry;
+                var partialViews = _builtWindowsByType[viewType].PartialViews;
                 var playerId = PlayerId.Get(player);
                 var playerUI = _db.Get<PlayerUI>(playerId);
 
@@ -238,27 +239,40 @@ namespace XM.UI
 
                 _playerViewModels[player][windowToken] = viewModel;
                 _tokenToPlayer[windowToken] = player;
-                _tokenToType[windowToken] = type;
+                _tokenToType[windowToken] = viewType;
 
                 if (!_playerToTokens.ContainsKey(player))
                     _playerToTokens[player] = new Dictionary<Type, int>();
 
-                _playerToTokens[player][type] = windowToken;
+                _playerToTokens[player][viewType] = windowToken;
 
                 viewModel.Bind(
+                    viewType,
                     player, 
                     windowToken, 
                     geometry,
                     partialViews,
+                    initialData,
                     tetherObject);
+
+                viewModel.OnRequestCloseWindow += UserRequestedWindowClose;
             }
+        }
+
+        private void UserRequestedWindowClose(object sender, RequestCloseWindowEventArgs args)
+        {
+            CloseWindow(args.ViewType, args.Player);
         }
 
         public void CloseWindow<TView>(uint player)
             where TView: IView
         {
             var type = typeof(TView);
+            CloseWindow(type, player);
+        }
 
+        internal void CloseWindow(Type type, uint player)
+        {
             if (!_playerToTokens.ContainsKey(player))
                 return;
 
@@ -266,7 +280,7 @@ namespace XM.UI
                 return;
 
             var windowToken = _playerToTokens[player][type];
-            
+
             DoCloseWindow(player, windowToken);
             NuiDestroy(player, windowToken);
         }

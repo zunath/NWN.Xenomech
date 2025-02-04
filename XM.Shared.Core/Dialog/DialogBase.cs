@@ -1,16 +1,13 @@
 ﻿using System.Collections.Generic;
+using Anvil.Services;
 
 namespace XM.Shared.Core.Dialog
 {
     public abstract class DialogBase : IConversation
     {
-        
-        protected DialogService Dialog { get; set; }
 
-        protected DialogBase(DialogService dialog)
-        {
-            Dialog = dialog;
-        }
+        [Inject]
+        public DialogService Dialog { get; set; }
 
         /// <summary>
         /// Retrieves the speaking player.

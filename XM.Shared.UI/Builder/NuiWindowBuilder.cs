@@ -91,7 +91,7 @@ namespace XM.UI.Builder
             return this;
         }
 
-        public NuiWindowBuilder<TViewModel> Title(Expression<Func<TViewModel, LocaleString>> expression)
+        public NuiWindowBuilder<TViewModel> Title(Expression<Func<TViewModel, string>> expression)
         {
             _titleBind = GetBindName(expression);
             return this;

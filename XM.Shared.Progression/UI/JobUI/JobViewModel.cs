@@ -1214,6 +1214,7 @@ namespace XM.Progression.UI.JobUI
                     }
 
                     Job.ChangeJob(Player, _selectedJob, _equippedAbilities);
+                    CloseWindow();
                 });
         };
 

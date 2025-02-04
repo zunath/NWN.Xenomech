@@ -17,6 +17,7 @@ namespace XM.App.Database
         private readonly string _ipAddress;
 
         private readonly Dictionary<string, Client> _searchClientsByType = new();
+        private bool _reindexingComplete = false;
 
         public RedisSocketServer(string ipAddress)
         {
@@ -150,6 +151,12 @@ namespace XM.App.Database
                         return HandleSet(command);
                     case DBServerCommandType.Search:
                         return HandleSearch(command);
+                    case DBServerCommandType.SearchCount:
+                        return HandleSearchCount(command);
+                    case DBServerCommandType.Delete:
+                        return HandleDelete(command);
+                    case DBServerCommandType.IndexingStatus:
+                        return HandleIndexingStatus();
                     default:
                         return new DBServerCommand { CommandType = DBServerCommandType.Error, Message = "Unknown command" };
                 }
@@ -190,6 +197,35 @@ namespace XM.App.Database
             {
                 CommandType = DBServerCommandType.Result,
                 EntitiesList = results.ToList()
+            };
+        }
+
+        private DBServerCommand HandleSearchCount(DBServerCommand command)
+        {
+            var result = SearchCount(command.EntityType, command.Query);
+            return new DBServerCommand
+            {
+                CommandType = DBServerCommandType.Result,
+                SearchCount = result
+            };
+        }
+
+        private DBServerCommand HandleDelete(DBServerCommand command)
+        {
+            Delete(command.EntityType, command.Key);
+            return new DBServerCommand
+            {
+                CommandType = DBServerCommandType.Result
+            };
+        }
+
+        private DBServerCommand HandleIndexingStatus()
+        {
+            return new DBServerCommand
+            {
+                CommandType = _reindexingComplete 
+                    ? DBServerCommandType.Ok 
+                    : DBServerCommandType.Pending
             };
         }
 
@@ -261,6 +297,8 @@ namespace XM.App.Database
                 }
 
             } while (indexing != "1");
+
+            _reindexingComplete = true;
         }
 
 
@@ -274,9 +312,9 @@ namespace XM.App.Database
         }
 
 
-        private IEnumerable<string> Search(string type, DBQuery<IDBEntity> query)
+        private IEnumerable<string> Search(string type, DBQuery query)
         {
-            var result = _searchClientsByType[type].Search(query.BuildQuery());
+            var result = _searchClientsByType[type].Search(query.BuildQuery(type));
 
             foreach (var doc in result.Documents)
             {
@@ -285,6 +323,14 @@ namespace XM.App.Database
                 yield return (string)_multiplexer.GetDatabase()
                     .JsonGet(recordId);
             }
+        }
+
+        private long SearchCount(string type, DBQuery query)
+        {
+            var result = _searchClientsByType[type]
+                .Search(query.BuildQuery(type, true));
+
+            return result.TotalResults;
         }
 
         private string Get(string id, string type)
@@ -311,6 +357,13 @@ namespace XM.App.Database
 
             _searchClientsByType[type].ReplaceDocument(indexKey, redisData);
             _multiplexer.GetDatabase().JsonSet($"{type}:{key}", entity);
+        }
+
+        private void Delete(string type, string key)
+        {
+            var indexKey = $"Index:{type}:{key}";
+            _searchClientsByType[type].DeleteDocument(indexKey);
+            _multiplexer.GetDatabase().JsonDelete($"{type}:{key}");
         }
     }
 }

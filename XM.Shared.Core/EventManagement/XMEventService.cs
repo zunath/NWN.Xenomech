@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Anvil.API;
 using Anvil.Services;
 using NLog;
@@ -79,8 +80,9 @@ namespace XM.Shared.Core.EventManagement
             if (!_scriptActionRegistrations.ContainsKey(type))
                 return;
 
-            foreach (var (_, action) in _scriptActionRegistrations[type])
+            for(var x = 0; x <= _scriptActionRegistrations[type].Count-1; x++)
             {
+                var (_, action) = _scriptActionRegistrations[type].ElementAt(x);
                 try
                 {
                     action(objectSelf);

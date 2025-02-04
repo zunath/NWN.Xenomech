@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq.Expressions;
 using Anvil.API;
 using XM.Shared.API.NUI;
 using XM.UI.Builder.Component;
@@ -219,12 +221,16 @@ namespace XM.UI.Builder.Layout
             return this;
         }
 
-        public NuiRowBuilder<TViewModel> AddList(Action<NuiListBuilder<TViewModel>> list)
+        public NuiRowBuilder<TViewModel> AddList(Action<NuiListBuilder<TViewModel>> list,
+            Expression<Func<TViewModel, IBindingList>> targetList)
         {
             var listBuilder = new NuiListBuilder<TViewModel>(RegisteredEvents);
             list(listBuilder);
 
             _children.Add(listBuilder);
+
+            var bindName = GetBindName(targetList);
+            listBuilder.ListBind = bindName;
 
             return this;
         }

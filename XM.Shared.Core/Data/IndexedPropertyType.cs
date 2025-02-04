@@ -7,5 +7,6 @@
         Text = 2,
         Guid = 3,
         Enum = 4,
+        Boolean = 5,
     }
 }

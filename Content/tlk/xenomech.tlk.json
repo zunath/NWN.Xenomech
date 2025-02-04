@@ -5576,6 +5576,210 @@
     {
       "id": 1394,
       "text": "You cannot speak while dead."
+    },
+    {
+      "id": 1395,
+      "text": "Miscellaneous"
+    },
+    {
+      "id": 1396,
+      "text": "Shield"
+    },
+    {
+      "id": 1397,
+      "text": "Back"
+    },
+    {
+      "id": 1398,
+      "text": "Waist"
+    },
+    {
+      "id": 1399,
+      "text": "Finger"
+    },
+    {
+      "id": 1400,
+      "text": "Neck"
+    },
+    {
+      "id": 1401,
+      "text": "Body"
+    },
+    {
+      "id": 1402,
+      "text": "Head"
+    },
+    {
+      "id": 1403,
+      "text": "Arm"
+    },
+    {
+      "id": 1404,
+      "text": "Feet"
+    },
+    {
+      "id": 1405,
+      "text": "1 credit is in your market till."
+    },
+    {
+      "id": 1406,
+      "text": "{0} credits are in your market till."
+    },
+    {
+      "id": 1407,
+      "text": "Arrow"
+    },
+    {
+      "id": 1408,
+      "text": "Bullet"
+    },
+    {
+      "id": 1409,
+      "text": "Potion"
+    },
+    {
+      "id": 1410,
+      "text": "Container"
+    },
+    {
+      "id": 1411,
+      "text": "Global Market"
+    },
+    {
+      "id": 1412,
+      "text": "Are you sure you want to buy '{0}' for {1} credits?"
+    },
+    {
+      "id": 1413,
+      "text": "This item is no longer available. It may have been sold or removed from the market."
+    },
+    {
+      "id": 1414,
+      "text": "You do not have enough credits to purchase this item."
+    },
+    {
+      "id": 1415,
+      "text": "The price of this item has been changed by the seller. Please try again."
+    },
+    {
+      "id": 1416,
+      "text": "{0} [{1}] bought {2}x {3} from {4} for {5} credits."
+    },
+    {
+      "id": 1417,
+      "text": "Clear Filters"
+    },
+    {
+      "id": 1418,
+      "text": "?"
+    },
+    {
+      "id": 1419,
+      "text": "Buy"
+    },
+    {
+      "id": 1420,
+      "text": "<"
+    },
+    {
+      "id": 1421,
+      "text": ">"
+    },
+    {
+      "id": 1422,
+      "text": "Page {0}"
+    },
+    {
+      "id": 1423,
+      "text": "Item Properties"
+    },
+    {
+      "id": 1424,
+      "text": "  Global Market [Tax Rate: {0}%]"
+    },
+    {
+      "id": 1425,
+      "text": "Till: {0} cr"
+    },
+    {
+      "id": 1426,
+      "text": "{0} / {1} Items Listed"
+    },
+    {
+      "id": 1427,
+      "text": "Please click on an item within your inventory."
+    },
+    {
+      "id": 1428,
+      "text": "Item must be in your inventory."
+    },
+    {
+      "id": 1429,
+      "text": "Containers cannot be listed."
+    },
+    {
+      "id": 1430,
+      "text": "You cannot list any more items."
+    },
+    {
+      "id": 1431,
+      "text": "This item cannot be sold on the market."
+    },
+    {
+      "id": 1432,
+      "text": "Are you sure you want to remove this item's listing? It will return to your inventory."
+    },
+    {
+      "id": 1433,
+      "text": "Your listing for '{0}' has been removed or sold already."
+    },
+    {
+      "id": 1434,
+      "text": "{0} cr"
+    },
+    {
+      "id": 1435,
+      "text": "Goods may be bought and sold on the market here. What would you like to do?"
+    },
+    {
+      "id": 1436,
+      "text": "Item Name"
+    },
+    {
+      "id": 1437,
+      "text": "Add Item"
+    },
+    {
+      "id": 1438,
+      "text": "For Sale"
+    },
+    {
+      "id": 1439,
+      "text": "Remove"
+    },
+    {
+      "id": 1440,
+      "text": "Save Changes"
+    },
+    {
+      "id": 1441,
+      "text": "Price"
+    },
+    {
+      "id": 1442,
+      "text": "Change Price"
+    },
+    {
+      "id": 1443,
+      "text": "Save"
+    },
+    {
+      "id": 1444,
+      "text": "Cancel"
+    },
+    {
+      "id": 1445,
+      "text": "Price For: {0}"
     }
   ]
 }

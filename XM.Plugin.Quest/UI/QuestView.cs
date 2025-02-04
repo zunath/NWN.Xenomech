@@ -50,7 +50,7 @@ namespace XM.Quest.UI
                         {
                             edit
                                 .Value(model => model.SearchText)
-                                .Label(LocaleString.SearchByName);
+                                .Placeholder(LocaleString.SearchByName);
                         });
 
                         row.AddButton(button =>
@@ -87,8 +87,8 @@ namespace XM.Quest.UI
                                         .OnClick(model => model.OnSelectQuest);
                                 });
                             });
-                        }, model => model.QuestNames);
-                    });
+                        });
+                    }, model => model.QuestNames);
                 });
             });
         }

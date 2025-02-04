@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System;
 using XM.Shared.API.NUI;
+using XM.Shared.Core;
 using XM.Shared.Core.Localization;
 
 namespace XM.UI.Builder.Component
@@ -44,6 +45,12 @@ namespace XM.UI.Builder.Component
             _selectedBind = GetBindName(expression);
             return this;
         }
+        public NuiCheckBuilder<TViewModel> Selected(Expression<Func<TViewModel, XMBindingList<bool>>> expression)
+        {
+            _selectedBind = GetBindName(expression);
+            return this;
+        }
+
 
         public override Json BuildEntity()
         {

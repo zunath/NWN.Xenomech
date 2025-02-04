@@ -9,11 +9,12 @@ namespace XM.Shared.Core.Data
         public string Key { get; set; }
         public string EntitySingle { get; set; }
         public List<string> EntitiesList { get; set; }
+        public long SearchCount { get; set; }
         public string Message { get; set; }
         public List<IndexedProperty> IndexedProperties { get; set; }
         public Dictionary<string, string> IndexData { get; set; }
 
-        public DBQuery<IDBEntity> Query { get; set; }
+        public DBQuery Query { get; set; }
 
         public DBServerCommand()
         {

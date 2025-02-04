@@ -18,6 +18,7 @@ namespace XM.UI
         IDisposable
         where TViewModel : IViewModel
     {
+        private Type _viewType;
         protected uint Player { get; private set; }
         protected uint TetherObject { get; private set; }
         private int WindowToken { get; set; }
@@ -28,11 +29,13 @@ namespace XM.UI
         private Guid _onNuiEventToken;
         private readonly Dictionary<string, object> _backingData = new();
         private readonly Dictionary<string, IXMBindingList> _boundLists = new();
-
         private readonly List<string> _watches = new();
+
 
         [Inject]
         public XMEventService Event { get; set; }
+
+        public event EventHandler<RequestCloseWindowEventArgs> OnRequestCloseWindow;
 
         public NuiRect Geometry
         {
@@ -41,13 +44,15 @@ namespace XM.UI
         }
 
         public void Bind(
+            Type viewType,
             uint player, 
             int windowToken,
             NuiRect geometry,
             Dictionary<string, Json> partialViews,
-            object initialData = default,
-            uint tetherObject = OBJECT_INVALID)
+            object initialData,
+            uint tetherObject)
         {
+            _viewType = viewType;
             Player = player;
             WindowToken = windowToken;
             TetherObject = tetherObject;
@@ -259,6 +264,12 @@ namespace XM.UI
         {
             ClearWatches();
             Event.Unsubscribe<ModuleEvent.OnNuiEvent>(_onNuiEventToken);
+        }
+
+        protected void CloseWindow()
+        {
+            var args = new RequestCloseWindowEventArgs(Player, _viewType);
+            OnRequestCloseWindow?.Invoke(this, args);
         }
 
         // The following method works around a NUI issue where the new partial view won't display on screen until the window resizes.

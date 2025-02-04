@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Anvil.Services;
 using NLog;
 using XM.Shared.API.Constants;
@@ -22,25 +23,11 @@ namespace XM.Shared.Core.Dialog
         private Dictionary<int, bool> DialogFilesInUse { get; } = new();
 
         private readonly Dictionary<string, IConversation> _conversationsByType = new();
+        private InjectionService _injection;
 
-        private readonly IList<IConversation> _conversations;
-
-        private readonly IServiceManager _serviceManager;
-
-        public DialogService(
-            IServiceManager serviceManager, 
-            XMEventService @event,
-            IList<IConversation> conversations)
+        public DialogService(InjectionService injection)
         {
-            _serviceManager = serviceManager;
-            _conversations = conversations;
-
-            @event.Subscribe<ModuleEvent.OnLoad>(OnModuleLoad);
-        }
-
-        private void OnModuleLoad(uint objectSelf)
-        {
-            InitializeDialogs();
+            _injection = injection;
         }
 
         private void InitializeDialogs()
@@ -56,7 +43,7 @@ namespace XM.Shared.Core.Dialog
         /// </summary>
         /// <param name="key">The name of the conversation.</param>
         /// <returns>A conversation instance</returns>
-        public IConversation GetConversation(string key)
+        internal IConversation GetConversation(string key)
         {
             if (!_conversationsByType.ContainsKey(key))
             {
@@ -550,7 +537,7 @@ namespace XM.Shared.Core.Dialog
         /// </summary>
         /// <param name="playerId">The player's unique Id.</param>
         /// <returns>true if the player has the dialog, false otherwise</returns>
-        public bool HasPlayerDialog(string playerId)
+        internal bool HasPlayerDialog(string playerId)
         {
             return PlayerDialogs.ContainsKey(playerId);
         }
@@ -653,13 +640,25 @@ namespace XM.Shared.Core.Dialog
 
         public void Init()
         {
-            foreach (var conversation in _conversations)
+            var classes = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(s => s.GetTypes())
+                .Where(p => typeof(IConversation).IsAssignableFrom(p) && p.IsClass && !p.IsAbstract).ToArray();
+            foreach (var type in classes)
             {
-                var type = conversation.GetType();
-                _conversationsByType.Add(type.Name, conversation);
+                var instance = Activator.CreateInstance(type) as IConversation;
+                _injection.Inject(instance);
+
+                if (instance == null)
+                {
+                    throw new NullReferenceException("Unable to activate instance of type: " + type);
+                }
+
+                _conversationsByType.Add(type.Name, instance);
             }
 
-            Console.WriteLine($"Loaded {_conversations.Count} conversations.");
+            Console.WriteLine($"Loaded {_conversationsByType.Count} conversations.");
+            
+            InitializeDialogs();
         }
     }
 }
