@@ -13,7 +13,7 @@ using Action = System.Action;
 
 namespace XM.Plugin.Administration.BanManagement
 {
-    internal class BanViewModel: ViewModel<BanViewModel>
+    internal class ManageBanViewModel: ViewModel<ManageBanViewModel>
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private static readonly Color _green = new(0, 255, 0);

@@ -5852,6 +5852,38 @@
     {
       "id": 1463,
       "text": "Manage Staff"
+    },
+    {
+      "id": 1464,
+      "text": "Are you sure you want to delete this staff member?"
+    },
+    {
+      "id": 1465,
+      "text": "You can't delete yourself."
+    },
+    {
+      "id": 1466,
+      "text": "User deleted successfully."
+    },
+    {
+      "id": 1467,
+      "text": "User deleted from authorized DM list. Name: {0}, CDKey: {1}, Role: {2}"
+    },
+    {
+      "id": 1468,
+      "text": "User updated on authorized DM list. Name: {0}, CDKey: {1}, Role: {2}"
+    },
+    {
+      "id": 1469,
+      "text": "User Name"
+    },
+    {
+      "id": 1470,
+      "text": "DM"
+    },
+    {
+      "id": 1471,
+      "text": "Admin"
     }
   ]
 }

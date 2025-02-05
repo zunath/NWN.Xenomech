@@ -6,13 +6,13 @@ using XM.UI.Builder;
 namespace XM.Plugin.Administration.BanManagement
 {
     [ServiceBinding(typeof(IView))]
-    internal class BanView: IView
+    internal class ManageBanView: IView
     {
-        private readonly NuiBuilder<BanViewModel> _builder = new();
+        private readonly NuiBuilder<ManageBanViewModel> _builder = new();
 
         public IViewModel CreateViewModel()
         {
-            return new BanViewModel();
+            return new ManageBanViewModel();
         }
 
         public NuiBuiltWindow Build()

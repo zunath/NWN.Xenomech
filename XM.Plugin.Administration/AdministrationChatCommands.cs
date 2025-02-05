@@ -32,7 +32,7 @@ namespace XM.Plugin.Administration
                 .Permissions(AuthorizationLevel.Admin)
                 .Action((user, target, location, args) =>
                 {
-                    Event.PublishEvent(user, new UIEvent.OpenWindow(typeof(BanView)));
+                    Event.PublishEvent(user, new UIEvent.OpenWindow(typeof(ManageBanView)));
                 });
         }
 
@@ -43,7 +43,7 @@ namespace XM.Plugin.Administration
                 .Permissions(AuthorizationLevel.Admin)
                 .Action((user, target, location, args) =>
                 {
-                    Event.PublishEvent(user, new UIEvent.OpenWindow(typeof(StaffView)));
+                    Event.PublishEvent(user, new UIEvent.OpenWindow(typeof(ManageStaffView)));
                 });
         }
     }

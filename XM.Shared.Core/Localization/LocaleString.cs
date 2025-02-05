@@ -1146,6 +1146,14 @@ namespace XM.Shared.Core.Localization
         DeleteUser = 1460,
         CDKey8Chars = 1461,
         BanReason = 1462,
-        ManageStaff = 1463
+        ManageStaff = 1463,
+        AreYouSureYouWantToDeleteThisStaffMember = 1464,
+        YouCantDeleteYourself = 1465,
+        UserDeletedSuccessfully = 1466,
+        UserDeletedFromAuthorizedDMListNameXCDKeyYRoleZ = 1467,
+        UserUpdatedOnAuthorizedDMListNameXCDKeyYRoleZ = 1468,
+        UserName = 1469,
+        DM = 1470,
+        Admin = 1471,
     }
 }
