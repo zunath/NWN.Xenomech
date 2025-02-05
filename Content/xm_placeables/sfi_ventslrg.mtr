@@ -1,0 +1,9 @@
+// Renderhint
+renderhint normalandspecmapped
+twosided 1
+
+// Textures
+texture0 sfi_ventslrg_D
+texture1 sfi_ventslrg_N
+texture2 sfi_ventslrg_S
+texture3 sfi_ventslrg_R

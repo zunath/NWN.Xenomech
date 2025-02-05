@@ -1,0 +1,10 @@
+ 
+renderhint NormalAndSpecMapped
+ 
+// Textures 
+texture0 sfi_platpane4_D
+texture1 sfi_platpane4_N
+texture2 sfi_platpane4_S
+texture3 sfi_platpane4_R
+texture4 null
+texture5 null

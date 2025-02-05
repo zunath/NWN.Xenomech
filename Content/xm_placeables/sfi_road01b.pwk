@@ -1,0 +1,20 @@
+node trimesh 01b_wg
+  parent sfi_road01b_pwk
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+  wirecolor 1.00 1.00 1.00
+  verts 2
+    -4.00000 -4.00000  0.00000
+     4.00000 -4.00000  0.00000
+  faces 0
+endnode
+node dummy p1b_pwk_use01
+  parent sfi_road01b_pwk
+  position  0.00000 -4.50000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+node dummy p1b_pwk_use02
+  parent sfi_road01b_pwk
+  position  0.00000 -3.50000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode

@@ -1,0 +1,8 @@
+// Renderhint
+renderhint normalandspecmapped
+twosided 1
+// Textures
+texture0 sfi_platpane8_D
+texture1 sfi_platpane8_N
+texture2 sfi_platpane8_S
+texture3 sfi_platpane8_R

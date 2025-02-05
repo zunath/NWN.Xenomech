@@ -1,0 +1,10 @@
+ 
+renderhint NormalAndSpecMapped
+ 
+// Textures 
+texture0 sfi_panel10c_D
+texture1 sfi_panel10_N
+texture2 sfi_panel10_S
+texture3 sfi_panel10_R
+texture4 null
+texture5 null

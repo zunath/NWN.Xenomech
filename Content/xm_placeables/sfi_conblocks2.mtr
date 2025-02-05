@@ -1,0 +1,10 @@
+// Renderhint
+renderhint normalandspecmapped
+twosided 1
+
+// Textures
+texture0 sfi_conblocks2_D
+texture1 sfi_conblocks2_N
+texture2 sfi_conblocks2_S
+texture3 sfi_conblocks2_R
+texture4 sfi_conblocks2_H

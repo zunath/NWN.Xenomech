@@ -1,0 +1,9 @@
+// Renderhint
+renderhint normalandspecmapped
+twosided 1
+
+// Textures
+texture0 sfi_barrel01a_D
+texture1 sfi_barrel01_N
+texture2 sfi_barrel01_S
+texture3 sfi_barrel01_R

@@ -1,0 +1,11 @@
+// Renderhint
+renderhint normalandspecmapped
+twosided 1
+
+// Textures
+texture0 sfi_props1_D
+texture1 sfi_props1_N
+texture2 sfi_props1_S
+texture3 sfi_props1_R
+texture4 null
+texture5 sfi_props1_I
