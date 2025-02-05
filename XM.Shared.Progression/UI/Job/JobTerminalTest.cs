@@ -1,7 +1,7 @@
 ﻿using Anvil.Services;
 using XM.UI;
 
-namespace XM.Progression.UI.JobUI
+namespace XM.Progression.UI.Job
 {
     [ServiceBinding(typeof(JobTerminalTest))]
     internal class JobTerminalTest

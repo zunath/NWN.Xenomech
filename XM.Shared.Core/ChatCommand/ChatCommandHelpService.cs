@@ -1,9 +1,9 @@
 ﻿using Anvil.Services;
 
-namespace XM.Chat.ChatCommand
+namespace XM.Shared.Core.ChatCommand
 {
     [ServiceBinding(typeof(ChatCommandHelpService))]
-    internal class ChatCommandHelpService
+    public class ChatCommandHelpService
     {
         public string HelpTextPlayer { get; internal set; }
         public string HelpTextEmote { get; internal set; }

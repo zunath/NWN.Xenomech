@@ -3,7 +3,7 @@ using XM.Shared.API.Constants;
 using XM.Shared.Core.EventManagement;
 using XM.UI;
 
-namespace XM.Progression.UI.CharacterSheetUI
+namespace XM.Progression.UI.CharacterSheet
 {
     [ServiceBinding(typeof(CharacterSheetService))]
     internal class CharacterSheetService

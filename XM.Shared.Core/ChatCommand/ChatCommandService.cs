@@ -4,13 +4,12 @@ using Anvil.API;
 using Anvil.Services;
 using NLog;
 using XM.Shared.API.NWNX.ChatPlugin;
-using XM.Shared.Core;
 using XM.Shared.Core.Authorization;
 using XM.Shared.Core.Configuration;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 
-namespace XM.Chat.ChatCommand
+namespace XM.Shared.Core.ChatCommand
 {
     [ServiceBinding(typeof(ChatCommandService))]
     internal class ChatCommandService : IInitializable

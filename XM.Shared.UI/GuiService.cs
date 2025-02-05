@@ -57,12 +57,34 @@ namespace XM.UI
         private void RegisterEvents()
         {
             _event.RegisterEvent<UIEvent.UIRefreshEvent>(UIEventScript.RefreshUIScript);
+            _event.RegisterEvent<UIEvent.OpenWindow>(UIEventScript.OpenWindowScript);
+            _event.RegisterEvent<UIEvent.CloseWindow>(UIEventScript.CloseWindowScript);
+            _event.RegisterEvent<UIEvent.ToggleWindow>(UIEventScript.ToggleWindowScript);
         }
 
         private void SubscribeEvents()
         {
             _event.Subscribe<ModuleEvent.OnNuiEvent>(OnNuiEvent);
             _event.Subscribe<UIEvent.UIRefreshEvent>(OnRefreshUI);
+            _event.Subscribe<UIEvent.OpenWindow>(OnOpenWindow);
+            _event.Subscribe<UIEvent.CloseWindow>(OnCloseWindow);
+            _event.Subscribe<UIEvent.ToggleWindow>(OnToggleWindow);
+        }
+
+        private void OnOpenWindow(uint player)
+        {
+            var data = _event.GetEventData<UIEvent.OpenWindow>();
+            ShowWindow(player, data.ViewType);
+        }
+        private void OnCloseWindow(uint player)
+        {
+            var data = _event.GetEventData<UIEvent.CloseWindow>();
+            CloseWindow(player, data.ViewType);
+        }
+        private void OnToggleWindow(uint player)
+        {
+            var data = _event.GetEventData<UIEvent.ToggleWindow>();
+            ToggleWindow(player, data.ViewType);
         }
 
         public void Init()
@@ -212,6 +234,15 @@ namespace XM.UI
             where TView : IView
         {
             var viewType = typeof(TView);
+            ShowWindow(player, viewType, initialData, tetherObject);
+        }
+
+        private void ShowWindow(
+            uint player, 
+            Type viewType,
+            object initialData = default,
+            uint tetherObject = OBJECT_INVALID)
+        {
             var window = _builtWindowsByType[viewType];
 
             if (NuiFindWindow(player, window.WindowId) == 0)
@@ -231,7 +262,7 @@ namespace XM.UI
                 {
                     geometry = playerUI.WindowGeometries[windowId];
                 }
-                
+
                 var windowToken = NuiCreate(player, json, window.WindowId);
 
                 if (!_playerViewModels.ContainsKey(player))
@@ -247,9 +278,9 @@ namespace XM.UI
                 _playerToTokens[player][viewType] = windowToken;
 
                 viewModel.Bind(
-                    viewType,
-                    player, 
-                    windowToken, 
+                viewType,
+                    player,
+                    windowToken,
                     geometry,
                     partialViews,
                     initialData,
@@ -261,17 +292,17 @@ namespace XM.UI
 
         private void UserRequestedWindowClose(object sender, RequestCloseWindowEventArgs args)
         {
-            CloseWindow(args.ViewType, args.Player);
+            CloseWindow(args.Player, args.ViewType);
         }
 
         public void CloseWindow<TView>(uint player)
             where TView: IView
         {
             var type = typeof(TView);
-            CloseWindow(type, player);
+            CloseWindow(player, type);
         }
 
-        internal void CloseWindow(Type type, uint player)
+        internal void CloseWindow(uint player, Type type)
         {
             if (!_playerToTokens.ContainsKey(player))
                 return;
@@ -288,16 +319,20 @@ namespace XM.UI
         public void ToggleWindow<TView>(uint player)
             where TView: IView
         {
-            var type = typeof(TView);
+            var viewType = typeof(TView);
+            ToggleWindow(player, viewType);
+        }
 
+        private void ToggleWindow(uint player, Type viewType)
+        {
             if (_playerToTokens.ContainsKey(player) &&
-                _playerToTokens[player].ContainsKey(type))
+                _playerToTokens[player].ContainsKey(viewType))
             {
-                CloseWindow<TView>(player);
+                CloseWindow(player, viewType);
             }
             else
             {
-                ShowWindow<TView>(player);
+                ShowWindow(player, viewType);
             }
         }
 

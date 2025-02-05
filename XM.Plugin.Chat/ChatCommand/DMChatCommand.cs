@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using Anvil.Services;
 using NWN.Core;
-using XM.Chat.ChatCommand;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.AdminPlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Authorization;
+using XM.Shared.Core.ChatCommand;
 
-namespace XM.Chat.ChatCommand.ChatCommandDefinitions
+namespace XM.Chat.ChatCommand
 {
     [ServiceBinding(typeof(IChatCommandListDefinition))]
     public class DMChatCommand : IChatCommandListDefinition

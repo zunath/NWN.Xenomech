@@ -16,7 +16,7 @@ namespace XM.UI.Builder.Component
         private string _valueBind;
 
         private ushort _maxLength = 32;
-        private bool _multiLine;
+        private bool _isMultiLine;
         private bool _wordWrap;
 
         public NuiTextEditBuilder(NuiEventCollection eventCollection)
@@ -36,9 +36,9 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiTextEditBuilder<TViewModel> MultiLine(bool multiLine)
+        public NuiTextEditBuilder<TViewModel> IsMultiLine(bool multiLine)
         {
-            _multiLine = multiLine;
+            _isMultiLine = multiLine;
             return this;
         }
 
@@ -75,7 +75,7 @@ namespace XM.UI.Builder.Component
 
             var value = Nui.Bind(_valueBind);
 
-            return Nui.TextEdit(placeholder, value, _maxLength, _multiLine, _wordWrap);
+            return Nui.TextEdit(placeholder, value, _maxLength, _isMultiLine, _wordWrap);
         }
     }
 }

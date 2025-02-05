@@ -1,8 +1,9 @@
-﻿using Anvil.Services;
+﻿using System;
 using System.Linq.Expressions;
-using System;
 using Anvil.API;
+using Anvil.Services;
 using XM.Progression.Job;
+using XM.Shared.Core;
 using XM.Shared.Core.Localization;
 using XM.UI;
 using XM.UI.Builder;
@@ -10,9 +11,8 @@ using XM.UI.Builder.Layout;
 using Action = System.Action;
 using NuiScrollbars = XM.Shared.API.NUI.NuiScrollbars;
 using NuiAspect = XM.Shared.API.NUI.NuiAspect;
-using XM.Shared.Core;
 
-namespace XM.Progression.UI.JobUI
+namespace XM.Progression.UI.Job
 {
     [ServiceBinding(typeof(IView))]
     internal class JobView: IView
