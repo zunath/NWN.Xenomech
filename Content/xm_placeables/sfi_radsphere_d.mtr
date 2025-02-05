@@ -1,0 +1,9 @@
+// Renderhint
+renderhint normalandspecmapped
+twosided 1
+
+// Textures
+texture0 sfi_radsphere_D
+texture1 sfi_radsphere_N
+texture2 sfi_radsphere_S
+texture3 sfi_radsphere_R

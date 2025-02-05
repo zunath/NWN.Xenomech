@@ -1,0 +1,10 @@
+ 
+renderhint NormalAndSpecMapped
+ 
+// Textures 
+texture0 sfi_conbricks2_D
+texture1 sfi_conbricks1_N
+texture2 sfi_conbricks1_S
+texture3 sfi_conbricks1_R
+texture4 sfi_conbricks1_H
+texture5 null

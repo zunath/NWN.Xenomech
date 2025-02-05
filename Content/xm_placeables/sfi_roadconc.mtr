@@ -1,0 +1,10 @@
+ 
+renderhint NormalAndSpecMapped
+ 
+// Textures 
+texture0 sfi_roadconc_D
+texture1 sfi_roadconc_N
+texture2 sfi_roadconc_S
+texture3 sfi_roadconc_R
+texture4 sfi_roadconc_H
+texture5 null

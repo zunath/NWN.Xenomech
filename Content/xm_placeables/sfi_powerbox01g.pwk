@@ -1,0 +1,25 @@
+node trimesh 01g_wg
+  parent sfi_powerbox01g_pwk
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+  wirecolor 1.00 1.00 1.00
+  verts 5
+    -0.00967  0.14343  0.00000
+    -0.31737 -0.08617  0.00000
+    -0.00967 -0.17832  0.00000
+    -0.31737  0.08617  0.00000
+    -0.21500  0.00129  0.00000
+  faces 2
+    0 1 2 1  0 0 0 0
+    0 3 1 2  0 0 0 0
+endnode
+node dummy p1g_pwk_use01
+  parent sfi_powerbox01g_pwk
+  position -0.17000 -0.68000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+node dummy p1g_pwk_use02
+  parent sfi_powerbox01g_pwk
+  position -0.17000  0.64000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode

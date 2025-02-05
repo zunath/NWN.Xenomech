@@ -1,0 +1,10 @@
+ 
+renderhint NormalAndSpecMapped
+ 
+// Textures 
+texture0 sfi_concdmg_D
+texture1 sfi_concdmg_N
+texture2 sfi_concdmg_S
+texture3 sfi_concdmg_R
+texture4 sfi_concdmg_H
+texture5 null

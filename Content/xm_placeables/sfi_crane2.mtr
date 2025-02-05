@@ -1,0 +1,9 @@
+// Renderhint
+renderhint normalandspecmapped
+twosided 1
+
+// Textures
+texture0 sfi_crane2_D
+texture1 sfi_crane2_N
+texture2 sfi_crane2_S
+texture3 sfi_crane2_R

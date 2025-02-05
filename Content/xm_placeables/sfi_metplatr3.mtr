@@ -1,0 +1,10 @@
+// Renderhint
+renderhint normalandspecmapped
+twosided 1
+
+// Textures
+texture0 sfi_metplatr3_D
+texture1 sfi_metplatr3_N
+texture2 sfi_metplatr3_S
+texture3 sfi_metplatr3_R
+texture4 sfi_metplatr3_H

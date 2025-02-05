@@ -5780,6 +5780,10 @@
     {
       "id": 1445,
       "text": "Price For: {0}"
+    },
+    {
+      "id": 1446,
+      "text": "Lighting"
     }
   ]
 }
