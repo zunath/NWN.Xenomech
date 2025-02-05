@@ -16,7 +16,7 @@ using XM.Shared.Core.Localization;
 using XM.UI;
 using Action = System.Action;
 
-namespace XM.Progression.UI.CharacterSheetUI
+namespace XM.Progression.UI.CharacterSheet
 {
     [ServiceBinding(typeof(IViewModel))]
     [ServiceBinding(typeof(IRefreshable))]

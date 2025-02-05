@@ -5780,6 +5780,30 @@
     {
       "id": 1445,
       "text": "Price For: {0}"
+    },
+    {
+      "id": 1446,
+      "text": "Lighting"
+    },
+    {
+      "id": 1447,
+      "text": "Area Notes"
+    },
+    {
+      "id": 1448,
+      "text": "DM Only Notes"
+    },
+    {
+      "id": 1449,
+      "text": "Public Notes"
+    },
+    {
+      "id": 1450,
+      "text": "Discard Changes"
+    },
+    {
+      "id": 1451,
+      "text": "Delete Note"
     }
   ]
 }

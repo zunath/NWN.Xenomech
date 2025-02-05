@@ -1,12 +1,10 @@
 ﻿using Anvil.Services;
-using NRediSearch.Aggregation;
-using XM.Shared.API.NUI;
 using XM.Shared.Core.Localization;
 using XM.UI;
 using XM.UI.Builder;
 using XM.UI.Builder.Layout;
 
-namespace XM.Progression.UI.PlayerStatusUI
+namespace XM.Progression.UI.PlayerStatus
 {
     [ServiceBinding(typeof(IView))]
     internal class PlayerStatusView: IView

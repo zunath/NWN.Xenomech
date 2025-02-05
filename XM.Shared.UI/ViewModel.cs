@@ -113,7 +113,7 @@ namespace XM.UI
 
                 var type = property.PropertyType;
                 var value = XMJsonUtility.DeserializeObject(jsonString, type);
-                _backingData[propertyName] = value;
+                GetType().GetProperty(propertyName)!.SetValue(this, value);
             }
         }
 

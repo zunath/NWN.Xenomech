@@ -20,6 +20,7 @@ namespace XM.Shared.Core.Json
             _options.Converters.Add(new NuiRectJsonConverter());
             _options.Converters.Add(new ColorJsonConverter());
             _options.Converters.Add(new FloatJsonConverter());
+            _options.Converters.Add(new TypeConverter());
             _options.Converters.Add(new NuiComboEntryConverter());
             _options.Converters.Add(new XMBindingListConverter<NuiComboEntry>(new JsonSerializerOptions()
             {

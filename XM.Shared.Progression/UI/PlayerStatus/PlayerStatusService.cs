@@ -5,7 +5,7 @@ using XM.Shared.Core.EventManagement;
 using XM.UI;
 using XM.UI.Event;
 
-namespace XM.Progression.UI.PlayerStatusUI
+namespace XM.Progression.UI.PlayerStatus
 {
     [ServiceBinding(typeof(PlayerStatusService))]
     internal class PlayerStatusService

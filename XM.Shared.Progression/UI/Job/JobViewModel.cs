@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Anvil.API;
 using Anvil.Services;
 using XM.Progression.Ability;
@@ -11,7 +10,7 @@ using XM.Shared.Core.Localization;
 using XM.UI;
 using Action = System.Action;
 
-namespace XM.Progression.UI.JobUI
+namespace XM.Progression.UI.Job
 {
     [ServiceBinding(typeof(IViewModel))]
     internal class JobViewModel: ViewModel<JobViewModel>
