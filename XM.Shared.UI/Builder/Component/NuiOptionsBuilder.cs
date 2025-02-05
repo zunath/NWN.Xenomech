@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using XM.Shared.API.NUI;
 using NuiDirection = XM.Shared.API.NUI.NuiDirection;
+using XM.Shared.Core.Localization;
 
 namespace XM.UI.Builder.Component
 {
@@ -11,7 +12,7 @@ namespace XM.UI.Builder.Component
         where TViewModel : IViewModel
     {
         private NuiDirection _direction;
-        private readonly List<string> _optionLabels = new();
+        private readonly List<LocaleString> _optionLabels = new();
 
         private int _selection;
         private string _selectionBind;
@@ -27,7 +28,7 @@ namespace XM.UI.Builder.Component
             return this;
         }
 
-        public NuiOptionsBuilder<TViewModel> Option(string option)
+        public NuiOptionsBuilder<TViewModel> AddOption(LocaleString option)
         {
             _optionLabels.Add(option);
             return this;
@@ -55,7 +56,7 @@ namespace XM.UI.Builder.Component
 
             foreach (var option in _optionLabels)
             {
-                optionLabels = JsonArrayInsert(optionLabels, JsonString(option));
+                optionLabels = JsonArrayInsert(optionLabels, JsonString(option.ToLocalizedString()));
             }
 
             return Nui.Options(_direction, optionLabels, selection);
