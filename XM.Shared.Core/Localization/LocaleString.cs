@@ -1135,5 +1135,17 @@ namespace XM.Shared.Core.Localization
         PublicNotes = 1449,
         DiscardChanges = 1450,
         DeleteNote = 1451,
+        AreYouSureYouWantToDeleteThisBan = 1452,
+        UserBanDeletedSuccessfully = 1453,
+        UserDeletedFromBanListCDKeyXReasonY = 1454,
+        CDKeysMustBeExactly8Digits = 1455,
+        SavedSuccessfully = 1456,
+        UserAddedToBanListCDKeyXReasonY = 1457,
+        ManageBans = 1458,
+        NewUser = 1459,
+        DeleteUser = 1460,
+        CDKey8Chars = 1461,
+        BanReason = 1462,
+        ManageStaff = 1463
     }
 }

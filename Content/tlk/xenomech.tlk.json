@@ -5804,6 +5804,54 @@
     {
       "id": 1451,
       "text": "Delete Note"
+    },
+    {
+      "id": 1452,
+      "text": "Are you sure you want to delete this ban?"
+    },
+    {
+      "id": 1453,
+      "text": "User ban deleted successfully."
+    },
+    {
+      "id": 1454,
+      "text": "User deleted from ban list. CDKey: {0}, Reason: {1}"
+    },
+    {
+      "id": 1455,
+      "text": "CD Keys must be exactly 8 digits."
+    },
+    {
+      "id": 1456,
+      "text": "Saved successfully."
+    },
+    {
+      "id": 1457,
+      "text": "User added to ban list. CDKey: {0}, Reason: {1}"
+    },
+    {
+      "id": 1458,
+      "text": "Manage Bans"
+    },
+    {
+      "id": 1459,
+      "text": "New User"
+    },
+    {
+      "id": 1460,
+      "text": "Delete User"
+    },
+    {
+      "id": 1461,
+      "text": "CD Key (8 Chars)"
+    },
+    {
+      "id": 1462,
+      "text": "Ban Reason"
+    },
+    {
+      "id": 1463,
+      "text": "Manage Staff"
     }
   ]
 }
