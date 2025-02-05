@@ -1,12 +1,11 @@
 ﻿using System;
 using Anvil.API;
 using Anvil.Services;
-using XM.Progression.Event;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.UI;
 
-namespace XM.Progression.UI.PlayerStatusUI
+namespace XM.Progression.UI.PlayerStatus
 {
     [ServiceBinding(typeof(IViewModel))]
     [ServiceBinding(typeof(IRefreshable))]

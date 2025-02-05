@@ -1129,5 +1129,11 @@ namespace XM.Shared.Core.Localization
         Save = 1443,
         Cancel = 1444,
         PriceForX = 1445,
+        Lighting = 1446,
+        AreaNotes = 1447,
+        DMOnlyNotes = 1448,
+        PublicNotes = 1449,
+        DiscardChanges = 1450,
+        DeleteNote = 1451,
     }
 }

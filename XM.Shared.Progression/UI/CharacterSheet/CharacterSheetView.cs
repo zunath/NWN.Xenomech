@@ -9,7 +9,7 @@ using XM.UI.Builder.Layout;
 using NuiAspect = XM.Shared.API.NUI.NuiAspect;
 using NuiScrollbars = XM.Shared.API.NUI.NuiScrollbars;
 
-namespace XM.Progression.UI.CharacterSheetUI
+namespace XM.Progression.UI.CharacterSheet
 {
     [ServiceBinding(typeof(IView))]
     internal class CharacterSheetView : IView
