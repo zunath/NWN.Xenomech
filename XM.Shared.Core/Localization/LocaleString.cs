@@ -1336,6 +1336,20 @@ namespace XM.Shared.Core.Localization
         Name = 1649,
         StoreOutfit = 1650,
         LoadOutfit = 1651,
+        AppearanceEditor = 1652,
+        Equipment = 1653,
+        Armor = 1654,
+        Helmet = 1655,
+        Cloak = 1656,
+        WeaponMain = 1657,
+        WeaponOff = 1658,
+        NoItemIsEquippedOrTheEquippedItemCannotBeModified = 1659,
+        PreviousPart = 1660,
+        NextPart = 1661,
+        ShowHelmet = 1662,
+        ShowCloak = 1663,
+        IncreaseHeight = 1664,
+        DecreaseHeight = 1665,
 
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using XM.Shared.API.NUI;
 using XM.Shared.Core;
+using XM.Shared.Core.Localization;
 
 namespace XM.UI.Builder.Component
 {
@@ -19,6 +20,16 @@ namespace XM.UI.Builder.Component
         public NuiComboBuilder(NuiEventCollection eventCollection)
             : base(eventCollection)
         {
+        }
+
+        public NuiComboBuilder<TViewModel> Option(LocaleString label, int value)
+        {
+            var optionBuilder = new NuiComboEntryBuilder<TViewModel>(RegisteredEvents);
+            optionBuilder.Label(label);
+            optionBuilder.Value(value);
+            _options.Add(optionBuilder);
+
+            return this;
         }
 
         public NuiComboBuilder<TViewModel> Option(Action<NuiComboEntryBuilder<TViewModel>> option)
