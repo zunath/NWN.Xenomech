@@ -2,6 +2,7 @@ namespace XM.Shared.API.Constants
 {
     public enum InventorySlotType
     {
+        Invalid = -1,
         Head = 0,
         Chest = 1,
         Boots = 2,

@@ -17,5 +17,8 @@ namespace XM.Shared.Core.Entity
         }
 
         public bool DisplayServerResetReminders { get; set; }
+        public bool ShowHelmet { get; set; }
+        public bool ShowCloak { get; set; }
+        public float AppearanceScale { get; set; }
     }
 }

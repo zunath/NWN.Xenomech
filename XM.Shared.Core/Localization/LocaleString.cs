@@ -1330,6 +1330,12 @@ namespace XM.Shared.Core.Localization
         SubmittedBugReportX = 1643,
         SubmitBugReport = 1644,
         PleaseEnterAsMuchInformationAsPossibleRegardingTheEncounteredBug = 1645,
+        Outfits = 1646,
+        New = 1647,
+        Delete = 1648,
+        Name = 1649,
+        StoreOutfit = 1650,
+        LoadOutfit = 1651,
 
     }
 }
