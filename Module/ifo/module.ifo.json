@@ -81,15 +81,15 @@
   },
   "Mod_Entry_X": {
     "type": "float",
-    "value": 9.875236511230469
+    "value": 9.0
   },
   "Mod_Entry_Y": {
     "type": "float",
-    "value": 10.60599327087402
+    "value": 10.0
   },
   "Mod_Entry_Z": {
     "type": "float",
-    "value": -1.407348690918298e-006
+    "value": 0.0
   },
   "Mod_Expan_List": {
     "type": "list",
@@ -155,7 +155,28 @@
         "__struct_id": 8,
         "Mod_Hak": {
           "type": "cexostring",
-          "value": "xm_placeables"
+          "value": "xm_plc_aforest"
+        }
+      },
+      {
+        "__struct_id": 8,
+        "Mod_Hak": {
+          "type": "cexostring",
+          "value": "xm_plc_lighting"
+        }
+      },
+      {
+        "__struct_id": 8,
+        "Mod_Hak": {
+          "type": "cexostring",
+          "value": "xm_plc_scifibase"
+        }
+      },
+      {
+        "__struct_id": 8,
+        "Mod_Hak": {
+          "type": "cexostring",
+          "value": "xm_plc_swtor"
         }
       },
       {
