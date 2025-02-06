@@ -3,6 +3,7 @@ using Anvil.Services;
 using XM.Shared.Core.Authorization;
 using XM.Shared.Core.ChatCommand;
 using XM.Shared.Core.Configuration;
+using XM.Shared.Core.Localization;
 
 namespace XM.Chat.ChatCommand
 {
@@ -25,7 +26,7 @@ namespace XM.Chat.ChatCommand
             _help = help;
         }
 
-        public Dictionary<string, ChatCommandDetail> BuildChatCommands()
+        public Dictionary<LocaleString, ChatCommandDetail> BuildChatCommands()
         {
             ListEmotesCommand();
             Help();
@@ -36,8 +37,8 @@ namespace XM.Chat.ChatCommand
 
         private void Help()
         {
-            _builder.Create("help")
-                .Description("Displays all chat commands available to you.")
+            _builder.Create(LocaleString.help)
+                .Description(LocaleString.DisplaysAllChatCommandsAvailableToYou)
                 .Permissions(AuthorizationLevel.All)
                 .Action((user, target, location, args) =>
                 {
@@ -61,8 +62,8 @@ namespace XM.Chat.ChatCommand
 
         private void ListEmotesCommand()
         {
-            _builder.Create("emotes")
-                .Description("Displays all emotes available to you.")
+            _builder.Create(LocaleString.emotes)
+                .Description(LocaleString.DisplaysAllEmotesAvailableToYou)
                 .Permissions(AuthorizationLevel.All)
                 .Action((user, target, location, args) => { SendMessageToPC(user, _help.HelpTextEmote); });
         }

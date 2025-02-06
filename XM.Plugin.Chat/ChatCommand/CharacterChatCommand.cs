@@ -15,7 +15,7 @@ namespace XM.Chat.ChatCommand
     {
         private readonly ChatCommandBuilder _builder = new();
 
-        public Dictionary<string, ChatCommandDetail> BuildChatCommands()
+        public Dictionary<LocaleString, ChatCommandDetail> BuildChatCommands()
         {
             Char();
             DeleteCommand();
@@ -25,14 +25,14 @@ namespace XM.Chat.ChatCommand
 
         private void Char()
         {
-            _builder.Create("character", "char")
-                .Description("Displays your character's info.")
+            _builder.Create(LocaleString.character, LocaleString.@char)
+                .Description(LocaleString.DisplaysYourCharacterInfo)
                 .Permissions(AuthorizationLevel.All)
                 .Validate((user, args) =>
                 {
                     if (GetIsDM(user))
                     {
-                        return "This command can only be used on PCs.";
+                        return LocaleString.ThisCommandCanOnlyBeUsedOnPCs.ToLocalizedString();
                     }
 
                     return string.Empty;
@@ -53,25 +53,25 @@ namespace XM.Chat.ChatCommand
 
         private void DeleteCommand()
         {
-            _builder.Create("delete")
-                .Description("Permanently deletes your character.")
+            _builder.Create(LocaleString.delete)
+                .Description(LocaleString.PermanentlyDeletesYourCharacter)
                 .Permissions(AuthorizationLevel.All)
                 .Validate((user, args) =>
                 {
                     if (!GetIsPC(user) || GetIsDM(user))
-                        return "You can only delete a player character.";
+                        return LocaleString.YouCanOnlyDeleteAPlayerCharacter.ToLocalizedString();
 
                     var cdKey = GetPCPublicCDKey(user);
                     var enteredCDKey = args.Length > 0 ? args[0] : string.Empty;
 
                     if (cdKey != enteredCDKey)
                     {
-                        return "Invalid CD key entered. Please enter the command as follows: \"/delete <CD Key>\". You can retrieve your CD key with the /Char chat command.";
+                        return LocaleString.InvalidCDKeyEnteredDeleteCharacter.ToLocalizedString();
                     }
 
                     if (GetIsDM(user) || GetIsDMPossessed(user))
                     {
-                        return "DM characters cannot use this chat command.";
+                        return LocaleString.DMCharactersCannotUseThisChatCommand.ToLocalizedString();
                     }
 
                     return string.Empty;
@@ -98,13 +98,13 @@ namespace XM.Chat.ChatCommand
                     if (isFirstSubmission)
                     {
                         SetLocalString(user, "DELETE_CHARACTER_LAST_SUBMISSION", DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture));
-                        FloatingTextStringOnCreature("Please confirm your deletion by entering another \"/delete <CD Key>\" command within 30 seconds.", user, false);
+                        FloatingTextStringOnCreature(LocaleString.PleaseConfirmDeletion.ToLocalizedString(), user, false);
                     }
                     else
                     {
                         var playerName = GetPCPlayerName(user);
                         var characterName = GetName(user);
-                        AdminPlugin.DeletePlayerCharacter(user, true, "Your character has been deleted.");
+                        AdminPlugin.DeletePlayerCharacter(user, true, LocaleString.YourCharacterHasBeenDeleted.ToLocalizedString());
                         AdminPlugin.DeleteTURD(playerName, characterName);
                     }
                 });

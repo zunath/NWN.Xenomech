@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Authorization;
+using XM.Shared.Core.Localization;
 
 namespace XM.Shared.Core.ChatCommand
 {
     public class ChatCommandBuilder
     {
-        private readonly Dictionary<string, ChatCommandDetail> _chatCommands = new Dictionary<string, ChatCommandDetail>();
+        private readonly Dictionary<LocaleString, ChatCommandDetail> _chatCommands = new();
         private ChatCommandDetail _currentDetail;
 
         /// <summary>
@@ -15,7 +16,7 @@ namespace XM.Shared.Core.ChatCommand
         /// <param name="command">The primary command name.</param>
         /// <param name="alternativeCommands">Alternative commands which also perform the same method.</param>
         /// <returns>A configured ChatCommandBuilder.</returns>
-        public ChatCommandBuilder Create(string command, params string[] alternativeCommands)
+        public ChatCommandBuilder Create(LocaleString command, params LocaleString[] alternativeCommands)
         {
             _currentDetail = new ChatCommandDetail();
             _chatCommands[command] = _currentDetail;
@@ -36,7 +37,7 @@ namespace XM.Shared.Core.ChatCommand
         /// </summary>
         /// <param name="description">The description to set.</param>
         /// <returns>A configured ChatCommandBuilder.</returns>
-        public ChatCommandBuilder Description(string description)
+        public ChatCommandBuilder Description(LocaleString description)
         {
             _currentDetail.Description = description;
 
@@ -168,7 +169,7 @@ namespace XM.Shared.Core.ChatCommand
         /// Builds all of the chat commands constructed by this builder.
         /// </summary>
         /// <returns>A dictionary containing all chat command configurations.</returns>
-        public Dictionary<string, ChatCommandDetail> Build()
+        public Dictionary<LocaleString, ChatCommandDetail> Build()
         {
             return _chatCommands;
         }

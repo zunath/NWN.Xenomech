@@ -5884,6 +5884,646 @@
     {
       "id": 1471,
       "text": "Admin"
+    },
+    {
+      "id": 1472,
+      "text": "managebans"
+    },
+    {
+      "id": 1473,
+      "text": "managestaff"
+    },
+    {
+      "id": 1474,
+      "text": "bug"
+    },
+    {
+      "id": 1475,
+      "text": "notes"
+    },
+    {
+      "id": 1476,
+      "text": "note"
+    },
+    {
+      "id": 1477,
+      "text": "character"
+    },
+    {
+      "id": 1478,
+      "text": "delete"
+    },
+    {
+      "id": 1479,
+      "text": "char"
+    },
+    {
+      "id": 1480,
+      "text": "copyitem"
+    },
+    {
+      "id": 1481,
+      "text": "day"
+    },
+    {
+      "id": 1482,
+      "text": "night"
+    },
+    {
+      "id": 1483,
+      "text": "getplot"
+    },
+    {
+      "id": 1484,
+      "text": "kill"
+    },
+    {
+      "id": 1485,
+      "text": "rez"
+    },
+    {
+      "id": 1486,
+      "text": "spawngold"
+    },
+    {
+      "id": 1487,
+      "text": "tpwp"
+    },
+    {
+      "id": 1488,
+      "text": "getlocalfloat"
+    },
+    {
+      "id": 1489,
+      "text": "getlocalint"
+    },
+    {
+      "id": 1490,
+      "text": "getlocalstring"
+    },
+    {
+      "id": 1491,
+      "text": "setlocalfloat"
+    },
+    {
+      "id": 1492,
+      "text": "setlocalint"
+    },
+    {
+      "id": 1493,
+      "text": "setlocalstring"
+    },
+    {
+      "id": 1494,
+      "text": "setportrait"
+    },
+    {
+      "id": 1495,
+      "text": "spawnitem"
+    },
+    {
+      "id": 1496,
+      "text": "playvfx"
+    },
+    {
+      "id": 1497,
+      "text": "restartserver"
+    },
+    {
+      "id": 1498,
+      "text": "gettag"
+    },
+    {
+      "id": 1499,
+      "text": "setscale"
+    },
+    {
+      "id": 1500,
+      "text": "getscale"
+    },
+    {
+      "id": 1501,
+      "text": "bored"
+    },
+    {
+      "id": 1502,
+      "text": "bow"
+    },
+    {
+      "id": 1503,
+      "text": "deadback"
+    },
+    {
+      "id": 1504,
+      "text": "deadfront"
+    },
+    {
+      "id": 1505,
+      "text": "drink"
+    },
+    {
+      "id": 1506,
+      "text": "drunk"
+    },
+    {
+      "id": 1507,
+      "text": "duck"
+    },
+    {
+      "id": 1508,
+      "text": "greet"
+    },
+    {
+      "id": 1509,
+      "text": "interact"
+    },
+    {
+      "id": 1510,
+      "text": "meditate"
+    },
+    {
+      "id": 1511,
+      "text": "laughing"
+    },
+    {
+      "id": 1512,
+      "text": "listen"
+    },
+    {
+      "id": 1513,
+      "text": "look"
+    },
+    {
+      "id": 1514,
+      "text": "pickup"
+    },
+    {
+      "id": 1515,
+      "text": "read"
+    },
+    {
+      "id": 1516,
+      "text": "salute"
+    },
+    {
+      "id": 1517,
+      "text": "scratchhead"
+    },
+    {
+      "id": 1518,
+      "text": "sidestep"
+    },
+    {
+      "id": 1519,
+      "text": "sit"
+    },
+    {
+      "id": 1520,
+      "text": "spasm"
+    },
+    {
+      "id": 1521,
+      "text": "taunt"
+    },
+    {
+      "id": 1522,
+      "text": "victory1"
+    },
+    {
+      "id": 1523,
+      "text": "victory2"
+    },
+    {
+      "id": 1524,
+      "text": "victory3"
+    },
+    {
+      "id": 1525,
+      "text": "coord"
+    },
+    {
+      "id": 1526,
+      "text": "pos"
+    },
+    {
+      "id": 1527,
+      "text": "time"
+    },
+    {
+      "id": 1528,
+      "text": "help"
+    },
+    {
+      "id": 1529,
+      "text": "emotes"
+    },
+    {
+      "id": 1530,
+      "text": "Displays all chat commands available to you."
+    },
+    {
+      "id": 1531,
+      "text": "Displays all emotes available to you."
+    },
+    {
+      "id": 1532,
+      "text": "Displays your current coordinates in the area."
+    },
+    {
+      "id": 1533,
+      "text": "Displays your current position in the area."
+    },
+    {
+      "id": 1534,
+      "text": "Returns the current UTC server time and the in-game time."
+    },
+    {
+      "id": 1535,
+      "text": "Current Area Coordinates: ({0}, {1})"
+    },
+    {
+      "id": 1536,
+      "text": "Current Position: ({0}, {1}, {2})"
+    },
+    {
+      "id": 1537,
+      "text": "Current Server Date: {0}"
+    },
+    {
+      "id": 1538,
+      "text": "Current World Time: {0}"
+    },
+    {
+      "id": 1539,
+      "text": "Copies the targeted item."
+    },
+    {
+      "id": 1540,
+      "text": "Sets the world time to 8 AM."
+    },
+    {
+      "id": 1541,
+      "text": "Sets the world time to 8 PM."
+    },
+    {
+      "id": 1542,
+      "text": "Gets whether an object is marked plot."
+    },
+    {
+      "id": 1543,
+      "text": "Kills your target."
+    },
+    {
+      "id": 1544,
+      "text": "Revives you, heals you to full, and restores all EP."
+    },
+    {
+      "id": 1545,
+      "text": "Spawns gold of a specific quantity on your character. Example: /spawngold 33"
+    },
+    {
+      "id": 1546,
+      "text": "Teleports you to a waypoint with a specified tag."
+    },
+    {
+      "id": 1547,
+      "text": "Gets a local float on a target."
+    },
+    {
+      "id": 1548,
+      "text": "Gets a local integer on a target."
+    },
+    {
+      "id": 1549,
+      "text": "Gets a local string on a target."
+    },
+    {
+      "id": 1550,
+      "text": "Sets a local float on a target."
+    },
+    {
+      "id": 1551,
+      "text": "Sets a local int on a target."
+    },
+    {
+      "id": 1552,
+      "text": "Sets a local string on a target."
+    },
+    {
+      "id": 1553,
+      "text": "Sets portrait of the target player using the string specified. (Remember to add po_ to the portrait)"
+    },
+    {
+      "id": 1554,
+      "text": "Spawns an item of a specific quantity on your character. Example: /spawnitem my_item 3"
+    },
+    {
+      "id": 1555,
+      "text": "Plays a visual effect from visualeffects.2da."
+    },
+    {
+      "id": 1556,
+      "text": "Restarts the server. Requires CD Key to be entered. Example: /restartserver XXXXYYYY"
+    },
+    {
+      "id": 1557,
+      "text": "Gets a target's tag."
+    },
+    {
+      "id": 1558,
+      "text": "Sets an object's scale."
+    },
+    {
+      "id": 1559,
+      "text": "Gets an object's scale."
+    },
+    {
+      "id": 1560,
+      "text": "Plays a bored animation."
+    },
+    {
+      "id": 1561,
+      "text": "Plays a bow animation."
+    },
+    {
+      "id": 1562,
+      "text": "Plays a dead back animation."
+    },
+    {
+      "id": 1563,
+      "text": "Plays a dead front animation."
+    },
+    {
+      "id": 1564,
+      "text": "Plays a drinking animation."
+    },
+    {
+      "id": 1565,
+      "text": "Plays a drunk animation."
+    },
+    {
+      "id": 1566,
+      "text": "Plays a duck animation."
+    },
+    {
+      "id": 1567,
+      "text": "Plays a greet animation."
+    },
+    {
+      "id": 1568,
+      "text": "Plays an interact animation."
+    },
+    {
+      "id": 1569,
+      "text": "Plays a meditate animation."
+    },
+    {
+      "id": 1570,
+      "text": "Plays a laughing animation."
+    },
+    {
+      "id": 1571,
+      "text": "Plays a listen animation."
+    },
+    {
+      "id": 1572,
+      "text": "Plays a look far animation."
+    },
+    {
+      "id": 1573,
+      "text": "Plays a pickup animation."
+    },
+    {
+      "id": 1574,
+      "text": "Plays a read animation."
+    },
+    {
+      "id": 1575,
+      "text": "Plays a salute animation."
+    },
+    {
+      "id": 1576,
+      "text": "Plays a scratch head animation."
+    },
+    {
+      "id": 1577,
+      "text": "Plays a side-step animation."
+    },
+    {
+      "id": 1578,
+      "text": "Makes your character sit down."
+    },
+    {
+      "id": 1579,
+      "text": "Plays a spasm animation."
+    },
+    {
+      "id": 1580,
+      "text": "Plays a taunt animation."
+    },
+    {
+      "id": 1581,
+      "text": "Plays a victory 1 animation."
+    },
+    {
+      "id": 1582,
+      "text": "Plays a victory 2 animation."
+    },
+    {
+      "id": 1583,
+      "text": "Plays a victory 3 animation."
+    },
+    {
+      "id": 1584,
+      "text": "Displays your character's info."
+    },
+    {
+      "id": 1585,
+      "text": "Permanently deletes your character."
+    },
+    {
+      "id": 1586,
+      "text": "Toggles the area notes window."
+    },
+    {
+      "id": 1587,
+      "text": "Toggles the manage bans window to add/remove banned players."
+    },
+    {
+      "id": 1588,
+      "text": "Toggles the manage staff window to add/remove staff members."
+    },
+    {
+      "id": 1589,
+      "text": "Toggles the bug report window to submit bugs to the developers. Please include as much detail as possible."
+    },
+    {
+      "id": 1590,
+      "text": "You may only submit one bug report per minute. Please wait and try again."
+    },
+    {
+      "id": 1591,
+      "text": "Loaded {0} chat commands."
+    },
+    {
+      "id": 1592,
+      "text": "Command '{0}' is registered multiple times. Only the first registration will take effect."
+    },
+    {
+      "id": 1593,
+      "text": "You can only copy items with this command."
+    },
+    {
+      "id": 1594,
+      "text": "Target is marked plot."
+    },
+    {
+      "id": 1595,
+      "text": "Target is NOT marked plot."
+    },
+    {
+      "id": 1596,
+      "text": "Please specify a quantity. Example: /spawngold 34"
+    },
+    {
+      "id": 1597,
+      "text": "You must specify a waypoint tag. Example: /tpwp MY_WAYPOINT_TAG"
+    },
+    {
+      "id": 1598,
+      "text": "Invalid waypoint tag. Did you enter the right tag?"
+    },
+    {
+      "id": 1599,
+      "text": "Missing arguments. Format should be: /GetLocalFloat Variable_Name. Example: /GetLocalFloat MY_VARIABLE"
+    },
+    {
+      "id": 1600,
+      "text": "Missing arguments. Format should be: /GetLocalInt Variable_Name. Example: /GetLocalInt MY_VARIABLE"
+    },
+    {
+      "id": 1601,
+      "text": "Missing arguments. Format should be: /GetLocalString Variable_Name. Example: /GetLocalString MY_VARIABLE"
+    },
+    {
+      "id": 1602,
+      "text": "Target is invalid. Targeting area instead."
+    },
+    {
+      "id": 1603,
+      "text": "Missing arguments. Format should be: /SetLocalFloat Variable_Name <VALUE>. Example: /SetLocalFloat MY_VARIABLE 6.9"
+    },
+    {
+      "id": 1604,
+      "text": "Missing arguments. Format should be: /SetLocalInt Variable_Name <VALUE>. Example: /SetLocalInt MY_VARIABLE 69"
+    },
+    {
+      "id": 1605,
+      "text": "Missing arguments. Format should be: /SetLocalString Variable_Name <VALUE>. Example: /SetLocalString MY_VARIABLE My Text"
+    },
+    {
+      "id": 1606,
+      "text": "Invalid value entered. Please try again."
+    },
+    {
+      "id": 1607,
+      "text": "Local float set: {0} = {1}"
+    },
+    {
+      "id": 1608,
+      "text": "Local int set: {0} = {1}"
+    },
+    {
+      "id": 1609,
+      "text": "Local string set: {0} = {1}"
+    },
+    {
+      "id": 1610,
+      "text": "Please enter the name of the portrait and try again. Example: /SetPortrait po_myportrait"
+    },
+    {
+      "id": 1611,
+      "text": "The portrait you entered is too long. Portrait names should be between 1 and 16 characters."
+    },
+    {
+      "id": 1612,
+      "text": "Only creatures may be targeted with this command."
+    },
+    {
+      "id": 1613,
+      "text": "Your portrait has been changed."
+    },
+    {
+      "id": 1614,
+      "text": "Please specify a resref and optionally a quantity. Example: /spawnitem my_resref 20"
+    },
+    {
+      "id": 1615,
+      "text": "Item not found! Did you enter the correct ResRef?"
+    },
+    {
+      "id": 1616,
+      "text": "Enter the ID from visauleffects.2da. Example: /playvfx 123"
+    },
+    {
+      "id": 1617,
+      "text": "Requires CD Key to be entered. Example: /restartserver XXXXYYYY"
+    },
+    {
+      "id": 1618,
+      "text": "Please enter your public CD Key to confirm the server reset. Use /cdkey to retrieve this. E.G: /restartserver XXXXYYYY"
+    },
+    {
+      "id": 1619,
+      "text": "Invalid public CD Key. {0} does not match your CDKey:{1}. Try again. E.G: /restartserver XXXXYYYY"
+    },
+    {
+      "id": 1620,
+      "text": "The server is restarting."
+    },
+    {
+      "id": 1621,
+      "text": "Target's tag: {0}"
+    },
+    {
+      "id": 1622,
+      "text": "Please specify the object's scale you want to set to. Valid range: 0.1-{0}"
+    },
+    {
+      "id": 1623,
+      "text": "Please specify a value between 0.1 and {0}."
+    },
+    {
+      "id": 1624,
+      "text": "{0} scaled to {1}."
+    },
+    {
+      "id": 1625,
+      "text": "{0} has a scale of {1}."
+    },
+    {
+      "id": 1626,
+      "text": "This command can only be used on PCs."
+    },
+    {
+      "id": 1627,
+      "text": "You can only delete a player character."
+    },
+    {
+      "id": 1628,
+      "text": "Invalid CD key entered. Please enter the command as follows: \"/delete <CD Key>\". You can retrieve your CD key with the /Char chat command."
+    },
+    {
+      "id": 1629,
+      "text": "DM characters cannot use this chat command."
+    },
+    {
+      "id": 1630,
+      "text": "Please confirm your deletion by entering another \"/delete <CD Key>\" command within 30 seconds."
+    },
+    {
+      "id": 1631,
+      "text": "Your character has been deleted."
     }
   ]
 }

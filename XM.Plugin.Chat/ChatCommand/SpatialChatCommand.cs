@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Anvil.Services;
 using XM.Shared.Core.Authorization;
 using XM.Shared.Core.ChatCommand;
+using XM.Shared.Core.Localization;
 
 namespace XM.Chat.ChatCommand
 {
@@ -11,7 +12,7 @@ namespace XM.Chat.ChatCommand
     {
         private readonly ChatCommandBuilder _builder = new();
 
-        public Dictionary<string, ChatCommandDetail> BuildChatCommands()
+        public Dictionary<LocaleString, ChatCommandDetail> BuildChatCommands()
         {
             Coordinates();
             Position();
@@ -22,8 +23,8 @@ namespace XM.Chat.ChatCommand
 
         private void Coordinates()
         {
-            _builder.Create("coord")
-                .Description("Displays your current coordinates in the area.")
+            _builder.Create(LocaleString.coord)
+                .Description(LocaleString.DisplaysYourCurrentCoordinatesInTheArea)
                 .Permissions(AuthorizationLevel.All)
                 .Action((user, target, location, args) =>
                 {
@@ -31,26 +32,27 @@ namespace XM.Chat.ChatCommand
                     var cellX = (int)(position.X / 10);
                     var cellY = (int)(position.Y / 10);
 
-                    SendMessageToPC(user, $"Current Area Coordinates: ({cellX}, {cellY})");
+                    var message = LocaleString.CurrentAreaCoordinatesXY.ToLocalizedString(cellX, cellY);
+                    SendMessageToPC(user, message);
                 });
         }
 
         private void Position()
         {
-            _builder.Create("pos")
-                .Description("Displays your current position in the area.")
+            _builder.Create(LocaleString.pos)
+                .Description(LocaleString.DisplaysYourCurrentPositionInTheArea)
                 .Permissions(AuthorizationLevel.All)
                 .Action((user, target, location, args) =>
                 {
                     var position = GetPosition(user);
-                    SendMessageToPC(user, $"Current Position: ({position.X}, {position.Y}, {position.Z})");
+                    SendMessageToPC(user, LocaleString.CurrentPositionXYZ.ToLocalizedString(position.X, position.Y, position.Z));
                 });
         }
 
         private void Time()
         {
-            _builder.Create("time")
-                .Description("Returns the current UTC server time and the in-game time.")
+            _builder.Create(LocaleString.time)
+                .Description(LocaleString.ReturnsTheCurrentUTCServerTimeAndTheInGameTime)
                 .Permissions(AuthorizationLevel.All)
                 .Action((user, target, location, args) =>
                 {
@@ -60,10 +62,9 @@ namespace XM.Chat.ChatCommand
                                    GetTimeMinute().ToString().PadLeft(2, '0') + ":" +
                                    GetTimeSecond().ToString().PadLeft(2, '0');
 
-                    SendMessageToPC(user, $"Current Server Date: {nowText}");
-                    SendMessageToPC(user, $"Current World Time: {gameTime}");
+                    SendMessageToPC(user, LocaleString.CurrentServerDateX.ToLocalizedString(nowText));
+                    SendMessageToPC(user, LocaleString.CurrentWorldTimeX.ToLocalizedString(gameTime));
                 });
-
         }
     }
 }

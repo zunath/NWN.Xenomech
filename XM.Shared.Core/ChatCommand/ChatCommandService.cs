@@ -124,7 +124,7 @@ namespace XM.Shared.Core.ChatCommand
             LoadCommands();
             BuildHelpText();
 
-            _logger.Info($"Loaded {_chatCommands.Count} chat commands.");
+            _logger.Info(LocaleString.LoadedXChatCommands.ToLocalizedString(_chatCommands.Count));
         }
 
         private void LoadCommands()
@@ -134,15 +134,15 @@ namespace XM.Shared.Core.ChatCommand
                 var commands = definition.BuildChatCommands();
                 foreach (var (command, detail) in commands)
                 {
-                    if (!_chatCommands.TryAdd(command, detail))
+                    if (!_chatCommands.TryAdd(command.ToLocalizedString(), detail))
                     {
-                        _logger.Error($"Command '{command}' is registered multiple times. Only the first registration will take effect.");
+                        _logger.Error(LocaleString.CommandXIsRegisteredMultipleTImes.ToLocalizedString(command));
                         continue;
                     }
 
                     if (detail.IsEmote)
                     {
-                        EmoteCommands[command] = detail;
+                        EmoteCommands[command.ToLocalizedString()] = detail;
                     }
                 }
             }

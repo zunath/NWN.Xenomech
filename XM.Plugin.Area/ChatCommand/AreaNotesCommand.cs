@@ -4,6 +4,7 @@ using XM.Plugin.Area.AreaNotes.UI;
 using XM.Shared.Core.Authorization;
 using XM.Shared.Core.ChatCommand;
 using XM.Shared.Core.EventManagement;
+using XM.Shared.Core.Localization;
 using XM.UI.Event;
 
 namespace XM.Plugin.Area.ChatCommand
@@ -19,7 +20,7 @@ namespace XM.Plugin.Area.ChatCommand
             _event = @event;
         }
 
-        public Dictionary<string, ChatCommandDetail> BuildChatCommands()
+        public Dictionary<LocaleString, ChatCommandDetail> BuildChatCommands()
         {
             AreaNotes();
 
@@ -28,8 +29,8 @@ namespace XM.Plugin.Area.ChatCommand
 
         private void AreaNotes()
         {
-            _builder.Create("notes", "note")
-                .Description("Toggles the area notes window.")
+            _builder.Create(LocaleString.notes, LocaleString.note)
+                .Description(LocaleString.TogglesTheAreaNotesWindow)
                 .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
                 .AvailableToAllOnTestEnvironment()
                 .Action((user, target, location, args) =>

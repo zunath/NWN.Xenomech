@@ -7,15 +7,16 @@ using XM.Shared.API.NWNX.AdminPlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Authorization;
 using XM.Shared.Core.ChatCommand;
+using XM.Shared.Core.Localization;
 
 namespace XM.Chat.ChatCommand
 {
     [ServiceBinding(typeof(IChatCommandListDefinition))]
     public class DMChatCommand : IChatCommandListDefinition
     {
-        private readonly ChatCommandBuilder _builder = new ChatCommandBuilder();
+        private readonly ChatCommandBuilder _builder = new();
 
-        public Dictionary<string, ChatCommandDetail> BuildChatCommands()
+        public Dictionary<LocaleString, ChatCommandDetail> BuildChatCommands()
         {
             CopyTargetItem();
             Day();
@@ -40,8 +41,8 @@ namespace XM.Chat.ChatCommand
 
         private void CopyTargetItem()
         {
-            _builder.Create("copyitem")
-                .Description("Copies the targeted item.")
+            _builder.Create(LocaleString.copyitem)
+                .Description(LocaleString.CopiesTheTargetedItem)
                 .RequiresTarget()
                 .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
                 .AvailableToAllOnTestEnvironment()
@@ -49,7 +50,7 @@ namespace XM.Chat.ChatCommand
                 {
                     if (GetObjectType(target) != ObjectType.Item)
                     {
-                        SendMessageToPC(user, "You can only copy items with this command.");
+                        SendMessageToPC(user, LocaleString.YouCanOnlyCopyItemsWithThisCommand.ToLocalizedString());
                         return;
                     }
 
@@ -60,8 +61,8 @@ namespace XM.Chat.ChatCommand
 
         private void Day()
         {
-            _builder.Create("day")
-                .Description("Sets the world time to 8 AM.")
+            _builder.Create(LocaleString.day)
+                .Description(LocaleString.SetsTheWorldTimeTo8AM)
                 .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
                 .AvailableToAllOnTestEnvironment()
                 .Action((user, target, location, args) =>
@@ -72,8 +73,8 @@ namespace XM.Chat.ChatCommand
 
         private void Night()
         {
-            _builder.Create("night")
-                .Description("Sets the world time to 8 PM.")
+            _builder.Create(LocaleString.night)
+                .Description(LocaleString.SetsTheWorldTimeTo8PM)
                 .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
                 .AvailableToAllOnTestEnvironment()
                 .Action((user, target, location, args) =>
@@ -84,21 +85,24 @@ namespace XM.Chat.ChatCommand
 
         private void GetPlot()
         {
-            _builder.Create("getplot")
-                .Description("Gets whether an object is marked plot.")
+            _builder.Create(LocaleString.getplot)
+                .Description(LocaleString.GetsWhetherAnObjectIsMarkedPlot)
                 .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
                 .AvailableToAllOnTestEnvironment()
                 .Action((user, target, location, args) =>
                 {
-                    SendMessageToPC(user, GetPlotFlag(target) ? "Target is marked plot." : "Target is NOT marked plot.");
+                    var message = GetPlotFlag(target) 
+                        ? LocaleString.TargetIsMarkedPlot 
+                        : LocaleString.TargetIsNOTMarkedPlot;
+                    SendMessageToPC(user, message.ToLocalizedString());
                 })
                 .RequiresTarget();
         }
 
         private void Kill()
         {
-            _builder.Create("kill")
-                .Description("Kills your target.")
+            _builder.Create(LocaleString.kill)
+                .Description(LocaleString.KillsYourTarget)
                 .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
                 .AvailableToAllOnTestEnvironment()
                 .Action((user, target, location, args) =>
@@ -112,8 +116,8 @@ namespace XM.Chat.ChatCommand
 
         private void Resurrect()
         {
-            _builder.Create("rez")
-                .Description("Revives you, heals you to full, and restores all EP.")
+            _builder.Create(LocaleString.rez)
+                .Description(LocaleString.RevivesYouHealsYouToFullAndRestoresAllEP)
                 .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
                 .AvailableToAllOnTestEnvironment()
                 .RequiresTarget(ObjectType.Creature)
@@ -130,15 +134,15 @@ namespace XM.Chat.ChatCommand
 
         private void SpawnGold()
         {
-            _builder.Create("spawngold")
-                .Description("Spawns gold of a specific quantity on your character. Example: /spawngold 33")
+            _builder.Create(LocaleString.spawngold)
+                .Description(LocaleString.SpawnsGoldOfASpecificQuantityOnYourCharacter)
                 .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
                 .AvailableToAllOnTestEnvironment()
                 .Validate((user, args) =>
                 {
                     if (args.Length <= 0)
                     {
-                        return ColorToken.Red("Please specify a quantity. Example: /spawngold 34");
+                        return ColorToken.Red(LocaleString.PleaseSpecifyAQuantityExampleSpawnGold34.ToLocalizedString());
                     }
                     return string.Empty;
                 })
@@ -160,15 +164,15 @@ namespace XM.Chat.ChatCommand
 
         private void TeleportWaypoint()
         {
-            _builder.Create("tpwp")
-                .Description("Teleports you to a waypoint with a specified tag.")
+            _builder.Create(LocaleString.tpwp)
+                .Description(LocaleString.TeleportsYouToAWaypointWithASpecifiedTag)
                 .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
                 .AvailableToAllOnTestEnvironment()
                 .Validate((user, args) =>
                 {
                     if (args.Length < 1)
                     {
-                        return "You must specify a waypoint tag. Example: /tpwp MY_WAYPOINT_TAG";
+                        return LocaleString.YouMustSpecifyAWaypointTag.ToLocalizedString();
                     }
 
                     return string.Empty;
@@ -180,7 +184,7 @@ namespace XM.Chat.ChatCommand
 
                     if (!GetIsObjectValid(wp))
                     {
-                        SendMessageToPC(user, "Invalid waypoint tag. Did you enter the right tag?");
+                        SendMessageToPC(user, LocaleString.InvalidWaypointTag.ToLocalizedString());
                         return;
                     }
 
@@ -190,8 +194,8 @@ namespace XM.Chat.ChatCommand
 
         private void GetLocalVariable()
         {
-            _builder.Create("getlocalfloat")
-                .Description("Gets a local float on a target.")
+            _builder.Create(LocaleString.getlocalfloat)
+                .Description(LocaleString.GetsALocalFloatOnATarget)
                 .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
                 .AvailableToAllOnTestEnvironment()
                 .RequiresTarget()
@@ -199,7 +203,7 @@ namespace XM.Chat.ChatCommand
                 {
                     if (args.Length < 1)
                     {
-                        return "Missing arguments. Format should be: /GetLocalFloat Variable_Name. Example: /GetLocalFloat MY_VARIABLE";
+                        return LocaleString.InvalidArgumentsGetFloat.ToLocalizedString();
                     }
 
                     return string.Empty;
@@ -208,7 +212,7 @@ namespace XM.Chat.ChatCommand
                 {
                     if (!GetIsObjectValid(target))
                     {
-                        SendMessageToPC(user, "Target is invalid. Targeting area instead.");
+                        SendMessageToPC(user, LocaleString.TargetIsInvalidTargetingAreaInstead.ToLocalizedString());
                         target = GetArea(user);
                     }
 
@@ -218,8 +222,8 @@ namespace XM.Chat.ChatCommand
                     SendMessageToPC(user, variableName + " = " + value);
                 });
 
-            _builder.Create("getlocalint")
-                .Description("Gets a local integer on a target.")
+            _builder.Create(LocaleString.getlocalint)
+                .Description(LocaleString.GetsALocalIntegerOnATarget)
                 .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
                 .AvailableToAllOnTestEnvironment()
                 .RequiresTarget()
@@ -227,7 +231,7 @@ namespace XM.Chat.ChatCommand
                 {
                     if (args.Length < 1)
                     {
-                        return "Missing arguments. Format should be: /GetLocalInt Variable_Name. Example: /GetLocalInt MY_VARIABLE";
+                        return LocaleString.InvalidArgumentsGetInt.ToLocalizedString();
                     }
 
                     return string.Empty;
@@ -236,7 +240,7 @@ namespace XM.Chat.ChatCommand
                 {
                     if (!GetIsObjectValid(target))
                     {
-                        SendMessageToPC(user, "Target is invalid. Targeting area instead.");
+                        SendMessageToPC(user, LocaleString.TargetIsInvalidTargetingAreaInstead.ToLocalizedString());
                         target = GetArea(user);
                     }
 
@@ -246,8 +250,8 @@ namespace XM.Chat.ChatCommand
                     SendMessageToPC(user, variableName + " = " + value);
                 });
 
-            _builder.Create("getlocalstring")
-                .Description("Gets a local string on a target.")
+            _builder.Create(LocaleString.getlocalstring)
+                .Description(LocaleString.GetsALocalStringOnATarget)
                 .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
                 .AvailableToAllOnTestEnvironment()
                 .RequiresTarget()
@@ -255,7 +259,7 @@ namespace XM.Chat.ChatCommand
                 {
                     if (args.Length < 1)
                     {
-                        return "Missing arguments. Format should be: /GetLocalString Variable_Name. Example: /GetLocalString MY_VARIABLE";
+                        return LocaleString.InvalidArgumentsGetString.ToLocalizedString();
                     }
 
                     return string.Empty;
@@ -264,7 +268,7 @@ namespace XM.Chat.ChatCommand
                 {
                     if (!GetIsObjectValid(target))
                     {
-                        SendMessageToPC(user, "Target is invalid. Targeting area instead.");
+                        SendMessageToPC(user, LocaleString.TargetIsInvalidTargetingAreaInstead.ToLocalizedString());
                         target = GetArea(user);
                     }
 
@@ -277,8 +281,8 @@ namespace XM.Chat.ChatCommand
 
         private void SetLocalVariable()
         {
-            _builder.Create("setlocalfloat")
-                .Description("Sets a local float on a target.")
+            _builder.Create(LocaleString.setlocalfloat)
+                .Description(LocaleString.SetsALocalFloatOnATarget)
                 .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
                 .AvailableToAllOnTestEnvironment()
                 .RequiresTarget()
@@ -286,12 +290,12 @@ namespace XM.Chat.ChatCommand
                 {
                     if (args.Length < 2)
                     {
-                        return "Missing arguments. Format should be: /SetLocalFloat Variable_Name <VALUE>. Example: /SetLocalFloat MY_VARIABLE 6.9";
+                        return LocaleString.InvalidArgumentsSetFloat.ToLocalizedString();
                     }
 
                     if (!float.TryParse(args[1], out var value))
                     {
-                        return "Invalid value entered. Please try again.";
+                        return LocaleString.InvalidValueEnteredPleaseTryAgain.ToLocalizedString();
                     }
 
                     return string.Empty;
@@ -300,7 +304,7 @@ namespace XM.Chat.ChatCommand
                 {
                     if (!GetIsObjectValid(target))
                     {
-                        SendMessageToPC(user, "Target is invalid. Targeting area instead.");
+                        SendMessageToPC(user, LocaleString.TargetIsInvalidTargetingAreaInstead.ToLocalizedString());
                         target = GetArea(user);
                     }
 
@@ -309,12 +313,12 @@ namespace XM.Chat.ChatCommand
 
                     SetLocalFloat(target, variableName, value);
 
-                    SendMessageToPC(user, "Local float set: " + variableName + " = " + value);
+                    SendMessageToPC(user, LocaleString.LocalFloatSetXEqualsY.ToLocalizedString(variableName, value));
                 });
 
 
-            _builder.Create("setlocalint")
-                .Description("Sets a local int on a target.")
+            _builder.Create(LocaleString.setlocalint)
+                .Description(LocaleString.SetsALocalIntOnATarget)
                 .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
                 .AvailableToAllOnTestEnvironment()
                 .RequiresTarget()
@@ -322,12 +326,12 @@ namespace XM.Chat.ChatCommand
                 {
                     if (args.Length < 2)
                     {
-                        return "Missing arguments. Format should be: /SetLocalInt Variable_Name <VALUE>. Example: /SetLocalInt MY_VARIABLE 69";
+                        return LocaleString.InvalidArgumentsSetInt.ToLocalizedString();
                     }
 
                     if (!int.TryParse(args[1], out var value))
                     {
-                        return "Invalid value entered. Please try again.";
+                        return LocaleString.InvalidValueEnteredPleaseTryAgain.ToLocalizedString();
                     }
 
                     return string.Empty;
@@ -336,7 +340,7 @@ namespace XM.Chat.ChatCommand
                 {
                     if (!GetIsObjectValid(target))
                     {
-                        SendMessageToPC(user, "Target is invalid. Targeting area instead.");
+                        SendMessageToPC(user, LocaleString.TargetIsInvalidTargetingAreaInstead.ToLocalizedString());
                         target = GetArea(user);
                     }
 
@@ -345,11 +349,11 @@ namespace XM.Chat.ChatCommand
 
                     SetLocalInt(target, variableName, value);
 
-                    SendMessageToPC(user, "Local integer set: " + variableName + " = " + value);
+                    SendMessageToPC(user, LocaleString.LocalIntSetXEqualsY.ToLocalizedString(variableName, value));
                 });
 
-            _builder.Create("setlocalstring")
-                .Description("Sets a local string on a target.")
+            _builder.Create(LocaleString.setlocalstring)
+                .Description(LocaleString.SetsALocalStringOnATarget)
                 .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
                 .AvailableToAllOnTestEnvironment()
                 .RequiresTarget()
@@ -357,7 +361,7 @@ namespace XM.Chat.ChatCommand
                 {
                     if (args.Length < 1)
                     {
-                        return "Missing arguments. Format should be: /SetLocalString Variable_Name <VALUE>. Example: /SetLocalString MY_VARIABLE My Text";
+                        return LocaleString.InvalidArgumentsSetString.ToLocalizedString();
                     }
 
                     return string.Empty;
@@ -366,7 +370,7 @@ namespace XM.Chat.ChatCommand
                 {
                     if (!GetIsObjectValid(target))
                     {
-                        SendMessageToPC(user, "Target is invalid. Targeting area instead.");
+                        SendMessageToPC(user, LocaleString.TargetIsInvalidTargetingAreaInstead.ToLocalizedString());
                         target = GetArea(user);
                     }
 
@@ -382,67 +386,14 @@ namespace XM.Chat.ChatCommand
 
                     SetLocalString(target, variableName, value);
 
-                    SendMessageToPC(user, "Local string set: " + variableName + " = " + value);
-                });
-
-            _builder.Create("tptag")
-                .Description("Sets a local tag on a target Teleport Object placeable.")
-                .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
-                .RequiresTarget()
-                .Validate((user, args) =>
-                {
-                    if (args.Length <= 0)
-                    {
-                        return "Missing arguments. Format should be: /TPTag <VALUE>. Example: /TPTag DUNGEON_ENTRANCE";
-                    }
-
-                    return string.Empty;
-                })
-                .Action((user, target, location, args) =>
-                {
-                    if (GetResRef(target) != "tele_obj")
-                    {
-                        SendMessageToPC(user, "This command can only be used on the Teleport Object placeable.");
-                    }
-                    else
-                    {
-                        SetTag(target, args[0]);
-
-                        SendMessageToPC(user, "Tag set to: " + args[0] + ".");
-                    }
-                });
-
-            _builder.Create("tpdest")
-                .Description("Changes the destination of a selected Teleport Object placeable to point toward a given waypoint or placeable tag.")
-                .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
-                .RequiresTarget()
-                .Validate((user, args) =>
-                {
-                    if (args.Length <= 0)
-                    {
-                        return "Missing arguments. Format should be: /destination <VALUE>. Example: /destination EventEntrance";
-                    }
-
-                    return string.Empty;
-                })
-                .Action((user, target, location, args) =>
-                {
-                    if (GetResRef(target) != "tele_obj")
-                    {
-                        SendMessageToPC(user, "Target is invalid. Please target a Teleport Object placeable.");
-                    }
-                    else
-                    {
-                        SetLocalString(target, "DESTINATION", args[0]);
-                        SendMessageToPC(user, "Destination tag set to " + args[0] + ".");
-                    }
+                    SendMessageToPC(user, LocaleString.LocalStringSetXEqualsY.ToLocalizedString(variableName, value));
                 });
         }
 
         private void SetPortrait()
         {
-            _builder.Create("setportrait")
-                .Description("Sets portrait of the target player using the string specified. (Remember to add po_ to the portrait)")
+            _builder.Create(LocaleString.setportrait)
+                .Description(LocaleString.SetsPortraitOfTheTargetPlayerUsingTheStringSpecified)
                 .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
                 .AvailableToAllOnTestEnvironment()
                 .RequiresTarget()
@@ -450,12 +401,12 @@ namespace XM.Chat.ChatCommand
                 {
                     if (args.Length <= 0)
                     {
-                        return "Please enter the name of the portrait and try again. Example: /SetPortrait po_myportrait";
+                        return LocaleString.PleaseEnterTheNameOfThePortrait.ToLocalizedString();
                     }
 
                     if (args[0].Length > 16)
                     {
-                        return "The portrait you entered is too long. Portrait names should be between 1 and 16 characters.";
+                        return LocaleString.ThePortraitYouEnteredIsTooLong.ToLocalizedString();
                     }
 
                     return string.Empty;
@@ -464,26 +415,26 @@ namespace XM.Chat.ChatCommand
                 {
                     if (!GetIsObjectValid(target) || GetObjectType(target) != ObjectType.Creature)
                     {
-                        SendMessageToPC(user, "Only creatures may be targeted with this command.");
+                        SendMessageToPC(user, LocaleString.OnlyCreaturesMayBeTargetedWithThisCommand.ToLocalizedString());
                         return;
                     }
 
                     SetPortraitResRef(target, args[0]);
-                    FloatingTextStringOnCreature("Your portrait has been changed.", target, false);
+                    FloatingTextStringOnCreature(LocaleString.YourPortraitHasBeenChanged.ToLocalizedString(), target, false);
                 });
         }
 
         private void SpawnItem()
         {
-            _builder.Create("spawnitem")
-                .Description("Spawns an item of a specific quantity on your character. Example: /spawnitem my_item 3")
+            _builder.Create(LocaleString.spawnitem)
+                .Description(LocaleString.SpawnsAnItemOfASpecificQuantityOnYourCharacter)
                 .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
                 .AvailableToAllOnTestEnvironment()
                 .Validate((user, args) =>
                 {
                     if (args.Length <= 0)
                     {
-                        return ColorToken.Red("Please specify a resref and optionally a quantity. Example: /spawnitem my_resref 20");
+                        return ColorToken.Red(LocaleString.PleaseSpecifyAResrefAndOptionallyAQuantity.ToLocalizedString());
                     }
 
                     return string.Empty;
@@ -505,7 +456,7 @@ namespace XM.Chat.ChatCommand
 
                     if (!GetIsObjectValid(item))
                     {
-                        SendMessageToPC(user, ColorToken.Red("Item not found! Did you enter the correct ResRef?"));
+                        SendMessageToPC(user, ColorToken.Red(LocaleString.ItemNotFoundDidYouEnterTheCorrectResref.ToLocalizedString()));
                         return;
                     }
 
@@ -515,8 +466,8 @@ namespace XM.Chat.ChatCommand
 
         private void PlayVFX()
         {
-            _builder.Create("playvfx")
-                .Description("Plays a visual effect from visualeffects.2da.")
+            _builder.Create(LocaleString.playvfx)
+                .Description(LocaleString.PlaysAVisualEffectFromVisualEffects2DA)
                 .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
                 .AvailableToAllOnTestEnvironment()
                 .RequiresTarget()
@@ -524,12 +475,12 @@ namespace XM.Chat.ChatCommand
                 {
                     if (args.Length < 1)
                     {
-                        return "Enter the ID from visauleffects.2da. Example: /playvfx 123";
+                        return LocaleString.EnterTheIDFromVisualEffects2DA.ToLocalizedString();
                     }
 
                     if (!int.TryParse(args[0], out var vfxId))
                     {
-                        return "Enter the ID from visauleffects.2da. Example: /playvfx 123";
+                        return LocaleString.EnterTheIDFromVisualEffects2DA.ToLocalizedString();
                     }
 
                     try
@@ -538,7 +489,7 @@ namespace XM.Chat.ChatCommand
                     }
                     catch
                     {
-                        return "Enter the ID from visauleffects.2da. Example: /playvfx 123";
+                        return LocaleString.EnterTheIDFromVisualEffects2DA.ToLocalizedString();
                     }
 
                     return string.Empty;
@@ -554,22 +505,22 @@ namespace XM.Chat.ChatCommand
 
         private void RestartServer()
         {
-            _builder.Create("restartserver")
-                .Description("Restarts the server. Requires CD Key to be entered. Example: /restartserver XXXXYYYY")
+            _builder.Create(LocaleString.restartserver)
+                .Description(LocaleString.RestartsTheServerRequiresCDKeyToBeEntered)
                 .Permissions(AuthorizationLevel.Admin, AuthorizationLevel.DM)
                 .Validate((user, args) =>
                 {
                     if (args.Length <= 0)
                     {
-                        return "Requires CD Key to be entered. Example: /restartserver XXXXYYYY";
+                        return LocaleString.RequiresCDKeyToBeEntered.ToLocalizedString();
                     }
                     else if (string.IsNullOrWhiteSpace(args[0]))
                     {
-                        return "Please enter your public CD Key to confirm the server reset. Use /cdkey to retrieve this. E.G: /restartserver XXXXYYYY";
+                        return LocaleString.PleaseEnterYourPublicCDKey.ToLocalizedString();
                     }
                     else if (GetPCPublicCDKey(user) != args[0])
                     {
-                        return $"Invalid public CD Key. {args[0]} does not match your CDKey:{GetPCPublicCDKey(user)}. Try again. E.G: /restartserver XXXXYYYY";
+                        return LocaleString.InvalidPublicCDKey.ToLocalizedString(args[0], GetPCPublicCDKey(user));
                     }
                     else
                     {
@@ -581,7 +532,7 @@ namespace XM.Chat.ChatCommand
                     uint player = GetFirstPC();
                     while (player != OBJECT_INVALID)
                     {
-                        BootPC(player, "The server is restarting.");
+                        BootPC(player, LocaleString.TheServerIsRestarting.ToLocalizedString());
                         player = GetNextPC();
                     }
                     AdminPlugin.ShutdownServer();
@@ -590,16 +541,15 @@ namespace XM.Chat.ChatCommand
 
         private void GetTag()
         {
-            _builder.Create("gettag")
-                .Description("Gets a target's tag.")
+            _builder.Create(LocaleString.gettag)
+                .Description(LocaleString.GetsATargetsTag)
                 .Permissions(AuthorizationLevel.Admin, AuthorizationLevel.DM)
                 .AvailableToAllOnTestEnvironment()
                 .RequiresTarget()
                 .Action((user, target, location, args) =>
                 {
                     var tag = NWScript.GetTag(target);
-
-                    SendMessageToPC(user, $"Target's tag: {tag}");
+                    SendMessageToPC(user, LocaleString.TargetsTagX.ToLocalizedString(tag));
                 });
         }
 
@@ -607,8 +557,8 @@ namespace XM.Chat.ChatCommand
         {
             const int MaxAmount = 50;
 
-            _builder.Create("setscale")
-                .Description("Sets an object's scale.")
+            _builder.Create(LocaleString.setscale)
+                .Description(LocaleString.SetsAnObjectsScale)
                 .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
                 .AvailableToAllOnTestEnvironment()
                 .RequiresTarget()
@@ -617,19 +567,19 @@ namespace XM.Chat.ChatCommand
                     // Missing an amount argument?
                     if (args.Length <= 0)
                     {
-                        return "Please specify the object's scale you want to set to. Valid range: 0.1-" + MaxAmount;
+                        return LocaleString.PleaseSpecifyTheObjectsScale.ToLocalizedString(MaxAmount);
                     }
 
                     // Can't parse the amount?
                     if (!float.TryParse(args[0], out var value))
                     {
-                        return "Please specify a value between 0.1 and " + MaxAmount + ".";
+                        return LocaleString.PleaseSpecifyAValueBetween01AndX.ToLocalizedString(MaxAmount);
                     }
 
                     // Amount is outside of our allowed range?
                     if (value < 0.1f || value > MaxAmount)
                     {
-                        return "Please specify a value between 0.1 and " + MaxAmount + ".";
+                        return LocaleString.PleaseSpecifyAValueBetween01AndX.ToLocalizedString(MaxAmount);
                     }
 
                     return string.Empty;
@@ -645,14 +595,14 @@ namespace XM.Chat.ChatCommand
                     var targetName = GetName(target);
                     var shownValue = finalValue.ToString("0.###");
 
-                    SendMessageToPC(user, $"{targetName} scaled to {shownValue}.");
+                    SendMessageToPC(user, LocaleString.XScaledToY.ToLocalizedString(targetName, shownValue));
                 });
         }
 
         private void GetScale()
         {
-            _builder.Create("getscale")
-                .Description("Gets an object's scale.")
+            _builder.Create(LocaleString.getscale)
+                .Description(LocaleString.GetsAnObjectsScale)
                 .Permissions(AuthorizationLevel.DM, AuthorizationLevel.Admin)
                 .AvailableToAllOnTestEnvironment()
                 .RequiresTarget()
@@ -662,7 +612,7 @@ namespace XM.Chat.ChatCommand
                     var targetName = GetName(target);
                     var shownScale = targetScale.ToString("0.###");
 
-                    SendMessageToPC(user, $"{targetName} has a scale of {shownScale}.");
+                    SendMessageToPC(user, LocaleString.XHasAScaleOfY.ToLocalizedString(targetName, shownScale));
                 });
         }
     }

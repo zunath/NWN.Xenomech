@@ -1,6 +1,7 @@
 ﻿using Anvil.API;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Authorization;
+using XM.Shared.Core.Localization;
 
 namespace XM.Shared.Core.ChatCommand
 {
@@ -23,7 +24,7 @@ namespace XM.Shared.Core.ChatCommand
         /// <returns>If successful, return a null or empty string. Otherwise, return the error message.</returns>
         public delegate string ValidateArgumentsDelegate(uint user, params string[] args);
 
-        public string Description { get; set; } = string.Empty;
+        public LocaleString Description { get; set; } = LocaleString.Empty;
         public AuthorizationLevel Authorization { get; set; }
         public ExecuteChatCommandDelegate DoAction { get; set; }
         public ValidateArgumentsDelegate ValidateArguments { get; set; }
