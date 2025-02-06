@@ -28,8 +28,23 @@
       "CompileModels": false
     },
     {
-      "Name":  "xm_placeables",
-      "Path": "../Content/xm_placeables/",
+      "Name":  "xm_plc_aforest",
+      "Path": "../Content/xm_plc_aforest/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_plc_lighting",
+      "Path": "../Content/xm_plc_lighting/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_plc_scifibase",
+      "Path": "../Content/xm_plc_scifibase/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_plc_swtor",
+      "Path": "../Content/xm_plc_swtor/",
       "CompileModels": false
     },
     {
