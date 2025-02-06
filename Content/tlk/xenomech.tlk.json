@@ -6524,6 +6524,62 @@
     {
       "id": 1631,
       "text": "Your character has been deleted."
+    },
+    {
+      "id": 1632,
+      "text": "Your message was too long. Please shorten it to no longer than 1000 characters and resubmit the bug. For reference, your message was: \"{0}\""
+    },
+    {
+      "id": 1633,
+      "text": "ERROR: Unable to send bug report because server admin has not specified the 'XM_BUG_WEBHOOK_URL' environment variable."
+    },
+    {
+      "id": 1634,
+      "text": "Bug Report [TEST SERVER]"
+    },
+    {
+      "id": 1635,
+      "text": "Bug Report"
+    },
+    {
+      "id": 1636,
+      "text": "Area Name"
+    },
+    {
+      "id": 1637,
+      "text": "Area Tag"
+    },
+    {
+      "id": 1638,
+      "text": "Area Resref"
+    },
+    {
+      "id": 1639,
+      "text": "Position"
+    },
+    {
+      "id": 1640,
+      "text": "Date Reported"
+    },
+    {
+      "id": 1641,
+      "text": "Player Id"
+    },
+    {
+      "id": 1642,
+      "text": "Bug report submitted! Thank you for your report."
+    },
+    {
+      "id": 1643,
+      "text": "Submitted Bug Report: {0}"
+    },
+    {
+      "id": 1644,
+      "text": "Submit Bug Report"
+    },
+    {
+      "id": 1645,
+      "text": "Please enter as much information as possible regarding the encountered bug."
     }
   ]
 }

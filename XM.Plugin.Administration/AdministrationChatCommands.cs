@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Anvil.Services;
 using XM.Plugin.Administration.BanManagement;
+using XM.Plugin.Administration.BugReport;
 using XM.Plugin.Administration.StaffManagement;
 using XM.Shared.Core.Authorization;
 using XM.Shared.Core.ChatCommand;
@@ -53,7 +54,6 @@ namespace XM.Plugin.Administration
 
         private void BugReport()
         {
-
             _builder.Create(LocaleString.bug)
                 .Description(LocaleString.TogglesTheBugReportWindowToSubmitBugs)
                 .Permissions(AuthorizationLevel.All)
@@ -74,7 +74,7 @@ namespace XM.Plugin.Administration
                 })
                 .Action((user, target, location, args) =>
                 {
-                    Event.PublishEvent(user, new UIEvent.OpenWindow(typeof(ManageStaffView)));
+                    Event.PublishEvent(user, new UIEvent.OpenWindow(typeof(BugReportView)));
                 });
         }
     }

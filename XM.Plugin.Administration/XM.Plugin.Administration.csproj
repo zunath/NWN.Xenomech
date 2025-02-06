@@ -62,6 +62,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Discord.Net" Version="3.17.1" />
     <PackageReference Include="NWN.Anvil" Version="8193.37.0-dev.12.raf500cfc" ExcludeAssets="runtime" PrivateAssets="all">
       <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

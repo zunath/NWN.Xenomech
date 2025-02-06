@@ -12,12 +12,15 @@ namespace XM.Shared.Core.Configuration
         public bool IsGameServerContext { get; }
         public ServerEnvironmentType ServerEnvironment { get; }
 
+        public string BugWebHookUrl { get; }
+
         public XMSettingsService()
         {
             SuperAdminCDKey = Environment.GetEnvironmentVariable("XM_SUPER_ADMIN_CD_KEY");
             RedisIPAddress = Environment.GetEnvironmentVariable("NWNX_REDIS_HOST");
             DatabaseSocketPath = Environment.GetEnvironmentVariable("XM_DATABASE_SOCKET_PATH");
             IsGameServerContext = Convert.ToBoolean(Environment.GetEnvironmentVariable("XM_GAME_SERVER_CONTEXT"));
+            BugWebHookUrl = Environment.GetEnvironmentVariable("XM_BUG_WEBHOOK_URL");
 
             var environment = Environment.GetEnvironmentVariable("XM_ENVIRONMENT");
             if (!string.IsNullOrWhiteSpace(environment) &&

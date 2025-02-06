@@ -1316,6 +1316,20 @@ namespace XM.Shared.Core.Localization
         DMCharactersCannotUseThisChatCommand = 1629,
         PleaseConfirmDeletion = 1630,
         YourCharacterHasBeenDeleted = 1631,
+        YourBugReportMessageWasTooLong = 1632,
+        BugReportMisconfigured = 1633,
+        BugReportTestServer = 1634,
+        BugReport = 1635,
+        AreaName = 1636,
+        AreaTag = 1637,
+        AreaResref = 1638,
+        Position = 1639,
+        DateReported = 1640,
+        PlayerId = 1641,
+        BugReportSubmittedThankYouForYouReport = 1642,
+        SubmittedBugReportX = 1643,
+        SubmitBugReport = 1644,
+        PleaseEnterAsMuchInformationAsPossibleRegardingTheEncounteredBug = 1645,
 
     }
 }
