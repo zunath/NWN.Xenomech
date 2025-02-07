@@ -60,7 +60,7 @@ namespace XM.Plugin.Administration.BanManagement
                                                         button
                                                             .Label(model => model.CDKeys)
                                                             .IsSelected(model => model.UserToggles)
-                                                            .OnClick(model => model.OnSelectUser);
+                                                            .OnClick(model => model.OnSelectUser());
                                                     });
                                                 });
                                         });
@@ -73,14 +73,14 @@ namespace XM.Plugin.Administration.BanManagement
                                     {
                                         button
                                             .Label(LocaleString.NewUser)
-                                            .OnClick(model => model.OnClickNewUser);
+                                            .OnClick(model => model.OnClickNewUser());
                                     });
 
                                     row.AddButton(button =>
                                     {
                                         button
                                             .Label(LocaleString.DeleteUser)
-                                            .OnClick(model => model.OnClickDeleteUser);
+                                            .OnClick(model => model.OnClickDeleteUser());
                                     });
                                 });
                             });
@@ -122,7 +122,7 @@ namespace XM.Plugin.Administration.BanManagement
                                     {
                                         button
                                             .Label(LocaleString.Save)
-                                            .OnClick(model => model.OnClickSave)
+                                            .OnClick(model => model.OnClickSave())
                                             .IsEnabled(model => model.IsUserSelected);
                                     });
 
@@ -130,7 +130,7 @@ namespace XM.Plugin.Administration.BanManagement
                                     {
                                         button
                                             .Label(LocaleString.DiscardChanges)
-                                            .OnClick(model => model.OnClickDiscardChanges)
+                                            .OnClick(model => model.OnClickDiscardChanges())
                                             .IsEnabled(model => model.IsUserSelected);
                                     });
                                 });

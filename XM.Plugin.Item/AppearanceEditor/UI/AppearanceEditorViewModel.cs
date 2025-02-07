@@ -1115,7 +1115,7 @@ namespace XM.Plugin.Item.AppearanceEditor.UI
             PartSelected[SelectedPartIndex] = true;
         }
 
-        public Action OnSelectAppearance => () =>
+        public Action OnSelectAppearance() => () =>
         {
             ChangePartialView(MainPartialElement, EditorHeaderPartial);
             IsAppearanceSelected = true;
@@ -1131,7 +1131,7 @@ namespace XM.Plugin.Item.AppearanceEditor.UI
             LoadBodyParts();
         };
 
-        public Action OnSelectEquipment => () =>
+        public Action OnSelectEquipment() => () =>
         {
             ChangePartialView(MainPartialElement, EditorHeaderPartial);
             IsAppearanceSelected = false;
@@ -1154,7 +1154,7 @@ namespace XM.Plugin.Item.AppearanceEditor.UI
             DelayCommand(3f, StartArmorClientWatches);
         };
 
-        public Action OnSelectSettings => () =>
+        public Action OnSelectSettings() => () =>
         {
             ChangePartialView(MainPartialElement, SettingsPartial);
             IsAppearanceSelected = false;
@@ -1169,7 +1169,7 @@ namespace XM.Plugin.Item.AppearanceEditor.UI
             _lastModifiedItem = OBJECT_INVALID;
         };
 
-        public Action OnDecreaseAppearanceScale => () =>
+        public Action OnDecreaseAppearanceScale() => () =>
         {
             var appearanceType = GetAppearanceType(_target);
             if (!_racialAppearances.ContainsKey(appearanceType))
@@ -1192,7 +1192,7 @@ namespace XM.Plugin.Item.AppearanceEditor.UI
                 SendMessageToPC(_target, $"Height: {GetObjectVisualTransform(_target, ObjectVisualTransformType.Scale)}");
             }
         };
-        public Action OnIncreaseAppearanceScale => () =>
+        public Action OnIncreaseAppearanceScale() => () =>
         {
             var appearanceType = GetAppearanceType(_target);
             if (!_racialAppearances.ContainsKey(appearanceType))
@@ -1217,7 +1217,7 @@ namespace XM.Plugin.Item.AppearanceEditor.UI
             }
         };
 
-        public Action OnSelectColorCategory => () =>
+        public Action OnSelectColorCategory() => () =>
         {
             ToggleItemEquippedFlags();
             if (DoesNotHaveItemEquipped)
@@ -1230,7 +1230,7 @@ namespace XM.Plugin.Item.AppearanceEditor.UI
             ColorCategorySelected[index] = true;
         };
 
-        public Action OnSelectPartCategory => () =>
+        public Action OnSelectPartCategory() => () =>
         {
             ToggleItemEquippedFlags();
             if (DoesNotHaveItemEquipped)
@@ -1356,7 +1356,7 @@ namespace XM.Plugin.Item.AppearanceEditor.UI
             _lastModifiedItem = copy;
         }
 
-        public Action OnSelectColor => () =>
+        public Action OnSelectColor() => () =>
         {
             ToggleItemEquippedFlags();
             if (DoesNotHaveItemEquipped)
@@ -1596,7 +1596,7 @@ namespace XM.Plugin.Item.AppearanceEditor.UI
             }
         }
 
-        public Action OnSelectPart => () =>
+        public Action OnSelectPart() => () =>
         {
             var index = NuiGetEventArrayIndex();
 
@@ -1607,7 +1607,7 @@ namespace XM.Plugin.Item.AppearanceEditor.UI
             LoadPart();
         };
 
-        public Action OnPreviousPart => () =>
+        public Action OnPreviousPart() => () =>
         {
             var newPartIndex = SelectedPartIndex - 1;
             if (newPartIndex < 0)
@@ -1619,7 +1619,7 @@ namespace XM.Plugin.Item.AppearanceEditor.UI
             LoadPart();
         };
 
-        public Action OnNextPart => () =>
+        public Action OnNextPart() => () =>
         {
             var newPartIndex = SelectedPartIndex + 1;
             if (newPartIndex > _partIdToIndex.Count - 1)
@@ -1631,12 +1631,12 @@ namespace XM.Plugin.Item.AppearanceEditor.UI
             LoadPart();
         };
 
-        public Action OnClickOutfits => () =>
+        public Action OnClickOutfits() => () =>
         {
             Event.PublishEvent(_target, new UIEvent.OpenWindow(typeof(OutfitEditorView)));
         };
 
-        public Action OnClickSaveSettings => () =>
+        public Action OnClickSaveSettings() => () =>
         {
             var playerId = GetObjectUUID(_target);
             var dbPlayer = DB.Get<PlayerSettings>(playerId);
@@ -2130,7 +2130,7 @@ namespace XM.Plugin.Item.AppearanceEditor.UI
             }
         }
 
-        public Action OnClickCopyToRight => () =>
+        public Action OnClickCopyToRight() => () =>
         {
             ToggleItemEquippedFlags();
             if (DoesNotHaveItemEquipped)
@@ -2201,7 +2201,7 @@ namespace XM.Plugin.Item.AppearanceEditor.UI
         };
 
 
-        public Action OnClickCopyToLeft => () =>
+        public Action OnClickCopyToLeft() => () =>
         {
             ToggleItemEquippedFlags();
             if (DoesNotHaveItemEquipped)

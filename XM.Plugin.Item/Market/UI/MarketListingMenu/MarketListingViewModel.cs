@@ -154,7 +154,7 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
             IsAddItemEnabled = _itemIds.Count < MarketService.MaxListings;
         }
 
-        public Action OnClickAddItem => () =>
+        public Action OnClickAddItem() => () =>
         {
             ClosePriceWindow();
 
@@ -221,7 +221,7 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
             UpdateItemCount();
         }
 
-        public Action OnClickRemove => () =>
+        public Action OnClickRemove() => () =>
         {
             ClosePriceWindow();
             var index = NuiGetEventArrayIndex();
@@ -257,20 +257,20 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
             });
         };
 
-        public Action OnClickSearch => () =>
+        public Action OnClickSearch() => () =>
         {
             ClosePriceWindow();
             LoadData();
         };
 
-        public Action OnClickClear => () =>
+        public Action OnClickClear() => () =>
         {
             ClosePriceWindow();
             SearchText = string.Empty;
             LoadData();
         };
 
-        public Action OnClickSaveChanges => () =>
+        public Action OnClickSaveChanges() => () =>
         {
             ClosePriceWindow();
 
@@ -307,7 +307,7 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
             Gui.CloseWindow<PriceSelectionView>(Player);
         }
 
-        public Action OnClickChangePrice => () =>
+        public Action OnClickChangePrice() => () =>
         {
             // There is a defect with NUI which prevents text boxes from working within lists.
             // As a workaround, we use a button to display a price change window. 
@@ -325,7 +325,7 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
             Gui.ShowWindow<PriceSelectionView>(Player, payload);
         };
 
-        public Action OnClickShopTill => () =>
+        public Action OnClickShopTill() => () =>
         {
             var playerId = GetObjectUUID(Player);
             var dbPlayer = DB.Get<PlayerMarket>(playerId);

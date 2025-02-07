@@ -2,6 +2,7 @@
 using System.Reflection;
 using System;
 using Action = System.Action;
+using System.Collections.Generic;
 
 namespace XM.UI.Builder
 {
@@ -20,6 +21,21 @@ namespace XM.UI.Builder
         protected string GetBindName<T>(Expression<Func<TViewModel, T>> expression)
         {
             return GetMemberName(expression);
+        }
+
+        protected NuiEventDetail GetMethodInfo<TMethod>(Expression<Func<TViewModel, TMethod>> expression)
+        {
+            var body = (MethodCallExpression)expression.Body;
+            var method = body.Method;
+            var values = new List<KeyValuePair<Type, object>>();
+
+            foreach (var argument in body.Arguments)
+            {
+                var value = Expression.Lambda(argument).Compile().DynamicInvoke();
+                values.Add(new KeyValuePair<Type, object>(value.GetType(), value));
+            }
+
+            return new NuiEventDetail(method, values);
         }
 
         /// <summary>

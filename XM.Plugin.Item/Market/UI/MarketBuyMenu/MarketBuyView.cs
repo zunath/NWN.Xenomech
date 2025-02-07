@@ -45,7 +45,7 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
                                     .Label(LocaleString.X)
                                     .Height(35f)
                                     .Width(35f)
-                                    .OnClick(model => model.OnClickClearSearch);
+                                    .OnClick(model => model.OnClickClearSearch());
                             });
 
                             row.AddButton(button =>
@@ -53,7 +53,7 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
                                 button
                                     .Label(LocaleString.Search)
                                     .Height(35f)
-                                    .OnClick(model => model.OnClickSearch);
+                                    .OnClick(model => model.OnClickSearch());
                             });
                         });
 
@@ -69,7 +69,7 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
                                             .Label(LocaleString.ClearFilters)
                                             .Height(35f)
                                             .Width(180f)
-                                            .OnClick(model => model.OnClickClearFilters);
+                                            .OnClick(model => model.OnClickClearFilters());
                                     });
                                 });
 
@@ -89,7 +89,7 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
                                                         .Label(model => model.CategoryNames)
                                                         .IsSelected(model => model.CategoryToggles)
                                                         .Height(30f)
-                                                        .OnClick(model => model.OnClickCategory);
+                                                        .OnClick(model => model.OnClickCategory());
                                                 });
                                             });
                                         });
@@ -167,7 +167,7 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
                                                             .Label(LocaleString.QuestionMark)
                                                             .Width(40f)
                                                             .Height(40f)
-                                                            .OnClick(model => model.OnClickExamine);
+                                                            .OnClick(model => model.OnClickExamine());
                                                     });
                                                 });
                                         });
@@ -180,7 +180,7 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
                                                 {
                                                     button
                                                         .Label(LocaleString.Buy)
-                                                        .OnClick(model => model.OnClickBuy)
+                                                        .OnClick(model => model.OnClickBuy())
                                                         .IsEnabled(model => model.ItemBuyEnabled);
                                                 });
                                             });
@@ -198,7 +198,7 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
                                             .Label(LocaleString.LessThanSymbol)
                                             .Width(32f)
                                             .Height(35f)
-                                            .OnClick(model => model.OnClickPreviousPage);
+                                            .OnClick(model => model.OnClickPreviousPage());
                                     });
 
                                     row2.AddComboBox(comboBox =>
@@ -214,7 +214,7 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
                                             .Label(LocaleString.GreaterThanSymbol)
                                             .Width(32f)
                                             .Height(35f)
-                                            .OnClick(model => model.OnClickNextPage);
+                                            .OnClick(model => model.OnClickNextPage());
                                     });
                                     row2.AddSpacer();
                                 });

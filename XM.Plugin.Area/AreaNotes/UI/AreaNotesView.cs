@@ -41,14 +41,14 @@ namespace XM.Plugin.Area.AreaNotes.UI
                                     .Label(LocaleString.X)
                                     .Height(35f)
                                     .Width(35f)
-                                    .OnClick(model => model.OnClickClearSearch);
+                                    .OnClick(model => model.OnClickClearSearch());
                             });
                             row.AddButton(button =>
                             {
                                 button
                                     .Label(LocaleString.Search)
                                     .Height(35f)
-                                    .OnClick(model => model.OnClickSearch);
+                                    .OnClick(model => model.OnClickSearch());
                             });
                         });
 
@@ -70,7 +70,7 @@ namespace XM.Plugin.Area.AreaNotes.UI
                                                         button
                                                             .Label(model => model.AreaNames)
                                                             .IsSelected(model => model.AreaToggled)
-                                                            .OnClick(model => model.OnSelectNote);
+                                                            .OnClick(model => model.OnSelectNote());
                                                     });
                                                 });
                                             });
@@ -119,7 +119,7 @@ namespace XM.Plugin.Area.AreaNotes.UI
                                     row.AddButton(button =>
                                     {
                                         button
-                                            .OnClick(model => model.OnClickSave)
+                                            .OnClick(model => model.OnClickSave())
                                             .Label(LocaleString.Save)
                                             .Height(35f)
                                             .IsEnabled(model => model.IsSaveEnabled);
@@ -128,7 +128,7 @@ namespace XM.Plugin.Area.AreaNotes.UI
                                     row.AddButton(button =>
                                     {
                                         button
-                                            .OnClick(model => model.OnClickDiscardChanges)
+                                            .OnClick(model => model.OnClickDiscardChanges())
                                             .Label(LocaleString.DiscardChanges)
                                             .Height(35f)
                                             .IsEnabled(model => model.IsSaveEnabled);
@@ -137,7 +137,7 @@ namespace XM.Plugin.Area.AreaNotes.UI
                                     row.AddButton(button =>
                                     {
                                         button
-                                            .OnClick(model => model.OnClickDeleteNote)
+                                            .OnClick(model => model.OnClickDeleteNote())
                                             .Label(LocaleString.DeleteNote)
                                             .Height(35f)
                                             .IsEnabled(model => model.IsDeleteEnabled);

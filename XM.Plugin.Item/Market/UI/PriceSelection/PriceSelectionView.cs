@@ -54,13 +54,13 @@ namespace XM.Plugin.Item.Market.UI.PriceSelection
                             {
                                 button
                                     .Label(LocaleString.Save)
-                                    .OnClick(model => model.OnClickSave);
+                                    .OnClick(model => model.OnClickSave());
                             });
                             row.AddButton(button =>
                             {
                                 button
                                     .Label(LocaleString.Cancel)
-                                    .OnClick(model => model.OnClickCancel);
+                                    .OnClick(model => model.OnClickCancel());
                             });
                         });
                     });

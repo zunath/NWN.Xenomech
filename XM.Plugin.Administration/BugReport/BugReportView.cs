@@ -60,7 +60,7 @@ namespace XM.Plugin.Administration.BugReport
                                 button
                                     .Height(35f)
                                     .Label(LocaleString.SubmitBugReport)
-                                    .OnClick(model => model.OnClickSubmit);
+                                    .OnClick(model => model.OnClickSubmit());
                             });
 
                             row.AddButton(button =>
@@ -68,7 +68,7 @@ namespace XM.Plugin.Administration.BugReport
                                 button
                                     .Height(35f)
                                     .Label(LocaleString.Cancel)
-                                    .OnClick(model => model.OnClickCancel);
+                                    .OnClick(model => model.OnClickCancel());
                             });
 
                             row.AddSpacer();

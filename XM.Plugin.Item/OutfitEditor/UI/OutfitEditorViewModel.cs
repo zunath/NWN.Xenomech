@@ -87,7 +87,7 @@ namespace XM.Plugin.Item.OutfitEditor.UI
             return dbOutfits.ToList();
         }
 
-        public Action OnClickSlot => () =>
+        public Action OnClickSlot() => () =>
         {
             if (SelectedSlotIndex > -1)
             {
@@ -139,7 +139,7 @@ namespace XM.Plugin.Item.OutfitEditor.UI
             }
         }
 
-        public Action OnClickSave => () =>
+        public Action OnClickSave() => () =>
         {
             var dbOutfit = DB.Get<PlayerOutfit>(_outfitIds[SelectedSlotIndex]);
 
@@ -153,7 +153,7 @@ namespace XM.Plugin.Item.OutfitEditor.UI
             SlotNames[SelectedSlotIndex] = Name;
         };
 
-        public Action OnClickStoreOutfit => () =>
+        public Action OnClickStoreOutfit() => () =>
         {
             var dbOutfit = DB.Get<PlayerOutfit>(_outfitIds[SelectedSlotIndex]);
 
@@ -210,7 +210,7 @@ namespace XM.Plugin.Item.OutfitEditor.UI
 
         };
 
-        public Action OnClickLoadOutfit => () =>
+        public Action OnClickLoadOutfit() => () =>
         {
             ShowModal($"Loading this outfit will overwrite the appearance of your currently equipped clothes. Are you sure you want to do this?",
                 () =>
@@ -294,7 +294,7 @@ namespace XM.Plugin.Item.OutfitEditor.UI
             });
         }
 
-        public Action OnClickNew => () =>
+        public Action OnClickNew() => () =>
         {
             var playerId = GetObjectUUID(Player);
             var outfitCount = DB.SearchCount<PlayerOutfit>(new DBQuery()
@@ -318,7 +318,7 @@ namespace XM.Plugin.Item.OutfitEditor.UI
             SlotToggles.Add(false);
         };
 
-        public Action OnClickDelete => () =>
+        public Action OnClickDelete() => () =>
         {
             ShowModal("Are you sure you want to delete this stored outfit?", () =>
             {

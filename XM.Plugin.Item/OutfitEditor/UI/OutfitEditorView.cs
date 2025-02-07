@@ -44,7 +44,7 @@ namespace XM.Plugin.Item.OutfitEditor.UI
                                                     button
                                                         .IsSelected(model => model.SlotToggles)
                                                         .Label(model => model.SlotNames)
-                                                        .OnClick(model => model.OnClickSlot);
+                                                        .OnClick(model => model.OnClickSlot());
                                                 });
                                             });
                                         });
@@ -58,7 +58,7 @@ namespace XM.Plugin.Item.OutfitEditor.UI
                                         button
                                             .Label(LocaleString.New)
                                             .Height(35f)
-                                            .OnClick(model => model.OnClickNew);
+                                            .OnClick(model => model.OnClickNew());
                                     });
 
                                     row.AddButton(button =>
@@ -66,7 +66,7 @@ namespace XM.Plugin.Item.OutfitEditor.UI
                                         button
                                             .Label(LocaleString.Delete)
                                             .Height(35f)
-                                            .OnClick(model => model.OnClickDelete);
+                                            .OnClick(model => model.OnClickDelete());
                                     });
                                 });
                             });
@@ -93,7 +93,7 @@ namespace XM.Plugin.Item.OutfitEditor.UI
                                             .Label(LocaleString.Save)
                                             .Height(35f)
                                             .IsEnabled(model => model.IsSaveEnabled)
-                                            .OnClick(model => model.OnClickSave);
+                                            .OnClick(model => model.OnClickSave());
                                     });
 
                                     row.AddSpacer();
@@ -117,7 +117,7 @@ namespace XM.Plugin.Item.OutfitEditor.UI
                                         button
                                             .Label(LocaleString.StoreOutfit)
                                             .Height(35f)
-                                            .OnClick(model => model.OnClickStoreOutfit);
+                                            .OnClick(model => model.OnClickStoreOutfit());
                                     });
 
                                     row.AddButton(button =>
@@ -125,7 +125,7 @@ namespace XM.Plugin.Item.OutfitEditor.UI
                                         button
                                             .Label(LocaleString.LoadOutfit)
                                             .Height(35f)
-                                            .OnClick(model => model.OnClickLoadOutfit);
+                                            .OnClick(model => model.OnClickLoadOutfit());
                                     });
 
                                     row.AddSpacer();

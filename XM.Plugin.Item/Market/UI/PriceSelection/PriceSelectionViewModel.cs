@@ -62,7 +62,7 @@ namespace XM.Plugin.Item.Market.UI.PriceSelection
             }
         }
 
-        public Action OnClickSave => () =>
+        public Action OnClickSave() => () =>
         {
             var price = Convert.ToInt32(Price);
             var @event = new MarketEvent.ChangeMarketPrice(_targetRecordId, price);
@@ -70,7 +70,7 @@ namespace XM.Plugin.Item.Market.UI.PriceSelection
             CloseWindow();
         };
 
-        public Action OnClickCancel => () =>
+        public Action OnClickCancel() => () =>
         {
             CloseWindow();
         };

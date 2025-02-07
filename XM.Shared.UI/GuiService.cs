@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Anvil.API;
 using Anvil.Services;
 using NLog;
@@ -136,26 +137,14 @@ namespace XM.UI
             if (!_registeredEvents[elementId].ContainsKey(type))
                 return;
 
-            var methodName = _registeredEvents[elementId][type];
+            var eventDetail = _registeredEvents[elementId][type];
             var player = _tokenToPlayer[windowToken];
             var viewModel = _playerViewModels[player][windowToken];
-            var vmType = viewModel.GetType();
-            
-            var property = vmType.GetProperty(methodName);
-            if (property != null)
-            {
-                var action = (Action)property.GetValue(viewModel);
-                action!();
-            }
-            else
-            {
-                var method = vmType.GetMethod(methodName);
-                if (method != null)
-                {
-                    var action = (Action)method.Invoke(viewModel, null);
-                    action!();
-                }
-            }
+            var method = viewModel.GetType().GetMethod(eventDetail.Method.Name);
+            var args = eventDetail.Arguments.Select(s => s.Value);
+            var action = method?.Invoke(viewModel, args.ToArray());
+            ((Action)action)?.Invoke();
+
         }
 
         private void RunOpenWindow()
@@ -216,7 +205,7 @@ namespace XM.UI
                 foreach (var (elementId, eventCollection) in elementEvents)
                 {
                     if (!_registeredEvents.ContainsKey(elementId))
-                        _registeredEvents[elementId] = new Dictionary<NuiEventType, string>();
+                        _registeredEvents[elementId] = new Dictionary<NuiEventType, NuiEventDetail>();
 
                     foreach (var (eventType, methodName) in eventCollection)
                     {

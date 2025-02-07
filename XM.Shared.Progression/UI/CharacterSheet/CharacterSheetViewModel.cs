@@ -500,7 +500,7 @@ namespace XM.Progression.UI.CharacterSheet
             WatchOnClient(model => model.IsDisplayServerResetRemindersChecked);
         }
 
-        public Action OnChangeTab => () =>
+        public Action OnChangeTab() => () =>
         {
             switch (SelectedTab)
             {
@@ -525,7 +525,7 @@ namespace XM.Progression.UI.CharacterSheet
             }
         };
 
-        public Action OnClickDisplayServerReminders => () =>
+        public Action OnClickDisplayServerReminders() => () =>
         {
             var playerId = PlayerId.Get(Player);
             var dbPlayerSettings = DB.Get<PlayerSettings>(playerId) ?? new PlayerSettings(playerId);
@@ -534,15 +534,15 @@ namespace XM.Progression.UI.CharacterSheet
             DB.Set(dbPlayerSettings);
         };
 
-        public Action OnClickQuests => () =>
+        public Action OnClickQuests() => () =>
         {
             Event.PublishEvent<XMEvent.OnPlayerOpenQuestsMenu>(Player);
         };
-        public Action OnClickAppearance => () =>
+        public Action OnClickAppearance() => () =>
         {
             Event.PublishEvent<XMEvent.OnPlayerOpenAppearanceMenu>(Player);
         };
-        public Action OnClickOpenTrash => () =>
+        public Action OnClickOpenTrash() => () =>
         {
             var location = GetLocation(Player);
             var trash = CreateObject(ObjectType.Placeable, "reo_trash_can", location);

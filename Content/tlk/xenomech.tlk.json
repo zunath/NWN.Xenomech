@@ -6660,6 +6660,98 @@
     {
       "id": 1665,
       "text": "Decrease Height"
+    },
+    {
+      "id": 1666,
+      "text": "Leather"
+    },
+    {
+      "id": 1667,
+      "text": "Cloth"
+    },
+    {
+      "id": 1668,
+      "text": "Metal"
+    },
+    {
+      "id": 1669,
+      "text": "Left Shoulder"
+    },
+    {
+      "id": 1670,
+      "text": "Left Bicep"
+    },
+    {
+      "id": 1671,
+      "text": "Left Forearm"
+    },
+    {
+      "id": 1672,
+      "text": "Left Hand"
+    },
+    {
+      "id": 1673,
+      "text": "Left Thigh"
+    },
+    {
+      "id": 1674,
+      "text": "Left Shin"
+    },
+    {
+      "id": 1675,
+      "text": "Left Foot"
+    },
+    {
+      "id": 1676,
+      "text": "Right Shoulder"
+    },
+    {
+      "id": 1677,
+      "text": "Right Bicep"
+    },
+    {
+      "id": 1678,
+      "text": "Right Forearm"
+    },
+    {
+      "id": 1679,
+      "text": "Right Hand"
+    },
+    {
+      "id": 1680,
+      "text": "Right Thigh"
+    },
+    {
+      "id": 1681,
+      "text": "Right Shin"
+    },
+    {
+      "id": 1682,
+      "text": "Right Foot"
+    },
+    {
+      "id": 1683,
+      "text": "Chest"
+    },
+    {
+      "id": 1684,
+      "text": "Belt"
+    },
+    {
+      "id": 1685,
+      "text": "Pelvis"
+    },
+    {
+      "id": 1686,
+      "text": "Robe"
+    },
+    {
+      "id": 1687,
+      "text": "Copy to Right -->"
+    },
+    {
+      "id": 1688,
+      "text": "<-- Copy to Left"
     }
   ]
 }

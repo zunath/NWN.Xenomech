@@ -67,7 +67,7 @@ namespace XM.Plugin.Administration.BanManagement
             set => Set(value);
         }
 
-        public Action OnSelectUser => () =>
+        public Action OnSelectUser() => () =>
         {
             if (SelectedUserIndex > -1)
                 UserToggles[SelectedUserIndex] = false;
@@ -85,7 +85,7 @@ namespace XM.Plugin.Administration.BanManagement
             StatusText = string.Empty;
         };
 
-        public Action OnClickNewUser => () =>
+        public Action OnClickNewUser() => () =>
         {
             var newBan = new PlayerBan
             {
@@ -102,7 +102,7 @@ namespace XM.Plugin.Administration.BanManagement
             StatusText = string.Empty;
         };
 
-        public Action OnClickDeleteUser => () =>
+        public Action OnClickDeleteUser() => () =>
         {
             ShowModal(LocaleString.AreYouSureYouWantToDeleteThisBan.ToLocalizedString(), () =>
             {
@@ -131,7 +131,7 @@ namespace XM.Plugin.Administration.BanManagement
             });
         };
 
-        public Action OnClickSave => () =>
+        public Action OnClickSave() => () =>
         {
             if (ActiveUserCDKey.Length != 8)
             {
@@ -160,7 +160,7 @@ namespace XM.Plugin.Administration.BanManagement
             _logger.Info(LocaleString.UserAddedToBanListCDKeyXReasonY.ToLocalizedString(dbUser.CDKey, dbUser.Reason));
         };
 
-        public Action OnClickDiscardChanges => () =>
+        public Action OnClickDiscardChanges() => () =>
         {
             var userId = _userIds[SelectedUserIndex];
             var dbUser = DB.Get<PlayerBan>(userId);

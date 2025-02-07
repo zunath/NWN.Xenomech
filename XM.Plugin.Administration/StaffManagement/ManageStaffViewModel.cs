@@ -78,7 +78,7 @@ namespace XM.Plugin.Administration.StaffManagement
             set => Set(value);
         }
 
-        public Action OnSelectUser => () =>
+        public Action OnSelectUser() => () =>
         {
             if (SelectedUserIndex > -1)
                 UserToggles[SelectedUserIndex] = false;
@@ -99,7 +99,7 @@ namespace XM.Plugin.Administration.StaffManagement
             StatusText = string.Empty;
         };
 
-        public Action OnClickNewUser => () =>
+        public Action OnClickNewUser() => () =>
         {
             var newUser = new AuthorizedDM
             {
@@ -117,7 +117,7 @@ namespace XM.Plugin.Administration.StaffManagement
             StatusText = string.Empty;
         };
 
-        public Action OnClickDeleteUser => () =>
+        public Action OnClickDeleteUser() => () =>
         {
             ShowModal(LocaleString.AreYouSureYouWantToDeleteThisStaffMember.ToLocalizedString(), () =>
             {
@@ -151,7 +151,7 @@ namespace XM.Plugin.Administration.StaffManagement
             });
         };
 
-        public Action OnClickSave => () =>
+        public Action OnClickSave() => () =>
         {
             if (ActiveUserCDKey.Length != 8)
             {
@@ -180,7 +180,7 @@ namespace XM.Plugin.Administration.StaffManagement
             _logger.Info(LocaleString.UserUpdatedOnAuthorizedDMListNameXCDKeyYRoleZ.ToLocalizedString(dbUser.Name, dbUser.CDKey, dbUser.Authorization));
         };
 
-        public Action OnClickDiscardChanges => () =>
+        public Action OnClickDiscardChanges() => () =>
         {
             var userId = _userIds[SelectedUserIndex];
             var dbUser = DB.Get<AuthorizedDM>(userId);

@@ -3,7 +3,7 @@ using Anvil.API;
 
 namespace XM.UI.Builder
 {
-    public class NuiEventCollection: Dictionary<string, Dictionary<NuiEventType, string>>
+    public class NuiEventCollection: Dictionary<string, Dictionary<NuiEventType, NuiEventDetail>>
     {
     }
 }

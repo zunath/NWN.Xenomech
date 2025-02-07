@@ -154,7 +154,7 @@ namespace XM.Plugin.Area.AreaNotes.UI
 
         public Action OnCloseWindow() => SaveNote;
 
-        public Action OnClickDeleteNote => () =>
+        public Action OnClickDeleteNote() => () =>
         {
             if (SelectedAreaIndex < 0)
                 return;
@@ -175,7 +175,7 @@ namespace XM.Plugin.Area.AreaNotes.UI
             IsSaveEnabled = false;
         };
 
-        public Action OnSelectNote => () =>
+        public Action OnSelectNote() => () =>
         {
             if (SelectedAreaIndex > -1)
                 AreaToggled[SelectedAreaIndex] = false;
@@ -192,9 +192,9 @@ namespace XM.Plugin.Area.AreaNotes.UI
             IsSaveEnabled = false;
         };
 
-        public Action OnClickSave => SaveNote;
+        public Action OnClickSave() => SaveNote;
 
-        public Action OnClickDiscardChanges => () =>
+        public Action OnClickDiscardChanges() => () =>
         {
             LoadNote();
             IsSaveEnabled = false;
@@ -245,9 +245,9 @@ namespace XM.Plugin.Area.AreaNotes.UI
             IsSaveEnabled = false;
         }
 
-        public Action OnClickSearch => Search;
+        public Action OnClickSearch() => Search;
 
-        public Action OnClickClearSearch => () =>
+        public Action OnClickClearSearch() => () =>
         {
             SearchText = string.Empty;
             Search();

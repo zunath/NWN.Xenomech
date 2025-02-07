@@ -837,7 +837,7 @@ namespace XM.Progression.UI.Job
             IsNightstalkerFilterEnabled = _selectedJob != JobType.Nightstalker;
         }
 
-        public Action OnChangeTab => () =>
+        public Action OnChangeTab() => () =>
         {
             switch (SelectedTab)
             {
@@ -928,7 +928,7 @@ namespace XM.Progression.UI.Job
             ClearEquippedAbilities();
         }
 
-        public Action OnClickKeeper => () =>
+        public Action OnClickKeeper() => () =>
         {
             ShowModal(
                 LocaleString.ChangeJobWillResetAbilities.ToLocalizedString(),
@@ -940,7 +940,7 @@ namespace XM.Progression.UI.Job
                 });
         };
 
-        public Action OnClickMender => () =>
+        public Action OnClickMender() => () =>
         {
             ShowModal(
                 LocaleString.ChangeJobWillResetAbilities.ToLocalizedString(),
@@ -952,7 +952,7 @@ namespace XM.Progression.UI.Job
                 });
         };
 
-        public Action OnClickTechweaver => () =>
+        public Action OnClickTechweaver() => () =>
         {
             ShowModal(
                 LocaleString.ChangeJobWillResetAbilities.ToLocalizedString(),
@@ -964,7 +964,7 @@ namespace XM.Progression.UI.Job
                 });
         };
 
-        public Action OnClickBeastmaster => () =>
+        public Action OnClickBeastmaster() => () =>
         {
             ShowModal(
                 LocaleString.ChangeJobWillResetAbilities.ToLocalizedString(),
@@ -976,7 +976,7 @@ namespace XM.Progression.UI.Job
                 });
         };
 
-        public Action OnClickBrawler => () =>
+        public Action OnClickBrawler() => () =>
         {
             ShowModal(
                 LocaleString.ChangeJobWillResetAbilities.ToLocalizedString(),
@@ -988,7 +988,7 @@ namespace XM.Progression.UI.Job
                 });
         };
 
-        public Action OnClickNightstalker => () =>
+        public Action OnClickNightstalker() => () =>
         {
             ShowModal(
                 LocaleString.ChangeJobWillResetAbilities.ToLocalizedString(),
@@ -1000,7 +1000,7 @@ namespace XM.Progression.UI.Job
                 });
         };
 
-        public Action OnClickHunter => () =>
+        public Action OnClickHunter() => () =>
         {
             ShowModal(
                 LocaleString.ChangeJobWillResetAbilities.ToLocalizedString(),
@@ -1012,7 +1012,7 @@ namespace XM.Progression.UI.Job
                 });
         };
 
-        public Action OnClickElementalist => () =>
+        public Action OnClickElementalist() => () =>
         {
             ShowModal(
                 LocaleString.ChangeJobWillResetAbilities.ToLocalizedString(),
@@ -1024,7 +1024,7 @@ namespace XM.Progression.UI.Job
                 });
         };
 
-        public Action OnClickFilterKeeper => () =>
+        public Action OnClickFilterKeeper() => () =>
         {
             RefreshAllJobFilterFlags();
             IsKeeperFilterEncouraged = true;
@@ -1032,7 +1032,7 @@ namespace XM.Progression.UI.Job
             RefreshAbilitiesList();
         };
 
-        public Action OnClickFilterMender => () =>
+        public Action OnClickFilterMender() => () =>
         {
             RefreshAllJobFilterFlags();
             IsMenderFilterEncouraged = true;
@@ -1040,7 +1040,7 @@ namespace XM.Progression.UI.Job
             RefreshAbilitiesList();
         };
 
-        public Action OnClickFilterTechweaver => () =>
+        public Action OnClickFilterTechweaver() => () =>
         {
             RefreshAllJobFilterFlags();
             IsTechweaverFilterEncouraged = true;
@@ -1048,7 +1048,7 @@ namespace XM.Progression.UI.Job
             RefreshAbilitiesList();
         };
 
-        public Action OnClickFilterBeastmaster => () =>
+        public Action OnClickFilterBeastmaster() => () =>
         {
             RefreshAllJobFilterFlags();
             IsBeastmasterFilterEncouraged = true;
@@ -1056,7 +1056,7 @@ namespace XM.Progression.UI.Job
             RefreshAbilitiesList();
         };
 
-        public Action OnClickFilterBrawler => () =>
+        public Action OnClickFilterBrawler() => () =>
         {
             RefreshAllJobFilterFlags();
             IsBrawlerFilterEncouraged = true;
@@ -1064,7 +1064,7 @@ namespace XM.Progression.UI.Job
             RefreshAbilitiesList();
         };
 
-        public Action OnClickFilterNightstalker => () =>
+        public Action OnClickFilterNightstalker() => () =>
         {
             RefreshAllJobFilterFlags();
             IsNightstalkerFilterEncouraged = true;
@@ -1072,7 +1072,7 @@ namespace XM.Progression.UI.Job
             RefreshAbilitiesList();
         };
 
-        public Action OnClickFilterHunter => () =>
+        public Action OnClickFilterHunter() => () =>
         {
             RefreshAllJobFilterFlags();
             IsHunterFilterEncouraged = true;
@@ -1080,7 +1080,7 @@ namespace XM.Progression.UI.Job
             RefreshAbilitiesList();
         };
 
-        public Action OnClickFilterElementalist => () =>
+        public Action OnClickFilterElementalist() => () =>
         {
             RefreshAllJobFilterFlags();
             IsElementalistFilterEncouraged = true;
@@ -1088,7 +1088,7 @@ namespace XM.Progression.UI.Job
             RefreshAbilitiesList();
         };
 
-        public Action OnClickAbility => () =>
+        public Action OnClickAbility() => () =>
         {
             var index = NuiGetEventArrayIndex();
 
@@ -1102,7 +1102,7 @@ namespace XM.Progression.UI.Job
             RefreshAbilityDetails();
         };
 
-        public Action OnClickEquippedAbility => () =>
+        public Action OnClickEquippedAbility() => () =>
         {
             var index = NuiGetEventArrayIndex();
 
@@ -1116,7 +1116,7 @@ namespace XM.Progression.UI.Job
             IsUnequipAbilityEnabled = _selectedEquippedAbilityIndex > -1;
         };
 
-        public Action OnEquipUnequipAbility => () =>
+        public Action OnEquipUnequipAbility() => () =>
         {
             if (_selectedAbilityIndex <= -1)
                 return;
@@ -1159,7 +1159,7 @@ namespace XM.Progression.UI.Job
             _equippedAbilities.Add(feat);
         }
 
-        public Action OnClickUnequipAbility => () =>
+        public Action OnClickUnequipAbility() => () =>
         {
             if (_selectedEquippedAbilityIndex < 0)
                 return;
@@ -1180,7 +1180,7 @@ namespace XM.Progression.UI.Job
             RefreshSelectedAbility();
         };
 
-        public Action OnClickChangeJob => () =>
+        public Action OnClickChangeJob() => () =>
         {
             ShowModal(LocaleString.AreYouSureYouWantToChangeJobs.ToLocalizedString(), 
                 () =>

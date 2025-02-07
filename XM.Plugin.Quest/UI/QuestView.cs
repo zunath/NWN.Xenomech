@@ -59,7 +59,7 @@ namespace XM.Quest.UI
                                 .Label(LocaleString.X)
                                 .Height(35f)
                                 .Width(35f)
-                                .OnClick(model => model.OnClearSearch);
+                                .OnClick(model => model.OnClearSearch());
                         });
 
                         row.AddButton(button =>
@@ -68,7 +68,7 @@ namespace XM.Quest.UI
                                 .Label(LocaleString.Search)
                                 .Height(35f)
                                 .Width(60f)
-                                .OnClick(model => model.OnSearch);
+                                .OnClick(model => model.OnSearch());
                         });
                     });
 
@@ -84,7 +84,7 @@ namespace XM.Quest.UI
                                         .IsSelected(model => model.QuestToggles)
                                         .Label(model => model.QuestNames)
                                         .TooltipText(model => model.QuestNames)
-                                        .OnClick(model => model.OnSelectQuest);
+                                        .OnClick(model => model.OnSelectQuest());
                                 });
                             });
                         });
@@ -127,7 +127,7 @@ namespace XM.Quest.UI
                     button
                         .Label(LocaleString.AbandonQuest)
                         .Height(32f)
-                        .OnClick(model => model.OnAbandonQuest)
+                        .OnClick(model => model.OnAbandonQuest())
                         .IsEnabled(model => model.IsAbandonQuestEnabled);
                 });
 

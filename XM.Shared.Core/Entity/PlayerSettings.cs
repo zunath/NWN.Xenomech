@@ -8,12 +8,19 @@ namespace XM.Shared.Core.Entity
     {
         public PlayerSettings()
         {
-            
+            Init();
         }
 
         public PlayerSettings(string playerId)
         {
             Id = playerId;
+            Init();
+        }
+
+        private void Init()
+        {
+            ShowHelmet = true;
+            ShowCloak = true;
         }
 
         public bool DisplayServerResetReminders { get; set; }

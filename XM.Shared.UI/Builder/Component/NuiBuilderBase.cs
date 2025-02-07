@@ -216,19 +216,18 @@ namespace XM.UI.Builder.Component
             return (TBuilder)this;
         }
 
-        private void BindAction(NuiEventType eventType, Expression<Func<TViewModel, Action>> expression)
+        private void BindAction<TMethod>(NuiEventType eventType, Expression<Func<TViewModel, TMethod>> expression)
         {
             AssignId();
             RaisesNuiEvents = true;
-            var methodName = GetBindName(expression);
 
             if (!RegisteredEvents.ContainsKey(_id))
-                RegisteredEvents[_id] = new Dictionary<NuiEventType, string>();
+                RegisteredEvents[_id] = new Dictionary<NuiEventType, NuiEventDetail>();
 
-            RegisteredEvents[_id][eventType] = methodName;
+            RegisteredEvents[_id][eventType] = GetMethodInfo(expression);
         }
 
-        public TBuilder OnClick(Expression<Func<TViewModel, Action>> expression)
+        public TBuilder OnClick<TMethod>(Expression<Func<TViewModel, TMethod>> expression)
         {
             BindAction(NuiEventType.Click, expression);
             return (TBuilder)this;

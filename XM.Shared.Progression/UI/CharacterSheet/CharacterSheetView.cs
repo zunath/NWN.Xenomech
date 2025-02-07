@@ -68,7 +68,7 @@ namespace XM.Progression.UI.CharacterSheet
                     .AddOption(LocaleString.KeyItems)
                     .AddOption(LocaleString.Settings)
                     .SelectedValue(model => model.SelectedTab)
-                    .OnMouseDown(model => model.OnChangeTab);
+                    .OnMouseDown(model => model.OnChangeTab());
             });
             row.AddSpacer();
         }
@@ -245,7 +245,7 @@ namespace XM.Progression.UI.CharacterSheet
                         check
                             .Label(LocaleString.DisplayServerResetReminders)
                             .Selected(model => model.IsDisplayServerResetRemindersChecked)
-                            .OnMouseDown(model => model.OnClickDisplayServerReminders)
+                            .OnMouseDown(model => model.OnClickDisplayServerReminders())
                             .Width(500f);
 
                     });
@@ -554,21 +554,21 @@ namespace XM.Progression.UI.CharacterSheet
                     button
                         .Label(LocaleString.Appearance)
                         .Width(ButtonWidth)
-                        .OnClick(model => model.OnClickAppearance);
+                        .OnClick(model => model.OnClickAppearance());
                 });
                 col.AddButton(button =>
                 {
                     button
                         .Label(LocaleString.Quests)
                         .Width(ButtonWidth)
-                        .OnClick(model => model.OnClickQuests);
+                        .OnClick(model => model.OnClickQuests());
                 });
                 col.AddButton(button =>
                 {
                     button
                         .Label(LocaleString.OpenTrash)
                         .Width(ButtonWidth)
-                        .OnClick(model => model.OnClickOpenTrash);
+                        .OnClick(model => model.OnClickOpenTrash());
                 });
             });
         }
