@@ -904,14 +904,16 @@ namespace XM.Plugin.Item.AppearanceEditor.UI
                     .Width(buttonSize)
                     .Height(buttonSize)
                     .Margin(0f)
-                    .IsEncouraged(true)
                     .DrawList(drawList =>
                     {
                         drawList.AddImage(image =>
                         {
                             image
                                 .ResRef(texture)
-                                .Position(drawOffset, drawOffset, buttonSize - drawOffset * 2f,
+                                .Position(
+                                    drawOffset, 
+                                    drawOffset, 
+                                    buttonSize - drawOffset * 2f,
                                     buttonSize - drawOffset * 2f)
                                 .Aspect(NuiAspect.Stretch)
                                 .HorizontalAlign(NuiHAlign.Left)

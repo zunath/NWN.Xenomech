@@ -35,6 +35,7 @@ namespace XM.UI.Builder.DrawList
 
         private NuiRect _drawTextureRegion;
         private string _drawTextureRegionBind;
+        private bool _hasDrawRegion;
 
         public NuiDrawListImageBuilder(NuiEventCollection registeredEvents)
             : base(registeredEvents)
@@ -152,11 +153,13 @@ namespace XM.UI.Builder.DrawList
         public NuiDrawListImageBuilder<TViewModel> DrawTextureRegion(NuiRect drawTextureRegion)
         {
             _drawTextureRegion = drawTextureRegion;
+            _hasDrawRegion = true;
             return this;
         }
         public NuiDrawListImageBuilder<TViewModel> DrawTextureRegion(Expression<Func<TViewModel, NuiRect>> expression)
         {
             _drawTextureRegionBind = GetBindName(expression);
+            _hasDrawRegion = true;
             return this;
         }
 
@@ -201,7 +204,7 @@ namespace XM.UI.Builder.DrawList
                 _render,
                 _bindArrays);
 
-            if (!string.IsNullOrWhiteSpace(_drawTextureRegionBind))
+            if (_hasDrawRegion)
             {
                 element = Nui.DrawListImageRegion(element, drawTextureRegion);
             }
