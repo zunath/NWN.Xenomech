@@ -1,0 +1,15 @@
+#MAXMODEL ASCII
+# model: WBwRf_b_011
+filedependancy WBwRf_b_011.max
+newmodel WBwRf_b_011
+setsupermodel WBwRf_b_011 NULL
+classification CHARACTER
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom WBwRf_b_011
+node dummy WBwRf_b_011
+  parent NULL
+endnode
+endmodelgeom WBwRf_b_011
+
+donemodel WBwRf_b_011
