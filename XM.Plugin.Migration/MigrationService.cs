@@ -22,14 +22,22 @@ namespace XM.Migration
         private int _newMigrationVersion;
         private readonly Dictionary<int, IServerMigration> _serverMigrations = new();
         private readonly Dictionary<int, IPlayerMigration> _playerMigrations = new();
+        private readonly IList<IServerMigration> _serverMigrationList;
+        private readonly IList<IPlayerMigration> _playerMigrationList;
 
         private readonly DBService _db;
         private readonly XMEventService _event;
 
-        public MigrationService(DBService db, XMEventService @event)
+        public MigrationService(
+            DBService db, 
+            XMEventService @event,
+            IList<IServerMigration> serverMigrationList,
+            IList<IPlayerMigration> playerMigrationList)
         {
             _db = db;
             _event = @event;
+            _serverMigrationList = serverMigrationList;
+            _playerMigrationList = playerMigrationList;
 
             @event.Subscribe<ModuleEvent.OnPlayerEnter>(OnModuleEnter);
         }
@@ -148,28 +156,16 @@ namespace XM.Migration
 
         private void LoadServerMigrations()
         {
-            var types = AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(s => s.GetTypes())
-                .Where(w => typeof(IServerMigration).IsAssignableFrom(w) && !w.IsInterface && !w.IsAbstract);
-
-            foreach (var type in types)
+            foreach (var instance in _serverMigrationList)
             {
-                var instance = (IServerMigration)Activator.CreateInstance(type);
-
                 _serverMigrations.Add(instance.Version, instance);
             }
         }
 
         private void LoadPlayerMigrations()
         {
-            var types = AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(s => s.GetTypes())
-                .Where(w => typeof(IPlayerMigration).IsAssignableFrom(w) && !w.IsInterface && !w.IsAbstract);
-
-            foreach (var type in types)
+            foreach (var instance in _playerMigrationList)
             {
-                var instance = (IPlayerMigration)Activator.CreateInstance(type);
-
                 _playerMigrations.Add(instance.Version, instance);
             }
         }

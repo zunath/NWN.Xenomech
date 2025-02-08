@@ -344,7 +344,8 @@ namespace XM.Progression.UI.CharacterSheet
                                         row.AddText(label =>
                                         {
                                             label
-                                                .Text(model => model.JobNames);
+                                                .Text(model => model.JobNames)
+                                                .ForegroundColor(model => model.JobColors);
                                         });
                                     });
                                     col.AddRow(row =>
@@ -352,7 +353,8 @@ namespace XM.Progression.UI.CharacterSheet
                                         row.AddText(label =>
                                         {
                                             label
-                                                .Text(model => model.JobLevels);
+                                                .Text(model => model.JobLevels)
+                                                .ForegroundColor(model => model.JobColors);
                                         });
                                     });
                                 });

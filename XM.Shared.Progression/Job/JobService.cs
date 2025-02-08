@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Anvil.API;
 using Anvil.Services;
 using XM.Inventory;
 using XM.Progression.Event;
@@ -15,7 +14,9 @@ using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
+using XM.UI.Event;
 using ArgumentException = System.ArgumentException;
+using ClassType = XM.Shared.API.Constants.ClassType;
 
 namespace XM.Progression.Job
 {
@@ -130,6 +131,46 @@ namespace XM.Progression.Job
             _db = db;
             _stat = stat;
             _event = @event;
+
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            _event.Subscribe<XMEvent.OnPCInitialized>(InitializeJob);
+        }
+
+        private void InitializeJob(uint player)
+        {
+            var @class = GetClassByPosition(1, player);
+            var job = ClassToJob(@class);
+
+            ChangeJob(player, job, []);
+        }
+
+        private JobType ClassToJob(ClassType @class)
+        {
+            switch (@class)
+            {
+                case ClassType.Beastmaster:
+                    return JobType.Beastmaster;
+                case ClassType.Brawler:
+                    return JobType.Brawler;
+                case ClassType.Elementalist:
+                    return JobType.Elementalist;
+                case ClassType.Hunter:
+                    return JobType.Hunter;
+                case ClassType.Keeper:
+                    return JobType.Keeper;
+                case ClassType.Mender:
+                    return JobType.Mender;
+                case ClassType.Nightstalker:
+                    return JobType.Nightstalker;
+                case ClassType.Techweaver:
+                    return JobType.Techweaver;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(@class), @class, null);
+            }
         }
 
         internal Dictionary<JobType, IJobDefinition> GetAllJobDefinitions()
@@ -288,9 +329,11 @@ namespace XM.Progression.Job
             _db.Set(dbPlayerJob);
 
             var name = definition.Name.ToLocalizedString();
-            SendMessageToPC(player, $"Job changed to: {ColorToken.Green(name)}");
+            var message = LocaleString.JobChangedToX.ToLocalizedString(ColorToken.Green(name));
+            SendMessageToPC(player, message);
 
             _event.PublishEvent<JobEvent.PlayerChangedJobEvent>(player);
+            _event.PublishEvent<UIEvent.UIRefreshEvent>(player);
         }
     }
 }

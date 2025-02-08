@@ -45,6 +45,16 @@ namespace XM.Shared.API.Constants
         EyeOfGruumsh = 39,
         ShouDisciple = 40,
         PurpleDragonKnight = 41,
+
+        Beastmaster = 43,
+        Brawler = 44,
+        Elementalist = 45,
+        Hunter = 46,
+        Keeper = 47,
+        Mender = 48,
+        Nightstalker = 49,
+        Techweaver = 50,
+
         Invalid = 255,
     }
 }

@@ -2070,10 +2070,6 @@
       "text": "Accuracy bonus: "
     },
     {
-      "id": 518,
-      "text": "Background"
-    },
-    {
       "id": 519,
       "text": "Discord"
     },
@@ -6752,6 +6748,146 @@
     {
       "id": 1688,
       "text": "<-- Copy to Left"
+    },
+    {
+      "id": 1689,
+      "text": " "
+    },
+    {
+      "id": 1690,
+      "text": "BST"
+    },
+    {
+      "id": 1691,
+      "text": "BRW"
+    },
+    {
+      "id": 1692,
+      "text": "ELM"
+    },
+    {
+      "id": 1693,
+      "text": "HNT"
+    },
+    {
+      "id": 1694,
+      "text": "KPR"
+    },
+    {
+      "id": 1695,
+      "text": "MND"
+    },
+    {
+      "id": 1696,
+      "text": "NGT"
+    },
+    {
+      "id": 1697,
+      "text": "TEC"
+    },
+    {
+      "id": 1698,
+      "text": "Beastmasters"
+    },
+    {
+      "id": 1699,
+      "text": "Brawlers"
+    },
+    {
+      "id": 1700,
+      "text": "Elementalists"
+    },
+    {
+      "id": 1701,
+      "text": "Hunters"
+    },
+    {
+      "id": 1702,
+      "text": "Keepers"
+    },
+    {
+      "id": 1703,
+      "text": "Menders"
+    },
+    {
+      "id": 1704,
+      "text": "Nightstalkers"
+    },
+    {
+      "id": 1705,
+      "text": "Techweavers"
+    },
+    {
+      "id": 1706,
+      "text": "beastmaster"
+    },
+    {
+      "id": 1707,
+      "text": "brawler"
+    },
+    {
+      "id": 1708,
+      "text": "elementalist"
+    },
+    {
+      "id": 1709,
+      "text": "hunter"
+    },
+    {
+      "id": 1710,
+      "text": "keeper"
+    },
+    {
+      "id": 1711,
+      "text": "mender"
+    },
+    {
+      "id": 1712,
+      "text": "nightstalker"
+    },
+    {
+      "id": 1713,
+      "text": "techweaver"
+    },
+    {
+      "id": 1714,
+      "text": "Summoners who bond with Etheric creatures, commanding pets to assist in combat while thriving in various environments."
+    },
+    {
+      "id": 1715,
+      "text": "Close-range melee fighters who channel Ether into powerful hand-to-hand techniques, executing rapid combos and explosive strikes."
+    },
+    {
+      "id": 1716,
+      "text": "Spellcasters who manipulate elemental forces such as fire, ice, and lightning to unleash devastating Ether-based attacks."
+    },
+    {
+      "id": 1717,
+      "text": "Ranged combatants adept at tracking, scouting, and executing precision attacks with bows or crossbows."
+    },
+    {
+      "id": 1718,
+      "text": "Defensive specialists who absorb damage, control enemies, and protect allies using Ether-powered barriers and crowd control abilities."
+    },
+    {
+      "id": 1719,
+      "text": "Skilled healers who restore health, cleanse ailments, and enhance team survivability with Ether-driven healing arts."
+    },
+    {
+      "id": 1720,
+      "text": "Stealthy assassins who master ambush tactics, Ether-infused concealment, and precision strikes to eliminate key targets."
+    },
+    {
+      "id": 1721,
+      "text": "Tactical controllers who blend Ether and technology to manipulate perception, disrupt enemies, and alter battlefield dynamics."
+    },
+    {
+      "id": 1722,
+      "text": "In Xenomech, the job system represents how individuals harness Ether, technology, and combat expertise to survive on Arcanis. Each job defines a specialized role, from melee combatants to Etheric spellcasters, shaped by Resonance Nodes that allow blending of abilities.\n\nPlayers start with a primary job and can switch at Zenithia’s Resonance Chamber, adapting their skills to new challenges. Jobs align with key combat styles—defensive, support, melee, ranged, or spellcasting—offering deep customization and synergy."
+    },
+    {
+      "id": 1723,
+      "text": "Job changed to: {0}"
     }
   ]
 }

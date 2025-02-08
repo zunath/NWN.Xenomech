@@ -36,6 +36,8 @@ namespace XM.Shared.Core
             SetTlkOverride(477, LocaleString.AgilityInformation.ToLocalizedString()); // Intelligence
             SetTlkOverride(479, LocaleString.SocialInformation.ToLocalizedString()); // Charisma
 
+            SetTlkOverride(484, LocaleString.JobSystemDescription.ToLocalizedString());
+
             SetTlkOverride(457, LocaleString.RecommendedButtonText.ToLocalizedString());
 
             SetTlkOverride(459, LocaleString.MightDetails.ToLocalizedString());

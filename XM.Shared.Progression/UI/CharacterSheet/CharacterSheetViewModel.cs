@@ -201,6 +201,12 @@ namespace XM.Progression.UI.CharacterSheet
             set => Set(value);
         }
 
+        public XMBindingList<Color> JobColors
+        {
+            get => Get<XMBindingList<Color>>();
+            set => Set(value);
+        }
+
         public XMBindingList<string> JobIcons
         {
             get => Get<XMBindingList<string>>();
@@ -369,28 +375,36 @@ namespace XM.Progression.UI.CharacterSheet
             var playerId = PlayerId.Get(Player);
             var dbPlayerJob = DB.Get<PlayerJob>(playerId) ?? new PlayerJob(playerId);
             var allJobs = Job.GetAllJobDefinitions();
+            var currentJob = Job.GetActiveJob(Player);
 
             var lvText = Locale.GetString(LocaleString.Lv);
             var jobNames = new XMBindingList<string>();
             var jobLevels = new XMBindingList<string>();
+            var jobColors = new XMBindingList<Color>();
             var jobIcons = new XMBindingList<string>();
             var jobProgresses = new XMBindingList<float>();
 
-            foreach (var (job, definition) in allJobs)
+            foreach (var (type, definition) in allJobs)
             {
                 if (!definition.IsVisibleToPlayers)
                     continue;
 
                 jobNames.Add(Locale.GetString(definition.Name));
-                jobLevels.Add($"{lvText} {dbPlayerJob.JobLevels[job]}");
+                jobLevels.Add($"{lvText} {dbPlayerJob.JobLevels[type]}");
+
+                jobColors.Add(currentJob.Type == type 
+                    ? new Color(255, 215, 0) 
+                    : new Color(255, 255, 255));
+
                 jobIcons.Add(definition.IconResref);
 
-                var ratio = dbPlayerJob.JobXP[job] / XP[dbPlayerJob.JobLevels[job]];
+                var ratio = dbPlayerJob.JobXP[type] / XP[dbPlayerJob.JobLevels[type]];
                 jobProgresses.Add(Math.Clamp(ratio, 0f, 1f));
             }
 
             JobNames = jobNames;
             JobLevels = jobLevels;
+            JobColors = jobColors;
             JobIcons = jobIcons;
             JobProgresses = jobProgresses;
         }
