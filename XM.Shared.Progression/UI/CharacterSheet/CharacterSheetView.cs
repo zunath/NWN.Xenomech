@@ -298,6 +298,7 @@ namespace XM.Progression.UI.CharacterSheet
                                         {
                                             col.AddGroup(imageGroup =>
                                             {
+                                                imageGroup.Scrollbars(NuiScrollbars.None);
                                                 imageGroup.SetLayout(layout =>
                                                 {
                                                     layout.AddImage(image =>
@@ -407,6 +408,7 @@ namespace XM.Progression.UI.CharacterSheet
                                         {
                                             col.AddGroup(imageGroup =>
                                             {
+                                                imageGroup.Scrollbars(NuiScrollbars.None);
                                                 imageGroup.SetLayout(layout =>
                                                 {
                                                     layout.AddImage(image =>
