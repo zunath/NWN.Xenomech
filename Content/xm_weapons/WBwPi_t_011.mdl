@@ -1,0 +1,15 @@
+#MAXMODEL ASCII
+# model: WBwPi_t_011
+filedependancy WBwPi_t_011.max
+newmodel WBwPi_t_011
+setsupermodel WBwPi_t_011 NULL
+classification CHARACTER
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom WBwPi_t_011
+node dummy WBwPi_t_011
+  parent NULL
+endnode
+endmodelgeom WBwPi_t_011
+
+donemodel WBwPi_t_011
