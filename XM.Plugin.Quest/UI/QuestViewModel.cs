@@ -155,7 +155,7 @@ namespace XM.Quest.UI
             return sb.ToString();
         }
 
-        public Action OnSelectQuest => () =>
+        public Action OnSelectQuest() => () =>
         {
             if (SelectedQuest > -1)
                 QuestToggles[SelectedQuest] = false;
@@ -167,15 +167,15 @@ namespace XM.Quest.UI
             LoadQuest();
         };
 
-        public Action OnClearSearch => () =>
+        public Action OnClearSearch() => () =>
         {
             SearchText = string.Empty;
             Search();
         };
 
-        public Action OnSearch => Search;
+        public Action OnSearch() => Search;
 
-        public Action OnAbandonQuest => () =>
+        public Action OnAbandonQuest() => () =>
         {
             if (SelectedQuest <= -1)
                 return;

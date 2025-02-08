@@ -113,7 +113,11 @@ namespace XM.UI
 
                 var type = property.PropertyType;
                 var value = XMJsonUtility.DeserializeObject(jsonString, type);
-                GetType().GetProperty(propertyName)!.SetValue(this, value);
+
+                if (propertyName != nameof(Geometry))
+                    GetType().GetProperty(propertyName)!.SetValue(this, value);
+                else
+                    _backingData[propertyName] = value;
             }
         }
 
@@ -195,15 +199,6 @@ namespace XM.UI
         {
             if(string.IsNullOrWhiteSpace(propertyName))
                 throw new Exception($"Property {propertyName} does not exist in view model.");
-
-            if (_backingData.ContainsKey(propertyName))
-            {
-                var currentValue = _backingData[propertyName];
-                if (EqualityComparer<T>.Default.Equals((T)currentValue, value))
-                {
-                    return;
-                }
-            }
 
             _backingData[propertyName] = value;
             OnPropertyChanged(propertyName);

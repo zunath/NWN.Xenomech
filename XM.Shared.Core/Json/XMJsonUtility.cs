@@ -26,6 +26,10 @@ namespace XM.Shared.Core.Json
             {
                 Converters = { new NuiComboEntryConverter() }
             }));
+            _options.Converters.Add(new XMBindingListConverter<NuiRect>(new JsonSerializerOptions()
+            {
+                Converters = { new NuiRectJsonConverter() }
+            }));
         }
 
         /// <summary>

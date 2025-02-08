@@ -61,7 +61,7 @@ namespace XM.Plugin.Administration.StaffManagement
                                                     button
                                                         .Label(model => model.Names)
                                                         .IsSelected(model => model.UserToggles)
-                                                        .OnClick(model => model.OnSelectUser);
+                                                        .OnClick(model => model.OnSelectUser());
                                                 });
                                             });
                                         });
@@ -74,14 +74,14 @@ namespace XM.Plugin.Administration.StaffManagement
                                     {
                                         button
                                             .Label(LocaleString.NewUser)
-                                            .OnClick(model => model.OnClickNewUser);
+                                            .OnClick(model => model.OnClickNewUser());
                                     });
 
                                     row.AddButton(button =>
                                     {
                                         button
                                             .Label(LocaleString.DeleteUser)
-                                            .OnClick(model => model.OnClickDeleteUser);
+                                            .OnClick(model => model.OnClickDeleteUser());
                                     });
                                 });
 
@@ -136,7 +136,7 @@ namespace XM.Plugin.Administration.StaffManagement
                                     row.AddButton(button =>
                                     {
                                         button
-                                            .OnClick(model => model.OnClickSave)
+                                            .OnClick(model => model.OnClickSave())
                                             .Label(LocaleString.Save)
                                             .IsEnabled(model => model.IsUserSelected);
                                     });
@@ -144,7 +144,7 @@ namespace XM.Plugin.Administration.StaffManagement
                                     row.AddButton(button =>
                                     {
                                         button
-                                            .OnClick(model => model.OnClickDiscardChanges)
+                                            .OnClick(model => model.OnClickDiscardChanges())
                                             .Label(LocaleString.DiscardChanges)
                                             .IsEnabled(model => model.IsUserSelected);
                                     });

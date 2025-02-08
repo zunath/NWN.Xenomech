@@ -9,6 +9,11 @@ namespace XM.Shared.Core.Json
     {
         public override NuiRect Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
+            if (reader.TokenType == JsonTokenType.Null)
+            {
+                return new NuiRect();
+            }
+
             if (reader.TokenType != JsonTokenType.StartObject)
             {
                 throw new JsonException("Expected StartObject token");

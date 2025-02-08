@@ -44,7 +44,7 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
                                     .Label(LocaleString.X)
                                     .Height(35f)
                                     .Width(35f)
-                                    .OnClick(model => model.OnClickClear);
+                                    .OnClick(model => model.OnClickClear());
                             });
 
                             row.AddButton(button =>
@@ -52,7 +52,7 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
                                 button
                                     .Label(LocaleString.Search)
                                     .Height(35f)
-                                    .OnClick(model => model.OnClickSearch);
+                                    .OnClick(model => model.OnClickSearch());
                             });
                         });
 
@@ -63,7 +63,7 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
                                 button
                                     .Label(LocaleString.AddItem)
                                     .Height(35f)
-                                    .OnClick(model => model.OnClickAddItem)
+                                    .OnClick(model => model.OnClickAddItem())
                                     .IsEnabled(model => model.IsAddItemEnabled);
                             });
 
@@ -72,7 +72,7 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
                                 button
                                     .Label(model => model.ShopTill)
                                     .Height(35f)
-                                    .OnClick(model => model.OnClickShopTill)
+                                    .OnClick(model => model.OnClickShopTill())
                                     .IsEnabled(model => model.IsShopTillEnabled);
                             });
 
@@ -137,7 +137,7 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
                                         {
                                             button
                                                 .Label(model => model.ItemPriceNames)
-                                                .OnClick(model => model.OnClickChangePrice);
+                                                .OnClick(model => model.OnClickChangePrice());
                                         });
                                     });
 
@@ -171,7 +171,7 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
                                             {
                                                 button
                                                     .Label(LocaleString.Remove)
-                                                    .OnClick(model => model.OnClickRemove);
+                                                    .OnClick(model => model.OnClickRemove());
                                             });
                                         });
                                 });
@@ -186,7 +186,7 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
                             {
                                 button
                                     .Label(LocaleString.SaveChanges)
-                                    .OnClick(model => model.OnClickSaveChanges);
+                                    .OnClick(model => model.OnClickSaveChanges());
                             });
 
                             row.AddSpacer();

@@ -6580,6 +6580,178 @@
     {
       "id": 1645,
       "text": "Please enter as much information as possible regarding the encountered bug."
+    },
+    {
+      "id": 1646,
+      "text": "Outfits"
+    },
+    {
+      "id": 1647,
+      "text": "New"
+    },
+    {
+      "id": 1648,
+      "text": "Delete"
+    },
+    {
+      "id": 1649,
+      "text": "Name"
+    },
+    {
+      "id": 1650,
+      "text": "Store Outfit"
+    },
+    {
+      "id": 1651,
+      "text": "Load Outfit"
+    },
+    {
+      "id": 1652,
+      "text": "Appearance Editor"
+    },
+    {
+      "id": 1653,
+      "text": "Equipment"
+    },
+    {
+      "id": 1654,
+      "text": "Armor"
+    },
+    {
+      "id": 1655,
+      "text": "Helmet"
+    },
+    {
+      "id": 1656,
+      "text": "Cloak"
+    },
+    {
+      "id": 1657,
+      "text": "Weapon (Main)"
+    },
+    {
+      "id": 1658,
+      "text": "Weapon (Off)"
+    },
+    {
+      "id": 1659,
+      "text": "No item is equipped or the equipped item cannot be modified."
+    },
+    {
+      "id": 1660,
+      "text": "Previous Part"
+    },
+    {
+      "id": 1661,
+      "text": "Next Part"
+    },
+    {
+      "id": 1662,
+      "text": "Show Helmet"
+    },
+    {
+      "id": 1663,
+      "text": "Show Cloak"
+    },
+    {
+      "id": 1664,
+      "text": "Increase Height"
+    },
+    {
+      "id": 1665,
+      "text": "Decrease Height"
+    },
+    {
+      "id": 1666,
+      "text": "Leather"
+    },
+    {
+      "id": 1667,
+      "text": "Cloth"
+    },
+    {
+      "id": 1668,
+      "text": "Metal"
+    },
+    {
+      "id": 1669,
+      "text": "Left Shoulder"
+    },
+    {
+      "id": 1670,
+      "text": "Left Bicep"
+    },
+    {
+      "id": 1671,
+      "text": "Left Forearm"
+    },
+    {
+      "id": 1672,
+      "text": "Left Hand"
+    },
+    {
+      "id": 1673,
+      "text": "Left Thigh"
+    },
+    {
+      "id": 1674,
+      "text": "Left Shin"
+    },
+    {
+      "id": 1675,
+      "text": "Left Foot"
+    },
+    {
+      "id": 1676,
+      "text": "Right Shoulder"
+    },
+    {
+      "id": 1677,
+      "text": "Right Bicep"
+    },
+    {
+      "id": 1678,
+      "text": "Right Forearm"
+    },
+    {
+      "id": 1679,
+      "text": "Right Hand"
+    },
+    {
+      "id": 1680,
+      "text": "Right Thigh"
+    },
+    {
+      "id": 1681,
+      "text": "Right Shin"
+    },
+    {
+      "id": 1682,
+      "text": "Right Foot"
+    },
+    {
+      "id": 1683,
+      "text": "Chest"
+    },
+    {
+      "id": 1684,
+      "text": "Belt"
+    },
+    {
+      "id": 1685,
+      "text": "Pelvis"
+    },
+    {
+      "id": 1686,
+      "text": "Robe"
+    },
+    {
+      "id": 1687,
+      "text": "Copy to Right -->"
+    },
+    {
+      "id": 1688,
+      "text": "<-- Copy to Left"
     }
   ]
 }

@@ -28,7 +28,7 @@ namespace XM.Plugin.Administration.BugReport
             set => Set(value);
         }
 
-        public Action OnClickSubmit => () =>
+        public Action OnClickSubmit() => () =>
         {
             if (string.IsNullOrWhiteSpace(BugReportText))
             {
@@ -141,7 +141,7 @@ namespace XM.Plugin.Administration.BugReport
             CloseWindow();
         };
 
-        public Action OnClickCancel => () =>
+        public Action OnClickCancel() => () =>
         {
             CloseWindow();
         };

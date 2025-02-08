@@ -198,15 +198,15 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
             _skipPaginationSearch = false;
         }
 
-        public Action OnClickSearch => Search;
+        public Action OnClickSearch() => Search;
 
-        public Action OnClickClearSearch => () =>
+        public Action OnClickClearSearch() => () =>
         {
             SearchText = string.Empty;
             Search();
         };
 
-        public Action OnClickPreviousPage => () =>
+        public Action OnClickPreviousPage() => () =>
         {
             _skipPaginationSearch = true;
             var newPage = SelectedPageIndex - 1;
@@ -217,7 +217,7 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
             _skipPaginationSearch = false;
         };
 
-        public Action OnClickNextPage => () =>
+        public Action OnClickNextPage() => () =>
         {
             _skipPaginationSearch = true;
             var newPage = SelectedPageIndex + 1;
@@ -228,7 +228,7 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
             _skipPaginationSearch = false;
         };
 
-        public Action OnClickExamine => () =>
+        public Action OnClickExamine() => () =>
         {
             var index = NuiGetEventArrayIndex();
             var itemId = _itemIds[index];
@@ -240,7 +240,7 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
             DestroyObject(item);
         };
 
-        public Action OnClickBuy => () =>
+        public Action OnClickBuy() => () =>
         {
             var index = NuiGetEventArrayIndex();
             var itemId = _itemIds[index];
@@ -315,14 +315,14 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
             });
         };
 
-        public Action OnClickClearFilters => () =>
+        public Action OnClickClearFilters() => () =>
         {
             LoadData();
             _activeCategoryIdFilters.Clear();
             Search();
         };
 
-        public Action OnClickCategory => () =>
+        public Action OnClickCategory() => () =>
         {
             var index = NuiGetEventArrayIndex();
             var categoryType = (int)_categoryTypes[index];

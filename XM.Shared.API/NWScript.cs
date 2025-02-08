@@ -7957,18 +7957,18 @@ namespace XM.Shared.API
         ///  [1] When specifying per-part coloring, the value 255 is allowed and corresponds with the logical<br/>
         ///  function &apos;clear colour override&apos;, which clears the per-part override for that part.
         /// </summary>
-        public static uint CopyItemAndModify(uint oItem, int nType, int nIndex, int nNewValue, bool bCopyVars = false)
+        public static uint CopyItemAndModify(uint oItem, ItemAppearanceType nType, int nIndex, int nNewValue, bool bCopyVars = false)
         {
-            return NWN.Core.NWScript.CopyItemAndModify(oItem, nType, nIndex, nNewValue, bCopyVars ? 1 : 0);
+            return NWN.Core.NWScript.CopyItemAndModify(oItem, (int)nType, nIndex, nNewValue, bCopyVars ? 1 : 0);
         }
 
         /// <summary>
         ///  Queries the current value of the appearance settings on an item. The parameters are<br/>
         ///  identical to those of CopyItemAndModify().
         /// </summary>
-        public static ItemAppearanceType GetItemAppearance(uint oItem, ItemAppearanceType nType, int nIndex)
+        public static int GetItemAppearance(uint oItem, ItemAppearanceType nType, int nIndex)
         {
-            return (ItemAppearanceType)NWN.Core.NWScript.GetItemAppearance(oItem, (int)nType, nIndex);
+            return NWN.Core.NWScript.GetItemAppearance(oItem, (int)nType, nIndex);
         }
 
         /// <summary>
@@ -9548,9 +9548,9 @@ namespace XM.Shared.API
         ///    e.g.: armour, helm, cloak, left hand, and right hand.<br/>
         ///  - nValue should be true or false.
         /// </summary>
-        public static void SetHiddenWhenEquipped(uint oItem, int nValue)
+        public static void SetHiddenWhenEquipped(uint oItem, bool nValue)
         {
-            NWN.Core.NWScript.SetHiddenWhenEquipped(oItem, nValue);
+            NWN.Core.NWScript.SetHiddenWhenEquipped(oItem, nValue ? 1 : 0);
         }
 
         /// <summary>

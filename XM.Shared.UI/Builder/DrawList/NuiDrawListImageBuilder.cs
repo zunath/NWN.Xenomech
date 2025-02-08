@@ -33,6 +33,10 @@ namespace XM.UI.Builder.DrawList
         private NuiDrawListItemRenderType _render = NuiDrawListItemRenderType.Always;
         private bool _bindArrays;
 
+        private NuiRect _drawTextureRegion;
+        private string _drawTextureRegionBind;
+        private bool _hasDrawRegion;
+
         public NuiDrawListImageBuilder(NuiEventCollection registeredEvents)
             : base(registeredEvents)
         {
@@ -146,6 +150,19 @@ namespace XM.UI.Builder.DrawList
             return this;
         }
 
+        public NuiDrawListImageBuilder<TViewModel> DrawTextureRegion(NuiRect drawTextureRegion)
+        {
+            _drawTextureRegion = drawTextureRegion;
+            _hasDrawRegion = true;
+            return this;
+        }
+        public NuiDrawListImageBuilder<TViewModel> DrawTextureRegion(Expression<Func<TViewModel, NuiRect>> expression)
+        {
+            _drawTextureRegionBind = GetBindName(expression);
+            _hasDrawRegion = true;
+            return this;
+        }
+
         public Json Build()
         {
             var isEnabled = string.IsNullOrWhiteSpace(_isEnabledBind)
@@ -172,7 +189,11 @@ namespace XM.UI.Builder.DrawList
                 ? JsonInt((int)_verticalAlign)
                 : Nui.Bind(_verticalAlignBind);
 
-            return Nui.DrawListImage(
+            var drawTextureRegion = string.IsNullOrWhiteSpace(_drawTextureRegionBind)
+                ? Nui.Rect(_drawTextureRegion.X, _drawTextureRegion.Y, _drawTextureRegion.Width, _drawTextureRegion.Height)
+                : Nui.Bind(_drawTextureRegionBind);
+
+            var element = Nui.DrawListImage(
                 isEnabled,
                 resRef,
                 position,
@@ -182,6 +203,13 @@ namespace XM.UI.Builder.DrawList
                 _order,
                 _render,
                 _bindArrays);
+
+            if (_hasDrawRegion)
+            {
+                element = Nui.DrawListImageRegion(element, drawTextureRegion);
+            }
+
+            return element;
         }
     }
 }

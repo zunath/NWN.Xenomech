@@ -119,49 +119,49 @@ namespace XM.Progression.UI.Job
                 LocaleString.Keeper, 
                 model => model.KeeperJobLevel,
                 model => model.IsKeeperEncouraged, 
-                model => model.OnClickKeeper);
+                model => model.OnClickKeeper());
             BuildJobButton(
                 JobType.Mender, 
                 LocaleString.Mender, 
                 model => model.MenderJobLevel,
                 model => model.IsMenderEncouraged, 
-                model => model.OnClickMender);
+                model => model.OnClickMender());
             BuildJobButton(
                 JobType.Brawler, 
                 LocaleString.Brawler, 
                 model => model.BrawlerJobLevel,
                 model => model.IsBrawlerEncouraged, 
-                model => model.OnClickBrawler);
+                model => model.OnClickBrawler());
             BuildJobButton(
                 JobType.Beastmaster, 
                 LocaleString.Beastmaster, 
                 model => model.BeastmasterJobLevel,
                 model => model.IsBeastmasterEncouraged, 
-                model => model.OnClickBeastmaster);
+                model => model.OnClickBeastmaster());
             BuildJobButton(
                 JobType.Elementalist, 
                 LocaleString.Elementalist, 
                 model => model.ElementalistJobLevel,
                 model => model.IsElementalistEncouraged, 
-                model => model.OnClickElementalist);
+                model => model.OnClickElementalist());
             BuildJobButton(
                 JobType.Techweaver, 
                 LocaleString.Techweaver, 
                 model => model.TechweaverJobLevel,
                 model => model.IsTechweaverEncouraged, 
-                model => model.OnClickTechweaver);
+                model => model.OnClickTechweaver());
             BuildJobButton(
                 JobType.Hunter, 
                 LocaleString.Hunter, 
                 model => model.HunterJobLevel,
                 model => model.IsHunterEncouraged, 
-                model => model.OnClickHunter);
+                model => model.OnClickHunter());
             BuildJobButton(
                 JobType.Nightstalker, 
                 LocaleString.Nightstalker, 
                 model => model.NightstalkerJobLevel,
                 model => model.IsNightstalkerEncouraged, 
-                model => model.OnClickNightstalker);
+                model => model.OnClickNightstalker());
             row.AddSpacer();
         }
 
@@ -291,7 +291,7 @@ namespace XM.Progression.UI.Job
                         .AddOption(LocaleString.EquippedAbilities)
                         .Height(32f)
                         .SelectedValue(model => model.SelectedTab)
-                        .OnMouseDown(model => model.OnChangeTab);
+                        .OnMouseDown(model => model.OnChangeTab());
                 });
                 row.AddSpacer();
             });
@@ -311,7 +311,7 @@ namespace XM.Progression.UI.Job
                 {
                     button.Label(LocaleString.ChangeJob)
                         .Height(32f)
-                        .OnClick(model => model.OnClickChangeJob);
+                        .OnClick(model => model.OnClickChangeJob());
                 });
                 row.AddSpacer();
             });
@@ -350,49 +350,49 @@ namespace XM.Progression.UI.Job
                     LocaleString.Keeper, 
                     model => model.IsKeeperFilterEnabled,
                     model => model.IsKeeperFilterEncouraged, 
-                    model => model.OnClickFilterKeeper);
+                    model => model.OnClickFilterKeeper());
                 BuildJobFilterButton(
                     row, JobType.Mender, 
                     LocaleString.Mender,
                     model => model.IsMenderFilterEnabled,
                     model => model.IsMenderFilterEncouraged, 
-                    model => model.OnClickFilterMender);
+                    model => model.OnClickFilterMender());
                 BuildJobFilterButton(
                     row, JobType.Brawler, 
                     LocaleString.Brawler,
                     model => model.IsBrawlerFilterEnabled,
                     model => model.IsBrawlerFilterEncouraged, 
-                    model => model.OnClickFilterBrawler);
+                    model => model.OnClickFilterBrawler());
                 BuildJobFilterButton(
                     row, JobType.Beastmaster, 
                     LocaleString.Beastmaster,
                     model => model.IsBeastmasterFilterEnabled,
                     model => model.IsBeastmasterFilterEncouraged, 
-                    model => model.OnClickFilterBeastmaster);
+                    model => model.OnClickFilterBeastmaster());
                 BuildJobFilterButton(
                     row, JobType.Elementalist, 
                     LocaleString.Elementalist,
                     model => model.IsElementalistFilterEnabled,
                     model => model.IsElementalistFilterEncouraged, 
-                    model => model.OnClickFilterElementalist);
+                    model => model.OnClickFilterElementalist());
                 BuildJobFilterButton(
                     row, JobType.Techweaver, 
                     LocaleString.Techweaver,
                     model => model.IsTechweaverFilterEnabled,
                     model => model.IsTechweaverFilterEncouraged, 
-                    model => model.OnClickFilterTechweaver);
+                    model => model.OnClickFilterTechweaver());
                 BuildJobFilterButton(
                     row, JobType.Hunter, 
                     LocaleString.Hunter,
                     model => model.IsHunterFilterEnabled,
                     model => model.IsHunterFilterEncouraged, 
-                    model => model.OnClickFilterHunter);
+                    model => model.OnClickFilterHunter());
                 BuildJobFilterButton(
                     row, JobType.Nightstalker, 
                     LocaleString.Nightstalker,
                     model => model.IsNightstalkerFilterEnabled,
                     model => model.IsNightstalkerFilterEncouraged, 
-                    model => model.OnClickFilterNightstalker);
+                    model => model.OnClickFilterNightstalker());
                 row.AddSpacer();
             });
         }
@@ -514,7 +514,7 @@ namespace XM.Progression.UI.Job
                             model => model.AbilityPip2Enabled,
                             model => model.AbilityPip3Enabled,
                             model => model.AbilityPip4Enabled,
-                            model => model.OnClickAbility);
+                            model => model.OnClickAbility());
                     });
                 });
             }, model => model.AbilityNames);
@@ -549,7 +549,7 @@ namespace XM.Progression.UI.Job
                         .Label(model => model.EquipUnequipButtonText)
                         .Height(32f)
                         .IsEnabled(model => model.IsEquipUnequipEnabled)
-                        .OnClick(model => model.OnEquipUnequipAbility);
+                        .OnClick(model => model.OnEquipUnequipAbility());
                 });
                 row.AddSpacer();
             });
@@ -579,7 +579,7 @@ namespace XM.Progression.UI.Job
                                 model => model.EquippedAbilityPip2Enabled,
                                 model => model.EquippedAbilityPip3Enabled,
                                 model => model.EquippedAbilityPip4Enabled,
-                                model => model.OnClickEquippedAbility);
+                                model => model.OnClickEquippedAbility());
                         });
                     });
                 }, model => model.EquippedAbilityNames);
@@ -594,7 +594,7 @@ namespace XM.Progression.UI.Job
                         .Label(LocaleString.Unequip)
                         .Height(32f)
                         .IsEnabled(model => model.IsUnequipAbilityEnabled)
-                        .OnClick(model => model.OnClickUnequipAbility);
+                        .OnClick(model => model.OnClickUnequipAbility());
                 });
                 row.AddSpacer();
             });
