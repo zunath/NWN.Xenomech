@@ -880,6 +880,44 @@
                     "__struct_id": 0,
                     "ID": {
                       "type": "byte",
+                      "value": 66
+                    },
+                    "STRREF": {
+                      "type": "dword",
+                      "value": 16778941
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "ID": {
+                      "type": "byte",
+                      "value": 65
+                    },
+                    "LIST": {
+                      "type": "list",
+                      "value": [
+                        {
+                          "__struct_id": 0,
+                          "NAME": {
+                            "type": "cexostring",
+                            "value": "rifle_test"
+                          },
+                          "RESREF": {
+                            "type": "resref",
+                            "value": "rifle_test"
+                          }
+                        }
+                      ]
+                    },
+                    "STRREF": {
+                      "type": "dword",
+                      "value": 16778940
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "ID": {
+                      "type": "byte",
                       "value": 45
                     },
                     "STRREF": {

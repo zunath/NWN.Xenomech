@@ -6888,6 +6888,14 @@
     {
       "id": 1723,
       "text": "Job changed to: {0}"
+    },
+    {
+      "id": 1724,
+      "text": "Rifles"
+    },
+    {
+      "id": 1725,
+      "text": "Pistols"
     }
   ]
 }

@@ -1408,6 +1408,8 @@ namespace XM.Shared.Core.Localization
         TechweaverDescription = 1721,
         JobSystemDescription = 1722,
         JobChangedToX = 1723,
+        Rifles = 1724,
+        Pistols = 1725
 
     }
 }
