@@ -166,6 +166,11 @@
       "Name":  "xm_ts_worms",
       "Path": "../Content/xm_ts_worms/",
       "CompileModels": false
+    },
+    {
+      "Name":  "xm_weapons",
+      "Path": "../Content/xm_weapons/",
+      "CompileModels": false
     }
   ]
 }
