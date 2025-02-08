@@ -19,6 +19,7 @@ namespace XM.Shared.Core.Entity
 
         private void Init()
         {
+            DisplayServerResetReminders = true;
             ShowHelmet = true;
             ShowCloak = true;
         }
