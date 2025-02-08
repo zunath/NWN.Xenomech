@@ -18,13 +18,123 @@
       "CompileModels": false
     },
     {
-      "Name":  "xm_mechs",
-      "Path": "../Content/xm_mechs/",
+      "Name":  "xm_items",
+      "Path": "../Content/xm_items/",
       "CompileModels": false
     },
     {
       "Name":  "xm_job",
       "Path": "../Content/xm_job/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_mechs",
+      "Path": "../Content/xm_mechs/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_part_belt",
+      "Path": "../Content/xm_part_belt/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_part_bicepl",
+      "Path": "../Content/xm_part_bicepl/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_part_bicepr",
+      "Path": "../Content/xm_part_bicepr/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_part_chest",
+      "Path": "../Content/xm_part_chest/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_part_cloak",
+      "Path": "../Content/xm_part_cloak/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_part_footl",
+      "Path": "../Content/xm_part_footl/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_part_footr",
+      "Path": "../Content/xm_part_footr/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_part_forel",
+      "Path": "../Content/xm_part_forel/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_part_forer",
+      "Path": "../Content/xm_part_forer/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_part_handl",
+      "Path": "../Content/xm_part_handl/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_part_handr",
+      "Path": "../Content/xm_part_handr/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_part_head",
+      "Path": "../Content/xm_part_head/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_part_legl",
+      "Path": "../Content/xm_part_legl/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_part_legr",
+      "Path": "../Content/xm_part_legr/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_part_neck",
+      "Path": "../Content/xm_part_neck/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_part_pelvis",
+      "Path": "../Content/xm_part_pelvis/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_part_robe",
+      "Path": "../Content/xm_part_robe/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_part_shinl",
+      "Path": "../Content/xm_part_shinl/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_part_shinr",
+      "Path": "../Content/xm_part_shinr/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_part_shol",
+      "Path": "../Content/xm_part_shol/",
+      "CompileModels": false
+    },
+    {
+      "Name":  "xm_part_shor",
+      "Path": "../Content/xm_part_shor/",
       "CompileModels": false
     },
     {
@@ -50,16 +160,6 @@
     {
       "Name":  "xm_ts_d20mm",
       "Path": "../Content/xm_ts_d20mm/",
-      "CompileModels": false
-    },
-    {
-      "Name":  "xm_items",
-      "Path": "../Content/xm_items/",
-      "CompileModels": false
-    },
-    {
-      "Name":  "xm_clothes",
-      "Path": "../Content/xm_clothes/",
       "CompileModels": false
     }
   ]
