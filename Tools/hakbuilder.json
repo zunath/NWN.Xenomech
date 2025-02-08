@@ -161,6 +161,11 @@
       "Name":  "xm_ts_d20mm",
       "Path": "../Content/xm_ts_d20mm/",
       "CompileModels": false
+    },
+    {
+      "Name":  "xm_ts_worms",
+      "Path": "../Content/xm_ts_worms/",
+      "CompileModels": false
     }
   ]
 }
