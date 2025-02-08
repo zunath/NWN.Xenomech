@@ -1,4 +1,6 @@
-﻿using Anvil.API;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Anvil.API;
 using Anvil.Services;
 using XM.Plugin.Combat.Event;
 using XM.Shared.API.Constants;
@@ -12,7 +14,9 @@ namespace XM.Plugin.Combat.Telegraph
     internal class TelegraphService: IInitializable
     {
         private const float TargetFPS = 30f;
-        private const string TelegraphsVariable = "TELEGRAPHS";
+        private const int MaxRenderCount = 8;
+
+        private readonly Dictionary<uint, Dictionary<string, ActiveTelegraph>> _telegraphsByArea = new();
 
         private readonly XMEventService _event;
 
@@ -83,31 +87,23 @@ namespace XM.Plugin.Combat.Telegraph
 
             var start = GetMicrosecondCounter();
             var end = (int)(start + data.Duration * 1000 * 1000);
+            var telegraph = new ActiveTelegraph(start, end, data);
 
-            var telegraphData = JsonObject();
-            telegraphData = JsonObjectSet(telegraphData, "start", JsonInt(start));
-            telegraphData = JsonObjectSet(telegraphData, "end", JsonInt(end));
-            telegraphData = JsonObjectSet(telegraphData, "packed", JsonString(packed));
+            if (!_telegraphsByArea.ContainsKey(area))
+                _telegraphsByArea[area] = new Dictionary<string, ActiveTelegraph>();
 
-            var telegraphIds = GetLocalJson(area, TelegraphsVariable);
-            telegraphIds = JsonGetType(telegraphIds) == JsonType.Null ? JsonArray() : telegraphIds;
-            telegraphIds = JsonArrayInsert(telegraphIds, JsonString(telegraphId));
-
-            SetLocalString(area, telegraphId, data.OnUpdateScript);
-            SetLocalJson(area, telegraphId, telegraphData);
-            SetLocalJson(area, TelegraphsVariable, telegraphIds);
+            _telegraphsByArea[area][telegraphId] = telegraph;
         }
 
         private void OnRemoved(uint telegrapher, Effect effect)
         {
             var area = GetArea(telegrapher);
             var telegraphId = GetEffectLinkId(effect);
-            var telegraphIds = GetLocalJson(area, TelegraphsVariable);
-            telegraphIds = JsonArrayDel(telegraphIds, JsonGetInt(JsonFind(telegraphIds, JsonString(telegraphId))));
 
-            DeleteLocalString(area, telegraphId);
-            DeleteLocalJson(area, telegraphId);
-            SetLocalJson(area, TelegraphsVariable, telegraphIds);
+            if (!_telegraphsByArea.ContainsKey(area))
+                return;
+
+            _telegraphsByArea[area].Remove(telegraphId);
         }
 
         private void UpdateShadersForAllPlayers()
@@ -121,29 +117,28 @@ namespace XM.Plugin.Combat.Telegraph
         private void UpdateShaderForPlayer(uint player)
         {
             var area = GetArea(player);
-            var telegraphs = GetLocalJson(area, TelegraphsVariable);
-            var telegraphCount = JsonGetLength(telegraphs);
-            var telegraphCountToRender = telegraphCount > 8 ? 8 : telegraphCount;
-            var telegraphCountToReset = 8 - telegraphCountToRender;
+            if (!_telegraphsByArea.ContainsKey(area))
+                return;
 
-            for (var i = 0; i < telegraphCountToRender; ++i)
+            var telegraphs = _telegraphsByArea[area];
+            var telegraphCountToRender = telegraphs.Count > MaxRenderCount 
+                ? MaxRenderCount 
+                : telegraphs.Count;
+            var telegraphCountToReset = MaxRenderCount - telegraphCountToRender;
+
+            var i = 0;
+            foreach (var (_, telegraph) in telegraphs)
             {
-                var telegraphId = JsonGetString(JsonArrayGet(telegraphs, i));
-                var telegraphJson = GetLocalJson(area, telegraphId);
+                SetShaderUniformInt(player, ShaderUniformType.Uniform1 + i, (int)telegraph.Data.Shape);
+                SetShaderUniformVec(player, ShaderUniformType.Uniform1 + (i * 2) + 0, telegraph.Data.X, telegraph.Data.Y, telegraph.Data.Z, telegraph.Data.Rotation);
+                SetShaderUniformVec(player, ShaderUniformType.Uniform1 + (i * 2) + 1, telegraph.Start, telegraph.End, telegraph.Data.SizeX, telegraph.Data.SizeY);
 
-                var start = JsonGetInt(JsonObjectGet(telegraphJson, "start"));
-                var end = JsonGetInt(JsonObjectGet(telegraphJson, "end"));
-                var packed = JsonGetString(JsonObjectGet(telegraphJson, "packed"));
-                var unpacked = XMJsonUtility.Deserialize<TelegraphData>(packed);
-
-                SetShaderUniformInt(player, ShaderUniformType.Uniform1 + i, (int)unpacked.Shape);
-                SetShaderUniformVec(player, ShaderUniformType.Uniform1 + (i * 2) + 0, unpacked.X, unpacked.Y, unpacked.Z, unpacked.Rotation);
-                SetShaderUniformVec(player, ShaderUniformType.Uniform1 + (i * 2) + 1, start, end, unpacked.SizeX, unpacked.SizeY);
+                i++;
             }
 
-            for (var i = 0; i < telegraphCountToReset; ++i)
+            for (var x = 0; x < telegraphCountToReset; ++x)
             {
-                var uniformIndex = ShaderUniformType.Uniform1 + telegraphCountToRender + i;
+                var uniformIndex = ShaderUniformType.Uniform1 + telegraphCountToRender + x;
                 SetShaderUniformInt(player, uniformIndex, (int)TelegraphType.None);
             }
         }
@@ -179,8 +174,8 @@ namespace XM.Plugin.Combat.Telegraph
                 Y = position.Y,
                 Z = position.Z,
                 Rotation = rotation,
-                SizeX = 10f,
-                SizeY = 10f,
+                SizeX = 4f,
+                SizeY = 4f,
                 Duration = 2.5f,
 
             });
