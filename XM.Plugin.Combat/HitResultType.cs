@@ -1,4 +1,4 @@
-﻿namespace XM.Combat
+﻿namespace XM.Plugin.Combat
 {
     internal enum HitResultType
     {

@@ -5,7 +5,7 @@ using Anvil.API;
 using Anvil.Services;
 using NWN.Native.API;
 
-namespace XM.Combat.NativeOverride
+namespace XM.Plugin.Combat.NativeOverride
 {
     [ServiceBinding(typeof(OnAIActionAttackObject))]
     internal sealed unsafe class OnAIActionAttackObject

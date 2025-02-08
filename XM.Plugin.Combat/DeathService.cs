@@ -1,6 +1,6 @@
 ﻿using Anvil.Services;
 using NLog;
-using XM.Combat.Entity;
+using XM.Plugin.Combat.Entity;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Caching;
@@ -8,7 +8,7 @@ using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 
-namespace XM.Combat
+namespace XM.Plugin.Combat
 {
     [ServiceBinding(typeof(DeathService))]
     internal class DeathService

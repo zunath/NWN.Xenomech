@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
-namespace XM.Combat.StatusEffect
+namespace XM.Plugin.Combat.StatusEffect
 {
     internal interface IStatusEffect
     {

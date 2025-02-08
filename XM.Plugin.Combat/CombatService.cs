@@ -1,21 +1,21 @@
-﻿using Anvil.Services;
-using System;
+﻿using System;
+using Anvil.Services;
 using NWN.Core.NWNX;
-using XM.Combat.StatusEffect;
 using XM.Inventory;
+using XM.Plugin.Combat.StatusEffect;
 using XM.Progression.Skill;
 using XM.Progression.Stat;
 using XM.Progression.Stat.Entity;
 using XM.Shared.API.Constants;
-using XM.Shared.Core;
-using XM.Shared.Core.Localization;
 using XM.Shared.API.NWNX.FeedbackPlugin;
+using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
+using XM.Shared.Core.Localization;
 using FeedbackPlugin = XM.Shared.API.NWNX.FeedbackPlugin.FeedbackPlugin;
 
 
-namespace XM.Combat
+namespace XM.Plugin.Combat
 {
     [ServiceBinding(typeof(CombatService))]
     internal class CombatService: IInitializable

@@ -1,12 +1,12 @@
 ﻿using Anvil.Services;
-using XM.Combat.StatusEffect;
-using XM.Combat.StatusEffect.StatusEffectDefinition;
+using XM.Plugin.Combat.StatusEffect;
+using XM.Plugin.Combat.StatusEffect.StatusEffectDefinition;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 using XM.Shared.Core.Party;
 
-namespace XM.Combat
+namespace XM.Plugin.Combat
 {
     [ServiceBinding(typeof(PlayerRestService))]
     internal class PlayerRestService

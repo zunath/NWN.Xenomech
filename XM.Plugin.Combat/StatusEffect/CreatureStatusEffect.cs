@@ -2,7 +2,7 @@
 using System.Linq;
 using XM.Progression.Stat;
 
-namespace XM.Combat.StatusEffect
+namespace XM.Plugin.Combat.StatusEffect
 {
     internal class CreatureStatusEffect
     {

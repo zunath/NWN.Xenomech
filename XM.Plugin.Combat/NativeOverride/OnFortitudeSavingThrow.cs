@@ -4,7 +4,7 @@ using NWN.Native.API;
 using XM.Shared.API.Constants;
 using SavingThrow = Anvil.API.SavingThrow;
 
-namespace XM.Combat.NativeOverride
+namespace XM.Plugin.Combat.NativeOverride
 {
     [ServiceBinding(typeof(OnFortitudeSavingThrow))]
     internal sealed unsafe class OnFortitudeSavingThrow
