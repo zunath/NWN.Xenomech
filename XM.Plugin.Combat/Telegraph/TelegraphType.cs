@@ -4,6 +4,6 @@
     {
         None = 0,
         Sphere = 1,
-        Cone = 2,
+        Cone = 2
     }
 }

@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Numerics;
 using Anvil.API;
 using Anvil.Services;
 using XM.Plugin.Combat.Event;
@@ -44,12 +44,44 @@ namespace XM.Plugin.Combat.Telegraph
 
         public void CreateTelegraph(uint creator, TelegraphData data)
         {
+            RunTelegraphEffect(creator, data);
+        }
+
+        public void CreateTelegraphSphere(uint creator, Vector3 position, float rotation, Vector2 size, float duration)
+        {
+            var data = new TelegraphData
+            {
+                Creator = creator,
+                Shape = TelegraphType.Sphere,
+                Position = position,
+                Rotation = rotation,
+                Size = size,
+                Duration = duration
+            };
+            RunTelegraphEffect(creator, data);
+        }
+        public void CreateTelegraphCone(uint creator, Vector3 position, float rotation, Vector2 size, float duration)
+        {
+            var data = new TelegraphData
+            {
+                Creator = creator,
+                Shape = TelegraphType.Cone,
+                Position = position,
+                Rotation = rotation,
+                Size = size,
+                Duration = duration
+            };
+            RunTelegraphEffect(creator, data);
+        }
+
+        private void RunTelegraphEffect(uint creator, TelegraphData data)
+        {
             var json = XMJsonUtility.Serialize(data);
             var effect = EffectRunScript(
                 CombatEventScript.TelegraphEffectScript,
                 CombatEventScript.TelegraphEffectScript,
-                CombatEventScript.TelegraphEffectScript,
-                data.UpdateInterval,
+                string.Empty,
+            0f,
                 json
             );
             ApplyEffectToObject(DurationType.Temporary, effect, creator, data.Duration);
@@ -129,9 +161,13 @@ namespace XM.Plugin.Combat.Telegraph
             var i = 0;
             foreach (var (_, telegraph) in telegraphs)
             {
+                var data = telegraph.Data;
+                var position = data.Position;
+                var size = data.Size;
+
                 SetShaderUniformInt(player, ShaderUniformType.Uniform1 + i, (int)telegraph.Data.Shape);
-                SetShaderUniformVec(player, ShaderUniformType.Uniform1 + (i * 2) + 0, telegraph.Data.X, telegraph.Data.Y, telegraph.Data.Z, telegraph.Data.Rotation);
-                SetShaderUniformVec(player, ShaderUniformType.Uniform1 + (i * 2) + 1, telegraph.Start, telegraph.End, telegraph.Data.SizeX, telegraph.Data.SizeY);
+                SetShaderUniformVec(player, ShaderUniformType.Uniform1 + (i * 2) + 0, position.X, position.Y, position.Z, telegraph.Data.Rotation);
+                SetShaderUniformVec(player, ShaderUniformType.Uniform1 + (i * 2) + 1, telegraph.Start, telegraph.End, size.X, size.Y);
 
                 i++;
             }
@@ -167,18 +203,7 @@ namespace XM.Plugin.Combat.Telegraph
             var position = GetPosition(player);
             var rotation = GetFacing(player);
 
-            CreateTelegraph(player, new TelegraphData
-            {
-                Shape = TelegraphType.Sphere,
-                X = position.X,
-                Y = position.Y,
-                Z = position.Z,
-                Rotation = rotation,
-                SizeX = 4f,
-                SizeY = 4f,
-                Duration = 2.5f,
-
-            });
+            CreateTelegraphSphere(player, position, rotation, new Vector2(4f, 4f), 2.5f);
         }
     }
 }

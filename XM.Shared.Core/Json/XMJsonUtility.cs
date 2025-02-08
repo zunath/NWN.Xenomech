@@ -22,6 +22,8 @@ namespace XM.Shared.Core.Json
             _options.Converters.Add(new FloatJsonConverter());
             _options.Converters.Add(new TypeConverter());
             _options.Converters.Add(new NuiComboEntryConverter());
+            _options.Converters.Add(new Vector2JsonConverter());
+            _options.Converters.Add(new Vector3JsonConverter());
             _options.Converters.Add(new XMBindingListConverter<NuiComboEntry>(new JsonSerializerOptions()
             {
                 Converters = { new NuiComboEntryConverter() }
