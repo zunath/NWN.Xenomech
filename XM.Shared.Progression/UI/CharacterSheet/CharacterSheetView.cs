@@ -34,7 +34,16 @@ namespace XM.Progression.UI.CharacterSheet
                     .InitialGeometry(0, 0, 800, 400)
                     .Root(root =>
                     {
-                        root.AddRow(BuildNavigation);
+                        root.AddGroup(group =>
+                        {
+                            group
+                                .Height(60f)
+                                .Scrollbars(NuiScrollbars.Auto)
+                                .SetLayout(layout =>
+                                {
+                                    layout.AddRow(BuildNavigation);
+                                });
+                        });
 
                         root.AddRow(row =>
                         {

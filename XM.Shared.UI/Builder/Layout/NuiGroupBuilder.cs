@@ -16,6 +16,7 @@ namespace XM.UI.Builder.Layout
 
         public NuiGroupBuilder(NuiEventCollection eventCollection) : base(eventCollection)
         {
+            _scrollbars = NuiScrollbars.Auto;
         }
 
         public NuiGroupBuilder<TViewModel> Border(bool border)
