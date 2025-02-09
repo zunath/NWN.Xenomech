@@ -83,6 +83,26 @@ namespace XM.Plugin.Combat.Telegraph
             };
             RunTelegraphEffect(creator, data);
         }
+        public void CreateTelegraphLine(
+            uint creator,
+            Vector3 position,
+            float rotation,
+            Vector2 size,
+            float duration,
+            ApplyTelegraphEffect action)
+        {
+            var data = new TelegraphData
+            {
+                Creator = creator,
+                Shape = TelegraphType.Line,
+                Position = position,
+                Rotation = rotation,
+                Size = size,
+                Duration = duration,
+                Action = action
+            };
+            RunTelegraphEffect(creator, data);
+        }
 
         private void RunTelegraphEffect(uint telegrapher, TelegraphData data)
         {
@@ -188,6 +208,8 @@ namespace XM.Plugin.Combat.Telegraph
                     return size.X; // Sphere radius
                 case TelegraphType.Cone:
                     return size.X; // Cone length
+                case TelegraphType.Line:
+                    return size.X; // Line length
                 default:
                     throw new ArgumentOutOfRangeException(nameof(shape), shape, null);
             }
@@ -201,6 +223,8 @@ namespace XM.Plugin.Combat.Telegraph
                     return IsCreatureInSphere(creature, data);
                 case TelegraphType.Cone:
                     return IsCreatureInCone(creature, data);
+                case TelegraphType.Line:
+                    return IsCreatureInLine(creature, data);
                 default:
                     return false;
             }
@@ -222,12 +246,30 @@ namespace XM.Plugin.Combat.Telegraph
             var distance = toPoint.Length();
 
             // Compute the actual cone angle dynamically
-            var halfAngle = atan((data.Size.Y / 2) / data.Size.X);
+            var halfAngle = atan((data.Size.Y * 0.5f) / data.Size.X);
 
             // Angle between the direction and the point
             var angleBetween = acos(Vector3.Dot(Vector3.Normalize(toPoint), direction));
 
             return (distance <= data.Size.X) && (angleBetween <= halfAngle);
+        }
+
+        private static bool IsCreatureInLine(uint creature, TelegraphData data)
+        {
+            var position = GetPosition(creature);
+            var toPoint = position - data.Position;
+
+            // Compute rotated position relative to the telegraph's orientation
+            var rotatedPos = new Vector2(
+                toPoint.X * cos(-data.Rotation) - toPoint.Y * sin(-data.Rotation),
+                toPoint.X * sin(-data.Rotation) + toPoint.Y * cos(-data.Rotation)
+            );
+
+            var distAlongLine = rotatedPos.X;
+            var distFromCenter = MathF.Abs(rotatedPos.Y);
+
+            return (distAlongLine >= 0f && distAlongLine <= data.Size.X) // Within length
+                   && (distFromCenter <= data.Size.Y * 0.5f); // Within width
         }
 
         private void UpdateShadersForAllPlayers()
@@ -299,7 +341,7 @@ namespace XM.Plugin.Combat.Telegraph
                 player, 
                 position, 
                 rotation, 
-                new Vector2(4f, 4f), 
+                new Vector2(8f, 2f), 
                 2.5f,
                 ((telegrapher, creatures) =>
                 {

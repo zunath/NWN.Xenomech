@@ -3,6 +3,7 @@
 const int TELEGRAPH_SHAPE_NONE = 0;
 const int TELEGRAPH_SHAPE_SPHERE = 1;
 const int TELEGRAPH_SHAPE_CONE = 2;
+const int TELEGRAPH_SHAPE_LINE = 3;
 
 #include "inc_target"
 #include "inc_postpr"
@@ -10,17 +11,16 @@ const int TELEGRAPH_SHAPE_CONE = 2;
 
 float CalculateLineFraction(vec2 origin, float rotation, float lineLength, vec2 point)
 {
-    float rads = radians(rotation + 90.0); // extra 90 because we need to be perpendicular to the line
+    float rads = radians(rotation + 90.0);
     vec2 direction = vec2(cos(rads), sin(rads));
     vec2 originToPoint = point - origin;
-    vec2 lineEnd = origin + direction * lineLength;
     vec2 projectedPoint = origin + direction * dot(originToPoint, direction);
     return length(projectedPoint - origin) / lineLength;
 }
 
 vec2 Rotate(vec2 pos, float angle)
 { 
-    float radian = radians(-angle); // something about our coordinate system handedness, idk, sorry god
+    float radian = radians(-angle);
     float s = sin(radian);
     float c = cos(radian);
     return vec2(c * pos.x - s * pos.y, s * pos.x + c * pos.y);
@@ -28,13 +28,12 @@ vec2 Rotate(vec2 pos, float angle)
 
 float GetThrobStrength(float base, float speed)
 {
-	return base + (1.0 + sin(float(worldtimerTimeOfDay) / speed)) * 0.5 * (1.0 - base);
+    return base + (1.0 + sin(float(worldtimerTimeOfDay) / speed)) * 0.5 * (1.0 - base);
 }
 
 float CalculateTelegraphColour(vec3 pixelPos, int shapeType, vec4 data1, vec4 data2)
 {
     const float borderWidth = 0.025;
-
     const float strengthEmpty = 0.25;
     const float strengthFull = 0.75;
     const float strengthBorder = strengthFull;
@@ -43,7 +42,7 @@ float CalculateTelegraphColour(vec3 pixelPos, int shapeType, vec4 data1, vec4 da
     int currentTime = scriptableInt16;
 
     vec3 origin = data1.xyz;
-    float rotation = data1.w + 90.0; // FOR THE OMNISSIAH'S SAKE, WHY THE FRACK, NWN?
+    float rotation = data1.w;  
     float startTime = data2.x;
     float endTime = data2.y;
     float sizeX = data2.z;
@@ -56,7 +55,7 @@ float CalculateTelegraphColour(vec3 pixelPos, int shapeType, vec4 data1, vec4 da
     vec3 originToPixel = pixelPos - origin;
     float originToPixelDist = length(originToPixel);
 
-	float strength = 0.0;
+    float strength = 0.0;
 
     if (shapeType == TELEGRAPH_SHAPE_SPHERE)
     {   
@@ -70,10 +69,30 @@ float CalculateTelegraphColour(vec3 pixelPos, int shapeType, vec4 data1, vec4 da
     {
         const float sin30Degrees = 0.50000019433;
         const float cos30Degrees = 0.86602529158;
-        float distToCone = distanceToCone(vec3(Rotate(originToPixel.xy, rotation), originToPixel.z), vec2(sin30Degrees, cos30Degrees), sizeX);
-        float distStrength = CalculateLineFraction(origin.xy, rotation, sizeX, pixelPos.xy) >= interp ? strengthEmpty : strengthFull;
+        float distToCone = distanceToCone(vec3(Rotate(originToPixel.xy, rotation+90.0), originToPixel.z), vec2(sin30Degrees, cos30Degrees), sizeX);
+        float distStrength = CalculateLineFraction(origin.xy, rotation+90.0, sizeX, pixelPos.xy) >= interp ? strengthEmpty : strengthFull;
         strength = distToCone > 0.0 ? 0.0 : (distToCone > -borderWidth ? strengthThrob : distStrength);
     }
+    else if (shapeType == TELEGRAPH_SHAPE_LINE)
+	{
+		vec2 direction = vec2(cos(radians(rotation)), sin(radians(rotation))); // Ensure correct facing
+		vec2 startPos = origin.xy; 
+		vec2 endPos = startPos + direction * sizeX; // Extend the line from origin
+
+		// Project point onto the line
+		vec2 originToPixel = pixelPos.xy - startPos;
+		float projection = dot(originToPixel, direction);
+		vec2 projectedPoint = startPos + direction * projection;
+
+		float distAlongLine = projection;
+		float distFromCenter = length(pixelPos.xy - projectedPoint);
+
+		float withinLength = (distAlongLine >= 0.0 && distAlongLine <= sizeX) ? 1.0 : 0.0;
+		float withinWidth = (distFromCenter <= sizeY * 0.5) ? 1.0 : 0.0;
+		float borderEffect = (distFromCenter > sizeY * 0.5 - borderWidth) ? strengthThrob : strengthFull;
+
+		strength = withinLength * withinWidth * borderEffect;
+	}
 
     return strength;
 }
