@@ -11519,9 +11519,9 @@ namespace XM.Shared.API
         ///  In multiplayer, these need to be reapplied when a player rejoins.<br/>
         ///  - nShader: SHADER_UNIFORM_*
         /// </summary>
-        public static void SetShaderUniformFloat(uint oPlayer, int nShader, float fValue)
+        public static void SetShaderUniformFloat(uint oPlayer, ShaderUniformType nShader, float fValue)
         {
-            NWN.Core.NWScript.SetShaderUniformFloat(oPlayer, nShader, fValue);
+            NWN.Core.NWScript.SetShaderUniformFloat(oPlayer, (int)nShader, fValue);
         }
 
         /// <summary>
@@ -11531,9 +11531,9 @@ namespace XM.Shared.API
         ///  In multiplayer, these need to be reapplied when a player rejoins.<br/>
         ///  - nShader: SHADER_UNIFORM_*
         /// </summary>
-        public static void SetShaderUniformInt(uint oPlayer, int nShader, int nValue)
+        public static void SetShaderUniformInt(uint oPlayer, ShaderUniformType nShader, int nValue)
         {
-            NWN.Core.NWScript.SetShaderUniformInt(oPlayer, nShader, nValue);
+            NWN.Core.NWScript.SetShaderUniformInt(oPlayer, (int)nShader, nValue);
         }
 
         /// <summary>
@@ -11543,9 +11543,9 @@ namespace XM.Shared.API
         ///  In multiplayer, these need to be reapplied when a player rejoins.<br/>
         ///  - nShader: SHADER_UNIFORM_*
         /// </summary>
-        public static void SetShaderUniformVec(uint oPlayer, int nShader, float fX, float fY, float fZ, float fW)
+        public static void SetShaderUniformVec(uint oPlayer, ShaderUniformType nShader, float fX, float fY, float fZ, float fW)
         {
-            NWN.Core.NWScript.SetShaderUniformVec(oPlayer, nShader, fX, fY, fZ, fW);
+            NWN.Core.NWScript.SetShaderUniformVec(oPlayer, (int)nShader, fX, fY, fZ, fW);
         }
 
         /// <summary>

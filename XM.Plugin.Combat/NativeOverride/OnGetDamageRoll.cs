@@ -2,7 +2,7 @@
 using Anvil.Services;
 using NWN.Native.API;
 
-namespace XM.Combat.NativeOverride
+namespace XM.Plugin.Combat.NativeOverride
 {
     [ServiceBinding(typeof(OnGetDamageRoll))]
     internal sealed unsafe class OnGetDamageRoll

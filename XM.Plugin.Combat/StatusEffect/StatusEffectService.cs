@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Anvil.Services;
-using XM.Combat.Event;
+using XM.Plugin.Combat.Event;
 using XM.Progression.Event;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 
-namespace XM.Combat.StatusEffect
+namespace XM.Plugin.Combat.StatusEffect
 {
     [ServiceBinding(typeof(StatusEffectService))]
     internal class StatusEffectService

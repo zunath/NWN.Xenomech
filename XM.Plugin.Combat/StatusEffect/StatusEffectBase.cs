@@ -4,7 +4,7 @@ using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
-namespace XM.Combat.StatusEffect
+namespace XM.Plugin.Combat.StatusEffect
 {
     internal abstract class StatusEffectBase: IStatusEffect
     {

@@ -1,6 +1,6 @@
 ﻿using XM.Shared.Core.EventManagement;
 
-namespace XM.Combat.Event
+namespace XM.Plugin.Combat.Event
 {
     internal class StatusEffectEvent
     {

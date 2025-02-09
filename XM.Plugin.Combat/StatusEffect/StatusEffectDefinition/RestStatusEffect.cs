@@ -5,7 +5,7 @@ using XM.Shared.API.Constants;
 using XM.Shared.Core.Activity;
 using XM.Shared.Core.Localization;
 
-namespace XM.Combat.StatusEffect.StatusEffectDefinition
+namespace XM.Plugin.Combat.StatusEffect.StatusEffectDefinition
 {
     [ServiceBinding(typeof(RestStatusEffect))]
     internal class RestStatusEffect: StatusEffectBase

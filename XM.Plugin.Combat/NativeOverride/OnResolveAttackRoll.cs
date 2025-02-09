@@ -4,7 +4,7 @@ using NWN.Native.API;
 using XM.Shared.API.Constants;
 using ObjectType = NWN.Native.API.ObjectType;
 
-namespace XM.Combat.NativeOverride
+namespace XM.Plugin.Combat.NativeOverride
 {
     [ServiceBinding(typeof(OnResolveAttackRoll))]
     internal sealed unsafe class OnResolveAttackRoll
