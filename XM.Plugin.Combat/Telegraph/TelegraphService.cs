@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Numerics;
 using Anvil.API;
 using Anvil.Services;
 using XM.Plugin.Combat.Event;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.EventManagement;
-using XM.Shared.Core.Json;
+using CreatureType = XM.Shared.API.Constants.CreatureType;
 
 namespace XM.Plugin.Combat.Telegraph
 {
@@ -42,12 +43,13 @@ namespace XM.Plugin.Combat.Telegraph
             _event.Subscribe<TelegraphEvent.RunTelegraphEffect>(OnRunTelegraphEffect);
         }
 
-        public void CreateTelegraph(uint creator, TelegraphData data)
-        {
-            RunTelegraphEffect(creator, data);
-        }
-
-        public void CreateTelegraphSphere(uint creator, Vector3 position, float rotation, Vector2 size, float duration)
+        public void CreateTelegraphSphere(
+            uint creator, 
+            Vector3 position, 
+            float rotation, 
+            Vector2 size, 
+            float duration,
+            ApplyTelegraphEffect action)
         {
             var data = new TelegraphData
             {
@@ -56,11 +58,18 @@ namespace XM.Plugin.Combat.Telegraph
                 Position = position,
                 Rotation = rotation,
                 Size = size,
-                Duration = duration
+                Duration = duration,
+                Action = action
             };
             RunTelegraphEffect(creator, data);
         }
-        public void CreateTelegraphCone(uint creator, Vector3 position, float rotation, Vector2 size, float duration)
+        public void CreateTelegraphCone(
+            uint creator, 
+            Vector3 position, 
+            float rotation, 
+            Vector2 size, 
+            float duration,
+            ApplyTelegraphEffect action)
         {
             var data = new TelegraphData
             {
@@ -69,22 +78,24 @@ namespace XM.Plugin.Combat.Telegraph
                 Position = position,
                 Rotation = rotation,
                 Size = size,
-                Duration = duration
+                Duration = duration,
+                Action = action
             };
             RunTelegraphEffect(creator, data);
         }
 
-        private void RunTelegraphEffect(uint creator, TelegraphData data)
+        private void RunTelegraphEffect(uint telegrapher, TelegraphData data)
         {
-            var json = XMJsonUtility.Serialize(data);
+            var area = GetArea(telegrapher);
+            if (!_telegraphsByArea.ContainsKey(area))
+                _telegraphsByArea[area] = new Dictionary<string, ActiveTelegraph>();
+
             var effect = EffectRunScript(
                 CombatEventScript.TelegraphEffectScript,
                 CombatEventScript.TelegraphEffectScript,
-                string.Empty,
-            0f,
-                json
-            );
-            ApplyEffectToObject(DurationType.Temporary, effect, creator, data.Duration);
+                string.Empty);
+            OnApply(telegrapher, data, effect);
+            ApplyEffectToObject(DurationType.Temporary, effect, telegrapher, data.Duration);
         }
 
         private void OnRunTelegraphEffect(uint telegrapher)
@@ -94,7 +105,6 @@ namespace XM.Plugin.Combat.Telegraph
             
             if (@event == RunScriptEffectScriptType.OnApplied)
             {
-                OnApply(telegrapher, effect);
                 UpdateShadersForAllPlayers();
                 _event.PublishEvent<TelegraphEvent.TelegraphApplied>(telegrapher);
             }
@@ -110,12 +120,10 @@ namespace XM.Plugin.Combat.Telegraph
             }
         }
 
-        private void OnApply(uint telegrapher, Effect effect)
+        private void OnApply(uint telegrapher, TelegraphData data, Effect effect)
         {
             var area = GetArea(telegrapher);
             var telegraphId = GetEffectLinkId(effect);
-            var packed = GetEffectString(effect, 0);
-            var data = XMJsonUtility.Deserialize<TelegraphData>(packed);
 
             var start = GetMicrosecondCounter();
             var end = (int)(start + data.Duration * 1000 * 1000);
@@ -135,7 +143,91 @@ namespace XM.Plugin.Combat.Telegraph
             if (!_telegraphsByArea.ContainsKey(area))
                 return;
 
+            if (!_telegraphsByArea[area].ContainsKey(telegraphId))
+                return;
+
+            RunTelegraphAction(area, _telegraphsByArea[area][telegraphId].Data);
+
             _telegraphsByArea[area].Remove(telegraphId);
+        }
+
+        private void RunTelegraphAction(uint area, TelegraphData data)
+        {
+            var action = data.Action;
+            if (action != null)
+            {
+                var location = Location(area, data.Position, data.Rotation);
+                var maxDistance = CalculateMaxCreatureDistance(data.Shape, data.Size);
+                var creatureList = new List<uint>();
+
+                var nth = 1;
+                var nearest = GetNearestCreatureToLocation((int)CreatureType.IsAlive, 1, location, nth);
+                while (GetIsObjectValid(nearest) &&
+                       GetDistanceBetweenLocations(location, GetLocation(nearest)) <= maxDistance)
+                {
+                    if (IsInTelegraph(nearest, data))
+                    {
+                        creatureList.Add(nearest);
+                    }
+
+                    nth++;
+                    nearest = GetNearestCreatureToLocation((int)CreatureType.IsAlive, 1, location, nth);
+                }
+
+                action(data.Creator, creatureList);
+            }
+        }
+
+        private float CalculateMaxCreatureDistance(TelegraphType shape, Vector2 size)
+        {
+            switch (shape)
+            {
+                case TelegraphType.None:
+                    return 0f;
+                case TelegraphType.Sphere:
+                    return size.X; // Sphere radius
+                case TelegraphType.Cone:
+                    return size.X; // Cone length
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(shape), shape, null);
+            }
+        }
+
+        private bool IsInTelegraph(uint creature, TelegraphData data)
+        {
+            switch (data.Shape)
+            {
+                case TelegraphType.Sphere:
+                    return IsCreatureInSphere(creature, data);
+                case TelegraphType.Cone:
+                    return IsCreatureInCone(creature, data);
+                default:
+                    return false;
+            }
+        }
+
+        private static bool IsCreatureInSphere(uint creature, TelegraphData data)
+        {
+            var position = GetPosition(creature);
+            var radius = data.Size.X;
+            return Vector3.Distance(position, data.Position) <= radius;
+        }
+
+        private static bool IsCreatureInCone(uint creature, TelegraphData data)
+        {
+            var position = GetPosition(creature);
+
+            var direction = new Vector3(cos(data.Rotation), sin(data.Rotation), 0);
+            var toPoint = (position - data.Position);
+            var distance = toPoint.Length();
+
+            // Compute the actual cone angle dynamically
+            var halfAngle = atan((data.Size.Y / 2) / data.Size.X);
+
+            // Angle between the direction and the point
+            var angleBetween = acos(Vector3.Dot(Vector3.Normalize(toPoint), direction));
+
+            return (distance <= data.Size.X) && (angleBetween <= halfAngle);
         }
 
         private void UpdateShadersForAllPlayers()
@@ -203,7 +295,19 @@ namespace XM.Plugin.Combat.Telegraph
             var position = GetPosition(player);
             var rotation = GetFacing(player);
 
-            CreateTelegraphSphere(player, position, rotation, new Vector2(4f, 4f), 2.5f);
+            CreateTelegraphCone(
+                player, 
+                position, 
+                rotation, 
+                new Vector2(4f, 4f), 
+                2.5f,
+                ((telegrapher, creatures) =>
+                {
+                    foreach (var creature in creatures)
+                    {
+                        ApplyEffectToObject(DurationType.Instant, EffectDamage(1), creature);
+                    }
+                }));
         }
     }
 }

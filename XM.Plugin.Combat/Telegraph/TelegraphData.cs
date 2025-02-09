@@ -11,5 +11,7 @@ namespace XM.Plugin.Combat.Telegraph
         public Vector2 Size { get; set; }
         public float Duration { get; set; }
         
+        public ApplyTelegraphEffect Action { get; set; }
+
     }
 }
