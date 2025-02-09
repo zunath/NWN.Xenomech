@@ -20,6 +20,18 @@ namespace XM.Shared.API
             }
         }
 
+        public static void RemoveEffectByLinkId(uint creature, string linkId)
+        {
+            for (var effect = GetFirstEffect(creature); GetIsEffectValid(effect); effect = GetNextEffect(creature))
+            {
+                var effectLinkId = GetEffectLinkId(effect);
+                if (effectLinkId == linkId)
+                {
+                    RemoveEffect(creature, effect);
+                }
+            }
+        }
+
         /// <summary>
         /// Determines if creature has at least one effect with the specified tags.
         /// </summary>

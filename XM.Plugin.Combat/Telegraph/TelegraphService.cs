@@ -25,6 +25,7 @@ namespace XM.Plugin.Combat.Telegraph
         private static readonly Color _enemyBeneficialTelegraphColor = new(169, 169, 169);
 
         private readonly Dictionary<uint, Dictionary<string, ActiveTelegraph>> _telegraphsByArea = new();
+        private readonly Dictionary<string, ActiveTelegraph> _allTelegraphs = new();
 
         private readonly XMEventService _event;
 
@@ -50,7 +51,7 @@ namespace XM.Plugin.Combat.Telegraph
             _event.Subscribe<TelegraphEvent.RunTelegraphEffect>(OnRunTelegraphEffect);
         }
 
-        public void CreateTelegraphSphere(
+        public string CreateTelegraphSphere(
             uint creator, 
             Vector3 position, 
             float rotation, 
@@ -70,9 +71,11 @@ namespace XM.Plugin.Combat.Telegraph
                 IsHostile = isHostile,
                 Action = action
             };
-            RunTelegraphEffect(creator, data);
+
+            return RunTelegraphEffect(creator, data);
         }
-        public void CreateTelegraphCone(
+
+        public string CreateTelegraphCone(
             uint creator, 
             Vector3 position, 
             float rotation, 
@@ -92,9 +95,10 @@ namespace XM.Plugin.Combat.Telegraph
                 IsHostile = isHostile,
                 Action = action
             };
-            RunTelegraphEffect(creator, data);
+            return RunTelegraphEffect(creator, data);
         }
-        public void CreateTelegraphLine(
+
+        public string CreateTelegraphLine(
             uint creator,
             Vector3 position,
             float rotation,
@@ -114,10 +118,27 @@ namespace XM.Plugin.Combat.Telegraph
                 IsHostile = isHostile,
                 Action = action
             };
-            RunTelegraphEffect(creator, data);
+
+            return RunTelegraphEffect(creator, data);
         }
 
-        private void RunTelegraphEffect(uint telegrapher, TelegraphData data)
+        public void CancelTelegraph(string telegraphId)
+        {
+            if (!_allTelegraphs.ContainsKey(telegraphId))
+                return;
+
+            var telegraph = _allTelegraphs[telegraphId];
+
+            if (_telegraphsByArea.ContainsKey(telegraph.Area) && _telegraphsByArea[telegraph.Area].ContainsKey(telegraphId))
+            {
+                _telegraphsByArea[telegraph.Area].Remove(telegraphId);
+            }
+
+            _allTelegraphs.Remove(telegraphId);
+            RemoveEffectByLinkId(telegraph.Data.Creator, telegraphId);
+        }
+
+        private string RunTelegraphEffect(uint telegrapher, TelegraphData data)
         {
             var area = GetArea(telegrapher);
             if (!_telegraphsByArea.ContainsKey(area))
@@ -129,6 +150,8 @@ namespace XM.Plugin.Combat.Telegraph
                 string.Empty);
             OnApply(telegrapher, data, effect);
             ApplyEffectToObject(DurationType.Temporary, effect, telegrapher, data.Duration);
+
+            return GetEffectLinkId(effect);
         }
 
         private void OnRunTelegraphEffect(uint telegrapher)
@@ -160,12 +183,13 @@ namespace XM.Plugin.Combat.Telegraph
 
             var start = GetMicrosecondCounter();
             var end = (int)(start + data.Duration * 1000 * 1000);
-            var telegraph = new ActiveTelegraph(start, end, data);
+            var telegraph = new ActiveTelegraph(area, start, end, data);
 
             if (!_telegraphsByArea.ContainsKey(area))
                 _telegraphsByArea[area] = new Dictionary<string, ActiveTelegraph>();
 
             _telegraphsByArea[area][telegraphId] = telegraph;
+            _allTelegraphs[telegraphId] = telegraph;
         }
 
         private void OnRemoved(uint telegrapher, Effect effect)
@@ -182,6 +206,7 @@ namespace XM.Plugin.Combat.Telegraph
             RunTelegraphAction(area, _telegraphsByArea[area][telegraphId].Data);
 
             _telegraphsByArea[area].Remove(telegraphId);
+            _allTelegraphs.Remove(telegraphId);
         }
 
         private void RunTelegraphAction(uint area, TelegraphData data)
@@ -392,11 +417,21 @@ namespace XM.Plugin.Combat.Telegraph
         public void BreadTest6()
         {
             var player = GetLastUsedBy();
+            var bread = OBJECT_SELF;
             var position = GetPosition(player);
             var rotation = GetFacing(player);
+            var currentTelegraph = GetLocalString(bread, "TELEGRAPH");
 
-            CreateTelegraphCone(
-                OBJECT_SELF, 
+            if (!string.IsNullOrWhiteSpace(currentTelegraph))
+            {
+                SendMessageToPC(player, "Canceling telegraph");
+                CancelTelegraph(currentTelegraph);
+                DeleteLocalString(bread, "TELEGRAPH");
+                return;
+            }
+
+            var telegraphId = CreateTelegraphCone(
+                player, 
                 position, 
                 rotation, 
                 new Vector2(8f, 2f), 
@@ -406,14 +441,19 @@ namespace XM.Plugin.Combat.Telegraph
                 {
                     foreach (var creature in creatures)
                     {
-                        ApplyEffectToObject(DurationType.Instant, EffectDamage(1), creature);
+                        SendMessageToPC(creature, "Firing telegraph!!");
                     }
+
+                    DeleteLocalString(bread, "TELEGRAPH");
                 }));
+
+            SetLocalString(bread, "TELEGRAPH", telegraphId);
         }
 
         public void Dispose()
         {
             _telegraphsByArea.Clear();
+            _allTelegraphs.Clear();
         }
     }
 }
