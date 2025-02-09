@@ -5,6 +5,7 @@ using Anvil.API;
 using Anvil.Services;
 using XM.Plugin.Combat.Event;
 using XM.Shared.API.Constants;
+using XM.Shared.Core;
 using XM.Shared.Core.EventManagement;
 using CreatureType = XM.Shared.API.Constants.CreatureType;
 
@@ -12,10 +13,16 @@ namespace XM.Plugin.Combat.Telegraph
 {
     [ServiceBinding(typeof(TelegraphService))]
     [ServiceBinding(typeof(IInitializable))]
-    internal class TelegraphService: IInitializable
+    internal class TelegraphService: 
+        IInitializable,
+        IDisposable
     {
         private const float TargetFPS = 30f;
         private const int MaxRenderCount = 8;
+        private static readonly Color _hostileTelegraphColor = new(255, 0, 0);
+        private static readonly Color _selfTelegraphColor = new(0, 0, 255);
+        private static readonly Color _friendlyTelegraphColor = new(0, 255, 0);
+        private static readonly Color _enemyBeneficialTelegraphColor = new(169, 169, 169);
 
         private readonly Dictionary<uint, Dictionary<string, ActiveTelegraph>> _telegraphsByArea = new();
 
@@ -49,6 +56,7 @@ namespace XM.Plugin.Combat.Telegraph
             float rotation, 
             Vector2 size, 
             float duration,
+            bool isHostile,
             ApplyTelegraphEffect action)
         {
             var data = new TelegraphData
@@ -59,6 +67,7 @@ namespace XM.Plugin.Combat.Telegraph
                 Rotation = rotation,
                 Size = size,
                 Duration = duration,
+                IsHostile = isHostile,
                 Action = action
             };
             RunTelegraphEffect(creator, data);
@@ -69,6 +78,7 @@ namespace XM.Plugin.Combat.Telegraph
             float rotation, 
             Vector2 size, 
             float duration,
+            bool isHostile,
             ApplyTelegraphEffect action)
         {
             var data = new TelegraphData
@@ -79,6 +89,7 @@ namespace XM.Plugin.Combat.Telegraph
                 Rotation = rotation,
                 Size = size,
                 Duration = duration,
+                IsHostile = isHostile,
                 Action = action
             };
             RunTelegraphEffect(creator, data);
@@ -89,6 +100,7 @@ namespace XM.Plugin.Combat.Telegraph
             float rotation,
             Vector2 size,
             float duration,
+            bool isHostile,
             ApplyTelegraphEffect action)
         {
             var data = new TelegraphData
@@ -99,6 +111,7 @@ namespace XM.Plugin.Combat.Telegraph
                 Rotation = rotation,
                 Size = size,
                 Duration = duration,
+                IsHostile = isHostile,
                 Action = action
             };
             RunTelegraphEffect(creator, data);
@@ -280,6 +293,11 @@ namespace XM.Plugin.Combat.Telegraph
             }
         }
 
+        private static int PackShapeAndColor(TelegraphType shapeType, byte r, byte g, byte b)
+        {
+            return ((int)shapeType << 24) | (r << 16) | (g << 8) | b;
+        }
+
         private void UpdateShaderForPlayer(uint player)
         {
             var area = GetArea(player);
@@ -295,13 +313,34 @@ namespace XM.Plugin.Combat.Telegraph
             var i = 0;
             foreach (var (_, telegraph) in telegraphs)
             {
+                if (i >= MaxRenderCount)
+                    break;
+
                 var data = telegraph.Data;
                 var position = data.Position;
                 var size = data.Size;
+                var color = DetermineTelegraphColor(player, data.Creator, data.IsHostile);
+                var packed = PackShapeAndColor(data.Shape, color.Red, color.Green, color.Blue);
 
-                SetShaderUniformInt(player, ShaderUniformType.Uniform1 + i, (int)telegraph.Data.Shape);
-                SetShaderUniformVec(player, ShaderUniformType.Uniform1 + (i * 2) + 0, position.X, position.Y, position.Z, telegraph.Data.Rotation);
-                SetShaderUniformVec(player, ShaderUniformType.Uniform1 + (i * 2) + 1, telegraph.Start, telegraph.End, size.X, size.Y);
+                SetShaderUniformInt(
+                    player, 
+                    ShaderUniformType.Uniform1 + i, 
+                    packed);
+
+                SetShaderUniformVec(
+                    player, 
+                    ShaderUniformType.Uniform1 + (i * 2) + 0, 
+                    position.X, 
+                    position.Y, 
+                    position.Z, 
+                    telegraph.Data.Rotation);
+                SetShaderUniformVec(
+                    player, 
+                    ShaderUniformType.Uniform1 + (i * 2) + 1, 
+                    telegraph.Start, 
+                    telegraph.End, 
+                    size.X, 
+                    size.Y);
 
                 i++;
             }
@@ -310,6 +349,25 @@ namespace XM.Plugin.Combat.Telegraph
             {
                 var uniformIndex = ShaderUniformType.Uniform1 + telegraphCountToRender + x;
                 SetShaderUniformInt(player, uniformIndex, (int)TelegraphType.None);
+            }
+        }
+
+        private Color DetermineTelegraphColor(uint player, uint telegrapher, bool isHostile)
+        {
+            if (player == telegrapher)
+                return _selfTelegraphColor;
+
+            if (isHostile)
+            {
+                return GetIsReactionTypeFriendly(player, telegrapher) 
+                    ? _friendlyTelegraphColor 
+                    : _hostileTelegraphColor;
+            }
+            else
+            {
+                return GetIsReactionTypeFriendly(player, telegrapher) 
+                    ? _friendlyTelegraphColor 
+                    : _enemyBeneficialTelegraphColor;
             }
         }
 
@@ -338,11 +396,12 @@ namespace XM.Plugin.Combat.Telegraph
             var rotation = GetFacing(player);
 
             CreateTelegraphCone(
-                player, 
+                OBJECT_SELF, 
                 position, 
                 rotation, 
                 new Vector2(8f, 2f), 
                 2.5f,
+                false,
                 ((telegrapher, creatures) =>
                 {
                     foreach (var creature in creatures)
@@ -350,6 +409,11 @@ namespace XM.Plugin.Combat.Telegraph
                         ApplyEffectToObject(DurationType.Instant, EffectDamage(1), creature);
                     }
                 }));
+        }
+
+        public void Dispose()
+        {
+            _telegraphsByArea.Clear();
         }
     }
 }

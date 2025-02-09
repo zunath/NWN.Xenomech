@@ -10,7 +10,7 @@ namespace XM.Plugin.Combat.Telegraph
         public float Rotation { get; set; }
         public Vector2 Size { get; set; }
         public float Duration { get; set; }
-        
+        public bool IsHostile { get; set; }
         public ApplyTelegraphEffect Action { get; set; }
 
     }

@@ -97,24 +97,82 @@ float CalculateTelegraphColour(vec3 pixelPos, int shapeType, vec4 data1, vec4 da
     return strength;
 }
 
-float CalculateTelegraphStrengthTotal(vec3 pixelPos)
+struct ShapeColorData 
 {
-    float strength = 0.0;
-    strength = max(strength, CalculateTelegraphColour(pixelPos, scriptableInt1, scriptableVec1, scriptableVec2));
-    strength = max(strength, CalculateTelegraphColour(pixelPos, scriptableInt2, scriptableVec3, scriptableVec4));
-    strength = max(strength, CalculateTelegraphColour(pixelPos, scriptableInt3, scriptableVec5, scriptableVec6));
-    strength = max(strength, CalculateTelegraphColour(pixelPos, scriptableInt4, scriptableVec7, scriptableVec8));
-    strength = max(strength, CalculateTelegraphColour(pixelPos, scriptableInt5, scriptableVec9, scriptableVec10));
-    strength = max(strength, CalculateTelegraphColour(pixelPos, scriptableInt6, scriptableVec11, scriptableVec12));
-    strength = max(strength, CalculateTelegraphColour(pixelPos, scriptableInt7, scriptableVec13, scriptableVec14));
-    strength = max(strength, CalculateTelegraphColour(pixelPos, scriptableInt8, scriptableVec15, scriptableVec16));
-    return strength;
+    int shapeType;
+    vec3 color;
+};
+
+ShapeColorData UnpackData(int packedData)
+{
+    ShapeColorData result;
+    result.shapeType = (packedData >> 24) & 0xFF; // Extract shape type (top 8 bits)
+
+    result.color.r = float((packedData >> 16) & 0xFF) / 255.0;
+    result.color.g = float((packedData >> 8) & 0xFF) / 255.0;
+    result.color.b = float(packedData & 0xFF) / 255.0;
+
+    return result;
+}
+
+vec4 CalculateTelegraphStrengthTotal(vec3 pixelPos)
+{
+    vec4 finalColor = vec4(0.0);
+
+    float strength;
+	ShapeColorData data;
+	
+	data = UnpackData(scriptableInt1);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec1, scriptableVec2);
+    finalColor.rgb = mix(finalColor.rgb, data.color, strength);
+    finalColor.a = max(finalColor.a, strength);
+
+	data = UnpackData(scriptableInt2);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec3, scriptableVec4);
+    finalColor.rgb = mix(finalColor.rgb, data.color, strength);
+    finalColor.a = max(finalColor.a, strength);
+
+	data = UnpackData(scriptableInt3);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec5, scriptableVec6);
+    finalColor.rgb = mix(finalColor.rgb, data.color, strength);
+    finalColor.a = max(finalColor.a, strength);
+
+	data = UnpackData(scriptableInt4);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec7, scriptableVec8);
+    finalColor.rgb = mix(finalColor.rgb, data.color, strength);
+    finalColor.a = max(finalColor.a, strength);
+
+	data = UnpackData(scriptableInt5);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec9, scriptableVec10);
+    finalColor.rgb = mix(finalColor.rgb, data.color, strength);
+    finalColor.a = max(finalColor.a, strength);
+
+	data = UnpackData(scriptableInt6);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec11, scriptableVec12);
+    finalColor.rgb = mix(finalColor.rgb, data.color, strength);
+    finalColor.a = max(finalColor.a, strength);
+
+	data = UnpackData(scriptableInt7);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec13, scriptableVec14);
+    finalColor.rgb = mix(finalColor.rgb, data.color, strength);
+    finalColor.a = max(finalColor.a, strength);
+
+	data = UnpackData(scriptableInt8);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec15, scriptableVec16);
+    finalColor.rgb = mix(finalColor.rgb, data.color, strength);
+    finalColor.a = max(finalColor.a, strength);
+
+    return finalColor;
 }
 
 void main()
 {
     vec3 pixelPos = (m_view_inv * vec4(GetViewPositionFromDepth(vVertexTexCoords, GetDepth(vVertexTexCoords)), 1.0)).xyz;
-    float telegraphStrength = CalculateTelegraphStrengthTotal(pixelPos);
+    vec4 telegraphEffect = CalculateTelegraphStrengthTotal(pixelPos);
+
     gl_FragColor = FS_PostProcess();
-    gl_FragColor.r = mix(gl_FragColor.r, 1.0, telegraphStrength);
+
+    // Apply telegraph color blending
+    gl_FragColor.rgb = mix(gl_FragColor.rgb, telegraphEffect.rgb, telegraphEffect.a);
+    gl_FragColor.a = 1.0;
 }
