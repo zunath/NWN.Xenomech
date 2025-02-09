@@ -20,7 +20,8 @@ using XM.Shared.Core.Localization;
 namespace XM.Progression.Ability
 {
     [ServiceBinding(typeof(AbilityService))]
-    internal class AbilityService: IInitializable
+    [ServiceBinding(typeof(IInitializable))]
+    public class AbilityService: IInitializable
     {
         private readonly Dictionary<FeatType, AbilityDetail> _abilities = new();
         private readonly Dictionary<FeatType, int> _abilitiesByLevel = new();
@@ -107,12 +108,12 @@ namespace XM.Progression.Ability
             }
         }
 
-        public List<FeatType> GetAbilityFeatsByJob(JobType jobType)
+        internal List<FeatType> GetAbilityFeatsByJob(JobType jobType)
         {
             return _abilitiesByJob[jobType].ToList();
         }
 
-        public AbilityDetail GetAbilityDetail(FeatType featType)
+        internal AbilityDetail GetAbilityDetail(FeatType featType)
         {
             if (!_abilities.ContainsKey(featType))
                 throw new KeyNotFoundException($"Feat '{featType}' is not registered to an ability.");
@@ -120,12 +121,15 @@ namespace XM.Progression.Ability
             return _abilities[featType];
         }
 
-        private bool CanUseAbility(
+        public bool CanUseAbility(
             uint activator,
             uint target,
             FeatType feat,
             Location targetLocation)
         {
+            if (!_abilities.ContainsKey(feat))
+                return false;
+
             var ability = GetAbilityDetail(feat);
 
             if (GetIsPC(activator) && 
@@ -419,7 +423,7 @@ namespace XM.Progression.Ability
             });
         }
 
-        public void DequeueWeaponAbility(uint target, bool sendMessage = true)
+        private void DequeueWeaponAbility(uint target, bool sendMessage = true)
         {
             var abilityId = GetLocalString(target, ActiveAbilityIdName);
             if (string.IsNullOrWhiteSpace(abilityId))
@@ -468,7 +472,7 @@ namespace XM.Progression.Ability
             ability.AbilityUnequippedAction?.Invoke(player);
         }
 
-        public List<FeatType> GetPlayerResonanceAbilities(uint player)
+        internal List<FeatType> GetPlayerResonanceAbilities(uint player)
         {
             var playerId = PlayerId.Get(player);
             var dbPlayerJob = _db.Get<PlayerJob>(playerId);
@@ -476,7 +480,7 @@ namespace XM.Progression.Ability
             return dbPlayerJob.ResonanceFeats.ToList();
         }
 
-        public int GetLevelAcquired(FeatType feat)
+        internal int GetLevelAcquired(FeatType feat)
         {
             if (!_abilitiesByLevel.ContainsKey(feat))
                 return 999;

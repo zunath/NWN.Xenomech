@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using Anvil.Services;
 using NWN.Core.NWNX;
-using XM.AI.AITrees;
 using XM.AI.Enmity;
 using XM.AI.Event;
-using XM.Progression.Stat;
+using XM.AI.Scorer;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.EventManagement;
@@ -27,20 +26,20 @@ namespace XM.AI
         private const double UpdateInterval = 2.0f;
         private readonly Dictionary<uint, DateTime> _lastUpdateTimestamps = new();
 
-        private readonly Dictionary<uint, IAITree> _creatureAITrees = new();
+        private readonly Dictionary<uint, IAIContext> _creatureAITrees = new();
 
         private readonly XMEventService _event;
         private readonly EnmityService _enmity;
-        private readonly StatService _stat;
+        private readonly AIServiceCollection _services;
 
         public AIService(
             XMEventService @event, 
             EnmityService enmity,
-            StatService stat)
+            AIServiceCollection services)
         {
             _event = @event;
             _enmity = enmity;
-            _stat = stat;
+            _services = services;
 
             SubscribeEvents();
         }
@@ -60,7 +59,7 @@ namespace XM.AI
         private void OnSpawnCreated(uint creature)
         {
             SetAIFlags(creature, AIFlag.ReturnHome);
-            _creatureAITrees[creature] = new StandardAITree(creature, this, _enmity, _stat);
+            _creatureAITrees[creature] = new AIContext(creature, _services);
             LoadAggroEffect(creature);
         }
 
@@ -158,32 +157,6 @@ namespace XM.AI
 
 
 
-
-
-
-        [ScriptHandler("bread_test")]
-        public void Test()
-        {
-            var npc = GetObjectByTag("goblintest");
-            var boy = GetObjectByTag("boy");
-
-            _enmity.ModifyEnmity(boy, npc, EnmityType.Volatile, 500);
-
-            var table = _enmity.GetEnmityTable(npc);
-            SendMessageToPC(GetLastUsedBy(), $"Boy enmity = {table[boy].TotalEnmity}");
-        }
-        [ScriptHandler("bread_test2")]
-        public void Test2()
-        {
-            var npc = GetObjectByTag("goblintest");
-            var girl = GetObjectByTag("girl");
-
-            _enmity.ModifyEnmity(girl, npc, EnmityType.Volatile, 500);
-
-            var table = _enmity.GetEnmityTable(npc);
-            SendMessageToPC(GetLastUsedBy(), $"Girl enmity = {table[girl].TotalEnmity}");
-        }
-
         [ScriptHandler("bread_test3")]
         public void Test3()
         {
@@ -191,16 +164,6 @@ namespace XM.AI
             ApplyEffectToObject(DurationType.Instant, EffectDamage(1), npc);
 
             SendMessageToPC(GetLastUsedBy(), $"Goblin HP: {GetCurrentHitPoints(npc)} / {GetMaxHitPoints(npc)}");
-        }
-
-        [ScriptHandler("bread_test4")]
-        public void Test4()
-        {
-            var savingThrow = GetFortitudeSavingThrow(GetLastUsedBy());
-
-            CreaturePlugin.SetBaseAttackBonus(GetLastUsedBy(), 1);
-
-            SendMessageToPC(GetLastUsedBy(), $"saving throw = {savingThrow}");
         }
     }
 }
