@@ -4,7 +4,7 @@ using XM.Shared.API.Constants;
 
 namespace XM.AI
 {
-    internal class CachedCreatureFeats: Dictionary<AbilityClassificationType, Dictionary<AITargetType, HashSet<FeatType>>>
+    internal class CachedCreatureFeats: Dictionary<AbilityCategoryType, Dictionary<AITargetType, HashSet<FeatType>>>
     {
     }
 }

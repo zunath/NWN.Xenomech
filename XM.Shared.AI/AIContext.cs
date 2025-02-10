@@ -66,15 +66,15 @@ namespace XM.AI
             return IsAIEnabled;
         }
 
-        public HashSet<FeatType> GetFeatsByType(AbilityClassificationType classification, AITargetType targetType)
+        public HashSet<FeatType> GetFeatsByType(AbilityCategoryType category, AITargetType targetType)
         {
-            if (!_abilitiesByClassification.ContainsKey(classification))
+            if (!_abilitiesByClassification.ContainsKey(category))
                 return new HashSet<FeatType>();
 
-            if (!_abilitiesByClassification[classification].ContainsKey(targetType))
+            if (!_abilitiesByClassification[category].ContainsKey(targetType))
                 return new HashSet<FeatType>();
 
-            return _abilitiesByClassification[classification][targetType];
+            return _abilitiesByClassification[category][targetType];
         }
 
     }

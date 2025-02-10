@@ -1,15 +1,15 @@
-﻿using System;
-using XM.AI.Targeters;
+﻿using XM.AI.Targeters;
 using XM.Progression.Ability;
 using XM.Shared.API.Constants;
 
-namespace XM.AI.Actions.Self
+namespace XM.AI.Actions.Ally
 {
-    internal class HealSelfAction: AIActionBase
+    internal class HealAllyAction: AIActionBase
     {
-        public HealSelfAction(IAIContext context) 
-            : base(context, new SelfTargeter())
+        public HealAllyAction(IAIContext context) 
+            : base(context, new LowestHPAllyTargeter())
         {
+
         }
 
         private FeatType _selectedFeat = FeatType.Invalid;
@@ -17,16 +17,14 @@ namespace XM.AI.Actions.Self
 
         protected override float CalculateScore()
         {
-            var creature = Context.Creature;
-            var hp = (float)GetCurrentHitPoints(creature) / (float)GetMaxHitPoints(creature);
+            _target = Targeter.SelectTarget(Context);
+            var hp = (float)GetCurrentHitPoints(_target) / (float)GetMaxHitPoints(_target);
             var score = 0;
 
             if (hp <= 0.2f)
-                score = 100;
+                score = 70;
             else if (hp <= 0.5f)
-                score = 80;
-            else if (hp <= 0.7f)
-                score = 30;
+                score = 40;
 
             if (score > 0)
                 score = FindBestAvailableAbility() ? score : 0;
@@ -36,8 +34,7 @@ namespace XM.AI.Actions.Self
 
         private bool FindBestAvailableAbility()
         {
-            _target = Targeter.SelectTarget(Context);
-            var feats = Context.GetFeatsByType(AbilityCategoryType.Healing, AITargetType.Self);
+            var feats = Context.GetFeatsByType(AbilityCategoryType.Healing, AITargetType.Others);
             foreach (var feat in feats)
             {
                 if (CanUseAbility(feat, _target))
@@ -50,7 +47,6 @@ namespace XM.AI.Actions.Self
             _selectedFeat = FeatType.Invalid;
             return false;
         }
-
         public override void Execute()
         {
             UseAbility(_selectedFeat, _target);

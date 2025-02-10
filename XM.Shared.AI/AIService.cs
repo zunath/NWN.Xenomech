@@ -105,23 +105,23 @@ namespace XM.AI
                     var targetTypeStr = Get2DAString("spells", "TargetType", spellId);
                     var targetTypes = (SpellTargetTypes)Convert.ToInt32(targetTypeStr, 16);
 
-                    if (!_creatureFeats[resref].ContainsKey(ability.Classification))
-                        _creatureFeats[resref][ability.Classification] = new Dictionary<AITargetType, HashSet<FeatType>>();
+                    if (!_creatureFeats[resref].ContainsKey(ability.Category))
+                        _creatureFeats[resref][ability.Category] = new Dictionary<AITargetType, HashSet<FeatType>>();
 
                     if (targetTypes.HasFlag(SpellTargetTypes.Self))
                     {
-                        if (!_creatureFeats[resref][ability.Classification].ContainsKey(AITargetType.Self))
-                            _creatureFeats[resref][ability.Classification][AITargetType.Self] = new HashSet<FeatType>();
+                        if (!_creatureFeats[resref][ability.Category].ContainsKey(AITargetType.Self))
+                            _creatureFeats[resref][ability.Category][AITargetType.Self] = new HashSet<FeatType>();
 
-                        _creatureFeats[resref][ability.Classification][AITargetType.Self].Add(feat);
+                        _creatureFeats[resref][ability.Category][AITargetType.Self].Add(feat);
                     }
 
                     if (targetTypes.HasFlag(SpellTargetTypes.Creature))
                     {
-                        if (!_creatureFeats[resref][ability.Classification].ContainsKey(AITargetType.Others))
-                            _creatureFeats[resref][ability.Classification][AITargetType.Others] = new HashSet<FeatType>();
+                        if (!_creatureFeats[resref][ability.Category].ContainsKey(AITargetType.Others))
+                            _creatureFeats[resref][ability.Category][AITargetType.Others] = new HashSet<FeatType>();
 
-                        _creatureFeats[resref][ability.Classification][AITargetType.Others].Add(feat);
+                        _creatureFeats[resref][ability.Category][AITargetType.Others].Add(feat);
                     }
                 }
             }
@@ -207,20 +207,27 @@ namespace XM.AI
 
         private void LoadAggroEffect(uint creature)
         {
-            var effect = SupernaturalEffect(EffectAreaOfEffect(AreaOfEffectType.AOEPerCustomAOE));
+            var effect = SupernaturalEffect(EffectAreaOfEffect(
+                AreaOfEffectType.AOEPerCustomAOE, 
+                AIEventScript.AggroAOEEnter, 
+                string.Empty, 
+                AIEventScript.AggroAOEExit));
+
             effect = TagEffect(effect, AggroAOETag);
             ApplyEffectToObject(DurationType.Permanent, effect, creature);
         }
 
-        private void OnEnterAggroAOE(uint creature)
+        private void OnEnterAggroAOE(uint aoe)
         {
-            var context = _creatureAITrees[creature];
+            var creator = GetAreaOfEffectCreator(aoe);
+            var context = _creatureAITrees[creator];
             var entering = GetEnteringObject();
             context.AddFriendly(entering);
         }
-        private void OnExitAggroAOE(uint creature)
+        private void OnExitAggroAOE(uint aoe)
         {
-            var context = _creatureAITrees[creature];
+            var creator = GetAreaOfEffectCreator(aoe);
+            var context = _creatureAITrees[creator];
             var exiting = GetExitingObject();
             context.AddFriendly(exiting);
         }

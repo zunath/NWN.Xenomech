@@ -52,11 +52,11 @@ namespace XM.Progression.Ability
         /// Sets the classification of the active ability we're building.
         /// This is primarily used in the AI to determine when the ability should be used.
         /// </summary>
-        /// <param name="classification">The type of classification</param>
+        /// <param name="category">The type of classification</param>
         /// <returns>An ability builder with the configured options.</returns>
-        public AbilityBuilder Classification(AbilityClassificationType classification)
+        public AbilityBuilder Classification(AbilityCategoryType category)
         {
-            _activeAbility.Classification = classification;
+            _activeAbility.Category = category;
 
             return this;
         }

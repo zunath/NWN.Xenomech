@@ -1,6 +1,6 @@
 ﻿namespace XM.Progression.Ability
 {
-    public enum AbilityClassificationType
+    public enum AbilityCategoryType
     {
         Invalid = 0,
         Healing = 1,

@@ -17,6 +17,7 @@ namespace XM.AI
         bool ToggleAI();
         public Location HomeLocation { get; }
         public AIFlag AIFlags { get; }
-        HashSet<FeatType> GetFeatsByType(AbilityClassificationType classification, AITargetType targetType);
+        HashSet<FeatType> GetFeatsByType(AbilityCategoryType category, AITargetType targetType);
+        HashSet<uint> GetNearbyFriendlies();
     }
 }
