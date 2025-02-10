@@ -5,6 +5,5 @@
         void Initialize();
         float DetermineScore();
         void Execute();
-        bool IsComplete { get; }
     }
 }

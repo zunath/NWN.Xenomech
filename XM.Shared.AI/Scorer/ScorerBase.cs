@@ -28,18 +28,21 @@ namespace XM.AI.Scorer
                 _isInitialized = true;
             }
         }
-
         public void Update()
         {
             InitializeActions();
 
-            if (_currentAction != null && !_currentAction.IsComplete)
+            if (!Context.IsAIEnabled ||
+                Context.Services.Activity.IsBusy(Context.Creature))
             {
                 return;
             }
 
             _currentAction = Actions
-                .OrderByDescending(o => o.DetermineScore())
+                .Select(action => new { Action = action, Score = action.DetermineScore() }) // Store scores before ordering
+                .Where(a => a.Score > 0)  // Ignore actions with 0 score
+                .OrderByDescending(a => a.Score)
+                .Select(a => a.Action) // Select the best action
                 .FirstOrDefault();
 
             if (_currentAction != null)

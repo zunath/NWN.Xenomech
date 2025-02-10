@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using XM.AI.Actions;
+using XM.AI.Actions.Enemy;
 using XM.AI.Actions.Self;
 
 namespace XM.AI.Scorer
@@ -11,7 +12,9 @@ namespace XM.AI.Scorer
         {
             Actions = 
             [
-                new HealSelfAction(Context)
+                new HealSelfAction(context),
+                new AttackEnemyAction(context),
+                new ReturnHomeAction(context)
             ];
         }
 

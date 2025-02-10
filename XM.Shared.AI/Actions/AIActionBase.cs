@@ -13,7 +13,10 @@ namespace XM.AI.Actions
 
         protected IAITargeter Targeter { get; private set; }
 
-        public abstract void Initialize();
+        public virtual void Initialize()
+        {
+
+        }
 
         protected abstract float CalculateScore();
 
@@ -37,8 +40,6 @@ namespace XM.AI.Actions
 
         public abstract void Execute();
 
-        public bool IsComplete { get; protected set; } = true;
-
         protected AIActionBase(IAIContext context, IAITargeter targeter)
         {
             Context = context;
@@ -52,6 +53,12 @@ namespace XM.AI.Actions
                 return false;
 
             return Context.Services.Ability.CanUseAbility(Context.Creature, target, feat, GetLocation(target));
+        }
+
+        protected void UseAbility(FeatType feat, uint target)
+        {
+            AssignCommand(Context.Creature, () => ClearAllActions());
+            AssignCommand(Context.Creature, () => ActionUseFeat(feat, target));
         }
     }
 }

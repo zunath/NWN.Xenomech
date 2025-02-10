@@ -1,4 +1,5 @@
-﻿using XM.AI.Targeters;
+﻿using System;
+using XM.AI.Targeters;
 using XM.Progression.Ability;
 using XM.Shared.API.Constants;
 
@@ -12,11 +13,7 @@ namespace XM.AI.Actions.Self
         }
 
         private FeatType _selectedFeat = FeatType.Invalid;
-
-
-        public override void Initialize()
-        {
-        }
+        private uint _target = OBJECT_INVALID;
 
         protected override float CalculateScore()
         {
@@ -39,11 +36,11 @@ namespace XM.AI.Actions.Self
 
         private bool FindBestAvailableAbility()
         {
-            var target = Targeter.SelectTarget(Context);
+            _target = Targeter.SelectTarget(Context);
             var feats = Context.GetFeatsByType(AbilityClassificationType.Healing, AITargetType.Self);
             foreach (var feat in feats)
             {
-                if (CanUseAbility(feat, target))
+                if (CanUseAbility(feat, _target))
                 {
                     _selectedFeat = feat;
                     return true;
@@ -56,7 +53,7 @@ namespace XM.AI.Actions.Self
 
         public override void Execute()
         {
-            AssignCommand(Context.Creature, () => ActionUseFeat(_selectedFeat, Context.Creature));
+            UseAbility(_selectedFeat, _target);
         }
     }
 }

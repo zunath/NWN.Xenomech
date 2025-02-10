@@ -134,7 +134,7 @@ namespace XM.AI
             var feats = _creatureFeats.ContainsKey(resref)
                 ? _creatureFeats[resref]
                 : new CachedCreatureFeats();
-            _creatureAITrees[creature] = new AIContext(creature, feats, _services);
+            _creatureAITrees[creature] = new AIContext(creature, GetAIFlags(creature), feats, _services);
             LoadAggroEffect(creature);
         }
 
@@ -150,7 +150,7 @@ namespace XM.AI
             SetLocalInt(creature, AIFlagsVariable, flagValue);
         }
 
-        public AIFlag GetAIFlags(uint creature)
+        private AIFlag GetAIFlags(uint creature)
         {
             var flagValue = GetLocalInt(creature, AIFlagsVariable);
             return (AIFlag)flagValue;
