@@ -219,7 +219,7 @@ namespace XM.Plugin.Combat.Telegraph
                 var creatureList = new List<uint>();
 
                 var nth = 1;
-                var nearest = GetNearestCreatureToLocation((int)CreatureType.IsAlive, 1, location, nth);
+                var nearest = GetNearestCreatureToLocation(CreatureType.IsAlive, 1, location, nth);
                 while (GetIsObjectValid(nearest) &&
                        GetDistanceBetweenLocations(location, GetLocation(nearest)) <= maxDistance)
                 {
@@ -229,7 +229,7 @@ namespace XM.Plugin.Combat.Telegraph
                     }
 
                     nth++;
-                    nearest = GetNearestCreatureToLocation((int)CreatureType.IsAlive, 1, location, nth);
+                    nearest = GetNearestCreatureToLocation(CreatureType.IsAlive, 1, location, nth);
                 }
 
                 action(data.Creator, creatureList);

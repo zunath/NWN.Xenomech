@@ -2469,9 +2469,9 @@ namespace XM.Shared.API
         ///    further specify the type of creature that we are looking for.<br/>
         ///  * Return value on error: OBJECT_INVALID
         /// </summary>
-        public static uint GetNearestCreatureToLocation(int nFirstCriteriaType, int nFirstCriteriaValue, Location lLocation, int nNth = 1, int nSecondCriteriaType = -1, int nSecondCriteriaValue = -1, int nThirdCriteriaType = -1, int nThirdCriteriaValue = -1)
+        public static uint GetNearestCreatureToLocation(CreatureType nFirstCriteriaType, int nFirstCriteriaValue, Location lLocation, int nNth = 1, int nSecondCriteriaType = -1, int nSecondCriteriaValue = -1, int nThirdCriteriaType = -1, int nThirdCriteriaValue = -1)
         {
-            return NWN.Core.NWScript.GetNearestCreatureToLocation(nFirstCriteriaType, nFirstCriteriaValue, lLocation, nNth, nSecondCriteriaType, nSecondCriteriaValue, nThirdCriteriaType, nThirdCriteriaValue);
+            return NWN.Core.NWScript.GetNearestCreatureToLocation((int)nFirstCriteriaType, nFirstCriteriaValue, lLocation, nNth, nSecondCriteriaType, nSecondCriteriaValue, nThirdCriteriaType, nThirdCriteriaValue);
         }
 
         /// <summary>
