@@ -1,6 +1,5 @@
-﻿using Anvil.API;
-using System.Collections.Generic;
-using XM.AI.Targeters;
+﻿using XM.AI.Targeters;
+using XM.Progression.Ability;
 using XM.Shared.API.Constants;
 
 namespace XM.AI.Actions.Self
@@ -12,25 +11,11 @@ namespace XM.AI.Actions.Self
         {
         }
 
-        private readonly HashSet<FeatType> _fullAbilityPool =
-        [
-            FeatType.EtherBloom4,
-            FeatType.EtherBloom3,
-            FeatType.EtherBloom2,
-            FeatType.EtherBloom1,
-        ];
-
-        private readonly HashSet<FeatType> _filteredAbilityPool = new();
         private FeatType _selectedFeat = FeatType.Invalid;
 
 
         public override void Initialize()
         {
-            foreach (var feat in _fullAbilityPool)
-            {
-                if (GetHasFeat(feat, Context.Creature))
-                    _filteredAbilityPool.Add(feat);
-            }
         }
 
         protected override float CalculateScore()
@@ -55,7 +40,8 @@ namespace XM.AI.Actions.Self
         private bool FindBestAvailableAbility()
         {
             var target = Targeter.SelectTarget(Context);
-            foreach (var feat in _filteredAbilityPool)
+            var feats = Context.GetFeatsByType(AbilityClassificationType.Healing, AITargetType.Self);
+            foreach (var feat in feats)
             {
                 if (CanUseAbility(feat, target))
                 {

@@ -20,8 +20,7 @@ using XM.Shared.Core.Localization;
 namespace XM.Progression.Ability
 {
     [ServiceBinding(typeof(AbilityService))]
-    [ServiceBinding(typeof(IInitializable))]
-    public class AbilityService: IInitializable
+    public class AbilityService
     {
         private readonly Dictionary<FeatType, AbilityDetail> _abilities = new();
         private readonly Dictionary<FeatType, int> _abilitiesByLevel = new();
@@ -52,6 +51,7 @@ namespace XM.Progression.Ability
             _abilityDefinitions = abilityDefinitions;
             _event = @event;
 
+            CacheAbilities();
             SubscribeEvents();
         }
 
@@ -60,11 +60,6 @@ namespace XM.Progression.Ability
             _event.Subscribe<NWNXEvent.OnUseFeatBefore>(UseAbility);
             _event.Subscribe<JobEvent.JobFeatAddedEvent>(AddJobFeat);
             _event.Subscribe<JobEvent.JobFeatRemovedEvent>(RemoveJobFeat);
-        }
-
-        public void Init()
-        {
-            CacheAbilities();
         }
 
         private void CacheAbilities()
@@ -113,7 +108,7 @@ namespace XM.Progression.Ability
             return _abilitiesByJob[jobType].ToList();
         }
 
-        internal AbilityDetail GetAbilityDetail(FeatType featType)
+        public AbilityDetail GetAbilityDetail(FeatType featType)
         {
             if (!_abilities.ContainsKey(featType))
                 throw new KeyNotFoundException($"Feat '{featType}' is not registered to an ability.");
@@ -216,7 +211,7 @@ namespace XM.Progression.Ability
 
             return true;
         }
-        private bool IsFeatRegistered(FeatType featType)
+        public bool IsFeatRegistered(FeatType featType)
         {
             return _abilities.ContainsKey(featType);
         }
@@ -480,7 +475,7 @@ namespace XM.Progression.Ability
             return dbPlayerJob.ResonanceFeats.ToList();
         }
 
-        internal int GetLevelAcquired(FeatType feat)
+        public int GetLevelAcquired(FeatType feat)
         {
             if (!_abilitiesByLevel.ContainsKey(feat))
                 return 999;

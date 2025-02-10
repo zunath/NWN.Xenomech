@@ -19,6 +19,7 @@ namespace XM.Progression.Ability
         {
             _activeAbility = new AbilityDetail();
             _abilities[featType] = _activeAbility;
+            _activeAbility.FeatType = featType;
 
             return this;
         }
@@ -43,6 +44,19 @@ namespace XM.Progression.Ability
         public AbilityBuilder Description(LocaleString description)
         {
             _activeAbility.Description = description;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the classification of the active ability we're building.
+        /// This is primarily used in the AI to determine when the ability should be used.
+        /// </summary>
+        /// <param name="classification">The type of classification</param>
+        /// <returns>An ability builder with the configured options.</returns>
+        public AbilityBuilder Classification(AbilityClassificationType classification)
+        {
+            _activeAbility.Classification = classification;
 
             return this;
         }

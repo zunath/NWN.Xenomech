@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using XM.AI.Scorer;
+using XM.Progression.Ability;
+using XM.Shared.API.Constants;
 
 namespace XM.AI
 {
@@ -12,12 +14,15 @@ namespace XM.AI
         public uint Creature { get; }
         private readonly HashSet<uint> _nearbyFriendlies = new();
         private readonly IAIScorer _scorer;
+        private readonly CachedCreatureFeats _abilitiesByClassification;
 
         public AIContext(
-            uint creature, 
+            uint creature,
+            CachedCreatureFeats abilitiesByClassification,
             AIServiceCollection services)
         {
             Creature = creature;
+            _abilitiesByClassification = abilitiesByClassification;
             _scorer = new StandardScorer(this);
             Services = services;
         }
@@ -53,5 +58,17 @@ namespace XM.AI
             IsAIEnabled = !IsAIEnabled;
             return IsAIEnabled;
         }
+
+        public HashSet<FeatType> GetFeatsByType(AbilityClassificationType classification, AITargetType targetType)
+        {
+            if (!_abilitiesByClassification.ContainsKey(classification))
+                return new HashSet<FeatType>();
+
+            if (!_abilitiesByClassification[classification].ContainsKey(targetType))
+                return new HashSet<FeatType>();
+
+            return _abilitiesByClassification[classification][targetType];
+        }
+
     }
 }
