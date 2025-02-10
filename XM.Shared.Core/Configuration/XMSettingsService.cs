@@ -11,8 +11,8 @@ namespace XM.Shared.Core.Configuration
         public string DatabaseSocketPath { get; }
         public bool IsGameServerContext { get; }
         public ServerEnvironmentType ServerEnvironment { get; }
-
         public string BugWebHookUrl { get; }
+        public string ResourcesDirectory { get; }
 
         public XMSettingsService()
         {
@@ -21,6 +21,7 @@ namespace XM.Shared.Core.Configuration
             DatabaseSocketPath = Environment.GetEnvironmentVariable("XM_DATABASE_SOCKET_PATH");
             IsGameServerContext = Convert.ToBoolean(Environment.GetEnvironmentVariable("XM_GAME_SERVER_CONTEXT"));
             BugWebHookUrl = Environment.GetEnvironmentVariable("XM_BUG_WEBHOOK_URL");
+            ResourcesDirectory = Environment.GetEnvironmentVariable("XM_RESOURCES_DIRECTORY");
 
             var environment = Environment.GetEnvironmentVariable("XM_ENVIRONMENT");
             if (!string.IsNullOrWhiteSpace(environment) &&

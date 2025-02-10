@@ -6,8 +6,10 @@ namespace XM.Progression.Ability
 {
     public class AbilityDetail
     {
+        public FeatType FeatType { get; set; }
         public LocaleString Name { get; set; }
         public LocaleString Description { get; set; }
+        public AbilityClassificationType Classification { get; set; }
         public AbilityActivationAction ActivationAction { get; set; }
         public AbilityImpactAction ImpactAction { get; set; }
         public AbilityActivationDelayAction ActivationDelay { get; set; }
@@ -30,6 +32,7 @@ namespace XM.Progression.Ability
         {
             ActivationVisualEffect = VisualEffectType.None;
             AnimationType = AnimationType.Invalid;
+            Classification = AbilityClassificationType.Invalid;
             EPRequired = 0;
             MaxRange = 5.0f;
             IsHostileAbility = false;

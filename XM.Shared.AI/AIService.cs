@@ -1,46 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using Anvil;
+using Anvil.API;
 using Anvil.Services;
+using NLog;
 using NWN.Core.NWNX;
-using XM.AI.AITrees;
 using XM.AI.Enmity;
 using XM.AI.Event;
-using XM.Progression.Stat;
+using XM.Progression.Ability;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
+using XM.Shared.Core.Configuration;
 using XM.Shared.Core.EventManagement;
+using XM.Shared.Core.Json;
 using XM.Shared.Core.Localization;
 
 namespace XM.AI
 {
     [ServiceBinding(typeof(AIService))]
+    [ServiceBinding(typeof(IInitializable))]
     [ServiceBinding(typeof(IDisposable))]
     [ServiceBinding(typeof(IUpdateable))]
-    internal class AIService: 
+    internal class AIService :
+        IInitializable,
         IUpdateable,
         IDisposable
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private const string AIFlagsVariable = "AI_FLAGS";
         private const string AggroAOETag = "AGGRO_AOE";
 
-        private const int BatchSize = 10; 
+        private const int BatchSize = 10;
         private const double UpdateInterval = 2.0f;
         private readonly Dictionary<uint, DateTime> _lastUpdateTimestamps = new();
+        private readonly Dictionary<uint, IAIContext> _creatureAITrees = new();
+        private readonly Dictionary<string, CachedCreatureFeats> _creatureFeats = new();
 
-        private readonly Dictionary<uint, IAITree> _creatureAITrees = new();
-
+        private readonly AbilityService _ability;
         private readonly XMEventService _event;
         private readonly EnmityService _enmity;
-        private readonly StatService _stat;
+        private readonly AIServiceCollection _services;
+        private readonly XMSettingsService _settings;
 
         public AIService(
-            XMEventService @event, 
+            AbilityService ability,
+            XMEventService @event,
             EnmityService enmity,
-            StatService stat)
+            AIServiceCollection services,
+            XMSettingsService settings)
         {
+            _ability = ability;
             _event = @event;
             _enmity = enmity;
-            _stat = stat;
+            _services = services;
+            _settings = settings;
 
             SubscribeEvents();
         }
@@ -55,12 +71,70 @@ namespace XM.AI
 
             _event.Subscribe<NWNXEvent.OnDmToggleAiAfter>(OnDMToggleAI);
         }
+        public void Init()
+        {
+            LoadCachedCreatureFeats();
+        }
 
+        private void LoadCachedCreatureFeats()
+        {
+            var fileName = _settings.ResourcesDirectory + "CachedCreatures.json";
+            if (!File.Exists(fileName))
+            {
+                _logger.Error($"WARNING: Could not locate '{Path.GetFullPath(fileName)}'. AI system will not function.");
+                return;
+            }
+
+            var json = File.ReadAllText(fileName);
+            var cachedCreatures = XMJsonUtility.Deserialize<List<CreatureFeatsFile>>(json);
+
+            foreach (var cachedCreature in cachedCreatures)
+            {
+                var resref = cachedCreature.Resref;
+                _creatureFeats[resref] = new CachedCreatureFeats();
+
+                foreach (var feat in cachedCreature.Feats.OrderByDescending(f => _ability.GetLevelAcquired(f)))
+                {
+                    if (!_ability.IsFeatRegistered(feat))
+                        continue;
+                    
+                    var ability = _ability.GetAbilityDetail(feat);
+                    var type = ability.FeatType;
+                    var spellIdStr = Get2DAString("feat", "SPELLID", (int)type);
+                    var spellId = Convert.ToInt32(spellIdStr);
+                    var targetTypeStr = Get2DAString("spells", "TargetType", spellId);
+                    var targetTypes = (SpellTargetTypes)Convert.ToInt32(targetTypeStr, 16);
+
+                    if (!_creatureFeats[resref].ContainsKey(ability.Classification))
+                        _creatureFeats[resref][ability.Classification] = new Dictionary<AITargetType, HashSet<FeatType>>();
+
+                    if (targetTypes.HasFlag(SpellTargetTypes.Self))
+                    {
+                        if (!_creatureFeats[resref][ability.Classification].ContainsKey(AITargetType.Self))
+                            _creatureFeats[resref][ability.Classification][AITargetType.Self] = new HashSet<FeatType>();
+
+                        _creatureFeats[resref][ability.Classification][AITargetType.Self].Add(feat);
+                    }
+
+                    if (targetTypes.HasFlag(SpellTargetTypes.Creature))
+                    {
+                        if (!_creatureFeats[resref][ability.Classification].ContainsKey(AITargetType.Others))
+                            _creatureFeats[resref][ability.Classification][AITargetType.Others] = new HashSet<FeatType>();
+
+                        _creatureFeats[resref][ability.Classification][AITargetType.Others].Add(feat);
+                    }
+                }
+            }
+        }
 
         private void OnSpawnCreated(uint creature)
         {
+            var resref = GetResRef(creature);
             SetAIFlags(creature, AIFlag.ReturnHome);
-            _creatureAITrees[creature] = new StandardAITree(creature, this, _enmity, _stat);
+            var feats = _creatureFeats.ContainsKey(resref)
+                ? _creatureFeats[resref]
+                : new CachedCreatureFeats();
+            _creatureAITrees[creature] = new AIContext(creature, GetAIFlags(creature), feats, _services);
             LoadAggroEffect(creature);
         }
 
@@ -76,7 +150,7 @@ namespace XM.AI
             SetLocalInt(creature, AIFlagsVariable, flagValue);
         }
 
-        public AIFlag GetAIFlags(uint creature)
+        private AIFlag GetAIFlags(uint creature)
         {
             var flagValue = GetLocalInt(creature, AIFlagsVariable);
             return (AIFlag)flagValue;
@@ -154,34 +228,7 @@ namespace XM.AI
         public void Dispose()
         {
             _creatureAITrees.Clear();
-        }
-
-
-
-
-
-
-        [ScriptHandler("bread_test")]
-        public void Test()
-        {
-            var npc = GetObjectByTag("goblintest");
-            var boy = GetObjectByTag("boy");
-
-            _enmity.ModifyEnmity(boy, npc, EnmityType.Volatile, 500);
-
-            var table = _enmity.GetEnmityTable(npc);
-            SendMessageToPC(GetLastUsedBy(), $"Boy enmity = {table[boy].TotalEnmity}");
-        }
-        [ScriptHandler("bread_test2")]
-        public void Test2()
-        {
-            var npc = GetObjectByTag("goblintest");
-            var girl = GetObjectByTag("girl");
-
-            _enmity.ModifyEnmity(girl, npc, EnmityType.Volatile, 500);
-
-            var table = _enmity.GetEnmityTable(npc);
-            SendMessageToPC(GetLastUsedBy(), $"Girl enmity = {table[girl].TotalEnmity}");
+            _lastUpdateTimestamps.Clear();
         }
 
         [ScriptHandler("bread_test3")]
@@ -193,14 +240,5 @@ namespace XM.AI
             SendMessageToPC(GetLastUsedBy(), $"Goblin HP: {GetCurrentHitPoints(npc)} / {GetMaxHitPoints(npc)}");
         }
 
-        [ScriptHandler("bread_test4")]
-        public void Test4()
-        {
-            var savingThrow = GetFortitudeSavingThrow(GetLastUsedBy());
-
-            CreaturePlugin.SetBaseAttackBonus(GetLastUsedBy(), 1);
-
-            SendMessageToPC(GetLastUsedBy(), $"saving throw = {savingThrow}");
-        }
     }
 }

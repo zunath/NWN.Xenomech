@@ -1,8 +1,6 @@
-﻿using Anvil.API;
-using Anvil.Services;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Anvil.Services;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.EventManagement;

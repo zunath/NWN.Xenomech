@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NWN.Anvil" Version="8193.37.0-dev.7.r1b4d3f3b" />
+    <PackageReference Include="NWN.Anvil" Version="8193.37.0-dev.12.raf500cfc" />
     <PackageReference Include="NWN.Core" Version="8193.37.0" />
   </ItemGroup>
 

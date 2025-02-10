@@ -145,9 +145,12 @@ namespace XM.Shared.API
         ///    on a creature, which will stop the combat music and allow them to rest,
         ///    engage in dialog, or other actions that they would normally have to wait for.
         /// </summary>
-        public static void ClearAllActions(bool nClearCombatState = false)
+        public static void ClearAllActions(bool nClearCombatState = false, uint oObject = OBJECT_INVALID)
         {
-            NWN.Core.NWScript.ClearAllActions(nClearCombatState ? 1 : 0);
+            if (oObject == OBJECT_INVALID)
+                oObject = OBJECT_SELF;
+
+            NWN.Core.NWScript.ClearAllActions(nClearCombatState ? 1 : 0, oObject);
         }
 
         /// <summary>

@@ -20,7 +20,7 @@ using XM.Shared.Core.Localization;
 namespace XM.Progression.Ability
 {
     [ServiceBinding(typeof(AbilityService))]
-    internal class AbilityService: IInitializable
+    public class AbilityService
     {
         private readonly Dictionary<FeatType, AbilityDetail> _abilities = new();
         private readonly Dictionary<FeatType, int> _abilitiesByLevel = new();
@@ -51,6 +51,7 @@ namespace XM.Progression.Ability
             _abilityDefinitions = abilityDefinitions;
             _event = @event;
 
+            CacheAbilities();
             SubscribeEvents();
         }
 
@@ -59,11 +60,6 @@ namespace XM.Progression.Ability
             _event.Subscribe<NWNXEvent.OnUseFeatBefore>(UseAbility);
             _event.Subscribe<JobEvent.JobFeatAddedEvent>(AddJobFeat);
             _event.Subscribe<JobEvent.JobFeatRemovedEvent>(RemoveJobFeat);
-        }
-
-        public void Init()
-        {
-            CacheAbilities();
         }
 
         private void CacheAbilities()
@@ -107,7 +103,7 @@ namespace XM.Progression.Ability
             }
         }
 
-        public List<FeatType> GetAbilityFeatsByJob(JobType jobType)
+        internal List<FeatType> GetAbilityFeatsByJob(JobType jobType)
         {
             return _abilitiesByJob[jobType].ToList();
         }
@@ -120,12 +116,15 @@ namespace XM.Progression.Ability
             return _abilities[featType];
         }
 
-        private bool CanUseAbility(
+        public bool CanUseAbility(
             uint activator,
             uint target,
             FeatType feat,
             Location targetLocation)
         {
+            if (!_abilities.ContainsKey(feat))
+                return false;
+
             var ability = GetAbilityDetail(feat);
 
             if (GetIsPC(activator) && 
@@ -212,7 +211,7 @@ namespace XM.Progression.Ability
 
             return true;
         }
-        private bool IsFeatRegistered(FeatType featType)
+        public bool IsFeatRegistered(FeatType featType)
         {
             return _abilities.ContainsKey(featType);
         }
@@ -419,7 +418,7 @@ namespace XM.Progression.Ability
             });
         }
 
-        public void DequeueWeaponAbility(uint target, bool sendMessage = true)
+        private void DequeueWeaponAbility(uint target, bool sendMessage = true)
         {
             var abilityId = GetLocalString(target, ActiveAbilityIdName);
             if (string.IsNullOrWhiteSpace(abilityId))
@@ -468,7 +467,7 @@ namespace XM.Progression.Ability
             ability.AbilityUnequippedAction?.Invoke(player);
         }
 
-        public List<FeatType> GetPlayerResonanceAbilities(uint player)
+        internal List<FeatType> GetPlayerResonanceAbilities(uint player)
         {
             var playerId = PlayerId.Get(player);
             var dbPlayerJob = _db.Get<PlayerJob>(playerId);
