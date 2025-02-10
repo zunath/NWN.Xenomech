@@ -1,14 +1,20 @@
-﻿namespace XM.App.CLI
+﻿using System.Text.Json;
+using XM.AI;
+using XM.Shared.API.Constants;
+
+namespace XM.App.CLI
 {
     internal class DeployBuild
     {
         private const string ServerPath = "../server/";
+        private const string ModulePath = "../Module/";
         private const string HakPath = ServerPath + "hak";
         private const string ModulesPath = ServerPath + "modules";
         private const string TlkPath = ServerPath + "tlk";
         private const string ExternalPluginsPath = "../ExternalPlugins";
         private const string AnvilPath = ServerPath + "anvil/";
         private const string AnvilPluginsPath = AnvilPath + "Plugins/";
+        private const string ResourcesPath = AnvilPluginsPath + "resources/";
 
         private readonly HakBuilder _hakBuilder = new();
 
@@ -17,6 +23,7 @@
             CreateServerDirectory();
             BuildHaks();
             BuildModule();
+            BuildCachedCreatureFeatsFile();
             CopyExternalPlugins();
         }
 
@@ -27,6 +34,7 @@
             Directory.CreateDirectory(HakPath);
             Directory.CreateDirectory(ModulesPath);
             Directory.CreateDirectory(TlkPath);
+            Directory.CreateDirectory(ResourcesPath);
 
             var source = new DirectoryInfo("../XM.App.Runner/Docker");
             var target = new DirectoryInfo(ServerPath);
@@ -74,6 +82,56 @@
                     target.CreateSubdirectory(diSourceSubDir.Name);
                 CopyAll(diSourceSubDir, nextTargetSubDir, preventOverwriteFile, excludeFiles);
             }
+        }
+
+        private void BuildCachedCreatureFeatsFile()
+        {
+            const string CreaturePath = ModulePath + "utc";
+            const string OutputPath = ResourcesPath + "CachedCreatures.json";
+            var creatureFeatsList = new List<CreatureFeatsFile>();
+
+            foreach (var filePath in Directory.GetFiles(CreaturePath, "*.json"))
+            {
+                string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(filePath));
+                string jsonContent = File.ReadAllText(filePath);
+
+                try
+                {
+                    var jsonData = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonContent);
+                    var featList = new CreatureFeatsFile { Resref = fileNameWithoutExtension, Feats = new List<FeatType>() };
+
+                    if (jsonData != null && jsonData.TryGetValue("FeatList", out object featListObj))
+                    {
+                        var featData = JsonSerializer.Deserialize<Dictionary<string, object>>(JsonSerializer.Serialize(featListObj));
+                        if (featData.TryGetValue("value", out object featValues))
+                        {
+                            var featEntries = JsonSerializer.Deserialize<List<Dictionary<string, object>>>(JsonSerializer.Serialize(featValues));
+
+                            foreach (var entry in featEntries)
+                            {
+                                if (entry.TryGetValue("Feat", out object featObj))
+                                {
+                                    var featInfo = JsonSerializer.Deserialize<Dictionary<string, object>>(JsonSerializer.Serialize(featObj));
+                                    if (featInfo.TryGetValue("value", out object featValue) && int.TryParse(featValue.ToString(), out int featId))
+                                    {
+                                        featList.Feats.Add((FeatType)featId);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    creatureFeatsList.Add(featList);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error processing file {filePath}: {ex.Message}");
+                }
+            }
+
+            // Write as a list instead of a dictionary
+            File.WriteAllText(OutputPath, JsonSerializer.Serialize(creatureFeatsList, new JsonSerializerOptions { WriteIndented = true }));
+            Console.WriteLine($"Processed {creatureFeatsList.Count} files and saved output to {OutputPath}");
         }
     }
 }
