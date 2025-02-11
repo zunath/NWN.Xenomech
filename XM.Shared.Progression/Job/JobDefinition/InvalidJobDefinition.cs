@@ -16,8 +16,8 @@ namespace XM.Progression.Job.JobDefinition
 
         public override JobGrade Grades { get; } = new()
         {
-            HP = GradeType.G,
-            EP = GradeType.G,
+            MaxHP = GradeType.G,
+            MaxEP = GradeType.G,
             Might = GradeType.G,
             Perception = GradeType.G,
             Vitality = GradeType.G,

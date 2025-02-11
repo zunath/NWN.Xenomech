@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using XM.Progression.Recast;
+using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
@@ -293,6 +294,13 @@ namespace XM.Progression.Ability
         public AbilityBuilder ResonanceCost(int cost)
         {
             _activeAbility.ResonanceCost = cost;
+
+            return this;
+        }
+
+        public AbilityBuilder IncreasesStat(StatType stat, int amount)
+        {
+            _activeAbility.Stats[stat] += amount;
 
             return this;
         }

@@ -5,8 +5,8 @@ namespace XM.Progression.Job
 {
     public class JobGrade
     {
-        public GradeType HP { get; set; }
-        public GradeType EP { get; set; }
+        public GradeType MaxHP { get; set; }
+        public GradeType MaxEP { get; set; }
         public GradeType Might { get; set; }
         public GradeType Perception { get; set; }
         public GradeType Vitality { get; set; }

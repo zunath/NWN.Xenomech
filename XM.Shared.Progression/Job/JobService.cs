@@ -25,83 +25,6 @@ namespace XM.Progression.Job
     {
         public const int ResonanceNodeLevelAcquisitionRate = 5; // One every 5 levels
 
-        private readonly Dictionary<GradeType, int> _baseHPByGrade = new()
-        {
-            { GradeType.A, 19},
-            { GradeType.B, 17},
-            { GradeType.C, 16},
-            { GradeType.D, 14},
-            { GradeType.E, 13},
-            { GradeType.F, 11},
-            { GradeType.G, 10},
-        };
-
-        private readonly Dictionary<GradeType, int> _growthHPByGrade = new()
-        {
-            { GradeType.A, 9},
-            { GradeType.B, 8},
-            { GradeType.C, 7},
-            { GradeType.D, 6},
-            { GradeType.E, 5},
-            { GradeType.F, 4},
-            { GradeType.G, 3},
-        };
-
-        private readonly Dictionary<GradeType, int> _bonusHPByGrade = new()
-        {
-            { GradeType.A, 1},
-            { GradeType.B, 1},
-            { GradeType.C, 1},
-            { GradeType.D, 0},
-            { GradeType.E, 0},
-            { GradeType.F, 0},
-            { GradeType.G, 0},
-        };
-
-        private readonly Dictionary<GradeType, int> _baseStatsByGrade = new()
-        {
-            { GradeType.A, 5},
-            { GradeType.B, 4},
-            { GradeType.C, 4},
-            { GradeType.D, 3},
-            { GradeType.E, 3},
-            { GradeType.F, 2},
-            { GradeType.G, 2},
-        };
-
-        private readonly Dictionary<GradeType, int> _baseEPByGrade = new()
-        {
-            { GradeType.A, 16},
-            { GradeType.B, 14},
-            { GradeType.C, 12},
-            { GradeType.D, 10},
-            { GradeType.E, 8},
-            { GradeType.F, 6},
-            { GradeType.G, 4},
-        };
-
-        private readonly Dictionary<GradeType, float> _growthEPByGrade = new()
-        {
-            { GradeType.A, 6f},
-            { GradeType.B, 5f},
-            { GradeType.C, 4f},
-            { GradeType.D, 3f},
-            { GradeType.E, 2f},
-            { GradeType.F, 1f},
-            { GradeType.G, 0.5f},
-        };
-
-        private readonly Dictionary<GradeType, float> _growthStatsByGrade = new()
-        {
-            { GradeType.A , 0.5f},
-            { GradeType.B , 0.45f},
-            { GradeType.C , 0.40f},
-            { GradeType.D , 0.35f},
-            { GradeType.E , 0.30f},
-            { GradeType.F , 0.25f},
-            { GradeType.G , 0.20f},
-        };
-
         private readonly Dictionary<JobType, IJobDefinition> _jobDefinitions = new()
         {
             { JobType.Invalid, new InvalidJobDefinition()},
@@ -132,7 +55,15 @@ namespace XM.Progression.Job
             _stat = stat;
             _event = @event;
 
+            RegisterEvents();
             SubscribeEvents();
+        }
+
+        private void RegisterEvents()
+        {
+            _event.RegisterEvent<JobEvent.PlayerChangedJobEvent>(ProgressionEventScript.PlayerChangedJobScript);
+            _event.RegisterEvent<JobEvent.JobFeatAddedEvent>(ProgressionEventScript.JobFeatAddScript);
+            _event.RegisterEvent<JobEvent.JobFeatRemovedEvent>(ProgressionEventScript.JobFeatRemovedScript);
         }
 
         private void SubscribeEvents()
@@ -217,31 +148,6 @@ namespace XM.Progression.Job
             return dbPlayerJob.JobLevels.ToDictionary(x => x.Key, y => y.Value);
         }
 
-        internal int CalculateHP(int level, GradeType grade)
-        {
-            var hpScale = _growthHPByGrade[grade];
-            var hpBase = _baseHPByGrade[grade];
-            var hpBonus = _bonusHPByGrade[grade];
-
-            return hpScale * (level - 1) + hpBase + hpBonus * level;
-        }
-
-        internal int CalculateEP(int level, GradeType grade)
-        {
-            var epScale = _growthEPByGrade[grade];
-            var epBase = _baseEPByGrade[grade];
-
-            return (int)(epScale * (level - 1) + epBase);
-        }
-
-        internal int CalculateStat(int level, GradeType grade)
-        {
-            var statScale = _growthStatsByGrade[grade];
-            var statBase = _baseStatsByGrade[grade];
-
-            return (int)(statScale * (level - 1) + statBase);
-        }
-
         public void GiveXP(uint player, int xp)
         {
             // todo fill in
@@ -259,81 +165,63 @@ namespace XM.Progression.Job
 
             var definition = GetJobDefinition(job);
             var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
             var dbPlayerJob = _db.Get<PlayerJob>(playerId);
             var level = dbPlayerJob.JobLevels[job];
             var currentJob = GetActiveJob(player);
+            var featsToAdd = new List<FeatType>();
+            var featsToRemove = new List<FeatType>();
 
             for(var index = dbPlayerJob.ResonanceFeats.Count-1; index >= 0; index--)
             {
                 var feat = dbPlayerJob.ResonanceFeats[index];
                 CreaturePlugin.RemoveFeat(player, feat);
                 dbPlayerJob.ResonanceFeats.Remove(feat);
-                _event.PublishEvent(player, new JobEvent.JobFeatRemovedEvent(feat));
+                featsToRemove.Add(feat);
             }
 
             foreach (var (_, feat) in currentJob.FeatAcquisitionLevels)
             {
                 CreaturePlugin.RemoveFeat(player, feat);
-                _event.PublishEvent(player, new JobEvent.JobFeatRemovedEvent(feat));
-            }
-
-            var hp = CalculateHP(level, definition.Grades.HP) + dbPlayerStat.HP;
-            var ep = CalculateEP(level, definition.Grades.EP) + dbPlayerStat.EP;
-            var might = CalculateStat(level, definition.Grades.Might) +
-                        dbPlayerStat.BaseAttributes[AbilityType.Might];
-
-            var perception = CalculateStat(level, definition.Grades.Perception) +
-                             dbPlayerStat.BaseAttributes[AbilityType.Perception];
-
-            var vitality = CalculateStat(level, definition.Grades.Vitality) +
-                           dbPlayerStat.BaseAttributes[AbilityType.Vitality];
-
-            var agility = CalculateStat(level, definition.Grades.Agility) +
-                          dbPlayerStat.BaseAttributes[AbilityType.Agility];
-
-            var willpower = CalculateStat(level, definition.Grades.Willpower) +
-                            dbPlayerStat.BaseAttributes[AbilityType.Willpower];
-
-            var social = CalculateStat(level, definition.Grades.Social) +
-                         dbPlayerStat.BaseAttributes[AbilityType.Social];
-
-            _stat.SetPlayerMaxHP(player, hp);
-            _stat.SetPlayerMaxEP(player, ep);
-            _stat.SetPlayerAttribute(player, AbilityType.Might, might);
-            _stat.SetPlayerAttribute(player, AbilityType.Perception, perception);
-            _stat.SetPlayerAttribute(player, AbilityType.Vitality, vitality);
-            _stat.SetPlayerAttribute(player, AbilityType.Agility, agility);
-            _stat.SetPlayerAttribute(player, AbilityType.Willpower, willpower);
-            _stat.SetPlayerAttribute(player, AbilityType.Social, social);
-
-            foreach (var feat in resonanceFeats)
-            {
-                CreaturePlugin.AddFeatByLevel(player, feat, 1);
-                dbPlayerJob.ResonanceFeats.Add(feat);
-                _event.PublishEvent(player, new JobEvent.JobFeatAddedEvent(feat));
+                featsToRemove.Add(feat);
             }
 
             var jobFeats = definition
                 .FeatAcquisitionLevels
                 .Where(x => x.Key <= level)
-                .Select(s => s.Value);
+                .Select(s => s.Value)
+                .ToList();
 
             foreach (var feat in jobFeats)
             {
                 CreaturePlugin.AddFeatByLevel(player, feat, 1);
-                _event.PublishEvent(player, new JobEvent.JobFeatAddedEvent(feat));
+                featsToRemove.Add(feat);
+            }
+
+            foreach (var feat in resonanceFeats)
+            {
+                CreaturePlugin.AddFeatByLevel(player, feat, 1);
+                dbPlayerJob.ResonanceFeats.Add(feat);
+                featsToAdd.Add(feat);
             }
 
             dbPlayerJob.ActiveJob = job;
             _db.Set(dbPlayerJob);
 
+            foreach (var feat in featsToRemove)
+            {
+                _event.PublishEvent(player, new JobEvent.JobFeatRemovedEvent(feat));
+            }
+
+            foreach (var feat in featsToAdd)
+            {
+                _event.PublishEvent(player, new JobEvent.JobFeatAddedEvent(feat));
+            }
+
+            _event.PublishEvent(player, new JobEvent.PlayerChangedJobEvent((JobDefinitionBase)definition, level));
+
             var name = definition.Name.ToLocalizedString();
             var message = LocaleString.JobChangedToX.ToLocalizedString(ColorToken.Green(name));
             SendMessageToPC(player, message);
-
-            _event.PublishEvent<JobEvent.PlayerChangedJobEvent>(player);
-            _event.PublishEvent<UIEvent.UIRefreshEvent>(player);
         }
     }
 }

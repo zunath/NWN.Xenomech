@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using Anvil.API;
 using Anvil.Services;
 using NLog;
@@ -94,22 +95,29 @@ namespace XM.Shared.Core.EventManagement
             }
         }
 
+        private readonly Dictionary<string, object> _eventData = new();
+
         public void PublishEvent<T>(uint target, T data = default)
             where T : IXMEvent
         {
             var type = typeof(T);
+            var eventId = Guid.NewGuid().ToString();
 
             if(data != null)
-                EventsPlugin.PushEventData("DATA", XMJsonUtility.Serialize(data));
+                EventsPlugin.PushEventData("EVENT_DATA_ID", eventId);
 
+            _eventData[eventId] = data;
             EventsPlugin.SignalEvent(type.FullName!, target);
+            _eventData.Remove(eventId);
         }
 
         public T GetEventData<T>()
             where T : IXMEvent
         {
-            var jsonData = EventsPlugin.GetEventData("DATA");
-            return XMJsonUtility.Deserialize<T>(jsonData);
+            var eventId = EventsPlugin.GetEventData("EVENT_DATA_ID");
+            var data = _eventData[eventId];
+
+            return (T)data;
         }
 
         public int ExecutionOrder => 0;

@@ -4,6 +4,8 @@
     {
         // Jobs
         public const string PlayerChangedJobScript = "pc_change_job";
+        public const string JobFeatRemovedScript = "job_feat_remove";
+        public const string JobFeatAddScript = "job_feat_add";
 
         // Stats
         public const string OnPlayerHPAdjustedScript = "pc_hp_adjusted";

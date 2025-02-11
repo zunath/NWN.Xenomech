@@ -32,6 +32,83 @@ namespace XM.Progression.Stat
 
         public const int MaxTP = 3000;
 
+        private readonly Dictionary<GradeType, int> _baseHPByGrade = new()
+        {
+            { GradeType.A, 19},
+            { GradeType.B, 17},
+            { GradeType.C, 16},
+            { GradeType.D, 14},
+            { GradeType.E, 13},
+            { GradeType.F, 11},
+            { GradeType.G, 10},
+        };
+
+        private readonly Dictionary<GradeType, int> _growthHPByGrade = new()
+        {
+            { GradeType.A, 9},
+            { GradeType.B, 8},
+            { GradeType.C, 7},
+            { GradeType.D, 6},
+            { GradeType.E, 5},
+            { GradeType.F, 4},
+            { GradeType.G, 3},
+        };
+
+        private readonly Dictionary<GradeType, int> _bonusHPByGrade = new()
+        {
+            { GradeType.A, 1},
+            { GradeType.B, 1},
+            { GradeType.C, 1},
+            { GradeType.D, 0},
+            { GradeType.E, 0},
+            { GradeType.F, 0},
+            { GradeType.G, 0},
+        };
+
+        private readonly Dictionary<GradeType, int> _baseStatsByGrade = new()
+        {
+            { GradeType.A, 5},
+            { GradeType.B, 4},
+            { GradeType.C, 4},
+            { GradeType.D, 3},
+            { GradeType.E, 3},
+            { GradeType.F, 2},
+            { GradeType.G, 2},
+        };
+
+        private readonly Dictionary<GradeType, int> _baseEPByGrade = new()
+        {
+            { GradeType.A, 16},
+            { GradeType.B, 14},
+            { GradeType.C, 12},
+            { GradeType.D, 10},
+            { GradeType.E, 8},
+            { GradeType.F, 6},
+            { GradeType.G, 4},
+        };
+
+        private readonly Dictionary<GradeType, float> _growthEPByGrade = new()
+        {
+            { GradeType.A, 6f},
+            { GradeType.B, 5f},
+            { GradeType.C, 4f},
+            { GradeType.D, 3f},
+            { GradeType.E, 2f},
+            { GradeType.F, 1f},
+            { GradeType.G, 0.5f},
+        };
+
+        private readonly Dictionary<GradeType, float> _growthStatsByGrade = new()
+        {
+            { GradeType.A , 0.5f},
+            { GradeType.B , 0.45f},
+            { GradeType.C , 0.40f},
+            { GradeType.D , 0.35f},
+            { GradeType.E , 0.30f},
+            { GradeType.F , 0.25f},
+            { GradeType.G , 0.20f},
+        };
+
         public StatService(
             DBService db, 
             XMEventService @event,
@@ -67,6 +144,7 @@ namespace XM.Progression.Stat
 
         private void SubscribeEvents()
         {
+            _event.Subscribe<XMEvent.OnPCInitialized>(OnInitializePlayer);
             _event.Subscribe<CreatureEvent.OnSpawn>(OnSpawnCreature);
             _event.Subscribe<ModuleEvent.OnEquipItem>(OnEquipItem);
             _event.Subscribe<ModuleEvent.OnUnequipItem>(OnUnequipItem);
@@ -75,7 +153,20 @@ namespace XM.Progression.Stat
             _event.Subscribe<JobEvent.PlayerChangedJobEvent>(OnPlayerChangeJob);
         }
 
+        private void OnInitializePlayer(uint player)
+        {
+            var playerId = PlayerId.Get(player);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
 
+            dbPlayerStat.BaseStats[StatType.Might] = CreaturePlugin.GetRawAbilityScore(player, AbilityType.Might);
+            dbPlayerStat.BaseStats[StatType.Perception] = CreaturePlugin.GetRawAbilityScore(player, AbilityType.Perception);
+            dbPlayerStat.BaseStats[StatType.Vitality] = CreaturePlugin.GetRawAbilityScore(player, AbilityType.Vitality);
+            dbPlayerStat.BaseStats[StatType.Willpower] = CreaturePlugin.GetRawAbilityScore(player, AbilityType.Willpower);
+            dbPlayerStat.BaseStats[StatType.Agility] = CreaturePlugin.GetRawAbilityScore(player, AbilityType.Agility);
+            dbPlayerStat.BaseStats[StatType.Social] = CreaturePlugin.GetRawAbilityScore(player, AbilityType.Social);
+
+            _db.Set(dbPlayerStat);
+        }
 
         private void OnSpawnCreature(uint creature)
         {
@@ -107,9 +198,9 @@ namespace XM.Progression.Stat
             SetLocalInt(creature, NPCEPStatVariable, GetMaxEP(creature));
         }
 
-        private ItemStat BuildItemStat(uint item)
+        private ItemStatGroup BuildItemStat(uint item)
         {
-            var itemStat = new ItemStat();
+            var itemStat = new ItemStatGroup();
             for (var ip = GetFirstItemProperty(item); GetIsItemPropertyValid(ip); ip = GetNextItemProperty(item))
             {
                 var type = GetItemPropertyType(ip);
@@ -123,31 +214,31 @@ namespace XM.Progression.Stat
                         itemStat.Delay += GetItemPropertyCostTableValue(ip) * 10;
                         break;
                     case ItemPropertyType.HPBonus:
-                        itemStat.HP += GetItemPropertyCostTableValue(ip);
+                        itemStat[StatType.MaxHP] += GetItemPropertyCostTableValue(ip);
                         break;
                     case ItemPropertyType.EP:
-                        itemStat.EP += GetItemPropertyCostTableValue(ip);
+                        itemStat[StatType.MaxEP] += GetItemPropertyCostTableValue(ip);
                         break;
                     case ItemPropertyType.EPRegen:
-                        itemStat.EPRegen += GetItemPropertyCostTableValue(ip);
+                        itemStat[StatType.EPRegen] += GetItemPropertyCostTableValue(ip);
                         break;
                     case ItemPropertyType.AbilityRecastReduction:
-                        itemStat.RecastReduction += GetItemPropertyCostTableValue(ip);
+                        itemStat[StatType.RecastReduction] += GetItemPropertyCostTableValue(ip);
                         break;
                     case ItemPropertyType.Defense:
-                        itemStat.Defense += GetItemPropertyCostTableValue(ip);
+                        itemStat[StatType.Defense] += GetItemPropertyCostTableValue(ip);
                         break;
                     case ItemPropertyType.Evasion:
-                        itemStat.Evasion += GetItemPropertyCostTableValue(ip);
+                        itemStat[StatType.Evasion] += GetItemPropertyCostTableValue(ip);
                         break;
                     case ItemPropertyType.Accuracy:
-                        itemStat.Accuracy += GetItemPropertyCostTableValue(ip);
+                        itemStat[StatType.Accuracy] += GetItemPropertyCostTableValue(ip);
                         break;
                     case ItemPropertyType.Attack:
-                        itemStat.Attack += GetItemPropertyCostTableValue(ip);
+                        itemStat[StatType.Attack] += GetItemPropertyCostTableValue(ip);
                         break;
                     case ItemPropertyType.EtherAttack:
-                        itemStat.EtherAttack += GetItemPropertyCostTableValue(ip);
+                        itemStat[StatType.EtherAttack] += GetItemPropertyCostTableValue(ip);
                         break;
                 }
             }
@@ -189,7 +280,7 @@ namespace XM.Progression.Stat
 
             if (dbPlayerStat.EquippedItemStats.ContainsKey(slot))
             {
-                dbPlayerStat.EquippedItemStats[slot] = new ItemStat();
+                dbPlayerStat.EquippedItemStats[slot] = new ItemStatGroup();
             }
 
             _db.Set(dbPlayerStat);
@@ -213,7 +304,20 @@ namespace XM.Progression.Stat
 
         public int GetMaxHP(uint creature)
         {
-            return GetMaxHitPoints(creature);
+            if (GetIsPC(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+                var jobMaxHP = dbPlayerStat.JobStats[StatType.MaxHP];
+                var itemMaxHP = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.MaxHP);
+                var abilityMaxHP = dbPlayerStat.AbilityStats.CalculateStat(StatType.MaxHP);
+
+                return jobMaxHP + itemMaxHP + abilityMaxHP;
+            }
+            else
+            {
+                return GetMaxHitPoints(creature);
+            }
         }
 
         public Dictionary<ResistType, IResistDefinition> GetAllResistDefinitions()
@@ -221,18 +325,13 @@ namespace XM.Progression.Stat
             return _resistDefinitions.ToDictionary(x => x.Key, y => y.Value);
         }
 
-        public void SetPlayerMaxHP(uint player, int amount)
+        private void ApplyPlayerMaxHP(uint player, int hpToApply)
         {
             const int MaxHPPerLevel = 254;
 
-            var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-            dbPlayerStat.MaxHP = amount;
             var nwnLevelCount = GetLevelByPosition(1, player) +
                                 GetLevelByPosition(2, player) +
                                 GetLevelByPosition(3, player);
-
-            var hpToApply = dbPlayerStat.MaxHP;
 
             // All levels must have at least 1 HP, so apply those right now.
             for (var nwnLevel = 1; nwnLevel <= nwnLevelCount; nwnLevel++)
@@ -269,10 +368,7 @@ namespace XM.Progression.Stat
             {
                 SetCurrentHitPoints(player, maxHP);
             }
-
-            _db.Set(dbPlayerStat);
         }
-
 
         public int GetCurrentEP(uint creature)
         {
@@ -297,7 +393,11 @@ namespace XM.Progression.Stat
             {
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-                return dbPlayerStat.MaxEP;
+                var jobMaxEP = dbPlayerStat.JobStats[StatType.MaxEP];
+                var abilityEP = dbPlayerStat.AbilityStats.CalculateStat(StatType.MaxEP);
+                var itemEP = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.MaxEP);
+
+                return jobMaxEP + abilityEP + itemEP;
             }
             // NPCs
             else
@@ -329,8 +429,9 @@ namespace XM.Progression.Stat
             {
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-                var itemHPRegen = dbPlayerStat.EquippedItemStats.CalculateHPRegen();
-                var hpRegen = itemHPRegen;
+                var itemHPRegen = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.HPRegen);
+                var abilityHPRegen = dbPlayerStat.AbilityStats.CalculateStat(StatType.HPRegen);
+                var hpRegen = itemHPRegen + abilityHPRegen;
 
                 return hpRegen;
             }
@@ -345,8 +446,9 @@ namespace XM.Progression.Stat
             {
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-                var itemEPRegen = dbPlayerStat.EquippedItemStats.CalculateEPRegen();
-                var epRegen = itemEPRegen;
+                var itemEPRegen = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.EPRegen);
+                var abilityEPRegen = dbPlayerStat.AbilityStats.CalculateStat(StatType.EPRegen);
+                var epRegen = itemEPRegen + abilityEPRegen;
 
                 return epRegen;
             }
@@ -428,27 +530,53 @@ namespace XM.Progression.Stat
 
             var playerId = PlayerId.Get(creature);
             var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-            var itemRecastReduction = dbPlayerStat.EquippedItemStats.CalculateRecastReduction();
-            var recastReduction = itemRecastReduction;
+            var itemRecastReduction = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.RecastReduction);
+            var abilityRecastReduction = dbPlayerStat.AbilityStats.CalculateStat(StatType.RecastReduction);
+            var recastReduction = itemRecastReduction + abilityRecastReduction;
 
             return recastReduction;
         }
 
-        public void SetPlayerMaxEP(uint player, int amount)
-        {
-            var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-            dbPlayerStat.MaxEP = amount;
-
-            if (dbPlayerStat.EP > dbPlayerStat.MaxEP)
-                dbPlayerStat.EP = dbPlayerStat.MaxEP;
-
-            _db.Set(dbPlayerStat);
-        }
-
         public int GetAttribute(uint creature, AbilityType type)
         {
-            return GetAbilityScore(creature, type);
+            if (GetIsPC(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+                var statType = StatType.Invalid;
+                switch (type)
+                {
+                    case AbilityType.Might:
+                        statType = StatType.Might;
+                        break;
+                    case AbilityType.Willpower:
+                        statType = StatType.Willpower;
+                        break;
+                    case AbilityType.Perception:
+                        statType = StatType.Perception;
+                        break;
+                    case AbilityType.Vitality:
+                        statType = StatType.Vitality;
+                        break;
+                    case AbilityType.Agility:
+                        statType = StatType.Agility;
+                        break;
+                    case AbilityType.Social:
+                        statType = StatType.Social;
+                        break;
+                }
+
+                var baseStat = dbPlayerStat.BaseStats[statType];
+                var jobBonus = dbPlayerStat.JobStats[statType];
+                var itemBonus = dbPlayerStat.EquippedItemStats.CalculateStat(statType);
+                var abilityBonus = dbPlayerStat.AbilityStats.CalculateStat(statType);
+
+                return baseStat + jobBonus + itemBonus + abilityBonus;
+            }
+            else
+            {
+                return GetAbilityScore(creature, type);
+            }
         }
 
         public void SetPlayerAttribute(uint player, AbilityType type, int amount)
@@ -462,8 +590,9 @@ namespace XM.Progression.Stat
             {
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-                var itemAttack = dbPlayerStat.EquippedItemStats.CalculateAttack();
-                var attack = itemAttack;
+                var itemAttack = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.Attack);
+                var abilityAttack = dbPlayerStat.AbilityStats.CalculateStat(StatType.Attack);
+                var attack = itemAttack + abilityAttack;
 
                 return attack;
             }
@@ -479,8 +608,9 @@ namespace XM.Progression.Stat
             {
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-                var itemEtherAttack = dbPlayerStat.EquippedItemStats.CalculateEtherAttack();
-                var etherAttack = itemEtherAttack;
+                var itemEtherAttack = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.EtherAttack);
+                var abilityEtherAttack = dbPlayerStat.AbilityStats.CalculateStat(StatType.EtherAttack);
+                var etherAttack = itemEtherAttack + abilityEtherAttack;
 
                 return etherAttack;
             }
@@ -497,8 +627,9 @@ namespace XM.Progression.Stat
             {
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-                var itemAccuracy = dbPlayerStat.EquippedItemStats.CalculateAccuracy();
-                var accuracy = itemAccuracy;
+                var itemAccuracy = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.Accuracy);
+                var abilityAccuracy = dbPlayerStat.AbilityStats.CalculateStat(StatType.Accuracy);
+                var accuracy = itemAccuracy + abilityAccuracy;
 
                 return accuracy;
             }
@@ -514,8 +645,9 @@ namespace XM.Progression.Stat
             {
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-                var itemEvasion = dbPlayerStat.EquippedItemStats.CalculateEvasion();
-                var evasion = itemEvasion;
+                var itemEvasion = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.Evasion);
+                var abilityEvasion = dbPlayerStat.AbilityStats.CalculateStat(StatType.Evasion);
+                var evasion = itemEvasion + abilityEvasion;
 
                 return evasion;
             }
@@ -531,8 +663,9 @@ namespace XM.Progression.Stat
             {
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-                var itemDefense = dbPlayerStat.EquippedItemStats.CalculateDefense();
-                var defense = itemDefense;
+                var itemDefense = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.Defense);
+                var abilityDefense = dbPlayerStat.AbilityStats.CalculateStat(StatType.Defense);
+                var defense = itemDefense + abilityDefense;
 
                 return defense;
             }
@@ -550,8 +683,9 @@ namespace XM.Progression.Stat
 
             var playerId = PlayerId.Get(creature);
             var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-            var itemTPGain = dbPlayerStat.EquippedItemStats.CalculateTPGain();
-            var tpGain = itemTPGain;
+            var itemTPGain = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.TPGain);
+            var abilityTPGain = dbPlayerStat.AbilityStats.CalculateStat(StatType.TPGain);
+            var tpGain = itemTPGain + abilityTPGain;
 
             return tpGain;
         }
@@ -621,8 +755,10 @@ namespace XM.Progression.Stat
             var playerId = PlayerId.Get(player);
             var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
             var equipmentResist = dbPlayerStat.EquippedItemStats.CalculateResist(resist);
-            
-            return Math.Clamp(equipmentResist, 0, 100);
+            var abilityResist = dbPlayerStat.AbilityStats.CalculateResist(resist);
+            var resistPercent = equipmentResist + abilityResist;
+
+            return Math.Clamp(resistPercent, 0, 100);
         }
 
         public NPCStats GetNPCStats(uint npc)
@@ -756,9 +892,79 @@ namespace XM.Progression.Stat
             SetTP(player, 0);
         }
 
+        private int CalculateJobHP(int level, GradeType grade)
+        {
+            var hpScale = _growthHPByGrade[grade];
+            var hpBase = _baseHPByGrade[grade];
+            var hpBonus = _bonusHPByGrade[grade];
+
+            return hpScale * (level - 1) + hpBase + hpBonus * level;
+        }
+
+        private int CalculateJobEP(int level, GradeType grade)
+        {
+            var epScale = _growthEPByGrade[grade];
+            var epBase = _baseEPByGrade[grade];
+
+            return (int)(epScale * (level - 1) + epBase);
+        }
+
+        private int CalculateJobStat(int level, GradeType grade)
+        {
+            var statScale = _growthStatsByGrade[grade];
+            var statBase = _baseStatsByGrade[grade];
+
+            return (int)(statScale * (level - 1) + statBase);
+        }
+
         private void OnPlayerChangeJob(uint player)
         {
-            SetTP(player, 0);
+            var data = _event.GetEventData<JobEvent.PlayerChangedJobEvent>();
+            var playerId = PlayerId.Get(player);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+            var level = data.Level;
+            var definition = data.Definition;
+
+            dbPlayerStat.JobStats[StatType.MaxHP] = CalculateJobHP(level, definition.Grades.MaxHP);
+            dbPlayerStat.JobStats[StatType.MaxEP] = CalculateJobEP(level, definition.Grades.MaxEP);
+
+            dbPlayerStat.JobStats[StatType.Might] = CalculateJobStat(level, definition.Grades.Might);
+            dbPlayerStat.JobStats[StatType.Perception] = CalculateJobStat(level, definition.Grades.Perception);
+            dbPlayerStat.JobStats[StatType.Vitality] = CalculateJobStat(level, definition.Grades.Vitality);
+            dbPlayerStat.JobStats[StatType.Willpower] = CalculateJobStat(level, definition.Grades.Willpower);
+            dbPlayerStat.JobStats[StatType.Agility] = CalculateJobStat(level, definition.Grades.Agility);
+            dbPlayerStat.JobStats[StatType.Social] = CalculateJobStat(level, definition.Grades.Social);
+
+            dbPlayerStat.TP = 0;
+
+            _db.Set(dbPlayerStat);
+            ApplyStats(player);
         }
+
+        public void ApplyStats(uint player)
+        {
+            if (!GetIsPC(player))
+                return;
+
+            var maxHP = GetMaxHP(player);
+
+            var might = GetAttribute(player, AbilityType.Might);
+            var perception = GetAttribute(player, AbilityType.Perception);
+            var vitality = GetAttribute(player, AbilityType.Vitality);
+            var willpower = GetAttribute(player, AbilityType.Willpower);
+            var agility = GetAttribute(player, AbilityType.Agility);
+            var social = GetAttribute(player, AbilityType.Social);
+
+            ApplyPlayerMaxHP(player, maxHP);
+            CreaturePlugin.SetRawAbilityScore(player, AbilityType.Might, might);
+            CreaturePlugin.SetRawAbilityScore(player, AbilityType.Perception, perception);
+            CreaturePlugin.SetRawAbilityScore(player, AbilityType.Vitality, vitality);
+            CreaturePlugin.SetRawAbilityScore(player, AbilityType.Willpower, willpower);
+            CreaturePlugin.SetRawAbilityScore(player, AbilityType.Agility, agility);
+            CreaturePlugin.SetRawAbilityScore(player, AbilityType.Social, social);
+
+            _event.PublishEvent<UIEvent.UIRefreshEvent>(player);
+        }
+
     }
 }

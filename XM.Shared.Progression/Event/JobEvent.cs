@@ -1,4 +1,5 @@
-﻿using XM.Shared.API.Constants;
+﻿using XM.Progression.Job.JobDefinition;
+using XM.Shared.API.Constants;
 using XM.Shared.Core.EventManagement;
 
 namespace XM.Progression.Event
@@ -7,12 +8,20 @@ namespace XM.Progression.Event
     {
         public struct PlayerChangedJobEvent : IXMEvent
         {
+            public IJobDefinition Definition { get; set; }
+            public int Level { get; set; }
+
+            public PlayerChangedJobEvent(IJobDefinition definition, int level)
+            {
+                Definition = definition;
+                Level = level;
+            }
 
         }
 
         public struct JobFeatRemovedEvent : IXMEvent
         {
-            public FeatType Feat { get; }
+            public FeatType Feat { get; set; }
             public JobFeatRemovedEvent(FeatType feat)
             {
                 Feat = feat;
@@ -21,7 +30,7 @@ namespace XM.Progression.Event
 
         public struct JobFeatAddedEvent : IXMEvent
         {
-            public FeatType Feat { get; }
+            public FeatType Feat { get; set; }
 
             public JobFeatAddedEvent(FeatType feat)
             {

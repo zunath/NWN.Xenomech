@@ -1,4 +1,5 @@
 ﻿using XM.Progression.Recast;
+using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
@@ -27,6 +28,7 @@ namespace XM.Progression.Ability
         public bool DisplaysActivationMessage { get; set; }
         public int ResonanceCost { get; set; }
         public string IconResref { get; set; }
+        public StatGroup Stats { get; set; }
 
         public AbilityDetail()
         {
@@ -37,6 +39,7 @@ namespace XM.Progression.Ability
             MaxRange = 5.0f;
             IsHostileAbility = false;
             DisplaysActivationMessage = true;
+            Stats = new ItemStatGroup();
         }
     }
 }

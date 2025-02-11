@@ -10,6 +10,7 @@ using XM.Progression.Job;
 using XM.Progression.Job.Entity;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
+using XM.Progression.Stat.Entity;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Activity;
@@ -454,7 +455,13 @@ namespace XM.Progression.Ability
             if (!_abilities.ContainsKey(data.Feat))
                 return;
 
+            var playerId = PlayerId.Get(player);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
             var ability = _abilities[data.Feat];
+
+            dbPlayerStat.AbilityStats.Add(data.Feat, ability.Stats);
+            _db.Set(dbPlayerStat);
+
             ability.AbilityEquippedAction?.Invoke(player);
         }
         private void RemoveJobFeat(uint player)
@@ -463,7 +470,13 @@ namespace XM.Progression.Ability
             if (!_abilities.ContainsKey(data.Feat))
                 return;
 
+            var playerId = PlayerId.Get(player);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
             var ability = _abilities[data.Feat];
+
+            dbPlayerStat.AbilityStats.Remove(data.Feat);
+            _db.Set(dbPlayerStat);
+
             ability.AbilityUnequippedAction?.Invoke(player);
         }
 
