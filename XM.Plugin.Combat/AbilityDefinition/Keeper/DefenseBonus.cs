@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
-using XM.AI.Enmity;
 using XM.Progression.Ability;
-using XM.Progression.Recast;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;

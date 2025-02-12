@@ -7,7 +7,6 @@ using XM.Progression.Event;
 using XM.Progression.Job.Entity;
 using XM.Progression.Job.JobDefinition;
 using XM.Progression.Stat;
-using XM.Progression.Stat.Entity;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.CreaturePlugin;
 using XM.Shared.Core;
@@ -15,8 +14,6 @@ using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 using XM.UI.Event;
-using ArgumentException = System.ArgumentException;
-using ClassType = XM.Shared.API.Constants.ClassType;
 
 namespace XM.Progression.Job
 {
