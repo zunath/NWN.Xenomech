@@ -306,13 +306,14 @@ namespace XM.Progression.Stat
         {
             if (GetIsPC(creature))
             {
+                const int MaxHPBase = 40;
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId);
                 var jobMaxHP = dbPlayerStat.JobStats[StatType.MaxHP];
                 var itemMaxHP = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.MaxHP);
                 var abilityMaxHP = dbPlayerStat.AbilityStats.CalculateStat(StatType.MaxHP);
 
-                return jobMaxHP + itemMaxHP + abilityMaxHP;
+                return MaxHPBase + jobMaxHP + itemMaxHP + abilityMaxHP;
             }
             else
             {

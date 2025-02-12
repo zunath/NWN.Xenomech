@@ -15,6 +15,8 @@
     <Nullable>disable</Nullable>
 
     <RootNamespace>XM.Progression</RootNamespace>
+
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
 <!--Uncomment and fill to build a NuGet package for your plugin.-->
@@ -71,6 +73,7 @@
 	<PackageReference Include="NWN.Anvil" Version="8193.37.0-dev.12.raf500cfc" ExcludeAssets="runtime" PrivateAssets="all">
 		<IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	</PackageReference>
+	<PackageReference Include="NWN.Native" Version="8193.37.1" />
 </ItemGroup>
 
 <ItemGroup>
