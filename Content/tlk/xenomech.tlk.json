@@ -6896,6 +6896,18 @@
     {
       "id": 1725,
       "text": "Pistols"
+    },
+    {
+      "id": 1726,
+      "text": "You earned experience."
+    },
+    {
+      "id": 1727,
+      "text": "Ability Acquired: {0}"
+    },
+    {
+      "id": 1728,
+      "text": "{0} attains level {1}!"
     }
   ]
 }
