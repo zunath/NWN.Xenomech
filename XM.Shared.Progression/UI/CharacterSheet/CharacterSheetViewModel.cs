@@ -398,7 +398,7 @@ namespace XM.Progression.UI.CharacterSheet
 
                 jobIcons.Add(definition.IconResref);
 
-                var ratio = dbPlayerJob.JobXP[type] / XP[dbPlayerJob.JobLevels[type]];
+                var ratio = (float)dbPlayerJob.JobXP[type] / (float)XP[dbPlayerJob.JobLevels[type]];
                 jobProgresses.Add(Math.Clamp(ratio, 0f, 1f));
             }
 
