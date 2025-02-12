@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Anvil.Services;
 using XM.AI.Enmity;
 using XM.Progression.Ability;
 using XM.Progression.Recast;
@@ -8,19 +9,10 @@ using XM.Shared.Core.Localization;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Keeper
 {
+    [ServiceBinding(typeof(IAbilityListDefinition))]
     internal class DefenseBonus: IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
-        private readonly EnmityService _enmity;
-        private readonly StatService _stat;
-
-        public DefenseBonus(
-            EnmityService enmity,
-            StatService stat)
-        {
-            _enmity = enmity;
-            _stat = stat;
-        }
 
         public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
