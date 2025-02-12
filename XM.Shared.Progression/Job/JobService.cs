@@ -23,6 +23,7 @@ namespace XM.Progression.Job
     [ServiceBinding(typeof(JobService))]
     public class JobService
     {
+        public const int LevelCap = 50;
         public const int ResonanceNodeLevelAcquisitionRate = 5; // One every 5 levels
 
         private readonly Dictionary<JobType, IJobDefinition> _jobDefinitions = new()
@@ -43,17 +44,20 @@ namespace XM.Progression.Job
         private readonly DBService _db;
         private readonly StatService _stat;
         private readonly XMEventService _event;
+        private readonly XPChart _xp;
 
         public JobService(
             InventoryService inventory, 
             DBService db,
             StatService stat,
-            XMEventService @event)
+            XMEventService @event,
+            XPChart xp)
         {
             _inventory = inventory;
             _db = db;
             _stat = stat;
             _event = @event;
+            _xp = xp;
 
             RegisterEvents();
             SubscribeEvents();
@@ -62,6 +66,7 @@ namespace XM.Progression.Job
         private void RegisterEvents()
         {
             _event.RegisterEvent<JobEvent.PlayerChangedJobEvent>(ProgressionEventScript.PlayerChangedJobScript);
+            _event.RegisterEvent<JobEvent.PlayerLeveledUpEvent>(ProgressionEventScript.PlayerLeveledUpScript);
             _event.RegisterEvent<JobEvent.JobFeatAddedEvent>(ProgressionEventScript.JobFeatAddScript);
             _event.RegisterEvent<JobEvent.JobFeatRemovedEvent>(ProgressionEventScript.JobFeatRemovedScript);
         }
@@ -147,10 +152,54 @@ namespace XM.Progression.Job
 
             return dbPlayerJob.JobLevels.ToDictionary(x => x.Key, y => y.Value);
         }
-
         public void GiveXP(uint player, int xp)
         {
-            // todo fill in
+            if (!GetIsPC(player) ||
+                GetIsDM(player) ||
+                GetIsDMPossessed(player))
+                return;
+
+            var playerId = PlayerId.Get(player);
+            var dbPlayerJob = _db.Get<PlayerJob>(playerId);
+            var job = dbPlayerJob.ActiveJob;
+            var level = dbPlayerJob.JobLevels[job];
+            var xpRequired = _xp[level];
+            var levelsGained = new List<int>();
+
+            dbPlayerJob.JobXP[job] += xp;
+
+            while (dbPlayerJob.JobXP[job] >= xpRequired)
+            {
+                if (level >= LevelCap)
+                {
+                    dbPlayerJob.JobXP[job] = xpRequired - 1;
+                    break;
+                }
+
+                level++;
+                dbPlayerJob.JobLevels[job] = level;
+                dbPlayerJob.JobXP[job] -= xpRequired;
+                xpRequired = _xp[level];
+
+                levelsGained.Add(level);
+            }
+
+            _db.Set(dbPlayerJob);
+
+            var definition = GetJobDefinition(job);
+            foreach (var gainedLevel in levelsGained)
+            {
+                _event.PublishEvent(player, new JobEvent.PlayerLeveledUpEvent(definition, gainedLevel));
+
+                var name = GetName(player);
+                var levelUpMessage = LocaleString.XAttainsLevelY.ToLocalizedString(name, gainedLevel);
+                Messaging.SendMessageNearbyToPlayers(player, levelUpMessage);
+            }
+
+            var message = LocaleString.YouEarnedExperience.ToLocalizedString();
+            SendMessageToPC(player, message);
+
+            _event.PublishEvent<UIEvent.UIRefreshEvent>(player);
         }
 
         public void ChangeJob(
@@ -222,6 +271,16 @@ namespace XM.Progression.Job
             var name = definition.Name.ToLocalizedString();
             var message = LocaleString.JobChangedToX.ToLocalizedString(ColorToken.Green(name));
             SendMessageToPC(player, message);
+        }
+
+        [ScriptHandler("bread_test1")]
+        public void GiveXPTest()
+        {
+            var player = GetLastUsedBy();
+            var bread = OBJECT_SELF;
+            var xp = GetLocalInt(bread, "XP");
+
+            GiveXP(player, xp);
         }
     }
 }

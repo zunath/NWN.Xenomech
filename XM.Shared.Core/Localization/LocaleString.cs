@@ -1409,7 +1409,10 @@ namespace XM.Shared.Core.Localization
         JobSystemDescription = 1722,
         JobChangedToX = 1723,
         Rifles = 1724,
-        Pistols = 1725
+        Pistols = 1725,
+        YouEarnedExperience = 1726,
+        AbilityAcquiredX = 1727,
+        XAttainsLevelY = 1728,
 
     }
 }

@@ -5,6 +5,7 @@ using Anvil.Services;
 using XM.Progression.Event;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
+using XM.Progression.Job.JobDefinition;
 using XM.Progression.Stat.Entity;
 using XM.Progression.Stat.ResistDefinition;
 using XM.Shared.API.Constants;
@@ -15,6 +16,7 @@ using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using XM.UI;
 using XM.UI.Event;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace XM.Progression.Stat
 {
@@ -151,6 +153,7 @@ namespace XM.Progression.Stat
             _event.Subscribe<ModuleEvent.OnPlayerDeath>(OnPlayerDeath);
             _event.Subscribe<ModuleEvent.OnPlayerLeave>(OnPlayerLeave);
             _event.Subscribe<JobEvent.PlayerChangedJobEvent>(OnPlayerChangeJob);
+            _event.Subscribe<JobEvent.PlayerLeveledUpEvent>(OnPlayerLevelUp);
         }
 
         private void OnInitializePlayer(uint player)
@@ -918,13 +921,10 @@ namespace XM.Progression.Stat
             return (int)(statScale * (level - 1) + statBase);
         }
 
-        private void OnPlayerChangeJob(uint player)
+        private void RecalculateJobStats(uint player, IJobDefinition definition, int level)
         {
-            var data = _event.GetEventData<JobEvent.PlayerChangedJobEvent>();
             var playerId = PlayerId.Get(player);
             var dbPlayerStat = _db.Get<PlayerStat>(playerId);
-            var level = data.Level;
-            var definition = data.Definition;
 
             dbPlayerStat.JobStats[StatType.MaxHP] = CalculateJobHP(level, definition.Grades.MaxHP);
             dbPlayerStat.JobStats[StatType.MaxEP] = CalculateJobEP(level, definition.Grades.MaxEP);
@@ -936,9 +936,21 @@ namespace XM.Progression.Stat
             dbPlayerStat.JobStats[StatType.Agility] = CalculateJobStat(level, definition.Grades.Agility);
             dbPlayerStat.JobStats[StatType.Social] = CalculateJobStat(level, definition.Grades.Social);
 
-            dbPlayerStat.TP = 0;
-
             _db.Set(dbPlayerStat);
+        }
+
+        private void OnPlayerChangeJob(uint player)
+        {
+            var data = _event.GetEventData<JobEvent.PlayerChangedJobEvent>();
+            RecalculateJobStats(player, data.Definition, data.Level);
+            ApplyStats(player);
+            SetTP(player, 0);
+        }
+
+        private void OnPlayerLevelUp(uint player)
+        {
+            var data = _event.GetEventData<JobEvent.PlayerLeveledUpEvent>();
+            RecalculateJobStats(player, data.Definition, data.Level);
             ApplyStats(player);
         }
 

@@ -8,6 +8,7 @@ using NWN.Core.NWNX;
 using XM.Progression.Event;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
+using XM.Progression.Job.JobDefinition;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
 using XM.Progression.Stat.Entity;
@@ -17,6 +18,7 @@ using XM.Shared.Core.Activity;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
+using CreaturePlugin = XM.Shared.API.NWNX.CreaturePlugin.CreaturePlugin;
 
 namespace XM.Progression.Ability
 {
@@ -61,6 +63,7 @@ namespace XM.Progression.Ability
             _event.Subscribe<NWNXEvent.OnUseFeatBefore>(UseAbility);
             _event.Subscribe<JobEvent.JobFeatAddedEvent>(AddJobFeat);
             _event.Subscribe<JobEvent.JobFeatRemovedEvent>(RemoveJobFeat);
+            _event.Subscribe<JobEvent.PlayerLeveledUpEvent>(ApplyLevelUp);
         }
 
         private void CacheAbilities()
@@ -494,6 +497,31 @@ namespace XM.Progression.Ability
                 return 999;
 
             return _abilitiesByLevel[feat];
+        }
+
+        private void ApplyLevelUp(uint player)
+        {
+            var data = _event.GetEventData<JobEvent.PlayerLeveledUpEvent>();
+            var definition = data.Definition;
+            var level = data.Level;
+
+            var feat = definition.FeatAcquisitionLevels.ContainsKey(level)
+                ? definition.FeatAcquisitionLevels[level]
+                : FeatType.Invalid;
+
+            if (feat == FeatType.Invalid)
+                return;
+
+            if (!_abilities.ContainsKey(feat))
+                return;
+
+            var ability = _abilities[feat];
+            CreaturePlugin.AddFeatByLevel(player, feat, 1);
+            var name = ability.Name.ToLocalizedString();
+            var message = LocaleString.AbilityAcquiredX.ToLocalizedString(name);
+            SendMessageToPC(player, message);
+
+            _event.PublishEvent(player, new JobEvent.JobFeatAddedEvent(feat));
         }
     }
 }

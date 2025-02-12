@@ -16,7 +16,18 @@ namespace XM.Progression.Event
                 Definition = definition;
                 Level = level;
             }
+        }
 
+        public struct PlayerLeveledUpEvent : IXMEvent
+        {
+            public IJobDefinition Definition { get; set; }
+            public int Level { get; set; }
+
+            public PlayerLeveledUpEvent(IJobDefinition definition, int level)
+            {
+                Definition = definition;
+                Level = level;
+            }
         }
 
         public struct JobFeatRemovedEvent : IXMEvent

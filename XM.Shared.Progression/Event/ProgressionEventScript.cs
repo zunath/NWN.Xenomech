@@ -4,6 +4,7 @@
     {
         // Jobs
         public const string PlayerChangedJobScript = "pc_change_job";
+        public const string PlayerLeveledUpScript = "pc_job_level_up";
         public const string JobFeatRemovedScript = "job_feat_remove";
         public const string JobFeatAddScript = "job_feat_add";
 
