@@ -444,6 +444,25 @@ namespace XM.Progression.Stat
                 return npcStats.Stats[StatType.SubtleBlow];
             }
         }
+        public int GetCriticalRate(uint creature)
+        {
+            const int BaseCriticalRate = 5;
+
+            if (GetIsPC(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+                var abilityCriticalRate = dbPlayerStat.AbilityStats.CalculateStat(StatType.CriticalRate);
+                var itemCriticalRate = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.CriticalRate);
+
+                return BaseCriticalRate + abilityCriticalRate + itemCriticalRate;
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                return BaseCriticalRate + npcStats.Stats[StatType.CriticalRate];
+            }
+        }
 
         public int GetHPRegen(uint creature)
         {

@@ -23,6 +23,6 @@
         ShieldDeflection = 18,
         AttackDeflection = 19,
         SubtleBlow = 20,
-
+        CriticalRate = 21,
     }
 }

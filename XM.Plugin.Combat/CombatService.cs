@@ -78,11 +78,10 @@ namespace XM.Plugin.Combat
             return hitRate;
         }
 
-        private int CalculateCriticalRate(
+        private int CalculateCriticalDelta(
             int attackerStat, 
             int defenderStat)
         {
-            const int BaseCriticalRate = 5;
             var delta = attackerStat - defenderStat;
 
             if (delta < 0)
@@ -90,7 +89,7 @@ namespace XM.Plugin.Combat
             else if (delta > 15)
                 delta = 15;
 
-            return BaseCriticalRate + delta;
+            return delta;
         }
 
         private int CalculateAccuracy(
@@ -232,7 +231,12 @@ namespace XM.Plugin.Combat
                 : _stat.GetAttribute(attacker, AbilityType.Agility);
             var defenderStat = _stat.GetAttribute(defender, AbilityType.Agility);
             var roll = XMRandom.D100(1);
-            var criticalRate = CalculateCriticalRate(attackerStat, defenderStat);
+            var criticalRate = _stat.GetCriticalRate(attacker);
+            var criticalDelta = CalculateCriticalDelta(attackerStat, defenderStat);
+            criticalRate += criticalDelta;
+
+            if (criticalRate > 35)
+                criticalRate = 35;
 
             return roll <= criticalRate;
         }
