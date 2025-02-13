@@ -305,6 +305,13 @@ namespace XM.Progression.Ability
             return this;
         }
 
+        public AbilityBuilder IncreasesResist(ResistType type, int amount)
+        {
+            _activeAbility.Stats.Resists[type] += amount;
+
+            return this;
+        }
+
         /// <summary>
         /// Returns a built list of abilities.
         /// </summary>

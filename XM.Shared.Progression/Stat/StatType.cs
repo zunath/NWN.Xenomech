@@ -20,5 +20,8 @@
         Agility = 15,
         Willpower = 16,
         Social = 17,
+        ShieldDeflection = 18,
+        AttackDeflection = 19,
+
     }
 }

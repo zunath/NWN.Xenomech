@@ -173,9 +173,19 @@ namespace XM.Plugin.Combat
         private int CalculateDeflectionChance(uint defender)
         {
             var offHand = GetItemInSlot(InventorySlotType.LeftHand, defender);
-            var isShield = _itemType.IsShield(offHand);
+            var hasShield = _itemType.IsShield(offHand);
+            var deflection = 0;
 
-            return isShield ? 10 : 0;
+            if (hasShield)
+            {
+                deflection += 10 + _stat.GetShieldDeflection(defender);
+            }
+            else
+            {
+                deflection += _stat.GetAttackDeflection(defender);
+            }
+
+            return deflection;
         }
 
         public (HitResultType, int) DetermineHitType(

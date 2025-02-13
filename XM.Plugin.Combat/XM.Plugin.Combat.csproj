@@ -79,8 +79,6 @@
 </ItemGroup>
 
 <ItemGroup>
-  <Folder Include="AbilityDefinition\Beastmaster\" />
-  <Folder Include="AbilityDefinition\Brawler\" />
   <Folder Include="AbilityDefinition\Hunter\" />
   <Folder Include="AbilityDefinition\Elementalist\" />
   <Folder Include="AbilityDefinition\NPC\" />

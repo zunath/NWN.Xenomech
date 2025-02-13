@@ -407,7 +407,7 @@ namespace XM.Progression.Stat
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.EP;
+                return npcStats.Stats[StatType.MaxEP];
             }
         }
 
@@ -603,7 +603,7 @@ namespace XM.Progression.Stat
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.Attack;
+                return npcStats.Stats[StatType.Attack];
             }
         }
         public int GetEtherAttack(uint creature)
@@ -621,7 +621,7 @@ namespace XM.Progression.Stat
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.EtherAttack;
+                return npcStats.Stats[StatType.EtherAttack];
             }
         }
 
@@ -640,7 +640,7 @@ namespace XM.Progression.Stat
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.Accuracy;
+                return npcStats.Stats[StatType.Accuracy];
             }
         }
         public int GetEvasion(uint creature)
@@ -658,7 +658,7 @@ namespace XM.Progression.Stat
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.Evasion;
+                return npcStats.Stats[StatType.Evasion];
             }
         }
         public int GetDefense(uint creature)
@@ -676,7 +676,44 @@ namespace XM.Progression.Stat
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.Defense;
+                return npcStats.Stats[StatType.Defense];
+            }
+        }
+
+        public int GetShieldDeflection(uint creature)
+        {
+            if (GetIsPC(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+                var itemShieldDeflection = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.ShieldDeflection);
+                var abilityShieldDeflection = dbPlayerStat.AbilityStats.CalculateStat(StatType.ShieldDeflection);
+                var shieldDeflection = itemShieldDeflection + abilityShieldDeflection;
+
+                return shieldDeflection;
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                return npcStats.Stats[StatType.ShieldDeflection];
+            }
+        }
+        public int GetAttackDeflection(uint creature)
+        {
+            if (GetIsPC(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+                var itemAttackDeflection = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.AttackDeflection);
+                var abilityAttackDeflection = dbPlayerStat.AbilityStats.CalculateStat(StatType.AttackDeflection);
+                var attackDeflection = itemAttackDeflection + abilityAttackDeflection;
+
+                return attackDeflection;
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                return npcStats.Stats[StatType.AttackDeflection];
             }
         }
 
@@ -782,27 +819,27 @@ namespace XM.Progression.Stat
                 }
                 else if (type == ItemPropertyType.Defense)
                 {
-                    npcStats.Defense = GetItemPropertyCostTableValue(ip);
+                    npcStats.Stats[StatType.Defense] = GetItemPropertyCostTableValue(ip);
                 }
                 else if (type == ItemPropertyType.Attack)
                 {
-                    npcStats.Attack = GetItemPropertyCostTableValue(ip);
+                    npcStats.Stats[StatType.Attack] = GetItemPropertyCostTableValue(ip);
                 }
                 else if (type == ItemPropertyType.EtherAttack)
                 {
-                    npcStats.EtherAttack = GetItemPropertyCostTableValue(ip);
+                    npcStats.Stats[StatType.EtherAttack] = GetItemPropertyCostTableValue(ip);
                 }
                 else if (type == ItemPropertyType.Evasion)
                 {
-                    npcStats.Evasion = GetItemPropertyCostTableValue(ip);
+                    npcStats.Stats[StatType.Evasion] = GetItemPropertyCostTableValue(ip);
                 }
                 else if (type == ItemPropertyType.EP)
                 {
-                    npcStats.EP = GetItemPropertyCostTableValue(ip);
+                    npcStats.Stats[StatType.MaxEP] = GetItemPropertyCostTableValue(ip);
                 }
                 else if (type == ItemPropertyType.Accuracy)
                 {
-                    npcStats.Accuracy = GetItemPropertyCostTableValue(ip);
+                    npcStats.Stats[StatType.Accuracy] = GetItemPropertyCostTableValue(ip);
                 }
                 else if (type == ItemPropertyType.NPCEvasionGrade)
                 {
