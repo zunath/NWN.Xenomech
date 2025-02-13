@@ -71,6 +71,9 @@ namespace XM.Plugin.Combat.StatusEffect.StatusEffectDefinition
             if (epAmount < 1)
                 epAmount = 1;
 
+            if (GetHasFeat(FeatType.ClearMind, creature))
+                epAmount *= 2;
+
             ApplyEffectToObject(DurationType.Instant, EffectHeal(hpAmount), creature);
             Stat.RestoreEP(creature, epAmount);
         }

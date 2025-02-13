@@ -79,8 +79,6 @@
 </ItemGroup>
 
 <ItemGroup>
-  <Folder Include="AbilityDefinition\Hunter\" />
-  <Folder Include="AbilityDefinition\Elementalist\" />
   <Folder Include="AbilityDefinition\NPC\" />
   <Folder Include="AbilityDefinition\Techweaver\" />
 </ItemGroup>
