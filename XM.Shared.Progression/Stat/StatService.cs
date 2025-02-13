@@ -427,6 +427,24 @@ namespace XM.Progression.Stat
             }
         }
 
+        public int GetSubtleBlow(uint creature)
+        {
+            if (GetIsPC(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+                var abilitySubtleBlow = dbPlayerStat.AbilityStats.CalculateStat(StatType.SubtleBlow);
+                var itemSubtleBlow = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.SubtleBlow);
+
+                return abilitySubtleBlow + itemSubtleBlow;
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                return npcStats.Stats[StatType.SubtleBlow];
+            }
+        }
+
         public int GetHPRegen(uint creature)
         {
             if (GetIsPC(creature) && !GetIsDM(creature))

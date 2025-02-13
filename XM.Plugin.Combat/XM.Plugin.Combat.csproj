@@ -83,7 +83,6 @@
   <Folder Include="AbilityDefinition\Elementalist\" />
   <Folder Include="AbilityDefinition\NPC\" />
   <Folder Include="AbilityDefinition\Techweaver\" />
-  <Folder Include="AbilityDefinition\Nightstalker\" />
 </ItemGroup>
 
 <Target Name="PostBuild" AfterTargets="PostBuildEvent">

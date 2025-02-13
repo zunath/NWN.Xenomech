@@ -66,11 +66,24 @@ namespace XM.Plugin.Combat.NativeOverride
 
                 if (damage > 0)
                 {
-                    _combat.GainTP(attacker.m_idSelf);
+                    ApplyTP(attacker.m_idSelf, defender.m_idSelf);
                 }
 
                 return damage;
             });
+        }
+
+        private void ApplyTP(uint attacker, uint defender)
+        {
+            var attackerTPAmount = GetIsPC(attacker)
+                ? _combat.CalculateTPGainPlayer(attacker, false)
+                : _combat.CalculateTPGainNPC(attacker, false);
+            var defenderTPAmount = GetIsPC(attacker)
+                ? _combat.CalculateTPGainPlayer(attacker, true)
+                : _combat.CalculateTPGainNPC(attacker, true);
+
+            _combat.GainTP(attacker, attackerTPAmount);
+            _combat.GainTP(defender, defenderTPAmount);
         }
     }
 }

@@ -401,7 +401,7 @@ namespace XM.Plugin.Combat
             return (int)(delay / 60f * 1000);
         }
 
-        private int CalculateTPGainPlayer(uint player)
+        public int CalculateTPGainPlayer(uint player, bool useSubtleBlow)
         {
             var playerId = PlayerId.Get(player);
             var dbPlayerStat = _db.Get<PlayerStat>(playerId);
@@ -430,10 +430,20 @@ namespace XM.Plugin.Combat
                 tpGain = 173 + ((totalDelay - 900) * 28 / 360);
 
             var totalTP = dbPlayerStat.TP + tpGain + equipmentBonus;
+
+            if (useSubtleBlow)
+            {
+                var subtleBlow = _stat.GetSubtleBlow(player) * 0.01f;
+                if (subtleBlow > 0.75f)
+                    subtleBlow = 0.75f;
+
+                totalTP -= (int)(subtleBlow * totalTP);
+            }
+
             return totalTP;
         }
 
-        private int CalculateTPGainNPC(uint npc)
+        public int CalculateTPGainNPC(uint npc, bool useSubtleBlow)
         {
             var npcStats = _stat.GetNPCStats(npc);
             var totalDelay = npcStats.MainHandDelay + npcStats.OffHandDelay;
@@ -456,17 +466,21 @@ namespace XM.Plugin.Combat
 
             var totalTP = _stat.GetCurrentTP(npc) + tpGain;
 
+            if (useSubtleBlow)
+            {
+                var subtleBlow = _stat.GetSubtleBlow(npc) * 0.01f;
+                if (subtleBlow > 0.75f)
+                    subtleBlow = 0.75f;
+
+                totalTP -= (int)(subtleBlow * totalTP);
+            }
+
             return totalTP;
         }
 
-        public void GainTP(uint attacker)
+        public void GainTP(uint target, int amount)
         {
-            var isPlayer = GetIsPC(attacker) && !GetIsDMPossessed(attacker);
-            var tp = isPlayer 
-                ? CalculateTPGainPlayer(attacker) 
-                : CalculateTPGainNPC(attacker);
-
-            _stat.SetTP(attacker, tp);
+            _stat.SetTP(target, amount);
         }
     }
 }

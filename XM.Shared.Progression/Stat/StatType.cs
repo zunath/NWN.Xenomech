@@ -22,6 +22,7 @@
         Social = 17,
         ShieldDeflection = 18,
         AttackDeflection = 19,
+        SubtleBlow = 20,
 
     }
 }
