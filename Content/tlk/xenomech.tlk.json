@@ -6912,6 +6912,18 @@
     {
       "id": 1729,
       "text": "You do not meet the requirements to equip that item."
+    },
+    {
+      "id": 1730,
+      "text": "Auto Regen I Description"
+    },
+    {
+      "id": 1731,
+      "text": "Auto Regen II Description"
+    },
+    {
+      "id": 1732,
+      "text": "Natural Regen"
     }
   ]
 }

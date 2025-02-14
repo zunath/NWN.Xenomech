@@ -1414,5 +1414,8 @@ namespace XM.Shared.Core.Localization
         AbilityAcquiredX = 1727,
         XAttainsLevelY = 1728,
         YouDoNotMeetTheRequirementsToEquipThatItem = 1729,
+        AutoRegenIDescription = 1730,
+        AutoRegenIIDescription = 1731,
+        NaturalRegen = 1732,
     }
 }
