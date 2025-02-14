@@ -13,6 +13,7 @@ using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 using FeedbackPlugin = XM.Shared.API.NWNX.FeedbackPlugin.FeedbackPlugin;
+using SkillType = XM.Progression.Skill.SkillType;
 
 
 namespace XM.Plugin.Combat
@@ -388,6 +389,9 @@ namespace XM.Plugin.Combat
 
         public int CalculateAttackDelay(uint attacker)
         {
+            var weapon = GetItemInSlot(InventorySlotType.RightHand, attacker);
+            var skillType = _skill.GetSkillOfWeapon(weapon);
+
             float delay;
             if (GetIsPC(attacker) && !GetIsDMPossessed(attacker))
             {
@@ -402,7 +406,21 @@ namespace XM.Plugin.Combat
                 delay = npcStats.MainHandDelay + npcStats.OffHandDelay;
             }
 
-            return (int)(delay / 60f * 1000);
+            var delayPercentAdjustment = 0f;
+
+            if (skillType == SkillType.Bow && 
+                GetHasFeat(FeatType.Barrage, attacker))
+            {
+                delayPercentAdjustment = -0.2f;
+            }
+            else if (skillType == SkillType.HandToHand && 
+                     GetHasFeat(FeatType.MartialArts, attacker))
+            {
+                delayPercentAdjustment = -0.2f;
+            }
+
+            var finalDelay = (int)(delay / 60f * 1000);
+            return (int)(finalDelay + finalDelay * delayPercentAdjustment);
         }
 
         public int CalculateTPGainPlayer(uint player, bool useSubtleBlow)
