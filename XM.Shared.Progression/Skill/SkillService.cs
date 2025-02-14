@@ -168,6 +168,11 @@ namespace XM.Progression.Skill
             return _skillDefinitions.ToList();
         }
 
+        public ISkillDefinition GetSkillDefinition(SkillType skillType)
+        {
+            return _skills[skillType];
+        }
+
         public SkillType GetSkillOfWeapon(uint weapon)
         {
             var baseItemType = GetBaseItemType(weapon);

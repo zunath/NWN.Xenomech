@@ -14,7 +14,7 @@ namespace XM.Progression.Skill.SkillDefinition
         public FeatType LoreFeat => FeatType.LongswordLore;
         public List<BaseItemType> BaseItems { get; } =
         [
-            BaseItemType.LongSword,
+            BaseItemType.Longsword,
         ];
         public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
         {

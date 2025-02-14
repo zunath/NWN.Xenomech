@@ -71,7 +71,7 @@ namespace XM.Plugin.Item.AppearanceEditor.UI
             _weaponAppearances[BaseItemType.Dagger] = new DaggerAppearanceDefinition();
             _weaponAppearances[BaseItemType.GreatSword] = new GreatSwordAppearanceDefinition();
             _weaponAppearances[BaseItemType.LargeShield] = new LargeShieldAppearanceDefinition();
-            _weaponAppearances[BaseItemType.LongSword] = new LongswordAppearanceDefinition();
+            _weaponAppearances[BaseItemType.Longsword] = new LongswordAppearanceDefinition();
             _weaponAppearances[BaseItemType.Pistol] = new PistolAppearanceDefinition();
             _weaponAppearances[BaseItemType.QuarterStaff] = new QuarterstaffAppearanceDefinition();
             _weaponAppearances[BaseItemType.Rifle] = new RifleAppearanceDefinition();

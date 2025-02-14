@@ -134,7 +134,7 @@ namespace XM.Plugin.Item.Market
             {
                 case BaseItemType.ShortSword:
                     return MarketCategoryType.ShortSword;
-                case BaseItemType.LongSword:
+                case BaseItemType.Longsword:
                     return MarketCategoryType.Longsword;
                 case BaseItemType.BattleAxe:
                     return MarketCategoryType.Axe;

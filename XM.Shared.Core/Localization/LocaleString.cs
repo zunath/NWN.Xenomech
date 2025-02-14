@@ -1413,6 +1413,6 @@ namespace XM.Shared.Core.Localization
         YouEarnedExperience = 1726,
         AbilityAcquiredX = 1727,
         XAttainsLevelY = 1728,
-
+        YouDoNotMeetTheRequirementsToEquipThatItem = 1729,
     }
 }

@@ -6908,6 +6908,10 @@
     {
       "id": 1728,
       "text": "{0} attains level {1}!"
+    },
+    {
+      "id": 1729,
+      "text": "You do not meet the requirements to equip that item."
     }
   ]
 }

@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using System.Numerics;
 using Anvil.Services;
 using NWN.Core.NWNX;
+using XM.Progression;
 using XM.Progression.Job;
 using XM.Progression.Recast;
+using XM.Progression.Skill;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
+using XM.Shared.Core;
 using XM.Shared.Core.Activity;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 using PlayerPlugin = XM.Shared.API.NWNX.PlayerPlugin.PlayerPlugin;
+using SkillType = XM.Progression.Skill.SkillType;
 
 namespace XM.Plugin.Item
 {
     [ServiceBinding(typeof(ItemUseService))]
     [ServiceBinding(typeof(IInitializable))]
-    internal class ItemUseService: IInitializable
+    internal class ItemUseService : IInitializable
     {
         private static readonly Dictionary<string, ItemDetail> _items = new();
 
@@ -25,6 +29,7 @@ namespace XM.Plugin.Item
         private readonly JobService _job;
         private readonly StatService _stat;
         private readonly RecastService _recast;
+        private readonly SkillService _skill;
 
         private readonly IList<IItemListDefinition> _itemListDefinitions;
 
@@ -34,6 +39,7 @@ namespace XM.Plugin.Item
             JobService job,
             StatService stat,
             RecastService recast,
+            SkillService skill,
             IList<IItemListDefinition> itemListDefinitions)
         {
             _event = @event;
@@ -41,6 +47,7 @@ namespace XM.Plugin.Item
             _job = job;
             _stat = stat;
             _recast = recast;
+            _skill = skill;
             _itemListDefinitions = itemListDefinitions;
 
             SubscribeEvents();
@@ -49,7 +56,9 @@ namespace XM.Plugin.Item
         private void SubscribeEvents()
         {
             _event.Subscribe<NWNXEvent.OnUseItemBefore>(UseItem);
+            _event.Subscribe<NWNXEvent.OnItemEquipBefore>(EquipItem);
         }
+
         public void Init()
         {
             LoadItemDefinitions();
@@ -273,6 +282,45 @@ namespace XM.Plugin.Item
             }
 
             return true;
+        }
+
+        private void EquipItem(uint player)
+        {
+            void SendErrorMessage()
+            {
+                var message = LocaleString.YouDoNotMeetTheRequirementsToEquipThatItem.ToLocalizedString();
+                SendMessageToPC(player, ColorToken.Red(message));
+            }
+
+            var item = StringToObject(EventsPlugin.GetEventData("ITEM"));
+            var canEquip = true;
+
+            var canUseItem = CanCreatureUseItem(player, item);
+            if (!canUseItem)
+            {
+                SendErrorMessage();
+                EventsPlugin.SkipEvent();
+                return;
+            }
+
+            var skillType = _skill.GetSkillOfWeapon(item);
+            if (skillType != SkillType.Invalid)
+            {
+                var job = _job.GetActiveJob(player);
+                var skill = _skill.GetSkillDefinition(skillType);
+                var grade = _skill.GetGrade(player, job, skill);
+
+                if (grade == GradeType.Invalid)
+                {
+                    canEquip = false;
+                }
+            }
+
+            if (!canEquip)
+            {
+                SendErrorMessage();
+                EventsPlugin.SkipEvent();
+            }
         }
     }
 }

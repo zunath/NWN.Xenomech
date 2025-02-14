@@ -4,7 +4,7 @@ namespace XM.Shared.API.Constants
     {
         All = -1,
         ShortSword = 0,
-        LongSword = 1,
+        Longsword = 1,
         BattleAxe = 2,
         BastardSword = 3,
         LightFlail = 4,
