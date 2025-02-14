@@ -25,7 +25,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Techweaver
             _builder.Create(FeatType.AutoRefresh1)
                 .Name(LocaleString.AutoRefreshI)
                 .Description(LocaleString.AutoRefreshIDescription)
-                .ResonanceCost(1)
+                .ResonanceCost(2)
                 .IncreasesStat(StatType.EPRegen, 1);
         }
         private void AutoRefresh2()
@@ -33,7 +33,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Techweaver
             _builder.Create(FeatType.AutoRefresh2)
                 .Name(LocaleString.AutoRefreshII)
                 .Description(LocaleString.AutoRefreshIIDescription)
-                .ResonanceCost(2)
+                .ResonanceCost(3)
                 .IncreasesStat(StatType.EPRegen, 2);
         }
     }
