@@ -124,14 +124,13 @@ namespace XM.Progression.Skill
             IJobDefinition job,
             ISkillDefinition skill)
         {
+            if (GetHasFeat(skill.LoreFeat))
+                return GradeType.A;
+
             if (!job.Grades.SkillGrades.ContainsKey(skill.Type))
                 return GradeType.Invalid;
 
-            var grade = GetHasFeat(skill.LoreFeat, player)
-                ? GradeType.A
-                : job.Grades.SkillGrades[skill.Type];
-
-            return grade;
+            return job.Grades.SkillGrades[skill.Type];
         }
 
         public int GetSkillCap(
