@@ -6924,6 +6924,10 @@
     {
       "id": 1732,
       "text": "Natural Regen"
+    },
+    {
+      "id": 1733,
+      "text": "Effect failed to apply: {0}"
     }
   ]
 }
