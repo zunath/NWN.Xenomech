@@ -131,6 +131,8 @@ namespace XM.Shared.API.Constants
         DamageImmunityNegativeDecrease = 126,
         DamageImmunityPositiveDecrease = 127,
         DamageImmunitySonicDecrease = 128,
-        Wounding = 129
+        Wounding = 129,
+        Aggressor1 = 130,
+        Aggressor2 = 131,
     }
 }

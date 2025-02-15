@@ -8,28 +8,18 @@ namespace XM.Plugin.Combat.StatusEffect
     {
         private readonly HashSet<IStatusEffect> _activeEffects = new();
 
-        public int HPRegen { get; set; }
-        public int EPRegen { get; set; }
-        public int Defense { get; set; }
-        public int Evasion { get; set; }
-        public int Accuracy { get; set; }
-        public int Attack { get; set; }
-        public int EtherAttack { get; set; }
-        public Dictionary<ResistType, int> Resists { get; set; }
+        public StatGroup Stats { get; set; }
 
         public void Add(IStatusEffect statusEffect)
         {
-            HPRegen += statusEffect.HPRegen;
-            EPRegen += statusEffect.EPRegen;
-            Defense += statusEffect.Defense;
-            Evasion += statusEffect.Evasion;
-            Accuracy += statusEffect.Accuracy;
-            Attack += statusEffect.Attack;
-            EtherAttack += statusEffect.EtherAttack;
-
-            foreach (var (type, amount) in statusEffect.Resists)
+            foreach (var (type, value) in statusEffect.Stats)
             {
-                Resists[type] += amount;
+                Stats[type] += value;
+            }
+
+            foreach (var (type, value) in statusEffect.Stats.Resists)
+            {
+                Stats.Resists[type] += value;
             }
 
             _activeEffects.Add(statusEffect);
@@ -37,17 +27,14 @@ namespace XM.Plugin.Combat.StatusEffect
 
         public void Remove(IStatusEffect statusEffect)
         {
-            HPRegen -= statusEffect.HPRegen;
-            EPRegen -= statusEffect.EPRegen;
-            Defense -= statusEffect.Defense;
-            Evasion -= statusEffect.Evasion;
-            Accuracy -= statusEffect.Accuracy;
-            Attack -= statusEffect.Attack;
-            EtherAttack -= statusEffect.EtherAttack;
-
-            foreach (var (type, amount) in statusEffect.Resists)
+            foreach (var (type, value) in statusEffect.Stats)
             {
-                Resists[type] -= amount;
+                Stats[type] -= value;
+            }
+
+            foreach (var (type, value) in statusEffect.Stats.Resists)
+            {
+                Stats.Resists[type] -= value;
             }
 
             _activeEffects.Remove(statusEffect);
@@ -60,7 +47,7 @@ namespace XM.Plugin.Combat.StatusEffect
 
         public CreatureStatusEffect()
         {
-            Resists = new ResistCollection();
+            Stats = new StatGroup();
         }
     }
 }

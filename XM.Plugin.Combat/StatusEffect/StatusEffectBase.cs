@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
@@ -21,19 +20,13 @@ namespace XM.Plugin.Combat.StatusEffect
         public abstract bool SendsWornOffMessage { get; }
         public abstract float Frequency { get; }
         public virtual bool IsRemovedOnJobChange => true;
-        public virtual int HPRegen => 0;
-        public virtual int EPRegen => 0;
-        public virtual int Defense => 0;
-        public virtual int Evasion => 0;
-        public virtual int Accuracy => 0;
-        public virtual int Attack => 0;
-        public virtual int EtherAttack => 0;
-        public Dictionary<ResistType, int> Resists => new ResistCollection();
+        public StatGroup Stats { get; }
 
 
         protected StatusEffectBase()
         {
             Id = Guid.NewGuid().ToString();
+            Stats = new StatGroup();
         }
 
         protected virtual void Apply(uint creature) { }
