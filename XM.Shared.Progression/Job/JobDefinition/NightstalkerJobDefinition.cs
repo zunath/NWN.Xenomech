@@ -47,7 +47,7 @@ namespace XM.Progression.Job.JobDefinition
             {20, FeatType.VenomStab},
             {22, FeatType.SneakAttack2},
             {24, FeatType.CriticalBonus1},
-            {25, FeatType.LightProtection},
+            {25, FeatType.LightWard},
             {26, FeatType.Flee},
             {30, FeatType.TreasureHunter2},
             {32, FeatType.BackAttack3},

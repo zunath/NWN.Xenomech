@@ -16,9 +16,9 @@ namespace XM.Progression.StatusEffect
         public abstract LocaleString Name { get; }
         public abstract EffectIconType Icon { get; }
         public abstract bool IsStackable { get; }
-        public abstract bool IsFlaggedForRemoval { get; protected set; }
-        public abstract bool SendsApplicationMessage { get; }
-        public abstract bool SendsWornOffMessage { get; }
+        public bool IsFlaggedForRemoval { get; protected set; }
+        public virtual bool SendsApplicationMessage => true;
+        public virtual bool SendsWornOffMessage => true;
         public abstract float Frequency { get; }
         public virtual bool IsRemovedOnJobChange => true;
         public StatGroup Stats { get; }

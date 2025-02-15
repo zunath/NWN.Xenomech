@@ -47,7 +47,7 @@ namespace XM.Progression.Job.JobDefinition
             {20, FeatType.ElectricFist2},
             {22, FeatType.Warcry},
             {24, FeatType.Chi1},
-            {25, FeatType.WindProtection},
+            {25, FeatType.WindWard},
             {26, FeatType.Parry2},
             {30, FeatType.StrikingCobra2},
             {32, FeatType.AttackBonus2},

@@ -47,7 +47,7 @@ namespace XM.Progression.Job.JobDefinition
             {20, FeatType.RadiantBlast1},
             {22, FeatType.Restoration2},
             {24, FeatType.HPBonus1},
-            {25, FeatType.DarknessProtection},
+            {25, FeatType.DarknessWard},
             {26, FeatType.Rampart},
             {30, FeatType.DefenseBonus3},
             {32, FeatType.Raise},

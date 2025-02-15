@@ -47,7 +47,7 @@ namespace XM.Progression.Job.JobDefinition
             {20, FeatType.Reward2},
             {22, FeatType.ThirdEye},
             {24, FeatType.CrescentMoon2},
-            {25, FeatType.EarthProtection},
+            {25, FeatType.EarthWard},
             {26, FeatType.FeralHowl},
             {30, FeatType.Quickness},
             {32, FeatType.MercyStrike2},

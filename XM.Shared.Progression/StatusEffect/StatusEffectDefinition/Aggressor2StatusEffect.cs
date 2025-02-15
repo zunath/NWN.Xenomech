@@ -13,9 +13,6 @@ namespace XM.Progression.StatusEffect.StatusEffectDefinition
         public override LocaleString Name => LocaleString.AggressorII;
         public override EffectIconType Icon => EffectIconType.Aggressor2;
         public override bool IsStackable => false;
-        public override bool IsFlaggedForRemoval { get; protected set; }
-        public override bool SendsApplicationMessage => true;
-        public override bool SendsWornOffMessage => true;
         public override float Frequency => 100f;
 
         public override List<Type> LessPowerfulEffectTypes { get; } =

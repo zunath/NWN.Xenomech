@@ -134,5 +134,13 @@ namespace XM.Shared.API.Constants
         Wounding = 129,
         Aggressor1 = 130,
         Aggressor2 = 131,
+        DarknessWard = 132,
+        FireWard = 133,
+        EarthWard = 134,
+        WindWard = 135,
+        LightWard = 136,
+        IceWard = 137,
+        LightningWard = 138,
+        MindWard = 139,
     }
 }

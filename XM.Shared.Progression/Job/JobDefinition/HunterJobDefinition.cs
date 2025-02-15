@@ -47,7 +47,7 @@ namespace XM.Progression.Job.JobDefinition
             {20, FeatType.Recycle1},
             {22, FeatType.ChokingShot2},
             {24, FeatType.Volley2},
-            {25, FeatType.IceProtection},
+            {25, FeatType.IceWard},
             {26, FeatType.CryoVenom2},
             {30, FeatType.Sharpshot},
             {32, FeatType.AccuracyBonus2},

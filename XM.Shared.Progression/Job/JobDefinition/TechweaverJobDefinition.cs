@@ -46,7 +46,7 @@ namespace XM.Progression.Job.JobDefinition
             {20, FeatType.AurionInfusion1},
             {22, FeatType.NullLance2},
             {24, FeatType.Mindstream1},
-            {25, FeatType.MindProtection},
+            {25, FeatType.MindWard},
             {26, FeatType.NeuralStasis},
             {30, FeatType.NeuralCascade2},
             {32, FeatType.EPBonus2},

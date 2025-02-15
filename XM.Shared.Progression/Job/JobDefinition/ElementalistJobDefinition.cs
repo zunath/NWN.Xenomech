@@ -47,7 +47,7 @@ namespace XM.Progression.Job.JobDefinition
             {20, FeatType.Flame2},
             {22, FeatType.AbyssalVeil1},
             {24, FeatType.ElementalSeal},
-            {25, FeatType.LightningProtection},
+            {25, FeatType.LightningWard},
             {26, FeatType.Escape},
             {30, FeatType.ZephyrShroud},
             {32, FeatType.EtherAttackBonus2},

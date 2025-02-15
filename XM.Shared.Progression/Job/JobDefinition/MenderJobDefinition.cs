@@ -47,7 +47,7 @@ namespace XM.Progression.Job.JobDefinition
             {20, FeatType.Regen1},
             {22, FeatType.Revive},
             {24, FeatType.EtherBloom3},
-            {25, FeatType.FireProtection},
+            {25, FeatType.FireWard},
             {26, FeatType.Protection2},
             {30, FeatType.Tsu},
             {32, FeatType.EtherBlast2},

@@ -17,8 +17,8 @@ namespace XM.Progression.Recast
         Aggressor = 4,
         [RecastGroup(LocaleString.RadiantBlast, true)]
         RadiantBlast = 5,
-        [RecastGroup(LocaleString.ElementalProtection, true)]
-        ElementalProtection = 6,
+        [RecastGroup(LocaleString.ElementalShielding, true)]
+        ElementalShielding = 6,
         [RecastGroup(LocaleString.Rampart, true)]
         Rampart = 7,
         [RecastGroup(LocaleString.Raise, true)]
@@ -137,5 +137,7 @@ namespace XM.Progression.Recast
         NeuralStasis = 64,
         [RecastGroup(LocaleString.Convert, true)]
         Convert = 65,
+        [RecastGroup(LocaleString.Ward, true)]
+        Ward = 66,
     }
 }
