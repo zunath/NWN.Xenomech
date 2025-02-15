@@ -43,6 +43,7 @@ namespace XM.Progression.Job.JobDefinition
             {10, FeatType.DivineSeal},
             {12, FeatType.EtherBloom2},
             {14, FeatType.AutoRegen1},
+            {16, FeatType.ClubLore},
             {18, FeatType.EtherBlast1},
             {20, FeatType.Regen1},
             {22, FeatType.Revive},

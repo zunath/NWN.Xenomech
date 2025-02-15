@@ -43,6 +43,7 @@ namespace XM.Progression.Job.JobDefinition
             {10, FeatType.Parry1},
             {12, FeatType.AttackBonus1},
             {14, FeatType.PowerAttack1},
+            {16, FeatType.HandToHandLore},
             {18, FeatType.Shadowstrike1},
             {20, FeatType.ElectricFist2},
             {22, FeatType.Warcry},

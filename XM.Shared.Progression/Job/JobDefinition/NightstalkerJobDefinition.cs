@@ -43,6 +43,7 @@ namespace XM.Progression.Job.JobDefinition
             {10, FeatType.SneakAttack1},
             {12, FeatType.SubtleBlow1},
             {14, FeatType.TreasureHunter1},
+            {16, FeatType.DaggerLore},
             {18, FeatType.BackAttack2},
             {20, FeatType.VenomStab},
             {22, FeatType.SneakAttack2},

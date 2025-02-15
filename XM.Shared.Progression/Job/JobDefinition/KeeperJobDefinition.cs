@@ -43,6 +43,7 @@ namespace XM.Progression.Job.JobDefinition
             {10, FeatType.ShieldMastery1},
             {12, FeatType.Aggressor1},
             {14, FeatType.DefenseBonus2},
+            {16, FeatType.LongswordLore},
             {18, FeatType.Provoke2},
             {20, FeatType.RadiantBlast1},
             {22, FeatType.Restoration2},

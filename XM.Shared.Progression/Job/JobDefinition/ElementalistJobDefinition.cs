@@ -43,6 +43,7 @@ namespace XM.Progression.Job.JobDefinition
             {10, FeatType.Drown1},
             {12, FeatType.EtherAttackBonus1},
             {14, FeatType.ShockwaveSurge1},
+            {16, FeatType.StaffLore},
             {18, FeatType.ShockingCircle},
             {20, FeatType.Flame2},
             {22, FeatType.AbyssalVeil1},

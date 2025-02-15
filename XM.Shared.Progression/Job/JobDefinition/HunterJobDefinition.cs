@@ -43,6 +43,7 @@ namespace XM.Progression.Job.JobDefinition
             {10, FeatType.ChokingShot1},
             {12, FeatType.AccuracyBonus1},
             {14, FeatType.FreezingShot2},
+            {16, FeatType.BowLore},
             {18, FeatType.Cripple1},
             {20, FeatType.Recycle1},
             {22, FeatType.ChokingShot2},

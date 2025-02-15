@@ -42,6 +42,7 @@ namespace XM.Progression.Job.JobDefinition
             {10, FeatType.Rupture},
             {12, FeatType.CerebralSpike1},
             {14, FeatType.AutoRefresh1},
+            {16, FeatType.PolearmLore},
             {18, FeatType.EPBonus1},
             {20, FeatType.AurionInfusion1},
             {22, FeatType.NullLance2},

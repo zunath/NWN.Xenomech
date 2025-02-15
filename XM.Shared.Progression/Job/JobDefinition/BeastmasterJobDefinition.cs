@@ -43,6 +43,7 @@ namespace XM.Progression.Job.JobDefinition
             {10, FeatType.Sic},
             {12, FeatType.MercyStrike1},
             {14, FeatType.Snarl},
+            {16, FeatType.AxeLore},
             {18, FeatType.ResistPoison},
             {20, FeatType.Reward2},
             {22, FeatType.ThirdEye},
