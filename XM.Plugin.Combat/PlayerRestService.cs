@@ -1,6 +1,6 @@
 ﻿using Anvil.Services;
-using XM.Plugin.Combat.StatusEffect;
-using XM.Plugin.Combat.StatusEffect.StatusEffectDefinition;
+using XM.Progression.StatusEffect;
+using XM.Progression.StatusEffect.StatusEffectDefinition;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;

@@ -207,10 +207,18 @@ namespace XM.AI.Enmity
             // Modify the enemy's enmity toward this creature.
             int enmityValue;
 
+
             if (type == EnmityType.Cumulative)
+            {
+                var bonusEnmity = _stat.GetEnmityAdjustment(creature) * 0.01f;
+                amount += (int)(amount * bonusEnmity);
+
                 enmityValue = _enemyEnmityTables[enemy][creature].CumulativeEnmity + amount;
+            }
             else
+            {
                 enmityValue = _enemyEnmityTables[enemy][creature].VolatileEnmity + amount;
+            }
 
             // Enmity cannot fall below 1.
             if (enmityValue < 1)

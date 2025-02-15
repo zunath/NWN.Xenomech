@@ -1417,5 +1417,7 @@ namespace XM.Shared.Core.Localization
         AutoRegenIDescription = 1730,
         AutoRegenIIDescription = 1731,
         NaturalRegen = 1732,
+        EffectFailedToApplyX = 1733,
+        AMorePowerfulEffectIsActive = 1734,
     }
 }

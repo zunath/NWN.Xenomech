@@ -8,15 +8,14 @@ using XM.Progression.Job.Entity;
 using XM.Progression.Job.JobDefinition;
 using XM.Progression.Stat.Entity;
 using XM.Progression.Stat.ResistDefinition;
+using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.CreaturePlugin;
 using XM.Shared.API.NWNX.ObjectPlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
-using XM.UI;
 using XM.UI.Event;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace XM.Progression.Stat
 {
@@ -28,6 +27,7 @@ namespace XM.Progression.Stat
         private const string NPCEPStatVariable = "EP";
         private const string NPCTPStatVariable = "TP";
         private readonly XMEventService _event;
+        private readonly StatusEffectService _status;
 
         private readonly IList<IResistDefinition> _resists;
         private readonly Dictionary<ResistType, IResistDefinition> _resistDefinitions = new();
@@ -114,10 +114,12 @@ namespace XM.Progression.Stat
         public StatService(
             DBService db, 
             XMEventService @event,
+            StatusEffectService status,
             IList<IResistDefinition> resistDefinitions)
         {
             _db = db;
             _event = @event;
+            _status = status;
             _resists = resistDefinitions;
 
             RegisterEvents();
@@ -315,8 +317,9 @@ namespace XM.Progression.Stat
                 var jobMaxHP = dbPlayerStat.JobStats[StatType.MaxHP];
                 var itemMaxHP = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.MaxHP);
                 var abilityMaxHP = dbPlayerStat.AbilityStats.CalculateStat(StatType.MaxHP);
+                var statusMaxHP = _status.GetCreatureStatusEffects(creature).Stats[StatType.MaxHP];
 
-                return MaxHPBase + jobMaxHP + itemMaxHP + abilityMaxHP;
+                return MaxHPBase + jobMaxHP + itemMaxHP + abilityMaxHP + statusMaxHP;
             }
             else
             {
@@ -400,8 +403,9 @@ namespace XM.Progression.Stat
                 var jobMaxEP = dbPlayerStat.JobStats[StatType.MaxEP];
                 var abilityEP = dbPlayerStat.AbilityStats.CalculateStat(StatType.MaxEP);
                 var itemEP = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.MaxEP);
+                var statusMaxEP = _status.GetCreatureStatusEffects(creature).Stats[StatType.MaxEP];
 
-                return jobMaxEP + abilityEP + itemEP;
+                return jobMaxEP + abilityEP + itemEP + statusMaxEP;
             }
             // NPCs
             else
@@ -435,8 +439,9 @@ namespace XM.Progression.Stat
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
                 var abilitySubtleBlow = dbPlayerStat.AbilityStats.CalculateStat(StatType.SubtleBlow);
                 var itemSubtleBlow = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.SubtleBlow);
+                var statusSubtleBlow = _status.GetCreatureStatusEffects(creature).Stats[StatType.SubtleBlow];
 
-                return abilitySubtleBlow + itemSubtleBlow;
+                return abilitySubtleBlow + itemSubtleBlow + statusSubtleBlow;
             }
             else
             {
@@ -454,8 +459,9 @@ namespace XM.Progression.Stat
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
                 var abilityCriticalRate = dbPlayerStat.AbilityStats.CalculateStat(StatType.CriticalRate);
                 var itemCriticalRate = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.CriticalRate);
+                var statusCriticalRate = _status.GetCreatureStatusEffects(creature).Stats[StatType.CriticalRate];
 
-                return BaseCriticalRate + abilityCriticalRate + itemCriticalRate;
+                return BaseCriticalRate + abilityCriticalRate + itemCriticalRate + statusCriticalRate;
             }
             else
             {
@@ -472,9 +478,9 @@ namespace XM.Progression.Stat
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
                 var itemHPRegen = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.HPRegen);
                 var abilityHPRegen = dbPlayerStat.AbilityStats.CalculateStat(StatType.HPRegen);
-                var hpRegen = itemHPRegen + abilityHPRegen;
+                var statusHPRegen = _status.GetCreatureStatusEffects(creature).Stats[StatType.HPRegen];
 
-                return hpRegen;
+                return itemHPRegen + abilityHPRegen + statusHPRegen;
             }
             else
             {
@@ -489,9 +495,9 @@ namespace XM.Progression.Stat
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
                 var itemEPRegen = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.EPRegen);
                 var abilityEPRegen = dbPlayerStat.AbilityStats.CalculateStat(StatType.EPRegen);
-                var epRegen = itemEPRegen + abilityEPRegen;
+                var statusMaxEP = _status.GetCreatureStatusEffects(creature).Stats[StatType.MaxEP];
 
-                return epRegen;
+                return itemEPRegen + abilityEPRegen + statusMaxEP;
             }
             else
             {
@@ -573,9 +579,9 @@ namespace XM.Progression.Stat
             var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
             var itemRecastReduction = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.RecastReduction);
             var abilityRecastReduction = dbPlayerStat.AbilityStats.CalculateStat(StatType.RecastReduction);
-            var recastReduction = itemRecastReduction + abilityRecastReduction;
+            var statusRecastReduction = _status.GetCreatureStatusEffects(creature).Stats[StatType.RecastReduction];
 
-            return recastReduction;
+            return itemRecastReduction + abilityRecastReduction + statusRecastReduction;
         }
 
         public int GetAttribute(uint creature, AbilityType type)
@@ -611,8 +617,9 @@ namespace XM.Progression.Stat
                 var jobBonus = dbPlayerStat.JobStats[statType];
                 var itemBonus = dbPlayerStat.EquippedItemStats.CalculateStat(statType);
                 var abilityBonus = dbPlayerStat.AbilityStats.CalculateStat(statType);
+                var statusAbilityBonus = _status.GetCreatureStatusEffects(creature).Stats[statType];
 
-                return baseStat + jobBonus + itemBonus + abilityBonus;
+                return baseStat + jobBonus + itemBonus + abilityBonus + statusAbilityBonus;
             }
             else
             {
@@ -633,9 +640,9 @@ namespace XM.Progression.Stat
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
                 var itemAttack = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.Attack);
                 var abilityAttack = dbPlayerStat.AbilityStats.CalculateStat(StatType.Attack);
-                var attack = itemAttack + abilityAttack;
+                var statusAttack = _status.GetCreatureStatusEffects(creature).Stats[StatType.Attack];
 
-                return attack;
+                return itemAttack + abilityAttack + statusAttack;
             }
             else
             {
@@ -651,9 +658,9 @@ namespace XM.Progression.Stat
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
                 var itemEtherAttack = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.EtherAttack);
                 var abilityEtherAttack = dbPlayerStat.AbilityStats.CalculateStat(StatType.EtherAttack);
-                var etherAttack = itemEtherAttack + abilityEtherAttack;
+                var statusEtherAttack = _status.GetCreatureStatusEffects(creature).Stats[StatType.EtherAttack];
 
-                return etherAttack;
+                return itemEtherAttack + abilityEtherAttack + statusEtherAttack;
             }
             else
             {
@@ -670,9 +677,9 @@ namespace XM.Progression.Stat
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
                 var itemAccuracy = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.Accuracy);
                 var abilityAccuracy = dbPlayerStat.AbilityStats.CalculateStat(StatType.Accuracy);
-                var accuracy = itemAccuracy + abilityAccuracy;
+                var statusAccuracy = _status.GetCreatureStatusEffects(creature).Stats[StatType.Accuracy];
 
-                return accuracy;
+                return itemAccuracy + abilityAccuracy + statusAccuracy;
             }
             else
             {
@@ -688,9 +695,9 @@ namespace XM.Progression.Stat
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
                 var itemEvasion = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.Evasion);
                 var abilityEvasion = dbPlayerStat.AbilityStats.CalculateStat(StatType.Evasion);
-                var evasion = itemEvasion + abilityEvasion;
+                var statusEvasion = _status.GetCreatureStatusEffects(creature).Stats[StatType.Evasion];
 
-                return evasion;
+                return itemEvasion + abilityEvasion + statusEvasion;
             }
             else
             {
@@ -706,9 +713,9 @@ namespace XM.Progression.Stat
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
                 var itemDefense = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.Defense);
                 var abilityDefense = dbPlayerStat.AbilityStats.CalculateStat(StatType.Defense);
-                var defense = itemDefense + abilityDefense;
+                var statusDefense = _status.GetCreatureStatusEffects(creature).Stats[StatType.Defense];
 
-                return defense;
+                return itemDefense + abilityDefense + statusDefense;
             }
             else
             {
@@ -725,9 +732,9 @@ namespace XM.Progression.Stat
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
                 var itemShieldDeflection = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.ShieldDeflection);
                 var abilityShieldDeflection = dbPlayerStat.AbilityStats.CalculateStat(StatType.ShieldDeflection);
-                var shieldDeflection = itemShieldDeflection + abilityShieldDeflection;
-
-                return shieldDeflection;
+                var statusShieldDeflection = _status.GetCreatureStatusEffects(creature).Stats[StatType.ShieldDeflection];
+                
+                return itemShieldDeflection + abilityShieldDeflection + statusShieldDeflection;
             }
             else
             {
@@ -743,9 +750,9 @@ namespace XM.Progression.Stat
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
                 var itemAttackDeflection = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.AttackDeflection);
                 var abilityAttackDeflection = dbPlayerStat.AbilityStats.CalculateStat(StatType.AttackDeflection);
-                var attackDeflection = itemAttackDeflection + abilityAttackDeflection;
+                var statusAttackDeflection = _status.GetCreatureStatusEffects(creature).Stats[StatType.AttackDeflection];
 
-                return attackDeflection;
+                return itemAttackDeflection + abilityAttackDeflection + statusAttackDeflection;
             }
             else
             {
@@ -763,9 +770,28 @@ namespace XM.Progression.Stat
             var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
             var itemTPGain = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.TPGain);
             var abilityTPGain = dbPlayerStat.AbilityStats.CalculateStat(StatType.TPGain);
-            var tpGain = itemTPGain + abilityTPGain;
+            var statusTPGain = _status.GetCreatureStatusEffects(creature).Stats[StatType.TPGain];
+            
+            return itemTPGain + abilityTPGain + statusTPGain;
+        }
+        public int GetEnmityAdjustment(uint creature)
+        {
+            if (!GetIsPC(creature))
+                return 0;
 
-            return tpGain;
+            var playerId = PlayerId.Get(creature);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+            var itemEnmity = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.Enmity);
+            var abilityEnmity = dbPlayerStat.AbilityStats.CalculateStat(StatType.Enmity);
+            var statusEnmity = _status.GetCreatureStatusEffects(creature).Stats[StatType.Enmity];
+
+            var enmity = itemEnmity + abilityEnmity + statusEnmity;
+            if (enmity > 200)
+                enmity = 200;
+            else if (enmity < -50)
+                enmity = -50;
+
+            return enmity;
         }
 
         public void SetTP(uint creature, int amount)
@@ -834,7 +860,8 @@ namespace XM.Progression.Stat
             var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
             var equipmentResist = dbPlayerStat.EquippedItemStats.CalculateResist(resist);
             var abilityResist = dbPlayerStat.AbilityStats.CalculateResist(resist);
-            var resistPercent = equipmentResist + abilityResist;
+            var statusResist = _status.GetCreatureStatusEffects(player).Stats.Resists[resist];
+            var resistPercent = equipmentResist + abilityResist + statusResist;
 
             return Math.Clamp(resistPercent, 0, 100);
         }

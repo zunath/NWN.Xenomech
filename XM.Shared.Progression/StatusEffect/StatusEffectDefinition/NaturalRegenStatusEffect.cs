@@ -3,10 +3,10 @@ using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
-namespace XM.Plugin.Combat.StatusEffect.StatusEffectDefinition
+namespace XM.Progression.StatusEffect.StatusEffectDefinition
 {
     [ServiceBinding(typeof(NaturalRegenStatusEffect))]
-    internal class NaturalRegenStatusEffect: StatusEffectBase
+    public class NaturalRegenStatusEffect: StatusEffectBase
     {
         public override LocaleString Name => LocaleString.NaturalRegen;
         public override EffectIconType Icon => EffectIconType.Invalid;

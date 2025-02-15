@@ -2,6 +2,11 @@
 {
     internal class ProgressionEventScript
     {
+        // Status Effects
+        public const string OnApplyStatusEffectScript = "status_apply";
+        public const string OnRemoveStatusEffectScript = "status_remove";
+        public const string OnStatusEffectIntervalScript = "status_interval";
+
         // Jobs
         public const string PlayerChangedJobScript = "pc_change_job";
         public const string PlayerLeveledUpScript = "pc_job_level_up";

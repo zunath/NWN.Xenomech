@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using XM.Progression.Stat;
 
-namespace XM.Plugin.Combat.StatusEffect
+namespace XM.Progression.StatusEffect
 {
-    internal class CreatureStatusEffect
+    public class CreatureStatusEffect
     {
         private readonly HashSet<IStatusEffect> _activeEffects = new();
 
@@ -43,6 +44,11 @@ namespace XM.Plugin.Combat.StatusEffect
         public HashSet<IStatusEffect> GetAllEffects()
         {
             return _activeEffects.ToHashSet();
+        }
+
+        public bool HasEffect(Type effectType)
+        {
+            return _activeEffects.Any(x => x.GetType() == effectType);
         }
 
         public CreatureStatusEffect()

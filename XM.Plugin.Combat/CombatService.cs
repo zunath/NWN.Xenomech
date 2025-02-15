@@ -2,10 +2,10 @@
 using Anvil.Services;
 using NWN.Core.NWNX;
 using XM.Inventory;
-using XM.Plugin.Combat.StatusEffect;
 using XM.Progression.Skill;
 using XM.Progression.Stat;
 using XM.Progression.Stat.Entity;
+using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.FeedbackPlugin;
 using XM.Shared.Core;

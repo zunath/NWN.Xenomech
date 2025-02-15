@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
-namespace XM.Plugin.Combat.StatusEffect
+namespace XM.Progression.StatusEffect
 {
-    internal abstract class StatusEffectBase: IStatusEffect
+    public abstract class StatusEffectBase: IStatusEffect
     {
         private bool _isPermanent;
         private int _durationTicks;
@@ -21,13 +22,18 @@ namespace XM.Plugin.Combat.StatusEffect
         public abstract float Frequency { get; }
         public virtual bool IsRemovedOnJobChange => true;
         public StatGroup Stats { get; }
-
+        public virtual List<Type> MorePowerfulEffectTypes { get; }
+        public virtual List<Type> LessPowerfulEffectTypes { get; }
 
         protected StatusEffectBase()
         {
             Id = Guid.NewGuid().ToString();
             Stats = new StatGroup();
+            MorePowerfulEffectTypes = new List<Type>();
+            LessPowerfulEffectTypes = new List<Type>();
         }
+
+        public virtual LocaleString CanApply(uint creature) { return LocaleString.Empty; }
 
         protected virtual void Apply(uint creature) { }
         public void ApplyEffect(uint creature, int durationTicks)

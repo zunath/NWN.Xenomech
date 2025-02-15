@@ -5,10 +5,10 @@ using XM.Shared.API.Constants;
 using XM.Shared.Core.Activity;
 using XM.Shared.Core.Localization;
 
-namespace XM.Plugin.Combat.StatusEffect.StatusEffectDefinition
+namespace XM.Progression.StatusEffect.StatusEffectDefinition
 {
     [ServiceBinding(typeof(RestStatusEffect))]
-    internal class RestStatusEffect: StatusEffectBase
+    public class RestStatusEffect: StatusEffectBase
     {
         private const string RestPositionX = "REST_POSITION_X";
         private const string RestPositionY = "REST_POSITION_Y";

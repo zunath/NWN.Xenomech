@@ -24,5 +24,6 @@
         AttackDeflection = 19,
         SubtleBlow = 20,
         CriticalRate = 21,
+        Enmity = 22,
     }
 }

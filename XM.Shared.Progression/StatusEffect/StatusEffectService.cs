@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using Anvil.Services;
-using XM.Plugin.Combat.Event;
 using XM.Progression.Event;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 
-namespace XM.Plugin.Combat.StatusEffect
+namespace XM.Progression.StatusEffect
 {
     [ServiceBinding(typeof(StatusEffectService))]
-    internal class StatusEffectService
+    public class StatusEffectService
     {
         private const string StatusEffectTag = "STATUS_EFFECT";
         private const float Interval = 1f;
@@ -34,9 +33,9 @@ namespace XM.Plugin.Combat.StatusEffect
 
         private void RegisterEvents()
         {
-            _event.RegisterEvent<StatusEffectEvent.OnApplyStatusEffect>(CombatEventScript.OnApplyStatusEffectScript);
-            _event.RegisterEvent<StatusEffectEvent.OnRemoveStatusEffect>(CombatEventScript.OnRemoveStatusEffectScript);
-            _event.RegisterEvent<StatusEffectEvent.OnStatusEffectInterval>(CombatEventScript.OnStatusEffectIntervalScript);
+            _event.RegisterEvent<StatusEffectEvent.OnApplyStatusEffect>(ProgressionEventScript.OnApplyStatusEffectScript);
+            _event.RegisterEvent<StatusEffectEvent.OnRemoveStatusEffect>(ProgressionEventScript.OnRemoveStatusEffectScript);
+            _event.RegisterEvent<StatusEffectEvent.OnStatusEffectInterval>(ProgressionEventScript.OnStatusEffectIntervalScript);
         }
 
         private void SubscribeEvents()
@@ -62,9 +61,9 @@ namespace XM.Plugin.Combat.StatusEffect
                 return;
 
             var effect = EffectRunScript(
-                CombatEventScript.OnApplyStatusEffectScript,
-                CombatEventScript.OnRemoveStatusEffectScript,
-                CombatEventScript.OnStatusEffectIntervalScript,
+                ProgressionEventScript.OnApplyStatusEffectScript,
+                ProgressionEventScript.OnRemoveStatusEffectScript,
+                ProgressionEventScript.OnStatusEffectIntervalScript,
                 Interval);
             effect = TagEffect(effect, StatusEffectTag);
             effect = SupernaturalEffect(effect);
@@ -127,9 +126,32 @@ namespace XM.Plugin.Combat.StatusEffect
             var statusEffect = (IStatusEffect)Activator.CreateInstance<T>();
             _injection.Inject(statusEffect);
 
+            var canApply = statusEffect.CanApply(creature).ToLocalizedString();
+            if (!string.IsNullOrWhiteSpace(canApply))
+            {
+                var message = LocaleString.EffectFailedToApplyX.ToLocalizedString(canApply);
+                SendMessageToPC(creature, message);
+                return;
+            }
+
+            foreach (var morePowerful in statusEffect.MorePowerfulEffectTypes)
+            {
+                if (HasEffect(morePowerful, creature))
+                {
+                    var message = LocaleString.AMorePowerfulEffectIsActive.ToLocalizedString();
+                    SendMessageToPC(creature, message);
+                    return;
+                }
+            }
+
             if (!statusEffect.IsStackable)
             {
                 RemoveStatusEffect<T>(creature);
+            }
+
+            foreach (var lessPowerful in statusEffect.LessPowerfulEffectTypes)
+            {
+                RemoveStatusEffect(lessPowerful, creature);
             }
 
             _creatureEffects[creature].Add(statusEffect);
@@ -183,6 +205,19 @@ namespace XM.Plugin.Combat.StatusEffect
             RemoveStatusEffect(type, creature);
         }
 
+        private bool HasEffect(Type type, uint creature)
+        {
+            if (!_creatureEffects.ContainsKey(creature))
+                return false;
+
+            return _creatureEffects[creature].HasEffect(type);
+        }
+
+        public bool HasEffect<T>(uint creature)
+            where T : IStatusEffect
+        {
+            return HasEffect(typeof(T), creature);
+        }
 
         private void OnChangeJobs(uint player)
         {
