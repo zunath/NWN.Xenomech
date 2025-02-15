@@ -1,6 +1,9 @@
 ﻿using Anvil.Services;
+using NWN.Core.NWNX;
 using XM.Plugin.Combat.StatusEffect;
 using XM.Plugin.Combat.StatusEffect.StatusEffectDefinition;
+using XM.Shared.API.Constants;
+using XM.Shared.Core;
 using XM.Shared.Core.EventManagement;
 
 namespace XM.Plugin.Combat
@@ -24,6 +27,7 @@ namespace XM.Plugin.Combat
         private void SubscribeEvents()
         {
             _event.Subscribe<ModuleEvent.OnPlayerEnter>(ApplyTraitEffects);
+            _event.Subscribe<NWNXEvent.OnItemDecrementStacksizeBefore>(RecycleTrait);
         }
 
         private void ApplyTraitEffects(uint module)
@@ -32,5 +36,32 @@ namespace XM.Plugin.Combat
 
             _statusEffect.ApplyPermanentStatusEffect<NaturalRegenStatusEffect>(player);
         }
+
+        private void RecycleTrait(uint item)
+        {
+            var type = GetBaseItemType(item);
+            if (type != BaseItemType.Arrow &&
+                type != BaseItemType.Bolt &&
+                type != BaseItemType.Bullet)
+                return;
+
+            var possessor = GetItemPossessor(item);
+            var chance = 0;
+            if (GetHasFeat(FeatType.Recycle1, possessor))
+            {
+                chance += 20;
+            }
+
+            if (GetHasFeat(FeatType.Recycle2, possessor))
+            {
+                chance += 30;
+            }
+
+            if (XMRandom.D100(1) <= chance)
+            {
+                EventsPlugin.SkipEvent();
+            }
+        }
+
     }
 }
