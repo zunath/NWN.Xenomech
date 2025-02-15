@@ -29,6 +29,18 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
             return _builder.Build();
         }
 
+        private bool HasEffect(uint activator)
+        {
+            return _status.HasEffect<Aggressor1StatusEffect>(activator) ||
+                   _status.HasEffect<Aggressor2StatusEffect>(activator);
+        }
+
+        private void RemoveEffects(uint activator)
+        {
+            _status.RemoveStatusEffect<Aggressor1StatusEffect>(activator);
+            _status.RemoveStatusEffect<Aggressor2StatusEffect>(activator);
+        }
+
         private void Aggressor1()
         {
             _builder.Create(FeatType.Aggressor1)
@@ -39,15 +51,16 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
                 .UsesAnimation(AnimationType.FireForgetTaunt)
                 .IsCastedAbility()
                 .ResonanceCost(1)
-                .HasImpactAction((activator, target, location) =>
+                .IsToggled(HasEffect)
+                .HasToggleAction((activator, isToggled) =>
                 {
-                    if (_status.HasEffect<Aggressor1StatusEffect>(activator))
+                    if (isToggled)
                     {
-                        _status.RemoveStatusEffect<Aggressor1StatusEffect>(activator);
+                        _status.ApplyPermanentStatusEffect<Aggressor1StatusEffect>(activator, activator);
                     }
                     else
                     {
-                        _status.ApplyPermanentStatusEffect<Aggressor1StatusEffect>(activator, activator);
+                        RemoveEffects(activator);
                     }
                 });
         }
@@ -62,15 +75,16 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
                 .UsesAnimation(AnimationType.FireForgetTaunt)
                 .IsCastedAbility()
                 .ResonanceCost(2)
-                .HasImpactAction((activator, target, location) =>
+                .IsToggled(HasEffect)
+                .HasToggleAction((activator, isToggled) =>
                 {
-                    if (_status.HasEffect<Aggressor2StatusEffect>(activator))
+                    if (isToggled)
                     {
-                        _status.RemoveStatusEffect<Aggressor2StatusEffect>(activator);
+                        _status.ApplyPermanentStatusEffect<Aggressor2StatusEffect>(activator, activator);
                     }
                     else
                     {
-                        _status.ApplyPermanentStatusEffect<Aggressor2StatusEffect>(activator, activator);
+                        RemoveEffects(activator);
                     }
                 });
         }
