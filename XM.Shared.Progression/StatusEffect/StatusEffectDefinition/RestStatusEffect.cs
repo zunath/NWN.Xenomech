@@ -74,7 +74,12 @@ namespace XM.Progression.StatusEffect.StatusEffectDefinition
             if (GetHasFeat(FeatType.ClearMind, creature))
                 epAmount *= 2;
 
-            ApplyEffectToObject(DurationType.Instant, EffectHeal(hpAmount), creature);
+            var currentHP = Stat.GetCurrentHP(creature);
+            var maxHP = Stat.GetMaxHP(creature);
+
+            if(currentHP < maxHP)
+                ApplyEffectToObject(DurationType.Instant, EffectHeal(hpAmount), creature);
+
             Stat.RestoreEP(creature, epAmount);
         }
 
