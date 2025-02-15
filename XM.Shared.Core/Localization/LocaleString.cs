@@ -1420,5 +1420,6 @@ namespace XM.Shared.Core.Localization
         EffectFailedToApplyX = 1733,
         AMorePowerfulEffectIsActive = 1734,
         Ward = 1735,
+        YourTargetMustBeDead = 1736
     }
 }

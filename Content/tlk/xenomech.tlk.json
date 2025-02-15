@@ -6936,6 +6936,10 @@
     {
       "id": 1735,
       "text": "Ward"
+    },
+    {
+      "id": 1736,
+      "text": "Your target must be dead."
     }
   ]
 }
