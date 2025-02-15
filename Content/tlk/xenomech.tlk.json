@@ -2287,11 +2287,11 @@
     },
     {
       "id": 573,
-      "text": "Darkness Protection"
+      "text": "Darkness Ward"
     },
     {
       "id": 574,
-      "text": "Darkness Protection Description"
+      "text": "Darkness Ward Description"
     },
     {
       "id": 575,
@@ -2459,11 +2459,11 @@
     },
     {
       "id": 616,
-      "text": "Fire Protection"
+      "text": "Fire Ward"
     },
     {
       "id": 617,
-      "text": "Fire Protection Description"
+      "text": "Fire Ward Description"
     },
     {
       "id": 618,
@@ -2615,11 +2615,11 @@
     },
     {
       "id": 655,
-      "text": "Earth Protection"
+      "text": "Earth Ward"
     },
     {
       "id": 656,
-      "text": "Earth Protection Description"
+      "text": "Earth Ward Description"
     },
     {
       "id": 657,
@@ -2839,11 +2839,11 @@
     },
     {
       "id": 711,
-      "text": "Wind Protection"
+      "text": "Wind Ward"
     },
     {
       "id": 712,
-      "text": "Wind Protection Description"
+      "text": "Wind Ward Description"
     },
     {
       "id": 713,
@@ -2995,11 +2995,11 @@
     },
     {
       "id": 750,
-      "text": "Light Protection"
+      "text": "Light Ward"
     },
     {
       "id": 751,
-      "text": "Light Protection Description"
+      "text": "Light Ward Description"
     },
     {
       "id": 752,
@@ -3183,11 +3183,11 @@
     },
     {
       "id": 797,
-      "text": "Ice Protection"
+      "text": "Ice Ward"
     },
     {
       "id": 798,
-      "text": "Ice Protection Description"
+      "text": "Ice Ward Description"
     },
     {
       "id": 799,
@@ -3359,11 +3359,11 @@
     },
     {
       "id": 841,
-      "text": "Lightning Protection"
+      "text": "Lightning Ward"
     },
     {
       "id": 842,
-      "text": "Lightning Protection Description"
+      "text": "Lightning Ward Description"
     },
     {
       "id": 843,
@@ -3563,11 +3563,11 @@
     },
     {
       "id": 892,
-      "text": "Mind Protection"
+      "text": "Mind Ward"
     },
     {
       "id": 893,
-      "text": "Mind Protection Description"
+      "text": "Mind Ward Description"
     },
     {
       "id": 894,
@@ -3599,7 +3599,7 @@
     },
     {
       "id": 901,
-      "text": "Elemental Protection"
+      "text": "Elemental Shielding"
     },
     {
       "id": 902,
@@ -6928,6 +6928,14 @@
     {
       "id": 1733,
       "text": "Effect failed to apply: {0}"
+    },
+    {
+      "id": 1734,
+      "text": "A more powerful effect is active."
+    },
+    {
+      "id": 1735,
+      "text": "Ward"
     }
   ]
 }
