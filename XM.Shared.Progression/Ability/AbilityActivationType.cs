@@ -7,5 +7,6 @@
         Weapon = 2,
         Stance = 3,
         Aura = 4,
+        Toggle = 5,
     }
 }

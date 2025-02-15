@@ -12,6 +12,8 @@ namespace XM.Progression.Ability
         uint target, 
         Location targetLocation);
 
+    public delegate void AbilityToggleAction(uint activator, bool isToggled);
+
     public delegate float AbilityActivationDelayAction(
         uint activator, 
         uint target);
@@ -26,4 +28,6 @@ namespace XM.Progression.Ability
     public delegate void AbilityEquippedAction(uint creature);
 
     public delegate void AbilityUnequippedAction(uint creature);
+
+    public delegate bool AbilityIsToggledAction(uint creature);
 }

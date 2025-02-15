@@ -257,6 +257,12 @@ namespace XM.Progression.Ability
                     QueueWeaponAbility(activator, ability, feat);
                 }
             }
+            // Toggle abilities
+            else if (ability.ActivationType == AbilityActivationType.Toggle &&
+                     ability.AbilityIsToggledAction(activator))
+            {
+                ability.AbilityToggleAction?.Invoke(activator, false);
+            }
             // All other abilities are funneled through the same process.
             else
             {
@@ -361,6 +367,7 @@ namespace XM.Progression.Ability
 
                 ApplyRequirementEffects(activator, ability);
                 ability.ImpactAction?.Invoke(activator, target, targetLocation);
+                ability.AbilityToggleAction?.Invoke(activator, true);
                 _recast.ApplyRecastDelay(activator, ability.RecastGroup, abilityRecastDelay, false);
             }
 

@@ -69,6 +69,7 @@ namespace XM.Progression.Ability
         public AbilityBuilder IsCastedAbility()
         {
             _activeAbility.ActivationType = AbilityActivationType.Casted;
+            _activeAbility.AbilityIsToggledAction = null;
 
             return this;
         }
@@ -80,6 +81,20 @@ namespace XM.Progression.Ability
         public AbilityBuilder IsWeaponAbility()
         {
             _activeAbility.ActivationType = AbilityActivationType.Weapon;
+            _activeAbility.AbilityIsToggledAction = null;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Indicates this ability is executed as a toggle and can be turned off at will by the creature.
+        /// </summary>
+        /// <param name="abilityIsToggled">The command run to determine if the ability is toggled.</param>
+        /// <returns>An ability builder with the configured options.</returns>
+        public AbilityBuilder IsToggled(AbilityIsToggledAction abilityIsToggled)
+        {
+            _activeAbility.ActivationType = AbilityActivationType.Toggle;
+            _activeAbility.AbilityIsToggledAction = abilityIsToggled;
 
             return this;
         }
@@ -139,7 +154,7 @@ namespace XM.Progression.Ability
         /// <summary>
         /// Assigns an impact action on the active ability we're building.
         /// Calling this more than once will replace the previous action.
-        /// Impact actions are fired when a ability is used. The timing of when it fires depends on the activation type.
+        /// Impact actions are fired when an ability is used. The timing of when it fires depends on the activation type.
         /// "Casted" abilities fire the impact action at the end of the casting phase.
         /// "Queued" abilities fire the impact action on the next weapon hit.
         /// "Concentration" abilities fire the impact action on each concentration cycle.
@@ -149,6 +164,21 @@ namespace XM.Progression.Ability
         public AbilityBuilder HasImpactAction(AbilityImpactAction action)
         {
             _activeAbility.ImpactAction = action;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Assigns a toggle action on the active ability we're building.
+        /// Calling this more than once will replace the previous action.
+        /// Toggle actions are fired when an ability is turned on or off.
+        /// Use in conjunction with IsToggled()
+        /// </summary>
+        /// <param name="action">The action to run when an ability is toggled on or off.</param>
+        /// <returns>An ability builder with the configured options</returns>
+        public AbilityBuilder HasToggleAction(AbilityToggleAction action)
+        {
+            _activeAbility.AbilityToggleAction = action;
 
             return this;
         }

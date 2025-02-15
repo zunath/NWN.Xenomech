@@ -18,6 +18,8 @@ namespace XM.Progression.Ability
         public AbilityCustomValidationAction CustomValidation { get; set; }
         public AbilityEquippedAction AbilityEquippedAction { get; set; }
         public AbilityUnequippedAction AbilityUnequippedAction { get; set; }
+        public AbilityIsToggledAction AbilityIsToggledAction { get; set; }
+        public AbilityToggleAction AbilityToggleAction { get; set; }
         public int EPRequired { get; set; }
         public VisualEffectType ActivationVisualEffect { get; set; }
         public RecastGroup RecastGroup { get; set; }
