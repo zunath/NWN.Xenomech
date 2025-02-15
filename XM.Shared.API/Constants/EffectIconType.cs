@@ -142,5 +142,6 @@ namespace XM.Shared.API.Constants
         IceWard = 137,
         LightningWard = 138,
         MindWard = 139,
+        Rampart = 140,
     }
 }

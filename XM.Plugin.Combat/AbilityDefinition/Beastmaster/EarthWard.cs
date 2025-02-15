@@ -42,7 +42,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Beastmaster
                 .ResonanceCost(1)
                 .HasImpactAction((activator, target, location) =>
                 {
-                    ApplyPartyAOE<EarthWardStatusEffect>(activator, 15f, 15);
+                    ApplyPartyAOE<EarthWardStatusEffect>(activator, activator, 15f, 15);
                 });
         }
     }

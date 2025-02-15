@@ -10,12 +10,16 @@ namespace XM.Progression.StatusEffect.StatusEffectDefinition
     {
         public override LocaleString Name => LocaleString.LightningWard;
         public override EffectIconType Icon => EffectIconType.LightningWard;
-        public override bool IsStackable => false;
-        public override float Frequency => 1000f;
+        public override StatusEffectStackType StackingType => StatusEffectStackType.Disabled;
+        public override float Frequency => 60f;
 
         public LightningWardStatusEffect()
         {
             Stats.Resists[ResistType.Lightning] = 50;
+        }
+        protected override void Apply(uint creature)
+        {
+            ApplyEffectToObject(DurationType.Temporary, EffectVisualEffect(VisualEffectType.DurAuraCyan), creature, 2f);
         }
     }
 }

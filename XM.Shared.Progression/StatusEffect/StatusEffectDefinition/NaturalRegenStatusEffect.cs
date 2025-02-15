@@ -10,7 +10,7 @@ namespace XM.Progression.StatusEffect.StatusEffectDefinition
     {
         public override LocaleString Name => LocaleString.NaturalRegen;
         public override EffectIconType Icon => EffectIconType.Invalid;
-        public override bool IsStackable => false;
+        public override StatusEffectStackType StackingType => StatusEffectStackType.Disabled;
         public override bool SendsApplicationMessage => false;
         public override bool SendsWornOffMessage => false;
         public override float Frequency => 3f;

@@ -112,13 +112,13 @@ namespace XM.Progression.StatusEffect
                 : _creatureEffects[creature];
         }
 
-        public void ApplyPermanentStatusEffect<T>(uint creature)
+        public void ApplyPermanentStatusEffect<T>(uint source, uint creature)
             where T: IStatusEffect
         {
-            ApplyStatusEffect<T>(creature, -1);
+            ApplyStatusEffect<T>(source, creature, -1);
         }
 
-        public void ApplyStatusEffect<T>(uint creature, int durationTicks)
+        public void ApplyStatusEffect<T>(uint source, uint creature, int durationTicks)
             where T: IStatusEffect
         {
             ApplyNWNEffect(creature);
@@ -144,9 +144,15 @@ namespace XM.Progression.StatusEffect
                 }
             }
 
-            if (!statusEffect.IsStackable)
+            switch (statusEffect.StackingType)
             {
-                RemoveStatusEffect<T>(creature);
+                case StatusEffectStackType.Disabled:
+                case StatusEffectStackType.Invalid:
+                    RemoveStatusEffect<T>(creature);
+                    break;
+                case StatusEffectStackType.StackFromMultipleSources:
+                    RemoveStatusEffect(typeof(T), creature, source);
+                    break;
             }
 
             foreach (var lessPowerful in statusEffect.LessPowerfulEffectTypes)
@@ -155,7 +161,7 @@ namespace XM.Progression.StatusEffect
             }
 
             _creatureEffects[creature].Add(statusEffect);
-            statusEffect.ApplyEffect(creature, durationTicks);
+            statusEffect.ApplyEffect(source, creature, durationTicks);
 
             if (statusEffect.Icon != EffectIconType.Invalid)
             {
@@ -173,7 +179,7 @@ namespace XM.Progression.StatusEffect
             }
         }
 
-        private void RemoveStatusEffect(Type type, uint creature)
+        private void RemoveStatusEffect(Type type, uint creature, uint source = OBJECT_INVALID)
         {
             var hasSentMessage = false;
             var statusEffects = _creatureEffects[creature].GetAllEffects();
@@ -181,14 +187,17 @@ namespace XM.Progression.StatusEffect
             {
                 if (statusEffect.GetType() == type)
                 {
-                    if (statusEffect.SendsWornOffMessage && !hasSentMessage)
+                    if (source == OBJECT_INVALID || statusEffect.Source == source)
                     {
-                        var name = GetName(creature);
-                        var effectName = statusEffect.Name.ToLocalizedString();
-                        Messaging.SendMessageNearbyToPlayers(creature,
-                            LocaleString.CreaturesXEffectHasWornOff.ToLocalizedString(name, effectName));
+                        if (statusEffect.SendsWornOffMessage && !hasSentMessage)
+                        {
+                            var name = GetName(creature);
+                            var effectName = statusEffect.Name.ToLocalizedString();
+                            Messaging.SendMessageNearbyToPlayers(creature,
+                                LocaleString.CreaturesXEffectHasWornOff.ToLocalizedString(name, effectName));
 
-                        hasSentMessage = true;
+                            hasSentMessage = true;
+                        }
                     }
 
                     RemoveEffectByTag(creature, statusEffect.Id);

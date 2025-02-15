@@ -16,7 +16,7 @@ namespace XM.Progression.StatusEffect.StatusEffectDefinition
 
         public override LocaleString Name => LocaleString.Rest;
         public override EffectIconType Icon => EffectIconType.Fatigue;
-        public override bool IsStackable => false;
+        public override StatusEffectStackType StackingType => StatusEffectStackType.Disabled;
         public override float Frequency => 6f;
 
         [Inject]

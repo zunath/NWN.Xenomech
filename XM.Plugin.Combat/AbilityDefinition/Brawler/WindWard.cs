@@ -42,7 +42,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Brawler
                 .ResonanceCost(1)
                 .HasImpactAction((activator, target, location) =>
                 {
-                    ApplyPartyAOE<WindWardStatusEffect>(activator, 15f, 15);
+                    ApplyPartyAOE<WindWardStatusEffect>(activator, activator, 15f, 15);
                 });
         }
     }

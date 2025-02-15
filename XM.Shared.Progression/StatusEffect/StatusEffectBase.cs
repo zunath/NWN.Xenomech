@@ -13,9 +13,10 @@ namespace XM.Progression.StatusEffect
         private DateTime _lastRun;
 
         public string Id { get; }
+        public uint Source { get; private set; }
         public abstract LocaleString Name { get; }
         public abstract EffectIconType Icon { get; }
-        public abstract bool IsStackable { get; }
+        public abstract StatusEffectStackType StackingType { get; }
         public bool IsFlaggedForRemoval { get; protected set; }
         public virtual bool SendsApplicationMessage => true;
         public virtual bool SendsWornOffMessage => true;
@@ -36,13 +37,14 @@ namespace XM.Progression.StatusEffect
         public virtual LocaleString CanApply(uint creature) { return LocaleString.Empty; }
 
         protected virtual void Apply(uint creature) { }
-        public void ApplyEffect(uint creature, int durationTicks)
+        public void ApplyEffect(uint source, uint creature, int durationTicks)
         {
             if (durationTicks < 0)
                 _isPermanent = true;
 
             _lastRun = DateTime.UtcNow;
             _durationTicks = durationTicks;
+            Source = source;
             Apply(creature);
         }
 

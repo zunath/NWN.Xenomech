@@ -34,7 +34,7 @@ namespace XM.Plugin.Combat
         {
             var player = GetEnteringObject();
 
-            _statusEffect.ApplyPermanentStatusEffect<NaturalRegenStatusEffect>(player);
+            _statusEffect.ApplyPermanentStatusEffect<NaturalRegenStatusEffect>(player, player);
         }
 
         private void RecycleTrait(uint item)

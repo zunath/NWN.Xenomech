@@ -12,8 +12,8 @@ namespace XM.Progression.StatusEffect.StatusEffectDefinition
     {
         public override LocaleString Name => LocaleString.AggressorII;
         public override EffectIconType Icon => EffectIconType.Aggressor2;
-        public override bool IsStackable => false;
-        public override float Frequency => 100f;
+        public override StatusEffectStackType StackingType => StatusEffectStackType.Disabled;
+        public override float Frequency => 60f;
 
         public override List<Type> LessPowerfulEffectTypes { get; } =
         [
@@ -23,6 +23,10 @@ namespace XM.Progression.StatusEffect.StatusEffectDefinition
         public Aggressor2StatusEffect()
         {
             Stats[StatType.Enmity] = 10;
+        }
+        protected override void Apply(uint creature)
+        {
+            ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpHeadEvil), creature);
         }
     }
 }

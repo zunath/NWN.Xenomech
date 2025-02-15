@@ -10,12 +10,16 @@ namespace XM.Progression.StatusEffect.StatusEffectDefinition
     {
         public override LocaleString Name => LocaleString.EarthWard;
         public override EffectIconType Icon => EffectIconType.EarthWard;
-        public override bool IsStackable => false;
-        public override float Frequency => 1000f;
+        public override StatusEffectStackType StackingType => StatusEffectStackType.Disabled;
+        public override float Frequency => 60f;
 
         public EarthWardStatusEffect()
         {
             Stats.Resists[ResistType.Earth] = 50;
+        }
+        protected override void Apply(uint creature)
+        {
+            ApplyEffectToObject(DurationType.Temporary, EffectVisualEffect(VisualEffectType.DurAuraOrange), creature, 2f);
         }
     }
 }

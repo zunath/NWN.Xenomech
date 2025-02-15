@@ -10,12 +10,16 @@ namespace XM.Progression.StatusEffect.StatusEffectDefinition
     {
         public override LocaleString Name => LocaleString.WindWard;
         public override EffectIconType Icon => EffectIconType.WindWard;
-        public override bool IsStackable => false;
-        public override float Frequency => 1000f;
+        public override StatusEffectStackType StackingType => StatusEffectStackType.Disabled;
+        public override float Frequency => 60f;
 
         public WindWardStatusEffect()
         {
             Stats.Resists[ResistType.Wind] = 50;
+        }
+        protected override void Apply(uint creature)
+        {
+            ApplyEffectToObject(DurationType.Temporary, EffectVisualEffect(VisualEffectType.DurAuraGreen), creature, 2f);
         }
     }
 }

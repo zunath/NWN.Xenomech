@@ -21,12 +21,13 @@ namespace XM.Plugin.Combat.AbilityDefinition
         }
 
         protected void ApplyPartyAOE<T>(
+            uint source,
             uint target,
             float distance,
             int durationTicks)
             where T : IStatusEffect
         {
-            _status.ApplyStatusEffect<T>(target, durationTicks);
+            _status.ApplyStatusEffect<T>(source, target, durationTicks);
 
             var nth = 1;
             var nearby = GetNearestCreature(CreatureType.IsAlive, 1, target, nth);
@@ -34,7 +35,7 @@ namespace XM.Plugin.Combat.AbilityDefinition
             {
                 if (target != nearby && _party.IsInParty(target, nearby))
                 {
-                    _status.ApplyStatusEffect<T>(target, durationTicks);
+                    _status.ApplyStatusEffect<T>(source, nearby, durationTicks);
                 }
 
                 nth++;

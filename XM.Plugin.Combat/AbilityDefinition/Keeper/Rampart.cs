@@ -8,14 +8,14 @@ using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 using XM.Shared.Core.Party;
 
-namespace XM.Plugin.Combat.AbilityDefinition.Mender
+namespace XM.Plugin.Combat.AbilityDefinition.Keeper
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class FireWard: AbilityBase
+    internal class Rampart: AbilityBase
     {
         private readonly AbilityBuilder _builder = new();
 
-        public FireWard(
+        public Rampart(
             PartyService party,
             StatusEffectService status)
             : base(party, status)
@@ -24,25 +24,25 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
 
         public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
-            FireWardAbility();
+            RampartAbility();
 
             return _builder.Build();
         }
 
-        private void FireWardAbility()
+        private void RampartAbility()
         {
-            _builder.Create(FeatType.FireWard)
-                .Name(LocaleString.FireWard)
-                .Description(LocaleString.FireWardDescription)
-                .HasRecastDelay(RecastGroup.Ward, 10f)
-                .HasActivationDelay(4f)
-                .RequirementEP(30)
+            _builder.Create(FeatType.Rampart)
+                .Name(LocaleString.Rampart)
+                .Description(LocaleString.RampartDescription)
+                .HasRecastDelay(RecastGroup.Rampart, 90f)
+                .HasActivationDelay(2f)
+                .RequirementEP(8)
                 .UsesAnimation(AnimationType.LoopingConjure2)
                 .DisplaysVisualEffectWhenActivating()
-                .ResonanceCost(1)
+                .ResonanceCost(2)
                 .HasImpactAction((activator, target, location) =>
                 {
-                    ApplyPartyAOE<FireWardStatusEffect>(activator, activator, 15f, 15);
+                    ApplyPartyAOE<RampartStatusEffect>(activator, activator, 15f, 2);
                 });
         }
     }

@@ -42,7 +42,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
                 .ResonanceCost(1)
                 .HasImpactAction((activator, target, location) =>
                 {
-                    ApplyPartyAOE<DarknessWardStatusEffect>(activator, 15f, 15);
+                    ApplyPartyAOE<DarknessWardStatusEffect>(activator, activator, 15f, 15);
                 });
         }
     }

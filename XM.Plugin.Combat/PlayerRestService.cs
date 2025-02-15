@@ -65,7 +65,7 @@ namespace XM.Plugin.Combat
                 return;
             }
 
-            _statusEffect.ApplyPermanentStatusEffect<RestStatusEffect>(player);
+            _statusEffect.ApplyPermanentStatusEffect<RestStatusEffect>(player, player);
         }
     }
 }

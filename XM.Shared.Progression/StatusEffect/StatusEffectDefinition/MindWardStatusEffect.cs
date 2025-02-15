@@ -10,12 +10,16 @@ namespace XM.Progression.StatusEffect.StatusEffectDefinition
     {
         public override LocaleString Name => LocaleString.MindWard;
         public override EffectIconType Icon => EffectIconType.MindWard;
-        public override bool IsStackable => false;
-        public override float Frequency => 1000f;
+        public override StatusEffectStackType StackingType => StatusEffectStackType.Disabled;
+        public override float Frequency => 60f;
 
         public MindWardStatusEffect()
         {
             Stats.Resists[ResistType.Mind] = 50;
+        }
+        protected override void Apply(uint creature)
+        {
+            ApplyEffectToObject(DurationType.Temporary, EffectVisualEffect(VisualEffectType.DurAuraRedLight), creature, 2f);
         }
     }
 }

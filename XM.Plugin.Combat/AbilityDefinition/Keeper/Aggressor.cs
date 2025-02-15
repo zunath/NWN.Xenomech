@@ -47,7 +47,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
                     }
                     else
                     {
-                        _status.ApplyPermanentStatusEffect<Aggressor1StatusEffect>(activator);
+                        _status.ApplyPermanentStatusEffect<Aggressor1StatusEffect>(activator, activator);
                     }
                 });
         }
@@ -70,7 +70,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
                     }
                     else
                     {
-                        _status.ApplyPermanentStatusEffect<Aggressor2StatusEffect>(activator);
+                        _status.ApplyPermanentStatusEffect<Aggressor2StatusEffect>(activator, activator);
                     }
                 });
         }

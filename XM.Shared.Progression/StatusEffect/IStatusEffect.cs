@@ -9,9 +9,10 @@ namespace XM.Progression.StatusEffect
     public interface IStatusEffect
     {
         string Id { get; }
+        uint Source { get; }
         LocaleString Name { get; }
         EffectIconType Icon { get; }
-        bool IsStackable { get; }
+        StatusEffectStackType StackingType { get; }
         bool IsFlaggedForRemoval { get; }
         bool SendsApplicationMessage { get; }
         bool SendsWornOffMessage { get; }
@@ -21,7 +22,7 @@ namespace XM.Progression.StatusEffect
         public List<Type> MorePowerfulEffectTypes { get; }
         public List<Type> LessPowerfulEffectTypes { get; }
         LocaleString CanApply(uint creature);
-        void ApplyEffect(uint creature, int durationTicks);
+        void ApplyEffect(uint source, uint creature, int durationTicks);
         void RemoveEffect(uint creature);
         void TickEffect(uint creature);
     }
