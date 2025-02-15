@@ -676,7 +676,7 @@ namespace XM.Progression.UI.Job
 
             var feats = Ability.GetAbilityFeatsByJob(_selectedJobFilter);
             var job = Job.GetJobDefinition(_selectedJobFilter);
-            var level = Job.GetJobLevel(Player, _selectedJob);
+            var levels = Job.GetJobLevels(Player);
 
             var abilityIcons = new XMBindingList<string>();
             var abilityLevels = new XMBindingList<string>();
@@ -694,12 +694,15 @@ namespace XM.Progression.UI.Job
                 var ability = Ability.GetAbilityDetail(feat);
                 var levelAcquired = job.GetFeatAcquiredLevel(feat);
                 var abilityName = BuildAbilityName(feat);
+                var level = levels[job.Type];
+                var meetsLevelRequirement = level >= levelAcquired && 
+                                            levels[_selectedJob] >= levelAcquired;
 
                 _availableAbilityFeats.Add(feat);
                 abilityIcons.Add(ability.IconResref);
                 abilityLevels.Add($"{LocaleString.Lv.ToLocalizedString()} {levelAcquired}");
                 abilityNames.Add(abilityName);
-                abilityColors.Add(level >= levelAcquired ? _green : _red);
+                abilityColors.Add(meetsLevelRequirement ? _green : _red);
                 abilityToggles.Add(false);
 
                 abilityPip1Enabled.Add(ability.ResonanceCost >= 1);
@@ -768,13 +771,14 @@ namespace XM.Progression.UI.Job
         {
             var level = Job.GetJobLevel(Player, _selectedJob);
             var filterJob = Job.GetJobDefinition(_selectedJobFilter);
+            var filterLevel = Job.GetJobLevel(Player, _selectedJobFilter);
             var levelAcquired = filterJob.GetFeatAcquiredLevel(feat);
             var ability = Ability.GetAbilityDetail(feat);
 
             if (_equippedAbilities.Contains(feat))
                 return false;
 
-            if (level < levelAcquired)
+            if (level < levelAcquired || filterLevel < levelAcquired)
                 return false;
 
             var remainingNodes = _availableNodes - _spentNodes;
@@ -811,6 +815,7 @@ namespace XM.Progression.UI.Job
         private void RefreshAllJobFilterFlags()
         {
             _selectedJobFilter = JobType.Invalid;
+            _selectedAbilityIndex = -1;
 
             IsKeeperFilterEncouraged = false;
             IsKeeperFilterEnabled = _selectedJob != JobType.Keeper;
