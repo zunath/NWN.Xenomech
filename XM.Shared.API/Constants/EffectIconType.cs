@@ -150,6 +150,7 @@ namespace XM.Shared.API.Constants
         DivineSeal = 145,
         Regen1 = 146,
         Regen2 = 147,
-
+        XMHaste = 148,
+        XMSlow = 149,
     }
 }

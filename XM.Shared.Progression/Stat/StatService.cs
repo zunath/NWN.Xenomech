@@ -505,6 +505,25 @@ namespace XM.Progression.Stat
             }
         }
 
+        public int GetHaste(uint creature)
+        {
+            if (GetIsPC(creature) && !GetIsDM(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+                var itemHaste = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.Haste) - dbPlayerStat.EquippedItemStats.CalculateStat(StatType.Slow);
+                var abilityHaste = dbPlayerStat.AbilityStats.CalculateStat(StatType.Haste) - dbPlayerStat.AbilityStats.CalculateStat(StatType.Slow);
+                var effects = _status.GetCreatureStatusEffects(creature);
+                var statusHaste = effects.Stats[StatType.Haste] - effects.Stats[StatType.Slow];
+
+                return itemHaste + abilityHaste + statusHaste;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         public void ReduceEP(uint creature, int reduceBy)
         {
             if (reduceBy <= 0) 

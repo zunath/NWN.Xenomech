@@ -25,5 +25,7 @@
         SubtleBlow = 20,
         CriticalRate = 21,
         Enmity = 22,
+        Haste = 23,
+        Slow = 24,
     }
 }

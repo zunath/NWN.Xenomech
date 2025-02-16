@@ -1422,5 +1422,7 @@ namespace XM.Shared.Core.Localization
         Ward = 1735,
         YourTargetMustBeDead = 1736,
         YourTargetIsNotPoisoned = 1737,
+        Slow = 1738,
+        SlowDescription = 1739,
     }
 }

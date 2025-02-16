@@ -424,6 +424,12 @@ namespace XM.Plugin.Combat
                 delayPercentAdjustment = -0.2f;
             }
 
+            var haste = _stat.GetHaste(attacker) * 0.01f;
+            delayPercentAdjustment -= haste;
+
+            if (delayPercentAdjustment < -0.5f)
+                delayPercentAdjustment = -0.5f;
+
             var finalDelay = (int)(delay / 60f * 1000);
             return (int)(finalDelay + finalDelay * delayPercentAdjustment);
         }

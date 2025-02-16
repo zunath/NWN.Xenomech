@@ -6944,6 +6944,14 @@
     {
       "id": 1737,
       "text": "Your target is not poisoned."
+    },
+    {
+      "id": 1738,
+      "text": "Slow"
+    },
+    {
+      "id": 1739,
+      "text": "Slow Description"
     }
   ]
 }

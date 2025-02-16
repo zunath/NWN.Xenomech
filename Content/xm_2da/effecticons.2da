@@ -149,3 +149,5 @@
 145   DIVINE_SEAL                           ife_divseal        16777816   
 146   REGEN1                                ife_regen          16777826   
 147   REGEN2                                ife_regen          16777828   
+148   XM_HASTE                              ife_haste          16777838   
+149   XM_SLOW                               ife_slow           16778954   
