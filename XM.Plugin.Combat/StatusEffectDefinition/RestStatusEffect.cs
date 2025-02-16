@@ -1,11 +1,12 @@
 ﻿using System;
 using Anvil.Services;
 using XM.Progression.Stat;
+using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Activity;
 using XM.Shared.Core.Localization;
 
-namespace XM.Progression.StatusEffect.StatusEffectDefinition
+namespace XM.Plugin.Combat.StatusEffectDefinition
 {
     [ServiceBinding(typeof(RestStatusEffect))]
     public class RestStatusEffect: StatusEffectBase

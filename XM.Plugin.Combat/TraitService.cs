@@ -1,7 +1,7 @@
 ﻿using Anvil.Services;
 using NWN.Core.NWNX;
+using XM.Plugin.Combat.StatusEffectDefinition;
 using XM.Progression.StatusEffect;
-using XM.Progression.StatusEffect.StatusEffectDefinition;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.EventManagement;

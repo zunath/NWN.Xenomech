@@ -1,8 +1,9 @@
 ﻿using XM.Progression.Stat;
+using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
-namespace XM.Progression.StatusEffect.StatusEffectDefinition
+namespace XM.Plugin.Combat.StatusEffectDefinition
 {
     public class PoisonStatusEffect: StatusEffectBase
     {

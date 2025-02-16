@@ -1,8 +1,9 @@
 ﻿using Anvil.Services;
+using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
-namespace XM.Progression.StatusEffect.StatusEffectDefinition
+namespace XM.Plugin.Combat.StatusEffectDefinition
 {
     [ServiceBinding(typeof(MightyStrikesStatusEffect))]
     public class MightyStrikesStatusEffect: StatusEffectBase

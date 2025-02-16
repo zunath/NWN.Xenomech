@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
-using XM.Plugin.Combat.StatusEffectDefinition;
 using XM.Progression.Ability;
 using XM.Progression.Recast;
 using XM.Progression.StatusEffect;
@@ -11,38 +10,38 @@ using XM.Shared.Core.Party;
 namespace XM.Plugin.Combat.AbilityDefinition.Mender
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class FireWard: AbilityBase
+    internal class Protection : AbilityBase
     {
         private readonly AbilityBuilder _builder = new();
 
-        public FireWard(
-            PartyService party,
-            StatusEffectService status)
-            : base(party, status)
-        {
-        }
-
         public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
-            FireWardAbility();
+            Protection1();
 
             return _builder.Build();
         }
 
-        private void FireWardAbility()
+        private readonly StatusEffectService _status;
+        public Protection(PartyService party, StatusEffectService status) 
+            : base(party, status)
         {
-            _builder.Create(FeatType.FireWard)
-                .Name(LocaleString.FireWard)
-                .Description(LocaleString.FireWardDescription)
-                .HasRecastDelay(RecastGroup.Ward, 10f)
+            _status = status;
+        }
+
+        private void Protection1()
+        {
+            _builder.Create(FeatType.Protection1)
+                .Name(LocaleString.ProtectionI)
+                .Description(LocaleString.ProtectionIDescription)
+                .HasRecastDelay(RecastGroup.Protection, 15f)
                 .HasActivationDelay(4f)
-                .RequirementEP(30)
-                .UsesAnimation(AnimationType.LoopingConjure2)
+                .RequirementEP(9)
+                .UsesAnimation(AnimationType.LoopingConjure1)
                 .DisplaysVisualEffectWhenActivating()
                 .ResonanceCost(1)
                 .HasImpactAction((activator, target, location) =>
                 {
-                    ApplyPartyAOE<FireWardStatusEffect>(activator, activator, 15f, 15);
+                    //ApplyPartyAOE<ProtectionStatusEffect>(activator, target, 10f, 30);
                 });
         }
     }
