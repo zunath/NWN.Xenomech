@@ -1424,5 +1424,6 @@ namespace XM.Shared.Core.Localization
         YourTargetIsNotPoisoned = 1737,
         Slow = 1738,
         SlowDescription = 1739,
+        YourTargetIsNotAfflictedByAnyDetrimentalEffects = 1740,
     }
 }

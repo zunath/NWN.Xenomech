@@ -6952,6 +6952,10 @@
     {
       "id": 1739,
       "text": "Slow Description"
+    },
+    {
+      "id": 1740,
+      "text": "Your target is not afflicted by any detrimental effects."
     }
   ]
 }

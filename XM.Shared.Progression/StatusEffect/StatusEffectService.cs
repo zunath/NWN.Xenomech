@@ -214,7 +214,12 @@ namespace XM.Progression.StatusEffect
             RemoveStatusEffect(type, creature);
         }
 
-        private bool HasEffect(Type type, uint creature)
+        public void RemoveStatusEffect(Type type, uint creature)
+        {
+            RemoveStatusEffect(type, creature, OBJECT_INVALID);
+        }
+
+        public bool HasEffect(Type type, uint creature)
         {
             if (!_creatureEffects.ContainsKey(creature))
                 return false;
