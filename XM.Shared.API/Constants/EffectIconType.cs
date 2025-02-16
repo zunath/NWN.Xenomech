@@ -159,5 +159,6 @@ namespace XM.Shared.API.Constants
         Warcry = 154,
         Chi1 = 155,
         Chi2 = 156,
+        PerfectDodge = 157,
     }
 }

@@ -194,6 +194,11 @@ namespace XM.Plugin.Combat
             AttackType attackType, 
             CombatModeType combatMode)
         {
+            if (_statusEffect.HasEffect<PerfectDodgeStatusEffect>(defender))
+            {
+                return (HitResultType.Miss, 0);
+            }
+
             var accuracy = CalculateAccuracy(attacker, defender, attackType, combatMode);
             var evasion = CalculateEvasion(defender);
             var roll = XMRandom.D100(1);
