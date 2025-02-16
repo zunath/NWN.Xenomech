@@ -44,7 +44,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
             _builder.Create(FeatType.RadiantBlast1)
                 .Name(LocaleString.RadiantBlastI)
                 .Description(LocaleString.RadiantBlastIDescription)
-                .HasRecastDelay(RecastGroup.RadiantBlast, 30f)
+                .HasRecastDelay(RecastGroup.RadiantBlast, 4f)
                 .DisplaysVisualEffectWhenActivating()
                 .HasActivationDelay(2f)
                 .UsesAnimation(AnimationType.LoopingConjure1)
