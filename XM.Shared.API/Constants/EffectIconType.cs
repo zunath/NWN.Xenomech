@@ -143,5 +143,6 @@ namespace XM.Shared.API.Constants
         LightningWard = 138,
         MindWard = 139,
         Rampart = 140,
+        MightyStrikes = 141,
     }
 }

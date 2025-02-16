@@ -2,10 +2,12 @@
 using Anvil.Services;
 using NWN.Core.NWNX;
 using XM.Inventory;
+using XM.Plugin.Combat.AbilityDefinition.Keeper;
 using XM.Progression.Skill;
 using XM.Progression.Stat;
 using XM.Progression.Stat.Entity;
 using XM.Progression.StatusEffect;
+using XM.Progression.StatusEffect.StatusEffectDefinition;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.FeedbackPlugin;
 using XM.Shared.Core;
@@ -226,6 +228,9 @@ namespace XM.Plugin.Combat
         {
             if (GetIsImmune(defender, ImmunityType.CriticalHit, attacker))
                 return false;
+
+            if (_statusEffect.HasEffect<MightyStrikesStatusEffect>(attacker))
+                return true;
 
             var attackerStat = attackType == AttackType.Melee
                 ? _stat.GetAttribute(attacker, AbilityType.Perception)
