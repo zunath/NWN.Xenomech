@@ -32,10 +32,10 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
 
         private void ReviveAbility()
         {
-            _builder.Create(FeatType.Raise)
-                .Name(LocaleString.Raise)
-                .Description(LocaleString.RaiseDescription)
-                .HasRecastDelay(RecastGroup.Raise, 120f)
+            _builder.Create(FeatType.Revive)
+                .Name(LocaleString.Revive)
+                .Description(LocaleString.ReviveDescription)
+                .HasRecastDelay(RecastGroup.Revive, 120f)
                 .IsCastedAbility()
                 .HasMaxRange(5f)
                 .RequirementEP(60)
