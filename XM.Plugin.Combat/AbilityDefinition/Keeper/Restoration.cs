@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using Anvil.Services;
 using XM.AI.Enmity;
+using XM.Plugin.Combat.StatusEffectDefinition;
 using XM.Progression.Ability;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
+using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Localization;
@@ -18,13 +21,16 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
 
         private readonly EnmityService _enmity;
         private readonly StatService _stat;
+        private readonly StatusEffectService _status;
 
         public Restoration(
             EnmityService enmity, 
-            StatService stat)
+            StatService stat,
+            StatusEffectService status)
         {
             _enmity = enmity;
             _stat = stat;
+            _status = status;
         }
 
         public Dictionary<FeatType, AbilityDetail> BuildAbilities()
@@ -55,6 +61,12 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
             var hpFloor = hpFloorAction(power);
 
             var healAmount = (int)Math.Floor((power - powerFloor) / rate) + hpFloor;
+
+            if (_status.HasEffect<DivineSealStatusEffect>(activator))
+            {
+                healAmount *= 2;
+                _status.RemoveStatusEffect<DivineSealStatusEffect>(activator);
+            }
 
             _enmity.ApplyHealingEnmity(activator, healAmount);
             ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(impactVFX), target);

@@ -147,5 +147,6 @@ namespace XM.Shared.API.Constants
         Protection1 = 142,
         Protection2 = 143,
         Protection3 = 144,
+        DivineSeal = 145,
     }
 }
