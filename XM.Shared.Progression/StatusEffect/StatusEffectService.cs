@@ -179,8 +179,11 @@ namespace XM.Progression.StatusEffect
             }
         }
 
-        private void RemoveStatusEffect(Type type, uint creature, uint source = OBJECT_INVALID)
+        private void RemoveStatusEffect(Type type, uint creature, uint source)
         {
+            if (!_creatureEffects.ContainsKey(creature))
+                return;
+
             var hasSentMessage = false;
             var statusEffects = _creatureEffects[creature].GetAllEffects();
             foreach (var statusEffect in statusEffects)

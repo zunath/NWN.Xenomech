@@ -155,5 +155,6 @@ namespace XM.Shared.API.Constants
         Snarl = 150,
         ThirdEye = 151,
         HundredFists = 152,
+        Flash = 153,
     }
 }

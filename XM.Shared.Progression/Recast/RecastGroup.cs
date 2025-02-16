@@ -139,5 +139,7 @@ namespace XM.Progression.Recast
         Convert = 65,
         [RecastGroup(LocaleString.Ward, true)]
         Ward = 66,
+        [RecastGroup(LocaleString.Revive, true)]
+        Revive = 67,
     }
 }
