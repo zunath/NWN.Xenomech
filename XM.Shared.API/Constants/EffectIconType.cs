@@ -152,5 +152,6 @@ namespace XM.Shared.API.Constants
         Regen2 = 147,
         XMHaste = 148,
         XMSlow = 149,
+        Snarl = 150,
     }
 }

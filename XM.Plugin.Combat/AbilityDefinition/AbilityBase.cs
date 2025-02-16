@@ -65,6 +65,26 @@ namespace XM.Plugin.Combat.AbilityDefinition
             }
         }
 
+        protected void ApplyEnemyAOE(
+            uint target,
+            float distance,
+            Action<uint> applyAction
+        )
+        {
+            var nth = 1;
+            var nearby = GetNearestCreature(CreatureType.IsAlive, 1, target, nth);
+            while (GetIsObjectValid(nearby) && GetDistanceBetween(target, nearby) <= distance)
+            {
+                if (target != nearby && GetIsReactionTypeHostile(target, nearby))
+                {
+                    applyAction(nearby);
+                }
+
+                nth++;
+                nearby = GetNearestCreature(CreatureType.IsAlive, 1, target, nth);
+            }
+        }
+
         public abstract Dictionary<FeatType, AbilityDetail> BuildAbilities();
     }
 }
