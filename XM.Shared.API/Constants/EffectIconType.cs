@@ -154,5 +154,6 @@ namespace XM.Shared.API.Constants
         XMSlow = 149,
         Snarl = 150,
         ThirdEye = 151,
+        HundredFists = 152,
     }
 }

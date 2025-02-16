@@ -392,6 +392,9 @@ namespace XM.Plugin.Combat
 
         public int CalculateAttackDelay(uint attacker)
         {
+            if (_statusEffect.HasEffect<HundredFistsStatusEffect>(attacker))
+                return 1;
+
             var weapon = GetItemInSlot(InventorySlotType.RightHand, attacker);
             var skillType = _skill.GetSkillOfWeapon(weapon);
 
