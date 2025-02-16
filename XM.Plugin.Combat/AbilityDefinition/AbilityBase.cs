@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using XM.Progression.Ability;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
@@ -20,7 +21,7 @@ namespace XM.Plugin.Combat.AbilityDefinition
             _status = status;
         }
 
-        protected void ApplyPartyAOE<T>(
+        protected void ApplyPartyStatusAOE<T>(
             uint source,
             uint target,
             float distance,
@@ -36,6 +37,27 @@ namespace XM.Plugin.Combat.AbilityDefinition
                 if (target != nearby && _party.IsInParty(target, nearby))
                 {
                     _status.ApplyStatusEffect<T>(source, nearby, durationTicks);
+                }
+
+                nth++;
+                nearby = GetNearestCreature(CreatureType.IsAlive, 1, target, nth);
+            }
+        }
+
+        protected void ApplyPartyAOE(
+            uint target,
+            float distance,
+            Action<uint> applyAction)
+        {
+            applyAction(target);
+
+            var nth = 1;
+            var nearby = GetNearestCreature(CreatureType.IsAlive, 1, target, nth);
+            while (GetIsObjectValid(nearby) && GetDistanceBetween(target, nearby) <= distance)
+            {
+                if (target != nearby && _party.IsInParty(target, nearby))
+                {
+                    applyAction(nearby);
                 }
 
                 nth++;

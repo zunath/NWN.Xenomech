@@ -42,7 +42,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Nightstalker
                 .ResonanceCost(1)
                 .HasImpactAction((activator, target, location) =>
                 {
-                    ApplyPartyAOE<LightWardStatusEffect>(activator, activator, 15f, 15);
+                    ApplyPartyStatusAOE<LightWardStatusEffect>(activator, activator, 15f, 15);
                 });
         }
     }

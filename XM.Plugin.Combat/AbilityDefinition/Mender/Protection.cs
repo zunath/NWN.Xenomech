@@ -42,7 +42,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
                 .ResonanceCost(1)
                 .HasImpactAction((activator, target, location) =>
                 {
-                    ApplyPartyAOE<Protection1StatusEffect>(activator, target, 10f, 30);
+                    ApplyPartyStatusAOE<Protection1StatusEffect>(activator, target, 10f, 30);
                 });
         }
 
@@ -59,7 +59,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
                 .ResonanceCost(2)
                 .HasImpactAction((activator, target, location) =>
                 {
-                    ApplyPartyAOE<Protection2StatusEffect>(activator, target, 10f, 30);
+                    ApplyPartyStatusAOE<Protection2StatusEffect>(activator, target, 10f, 30);
                 });
         }
 
@@ -76,7 +76,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
                 .ResonanceCost(3)
                 .HasImpactAction((activator, target, location) =>
                 {
-                    ApplyPartyAOE<Protection3StatusEffect>(activator, target, 10f, 30);
+                    ApplyPartyStatusAOE<Protection3StatusEffect>(activator, target, 10f, 30);
                 });
         }
     }

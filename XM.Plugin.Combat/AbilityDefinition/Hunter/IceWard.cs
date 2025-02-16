@@ -42,7 +42,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Hunter
                 .ResonanceCost(1)
                 .HasImpactAction((activator, target, location) =>
                 {
-                    ApplyPartyAOE<IceWardStatusEffect>(activator, activator, 15f, 15);
+                    ApplyPartyStatusAOE<IceWardStatusEffect>(activator, activator, 15f, 15);
                 });
         }
     }

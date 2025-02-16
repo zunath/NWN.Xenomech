@@ -42,7 +42,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
                 .ResonanceCost(1)
                 .HasImpactAction((activator, target, location) =>
                 {
-                    ApplyPartyAOE<LightningWardStatusEffect>(activator, activator, 15f, 15);
+                    ApplyPartyStatusAOE<LightningWardStatusEffect>(activator, activator, 15f, 15);
                 });
         }
     }

@@ -42,7 +42,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
                 .ResonanceCost(1)
                 .HasImpactAction((activator, target, location) =>
                 {
-                    ApplyPartyAOE<FireWardStatusEffect>(activator, activator, 15f, 15);
+                    ApplyPartyStatusAOE<FireWardStatusEffect>(activator, activator, 15f, 15);
                 });
         }
     }

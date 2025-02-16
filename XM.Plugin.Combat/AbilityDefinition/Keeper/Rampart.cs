@@ -42,7 +42,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
                 .ResonanceCost(2)
                 .HasImpactAction((activator, target, location) =>
                 {
-                    ApplyPartyAOE<RampartStatusEffect>(activator, activator, 15f, 2);
+                    ApplyPartyStatusAOE<RampartStatusEffect>(activator, activator, 15f, 2);
                 });
         }
     }
