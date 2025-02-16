@@ -1,0 +1,27 @@
+﻿using Anvil.Services;
+using XM.Progression.Stat;
+using XM.Progression.StatusEffect;
+using XM.Shared.API.Constants;
+using XM.Shared.Core.Localization;
+
+namespace XM.Plugin.Combat.StatusEffectDefinition
+{
+    [ServiceBinding(typeof(WarcryStatusEffect))]
+    public class WarcryStatusEffect: StatusEffectBase
+    {
+        public override LocaleString Name => LocaleString.Warcry;
+        public override EffectIconType Icon => EffectIconType.Warcry;
+        public override StatusEffectStackType StackingType => StatusEffectStackType.StackFromMultipleSources;
+        public override float Frequency => 60f;
+
+        public WarcryStatusEffect()
+        {
+            Stats[StatType.Attack] = 25;
+        }
+
+        protected override void Apply(uint creature)
+        {
+            ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpImproveAbilityScore), creature);
+        }
+    }
+}

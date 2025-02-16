@@ -156,5 +156,6 @@ namespace XM.Shared.API.Constants
         ThirdEye = 151,
         HundredFists = 152,
         Flash = 153,
+        Warcry = 154,
     }
 }
