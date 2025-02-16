@@ -2,6 +2,7 @@
 using NLog;
 using System;
 using System.Collections.Generic;
+using XM.Shared.API.BaseTypes;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.EventManagement;
@@ -22,18 +23,30 @@ namespace XM.Inventory.Loot
         private const string CorpseClosedScript = "corpse_closed";
         private const string CorpseDisturbedScript = "corpse_disturbed";
 
+        private const string RareBonusChanceVariable = "RARE_BONUS_CHANCE";
+        private const string CreditfinderLevelVariable = "CREDITFINDER_LEVEL";
+
 
         [Inject]
         public IList<ILootTableDefinition> Definitions { get; set; }
-
         private readonly InventoryService _inventory;
+        private readonly XMEventService _event;
 
-        public LootService(InventoryService inventory, XMEventService @event)
+        public LootService(
+            InventoryService inventory, 
+            XMEventService @event)
         {
             _inventory = inventory;
+            _event = @event;
             _lootTables = new Dictionary<string, LootTable>();
 
-            @event.Subscribe<CreatureEvent.OnDeath>(CreatureOnDeathBefore);
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            _event.Subscribe<CreatureEvent.OnDeath>(CreatureOnDeathBefore);
+            _event.Subscribe<XMEvent.OnItemHit>(MarkCreditfinderAndTreasureHunterOnTarget);
         }
 
         public void Init()
@@ -115,9 +128,9 @@ namespace XM.Inventory.Loot
 
         public List<uint> SpawnLoot(uint source, uint receiver, string lootTableName, int chance, int attempts)
         {
-            var creditFinderLevel = GetLocalInt(source, "CREDITFINDER_LEVEL");
-            var creditPercentIncrease = creditFinderLevel * 0.2f;
-            var rareBonusChance = GetLocalInt(source, "RARE_BONUS_CHANCE");
+            var creditFinderLevel = GetLocalInt(source, CreditfinderLevelVariable);
+            var creditPercentIncrease = creditFinderLevel * 0.01f;
+            var rareBonusChance = GetLocalInt(source, RareBonusChanceVariable);
 
             var lootList = new List<uint>();
             var table = GetLootTableByName(lootTableName);
@@ -353,6 +366,33 @@ namespace XM.Inventory.Loot
                 }
 
                 DeleteLocalObject(item, CorpseCopyItemVariable);
+            }
+        }
+
+        private void MarkCreditfinderAndTreasureHunterOnTarget(uint attacker)
+        {
+            var target = GetSpellTargetObject();
+            if (GetIsPC(target) || GetIsDM(target))
+                return;
+
+            var currentCreditFinder = GetLocalInt(target, CreditfinderLevelVariable);
+            var currentTreasureHunter = GetLocalInt(target, RareBonusChanceVariable);
+
+            var creditFinderLevel = GetHasFeat(FeatType.Creditfinder, attacker) ? 50 : 0;
+            int rareBonusChance = 0;
+            if (GetHasFeat(FeatType.TreasureHunter2, attacker))
+                rareBonusChance = 30;
+            else if (GetHasFeat(FeatType.TreasureHunter1, attacker))
+                rareBonusChance = 15;
+
+            if (creditFinderLevel > currentCreditFinder)
+            {
+                SetLocalInt(target, CreditfinderLevelVariable, creditFinderLevel);
+            }
+
+            if (rareBonusChance > currentTreasureHunter)
+            {
+                SetLocalInt(target, RareBonusChanceVariable, rareBonusChance);
             }
         }
     }
