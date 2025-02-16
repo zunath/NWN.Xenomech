@@ -4,7 +4,7 @@ using XM.Shared.Core.Localization;
 
 namespace XM.Progression.StatusEffect.StatusEffectDefinition
 {
-    internal class PoisonStatusEffect: StatusEffectBase
+    public class PoisonStatusEffect: StatusEffectBase
     {
         public override LocaleString Name => LocaleString.Poison;
         public override EffectIconType Icon => EffectIconType.Poison;
