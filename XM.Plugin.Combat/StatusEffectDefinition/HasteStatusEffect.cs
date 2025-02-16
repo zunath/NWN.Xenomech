@@ -12,7 +12,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition
         public override LocaleString Name => LocaleString.Haste;
         public override EffectIconType Icon => EffectIconType.XMHaste;
         public override StatusEffectStackType StackingType => StatusEffectStackType.Disabled;
-        public override float Frequency => 60f;
+        public override float Frequency => 180f;
 
         public HasteStatusEffect()
         {
