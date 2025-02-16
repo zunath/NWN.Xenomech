@@ -3034,7 +3034,7 @@ namespace XM.Shared.API
         ///  - oCreature<br/>
         ///  - bIgnoreUses: Will check if the creature has the given feat even if it has no uses remaining
         /// </summary>
-        public static bool GetHasFeat(FeatType nFeat, uint oCreature = OBJECT_INVALID, bool bIgnoreUses = false)
+        public static bool GetHasFeat(FeatType nFeat, uint oCreature, bool bIgnoreUses = false)
         {
             return NWN.Core.NWScript.GetHasFeat((int)nFeat, oCreature, bIgnoreUses ? 1 : 0) == 1;
         }

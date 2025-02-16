@@ -124,7 +124,7 @@ namespace XM.Progression.Skill
             IJobDefinition job,
             ISkillDefinition skill)
         {
-            if (GetHasFeat(skill.LoreFeat))
+            if (GetHasFeat(skill.LoreFeat, player))
                 return GradeType.A;
 
             if (!job.Grades.SkillGrades.ContainsKey(skill.Type))
