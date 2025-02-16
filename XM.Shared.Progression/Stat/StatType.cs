@@ -28,5 +28,6 @@
         Haste = 23,
         Slow = 24,
         DamageReduction = 25,
+        EtherDefense = 26,
     }
 }

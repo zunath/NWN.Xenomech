@@ -484,7 +484,8 @@ namespace XM.Progression.Stat
             }
             else
             {
-                return 0;
+                var npcStats = GetNPCStats(creature);
+                return npcStats.Stats[StatType.HPRegen];
             }
         }
         public int GetEPRegen(uint creature)
@@ -501,7 +502,8 @@ namespace XM.Progression.Stat
             }
             else
             {
-                return 0;
+                var npcStats = GetNPCStats(creature);
+                return npcStats.Stats[StatType.EPRegen];
             }
         }
 
@@ -520,7 +522,8 @@ namespace XM.Progression.Stat
             }
             else
             {
-                return 0;
+                var npcStats = GetNPCStats(creature);
+                return npcStats.Stats[StatType.Haste];
             }
         }
         public int GetDamageReduction(uint creature)
@@ -537,7 +540,8 @@ namespace XM.Progression.Stat
             }
             else
             {
-                return 0;
+                var npcStats = GetNPCStats(creature);
+                return npcStats.Stats[StatType.DamageReduction];
             }
         }
 
@@ -702,6 +706,24 @@ namespace XM.Progression.Stat
             {
                 var npcStats = GetNPCStats(creature);
                 return npcStats.Stats[StatType.EtherAttack];
+            }
+        }
+        public int GetEtherDefense(uint creature)
+        {
+            if (GetIsPC(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+                var itemEtherDefense = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.EtherDefense);
+                var abilityEtherDefense = dbPlayerStat.AbilityStats.CalculateStat(StatType.EtherDefense);
+                var statusEtherDefense = _status.GetCreatureStatusEffects(creature).Stats[StatType.EtherDefense];
+
+                return itemEtherDefense + abilityEtherDefense + statusEtherDefense;
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                return npcStats.Stats[StatType.EtherDefense];
             }
         }
 
@@ -890,16 +912,24 @@ namespace XM.Progression.Stat
             return GetDMG(item);
         }
 
-        public int GetResist(uint player, ResistType resist)
+        public int GetResist(uint creature, ResistType resist)
         {
-            var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-            var equipmentResist = dbPlayerStat.EquippedItemStats.CalculateResist(resist);
-            var abilityResist = dbPlayerStat.AbilityStats.CalculateResist(resist);
-            var statusResist = _status.GetCreatureStatusEffects(player).Stats.Resists[resist];
-            var resistPercent = equipmentResist + abilityResist + statusResist;
+            if (GetIsPC(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+                var equipmentResist = dbPlayerStat.EquippedItemStats.CalculateResist(resist);
+                var abilityResist = dbPlayerStat.AbilityStats.CalculateResist(resist);
+                var statusResist = _status.GetCreatureStatusEffects(creature).Stats.Resists[resist];
+                var resistPercent = equipmentResist + abilityResist + statusResist;
 
-            return Math.Clamp(resistPercent, 0, 100);
+                return Math.Clamp(resistPercent, 0, 100);
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                return npcStats.Stats.Resists[resist];
+            }
         }
 
         public NPCStats GetNPCStats(uint npc)
