@@ -147,3 +147,5 @@
 143   PROTECTION_2                          ife_protection     16777812   
 144   PROTECTION_3                          ife_protection     16777814   
 145   DIVINE_SEAL                           ife_divseal        16777816   
+146   REGEN1                                ife_regen          16777826   
+147   REGEN2                                ife_regen          16777828   

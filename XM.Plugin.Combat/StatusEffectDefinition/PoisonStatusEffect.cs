@@ -1,10 +1,12 @@
-﻿using XM.Progression.Stat;
+﻿using Anvil.Services;
+using XM.Progression.Stat;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
 namespace XM.Plugin.Combat.StatusEffectDefinition
 {
+    [ServiceBinding(typeof(PoisonStatusEffect))]
     public class PoisonStatusEffect: StatusEffectBase
     {
         public override LocaleString Name => LocaleString.Poison;
