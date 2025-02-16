@@ -6956,6 +6956,70 @@
     {
       "id": 1740,
       "text": "Your target is not afflicted by any detrimental effects."
+    },
+    {
+      "id": 1741,
+      "text": "Ice"
+    },
+    {
+      "id": 1742,
+      "text": "Lightning"
+    },
+    {
+      "id": 1743,
+      "text": "<CUSTOM0> Ice"
+    },
+    {
+      "id": 1744,
+      "text": "<CUSTOM0> Lightning"
+    },
+    {
+      "id": 1745,
+      "text": "<CUSTOM0> Wind"
+    },
+    {
+      "id": 1746,
+      "text": "<CUSTOM0> Earth"
+    },
+    {
+      "id": 1747,
+      "text": "<CUSTOM0> Water"
+    },
+    {
+      "id": 1748,
+      "text": "<CUSTOM0> Light"
+    },
+    {
+      "id": 1749,
+      "text": "<CUSTOM0> Darkness"
+    },
+    {
+      "id": 1750,
+      "text": "<CUSTOM0> Mind"
+    },
+    {
+      "id": 1751,
+      "text": "Wind"
+    },
+    {
+      "id": 1752,
+      "text": "Earth"
+    },
+    {
+      "id": 1753,
+      "text": "Water"
+    },
+    {
+      "id": 1754,
+      "text": "Light"
+    },
+    {
+      "id": 1755,
+      "text": "Darkness"
+    },
+    {
+      "id": 1756,
+      "text": "Mind"
     }
   ]
 }

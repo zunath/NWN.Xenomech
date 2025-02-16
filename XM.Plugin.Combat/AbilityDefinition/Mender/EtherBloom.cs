@@ -132,7 +132,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
                 .HasActivationDelay(2f)
                 .RequirementEP(8)
                 .HasMaxRange(15f)
-                .UsesAnimation(AnimationType.LoopingConjure2)
+                .UsesAnimation(AnimationType.LoopingConjure1)
                 .DisplaysVisualEffectWhenActivating()
                 .ResonanceCost(1)
                 .HasImpactAction((activator, target, location) =>
@@ -200,7 +200,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
                     .HasActivationDelay(2f)
                     .RequirementEP(24)
                     .HasMaxRange(15f)
-                    .UsesAnimation(AnimationType.LoopingConjure2)
+                    .UsesAnimation(AnimationType.LoopingConjure1)
                     .DisplaysVisualEffectWhenActivating()
                     .ResonanceCost(2)
                     .HasImpactAction((activator, target, location) =>
@@ -262,7 +262,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
                     .HasActivationDelay(3f)
                     .RequirementEP(46)
                     .HasMaxRange(15f)
-                    .UsesAnimation(AnimationType.LoopingConjure2)
+                    .UsesAnimation(AnimationType.LoopingConjure1)
                     .DisplaysVisualEffectWhenActivating()
                     .ResonanceCost(3)
                     .HasImpactAction((activator, target, location) =>
@@ -323,7 +323,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
                     .HasActivationDelay(5f)
                     .RequirementEP(88)
                     .HasMaxRange(15f)
-                    .UsesAnimation(AnimationType.LoopingConjure2)
+                    .UsesAnimation(AnimationType.LoopingConjure1)
                     .DisplaysVisualEffectWhenActivating()
                     .ResonanceCost(4)
                     .HasImpactAction((activator, target, location) =>

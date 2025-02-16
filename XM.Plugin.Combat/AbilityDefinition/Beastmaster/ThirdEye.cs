@@ -40,7 +40,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Beastmaster
                 .HasRecastDelay(RecastGroup.ThirdEye, 15f)
                 .HasActivationDelay(1f)
                 .RequirementEP(6)
-                .UsesAnimation(AnimationType.LoopingConjure2)
+                .UsesAnimation(AnimationType.LoopingConjure1)
                 .DisplaysVisualEffectWhenActivating()
                 .ResonanceCost(1)
                 .HasImpactAction((activator, target, location) =>

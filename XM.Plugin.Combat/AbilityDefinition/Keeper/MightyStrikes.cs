@@ -41,7 +41,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
                 .HasRecastDelay(RecastGroup.JobCapstone, 60f * 30f)
                 .IsCastedAbility()
                 .RequirementEP(150)
-                .UsesAnimation(AnimationType.LoopingConjure2)
+                .UsesAnimation(AnimationType.LoopingConjure1)
                 .HasActivationDelay(3f)
                 .ResonanceCost(3)
                 .HasImpactAction((activator, target, location) =>

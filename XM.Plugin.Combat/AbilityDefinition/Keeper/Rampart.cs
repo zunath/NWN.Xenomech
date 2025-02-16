@@ -37,7 +37,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
                 .HasRecastDelay(RecastGroup.Rampart, 90f)
                 .HasActivationDelay(2f)
                 .RequirementEP(8)
-                .UsesAnimation(AnimationType.LoopingConjure2)
+                .UsesAnimation(AnimationType.LoopingConjure1)
                 .DisplaysVisualEffectWhenActivating()
                 .ResonanceCost(2)
                 .HasImpactAction((activator, target, location) =>

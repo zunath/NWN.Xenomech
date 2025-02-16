@@ -132,7 +132,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
                 .HasRecastDelay(RecastGroup.Restoration, 4f)
                 .HasActivationDelay(2f)
                 .RequirementEP(4)
-                .UsesAnimation(AnimationType.LoopingConjure2)
+                .UsesAnimation(AnimationType.LoopingConjure1)
                 .DisplaysVisualEffectWhenActivating()
                 .ResonanceCost(1)
                 .HasImpactAction((activator, target, location) =>
@@ -199,7 +199,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
                     .HasRecastDelay(RecastGroup.Restoration, 4f)
                     .HasActivationDelay(2f)
                     .RequirementEP(10)
-                    .UsesAnimation(AnimationType.LoopingConjure2)
+                    .UsesAnimation(AnimationType.LoopingConjure1)
                     .DisplaysVisualEffectWhenActivating()
                     .ResonanceCost(2)
                     .HasImpactAction((activator, target, location) =>
@@ -260,7 +260,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
                     .HasRecastDelay(RecastGroup.Restoration, 5f)
                     .HasActivationDelay(2f)
                     .RequirementEP(15)
-                    .UsesAnimation(AnimationType.LoopingConjure2)
+                    .UsesAnimation(AnimationType.LoopingConjure1)
                     .DisplaysVisualEffectWhenActivating()
                     .ResonanceCost(3)
                     .HasImpactAction((activator, target, location) =>

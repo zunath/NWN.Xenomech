@@ -34,7 +34,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
                 .Name(LocaleString.DivineSeal)
                 .Description(LocaleString.DivineSealDescription)
                 .HasRecastDelay(RecastGroup.DivineSeal, 60f * 5f)
-                .UsesAnimation(AnimationType.LoopingConjure2)
+                .UsesAnimation(AnimationType.LoopingConjure1)
                 .DisplaysVisualEffectWhenActivating()
                 .ResonanceCost(1)
                 .HasImpactAction((activator, target, location) =>

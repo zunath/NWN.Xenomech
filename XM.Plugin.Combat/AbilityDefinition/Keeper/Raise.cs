@@ -36,7 +36,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
                 .IsCastedAbility()
                 .HasMaxRange(5f)
                 .RequirementEP(60)
-                .UsesAnimation(AnimationType.LoopingConjure2)
+                .UsesAnimation(AnimationType.LoopingConjure1)
                 .ResonanceCost(1)
                 .HasCustomValidation((activator, target, location) =>
                 {
