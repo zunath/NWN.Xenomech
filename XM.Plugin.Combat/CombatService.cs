@@ -381,16 +381,35 @@ namespace XM.Plugin.Combat
             if (!isBehind)
                 return 0;
 
+            var bonusDMG = 0;
             if (GetHasFeat(FeatType.BackAttack4, attacker))
-                return 16;
-            if (GetHasFeat(FeatType.BackAttack3, attacker))
-                return 12;
-            if (GetHasFeat(FeatType.BackAttack2, attacker))
-                return 8;
-            if (GetHasFeat(FeatType.BackAttack1, attacker))
-                return 4;
+                bonusDMG += 16;
+            else if (GetHasFeat(FeatType.BackAttack3, attacker))
+                bonusDMG += 12;
+            else if (GetHasFeat(FeatType.BackAttack2, attacker))
+                bonusDMG += 8;
+            else if (GetHasFeat(FeatType.BackAttack1, attacker))
+                bonusDMG += 4;
 
-            return 0;
+            if (_statusEffect.HasEffect<SneakAttack3StatusEffect>(attacker))
+            {
+                bonusDMG += 30;
+                _statusEffect.RemoveStatusEffect<SneakAttack3StatusEffect>(attacker);
+            }
+
+            if (_statusEffect.HasEffect<SneakAttack2StatusEffect>(attacker))
+            {
+                bonusDMG += 20;
+                _statusEffect.RemoveStatusEffect<SneakAttack2StatusEffect>(attacker);
+            }
+
+            if (_statusEffect.HasEffect<SneakAttack1StatusEffect>(attacker))
+            {
+                bonusDMG += 10;
+                _statusEffect.RemoveStatusEffect<SneakAttack1StatusEffect>(attacker);
+            }
+
+            return bonusDMG;
         }
 
         public int DetermineDamage(

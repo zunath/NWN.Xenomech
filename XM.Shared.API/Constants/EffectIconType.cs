@@ -161,5 +161,8 @@ namespace XM.Shared.API.Constants
         Chi2 = 156,
         PerfectDodge = 157,
         StasisField = 158,
+        SneakAttack1 = 159,
+        SneakAttack2 = 160,
+        SneakAttack3 = 161,
     }
 }
