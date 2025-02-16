@@ -157,5 +157,7 @@ namespace XM.Shared.API.Constants
         HundredFists = 152,
         Flash = 153,
         Warcry = 154,
+        Chi1 = 155,
+        Chi2 = 156,
     }
 }
