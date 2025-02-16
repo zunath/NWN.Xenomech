@@ -153,5 +153,6 @@ namespace XM.Shared.API.Constants
         XMHaste = 148,
         XMSlow = 149,
         Snarl = 150,
+        ThirdEye = 151,
     }
 }

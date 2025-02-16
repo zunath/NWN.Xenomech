@@ -523,6 +523,23 @@ namespace XM.Progression.Stat
                 return 0;
             }
         }
+        public int GetDamageReduction(uint creature)
+        {
+            if (GetIsPC(creature) && !GetIsDM(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+                var itemDamageReduction = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.DamageReduction);
+                var abilityDamageReduction = dbPlayerStat.AbilityStats.CalculateStat(StatType.DamageReduction);
+                var statusDamageReduction = _status.GetCreatureStatusEffects(creature).Stats[StatType.DamageReduction];
+
+                return itemDamageReduction + abilityDamageReduction + statusDamageReduction;
+            }
+            else
+            {
+                return 0;
+            }
+        }
 
         public void ReduceEP(uint creature, int reduceBy)
         {

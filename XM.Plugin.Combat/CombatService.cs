@@ -101,8 +101,7 @@ namespace XM.Plugin.Combat
             AttackType attackType, 
             CombatModeType combatMode)
         {
-            var attackerStatusEffects = _statusEffect.GetCreatureStatusEffects(attacker);
-            var bonus = _stat.GetAccuracy(attacker) + attackerStatusEffects.Stats[StatType.Accuracy];
+            var bonus = _stat.GetAccuracy(attacker);
             var perception = _stat.GetAttribute(attacker, AbilityType.Perception);
             var attackerLevel = _stat.GetLevel(attacker);
             var defenderLevel = _stat.GetLevel(defender);
@@ -126,10 +125,9 @@ namespace XM.Plugin.Combat
 
         private int CalculateEvasion(uint creature)
         {
-            var statusEffects = _statusEffect.GetCreatureStatusEffects(creature);
             var agility = _stat.GetAttribute(creature, AbilityType.Agility);
             var baseEvasion = _skill.GetEvasionSkill(creature) / 10;
-            var evasionBonus = _stat.GetEvasion(creature) + statusEffects.Stats[StatType.Evasion];
+            var evasionBonus = _stat.GetEvasion(creature);
             var level = _stat.GetLevel(creature);
             
             return agility * 3 + level + baseEvasion + evasionBonus;
@@ -292,8 +290,7 @@ namespace XM.Plugin.Combat
 
         private int CalculateAttack(uint attacker, uint weapon, AttackType attackType)
         {
-            var attackerStatusEffects = _statusEffect.GetCreatureStatusEffects(attacker);
-            var attack = _stat.GetAttack(attacker) + attackerStatusEffects.Stats[StatType.Attack];
+            var attack = _stat.GetAttack(attacker);
             var stat = attackType == AttackType.Melee
                 ? _stat.GetAttribute(attacker, AbilityType.Might)
                 : _stat.GetAttribute(attacker, AbilityType.Agility);
@@ -306,8 +303,7 @@ namespace XM.Plugin.Combat
 
         private int CalculateDefense(uint defender)
         {
-            var defenderStatusEffects = _statusEffect.GetCreatureStatusEffects(defender);
-            var defense = _stat.GetDefense(defender) + defenderStatusEffects.Stats[StatType.Defense];
+            var defense = _stat.GetDefense(defender);
             var stat = _stat.GetAttribute(defender, AbilityType.Vitality);
             var level = _stat.GetLevel(defender);
 
@@ -388,6 +384,8 @@ namespace XM.Plugin.Combat
             {
                 damage += (int)(damage * 0.25f);
             }
+
+            damage -= (int)(damage * (_stat.GetDamageReduction(defender) * 0.01f));
 
             return damage;
         }
@@ -514,6 +512,11 @@ namespace XM.Plugin.Combat
         public void GainTP(uint target, int amount)
         {
             _stat.SetTP(target, amount);
+        }
+
+        public void RemoveEffectsOnDamage(uint target)
+        {
+            _statusEffect.RemoveStatusEffect<ThirdEyeStatusEffect>(target);
         }
     }
 }
