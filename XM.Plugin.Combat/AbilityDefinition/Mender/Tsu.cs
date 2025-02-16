@@ -22,7 +22,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
 
         public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
-            RadiantBlast1();
+            TsuAbility();
 
             return _builder.Build();
         }
@@ -38,7 +38,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
             AssignCommand(activator, () => ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpBreach), target));
         }
 
-        private void RadiantBlast1()
+        private void TsuAbility()
         {
             _builder.Create(FeatType.Tsu)
                 .Name(LocaleString.Tsu)
