@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 using Anvil.Services;
 using NWN.Core.NWNX;
 using XM.Inventory;
@@ -366,12 +367,30 @@ namespace XM.Plugin.Combat
             var delta = CalculateDamageStatDelta(attacker, defender, attackType);
             var ratio = CalculateDamageRatio(attacker, defender, weapon, attackType);
             var attackerDMG = _stat.GetMainHandDMG(attacker) + _stat.GetOffHandDMG(attacker);
-            var baseDMG = attackerDMG + delta;
-
+            var backAttackDMG = CalculateBackAttackBonus(attacker, defender);
+            var baseDMG = attackerDMG + delta + backAttackDMG;
             var maxDamage = baseDMG * ratio;
             var minDamage = maxDamage * 0.7f;
 
             return ((int)minDamage, (int)maxDamage);
+        }
+
+        private int CalculateBackAttackBonus(uint attacker, uint defender)
+        {
+            var isBehind = IsBehind(attacker, defender);
+            if (!isBehind)
+                return 0;
+
+            if (GetHasFeat(FeatType.BackAttack4, attacker))
+                return 16;
+            if (GetHasFeat(FeatType.BackAttack3, attacker))
+                return 12;
+            if (GetHasFeat(FeatType.BackAttack2, attacker))
+                return 8;
+            if (GetHasFeat(FeatType.BackAttack1, attacker))
+                return 4;
+
+            return 0;
         }
 
         public int DetermineDamage(
@@ -526,5 +545,25 @@ namespace XM.Plugin.Combat
         {
             _statusEffect.RemoveStatusEffect<ThirdEyeStatusEffect>(target);
         }
+
+        private bool IsBehind(uint attacker, uint defender)
+        {
+            var attackerPosition = GetPosition(attacker);
+            var defenderPosition = GetPosition(defender);
+            var defenderFacing = GetFacing(defender);
+
+            // Adjust facing to account for NWN's 0.0 being East instead of North
+            var defenderDirection = new Vector3(cos(defenderFacing + (float)Math.PI / 2), sin(defenderFacing + (float)Math.PI / 2), 0);
+
+            var toAttacker = Vector3.Normalize(attackerPosition - defenderPosition);
+
+            // Attacker is behind the defender if the direction from the defender to the attacker 
+            // is opposite to the defender's facing direction.
+            var isBehind = Vector3.Dot(toAttacker, defenderDirection) < -0.5f;
+
+            return isBehind;
+        }
+
+
     }
 }

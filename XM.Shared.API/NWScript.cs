@@ -3409,9 +3409,12 @@ namespace XM.Shared.API
         ///  - bRaiseable: If this is true, the caller can be raised via resurrection.<br/>
         ///  - bSelectableWhenDead: If this is true, the caller is selectable after death.
         /// </summary>
-        public static void SetIsDestroyable(bool bDestroyable, bool bRaiseable = true, bool bSelectableWhenDead = false)
+        public static void SetIsDestroyable(bool bDestroyable, bool bRaiseable = true, bool bSelectableWhenDead = false, uint oObject = OBJECT_INVALID)
         {
-            NWN.Core.NWScript.SetIsDestroyable(bDestroyable ? 1 : 0, bRaiseable ? 1 : 0, bSelectableWhenDead ? 1 : 0);
+            if (oObject == OBJECT_INVALID)
+                oObject = OBJECT_SELF;
+
+            NWN.Core.NWScript.SetIsDestroyable(bDestroyable ? 1 : 0, bRaiseable ? 1 : 0, bSelectableWhenDead ? 1 : 0, oObject);
         }
 
         /// <summary>
