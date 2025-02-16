@@ -27,10 +27,14 @@ namespace XM.Plugin.Combat
             return Math.Max(1f - (resist / (resist + 50f)), 0.1f);
         }
 
-        private int CalculateDeltaWIL(uint caster, uint target)
+        private int CalculateStatDelta(
+            uint caster, 
+            uint target, 
+            AbilityType casterStatType, 
+            AbilityType targetStatType)
         {
-            var casterWIL = _stat.GetAttribute(caster, AbilityType.Willpower);
-            var targetWIL = _stat.GetAttribute(target, AbilityType.Willpower);
+            var casterWIL = _stat.GetAttribute(caster, casterStatType);
+            var targetWIL = _stat.GetAttribute(target, targetStatType);
 
             return Math.Clamp(casterWIL - targetWIL, -15, 15);
         }
@@ -58,10 +62,12 @@ namespace XM.Plugin.Combat
             uint caster,
             uint target,
             int baseDamage,
-            ResistType resistType)
+            ResistType resistType,
+            AbilityType casterStatType = AbilityType.Willpower,
+            AbilityType targetStatType = AbilityType.Willpower)
         {
             var resistReduction = CalculateResistDamageReduction(target, resistType);
-            var wilDelta = CalculateDeltaWIL(caster, target);
+            var wilDelta = CalculateStatDelta(caster, target, casterStatType, targetStatType);
             var levelDelta = CalculateLevelDelta(caster, target);
             var etherAttackDefenseDelta = Math.Clamp(CalculateEtherAttackDefenseRatio(caster, target), 0.5f, 2.0f);
 
