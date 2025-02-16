@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
+using XM.Plugin.Combat.StatusEffectDefinition;
 using XM.Progression.Ability;
 using XM.Progression.Recast;
 using XM.Progression.StatusEffect;
@@ -17,15 +18,15 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
         public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             Protection1();
+            Protection2();
+            Protection3();
 
             return _builder.Build();
         }
 
-        private readonly StatusEffectService _status;
         public Protection(PartyService party, StatusEffectService status) 
             : base(party, status)
         {
-            _status = status;
         }
 
         private void Protection1()
@@ -41,7 +42,41 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
                 .ResonanceCost(1)
                 .HasImpactAction((activator, target, location) =>
                 {
-                    //ApplyPartyAOE<ProtectionStatusEffect>(activator, target, 10f, 30);
+                    ApplyPartyAOE<Protection1StatusEffect>(activator, target, 10f, 30);
+                });
+        }
+
+        private void Protection2()
+        {
+            _builder.Create(FeatType.Protection2)
+                .Name(LocaleString.ProtectionII)
+                .Description(LocaleString.ProtectionIIDescription)
+                .HasRecastDelay(RecastGroup.Protection, 15f)
+                .HasActivationDelay(4f)
+                .RequirementEP(28)
+                .UsesAnimation(AnimationType.LoopingConjure1)
+                .DisplaysVisualEffectWhenActivating()
+                .ResonanceCost(2)
+                .HasImpactAction((activator, target, location) =>
+                {
+                    ApplyPartyAOE<Protection2StatusEffect>(activator, target, 10f, 30);
+                });
+        }
+
+        private void Protection3()
+        {
+            _builder.Create(FeatType.Protection3)
+                .Name(LocaleString.ProtectionIII)
+                .Description(LocaleString.ProtectionIIIDescription)
+                .HasRecastDelay(RecastGroup.Protection, 15f)
+                .HasActivationDelay(4f)
+                .RequirementEP(56)
+                .UsesAnimation(AnimationType.LoopingConjure1)
+                .DisplaysVisualEffectWhenActivating()
+                .ResonanceCost(3)
+                .HasImpactAction((activator, target, location) =>
+                {
+                    ApplyPartyAOE<Protection3StatusEffect>(activator, target, 10f, 30);
                 });
         }
     }

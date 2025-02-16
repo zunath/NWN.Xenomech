@@ -144,5 +144,8 @@ namespace XM.Shared.API.Constants
         MindWard = 139,
         Rampart = 140,
         MightyStrikes = 141,
+        Protection1 = 142,
+        Protection2 = 143,
+        Protection3 = 144,
     }
 }
