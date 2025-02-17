@@ -7032,6 +7032,10 @@
     {
       "id": 1759,
       "text": "{0} stole {1} from {2}."
+    },
+    {
+      "id": 1760,
+      "text": "You cannot escape from this area!"
     }
   ]
 }

@@ -1443,6 +1443,7 @@ namespace XM.Shared.Core.Localization
         Mind = 1756,
         NoAttackTargetAvailable = 1757,
         YourTargetHasNothingToSteal = 1758,
-        XStoleYFromZ = 1759
+        XStoleYFromZ = 1759,
+        YouCannotEscapeFromThisArea = 1760,
     }
 }
