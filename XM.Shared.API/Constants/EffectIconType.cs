@@ -167,5 +167,6 @@ namespace XM.Shared.API.Constants
         Flee = 162,
         Hide = 163,
         EagleEyeShot = 164,
+        Sharpshot = 165,
     }
 }
