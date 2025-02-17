@@ -5,7 +5,7 @@ using XM.Shared.Core;
 
 namespace XM.Inventory.Loot
 {
-    internal class LootTable : List<LootTableItem>
+    public class LootTable : List<LootTableItem>
     {
         public bool IsRare { get; set; }
 

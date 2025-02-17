@@ -2,7 +2,7 @@
 
 namespace XM.Inventory.Loot
 {
-    internal interface ILootTableDefinition
+    public interface ILootTableDefinition
     {
         /// <summary>
         /// Creates a dictionary of loot tables to be stored in the cache.

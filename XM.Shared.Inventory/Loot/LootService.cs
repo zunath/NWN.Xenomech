@@ -10,7 +10,7 @@ using XM.Shared.Core.EventManagement;
 namespace XM.Inventory.Loot
 {
     [ServiceBinding(typeof(LootService))]
-    internal class LootService: IInitializable
+    public class LootService: IInitializable
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -23,21 +23,26 @@ namespace XM.Inventory.Loot
         private const string CorpseClosedScript = "corpse_closed";
         private const string CorpseDisturbedScript = "corpse_disturbed";
 
+        private const string LootTablePrefix = "LOOT_TABLE_";
+        private const string StealLootTablePrefix = "STEAL_LOOT_TABLE_";
+        private const string StealLootItemVariable = "STEAL_ITEM";
+
         private const string RareBonusChanceVariable = "RARE_BONUS_CHANCE";
         private const string CreditfinderLevelVariable = "CREDITFINDER_LEVEL";
 
 
-        [Inject]
-        public IList<ILootTableDefinition> Definitions { get; set; }
+        private readonly IList<ILootTableDefinition> _definitions;
         private readonly InventoryService _inventory;
         private readonly XMEventService _event;
 
         public LootService(
             InventoryService inventory, 
-            XMEventService @event)
+            XMEventService @event,
+            IList<ILootTableDefinition> definitions)
         {
             _inventory = inventory;
             _event = @event;
+            _definitions = definitions;
             _lootTables = new Dictionary<string, LootTable>();
 
             SubscribeEvents();
@@ -46,8 +51,10 @@ namespace XM.Inventory.Loot
         private void SubscribeEvents()
         {
             _event.Subscribe<CreatureEvent.OnDeath>(CreatureOnDeathBefore);
+            _event.Subscribe<CreatureEvent.OnSpawn>(CreatureOnSpawn);
             _event.Subscribe<XMEvent.OnItemHit>(MarkCreditfinderAndTreasureHunterOnTarget);
         }
+
 
         public void Init()
         {
@@ -56,7 +63,7 @@ namespace XM.Inventory.Loot
 
         private void LoadLootTables()
         {
-            foreach (var definition in Definitions)
+            foreach (var definition in _definitions)
             {
                 var tables = definition.BuildLootTables();
 
@@ -310,7 +317,51 @@ namespace XM.Inventory.Loot
 
         private void CreatureOnDeathBefore(uint objectSelf)
         {
+            SpawnLoot(objectSelf, objectSelf, LootTablePrefix);
             ProcessCorpse();
+        }
+        private void CreatureOnSpawn(uint creature)
+        {
+            SpawnStealLoot(creature);
+        }
+
+        private void SpawnStealLoot(uint creature)
+        {
+            var lootTables = GetLootTableDetails(creature, StealLootTablePrefix);
+
+            foreach (var lootTable in lootTables)
+            {
+                var (tableName, chance, attempts) = ParseLootTableArguments(lootTable);
+
+                foreach (var item in SpawnLoot(creature, creature, tableName, chance, attempts))
+                {
+                    SetItemCursedFlag(item, true);
+                    SetDroppableFlag(item, false);
+
+                    SetLocalBool(item, StealLootItemVariable, true);
+                }
+            }
+        }
+
+        public uint GetRandomStealableItem(uint creature)
+        {
+            var items = new List<uint>();
+
+            for (var item = GetFirstItemInInventory(creature);
+                 GetIsObjectValid(item);
+                 item = GetNextItemInInventory(creature))
+            {
+                if (GetLocalBool(item, StealLootItemVariable))
+                {
+                    items.Add(item);
+                }
+            }
+
+            if (items.Count <= 0)
+                return OBJECT_INVALID;
+
+            var index = XMRandom.Next(items.Count);
+            return items[index];
         }
 
         /// <summary>

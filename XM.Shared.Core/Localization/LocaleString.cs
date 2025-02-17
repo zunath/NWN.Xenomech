@@ -1441,5 +1441,8 @@ namespace XM.Shared.Core.Localization
         Light = 1754,
         Darkness = 1755,
         Mind = 1756,
+        NoAttackTargetAvailable = 1757,
+        YourTargetHasNothingToSteal = 1758,
+        XStoleYFromZ = 1759
     }
 }

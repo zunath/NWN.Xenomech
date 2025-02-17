@@ -7020,6 +7020,18 @@
     {
       "id": 1756,
       "text": "Mind"
+    },
+    {
+      "id": 1757,
+      "text": "No attack target available."
+    },
+    {
+      "id": 1758,
+      "text": "Your target has nothing to steal!"
+    },
+    {
+      "id": 1759,
+      "text": "{0} stole {1} from {2}."
     }
   ]
 }
