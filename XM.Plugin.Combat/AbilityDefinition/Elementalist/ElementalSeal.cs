@@ -33,10 +33,11 @@ namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
             _builder.Create(FeatType.ElementalSeal)
                 .Name(LocaleString.ElementalSeal)
                 .Description(LocaleString.ElementalSealDescription)
-                .HasRecastDelay(RecastGroup.DivineSeal, 60f * 5f)
+                .HasRecastDelay(RecastGroup.ElementalSeal, 60f)
                 .HasActivationDelay(2f)
                 .UsesAnimation(AnimationType.LoopingConjure1)
                 .DisplaysVisualEffectWhenActivating()
+                .RequirementEP(40)
                 .ResonanceCost(1)
                 .HasImpactAction((activator, target, location) =>
                 {
