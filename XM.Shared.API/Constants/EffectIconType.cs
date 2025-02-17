@@ -170,5 +170,6 @@ namespace XM.Shared.API.Constants
         Sharpshot = 165,
         Manafont = 166,
         ElementalSeal = 167,
+        ZephyrShroud = 168,
     }
 }
