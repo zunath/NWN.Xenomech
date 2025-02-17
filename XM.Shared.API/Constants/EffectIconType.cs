@@ -166,5 +166,6 @@ namespace XM.Shared.API.Constants
         SneakAttack3 = 161,
         Flee = 162,
         Hide = 163,
+        EagleEyeShot = 164,
     }
 }

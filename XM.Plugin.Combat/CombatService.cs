@@ -437,6 +437,12 @@ namespace XM.Plugin.Combat
 
             damage -= (int)(damage * (_stat.GetDamageReduction(defender) * 0.01f));
 
+            if (_statusEffect.HasEffect<EagleEyeShotStatusEffect>(attacker))
+            {
+                damage *= 5;
+                _statusEffect.RemoveStatusEffect<EagleEyeShotStatusEffect>(attacker);
+            }
+
             return damage;
         }
 
