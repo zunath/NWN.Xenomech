@@ -169,5 +169,6 @@ namespace XM.Shared.API.Constants
         EagleEyeShot = 164,
         Sharpshot = 165,
         Manafont = 166,
+        ElementalSeal = 167,
     }
 }
