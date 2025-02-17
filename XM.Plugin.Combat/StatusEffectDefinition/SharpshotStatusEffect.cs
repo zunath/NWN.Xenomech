@@ -11,7 +11,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition
     {
         public override LocaleString Name => LocaleString.Sharpshot;
         public override EffectIconType Icon => EffectIconType.Sharpshot;
-        public override StatusEffectStackType StackingType => StatusEffectStackType.Disabled;
+        public override StatusEffectStackType StackingType => StatusEffectStackType.StackFromMultipleSources;
         public override float Frequency => 120f;
 
         public SharpshotStatusEffect()
