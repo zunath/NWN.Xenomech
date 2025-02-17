@@ -122,6 +122,12 @@ namespace XM.Progression.StatusEffect
         public void ApplyStatusEffect<T>(uint source, uint creature, int durationTicks)
             where T: IStatusEffect
         {
+            if (durationTicks <= 0)
+            {
+                SendMessageToPC(source, LocaleString.YourSpellWasResisted.ToLocalizedString());
+                return;
+            }
+
             ApplyNWNEffect(creature);
 
             var statusEffect = (IStatusEffect)Activator.CreateInstance<T>();

@@ -1445,5 +1445,6 @@ namespace XM.Shared.Core.Localization
         YourTargetHasNothingToSteal = 1758,
         XStoleYFromZ = 1759,
         YouCannotEscapeFromThisArea = 1760,
+        YourSpellWasResisted = 1761,
     }
 }
