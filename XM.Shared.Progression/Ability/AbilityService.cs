@@ -120,6 +120,11 @@ namespace XM.Progression.Ability
             return _abilities[featType];
         }
 
+        private bool HasManafont(uint target)
+        {
+            return GetLocalBool(target, "MANAFONT");
+        }
+
         public bool CanUseAbility(
             uint activator,
             uint target,
@@ -189,7 +194,7 @@ namespace XM.Progression.Ability
             }
 
             // EP check
-            if (_stat.GetCurrentEP(activator) < ability.EPRequired)
+            if (!HasManafont(activator) && _stat.GetCurrentEP(activator) < ability.EPRequired)
             {
                 SendMessageToPC(activator, LocaleString.InsufficientEP.ToLocalizedString());
                 return false;
@@ -456,7 +461,8 @@ namespace XM.Progression.Ability
 
         private void ApplyRequirementEffects(uint activator, AbilityDetail ability)
         {
-            _stat.ReduceEP(activator, ability.EPRequired);
+            if(!HasManafont(activator))
+                _stat.ReduceEP(activator, ability.EPRequired);
         }
 
         private void AddJobFeat(uint player)

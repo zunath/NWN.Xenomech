@@ -168,5 +168,6 @@ namespace XM.Shared.API.Constants
         Hide = 163,
         EagleEyeShot = 164,
         Sharpshot = 165,
+        Manafont = 166,
     }
 }
