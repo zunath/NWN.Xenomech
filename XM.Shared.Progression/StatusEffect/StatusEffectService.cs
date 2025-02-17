@@ -49,6 +49,7 @@ namespace XM.Progression.StatusEffect
             _event.Subscribe<JobEvent.PlayerChangedJobEvent>(OnChangeJobs);
         }
 
+
         private void OnPlayerEnter(uint module)
         {
             var player = GetEnteringObject();

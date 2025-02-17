@@ -46,7 +46,14 @@ namespace XM.Plugin.Combat
             _statusEffect = statusEffect;
             _db = db;
 
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
             _event.Subscribe<NWNXEvent.OnBroadcastAttackOfOpportunityBefore>(DisableAttacksOfOpportunity);
+            _event.Subscribe<PlayerEvent.OnDamaged>(RemoveEffectsOnDamaged);
+            _event.Subscribe<CreatureEvent.OnDamaged>(RemoveEffectsOnDamaged);
         }
 
 
@@ -560,13 +567,20 @@ namespace XM.Plugin.Combat
             _stat.SetTP(target, amount);
         }
 
-        public void RemoveEffectsOnDamage(uint target)
+        private void RemoveEffectsOnDamaged(uint creature)
         {
-            _statusEffect.RemoveStatusEffect<ThirdEyeStatusEffect>(target);
+            _statusEffect.RemoveStatusEffect<ThirdEyeStatusEffect>(creature);
+            _statusEffect.RemoveStatusEffect<HideStatusEffect>(creature);
         }
 
         private bool IsBehind(uint attacker, uint defender)
         {
+            if (_statusEffect.HasEffect<HideStatusEffect>(attacker))
+            {
+                _statusEffect.RemoveStatusEffect<HideStatusEffect>(attacker);
+                return true;
+            }
+
             var attackerPosition = GetPosition(attacker);
             var defenderPosition = GetPosition(defender);
             var defenderFacing = GetFacing(defender);

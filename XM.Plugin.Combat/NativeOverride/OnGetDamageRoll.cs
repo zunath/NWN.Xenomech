@@ -69,8 +69,6 @@ namespace XM.Plugin.Combat.NativeOverride
                     ApplyTP(attacker.m_idSelf, defender.m_idSelf);
                 }
 
-                _combat.RemoveEffectsOnDamage(defender.m_idSelf);
-
                 return damage;
             });
         }
