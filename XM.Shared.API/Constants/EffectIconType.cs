@@ -174,5 +174,7 @@ namespace XM.Shared.API.Constants
         EtherWall = 169,
         AurionInfusion1 = 170,
         AurionInfusion2 = 171,
+        Mindstream1 = 172,
+        Mindstream2 = 173,
     }
 }
