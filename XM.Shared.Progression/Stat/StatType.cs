@@ -29,5 +29,6 @@
         Slow = 24,
         DamageReduction = 25,
         EtherDefense = 26,
+        QueuedDMGBonus = 27,
     }
 }

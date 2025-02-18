@@ -226,9 +226,8 @@ namespace XM.Progression.Ability
         }
 
         // Variable names for queued abilities.
-        private const string ActiveAbilityIdName = "ACTIVE_ABILITY_ID";
-        private const string ActiveAbilityFeatIdName = "ACTIVE_ABILITY_FEAT_ID";
-        private const string ActiveAbilityEffectivePerkLevelName = "ACTIVE_ABILITY_EFFECTIVE_PERK_LEVEL";
+        private const string ActiveActionId = "ACTIVE_ABILITY_ID";
+        private const string ActiveAbilityFeatId = "ACTIVE_ABILITY_FEAT_ID";
 
         private void UseAbility(uint activator)
         {
@@ -419,8 +418,8 @@ namespace XM.Progression.Ability
         {
             var abilityId = Guid.NewGuid().ToString();
             // Assign local variables which will be picked up on the next weapon OnHit event by this player.
-            SetLocalString(activator, ActiveAbilityIdName, abilityId);
-            SetLocalInt(activator, ActiveAbilityFeatIdName, (int)feat);
+            SetLocalString(activator, ActiveActionId, abilityId);
+            SetLocalInt(activator, ActiveAbilityFeatId, (int)feat);
 
             ApplyRequirementEffects(activator, ability);
 
@@ -436,11 +435,11 @@ namespace XM.Progression.Ability
 
         private void DequeueWeaponAbility(uint target, bool sendMessage = true)
         {
-            var abilityId = GetLocalString(target, ActiveAbilityIdName);
-            if (string.IsNullOrWhiteSpace(abilityId))
+            var actionId = GetLocalString(target, ActiveActionId);
+            if (string.IsNullOrWhiteSpace(actionId))
                 return;
 
-            var featId = GetLocalInt(target, ActiveAbilityFeatIdName);
+            var featId = GetLocalInt(target, ActiveAbilityFeatId);
             if (featId == 0)
                 return;
 
@@ -448,15 +447,37 @@ namespace XM.Progression.Ability
             var abilityDetail = GetAbilityDetail(featType);
 
             // Remove the local variables.
-            DeleteLocalString(target, ActiveAbilityIdName);
-            DeleteLocalInt(target, ActiveAbilityFeatIdName);
-            DeleteLocalInt(target, ActiveAbilityEffectivePerkLevelName);
+            DeleteLocalString(target, ActiveActionId);
+            DeleteLocalInt(target, ActiveAbilityFeatId);
 
             // Notify the activator and nearby players
             SendMessageToPC(target, LocaleString.YourWeaponAbilityXIsNoLongerQueued.ToLocalizedString(abilityDetail.Name.ToLocalizedString()));
 
             if (sendMessage)
                 Messaging.SendMessageNearbyToPlayers(target, LocaleString.PlayerNoLongerHasWeaponAbilityXReadied.ToLocalizedString(GetName(target), abilityDetail.Name.ToLocalizedString()));
+        }
+
+        public AbilityDetail GetQueuedAbility(uint attacker)
+        {
+            var featType = (FeatType)GetLocalInt(attacker, ActiveAbilityFeatId);
+            if (!IsFeatRegistered(featType))
+                return null;
+
+            return _abilities[featType];
+        }
+
+        public void ProcessQueuedAbility(uint attacker, uint defender)
+        {
+            var featType = (FeatType)GetLocalInt(attacker, ActiveAbilityFeatId);
+
+            if (!IsFeatRegistered(featType))
+                return;
+
+            var ability = GetQueuedAbility(attacker);
+            ability.ImpactAction?.Invoke(attacker, defender, GetLocation(defender));
+
+            DeleteLocalString(attacker, ActiveActionId);
+            DeleteLocalInt(attacker, ActiveAbilityFeatId);
         }
 
         private void ApplyRequirementEffects(uint activator, AbilityDetail ability)
@@ -536,5 +557,6 @@ namespace XM.Progression.Ability
 
             _event.PublishEvent(player, new JobEvent.JobFeatAddedEvent(feat));
         }
+
     }
 }

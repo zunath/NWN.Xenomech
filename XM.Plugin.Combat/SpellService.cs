@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat
             _stat = stat;
         }
 
-        private float CalculateResistDamageReduction(uint creature, ResistType resistType)
+        public float CalculateResistDamageReduction(uint creature, ResistType resistType)
         {
             var resist = _stat.GetResist(creature, resistType);
             if (resist <= 0)

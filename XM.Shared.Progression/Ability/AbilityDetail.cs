@@ -25,6 +25,7 @@ namespace XM.Progression.Ability
         public RecastGroup RecastGroup { get; set; }
         public AbilityActivationType ActivationType { get; set; }
         public AnimationType AnimationType { get; set; }
+        public ResistType ResistType { get; set; }
         public float MaxRange { get; set; }
         public bool IsHostileAbility { get; set; }
         public bool DisplaysActivationMessage { get; set; }

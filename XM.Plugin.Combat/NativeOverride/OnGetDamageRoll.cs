@@ -1,6 +1,7 @@
 ﻿using Anvil.API;
 using Anvil.Services;
 using NWN.Native.API;
+using XM.Progression.Ability;
 
 namespace XM.Plugin.Combat.NativeOverride
 {
@@ -15,14 +16,17 @@ namespace XM.Plugin.Combat.NativeOverride
 
         private readonly VirtualMachine _vm;
         private readonly CombatService _combat;
+        private readonly AbilityService _ability;
 
         public OnGetDamageRoll(
             HookService hook,
             VirtualMachine vm,
-            CombatService combat)
+            CombatService combat,
+            AbilityService ability)
         {
             _vm = vm;
             _combat = combat;
+            _ability = ability;
 
             _getDamageRollHook = hook.RequestHook<GetDamageRollHook>(GetDamageRoll);
         }
@@ -68,6 +72,8 @@ namespace XM.Plugin.Combat.NativeOverride
                 {
                     ApplyTP(attacker.m_idSelf, defender.m_idSelf);
                 }
+
+                _ability.ProcessQueuedAbility(attacker.m_idSelf, defender.m_idSelf);
 
                 return damage;
             });

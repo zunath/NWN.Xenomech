@@ -342,6 +342,13 @@ namespace XM.Progression.Ability
             return this;
         }
 
+        public AbilityBuilder ResistType(ResistType type)
+        {
+            _activeAbility.ResistType = type;
+
+            return this;
+        }
+
         /// <summary>
         /// Returns a built list of abilities.
         /// </summary>

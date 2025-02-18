@@ -3,8 +3,8 @@ using System.Numerics;
 using Anvil.Services;
 using NWN.Core.NWNX;
 using XM.Inventory;
-using XM.Plugin.Combat.AbilityDefinition.Keeper;
 using XM.Plugin.Combat.StatusEffectDefinition;
+using XM.Progression.Ability;
 using XM.Progression.Skill;
 using XM.Progression.Stat;
 using XM.Progression.Stat.Entity;
@@ -30,6 +30,8 @@ namespace XM.Plugin.Combat
         private readonly ItemTypeService _itemType;
         private readonly StatusEffectService _statusEffect;
         private readonly DBService _db;
+        private readonly AbilityService _ability;
+        private readonly SpellService _spell;
 
         public CombatService(
             SkillService skill,
@@ -37,7 +39,9 @@ namespace XM.Plugin.Combat
             StatService stat,
             ItemTypeService itemType,
             StatusEffectService statusEffect,
-            DBService db)
+            DBService db,
+            AbilityService ability,
+            SpellService spell)
         {
             _skill = skill;
             _event = @event;
@@ -45,6 +49,8 @@ namespace XM.Plugin.Combat
             _itemType = itemType;
             _statusEffect = statusEffect;
             _db = db;
+            _ability = ability;
+            _spell = spell;
 
             SubscribeEvents();
         }
@@ -375,6 +381,7 @@ namespace XM.Plugin.Combat
             var ratio = CalculateDamageRatio(attacker, defender, weapon, attackType);
             var attackerDMG = _stat.GetMainHandDMG(attacker) + _stat.GetOffHandDMG(attacker);
             var backAttackDMG = CalculateBackAttackBonus(attacker, defender);
+            var queuedDMG = CalculateQueuedAbilityDamageBonus(attacker, defender);
             var baseDMG = attackerDMG + delta + backAttackDMG;
             var maxDamage = baseDMG * ratio;
             var minDamage = maxDamage * 0.7f;
@@ -417,6 +424,26 @@ namespace XM.Plugin.Combat
             }
 
             return bonusDMG;
+        }
+
+        private int CalculateQueuedAbilityDamageBonus(uint attacker, uint defender)
+        {
+            var ability = _ability.GetQueuedAbility(attacker);
+            if (ability == null)
+                return 0;
+
+            var dmg = ability.Stats[StatType.QueuedDMGBonus];
+
+            if (ability.ResistType != ResistType.Invalid)
+            {
+                var resist = _spell.CalculateResistDamageReduction(defender, ability.ResistType);
+                dmg = (int)(dmg * resist);
+            }
+
+            if (dmg <= 0)
+                dmg = 0;
+
+            return dmg;
         }
 
         public int DetermineDamage(
