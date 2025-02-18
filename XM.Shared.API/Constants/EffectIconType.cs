@@ -172,5 +172,7 @@ namespace XM.Shared.API.Constants
         ElementalSeal = 167,
         ZephyrShroud = 168,
         EtherWall = 169,
+        AurionInfusion1 = 170,
+        AurionInfusion2 = 171,
     }
 }
