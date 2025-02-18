@@ -426,7 +426,6 @@ namespace XM.Plugin.Combat
             AttackType attackType,
             HitResultType hitResult)
         {
-            
             var (minDamage, maxDamage) = CalculateDamageRange(attacker, defender, weapon, attackType);
             var damage = XMRandom.Next(minDamage, maxDamage);
 
@@ -437,10 +436,35 @@ namespace XM.Plugin.Combat
 
             damage -= (int)(damage * (_stat.GetDamageReduction(defender) * 0.01f));
 
+            // Eagle Eye Shot - Multiply Damage by 5
             if (_statusEffect.HasEffect<EagleEyeShotStatusEffect>(attacker))
             {
                 damage *= 5;
                 _statusEffect.RemoveStatusEffect<EagleEyeShotStatusEffect>(attacker);
+            }
+
+            var halfDamage = damage / 2;
+            // Ether Wall - 50% of damage applied to EP. If no EP is remaining, remove effect. Remainder is normal damage.
+            if (_statusEffect.HasEffect<EtherWallStatusEffect>(defender))
+            {
+                var ep = _stat.GetCurrentEP(defender);
+                if (ep < halfDamage)
+                {
+                    damage -= ep;
+                    _stat.ReduceEP(defender, ep);
+                    _statusEffect.RemoveStatusEffect<EtherWallStatusEffect>(defender);
+                }
+                else if (ep > halfDamage)
+                {
+                    _stat.ReduceEP(defender, halfDamage);
+                    damage -= halfDamage;
+                }
+                else if (ep == halfDamage)
+                {
+                    _stat.ReduceEP(defender, halfDamage);
+                    damage -= halfDamage;
+                    _statusEffect.RemoveStatusEffect<EtherWallStatusEffect>(defender);
+                }
             }
 
             return damage;

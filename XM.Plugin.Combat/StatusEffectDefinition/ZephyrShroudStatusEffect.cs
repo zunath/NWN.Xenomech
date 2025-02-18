@@ -6,7 +6,7 @@ using XM.Shared.Core.Localization;
 
 namespace XM.Plugin.Combat.StatusEffectDefinition
 {
-    [ServiceBinding(typeof(IceWardStatusEffect))]
+    [ServiceBinding(typeof(ZephyrShroudStatusEffect))]
     public class ZephyrShroudStatusEffect: StatusEffectBase
     {
         public override LocaleString Name => LocaleString.ZephyrShroud;

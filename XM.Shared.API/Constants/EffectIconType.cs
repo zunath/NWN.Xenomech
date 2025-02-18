@@ -171,5 +171,6 @@ namespace XM.Shared.API.Constants
         Manafont = 166,
         ElementalSeal = 167,
         ZephyrShroud = 168,
+        EtherWall = 169,
     }
 }

@@ -5,7 +5,7 @@ using XM.Shared.Core.Localization;
 
 namespace XM.Plugin.Combat.StatusEffectDefinition
 {
-    [ServiceBinding(typeof(DivineSealStatusEffect))]
+    [ServiceBinding(typeof(ManafontStatusEffect))]
     public class ManafontStatusEffect: StatusEffectBase
     {
         public override LocaleString Name => LocaleString.Manafont;
