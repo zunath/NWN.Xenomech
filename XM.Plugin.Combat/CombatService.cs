@@ -382,7 +382,7 @@ namespace XM.Plugin.Combat
             var attackerDMG = _stat.GetMainHandDMG(attacker) + _stat.GetOffHandDMG(attacker);
             var backAttackDMG = CalculateBackAttackBonus(attacker, defender);
             var queuedDMG = CalculateQueuedAbilityDamageBonus(attacker, defender);
-            var baseDMG = attackerDMG + delta + backAttackDMG;
+            var baseDMG = attackerDMG + delta + backAttackDMG + queuedDMG;
             var maxDamage = baseDMG * ratio;
             var minDamage = maxDamage * 0.7f;
 

@@ -78,9 +78,9 @@ namespace XM.Progression.Ability
         /// Indicates this ability is executed on the next weapon hit.
         /// </summary>
         /// <returns>An ability builder with the configured options.</returns>
-        public AbilityBuilder IsWeaponAbility()
+        public AbilityBuilder IsQueuedAttack()
         {
-            _activeAbility.ActivationType = AbilityActivationType.Weapon;
+            _activeAbility.ActivationType = AbilityActivationType.QueuedAttack;
             _activeAbility.AbilityIsToggledAction = null;
 
             return this;

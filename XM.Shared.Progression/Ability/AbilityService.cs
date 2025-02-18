@@ -252,7 +252,7 @@ namespace XM.Progression.Ability
             var ability = GetAbilityDetail(feat);
 
             // Weapon abilities are queued for the next time the activator's attack lands on an enemy.
-            if (ability.ActivationType == AbilityActivationType.Weapon)
+            if (ability.ActivationType == AbilityActivationType.QueuedAttack)
             {
                 if (CanUseAbility(activator, target, feat, targetLocation))
                 {
