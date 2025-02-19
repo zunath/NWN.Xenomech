@@ -1446,5 +1446,7 @@ namespace XM.Shared.Core.Localization
         XStoleYFromZ = 1759,
         YouCannotEscapeFromThisArea = 1760,
         YourSpellWasResisted = 1761,
+        RESISTED = 1762,
+
     }
 }

@@ -14,7 +14,5 @@
         Mind = 9,
 
         Poison = 20,
-        Slow = 21,
-
     }
 }

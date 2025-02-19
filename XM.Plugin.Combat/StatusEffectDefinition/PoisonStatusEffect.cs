@@ -2,6 +2,7 @@
 using XM.Progression.Stat;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
+using XM.Shared.Core;
 using XM.Shared.Core.Localization;
 
 namespace XM.Plugin.Combat.StatusEffectDefinition
@@ -18,6 +19,18 @@ namespace XM.Plugin.Combat.StatusEffectDefinition
         public PoisonStatusEffect(StatService stat)
         {
             _stat = stat;
+        }
+
+        public override LocaleString CanApply(uint creature)
+        {
+            var resist = _stat.GetResist(creature, ResistType.Poison);
+
+            if (XMRandom.D100(1) <= resist)
+            {
+                return LocaleString.RESISTED;
+            }
+
+            return LocaleString.Empty;
         }
 
         protected override void Tick(uint creature)

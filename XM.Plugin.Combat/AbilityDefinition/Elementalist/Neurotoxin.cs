@@ -46,7 +46,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
                 .ResonanceCost(1)
                 .HasImpactAction((activator, target, location) =>
                 {
-                    var duration = _spell.CalculateResistedTicks(target, ResistType.Poison, 40);
+                    var duration = _spell.CalculateResistedTicks(target, ResistType.Wind, 40);
                     _status.ApplyStatusEffect<PoisonStatusEffect>(activator, target, duration);
                     ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpDiseaseSmall), target);
                 });

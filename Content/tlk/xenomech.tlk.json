@@ -7036,6 +7036,14 @@
     {
       "id": 1760,
       "text": "You cannot escape from this area!"
+    },
+    {
+      "id": 1761,
+      "text": "Your spell was resisted."
+    },
+    {
+      "id": 1762,
+      "text": "**RESISTED**"
     }
   ]
 }
