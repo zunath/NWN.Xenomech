@@ -5,6 +5,7 @@ using System.Numerics;
 using Anvil.API;
 using Anvil.Services;
 using NWN.Core.NWNX;
+using XM.Progression.Ability.Telegraph;
 using XM.Progression.Event;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
@@ -36,6 +37,7 @@ namespace XM.Progression.Ability
         private readonly IList<IAbilityListDefinition> _abilityDefinitions;
         private readonly Dictionary<JobType, List<FeatType>> _abilitiesByJob = new();
         private readonly XMEventService _event;
+        private readonly TelegraphService _telegraph;
 
         public AbilityService(
             DBService db,
@@ -44,7 +46,8 @@ namespace XM.Progression.Ability
             RecastService recast,
             JobService job,
             IList<IAbilityListDefinition> abilityDefinitions,
-            XMEventService @event)
+            XMEventService @event,
+            TelegraphService telegraph)
         {
             _db = db;
             _activity = activity;
@@ -53,6 +56,7 @@ namespace XM.Progression.Ability
             _job = job;
             _abilityDefinitions = abilityDefinitions;
             _event = @event;
+            _telegraph = telegraph;
 
             CacheAbilities();
             SubscribeEvents();
@@ -295,6 +299,8 @@ namespace XM.Progression.Ability
             AbilityDetail ability,
             Location targetLocation)
         {
+            var telegraphId = string.Empty;
+
             float CalculateActivationDelay()
             {
                 var abilityDelay = ability.ActivationDelay?.Invoke(activator, target) ?? 0.0f;
@@ -333,11 +339,13 @@ namespace XM.Progression.Ability
             // Recursive function which checks if player has moved since starting the casting.
             void CheckForActivationInterruption(string activationId, Vector3 originalPosition)
             {
-                if (!GetIsPC(activator)) return;
+                if (!GetIsPC(activator)) 
+                    return;
 
                 // Completed abilities should no longer run.
                 var status = GetLocalInt(activator, activationId);
-                if (status == (int)ActivationStatus.Completed || status == (int)ActivationStatus.Invalid) return;
+                if (status == (int)ActivationStatus.Completed || status == (int)ActivationStatus.Invalid) 
+                    return;
 
                 var currentPosition = GetPosition(activator);
 
@@ -345,10 +353,12 @@ namespace XM.Progression.Ability
                     currentPosition.Y != originalPosition.Y ||
                     currentPosition.Z != originalPosition.Z)
                 {
+                    _activity.ClearBusy(activator);
                     RemoveEffectByTag(activator, "ACTIVATION_VFX");
                     PlayerPlugin.StopGuiTimingBar(activator, string.Empty);
                     Messaging.SendMessageNearbyToPlayers(activator, LocaleString.PlayersAbilityHasBeenInterrupted.ToLocalizedString(GetName(activator)));
                     SetLocalInt(activator, activationId, (int)ActivationStatus.Interrupted);
+                    _telegraph.CancelTelegraph(telegraphId);
                     return;
                 }
 
@@ -356,23 +366,28 @@ namespace XM.Progression.Ability
             }
 
             // This method is called after the delay of the ability has finished.
-            void CompleteActivation(string activationId, float abilityRecastDelay)
+            bool CompleteActivation(uint caster, string activationId)
             {
-                _activity.ClearBusy(activator);
+                _activity.ClearBusy(caster);
 
                 // Moved during casting or activator died. Cancel the activation.
-                if (GetLocalInt(activator, activationId) == (int)ActivationStatus.Interrupted || GetCurrentHitPoints(activator) <= 0)
-                    return;
+                if (GetLocalInt(caster, activationId) == (int)ActivationStatus.Interrupted || GetCurrentHitPoints(caster) <= 0)
+                    return false;
 
-                if (!CanUseAbility(activator, target, feat, targetLocation))
-                    return;
+                if (!CanUseAbility(caster, target, feat, targetLocation))
+                    return false;
 
-                DeleteLocalInt(activator, activationId);
+                DeleteLocalInt(caster, activationId);
 
-                ApplyRequirementEffects(activator, ability);
+                ApplyRequirementEffects(caster, ability);
+
+                return true;
+            }
+
+            void ExecuteImpact()
+            {
                 ability.ImpactAction?.Invoke(activator, target, targetLocation);
                 ability.AbilityToggleAction?.Invoke(activator, true);
-                _recast.ApplyRecastDelay(activator, ability.RecastGroup, abilityRecastDelay, false);
             }
 
             // Begin the main process
@@ -399,7 +414,40 @@ namespace XM.Progression.Ability
                 }
 
                 _activity.SetBusy(activator, ActivityStatusType.AbilityActivation);
-                DelayCommand(activationDelay, () => CompleteActivation(activationId, recastDelay));
+
+                if (ability.TelegraphAction != null && 
+                    ability.TelegraphType != TelegraphType.None)
+                {
+                    telegraphId = _telegraph.CreateTelegraph(
+                        activator,
+                        GetPosition(activator),
+                        GetFacing(activator),
+                        ability.TelegraphSize,
+                        activationDelay,
+                        ability.IsHostileAbility,
+                        ability.TelegraphType,
+                        (telegrapher, creatures) =>
+                        {
+                            Console.WriteLine($"telegrapher = {GetName(telegrapher)}");
+
+                            if (CompleteActivation(telegrapher, activationId))
+                            {
+                                _recast.ApplyRecastDelay(telegrapher, ability.RecastGroup, recastDelay, false);
+                                ability.TelegraphAction(telegrapher, creatures);
+                            }
+                        });
+                }
+                else
+                {
+                    DelayCommand(activationDelay, () =>
+                    {
+                        if (CompleteActivation(activator, activationId))
+                        {
+                            ExecuteImpact();
+                            _recast.ApplyRecastDelay(activator, ability.RecastGroup, recastDelay, false);
+                        }
+                    });
+                }
 
                 // If currently attacking a target, re-attack it after the end of the activation period.
                 // This mitigates the issue where a melee fighter's combat is disrupted for using an ability.

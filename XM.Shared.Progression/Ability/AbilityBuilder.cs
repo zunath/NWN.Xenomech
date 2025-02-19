@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Numerics;
+using XM.Progression.Ability.Telegraph;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
@@ -168,6 +170,37 @@ namespace XM.Progression.Ability
             return this;
         }
 
+        public AbilityBuilder HasTelegraphSphereAction(AbilityTelegraphAction action)
+        {
+            _activeAbility.TelegraphAction = action;
+            _activeAbility.TelegraphType = TelegraphType.Sphere;
+
+            return this;
+        }
+
+        public AbilityBuilder HasTelegraphConeAction(AbilityTelegraphAction action)
+        {
+            _activeAbility.TelegraphAction = action;
+            _activeAbility.TelegraphType = TelegraphType.Cone;
+
+            return this;
+        }
+
+        public AbilityBuilder HasTelegraphLineAction(AbilityTelegraphAction action)
+        {
+            _activeAbility.TelegraphAction = action;
+            _activeAbility.TelegraphType = TelegraphType.Line;
+
+            return this;
+        }
+
+        public AbilityBuilder TelegraphSize(float width, float height)
+        {
+            _activeAbility.TelegraphSize = new Vector2(width, height);
+
+            return this;
+        }
+
         /// <summary>
         /// Assigns a toggle action on the active ability we're building.
         /// Calling this more than once will replace the previous action.
@@ -314,7 +347,7 @@ namespace XM.Progression.Ability
         /// Indicates this ability is a hostile ability and should not target friendlies.
         /// </summary>
         /// <returns>An ability builder with the configured options</returns>
-        public AbilityBuilder IsHostileAbility()
+        public AbilityBuilder IsHostile()
         {
             _activeAbility.IsHostileAbility = true;
 

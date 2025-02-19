@@ -80,6 +80,7 @@
 
 <ItemGroup>
   <Folder Include="AbilityDefinition\NPC\" />
+  <Folder Include="Event\" />
 </ItemGroup>
 
 <Target Name="PostBuild" AfterTargets="PostBuildEvent">

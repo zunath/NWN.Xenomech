@@ -1,6 +1,6 @@
 ﻿using XM.Shared.Core.EventManagement;
 
-namespace XM.Plugin.Combat.Event
+namespace XM.Progression.Event
 {
     internal class TelegraphEvent
     {

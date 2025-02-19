@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Numerics;
 using Anvil.API;
 using Anvil.Services;
-using XM.Plugin.Combat.Event;
+using XM.Progression.Event;
 using XM.Shared.API.Constants;
-using XM.Shared.Core;
 using XM.Shared.Core.EventManagement;
 using CreatureType = XM.Shared.API.Constants.CreatureType;
 
-namespace XM.Plugin.Combat.Telegraph
+namespace XM.Progression.Ability.Telegraph
 {
     [ServiceBinding(typeof(TelegraphService))]
     [ServiceBinding(typeof(IInitializable))]
-    internal class TelegraphService: 
+    public class TelegraphService: 
         IInitializable,
         IDisposable
     {
@@ -40,10 +39,10 @@ namespace XM.Plugin.Combat.Telegraph
 
         private void RegisterEvents()
         {
-            _event.RegisterEvent<TelegraphEvent.RunTelegraphEffect>(CombatEventScript.TelegraphEffectScript);
-            _event.RegisterEvent<TelegraphEvent.TelegraphApplied>(CombatEventScript.TelegraphApplied);
-            _event.RegisterEvent<TelegraphEvent.TelegraphTicked>(CombatEventScript.TelegraphTicked);
-            _event.RegisterEvent<TelegraphEvent.TelegraphRemoved>(CombatEventScript.TelegraphRemoved);
+            _event.RegisterEvent<TelegraphEvent.RunTelegraphEffect>(ProgressionEventScript.TelegraphEffectScript);
+            _event.RegisterEvent<TelegraphEvent.TelegraphApplied>(ProgressionEventScript.TelegraphApplied);
+            _event.RegisterEvent<TelegraphEvent.TelegraphTicked>(ProgressionEventScript.TelegraphTicked);
+            _event.RegisterEvent<TelegraphEvent.TelegraphRemoved>(ProgressionEventScript.TelegraphRemoved);
         }
 
         private void SubscribeEvents()
@@ -51,66 +50,20 @@ namespace XM.Plugin.Combat.Telegraph
             _event.Subscribe<TelegraphEvent.RunTelegraphEffect>(OnRunTelegraphEffect);
         }
 
-        public string CreateTelegraphSphere(
+        public string CreateTelegraph(
             uint creator, 
             Vector3 position, 
             float rotation, 
             Vector2 size, 
             float duration,
             bool isHostile,
+            TelegraphType type,
             ApplyTelegraphEffect action)
         {
             var data = new TelegraphData
             {
                 Creator = creator,
-                Shape = TelegraphType.Sphere,
-                Position = position,
-                Rotation = rotation,
-                Size = size,
-                Duration = duration,
-                IsHostile = isHostile,
-                Action = action
-            };
-
-            return RunTelegraphEffect(creator, data);
-        }
-
-        public string CreateTelegraphCone(
-            uint creator, 
-            Vector3 position, 
-            float rotation, 
-            Vector2 size, 
-            float duration,
-            bool isHostile,
-            ApplyTelegraphEffect action)
-        {
-            var data = new TelegraphData
-            {
-                Creator = creator,
-                Shape = TelegraphType.Cone,
-                Position = position,
-                Rotation = rotation,
-                Size = size,
-                Duration = duration,
-                IsHostile = isHostile,
-                Action = action
-            };
-            return RunTelegraphEffect(creator, data);
-        }
-
-        public string CreateTelegraphLine(
-            uint creator,
-            Vector3 position,
-            float rotation,
-            Vector2 size,
-            float duration,
-            bool isHostile,
-            ApplyTelegraphEffect action)
-        {
-            var data = new TelegraphData
-            {
-                Creator = creator,
-                Shape = TelegraphType.Line,
+                Shape = type,
                 Position = position,
                 Rotation = rotation,
                 Size = size,
@@ -145,8 +98,8 @@ namespace XM.Plugin.Combat.Telegraph
                 _telegraphsByArea[area] = new Dictionary<string, ActiveTelegraph>();
 
             var effect = EffectRunScript(
-                CombatEventScript.TelegraphEffectScript,
-                CombatEventScript.TelegraphEffectScript,
+                ProgressionEventScript.TelegraphEffectScript,
+                ProgressionEventScript.TelegraphEffectScript,
                 string.Empty);
             OnApply(telegrapher, data, effect);
             ApplyEffectToObject(DurationType.Temporary, effect, telegrapher, data.Duration);
@@ -411,43 +364,6 @@ namespace XM.Plugin.Combat.Telegraph
             }
 
             DelayCommand(1.0f / TargetFPS, UpdateShaderLerpTimer);
-        }
-
-        [ScriptHandler("bread_test6")]
-        public void BreadTest6()
-        {
-            var player = GetLastUsedBy();
-            var bread = OBJECT_SELF;
-            var position = GetPosition(player);
-            var rotation = GetFacing(player);
-            var currentTelegraph = GetLocalString(bread, "TELEGRAPH");
-
-            if (!string.IsNullOrWhiteSpace(currentTelegraph))
-            {
-                SendMessageToPC(player, "Canceling telegraph");
-                CancelTelegraph(currentTelegraph);
-                DeleteLocalString(bread, "TELEGRAPH");
-                return;
-            }
-
-            var telegraphId = CreateTelegraphCone(
-                player, 
-                position, 
-                rotation, 
-                new Vector2(8f, 2f), 
-                2.5f,
-                false,
-                ((telegrapher, creatures) =>
-                {
-                    foreach (var creature in creatures)
-                    {
-                        SendMessageToPC(creature, "Firing telegraph!!");
-                    }
-
-                    DeleteLocalString(bread, "TELEGRAPH");
-                }));
-
-            SetLocalString(bread, "TELEGRAPH", telegraphId);
         }
 
         public void Dispose()

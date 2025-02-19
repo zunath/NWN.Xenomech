@@ -1,4 +1,6 @@
-﻿using XM.Progression.Recast;
+﻿using System.Numerics;
+using XM.Progression.Ability.Telegraph;
+using XM.Progression.Recast;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
@@ -32,6 +34,9 @@ namespace XM.Progression.Ability
         public int ResonanceCost { get; set; }
         public string IconResref { get; set; }
         public StatGroup Stats { get; set; }
+        public AbilityTelegraphAction TelegraphAction { get; set; }
+        public TelegraphType TelegraphType { get; set; }
+        public Vector2 TelegraphSize { get; set; }
 
         public AbilityDetail()
         {
@@ -43,6 +48,7 @@ namespace XM.Progression.Ability
             IsHostileAbility = false;
             DisplaysActivationMessage = true;
             Stats = new ItemStatGroup();
+            TelegraphType = TelegraphType.None;
         }
     }
 }

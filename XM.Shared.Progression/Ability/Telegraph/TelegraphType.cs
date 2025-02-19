@@ -1,6 +1,6 @@
-﻿namespace XM.Plugin.Combat.Telegraph
+﻿namespace XM.Progression.Ability.Telegraph
 {
-    internal enum TelegraphType
+    public enum TelegraphType
     {
         None = 0,
         Sphere = 1,

@@ -1,4 +1,4 @@
-﻿namespace XM.Plugin.Combat.Telegraph
+﻿namespace XM.Progression.Ability.Telegraph
 {
     internal class ActiveTelegraph
     {

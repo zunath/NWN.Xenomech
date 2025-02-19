@@ -1,4 +1,5 @@
-﻿using Anvil.API;
+﻿using System.Collections.Generic;
+using Anvil.API;
 
 namespace XM.Progression.Ability
 {
@@ -11,6 +12,10 @@ namespace XM.Progression.Ability
         uint activator, 
         uint target, 
         Location targetLocation);
+
+    public delegate void AbilityTelegraphAction(
+        uint activator,
+        List<uint> targets);
 
     public delegate void AbilityToggleAction(uint activator, bool isToggled);
 
