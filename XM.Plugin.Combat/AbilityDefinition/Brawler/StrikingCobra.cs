@@ -45,11 +45,11 @@ namespace XM.Plugin.Combat.AbilityDefinition.Brawler
                 .IsQueuedAttack()
                 .RequirementEP(10)
                 .ResonanceCost(1)
-                .ResistType(ResistType.Darkness)
+                .ResistType(ResistType.Wind)
                 .IncreasesStat(StatType.QueuedDMGBonus, 14)
                 .HasImpactAction((activator, target, location) =>
                 {
-                    var duration = _spell.CalculateResistedTicks(target, ResistType.Darkness, 20);
+                    var duration = _spell.CalculateResistedTicks(target, ResistType.Wind, 20);
                     _status.ApplyStatusEffect<PoisonStatusEffect>(activator, target, duration);
                     AssignCommand(activator, () => ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpDiseaseSmall), target));
                 });
@@ -64,11 +64,11 @@ namespace XM.Plugin.Combat.AbilityDefinition.Brawler
                 .IsQueuedAttack()
                 .RequirementEP(28)
                 .ResonanceCost(2)
-                .ResistType(ResistType.Darkness)
+                .ResistType(ResistType.Wind)
                 .IncreasesStat(StatType.QueuedDMGBonus, 32)
                 .HasImpactAction((activator, target, location) =>
                 {
-                    var duration = _spell.CalculateResistedTicks(target, ResistType.Darkness, 20);
+                    var duration = _spell.CalculateResistedTicks(target, ResistType.Wind, 20);
                     _status.ApplyStatusEffect<PoisonStatusEffect>(activator, target, duration);
                     AssignCommand(activator, () => ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpDiseaseSmall), target));
                 });
