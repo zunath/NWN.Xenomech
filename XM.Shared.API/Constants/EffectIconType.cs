@@ -176,5 +176,7 @@ namespace XM.Shared.API.Constants
         AurionInfusion2 = 171,
         Mindstream1 = 172,
         Mindstream2 = 173,
+        Cripple1 = 174,
+        Cripple2 = 175,
     }
 }
