@@ -12,7 +12,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition
         public override LocaleString Name => LocaleString.Slow;
         public override EffectIconType Icon => EffectIconType.XMSlow;
         public override StatusEffectStackType StackingType => StatusEffectStackType.Disabled;
-        public override float Frequency => 60f;
+        public override float Frequency => 3f;
 
         public SlowStatusEffect()
         {
