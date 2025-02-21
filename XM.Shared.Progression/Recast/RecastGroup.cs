@@ -89,8 +89,8 @@ namespace XM.Progression.Recast
         CryoVenom = 40,
         [RecastGroup(LocaleString.FreezingShot, true)]
         FreezingShot = 41,
-        [RecastGroup(LocaleString.Volley, true)]
-        Volley = 42,
+        [RecastGroup(LocaleString.IceVolley, true)]
+        IceVolley = 42,
         [RecastGroup(LocaleString.ChokingShot, true)]
         ChokingShot = 43,
         [RecastGroup(LocaleString.Cripple, true)]

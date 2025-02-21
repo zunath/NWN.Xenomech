@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Anvil.API;
 using XM.Progression.Ability;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
@@ -65,23 +66,43 @@ namespace XM.Plugin.Combat.AbilityDefinition
             }
         }
 
-        protected void ApplyEnemyAOE(
-            uint target,
+        protected void ApplyEnemyAOEAroundActivator(
+            uint activator,
             float distance,
             Action<uint> applyAction
         )
         {
             var nth = 1;
-            var nearby = GetNearestCreature(CreatureType.IsAlive, 1, target, nth);
-            while (GetIsObjectValid(nearby) && GetDistanceBetween(target, nearby) <= distance)
+            var nearby = GetNearestCreature(CreatureType.IsAlive, 1, activator, nth);
+            while (GetIsObjectValid(nearby) && GetDistanceBetween(activator, nearby) <= distance)
             {
-                if (target != nearby && GetIsReactionTypeHostile(target, nearby))
+                if (activator != nearby && GetIsReactionTypeHostile(activator, nearby))
                 {
                     applyAction(nearby);
                 }
 
                 nth++;
-                nearby = GetNearestCreature(CreatureType.IsAlive, 1, target, nth);
+                nearby = GetNearestCreature(CreatureType.IsAlive, 1, activator, nth);
+            }
+        }
+
+        protected void ApplyEnemyAOEAtTargetLocation(
+            uint activator,
+            Location targetLocation,
+            float distance,
+            Action<uint> applyAction)
+        {
+            var nth = 1;
+            var nearby = GetNearestCreatureToLocation(CreatureType.IsAlive, 1, targetLocation, nth);
+            while(GetIsObjectValid(nearby) && GetDistanceBetweenLocations(targetLocation, GetLocation(nearby)) <= distance)
+            {
+                if (GetIsReactionTypeHostile(activator, nearby))
+                {
+                    applyAction(nearby);
+                }
+
+                nth++;
+                nearby = GetNearestCreatureToLocation(CreatureType.IsAlive, 1, targetLocation, nth);
             }
         }
 

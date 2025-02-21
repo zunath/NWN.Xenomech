@@ -64,7 +64,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Brawler
                 {
                     ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.FnfHowlOdd), activator);
 
-                    ApplyEnemyAOE(activator, 8f, nearest =>
+                    ApplyEnemyAOEAroundActivator(activator, 8f, nearest =>
                     {
                         Impact(activator, nearest, 1500);
                     });

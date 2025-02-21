@@ -41,7 +41,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Brawler
                 .RequirementEP(22)
                 .ResonanceCost(1)
                 .TelegraphSize(8f, 8f)
-                .HasTelegraphSphereAction((activator, targets) =>
+                .HasTelegraphSphereAction((activator, targets, targetLocation) =>
                 {
                     Console.WriteLine($"firing shadowstrike");
                 });

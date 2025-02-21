@@ -45,7 +45,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Beastmaster
                 .ResonanceCost(1)
                 .HasImpactAction((activator, target, location) =>
                 {
-                    ApplyEnemyAOE(activator, 8f, enemy =>
+                    ApplyEnemyAOEAroundActivator(activator, 8f, enemy =>
                     {
                         _status.ApplyStatusEffect<SnarlStatusEffect>(activator, enemy, 1);
                     });

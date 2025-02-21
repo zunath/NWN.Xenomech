@@ -418,22 +418,27 @@ namespace XM.Progression.Ability
                 if (ability.TelegraphAction != null && 
                     ability.TelegraphType != TelegraphType.None)
                 {
+                    var telegraphPosition = targetLocation == LOCATION_INVALID
+                        ? GetPosition(activator)
+                        : GetPositionFromLocation(targetLocation);
+                    var telegraphFacing = targetLocation == LOCATION_INVALID
+                        ? GetFacing(activator)
+                        : GetFacingFromLocation(targetLocation);
+
                     telegraphId = _telegraph.CreateTelegraph(
                         activator,
-                        GetPosition(activator),
-                        GetFacing(activator),
+                        telegraphPosition,
+                        telegraphFacing,
                         ability.TelegraphSize,
                         activationDelay,
                         ability.IsHostileAbility,
                         ability.TelegraphType,
                         (telegrapher, creatures) =>
                         {
-                            Console.WriteLine($"telegrapher = {GetName(telegrapher)}");
-
                             if (CompleteActivation(telegrapher, activationId))
                             {
                                 _recast.ApplyRecastDelay(telegrapher, ability.RecastGroup, recastDelay, false);
-                                ability.TelegraphAction(telegrapher, creatures);
+                                ability.TelegraphAction(telegrapher, creatures, targetLocation);
                             }
                         });
                 }

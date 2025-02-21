@@ -15,7 +15,8 @@ namespace XM.Progression.Ability
 
     public delegate void AbilityTelegraphAction(
         uint activator,
-        List<uint> targets);
+        List<uint> targets,
+        Location targetLocation);
 
     public delegate void AbilityToggleAction(uint activator, bool isToggled);
 
