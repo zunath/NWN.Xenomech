@@ -26,7 +26,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition
             Stats[StatType.HPRegen] = 3;
         }
 
-        protected override void Apply(uint creature)
+        protected override void Apply(uint creature, int durationTicks)
         {
             ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpHeadHoly), creature);
         }

@@ -27,7 +27,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition
         public StatService Stat { get; set; }
 
 
-        protected override void Apply(uint creature)
+        protected override void Apply(uint creature, int durationTicks)
         {
             AssignCommand(creature, () =>
             {

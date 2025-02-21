@@ -19,7 +19,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition
             Stats[StatType.Haste] = 15;
         }
 
-        protected override void Apply(uint creature)
+        protected override void Apply(uint creature, int durationTicks)
         {
             ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpHaste), creature);
         }

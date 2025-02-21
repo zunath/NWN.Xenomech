@@ -36,7 +36,7 @@ namespace XM.Progression.StatusEffect
 
         public virtual LocaleString CanApply(uint creature) { return LocaleString.Empty; }
 
-        protected virtual void Apply(uint creature) { }
+        protected virtual void Apply(uint creature, int durationTicks) { }
         public void ApplyEffect(uint source, uint creature, int durationTicks)
         {
             if (durationTicks < 0)
@@ -45,7 +45,7 @@ namespace XM.Progression.StatusEffect
             _lastRun = DateTime.UtcNow;
             _durationTicks = durationTicks;
             Source = source;
-            Apply(creature);
+            Apply(creature, durationTicks);
         }
 
         protected virtual void Remove(uint creature) { }

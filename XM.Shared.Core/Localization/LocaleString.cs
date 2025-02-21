@@ -1447,6 +1447,6 @@ namespace XM.Shared.Core.Localization
         YouCannotEscapeFromThisArea = 1760,
         YourSpellWasResisted = 1761,
         RESISTED = 1762,
-
+        GraspingDeath = 1763,
     }
 }

@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition
 
         private const string EffectTag = "HIDE_EFFECT";
 
-        protected override void Apply(uint creature)
+        protected override void Apply(uint creature, int durationTicks)
         {
             var effect = EffectInvisibility(InvisibilityType.Normal);
             effect = TagEffect(effect, EffectTag);

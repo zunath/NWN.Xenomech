@@ -13,7 +13,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition
         public override StatusEffectStackType StackingType => StatusEffectStackType.Disabled;
         public override float Frequency => 60f;
 
-        protected override void Apply(uint creature)
+        protected override void Apply(uint creature, int durationTicks)
         {
             ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpGoodHelp), creature);
             SetLocalBool(creature, "MANAFONT", true);

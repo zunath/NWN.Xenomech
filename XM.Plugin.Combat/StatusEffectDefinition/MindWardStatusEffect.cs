@@ -18,7 +18,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition
         {
             Stats.Resists[ResistType.Mind] = 50;
         }
-        protected override void Apply(uint creature)
+        protected override void Apply(uint creature, int durationTicks)
         {
             ApplyEffectToObject(DurationType.Temporary, EffectVisualEffect(VisualEffectType.DurAuraRedLight), creature, 2f);
         }

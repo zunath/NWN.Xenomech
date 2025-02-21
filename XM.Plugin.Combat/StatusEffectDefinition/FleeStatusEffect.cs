@@ -21,7 +21,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition
             Stats[StatType.Defense] = 30;
         }
 
-        protected override void Apply(uint creature)
+        protected override void Apply(uint creature, int durationTicks)
         {
             var effect = EffectMovementSpeedIncrease(60);
             effect = TagEffect(effect, EffectTag);

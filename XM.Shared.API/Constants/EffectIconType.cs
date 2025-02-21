@@ -178,5 +178,6 @@ namespace XM.Shared.API.Constants
         Mindstream2 = 173,
         Cripple1 = 174,
         Cripple2 = 175,
+        GraspingDeath = 176,
     }
 }

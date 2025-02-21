@@ -24,7 +24,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition
             typeof(SneakAttack3StatusEffect),
         ];
 
-        protected override void Apply(uint creature)
+        protected override void Apply(uint creature, int durationTicks)
         {
             ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpImproveAbilityScore), creature);
         }
