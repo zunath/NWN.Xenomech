@@ -179,5 +179,6 @@ namespace XM.Shared.API.Constants
         Cripple1 = 174,
         Cripple2 = 175,
         GraspingDeath = 176,
+        Knockdown = 177,
     }
 }

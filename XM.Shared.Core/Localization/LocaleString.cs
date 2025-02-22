@@ -1448,5 +1448,6 @@ namespace XM.Shared.Core.Localization
         YourSpellWasResisted = 1761,
         RESISTED = 1762,
         GraspingDeath = 1763,
+        Knockdown = 1764,
     }
 }
