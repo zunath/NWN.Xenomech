@@ -37,7 +37,8 @@ namespace XM.Plugin.Combat.AbilityDefinition.Techweaver
         private void Impact(uint activator, uint target, int dmg)
         {
             var damage = _spell.CalculateSpellDamage(activator, target, dmg, ResistType.Mind);
-            
+            damage = _spell.CalculateElementalSealBonus(activator, damage);
+
             AssignCommand(activator, () =>
             {
                 ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.BeamMind), target);

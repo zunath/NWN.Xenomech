@@ -42,6 +42,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
                     continue;
 
                 var damage = _spell.CalculateSpellDamage(activator, target, dmg, ResistType.Lightning);
+                damage = _spell.CalculateElementalSealBonus(activator, damage);
 
                 AssignCommand(activator, () => ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpLightningMedium), target));
                 AssignCommand(activator, () =>

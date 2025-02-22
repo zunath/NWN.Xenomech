@@ -41,6 +41,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
             where T: IStatusEffect
         {
             var damage = _spell.CalculateSpellDamage(activator, target, dmg, ResistType.Water);
+            damage = _spell.CalculateElementalSealBonus(activator, damage);
             var duration = _spell.CalculateResistedTicks(target, ResistType.Water, 120);
             ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpPulseWater), target);
             AssignCommand(activator, () =>

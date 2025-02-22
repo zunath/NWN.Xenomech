@@ -33,6 +33,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
             int baseDMG)
         {
             var damage = _spell.CalculateSpellDamage(activator, target, baseDMG, ResistType.Light);
+            damage = _spell.CalculateElementalSealBonus(activator, damage);
 
             AssignCommand(activator, () => ApplyEffectToObject(DurationType.Instant, EffectDamage(damage, DamageType.Light), target));
             AssignCommand(activator, () => ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpBreach), target));

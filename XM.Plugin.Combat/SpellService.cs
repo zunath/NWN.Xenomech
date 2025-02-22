@@ -1,6 +1,8 @@
 ﻿using System;
 using Anvil.Services;
+using XM.Plugin.Combat.StatusEffectDefinition.Buff;
 using XM.Progression.Stat;
+using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 
@@ -10,10 +12,14 @@ namespace XM.Plugin.Combat
     internal class SpellService
     {
         private readonly StatService _stat;
+        private readonly StatusEffectService _status;
 
-        public SpellService(StatService stat)
+        public SpellService(
+            StatService stat,
+            StatusEffectService status)
         {
             _stat = stat;
+            _status = status;
         }
 
         public float CalculateResistDamageReduction(uint creature, ResistType resistType)
@@ -81,6 +87,16 @@ namespace XM.Plugin.Combat
             var damageMin = Math.Max((int)(damageMax * 0.75f), 1);
 
             return XMRandom.Next(damageMin, damageMax);
+        }
+
+        public int CalculateElementalSealBonus(uint caster, int damage)
+        {
+            if (!_status.HasEffect<ElementalSealStatusEffect>(caster))
+                return damage;
+
+            _status.RemoveStatusEffect<ElementalSealStatusEffect>(caster);
+
+            return damage * 2;
         }
 
         public int CalculateResistedTicks(uint creature, ResistType resistType, int baseTicks)

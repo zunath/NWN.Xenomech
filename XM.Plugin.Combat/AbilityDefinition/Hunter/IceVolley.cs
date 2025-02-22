@@ -43,7 +43,8 @@ namespace XM.Plugin.Combat.AbilityDefinition.Hunter
             foreach (var target in targets)
             {
                 var damage = _spell.CalculateSpellDamage(activator, target, dmg, ResistType.Ice, AbilityType.Perception, AbilityType.Perception);
-                
+                damage = _spell.CalculateElementalSealBonus(activator, damage);
+
                 AssignCommand(activator, () =>
                 {
                     ApplyEffectToObject(DurationType.Instant, EffectDamage(damage, DamageType.Ice), target);

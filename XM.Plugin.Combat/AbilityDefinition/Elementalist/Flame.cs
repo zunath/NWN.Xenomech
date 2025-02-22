@@ -39,6 +39,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
         private void Impact(uint activator, uint target, int dmg)
         {
             var damage = _spell.CalculateSpellDamage(activator, target, dmg, ResistType.Fire);
+            damage = _spell.CalculateElementalSealBonus(activator, damage);
             ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpFlameSmall), target);
             AssignCommand(activator, () =>
             {

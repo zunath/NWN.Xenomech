@@ -42,6 +42,8 @@ namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
             where T: IStatusEffect
         {
             var damage = _spell.CalculateSpellDamage(activator, target, dmg, ResistType.Darkness);
+            damage = _spell.CalculateElementalSealBonus(activator, damage);
+
             AssignCommand(activator, () =>
             {
                 ApplyEffectToObject(DurationType.Instant, EffectDamage(damage, DamageType.Darkness), target);
