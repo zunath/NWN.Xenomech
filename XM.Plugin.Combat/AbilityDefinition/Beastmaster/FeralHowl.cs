@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
-using XM.Plugin.Combat.StatusEffectDefinition.Debuff;
+using XM.Plugin.Combat.StatusEffectDefinition.Buff;
 using XM.Progression.Ability;
 using XM.Progression.Recast;
-using XM.Progression.Stat;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
@@ -11,46 +10,45 @@ using XM.Shared.Core.Localization;
 namespace XM.Plugin.Combat.AbilityDefinition.Beastmaster
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class Snarl: IAbilityListDefinition
+    internal class FeralHowl: IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
 
         private readonly StatusEffectService _status;
-        private readonly SpellService _spell;
 
-        public Snarl(
-            StatusEffectService status,
-            SpellService spell)
+        public FeralHowl(StatusEffectService status)
         {
             _status = status;
-            _spell = spell;
         }
 
         public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
-            SnarlAbility();
+            FeralHowlAbility();
 
             return _builder.Build();
         }
 
-        private void SnarlAbility()
+        private void FeralHowlAbility()
         {
-            _builder.Create(FeatType.Snarl)
-                .Name(LocaleString.Snarl)
-                .Description(LocaleString.SnarlDescription)
-                .HasRecastDelay(RecastGroup.Snarl, 30f)
+            _builder.Create(FeatType.FeralHowl)
+                .Name(LocaleString.FeralHowl)
+                .Description(LocaleString.FeralHowlDescription)
+                .HasRecastDelay(RecastGroup.FeralHowl, 60f * 3f)
                 .HasActivationDelay(2f)
-                .RequirementEP(20)
+                .RequirementEP(38)
                 .UsesAnimation(AnimationType.LoopingConjure1)
                 .DisplaysVisualEffectWhenActivating()
-                .ResonanceCost(1)
+                .ResonanceCost(2)
                 .TelegraphSize(4f, 4f)
                 .HasTelegraphSphereAction((activator, targets, location) =>
                 {
+                    ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpPdkGenericPulse), activator);
                     foreach (var target in targets)
                     {
-                        var duration = _spell.CalculateResistedTicks(target, ResistType.Wind, 20);
-                        _status.ApplyStatusEffect<SnarlStatusEffect>(activator, target, duration);
+                        if (!GetFactionEqual(target, activator))
+                            continue;
+
+                        _status.ApplyStatusEffect<FeralHowlStatusEffect>(activator, target, 1);
                     }
                 });
         }

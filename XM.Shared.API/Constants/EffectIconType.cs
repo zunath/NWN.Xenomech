@@ -190,5 +190,6 @@ namespace XM.Shared.API.Constants
         NeuralStasis = 185,
         Pacified = 186,
         Quickness = 187,
+        FeralHowl = 188,
     }
 }

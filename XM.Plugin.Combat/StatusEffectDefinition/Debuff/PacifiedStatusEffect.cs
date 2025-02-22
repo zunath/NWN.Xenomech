@@ -5,7 +5,7 @@ using XM.Shared.Core.Localization;
 
 namespace XM.Plugin.Combat.StatusEffectDefinition.Debuff
 {
-    [ServiceBinding(typeof(SlowStatusEffect))]
+    [ServiceBinding(typeof(PacifiedStatusEffect))]
     public class PacifiedStatusEffect : StatusEffectBase
     {
         public override LocaleString Name => LocaleString.Pacified;

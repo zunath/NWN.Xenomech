@@ -4,7 +4,7 @@ using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
-namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
+namespace XM.Plugin.Combat.StatusEffectDefinition.Debuff
 {
     [ServiceBinding(typeof(SnarlStatusEffect))]
     public class SnarlStatusEffect : StatusEffectBase
