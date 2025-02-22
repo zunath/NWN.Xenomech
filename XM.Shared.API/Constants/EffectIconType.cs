@@ -189,5 +189,6 @@ namespace XM.Shared.API.Constants
         Rupture = 184,
         NeuralStasis = 185,
         Pacified = 186,
+        Quickness = 187,
     }
 }
