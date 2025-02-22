@@ -43,7 +43,11 @@ namespace XM.Plugin.Combat.AbilityDefinition.Hunter
             foreach (var target in targets)
             {
                 var damage = _spell.CalculateSpellDamage(activator, target, dmg, ResistType.Ice, AbilityType.Perception, AbilityType.Perception);
-                ApplyEffectToObject(DurationType.Instant, EffectDamage(damage, DamageType.Ice), target);
+                
+                AssignCommand(activator, () =>
+                {
+                    ApplyEffectToObject(DurationType.Instant, EffectDamage(damage, DamageType.Ice), target);
+                });
             }
         }
 
@@ -55,6 +59,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Hunter
                 .HasRecastDelay(RecastGroup.IceVolley, 60f)
                 .HasActivationDelay(2f)
                 .DisplaysVisualEffectWhenActivating()
+                .UsesAnimation(AnimationType.LoopingConjure1)
                 .IsCastedAbility()
                 .RequirementEP(22)
                 .ResonanceCost(1)
@@ -76,6 +81,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Hunter
                 .HasRecastDelay(RecastGroup.IceVolley, 60f)
                 .HasActivationDelay(2f)
                 .DisplaysVisualEffectWhenActivating()
+                .UsesAnimation(AnimationType.LoopingConjure1)
                 .IsCastedAbility()
                 .RequirementEP(44)
                 .ResonanceCost(2)

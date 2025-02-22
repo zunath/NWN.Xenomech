@@ -9,7 +9,7 @@ namespace XM.Shared.API.Constants
         Acid = 16,
         Ice = 32,
         Divine = 64,
-        Electrical = 128,
+        Lightning = 128,
         Fire = 256,
         Negative = 512,
         Positive = 1024,
