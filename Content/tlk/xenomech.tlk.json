@@ -7060,6 +7060,10 @@
     {
       "id": 1766,
       "text": "{0} is paralyzed."
+    },
+    {
+      "id": 1767,
+      "text": "Pacified"
     }
   ]
 }

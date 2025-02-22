@@ -1451,5 +1451,6 @@ namespace XM.Shared.Core.Localization
         Knockdown = 1764,
         Paralyze = 1765,
         XIsParalyzed = 1766,
+        Pacified = 1767,
     }
 }

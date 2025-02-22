@@ -24,6 +24,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
 
         private static readonly List<Type> _effectsToRemoveInOrder =
         [
+            typeof(PacifiedStatusEffect),
             typeof(ParalyzeStatusEffect),
             typeof(GraspingDeathStatusEffect),
             typeof(SlowStatusEffect),
@@ -33,6 +34,11 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
             typeof(Drown1StatusEffect),
             typeof(FlashStatusEffect),
             typeof(KnockdownStatusEffect),
+            typeof(AbyssalVeil2StatusEffect),
+            typeof(AbyssalVeil1StatusEffect),
+            typeof(GravitonFieldStatusEffect),
+            typeof(NeuralStasisStatusEffect),
+            typeof(RuptureStatusEffect),
             typeof(PoisonStatusEffect),
         ];
 
