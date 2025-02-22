@@ -1,34 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Anvil.API;
 using Anvil.Services;
 using XM.Progression.Ability;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
-using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 using DamageType = XM.Shared.API.Constants.DamageType;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Hunter
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class IceVolley: AbilityBase
+    internal class IceVolley: IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
         private readonly SpellService _spell;
 
-        public IceVolley(
-            PartyService party,
-            StatusEffectService status,
-            SpellService spell)
-            : base(party, status)
+        public IceVolley(SpellService spell)
         {
             _spell = spell;
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             IceVolley1();
             IceVolley2();

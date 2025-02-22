@@ -7,26 +7,25 @@ using XM.Progression.Recast;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Hunter
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class Sharpshot: AbilityBase
+    internal class Sharpshot: IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
+        private readonly StatusEffectService _status;
         private readonly EnmityService _enmity;
 
         public Sharpshot(
             StatusEffectService status,
-            EnmityService enmity,
-            PartyService party)
-            : base(party, status)
+            EnmityService enmity)
         {
+            _status = status;
             _enmity = enmity;
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             SharpshotAbility();
 
@@ -44,10 +43,18 @@ namespace XM.Plugin.Combat.AbilityDefinition.Hunter
                 .UsesAnimation(AnimationType.LoopingConjure1)
                 .HasActivationDelay(2f)
                 .ResonanceCost(2)
-                .HasImpactAction((activator, target, location) =>
+                .TelegraphSize(10f, 10f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
                 {
-                    ApplyPartyStatusAOE<SharpshotStatusEffect>(activator, activator, 10f, 1);
                     _enmity.ModifyEnmityOnAll(activator, EnmityType.Volatile, 800);
+
+                    foreach (var target in targets)
+                    {
+                        if (!GetFactionEqual(target, activator))
+                            continue;
+
+                        _status.ApplyStatusEffect<SharpshotStatusEffect>(activator, target, 1);
+                    }
                 });
         }
     }

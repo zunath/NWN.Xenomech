@@ -6,23 +6,21 @@ using XM.Progression.Recast;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Hunter
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class IceWard: AbilityBase
+    internal class IceWard : IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
+        private readonly StatusEffectService _status;
 
-        public IceWard(
-            PartyService party,
-            StatusEffectService status)
-            : base(party, status)
+        public IceWard(StatusEffectService status)
         {
+            _status = status;
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             IceWardAbility();
 
@@ -40,9 +38,16 @@ namespace XM.Plugin.Combat.AbilityDefinition.Hunter
                 .UsesAnimation(AnimationType.LoopingConjure1)
                 .DisplaysVisualEffectWhenActivating()
                 .ResonanceCost(1)
-                .HasImpactAction((activator, target, location) =>
+                .TelegraphSize(15f, 15f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
                 {
-                    ApplyPartyStatusAOE<IceWardStatusEffect>(activator, activator, 15f, 15);
+                    foreach (var target in targets)
+                    {
+                        if (!GetFactionEqual(target, activator))
+                            continue;
+
+                        _status.ApplyStatusEffect<IceWardStatusEffect>(activator, target, 15);
+                    }
                 });
         }
     }

@@ -7,28 +7,25 @@ using XM.Progression.Stat;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class ShockingCircle: AbilityBase
+    internal class ShockingCircle: IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
         private readonly StatusEffectService _status;
         private readonly SpellService _spell;
 
         public ShockingCircle(
-            PartyService party,
             StatusEffectService status,
             SpellService spell)
-            : base(party, status)
         {
             _status = status;
             _spell = spell;
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             ShockingCircleAbility();
 

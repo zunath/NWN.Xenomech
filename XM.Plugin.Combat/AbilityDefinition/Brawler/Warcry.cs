@@ -6,23 +6,21 @@ using XM.Progression.Recast;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Brawler
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class Warcry: AbilityBase
+    internal class Warcry : IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
+        private readonly StatusEffectService _status;
 
-        public Warcry(
-            PartyService party,
-            StatusEffectService status)
-            : base(party, status)
+        public Warcry(StatusEffectService status)
         {
+            _status = status;
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             WarcryAbility();
 
@@ -40,9 +38,16 @@ namespace XM.Plugin.Combat.AbilityDefinition.Brawler
                 .UsesAnimation(AnimationType.LoopingConjure1)
                 .DisplaysVisualEffectWhenActivating()
                 .ResonanceCost(2)
-                .HasImpactAction((activator, target, location) =>
+                .TelegraphSize(10f, 10f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
                 {
-                    ApplyPartyStatusAOE<WarcryStatusEffect>(activator, activator, 10f, 1);
+                    foreach (var target in targets)
+                    {
+                        if (!GetFactionEqual(target, activator))
+                            continue;
+
+                        _status.ApplyStatusEffect<WarcryStatusEffect>(activator, target, 1);
+                    }
                 });
         }
     }

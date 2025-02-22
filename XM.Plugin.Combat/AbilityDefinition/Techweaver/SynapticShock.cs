@@ -1,36 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Anvil.Services;
 using XM.AI.Enmity;
 using XM.Progression.Ability;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
-using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Techweaver
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class SynapticShock : AbilityBase
+    internal class SynapticShock : IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
         private readonly SpellService _spell;
         private readonly EnmityService _enmity;
 
         public SynapticShock(
-            PartyService party,
-            StatusEffectService status,
             SpellService spell,
             EnmityService enmity)
-            : base(party, status)
         {
             _spell = spell;
             _enmity = enmity;
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             SynapticShockAbility();
 

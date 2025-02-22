@@ -3,29 +3,24 @@ using Anvil.Services;
 using XM.Progression.Ability;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
-using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Beastmaster
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class CrescentMoon : AbilityBase
+    internal class CrescentMoon : IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
         private readonly SpellService _spell;
 
         public CrescentMoon(
-            PartyService party,
-            StatusEffectService status,
             SpellService spell)
-            : base(party, status)
         {
             _spell = spell;
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             CrescentMoon1();
             CrescentMoon2();

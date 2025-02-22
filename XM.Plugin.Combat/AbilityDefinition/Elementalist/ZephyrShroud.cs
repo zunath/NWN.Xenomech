@@ -6,23 +6,21 @@ using XM.Progression.Recast;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class ZephyrShroud: AbilityBase
+    internal class ZephyrShroud : IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
+        private readonly StatusEffectService _status;
 
-        public ZephyrShroud(
-            StatusEffectService status,
-            PartyService party)
-            : base(party, status)
+        public ZephyrShroud(StatusEffectService status)
         {
+            _status = status;
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             ZephyrShroudAbility();
 
@@ -40,9 +38,16 @@ namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
                 .UsesAnimation(AnimationType.LoopingConjure1)
                 .HasActivationDelay(2f)
                 .ResonanceCost(2)
-                .HasImpactAction((activator, target, location) =>
+                .TelegraphSize(10f, 10f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
                 {
-                    ApplyPartyStatusAOE<ZephyrShroudStatusEffect>(activator, activator, 10f, 1);
+                    foreach (var target in targets)
+                    {
+                        if (!GetFactionEqual(target, activator))
+                            continue;
+
+                        _status.ApplyStatusEffect<ZephyrShroudStatusEffect>(activator, target, 1);
+                    }
                 });
         }
     }

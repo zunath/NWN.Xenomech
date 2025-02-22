@@ -2,28 +2,19 @@
 using Anvil.Services;
 using XM.Progression.Ability;
 using XM.Progression.Recast;
-using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class Escape: AbilityBase
+    internal class Escape: IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
 
-        public Escape(
-            StatusEffectService status,
-            PartyService party)
-            : base(party, status)
-        {
-        }
-
         private const string EscapePointVariable = "ESCAPE_POINT";
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             EscapeAbility();
 
@@ -53,19 +44,23 @@ namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
 
                     return string.Empty;
                 })
-                .HasImpactAction((activator, target, location) =>
+                .TelegraphSize(10f, 10f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
                 {
                     var area = GetArea(activator);
                     var escapePoint = GetLocalString(area, EscapePointVariable);
                     var waypoint = GetWaypointByTag(escapePoint);
                     var escapeLocation = GetLocation(waypoint);
 
-                    ApplyPartyAOE(activator, 10f, member =>
+                    foreach (var target in targets)
                     {
-                        AssignCommand(member, () => ClearAllActions());
-                        AssignCommand(member, () => ActionJumpToLocation(escapeLocation));
-                        ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpUnsummon), member);
-                    });
+                        if (!GetFactionEqual(target, activator))
+                            continue;
+
+                        AssignCommand(target, () => ClearAllActions());
+                        AssignCommand(target, () => ActionJumpToLocation(escapeLocation));
+                        ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpUnsummon), target);
+                    }
                 });
         }
     }

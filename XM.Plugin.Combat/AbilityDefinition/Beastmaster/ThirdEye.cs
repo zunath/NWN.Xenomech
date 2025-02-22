@@ -6,26 +6,22 @@ using XM.Progression.Recast;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Beastmaster
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class ThirdEye: AbilityBase
+    internal class ThirdEye: IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
 
         private readonly StatusEffectService _status;
 
-        public ThirdEye(
-            PartyService party,
-            StatusEffectService status)
-            : base(party, status)
+        public ThirdEye(StatusEffectService status)
         {
             _status = status;
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             ThirdEyeAbility();
 

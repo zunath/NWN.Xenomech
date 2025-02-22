@@ -3,29 +3,30 @@ using Anvil.Services;
 using XM.Plugin.Combat.StatusEffectDefinition.Buff;
 using XM.Progression.Ability;
 using XM.Progression.Recast;
+using XM.Progression.Stat;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Beastmaster
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class Snarl: AbilityBase
+    internal class Snarl: IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
 
         private readonly StatusEffectService _status;
+        private readonly SpellService _spell;
 
         public Snarl(
-            PartyService party,
-            StatusEffectService status)
-            : base(party, status)
+            StatusEffectService status,
+            SpellService spell)
         {
             _status = status;
+            _spell = spell;
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             SnarlAbility();
 
@@ -43,12 +44,14 @@ namespace XM.Plugin.Combat.AbilityDefinition.Beastmaster
                 .UsesAnimation(AnimationType.LoopingConjure1)
                 .DisplaysVisualEffectWhenActivating()
                 .ResonanceCost(1)
-                .HasImpactAction((activator, target, location) =>
+                .TelegraphSize(4f, 4f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
                 {
-                    ApplyEnemyAOEAroundActivator(activator, 8f, enemy =>
+                    foreach (var target in targets)
                     {
-                        _status.ApplyStatusEffect<SnarlStatusEffect>(activator, enemy, 1);
-                    });
+                        var duration = _spell.CalculateResistedTicks(target, ResistType.Wind, 20);
+                        _status.ApplyStatusEffect<SnarlStatusEffect>(activator, target, duration);
+                    }
                 });
         }
     }

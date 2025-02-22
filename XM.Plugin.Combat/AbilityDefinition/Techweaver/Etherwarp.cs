@@ -4,15 +4,13 @@ using XM.AI.Enmity;
 using XM.Progression.Ability;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
-using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Techweaver
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class Etherwarp: AbilityBase
+    internal class Etherwarp: IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
 
@@ -21,16 +19,13 @@ namespace XM.Plugin.Combat.AbilityDefinition.Techweaver
 
         public Etherwarp(
             EnmityService enmity,
-            PartyService party,
-            StatusEffectService status,
             StatService stat)
-        :base(party, status)
         {
             _enmity = enmity;
             _stat = stat;
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             EtherwarpAbility();
 
@@ -48,17 +43,20 @@ namespace XM.Plugin.Combat.AbilityDefinition.Techweaver
                 .UsesAnimation(AnimationType.LoopingConjure1)
                 .HasActivationDelay(4f)
                 .ResonanceCost(3)
-                .HasImpactAction((activator, target, location) =>
+                .TelegraphSize(13f, 13f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
                 {
-                    ApplyPartyAOE(activator, 13f, member =>
-                    {
-                        var maxEP = _stat.GetMaxEP(member);
-                        _stat.RestoreEP(member, maxEP);
-                        ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpHealingExtra), member);
-                        _enmity.ModifyEnmityOnAll(activator, EnmityType.Volatile, maxEP);
-                    });
-
                     _enmity.ModifyEnmityOnAll(activator, EnmityType.Volatile, 4500);
+                    foreach (var target in targets)
+                    {
+                        if (!GetFactionEqual(target, activator))
+                            continue;
+
+                        var maxEP = _stat.GetMaxEP(target);
+                        _stat.RestoreEP(target, maxEP);
+                        ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpHealingExtra), target);
+                        _enmity.ModifyEnmityOnAll(activator, EnmityType.Volatile, maxEP);
+                    }
                 });
         }
     }

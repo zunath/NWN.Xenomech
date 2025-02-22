@@ -1,27 +1,21 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
-using XM.Plugin.Combat.StatusEffectDefinition.Debuff;
 using XM.Progression.Ability;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
-using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Beastmaster
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class MercyStrike: AbilityBase
+    internal class MercyStrike: IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
         private readonly SpellService _spell;
 
         public MercyStrike(
-            PartyService party,
-            StatusEffectService status,
             SpellService spell)
-            : base(party, status)
         {
             _spell = spell;
         }
@@ -43,7 +37,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Beastmaster
             }
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             MercyStrike1();
             MercyStrike2();

@@ -8,12 +8,11 @@ using XM.Progression.Stat;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Brawler
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class Flash: AbilityBase
+    internal class Flash: IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
         private readonly EnmityService _enmity;
@@ -21,18 +20,16 @@ namespace XM.Plugin.Combat.AbilityDefinition.Brawler
         private readonly StatusEffectService _status;
 
         public Flash(
-            PartyService party,
             StatusEffectService status,
             EnmityService enmity,
             SpellService spell)
-            :base(party, status)
         {
             _status = status;
             _enmity = enmity;
             _spell = spell;
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             FlashAbility();
 
@@ -60,14 +57,18 @@ namespace XM.Plugin.Combat.AbilityDefinition.Brawler
                 .IsCastedAbility()
                 .RequirementEP(8)
                 .ResonanceCost(1)
-                .HasImpactAction((activator, target, location) =>
+                .TelegraphSize(8f, 8f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
                 {
                     ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.FnfHowlOdd), activator);
 
-                    ApplyEnemyAOEAroundActivator(activator, 8f, nearest =>
+                    foreach (var target in targets)
                     {
-                        Impact(activator, nearest, 1500);
-                    });
+                        if (GetIsPC(target) || !GetIsReactionTypeHostile(target, activator))
+                            continue;
+
+                        Impact(activator, target, 1500);
+                    }
                 });
         }
     }

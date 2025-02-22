@@ -7,28 +7,25 @@ using XM.Progression.Stat;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Brawler
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class StrikingCobra: AbilityBase
+    internal class StrikingCobra: IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
         private readonly SpellService _spell;
         private readonly StatusEffectService _status;
 
         public StrikingCobra(
-            PartyService party,
             StatusEffectService status,
             SpellService spell)
-            : base(party, status)
         {
             _spell = spell;
             _status = status;
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             StrikingCobra1();
             StrikingCobra2();

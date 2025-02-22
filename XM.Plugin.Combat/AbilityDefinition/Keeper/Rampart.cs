@@ -6,23 +6,21 @@ using XM.Progression.Recast;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Keeper
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class Rampart: AbilityBase
+    internal class Rampart : IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
+        private readonly StatusEffectService _status;
 
-        public Rampart(
-            PartyService party,
-            StatusEffectService status)
-            : base(party, status)
+        public Rampart(StatusEffectService status)
         {
+            _status = status;
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             RampartAbility();
 
@@ -40,9 +38,16 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
                 .UsesAnimation(AnimationType.LoopingConjure1)
                 .DisplaysVisualEffectWhenActivating()
                 .ResonanceCost(2)
-                .HasImpactAction((activator, target, location) =>
+                .TelegraphSize(15f, 15f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
                 {
-                    ApplyPartyStatusAOE<RampartStatusEffect>(activator, activator, 15f, 2);
+                    foreach (var target in targets)
+                    {
+                        if (!GetFactionEqual(target, activator))
+                            continue;
+
+                        _status.ApplyStatusEffect<RampartStatusEffect>(activator, target, 2);
+                    }
                 });
         }
     }

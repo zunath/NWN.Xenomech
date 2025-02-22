@@ -6,23 +6,21 @@ using XM.Progression.Recast;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Brawler
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class WindWard: AbilityBase
+    internal class WindWard : IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
+        private readonly StatusEffectService _status;
 
-        public WindWard(
-            PartyService party,
-            StatusEffectService status)
-            : base(party, status)
+        public WindWard(StatusEffectService status)
         {
+            _status = status;
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             WindWardAbility();
 
@@ -40,9 +38,16 @@ namespace XM.Plugin.Combat.AbilityDefinition.Brawler
                 .UsesAnimation(AnimationType.LoopingConjure1)
                 .DisplaysVisualEffectWhenActivating()
                 .ResonanceCost(1)
-                .HasImpactAction((activator, target, location) =>
+                .TelegraphSize(15f, 15f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
                 {
-                    ApplyPartyStatusAOE<WindWardStatusEffect>(activator, activator, 15f, 15);
+                    foreach (var target in targets)
+                    {
+                        if (!GetFactionEqual(target, activator))
+                            continue;
+
+                        _status.ApplyStatusEffect<WindWardStatusEffect>(activator, target, 15);
+                    }
                 });
         }
     }

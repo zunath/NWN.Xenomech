@@ -12,7 +12,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
         public override LocaleString Name => LocaleString.Snarl;
         public override EffectIconType Icon => EffectIconType.Snarl;
         public override StatusEffectStackType StackingType => StatusEffectStackType.StackFromMultipleSources;
-        public override float Frequency => 60f;
+        public override float Frequency => 3f;
 
         public SnarlStatusEffect()
         {

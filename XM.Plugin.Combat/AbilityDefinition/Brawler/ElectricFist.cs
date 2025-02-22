@@ -1,29 +1,19 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
-using XM.Plugin.Combat.StatusEffectDefinition;
 using XM.Progression.Ability;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
-using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Brawler
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class ElectricFist: AbilityBase
+    internal class ElectricFist: IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
 
-        public ElectricFist(
-            PartyService party,
-            StatusEffectService status)
-            : base(party, status)
-        {
-        }
-
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             ElectricFist1();
             ElectricFist2();

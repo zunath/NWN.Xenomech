@@ -2,7 +2,6 @@
 using XM.Progression.Stat;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
-using XM.Shared.Core;
 using XM.Shared.Core.Localization;
 
 namespace XM.Plugin.Combat.StatusEffectDefinition.Debuff

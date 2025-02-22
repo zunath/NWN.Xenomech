@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Anvil.API;
 using Anvil.Services;
 using XM.Plugin.Combat.StatusEffectDefinition.Debuff;
 using XM.Progression.Ability;
@@ -8,29 +7,26 @@ using XM.Progression.Stat;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 using DamageType = XM.Shared.API.Constants.DamageType;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class AbyssalVeil: AbilityBase
+    internal class AbyssalVeil: IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
         private readonly SpellService _spell;
         private readonly StatusEffectService _status;
 
         public AbyssalVeil(
-            PartyService party,
             StatusEffectService status,
             SpellService spell)
-            : base(party, status)
         {
             _spell = spell;
             _status = status;
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             AbyssalVeil1();
             AbyssalVeil2();

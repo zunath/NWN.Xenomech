@@ -8,28 +8,25 @@ using XM.Progression.Stat;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Hunter
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class ChokingShot: AbilityBase
+    internal class ChokingShot: IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
         private readonly SpellService _spell;
         private readonly StatusEffectService _status;
 
         public ChokingShot(
-            PartyService party,
             StatusEffectService status,
             SpellService spell)
-            : base(party, status)
         {
             _spell = spell;
             _status = status;
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             ChokingShot1();
             ChokingShot2();

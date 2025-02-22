@@ -6,27 +6,27 @@ using XM.Progression.Recast;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Mender
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class Protection : AbilityBase
+    internal class Protection : IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
+        private readonly StatusEffectService _status;
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Protection(StatusEffectService status)
+        {
+            _status = status;
+        }
+
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             Protection1();
             Protection2();
             Protection3();
 
             return _builder.Build();
-        }
-
-        public Protection(PartyService party, StatusEffectService status) 
-            : base(party, status)
-        {
         }
 
         private void Protection1()
@@ -40,9 +40,16 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
                 .UsesAnimation(AnimationType.LoopingConjure1)
                 .DisplaysVisualEffectWhenActivating()
                 .ResonanceCost(1)
-                .HasImpactAction((activator, target, location) =>
+                .TelegraphSize(10f, 10f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
                 {
-                    ApplyPartyStatusAOE<Protection1StatusEffect>(activator, target, 10f, 30);
+                    foreach (var target in targets)
+                    {
+                        if (!GetFactionEqual(target, activator))
+                            continue;
+
+                        _status.ApplyStatusEffect<Protection1StatusEffect>(activator, target, 30);
+                    }
                 });
         }
 
@@ -57,9 +64,16 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
                 .UsesAnimation(AnimationType.LoopingConjure1)
                 .DisplaysVisualEffectWhenActivating()
                 .ResonanceCost(2)
-                .HasImpactAction((activator, target, location) =>
+                .TelegraphSize(10f, 10f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
                 {
-                    ApplyPartyStatusAOE<Protection2StatusEffect>(activator, target, 10f, 30);
+                    foreach (var target in targets)
+                    {
+                        if (!GetFactionEqual(target, activator))
+                            continue;
+
+                        _status.ApplyStatusEffect<Protection2StatusEffect>(activator, target, 30);
+                    }
                 });
         }
 
@@ -74,9 +88,16 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
                 .UsesAnimation(AnimationType.LoopingConjure1)
                 .DisplaysVisualEffectWhenActivating()
                 .ResonanceCost(3)
-                .HasImpactAction((activator, target, location) =>
+                .TelegraphSize(10f, 10f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
                 {
-                    ApplyPartyStatusAOE<Protection3StatusEffect>(activator, target, 10f, 30);
+                    foreach (var target in targets)
+                    {
+                        if (!GetFactionEqual(target, activator))
+                            continue;
+
+                        _status.ApplyStatusEffect<Protection3StatusEffect>(activator, target, 30);
+                    }
                 });
         }
     }

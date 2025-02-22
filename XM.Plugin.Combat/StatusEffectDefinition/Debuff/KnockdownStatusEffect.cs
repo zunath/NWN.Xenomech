@@ -1,5 +1,4 @@
 ﻿using Anvil.Services;
-using XM.Progression.Stat;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;

@@ -8,12 +8,11 @@ using XM.Progression.Stat;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class GravitonField: AbilityBase
+    internal class GravitonField: IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
         private readonly SpellService _spell;
@@ -21,18 +20,16 @@ namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
         private readonly EnmityService _enmity;
 
         public GravitonField(
-            PartyService party,
             StatusEffectService status,
             SpellService spell,
             EnmityService enmity)
-            : base(party, status)
         {
             _spell = spell;
             _status = status;
             _enmity = enmity;
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             GravitonFieldAbility();
 

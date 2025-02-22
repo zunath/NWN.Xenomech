@@ -4,15 +4,13 @@ using XM.AI.Enmity;
 using XM.Progression.Ability;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
-using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Mender
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class Benediction: AbilityBase
+    internal class Benediction: IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
 
@@ -21,16 +19,13 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
 
         public Benediction(
             EnmityService enmity,
-            PartyService party,
-            StatusEffectService status,
             StatService stat)
-        :base(party, status)
         {
             _enmity = enmity;
             _stat = stat;
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             BenedictionAbility();
 
@@ -48,17 +43,21 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
                 .UsesAnimation(AnimationType.LoopingConjure1)
                 .HasActivationDelay(4f)
                 .ResonanceCost(3)
-                .HasImpactAction((activator, target, location) =>
+                .TelegraphSize(15f, 15f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
                 {
-                    ApplyPartyAOE(activator, 15f, member =>
-                    {
-                        var maxHP = _stat.GetMaxHP(member);
-                        ApplyEffectToObject(DurationType.Instant, EffectHeal(maxHP), member);
-                        ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpHealingExtra), member);
-                        _enmity.ModifyEnmityOnAll(activator, EnmityType.Volatile, maxHP);
-                    });
-
                     _enmity.ModifyEnmityOnAll(activator, EnmityType.Volatile, 4500);
+
+                    foreach (var target in targets)
+                    {
+                        if (!GetFactionEqual(target, activator))
+                            continue;
+
+                        var maxHP = _stat.GetMaxHP(target);
+                        ApplyEffectToObject(DurationType.Instant, EffectHeal(maxHP), target);
+                        ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpHealingExtra), target);
+                        _enmity.ModifyEnmityOnAll(activator, EnmityType.Volatile, maxHP);
+                    }
                 });
         }
     }

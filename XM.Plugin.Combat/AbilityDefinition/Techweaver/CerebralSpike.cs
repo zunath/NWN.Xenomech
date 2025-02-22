@@ -3,30 +3,25 @@ using Anvil.Services;
 using XM.Progression.Ability;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
-using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 using DamageType = XM.Shared.API.Constants.DamageType;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Techweaver
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class CerebralSpike: AbilityBase
+    internal class CerebralSpike: IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
         private readonly SpellService _spell;
 
         public CerebralSpike(
-            PartyService party,
-            StatusEffectService status,
             SpellService spell)
-            : base(party, status)
         {
             _spell = spell;
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             CerebralSpike1();
             CerebralSpike2();

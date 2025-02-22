@@ -10,12 +10,11 @@ using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Localization;
-using XM.Shared.Core.Party;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Mender
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class EtherBlast : AbilityBase
+    internal class EtherBlast : IAbilityListDefinition
     {
         private readonly AbilityBuilder _builder = new();
 
@@ -26,16 +25,14 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
         public EtherBlast(
             EnmityService enmity,
             StatService stat,
-            StatusEffectService status,
-            PartyService party)
-        : base(party, status)
+            StatusEffectService status)
         {
             _enmity = enmity;
             _stat = stat;
             _status = status;
         }
 
-        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             EtherBlast1();
             EtherBlast2();
@@ -45,6 +42,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
 
         private void Impact(
             uint activator,
+            List<uint> targets,
             VisualEffectType impactVFX,
             Func<int, float> rateAction,
             Func<int, int> constAction,
@@ -70,13 +68,16 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
                 _status.RemoveStatusEffect<DivineSealStatusEffect>(activator);
             }
 
-            ApplyPartyAOE(activator, 10f, target =>
+            foreach (var target in targets)
             {
+                if (!GetFactionEqual(target, activator))
+                    continue;
+
                 _enmity.ApplyHealingEnmity(activator, healAmount);
                 ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(impactVFX), target);
                 ApplyEffectToObject(DurationType.Instant, EffectHeal(healAmount), target);
                 Messaging.SendMessageNearbyToPlayers(activator, LocaleString.PlayerRestoresXHPToTarget.ToLocalizedString(GetName(activator), healAmount, GetName(target)));
-            });
+            }
         }
 
         private void EtherBlast1()
@@ -101,9 +102,10 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
                 .UsesAnimation(AnimationType.LoopingConjure1)
                 .DisplaysVisualEffectWhenActivating()
                 .ResonanceCost(2)
-                .HasImpactAction((activator, target, location) =>
+                .TelegraphSize(10f, 10f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
                 {
-                    Impact(activator, VisualEffectType.ImpHealingSmall, GetRate, GetConst, 20);
+                    Impact(activator, targets, VisualEffectType.ImpHealingSmall, GetRate, GetConst, 20);
                 });
         }
 
@@ -129,9 +131,10 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
                 .UsesAnimation(AnimationType.LoopingConjure1)
                 .DisplaysVisualEffectWhenActivating()
                 .ResonanceCost(3)
-                .HasImpactAction((activator, target, location) =>
+                .TelegraphSize(10f, 10f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
                 {
-                    Impact(activator, VisualEffectType.ImpHealingMedium, GetRate, GetConst, 70);
+                    Impact(activator, targets, VisualEffectType.ImpHealingSmall, GetRate, GetConst, 70);
                 });
         }
     }
