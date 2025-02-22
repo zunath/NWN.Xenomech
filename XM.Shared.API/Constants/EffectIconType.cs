@@ -186,6 +186,6 @@ namespace XM.Shared.API.Constants
         GravitonField = 181,
         AbyssalVeil1 = 182,
         AbyssalVeil2 = 183,
-
+        Rupture = 184,
     }
 }
