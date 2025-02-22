@@ -88,22 +88,36 @@ namespace XM.Shared.API.Constants
         
         Delay = 88,
         UseLimitationJob = 89,
-        HPBonus = 90,
+        HP = 90,
         EP = 91,
         LevelRequired = 92,
         DMG = 93,
         Defense = 94,
         NPCEvasionGrade = 95,
-        NPCHP = 96,
+        // 96 is free
         Accuracy = 97,
-        // 98 is free
+        HPRegen = 98,
         NPCLevel = 99,
-        // 100-110 are open
+        TPGain = 100,
+        Might = 101,
+        Perception = 102,
+        Vitality = 103,
+        Agility = 104,
+        Willpower = 105,
+        Social = 106,
+        ShieldDeflection = 107,
+        AttackDeflection = 108,
+        SubtleBlow = 109,
+        CriticalRate = 110,
         Attack = 111,
         EtherAttack = 112,
-        // 113-116 are open
+        Enmity = 113,
+        XMHaste = 114,
+        Slow = 115,
+        XMDamageReduction = 116,
         Evasion = 117,
         AbilityRecastReduction = 118,
         EPRegen = 119,
+        EtherDefense = 120,
     }
 }

@@ -202,16 +202,7 @@ namespace XM.Progression.Stat
 
         private void LoadNPCStats(uint creature)
         {
-            var skin = GetItemInSlot(InventorySlotType.CreatureArmor, creature);
-
-            var maxHP = 0;
-            for (var ip = GetFirstItemProperty(skin); GetIsItemPropertyValid(ip); ip = GetNextItemProperty(skin))
-            {
-                if (GetItemPropertyType(ip) == ItemPropertyType.NPCHP)
-                {
-                    maxHP += GetItemPropertyCostTableValue(ip);
-                }
-            }
+            var maxHP = GetMaxHP(creature);
 
             if (maxHP > 30000)
                 maxHP = 30000;
@@ -240,7 +231,7 @@ namespace XM.Progression.Stat
                     case ItemPropertyType.Delay:
                         itemStat.Delay += GetItemPropertyCostTableValue(ip) * 10;
                         break;
-                    case ItemPropertyType.HPBonus:
+                    case ItemPropertyType.HP:
                         itemStat[StatType.MaxHP] += GetItemPropertyCostTableValue(ip);
                         break;
                     case ItemPropertyType.EP:
@@ -345,7 +336,8 @@ namespace XM.Progression.Stat
             }
             else
             {
-                return GetMaxHitPoints(creature);
+                var npcStats = GetNPCStats(creature);
+                return npcStats.Stats[StatType.MaxHP];
             }
         }
 
@@ -976,6 +968,36 @@ namespace XM.Progression.Stat
             }
         }
 
+        private readonly Dictionary<ItemPropertyType, StatType> _itemPropertyToStat = new()
+        {
+            { ItemPropertyType.HP, StatType.MaxHP},
+            { ItemPropertyType.EP, StatType.MaxEP},
+            { ItemPropertyType.HPRegen, StatType.HPRegen},
+            { ItemPropertyType.EPRegen, StatType.EPRegen},
+            { ItemPropertyType.AbilityRecastReduction, StatType.RecastReduction},
+            { ItemPropertyType.Defense, StatType.Defense},
+            { ItemPropertyType.Evasion, StatType.Evasion},
+            { ItemPropertyType.Accuracy, StatType.Accuracy},
+            { ItemPropertyType.Attack, StatType.Attack},
+            { ItemPropertyType.EtherAttack, StatType.EtherAttack},
+            { ItemPropertyType.TPGain, StatType.TPGain},
+            { ItemPropertyType.Might, StatType.Might},
+            { ItemPropertyType.Perception, StatType.Perception},
+            { ItemPropertyType.Vitality, StatType.Vitality},
+            { ItemPropertyType.Agility, StatType.Agility},
+            { ItemPropertyType.Willpower, StatType.Willpower},
+            { ItemPropertyType.Social, StatType.Social},
+            { ItemPropertyType.ShieldDeflection, StatType.ShieldDeflection},
+            { ItemPropertyType.AttackDeflection, StatType.AttackDeflection},
+            { ItemPropertyType.SubtleBlow, StatType.SubtleBlow},
+            { ItemPropertyType.CriticalRate, StatType.CriticalRate},
+            { ItemPropertyType.Enmity, StatType.Enmity},
+            { ItemPropertyType.Haste, StatType.Haste},
+            { ItemPropertyType.Slow, StatType.Slow},
+            { ItemPropertyType.DamageReduction, StatType.DamageReduction},
+            { ItemPropertyType.EtherDefense, StatType.EtherDefense},
+        };
+
         public NPCStats GetNPCStats(uint npc)
         {
             var npcStats = new NPCStats();
@@ -984,6 +1006,7 @@ namespace XM.Progression.Stat
             if (!GetIsObjectValid(skin))
                 return npcStats;
 
+            npcStats.Stats[StatType.MaxHP] += GetMaxHitPoints(npc);
             for (var ip = GetFirstItemProperty(skin); GetIsItemPropertyValid(ip); ip = GetNextItemProperty(skin))
             {
                 var type = GetItemPropertyType(ip);
@@ -991,36 +1014,16 @@ namespace XM.Progression.Stat
                 {
                     npcStats.Level = GetItemPropertyCostTableValue(ip);
                 }
-                else if (type == ItemPropertyType.Defense)
-                {
-                    npcStats.Stats[StatType.Defense] = GetItemPropertyCostTableValue(ip);
-                }
-                else if (type == ItemPropertyType.Attack)
-                {
-                    npcStats.Stats[StatType.Attack] = GetItemPropertyCostTableValue(ip);
-                }
-                else if (type == ItemPropertyType.EtherAttack)
-                {
-                    npcStats.Stats[StatType.EtherAttack] = GetItemPropertyCostTableValue(ip);
-                }
-                else if (type == ItemPropertyType.Evasion)
-                {
-                    npcStats.Stats[StatType.Evasion] = GetItemPropertyCostTableValue(ip);
-                }
-                else if (type == ItemPropertyType.EP)
-                {
-                    npcStats.Stats[StatType.MaxEP] = GetItemPropertyCostTableValue(ip);
-                }
-                else if (type == ItemPropertyType.Accuracy)
-                {
-                    npcStats.Stats[StatType.Accuracy] = GetItemPropertyCostTableValue(ip);
-                }
                 else if (type == ItemPropertyType.NPCEvasionGrade)
                 {
                     var gradeId = GetItemPropertyCostTableValue(ip);
                     npcStats.EvasionGrade = (GradeType)gradeId;
                     if (npcStats.EvasionGrade < GradeType.F)
                         npcStats.EvasionGrade = GradeType.F;
+                }
+                else if(_itemPropertyToStat.ContainsKey(type))
+                {
+                    npcStats.Stats[_itemPropertyToStat[type]] += GetItemPropertyCostTableValue(ip);
                 }
             }
 

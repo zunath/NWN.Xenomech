@@ -1461,5 +1461,16 @@ namespace XM.Shared.Core.Localization
         YouDoNotHaveTheCallBeastAbility = 1774,
         InvalidBeastTypeIdError = 1775,
         InsufficientLevelRequiredX = 1776,
+        TPGain = 1777,
+        ShieldDeflection = 1778,
+        AttackDeflection = 1779,
+        SubtleBlow = 1780,
+        CriticalRate = 1781,
+        Enmity = 1782,
+        DamageReduction = 1783,
+        EtherDefense = 1784,
+        FiveHundred = 1785,
+        OneThousand = 1786,
+        FiveThousand = 1787,
     }
 }

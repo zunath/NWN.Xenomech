@@ -7100,6 +7100,50 @@
     {
       "id": 1776,
       "text": "Insufficient Level. (Required: {0})"
+    },
+    {
+      "id": 1777,
+      "text": "TP Gain"
+    },
+    {
+      "id": 1778,
+      "text": "Shield Deflection"
+    },
+    {
+      "id": 1779,
+      "text": "Attack Deflection"
+    },
+    {
+      "id": 1780,
+      "text": "Subtle Blow"
+    },
+    {
+      "id": 1781,
+      "text": "Critical Rate"
+    },
+    {
+      "id": 1782,
+      "text": "Enmity"
+    },
+    {
+      "id": 1783,
+      "text": "Damage Reduction"
+    },
+    {
+      "id": 1784,
+      "text": "Ether Defense"
+    },
+    {
+      "id": 1785,
+      "text": "500"
+    },
+    {
+      "id": 1786,
+      "text": "1000"
+    },
+    {
+      "id": 1787,
+      "text": "5000"
     }
   ]
 }
