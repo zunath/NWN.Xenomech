@@ -183,5 +183,6 @@ namespace XM.Shared.API.Constants
         XMParalyze = 178,
         Drown1 = 179,
         Drown2 = 180,
+        GravitonField = 181,
     }
 }
