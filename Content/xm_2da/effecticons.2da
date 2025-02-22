@@ -180,3 +180,5 @@
 176   GRASPING_DEATH                        ife_graspdth       16778979   
 177   KNOCKDOWN                             ife_xmknockdown    16778980   
 178   XM_PARALYZE                           ife_xmparalyze     16778981   
+179   DROWN_1                               ife_drown          16778035   
+180   DROWN_2                               ife_drown          16778037   
