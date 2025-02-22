@@ -184,5 +184,8 @@ namespace XM.Shared.API.Constants
         Drown1 = 179,
         Drown2 = 180,
         GravitonField = 181,
+        AbyssalVeil1 = 182,
+        AbyssalVeil2 = 183,
+
     }
 }
