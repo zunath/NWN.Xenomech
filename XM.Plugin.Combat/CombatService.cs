@@ -654,6 +654,20 @@ namespace XM.Plugin.Combat
             return isBehind;
         }
 
+        public bool HandleParalyze(uint attacker)
+        {
+            if (!_statusEffect.HasEffect<ParalyzeStatusEffect>(attacker))
+                return false;
+
+            var hasParalysis = XMRandom.D100(1) <= _stat.GetParalysis(attacker);
+
+            if (hasParalysis)
+            {
+                Messaging.SendMessageNearbyToPlayers(attacker, LocaleString.XIsParalyzed.ToLocalizedString(GetName(attacker)));
+            }
+
+            return hasParalysis;
+        }
 
     }
 }

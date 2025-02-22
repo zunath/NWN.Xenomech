@@ -30,5 +30,6 @@
         DamageReduction = 25,
         EtherDefense = 26,
         QueuedDMGBonus = 27,
+        Paralysis = 28,
     }
 }

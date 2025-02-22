@@ -783,6 +783,25 @@ namespace XM.Progression.Stat
             }
         }
 
+        public int GetParalysis(uint creature)
+        {
+            var statusParalysis = _status.GetCreatureStatusEffects(creature).Stats[StatType.Paralysis];
+            if (GetIsPC(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+                var itemParalysis = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.Paralysis);
+                var abilityParalysis = dbPlayerStat.AbilityStats.CalculateStat(StatType.Paralysis);
+
+                return Math.Clamp(itemParalysis + abilityParalysis + statusParalysis, 0, 100);
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                return Math.Clamp(npcStats.Stats[StatType.Paralysis] + statusParalysis, 0, 100);
+            }
+        }
+
         public int GetShieldDeflection(uint creature)
         {
             var statusShieldDeflection = _status.GetCreatureStatusEffects(creature).Stats[StatType.ShieldDeflection];

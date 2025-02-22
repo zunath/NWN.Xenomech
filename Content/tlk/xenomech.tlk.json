@@ -7052,6 +7052,14 @@
     {
       "id": 1764,
       "text": "Knockdown"
+    },
+    {
+      "id": 1765,
+      "text": "Paralyze"
+    },
+    {
+      "id": 1766,
+      "text": "{0} is paralyzed."
     }
   ]
 }

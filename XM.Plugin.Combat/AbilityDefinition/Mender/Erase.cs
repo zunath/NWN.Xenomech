@@ -24,9 +24,10 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
 
         private static readonly List<Type> _effectsToRemoveInOrder =
         [
+            typeof(ParalyzeStatusEffect),
+            typeof(GraspingDeathStatusEffect),
             typeof(SlowStatusEffect),
             typeof(PoisonStatusEffect),
-            typeof(GraspingDeathStatusEffect)
         ];
 
         private readonly StatusEffectService _status;

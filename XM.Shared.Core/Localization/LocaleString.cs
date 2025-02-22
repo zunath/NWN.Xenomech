@@ -1449,5 +1449,7 @@ namespace XM.Shared.Core.Localization
         RESISTED = 1762,
         GraspingDeath = 1763,
         Knockdown = 1764,
+        Paralyze = 1765,
+        XIsParalyzed = 1766,
     }
 }
