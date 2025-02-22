@@ -7064,6 +7064,26 @@
     {
       "id": 1767,
       "text": "Pacified"
+    },
+    {
+      "id": 1768,
+      "text": "Badger"
+    },
+    {
+      "id": 1769,
+      "text": "Flame Breath"
+    },
+    {
+      "id": 1770,
+      "text": "Flame Breath Description"
+    },
+    {
+      "id": 1771,
+      "text": "Only one companion may be active at a time."
+    },
+    {
+      "id": 1772,
+      "text": "You do not have an active beast."
     }
   ]
 }

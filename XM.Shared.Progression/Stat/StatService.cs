@@ -89,6 +89,17 @@ namespace XM.Progression.Stat
             { GradeType.G, 4},
         };
 
+        private readonly Dictionary<GradeType, int> _baseDMGByGrade = new()
+        {
+            { GradeType.A , 10},
+            { GradeType.B , 9},
+            { GradeType.C , 8},
+            { GradeType.D , 7},
+            { GradeType.E , 6},
+            { GradeType.F , 5},
+            { GradeType.G , 4},
+        };
+
         private readonly Dictionary<GradeType, float> _growthEPByGrade = new()
         {
             { GradeType.A, 6f},
@@ -109,6 +120,17 @@ namespace XM.Progression.Stat
             { GradeType.E , 0.30f},
             { GradeType.F , 0.25f},
             { GradeType.G , 0.20f},
+        };
+
+        private readonly Dictionary<GradeType, float> _growthDMGByGrade = new()
+        {
+            { GradeType.A , 1.22f},
+            { GradeType.B , 1.14f},
+            { GradeType.C , 1.06f},
+            { GradeType.D , 0.98f},
+            { GradeType.E , 0.9f},
+            { GradeType.F , 0.82f},
+            { GradeType.G , 0.73f},
         };
 
         public StatService(
@@ -996,27 +1018,9 @@ namespace XM.Progression.Stat
                 else if (type == ItemPropertyType.NPCEvasionGrade)
                 {
                     var gradeId = GetItemPropertyCostTableValue(ip);
-                    switch (gradeId)
-                    {
-                        case 1:
-                            npcStats.EvasionGrade = GradeType.A;
-                            break;
-                        case 2:
-                            npcStats.EvasionGrade = GradeType.B;
-                            break;
-                        case 3:
-                            npcStats.EvasionGrade = GradeType.C;
-                            break;
-                        case 4:
-                            npcStats.EvasionGrade = GradeType.D;
-                            break;
-                        case 5:
-                            npcStats.EvasionGrade = GradeType.E;
-                            break;
-                        case 6:
-                            npcStats.EvasionGrade = GradeType.F;
-                            break;
-                    }
+                    npcStats.EvasionGrade = (GradeType)gradeId;
+                    if (npcStats.EvasionGrade < GradeType.F)
+                        npcStats.EvasionGrade = GradeType.F;
                 }
             }
 
@@ -1085,7 +1089,7 @@ namespace XM.Progression.Stat
             SetTP(player, 0);
         }
 
-        private int CalculateJobHP(int level, GradeType grade)
+        internal int CalculateHP(int level, GradeType grade)
         {
             var hpScale = _growthHPByGrade[grade];
             var hpBase = _baseHPByGrade[grade];
@@ -1094,7 +1098,7 @@ namespace XM.Progression.Stat
             return hpScale * (level - 1) + hpBase + hpBonus * level;
         }
 
-        private int CalculateJobEP(int level, GradeType grade)
+        internal int CalculateEP(int level, GradeType grade)
         {
             var epScale = _growthEPByGrade[grade];
             var epBase = _baseEPByGrade[grade];
@@ -1102,7 +1106,7 @@ namespace XM.Progression.Stat
             return (int)(epScale * (level - 1) + epBase);
         }
 
-        private int CalculateJobStat(int level, GradeType grade)
+        internal int CalculateStat(int level, GradeType grade)
         {
             var statScale = _growthStatsByGrade[grade];
             var statBase = _baseStatsByGrade[grade];
@@ -1110,20 +1114,28 @@ namespace XM.Progression.Stat
             return (int)(statScale * (level - 1) + statBase);
         }
 
+        internal int CalculateDMG(int level, GradeType grade)
+        {
+            var dmgScale = _growthDMGByGrade[grade];
+            var dmgBase = _baseDMGByGrade[grade];
+
+            return (int)(dmgScale * (level - 1) + dmgBase);
+        }
+
         private void RecalculateJobStats(uint player, IJobDefinition definition, int level)
         {
             var playerId = PlayerId.Get(player);
             var dbPlayerStat = _db.Get<PlayerStat>(playerId);
 
-            dbPlayerStat.JobStats[StatType.MaxHP] = CalculateJobHP(level, definition.Grades.MaxHP);
-            dbPlayerStat.JobStats[StatType.MaxEP] = CalculateJobEP(level, definition.Grades.MaxEP);
+            dbPlayerStat.JobStats[StatType.MaxHP] = CalculateHP(level, definition.Grades.MaxHP);
+            dbPlayerStat.JobStats[StatType.MaxEP] = CalculateEP(level, definition.Grades.MaxEP);
 
-            dbPlayerStat.JobStats[StatType.Might] = CalculateJobStat(level, definition.Grades.Might);
-            dbPlayerStat.JobStats[StatType.Perception] = CalculateJobStat(level, definition.Grades.Perception);
-            dbPlayerStat.JobStats[StatType.Vitality] = CalculateJobStat(level, definition.Grades.Vitality);
-            dbPlayerStat.JobStats[StatType.Willpower] = CalculateJobStat(level, definition.Grades.Willpower);
-            dbPlayerStat.JobStats[StatType.Agility] = CalculateJobStat(level, definition.Grades.Agility);
-            dbPlayerStat.JobStats[StatType.Social] = CalculateJobStat(level, definition.Grades.Social);
+            dbPlayerStat.JobStats[StatType.Might] = CalculateStat(level, definition.Grades.Might);
+            dbPlayerStat.JobStats[StatType.Perception] = CalculateStat(level, definition.Grades.Perception);
+            dbPlayerStat.JobStats[StatType.Vitality] = CalculateStat(level, definition.Grades.Vitality);
+            dbPlayerStat.JobStats[StatType.Willpower] = CalculateStat(level, definition.Grades.Willpower);
+            dbPlayerStat.JobStats[StatType.Agility] = CalculateStat(level, definition.Grades.Agility);
+            dbPlayerStat.JobStats[StatType.Social] = CalculateStat(level, definition.Grades.Social);
 
             _db.Set(dbPlayerStat);
         }

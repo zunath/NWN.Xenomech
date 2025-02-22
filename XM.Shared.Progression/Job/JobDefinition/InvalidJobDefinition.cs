@@ -14,7 +14,7 @@ namespace XM.Progression.Job.JobDefinition
 
         public override string IconResref => string.Empty;
 
-        public override JobGrade Grades { get; } = new()
+        public override StatGrade Grades { get; } = new()
         {
             MaxHP = GradeType.G,
             MaxEP = GradeType.G,

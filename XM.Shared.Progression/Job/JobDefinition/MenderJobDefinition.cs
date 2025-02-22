@@ -14,7 +14,7 @@ namespace XM.Progression.Job.JobDefinition
 
         public override string IconResref => "mender_icon";
 
-        public override JobGrade Grades { get; } = new()
+        public override StatGrade Grades { get; } = new()
         {
             MaxHP = GradeType.E,
             MaxEP = GradeType.C,

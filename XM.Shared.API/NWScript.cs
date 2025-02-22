@@ -10576,9 +10576,9 @@ namespace XM.Shared.API
         ///  This function can be used in place of all the other ItemPropertyXxx constructors<br/>
         ///  Use GetItemProperty{Type,SubType,CostTableValue,Param1Value} to see the values for a given itemproperty.
         /// </summary>
-        public static ItemProperty ItemPropertyCustom(int nType, int nSubType = -1, int nCostTableValue = -1, int nParam1Value = -1)
+        public static ItemProperty ItemPropertyCustom(ItemPropertyType nType, int nSubType = -1, int nCostTableValue = -1, int nParam1Value = -1)
         {
-            return NWN.Core.NWScript.ItemPropertyCustom(nType, nSubType, nCostTableValue, nParam1Value);
+            return NWN.Core.NWScript.ItemPropertyCustom((int)nType, nSubType, nCostTableValue, nParam1Value);
         }
 
         /// <summary>

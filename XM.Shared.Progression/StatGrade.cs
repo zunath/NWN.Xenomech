@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using XM.Progression.Skill;
 
-namespace XM.Progression.Job
+namespace XM.Progression
 {
-    public class JobGrade
+    public class StatGrade
     {
         public GradeType MaxHP { get; set; }
         public GradeType MaxEP { get; set; }
@@ -13,12 +13,13 @@ namespace XM.Progression.Job
         public GradeType Agility { get; set; }
         public GradeType Willpower { get; set; }
         public GradeType Social { get; set; }
+        public GradeType DMG { get; set; }
 
         public GradeType Evasion { get; set; }
 
         public Dictionary<SkillType, GradeType> SkillGrades { get; set; }
 
-        public JobGrade()
+        public StatGrade()
         {
             SkillGrades = new Dictionary<SkillType, GradeType>();
         }

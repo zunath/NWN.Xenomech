@@ -1364,6 +1364,6 @@ namespace XM.Shared.API.Constants
         RifleLore = 1446,
         ShortSwordLore = 1447,
         ThrowingLore = 1448,
-
+        FlameBreath = 1449,
     }
 }

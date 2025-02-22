@@ -191,5 +191,6 @@ namespace XM.Shared.API.Constants
         Pacified = 186,
         Quickness = 187,
         FeralHowl = 188,
+        Familiar = 189,
     }
 }

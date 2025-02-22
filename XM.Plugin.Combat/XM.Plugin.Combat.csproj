@@ -79,6 +79,7 @@
 </ItemGroup>
 
 <ItemGroup>
+  <Folder Include="AbilityDefinition\Beast\" />
   <Folder Include="AbilityDefinition\NPC\" />
 </ItemGroup>
 

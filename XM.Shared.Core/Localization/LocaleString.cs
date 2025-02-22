@@ -1452,5 +1452,10 @@ namespace XM.Shared.Core.Localization
         Paralyze = 1765,
         XIsParalyzed = 1766,
         Pacified = 1767,
+        Badger = 1768,
+        FlameBreath = 1769,
+        FlameBreathDescription = 1770,
+        OnlyOneCompanionMayBeActiveAtATime = 1771,
+        YouDoNotHaveAnActiveBeast = 1772,
     }
 }
