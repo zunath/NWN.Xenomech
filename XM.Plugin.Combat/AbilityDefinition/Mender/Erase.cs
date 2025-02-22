@@ -27,6 +27,12 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
             typeof(ParalyzeStatusEffect),
             typeof(GraspingDeathStatusEffect),
             typeof(SlowStatusEffect),
+            typeof(Cripple2StatusEffect),
+            typeof(Cripple1StatusEffect),
+            typeof(Drown2StatusEffect),
+            typeof(Drown1StatusEffect),
+            typeof(FlashStatusEffect),
+            typeof(KnockdownStatusEffect),
             typeof(PoisonStatusEffect),
         ];
 
