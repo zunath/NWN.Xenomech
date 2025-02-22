@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Numerics;
+﻿using System.Collections.Generic;
 using Anvil.Services;
 using XM.Plugin.Combat.StatusEffectDefinition;
 using XM.Progression.Ability;
