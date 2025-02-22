@@ -187,5 +187,6 @@ namespace XM.Shared.API.Constants
         AbyssalVeil1 = 182,
         AbyssalVeil2 = 183,
         Rupture = 184,
+        NeuralStasis = 185,
     }
 }
