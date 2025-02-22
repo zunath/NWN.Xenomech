@@ -1,6 +1,6 @@
 ﻿using Anvil.Services;
 using NWN.Core.NWNX;
-using XM.Plugin.Combat.StatusEffectDefinition;
+using XM.Plugin.Combat.StatusEffectDefinition.Buff;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;

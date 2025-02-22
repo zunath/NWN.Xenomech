@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Anvil.API;
 using Anvil.Services;
-using XM.Plugin.Combat.StatusEffectDefinition;
+using XM.Plugin.Combat.StatusEffectDefinition.Debuff;
 using XM.Progression.Ability;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
