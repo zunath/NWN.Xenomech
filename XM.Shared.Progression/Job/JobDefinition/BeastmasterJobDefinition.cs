@@ -37,7 +37,7 @@ namespace XM.Progression.Job.JobDefinition
 
         public override Dictionary<int, FeatType> FeatAcquisitionLevels => new()
         {
-            {2, FeatType.CallBeast},
+            {1, FeatType.CallBeast},
             {4, FeatType.Reward1},
             {8, FeatType.CrescentMoon1},
             {10, FeatType.Sic},

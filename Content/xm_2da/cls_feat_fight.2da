@@ -538,7 +538,7 @@
 534   NEURAL_STASIS                                    1291        1      99               1        
 535   CONVERT                                          1292        1      99               1        
 536   ETHERWARP                                        1293        1      99               1        
-537   CALL_BEAST                                       1294        1      99               1        
+537   CALL_BEAST                                       1294        1      99               0        
 538   LONGSWORD_LORE                                   1295        1      99               0        
 539   CLUB_LORE                                        1296        1      99               0        
 540   AXE_LORE                                         1297        1      99               0        

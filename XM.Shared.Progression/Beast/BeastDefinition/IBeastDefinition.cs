@@ -7,6 +7,7 @@ namespace XM.Progression.Beast.BeastDefinition
     public interface IBeastDefinition
     {
         public BeastType Type { get; }
+        public int LevelRequired { get; }
         public AppearanceType Appearance { get; }
         public float Scale { get; }
         public int PortraitId { get; }

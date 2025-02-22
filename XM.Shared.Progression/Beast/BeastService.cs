@@ -60,6 +60,24 @@ namespace XM.Progression.Beast
             return beast;
         }
 
+        public string CanSummonBeast(uint activator, BeastType beastType)
+        {
+            if (!GetHasFeat(FeatType.CallBeast, activator))
+                return LocaleString.YouDoNotHaveTheCallBeastAbility.ToLocalizedString();
+
+            var level = _stat.GetLevel(activator);
+            var definition = _beasts[beastType];
+
+            if (level < definition.LevelRequired)
+                return LocaleString.InsufficientLevelRequiredX.ToLocalizedString(definition.LevelRequired);
+
+            var currentBeast = GetBeast(activator);
+            if (GetIsObjectValid(currentBeast) || GetIsObjectValid(GetHenchman(activator)))
+                return LocaleString.OnlyOneCompanionMayBeActiveAtATime.ToLocalizedString();
+
+            return string.Empty;
+        }
+
         public void SummonBeast(uint activator, BeastType beastType)
         {
             if (GetIsObjectValid(GetAssociate(AssociateType.Henchman, activator)))

@@ -7084,6 +7084,22 @@
     {
       "id": 1772,
       "text": "You do not have an active beast."
+    },
+    {
+      "id": 1773,
+      "text": "Beast Jugs"
+    },
+    {
+      "id": 1774,
+      "text": "You do not have the Call Beast ability."
+    },
+    {
+      "id": 1775,
+      "text": "Invalid beast type ID is configured. Please report a bug with the /bug command."
+    },
+    {
+      "id": 1776,
+      "text": "Insufficient Level. (Required: {0})"
     }
   ]
 }

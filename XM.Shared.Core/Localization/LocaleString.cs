@@ -1457,5 +1457,9 @@ namespace XM.Shared.Core.Localization
         FlameBreathDescription = 1770,
         OnlyOneCompanionMayBeActiveAtATime = 1771,
         YouDoNotHaveAnActiveBeast = 1772,
+        BeastJugs = 1773,
+        YouDoNotHaveTheCallBeastAbility = 1774,
+        InvalidBeastTypeIdError = 1775,
+        InsufficientLevelRequiredX = 1776,
     }
 }

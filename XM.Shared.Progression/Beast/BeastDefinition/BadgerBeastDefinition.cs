@@ -9,6 +9,7 @@ namespace XM.Progression.Beast.BeastDefinition
     internal class BadgerBeastDefinition: IBeastDefinition
     {
         public BeastType Type => BeastType.BadgerTest;
+        public int LevelRequired => 1;
         public AppearanceType Appearance => AppearanceType.Badger;
         public float Scale => 1f;
         public int PortraitId => 144;
