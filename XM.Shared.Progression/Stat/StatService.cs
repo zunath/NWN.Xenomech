@@ -660,11 +660,11 @@ namespace XM.Progression.Stat
                 var itemBonus = dbPlayerStat.EquippedItemStats.CalculateStat(statType);
                 var abilityBonus = dbPlayerStat.AbilityStats.CalculateStat(statType);
 
-                return baseStat + jobBonus + itemBonus + abilityBonus + statusAbilityBonus;
+                return Math.Clamp(baseStat + jobBonus + itemBonus + abilityBonus + statusAbilityBonus, 3, 127);
             }
             else
             {
-                return GetAbilityScore(creature, type) + statusAbilityBonus;
+                return Math.Clamp(GetAbilityScore(creature, type) + statusAbilityBonus, 3, 127);
             }
         }
 
