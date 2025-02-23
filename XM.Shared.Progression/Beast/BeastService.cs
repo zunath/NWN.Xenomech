@@ -4,7 +4,6 @@ using XM.Progression.Beast.BeastDefinition;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.CreaturePlugin;
-using XM.Shared.API.NWNX.ObjectPlugin;
 using XM.Shared.Core.Localization;
 
 namespace XM.Progression.Beast
@@ -113,32 +112,28 @@ namespace XM.Progression.Beast
 
         private void ApplyStats(uint activator, uint beast, IBeastDefinition definition)
         {
-            var skin = GetItemInSlot(InventorySlotType.CreatureArmor, beast);
-            var claw = GetItemInSlot(InventorySlotType.CreatureWeaponLeft, beast);
-
             var level = _stat.GetLevel(activator);
-            var dmg = _stat.CalculateDMG(level, definition.Grades.DMG);
-            var hp = _stat.CalculateHP(level, definition.Grades.MaxHP);
-            var ep = _stat.CalculateHP(level, definition.Grades.MaxEP);
-            var might = _stat.CalculateStat(level, definition.Grades.Might);
-            var perception = _stat.CalculateStat(level, definition.Grades.Perception);
-            var vitality = _stat.CalculateStat(level, definition.Grades.Vitality);
-            var willpower = _stat.CalculateStat(level, definition.Grades.Willpower);
-            var agility = _stat.CalculateStat(level, definition.Grades.Agility);
-            var social = _stat.CalculateStat(level, definition.Grades.Social);
 
-            BiowareXP2.IPSafeAddItemProperty(skin, ItemPropertyCustom(ItemPropertyType.NPCLevel, -1, level), 0f, AddItemPropertyPolicy.ReplaceExisting, false, false);
-            BiowareXP2.IPSafeAddItemProperty(skin, ItemPropertyCustom(ItemPropertyType.EP, -1, ep), 0f, AddItemPropertyPolicy.ReplaceExisting, false, false);
+            var npcStats = new NPCStats
+            {
+                Level = level,
+                EvasionGrade = definition.Grades.Evasion,
+                MainHandDMG = _stat.CalculateDMG(level, definition.Grades.DMG),
+                MainHandDelay = definition.AttackDelay,
+                Stats =
+                {
+                    [StatType.MaxHP] = _stat.CalculateHP(level, definition.Grades.MaxHP),
+                    [StatType.MaxEP] = _stat.CalculateHP(level, definition.Grades.MaxEP),
+                    [StatType.Might] = _stat.CalculateHP(level, definition.Grades.Might),
+                    [StatType.Perception] = _stat.CalculateHP(level, definition.Grades.Perception),
+                    [StatType.Vitality] = _stat.CalculateHP(level, definition.Grades.Vitality),
+                    [StatType.Agility] = _stat.CalculateHP(level, definition.Grades.Agility),
+                    [StatType.Willpower] = _stat.CalculateHP(level, definition.Grades.Willpower),
+                    [StatType.Social] = _stat.CalculateHP(level, definition.Grades.Social),
+                }
+            };
 
-            BiowareXP2.IPSafeAddItemProperty(claw, ItemPropertyCustom(ItemPropertyType.DMG, -1, dmg), 0f, AddItemPropertyPolicy.ReplaceExisting, false, false);
-
-            ObjectPlugin.SetMaxHitPoints(beast, hp);
-            CreaturePlugin.SetRawAbilityScore(beast, AbilityType.Might, might);
-            CreaturePlugin.SetRawAbilityScore(beast, AbilityType.Perception, perception);
-            CreaturePlugin.SetRawAbilityScore(beast, AbilityType.Vitality, vitality);
-            CreaturePlugin.SetRawAbilityScore(beast, AbilityType.Willpower, willpower);
-            CreaturePlugin.SetRawAbilityScore(beast, AbilityType.Agility, agility);
-            CreaturePlugin.SetRawAbilityScore(beast, AbilityType.Social, social);
+            _stat.SetNPCStats(beast, npcStats);
         }
 
         private void ApplyFeats(uint activator, uint beast, IBeastDefinition definition)

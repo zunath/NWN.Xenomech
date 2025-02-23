@@ -9,7 +9,6 @@ using XM.Progression.Ability.Telegraph;
 using XM.Progression.Event;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
-using XM.Progression.Job.JobDefinition;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
 using XM.Progression.Stat.Entity;

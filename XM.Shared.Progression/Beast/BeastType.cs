@@ -3,6 +3,6 @@
     public enum BeastType
     {
         Invalid = 0,
-        BadgerTest = 1,
+        Badger = 1,
     }
 }

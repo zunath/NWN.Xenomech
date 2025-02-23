@@ -4,6 +4,8 @@
     {
         public GradeType EvasionGrade { get; set; }
         public int Level { get; set; }
+        public int MainHandDMG { get; set; }
+        public int OffHandDMG { get; set; }
         public int MainHandDelay { get; set; }
         public int OffHandDelay { get; set; }
         

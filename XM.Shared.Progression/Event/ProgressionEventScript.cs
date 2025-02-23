@@ -14,9 +14,9 @@
         public const string JobFeatAddScript = "job_feat_add";
 
         // Stats
-        public const string OnPlayerHPAdjustedScript = "pc_hp_adjusted";
-        public const string OnPlayerEPAdjustedScript = "pc_ep_adjusted";
-        public const string OnPlayerTPAdjustedScript = "pc_tp_adjusted";
+        public const string PlayerHPAdjustedScript = "pc_hp_adjusted";
+        public const string PlayerEPAdjustedScript = "pc_ep_adjusted";
+        public const string PlayerTPAdjustedScript = "pc_tp_adjusted";
 
         // Telegraphs
         public const string TelegraphEffectScript = "telegraph_effect";

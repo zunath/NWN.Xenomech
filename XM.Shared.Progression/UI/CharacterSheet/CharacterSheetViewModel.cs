@@ -14,7 +14,6 @@ using XM.Shared.Core.Entity;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 using XM.UI;
-using XM.UI.Event;
 using Action = System.Action;
 
 namespace XM.Progression.UI.CharacterSheet

@@ -13,6 +13,7 @@ namespace XM.Progression.Beast.BeastDefinition
         public int PortraitId { get; }
         public int SoundSetId { get; }
         public LocaleString Name { get; }
+        public int AttackDelay { get; }
         public StatGrade Grades { get; }
         public List<FeatType> Feats { get; }
     }

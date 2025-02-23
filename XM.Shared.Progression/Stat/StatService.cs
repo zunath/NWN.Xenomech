@@ -151,6 +151,7 @@ namespace XM.Progression.Stat
         public void Init()
         {
             LoadResistDefinitions();
+            LoadMappings();
         }
 
         private void LoadResistDefinitions()
@@ -161,11 +162,19 @@ namespace XM.Progression.Stat
             }
         }
 
+        private void LoadMappings()
+        {
+            foreach (var (ipType, statType) in _itemPropertyToStat)
+            {
+                _statsToItemProperty[statType] = ipType;
+            }
+        }
+
         private void RegisterEvents()
         {
-            _event.RegisterEvent<StatEvent.PlayerHPAdjustedEvent>(ProgressionEventScript.OnPlayerHPAdjustedScript);
-            _event.RegisterEvent<StatEvent.PlayerEPAdjustedEvent>(ProgressionEventScript.OnPlayerEPAdjustedScript);
-            _event.RegisterEvent<StatEvent.PlayerTPAdjustedEvent>(ProgressionEventScript.OnPlayerTPAdjustedScript);
+            _event.RegisterEvent<StatEvent.PlayerHPAdjustedEvent>(ProgressionEventScript.PlayerHPAdjustedScript);
+            _event.RegisterEvent<StatEvent.PlayerEPAdjustedEvent>(ProgressionEventScript.PlayerEPAdjustedScript);
+            _event.RegisterEvent<StatEvent.PlayerTPAdjustedEvent>(ProgressionEventScript.PlayerTPAdjustedScript);
         }
 
         private void SubscribeEvents()
@@ -197,23 +206,7 @@ namespace XM.Progression.Stat
 
         private void OnSpawnCreature(uint creature)
         {
-            LoadNPCStats(creature);
-        }
-
-        private void LoadNPCStats(uint creature)
-        {
-            var maxHP = GetMaxHP(creature);
-
-            if (maxHP > 30000)
-                maxHP = 30000;
-
-            if (maxHP > 0)
-            {
-                ObjectPlugin.SetMaxHitPoints(creature, maxHP);
-                ObjectPlugin.SetCurrentHitPoints(creature, maxHP);
-            }
-
-            SetLocalInt(creature, NPCEPStatVariable, GetMaxEP(creature));
+            ApplyStats(creature);
         }
 
         private ItemStatGroup BuildItemStat(uint item)
@@ -926,24 +919,40 @@ namespace XM.Progression.Stat
 
         public int GetMainHandDMG(uint creature)
         {
-            var item = GetItemInSlot(InventorySlotType.RightHand, creature);
-            if (!GetIsObjectValid(item))
-                return 3; // Base DMG of 3 for unarmed
+            if (GetIsPC(creature))
+            {
+                var item = GetItemInSlot(InventorySlotType.RightHand, creature);
+                if (!GetIsObjectValid(item))
+                    return 3; // Base DMG of 3 for unarmed
 
-            var dmg =  GetDMG(item);
-            if (dmg < 1)
-                dmg = 1;
+                var dmg = GetDMG(item);
+                if (dmg < 1)
+                    dmg = 1;
 
-            return dmg;
+                return dmg;
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                return npcStats.MainHandDMG;
+            }
         }
 
         public int GetOffHandDMG(uint creature)
         {
-            var item = GetItemInSlot(InventorySlotType.LeftHand, creature);
-            if (!GetIsObjectValid(item))
-                return 0;
+            if (GetIsPC(creature))
+            {
+                var item = GetItemInSlot(InventorySlotType.LeftHand, creature);
+                if (!GetIsObjectValid(item))
+                    return 0;
 
-            return GetDMG(item);
+                return GetDMG(item);
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                return npcStats.OffHandDMG;
+            }
         }
 
         public int GetResist(uint creature, ResistType resist)
@@ -997,6 +1006,8 @@ namespace XM.Progression.Stat
             { ItemPropertyType.DamageReduction, StatType.DamageReduction},
             { ItemPropertyType.EtherDefense, StatType.EtherDefense},
         };
+
+        private readonly Dictionary<StatType, ItemPropertyType> _statsToItemProperty = new();
 
         public NPCStats GetNPCStats(uint npc)
         {
@@ -1057,8 +1068,58 @@ namespace XM.Progression.Stat
                 }
             }
 
-
             return npcStats;
+        }
+
+        private void SetIP(uint item, ItemPropertyType type, int value)
+        {
+            BiowareXP2.IPSafeAddItemProperty(item, ItemPropertyCustom(type, -1, value), 0f, AddItemPropertyPolicy.ReplaceExisting, false, false);
+        }
+
+        public void SetNPCStats(
+            uint npc, 
+            NPCStats npcStats)
+        {
+            if (GetIsPC(npc) || GetIsDM(npc))
+                return;
+
+            var skin = GetItemInSlot(InventorySlotType.CreatureArmor, npc);
+            var clawRight = GetItemInSlot(InventorySlotType.CreatureWeaponRight, npc);
+            var clawLeft = GetItemInSlot(InventorySlotType.CreatureWeaponLeft, npc);
+
+            SetIP(skin, ItemPropertyType.NPCLevel, npcStats.Level);
+
+            if (npcStats.MainHandDMG > 0)
+            {
+                SetIP(clawRight, ItemPropertyType.DMG, npcStats.MainHandDMG);
+            }
+
+            if (npcStats.MainHandDelay > 0)
+            {
+                SetIP(clawRight, ItemPropertyType.Delay, npcStats.MainHandDelay / 10);
+            }
+
+            if (npcStats.OffHandDMG > 0)
+            {
+                SetIP(clawLeft, ItemPropertyType.DMG, npcStats.OffHandDMG);
+            }
+
+            if (npcStats.OffHandDelay > 0)
+            {
+                SetIP(clawLeft, ItemPropertyType.Delay, npcStats.OffHandDelay / 10);
+            }
+
+            if (npcStats.EvasionGrade != GradeType.Invalid)
+            {
+                SetIP(skin, ItemPropertyType.NPCEvasionGrade, (int)npcStats.EvasionGrade);
+            }
+
+            foreach (var (stat, ipType) in _statsToItemProperty)
+            {
+                SetIP(skin, ipType, npcStats.Stats[stat]);
+            }
+
+            ApplyStats(npc);
         }
 
         public int GetLevel(uint creature)
@@ -1158,29 +1219,42 @@ namespace XM.Progression.Stat
             ApplyStats(player);
         }
 
-        public void ApplyStats(uint player)
+        private void ApplyStats(uint creature)
         {
-            if (!GetIsPC(player))
-                return;
+            var maxHP = GetMaxHP(creature);
 
-            var maxHP = GetMaxHP(player);
+            var might = GetAttribute(creature, AbilityType.Might);
+            var perception = GetAttribute(creature, AbilityType.Perception);
+            var vitality = GetAttribute(creature, AbilityType.Vitality);
+            var willpower = GetAttribute(creature, AbilityType.Willpower);
+            var agility = GetAttribute(creature, AbilityType.Agility);
+            var social = GetAttribute(creature, AbilityType.Social);
 
-            var might = GetAttribute(player, AbilityType.Might);
-            var perception = GetAttribute(player, AbilityType.Perception);
-            var vitality = GetAttribute(player, AbilityType.Vitality);
-            var willpower = GetAttribute(player, AbilityType.Willpower);
-            var agility = GetAttribute(player, AbilityType.Agility);
-            var social = GetAttribute(player, AbilityType.Social);
+            CreaturePlugin.SetRawAbilityScore(creature, AbilityType.Might, might);
+            CreaturePlugin.SetRawAbilityScore(creature, AbilityType.Perception, perception);
+            CreaturePlugin.SetRawAbilityScore(creature, AbilityType.Vitality, vitality);
+            CreaturePlugin.SetRawAbilityScore(creature, AbilityType.Willpower, willpower);
+            CreaturePlugin.SetRawAbilityScore(creature, AbilityType.Agility, agility);
+            CreaturePlugin.SetRawAbilityScore(creature, AbilityType.Social, social);
 
-            ApplyPlayerMaxHP(player, maxHP);
-            CreaturePlugin.SetRawAbilityScore(player, AbilityType.Might, might);
-            CreaturePlugin.SetRawAbilityScore(player, AbilityType.Perception, perception);
-            CreaturePlugin.SetRawAbilityScore(player, AbilityType.Vitality, vitality);
-            CreaturePlugin.SetRawAbilityScore(player, AbilityType.Willpower, willpower);
-            CreaturePlugin.SetRawAbilityScore(player, AbilityType.Agility, agility);
-            CreaturePlugin.SetRawAbilityScore(player, AbilityType.Social, social);
+            if (GetIsPC(creature))
+            {
+                ApplyPlayerMaxHP(creature, maxHP);
+                _event.PublishEvent<UIEvent.UIRefreshEvent>(creature);
+            }
+            else
+            {
+                if (maxHP > 30000)
+                    maxHP = 30000;
 
-            _event.PublishEvent<UIEvent.UIRefreshEvent>(player);
+                if (maxHP > 0)
+                {
+                    ObjectPlugin.SetMaxHitPoints(creature, maxHP);
+                    ObjectPlugin.SetCurrentHitPoints(creature, maxHP);
+                }
+
+                SetLocalInt(creature, NPCEPStatVariable, GetMaxEP(creature));
+            }
         }
 
     }

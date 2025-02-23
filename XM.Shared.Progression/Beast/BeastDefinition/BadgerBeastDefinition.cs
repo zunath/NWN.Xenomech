@@ -8,13 +8,14 @@ namespace XM.Progression.Beast.BeastDefinition
     [ServiceBinding(typeof(IBeastDefinition))]
     internal class BadgerBeastDefinition: IBeastDefinition
     {
-        public BeastType Type => BeastType.BadgerTest;
+        public BeastType Type => BeastType.Badger;
         public int LevelRequired => 1;
         public AppearanceType Appearance => AppearanceType.Badger;
         public float Scale => 1f;
         public int PortraitId => 144;
         public int SoundSetId => 4;
         public LocaleString Name => LocaleString.Badger;
+        public int AttackDelay => 300;
 
         public StatGrade Grades => new()
         {
