@@ -18,16 +18,13 @@ namespace XM.Progression.Skill.SkillDefinition
         ];
         public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
         {
-            {50, FeatType.HardSlash},
-            {160, FeatType.PowerSlash},
+            {160, FeatType.HardSlash},
             {240, FeatType.Frostbite},
-            {320, FeatType.ShockSlash},
             {540, FeatType.SickleMoon},
-            {860, FeatType.GroundStrike},
-            {1130, FeatType.Freezebite},
-            {1390, FeatType.HerculeanSlash},
-            {1430, FeatType.SpinningSlash},
-            {1500, FeatType.Scourge},
+            {860, FeatType.SpinningSlash},
+            {1130, FeatType.ShockSlash},
+            {1390, FeatType.GroundStrike},
+            {1430, FeatType.Scourge},
         };
     }
 }

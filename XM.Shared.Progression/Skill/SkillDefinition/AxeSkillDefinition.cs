@@ -22,16 +22,13 @@ namespace XM.Progression.Skill.SkillDefinition
 
         public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
         {
-            {50, FeatType.RagingAxe},
-            {160, FeatType.SmashAxe},
-            {240, FeatType.GaleAxe},
-            {320, FeatType.AvalancheAxe},
-            {540, FeatType.SpinningAxe},
-            {860, FeatType.Rampage},
-            {1130, FeatType.Calamity},
-            {1390, FeatType.MistralAxe},
-            {1430, FeatType.Decimation},
-            {1500, FeatType.PrimalRend},
+            {160, FeatType.RagingAxe},
+            {240, FeatType.SmashAxe},
+            {540, FeatType.GaleAxe},
+            {860, FeatType.AvalancheAxe},
+            {1130, FeatType.SpinningAxe},
+            {1390, FeatType.Rampage},
+            {1430, FeatType.PrimalRend},
         };
 
     }

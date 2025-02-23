@@ -18,16 +18,13 @@ namespace XM.Progression.Skill.SkillDefinition
         ];
         public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
         {
-            {50, FeatType.ShieldBreak},
-            {160, FeatType.IronTempest},
-            {240, FeatType.Sturmwind},
-            {320, FeatType.KeenEdge},
-            {540, FeatType.RagingRush},
-            {860, FeatType.FellCleave},
-            {1130, FeatType.Upheaval},
-            {1390, FeatType.Knockout},
-            {1430, FeatType.FurySlash},
-            {1500, FeatType.GrandSlash},
+            {160, FeatType.ShieldBreak},
+            {240, FeatType.IronTempest},
+            {540, FeatType.FellCleave},
+            {860, FeatType.GrandSlash},
+            {1130, FeatType.Knockout},
+            {1390, FeatType.FurySlash},
+            {1430, FeatType.Upheaval},
         };
     }
 }

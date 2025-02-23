@@ -18,16 +18,13 @@ namespace XM.Progression.Skill.SkillDefinition
         ];
         public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
         {
-            {50, FeatType.FastBlade},
-            {160, FeatType.BurningBlade},
-            {240, FeatType.RedLotusBlade},
-            {320, FeatType.FlatBlade},
-            {540, FeatType.ShiningBlade},
-            {860, FeatType.SeraphBlade},
-            {1130, FeatType.VorpalBlade},
-            {1390, FeatType.SwiftBlade},
-            {1430, FeatType.SanguineBlade},
-            {1500, FeatType.Atonement},
+            {160, FeatType.FastBlade},
+            {240, FeatType.BurningBlade},
+            {540, FeatType.RedLotusBlade},
+            {860, FeatType.VorpalBlade},
+            {1130, FeatType.FlatBlade},
+            {1390, FeatType.Atonement},
+            {1430, FeatType.ShiningBlade},
         };
     }
 }

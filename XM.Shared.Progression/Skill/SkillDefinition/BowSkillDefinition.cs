@@ -19,16 +19,13 @@ namespace XM.Progression.Skill.SkillDefinition
         ];
         public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
         {
-            {50, FeatType.FlamingArrow},
-            {160, FeatType.PiercingArrow},
-            {240, FeatType.DullingArrow},
-            {320, FeatType.Sidewinder},
-            {540, FeatType.BlastArrow},
-            {860, FeatType.ArchingArrow},
-            {1130, FeatType.EmpyrealArrow},
-            {1390, FeatType.NamasArrow},
+            {160, FeatType.FlamingArrow},
+            {240, FeatType.PiercingArrow},
+            {540, FeatType.DullingArrow},
+            {860, FeatType.Sidewinder},
+            {1130, FeatType.BlastArrow},
+            {1390, FeatType.ArchingArrow},
             {1430, FeatType.ApexArrow},
-            {1500, FeatType.RadiantArrow},
         };
     }
 }

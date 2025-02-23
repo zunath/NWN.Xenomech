@@ -20,16 +20,13 @@ namespace XM.Progression.Skill.SkillDefinition
         ];
         public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
         {
-            {50, FeatType.StoneToss},
-            {160, FeatType.WindSlash},
-            {240, FeatType.ShurikenStorm},
-            {320, FeatType.GaleCutter},
-            {540, FeatType.FlameToss},
-            {860, FeatType.FrostDart},
-            {1130, FeatType.ShockBomb},
-            {1390, FeatType.ShadowThrow},
+            {160, FeatType.StoneToss},
+            {240, FeatType.WindSlash},
+            {540, FeatType.ShurikenStorm},
+            {860, FeatType.PhantomHurl},
+            {1130, FeatType.FlameToss},
+            {1390, FeatType.FrostDart},
             {1430, FeatType.StarStrike},
-            {1500, FeatType.PhantomHurl},
         };
     }
 }

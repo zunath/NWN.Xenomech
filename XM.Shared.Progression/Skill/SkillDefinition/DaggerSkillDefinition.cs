@@ -18,16 +18,13 @@ namespace XM.Progression.Skill.SkillDefinition
         ];
         public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
         {
-            {50, FeatType.WaspSting},
-            {160, FeatType.GustSlash},
-            {240, FeatType.Shadowstitch},
-            {320, FeatType.Cyclone},
-            {540, FeatType.EnergyDrain},
-            {860, FeatType.Evisceration},
-            {1130, FeatType.MercyStroke},
-            {1390, FeatType.RuthlessStroke},
-            {1430, FeatType.SharkBite},
-            {1500, FeatType.DancingEdge},
+            {160, FeatType.WaspSting},
+            {240, FeatType.GustSlash},
+            {540, FeatType.Cyclone},
+            {860, FeatType.SharkBite},
+            {1130, FeatType.Shadowstitch},
+            {1390, FeatType.EnergyDrain},
+            {1430, FeatType.DancingEdge},
         };
     }
 }

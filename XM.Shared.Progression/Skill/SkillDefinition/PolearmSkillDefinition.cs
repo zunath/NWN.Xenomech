@@ -18,16 +18,13 @@ namespace XM.Progression.Skill.SkillDefinition
         ];
         public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
         {
-            {50, FeatType.DoubleThrust},
-            {160, FeatType.ThunderThrust},
-            {240, FeatType.RaidenThrust},
-            {320, FeatType.PentaThrust},
-            {540, FeatType.VorpalThrust},
-            {860, FeatType.SonicThrust},
-            {1130, FeatType.Drakesbane},
-            {1390, FeatType.WheelingThrust},
-            {1430, FeatType.Stardiver},
-            {1500, FeatType.Skewer},
+            {160, FeatType.DoubleThrust},
+            {240, FeatType.ThunderThrust},
+            {540, FeatType.RaidenThrust},
+            {860, FeatType.PentaThrust},
+            {1130, FeatType.VorpalThrust},
+            {1390, FeatType.SonicThrust},
+            {1430, FeatType.Drakesbane},
         };
     }
 }

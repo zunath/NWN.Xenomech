@@ -18,16 +18,13 @@ namespace XM.Progression.Skill.SkillDefinition
         ];
         public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
         {
-            {50, FeatType.HotShot},
-            {160, FeatType.SplitShot},
-            {240, FeatType.SniperShot},
-            {320, FeatType.SlugShot},
-            {540, FeatType.BlastShot},
-            {860, FeatType.HeavyShot},
-            {1130, FeatType.Detonator},
-            {1390, FeatType.NumbingShot},
+            {160, FeatType.HotShot},
+            {240, FeatType.SplitShot},
+            {540, FeatType.SniperShot},
+            {860, FeatType.SlugShot},
+            {1130, FeatType.BlastShot},
+            {1390, FeatType.HeavyShot},
             {1430, FeatType.Trueflight},
-            {1500, FeatType.LastStand},
         };
     }
 }

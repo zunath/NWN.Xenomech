@@ -18,16 +18,13 @@ namespace XM.Progression.Skill.SkillDefinition
         ];
         public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
         {
-            {50, FeatType.HeavySwing},
-            {160, FeatType.RockCrusher},
-            {240, FeatType.EarthCrusher},
-            {320, FeatType.Starburst},
-            {540, FeatType.Sunburst},
-            {860, FeatType.SpiritTaker},
-            {1130, FeatType.Retribution},
-            {1390, FeatType.Omniscience},
-            {1430, FeatType.Cataclysm},
-            {1500, FeatType.Shattersoul},
+            {160, FeatType.HeavySwing},
+            {240, FeatType.RockCrusher},
+            {540, FeatType.EarthCrusher},
+            {860, FeatType.Starburst},
+            {1130, FeatType.Omniscience},
+            {1390, FeatType.SpiritTaker},
+            {1430, FeatType.Shattersoul},
         };
     }
 }

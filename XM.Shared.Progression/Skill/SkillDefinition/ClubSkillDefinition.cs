@@ -19,16 +19,13 @@ namespace XM.Progression.Skill.SkillDefinition
         ];
         public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
         {
-            {50, FeatType.ShiningStrike},
-            {160, FeatType.SeraphStrike},
-            {240, FeatType.Brainshaker},
-            {320, FeatType.Starlight},
-            {540, FeatType.Moonlight},
-            {860, FeatType.Skullbreaker},
-            {1130, FeatType.Judgment},
-            {1390, FeatType.HexaStrike},
-            {1430, FeatType.BlackHalo},
-            {1500, FeatType.FlashNova},
+            {160, FeatType.ShiningStrike},
+            {240, FeatType.SeraphStrike},
+            {540, FeatType.Brainshaker},
+            {860, FeatType.BlackHalo},
+            {1130, FeatType.FlashNova},
+            {1390, FeatType.Judgment},
+            {1430, FeatType.HexaStrike},
         };
     }
 }

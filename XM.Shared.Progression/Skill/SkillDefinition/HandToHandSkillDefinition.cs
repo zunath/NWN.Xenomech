@@ -18,16 +18,13 @@ namespace XM.Progression.Skill.SkillDefinition
         ];
         public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
         {
-            {50, FeatType.Combo},
-            {160, FeatType.OneInchPunch},
-            {240, FeatType.BackhandBlow},
-            {320, FeatType.RagingFists},
-            {540, FeatType.SpinningAttack},
-            {860, FeatType.HowlingFist},
-            {1130, FeatType.ParadiseStrike},
-            {1390, FeatType.DragonBlow},
-            {1430, FeatType.FinalHeaven},
-            {1500, FeatType.AsuranFists},
+            {160, FeatType.Combo},
+            {240, FeatType.RagingFists},
+            {540, FeatType.HowlingFist},
+            {860, FeatType.FinalHeaven},
+            {1130, FeatType.DragonBlow},
+            {1390, FeatType.OneInchPunch},
+            {1430, FeatType.AsuranFists},
         };
     }
 }
