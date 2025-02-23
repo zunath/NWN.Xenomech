@@ -7144,6 +7144,14 @@
     {
       "id": 1787,
       "text": "5000"
+    },
+    {
+      "id": 1788,
+      "text": "Your beast cannot use Sic."
+    },
+    {
+      "id": 1789,
+      "text": "Your beast has no target."
     }
   ]
 }

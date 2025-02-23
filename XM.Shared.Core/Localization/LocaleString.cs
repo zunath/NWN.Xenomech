@@ -1472,5 +1472,7 @@ namespace XM.Shared.Core.Localization
         FiveHundred = 1785,
         OneThousand = 1786,
         FiveThousand = 1787,
+        YourBeastCannotUseSic = 1788,
+        YourBeastHasNoTarget = 1789,
     }
 }

@@ -4,6 +4,7 @@ using XM.Progression.Beast.BeastDefinition;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.CreaturePlugin;
+using XM.Shared.Core;
 using XM.Shared.Core.Localization;
 
 namespace XM.Progression.Beast
@@ -36,7 +37,25 @@ namespace XM.Progression.Beast
             }
         }
 
-        private BeastType GetBeastType(uint beast)
+        public bool HasSicAbilities(BeastType type)
+        {
+            var definition = _beasts[type];
+
+            return definition.Feats.Count > 0;
+        }
+
+        public FeatType GetRandomSicAbility(BeastType type)
+        {
+            var definition = _beasts[type];
+
+            if (definition.Feats.Count <= 0)
+                return FeatType.Invalid;
+
+            var index = XMRandom.Next(definition.Feats.Count);
+            return definition.Feats[index];
+        }
+
+        public BeastType GetBeastType(uint beast)
         {
             return (BeastType)GetLocalInt(beast, BeastTypeVariable);
         }
