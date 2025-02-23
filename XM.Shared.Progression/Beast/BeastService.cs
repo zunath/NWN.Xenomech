@@ -93,8 +93,8 @@ namespace XM.Progression.Beast
             SetBeastType(beast, beastType);
 
             ApplyAppearance(beast, definition);
-            ApplyStats(activator, beast, definition);
             ApplyFeats(activator, beast, definition);
+            ApplyStats(activator, beast, definition);
 
             AddHenchman(activator, beast);
 
@@ -132,6 +132,11 @@ namespace XM.Progression.Beast
                     [StatType.Social] = _stat.CalculateHP(level, definition.Grades.Social),
                 }
             };
+
+            if (GetHasFeat(FeatType.BeastSpeed, beast))
+            {
+                npcStats.Stats[StatType.Haste] += 15;
+            }
 
             _stat.SetNPCStats(beast, npcStats);
         }
