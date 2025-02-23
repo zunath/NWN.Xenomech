@@ -14,10 +14,10 @@ namespace XM.Progression.Job.JobDefinition
 
         public override string IconResref => "hunter_icon";
 
-        public override JobGrade Grades { get; } = new()
+        public override StatGrade Grades { get; } = new()
         {
-            HP = GradeType.E,
-            EP = GradeType.G,
+            MaxHP = GradeType.E,
+            MaxEP = GradeType.G,
             Might = GradeType.E,
             Perception = GradeType.D,
             Vitality = GradeType.D,
@@ -39,22 +39,23 @@ namespace XM.Progression.Job.JobDefinition
         {
             {2, FeatType.CryoVenom1},
             {4, FeatType.FreezingShot1},
-            {8, FeatType.Volley1},
+            {8, FeatType.IceVolley1},
             {10, FeatType.ChokingShot1},
             {12, FeatType.AccuracyBonus1},
             {14, FeatType.FreezingShot2},
+            {16, FeatType.BowLore},
             {18, FeatType.Cripple1},
             {20, FeatType.Recycle1},
             {22, FeatType.ChokingShot2},
-            {24, FeatType.Volley2},
-            {25, FeatType.IceProtection},
+            {24, FeatType.IceVolley2},
+            {25, FeatType.IceWard},
             {26, FeatType.CryoVenom2},
             {30, FeatType.Sharpshot},
             {32, FeatType.AccuracyBonus2},
             {34, FeatType.ReflexBonus},
             {36, FeatType.Recycle2},
             {40, FeatType.Cripple2},
-            {42, FeatType.Volley3},
+            {42, FeatType.IceVolley3},
             {44, FeatType.FreezingShot3},
             {48, FeatType.Barrage},
             {50, FeatType.EagleEyeShot},

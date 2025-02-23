@@ -2287,11 +2287,11 @@
     },
     {
       "id": 573,
-      "text": "Darkness Protection"
+      "text": "Darkness Ward"
     },
     {
       "id": 574,
-      "text": "Darkness Protection Description"
+      "text": "Darkness Ward Description"
     },
     {
       "id": 575,
@@ -2459,11 +2459,11 @@
     },
     {
       "id": 616,
-      "text": "Fire Protection"
+      "text": "Fire Ward"
     },
     {
       "id": 617,
-      "text": "Fire Protection Description"
+      "text": "Fire Ward Description"
     },
     {
       "id": 618,
@@ -2615,11 +2615,11 @@
     },
     {
       "id": 655,
-      "text": "Earth Protection"
+      "text": "Earth Ward"
     },
     {
       "id": 656,
-      "text": "Earth Protection Description"
+      "text": "Earth Ward Description"
     },
     {
       "id": 657,
@@ -2839,11 +2839,11 @@
     },
     {
       "id": 711,
-      "text": "Wind Protection"
+      "text": "Wind Ward"
     },
     {
       "id": 712,
-      "text": "Wind Protection Description"
+      "text": "Wind Ward Description"
     },
     {
       "id": 713,
@@ -2995,11 +2995,11 @@
     },
     {
       "id": 750,
-      "text": "Light Protection"
+      "text": "Light Ward"
     },
     {
       "id": 751,
-      "text": "Light Protection Description"
+      "text": "Light Ward Description"
     },
     {
       "id": 752,
@@ -3083,31 +3083,31 @@
     },
     {
       "id": 772,
-      "text": "Volley"
+      "text": "Ice Volley"
     },
     {
       "id": 773,
-      "text": "Volley I"
+      "text": "Ice Volley I"
     },
     {
       "id": 774,
-      "text": "Volley I Description"
+      "text": "Ice Volley I Description"
     },
     {
       "id": 775,
-      "text": "Volley II"
+      "text": "Ice Volley II"
     },
     {
       "id": 776,
-      "text": "Volley II Description"
+      "text": "Ice Volley II Description"
     },
     {
       "id": 777,
-      "text": "Volley III"
+      "text": "Ice Volley III"
     },
     {
       "id": 778,
-      "text": "Volley III Description"
+      "text": "Ice Volley III Description"
     },
     {
       "id": 779,
@@ -3183,11 +3183,11 @@
     },
     {
       "id": 797,
-      "text": "Ice Protection"
+      "text": "Ice Ward"
     },
     {
       "id": 798,
-      "text": "Ice Protection Description"
+      "text": "Ice Ward Description"
     },
     {
       "id": 799,
@@ -3359,11 +3359,11 @@
     },
     {
       "id": 841,
-      "text": "Lightning Protection"
+      "text": "Lightning Ward"
     },
     {
       "id": 842,
-      "text": "Lightning Protection Description"
+      "text": "Lightning Ward Description"
     },
     {
       "id": 843,
@@ -3563,11 +3563,11 @@
     },
     {
       "id": 892,
-      "text": "Mind Protection"
+      "text": "Mind Ward"
     },
     {
       "id": 893,
-      "text": "Mind Protection Description"
+      "text": "Mind Ward Description"
     },
     {
       "id": 894,
@@ -3599,7 +3599,7 @@
     },
     {
       "id": 901,
-      "text": "Elemental Protection"
+      "text": "Elemental Shielding"
     },
     {
       "id": 902,
@@ -6896,6 +6896,262 @@
     {
       "id": 1725,
       "text": "Pistols"
+    },
+    {
+      "id": 1726,
+      "text": "You earned experience."
+    },
+    {
+      "id": 1727,
+      "text": "Ability Acquired: {0}"
+    },
+    {
+      "id": 1728,
+      "text": "{0} attains level {1}!"
+    },
+    {
+      "id": 1729,
+      "text": "You do not meet the requirements to equip that item."
+    },
+    {
+      "id": 1730,
+      "text": "Auto Regen I Description"
+    },
+    {
+      "id": 1731,
+      "text": "Auto Regen II Description"
+    },
+    {
+      "id": 1732,
+      "text": "Natural Regen"
+    },
+    {
+      "id": 1733,
+      "text": "Effect failed to apply: {0}"
+    },
+    {
+      "id": 1734,
+      "text": "A more powerful effect is active."
+    },
+    {
+      "id": 1735,
+      "text": "Ward"
+    },
+    {
+      "id": 1736,
+      "text": "Your target must be dead."
+    },
+    {
+      "id": 1737,
+      "text": "Your target is not poisoned."
+    },
+    {
+      "id": 1738,
+      "text": "Slow"
+    },
+    {
+      "id": 1739,
+      "text": "Slow Description"
+    },
+    {
+      "id": 1740,
+      "text": "Your target is not afflicted by any detrimental effects."
+    },
+    {
+      "id": 1741,
+      "text": "Ice"
+    },
+    {
+      "id": 1742,
+      "text": "Lightning"
+    },
+    {
+      "id": 1743,
+      "text": "<CUSTOM0> Ice"
+    },
+    {
+      "id": 1744,
+      "text": "<CUSTOM0> Lightning"
+    },
+    {
+      "id": 1745,
+      "text": "<CUSTOM0> Wind"
+    },
+    {
+      "id": 1746,
+      "text": "<CUSTOM0> Earth"
+    },
+    {
+      "id": 1747,
+      "text": "<CUSTOM0> Water"
+    },
+    {
+      "id": 1748,
+      "text": "<CUSTOM0> Light"
+    },
+    {
+      "id": 1749,
+      "text": "<CUSTOM0> Darkness"
+    },
+    {
+      "id": 1750,
+      "text": "<CUSTOM0> Mind"
+    },
+    {
+      "id": 1751,
+      "text": "Wind"
+    },
+    {
+      "id": 1752,
+      "text": "Earth"
+    },
+    {
+      "id": 1753,
+      "text": "Water"
+    },
+    {
+      "id": 1754,
+      "text": "Light"
+    },
+    {
+      "id": 1755,
+      "text": "Darkness"
+    },
+    {
+      "id": 1756,
+      "text": "Mind"
+    },
+    {
+      "id": 1757,
+      "text": "No attack target available."
+    },
+    {
+      "id": 1758,
+      "text": "Your target has nothing to steal!"
+    },
+    {
+      "id": 1759,
+      "text": "{0} stole {1} from {2}."
+    },
+    {
+      "id": 1760,
+      "text": "You cannot escape from this area!"
+    },
+    {
+      "id": 1761,
+      "text": "Your spell was resisted."
+    },
+    {
+      "id": 1762,
+      "text": "**RESISTED**"
+    },
+    {
+      "id": 1763,
+      "text": "Grasping Death"
+    },
+    {
+      "id": 1764,
+      "text": "Knockdown"
+    },
+    {
+      "id": 1765,
+      "text": "Paralyze"
+    },
+    {
+      "id": 1766,
+      "text": "{0} is paralyzed."
+    },
+    {
+      "id": 1767,
+      "text": "Pacified"
+    },
+    {
+      "id": 1768,
+      "text": "Badger"
+    },
+    {
+      "id": 1769,
+      "text": "Flame Breath"
+    },
+    {
+      "id": 1770,
+      "text": "Flame Breath Description"
+    },
+    {
+      "id": 1771,
+      "text": "Only one companion may be active at a time."
+    },
+    {
+      "id": 1772,
+      "text": "You do not have an active beast."
+    },
+    {
+      "id": 1773,
+      "text": "Beast Jugs"
+    },
+    {
+      "id": 1774,
+      "text": "You do not have the Call Beast ability."
+    },
+    {
+      "id": 1775,
+      "text": "Invalid beast type ID is configured. Please report a bug with the /bug command."
+    },
+    {
+      "id": 1776,
+      "text": "Insufficient Level. (Required: {0})"
+    },
+    {
+      "id": 1777,
+      "text": "TP Gain"
+    },
+    {
+      "id": 1778,
+      "text": "Shield Deflection"
+    },
+    {
+      "id": 1779,
+      "text": "Attack Deflection"
+    },
+    {
+      "id": 1780,
+      "text": "Subtle Blow"
+    },
+    {
+      "id": 1781,
+      "text": "Critical Rate"
+    },
+    {
+      "id": 1782,
+      "text": "Enmity"
+    },
+    {
+      "id": 1783,
+      "text": "Damage Reduction"
+    },
+    {
+      "id": 1784,
+      "text": "Ether Defense"
+    },
+    {
+      "id": 1785,
+      "text": "500"
+    },
+    {
+      "id": 1786,
+      "text": "1000"
+    },
+    {
+      "id": 1787,
+      "text": "5000"
+    },
+    {
+      "id": 1788,
+      "text": "Your beast cannot use Sic."
+    },
+    {
+      "id": 1789,
+      "text": "Your beast has no target."
     }
   ]
 }

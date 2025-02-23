@@ -12,5 +12,7 @@
         Light = 7,
         Darkness = 8,
         Mind = 9,
+
+        Poison = 20,
     }
 }

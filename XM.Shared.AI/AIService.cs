@@ -140,8 +140,20 @@ namespace XM.AI
 
         private void OnCreatureDeath(uint creature)
         {
-            if (_creatureAITrees.ContainsKey(creature))
-                _creatureAITrees.Remove(creature);
+            if (!_creatureAITrees.ContainsKey(creature))
+                return;
+
+            var context = _creatureAITrees[creature];
+            foreach (var friendly in context.GetNearbyFriendlies())
+            {
+                if (_creatureAITrees.ContainsKey(friendly))
+                {
+                    var friendlyContext = _creatureAITrees[friendly];
+                    friendlyContext.RemoveFriendly(creature);
+                }
+            }
+
+            _creatureAITrees.Remove(creature);
         }
 
         private void SetAIFlags(uint creature, AIFlag flags)
@@ -227,9 +239,12 @@ namespace XM.AI
         private void OnExitAggroAOE(uint aoe)
         {
             var creator = GetAreaOfEffectCreator(aoe);
+            if (!_creatureAITrees.ContainsKey(creator))
+                return;
+
             var context = _creatureAITrees[creator];
             var exiting = GetExitingObject();
-            context.AddFriendly(exiting);
+            context.RemoveFriendly(exiting);
         }
 
         public void Dispose()

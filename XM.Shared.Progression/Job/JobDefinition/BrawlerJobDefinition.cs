@@ -14,10 +14,10 @@ namespace XM.Progression.Job.JobDefinition
 
         public override string IconResref => "brawler_icon";
 
-        public override JobGrade Grades { get; } = new()
+        public override StatGrade Grades { get; } = new()
         {
-            HP = GradeType.A,
-            EP = GradeType.G,
+            MaxHP = GradeType.A,
+            MaxEP = GradeType.G,
             Might = GradeType.C,
             Perception = GradeType.B,
             Vitality = GradeType.A,
@@ -43,11 +43,12 @@ namespace XM.Progression.Job.JobDefinition
             {10, FeatType.Parry1},
             {12, FeatType.AttackBonus1},
             {14, FeatType.PowerAttack1},
+            {16, FeatType.HandToHandLore},
             {18, FeatType.Shadowstrike1},
             {20, FeatType.ElectricFist2},
             {22, FeatType.Warcry},
             {24, FeatType.Chi1},
-            {25, FeatType.WindProtection},
+            {25, FeatType.WindWard},
             {26, FeatType.Parry2},
             {30, FeatType.StrikingCobra2},
             {32, FeatType.AttackBonus2},

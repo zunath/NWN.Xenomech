@@ -22,6 +22,7 @@ namespace XM.Shared.Core.Entity
             DisplayServerResetReminders = true;
             ShowHelmet = true;
             ShowCloak = true;
+            AppearanceScale = 1f;
         }
 
         public bool DisplayServerResetReminders { get; set; }

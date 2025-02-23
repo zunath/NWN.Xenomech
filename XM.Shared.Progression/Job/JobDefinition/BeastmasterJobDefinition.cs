@@ -14,10 +14,10 @@ namespace XM.Progression.Job.JobDefinition
 
         public override string IconResref => "beast_icon";
 
-        public override JobGrade Grades { get; } = new()
+        public override StatGrade Grades { get; } = new()
         {
-            HP = GradeType.C,
-            EP = GradeType.G,
+            MaxHP = GradeType.C,
+            MaxEP = GradeType.G,
             Might = GradeType.D,
             Perception = GradeType.C,
             Vitality = GradeType.D,
@@ -37,17 +37,18 @@ namespace XM.Progression.Job.JobDefinition
 
         public override Dictionary<int, FeatType> FeatAcquisitionLevels => new()
         {
-            {2, FeatType.Tame},
+            {1, FeatType.CallBeast},
             {4, FeatType.Reward1},
             {8, FeatType.CrescentMoon1},
             {10, FeatType.Sic},
             {12, FeatType.MercyStrike1},
             {14, FeatType.Snarl},
+            {16, FeatType.AxeLore},
             {18, FeatType.ResistPoison},
             {20, FeatType.Reward2},
             {22, FeatType.ThirdEye},
             {24, FeatType.CrescentMoon2},
-            {25, FeatType.EarthProtection},
+            {25, FeatType.EarthWard},
             {26, FeatType.FeralHowl},
             {30, FeatType.Quickness},
             {32, FeatType.MercyStrike2},

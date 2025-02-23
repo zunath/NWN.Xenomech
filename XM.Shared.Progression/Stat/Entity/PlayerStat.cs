@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Anvil.Services;
-using XM.Shared.API.Constants;
+﻿using Anvil.Services;
 using XM.Shared.Core.Data;
 
 namespace XM.Progression.Stat.Entity
@@ -22,27 +19,19 @@ namespace XM.Progression.Stat.Entity
 
         private void Init()
         {
-            BaseAttributes = new Dictionary<AbilityType, int>
-            {
-                {AbilityType.Might, 0},
-                {AbilityType.Perception, 0},
-                {AbilityType.Vitality, 0},
-                {AbilityType.Agility, 0},
-                {AbilityType.Willpower, 0},
-                {AbilityType.Social, 0},
-            };
-
+            JobStats = new StatGroup();
+            BaseStats = new ItemStatGroup();
             EquippedItemStats = new ItemStatCollection();
+            AbilityStats = new AbilityStatCollection();
         }
 
-
-        public int MaxHP { get; set; }
-        public int MaxEP { get; set; }
         public int HP { get; set; }
         public int EP { get; set; }
         public int TP { get; set; }
+        public StatGroup BaseStats { get; set; }
+        public StatGroup JobStats { get; set; }
         public ItemStatCollection EquippedItemStats { get; set; }
-        public Dictionary<AbilityType, int> BaseAttributes { get; set; }
+        public AbilityStatCollection AbilityStats { get; set; }
 
     }
 }

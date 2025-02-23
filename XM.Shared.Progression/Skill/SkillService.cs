@@ -124,14 +124,13 @@ namespace XM.Progression.Skill
             IJobDefinition job,
             ISkillDefinition skill)
         {
+            if (GetHasFeat(skill.LoreFeat, player))
+                return GradeType.A;
+
             if (!job.Grades.SkillGrades.ContainsKey(skill.Type))
                 return GradeType.Invalid;
 
-            var grade = GetHasFeat(skill.LoreFeat, player)
-                ? GradeType.A
-                : job.Grades.SkillGrades[skill.Type];
-
-            return grade;
+            return job.Grades.SkillGrades[skill.Type];
         }
 
         public int GetSkillCap(
@@ -169,6 +168,11 @@ namespace XM.Progression.Skill
             return _skillDefinitions.ToList();
         }
 
+        public ISkillDefinition GetSkillDefinition(SkillType skillType)
+        {
+            return _skills[skillType];
+        }
+
         public SkillType GetSkillOfWeapon(uint weapon)
         {
             var baseItemType = GetBaseItemType(weapon);
@@ -177,18 +181,22 @@ namespace XM.Progression.Skill
                 : SkillType.Invalid;
         }
 
-        public int GetSkillLevel(uint player, SkillType skillType)
+        public int GetSkillLevel(uint creature, SkillType skillType)
         {
-            if (!GetIsPC(player) || GetIsDM(player))
-                return 0;
+            if (GetIsPC(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerSkill = _db.Get<PlayerSkill>(playerId);
 
-            var playerId = PlayerId.Get(player);
-            var dbPlayerSkill = _db.Get<PlayerSkill>(playerId);
+                if (!dbPlayerSkill.Skills.ContainsKey(skillType))
+                    dbPlayerSkill.Skills[skillType] = 0;
 
-            if (!dbPlayerSkill.Skills.ContainsKey(skillType))
-                dbPlayerSkill.Skills[skillType] = 0;
-
-            return dbPlayerSkill.Skills[skillType];
+                return dbPlayerSkill.Skills[skillType];
+            }
+            else
+            {
+                return GetSkillCap(GradeType.C, _stat.GetLevel(creature));
+            }
         }
 
         public int GetEvasionSkill(uint creature)

@@ -14,10 +14,10 @@ namespace XM.Progression.Job.JobDefinition
 
         public override string IconResref => "keeper_icon";
 
-        public override JobGrade Grades { get; } = new()
+        public override StatGrade Grades { get; } = new()
         {
-            HP = GradeType.C,
-            EP = GradeType.F,
+            MaxHP = GradeType.C,
+            MaxEP = GradeType.F,
             Might = GradeType.B,
             Perception = GradeType.E,
             Vitality = GradeType.A,
@@ -43,11 +43,12 @@ namespace XM.Progression.Job.JobDefinition
             {10, FeatType.ShieldMastery1},
             {12, FeatType.Aggressor1},
             {14, FeatType.DefenseBonus2},
+            {16, FeatType.LongswordLore},
             {18, FeatType.Provoke2},
             {20, FeatType.RadiantBlast1},
             {22, FeatType.Restoration2},
             {24, FeatType.HPBonus1},
-            {25, FeatType.DarknessProtection},
+            {25, FeatType.DarknessWard},
             {26, FeatType.Rampart},
             {30, FeatType.DefenseBonus3},
             {32, FeatType.Raise},

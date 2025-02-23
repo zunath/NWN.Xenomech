@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Anvil.Services;
 using NWN.Core;
+using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.AdminPlugin;
 using XM.Shared.Core;
@@ -15,6 +16,11 @@ namespace XM.Chat.ChatCommand
     public class DMChatCommand : IChatCommandListDefinition
     {
         private readonly ChatCommandBuilder _builder = new();
+        private readonly StatService _stat;
+        public DMChatCommand(StatService stat)
+        {
+            _stat = stat;
+        }
 
         public Dictionary<LocaleString, ChatCommandDetail> BuildChatCommands()
         {
@@ -128,7 +134,8 @@ namespace XM.Chat.ChatCommand
                         ApplyEffectToObject(DurationType.Instant, EffectResurrection(), target);
                     }
 
-                    ApplyEffectToObject(DurationType.Instant, EffectHeal(999), target);
+                    ApplyEffectToObject(DurationType.Instant, EffectHeal(9999), target);
+                    _stat.RestoreEP(target, 9999);
                 });
         }
 

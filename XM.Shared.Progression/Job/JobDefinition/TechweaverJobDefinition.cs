@@ -14,10 +14,10 @@ namespace XM.Progression.Job.JobDefinition
 
         public override string IconResref => "techweaver_icon";
 
-        public override JobGrade Grades { get; } = new()
+        public override StatGrade Grades { get; } = new()
         {
-            HP = GradeType.D,
-            EP = GradeType.D,
+            MaxHP = GradeType.D,
+            MaxEP = GradeType.D,
             Might = GradeType.D,
             Perception = GradeType.D,
             Vitality = GradeType.E,
@@ -42,11 +42,12 @@ namespace XM.Progression.Job.JobDefinition
             {10, FeatType.Rupture},
             {12, FeatType.CerebralSpike1},
             {14, FeatType.AutoRefresh1},
+            {16, FeatType.PolearmLore},
             {18, FeatType.EPBonus1},
             {20, FeatType.AurionInfusion1},
             {22, FeatType.NullLance2},
             {24, FeatType.Mindstream1},
-            {25, FeatType.MindProtection},
+            {25, FeatType.MindWard},
             {26, FeatType.NeuralStasis},
             {30, FeatType.NeuralCascade2},
             {32, FeatType.EPBonus2},

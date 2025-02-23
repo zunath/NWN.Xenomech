@@ -4,7 +4,7 @@ using Anvil.Services;
 namespace XM.Progression.Job
 {
     [ServiceBinding(typeof(XPChart))]
-    internal class XPChart: Dictionary<int, int>
+    public class XPChart: Dictionary<int, int>
     {
         public XPChart()
         {

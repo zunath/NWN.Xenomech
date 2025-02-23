@@ -79,14 +79,8 @@
 </ItemGroup>
 
 <ItemGroup>
-  <Folder Include="AbilityDefinition\Keeper\" />
-  <Folder Include="AbilityDefinition\Beastmaster\" />
-  <Folder Include="AbilityDefinition\Brawler\" />
-  <Folder Include="AbilityDefinition\Hunter\" />
-  <Folder Include="AbilityDefinition\Elementalist\" />
+  <Folder Include="AbilityDefinition\Beast\" />
   <Folder Include="AbilityDefinition\NPC\" />
-  <Folder Include="AbilityDefinition\Techweaver\" />
-  <Folder Include="AbilityDefinition\Nightstalker\" />
 </ItemGroup>
 
 <Target Name="PostBuild" AfterTargets="PostBuildEvent">

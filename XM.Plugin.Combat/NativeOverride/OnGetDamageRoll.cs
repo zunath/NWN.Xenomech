@@ -1,6 +1,7 @@
 ﻿using Anvil.API;
 using Anvil.Services;
 using NWN.Native.API;
+using XM.Progression.Ability;
 
 namespace XM.Plugin.Combat.NativeOverride
 {
@@ -15,14 +16,17 @@ namespace XM.Plugin.Combat.NativeOverride
 
         private readonly VirtualMachine _vm;
         private readonly CombatService _combat;
+        private readonly AbilityService _ability;
 
         public OnGetDamageRoll(
             HookService hook,
             VirtualMachine vm,
-            CombatService combat)
+            CombatService combat,
+            AbilityService ability)
         {
             _vm = vm;
             _combat = combat;
+            _ability = ability;
 
             _getDamageRollHook = hook.RequestHook<GetDamageRollHook>(GetDamageRoll);
         }
@@ -66,11 +70,32 @@ namespace XM.Plugin.Combat.NativeOverride
 
                 if (damage > 0)
                 {
-                    _combat.GainTP(attacker.m_idSelf);
+                    OnDamaged(attacker.m_idSelf, defender.m_idSelf);
                 }
+
+                _ability.ProcessQueuedAbility(attacker.m_idSelf, defender.m_idSelf);
 
                 return damage;
             });
+        }
+
+        private void ApplyTP(uint attacker, uint defender)
+        {
+            var attackerTPAmount = GetIsPC(attacker)
+                ? _combat.CalculateTPGainPlayer(attacker, false)
+                : _combat.CalculateTPGainNPC(attacker, false);
+            var defenderTPAmount = GetIsPC(attacker)
+                ? _combat.CalculateTPGainPlayer(attacker, true)
+                : _combat.CalculateTPGainNPC(attacker, true);
+
+            _combat.GainTP(attacker, attackerTPAmount);
+            _combat.GainTP(defender, defenderTPAmount);
+        }
+
+        private void OnDamaged(uint attacker, uint defender)
+        {
+            ApplyTP(attacker, defender);
+            _combat.HandleEtherLink(attacker);
         }
     }
 }

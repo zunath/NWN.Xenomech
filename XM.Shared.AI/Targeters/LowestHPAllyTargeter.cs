@@ -9,6 +9,9 @@
 
             foreach (var ally in context.GetNearbyFriendlies())
             {
+                if (GetIsDead(ally))
+                    continue;
+
                 var hpPercentage = (float)GetCurrentHitPoints(ally) / GetMaxHitPoints(ally);
                 if (hpPercentage < lowestPercentage)
                 {

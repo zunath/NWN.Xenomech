@@ -1,11 +1,16 @@
 ﻿using System;
+using System.Numerics;
 using Anvil.Services;
 using NWN.Core.NWNX;
 using XM.Inventory;
-using XM.Plugin.Combat.StatusEffect;
+using XM.Plugin.Combat.StatusEffectDefinition.Buff;
+using XM.Plugin.Combat.StatusEffectDefinition.Debuff;
+using XM.Progression.Ability;
+using XM.Progression.Beast;
 using XM.Progression.Skill;
 using XM.Progression.Stat;
 using XM.Progression.Stat.Entity;
+using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.FeedbackPlugin;
 using XM.Shared.Core;
@@ -13,6 +18,7 @@ using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 using FeedbackPlugin = XM.Shared.API.NWNX.FeedbackPlugin.FeedbackPlugin;
+using SkillType = XM.Progression.Skill.SkillType;
 
 
 namespace XM.Plugin.Combat
@@ -26,6 +32,9 @@ namespace XM.Plugin.Combat
         private readonly ItemTypeService _itemType;
         private readonly StatusEffectService _statusEffect;
         private readonly DBService _db;
+        private readonly AbilityService _ability;
+        private readonly SpellService _spell;
+        private readonly BeastService _beast;
 
         public CombatService(
             SkillService skill,
@@ -33,7 +42,10 @@ namespace XM.Plugin.Combat
             StatService stat,
             ItemTypeService itemType,
             StatusEffectService statusEffect,
-            DBService db)
+            DBService db,
+            AbilityService ability,
+            SpellService spell,
+            BeastService beast)
         {
             _skill = skill;
             _event = @event;
@@ -41,8 +53,18 @@ namespace XM.Plugin.Combat
             _itemType = itemType;
             _statusEffect = statusEffect;
             _db = db;
+            _ability = ability;
+            _spell = spell;
+            _beast = beast;
 
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
             _event.Subscribe<NWNXEvent.OnBroadcastAttackOfOpportunityBefore>(DisableAttacksOfOpportunity);
+            _event.Subscribe<PlayerEvent.OnDamaged>(RemoveEffectsOnDamaged);
+            _event.Subscribe<CreatureEvent.OnDamaged>(RemoveEffectsOnDamaged);
         }
 
 
@@ -62,7 +84,7 @@ namespace XM.Plugin.Combat
             EventsPlugin.SkipEvent();
         }
 
-        public int CalculateHitRate(
+        internal int CalculateHitRate(
             int attackerAccuracy,
             int defenderEvasion)
         {
@@ -78,11 +100,10 @@ namespace XM.Plugin.Combat
             return hitRate;
         }
 
-        private int CalculateCriticalRate(
+        private int CalculateCriticalDelta(
             int attackerStat, 
             int defenderStat)
         {
-            const int BaseCriticalRate = 5;
             var delta = attackerStat - defenderStat;
 
             if (delta < 0)
@@ -90,7 +111,7 @@ namespace XM.Plugin.Combat
             else if (delta > 15)
                 delta = 15;
 
-            return BaseCriticalRate + delta;
+            return delta;
         }
 
         private int CalculateAccuracy(
@@ -99,8 +120,7 @@ namespace XM.Plugin.Combat
             AttackType attackType, 
             CombatModeType combatMode)
         {
-            var attackerStatusEffects = _statusEffect.GetCreatureStatusEffects(attacker);
-            var bonus = _stat.GetAccuracy(attacker) + attackerStatusEffects.Accuracy;
+            var bonus = _stat.GetAccuracy(attacker);
             var perception = _stat.GetAttribute(attacker, AbilityType.Perception);
             var attackerLevel = _stat.GetLevel(attacker);
             var defenderLevel = _stat.GetLevel(defender);
@@ -124,10 +144,9 @@ namespace XM.Plugin.Combat
 
         private int CalculateEvasion(uint creature)
         {
-            var statusEffects = _statusEffect.GetCreatureStatusEffects(creature);
             var agility = _stat.GetAttribute(creature, AbilityType.Agility);
             var baseEvasion = _skill.GetEvasionSkill(creature) / 10;
-            var evasionBonus = _stat.GetEvasion(creature) + statusEffects.Evasion;
+            var evasionBonus = _stat.GetEvasion(creature);
             var level = _stat.GetLevel(creature);
             
             return agility * 3 + level + baseEvasion + evasionBonus;
@@ -173,17 +192,32 @@ namespace XM.Plugin.Combat
         private int CalculateDeflectionChance(uint defender)
         {
             var offHand = GetItemInSlot(InventorySlotType.LeftHand, defender);
-            var isShield = _itemType.IsShield(offHand);
+            var hasShield = _itemType.IsShield(offHand);
+            var deflection = 0;
 
-            return isShield ? 10 : 0;
+            if (hasShield)
+            {
+                deflection += 10 + _stat.GetShieldDeflection(defender);
+            }
+            else
+            {
+                deflection += _stat.GetAttackDeflection(defender);
+            }
+
+            return deflection;
         }
 
-        public (HitResultType, int) DetermineHitType(
+        internal (HitResultType, int) DetermineHitType(
             uint attacker, 
             uint defender, 
             AttackType attackType, 
             CombatModeType combatMode)
         {
+            if (_statusEffect.HasEffect<PerfectDodgeStatusEffect>(defender))
+            {
+                return (HitResultType.Miss, 0);
+            }
+
             var accuracy = CalculateAccuracy(attacker, defender, attackType, combatMode);
             var evasion = CalculateEvasion(defender);
             var roll = XMRandom.D100(1);
@@ -217,12 +251,20 @@ namespace XM.Plugin.Combat
             if (GetIsImmune(defender, ImmunityType.CriticalHit, attacker))
                 return false;
 
+            if (_statusEffect.HasEffect<MightyStrikesStatusEffect>(attacker))
+                return true;
+
             var attackerStat = attackType == AttackType.Melee
                 ? _stat.GetAttribute(attacker, AbilityType.Perception)
                 : _stat.GetAttribute(attacker, AbilityType.Agility);
             var defenderStat = _stat.GetAttribute(defender, AbilityType.Agility);
             var roll = XMRandom.D100(1);
-            var criticalRate = CalculateCriticalRate(attackerStat, defenderStat);
+            var criticalRate = _stat.GetCriticalRate(attacker);
+            var criticalDelta = CalculateCriticalDelta(attackerStat, defenderStat);
+            criticalRate += criticalDelta;
+
+            if (criticalRate > 35)
+                criticalRate = 35;
 
             return roll <= criticalRate;
         }
@@ -235,7 +277,7 @@ namespace XM.Plugin.Combat
             return roll <= deflectionChance;
         }
 
-        public string BuildCombatLogMessage(
+        internal string BuildCombatLogMessage(
             uint attacker, 
             uint defender, 
             HitResultType hitType,
@@ -272,8 +314,7 @@ namespace XM.Plugin.Combat
 
         private int CalculateAttack(uint attacker, uint weapon, AttackType attackType)
         {
-            var attackerStatusEffects = _statusEffect.GetCreatureStatusEffects(attacker);
-            var attack = _stat.GetAttack(attacker) + attackerStatusEffects.Attack;
+            var attack = _stat.GetAttack(attacker);
             var stat = attackType == AttackType.Melee
                 ? _stat.GetAttribute(attacker, AbilityType.Might)
                 : _stat.GetAttribute(attacker, AbilityType.Agility);
@@ -286,8 +327,7 @@ namespace XM.Plugin.Combat
 
         private int CalculateDefense(uint defender)
         {
-            var defenderStatusEffects = _statusEffect.GetCreatureStatusEffects(defender);
-            var defense = _stat.GetDefense(defender) + defenderStatusEffects.Defense;
+            var defense = _stat.GetDefense(defender);
             var stat = _stat.GetAttribute(defender, AbilityType.Vitality);
             var level = _stat.GetLevel(defender);
 
@@ -345,22 +385,79 @@ namespace XM.Plugin.Combat
             var delta = CalculateDamageStatDelta(attacker, defender, attackType);
             var ratio = CalculateDamageRatio(attacker, defender, weapon, attackType);
             var attackerDMG = _stat.GetMainHandDMG(attacker) + _stat.GetOffHandDMG(attacker);
-            var baseDMG = attackerDMG + delta;
-
+            var backAttackDMG = CalculateBackAttackBonus(attacker, defender);
+            var queuedDMG = CalculateQueuedAbilityDamageBonus(attacker, defender);
+            var baseDMG = attackerDMG + delta + backAttackDMG + queuedDMG;
             var maxDamage = baseDMG * ratio;
             var minDamage = maxDamage * 0.7f;
 
             return ((int)minDamage, (int)maxDamage);
         }
 
-        public int DetermineDamage(
+        private int CalculateBackAttackBonus(uint attacker, uint defender)
+        {
+            var isBehind = IsBehind(attacker, defender);
+            if (!isBehind)
+                return 0;
+
+            var bonusDMG = 0;
+            if (GetHasFeat(FeatType.BackAttack4, attacker))
+                bonusDMG += 16;
+            else if (GetHasFeat(FeatType.BackAttack3, attacker))
+                bonusDMG += 12;
+            else if (GetHasFeat(FeatType.BackAttack2, attacker))
+                bonusDMG += 8;
+            else if (GetHasFeat(FeatType.BackAttack1, attacker))
+                bonusDMG += 4;
+
+            if (_statusEffect.HasEffect<SneakAttack3StatusEffect>(attacker))
+            {
+                bonusDMG += 30;
+                _statusEffect.RemoveStatusEffect<SneakAttack3StatusEffect>(attacker);
+            }
+
+            if (_statusEffect.HasEffect<SneakAttack2StatusEffect>(attacker))
+            {
+                bonusDMG += 20;
+                _statusEffect.RemoveStatusEffect<SneakAttack2StatusEffect>(attacker);
+            }
+
+            if (_statusEffect.HasEffect<SneakAttack1StatusEffect>(attacker))
+            {
+                bonusDMG += 10;
+                _statusEffect.RemoveStatusEffect<SneakAttack1StatusEffect>(attacker);
+            }
+
+            return bonusDMG;
+        }
+
+        private int CalculateQueuedAbilityDamageBonus(uint attacker, uint defender)
+        {
+            var ability = _ability.GetQueuedAbility(attacker);
+            if (ability == null)
+                return 0;
+
+            var dmg = ability.Stats[StatType.QueuedDMGBonus];
+
+            if (ability.ResistType != ResistType.Invalid)
+            {
+                var resist = _spell.CalculateResistDamageReduction(defender, ability.ResistType);
+                dmg = (int)(dmg * resist);
+            }
+
+            if (dmg <= 0)
+                dmg = 0;
+
+            return dmg;
+        }
+
+        internal int DetermineDamage(
             uint attacker, 
             uint defender,
             uint weapon,
             AttackType attackType,
             HitResultType hitResult)
         {
-            
             var (minDamage, maxDamage) = CalculateDamageRange(attacker, defender, weapon, attackType);
             var damage = XMRandom.Next(minDamage, maxDamage);
 
@@ -369,11 +466,50 @@ namespace XM.Plugin.Combat
                 damage += (int)(damage * 0.25f);
             }
 
+            damage -= (int)(damage * (_stat.GetDamageReduction(defender) * 0.01f));
+
+            // Eagle Eye Shot - Multiply Damage by 5
+            if (_statusEffect.HasEffect<EagleEyeShotStatusEffect>(attacker))
+            {
+                damage *= 5;
+                _statusEffect.RemoveStatusEffect<EagleEyeShotStatusEffect>(attacker);
+            }
+
+            var halfDamage = damage / 2;
+            // Ether Wall - 50% of damage applied to EP. If no EP is remaining, remove effect. Remainder is normal damage.
+            if (_statusEffect.HasEffect<EtherWallStatusEffect>(defender))
+            {
+                var ep = _stat.GetCurrentEP(defender);
+                if (ep < halfDamage)
+                {
+                    damage -= ep;
+                    _stat.ReduceEP(defender, ep);
+                    _statusEffect.RemoveStatusEffect<EtherWallStatusEffect>(defender);
+                }
+                else if (ep > halfDamage)
+                {
+                    _stat.ReduceEP(defender, halfDamage);
+                    damage -= halfDamage;
+                }
+                else if (ep == halfDamage)
+                {
+                    _stat.ReduceEP(defender, halfDamage);
+                    damage -= halfDamage;
+                    _statusEffect.RemoveStatusEffect<EtherWallStatusEffect>(defender);
+                }
+            }
+
             return damage;
         }
 
-        public int CalculateAttackDelay(uint attacker)
+        internal int CalculateAttackDelay(uint attacker)
         {
+            if (_statusEffect.HasEffect<HundredFistsStatusEffect>(attacker))
+                return 1;
+
+            var weapon = GetItemInSlot(InventorySlotType.RightHand, attacker);
+            var skillType = _skill.GetSkillOfWeapon(weapon);
+
             float delay;
             if (GetIsPC(attacker) && !GetIsDMPossessed(attacker))
             {
@@ -388,10 +524,30 @@ namespace XM.Plugin.Combat
                 delay = npcStats.MainHandDelay + npcStats.OffHandDelay;
             }
 
-            return (int)(delay / 60f * 1000);
+            var delayPercentAdjustment = 0f;
+
+            if (skillType == SkillType.Bow && 
+                GetHasFeat(FeatType.Barrage, attacker))
+            {
+                delayPercentAdjustment = -0.2f;
+            }
+            else if (skillType == SkillType.HandToHand && 
+                     GetHasFeat(FeatType.MartialArts, attacker))
+            {
+                delayPercentAdjustment = -0.2f;
+            }
+
+            var haste = _stat.GetHaste(attacker) * 0.01f;
+            delayPercentAdjustment -= haste;
+
+            if (delayPercentAdjustment < -0.5f)
+                delayPercentAdjustment = -0.5f;
+
+            var finalDelay = (int)(delay / 60f * 1000);
+            return (int)(finalDelay + finalDelay * delayPercentAdjustment);
         }
 
-        private int CalculateTPGainPlayer(uint player)
+        internal int CalculateTPGainPlayer(uint player, bool useSubtleBlow)
         {
             var playerId = PlayerId.Get(player);
             var dbPlayerStat = _db.Get<PlayerStat>(playerId);
@@ -420,10 +576,20 @@ namespace XM.Plugin.Combat
                 tpGain = 173 + ((totalDelay - 900) * 28 / 360);
 
             var totalTP = dbPlayerStat.TP + tpGain + equipmentBonus;
+
+            if (useSubtleBlow)
+            {
+                var subtleBlow = _stat.GetSubtleBlow(player) * 0.01f;
+                if (subtleBlow > 0.75f)
+                    subtleBlow = 0.75f;
+
+                totalTP -= (int)(subtleBlow * totalTP);
+            }
+
             return totalTP;
         }
 
-        private int CalculateTPGainNPC(uint npc)
+        internal int CalculateTPGainNPC(uint npc, bool useSubtleBlow)
         {
             var npcStats = _stat.GetNPCStats(npc);
             var totalDelay = npcStats.MainHandDelay + npcStats.OffHandDelay;
@@ -446,17 +612,83 @@ namespace XM.Plugin.Combat
 
             var totalTP = _stat.GetCurrentTP(npc) + tpGain;
 
+            if (useSubtleBlow)
+            {
+                var subtleBlow = _stat.GetSubtleBlow(npc) * 0.01f;
+                if (subtleBlow > 0.75f)
+                    subtleBlow = 0.75f;
+
+                totalTP -= (int)(subtleBlow * totalTP);
+            }
+
             return totalTP;
         }
 
-        public void GainTP(uint attacker)
+        internal void GainTP(uint target, int amount)
         {
-            var isPlayer = GetIsPC(attacker) && !GetIsDMPossessed(attacker);
-            var tp = isPlayer 
-                ? CalculateTPGainPlayer(attacker) 
-                : CalculateTPGainNPC(attacker);
+            _stat.SetTP(target, amount);
+        }
 
-            _stat.SetTP(attacker, tp);
+        private void RemoveEffectsOnDamaged(uint creature)
+        {
+            _statusEffect.RemoveStatusEffect<ThirdEyeStatusEffect>(creature);
+            _statusEffect.RemoveStatusEffect<HideStatusEffect>(creature);
+        }
+
+        private bool IsBehind(uint attacker, uint defender)
+        {
+            if (_statusEffect.HasEffect<HideStatusEffect>(attacker))
+            {
+                _statusEffect.RemoveStatusEffect<HideStatusEffect>(attacker);
+                return true;
+            }
+
+            var attackerPosition = GetPosition(attacker);
+            var defenderPosition = GetPosition(defender);
+            var defenderFacing = GetFacing(defender);
+
+            // Adjust facing to account for NWN's 0.0 being East instead of North
+            var defenderDirection = new Vector3(cos(defenderFacing + (float)Math.PI / 2), sin(defenderFacing + (float)Math.PI / 2), 0);
+
+            var toAttacker = Vector3.Normalize(attackerPosition - defenderPosition);
+
+            // Attacker is behind the defender if the direction from the defender to the attacker 
+            // is opposite to the defender's facing direction.
+            var isBehind = Vector3.Dot(toAttacker, defenderDirection) < -0.5f;
+
+            return isBehind;
+        }
+
+        internal bool HandleParalyze(uint attacker)
+        {
+            if (!_statusEffect.HasEffect<ParalyzeStatusEffect>(attacker))
+                return false;
+
+            var hasParalysis = XMRandom.D100(1) <= _stat.GetParalysis(attacker);
+
+            if (hasParalysis)
+            {
+                Messaging.SendMessageNearbyToPlayers(attacker, LocaleString.XIsParalyzed.ToLocalizedString(GetName(attacker)));
+            }
+
+            return hasParalysis;
+        }
+
+        internal void HandleEtherLink(uint attacker)
+        {
+            if (!_beast.IsBeast(attacker))
+                return;
+
+            if (!GetHasFeat(FeatType.EtherLink, attacker))
+                return;
+
+            var npcStats = _stat.GetNPCStats(attacker);
+
+            if (XMRandom.D100(1) <= npcStats.Stats[StatType.EtherLink])
+            {
+                var owner = GetMaster(attacker);
+                _stat.RestoreEP(owner, 5);
+            }
         }
     }
 }

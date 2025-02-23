@@ -14,7 +14,6 @@ using XM.Shared.Core.Entity;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 using XM.UI;
-using XM.UI.Event;
 using Action = System.Action;
 
 namespace XM.Progression.UI.CharacterSheet
@@ -398,7 +397,7 @@ namespace XM.Progression.UI.CharacterSheet
 
                 jobIcons.Add(definition.IconResref);
 
-                var ratio = dbPlayerJob.JobXP[type] / XP[dbPlayerJob.JobLevels[type]];
+                var ratio = (float)dbPlayerJob.JobXP[type] / (float)XP[dbPlayerJob.JobLevels[type]];
                 jobProgresses.Add(Math.Clamp(ratio, 0f, 1f));
             }
 

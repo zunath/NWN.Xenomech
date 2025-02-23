@@ -2,7 +2,7 @@
 
 namespace XM.Inventory.Loot
 {
-    internal class LootTableItem
+    public class LootTableItem
     {
         public string Resref { get; set; }
         public int MaxQuantity { get; set; }

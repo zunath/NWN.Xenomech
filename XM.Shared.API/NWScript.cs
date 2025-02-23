@@ -2469,9 +2469,9 @@ namespace XM.Shared.API
         ///    further specify the type of creature that we are looking for.<br/>
         ///  * Return value on error: OBJECT_INVALID
         /// </summary>
-        public static uint GetNearestCreatureToLocation(int nFirstCriteriaType, int nFirstCriteriaValue, Location lLocation, int nNth = 1, int nSecondCriteriaType = -1, int nSecondCriteriaValue = -1, int nThirdCriteriaType = -1, int nThirdCriteriaValue = -1)
+        public static uint GetNearestCreatureToLocation(CreatureType nFirstCriteriaType, int nFirstCriteriaValue, Location lLocation, int nNth = 1, int nSecondCriteriaType = -1, int nSecondCriteriaValue = -1, int nThirdCriteriaType = -1, int nThirdCriteriaValue = -1)
         {
-            return NWN.Core.NWScript.GetNearestCreatureToLocation(nFirstCriteriaType, nFirstCriteriaValue, lLocation, nNth, nSecondCriteriaType, nSecondCriteriaValue, nThirdCriteriaType, nThirdCriteriaValue);
+            return NWN.Core.NWScript.GetNearestCreatureToLocation((int)nFirstCriteriaType, nFirstCriteriaValue, lLocation, nNth, nSecondCriteriaType, nSecondCriteriaValue, nThirdCriteriaType, nThirdCriteriaValue);
         }
 
         /// <summary>
@@ -3034,7 +3034,7 @@ namespace XM.Shared.API
         ///  - oCreature<br/>
         ///  - bIgnoreUses: Will check if the creature has the given feat even if it has no uses remaining
         /// </summary>
-        public static bool GetHasFeat(FeatType nFeat, uint oCreature = OBJECT_INVALID, bool bIgnoreUses = false)
+        public static bool GetHasFeat(FeatType nFeat, uint oCreature, bool bIgnoreUses = false)
         {
             return NWN.Core.NWScript.GetHasFeat((int)nFeat, oCreature, bIgnoreUses ? 1 : 0) == 1;
         }
@@ -3409,9 +3409,12 @@ namespace XM.Shared.API
         ///  - bRaiseable: If this is true, the caller can be raised via resurrection.<br/>
         ///  - bSelectableWhenDead: If this is true, the caller is selectable after death.
         /// </summary>
-        public static void SetIsDestroyable(bool bDestroyable, bool bRaiseable = true, bool bSelectableWhenDead = false)
+        public static void SetIsDestroyable(bool bDestroyable, bool bRaiseable = true, bool bSelectableWhenDead = false, uint oObject = OBJECT_INVALID)
         {
-            NWN.Core.NWScript.SetIsDestroyable(bDestroyable ? 1 : 0, bRaiseable ? 1 : 0, bSelectableWhenDead ? 1 : 0);
+            if (oObject == OBJECT_INVALID)
+                oObject = OBJECT_SELF;
+
+            NWN.Core.NWScript.SetIsDestroyable(bDestroyable ? 1 : 0, bRaiseable ? 1 : 0, bSelectableWhenDead ? 1 : 0, oObject);
         }
 
         /// <summary>
@@ -10573,9 +10576,9 @@ namespace XM.Shared.API
         ///  This function can be used in place of all the other ItemPropertyXxx constructors<br/>
         ///  Use GetItemProperty{Type,SubType,CostTableValue,Param1Value} to see the values for a given itemproperty.
         /// </summary>
-        public static ItemProperty ItemPropertyCustom(int nType, int nSubType = -1, int nCostTableValue = -1, int nParam1Value = -1)
+        public static ItemProperty ItemPropertyCustom(ItemPropertyType nType, int nSubType = -1, int nCostTableValue = -1, int nParam1Value = -1)
         {
-            return NWN.Core.NWScript.ItemPropertyCustom(nType, nSubType, nCostTableValue, nParam1Value);
+            return NWN.Core.NWScript.ItemPropertyCustom((int)nType, nSubType, nCostTableValue, nParam1Value);
         }
 
         /// <summary>

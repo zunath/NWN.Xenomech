@@ -17,8 +17,8 @@ namespace XM.Progression.Recast
         Aggressor = 4,
         [RecastGroup(LocaleString.RadiantBlast, true)]
         RadiantBlast = 5,
-        [RecastGroup(LocaleString.ElementalProtection, true)]
-        ElementalProtection = 6,
+        [RecastGroup(LocaleString.ElementalShielding, true)]
+        ElementalShielding = 6,
         [RecastGroup(LocaleString.Rampart, true)]
         Rampart = 7,
         [RecastGroup(LocaleString.Raise, true)]
@@ -89,8 +89,8 @@ namespace XM.Progression.Recast
         CryoVenom = 40,
         [RecastGroup(LocaleString.FreezingShot, true)]
         FreezingShot = 41,
-        [RecastGroup(LocaleString.Volley, true)]
-        Volley = 42,
+        [RecastGroup(LocaleString.IceVolley, true)]
+        IceVolley = 42,
         [RecastGroup(LocaleString.ChokingShot, true)]
         ChokingShot = 43,
         [RecastGroup(LocaleString.Cripple, true)]
@@ -137,5 +137,9 @@ namespace XM.Progression.Recast
         NeuralStasis = 64,
         [RecastGroup(LocaleString.Convert, true)]
         Convert = 65,
+        [RecastGroup(LocaleString.Ward, true)]
+        Ward = 66,
+        [RecastGroup(LocaleString.Revive, true)]
+        Revive = 67,
     }
 }

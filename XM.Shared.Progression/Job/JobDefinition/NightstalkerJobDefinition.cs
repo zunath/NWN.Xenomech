@@ -14,10 +14,10 @@ namespace XM.Progression.Job.JobDefinition
 
         public override string IconResref => "night_icon";
 
-        public override JobGrade Grades { get; } = new()
+        public override StatGrade Grades { get; } = new()
         {
-            HP = GradeType.D,
-            EP = GradeType.G,
+            MaxHP = GradeType.D,
+            MaxEP = GradeType.G,
             Might = GradeType.D,
             Perception = GradeType.A,
             Vitality = GradeType.D,
@@ -43,11 +43,11 @@ namespace XM.Progression.Job.JobDefinition
             {10, FeatType.SneakAttack1},
             {12, FeatType.SubtleBlow1},
             {14, FeatType.TreasureHunter1},
+            {16, FeatType.DaggerLore},
             {18, FeatType.BackAttack2},
-            {20, FeatType.VenomStab},
             {22, FeatType.SneakAttack2},
             {24, FeatType.CriticalBonus1},
-            {25, FeatType.LightProtection},
+            {25, FeatType.LightWard},
             {26, FeatType.Flee},
             {30, FeatType.TreasureHunter2},
             {32, FeatType.BackAttack3},

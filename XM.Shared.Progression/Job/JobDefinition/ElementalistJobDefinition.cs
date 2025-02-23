@@ -14,10 +14,10 @@ namespace XM.Progression.Job.JobDefinition
 
         public override string IconResref => "elem_icon";
 
-        public override JobGrade Grades { get; } = new()
+        public override StatGrade Grades { get; } = new()
         {
-            HP = GradeType.F,
-            EP = GradeType.B,
+            MaxHP = GradeType.F,
+            MaxEP = GradeType.B,
             Might = GradeType.F,
             Perception = GradeType.C,
             Vitality = GradeType.F,
@@ -43,11 +43,12 @@ namespace XM.Progression.Job.JobDefinition
             {10, FeatType.Drown1},
             {12, FeatType.EtherAttackBonus1},
             {14, FeatType.ShockwaveSurge1},
+            {16, FeatType.StaffLore},
             {18, FeatType.ShockingCircle},
             {20, FeatType.Flame2},
             {22, FeatType.AbyssalVeil1},
             {24, FeatType.ElementalSeal},
-            {25, FeatType.LightningProtection},
+            {25, FeatType.LightningWard},
             {26, FeatType.Escape},
             {30, FeatType.ZephyrShroud},
             {32, FeatType.EtherAttackBonus2},

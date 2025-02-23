@@ -14,10 +14,10 @@ namespace XM.Progression.Job.JobDefinition
 
         public override string IconResref => "mender_icon";
 
-        public override JobGrade Grades { get; } = new()
+        public override StatGrade Grades { get; } = new()
         {
-            HP = GradeType.E,
-            EP = GradeType.C,
+            MaxHP = GradeType.E,
+            MaxEP = GradeType.C,
             Might = GradeType.D,
             Perception = GradeType.F,
             Vitality = GradeType.D,
@@ -43,11 +43,12 @@ namespace XM.Progression.Job.JobDefinition
             {10, FeatType.DivineSeal},
             {12, FeatType.EtherBloom2},
             {14, FeatType.AutoRegen1},
+            {16, FeatType.ClubLore},
             {18, FeatType.EtherBlast1},
             {20, FeatType.Regen1},
             {22, FeatType.Revive},
             {24, FeatType.EtherBloom3},
-            {25, FeatType.FireProtection},
+            {25, FeatType.FireWard},
             {26, FeatType.Protection2},
             {30, FeatType.Tsu},
             {32, FeatType.EtherBlast2},

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using Anvil.Services;
 using XM.AI.Enmity;
+using XM.Plugin.Combat.StatusEffectDefinition.Buff;
 using XM.Progression.Ability;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
+using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Localization;
@@ -18,13 +20,16 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
 
         private readonly EnmityService _enmity;
         private readonly StatService _stat;
+        private readonly StatusEffectService _status;
 
         public EtherBloom(
             EnmityService enmity, 
-            StatService stat)
+            StatService stat,
+            StatusEffectService status)
         {
             _enmity = enmity;
             _stat = stat;
+            _status = status;
         }
 
         public Dictionary<FeatType, AbilityDetail> BuildAbilities()
@@ -56,6 +61,12 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
             var hpFloor = hpFloorAction(power);
 
             var healAmount = (int)Math.Floor((power - powerFloor) / rate) + hpFloor;
+
+            if (_status.HasEffect<DivineSealStatusEffect>(activator))
+            {
+                healAmount *= 2;
+                _status.RemoveStatusEffect<DivineSealStatusEffect>(activator);
+            }
 
             _enmity.ApplyHealingEnmity(activator, healAmount);
             ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(impactVFX), target);
@@ -121,7 +132,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
                 .HasActivationDelay(2f)
                 .RequirementEP(8)
                 .HasMaxRange(15f)
-                .UsesAnimation(AnimationType.LoopingConjure2)
+                .UsesAnimation(AnimationType.LoopingConjure1)
                 .DisplaysVisualEffectWhenActivating()
                 .ResonanceCost(1)
                 .HasImpactAction((activator, target, location) =>
@@ -189,7 +200,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
                     .HasActivationDelay(2f)
                     .RequirementEP(24)
                     .HasMaxRange(15f)
-                    .UsesAnimation(AnimationType.LoopingConjure2)
+                    .UsesAnimation(AnimationType.LoopingConjure1)
                     .DisplaysVisualEffectWhenActivating()
                     .ResonanceCost(2)
                     .HasImpactAction((activator, target, location) =>
@@ -251,7 +262,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
                     .HasActivationDelay(3f)
                     .RequirementEP(46)
                     .HasMaxRange(15f)
-                    .UsesAnimation(AnimationType.LoopingConjure2)
+                    .UsesAnimation(AnimationType.LoopingConjure1)
                     .DisplaysVisualEffectWhenActivating()
                     .ResonanceCost(3)
                     .HasImpactAction((activator, target, location) =>
@@ -312,7 +323,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
                     .HasActivationDelay(5f)
                     .RequirementEP(88)
                     .HasMaxRange(15f)
-                    .UsesAnimation(AnimationType.LoopingConjure2)
+                    .UsesAnimation(AnimationType.LoopingConjure1)
                     .DisplaysVisualEffectWhenActivating()
                     .ResonanceCost(4)
                     .HasImpactAction((activator, target, location) =>

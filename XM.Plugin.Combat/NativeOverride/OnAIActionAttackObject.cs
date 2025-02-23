@@ -448,11 +448,19 @@ namespace XM.Plugin.Combat.NativeOverride
                                     }
                                     else
                                     {
-                                        _creatureAttackDelays[pCreature.m_idSelf] = DateTime.UtcNow;
+                                        var isParalyzed = _combat.HandleParalyze(pCreature.m_idSelf);
 
-                                        var result = DoAttack(pPendingAction, pCreature, oidAttackTarget, pNode);
-                                        if (result)
-                                            bTargetActive = true;
+                                        _creatureAttackDelays[pCreature.m_idSelf] = DateTime.UtcNow;
+                                        if (isParalyzed)
+                                        {
+                                            pCreature.m_pcCombatRound.RecomputeRound();
+                                        }
+                                        else
+                                        {
+                                            var result = DoAttack(pPendingAction, pCreature, oidAttackTarget, pNode);
+                                            if (result)
+                                                bTargetActive = true;
+                                        }
                                     }
 
                                     break;

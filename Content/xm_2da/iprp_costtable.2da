@@ -42,4 +42,4 @@
 38    IPRP_DIG0          Digit0Based            0            
 39    IPRP_PPERC1        PositivePercent        0            
 40    IPRP_NPERC1        NegativePercent        0            
-41    IPRP_NPCHP         NPCHP                  0            
+41    IPRP_HP            HP                     0            

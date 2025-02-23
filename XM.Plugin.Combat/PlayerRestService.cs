@@ -1,6 +1,6 @@
 ﻿using Anvil.Services;
-using XM.Plugin.Combat.StatusEffect;
-using XM.Plugin.Combat.StatusEffect.StatusEffectDefinition;
+using XM.Plugin.Combat.StatusEffectDefinition.Buff;
+using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
@@ -65,7 +65,7 @@ namespace XM.Plugin.Combat
                 return;
             }
 
-            _statusEffect.ApplyPermanentStatusEffect<RestStatusEffect>(player);
+            _statusEffect.ApplyPermanentStatusEffect<RestStatusEffect>(player, player);
         }
     }
 }
