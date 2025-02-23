@@ -133,6 +133,36 @@ namespace XM.Progression.Stat
             { GradeType.G , 0.73f},
         };
 
+        private readonly Dictionary<ItemPropertyType, StatType> _itemPropertyToStat = new()
+        {
+            { ItemPropertyType.HP, StatType.MaxHP},
+            { ItemPropertyType.EP, StatType.MaxEP},
+            { ItemPropertyType.HPRegen, StatType.HPRegen},
+            { ItemPropertyType.EPRegen, StatType.EPRegen},
+            { ItemPropertyType.AbilityRecastReduction, StatType.RecastReduction},
+            { ItemPropertyType.Defense, StatType.Defense},
+            { ItemPropertyType.Evasion, StatType.Evasion},
+            { ItemPropertyType.Accuracy, StatType.Accuracy},
+            { ItemPropertyType.Attack, StatType.Attack},
+            { ItemPropertyType.EtherAttack, StatType.EtherAttack},
+            { ItemPropertyType.TPGain, StatType.TPGain},
+            { ItemPropertyType.Might, StatType.Might},
+            { ItemPropertyType.Perception, StatType.Perception},
+            { ItemPropertyType.Vitality, StatType.Vitality},
+            { ItemPropertyType.Agility, StatType.Agility},
+            { ItemPropertyType.Willpower, StatType.Willpower},
+            { ItemPropertyType.Social, StatType.Social},
+            { ItemPropertyType.ShieldDeflection, StatType.ShieldDeflection},
+            { ItemPropertyType.AttackDeflection, StatType.AttackDeflection},
+            { ItemPropertyType.SubtleBlow, StatType.SubtleBlow},
+            { ItemPropertyType.CriticalRate, StatType.CriticalRate},
+            { ItemPropertyType.Enmity, StatType.Enmity},
+            { ItemPropertyType.Haste, StatType.Haste},
+            { ItemPropertyType.Slow, StatType.Slow},
+            { ItemPropertyType.DamageReduction, StatType.DamageReduction},
+            { ItemPropertyType.EtherDefense, StatType.EtherDefense},
+            { ItemPropertyType.EtherLink, StatType.EtherLink}
+        };
         public StatService(
             DBService db, 
             XMEventService @event,
@@ -977,35 +1007,6 @@ namespace XM.Progression.Stat
             }
         }
 
-        private readonly Dictionary<ItemPropertyType, StatType> _itemPropertyToStat = new()
-        {
-            { ItemPropertyType.HP, StatType.MaxHP},
-            { ItemPropertyType.EP, StatType.MaxEP},
-            { ItemPropertyType.HPRegen, StatType.HPRegen},
-            { ItemPropertyType.EPRegen, StatType.EPRegen},
-            { ItemPropertyType.AbilityRecastReduction, StatType.RecastReduction},
-            { ItemPropertyType.Defense, StatType.Defense},
-            { ItemPropertyType.Evasion, StatType.Evasion},
-            { ItemPropertyType.Accuracy, StatType.Accuracy},
-            { ItemPropertyType.Attack, StatType.Attack},
-            { ItemPropertyType.EtherAttack, StatType.EtherAttack},
-            { ItemPropertyType.TPGain, StatType.TPGain},
-            { ItemPropertyType.Might, StatType.Might},
-            { ItemPropertyType.Perception, StatType.Perception},
-            { ItemPropertyType.Vitality, StatType.Vitality},
-            { ItemPropertyType.Agility, StatType.Agility},
-            { ItemPropertyType.Willpower, StatType.Willpower},
-            { ItemPropertyType.Social, StatType.Social},
-            { ItemPropertyType.ShieldDeflection, StatType.ShieldDeflection},
-            { ItemPropertyType.AttackDeflection, StatType.AttackDeflection},
-            { ItemPropertyType.SubtleBlow, StatType.SubtleBlow},
-            { ItemPropertyType.CriticalRate, StatType.CriticalRate},
-            { ItemPropertyType.Enmity, StatType.Enmity},
-            { ItemPropertyType.Haste, StatType.Haste},
-            { ItemPropertyType.Slow, StatType.Slow},
-            { ItemPropertyType.DamageReduction, StatType.DamageReduction},
-            { ItemPropertyType.EtherDefense, StatType.EtherDefense},
-        };
 
         private readonly Dictionary<StatType, ItemPropertyType> _statsToItemProperty = new();
 

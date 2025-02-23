@@ -94,7 +94,7 @@ namespace XM.Shared.API.Constants
         DMG = 93,
         Defense = 94,
         NPCEvasionGrade = 95,
-        // 96 is free
+        EtherLink = 96,
         Accuracy = 97,
         HPRegen = 98,
         NPCLevel = 99,

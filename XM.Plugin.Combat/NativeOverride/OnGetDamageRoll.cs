@@ -70,7 +70,7 @@ namespace XM.Plugin.Combat.NativeOverride
 
                 if (damage > 0)
                 {
-                    ApplyTP(attacker.m_idSelf, defender.m_idSelf);
+                    OnDamaged(attacker.m_idSelf, defender.m_idSelf);
                 }
 
                 _ability.ProcessQueuedAbility(attacker.m_idSelf, defender.m_idSelf);
@@ -90,6 +90,12 @@ namespace XM.Plugin.Combat.NativeOverride
 
             _combat.GainTP(attacker, attackerTPAmount);
             _combat.GainTP(defender, defenderTPAmount);
+        }
+
+        private void OnDamaged(uint attacker, uint defender)
+        {
+            ApplyTP(attacker, defender);
+            _combat.HandleEtherLink(attacker);
         }
     }
 }

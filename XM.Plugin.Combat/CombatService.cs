@@ -6,6 +6,7 @@ using XM.Inventory;
 using XM.Plugin.Combat.StatusEffectDefinition.Buff;
 using XM.Plugin.Combat.StatusEffectDefinition.Debuff;
 using XM.Progression.Ability;
+using XM.Progression.Beast;
 using XM.Progression.Skill;
 using XM.Progression.Stat;
 using XM.Progression.Stat.Entity;
@@ -33,6 +34,7 @@ namespace XM.Plugin.Combat
         private readonly DBService _db;
         private readonly AbilityService _ability;
         private readonly SpellService _spell;
+        private readonly BeastService _beast;
 
         public CombatService(
             SkillService skill,
@@ -42,7 +44,8 @@ namespace XM.Plugin.Combat
             StatusEffectService statusEffect,
             DBService db,
             AbilityService ability,
-            SpellService spell)
+            SpellService spell,
+            BeastService beast)
         {
             _skill = skill;
             _event = @event;
@@ -52,6 +55,7 @@ namespace XM.Plugin.Combat
             _db = db;
             _ability = ability;
             _spell = spell;
+            _beast = beast;
 
             SubscribeEvents();
         }
@@ -80,7 +84,7 @@ namespace XM.Plugin.Combat
             EventsPlugin.SkipEvent();
         }
 
-        public int CalculateHitRate(
+        internal int CalculateHitRate(
             int attackerAccuracy,
             int defenderEvasion)
         {
@@ -203,7 +207,7 @@ namespace XM.Plugin.Combat
             return deflection;
         }
 
-        public (HitResultType, int) DetermineHitType(
+        internal (HitResultType, int) DetermineHitType(
             uint attacker, 
             uint defender, 
             AttackType attackType, 
@@ -273,7 +277,7 @@ namespace XM.Plugin.Combat
             return roll <= deflectionChance;
         }
 
-        public string BuildCombatLogMessage(
+        internal string BuildCombatLogMessage(
             uint attacker, 
             uint defender, 
             HitResultType hitType,
@@ -447,7 +451,7 @@ namespace XM.Plugin.Combat
             return dmg;
         }
 
-        public int DetermineDamage(
+        internal int DetermineDamage(
             uint attacker, 
             uint defender,
             uint weapon,
@@ -498,7 +502,7 @@ namespace XM.Plugin.Combat
             return damage;
         }
 
-        public int CalculateAttackDelay(uint attacker)
+        internal int CalculateAttackDelay(uint attacker)
         {
             if (_statusEffect.HasEffect<HundredFistsStatusEffect>(attacker))
                 return 1;
@@ -543,7 +547,7 @@ namespace XM.Plugin.Combat
             return (int)(finalDelay + finalDelay * delayPercentAdjustment);
         }
 
-        public int CalculateTPGainPlayer(uint player, bool useSubtleBlow)
+        internal int CalculateTPGainPlayer(uint player, bool useSubtleBlow)
         {
             var playerId = PlayerId.Get(player);
             var dbPlayerStat = _db.Get<PlayerStat>(playerId);
@@ -585,7 +589,7 @@ namespace XM.Plugin.Combat
             return totalTP;
         }
 
-        public int CalculateTPGainNPC(uint npc, bool useSubtleBlow)
+        internal int CalculateTPGainNPC(uint npc, bool useSubtleBlow)
         {
             var npcStats = _stat.GetNPCStats(npc);
             var totalDelay = npcStats.MainHandDelay + npcStats.OffHandDelay;
@@ -620,7 +624,7 @@ namespace XM.Plugin.Combat
             return totalTP;
         }
 
-        public void GainTP(uint target, int amount)
+        internal void GainTP(uint target, int amount)
         {
             _stat.SetTP(target, amount);
         }
@@ -655,7 +659,7 @@ namespace XM.Plugin.Combat
             return isBehind;
         }
 
-        public bool HandleParalyze(uint attacker)
+        internal bool HandleParalyze(uint attacker)
         {
             if (!_statusEffect.HasEffect<ParalyzeStatusEffect>(attacker))
                 return false;
@@ -670,5 +674,21 @@ namespace XM.Plugin.Combat
             return hasParalysis;
         }
 
+        internal void HandleEtherLink(uint attacker)
+        {
+            if (!_beast.IsBeast(attacker))
+                return;
+
+            if (!GetHasFeat(FeatType.EtherLink, attacker))
+                return;
+
+            var npcStats = _stat.GetNPCStats(attacker);
+
+            if (XMRandom.D100(1) <= npcStats.Stats[StatType.EtherLink])
+            {
+                var owner = GetMaster(attacker);
+                _stat.RestoreEP(owner, 5);
+            }
+        }
     }
 }

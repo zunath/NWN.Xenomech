@@ -59,6 +59,11 @@ namespace XM.Progression.Beast
             return beast;
         }
 
+        public bool IsBeast(uint creature)
+        {
+            return GetBeastType(creature) != BeastType.Invalid;
+        }
+
         public string CanSummonBeast(uint activator, BeastType beastType)
         {
             if (!GetHasFeat(FeatType.CallBeast, activator))
@@ -136,6 +141,11 @@ namespace XM.Progression.Beast
             if (GetHasFeat(FeatType.BeastSpeed, beast))
             {
                 npcStats.Stats[StatType.Haste] += 15;
+            }
+
+            if (GetHasFeat(FeatType.EtherLink, beast))
+            {
+                npcStats.Stats[StatType.EtherLink] += 20;
             }
 
             _stat.SetNPCStats(beast, npcStats);
