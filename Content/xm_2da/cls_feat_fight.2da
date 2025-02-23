@@ -429,8 +429,8 @@
 425   FERAL_HOWL                                       1182        1      99               1        
 426   QUICKNESS                                        1183        1      99               1        
 427   ASSAULT                                          1184        1      99               1        
-428   KILLER_INSTINCT                                  1185        1      99               1        
-429   BEAST_SPEED                                      1186        1      99               1        
+428   KILLER_INSTINCT                                  1185        1      99               0        
+429   BEAST_SPEED                                      1186        1      99               0        
 430   ETHER_LINK                                       1187        1      99               0        
 431   FAMILIAR                                         1188        1      99               1        
 432   ELECTRIC_FIST_1                                  1189        1      99               1        

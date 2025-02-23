@@ -36,4 +36,6 @@ namespace XM.Progression.Ability
     public delegate void AbilityUnequippedAction(uint creature);
 
     public delegate bool AbilityIsToggledAction(uint creature);
+
+    public delegate uint AbilityRetargetActivatorAction(uint caster);
 }

@@ -232,7 +232,7 @@ namespace XM.Progression.Ability
         private const string ActiveActionId = "ACTIVE_ABILITY_ID";
         private const string ActiveAbilityFeatId = "ACTIVE_ABILITY_FEAT_ID";
 
-        private void UseAbility(uint activator)
+        private void UseAbility(uint caster)
         {
             var target = StringToObject(EventsPlugin.GetEventData("TARGET_OBJECT_ID"));
             var targetArea = StringToObject(EventsPlugin.GetEventData("AREA_OBJECT_ID"));
@@ -257,36 +257,40 @@ namespace XM.Progression.Ability
             // Weapon abilities are queued for the next time the activator's attack lands on an enemy.
             if (ability.ActivationType == AbilityActivationType.QueuedAttack)
             {
-                if (CanUseAbility(activator, target, feat, targetLocation))
+                if (CanUseAbility(caster, target, feat, targetLocation))
                 {
                     if (ability.DisplaysActivationMessage)
-                        Messaging.SendMessageNearbyToPlayers(activator, LocaleString.PlayerQueuesAbilityForTheNextAttack.ToLocalizedString(GetName(activator), ability.Name.ToLocalizedString()));
-                    QueueWeaponAbility(activator, ability, feat);
+                    {
+                        var activator = ability.RetargetActivatorAction?.Invoke(caster) ?? caster;
+                        Messaging.SendMessageNearbyToPlayers(caster, LocaleString.PlayerQueuesAbilityForTheNextAttack.ToLocalizedString(GetName(activator), ability.Name.ToLocalizedString()));
+                    }
+                    QueueAbility(caster, ability, feat);
                 }
             }
             // Toggle abilities
             else if (ability.ActivationType == AbilityActivationType.Toggle &&
-                     ability.AbilityIsToggledAction(activator))
+                     ability.AbilityIsToggledAction(caster))
             {
+                var activator = ability.RetargetActivatorAction?.Invoke(caster) ?? caster;
                 ability.AbilityToggleAction?.Invoke(activator, false);
             }
             // All other abilities are funneled through the same process.
             else
             {
-                if (CanUseAbility(activator, target, feat, targetLocation))
+                if (CanUseAbility(caster, target, feat, targetLocation))
                 {
                     if (GetIsObjectValid(target))
                     {
                         if (ability.DisplaysActivationMessage)
-                            Messaging.SendMessageNearbyToPlayers(activator, LocaleString.PlayerReadiesAbilityOnTarget.ToLocalizedString(GetName(activator), ability.Name.ToLocalizedString(), GetName(target)));
+                            Messaging.SendMessageNearbyToPlayers(caster, LocaleString.PlayerReadiesAbilityOnTarget.ToLocalizedString(GetName(caster), ability.Name.ToLocalizedString(), GetName(target)));
                     }
                     else
                     {
                         if (ability.DisplaysActivationMessage)
-                            Messaging.SendMessageNearbyToPlayers(activator, LocaleString.PlayerReadiesAbility.ToLocalizedString(GetName(activator), ability.Name.ToLocalizedString()));
+                            Messaging.SendMessageNearbyToPlayers(caster, LocaleString.PlayerReadiesAbility.ToLocalizedString(GetName(caster), ability.Name.ToLocalizedString()));
                     }
 
-                    ActivateAbility(activator, target, feat, ability, targetLocation);
+                    ActivateAbility(caster, target, feat, ability, targetLocation);
                 }
             }
         }
@@ -466,17 +470,18 @@ namespace XM.Progression.Ability
             }
         }
 
-        private void QueueWeaponAbility(uint activator, AbilityDetail ability, FeatType feat)
+        private void QueueAbility(uint caster, AbilityDetail ability, FeatType feat)
         {
             var abilityId = Guid.NewGuid().ToString();
             // Assign local variables which will be picked up on the next weapon OnHit event by this player.
+            var activator = ability.RetargetActivatorAction?.Invoke(caster) ?? caster;
             SetLocalString(activator, ActiveActionId, abilityId);
             SetLocalInt(activator, ActiveAbilityFeatId, (int)feat);
 
-            ApplyRequirementEffects(activator, ability);
+            ApplyRequirementEffects(caster, ability);
 
-            var abilityRecastDelay = ability.RecastDelay?.Invoke(activator) ?? 0.0f;
-            _recast.ApplyRecastDelay(activator, ability.RecastGroup, abilityRecastDelay, false);
+            var abilityRecastDelay = ability.RecastDelay?.Invoke(caster) ?? 0.0f;
+            _recast.ApplyRecastDelay(caster, ability.RecastGroup, abilityRecastDelay, false);
 
             // Activator must attack within 30 seconds after queueing or else it wears off.
             DelayCommand(30.0f, () =>

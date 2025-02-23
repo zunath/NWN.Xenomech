@@ -14,6 +14,7 @@ namespace XM.Progression.Ability
         public LocaleString Description { get; set; }
         public AbilityCategoryType Category { get; set; }
         public AbilityActivationAction ActivationAction { get; set; }
+        public AbilityRetargetActivatorAction RetargetActivatorAction { get; set; }
         public AbilityImpactAction ImpactAction { get; set; }
         public AbilityActivationDelayAction ActivationDelay { get; set; }
         public AbilityRecastDelayAction RecastDelay { get; set; }
@@ -40,6 +41,7 @@ namespace XM.Progression.Ability
 
         public AbilityDetail()
         {
+            ActivationType = AbilityActivationType.Casted;
             ActivationVisualEffect = VisualEffectType.None;
             AnimationType = AnimationType.Invalid;
             Category = AbilityCategoryType.Invalid;

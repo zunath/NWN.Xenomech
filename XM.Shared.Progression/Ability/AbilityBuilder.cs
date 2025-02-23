@@ -382,6 +382,13 @@ namespace XM.Progression.Ability
             return this;
         }
 
+        public AbilityBuilder ModifyActivator(AbilityRetargetActivatorAction action)
+        {
+            _activeAbility.RetargetActivatorAction = action;
+
+            return this;
+        }
+
         /// <summary>
         /// Returns a built list of abilities.
         /// </summary>
