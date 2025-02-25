@@ -119,17 +119,17 @@ namespace XM.Progression.StatusEffect
         public void ApplyPermanentStatusEffect<T>(uint source, uint creature)
             where T: IStatusEffect
         {
-            ApplyStatusEffect<T>(source, creature, -1);
+            ApplyStatusEffectInternal(typeof(T), source, creature, -1, true);
         }
 
         public void ApplyPermanentStatusEffect(Type type, uint source, uint creature)
         {
-            ApplyStatusEffect(type, source, creature, -1);
+            ApplyStatusEffectInternal(type, source, creature, -1, true);
         }
 
-        private void ApplyStatusEffect(Type type, uint source, uint creature, int durationTicks)
+        private void ApplyStatusEffectInternal(Type type, uint source, uint creature, int durationTicks, bool isPermanent)
         {
-            if (durationTicks <= 0)
+            if (!isPermanent && durationTicks <= 0)
             {
                 SendMessageToPC(source, LocaleString.YourSpellWasResisted.ToLocalizedString());
                 return;
@@ -197,7 +197,7 @@ namespace XM.Progression.StatusEffect
             where T: IStatusEffect
         {
             var type = typeof(T);
-            ApplyStatusEffect(type, source, creature, durationTicks);
+            ApplyStatusEffectInternal(type, source, creature, durationTicks, false);
         }
 
         private void RemoveStatusEffect(Type type, uint creature, uint source)
