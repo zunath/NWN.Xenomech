@@ -12,6 +12,7 @@ namespace XM.Progression.Skill.SkillDefinition
         public LocaleString Name => LocaleString.Pistol;
         public string IconResref => "skl_pistol";
         public FeatType LoreFeat => FeatType.PistolLore;
+        public FeatType PassiveFeat => FeatType.TrueShot;
         public List<BaseItemType> BaseItems { get; } =
         [
             BaseItemType.Pistol,

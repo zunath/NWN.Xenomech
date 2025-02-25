@@ -12,6 +12,7 @@ namespace XM.Progression.Skill.SkillDefinition
         public LocaleString Name => LocaleString.Longsword;
         public string IconResref => "skl_longsword";
         public FeatType LoreFeat => FeatType.LongswordLore;
+        public FeatType PassiveFeat => FeatType.ShiningBlade;
         public List<BaseItemType> BaseItems { get; } =
         [
             BaseItemType.Longsword,

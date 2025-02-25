@@ -12,6 +12,7 @@ namespace XM.Progression.Skill.SkillDefinition
         public LocaleString Name => LocaleString.Throwing;
         public string IconResref => "skl_throwing";
         public FeatType LoreFeat => FeatType.ThrowingLore;
+        public FeatType PassiveFeat => FeatType.StarStrike;
         public List<BaseItemType> BaseItems { get; } =
         [
             BaseItemType.Dart,

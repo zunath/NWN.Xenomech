@@ -12,6 +12,7 @@ namespace XM.Progression.Skill.SkillDefinition
         public LocaleString Name => LocaleString.Club;
         public string IconResref => "skl_club";
         public FeatType LoreFeat => FeatType.ClubLore;
+        public FeatType PassiveFeat => FeatType.HexaStrike;
         public List<BaseItemType> BaseItems { get; } =
         [
             BaseItemType.Club,

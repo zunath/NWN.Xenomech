@@ -12,6 +12,7 @@ namespace XM.Progression.Skill.SkillDefinition
         public LocaleString Name => LocaleString.Axe;
         public string IconResref => "skl_axe";
         public FeatType LoreFeat => FeatType.AxeLore;
+        public FeatType PassiveFeat => FeatType.PrimalRend;
 
         public List<BaseItemType> BaseItems { get; } =
         [

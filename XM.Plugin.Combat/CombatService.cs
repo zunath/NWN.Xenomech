@@ -7,6 +7,7 @@ using XM.Plugin.Combat.StatusEffectDefinition.Buff;
 using XM.Plugin.Combat.StatusEffectDefinition.Debuff;
 using XM.Progression.Ability;
 using XM.Progression.Beast;
+using XM.Progression.Event;
 using XM.Progression.Skill;
 using XM.Progression.Stat;
 using XM.Progression.Stat.Entity;
@@ -65,7 +66,11 @@ namespace XM.Plugin.Combat
             _event.Subscribe<NWNXEvent.OnBroadcastAttackOfOpportunityBefore>(DisableAttacksOfOpportunity);
             _event.Subscribe<PlayerEvent.OnDamaged>(RemoveEffectsOnDamaged);
             _event.Subscribe<CreatureEvent.OnDamaged>(RemoveEffectsOnDamaged);
+            _event.Subscribe<StatEvent.PassiveTPBonusAcquiredEvent>(ApplyPassiveTPBonus);
+            _event.Subscribe<StatEvent.PassiveTPBonusRemovedEvent>(RemovePassiveTPBonus);
         }
+
+
 
 
         public void Init()
@@ -624,9 +629,29 @@ namespace XM.Plugin.Combat
             return totalTP;
         }
 
-        internal void GainTP(uint target, int amount)
+        internal void UpdateTP(uint target, int tp)
         {
-            _stat.SetTP(target, amount);
+            _stat.SetTP(target, tp);
+        }
+
+        private void ApplyPassiveTPBonus(uint creature)
+        {
+            var weapon = GetItemInSlot(InventorySlotType.RightHand, creature);
+            var skill = _skill.GetSkillOfWeapon(weapon);
+
+            if (skill == SkillType.Invalid)
+                return;
+
+            var definition = _skill.GetSkillDefinition(skill);
+            if (!_ability.IsFeatRegistered(definition.PassiveFeat))
+                return;
+
+            var ability = _ability.GetAbilityDetail(definition.PassiveFeat);
+            _statusEffect.ApplyPermanentStatusEffect(ability.PassiveWeaponSkillStatusEffectType, creature, creature);
+        }
+        private void RemovePassiveTPBonus(uint creature)
+        {
+            _statusEffect.RemoveStatusEffectBySourceType(creature, StatusEffectSourceType.WeaponSkill);
         }
 
         private void RemoveEffectsOnDamaged(uint creature)

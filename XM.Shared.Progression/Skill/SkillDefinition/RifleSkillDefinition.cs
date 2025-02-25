@@ -12,6 +12,7 @@ namespace XM.Progression.Skill.SkillDefinition
         public LocaleString Name => LocaleString.Rifle;
         public string IconResref => "skl_rifle";
         public FeatType LoreFeat => FeatType.RifleLore;
+        public FeatType PassiveFeat => FeatType.Trueflight;
         public List<BaseItemType> BaseItems { get; } =
         [
             BaseItemType.Rifle,

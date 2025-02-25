@@ -12,6 +12,7 @@ namespace XM.Progression.Skill.SkillDefinition
         public LocaleString Name => LocaleString.Polearm;
         public string IconResref => "skl_polearm";
         public FeatType LoreFeat => FeatType.PolearmLore;
+        public FeatType PassiveFeat => FeatType.Drakesbane;
         public List<BaseItemType> BaseItems { get; } =
         [
             BaseItemType.ShortSpear,

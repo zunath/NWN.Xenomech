@@ -1169,7 +1169,7 @@
           "id": 66778,
           "type": "cexolocstring",
           "value": {
-            "0": "Telegraph"
+            "0": "Give TP"
           }
         },
         "OnClick": {

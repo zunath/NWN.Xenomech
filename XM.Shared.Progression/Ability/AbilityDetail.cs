@@ -1,9 +1,11 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using XM.Progression.Ability.Telegraph;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
+using SkillType = XM.Progression.Skill.SkillType;
 
 namespace XM.Progression.Ability
 {
@@ -38,6 +40,8 @@ namespace XM.Progression.Ability
         public AbilityTelegraphAction TelegraphAction { get; set; }
         public TelegraphType TelegraphType { get; set; }
         public Vector2 TelegraphSize { get; set; }
+        public SkillType WeaponSkillType { get; set; }
+        public Type PassiveWeaponSkillStatusEffectType { get; set; }
 
         public AbilityDetail()
         {

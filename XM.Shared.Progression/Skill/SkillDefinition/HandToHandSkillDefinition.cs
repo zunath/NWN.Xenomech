@@ -12,6 +12,7 @@ namespace XM.Progression.Skill.SkillDefinition
         public LocaleString Name => LocaleString.HandToHand;
         public string IconResref => "skl_handtohand";
         public FeatType LoreFeat => FeatType.HandToHandLore;
+        public FeatType PassiveFeat => FeatType.AsuranFists;
         public List<BaseItemType> BaseItems { get; } =
         [
             BaseItemType.Claw,

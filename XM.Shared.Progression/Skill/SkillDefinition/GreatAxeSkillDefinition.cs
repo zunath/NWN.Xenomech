@@ -12,6 +12,7 @@ namespace XM.Progression.Skill.SkillDefinition
         public LocaleString Name => LocaleString.GreatAxe;
         public string IconResref => "skl_greataxe";
         public FeatType LoreFeat => FeatType.GreatAxeLore;
+        public FeatType PassiveFeat => FeatType.Upheaval;
         public List<BaseItemType> BaseItems { get; } =
         [
             BaseItemType.GreatAxe

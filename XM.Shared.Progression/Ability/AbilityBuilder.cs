@@ -3,8 +3,10 @@ using System.Numerics;
 using XM.Progression.Ability.Telegraph;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
+using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
+using SkillType = XM.Progression.Skill.SkillType;
 
 namespace XM.Progression.Ability
 {
@@ -385,6 +387,16 @@ namespace XM.Progression.Ability
         public AbilityBuilder ModifyActivator(AbilityRetargetActivatorAction action)
         {
             _activeAbility.RetargetActivatorAction = action;
+
+            return this;
+        }
+
+        public AbilityBuilder HasPassiveWeaponSkill<T>(SkillType weaponSkillType)
+            where T: IStatusEffect
+        {
+            _activeAbility.ActivationType = AbilityActivationType.PassiveWeaponSkill;
+            _activeAbility.WeaponSkillType = weaponSkillType;
+            _activeAbility.PassiveWeaponSkillStatusEffectType = typeof(T);
 
             return this;
         }

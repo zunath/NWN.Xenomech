@@ -23,6 +23,8 @@ namespace XM.Progression.Stat
     [ServiceBinding(typeof(IInitializable))]
     public class StatService: IInitializable
     {
+        private const int PassiveWeaponSkillTPThreshold = 2000;
+
         private readonly DBService _db;
         private const string NPCEPStatVariable = "EP";
         private const string NPCTPStatVariable = "TP";
@@ -205,6 +207,8 @@ namespace XM.Progression.Stat
             _event.RegisterEvent<StatEvent.PlayerHPAdjustedEvent>(ProgressionEventScript.PlayerHPAdjustedScript);
             _event.RegisterEvent<StatEvent.PlayerEPAdjustedEvent>(ProgressionEventScript.PlayerEPAdjustedScript);
             _event.RegisterEvent<StatEvent.PlayerTPAdjustedEvent>(ProgressionEventScript.PlayerTPAdjustedScript);
+            _event.RegisterEvent<StatEvent.PassiveTPBonusAcquiredEvent>(ProgressionEventScript.PlayerPassiveTPBonusAcquiredScript);
+            _event.RegisterEvent<StatEvent.PassiveTPBonusRemovedEvent>(ProgressionEventScript.PlayerPassiveTPBonusRemovedScript);
         }
 
         private void SubscribeEvents()
@@ -918,11 +922,25 @@ namespace XM.Progression.Stat
             {
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+                var oldTP = dbPlayerStat.TP;
                 dbPlayerStat.TP = amount;
 
                 _db.Set(dbPlayerStat);
 
                 _event.PublishEvent<UIEvent.UIRefreshEvent>(creature);
+
+                // Below the threshold before this change but now we're at or above it.
+                if (oldTP < PassiveWeaponSkillTPThreshold && 
+                    dbPlayerStat.TP >= PassiveWeaponSkillTPThreshold)
+                {
+                    _event.PublishEvent<StatEvent.PassiveTPBonusAcquiredEvent>(creature);
+                }
+                // Above the threshold before this change but now we're below it.
+                else if (oldTP >= PassiveWeaponSkillTPThreshold &&
+                         dbPlayerStat.TP < PassiveWeaponSkillTPThreshold)
+                {
+                    _event.PublishEvent<StatEvent.PassiveTPBonusRemovedEvent>(creature);
+                }
             }
             else
             {
@@ -1258,5 +1276,12 @@ namespace XM.Progression.Stat
             }
         }
 
+        [ScriptHandler("bread_test6")]
+        public void DebugTP()
+        {
+            var player = GetLastUsedBy();
+            var tp = GetCurrentTP(player) + 500;
+            SetTP(player, tp);
+        }
     }
 }

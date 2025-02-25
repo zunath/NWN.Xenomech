@@ -448,7 +448,7 @@ namespace XM.Shared.API.NWNX.CreaturePlugin
         /// <param name="creature">The creature object.</param>
         /// <param name="skill">The skill id.</param>
         /// <param name="rank">The value to set as the skill rank.</param>
-        public static void SetSkillRank(uint creature, SkillType skill, int rank)
+        public static void SetSkillRank(uint creature, NWNSkillType skill, int rank)
         {
             NWN.Core.NWNX.CreaturePlugin.SetSkillRank(creature, (int)skill, rank);
         }
@@ -460,7 +460,7 @@ namespace XM.Shared.API.NWNX.CreaturePlugin
         /// <param name="skill">The skill id.</param>
         /// <param name="level">The level they gained skill ranks.</param>
         /// <returns>The rank in a skill assigned at a level (-1 on error).</returns>
-        public static int GetSkillRankByLevel(uint creature, SkillType skill, int level)
+        public static int GetSkillRankByLevel(uint creature, NWNSkillType skill, int level)
         {
             return NWN.Core.NWNX.CreaturePlugin.GetSkillRankByLevel(creature, (int)skill, level);
         }
@@ -473,7 +473,7 @@ namespace XM.Shared.API.NWNX.CreaturePlugin
         /// <param name="level">The level they gained skill ranks.</param>
         /// <param name="rank">The value to set as the skill rank.</param>
         /// <note>It only affects the leveling array. To effectively change the skill rank on the current level, NWNX_Creature_SetSkillRank is also needed.</note>
-        public static void SetSkillRankByLevel(uint creature, SkillType skill, int rank, int level)
+        public static void SetSkillRankByLevel(uint creature, NWNSkillType skill, int rank, int level)
         {
             NWN.Core.NWNX.CreaturePlugin.SetSkillRankByLevel(creature, (int)skill, rank, level);
         }
@@ -768,7 +768,7 @@ namespace XM.Shared.API.NWNX.CreaturePlugin
             bool isForceMax = false,
             SavingThrowCategoryType saveType = SavingThrowCategoryType.Invalid,
             SavingThrowType saveSpecificType = SavingThrowType.Invalid,
-            SkillType skill = SkillType.Invalid,
+            NWNSkillType skill = NWNSkillType.Invalid,
             AbilityType abilityScore = AbilityType.Invalid,
             bool isOffhand = false)
         {

@@ -12,6 +12,7 @@ namespace XM.Progression.Skill.SkillDefinition
         public LocaleString Name => LocaleString.Dagger;
         public string IconResref => "skl_dagger";
         public FeatType LoreFeat => FeatType.DaggerLore;
+        public FeatType PassiveFeat => FeatType.DancingEdge;
         public List<BaseItemType> BaseItems { get; } =
         [
             BaseItemType.Dagger

@@ -13,5 +13,11 @@ namespace XM.Progression.Event
         public struct PlayerTPAdjustedEvent : IXMEvent
         {
         }
+        public struct PassiveTPBonusAcquiredEvent : IXMEvent
+        {
+        }
+        public struct PassiveTPBonusRemovedEvent : IXMEvent
+        {
+        }
     }
 }

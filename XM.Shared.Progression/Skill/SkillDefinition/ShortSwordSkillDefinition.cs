@@ -12,6 +12,7 @@ namespace XM.Progression.Skill.SkillDefinition
         public LocaleString Name => LocaleString.ShortSword;
         public string IconResref => "skl_shortsword";
         public FeatType LoreFeat => FeatType.ShortSwordLore;
+        public FeatType PassiveFeat => FeatType.FrostbiteBlade;
         public List<BaseItemType> BaseItems { get; } =
         [
             BaseItemType.ShortSword,

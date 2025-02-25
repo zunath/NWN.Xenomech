@@ -1,6 +1,6 @@
 namespace XM.Shared.API.Constants
 {
-    public enum SkillType
+    public enum NWNSkillType
     {
         Invalid = -1,
         AnimalEmpathy = 0,

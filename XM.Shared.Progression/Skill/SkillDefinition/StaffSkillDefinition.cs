@@ -12,6 +12,7 @@ namespace XM.Progression.Skill.SkillDefinition
         public LocaleString Name => LocaleString.Staff;
         public string IconResref => "skl_staff";
         public FeatType LoreFeat => FeatType.StaffLore;
+        public FeatType PassiveFeat => FeatType.Shattersoul;
         public List<BaseItemType> BaseItems { get; } =
         [
             BaseItemType.QuarterStaff,

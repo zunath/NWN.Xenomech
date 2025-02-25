@@ -12,6 +12,7 @@ namespace XM.Progression.Skill.SkillDefinition
         public LocaleString Name => LocaleString.GreatSword;
         public string IconResref => "skl_greatsword";
         public FeatType LoreFeat => FeatType.GreatSwordLore;
+        public FeatType PassiveFeat => FeatType.Scourge;
         public List<BaseItemType> BaseItems { get; } =
         [
             BaseItemType.GreatSword

@@ -7,8 +7,10 @@ namespace XM.Progression.StatusEffect
 {
     public class CreatureStatusEffect
     {
-        private readonly HashSet<IStatusEffect> _activeEffects = new();
-
+        private readonly HashSet<IStatusEffect> _allActiveEffects = new();
+        private readonly HashSet<IStatusEffect> _tickEffects = new();
+        private readonly HashSet<IStatusEffect> _onHitEffects = new();
+        private readonly Dictionary<StatusEffectSourceType, HashSet<IStatusEffect>> _effectsBySourceType = new();
         public StatGroup Stats { get; set; }
 
         public void Add(IStatusEffect statusEffect)
@@ -23,7 +25,20 @@ namespace XM.Progression.StatusEffect
                 Stats.Resists[type] += value;
             }
 
-            _activeEffects.Add(statusEffect);
+            _allActiveEffects.Add(statusEffect);
+
+            if (statusEffect.ActivationType == StatusEffectActivationType.Tick)
+            {
+                _tickEffects.Add(statusEffect);
+            }
+            else if (statusEffect.ActivationType == StatusEffectActivationType.OnHit)
+            {
+                _onHitEffects.Add(statusEffect);
+            }
+
+            if (!_effectsBySourceType.ContainsKey(statusEffect.SourceType))
+                _effectsBySourceType[statusEffect.SourceType] = new HashSet<IStatusEffect>();
+            _effectsBySourceType[statusEffect.SourceType].Add(statusEffect);
         }
 
         public void Remove(IStatusEffect statusEffect)
@@ -38,17 +53,43 @@ namespace XM.Progression.StatusEffect
                 Stats.Resists[type] -= value;
             }
 
-            _activeEffects.Remove(statusEffect);
+            _allActiveEffects.Remove(statusEffect);
+            if (_tickEffects.Contains(statusEffect))
+                _tickEffects.Remove(statusEffect);
+            if (_onHitEffects.Contains(statusEffect))
+                _onHitEffects.Remove(statusEffect);
+
+            if (_effectsBySourceType.ContainsKey(statusEffect.SourceType) &&
+                _effectsBySourceType[statusEffect.SourceType].Contains(statusEffect))
+                _effectsBySourceType[statusEffect.SourceType].Remove(statusEffect);
         }
 
         public HashSet<IStatusEffect> GetAllEffects()
         {
-            return _activeEffects.ToHashSet();
+            return _allActiveEffects.ToHashSet();
+        }
+
+        public HashSet<IStatusEffect> GetAllTickEffects()
+        {
+            return _tickEffects.ToHashSet();
+        }
+
+        public HashSet<IStatusEffect> GetAllOnHitEffects()
+        {
+            return _onHitEffects.ToHashSet();
+        }
+
+        public HashSet<IStatusEffect> GetAllBySourceType(StatusEffectSourceType sourceType)
+        {
+            if (!_effectsBySourceType.ContainsKey(sourceType))
+                return new HashSet<IStatusEffect>();
+
+            return _effectsBySourceType[sourceType].ToHashSet();
         }
 
         public bool HasEffect(Type effectType)
         {
-            return _activeEffects.Any(x => x.GetType() == effectType);
+            return _allActiveEffects.Any(x => x.GetType() == effectType);
         }
 
         public CreatureStatusEffect()

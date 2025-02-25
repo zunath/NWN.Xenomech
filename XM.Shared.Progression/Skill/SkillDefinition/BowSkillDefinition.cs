@@ -12,6 +12,7 @@ namespace XM.Progression.Skill.SkillDefinition
         public LocaleString Name => LocaleString.Bow;
         public string IconResref => "skl_bow";
         public FeatType LoreFeat => FeatType.BowLore;
+        public FeatType PassiveFeat => FeatType.ApexArrow;
         public List<BaseItemType> BaseItems { get; } =
         [
             BaseItemType.LongBow,

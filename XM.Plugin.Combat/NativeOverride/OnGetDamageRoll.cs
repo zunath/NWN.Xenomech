@@ -88,8 +88,8 @@ namespace XM.Plugin.Combat.NativeOverride
                 ? _combat.CalculateTPGainPlayer(attacker, true)
                 : _combat.CalculateTPGainNPC(attacker, true);
 
-            _combat.GainTP(attacker, attackerTPAmount);
-            _combat.GainTP(defender, defenderTPAmount);
+            _combat.UpdateTP(attacker, attackerTPAmount);
+            _combat.UpdateTP(defender, defenderTPAmount);
         }
 
         private void OnDamaged(uint attacker, uint defender)
