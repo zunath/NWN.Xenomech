@@ -14,5 +14,16 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill
         public override StatusEffectActivationType ActivationType => StatusEffectActivationType.OnHit;
         public override StatusEffectSourceType SourceType => StatusEffectSourceType.WeaponSkill;
         public override float Frequency => -1;
+
+        protected override void OnHit(uint creature, uint target, int damage)
+        {
+            var restore = (int)(damage * 0.2f);
+            var hasDamage = GetCurrentHitPoints(creature) < GetMaxHitPoints(creature);
+
+            if (restore > 0 && hasDamage)
+            {
+                ApplyEffectToObject(DurationType.Instant, EffectHeal(restore), creature);
+            }
+        }
     }
 }

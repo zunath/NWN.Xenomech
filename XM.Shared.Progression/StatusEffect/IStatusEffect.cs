@@ -27,6 +27,6 @@ namespace XM.Progression.StatusEffect
         void ApplyEffect(uint source, uint creature, int durationTicks);
         void RemoveEffect(uint creature);
         void TickEffect(uint creature);
-        void OnHitEffect(uint creature, uint target);
+        void OnHitEffect(uint creature, uint target, int damage);
     }
 }

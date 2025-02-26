@@ -76,10 +76,10 @@ namespace XM.Progression.StatusEffect
             Tick(creature);
         }
 
-        protected virtual void OnHit(uint creature, uint target) { }
-        public void OnHitEffect(uint creature, uint target)
+        protected virtual void OnHit(uint creature, uint target, int damage) { }
+        public void OnHitEffect(uint creature, uint target, int damage)
         {
-            OnHit(creature, target);
+            OnHit(creature, target, damage);
         }
     }
 }

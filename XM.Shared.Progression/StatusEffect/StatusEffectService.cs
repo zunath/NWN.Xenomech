@@ -43,11 +43,11 @@ namespace XM.Progression.StatusEffect
             _event.Subscribe<StatusEffectEvent.OnApplyStatusEffect>(OnApplyNWNStatusEffect);
             _event.Subscribe<StatusEffectEvent.OnRemoveStatusEffect>(OnRemoveNWNStatusEffect);
             _event.Subscribe<StatusEffectEvent.OnStatusEffectInterval>(OnNWNStatusEffectInterval);
-
             _event.Subscribe<ModuleEvent.OnPlayerEnter>(OnPlayerEnter);
-
             _event.Subscribe<JobEvent.PlayerChangedJobEvent>(OnChangeJobs);
+            _event.Subscribe<XMEvent.OnDamageDealt>(OnDealtDamage);
         }
+
 
 
         private void OnPlayerEnter(uint module)
@@ -281,13 +281,14 @@ namespace XM.Progression.StatusEffect
             }
         }
 
-        public void RunOnHitEffects(uint attacker, uint defender)
+        private void OnDealtDamage(uint attacker)
         {
+            var data = _event.GetEventData<XMEvent.OnDamageDealt>();
             var effects = GetCreatureStatusEffects(attacker);
 
             foreach (var effect in effects.GetAllOnHitEffects())
             {
-                effect.OnHitEffect(attacker, defender);
+                effect.OnHitEffect(attacker, data.Target, data.Damage);
             }
         }
     }

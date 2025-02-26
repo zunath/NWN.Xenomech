@@ -70,9 +70,6 @@ namespace XM.Plugin.Combat
             _event.Subscribe<StatEvent.PassiveTPBonusRemovedEvent>(RemovePassiveTPBonus);
         }
 
-
-
-
         public void Init()
         {
             DisableDefaultCombatMessages();
@@ -644,6 +641,9 @@ namespace XM.Plugin.Combat
 
             var definition = _skill.GetSkillDefinition(skill);
             if (!_ability.IsFeatRegistered(definition.PassiveFeat))
+                return;
+
+            if (!GetHasFeat(definition.PassiveFeat, creature))
                 return;
 
             var ability = _ability.GetAbilityDetail(definition.PassiveFeat);
