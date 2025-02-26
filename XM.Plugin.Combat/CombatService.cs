@@ -68,6 +68,7 @@ namespace XM.Plugin.Combat
             _event.Subscribe<CreatureEvent.OnDamaged>(RemoveEffectsOnDamaged);
             _event.Subscribe<StatEvent.PassiveTPBonusAcquiredEvent>(ApplyPassiveTPBonus);
             _event.Subscribe<StatEvent.PassiveTPBonusRemovedEvent>(RemovePassiveTPBonus);
+            _event.Subscribe<XMEvent.OnDamageDealt>(OnDamageDealt);
         }
 
         public void Init()
@@ -343,6 +344,13 @@ namespace XM.Plugin.Combat
 
             var attackerAttack = CalculateAttack(attacker, weapon, attackType);
             var defenderDefense = CalculateDefense(defender);
+
+            var defenseModifier = 1 + _stat.GetDefenseModifier(defender);
+            defenderDefense = (int)(defenderDefense * defenseModifier);
+
+            var defenseBypassModifier = 1 - _stat.GetDefenseBypassModifier(attacker);
+            defenderDefense = (int)(defenderDefense * defenseBypassModifier);
+
             if (defenderDefense < 1)
                 defenderDefense = 1;
 
@@ -699,7 +707,7 @@ namespace XM.Plugin.Combat
             return hasParalysis;
         }
 
-        internal void HandleEtherLink(uint attacker)
+        private void HandleEtherLink(uint attacker)
         {
             if (!_beast.IsBeast(attacker))
                 return;
@@ -714,6 +722,21 @@ namespace XM.Plugin.Combat
                 var owner = GetMaster(attacker);
                 _stat.RestoreEP(owner, 5);
             }
+        }
+
+        private void HandleRestoreEPOnHit(uint attacker)
+        {
+            var epRestore = _stat.GetEPRestoreOnHit(attacker);
+            if (epRestore <= 0)
+                return;
+
+            _stat.RestoreEP(attacker, epRestore);
+        }
+
+        private void OnDamageDealt(uint attacker)
+        {
+            HandleEtherLink(attacker);
+            HandleRestoreEPOnHit(attacker);
         }
     }
 }

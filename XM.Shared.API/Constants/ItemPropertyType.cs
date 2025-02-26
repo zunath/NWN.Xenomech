@@ -119,5 +119,15 @@ namespace XM.Shared.API.Constants
         AbilityRecastReduction = 118,
         EPRegen = 119,
         EtherDefense = 120,
+        AccuracyModifier = 121,
+        TPGainModifier = 122,
+        RecastReductionModifier = 123,
+        TPCostModifier = 124,
+        DefenseBypassModifier = 125,
+        HealingModifier = 126,
+        EPRestoreOnHit = 127,
+        DefenseModifier = 128,
+        EtherDefenseModifier = 129,
+        ExtraAttackModifier = 130,
     }
 }

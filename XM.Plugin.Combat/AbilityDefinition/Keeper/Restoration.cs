@@ -58,7 +58,9 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
             var rate = rateAction(power);
             var hpFloor = hpFloorAction(power);
 
+            var healModifier = 1 + _stat.GetHealingModifier(activator);
             var healAmount = (int)Math.Floor((power - powerFloor) / rate) + hpFloor;
+            healAmount *= (int)healModifier;
 
             if (_status.HasEffect<DivineSealStatusEffect>(activator))
             {

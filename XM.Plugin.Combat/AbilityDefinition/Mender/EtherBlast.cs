@@ -55,7 +55,9 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
             var rate = rateAction(power);
             var hpConst = constAction(power);
 
+            var healModifier = 1 + _stat.GetHealingModifier(activator);
             var healAmount = (int)Math.Floor((Math.Floor(power / 2.0) / rate)) + hpConst;
+            healAmount *= (int)healModifier;
 
             if (healAmount < minCap)
             {

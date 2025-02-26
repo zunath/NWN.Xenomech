@@ -99,7 +99,6 @@ namespace XM.Plugin.Combat.NativeOverride
         private void OnDamaged(uint attacker, uint defender, int damage)
         {
             ApplyTP(attacker, defender);
-            _combat.HandleEtherLink(attacker);
             
             _event.PublishEvent(attacker, new XMEvent.OnDamageDealt(defender, damage));
         }

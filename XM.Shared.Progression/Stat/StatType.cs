@@ -32,5 +32,15 @@
         QueuedDMGBonus = 27,
         Paralysis = 28,
         EtherLink = 29,
+        AccuracyModifier = 30,
+        TPGainModifier = 31,
+        RecastReductionModifier = 32,
+        TPCostModifier = 33,
+        DefenseBypassModifier = 34,
+        HealingModifier = 35,
+        EPRestoreOnHit = 36,
+        DefenseModifier = 37,
+        EtherDefenseModifier = 38,
+        ExtraAttackModifier = 39,
     }
 }
