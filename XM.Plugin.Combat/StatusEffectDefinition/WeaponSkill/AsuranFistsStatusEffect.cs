@@ -6,19 +6,19 @@ using XM.Shared.Core.Localization;
 
 namespace XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill
 {
-    [ServiceBinding(typeof(TrueShotStatusEffect))]
-    public class TrueShotStatusEffect : StatusEffectBase
+    [ServiceBinding(typeof(AsuranFistsStatusEffect))]
+    public class AsuranFistsStatusEffect : StatusEffectBase
     {
-        public override LocaleString Name => LocaleString.TrueShot;
-        public override EffectIconType Icon => EffectIconType.TrueShot;
+        public override LocaleString Name => LocaleString.Upheaval;
+        public override EffectIconType Icon => EffectIconType.Upheaval;
         public override StatusEffectStackType StackingType => StatusEffectStackType.Disabled;
         public override StatusEffectActivationType ActivationType => StatusEffectActivationType.Passive;
         public override StatusEffectSourceType SourceType => StatusEffectSourceType.WeaponSkill;
         public override float Frequency => -1;
 
-        public TrueShotStatusEffect()
+        public AsuranFistsStatusEffect()
         {
-            Stats[StatType.AccuracyModifier] = 20;
+            Stats[StatType.TPCostModifier] = -20;
         }
     }
 }

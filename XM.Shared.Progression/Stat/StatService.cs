@@ -665,7 +665,7 @@ namespace XM.Progression.Stat
         {
             var effects = _status.GetCreatureStatusEffects(creature);
             var statusRecastReduction = effects.Stats[StatType.RecastReduction];
-            var statusRecastReductionModifier = 1 + effects.Stats[StatType.RecastReductionModifier] * 0.01f;
+            var statusRecastReductionModifier = 1 - effects.Stats[StatType.RecastReductionModifier] * 0.01f;
 
             if (GetIsPC(creature))
             {

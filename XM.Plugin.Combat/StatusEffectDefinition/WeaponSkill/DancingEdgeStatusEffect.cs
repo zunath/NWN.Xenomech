@@ -6,19 +6,19 @@ using XM.Shared.Core.Localization;
 
 namespace XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill
 {
-    [ServiceBinding(typeof(TrueShotStatusEffect))]
-    public class TrueShotStatusEffect : StatusEffectBase
+    [ServiceBinding(typeof(DancingEdgeStatusEffect))]
+    public class DancingEdgeStatusEffect : StatusEffectBase
     {
-        public override LocaleString Name => LocaleString.TrueShot;
-        public override EffectIconType Icon => EffectIconType.TrueShot;
+        public override LocaleString Name => LocaleString.DancingEdge;
+        public override EffectIconType Icon => EffectIconType.DancingEdge;
         public override StatusEffectStackType StackingType => StatusEffectStackType.Disabled;
         public override StatusEffectActivationType ActivationType => StatusEffectActivationType.Passive;
         public override StatusEffectSourceType SourceType => StatusEffectSourceType.WeaponSkill;
         public override float Frequency => -1;
 
-        public TrueShotStatusEffect()
+        public DancingEdgeStatusEffect()
         {
-            Stats[StatType.AccuracyModifier] = 20;
+            Stats[StatType.TPGainModifier] = 20;
         }
     }
 }

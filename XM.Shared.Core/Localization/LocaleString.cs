@@ -1474,5 +1474,15 @@ namespace XM.Shared.Core.Localization
         FiveThousand = 1787,
         YourBeastCannotUseSic = 1788,
         YourBeastHasNoTarget = 1789,
+        AccuracyPercentage = 1790,
+        TPGainPercentage = 1791,
+        RecastReductionPercentage = 1792,
+        TPCostPercentage = 1793,
+        DefenseBypassPercentage = 1794,
+        HealingPercentage = 1795,
+        EPRestoreOnHit = 1796,
+        DefensePercentage = 1797,
+        EtherDefensePercentage = 1798,
+        ExtraAttackPercentage = 1799,
     }
 }
