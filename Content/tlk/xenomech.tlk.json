@@ -7192,6 +7192,10 @@
     {
       "id": 1799,
       "text": "Extra Attack %"
+    },
+    {
+      "id": 1800,
+      "text": "Insufficient TP."
     }
   ]
 }

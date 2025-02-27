@@ -32,7 +32,7 @@ namespace XM.Progression.Job.JobDefinition
         public int GetFeatAcquiredLevel(FeatType feat)
         {
             return !_featsByLevel.ContainsKey(feat) 
-                ? 999 
+                ? -1 
                 : _featsByLevel[feat];
         }
     }

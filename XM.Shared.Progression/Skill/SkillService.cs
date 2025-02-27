@@ -233,5 +233,19 @@ namespace XM.Progression.Skill
                 }
             }
         }
+
+
+        [ScriptHandler("bread_test2")]
+        public void TestBread2()
+        {
+            var player = GetLastUsedBy();
+            var weapon = GetItemInSlot(InventorySlotType.RightHand, player);
+            var skill = GetSkillOfWeapon(weapon);
+            if (skill == SkillType.Invalid)
+                return;
+
+            LevelUpSkill(player, skill);
+        }
+
     }
 }

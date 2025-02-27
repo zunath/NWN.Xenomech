@@ -337,13 +337,24 @@ namespace XM.Progression.Ability
         }
 
         /// <summary>
-        /// Adds an EP requirement to use the ability at this level.
+        /// Adds an EP requirement to use the ability.
         /// </summary>
-        /// <param name="requiredEP">The amount of EP needed to use this ability at this level.</param>
+        /// <param name="requiredEP">The amount of EP needed to use this ability.</param>
         /// <returns>An ability builder with the configured options</returns>
         public AbilityBuilder RequirementEP(int requiredEP)
         {
             _activeAbility.EPRequired = requiredEP;
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a TP requirement to use the ability.
+        /// </summary>
+        /// <param name="requiredTP">The amount of TP needed to use this ability.</param>
+        /// <returns>An ability builder with the configured options</returns>
+        public AbilityBuilder RequirementTP(int requiredTP)
+        {
+            _activeAbility.TPRequired = requiredTP;
             return this;
         }
 

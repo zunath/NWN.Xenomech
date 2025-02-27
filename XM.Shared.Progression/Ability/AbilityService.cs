@@ -210,6 +210,13 @@ namespace XM.Progression.Ability
                 return false;
             }
 
+            // TP check
+            if (_stat.GetCurrentTP(activator) < ability.TPRequired)
+            {
+                SendMessageToPC(activator, LocaleString.InsufficientTP.ToLocalizedString());
+                return false;
+            }
+
             // Perk-specific custom validation logic.
             var customValidationResult = ability.CustomValidation == null 
                 ? string.Empty 
@@ -554,6 +561,8 @@ namespace XM.Progression.Ability
         {
             if(!HasManafont(activator))
                 _stat.ReduceEP(activator, ability.EPRequired);
+
+            _stat.ReduceTP(activator, ability.TPRequired);
         }
 
         private void AddJobFeat(uint player)

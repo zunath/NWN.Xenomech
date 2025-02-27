@@ -661,6 +661,36 @@ namespace XM.Progression.Stat
             _event.PublishEvent<StatEvent.PlayerEPAdjustedEvent>(creature);
         }
 
+        public void ReduceTP(uint creature, int reduceBy)
+        {
+            if (reduceBy <= 0)
+                return;
+
+            if (GetIsPC(creature) && !GetIsDM(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+
+                dbPlayerStat.TP -= reduceBy;
+
+                if (dbPlayerStat.TP < 0)
+                    dbPlayerStat.TP = 0;
+
+                _db.Set(dbPlayerStat);
+            }
+            else
+            {
+                var tp = GetLocalInt(creature, NPCTPStatVariable);
+                tp -= reduceBy;
+                if (tp < 0)
+                    tp = 0;
+
+                SetLocalInt(creature, NPCTPStatVariable, tp);
+            }
+
+            _event.PublishEvent<StatEvent.PlayerTPAdjustedEvent>(creature);
+        }
+
         public int GetRecastReduction(uint creature)
         {
             var effects = _status.GetCreatureStatusEffects(creature);

@@ -561,7 +561,7 @@ namespace XM.Plugin.Combat.NativeOverride
             if (!_creatureAttackDelays.ContainsKey(creature))
                 return;
 
-            _creatureAttackDelays[creature] = DateTime.UtcNow;
+            _creatureAttackDelays[creature] = DateTime.MinValue;
         }
     }
 }

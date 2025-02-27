@@ -26,6 +26,7 @@ namespace XM.Progression.Ability
         public AbilityIsToggledAction AbilityIsToggledAction { get; set; }
         public AbilityToggleAction AbilityToggleAction { get; set; }
         public int EPRequired { get; set; }
+        public int TPRequired { get; set; }
         public VisualEffectType ActivationVisualEffect { get; set; }
         public RecastGroup RecastGroup { get; set; }
         public AbilityActivationType ActivationType { get; set; }

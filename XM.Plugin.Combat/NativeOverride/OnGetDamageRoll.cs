@@ -72,7 +72,7 @@ namespace XM.Plugin.Combat.NativeOverride
                     attackType,
                     hitResult);
 
-                if (damage > 0)
+                if (damage > 0 && defender.m_bPlotObject == 0)
                 {
                     OnDamaged(attacker.m_idSelf, defender.m_idSelf, damage);
                 }
