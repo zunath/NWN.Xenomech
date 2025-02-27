@@ -33,7 +33,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
             _builder.Create(FeatType.FastBlade)
                 .Name(LocaleString.FastBlade)
                 .Description(LocaleString.FastBladeDescription)
-                .IsWeaponSkill()
+                .IsWeaponSkill(SkillType.Longsword, 160)
                 .RequirementTP(500)
                 .ResistType(ResistType.Darkness)
                 .IncreasesStat(StatType.QueuedDMGBonus, 10);

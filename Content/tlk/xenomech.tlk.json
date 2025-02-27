@@ -7196,6 +7196,10 @@
     {
       "id": 1800,
       "text": "Insufficient TP."
+    },
+    {
+      "id": 1801,
+      "text": "Incorrect weapon equipped for this ability."
     }
   ]
 }

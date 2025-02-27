@@ -1485,5 +1485,6 @@ namespace XM.Shared.Core.Localization
         EtherDefensePercentage = 1798,
         ExtraAttackPercentage = 1799,
         InsufficientTP = 1800,
+        IncorrectWeaponEquippedForThisAbility = 1801,
     }
 }

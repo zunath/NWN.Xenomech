@@ -42,6 +42,7 @@ namespace XM.Progression.Ability
         public TelegraphType TelegraphType { get; set; }
         public Vector2 TelegraphSize { get; set; }
         public SkillType WeaponSkillType { get; set; }
+        public int SkillLevelRequired { get; set; }
         public Type PassiveWeaponSkillStatusEffectType { get; set; }
 
         public AbilityDetail()
@@ -51,11 +52,14 @@ namespace XM.Progression.Ability
             AnimationType = AnimationType.Invalid;
             Category = AbilityCategoryType.Invalid;
             EPRequired = 0;
+            TPRequired = 0;
             MaxRange = 5.0f;
             IsHostileAbility = false;
             DisplaysActivationMessage = true;
             StatGroup = new ItemStatGroup();
             TelegraphType = TelegraphType.None;
+            WeaponSkillType = SkillType.Invalid;
+            SkillLevelRequired = 0;
         }
     }
 }

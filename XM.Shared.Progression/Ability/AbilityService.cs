@@ -10,6 +10,7 @@ using XM.Progression.Event;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
 using XM.Progression.Recast;
+using XM.Progression.Skill;
 using XM.Progression.Stat;
 using XM.Progression.Stat.Entity;
 using XM.Shared.API.Constants;
@@ -37,6 +38,7 @@ namespace XM.Progression.Ability
         private readonly Dictionary<JobType, List<FeatType>> _abilitiesByJob = new();
         private readonly XMEventService _event;
         private readonly TelegraphService _telegraph;
+        private readonly SkillService _skill;
 
         public AbilityService(
             DBService db,
@@ -46,7 +48,8 @@ namespace XM.Progression.Ability
             JobService job,
             IList<IAbilityListDefinition> abilityDefinitions,
             XMEventService @event,
-            TelegraphService telegraph)
+            TelegraphService telegraph,
+            SkillService skill)
         {
             _db = db;
             _activity = activity;
@@ -56,6 +59,7 @@ namespace XM.Progression.Ability
             _abilityDefinitions = abilityDefinitions;
             _event = @event;
             _telegraph = telegraph;
+            _skill = skill;
 
             CacheAbilities();
 
@@ -201,6 +205,27 @@ namespace XM.Progression.Ability
             {
                 SendMessageToPC(activator, LocaleString.YouMayOnlyUseThisAbilityOnEnemies.ToLocalizedString());
                 return false;
+            }
+
+            // Weapon check
+            if (ability.WeaponSkillType != SkillType.Invalid)
+            {
+                var weapon = GetItemInSlot(InventorySlotType.RightHand, activator);
+                var skill = _skill.GetSkillOfWeapon(weapon);
+                if (skill != ability.WeaponSkillType)
+                {
+                    SendMessageToPC(activator, LocaleString.IncorrectWeaponEquippedForThisAbility.ToLocalizedString());
+                    return false;
+                }
+
+                var requiredLevel = ability.SkillLevelRequired;
+                var level = _skill.GetSkillLevel(activator, skill);
+
+                if (level < requiredLevel)
+                {
+                    SendMessageToPC(activator, LocaleString.InsufficientLevel.ToLocalizedString());
+                    return false;
+                }
             }
 
             // EP check

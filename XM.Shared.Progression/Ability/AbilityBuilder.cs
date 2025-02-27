@@ -95,9 +95,11 @@ namespace XM.Progression.Ability
         /// Weapon skills also reset the delay between attacks for one hit.
         /// </summary>
         /// <returns>An ability builder with the configured options.</returns>
-        public AbilityBuilder IsWeaponSkill()
+        public AbilityBuilder IsWeaponSkill(SkillType skillType, int levelRequired)
         {
             _activeAbility.ActivationType = AbilityActivationType.WeaponSkill;
+            _activeAbility.WeaponSkillType = skillType;
+            _activeAbility.SkillLevelRequired = levelRequired;
             _activeAbility.AbilityIsToggledAction = null;
 
             return this;
