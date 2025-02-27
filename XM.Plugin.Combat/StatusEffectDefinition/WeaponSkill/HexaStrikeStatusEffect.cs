@@ -18,7 +18,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill
 
         public HexaStrikeStatusEffect()
         {
-            Stats[StatType.HealingModifier] = 20;
+            StatGroup.Stats[StatType.HealingModifier] = 20;
         }
     }
 }

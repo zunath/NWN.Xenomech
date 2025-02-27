@@ -19,12 +19,12 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         protected override void Apply(uint creature, int durationTicks)
         {
-            Stats[StatType.Might] = Stat.GetAttribute(creature, AbilityType.Might);
-            Stats[StatType.Perception] = Stat.GetAttribute(creature, AbilityType.Perception);
-            Stats[StatType.Vitality] = Stat.GetAttribute(creature, AbilityType.Vitality);
-            Stats[StatType.Willpower] = Stat.GetAttribute(creature, AbilityType.Willpower);
-            Stats[StatType.Agility] = Stat.GetAttribute(creature, AbilityType.Agility);
-            Stats[StatType.Social] = Stat.GetAttribute(creature, AbilityType.Social);
+            StatGroup.Stats[StatType.Might] = Stat.GetAttribute(creature, AbilityType.Might);
+            StatGroup.Stats[StatType.Perception] = Stat.GetAttribute(creature, AbilityType.Perception);
+            StatGroup.Stats[StatType.Vitality] = Stat.GetAttribute(creature, AbilityType.Vitality);
+            StatGroup.Stats[StatType.Willpower] = Stat.GetAttribute(creature, AbilityType.Willpower);
+            StatGroup.Stats[StatType.Agility] = Stat.GetAttribute(creature, AbilityType.Agility);
+            StatGroup.Stats[StatType.Social] = Stat.GetAttribute(creature, AbilityType.Social);
         }
     }
 }

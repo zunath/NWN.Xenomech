@@ -9,12 +9,12 @@
         public int MainHandDelay { get; set; }
         public int OffHandDelay { get; set; }
         
-        public StatGroup Stats { get; set; }
+        public StatGroup StatGroup { get; set; }
 
         public NPCStats()
         {
             EvasionGrade = GradeType.C;
-            Stats = new StatGroup();
+            StatGroup = new StatGroup();
         }
     }
 }

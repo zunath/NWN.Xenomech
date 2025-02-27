@@ -18,7 +18,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill
 
         public TrueFlightStatusEffect()
         {
-            Stats[StatType.DefenseBypassModifier] = 20;
+            StatGroup.Stats[StatType.DefenseBypassModifier] = 20;
         }
     }
 }

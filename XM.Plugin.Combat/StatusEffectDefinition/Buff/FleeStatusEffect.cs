@@ -18,7 +18,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public FleeStatusEffect()
         {
-            Stats[StatType.Defense] = 30;
+            StatGroup.Stats[StatType.Defense] = 30;
         }
 
         protected override void Apply(uint creature, int durationTicks)

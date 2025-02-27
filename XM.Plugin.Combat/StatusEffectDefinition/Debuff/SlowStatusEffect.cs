@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Debuff
 
         public SlowStatusEffect()
         {
-            Stats[StatType.Slow] = 15;
+            StatGroup.Stats[StatType.Slow] = 15;
         }
 
         protected override void Apply(uint creature, int durationTicks)

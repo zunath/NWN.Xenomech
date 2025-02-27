@@ -18,7 +18,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill
 
         public AsuranFistsStatusEffect()
         {
-            Stats[StatType.TPCostModifier] = -20;
+            StatGroup.Stats[StatType.TPCostModifier] = -20;
         }
     }
 }

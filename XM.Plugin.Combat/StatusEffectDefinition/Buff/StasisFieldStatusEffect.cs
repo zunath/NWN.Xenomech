@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public StasisFieldStatusEffect()
         {
-            Stats[StatType.Evasion] = 40;
+            StatGroup.Stats[StatType.Evasion] = 40;
         }
         protected override void Apply(uint creature, int durationTicks)
         {

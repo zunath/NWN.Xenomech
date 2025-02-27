@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Debuff
 
         public StarStrikeDebuffStatusEffect()
         {
-            Stats[StatType.AccuracyModifier] = -20;
+            StatGroup.Stats[StatType.AccuracyModifier] = -20;
         }
     }
 }

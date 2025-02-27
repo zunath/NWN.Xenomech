@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public IceWardStatusEffect()
         {
-            Stats.Resists[ResistType.Ice] = 50;
+            StatGroup.Resists[ResistType.Ice] = 50;
         }
         protected override void Apply(uint creature, int durationTicks)
         {

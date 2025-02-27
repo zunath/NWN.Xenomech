@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Debuff
 
         public SnarlStatusEffect()
         {
-            Stats[StatType.Accuracy] = -15;
+            StatGroup.Stats[StatType.Accuracy] = -15;
         }
         protected override void Apply(uint creature, int durationTicks)
         {

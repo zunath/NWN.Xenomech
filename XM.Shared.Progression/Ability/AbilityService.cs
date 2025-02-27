@@ -58,7 +58,14 @@ namespace XM.Progression.Ability
             _telegraph = telegraph;
 
             CacheAbilities();
+
+            RegisterEvents();
             SubscribeEvents();
+        }
+
+        private void RegisterEvents()
+        {
+            _event.RegisterEvent<AbilityEvent.OnQueueWeaponSkillScript>(ProgressionEventScript.OnQueueWeaponSkillScript);
         }
 
         private void SubscribeEvents()
@@ -254,8 +261,9 @@ namespace XM.Progression.Ability
             if (!IsFeatRegistered(feat)) return;
             var ability = GetAbilityDetail(feat);
 
-            // Weapon abilities are queued for the next time the activator's attack lands on an enemy.
-            if (ability.ActivationType == AbilityActivationType.QueuedAttack)
+            // Weapon skills & queued attacks are queued for the next time the activator's attack lands on an enemy.
+            if (ability.ActivationType == AbilityActivationType.QueuedAttack ||
+                ability.ActivationType == AbilityActivationType.WeaponSkill)
             {
                 if (CanUseAbility(caster, target, feat, targetLocation))
                 {
@@ -488,6 +496,11 @@ namespace XM.Progression.Ability
             {
                 DequeueWeaponAbility(activator, ability.DisplaysActivationMessage);
             });
+
+            if (ability.ActivationType == AbilityActivationType.WeaponSkill)
+            {
+                _event.PublishEvent<AbilityEvent.OnQueueWeaponSkillScript>(caster);
+            }
         }
 
         private void DequeueWeaponAbility(uint target, bool sendMessage = true)
@@ -553,7 +566,7 @@ namespace XM.Progression.Ability
             var dbPlayerStat = _db.Get<PlayerStat>(playerId);
             var ability = _abilities[data.Feat];
 
-            dbPlayerStat.AbilityStats.Add(data.Feat, ability.Stats);
+            dbPlayerStat.AbilityStats.Add(data.Feat, ability.StatGroup);
             _db.Set(dbPlayerStat);
 
             ability.AbilityEquippedAction?.Invoke(player);

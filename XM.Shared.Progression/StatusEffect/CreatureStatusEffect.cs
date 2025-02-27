@@ -11,18 +11,18 @@ namespace XM.Progression.StatusEffect
         private readonly HashSet<IStatusEffect> _tickEffects = new();
         private readonly HashSet<IStatusEffect> _onHitEffects = new();
         private readonly Dictionary<StatusEffectSourceType, HashSet<IStatusEffect>> _effectsBySourceType = new();
-        public StatGroup Stats { get; set; }
+        public StatGroup StatGroup { get; set; }
 
         public void Add(IStatusEffect statusEffect)
         {
-            foreach (var (type, value) in statusEffect.Stats)
+            foreach (var (type, value) in statusEffect.StatGroup.Stats)
             {
-                Stats[type] += value;
+                StatGroup.Stats[type] += value;
             }
 
-            foreach (var (type, value) in statusEffect.Stats.Resists)
+            foreach (var (type, value) in statusEffect.StatGroup.Resists)
             {
-                Stats.Resists[type] += value;
+                StatGroup.Resists[type] += value;
             }
 
             _allActiveEffects.Add(statusEffect);
@@ -43,14 +43,14 @@ namespace XM.Progression.StatusEffect
 
         public void Remove(IStatusEffect statusEffect)
         {
-            foreach (var (type, value) in statusEffect.Stats)
+            foreach (var (type, value) in statusEffect.StatGroup.Stats)
             {
-                Stats[type] -= value;
+                StatGroup.Stats[type] -= value;
             }
 
-            foreach (var (type, value) in statusEffect.Stats.Resists)
+            foreach (var (type, value) in statusEffect.StatGroup.Resists)
             {
-                Stats.Resists[type] -= value;
+                StatGroup.Resists[type] -= value;
             }
 
             _allActiveEffects.Remove(statusEffect);
@@ -94,7 +94,7 @@ namespace XM.Progression.StatusEffect
 
         public CreatureStatusEffect()
         {
-            Stats = new StatGroup();
+            StatGroup = new StatGroup();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Debuff
 
         public PrimalRendDebuffStatusEffect()
         {
-            Stats[StatType.DefenseModifier] = -20;
+            StatGroup.Stats[StatType.DefenseModifier] = -20;
         }
     }
 }

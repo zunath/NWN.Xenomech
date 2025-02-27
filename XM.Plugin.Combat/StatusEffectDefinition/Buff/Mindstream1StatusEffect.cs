@@ -23,7 +23,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public Mindstream1StatusEffect()
         {
-            Stats[StatType.EPRegen] = 3;
+            StatGroup.Stats[StatType.EPRegen] = 3;
         }
         protected override void Apply(uint creature, int durationTicks)
         {

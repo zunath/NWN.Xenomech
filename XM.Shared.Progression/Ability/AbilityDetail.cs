@@ -36,7 +36,7 @@ namespace XM.Progression.Ability
         public bool DisplaysActivationMessage { get; set; }
         public int ResonanceCost { get; set; }
         public string IconResref { get; set; }
-        public StatGroup Stats { get; set; }
+        public StatGroup StatGroup { get; set; }
         public AbilityTelegraphAction TelegraphAction { get; set; }
         public TelegraphType TelegraphType { get; set; }
         public Vector2 TelegraphSize { get; set; }
@@ -53,7 +53,7 @@ namespace XM.Progression.Ability
             MaxRange = 5.0f;
             IsHostileAbility = false;
             DisplaysActivationMessage = true;
-            Stats = new ItemStatGroup();
+            StatGroup = new ItemStatGroup();
             TelegraphType = TelegraphType.None;
         }
     }

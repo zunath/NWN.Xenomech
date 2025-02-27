@@ -18,7 +18,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill
 
         public ShattersoulStatusEffect()
         {
-            Stats[StatType.EPRestoreOnHit] = 2;
+            StatGroup.Stats[StatType.EPRestoreOnHit] = 2;
         }
     }
 }

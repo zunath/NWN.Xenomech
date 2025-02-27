@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Debuff
 
         public DrakesbaneDebuffStatusEffect()
         {
-            Stats[StatType.EtherDefenseModifier] = -20;
+            StatGroup.Stats[StatType.EtherDefenseModifier] = -20;
         }
     }
 }

@@ -144,27 +144,30 @@ namespace XM.Progression.Beast
                 EvasionGrade = definition.Grades.Evasion,
                 MainHandDMG = _stat.CalculateDMG(level, definition.Grades.DMG),
                 MainHandDelay = definition.AttackDelay,
-                Stats =
+                StatGroup =
                 {
-                    [StatType.MaxHP] = _stat.CalculateHP(level, definition.Grades.MaxHP),
-                    [StatType.MaxEP] = _stat.CalculateHP(level, definition.Grades.MaxEP),
-                    [StatType.Might] = _stat.CalculateHP(level, definition.Grades.Might),
-                    [StatType.Perception] = _stat.CalculateHP(level, definition.Grades.Perception),
-                    [StatType.Vitality] = _stat.CalculateHP(level, definition.Grades.Vitality),
-                    [StatType.Agility] = _stat.CalculateHP(level, definition.Grades.Agility),
-                    [StatType.Willpower] = _stat.CalculateHP(level, definition.Grades.Willpower),
-                    [StatType.Social] = _stat.CalculateHP(level, definition.Grades.Social),
+                    Stats =
+                    {
+                        [StatType.MaxHP] = _stat.CalculateHP(level, definition.Grades.MaxHP),
+                        [StatType.MaxEP] = _stat.CalculateHP(level, definition.Grades.MaxEP),
+                        [StatType.Might] = _stat.CalculateHP(level, definition.Grades.Might),
+                        [StatType.Perception] = _stat.CalculateHP(level, definition.Grades.Perception),
+                        [StatType.Vitality] = _stat.CalculateHP(level, definition.Grades.Vitality),
+                        [StatType.Agility] = _stat.CalculateHP(level, definition.Grades.Agility),
+                        [StatType.Willpower] = _stat.CalculateHP(level, definition.Grades.Willpower),
+                        [StatType.Social] = _stat.CalculateHP(level, definition.Grades.Social),
+                    }
                 }
             };
 
             if (GetHasFeat(FeatType.BeastSpeed, beast))
             {
-                npcStats.Stats[StatType.Haste] += 15;
+                npcStats.StatGroup.Stats[StatType.Haste] += 15;
             }
 
             if (GetHasFeat(FeatType.EtherLink, beast))
             {
-                npcStats.Stats[StatType.EtherLink] += 20;
+                npcStats.StatGroup.Stats[StatType.EtherLink] += 20;
             }
 
             _stat.SetNPCStats(beast, npcStats);

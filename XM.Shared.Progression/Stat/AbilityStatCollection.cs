@@ -10,7 +10,7 @@ namespace XM.Progression.Stat
             var total = 0;
             foreach (var (_, ability) in this)
             {
-                total += ability[type];
+                total += ability.Stats[type];
             }
 
             return total;

@@ -18,7 +18,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Debuff
 
         public GravitonFieldStatusEffect()
         {
-            Stats[StatType.Evasion] = -25;
+            StatGroup.Stats[StatType.Evasion] = -25;
         }
 
         protected override void Apply(uint creature, int durationTicks)

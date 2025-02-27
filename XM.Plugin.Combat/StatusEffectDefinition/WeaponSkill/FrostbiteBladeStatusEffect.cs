@@ -18,7 +18,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill
 
         public FrostbiteBladeStatusEffect()
         {
-            Stats[StatType.Haste] = 10;
+            StatGroup.Stats[StatType.Haste] = 10;
         }
     }
 }

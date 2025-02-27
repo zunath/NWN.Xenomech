@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public ThirdEyeStatusEffect()
         {
-            Stats[StatType.DamageReduction] = 10;
+            StatGroup.Stats[StatType.DamageReduction] = 10;
         }
 
         protected override void Apply(uint creature, int durationTicks)

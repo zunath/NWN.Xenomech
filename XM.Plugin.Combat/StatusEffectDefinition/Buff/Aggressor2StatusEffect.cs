@@ -23,7 +23,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public Aggressor2StatusEffect()
         {
-            Stats[StatType.Enmity] = 10;
+            StatGroup.Stats[StatType.Enmity] = 10;
         }
         protected override void Apply(uint creature, int durationTicks)
         {

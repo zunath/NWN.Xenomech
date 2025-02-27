@@ -18,7 +18,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill
 
         public ApexArrowStatusEffect()
         {
-            Stats[StatType.ExtraAttackModifier] = 20;
+            StatGroup.Stats[StatType.ExtraAttackModifier] = 20;
         }
     }
 }

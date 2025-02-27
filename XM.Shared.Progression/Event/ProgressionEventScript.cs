@@ -2,6 +2,9 @@
 {
     internal class ProgressionEventScript
     {
+        // Ability
+        public const string OnQueueWeaponSkillScript = "queue_wpnskill";
+
         // Status Effects
         public const string OnApplyStatusEffectScript = "status_apply";
         public const string OnRemoveStatusEffectScript = "status_remove";

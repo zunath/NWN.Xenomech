@@ -24,14 +24,14 @@ namespace XM.Progression.StatusEffect
         public virtual bool SendsWornOffMessage => true;
         public abstract float Frequency { get; }
         public virtual bool IsRemovedOnJobChange => true;
-        public StatGroup Stats { get; }
+        public StatGroup StatGroup { get; }
         public virtual List<Type> MorePowerfulEffectTypes { get; }
         public virtual List<Type> LessPowerfulEffectTypes { get; }
 
         protected StatusEffectBase()
         {
             Id = Guid.NewGuid().ToString();
-            Stats = new StatGroup();
+            StatGroup = new StatGroup();
             MorePowerfulEffectTypes = new List<Type>();
             LessPowerfulEffectTypes = new List<Type>();
         }

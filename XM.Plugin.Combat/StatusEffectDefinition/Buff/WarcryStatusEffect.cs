@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public WarcryStatusEffect()
         {
-            Stats[StatType.Attack] = 25;
+            StatGroup.Stats[StatType.Attack] = 25;
         }
 
         protected override void Apply(uint creature, int durationTicks)

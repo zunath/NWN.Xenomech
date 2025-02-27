@@ -91,6 +91,19 @@ namespace XM.Progression.Ability
         }
 
         /// <summary>
+        /// Indicates this ability is executed on the next weapon hit.
+        /// Weapon skills also reset the delay between attacks for one hit.
+        /// </summary>
+        /// <returns>An ability builder with the configured options.</returns>
+        public AbilityBuilder IsWeaponSkill()
+        {
+            _activeAbility.ActivationType = AbilityActivationType.WeaponSkill;
+            _activeAbility.AbilityIsToggledAction = null;
+
+            return this;
+        }
+
+        /// <summary>
         /// Indicates this ability is executed as a toggle and can be turned off at will by the creature.
         /// </summary>
         /// <param name="abilityIsToggled">The command run to determine if the ability is toggled.</param>
@@ -365,14 +378,14 @@ namespace XM.Progression.Ability
 
         public AbilityBuilder IncreasesStat(StatType stat, int amount)
         {
-            _activeAbility.Stats[stat] += amount;
+            _activeAbility.StatGroup.Stats[stat] += amount;
 
             return this;
         }
 
         public AbilityBuilder IncreasesResist(ResistType type, int amount)
         {
-            _activeAbility.Stats.Resists[type] += amount;
+            _activeAbility.StatGroup.Resists[type] += amount;
 
             return this;
         }

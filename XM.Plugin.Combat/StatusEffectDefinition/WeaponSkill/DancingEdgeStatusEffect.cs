@@ -18,7 +18,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill
 
         public DancingEdgeStatusEffect()
         {
-            Stats[StatType.TPGainModifier] = 20;
+            StatGroup.Stats[StatType.TPGainModifier] = 20;
         }
     }
 }

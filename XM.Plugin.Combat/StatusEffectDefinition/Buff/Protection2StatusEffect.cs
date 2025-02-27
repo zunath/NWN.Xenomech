@@ -28,7 +28,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public Protection2StatusEffect()
         {
-            Stats[StatType.Defense] = 50;
+            StatGroup.Stats[StatType.Defense] = 50;
         }
         protected override void Apply(uint creature, int durationTicks)
         {

@@ -18,7 +18,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill
 
         public UpheavalStatusEffect()
         {
-            Stats[StatType.RecastReductionModifier] = 20;
+            StatGroup.Stats[StatType.RecastReductionModifier] = 20;
         }
     }
 }

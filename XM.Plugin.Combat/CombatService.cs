@@ -447,7 +447,7 @@ namespace XM.Plugin.Combat
             if (ability == null)
                 return 0;
 
-            var dmg = ability.Stats[StatType.QueuedDMGBonus];
+            var dmg = ability.StatGroup.Stats[StatType.QueuedDMGBonus];
 
             if (ability.ResistType != ResistType.Invalid)
             {
@@ -524,9 +524,9 @@ namespace XM.Plugin.Combat
             if (GetIsPC(attacker) && !GetIsDMPossessed(attacker))
             {
                 var playerId = PlayerId.Get(attacker);
-                var dbPlayerCombat = _db.Get<PlayerStat>(playerId);
-                delay = dbPlayerCombat.EquippedItemStats[InventorySlotType.RightHand].Delay +
-                        dbPlayerCombat.EquippedItemStats[InventorySlotType.LeftHand].Delay;
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+                delay = dbPlayerStat.EquippedItemStats[InventorySlotType.RightHand].Delay +
+                        dbPlayerStat.EquippedItemStats[InventorySlotType.LeftHand].Delay;
             }
             else
             {
@@ -717,7 +717,7 @@ namespace XM.Plugin.Combat
 
             var npcStats = _stat.GetNPCStats(attacker);
 
-            if (XMRandom.D100(1) <= npcStats.Stats[StatType.EtherLink])
+            if (XMRandom.D100(1) <= npcStats.StatGroup.Stats[StatType.EtherLink])
             {
                 var owner = GetMaster(attacker);
                 _stat.RestoreEP(owner, 5);

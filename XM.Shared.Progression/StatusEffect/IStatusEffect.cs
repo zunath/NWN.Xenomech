@@ -20,7 +20,7 @@ namespace XM.Progression.StatusEffect
         bool SendsWornOffMessage { get; }
         bool IsRemovedOnJobChange { get; }
         float Frequency { get; }
-        public StatGroup Stats { get; }
+        public StatGroup StatGroup { get; }
         public List<Type> MorePowerfulEffectTypes { get; }
         public List<Type> LessPowerfulEffectTypes { get; }
         LocaleString CanApply(uint creature);

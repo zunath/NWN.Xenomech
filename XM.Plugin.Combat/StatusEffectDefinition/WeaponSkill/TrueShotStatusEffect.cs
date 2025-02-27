@@ -18,7 +18,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill
 
         public TrueShotStatusEffect()
         {
-            Stats[StatType.AccuracyModifier] = 20;
+            StatGroup.Stats[StatType.AccuracyModifier] = 20;
         }
     }
 }

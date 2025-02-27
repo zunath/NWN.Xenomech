@@ -23,7 +23,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Debuff
 
         public Cripple2StatusEffect()
         {
-            Stats[StatType.Defense] = 40;
+            StatGroup.Stats[StatType.Defense] = 40;
         }
         protected override void Apply(uint creature, int durationTicks)
         {
