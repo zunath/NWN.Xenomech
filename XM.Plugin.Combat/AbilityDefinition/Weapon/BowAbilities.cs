@@ -3,6 +3,7 @@ using Anvil.Services;
 using XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill;
 using XM.Progression.Ability;
 using XM.Progression.Skill;
+using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
@@ -28,7 +29,13 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void FlamingArrow()
         {
-
+            _builder.Create(FeatType.FlamingArrow)
+                .Name(LocaleString.FlamingArrow)
+                .Description(LocaleString.FlamingArrowDescription)
+                .IsWeaponSkill(SkillType.Bow, 160)
+                .RequirementTP(500)
+                .ResistType(ResistType.Fire)
+                .IncreasesStat(StatType.QueuedDMGBonus, 10);
         }
 
         private void PiercingArrow()

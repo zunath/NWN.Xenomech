@@ -3,6 +3,7 @@ using Anvil.Services;
 using XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill;
 using XM.Progression.Ability;
 using XM.Progression.Skill;
+using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
@@ -28,7 +29,13 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void HotShot()
         {
-
+            _builder.Create(FeatType.HotShot)
+                .Name(LocaleString.HotShot)
+                .Description(LocaleString.HotShotDescription)
+                .IsWeaponSkill(SkillType.Rifle, 160)
+                .RequirementTP(500)
+                .ResistType(ResistType.Fire)
+                .IncreasesStat(StatType.QueuedDMGBonus, 9);
         }
 
         private void SplitShot()
@@ -38,7 +45,13 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void SniperShot()
         {
-
+            _builder.Create(FeatType.SniperShot)
+                .Name(LocaleString.SniperShot)
+                .Description(LocaleString.SniperShotDescription)
+                .IsWeaponSkill(SkillType.Rifle, 540)
+                .RequirementTP(1250)
+                .ResistType(ResistType.Wind)
+                .IncreasesStat(StatType.QueuedDMGBonus, 14);
         }
 
         private void SlugShot()

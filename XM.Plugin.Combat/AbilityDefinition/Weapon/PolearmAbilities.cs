@@ -3,6 +3,7 @@ using Anvil.Services;
 using XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill;
 using XM.Progression.Ability;
 using XM.Progression.Skill;
+using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
@@ -28,7 +29,13 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void DoubleThrust()
         {
-
+            _builder.Create(FeatType.DoubleThrust)
+                .Name(LocaleString.DoubleThrust)
+                .Description(LocaleString.DoubleThrustDescription)
+                .IsWeaponSkill(SkillType.Polearm, 160)
+                .RequirementTP(500)
+                .ResistType(ResistType.Lightning)
+                .IncreasesStat(StatType.QueuedDMGBonus, 11);
         }
 
         private void ThunderThrust()

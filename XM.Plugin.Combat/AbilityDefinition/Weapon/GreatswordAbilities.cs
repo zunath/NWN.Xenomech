@@ -3,6 +3,7 @@ using Anvil.Services;
 using XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill;
 using XM.Progression.Ability;
 using XM.Progression.Skill;
+using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
@@ -28,7 +29,13 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void HardSlash()
         {
-
+            _builder.Create(FeatType.HardSlash)
+                .Name(LocaleString.HardSlash)
+                .Description(LocaleString.HardSlashDescription)
+                .IsWeaponSkill(SkillType.GreatSword, 160)
+                .RequirementTP(500)
+                .ResistType(ResistType.Earth)
+                .IncreasesStat(StatType.QueuedDMGBonus, 12);
         }
 
         private void Frostbite()

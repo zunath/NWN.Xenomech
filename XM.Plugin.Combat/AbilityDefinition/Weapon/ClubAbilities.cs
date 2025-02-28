@@ -3,6 +3,7 @@ using Anvil.Services;
 using XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill;
 using XM.Progression.Ability;
 using XM.Progression.Skill;
+using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
@@ -28,7 +29,13 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void ShiningStrike()
         {
-
+            _builder.Create(FeatType.ShiningStrike)
+                .Name(LocaleString.ShiningStrike)
+                .Description(LocaleString.ShiningStrikeDescription)
+                .IsWeaponSkill(SkillType.Club, 160)
+                .RequirementTP(500)
+                .ResistType(ResistType.Light)
+                .IncreasesStat(StatType.QueuedDMGBonus, 7);
         }
 
         private void SeraphStrike()
@@ -38,7 +45,13 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void Brainshaker()
         {
-
+            _builder.Create(FeatType.Brainshaker)
+                .Name(LocaleString.Brainshaker)
+                .Description(LocaleString.BrainshakerDescription)
+                .IsWeaponSkill(SkillType.Club, 540)
+                .RequirementTP(1250)
+                .ResistType(ResistType.Mind)
+                .IncreasesStat(StatType.QueuedDMGBonus, 11);
         }
 
         private void BlackHalo()

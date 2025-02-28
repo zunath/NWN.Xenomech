@@ -3,6 +3,7 @@ using Anvil.Services;
 using XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill;
 using XM.Progression.Ability;
 using XM.Progression.Skill;
+using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
@@ -28,7 +29,13 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void QuickDraw()
         {
-
+            _builder.Create(FeatType.QuickDraw)
+                .Name(LocaleString.QuickDraw)
+                .Description(LocaleString.QuickDrawDescription)
+                .IsWeaponSkill(SkillType.Pistol, 160)
+                .RequirementTP(500)
+                .ResistType(ResistType.Lightning)
+                .IncreasesStat(StatType.QueuedDMGBonus, 8);
         }
 
         private void BurningShot()

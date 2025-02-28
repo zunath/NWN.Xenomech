@@ -3,6 +3,7 @@ using Anvil.Services;
 using XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill;
 using XM.Progression.Ability;
 using XM.Progression.Skill;
+using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
@@ -43,7 +44,13 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void SharkBite()
         {
-
+            _builder.Create(FeatType.SharkBite)
+                .Name(LocaleString.SharkBite)
+                .Description(LocaleString.SharkBiteDescription)
+                .IsWeaponSkill(SkillType.Dagger, 860)
+                .RequirementTP(1500)
+                .ResistType(ResistType.Water)
+                .IncreasesStat(StatType.QueuedDMGBonus, 18);
         }
 
         private void Shadowstitch()
