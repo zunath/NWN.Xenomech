@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Anvil.Services;
+using XM.Plugin.Combat.StatusEffectDefinition.Debuff;
 using XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill;
 using XM.Progression.Ability;
 using XM.Progression.Skill;
@@ -15,12 +16,17 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
     internal class PolearmAbilities : WeaponSkillBaseAbility
     {
         private readonly AbilityBuilder _builder = new();
+        private readonly Lazy<StatusEffectService> _status;
+        private readonly SpellService _spell;
 
         public PolearmAbilities(
             Lazy<CombatService> combat,
-            Lazy<StatusEffectService> status)
+            Lazy<StatusEffectService> status,
+            SpellService spell)
             : base(combat, status)
         {
+            _status = status;
+            _spell = spell;
         }
         public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
@@ -129,12 +135,37 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void VorpalThrust()
         {
-
+            _builder.Create(FeatType.VorpalThrust)
+                .Name(LocaleString.VorpalThrust)
+                .Description(LocaleString.VorpalThrustDescription)
+                .IsWeaponSkill(SkillType.Longsword, 1130)
+                .RequirementTP(1350)
+                .HasImpactAction((activator, target, location) =>
+                {
+                    var duration = _spell.CalculateResistedTicks(target, ResistType.Water, 20);
+                    _status.Value.ApplyStatusEffect<ParalyzeStatusEffect>(activator, target, duration);
+                });
         }
 
         private void SonicThrust()
         {
+            _builder.Create(FeatType.SonicThrust)
+                .Name(LocaleString.SonicThrust)
+                .Description(LocaleString.SonicThrustDescription)
+                .IsWeaponSkill(SkillType.Longsword, 1390)
+                .RequirementTP(2000)
+                .HasActivationDelay(2f)
+                .TelegraphSize(4f, 2f)
+                .HasTelegraphConeAction((activator, targets, location) =>
+                {
+                    foreach (var target in targets)
+                    {
+                        if (GetFactionEqual(target, activator))
+                            continue;
 
+                        _status.Value.ApplyStatusEffect<SonicThrustStatusEffect>(activator, target, 1);
+                    }
+                });
         }
 
         private void Drakesbane()

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
 using Anvil.Services;
 using XM.Plugin.Combat.StatusEffectDefinition.Buff;
 using XM.Plugin.Combat.StatusEffectDefinition.Debuff;
@@ -136,7 +135,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
                 {
                     foreach (var target in targets)
                     {
-                        if (!GetFactionEqual(target, activator))
+                        if (GetFactionEqual(target, activator))
                             continue;
 
                         var duration = _spell.CalculateResistedTicks(target, ResistType.Mind, 32);
