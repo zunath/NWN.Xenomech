@@ -7220,6 +7220,10 @@
     {
       "id": 1806,
       "text": "Evasion %"
+    },
+    {
+      "id": 1807,
+      "text": "{0}'s TP has been reduced by {1}%."
     }
   ]
 }

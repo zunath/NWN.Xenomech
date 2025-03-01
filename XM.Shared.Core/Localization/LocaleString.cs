@@ -1488,5 +1488,9 @@ namespace XM.Shared.Core.Localization
         IncorrectWeaponEquippedForThisAbility = 1801,
         Blind = 1802,
         Burn = 1803,
+        AttackPercentage = 1804,
+        EtherAttackPercentage = 1805,
+        EvasionPercentage = 1806,
+        XTPHasBeenReducedByYPercent = 1807,
     }
 }
