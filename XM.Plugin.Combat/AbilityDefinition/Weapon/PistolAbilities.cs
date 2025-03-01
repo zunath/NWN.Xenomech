@@ -48,17 +48,83 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void BurningShot()
         {
+            const int DMG = 10;
+            const ResistType Resist = ResistType.Fire;
+            const DamageType DamageType = DamageType.Fire;
+            const VisualEffectType Vfx = VisualEffectType.ComHitFire;
 
+            _builder.Create(FeatType.BurningShot)
+                .Name(LocaleString.BurningShot)
+                .Description(LocaleString.BurningShotDescription)
+                .IsWeaponSkill(SkillType.Pistol, 240)
+                .RequirementTP(1000)
+                .ResistType(Resist)
+                .IncreasesStat(StatType.QueuedDMGBonus, DMG)
+                .TelegraphSize(4f, 2f)
+                .HasTelegraphConeAction((activator, targets, location) =>
+                {
+                    DamageImpact(
+                        activator,
+                        targets,
+                        DMG,
+                        Resist,
+                        DamageType,
+                        Vfx);
+                });
         }
 
         private void Ricochet()
         {
+            const int DMG = 13;
+            const ResistType Resist = ResistType.Water;
+            const DamageType DamageType = DamageType.Water;
+            const VisualEffectType Vfx = VisualEffectType.ImpDeathWard;
 
+            _builder.Create(FeatType.Ricochet)
+                .Name(LocaleString.Ricochet)
+                .Description(LocaleString.RicochetDescription)
+                .IsWeaponSkill(SkillType.Pistol, 540)
+                .RequirementTP(1250)
+                .ResistType(Resist)
+                .IncreasesStat(StatType.QueuedDMGBonus, DMG)
+                .TelegraphSize(4f, 4f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
+                {
+                    DamageImpact(
+                        activator,
+                        targets,
+                        DMG,
+                        Resist,
+                        DamageType,
+                        Vfx);
+                });
         }
 
         private void PiercingShot()
         {
+            const int DMG = 16;
+            const ResistType Resist = ResistType.Mind;
+            const DamageType DamageType = DamageType.Mind;
+            const VisualEffectType Vfx = VisualEffectType.ImpDeathWard;
 
+            _builder.Create(FeatType.PiercingShot)
+                .Name(LocaleString.PiercingShot)
+                .Description(LocaleString.PiercingShotDescription)
+                .IsWeaponSkill(SkillType.Pistol, 860)
+                .RequirementTP(1500)
+                .ResistType(Resist)
+                .IncreasesStat(StatType.QueuedDMGBonus, DMG)
+                .TelegraphSize(4f, 2f)
+                .HasTelegraphLineAction((activator, targets, location) =>
+                {
+                    DamageImpact(
+                        activator,
+                        targets,
+                        DMG,
+                        Resist,
+                        DamageType,
+                        Vfx);
+                });
         }
 
         private void ShadowBarrage()
