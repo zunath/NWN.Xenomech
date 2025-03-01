@@ -207,5 +207,7 @@ namespace XM.Shared.API.Constants
         Drakesbane = 202,
         ApexArrow = 203,
         XMBlind = 204,
+        Atonement = 205,
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Anvil.Services;
+using XM.Plugin.Combat.StatusEffectDefinition.Buff;
 using XM.Plugin.Combat.StatusEffectDefinition.Debuff;
 using XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill;
 using XM.Progression.Ability;
@@ -151,7 +152,20 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void Atonement()
         {
-
+            _builder.Create(FeatType.Atonement)
+                .Name(LocaleString.Atonement)
+                .Description(LocaleString.AtonementDescription)
+                .IsWeaponSkill(SkillType.Longsword, 1390)
+                .RequirementTP(2000)
+                .HasActivationDelay(2f)
+                .TelegraphSize(3f, 3f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
+                {
+                    foreach (var target in targets)
+                    {
+                        _status.Value.ApplyStatusEffect<AtonementStatusEffect>(activator, target, 1);
+                    }
+                });
         }
 
         private void ShiningBlade()
