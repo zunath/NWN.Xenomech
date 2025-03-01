@@ -49,17 +49,83 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void WindSlash()
         {
+            const int DMG = 10;
+            const ResistType Resist = ResistType.Wind;
+            const DamageType DamageType = DamageType.Wind;
+            const VisualEffectType Vfx = VisualEffectType.ImpDeathWard;
 
+            _builder.Create(FeatType.WindSlash)
+                .Name(LocaleString.WindSlash)
+                .Description(LocaleString.WindSlashDescription)
+                .IsWeaponSkill(SkillType.Throwing, 240)
+                .RequirementTP(1000)
+                .ResistType(Resist)
+                .IncreasesStat(StatType.QueuedDMGBonus, DMG)
+                .TelegraphSize(4f, 2f)
+                .HasTelegraphConeAction((activator, targets, location) =>
+                {
+                    DamageImpact(
+                        activator,
+                        targets,
+                        DMG,
+                        Resist,
+                        DamageType,
+                        Vfx);
+                });
         }
 
         private void ShurikenStorm()
         {
+            const int DMG = 13;
+            const ResistType Resist = ResistType.Lightning;
+            const DamageType DamageType = DamageType.Lightning;
+            const VisualEffectType Vfx = VisualEffectType.ImpLightningSmall;
 
+            _builder.Create(FeatType.ShurikenStorm)
+                .Name(LocaleString.ShurikenStorm)
+                .Description(LocaleString.ShurikenStormDescription)
+                .IsWeaponSkill(SkillType.Throwing, 540)
+                .RequirementTP(1250)
+                .ResistType(Resist)
+                .IncreasesStat(StatType.QueuedDMGBonus, DMG)
+                .TelegraphSize(3f, 3f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
+                {
+                    DamageImpact(
+                        activator,
+                        targets,
+                        DMG,
+                        Resist,
+                        DamageType,
+                        Vfx);
+                });
         }
 
         private void PhantomHurl()
         {
+            const int DMG = 16;
+            const ResistType Resist = ResistType.Darkness;
+            const DamageType DamageType = DamageType.Darkness;
+            const VisualEffectType Vfx = VisualEffectType.ImpDoom;
 
+            _builder.Create(FeatType.PhantomHurl)
+                .Name(LocaleString.PhantomHurl)
+                .Description(LocaleString.PhantomHurlDescription)
+                .IsWeaponSkill(SkillType.Throwing, 860)
+                .RequirementTP(1500)
+                .ResistType(Resist)
+                .IncreasesStat(StatType.QueuedDMGBonus, DMG)
+                .TelegraphSize(5f, 2f)
+                .HasTelegraphLineAction((activator, targets, location) =>
+                {
+                    DamageImpact(
+                        activator,
+                        targets,
+                        DMG,
+                        Resist,
+                        DamageType,
+                        Vfx);
+                });
         }
 
         private void FlameToss()
