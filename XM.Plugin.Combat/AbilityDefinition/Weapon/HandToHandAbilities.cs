@@ -48,17 +48,83 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void RagingFists()
         {
+            const int DMG = 14;
+            const ResistType Resist = ResistType.Fire;
+            const DamageType DamageType = DamageType.Fire;
+            const VisualEffectType Vfx = VisualEffectType.ComHitFire;
 
+            _builder.Create(FeatType.RagingFists)
+                .Name(LocaleString.RagingFists)
+                .Description(LocaleString.RagingFistsDescription)
+                .IsWeaponSkill(SkillType.HandToHand, 240)
+                .RequirementTP(1000)
+                .ResistType(Resist)
+                .IncreasesStat(StatType.QueuedDMGBonus, DMG)
+                .TelegraphSize(4f, 2f)
+                .HasTelegraphConeAction((activator, targets, location) =>
+                {
+                    DamageImpact(
+                        activator,
+                        targets,
+                        DMG,
+                        Resist,
+                        DamageType,
+                        Vfx);
+                });
         }
 
         private void HowlingFist()
         {
+            const int DMG = 18;
+            const ResistType Resist = ResistType.Wind;
+            const DamageType DamageType = DamageType.Wind;
+            const VisualEffectType Vfx = VisualEffectType.ImpAcidSmall;
 
+            _builder.Create(FeatType.HowlingFist)
+                .Name(LocaleString.HowlingFist)
+                .Description(LocaleString.HowlingFistDescription)
+                .IsWeaponSkill(SkillType.HandToHand, 540)
+                .RequirementTP(1250)
+                .ResistType(Resist)
+                .IncreasesStat(StatType.QueuedDMGBonus, DMG)
+                .TelegraphSize(4f, 2f)
+                .HasTelegraphLineAction((activator, targets, location) =>
+                {
+                    DamageImpact(
+                        activator,
+                        targets,
+                        DMG,
+                        Resist,
+                        DamageType,
+                        Vfx);
+                });
         }
 
         private void FinalHeaven()
         {
+            const int DMG = 22;
+            const ResistType Resist = ResistType.Light;
+            const DamageType DamageType = DamageType.Light;
+            const VisualEffectType Vfx = VisualEffectType.ImpDivineStrikeHoly;
 
+            _builder.Create(FeatType.FinalHeaven)
+                .Name(LocaleString.FinalHeaven)
+                .Description(LocaleString.FinalHeavenDescription)
+                .IsWeaponSkill(SkillType.HandToHand, 860)
+                .RequirementTP(1500)
+                .ResistType(Resist)
+                .IncreasesStat(StatType.QueuedDMGBonus, DMG)
+                .TelegraphSize(3f, 3f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
+                {
+                    DamageImpact(
+                        activator,
+                        targets,
+                        DMG,
+                        Resist,
+                        DamageType,
+                        Vfx);
+                });
         }
 
         private void DragonBlow()

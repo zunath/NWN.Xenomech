@@ -48,7 +48,29 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void SplitShot()
         {
+            const int DMG = 12;
+            const ResistType Resist = ResistType.Water;
+            const DamageType DamageType = DamageType.Water;
+            const VisualEffectType Vfx = VisualEffectType.ImpDeathWard;
 
+            _builder.Create(FeatType.SplitShot)
+                .Name(LocaleString.SplitShot)
+                .Description(LocaleString.SplitShotDescription)
+                .IsWeaponSkill(SkillType.Rifle, 240)
+                .RequirementTP(1000)
+                .ResistType(Resist)
+                .IncreasesStat(StatType.QueuedDMGBonus, DMG)
+                .TelegraphSize(4f, 2f)
+                .HasTelegraphLineAction((activator, targets, location) =>
+                {
+                    DamageImpact(
+                        activator,
+                        targets,
+                        DMG,
+                        Resist,
+                        DamageType,
+                        Vfx);
+                });
         }
 
         private void SniperShot()
@@ -64,7 +86,29 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void SlugShot()
         {
+            const int DMG = 18;
+            const ResistType Resist = ResistType.Mind;
+            const DamageType DamageType = DamageType.Mind;
+            const VisualEffectType Vfx = VisualEffectType.ImpDestruction;
 
+            _builder.Create(FeatType.SlugShot)
+                .Name(LocaleString.SlugShot)
+                .Description(LocaleString.SlugShotDescription)
+                .IsWeaponSkill(SkillType.Rifle, 860)
+                .RequirementTP(1500)
+                .ResistType(Resist)
+                .IncreasesStat(StatType.QueuedDMGBonus, DMG)
+                .TelegraphSize(4f, 4f)
+                .HasTelegraphLineAction((activator, targets, location) =>
+                {
+                    DamageImpact(
+                        activator,
+                        targets,
+                        DMG,
+                        Resist,
+                        DamageType,
+                        Vfx);
+                });
         }
 
         private void BlastShot()

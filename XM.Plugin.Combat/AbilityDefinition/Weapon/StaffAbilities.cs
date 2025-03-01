@@ -49,12 +49,56 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void RockCrusher()
         {
+            const int DMG = 9;
+            const ResistType Resist = ResistType.Earth;
+            const DamageType DamageType = DamageType.Earth;
+            const VisualEffectType Vfx = VisualEffectType.ImpAcidSmall;
 
+            _builder.Create(FeatType.RockCrusher)
+                .Name(LocaleString.RockCrusher)
+                .Description(LocaleString.RockCrusherDescription)
+                .IsWeaponSkill(SkillType.Staff, 240)
+                .RequirementTP(1000)
+                .ResistType(Resist)
+                .IncreasesStat(StatType.QueuedDMGBonus, DMG)
+                .TelegraphSize(4f, 4f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
+                {
+                    DamageImpact(
+                        activator,
+                        targets,
+                        DMG,
+                        Resist,
+                        DamageType,
+                        Vfx);
+                });
         }
 
         private void EarthCrusher()
         {
+            const int DMG = 11;
+            const ResistType Resist = ResistType.Earth;
+            const DamageType DamageType = DamageType.Earth;
+            const VisualEffectType Vfx = VisualEffectType.ImpAcidSmall;
 
+            _builder.Create(FeatType.EarthCrusher)
+                .Name(LocaleString.EarthCrusher)
+                .Description(LocaleString.EarthCrusherDescription)
+                .IsWeaponSkill(SkillType.Staff, 540)
+                .RequirementTP(1250)
+                .ResistType(Resist)
+                .IncreasesStat(StatType.QueuedDMGBonus, DMG)
+                .TelegraphSize(4f, 2f)
+                .HasTelegraphConeAction((activator, targets, location) =>
+                {
+                    DamageImpact(
+                        activator,
+                        targets,
+                        DMG,
+                        Resist,
+                        DamageType,
+                        Vfx);
+                });
         }
 
         private void Starburst()
