@@ -608,20 +608,27 @@ namespace XM.Progression.Ability
         {
             var wsAbility = GetQueuedAbility(attacker);
             if (wsAbility == null ||
-                wsAbility.ActivationType != AbilityActivationType.WeaponSkill ||
-                wsAbility.TelegraphType == TelegraphType.None)
+                wsAbility.ActivationType != AbilityActivationType.WeaponSkill)
                 return;
 
             var targetLocation = GetLocation(attacker);
-            HandleTelegraphAbility(
-                attacker,
-                telegraphTime,
-                wsAbility,
-                targetLocation,
-                (telegrapher, creatures) =>
-                {
-                    wsAbility.TelegraphAction?.Invoke(telegrapher, creatures, targetLocation);
-                });
+            if (wsAbility.TelegraphType == TelegraphType.None)
+            {
+                wsAbility.ImpactAction?.Invoke(attacker, defender, targetLocation);
+            }
+            else
+            {
+                HandleTelegraphAbility(
+                    attacker,
+                    telegraphTime,
+                    wsAbility,
+                    targetLocation,
+                    (telegrapher, creatures) =>
+                    {
+                        wsAbility.TelegraphAction?.Invoke(telegrapher, creatures, targetLocation);
+                    });
+            }
+
 
             DeleteLocalString(attacker, ActiveActionId);
             DeleteLocalInt(attacker, ActiveAbilityFeatId);
