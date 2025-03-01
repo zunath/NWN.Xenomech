@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Anvil.Services;
+using XM.Plugin.Combat.StatusEffectDefinition.Buff;
+using XM.Plugin.Combat.StatusEffectDefinition.Debuff;
 using XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill;
 using XM.Progression.Ability;
 using XM.Progression.Skill;
@@ -15,12 +17,17 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
     internal class RifleAbilities : WeaponSkillBaseAbility
     {
         private readonly AbilityBuilder _builder = new();
+        private readonly Lazy<StatusEffectService> _status;
+        private readonly SpellService _spell;
 
         public RifleAbilities(
             Lazy<CombatService> combat,
-            Lazy<StatusEffectService> status)
+            Lazy<StatusEffectService> status,
+            SpellService spell)
             : base(combat, status)
         {
+            _status = status;
+            _spell = spell;
         }
         public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
@@ -113,12 +120,44 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void BlastShot()
         {
+            _builder.Create(FeatType.BlastShot)
+                .Name(LocaleString.BlastShot)
+                .Description(LocaleString.BlastShotDescription)
+                .IsWeaponSkill(SkillType.Rifle, 1130)
+                .RequirementTP(1350)
+                .TelegraphSize(4f, 2f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
+                {
+                    foreach (var target in targets)
+                    {
+                        if (!GetFactionEqual(target, activator))
+                            continue;
 
+                        var duration = _spell.CalculateResistedTicks(target, ResistType.Fire, 10);
+                        _status.Value.ApplyStatusEffect<BurnStatusEffect>(activator, target, duration);
+                    }
+                });
         }
 
         private void HeavyShot()
         {
+            _builder.Create(FeatType.HeavyShot)
+                .Name(LocaleString.HeavyShot)
+                .Description(LocaleString.HeavyShotDescription)
+                .IsWeaponSkill(SkillType.Rifle, 1390)
+                .RequirementTP(2000)
+                .TelegraphSize(4f, 2f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
+                {
+                    foreach (var target in targets)
+                    {
+                        if (!GetFactionEqual(target, activator))
+                            continue;
 
+                        var duration = _spell.CalculateResistedTicks(target, ResistType.Earth, 20);
+                        _status.Value.ApplyStatusEffect<ParalyzeStatusEffect>(activator, target, duration);
+                    }
+                });
         }
 
         private void Trueflight()
