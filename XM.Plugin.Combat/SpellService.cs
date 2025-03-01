@@ -55,7 +55,10 @@ namespace XM.Plugin.Combat
         private float CalculateEtherAttackDefenseRatio(uint caster, uint target)
         {
             var etherAttack = _stat.GetEtherAttack(caster);
-            var etherDefense = _stat.GetDefense(target);
+            var etherDefense = _stat.GetEtherDefense(target);
+            var etherDefenseModifier = 1 + _stat.GetEtherDefenseModifier(target);
+            etherDefense = (int)(etherDefense * etherDefenseModifier);
+
             var numerator = 100f + etherAttack;
             var denominator = 100f + etherDefense;
             if (denominator == 0)

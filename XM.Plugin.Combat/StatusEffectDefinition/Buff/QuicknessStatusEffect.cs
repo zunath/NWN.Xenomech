@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public QuicknessStatusEffect()
         {
-            Stats[StatType.Haste] = 10;
+            StatGroup.Stats[StatType.Haste] = 10;
         }
 
         protected override void Apply(uint creature, int durationTicks)

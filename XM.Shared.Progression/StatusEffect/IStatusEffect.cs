@@ -10,6 +10,8 @@ namespace XM.Progression.StatusEffect
     {
         string Id { get; }
         uint Source { get; }
+        StatusEffectActivationType ActivationType { get; }
+        StatusEffectSourceType SourceType { get; }
         LocaleString Name { get; }
         EffectIconType Icon { get; }
         StatusEffectStackType StackingType { get; }
@@ -18,12 +20,13 @@ namespace XM.Progression.StatusEffect
         bool SendsWornOffMessage { get; }
         bool IsRemovedOnJobChange { get; }
         float Frequency { get; }
-        public StatGroup Stats { get; }
+        public StatGroup StatGroup { get; }
         public List<Type> MorePowerfulEffectTypes { get; }
         public List<Type> LessPowerfulEffectTypes { get; }
         LocaleString CanApply(uint creature);
         void ApplyEffect(uint source, uint creature, int durationTicks);
         void RemoveEffect(uint creature);
         void TickEffect(uint creature);
+        void OnHitEffect(uint creature, uint target, int damage);
     }
 }

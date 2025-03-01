@@ -14,6 +14,8 @@ namespace XM.Progression.StatusEffect
 
         public string Id { get; }
         public uint Source { get; private set; }
+        public virtual StatusEffectActivationType ActivationType => StatusEffectActivationType.Tick;
+        public virtual StatusEffectSourceType SourceType => StatusEffectSourceType.Normal;
         public abstract LocaleString Name { get; }
         public abstract EffectIconType Icon { get; }
         public abstract StatusEffectStackType StackingType { get; }
@@ -22,14 +24,14 @@ namespace XM.Progression.StatusEffect
         public virtual bool SendsWornOffMessage => true;
         public abstract float Frequency { get; }
         public virtual bool IsRemovedOnJobChange => true;
-        public StatGroup Stats { get; }
+        public StatGroup StatGroup { get; }
         public virtual List<Type> MorePowerfulEffectTypes { get; }
         public virtual List<Type> LessPowerfulEffectTypes { get; }
 
         protected StatusEffectBase()
         {
             Id = Guid.NewGuid().ToString();
-            Stats = new StatGroup();
+            StatGroup = new StatGroup();
             MorePowerfulEffectTypes = new List<Type>();
             LessPowerfulEffectTypes = new List<Type>();
         }
@@ -74,5 +76,10 @@ namespace XM.Progression.StatusEffect
             Tick(creature);
         }
 
+        protected virtual void OnHit(uint creature, uint target, int damage) { }
+        public void OnHitEffect(uint creature, uint target, int damage)
+        {
+            OnHit(creature, target, damage);
+        }
     }
 }

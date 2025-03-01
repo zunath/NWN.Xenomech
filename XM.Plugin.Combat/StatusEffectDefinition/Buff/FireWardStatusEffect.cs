@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public FireWardStatusEffect()
         {
-            Stats.Resists[ResistType.Fire] = 50;
+            StatGroup.Resists[ResistType.Fire] = 50;
         }
         protected override void Apply(uint creature, int durationTicks)
         {

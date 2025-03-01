@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public DarknessWardStatusEffect()
         {
-            Stats.Resists[ResistType.Darkness] = 50;
+            StatGroup.Resists[ResistType.Darkness] = 50;
         }
         protected override void Apply(uint creature, int durationTicks)
         {

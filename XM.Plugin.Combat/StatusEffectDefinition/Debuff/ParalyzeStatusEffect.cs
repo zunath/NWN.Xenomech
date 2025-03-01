@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Debuff
 
         public ParalyzeStatusEffect()
         {
-            Stats[StatType.Paralysis] = 25;
+            StatGroup.Stats[StatType.Paralysis] = 25;
         }
     }
 }

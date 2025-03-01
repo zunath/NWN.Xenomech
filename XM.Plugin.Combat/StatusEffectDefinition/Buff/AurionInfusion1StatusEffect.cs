@@ -23,7 +23,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public AurionInfusion1StatusEffect()
         {
-            Stats[StatType.EtherAttack] = 15;
+            StatGroup.Stats[StatType.EtherAttack] = 15;
         }
         protected override void Apply(uint creature, int durationTicks)
         {

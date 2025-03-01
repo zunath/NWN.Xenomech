@@ -12,23 +12,11 @@ namespace XM.Progression.Skill.SkillDefinition
         public LocaleString Name => LocaleString.Bow;
         public string IconResref => "skl_bow";
         public FeatType LoreFeat => FeatType.BowLore;
+        public FeatType PassiveFeat => FeatType.ApexArrow;
         public List<BaseItemType> BaseItems { get; } =
         [
             BaseItemType.LongBow,
             BaseItemType.ShortBow
         ];
-        public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
-        {
-            {50, FeatType.FlamingArrow},
-            {160, FeatType.PiercingArrow},
-            {240, FeatType.DullingArrow},
-            {320, FeatType.Sidewinder},
-            {540, FeatType.BlastArrow},
-            {860, FeatType.ArchingArrow},
-            {1130, FeatType.EmpyrealArrow},
-            {1390, FeatType.NamasArrow},
-            {1430, FeatType.ApexArrow},
-            {1500, FeatType.RadiantArrow},
-        };
     }
 }

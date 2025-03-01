@@ -19,7 +19,7 @@ namespace XM.Progression.Stat
             var total = 0;
             foreach (var (_, item) in this)
             {
-                total += item[type];
+                total += item.Stats[type];
             }
 
             return total;

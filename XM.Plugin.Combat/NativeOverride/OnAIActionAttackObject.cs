@@ -4,6 +4,9 @@ using System.Runtime.InteropServices;
 using Anvil.API;
 using Anvil.Services;
 using NWN.Native.API;
+using XM.Progression.Ability;
+using XM.Progression.Event;
+using XM.Shared.Core.EventManagement;
 
 namespace XM.Plugin.Combat.NativeOverride
 {
@@ -54,16 +57,30 @@ namespace XM.Plugin.Combat.NativeOverride
 
         private readonly CombatService _combat;
         private readonly VirtualMachine _vm;
+        private readonly XMEventService _event;
+        private readonly AbilityService _ability;
 
         public OnAIActionAttackObject(
             HookService hook,
             CombatService combat,
-            VirtualMachine vm)
+            VirtualMachine vm,
+            XMEventService @event,
+            AbilityService ability)
         {
             _aiActionAttackObjectHook = hook.RequestHook<AIActionAttackObjectHook>(HandleAIActionAttackObject, HookOrder.Late);
             _combat = combat;
             _vm = vm;
+            _event = @event;
+            _ability = ability;
+
+            SubscribeEvents();
         }
+
+        private void SubscribeEvents()
+        {
+            _event.Subscribe<AbilityEvent.OnQueueWeaponSkill>(OnWeaponSkillQueued);
+        }
+
 
         private bool IsAIState(ushort nAIState, CNWSCreature pCreature)
         {
@@ -529,6 +546,7 @@ namespace XM.Plugin.Combat.NativeOverride
             }
 
             pCreature.ResolveAttack(oidTarget, nAttacks, nTimeAnimation);
+            _ability.ProcessWeaponAbility(pCreature.m_idSelf, oidTarget, 0.75f);
 
             return result;
         }
@@ -543,5 +561,12 @@ namespace XM.Plugin.Combat.NativeOverride
             return x * x;
         }
 
+        private void OnWeaponSkillQueued(uint creature)
+        {
+            if (!_creatureAttackDelays.ContainsKey(creature))
+                return;
+
+            _creatureAttackDelays[creature] = DateTime.MinValue;
+        }
     }
 }

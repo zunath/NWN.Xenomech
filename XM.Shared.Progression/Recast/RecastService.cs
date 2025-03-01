@@ -92,7 +92,7 @@ namespace XM.Progression.Recast
 
                 if (!ignoreRecastReduction)
                 {
-                    var recastReduction = _stat.GetAbilityRecastReduction(activator);
+                    var recastReduction = _stat.GetRecastReduction(activator);
 
                     var recastPercentage = recastReduction * 0.01f;
                     if (recastPercentage > 0.5f)

@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public EarthWardStatusEffect()
         {
-            Stats.Resists[ResistType.Earth] = 50;
+            StatGroup.Resists[ResistType.Earth] = 50;
         }
         protected override void Apply(uint creature, int durationTicks)
         {

@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public MindWardStatusEffect()
         {
-            Stats.Resists[ResistType.Mind] = 50;
+            StatGroup.Resists[ResistType.Mind] = 50;
         }
         protected override void Apply(uint creature, int durationTicks)
         {

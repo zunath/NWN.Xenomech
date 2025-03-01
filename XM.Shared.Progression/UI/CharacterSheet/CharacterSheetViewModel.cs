@@ -325,7 +325,7 @@ namespace XM.Progression.UI.CharacterSheet
             Willpower = Stat.GetAttribute(Player, AbilityType.Willpower).ToString();
             Agility = Stat.GetAttribute(Player, AbilityType.Agility).ToString();
             Social = Stat.GetAttribute(Player, AbilityType.Social).ToString();
-            RecastReduction = Stat.GetAbilityRecastReduction(Player).ToString();
+            RecastReduction = Stat.GetRecastReduction(Player).ToString();
 
             MainHand = $"{Stat.GetMainHandDMG(Player)} {Locale.GetString(LocaleString.DMG)}";
             OffHand = $"{Stat.GetOffHandDMG(Player)} {Locale.GetString(LocaleString.DMG)}";

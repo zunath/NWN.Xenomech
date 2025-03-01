@@ -29,11 +29,19 @@
         public struct OnPlayerOpenAppearanceMenu : IXMEvent
         {
         }
-
         public struct OnItemHit : IXMEvent
         {
-
         }
-        
+        public struct OnDamageDealt : IXMEvent
+        {
+            public uint Target { get; }
+            public int Damage { get; }
+
+            public OnDamageDealt(uint target, int damage)
+            {
+                Target = target;
+                Damage = damage;
+            }
+        }
     }
 }

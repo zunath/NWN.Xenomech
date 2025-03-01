@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public SharpshotStatusEffect()
         {
-            Stats[StatType.Accuracy] = 20;
+            StatGroup.Stats[StatType.Accuracy] = 20;
         }
         protected override void Apply(uint creature, int durationTicks)
         {

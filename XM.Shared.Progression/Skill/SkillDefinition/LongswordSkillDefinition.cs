@@ -12,22 +12,10 @@ namespace XM.Progression.Skill.SkillDefinition
         public LocaleString Name => LocaleString.Longsword;
         public string IconResref => "skl_longsword";
         public FeatType LoreFeat => FeatType.LongswordLore;
+        public FeatType PassiveFeat => FeatType.ShiningBlade;
         public List<BaseItemType> BaseItems { get; } =
         [
             BaseItemType.Longsword,
         ];
-        public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
-        {
-            {50, FeatType.FastBlade},
-            {160, FeatType.BurningBlade},
-            {240, FeatType.RedLotusBlade},
-            {320, FeatType.FlatBlade},
-            {540, FeatType.ShiningBlade},
-            {860, FeatType.SeraphBlade},
-            {1130, FeatType.VorpalBlade},
-            {1390, FeatType.SwiftBlade},
-            {1430, FeatType.SanguineBlade},
-            {1500, FeatType.Atonement},
-        };
     }
 }

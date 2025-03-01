@@ -7152,6 +7152,78 @@
     {
       "id": 1789,
       "text": "Your beast has no target."
+    },
+    {
+      "id": 1790,
+      "text": "Accuracy %"
+    },
+    {
+      "id": 1791,
+      "text": "TP Gain %"
+    },
+    {
+      "id": 1792,
+      "text": "Recast Reduction %"
+    },
+    {
+      "id": 1793,
+      "text": "TP Cost %"
+    },
+    {
+      "id": 1794,
+      "text": "Defense Bypass %"
+    },
+    {
+      "id": 1795,
+      "text": "Healing %"
+    },
+    {
+      "id": 1796,
+      "text": "EP Restore On Hit"
+    },
+    {
+      "id": 1797,
+      "text": "Defense %"
+    },
+    {
+      "id": 1798,
+      "text": "Ether Defense %"
+    },
+    {
+      "id": 1799,
+      "text": "Extra Attack %"
+    },
+    {
+      "id": 1800,
+      "text": "Insufficient TP."
+    },
+    {
+      "id": 1801,
+      "text": "Incorrect weapon equipped for this ability."
+    },
+    {
+      "id": 1802,
+      "text": "Blind"
+    },
+    {
+      "id": 1803,
+      "text": "Burn"
+    },
+    {
+      "id": 1804,
+      "text": "Attack %"
+    },
+    {
+      "id": 1805,
+      "text": "Ether Attack %"
+    },
+    {
+      "id": 1806,
+      "text": "Evasion %"
+    },
+    {
+      "id": 1807,
+      "text": "{0}'s TP has been reduced by {1}%."
     }
   ]
 }

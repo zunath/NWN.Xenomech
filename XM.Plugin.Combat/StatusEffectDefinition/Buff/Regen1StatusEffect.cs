@@ -23,7 +23,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public Regen1StatusEffect()
         {
-            Stats[StatType.HPRegen] = 5;
+            StatGroup.Stats[StatType.HPRegen] = 5;
         }
 
         protected override void Apply(uint creature, int durationTicks)

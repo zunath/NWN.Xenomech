@@ -31,6 +31,7 @@ namespace XM.Progression.UI.PlayerStatus
 
             _event.Subscribe<NWNXEvent.OnHealAfter>(OnPlayerHealed);
             _event.Subscribe<StatEvent.PlayerEPAdjustedEvent>(OnPlayerEPAdjusted);
+            _event.Subscribe<StatEvent.PlayerTPAdjustedEvent>(OnPlayerTPAdjusted);
             _event.Subscribe<PlayerEvent.OnDamaged>(OnPlayerDamaged);
 
             _event.Subscribe<NWNXEvent.OnItemEquipAfter>(OnPlayerEquipItem);
@@ -83,7 +84,7 @@ namespace XM.Progression.UI.PlayerStatus
             _event.PublishEvent<UIEvent.UIRefreshEvent>(player);
         }
 
-        private void OnPlayerDamaged(uint objectSelf)
+        private void OnPlayerTPAdjusted(uint obj)
         {
             var player = OBJECT_SELF;
             if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
@@ -92,6 +93,13 @@ namespace XM.Progression.UI.PlayerStatus
             _event.PublishEvent<UIEvent.UIRefreshEvent>(player);
         }
 
+        private void OnPlayerDamaged(uint objectSelf)
+        {
+            var player = OBJECT_SELF;
+            if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
+                return;
 
+            _event.PublishEvent<UIEvent.UIRefreshEvent>(player);
+        }
     }
 }

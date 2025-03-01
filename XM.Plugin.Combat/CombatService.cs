@@ -7,6 +7,7 @@ using XM.Plugin.Combat.StatusEffectDefinition.Buff;
 using XM.Plugin.Combat.StatusEffectDefinition.Debuff;
 using XM.Progression.Ability;
 using XM.Progression.Beast;
+using XM.Progression.Event;
 using XM.Progression.Skill;
 using XM.Progression.Stat;
 using XM.Progression.Stat.Entity;
@@ -65,8 +66,10 @@ namespace XM.Plugin.Combat
             _event.Subscribe<NWNXEvent.OnBroadcastAttackOfOpportunityBefore>(DisableAttacksOfOpportunity);
             _event.Subscribe<PlayerEvent.OnDamaged>(RemoveEffectsOnDamaged);
             _event.Subscribe<CreatureEvent.OnDamaged>(RemoveEffectsOnDamaged);
+            _event.Subscribe<StatEvent.PassiveTPBonusAcquiredEvent>(ApplyPassiveTPBonus);
+            _event.Subscribe<StatEvent.PassiveTPBonusRemovedEvent>(RemovePassiveTPBonus);
+            _event.Subscribe<XMEvent.OnDamageDealt>(OnDamageDealt);
         }
-
 
         public void Init()
         {
@@ -341,6 +344,13 @@ namespace XM.Plugin.Combat
 
             var attackerAttack = CalculateAttack(attacker, weapon, attackType);
             var defenderDefense = CalculateDefense(defender);
+
+            var defenseModifier = 1 + _stat.GetDefenseModifier(defender);
+            defenderDefense = (int)(defenderDefense * defenseModifier);
+
+            var defenseBypassModifier = 1 - _stat.GetDefenseBypassModifier(attacker);
+            defenderDefense = (int)(defenderDefense * defenseBypassModifier);
+
             if (defenderDefense < 1)
                 defenderDefense = 1;
 
@@ -394,6 +404,31 @@ namespace XM.Plugin.Combat
             return ((int)minDamage, (int)maxDamage);
         }
 
+        public int CalculateWeaponSkillDamage(
+            uint attacker, 
+            uint defender,
+            int bonusDMG, 
+            ResistType resistType)
+        {
+            var weapon = GetItemInSlot(InventorySlotType.RightHand, attacker);
+            var attackType = GetWeaponRanged(weapon)
+                ? AttackType.Ranged
+                : AttackType.Melee;
+
+            var delta = CalculateDamageStatDelta(attacker, defender, attackType);
+            var ratio = CalculateDamageRatio(attacker, defender, weapon, attackType);
+            var baseDMG = _stat.GetMainHandDMG(attacker) + bonusDMG + delta;
+            var maxDamage = (int)(baseDMG * ratio);
+            var minDamage = (int)(maxDamage * 0.7f);
+
+            if (maxDamage < 1)
+                maxDamage = 1;
+            if (minDamage < 1)
+                minDamage = 1;
+
+            return XMRandom.Next(minDamage, maxDamage);
+        }
+
         private int CalculateBackAttackBonus(uint attacker, uint defender)
         {
             var isBehind = IsBehind(attacker, defender);
@@ -437,7 +472,7 @@ namespace XM.Plugin.Combat
             if (ability == null)
                 return 0;
 
-            var dmg = ability.Stats[StatType.QueuedDMGBonus];
+            var dmg = ability.StatGroup.Stats[StatType.QueuedDMGBonus];
 
             if (ability.ResistType != ResistType.Invalid)
             {
@@ -514,9 +549,9 @@ namespace XM.Plugin.Combat
             if (GetIsPC(attacker) && !GetIsDMPossessed(attacker))
             {
                 var playerId = PlayerId.Get(attacker);
-                var dbPlayerCombat = _db.Get<PlayerStat>(playerId);
-                delay = dbPlayerCombat.EquippedItemStats[InventorySlotType.RightHand].Delay +
-                        dbPlayerCombat.EquippedItemStats[InventorySlotType.LeftHand].Delay;
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+                delay = dbPlayerStat.EquippedItemStats[InventorySlotType.RightHand].Delay +
+                        dbPlayerStat.EquippedItemStats[InventorySlotType.LeftHand].Delay;
             }
             else
             {
@@ -624,9 +659,32 @@ namespace XM.Plugin.Combat
             return totalTP;
         }
 
-        internal void GainTP(uint target, int amount)
+        internal void UpdateTP(uint target, int tp)
         {
-            _stat.SetTP(target, amount);
+            _stat.SetTP(target, tp);
+        }
+
+        private void ApplyPassiveTPBonus(uint creature)
+        {
+            var weapon = GetItemInSlot(InventorySlotType.RightHand, creature);
+            var skill = _skill.GetSkillOfWeapon(weapon);
+
+            if (skill == SkillType.Invalid)
+                return;
+
+            var definition = _skill.GetSkillDefinition(skill);
+            if (!_ability.IsFeatRegistered(definition.PassiveFeat))
+                return;
+
+            if (!GetHasFeat(definition.PassiveFeat, creature))
+                return;
+
+            var ability = _ability.GetAbilityDetail(definition.PassiveFeat);
+            _statusEffect.ApplyPermanentStatusEffect(ability.PassiveWeaponSkillStatusEffectType, creature, creature);
+        }
+        private void RemovePassiveTPBonus(uint creature)
+        {
+            _statusEffect.RemoveStatusEffectBySourceType(creature, StatusEffectSourceType.WeaponSkill);
         }
 
         private void RemoveEffectsOnDamaged(uint creature)
@@ -674,7 +732,7 @@ namespace XM.Plugin.Combat
             return hasParalysis;
         }
 
-        internal void HandleEtherLink(uint attacker)
+        private void HandleEtherLink(uint attacker)
         {
             if (!_beast.IsBeast(attacker))
                 return;
@@ -684,11 +742,26 @@ namespace XM.Plugin.Combat
 
             var npcStats = _stat.GetNPCStats(attacker);
 
-            if (XMRandom.D100(1) <= npcStats.Stats[StatType.EtherLink])
+            if (XMRandom.D100(1) <= npcStats.StatGroup.Stats[StatType.EtherLink])
             {
                 var owner = GetMaster(attacker);
                 _stat.RestoreEP(owner, 5);
             }
+        }
+
+        private void HandleRestoreEPOnHit(uint attacker)
+        {
+            var epRestore = _stat.GetEPRestoreOnHit(attacker);
+            if (epRestore <= 0)
+                return;
+
+            _stat.RestoreEP(attacker, epRestore);
+        }
+
+        private void OnDamageDealt(uint attacker)
+        {
+            HandleEtherLink(attacker);
+            HandleRestoreEPOnHit(attacker);
         }
     }
 }

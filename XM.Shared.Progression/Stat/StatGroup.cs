@@ -4,12 +4,14 @@ using System.Linq;
 
 namespace XM.Progression.Stat
 {
-    public class StatGroup: Dictionary<StatType, int>
+    public class StatGroup
     {
+        public Dictionary<StatType, int> Stats { get; set; }
         public ResistCollection Resists { get; set; }
 
         public StatGroup()
         {
+            Stats = new Dictionary<StatType, int>();
             Resists = new ResistCollection();
             PopulateStats();
         }
@@ -18,7 +20,7 @@ namespace XM.Progression.Stat
         {
             foreach (var type in Enum.GetValues(typeof(StatType)).Cast<StatType>())
             {
-                this[type] = 0;
+                Stats[type] = 0;
             }
         }
     }

@@ -2,6 +2,7 @@
 using Anvil.Services;
 using NWN.Native.API;
 using XM.Progression.Ability;
+using XM.Shared.Core.EventManagement;
 
 namespace XM.Plugin.Combat.NativeOverride
 {
@@ -17,16 +18,19 @@ namespace XM.Plugin.Combat.NativeOverride
         private readonly VirtualMachine _vm;
         private readonly CombatService _combat;
         private readonly AbilityService _ability;
+        private readonly XMEventService _event;
 
         public OnGetDamageRoll(
             HookService hook,
             VirtualMachine vm,
             CombatService combat,
-            AbilityService ability)
+            AbilityService ability,
+            XMEventService @event)
         {
             _vm = vm;
             _combat = combat;
             _ability = ability;
+            _event = @event;
 
             _getDamageRollHook = hook.RequestHook<GetDamageRollHook>(GetDamageRoll);
         }
@@ -68,9 +72,9 @@ namespace XM.Plugin.Combat.NativeOverride
                     attackType,
                     hitResult);
 
-                if (damage > 0)
+                if (damage > 0 && defender.m_bPlotObject == 0)
                 {
-                    OnDamaged(attacker.m_idSelf, defender.m_idSelf);
+                    OnDamaged(attacker.m_idSelf, defender.m_idSelf, damage);
                 }
 
                 _ability.ProcessQueuedAbility(attacker.m_idSelf, defender.m_idSelf);
@@ -88,14 +92,15 @@ namespace XM.Plugin.Combat.NativeOverride
                 ? _combat.CalculateTPGainPlayer(attacker, true)
                 : _combat.CalculateTPGainNPC(attacker, true);
 
-            _combat.GainTP(attacker, attackerTPAmount);
-            _combat.GainTP(defender, defenderTPAmount);
+            _combat.UpdateTP(attacker, attackerTPAmount);
+            _combat.UpdateTP(defender, defenderTPAmount);
         }
 
-        private void OnDamaged(uint attacker, uint defender)
+        private void OnDamaged(uint attacker, uint defender, int damage)
         {
             ApplyTP(attacker, defender);
-            _combat.HandleEtherLink(attacker);
+            
+            _event.PublishEvent(attacker, new XMEvent.OnDamageDealt(defender, damage));
         }
     }
 }

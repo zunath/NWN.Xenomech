@@ -115,7 +115,7 @@ namespace XM.Migration.PlayerMigration
         {
             for (var iCurSkill = 1; iCurSkill <= 27; iCurSkill++)
             {
-                var skill = (SkillType)(iCurSkill - 1);
+                var skill = (NWNSkillType)(iCurSkill - 1);
                 CreaturePlugin.SetSkillRank(player, skill, 0);
             }
         }

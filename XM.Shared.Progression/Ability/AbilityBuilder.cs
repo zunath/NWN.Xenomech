@@ -3,8 +3,10 @@ using System.Numerics;
 using XM.Progression.Ability.Telegraph;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
+using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
+using SkillType = XM.Progression.Skill.SkillType;
 
 namespace XM.Progression.Ability
 {
@@ -83,6 +85,21 @@ namespace XM.Progression.Ability
         public AbilityBuilder IsQueuedAttack()
         {
             _activeAbility.ActivationType = AbilityActivationType.QueuedAttack;
+            _activeAbility.AbilityIsToggledAction = null;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Indicates this ability is executed on the next weapon hit.
+        /// Weapon skills also reset the delay between attacks for one hit.
+        /// </summary>
+        /// <returns>An ability builder with the configured options.</returns>
+        public AbilityBuilder IsWeaponSkill(SkillType skillType, int levelRequired)
+        {
+            _activeAbility.ActivationType = AbilityActivationType.WeaponSkill;
+            _activeAbility.WeaponSkillType = skillType;
+            _activeAbility.SkillLevelRequired = levelRequired;
             _activeAbility.AbilityIsToggledAction = null;
 
             return this;
@@ -322,13 +339,24 @@ namespace XM.Progression.Ability
         }
 
         /// <summary>
-        /// Adds an EP requirement to use the ability at this level.
+        /// Adds an EP requirement to use the ability.
         /// </summary>
-        /// <param name="requiredEP">The amount of EP needed to use this ability at this level.</param>
+        /// <param name="requiredEP">The amount of EP needed to use this ability.</param>
         /// <returns>An ability builder with the configured options</returns>
         public AbilityBuilder RequirementEP(int requiredEP)
         {
             _activeAbility.EPRequired = requiredEP;
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a TP requirement to use the ability.
+        /// </summary>
+        /// <param name="requiredTP">The amount of TP needed to use this ability.</param>
+        /// <returns>An ability builder with the configured options</returns>
+        public AbilityBuilder RequirementTP(int requiredTP)
+        {
+            _activeAbility.TPRequired = requiredTP;
             return this;
         }
 
@@ -363,14 +391,14 @@ namespace XM.Progression.Ability
 
         public AbilityBuilder IncreasesStat(StatType stat, int amount)
         {
-            _activeAbility.Stats[stat] += amount;
+            _activeAbility.StatGroup.Stats[stat] += amount;
 
             return this;
         }
 
         public AbilityBuilder IncreasesResist(ResistType type, int amount)
         {
-            _activeAbility.Stats.Resists[type] += amount;
+            _activeAbility.StatGroup.Resists[type] += amount;
 
             return this;
         }
@@ -385,6 +413,16 @@ namespace XM.Progression.Ability
         public AbilityBuilder ModifyActivator(AbilityRetargetActivatorAction action)
         {
             _activeAbility.RetargetActivatorAction = action;
+
+            return this;
+        }
+
+        public AbilityBuilder HasPassiveWeaponSkill<T>(SkillType weaponSkillType)
+            where T: IStatusEffect
+        {
+            _activeAbility.ActivationType = AbilityActivationType.PassiveWeaponSkill;
+            _activeAbility.WeaponSkillType = weaponSkillType;
+            _activeAbility.PassiveWeaponSkillStatusEffectType = typeof(T);
 
             return this;
         }

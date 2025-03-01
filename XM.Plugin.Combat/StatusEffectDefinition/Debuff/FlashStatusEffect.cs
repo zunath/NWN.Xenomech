@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Debuff
 
         public FlashStatusEffect()
         {
-            Stats[StatType.Accuracy] = -15;
+            StatGroup.Stats[StatType.Accuracy] = -15;
         }
     }
 }

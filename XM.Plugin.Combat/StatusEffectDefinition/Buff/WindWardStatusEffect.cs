@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public WindWardStatusEffect()
         {
-            Stats.Resists[ResistType.Wind] = 50;
+            StatGroup.Resists[ResistType.Wind] = 50;
         }
         protected override void Apply(uint creature, int durationTicks)
         {

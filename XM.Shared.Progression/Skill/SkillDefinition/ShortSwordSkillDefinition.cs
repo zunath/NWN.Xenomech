@@ -12,22 +12,10 @@ namespace XM.Progression.Skill.SkillDefinition
         public LocaleString Name => LocaleString.ShortSword;
         public string IconResref => "skl_shortsword";
         public FeatType LoreFeat => FeatType.ShortSwordLore;
+        public FeatType PassiveFeat => FeatType.FrostbiteBlade;
         public List<BaseItemType> BaseItems { get; } =
         [
             BaseItemType.ShortSword,
         ];
-        public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
-        {
-            {50, FeatType.PiercingBlade},
-            {160, FeatType.BurningEdge},
-            {240, FeatType.ShadowStrike},
-            {320, FeatType.IceFang},
-            {540, FeatType.SonicSlash},
-            {860, FeatType.EmberFang},
-            {1130, FeatType.Lightfang},
-            {1390, FeatType.FrostbiteBlade},
-            {1430, FeatType.ThunderSlash},
-            {1500, FeatType.SoulBlade},
-        };
     }
 }

@@ -43,11 +43,11 @@ namespace XM.Progression.StatusEffect
             _event.Subscribe<StatusEffectEvent.OnApplyStatusEffect>(OnApplyNWNStatusEffect);
             _event.Subscribe<StatusEffectEvent.OnRemoveStatusEffect>(OnRemoveNWNStatusEffect);
             _event.Subscribe<StatusEffectEvent.OnStatusEffectInterval>(OnNWNStatusEffectInterval);
-
             _event.Subscribe<ModuleEvent.OnPlayerEnter>(OnPlayerEnter);
-
             _event.Subscribe<JobEvent.PlayerChangedJobEvent>(OnChangeJobs);
+            _event.Subscribe<XMEvent.OnDamageDealt>(OnDealtDamage);
         }
+
 
 
         private void OnPlayerEnter(uint module)
@@ -93,8 +93,11 @@ namespace XM.Progression.StatusEffect
 
             var effects = _creatureEffects[creature];
 
-            foreach (var effect in effects.GetAllEffects())
+            foreach (var effect in effects.GetAllTickEffects())
             {
+                if (effect.ActivationType != StatusEffectActivationType.Tick)
+                    continue;
+
                 if (effect.IsFlaggedForRemoval)
                 {
                     RemoveStatusEffect(effect.GetType(), creature);
@@ -116,13 +119,17 @@ namespace XM.Progression.StatusEffect
         public void ApplyPermanentStatusEffect<T>(uint source, uint creature)
             where T: IStatusEffect
         {
-            ApplyStatusEffect<T>(source, creature, -1);
+            ApplyStatusEffectInternal(typeof(T), source, creature, -1, true);
         }
 
-        public void ApplyStatusEffect<T>(uint source, uint creature, int durationTicks)
-            where T: IStatusEffect
+        public void ApplyPermanentStatusEffect(Type type, uint source, uint creature)
         {
-            if (durationTicks <= 0)
+            ApplyStatusEffectInternal(type, source, creature, -1, true);
+        }
+
+        private void ApplyStatusEffectInternal(Type type, uint source, uint creature, int durationTicks, bool isPermanent)
+        {
+            if (!isPermanent && durationTicks <= 0)
             {
                 SendMessageToPC(source, LocaleString.YourSpellWasResisted.ToLocalizedString());
                 return;
@@ -130,7 +137,7 @@ namespace XM.Progression.StatusEffect
 
             ApplyNWNEffect(creature);
 
-            var statusEffect = (IStatusEffect)Activator.CreateInstance<T>();
+            var statusEffect = (IStatusEffect)Activator.CreateInstance(type);
             _injection.Inject(statusEffect);
 
             var canApply = statusEffect.CanApply(creature).ToLocalizedString();
@@ -155,10 +162,10 @@ namespace XM.Progression.StatusEffect
             {
                 case StatusEffectStackType.Disabled:
                 case StatusEffectStackType.Invalid:
-                    RemoveStatusEffect<T>(creature);
+                    RemoveStatusEffect(type, creature);
                     break;
                 case StatusEffectStackType.StackFromMultipleSources:
-                    RemoveStatusEffect(typeof(T), creature, source);
+                    RemoveStatusEffect(type, creature, source);
                     break;
             }
 
@@ -184,6 +191,13 @@ namespace XM.Progression.StatusEffect
                 Messaging.SendMessageNearbyToPlayers(creature,
                     LocaleString.CreatureReceivesTheEffectOfX.ToLocalizedString(name, effectName));
             }
+        }
+
+        public void ApplyStatusEffect<T>(uint source, uint creature, int durationTicks)
+            where T: IStatusEffect
+        {
+            var type = typeof(T);
+            ApplyStatusEffectInternal(type, source, creature, durationTicks, false);
         }
 
         private void RemoveStatusEffect(Type type, uint creature, uint source)
@@ -229,6 +243,16 @@ namespace XM.Progression.StatusEffect
             RemoveStatusEffect(type, creature, OBJECT_INVALID);
         }
 
+        public void RemoveStatusEffectBySourceType(uint creature, StatusEffectSourceType sourceType)
+        {
+            var creatureEffects = GetCreatureStatusEffects(creature);
+            var effects = creatureEffects.GetAllBySourceType(sourceType);
+            foreach (var effect in effects)
+            {
+                RemoveStatusEffect(effect.GetType(), creature);
+            }
+        }
+
         public bool HasEffect(Type type, uint creature)
         {
             if (!_creatureEffects.ContainsKey(creature))
@@ -254,6 +278,17 @@ namespace XM.Progression.StatusEffect
                 {
                     RemoveStatusEffect(effect.GetType(), player);
                 }
+            }
+        }
+
+        private void OnDealtDamage(uint attacker)
+        {
+            var data = _event.GetEventData<XMEvent.OnDamageDealt>();
+            var effects = GetCreatureStatusEffects(attacker);
+
+            foreach (var effect in effects.GetAllOnHitEffects())
+            {
+                effect.OnHitEffect(attacker, data.Target, data.Damage);
             }
         }
     }

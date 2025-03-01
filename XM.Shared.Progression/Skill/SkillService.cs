@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Anvil.Services;
+using XM.Progression.Ability;
+using XM.Progression.Event;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
 using XM.Progression.Job.JobDefinition;
@@ -29,6 +31,7 @@ namespace XM.Progression.Skill
         private readonly Dictionary<SkillType, ISkillDefinition> _skills = new();
         private readonly Dictionary<BaseItemType, SkillType> _weaponToSkills = new();
         private readonly SkillGrades _skillGrades = new();
+        private readonly Dictionary<SkillType, Dictionary<int, FeatType>> _weaponSkillAcquisitionLevels = new();
 
         public SkillService(
             DBService db,
@@ -49,6 +52,7 @@ namespace XM.Progression.Skill
         private void SubscribeEvents()
         {
             _event.Subscribe<XMEvent.OnItemHit>(ProcessSkillGain);
+            _event.Subscribe<AbilityEvent.OnAbilitiesRegistered>(RegisterSkillAbilities);
         }
 
         private void ProcessSkillGain(uint player)
@@ -108,9 +112,10 @@ namespace XM.Progression.Skill
             var definition = _skills[skillType];
             SendMessageToPC(player, LocaleString.YourXSkillIncreasesToY.ToLocalizedString(definition.Name.ToLocalizedString(), dbPlayerSkill.Skills[skillType]));
 
-            if (definition.WeaponSkillAcquisitionLevels.ContainsKey(newLevel))
+            if (_weaponSkillAcquisitionLevels.ContainsKey(skillType) &&
+                _weaponSkillAcquisitionLevels[skillType].ContainsKey(newLevel))
             {
-                var feat = definition.WeaponSkillAcquisitionLevels[newLevel];
+                var feat = _weaponSkillAcquisitionLevels[skillType][newLevel];
                 var featNameId = Convert.ToInt32(Get2DAString("feat", "FEAT", (int)feat));
                 var featName = GetStringByStrRef(featNameId);
                 CreaturePlugin.AddFeatByLevel(player, feat, 1);
@@ -233,5 +238,36 @@ namespace XM.Progression.Skill
                 }
             }
         }
+
+        private void RegisterSkillAbilities(uint module)
+        {
+            var data = _event.GetEventData<AbilityEvent.OnAbilitiesRegistered>();
+
+            foreach (var ability in data.Abilities)
+            {
+                if (ability.ActivationType != AbilityActivationType.WeaponSkill)
+                    continue;
+
+                var skill = ability.WeaponSkillType;
+                if (!_weaponSkillAcquisitionLevels.ContainsKey(skill))
+                    _weaponSkillAcquisitionLevels[skill] = new Dictionary<int, FeatType>();
+
+                _weaponSkillAcquisitionLevels[skill].Add(ability.SkillLevelRequired, ability.FeatType);
+            }
+        }
+
+
+        [ScriptHandler("bread_test2")]
+        public void TestBread2()
+        {
+            var player = GetLastUsedBy();
+            var weapon = GetItemInSlot(InventorySlotType.RightHand, player);
+            var skill = GetSkillOfWeapon(weapon);
+            if (skill == SkillType.Invalid)
+                return;
+
+            LevelUpSkill(player, skill);
+        }
+
     }
 }

@@ -23,7 +23,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public Chi2StatusEffect()
         {
-            Stats[StatType.HPRegen] = 8;
+            StatGroup.Stats[StatType.HPRegen] = 8;
         }
         protected override void Apply(uint creature, int durationTicks)
         {

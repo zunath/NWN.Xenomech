@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public LightWardStatusEffect()
         {
-            Stats.Resists[ResistType.Light] = 50;
+            StatGroup.Resists[ResistType.Light] = 50;
         }
         protected override void Apply(uint creature, int durationTicks)
         {

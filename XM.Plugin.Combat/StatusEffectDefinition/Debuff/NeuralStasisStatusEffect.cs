@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Debuff
 
         public NeuralStasisStatusEffect()
         {
-            Stats[StatType.Slow] = 20;
+            StatGroup.Stats[StatType.Slow] = 20;
         }
 
         protected override void Apply(uint creature, int durationTicks)

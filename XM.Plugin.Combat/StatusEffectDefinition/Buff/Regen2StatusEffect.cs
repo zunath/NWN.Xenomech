@@ -23,7 +23,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public Regen2StatusEffect()
         {
-            Stats[StatType.HPRegen] = 12;
+            StatGroup.Stats[StatType.HPRegen] = 12;
         }
         protected override void Apply(uint creature, int durationTicks)
         {

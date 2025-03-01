@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public LightningWardStatusEffect()
         {
-            Stats.Resists[ResistType.Lightning] = 50;
+            StatGroup.Resists[ResistType.Lightning] = 50;
         }
         protected override void Apply(uint creature, int durationTicks)
         {

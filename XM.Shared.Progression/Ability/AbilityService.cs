@@ -10,6 +10,7 @@ using XM.Progression.Event;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
 using XM.Progression.Recast;
+using XM.Progression.Skill;
 using XM.Progression.Stat;
 using XM.Progression.Stat.Entity;
 using XM.Shared.API.Constants;
@@ -23,7 +24,8 @@ using CreaturePlugin = XM.Shared.API.NWNX.CreaturePlugin.CreaturePlugin;
 namespace XM.Progression.Ability
 {
     [ServiceBinding(typeof(AbilityService))]
-    public class AbilityService
+    [ServiceBinding(typeof(IInitializable))]
+    public class AbilityService: IInitializable
     {
         private readonly Dictionary<FeatType, AbilityDetail> _abilities = new();
         private readonly Dictionary<FeatType, int> _abilitiesByLevel = new();
@@ -37,6 +39,7 @@ namespace XM.Progression.Ability
         private readonly Dictionary<JobType, List<FeatType>> _abilitiesByJob = new();
         private readonly XMEventService _event;
         private readonly TelegraphService _telegraph;
+        private readonly SkillService _skill;
 
         public AbilityService(
             DBService db,
@@ -46,7 +49,8 @@ namespace XM.Progression.Ability
             JobService job,
             IList<IAbilityListDefinition> abilityDefinitions,
             XMEventService @event,
-            TelegraphService telegraph)
+            TelegraphService telegraph,
+            SkillService skill)
         {
             _db = db;
             _activity = activity;
@@ -56,9 +60,18 @@ namespace XM.Progression.Ability
             _abilityDefinitions = abilityDefinitions;
             _event = @event;
             _telegraph = telegraph;
+            _skill = skill;
 
             CacheAbilities();
+
+            RegisterEvents();
             SubscribeEvents();
+        }
+
+        private void RegisterEvents()
+        {
+            _event.RegisterEvent<AbilityEvent.OnQueueWeaponSkill>(ProgressionEventScript.OnQueueWeaponSkillScript);
+            _event.RegisterEvent<AbilityEvent.OnAbilitiesRegistered>(ProgressionEventScript.OnRegisterAbilityScript);
         }
 
         private void SubscribeEvents()
@@ -67,6 +80,19 @@ namespace XM.Progression.Ability
             _event.Subscribe<JobEvent.JobFeatAddedEvent>(AddJobFeat);
             _event.Subscribe<JobEvent.JobFeatRemovedEvent>(RemoveJobFeat);
             _event.Subscribe<JobEvent.PlayerLeveledUpEvent>(ApplyLevelUp);
+        }
+
+        public void Init()
+        {
+            PublishAbilities();
+        }
+
+        private void PublishAbilities()
+        {
+            var module = GetModule();
+            var abilityList = _abilities.Values.ToList();
+            var @event = new AbilityEvent.OnAbilitiesRegistered(abilityList);
+            _event.PublishEvent(module, @event);
         }
 
         private void CacheAbilities()
@@ -196,10 +222,38 @@ namespace XM.Progression.Ability
                 return false;
             }
 
+            // Weapon check
+            if (ability.WeaponSkillType != SkillType.Invalid)
+            {
+                var weapon = GetItemInSlot(InventorySlotType.RightHand, activator);
+                var skill = _skill.GetSkillOfWeapon(weapon);
+                if (skill != ability.WeaponSkillType)
+                {
+                    SendMessageToPC(activator, LocaleString.IncorrectWeaponEquippedForThisAbility.ToLocalizedString());
+                    return false;
+                }
+
+                var requiredLevel = ability.SkillLevelRequired;
+                var level = _skill.GetSkillLevel(activator, skill);
+
+                if (level < requiredLevel)
+                {
+                    SendMessageToPC(activator, LocaleString.InsufficientLevel.ToLocalizedString());
+                    return false;
+                }
+            }
+
             // EP check
             if (!HasManafont(activator) && _stat.GetCurrentEP(activator) < ability.EPRequired)
             {
                 SendMessageToPC(activator, LocaleString.InsufficientEP.ToLocalizedString());
+                return false;
+            }
+
+            // TP check
+            if (_stat.GetCurrentTP(activator) < ability.TPRequired)
+            {
+                SendMessageToPC(activator, LocaleString.InsufficientTP.ToLocalizedString());
                 return false;
             }
 
@@ -254,8 +308,9 @@ namespace XM.Progression.Ability
             if (!IsFeatRegistered(feat)) return;
             var ability = GetAbilityDetail(feat);
 
-            // Weapon abilities are queued for the next time the activator's attack lands on an enemy.
-            if (ability.ActivationType == AbilityActivationType.QueuedAttack)
+            // Weapon skills & queued attacks are queued for the next time the activator's attack lands on an enemy.
+            if (ability.ActivationType == AbilityActivationType.QueuedAttack ||
+                ability.ActivationType == AbilityActivationType.WeaponSkill)
             {
                 if (CanUseAbility(caster, target, feat, targetLocation))
                 {
@@ -419,23 +474,14 @@ namespace XM.Progression.Ability
                 _activity.SetBusy(activator, ActivityStatusType.AbilityActivation);
 
                 if (ability.TelegraphAction != null && 
-                    ability.TelegraphType != TelegraphType.None)
+                    ability.TelegraphType != TelegraphType.None &&
+                    ability.ActivationType != AbilityActivationType.WeaponSkill)
                 {
-                    var telegraphPosition = targetLocation == LOCATION_INVALID
-                        ? GetPosition(activator)
-                        : GetPositionFromLocation(targetLocation);
-                    var telegraphFacing = targetLocation == LOCATION_INVALID
-                        ? GetFacing(activator)
-                        : GetFacingFromLocation(targetLocation);
-
-                    telegraphId = _telegraph.CreateTelegraph(
-                        activator,
-                        telegraphPosition,
-                        telegraphFacing,
-                        ability.TelegraphSize,
-                        activationDelay,
-                        ability.IsHostileAbility,
-                        ability.TelegraphType,
+                    HandleTelegraphAbility(
+                        activator, 
+                        activationDelay, 
+                        ability, 
+                        targetLocation,
                         (telegrapher, creatures) =>
                         {
                             if (CompleteActivation(telegrapher, activationId))
@@ -470,6 +516,33 @@ namespace XM.Progression.Ability
             }
         }
 
+        public string HandleTelegraphAbility(
+            uint activator, 
+            float duration, 
+            AbilityDetail ability, 
+            Location targetLocation,
+            ApplyTelegraphEffect action)
+        {
+            var telegraphPosition = targetLocation == LOCATION_INVALID
+                ? GetPosition(activator)
+                : GetPositionFromLocation(targetLocation);
+            var telegraphFacing = targetLocation == LOCATION_INVALID
+                ? GetFacing(activator)
+                : GetFacingFromLocation(targetLocation);
+
+            var telegraphId = _telegraph.CreateTelegraph(
+                activator,
+                telegraphPosition,
+                telegraphFacing,
+                ability.TelegraphSize,
+                duration,
+                ability.IsHostileAbility,
+                ability.TelegraphType,
+                action);
+
+            return telegraphId;
+        }
+
         private void QueueAbility(uint caster, AbilityDetail ability, FeatType feat)
         {
             var abilityId = Guid.NewGuid().ToString();
@@ -488,6 +561,12 @@ namespace XM.Progression.Ability
             {
                 DequeueWeaponAbility(activator, ability.DisplaysActivationMessage);
             });
+
+            if (ability.ActivationType == AbilityActivationType.WeaponSkill)
+            {
+                ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpFortitudeSavingThrowUse), caster);
+                _event.PublishEvent<AbilityEvent.OnQueueWeaponSkill>(caster);
+            }
         }
 
         private void DequeueWeaponAbility(uint target, bool sendMessage = true)
@@ -531,7 +610,40 @@ namespace XM.Progression.Ability
                 return;
 
             var ability = GetQueuedAbility(attacker);
+            if (ability.ActivationType != AbilityActivationType.QueuedAttack)
+                return;
+
             ability.ImpactAction?.Invoke(attacker, defender, GetLocation(defender));
+
+            DeleteLocalString(attacker, ActiveActionId);
+            DeleteLocalInt(attacker, ActiveAbilityFeatId);
+        }
+
+        public void ProcessWeaponAbility(uint attacker, uint defender, float telegraphTime)
+        {
+            var wsAbility = GetQueuedAbility(attacker);
+            if (wsAbility == null ||
+                wsAbility.ActivationType != AbilityActivationType.WeaponSkill)
+                return;
+
+            var targetLocation = GetLocation(attacker);
+            if (wsAbility.TelegraphType == TelegraphType.None)
+            {
+                wsAbility.ImpactAction?.Invoke(attacker, defender, targetLocation);
+            }
+            else
+            {
+                HandleTelegraphAbility(
+                    attacker,
+                    telegraphTime,
+                    wsAbility,
+                    targetLocation,
+                    (telegrapher, creatures) =>
+                    {
+                        wsAbility.TelegraphAction?.Invoke(telegrapher, creatures, targetLocation);
+                    });
+            }
+
 
             DeleteLocalString(attacker, ActiveActionId);
             DeleteLocalInt(attacker, ActiveAbilityFeatId);
@@ -541,6 +653,8 @@ namespace XM.Progression.Ability
         {
             if(!HasManafont(activator))
                 _stat.ReduceEP(activator, ability.EPRequired);
+
+            _stat.ReduceTP(activator, ability.TPRequired);
         }
 
         private void AddJobFeat(uint player)
@@ -553,7 +667,7 @@ namespace XM.Progression.Ability
             var dbPlayerStat = _db.Get<PlayerStat>(playerId);
             var ability = _abilities[data.Feat];
 
-            dbPlayerStat.AbilityStats.Add(data.Feat, ability.Stats);
+            dbPlayerStat.AbilityStats.Add(data.Feat, ability.StatGroup);
             _db.Set(dbPlayerStat);
 
             ability.AbilityEquippedAction?.Invoke(player);

@@ -12,22 +12,10 @@ namespace XM.Progression.Skill.SkillDefinition
         public LocaleString Name => LocaleString.GreatSword;
         public string IconResref => "skl_greatsword";
         public FeatType LoreFeat => FeatType.GreatSwordLore;
+        public FeatType PassiveFeat => FeatType.Scourge;
         public List<BaseItemType> BaseItems { get; } =
         [
             BaseItemType.GreatSword
         ];
-        public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
-        {
-            {50, FeatType.HardSlash},
-            {160, FeatType.PowerSlash},
-            {240, FeatType.Frostbite},
-            {320, FeatType.ShockSlash},
-            {540, FeatType.SickleMoon},
-            {860, FeatType.GroundStrike},
-            {1130, FeatType.Freezebite},
-            {1390, FeatType.HerculeanSlash},
-            {1430, FeatType.SpinningSlash},
-            {1500, FeatType.Scourge},
-        };
     }
 }

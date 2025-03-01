@@ -23,6 +23,8 @@ namespace XM.Progression.Stat
     [ServiceBinding(typeof(IInitializable))]
     public class StatService: IInitializable
     {
+        private const int PassiveWeaponSkillTPThreshold = 2000;
+
         private readonly DBService _db;
         private const string NPCEPStatVariable = "EP";
         private const string NPCTPStatVariable = "TP";
@@ -161,7 +163,20 @@ namespace XM.Progression.Stat
             { ItemPropertyType.Slow, StatType.Slow},
             { ItemPropertyType.DamageReduction, StatType.DamageReduction},
             { ItemPropertyType.EtherDefense, StatType.EtherDefense},
-            { ItemPropertyType.EtherLink, StatType.EtherLink}
+            { ItemPropertyType.EtherLink, StatType.EtherLink},
+            { ItemPropertyType.AccuracyModifier, StatType.AccuracyModifier},
+            { ItemPropertyType.TPGainModifier, StatType.TPGainModifier},
+            { ItemPropertyType.RecastReductionModifier, StatType.RecastReductionModifier},
+            { ItemPropertyType.TPCostModifier, StatType.TPCostModifier},
+            { ItemPropertyType.DefenseBypassModifier, StatType.DefenseBypassModifier},
+            { ItemPropertyType.HealingModifier, StatType.HealingModifier},
+            { ItemPropertyType.EPRestoreOnHit, StatType.EPRestoreOnHit},
+            { ItemPropertyType.DefenseModifier, StatType.DefenseModifier},
+            { ItemPropertyType.EtherDefenseModifier, StatType.EtherDefenseModifier},
+            { ItemPropertyType.ExtraAttackModifier, StatType.ExtraAttackModifier},
+            { ItemPropertyType.AttackModifier, StatType.AttackModifier},
+            { ItemPropertyType.EtherAttackModifier, StatType.EtherAttackModifier},
+            { ItemPropertyType.EvasionModifier, StatType.EvasionModifier}
         };
         public StatService(
             DBService db, 
@@ -205,6 +220,8 @@ namespace XM.Progression.Stat
             _event.RegisterEvent<StatEvent.PlayerHPAdjustedEvent>(ProgressionEventScript.PlayerHPAdjustedScript);
             _event.RegisterEvent<StatEvent.PlayerEPAdjustedEvent>(ProgressionEventScript.PlayerEPAdjustedScript);
             _event.RegisterEvent<StatEvent.PlayerTPAdjustedEvent>(ProgressionEventScript.PlayerTPAdjustedScript);
+            _event.RegisterEvent<StatEvent.PassiveTPBonusAcquiredEvent>(ProgressionEventScript.PlayerPassiveTPBonusAcquiredScript);
+            _event.RegisterEvent<StatEvent.PassiveTPBonusRemovedEvent>(ProgressionEventScript.PlayerPassiveTPBonusRemovedScript);
         }
 
         private void SubscribeEvents()
@@ -224,12 +241,12 @@ namespace XM.Progression.Stat
             var playerId = PlayerId.Get(player);
             var dbPlayerStat = _db.Get<PlayerStat>(playerId);
 
-            dbPlayerStat.BaseStats[StatType.Might] = CreaturePlugin.GetRawAbilityScore(player, AbilityType.Might);
-            dbPlayerStat.BaseStats[StatType.Perception] = CreaturePlugin.GetRawAbilityScore(player, AbilityType.Perception);
-            dbPlayerStat.BaseStats[StatType.Vitality] = CreaturePlugin.GetRawAbilityScore(player, AbilityType.Vitality);
-            dbPlayerStat.BaseStats[StatType.Willpower] = CreaturePlugin.GetRawAbilityScore(player, AbilityType.Willpower);
-            dbPlayerStat.BaseStats[StatType.Agility] = CreaturePlugin.GetRawAbilityScore(player, AbilityType.Agility);
-            dbPlayerStat.BaseStats[StatType.Social] = CreaturePlugin.GetRawAbilityScore(player, AbilityType.Social);
+            dbPlayerStat.BaseStats.Stats[StatType.Might] = CreaturePlugin.GetRawAbilityScore(player, AbilityType.Might);
+            dbPlayerStat.BaseStats.Stats[StatType.Perception] = CreaturePlugin.GetRawAbilityScore(player, AbilityType.Perception);
+            dbPlayerStat.BaseStats.Stats[StatType.Vitality] = CreaturePlugin.GetRawAbilityScore(player, AbilityType.Vitality);
+            dbPlayerStat.BaseStats.Stats[StatType.Willpower] = CreaturePlugin.GetRawAbilityScore(player, AbilityType.Willpower);
+            dbPlayerStat.BaseStats.Stats[StatType.Agility] = CreaturePlugin.GetRawAbilityScore(player, AbilityType.Agility);
+            dbPlayerStat.BaseStats.Stats[StatType.Social] = CreaturePlugin.GetRawAbilityScore(player, AbilityType.Social);
 
             _db.Set(dbPlayerStat);
         }
@@ -255,31 +272,31 @@ namespace XM.Progression.Stat
                         itemStat.Delay += GetItemPropertyCostTableValue(ip) * 10;
                         break;
                     case ItemPropertyType.HP:
-                        itemStat[StatType.MaxHP] += GetItemPropertyCostTableValue(ip);
+                        itemStat.Stats[StatType.MaxHP] += GetItemPropertyCostTableValue(ip);
                         break;
                     case ItemPropertyType.EP:
-                        itemStat[StatType.MaxEP] += GetItemPropertyCostTableValue(ip);
+                        itemStat.Stats[StatType.MaxEP] += GetItemPropertyCostTableValue(ip);
                         break;
                     case ItemPropertyType.EPRegen:
-                        itemStat[StatType.EPRegen] += GetItemPropertyCostTableValue(ip);
+                        itemStat.Stats[StatType.EPRegen] += GetItemPropertyCostTableValue(ip);
                         break;
                     case ItemPropertyType.AbilityRecastReduction:
-                        itemStat[StatType.RecastReduction] += GetItemPropertyCostTableValue(ip);
+                        itemStat.Stats[StatType.RecastReduction] += GetItemPropertyCostTableValue(ip);
                         break;
                     case ItemPropertyType.Defense:
-                        itemStat[StatType.Defense] += GetItemPropertyCostTableValue(ip);
+                        itemStat.Stats[StatType.Defense] += GetItemPropertyCostTableValue(ip);
                         break;
                     case ItemPropertyType.Evasion:
-                        itemStat[StatType.Evasion] += GetItemPropertyCostTableValue(ip);
+                        itemStat.Stats[StatType.Evasion] += GetItemPropertyCostTableValue(ip);
                         break;
                     case ItemPropertyType.Accuracy:
-                        itemStat[StatType.Accuracy] += GetItemPropertyCostTableValue(ip);
+                        itemStat.Stats[StatType.Accuracy] += GetItemPropertyCostTableValue(ip);
                         break;
                     case ItemPropertyType.Attack:
-                        itemStat[StatType.Attack] += GetItemPropertyCostTableValue(ip);
+                        itemStat.Stats[StatType.Attack] += GetItemPropertyCostTableValue(ip);
                         break;
                     case ItemPropertyType.EtherAttack:
-                        itemStat[StatType.EtherAttack] += GetItemPropertyCostTableValue(ip);
+                        itemStat.Stats[StatType.EtherAttack] += GetItemPropertyCostTableValue(ip);
                         break;
                 }
             }
@@ -350,17 +367,17 @@ namespace XM.Progression.Stat
                 const int MaxHPBase = 40;
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId);
-                var jobMaxHP = dbPlayerStat.JobStats[StatType.MaxHP];
+                var jobMaxHP = dbPlayerStat.JobStats.Stats[StatType.MaxHP];
                 var itemMaxHP = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.MaxHP);
                 var abilityMaxHP = dbPlayerStat.AbilityStats.CalculateStat(StatType.MaxHP);
-                var statusMaxHP = _status.GetCreatureStatusEffects(creature).Stats[StatType.MaxHP];
+                var statusMaxHP = _status.GetCreatureStatusEffects(creature).StatGroup.Stats[StatType.MaxHP];
 
                 return MaxHPBase + jobMaxHP + itemMaxHP + abilityMaxHP + statusMaxHP;
             }
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.Stats[StatType.MaxHP];
+                return npcStats.StatGroup.Stats[StatType.MaxHP];
             }
         }
 
@@ -432,13 +449,13 @@ namespace XM.Progression.Stat
 
         public int GetMaxEP(uint creature)
         {
-            var statusMaxEP = _status.GetCreatureStatusEffects(creature).Stats[StatType.MaxEP];
+            var statusMaxEP = _status.GetCreatureStatusEffects(creature).StatGroup.Stats[StatType.MaxEP];
             // Players
             if (GetIsPC(creature) && !GetIsDM(creature))
             {
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-                var jobMaxEP = dbPlayerStat.JobStats[StatType.MaxEP];
+                var jobMaxEP = dbPlayerStat.JobStats.Stats[StatType.MaxEP];
                 var abilityEP = dbPlayerStat.AbilityStats.CalculateStat(StatType.MaxEP);
                 var itemEP = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.MaxEP);
 
@@ -448,7 +465,7 @@ namespace XM.Progression.Stat
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.Stats[StatType.MaxEP] + statusMaxEP;
+                return npcStats.StatGroup.Stats[StatType.MaxEP] + statusMaxEP;
             }
         }
 
@@ -470,7 +487,7 @@ namespace XM.Progression.Stat
 
         public int GetSubtleBlow(uint creature)
         {
-            var statusSubtleBlow = _status.GetCreatureStatusEffects(creature).Stats[StatType.SubtleBlow];
+            var statusSubtleBlow = _status.GetCreatureStatusEffects(creature).StatGroup.Stats[StatType.SubtleBlow];
             if (GetIsPC(creature))
             {
                 var playerId = PlayerId.Get(creature);
@@ -483,14 +500,14 @@ namespace XM.Progression.Stat
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.Stats[StatType.SubtleBlow] + statusSubtleBlow;
+                return npcStats.StatGroup.Stats[StatType.SubtleBlow] + statusSubtleBlow;
             }
         }
         public int GetCriticalRate(uint creature)
         {
             const int BaseCriticalRate = 5;
 
-            var statusCriticalRate = _status.GetCreatureStatusEffects(creature).Stats[StatType.CriticalRate];
+            var statusCriticalRate = _status.GetCreatureStatusEffects(creature).StatGroup.Stats[StatType.CriticalRate];
             if (GetIsPC(creature))
             {
                 var playerId = PlayerId.Get(creature);
@@ -503,13 +520,13 @@ namespace XM.Progression.Stat
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return BaseCriticalRate + npcStats.Stats[StatType.CriticalRate] + statusCriticalRate;
+                return BaseCriticalRate + npcStats.StatGroup.Stats[StatType.CriticalRate] + statusCriticalRate;
             }
         }
 
         public int GetHPRegen(uint creature)
         {
-            var statusHPRegen = _status.GetCreatureStatusEffects(creature).Stats[StatType.HPRegen];
+            var statusHPRegen = _status.GetCreatureStatusEffects(creature).StatGroup.Stats[StatType.HPRegen];
             if (GetIsPC(creature) && !GetIsDM(creature))
             {
                 var playerId = PlayerId.Get(creature);
@@ -522,12 +539,12 @@ namespace XM.Progression.Stat
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.Stats[StatType.HPRegen] + statusHPRegen;
+                return npcStats.StatGroup.Stats[StatType.HPRegen] + statusHPRegen;
             }
         }
         public int GetEPRegen(uint creature)
         {
-            var statusEPRegen = _status.GetCreatureStatusEffects(creature).Stats[StatType.EPRegen];
+            var statusEPRegen = _status.GetCreatureStatusEffects(creature).StatGroup.Stats[StatType.EPRegen];
             if (GetIsPC(creature) && !GetIsDM(creature))
             {
                 var playerId = PlayerId.Get(creature);
@@ -540,14 +557,14 @@ namespace XM.Progression.Stat
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.Stats[StatType.EPRegen] + statusEPRegen;
+                return npcStats.StatGroup.Stats[StatType.EPRegen] + statusEPRegen;
             }
         }
 
         public int GetHaste(uint creature)
         {
             var effects = _status.GetCreatureStatusEffects(creature);
-            var statusHaste = effects.Stats[StatType.Haste] - effects.Stats[StatType.Slow];
+            var statusHaste = effects.StatGroup.Stats[StatType.Haste] - effects.StatGroup.Stats[StatType.Slow];
             if (GetIsPC(creature) && !GetIsDM(creature))
             {
                 var playerId = PlayerId.Get(creature);
@@ -560,7 +577,7 @@ namespace XM.Progression.Stat
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.Stats[StatType.Haste] + statusHaste;
+                return npcStats.StatGroup.Stats[StatType.Haste] + statusHaste;
             }
         }
         public int GetDamageReduction(uint creature)
@@ -571,14 +588,14 @@ namespace XM.Progression.Stat
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
                 var itemDamageReduction = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.DamageReduction);
                 var abilityDamageReduction = dbPlayerStat.AbilityStats.CalculateStat(StatType.DamageReduction);
-                var statusDamageReduction = _status.GetCreatureStatusEffects(creature).Stats[StatType.DamageReduction];
+                var statusDamageReduction = _status.GetCreatureStatusEffects(creature).StatGroup.Stats[StatType.DamageReduction];
 
                 return itemDamageReduction + abilityDamageReduction + statusDamageReduction;
             }
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.Stats[StatType.DamageReduction];
+                return npcStats.StatGroup.Stats[StatType.DamageReduction];
             }
         }
 
@@ -647,18 +664,58 @@ namespace XM.Progression.Stat
             _event.PublishEvent<StatEvent.PlayerEPAdjustedEvent>(creature);
         }
 
-        public int GetAbilityRecastReduction(uint creature)
+        public void ReduceTP(uint creature, int reduceBy)
         {
-            if (!GetIsPC(creature) || GetIsDMPossessed(creature))
-                throw new Exception($"Only PCs have ability recast reduction.");
+            if (reduceBy <= 0)
+                return;
 
-            var playerId = PlayerId.Get(creature);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
-            var itemRecastReduction = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.RecastReduction);
-            var abilityRecastReduction = dbPlayerStat.AbilityStats.CalculateStat(StatType.RecastReduction);
-            var statusRecastReduction = _status.GetCreatureStatusEffects(creature).Stats[StatType.RecastReduction];
+            if (GetIsPC(creature) && !GetIsDM(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
 
-            return itemRecastReduction + abilityRecastReduction + statusRecastReduction;
+                dbPlayerStat.TP -= reduceBy;
+
+                if (dbPlayerStat.TP < 0)
+                    dbPlayerStat.TP = 0;
+
+                _db.Set(dbPlayerStat);
+            }
+            else
+            {
+                var tp = GetLocalInt(creature, NPCTPStatVariable);
+                tp -= reduceBy;
+                if (tp < 0)
+                    tp = 0;
+
+                SetLocalInt(creature, NPCTPStatVariable, tp);
+            }
+
+            _event.PublishEvent<StatEvent.PlayerTPAdjustedEvent>(creature);
+        }
+
+        public int GetRecastReduction(uint creature)
+        {
+            var effects = _status.GetCreatureStatusEffects(creature);
+            var statusRecastReduction = effects.StatGroup.Stats[StatType.RecastReduction];
+            var statusRecastReductionModifier = 1 - effects.StatGroup.Stats[StatType.RecastReductionModifier] * 0.01f;
+
+            if (GetIsPC(creature))
+            {
+                var playerId = PlayerId.Get(creature);
+                var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
+                var itemRecastReduction = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.RecastReduction);
+                var abilityRecastReduction = dbPlayerStat.AbilityStats.CalculateStat(StatType.RecastReduction);
+
+                return (int)((itemRecastReduction + abilityRecastReduction + statusRecastReduction) * statusRecastReductionModifier);
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                var recastReduction = npcStats.StatGroup.Stats[StatType.RecastReduction];
+
+                return (int)((recastReduction + statusRecastReduction) * statusRecastReductionModifier);
+            }
         }
 
         public int GetAttribute(uint creature, AbilityType type)
@@ -686,14 +743,14 @@ namespace XM.Progression.Stat
                     break;
             }
 
-            var statusAbilityBonus = _status.GetCreatureStatusEffects(creature).Stats[statType];
+            var statusAbilityBonus = _status.GetCreatureStatusEffects(creature).StatGroup.Stats[statType];
             if (GetIsPC(creature))
             {
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId);
 
-                var baseStat = dbPlayerStat.BaseStats[statType];
-                var jobBonus = dbPlayerStat.JobStats[statType];
+                var baseStat = dbPlayerStat.BaseStats.Stats[statType];
+                var jobBonus = dbPlayerStat.JobStats.Stats[statType];
                 var itemBonus = dbPlayerStat.EquippedItemStats.CalculateStat(statType);
                 var abilityBonus = dbPlayerStat.AbilityStats.CalculateStat(statType);
 
@@ -712,7 +769,10 @@ namespace XM.Progression.Stat
 
         public int GetAttack(uint creature)
         {
-            var statusAttack = _status.GetCreatureStatusEffects(creature).Stats[StatType.Attack];
+            var effects = _status.GetCreatureStatusEffects(creature);
+            var statusAttack = effects.StatGroup.Stats[StatType.Attack];
+            var statusAttackModifier = 1 + effects.StatGroup.Stats[StatType.AttackModifier] * 0.01f;
+
             if (GetIsPC(creature))
             {
                 var playerId = PlayerId.Get(creature);
@@ -720,17 +780,21 @@ namespace XM.Progression.Stat
                 var itemAttack = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.Attack);
                 var abilityAttack = dbPlayerStat.AbilityStats.CalculateStat(StatType.Attack);
 
-                return itemAttack + abilityAttack + statusAttack;
+                return (int)((itemAttack + abilityAttack + statusAttack) * statusAttackModifier);
             }
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.Stats[StatType.Attack] + statusAttack;
+                return (int)((npcStats.StatGroup.Stats[StatType.Attack] + statusAttack) * statusAttackModifier);
             }
         }
+
         public int GetEtherAttack(uint creature)
         {
-            var statusEtherAttack = _status.GetCreatureStatusEffects(creature).Stats[StatType.EtherAttack];
+            var effects = _status.GetCreatureStatusEffects(creature);
+            var statusEtherAttack = effects.StatGroup.Stats[StatType.EtherAttack];
+            var statusEtherAttackModifier = 1 + effects.StatGroup.Stats[StatType.EtherAttackModifier] * 0.01f;
+
             if (GetIsPC(creature))
             {
                 var playerId = PlayerId.Get(creature);
@@ -738,17 +802,18 @@ namespace XM.Progression.Stat
                 var itemEtherAttack = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.EtherAttack);
                 var abilityEtherAttack = dbPlayerStat.AbilityStats.CalculateStat(StatType.EtherAttack);
 
-                return itemEtherAttack + abilityEtherAttack + statusEtherAttack;
+                return (int)((itemEtherAttack + abilityEtherAttack + statusEtherAttack) * statusEtherAttackModifier);
             }
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.Stats[StatType.EtherAttack] + statusEtherAttack;
+                return (int)((npcStats.StatGroup.Stats[StatType.EtherAttack] + statusEtherAttack) * statusEtherAttackModifier);
             }
         }
+
         public int GetEtherDefense(uint creature)
         {
-            var statusEtherDefense = _status.GetCreatureStatusEffects(creature).Stats[StatType.EtherDefense];
+            var statusEtherDefense = _status.GetCreatureStatusEffects(creature).StatGroup.Stats[StatType.EtherDefense];
             if (GetIsPC(creature))
             {
                 var playerId = PlayerId.Get(creature);
@@ -761,13 +826,16 @@ namespace XM.Progression.Stat
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.Stats[StatType.EtherDefense] + statusEtherDefense;
+                return npcStats.StatGroup.Stats[StatType.EtherDefense] + statusEtherDefense;
             }
         }
 
         public int GetAccuracy(uint creature)
         {
-            var statusAccuracy = _status.GetCreatureStatusEffects(creature).Stats[StatType.Accuracy];
+            var effects = _status.GetCreatureStatusEffects(creature);
+            var statusAccuracy = effects.StatGroup.Stats[StatType.Accuracy];
+            var statusAccuracyModifier = 1 + effects.StatGroup.Stats[StatType.AccuracyModifier] * 0.01f;
+
             if (GetIsPC(creature))
             {
                 var playerId = PlayerId.Get(creature);
@@ -775,17 +843,20 @@ namespace XM.Progression.Stat
                 var itemAccuracy = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.Accuracy);
                 var abilityAccuracy = dbPlayerStat.AbilityStats.CalculateStat(StatType.Accuracy);
 
-                return itemAccuracy + abilityAccuracy + statusAccuracy;
+                return (int)((itemAccuracy + abilityAccuracy + statusAccuracy) * statusAccuracyModifier);
             }
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.Stats[StatType.Accuracy] + statusAccuracy;
+                return (int)((npcStats.StatGroup.Stats[StatType.Accuracy] + statusAccuracy) * statusAccuracyModifier);
             }
         }
         public int GetEvasion(uint creature)
         {
-            var statusEvasion = _status.GetCreatureStatusEffects(creature).Stats[StatType.Evasion];
+            var effects = _status.GetCreatureStatusEffects(creature);
+            var statusEvasion = effects.StatGroup.Stats[StatType.Evasion];
+            var statusEvasionModifier = 1 + effects.StatGroup.Stats[StatType.EvasionModifier] * 0.01f;
+
             if (GetIsPC(creature))
             {
                 var playerId = PlayerId.Get(creature);
@@ -793,17 +864,17 @@ namespace XM.Progression.Stat
                 var itemEvasion = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.Evasion);
                 var abilityEvasion = dbPlayerStat.AbilityStats.CalculateStat(StatType.Evasion);
 
-                return itemEvasion + abilityEvasion + statusEvasion;
+                return (int)((itemEvasion + abilityEvasion + statusEvasion) * statusEvasionModifier);
             }
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.Stats[StatType.Evasion] + statusEvasion;
+                return (int)((npcStats.StatGroup.Stats[StatType.Evasion] + statusEvasion) * statusEvasionModifier);
             }
         }
         public int GetDefense(uint creature)
         {
-            var statusDefense = _status.GetCreatureStatusEffects(creature).Stats[StatType.Defense];
+            var statusDefense = _status.GetCreatureStatusEffects(creature).StatGroup.Stats[StatType.Defense];
             if (GetIsPC(creature))
             {
                 var playerId = PlayerId.Get(creature);
@@ -816,13 +887,13 @@ namespace XM.Progression.Stat
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.Stats[StatType.Defense] + statusDefense;
+                return npcStats.StatGroup.Stats[StatType.Defense] + statusDefense;
             }
         }
 
         public int GetParalysis(uint creature)
         {
-            var statusParalysis = _status.GetCreatureStatusEffects(creature).Stats[StatType.Paralysis];
+            var statusParalysis = _status.GetCreatureStatusEffects(creature).StatGroup.Stats[StatType.Paralysis];
             if (GetIsPC(creature))
             {
                 var playerId = PlayerId.Get(creature);
@@ -835,13 +906,13 @@ namespace XM.Progression.Stat
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return Math.Clamp(npcStats.Stats[StatType.Paralysis] + statusParalysis, 0, 100);
+                return Math.Clamp(npcStats.StatGroup.Stats[StatType.Paralysis] + statusParalysis, 0, 100);
             }
         }
 
         public int GetShieldDeflection(uint creature)
         {
-            var statusShieldDeflection = _status.GetCreatureStatusEffects(creature).Stats[StatType.ShieldDeflection];
+            var statusShieldDeflection = _status.GetCreatureStatusEffects(creature).StatGroup.Stats[StatType.ShieldDeflection];
             if (GetIsPC(creature))
             {
                 var playerId = PlayerId.Get(creature);
@@ -854,12 +925,12 @@ namespace XM.Progression.Stat
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.Stats[StatType.ShieldDeflection] + statusShieldDeflection;
+                return npcStats.StatGroup.Stats[StatType.ShieldDeflection] + statusShieldDeflection;
             }
         }
         public int GetAttackDeflection(uint creature)
         {
-            var statusAttackDeflection = _status.GetCreatureStatusEffects(creature).Stats[StatType.AttackDeflection];
+            var statusAttackDeflection = _status.GetCreatureStatusEffects(creature).StatGroup.Stats[StatType.AttackDeflection];
             if (GetIsPC(creature))
             {
                 var playerId = PlayerId.Get(creature);
@@ -872,7 +943,25 @@ namespace XM.Progression.Stat
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.Stats[StatType.AttackDeflection] + statusAttackDeflection;
+                return npcStats.StatGroup.Stats[StatType.AttackDeflection] + statusAttackDeflection;
+            }
+        }
+
+        public float GetTPCostModifier(uint creature)
+        {
+            var effects = _status.GetCreatureStatusEffects(creature);
+            var statusTPCostModifier = effects.StatGroup.Stats[StatType.TPCostModifier];
+
+            if (GetIsPC(creature))
+            {
+                return statusTPCostModifier * 0.01f;
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                var tpCostModifier = npcStats.StatGroup.Stats[StatType.TPCostModifier];
+
+                return (tpCostModifier + statusTPCostModifier) * 0.01f;
             }
         }
 
@@ -881,14 +970,124 @@ namespace XM.Progression.Stat
             if (!GetIsPC(creature))
                 return 0;
 
+            var effects = _status.GetCreatureStatusEffects(creature);
             var playerId = PlayerId.Get(creature);
             var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
             var itemTPGain = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.TPGain);
             var abilityTPGain = dbPlayerStat.AbilityStats.CalculateStat(StatType.TPGain);
-            var statusTPGain = _status.GetCreatureStatusEffects(creature).Stats[StatType.TPGain];
+            var statusTPGain = effects.StatGroup.Stats[StatType.TPGain];
+            var statusTPGainModifier = 1 + effects.StatGroup.Stats[StatType.TPGainModifier] * 0.01f;
             
-            return itemTPGain + abilityTPGain + statusTPGain;
+            return (int)((itemTPGain + abilityTPGain + statusTPGain) * statusTPGainModifier);
         }
+
+
+        public float GetDefenseBypassModifier(uint creature)
+        {
+            var effects = _status.GetCreatureStatusEffects(creature);
+            var statusDefenseBypassModifier = effects.StatGroup.Stats[StatType.DefenseBypassModifier];
+
+            if (GetIsPC(creature))
+            {
+                return statusDefenseBypassModifier * 0.01f;
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                var defenseBypass = npcStats.StatGroup.Stats[StatType.DefenseBypassModifier];
+
+                return (defenseBypass + statusDefenseBypassModifier) * 0.01f;
+            }
+        }
+
+        public float GetHealingModifier(uint creature)
+        {
+            var effects = _status.GetCreatureStatusEffects(creature);
+            var statusHealingModifier = effects.StatGroup.Stats[StatType.HealingModifier];
+
+            if (GetIsPC(creature))
+            {
+                return statusHealingModifier * 0.01f;
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                var healingModifier = npcStats.StatGroup.Stats[StatType.HealingModifier];
+
+                return (healingModifier + statusHealingModifier) * 0.01f;
+            }
+        }
+
+        public int GetEPRestoreOnHit(uint creature)
+        {
+            var effects = _status.GetCreatureStatusEffects(creature);
+            var statusEPRestoreOnHit = effects.StatGroup.Stats[StatType.EPRestoreOnHit];
+
+            if (GetIsPC(creature))
+            {
+                return statusEPRestoreOnHit;
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                var epRestoreOnHit = npcStats.StatGroup.Stats[StatType.EPRestoreOnHit];
+
+                return epRestoreOnHit + statusEPRestoreOnHit;
+            }
+        }
+
+        public float GetDefenseModifier(uint creature)
+        {
+            var effects = _status.GetCreatureStatusEffects(creature);
+            var statusDefenseModifier = effects.StatGroup.Stats[StatType.DefenseModifier];
+
+            if (GetIsPC(creature))
+            {
+                return statusDefenseModifier * 0.01f;
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                var defenseModifier = npcStats.StatGroup.Stats[StatType.DefenseModifier];
+
+                return (defenseModifier + statusDefenseModifier) * 0.01f;
+            }
+        }
+        public float GetEtherDefenseModifier(uint creature)
+        {
+            var effects = _status.GetCreatureStatusEffects(creature);
+            var statusEtherDefenseModifier = effects.StatGroup.Stats[StatType.EtherDefenseModifier];
+
+            if (GetIsPC(creature))
+            {
+                return statusEtherDefenseModifier * 0.01f;
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                var etherDefenseModifier = npcStats.StatGroup.Stats[StatType.EtherDefenseModifier];
+
+                return (etherDefenseModifier + statusEtherDefenseModifier) * 0.01f;
+            }
+        }
+        public int GetExtraAttackModifier(uint creature)
+        {
+            var effects = _status.GetCreatureStatusEffects(creature);
+            var statusExtraAttackModifier = effects.StatGroup.Stats[StatType.ExtraAttackModifier];
+
+            if (GetIsPC(creature))
+            {
+                return statusExtraAttackModifier;
+            }
+            else
+            {
+                var npcStats = GetNPCStats(creature);
+                var extraAttackModifier = npcStats.StatGroup.Stats[StatType.ExtraAttackModifier];
+
+                return extraAttackModifier + statusExtraAttackModifier;
+            }
+        }
+
         public int GetEnmityAdjustment(uint creature)
         {
             if (!GetIsPC(creature))
@@ -898,7 +1097,7 @@ namespace XM.Progression.Stat
             var dbPlayerStat = _db.Get<PlayerStat>(playerId) ?? new PlayerStat(playerId);
             var itemEnmity = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.Enmity);
             var abilityEnmity = dbPlayerStat.AbilityStats.CalculateStat(StatType.Enmity);
-            var statusEnmity = _status.GetCreatureStatusEffects(creature).Stats[StatType.Enmity];
+            var statusEnmity = _status.GetCreatureStatusEffects(creature).StatGroup.Stats[StatType.Enmity];
 
             var enmity = itemEnmity + abilityEnmity + statusEnmity;
             if (enmity > 200)
@@ -918,11 +1117,25 @@ namespace XM.Progression.Stat
             {
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+                var oldTP = dbPlayerStat.TP;
                 dbPlayerStat.TP = amount;
 
                 _db.Set(dbPlayerStat);
 
                 _event.PublishEvent<UIEvent.UIRefreshEvent>(creature);
+
+                // Below the threshold before this change but now we're at or above it.
+                if (oldTP < PassiveWeaponSkillTPThreshold && 
+                    dbPlayerStat.TP >= PassiveWeaponSkillTPThreshold)
+                {
+                    _event.PublishEvent<StatEvent.PassiveTPBonusAcquiredEvent>(creature);
+                }
+                // Above the threshold before this change but now we're below it.
+                else if (oldTP >= PassiveWeaponSkillTPThreshold &&
+                         dbPlayerStat.TP < PassiveWeaponSkillTPThreshold)
+                {
+                    _event.PublishEvent<StatEvent.PassiveTPBonusRemovedEvent>(creature);
+                }
             }
             else
             {
@@ -987,7 +1200,7 @@ namespace XM.Progression.Stat
 
         public int GetResist(uint creature, ResistType resist)
         {
-            var statusResist = _status.GetCreatureStatusEffects(creature).Stats.Resists[resist];
+            var statusResist = _status.GetCreatureStatusEffects(creature).StatGroup.Resists[resist];
             if (GetIsPC(creature))
             {
                 var playerId = PlayerId.Get(creature);
@@ -1001,7 +1214,7 @@ namespace XM.Progression.Stat
             else
             {
                 var npcStats = GetNPCStats(creature);
-                var resistPercent = npcStats.Stats.Resists[resist] + statusResist;
+                var resistPercent = npcStats.StatGroup.Resists[resist] + statusResist;
 
                 return Math.Clamp(resistPercent, 0, 100);
             }
@@ -1018,7 +1231,7 @@ namespace XM.Progression.Stat
             if (!GetIsObjectValid(skin))
                 return npcStats;
 
-            npcStats.Stats[StatType.MaxHP] += GetMaxHitPoints(npc);
+            npcStats.StatGroup.Stats[StatType.MaxHP] += GetMaxHitPoints(npc);
             for (var ip = GetFirstItemProperty(skin); GetIsItemPropertyValid(ip); ip = GetNextItemProperty(skin))
             {
                 var type = GetItemPropertyType(ip);
@@ -1035,7 +1248,18 @@ namespace XM.Progression.Stat
                 }
                 else if(_itemPropertyToStat.ContainsKey(type))
                 {
-                    npcStats.Stats[_itemPropertyToStat[type]] += GetItemPropertyCostTableValue(ip);
+                    var costTable = GetItemPropertyCostTable(ip);
+                    var value = GetItemPropertyCostTableValue(ip);
+
+                    // Cost Table ID 42 has positive values between 1-100 
+                    // Starting at 101 the values become negative.
+                    // We need to adjust for that here.
+                    if (costTable == 42 && value > 100)
+                    {
+                        value = -(value - 100);
+                    }
+
+                    npcStats.StatGroup.Stats[_itemPropertyToStat[type]] += value;
                 }
             }
 
@@ -1117,7 +1341,7 @@ namespace XM.Progression.Stat
 
             foreach (var (stat, ipType) in _statsToItemProperty)
             {
-                SetIP(skin, ipType, npcStats.Stats[stat]);
+                SetIP(skin, ipType, npcStats.StatGroup.Stats[stat]);
             }
 
             ApplyStats(npc);
@@ -1192,15 +1416,15 @@ namespace XM.Progression.Stat
             var playerId = PlayerId.Get(player);
             var dbPlayerStat = _db.Get<PlayerStat>(playerId);
 
-            dbPlayerStat.JobStats[StatType.MaxHP] = CalculateHP(level, definition.Grades.MaxHP);
-            dbPlayerStat.JobStats[StatType.MaxEP] = CalculateEP(level, definition.Grades.MaxEP);
+            dbPlayerStat.JobStats.Stats[StatType.MaxHP] = CalculateHP(level, definition.Grades.MaxHP);
+            dbPlayerStat.JobStats.Stats[StatType.MaxEP] = CalculateEP(level, definition.Grades.MaxEP);
 
-            dbPlayerStat.JobStats[StatType.Might] = CalculateStat(level, definition.Grades.Might);
-            dbPlayerStat.JobStats[StatType.Perception] = CalculateStat(level, definition.Grades.Perception);
-            dbPlayerStat.JobStats[StatType.Vitality] = CalculateStat(level, definition.Grades.Vitality);
-            dbPlayerStat.JobStats[StatType.Willpower] = CalculateStat(level, definition.Grades.Willpower);
-            dbPlayerStat.JobStats[StatType.Agility] = CalculateStat(level, definition.Grades.Agility);
-            dbPlayerStat.JobStats[StatType.Social] = CalculateStat(level, definition.Grades.Social);
+            dbPlayerStat.JobStats.Stats[StatType.Might] = CalculateStat(level, definition.Grades.Might);
+            dbPlayerStat.JobStats.Stats[StatType.Perception] = CalculateStat(level, definition.Grades.Perception);
+            dbPlayerStat.JobStats.Stats[StatType.Vitality] = CalculateStat(level, definition.Grades.Vitality);
+            dbPlayerStat.JobStats.Stats[StatType.Willpower] = CalculateStat(level, definition.Grades.Willpower);
+            dbPlayerStat.JobStats.Stats[StatType.Agility] = CalculateStat(level, definition.Grades.Agility);
+            dbPlayerStat.JobStats.Stats[StatType.Social] = CalculateStat(level, definition.Grades.Social);
 
             _db.Set(dbPlayerStat);
         }
@@ -1258,5 +1482,12 @@ namespace XM.Progression.Stat
             }
         }
 
+        [ScriptHandler("bread_test6")]
+        public void DebugTP()
+        {
+            var player = GetLastUsedBy();
+            var tp = GetCurrentTP(player) + 500;
+            SetTP(player, tp);
+        }
     }
 }

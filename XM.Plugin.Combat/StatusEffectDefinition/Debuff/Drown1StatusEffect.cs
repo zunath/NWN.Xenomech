@@ -23,7 +23,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Debuff
 
         public Drown1StatusEffect()
         {
-            Stats[StatType.Might] = -6;
+            StatGroup.Stats[StatType.Might] = -6;
         }
     }
 }

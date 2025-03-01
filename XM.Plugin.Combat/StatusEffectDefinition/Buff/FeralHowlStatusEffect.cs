@@ -16,7 +16,7 @@ namespace XM.Plugin.Combat.StatusEffectDefinition.Buff
 
         public FeralHowlStatusEffect()
         {
-            Stats[StatType.Accuracy] = 30;
+            StatGroup.Stats[StatType.Accuracy] = 30;
         }
         protected override void Apply(uint creature, int durationTicks)
         {
