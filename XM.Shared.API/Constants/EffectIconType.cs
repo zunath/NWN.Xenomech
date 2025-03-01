@@ -208,6 +208,27 @@ namespace XM.Shared.API.Constants
         ApexArrow = 203,
         XMBlind = 204,
         Atonement = 205,
-
+        ShockSlash = 206,
+        GroundStrike = 207,
+        ShadowBarrage = 208,
+        Deadeye = 209,
+        Shadowstitch = 210,
+        EnergyDrain = 211,
+        FlameToss = 212,
+        FrostDart = 213,
+        FurySlash = 214,
+        DragonBlow = 215,
+        OneInchPunch = 216,
+        BlastShot = 217,
+        HeavyShot = 218,
+        Omniscience = 219,
+        SpinningAxe = 220,
+        Rampage = 221,
+        SonicSlash = 222,
+        EmberFang = 223,
+        VorpalThrust = 224,
+        SonicThrust = 225,
+        BlastArrow = 226,
+        ArchingArrow = 227
     }
 }
