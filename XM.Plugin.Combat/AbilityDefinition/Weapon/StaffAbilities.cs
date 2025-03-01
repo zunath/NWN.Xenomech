@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Anvil.Services;
+using XM.Plugin.Combat.StatusEffectDefinition.Buff;
 using XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill;
 using XM.Progression.Ability;
 using XM.Progression.Skill;
@@ -15,12 +16,20 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
     internal class StaffAbilities : WeaponSkillBaseAbility
     {
         private readonly AbilityBuilder _builder = new();
+        private readonly Lazy<StatusEffectService> _status;
+        private readonly SpellService _spell;
+        private readonly StatService _stat;
 
         public StaffAbilities(
             Lazy<CombatService> combat,
-            Lazy<StatusEffectService> status)
+            Lazy<StatusEffectService> status,
+            SpellService spell,
+            StatService stat)
             : base(combat, status)
         {
+            _status = status;
+            _spell = spell;
+            _stat = stat;
         }
 
         public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
@@ -114,12 +123,39 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void Omniscience()
         {
+            _builder.Create(FeatType.Omniscience)
+                .Name(LocaleString.Omniscience)
+                .Description(LocaleString.OmniscienceDescription)
+                .IsWeaponSkill(SkillType.Longsword, 1130)
+                .RequirementTP(1350)
+                .TelegraphSize(4f, 4f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
+                {
+                    foreach (var target in targets)
+                    {
+                        if (!GetFactionEqual(target, activator))
+                            continue;
 
+                        _status.Value.ApplyStatusEffect<OmniscienceStatusEffect>(activator, target, 1);
+                    }
+                });
         }
 
         private void SpiritTaker()
         {
+            _builder.Create(FeatType.SpiritTaker)
+                .Name(LocaleString.SpiritTaker)
+                .Description(LocaleString.SpiritTakerDescription)
+                .IsWeaponSkill(SkillType.Staff, 1390)
+                .RequirementTP(2000)
+                .HasImpactAction((activator, target, location) =>
+                {
+                    var maxEP = _stat.GetMaxEP(activator);
+                    var restore = (int)(maxEP * 0.4f);
 
+                    _stat.RestoreEP(activator, restore);
+                    ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpRestorationGreater), activator);
+                });
         }
 
         private void Shattersoul()

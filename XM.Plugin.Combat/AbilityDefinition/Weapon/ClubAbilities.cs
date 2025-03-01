@@ -157,14 +157,6 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
                     });
 
                     ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpHealingExtra), activator);
-                })
-                .HasTelegraphConeAction((activator, targets, location) =>
-                {
-                    foreach (var target in targets)
-                    {
-                        var duration = _spell.CalculateResistedTicks(target, ResistType.Light, 6);
-                        _status.Value.ApplyStatusEffect<BlindStatusEffect>(activator, target, duration);
-                    }
                 });
         }
 
