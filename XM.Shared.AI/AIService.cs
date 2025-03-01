@@ -70,7 +70,11 @@ namespace XM.AI
             _event.Subscribe<AIEvent.OnExitAggroAOE>(OnExitAggroAOE);
 
             _event.Subscribe<NWNXEvent.OnDmToggleAiAfter>(OnDMToggleAI);
+
+            _event.Subscribe<CreatureEvent.OnMeleeAttacked>(OnCreatureAttacked);
         }
+
+
         public void Init()
         {
             LoadCachedCreatureFeats();
@@ -247,20 +251,27 @@ namespace XM.AI
             context.RemoveFriendly(exiting);
         }
 
+        private void OnCreatureAttacked(uint creature)
+        {
+            if (!_creatureAITrees.ContainsKey(creature))
+                return;
+
+            var attacker = GetLastAttacker(creature);
+            var context = _creatureAITrees[creature];
+
+            foreach (var friendly in context.GetNearbyFriendlies())
+            {
+                if (GetFactionEqual(creature, friendly))
+                {
+                    _enmity.ModifyEnmity(attacker, friendly, EnmityType.Volatile, 1);
+                }
+            }
+        }
+
         public void Dispose()
         {
             _creatureAITrees.Clear();
             _lastUpdateTimestamps.Clear();
         }
-
-        [ScriptHandler("bread_test3")]
-        public void Test3()
-        {
-            var npc = GetObjectByTag("goblintest");
-            ApplyEffectToObject(DurationType.Instant, EffectDamage(1), npc);
-
-            SendMessageToPC(GetLastUsedBy(), $"Goblin HP: {GetCurrentHitPoints(npc)} / {GetMaxHitPoints(npc)}");
-        }
-
     }
 }
