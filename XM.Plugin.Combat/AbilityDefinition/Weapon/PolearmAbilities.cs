@@ -48,17 +48,83 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void ThunderThrust()
         {
+            const int DMG = 14;
+            const ResistType Resist = ResistType.Lightning;
+            const DamageType DamageType = DamageType.Lightning;
+            const VisualEffectType Vfx = VisualEffectType.ImpLightningSmall;
 
+            _builder.Create(FeatType.ThunderThrust)
+                .Name(LocaleString.ThunderThrust)
+                .Description(LocaleString.ThunderThrustDescription)
+                .IsWeaponSkill(SkillType.Polearm, 240)
+                .RequirementTP(1000)
+                .ResistType(Resist)
+                .IncreasesStat(StatType.QueuedDMGBonus, DMG)
+                .TelegraphSize(4f, 2f)
+                .HasTelegraphLineAction((activator, targets, location) =>
+                {
+                    DamageImpact(
+                        activator,
+                        targets,
+                        DMG,
+                        Resist,
+                        DamageType,
+                        Vfx);
+                });
         }
 
         private void RaidenThrust()
         {
+            const int DMG = 18;
+            const ResistType Resist = ResistType.Lightning;
+            const DamageType DamageType = DamageType.Lightning;
+            const VisualEffectType Vfx = VisualEffectType.ImpLightningSmall;
 
+            _builder.Create(FeatType.RaidenThrust)
+                .Name(LocaleString.RaidenThrust)
+                .Description(LocaleString.RaidenThrustDescription)
+                .IsWeaponSkill(SkillType.Polearm, 540)
+                .RequirementTP(1250)
+                .ResistType(Resist)
+                .IncreasesStat(StatType.QueuedDMGBonus, DMG)
+                .TelegraphSize(4f, 2f)
+                .HasTelegraphConeAction((activator, targets, location) =>
+                {
+                    DamageImpact(
+                        activator,
+                        targets,
+                        DMG,
+                        Resist,
+                        DamageType,
+                        Vfx);
+                });
         }
 
         private void PentaThrust()
         {
+            const int DMG = 22;
+            const ResistType Resist = ResistType.Lightning;
+            const DamageType DamageType = DamageType.Lightning;
+            const VisualEffectType Vfx = VisualEffectType.ImpLightningSmall;
 
+            _builder.Create(FeatType.PentaThrust)
+                .Name(LocaleString.PentaThrust)
+                .Description(LocaleString.PentaThrustDescription)
+                .IsWeaponSkill(SkillType.Polearm, 860)
+                .RequirementTP(1500)
+                .ResistType(Resist)
+                .IncreasesStat(StatType.QueuedDMGBonus, DMG)
+                .TelegraphSize(2f, 2f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
+                {
+                    DamageImpact(
+                        activator,
+                        targets,
+                        DMG,
+                        Resist,
+                        DamageType,
+                        Vfx);
+                });
         }
 
         private void VorpalThrust()
