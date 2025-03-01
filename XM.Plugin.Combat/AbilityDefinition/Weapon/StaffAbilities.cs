@@ -1,18 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Anvil.Services;
 using XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill;
 using XM.Progression.Ability;
 using XM.Progression.Skill;
 using XM.Progression.Stat;
+using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class StaffAbilities : IAbilityListDefinition
+    internal class StaffAbilities : WeaponSkillBaseAbility
     {
         private readonly AbilityBuilder _builder = new();
+
+        public StaffAbilities(
+            Lazy<CombatService> combat,
+            Lazy<StatusEffectService> status)
+            : base(combat, status)
+        {
+        }
 
         public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {

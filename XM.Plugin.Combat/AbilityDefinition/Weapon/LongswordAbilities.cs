@@ -63,7 +63,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
                 .RequirementTP(1000)
                 .ResistType(Resist)
                 .IncreasesStat(StatType.QueuedDMGBonus, DMG)
-                .TelegraphSize(6f, 2f)
+                .TelegraphSize(4f, 2f)
                 .HasTelegraphLineAction((activator, targets, location) =>
                 {
                     DamageImpact(
@@ -90,7 +90,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
                 .RequirementTP(1250)
                 .ResistType(Resist)
                 .IncreasesStat(StatType.QueuedDMGBonus, DMG)
-                .TelegraphSize(6f, 2f)
+                .TelegraphSize(4f, 2f)
                 .HasTelegraphConeAction((activator, targets, location) =>
                 {
                     DamageImpact(
