@@ -206,5 +206,6 @@ namespace XM.Shared.API.Constants
         FrostbiteBlade = 201,
         Drakesbane = 202,
         ApexArrow = 203,
+        XMBlind = 204,
     }
 }

@@ -1486,5 +1486,6 @@ namespace XM.Shared.Core.Localization
         ExtraAttackPercentage = 1799,
         InsufficientTP = 1800,
         IncorrectWeaponEquippedForThisAbility = 1801,
+        Blind = 1802,
     }
 }

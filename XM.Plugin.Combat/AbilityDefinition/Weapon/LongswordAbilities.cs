@@ -16,13 +16,17 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
     internal class LongswordAbilities : WeaponSkillBaseAbility
     {
         private readonly AbilityBuilder _builder = new();
-
+        private readonly Lazy<StatusEffectService> _status;
+        private readonly SpellService _spell;
 
         public LongswordAbilities(
             Lazy<CombatService> combat,
-            Lazy<StatusEffectService> status) 
+            Lazy<StatusEffectService> status,
+            SpellService spell) 
             : base(combat, status)
         {
+            _status = status;
+            _spell = spell;
         }
 
         public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
@@ -133,7 +137,16 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void FlatBlade()
         {
-
+            _builder.Create(FeatType.FlatBlade)
+                .Name(LocaleString.FlatBlade)
+                .Description(LocaleString.FlatBladeDescription)
+                .IsWeaponSkill(SkillType.Longsword, 1130)
+                .RequirementTP(1350)
+                .HasImpactAction((activator, target, location) =>
+                {
+                    var duration = _spell.CalculateResistedTicks(target, ResistType.Mind, 20);
+                    _status.Value.ApplyStatusEffect<BlindStatusEffect>(activator, target, duration);
+                });
         }
 
         private void Atonement()
