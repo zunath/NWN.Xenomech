@@ -5,9 +5,37 @@ const int TELEGRAPH_SHAPE_SPHERE = 1;
 const int TELEGRAPH_SHAPE_CONE = 2;
 const int TELEGRAPH_SHAPE_LINE = 3;
 
+const int COLOR_HOSTILE = 0;
+const int COLOR_SELF = 1;
+const int COLOR_FRIENDLY = 2;
+const int COLOR_ENEMY_BENEFICIAL = 3;
+
 #include "inc_target"
 #include "inc_postpr"
 #include "inc_scriptable"
+
+vec3 GetTelegraphColor(int colorType)
+{
+    if (colorType == COLOR_HOSTILE) return vec3(1.0, 0.0, 0.0); // Red
+    if (colorType == COLOR_SELF) return vec3(0.0, 0.0, 1.0); // Blue
+    if (colorType == COLOR_FRIENDLY) return vec3(0.0, 1.0, 0.0); // Green
+    if (colorType == COLOR_ENEMY_BENEFICIAL) return vec3(0.66, 0.66, 0.66); // Gray
+    return vec3(1.0, 1.0, 1.0); // Default White
+}
+
+struct ShapeColorData 
+{
+    int shapeType;
+    int colorType;
+};
+
+ShapeColorData UnpackData(int packedData)
+{
+    ShapeColorData result;
+    result.shapeType = (packedData >> 8) & 0xFF; // Extract shape type (top 8 bits)
+    result.colorType = packedData & 0xFF; // Extract color type (bottom 8 bits)
+    return result;
+}
 
 float CalculateLineFraction(vec2 origin, float rotation, float lineLength, vec2 point)
 {
@@ -97,24 +125,6 @@ float CalculateTelegraphColour(vec3 pixelPos, int shapeType, vec4 data1, vec4 da
     return strength;
 }
 
-struct ShapeColorData 
-{
-    int shapeType;
-    vec3 color;
-};
-
-ShapeColorData UnpackData(int packedData)
-{
-    ShapeColorData result;
-    result.shapeType = (packedData >> 24) & 0xFF; // Extract shape type (top 8 bits)
-
-    result.color.r = float((packedData >> 16) & 0xFF) / 255.0;
-    result.color.g = float((packedData >> 8) & 0xFF) / 255.0;
-    result.color.b = float(packedData & 0xFF) / 255.0;
-
-    return result;
-}
-
 vec4 CalculateTelegraphStrengthTotal(vec3 pixelPos)
 {
     vec4 finalColor = vec4(0.0);
@@ -124,42 +134,42 @@ vec4 CalculateTelegraphStrengthTotal(vec3 pixelPos)
 	
 	data = UnpackData(scriptableInt1);
     strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec1, scriptableVec2);
-    finalColor.rgb = mix(finalColor.rgb, data.color, strength);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
     finalColor.a = max(finalColor.a, strength);
 
 	data = UnpackData(scriptableInt2);
     strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec3, scriptableVec4);
-    finalColor.rgb = mix(finalColor.rgb, data.color, strength);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
     finalColor.a = max(finalColor.a, strength);
 
 	data = UnpackData(scriptableInt3);
     strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec5, scriptableVec6);
-    finalColor.rgb = mix(finalColor.rgb, data.color, strength);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
     finalColor.a = max(finalColor.a, strength);
 
 	data = UnpackData(scriptableInt4);
     strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec7, scriptableVec8);
-    finalColor.rgb = mix(finalColor.rgb, data.color, strength);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
     finalColor.a = max(finalColor.a, strength);
 
 	data = UnpackData(scriptableInt5);
     strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec9, scriptableVec10);
-    finalColor.rgb = mix(finalColor.rgb, data.color, strength);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
     finalColor.a = max(finalColor.a, strength);
 
 	data = UnpackData(scriptableInt6);
     strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec11, scriptableVec12);
-    finalColor.rgb = mix(finalColor.rgb, data.color, strength);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
     finalColor.a = max(finalColor.a, strength);
 
 	data = UnpackData(scriptableInt7);
     strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec13, scriptableVec14);
-    finalColor.rgb = mix(finalColor.rgb, data.color, strength);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
     finalColor.a = max(finalColor.a, strength);
 
 	data = UnpackData(scriptableInt8);
     strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec15, scriptableVec16);
-    finalColor.rgb = mix(finalColor.rgb, data.color, strength);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
     finalColor.a = max(finalColor.a, strength);
 
     return finalColor;

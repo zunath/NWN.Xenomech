@@ -271,9 +271,9 @@ namespace XM.Progression.Ability.Telegraph
             }
         }
 
-        private static int PackShapeAndColor(TelegraphType shapeType, byte r, byte g, byte b)
+        private static int PackShapeAndColor(TelegraphType shapeType, TelegraphColorType colorType)
         {
-            return ((int)shapeType << 24) | (r << 16) | (g << 8) | b;
+            return ((int)shapeType << 8) | (int)colorType;
         }
 
         private void UpdateShaderForPlayer(uint player)
@@ -297,8 +297,8 @@ namespace XM.Progression.Ability.Telegraph
                 var data = telegraph.Data;
                 var position = data.Position;
                 var size = data.Size;
-                var color = DetermineTelegraphColor(player, data.Creator, data.IsHostile);
-                var packed = PackShapeAndColor(data.Shape, color.Red, color.Green, color.Blue);
+                var colorType = DetermineTelegraphColorType(player, data.Creator, data.IsHostile);
+                var packed = PackShapeAndColor(data.Shape, colorType);
 
                 SetShaderUniformInt(
                     player, 
@@ -330,23 +330,14 @@ namespace XM.Progression.Ability.Telegraph
             }
         }
 
-        private Color DetermineTelegraphColor(uint player, uint telegrapher, bool isHostile)
+        private TelegraphColorType DetermineTelegraphColorType(uint player, uint telegrapher, bool isHostile)
         {
             if (player == telegrapher)
-                return _selfTelegraphColor;
+                return TelegraphColorType.Self;
 
-            if (isHostile)
-            {
-                return GetIsReactionTypeFriendly(player, telegrapher) 
-                    ? _friendlyTelegraphColor 
-                    : _hostileTelegraphColor;
-            }
-            else
-            {
-                return GetIsReactionTypeFriendly(player, telegrapher) 
-                    ? _friendlyTelegraphColor 
-                    : _enemyBeneficialTelegraphColor;
-            }
+            return isHostile
+                ? (GetIsReactionTypeFriendly(player, telegrapher) ? TelegraphColorType.Friendly : TelegraphColorType.Hostile)
+                : (GetIsReactionTypeFriendly(player, telegrapher) ? TelegraphColorType.Friendly : TelegraphColorType.EnemyBeneficial);
         }
 
         public void Init()
