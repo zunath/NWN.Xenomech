@@ -163,6 +163,9 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
                 {
                     foreach (var target in targets)
                     {
+                        if (!GetFactionEqual(target, activator))
+                            continue;
+
                         _status.Value.ApplyStatusEffect<AtonementStatusEffect>(activator, target, 1);
                     }
                 });

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using Anvil.Services;
+using XM.Plugin.Combat.StatusEffectDefinition.Buff;
+using XM.Plugin.Combat.StatusEffectDefinition.Debuff;
 using XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill;
 using XM.Progression.Ability;
 using XM.Progression.Skill;
@@ -15,13 +18,19 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
     internal class PistolAbilities : WeaponSkillBaseAbility
     {
         private readonly AbilityBuilder _builder = new();
+        private readonly Lazy<StatusEffectService> _status;
+        private readonly SpellService _spell;
 
         public PistolAbilities(
             Lazy<CombatService> combat,
-            Lazy<StatusEffectService> status)
+            Lazy<StatusEffectService> status,
+            SpellService spell)
             : base(combat, status)
         {
+            _status = status;
+            _spell = spell;
         }
+
         public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             QuickDraw();
@@ -129,12 +138,37 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void ShadowBarrage()
         {
-
+            _builder.Create(FeatType.ShadowBarrage)
+                .Name(LocaleString.ShadowBarrage)
+                .Description(LocaleString.ShadowBarrageDescription)
+                .IsWeaponSkill(SkillType.Pistol, 1130)
+                .RequirementTP(1350)
+                .HasImpactAction((activator, target, location) =>
+                {
+                    var duration = _spell.CalculateResistedTicks(target, ResistType.Darkness, 6);
+                    _status.Value.ApplyStatusEffect<ShadowBarrageStatusEffect>(activator, target, duration);
+                });
         }
 
         private void Deadeye()
         {
+            _builder.Create(FeatType.Deadeye)
+                .Name(LocaleString.Deadeye)
+                .Description(LocaleString.DeadeyeDescription)
+                .IsWeaponSkill(SkillType.Pistol, 1390)
+                .RequirementTP(2000)
+                .HasActivationDelay(2f)
+                .TelegraphSize(3f, 3f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
+                {
+                    foreach (var target in targets)
+                    {
+                        if (!GetFactionEqual(target, activator))
+                            continue;
 
+                        _status.Value.ApplyStatusEffect<DeadeyeStatusEffect>(activator, target, 1);
+                    }
+                });
         }
 
         private void TrueShot()
