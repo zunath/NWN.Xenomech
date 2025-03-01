@@ -1,19 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Anvil.Services;
+using XM.Plugin.Combat.StatusEffectDefinition.Debuff;
 using XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill;
 using XM.Progression.Ability;
-using XM.Progression.Recast;
 using XM.Progression.Skill;
 using XM.Progression.Stat;
+using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 {
     [ServiceBinding(typeof(IAbilityListDefinition))]
-    internal class LongswordAbilities : IAbilityListDefinition
+    internal class LongswordAbilities : WeaponSkillBaseAbility
     {
         private readonly AbilityBuilder _builder = new();
+
+
+        public LongswordAbilities(
+            Lazy<CombatService> combat,
+            Lazy<StatusEffectService> status) 
+            : base(combat, status)
+        {
+        }
 
         public Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
@@ -41,31 +51,84 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void BurningBlade()
         {
+            const int DMG = 13;
+            const ResistType Resist = ResistType.Fire;
+            const DamageType DamageType = DamageType.Fire;
+            const VisualEffectType Vfx = VisualEffectType.ComHitFire;
+
             _builder.Create(FeatType.BurningBlade)
                 .Name(LocaleString.BurningBlade)
                 .Description(LocaleString.BurningBladeDescription)
                 .IsWeaponSkill(SkillType.Longsword, 240)
                 .RequirementTP(1000)
-                .ResistType(ResistType.Fire)
-                .IncreasesStat(StatType.QueuedDMGBonus, 13)
-                .TelegraphSize(4f, 2f)
+                .ResistType(Resist)
+                .IncreasesStat(StatType.QueuedDMGBonus, DMG)
+                .TelegraphSize(6f, 2f)
                 .HasTelegraphLineAction((activator, targets, location) =>
                 {
-                    foreach (var target in targets)
-                    {
-                        SendMessageToPC(activator, "Target = " + GetName(target));
-                    }
+                    DamageImpact(
+                        activator, 
+                        targets,
+                        DMG,
+                        Resist,
+                        DamageType,
+                        Vfx);
                 });
         }
 
         private void RedLotusBlade()
         {
+            const int DMG = 16;
+            const ResistType Resist = ResistType.Fire;
+            const DamageType DamageType = DamageType.Fire;
+            const VisualEffectType Vfx = VisualEffectType.ComHitFire;
 
+            _builder.Create(FeatType.RedLotusBlade)
+                .Name(LocaleString.RedLotusBlade)
+                .Description(LocaleString.RedLotusBladeDescription)
+                .IsWeaponSkill(SkillType.Longsword, 540)
+                .RequirementTP(1250)
+                .ResistType(Resist)
+                .IncreasesStat(StatType.QueuedDMGBonus, DMG)
+                .TelegraphSize(6f, 2f)
+                .HasTelegraphConeAction((activator, targets, location) =>
+                {
+                    DamageImpact(
+                        activator,
+                        targets,
+                        DMG,
+                        Resist,
+                        DamageType,
+                        Vfx);
+                });
         }
 
         private void VorpalBlade()
         {
+            const int DMG = 20;
+            const ResistType Resist = ResistType.Water;
+            const DamageType DamageType = DamageType.Water;
+            const VisualEffectType Vfx = VisualEffectType.None;
+            const int DurationTicks = 10;
 
+            _builder.Create(FeatType.VorpalBlade)
+                .Name(LocaleString.VorpalBlade)
+                .Description(LocaleString.VorpalBladeDescription)
+                .IsWeaponSkill(SkillType.Longsword, 860)
+                .RequirementTP(1500)
+                .ResistType(Resist)
+                .IncreasesStat(StatType.QueuedDMGBonus, DMG)
+                .HasImpactAction((activator, target, location) =>
+                {
+                    DamageEffectImpact<SlowStatusEffect>(
+                        activator,
+                        target,
+                        DMG,
+                        Resist,
+                        DamageType,
+                        Vfx,
+                        DurationTicks);
+                });
         }
 
         private void FlatBlade()

@@ -404,6 +404,31 @@ namespace XM.Plugin.Combat
             return ((int)minDamage, (int)maxDamage);
         }
 
+        public int CalculateWeaponSkillDamage(
+            uint attacker, 
+            uint defender,
+            int bonusDMG, 
+            ResistType resistType)
+        {
+            var weapon = GetItemInSlot(InventorySlotType.RightHand, attacker);
+            var attackType = GetWeaponRanged(weapon)
+                ? AttackType.Ranged
+                : AttackType.Melee;
+
+            var delta = CalculateDamageStatDelta(attacker, defender, attackType);
+            var ratio = CalculateDamageRatio(attacker, defender, weapon, attackType);
+            var baseDMG = _stat.GetMainHandDMG(attacker) + bonusDMG + delta;
+            var maxDamage = (int)(baseDMG * ratio);
+            var minDamage = (int)(maxDamage * 0.7f);
+
+            if (maxDamage < 1)
+                maxDamage = 1;
+            if (minDamage < 1)
+                minDamage = 1;
+
+            return XMRandom.Next(minDamage, maxDamage);
+        }
+
         private int CalculateBackAttackBonus(uint attacker, uint defender)
         {
             var isBehind = IsBehind(attacker, defender);
