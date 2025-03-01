@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using Anvil.API;
 using Anvil.Services;
 using NWN.Native.API;
+using XM.Progression.Ability;
 using XM.Progression.Event;
 using XM.Shared.Core.EventManagement;
 
@@ -57,17 +58,20 @@ namespace XM.Plugin.Combat.NativeOverride
         private readonly CombatService _combat;
         private readonly VirtualMachine _vm;
         private readonly XMEventService _event;
+        private readonly AbilityService _ability;
 
         public OnAIActionAttackObject(
             HookService hook,
             CombatService combat,
             VirtualMachine vm,
-            XMEventService @event)
+            XMEventService @event,
+            AbilityService ability)
         {
             _aiActionAttackObjectHook = hook.RequestHook<AIActionAttackObjectHook>(HandleAIActionAttackObject, HookOrder.Late);
             _combat = combat;
             _vm = vm;
             _event = @event;
+            _ability = ability;
 
             SubscribeEvents();
         }
@@ -542,6 +546,7 @@ namespace XM.Plugin.Combat.NativeOverride
             }
 
             pCreature.ResolveAttack(oidTarget, nAttacks, nTimeAnimation);
+            _ability.ProcessWeaponAbility(pCreature.m_idSelf, oidTarget, 0.75f);
 
             return result;
         }

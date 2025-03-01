@@ -459,23 +459,14 @@ namespace XM.Progression.Ability
                 _activity.SetBusy(activator, ActivityStatusType.AbilityActivation);
 
                 if (ability.TelegraphAction != null && 
-                    ability.TelegraphType != TelegraphType.None)
+                    ability.TelegraphType != TelegraphType.None &&
+                    ability.ActivationType != AbilityActivationType.WeaponSkill)
                 {
-                    var telegraphPosition = targetLocation == LOCATION_INVALID
-                        ? GetPosition(activator)
-                        : GetPositionFromLocation(targetLocation);
-                    var telegraphFacing = targetLocation == LOCATION_INVALID
-                        ? GetFacing(activator)
-                        : GetFacingFromLocation(targetLocation);
-
-                    telegraphId = _telegraph.CreateTelegraph(
-                        activator,
-                        telegraphPosition,
-                        telegraphFacing,
-                        ability.TelegraphSize,
-                        activationDelay,
-                        ability.IsHostileAbility,
-                        ability.TelegraphType,
+                    HandleTelegraphAbility(
+                        activator, 
+                        activationDelay, 
+                        ability, 
+                        targetLocation,
                         (telegrapher, creatures) =>
                         {
                             if (CompleteActivation(telegrapher, activationId))
@@ -510,6 +501,33 @@ namespace XM.Progression.Ability
             }
         }
 
+        public string HandleTelegraphAbility(
+            uint activator, 
+            float duration, 
+            AbilityDetail ability, 
+            Location targetLocation,
+            ApplyTelegraphEffect action)
+        {
+            var telegraphPosition = targetLocation == LOCATION_INVALID
+                ? GetPosition(activator)
+                : GetPositionFromLocation(targetLocation);
+            var telegraphFacing = targetLocation == LOCATION_INVALID
+                ? GetFacing(activator)
+                : GetFacingFromLocation(targetLocation);
+
+            var telegraphId = _telegraph.CreateTelegraph(
+                activator,
+                telegraphPosition,
+                telegraphFacing,
+                ability.TelegraphSize,
+                duration,
+                ability.IsHostileAbility,
+                ability.TelegraphType,
+                action);
+
+            return telegraphId;
+        }
+
         private void QueueAbility(uint caster, AbilityDetail ability, FeatType feat)
         {
             var abilityId = Guid.NewGuid().ToString();
@@ -531,6 +549,7 @@ namespace XM.Progression.Ability
 
             if (ability.ActivationType == AbilityActivationType.WeaponSkill)
             {
+                ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpFortitudeSavingThrowUse), caster);
                 _event.PublishEvent<AbilityEvent.OnQueueWeaponSkillScript>(caster);
             }
         }
@@ -576,7 +595,33 @@ namespace XM.Progression.Ability
                 return;
 
             var ability = GetQueuedAbility(attacker);
+            if (ability.ActivationType != AbilityActivationType.QueuedAttack)
+                return;
+
             ability.ImpactAction?.Invoke(attacker, defender, GetLocation(defender));
+
+            DeleteLocalString(attacker, ActiveActionId);
+            DeleteLocalInt(attacker, ActiveAbilityFeatId);
+        }
+
+        public void ProcessWeaponAbility(uint attacker, uint defender, float telegraphTime)
+        {
+            var wsAbility = GetQueuedAbility(attacker);
+            if (wsAbility == null ||
+                wsAbility.ActivationType != AbilityActivationType.WeaponSkill ||
+                wsAbility.TelegraphType == TelegraphType.None)
+                return;
+
+            var targetLocation = GetLocation(attacker);
+            HandleTelegraphAbility(
+                attacker,
+                telegraphTime,
+                wsAbility,
+                targetLocation,
+                (telegrapher, creatures) =>
+                {
+                    wsAbility.TelegraphAction?.Invoke(telegrapher, creatures, targetLocation);
+                });
 
             DeleteLocalString(attacker, ActiveActionId);
             DeleteLocalInt(attacker, ActiveAbilityFeatId);
