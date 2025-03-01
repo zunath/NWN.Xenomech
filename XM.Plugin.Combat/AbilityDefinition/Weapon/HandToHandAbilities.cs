@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Anvil.Services;
+using XM.Plugin.Combat.StatusEffectDefinition.Debuff;
 using XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill;
 using XM.Progression.Ability;
 using XM.Progression.Skill;
@@ -15,13 +16,19 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
     internal class HandToHandAbilities : WeaponSkillBaseAbility
     {
         private readonly AbilityBuilder _builder = new();
+        private readonly Lazy<StatusEffectService> _status;
+        private readonly SpellService _spell;
 
         public HandToHandAbilities(
             Lazy<CombatService> combat,
-            Lazy<StatusEffectService> status)
+            Lazy<StatusEffectService> status,
+            SpellService spell)
             : base(combat, status)
         {
+            _status = status;
+            _spell = spell;
         }
+
         public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             Combo();
@@ -129,12 +136,34 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void DragonBlow()
         {
-
+            _builder.Create(FeatType.DragonBlow)
+                .Name(LocaleString.DragonBlow)
+                .Description(LocaleString.DragonBlowDescription)
+                .IsWeaponSkill(SkillType.HandToHand, 1130)
+                .RequirementTP(1350)
+                .TelegraphSize(4f, 2f)
+                .HasTelegraphLineAction((activator, targets, location) =>
+                {
+                    foreach (var target in targets)
+                    {
+                        var duration = _spell.CalculateResistedTicks(target, ResistType.Fire, 20);
+                        _status.Value.ApplyStatusEffect<BurnStatusEffect>(activator, target, duration);
+                    }
+                });
         }
 
         private void OneInchPunch()
         {
-
+            _builder.Create(FeatType.OneInchPunch)
+                .Name(LocaleString.OneInchPunch)
+                .Description(LocaleString.OneInchPunchDescription)
+                .IsWeaponSkill(SkillType.HandToHand, 1390)
+                .RequirementTP(2000)
+                .HasImpactAction((activator, target, location) =>
+                {
+                    var duration = _spell.CalculateResistedTicks(target, ResistType.Water, 10);
+                    _status.Value.ApplyStatusEffect<OneInchPunchStatusEffect>(activator, target, duration);
+                });
         }
 
         private void AsuranFists()
