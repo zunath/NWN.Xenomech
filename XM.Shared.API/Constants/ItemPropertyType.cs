@@ -129,5 +129,7 @@ namespace XM.Shared.API.Constants
         DefenseModifier = 128,
         EtherDefenseModifier = 129,
         ExtraAttackModifier = 130,
+        AttackModifier = 131,
+        EtherAttackModifier = 132,
     }
 }

@@ -42,5 +42,7 @@
         DefenseModifier = 37,
         EtherDefenseModifier = 38,
         ExtraAttackModifier = 39,
+        AttackModifier = 40,
+        EtherAttackModifier = 41,
     }
 }

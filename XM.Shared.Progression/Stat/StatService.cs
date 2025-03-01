@@ -174,6 +174,8 @@ namespace XM.Progression.Stat
             { ItemPropertyType.DefenseModifier, StatType.DefenseModifier},
             { ItemPropertyType.EtherDefenseModifier, StatType.EtherDefenseModifier},
             { ItemPropertyType.ExtraAttackModifier, StatType.ExtraAttackModifier},
+            { ItemPropertyType.AttackModifier, StatType.AttackModifier},
+            { ItemPropertyType.EtherAttackModifier, StatType.EtherAttackModifier}
         };
         public StatService(
             DBService db, 
@@ -766,7 +768,10 @@ namespace XM.Progression.Stat
 
         public int GetAttack(uint creature)
         {
-            var statusAttack = _status.GetCreatureStatusEffects(creature).StatGroup.Stats[StatType.Attack];
+            var effects = _status.GetCreatureStatusEffects(creature);
+            var statusAttack = effects.StatGroup.Stats[StatType.Attack];
+            var statusAttackModifier = 1 + effects.StatGroup.Stats[StatType.AttackModifier] * 0.01f;
+
             if (GetIsPC(creature))
             {
                 var playerId = PlayerId.Get(creature);
@@ -774,17 +779,21 @@ namespace XM.Progression.Stat
                 var itemAttack = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.Attack);
                 var abilityAttack = dbPlayerStat.AbilityStats.CalculateStat(StatType.Attack);
 
-                return itemAttack + abilityAttack + statusAttack;
+                return (int)((itemAttack + abilityAttack + statusAttack) * statusAttackModifier);
             }
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.StatGroup.Stats[StatType.Attack] + statusAttack;
+                return (int)((npcStats.StatGroup.Stats[StatType.Attack] + statusAttack) * statusAttackModifier);
             }
         }
+
         public int GetEtherAttack(uint creature)
         {
-            var statusEtherAttack = _status.GetCreatureStatusEffects(creature).StatGroup.Stats[StatType.EtherAttack];
+            var effects = _status.GetCreatureStatusEffects(creature);
+            var statusEtherAttack = effects.StatGroup.Stats[StatType.EtherAttack];
+            var statusEtherAttackModifier = 1 + effects.StatGroup.Stats[StatType.EtherAttackModifier] * 0.01f;
+
             if (GetIsPC(creature))
             {
                 var playerId = PlayerId.Get(creature);
@@ -792,14 +801,15 @@ namespace XM.Progression.Stat
                 var itemEtherAttack = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.EtherAttack);
                 var abilityEtherAttack = dbPlayerStat.AbilityStats.CalculateStat(StatType.EtherAttack);
 
-                return itemEtherAttack + abilityEtherAttack + statusEtherAttack;
+                return (int)((itemEtherAttack + abilityEtherAttack + statusEtherAttack) * statusEtherAttackModifier);
             }
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.StatGroup.Stats[StatType.EtherAttack] + statusEtherAttack;
+                return (int)((npcStats.StatGroup.Stats[StatType.EtherAttack] + statusEtherAttack) * statusEtherAttackModifier);
             }
         }
+
         public int GetEtherDefense(uint creature)
         {
             var statusEtherDefense = _status.GetCreatureStatusEffects(creature).StatGroup.Stats[StatType.EtherDefense];
