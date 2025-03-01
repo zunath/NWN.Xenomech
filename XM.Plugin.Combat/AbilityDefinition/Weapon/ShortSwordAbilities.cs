@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using Anvil.Services;
+using XM.Plugin.Combat.StatusEffectDefinition.Buff;
+using XM.Plugin.Combat.StatusEffectDefinition.Debuff;
 using XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill;
 using XM.Progression.Ability;
 using XM.Progression.Skill;
@@ -15,12 +18,17 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
     internal class ShortSwordAbilities : WeaponSkillBaseAbility
     {
         private readonly AbilityBuilder _builder = new();
+        private readonly Lazy<StatusEffectService> _status;
+        private readonly SpellService _spell;
 
         public ShortSwordAbilities(
             Lazy<CombatService> combat,
-            Lazy<StatusEffectService> status)
+            Lazy<StatusEffectService> status,
+            SpellService spell)
             : base(combat, status)
         {
+            _status = status;
+            _spell = spell;
         }
 
         public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
@@ -114,12 +122,44 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void SonicSlash()
         {
+            _builder.Create(FeatType.SonicSlash)
+                .Name(LocaleString.SonicSlash)
+                .Description(LocaleString.SonicSlashDescription)
+                .IsWeaponSkill(SkillType.Longsword, 1130)
+                .RequirementTP(1350)
+                .TelegraphSize(4f, 2f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
+                {
+                    foreach (var target in targets)
+                    {
+                        if (!GetFactionEqual(target, activator))
+                            continue;
 
+                        var duration = _spell.CalculateResistedTicks(target, ResistType.Wind, 6);
+                        _status.Value.ApplyStatusEffect<SonicSlashStatusEffect>(activator, target, duration);
+                    }
+                });
         }
 
         private void EmberFang()
         {
+            _builder.Create(FeatType.EmberFang)
+                .Name(LocaleString.EmberFang)
+                .Description(LocaleString.EmberFangDescription)
+                .IsWeaponSkill(SkillType.Longsword, 1390)
+                .RequirementTP(2000)
+                .HasActivationDelay(2f)
+                .TelegraphSize(3f, 3f)
+                .HasTelegraphSphereAction((activator, targets, location) =>
+                {
+                    foreach (var target in targets)
+                    {
+                        if (!GetFactionEqual(target, activator))
+                            continue;
 
+                        _status.Value.ApplyStatusEffect<EmberFangStatusEffect>(activator, target, 1);
+                    }
+                });
         }
 
         private void FrostbiteBlade()
