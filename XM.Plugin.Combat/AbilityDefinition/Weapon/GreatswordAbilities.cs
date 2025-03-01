@@ -16,12 +16,17 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
     internal class GreatswordAbilities : WeaponSkillBaseAbility
     {
         private readonly AbilityBuilder _builder = new();
+        private readonly Lazy<StatusEffectService> _status;
+        private readonly SpellService _spell;
 
         public GreatswordAbilities(
             Lazy<CombatService> combat, 
-            Lazy<StatusEffectService> status) 
+            Lazy<StatusEffectService> status,
+            SpellService spell) 
             : base(combat, status)
         {
+            _status = status;
+            _spell = spell;
         }
 
         public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
@@ -132,12 +137,30 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void ShockSlash()
         {
-
+            _builder.Create(FeatType.ShockSlash)
+                .Name(LocaleString.ShockSlash)
+                .Description(LocaleString.ShockSlashDescription)
+                .IsWeaponSkill(SkillType.GreatSword, 1130)
+                .RequirementTP(1350)
+                .HasImpactAction((activator, target, location) =>
+                {
+                    var duration = _spell.CalculateResistedTicks(target, ResistType.Lightning, 6);
+                    _status.Value.ApplyStatusEffect<ShockSlashStatusEffect>(activator, target, duration);
+                });
         }
 
         private void GroundStrike()
         {
-
+            _builder.Create(FeatType.GroundStrike)
+                .Name(LocaleString.GroundStrike)
+                .Description(LocaleString.GroundStrikeDescription)
+                .IsWeaponSkill(SkillType.GreatSword, 1390)
+                .RequirementTP(2000)
+                .HasImpactAction((activator, target, location) =>
+                {
+                    var duration = _spell.CalculateResistedTicks(target, ResistType.Earth, 10);
+                    _status.Value.ApplyStatusEffect<GroundStrikeStatusEffect>(activator, target, duration);
+                });
         }
 
         private void Scourge()
