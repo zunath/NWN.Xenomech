@@ -22,7 +22,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
             : base(combat, status)
         {
         }
-        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             ShiningStrike();
             SeraphStrike();

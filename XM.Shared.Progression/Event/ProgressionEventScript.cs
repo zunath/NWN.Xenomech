@@ -4,6 +4,7 @@
     {
         // Ability
         public const string OnQueueWeaponSkillScript = "queue_wpnskill";
+        public const string OnRegisterAbilityScript = "register_ability";
 
         // Status Effects
         public const string OnApplyStatusEffectScript = "status_apply";

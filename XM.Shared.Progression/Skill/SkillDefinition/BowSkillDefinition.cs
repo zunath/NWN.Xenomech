@@ -18,15 +18,5 @@ namespace XM.Progression.Skill.SkillDefinition
             BaseItemType.LongBow,
             BaseItemType.ShortBow
         ];
-        public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
-        {
-            {160, FeatType.FlamingArrow},
-            {240, FeatType.PiercingArrow},
-            {540, FeatType.DullingArrow},
-            {860, FeatType.Sidewinder},
-            {1130, FeatType.BlastArrow},
-            {1390, FeatType.ArchingArrow},
-            {1430, FeatType.ApexArrow},
-        };
     }
 }

@@ -78,7 +78,7 @@ namespace XM.Plugin.Combat.NativeOverride
 
         private void SubscribeEvents()
         {
-            _event.Subscribe<AbilityEvent.OnQueueWeaponSkillScript>(OnWeaponSkillQueued);
+            _event.Subscribe<AbilityEvent.OnQueueWeaponSkill>(OnWeaponSkillQueued);
         }
 
 

@@ -17,15 +17,5 @@ namespace XM.Progression.Skill.SkillDefinition
         [
             BaseItemType.Pistol,
         ];
-        public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
-        {
-            {160, FeatType.QuickDraw},
-            {240, FeatType.BurningShot},
-            {540, FeatType.Ricochet},
-            {860, FeatType.PiercingShot},
-            {1130, FeatType.ShadowBarrage},
-            {1390, FeatType.Deadeye},
-            {1430, FeatType.TrueShot},
-        };
     }
 }

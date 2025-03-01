@@ -17,15 +17,5 @@ namespace XM.Progression.Skill.SkillDefinition
         [
             BaseItemType.Longsword,
         ];
-        public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
-        {
-            {160, FeatType.FastBlade},
-            {240, FeatType.BurningBlade},
-            {540, FeatType.RedLotusBlade},
-            {860, FeatType.VorpalBlade},
-            {1130, FeatType.FlatBlade},
-            {1390, FeatType.Atonement},
-            {1430, FeatType.ShiningBlade},
-        };
     }
 }

@@ -17,15 +17,5 @@ namespace XM.Progression.Skill.SkillDefinition
         [
             BaseItemType.GreatSword
         ];
-        public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
-        {
-            {160, FeatType.HardSlash},
-            {240, FeatType.Frostbite},
-            {540, FeatType.SickleMoon},
-            {860, FeatType.SpinningSlash},
-            {1130, FeatType.ShockSlash},
-            {1390, FeatType.GroundStrike},
-            {1430, FeatType.Scourge},
-        };
     }
 }

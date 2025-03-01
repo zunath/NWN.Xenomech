@@ -19,15 +19,5 @@ namespace XM.Progression.Skill.SkillDefinition
             BaseItemType.ThrowingAxe,
             BaseItemType.Shuriken
         ];
-        public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
-        {
-            {160, FeatType.StoneToss},
-            {240, FeatType.WindSlash},
-            {540, FeatType.ShurikenStorm},
-            {860, FeatType.PhantomHurl},
-            {1130, FeatType.FlameToss},
-            {1390, FeatType.FrostDart},
-            {1430, FeatType.StarStrike},
-        };
     }
 }

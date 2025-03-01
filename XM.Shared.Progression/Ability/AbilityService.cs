@@ -24,7 +24,8 @@ using CreaturePlugin = XM.Shared.API.NWNX.CreaturePlugin.CreaturePlugin;
 namespace XM.Progression.Ability
 {
     [ServiceBinding(typeof(AbilityService))]
-    public class AbilityService
+    [ServiceBinding(typeof(IInitializable))]
+    public class AbilityService: IInitializable
     {
         private readonly Dictionary<FeatType, AbilityDetail> _abilities = new();
         private readonly Dictionary<FeatType, int> _abilitiesByLevel = new();
@@ -69,7 +70,8 @@ namespace XM.Progression.Ability
 
         private void RegisterEvents()
         {
-            _event.RegisterEvent<AbilityEvent.OnQueueWeaponSkillScript>(ProgressionEventScript.OnQueueWeaponSkillScript);
+            _event.RegisterEvent<AbilityEvent.OnQueueWeaponSkill>(ProgressionEventScript.OnQueueWeaponSkillScript);
+            _event.RegisterEvent<AbilityEvent.OnAbilitiesRegistered>(ProgressionEventScript.OnRegisterAbilityScript);
         }
 
         private void SubscribeEvents()
@@ -78,6 +80,19 @@ namespace XM.Progression.Ability
             _event.Subscribe<JobEvent.JobFeatAddedEvent>(AddJobFeat);
             _event.Subscribe<JobEvent.JobFeatRemovedEvent>(RemoveJobFeat);
             _event.Subscribe<JobEvent.PlayerLeveledUpEvent>(ApplyLevelUp);
+        }
+
+        public void Init()
+        {
+            PublishAbilities();
+        }
+
+        private void PublishAbilities()
+        {
+            var module = GetModule();
+            var abilityList = _abilities.Values.ToList();
+            var @event = new AbilityEvent.OnAbilitiesRegistered(abilityList);
+            _event.PublishEvent(module, @event);
         }
 
         private void CacheAbilities()
@@ -550,7 +565,7 @@ namespace XM.Progression.Ability
             if (ability.ActivationType == AbilityActivationType.WeaponSkill)
             {
                 ApplyEffectToObject(DurationType.Instant, EffectVisualEffect(VisualEffectType.ImpFortitudeSavingThrowUse), caster);
-                _event.PublishEvent<AbilityEvent.OnQueueWeaponSkillScript>(caster);
+                _event.PublishEvent<AbilityEvent.OnQueueWeaponSkill>(caster);
             }
         }
 

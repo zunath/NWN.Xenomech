@@ -17,15 +17,5 @@ namespace XM.Progression.Skill.SkillDefinition
         [
             BaseItemType.QuarterStaff,
         ];
-        public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
-        {
-            {160, FeatType.HeavySwing},
-            {240, FeatType.RockCrusher},
-            {540, FeatType.EarthCrusher},
-            {860, FeatType.Starburst},
-            {1130, FeatType.Omniscience},
-            {1390, FeatType.SpiritTaker},
-            {1430, FeatType.Shattersoul},
-        };
     }
 }

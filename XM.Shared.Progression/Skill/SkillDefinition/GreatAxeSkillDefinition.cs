@@ -17,15 +17,5 @@ namespace XM.Progression.Skill.SkillDefinition
         [
             BaseItemType.GreatAxe
         ];
-        public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
-        {
-            {160, FeatType.ShieldBreak},
-            {240, FeatType.IronTempest},
-            {540, FeatType.FellCleave},
-            {860, FeatType.GrandSlash},
-            {1130, FeatType.Knockout},
-            {1390, FeatType.FurySlash},
-            {1430, FeatType.Upheaval},
-        };
     }
 }

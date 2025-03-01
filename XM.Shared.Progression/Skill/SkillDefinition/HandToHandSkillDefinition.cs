@@ -17,15 +17,5 @@ namespace XM.Progression.Skill.SkillDefinition
         [
             BaseItemType.Claw,
         ];
-        public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
-        {
-            {160, FeatType.Combo},
-            {240, FeatType.RagingFists},
-            {540, FeatType.HowlingFist},
-            {860, FeatType.FinalHeaven},
-            {1130, FeatType.DragonBlow},
-            {1390, FeatType.OneInchPunch},
-            {1430, FeatType.AsuranFists},
-        };
     }
 }

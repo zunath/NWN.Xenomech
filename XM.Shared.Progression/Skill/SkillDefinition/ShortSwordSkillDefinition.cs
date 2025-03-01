@@ -17,15 +17,5 @@ namespace XM.Progression.Skill.SkillDefinition
         [
             BaseItemType.ShortSword,
         ];
-        public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
-        {
-            {160, FeatType.PiercingBlade},
-            {240, FeatType.BurningEdge},
-            {540, FeatType.SoulBlade},
-            {860, FeatType.IceFang},
-            {1130, FeatType.SonicSlash},
-            {1390, FeatType.EmberFang},
-            {1430, FeatType.FrostbiteBlade},
-        };
     }
 }

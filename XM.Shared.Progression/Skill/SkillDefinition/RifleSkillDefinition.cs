@@ -17,15 +17,5 @@ namespace XM.Progression.Skill.SkillDefinition
         [
             BaseItemType.Rifle,
         ];
-        public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
-        {
-            {160, FeatType.HotShot},
-            {240, FeatType.SplitShot},
-            {540, FeatType.SniperShot},
-            {860, FeatType.SlugShot},
-            {1130, FeatType.BlastShot},
-            {1390, FeatType.HeavyShot},
-            {1430, FeatType.Trueflight},
-        };
     }
 }

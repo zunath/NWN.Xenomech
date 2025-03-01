@@ -17,15 +17,5 @@ namespace XM.Progression.Skill.SkillDefinition
         [
             BaseItemType.ShortSpear,
         ];
-        public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
-        {
-            {160, FeatType.DoubleThrust},
-            {240, FeatType.ThunderThrust},
-            {540, FeatType.RaidenThrust},
-            {860, FeatType.PentaThrust},
-            {1130, FeatType.VorpalThrust},
-            {1390, FeatType.SonicThrust},
-            {1430, FeatType.Drakesbane},
-        };
     }
 }

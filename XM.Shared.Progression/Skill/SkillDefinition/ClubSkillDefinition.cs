@@ -18,15 +18,5 @@ namespace XM.Progression.Skill.SkillDefinition
             BaseItemType.Club,
             BaseItemType.LightMace
         ];
-        public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
-        {
-            {160, FeatType.ShiningStrike},
-            {240, FeatType.SeraphStrike},
-            {540, FeatType.Brainshaker},
-            {860, FeatType.BlackHalo},
-            {1130, FeatType.FlashNova},
-            {1390, FeatType.Judgment},
-            {1430, FeatType.HexaStrike},
-        };
     }
 }

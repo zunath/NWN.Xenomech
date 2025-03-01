@@ -23,7 +23,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
             : base(combat, status)
         {
         }
-        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             WaspSting();
             GustSlash();
@@ -47,7 +47,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
             _builder.Create(FeatType.WaspSting)
                 .Name(LocaleString.WaspSting)
                 .Description(LocaleString.WaspStingDescription)
-                .IsWeaponSkill(SkillType.Dagger, 240)
+                .IsWeaponSkill(SkillType.Dagger, 160)
                 .RequirementTP(500)
                 .ResistType(Resist)
                 .IncreasesStat(StatType.QueuedDMGBonus, DMG)

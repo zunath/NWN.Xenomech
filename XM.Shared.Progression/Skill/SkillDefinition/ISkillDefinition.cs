@@ -12,6 +12,5 @@ namespace XM.Progression.Skill.SkillDefinition
         FeatType LoreFeat { get; }
         FeatType PassiveFeat { get; }
         List<BaseItemType> BaseItems { get; }
-        Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; }
     }
 }

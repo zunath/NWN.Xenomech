@@ -20,17 +20,5 @@ namespace XM.Progression.Skill.SkillDefinition
             BaseItemType.HandAxe,
             BaseItemType.DwarvenWarAxe
         ];
-
-        public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
-        {
-            {160, FeatType.RagingAxe},
-            {240, FeatType.SmashAxe},
-            {540, FeatType.GaleAxe},
-            {860, FeatType.AvalancheAxe},
-            {1130, FeatType.SpinningAxe},
-            {1390, FeatType.Rampage},
-            {1430, FeatType.PrimalRend},
-        };
-
     }
 }

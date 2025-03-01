@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using XM.Progression.Ability;
 using XM.Progression.Stat;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 
 namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 {
-    internal abstract class WeaponSkillBaseAbility
+    internal abstract class WeaponSkillBaseAbility: IAbilityListDefinition
     {
         private readonly Lazy<CombatService> _combat;
         private readonly Lazy<StatusEffectService> _status;
@@ -107,5 +108,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
             _status.Value.ApplyStatusEffect<T>(activator, target, durationTicks);
         }
+
+        public abstract Dictionary<FeatType, AbilityDetail> BuildAbilities();
     }
 }

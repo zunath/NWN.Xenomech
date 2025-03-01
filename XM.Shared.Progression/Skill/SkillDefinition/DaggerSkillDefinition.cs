@@ -17,15 +17,5 @@ namespace XM.Progression.Skill.SkillDefinition
         [
             BaseItemType.Dagger
         ];
-        public Dictionary<int, FeatType> WeaponSkillAcquisitionLevels { get; } = new()
-        {
-            {160, FeatType.WaspSting},
-            {240, FeatType.GustSlash},
-            {540, FeatType.Cyclone},
-            {860, FeatType.SharkBite},
-            {1130, FeatType.Shadowstitch},
-            {1390, FeatType.EnergyDrain},
-            {1430, FeatType.DancingEdge},
-        };
     }
 }

@@ -23,7 +23,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
         {
         }
 
-        public Dictionary<FeatType, AbilityDetail> BuildAbilities()
+        public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
         {
             HeavySwing();
             RockCrusher();
@@ -41,7 +41,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
             _builder.Create(FeatType.HeavySwing)
                 .Name(LocaleString.HeavySwing)
                 .Description(LocaleString.HeavySwingDescription)
-                .IsWeaponSkill(SkillType.Club, 160)
+                .IsWeaponSkill(SkillType.Staff, 160)
                 .RequirementTP(500)
                 .ResistType(ResistType.Earth)
                 .IncreasesStat(StatType.QueuedDMGBonus, 7);
@@ -106,7 +106,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
             _builder.Create(FeatType.Starburst)
                 .Name(LocaleString.Starburst)
                 .Description(LocaleString.StarburstDescription)
-                .IsWeaponSkill(SkillType.Club, 860)
+                .IsWeaponSkill(SkillType.Staff, 860)
                 .RequirementTP(1500)
                 .ResistType(ResistType.Mind)
                 .IncreasesStat(StatType.QueuedDMGBonus, 14);
