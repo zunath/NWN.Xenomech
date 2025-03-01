@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Anvil.Services;
+using XM.Plugin.Combat.StatusEffectDefinition.Debuff;
 using XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill;
 using XM.Progression.Ability;
 using XM.Progression.Skill;
@@ -15,12 +16,17 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
     internal class ThrowingAbilities : WeaponSkillBaseAbility
     {
         private readonly AbilityBuilder _builder = new();
+        private readonly Lazy<StatusEffectService> _status;
+        private readonly SpellService _spell;
 
         public ThrowingAbilities(
             Lazy<CombatService> combat,
-            Lazy<StatusEffectService> status)
+            Lazy<StatusEffectService> status,
+            SpellService spell)
             : base(combat, status)
         {
+            _status = status;
+            _spell = spell;
         }
 
         public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
@@ -130,12 +136,30 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void FlameToss()
         {
-
+            _builder.Create(FeatType.FlameToss)
+                .Name(LocaleString.FlameToss)
+                .Description(LocaleString.FlameTossDescription)
+                .IsWeaponSkill(SkillType.Throwing, 1130)
+                .RequirementTP(1350)
+                .HasImpactAction((activator, target, location) =>
+                {
+                    var duration = _spell.CalculateResistedTicks(target, ResistType.Fire, 20);
+                    _status.Value.ApplyStatusEffect<BurnStatusEffect>(activator, target, duration);
+                });
         }
 
         private void FrostDart()
         {
-
+            _builder.Create(FeatType.FrostDart)
+                .Name(LocaleString.FrostDart)
+                .Description(LocaleString.FrostDartDescription)
+                .IsWeaponSkill(SkillType.Throwing, 1390)
+                .RequirementTP(2000)
+                .HasImpactAction((activator, target, location) =>
+                {
+                    var duration = _spell.CalculateResistedTicks(target, ResistType.Ice, 10);
+                    _status.Value.ApplyStatusEffect<FrostDartStatusEffect>(activator, target, duration);
+                });
         }
 
         private void StarStrike()

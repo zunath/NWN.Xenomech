@@ -1487,5 +1487,6 @@ namespace XM.Shared.Core.Localization
         InsufficientTP = 1800,
         IncorrectWeaponEquippedForThisAbility = 1801,
         Blind = 1802,
+        Burn = 1803,
     }
 }

@@ -39,6 +39,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
             typeof(GravitonFieldStatusEffect),
             typeof(NeuralStasisStatusEffect),
             typeof(RuptureStatusEffect),
+            typeof(BurnStatusEffect),
             typeof(PoisonStatusEffect),
         ];
 

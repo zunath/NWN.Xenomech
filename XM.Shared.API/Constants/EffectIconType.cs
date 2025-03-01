@@ -229,6 +229,8 @@ namespace XM.Shared.API.Constants
         VorpalThrust = 224,
         SonicThrust = 225,
         BlastArrow = 226,
-        ArchingArrow = 227
+        ArchingArrow = 227,
+        Burn = 228,
+
     }
 }
