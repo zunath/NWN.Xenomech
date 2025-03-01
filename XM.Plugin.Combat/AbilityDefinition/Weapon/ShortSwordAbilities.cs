@@ -124,7 +124,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
             _builder.Create(FeatType.SonicSlash)
                 .Name(LocaleString.SonicSlash)
                 .Description(LocaleString.SonicSlashDescription)
-                .IsWeaponSkill(SkillType.Longsword, 1130)
+                .IsWeaponSkill(SkillType.ShortSword, 1130)
                 .RequirementTP(1350)
                 .TelegraphSize(4f, 2f)
                 .HasTelegraphSphereAction((activator, targets, location) =>
@@ -145,7 +145,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
             _builder.Create(FeatType.EmberFang)
                 .Name(LocaleString.EmberFang)
                 .Description(LocaleString.EmberFangDescription)
-                .IsWeaponSkill(SkillType.Longsword, 1390)
+                .IsWeaponSkill(SkillType.ShortSword, 1390)
                 .RequirementTP(2000)
                 .HasActivationDelay(2f)
                 .TelegraphSize(3f, 3f)

@@ -138,7 +138,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
             _builder.Create(FeatType.VorpalThrust)
                 .Name(LocaleString.VorpalThrust)
                 .Description(LocaleString.VorpalThrustDescription)
-                .IsWeaponSkill(SkillType.Longsword, 1130)
+                .IsWeaponSkill(SkillType.Polearm, 1130)
                 .RequirementTP(1350)
                 .HasImpactAction((activator, target, location) =>
                 {
@@ -152,7 +152,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
             _builder.Create(FeatType.SonicThrust)
                 .Name(LocaleString.SonicThrust)
                 .Description(LocaleString.SonicThrustDescription)
-                .IsWeaponSkill(SkillType.Longsword, 1390)
+                .IsWeaponSkill(SkillType.Polearm, 1390)
                 .RequirementTP(2000)
                 .HasActivationDelay(2f)
                 .TelegraphSize(4f, 2f)
