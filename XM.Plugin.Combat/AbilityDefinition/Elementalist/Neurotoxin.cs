@@ -38,6 +38,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
             _builder.Create(FeatType.Neurotoxin)
                 .Name(LocaleString.Neurotoxin)
                 .Description(LocaleString.NeurotoxinDescription)
+                .Classification(AbilityCategoryType.Offensive)
                 .HasRecastDelay(RecastGroup.Neurotoxin, 5f)
                 .HasActivationDelay(1f)
                 .UsesAnimation(AnimationType.LoopingConjure1)

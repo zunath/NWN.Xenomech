@@ -33,6 +33,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
             _builder.Create(FeatType.DivineSeal)
                 .Name(LocaleString.DivineSeal)
                 .Description(LocaleString.DivineSealDescription)
+                .Classification(AbilityCategoryType.Defensive)
                 .HasRecastDelay(RecastGroup.DivineSeal, 60f * 5f)
                 .UsesAnimation(AnimationType.LoopingConjure1)
                 .DisplaysVisualEffectWhenActivating()

@@ -37,6 +37,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Nightstalker
             _builder.Create(FeatType.Steal)
                 .Name(LocaleString.Steal)
                 .Description(LocaleString.StealDescription)
+                .Classification(AbilityCategoryType.Special)
                 .HasRecastDelay(RecastGroup.Steal, 60f * 3f)
                 .HasActivationDelay(2f)
                 .RequirementEP(7)

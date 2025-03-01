@@ -33,6 +33,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
             _builder.Create(FeatType.ElementalSeal)
                 .Name(LocaleString.ElementalSeal)
                 .Description(LocaleString.ElementalSealDescription)
+                .Classification(AbilityCategoryType.Defensive)
                 .HasRecastDelay(RecastGroup.ElementalSeal, 60f)
                 .HasActivationDelay(2f)
                 .UsesAnimation(AnimationType.LoopingConjure1)

@@ -38,6 +38,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Nightstalker
             _builder.Create(FeatType.StasisField)
                 .Name(LocaleString.StasisField)
                 .Description(LocaleString.StasisFieldDescription)
+                .Classification(AbilityCategoryType.Defensive)
                 .HasRecastDelay(RecastGroup.StasisField, 60f * 5f)
                 .IsCastedAbility()
                 .RequirementEP(40)

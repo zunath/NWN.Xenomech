@@ -44,6 +44,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
             _builder.Create(FeatType.Tsu)
                 .Name(LocaleString.Tsu)
                 .Description(LocaleString.TsuDescription)
+                .Classification(AbilityCategoryType.Offensive)
                 .HasRecastDelay(RecastGroup.Tsu, 30f)
                 .DisplaysVisualEffectWhenActivating()
                 .HasActivationDelay(1f)

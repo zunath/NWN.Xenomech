@@ -37,6 +37,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Hunter
             _builder.Create(FeatType.EagleEyeShot)
                 .Name(LocaleString.EagleEyeShot)
                 .Description(LocaleString.EagleEyeShotDescription)
+                .Classification(AbilityCategoryType.Offensive)
                 .HasRecastDelay(RecastGroup.JobCapstone, 60f * 30f)
                 .IsCastedAbility()
                 .RequirementEP(150)

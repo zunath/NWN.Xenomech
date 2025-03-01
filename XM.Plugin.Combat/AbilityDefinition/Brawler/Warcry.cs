@@ -32,6 +32,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Brawler
             _builder.Create(FeatType.Warcry)
                 .Name(LocaleString.Warcry)
                 .Description(LocaleString.WarcryDescription)
+                .Classification(AbilityCategoryType.Defensive)
                 .HasRecastDelay(RecastGroup.Warcry, 15f)
                 .HasActivationDelay(2f)
                 .RequirementEP(14)

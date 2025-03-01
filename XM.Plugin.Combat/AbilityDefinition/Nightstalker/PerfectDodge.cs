@@ -38,6 +38,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Nightstalker
             _builder.Create(FeatType.PerfectDodge)
                 .Name(LocaleString.PerfectDodge)
                 .Description(LocaleString.PerfectDodgeDescription)
+                .Classification(AbilityCategoryType.Defensive)
                 .HasRecastDelay(RecastGroup.JobCapstone, 60f * 30f)
                 .IsCastedAbility()
                 .RequirementEP(150)

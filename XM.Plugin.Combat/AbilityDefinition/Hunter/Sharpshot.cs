@@ -37,6 +37,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Hunter
             _builder.Create(FeatType.Sharpshot)
                 .Name(LocaleString.Sharpshot)
                 .Description(LocaleString.SharpshotDescription)
+                .Classification(AbilityCategoryType.Defensive)
                 .HasRecastDelay(RecastGroup.Sharpshot, 60f * 5)
                 .IsCastedAbility()
                 .RequirementEP(40)

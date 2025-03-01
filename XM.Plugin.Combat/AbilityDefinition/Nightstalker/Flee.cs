@@ -31,6 +31,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Nightstalker
             _builder.Create(FeatType.Flee)
                 .Name(LocaleString.Flee)
                 .Description(LocaleString.FleeDescription)
+                .Classification(AbilityCategoryType.Special)
                 .HasRecastDelay(RecastGroup.Flee, 60f * 5f)
                 .HasActivationDelay(2f)
                 .RequirementEP(12)

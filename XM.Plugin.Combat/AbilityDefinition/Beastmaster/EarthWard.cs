@@ -32,6 +32,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Beastmaster
             _builder.Create(FeatType.EarthWard)
                 .Name(LocaleString.EarthWard)
                 .Description(LocaleString.EarthWardDescription)
+                .Classification(AbilityCategoryType.Defensive)
                 .HasRecastDelay(RecastGroup.Ward, 10f)
                 .HasActivationDelay(4f)
                 .RequirementEP(30)

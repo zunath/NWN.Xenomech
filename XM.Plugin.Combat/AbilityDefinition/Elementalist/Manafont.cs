@@ -37,6 +37,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
             _builder.Create(FeatType.Manafont)
                 .Name(LocaleString.Manafont)
                 .Description(LocaleString.ManafontDescription)
+                .Classification(AbilityCategoryType.Defensive)
                 .HasRecastDelay(RecastGroup.JobCapstone, 60f * 30f)
                 .IsCastedAbility()
                 .RequirementEP(150)

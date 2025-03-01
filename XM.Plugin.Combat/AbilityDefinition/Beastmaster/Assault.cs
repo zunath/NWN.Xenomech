@@ -34,6 +34,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Beastmaster
             _builder.Create(FeatType.Assault)
                 .Name(LocaleString.Assault)
                 .Description(LocaleString.AssaultDescription)
+                .Classification(AbilityCategoryType.Offensive)
                 .HasRecastDelay(RecastGroup.Assault, 60f)
                 .HasActivationDelay(2f)
                 .RequirementEP(22)

@@ -26,6 +26,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
             _builder.Create(FeatType.Escape)
                 .Name(LocaleString.Escape)
                 .Description(LocaleString.EscapeDescription)
+                .Classification(AbilityCategoryType.Special)
                 .HasRecastDelay(RecastGroup.Escape, 60f)
                 .IsCastedAbility()
                 .RequirementEP(40)

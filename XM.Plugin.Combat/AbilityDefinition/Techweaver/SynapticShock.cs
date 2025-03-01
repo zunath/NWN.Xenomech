@@ -49,6 +49,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Techweaver
             _builder.Create(FeatType.SynapticShock)
                 .Name(LocaleString.SynapticShock)
                 .Description(LocaleString.SynapticShockDescription)
+                .Classification(AbilityCategoryType.Offensive)
                 .HasRecastDelay(RecastGroup.SynapticShock, 60f)
                 .IsCastedAbility()
                 .HasActivationDelay(1f)

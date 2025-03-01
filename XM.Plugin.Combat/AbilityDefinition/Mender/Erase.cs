@@ -54,6 +54,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
             _builder.Create(FeatType.Erase)
                 .Name(LocaleString.Erase)
                 .Description(LocaleString.EraseDescription)
+                .Classification(AbilityCategoryType.Special)
                 .HasRecastDelay(RecastGroup.Erase, 15f)
                 .HasActivationDelay(3f)
                 .RequirementEP(18)

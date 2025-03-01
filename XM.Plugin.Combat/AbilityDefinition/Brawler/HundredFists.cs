@@ -38,6 +38,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Brawler
             _builder.Create(FeatType.HundredFists)
                 .Name(LocaleString.HundredFists)
                 .Description(LocaleString.HundredFistsDescription)
+                .Classification(AbilityCategoryType.Offensive)
                 .HasRecastDelay(RecastGroup.JobCapstone, 60f * 30f)
                 .IsCastedAbility()
                 .RequirementEP(150)

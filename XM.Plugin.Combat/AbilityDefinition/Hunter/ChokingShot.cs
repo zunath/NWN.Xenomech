@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Anvil.API;
 using Anvil.Services;
 using XM.Plugin.Combat.StatusEffectDefinition.Debuff;
 using XM.Progression.Ability;
@@ -34,7 +33,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Hunter
             return _builder.Build();
         }
 
-        private void Impact(uint activator, List<uint> targets, Location targetLocation, int dmg)
+        private void Impact(uint activator, List<uint> targets)
         {
             foreach (var target in targets)
             {
@@ -48,6 +47,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Hunter
             _builder.Create(FeatType.ChokingShot1)
                 .Name(LocaleString.ChokingShotI)
                 .Description(LocaleString.ChokingShotIDescription)
+                .Classification(AbilityCategoryType.Offensive)
                 .HasRecastDelay(RecastGroup.ChokingShot, 24f)
                 .HasActivationDelay(2f)
                 .DisplaysVisualEffectWhenActivating()
@@ -60,7 +60,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Hunter
                 .TelegraphSize(3f, 3f)
                 .HasTelegraphSphereAction((activator, targets, targetLocation) =>
                 {
-                    Impact(activator, targets, targetLocation, 18);
+                    Impact(activator, targets);
                 });
         }
 
@@ -69,6 +69,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Hunter
             _builder.Create(FeatType.ChokingShot2)
                 .Name(LocaleString.ChokingShotII)
                 .Description(LocaleString.ChokingShotIIDescription)
+                .Classification(AbilityCategoryType.Offensive)
                 .HasRecastDelay(RecastGroup.ChokingShot, 24f)
                 .HasActivationDelay(2f)
                 .DisplaysVisualEffectWhenActivating()
@@ -81,7 +82,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Hunter
                 .TelegraphSize(3f, 3f)
                 .HasTelegraphSphereAction((activator, targets, targetLocation) =>
                 {
-                    Impact(activator, targets, targetLocation, 30);
+                    Impact(activator, targets);
                 });
         }
     }

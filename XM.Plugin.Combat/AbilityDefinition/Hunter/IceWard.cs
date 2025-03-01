@@ -32,6 +32,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Hunter
             _builder.Create(FeatType.IceWard)
                 .Name(LocaleString.IceWard)
                 .Description(LocaleString.IceWardDescription)
+                .Classification(AbilityCategoryType.Defensive)
                 .HasRecastDelay(RecastGroup.Ward, 10f)
                 .HasActivationDelay(4f)
                 .RequirementEP(30)

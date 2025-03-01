@@ -32,6 +32,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
             _builder.Create(FeatType.ZephyrShroud)
                 .Name(LocaleString.ZephyrShroud)
                 .Description(LocaleString.ZephyrShroudDescription)
+                .Classification(AbilityCategoryType.Defensive)
                 .HasRecastDelay(RecastGroup.ZephyrShroud, 60f * 5f)
                 .IsCastedAbility()
                 .RequirementEP(40)

@@ -32,6 +32,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Brawler
             _builder.Create(FeatType.WindWard)
                 .Name(LocaleString.WindWard)
                 .Description(LocaleString.WindWardDescription)
+                .Classification(AbilityCategoryType.Defensive)
                 .HasRecastDelay(RecastGroup.Ward, 10f)
                 .HasActivationDelay(4f)
                 .RequirementEP(30)

@@ -32,6 +32,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
             _builder.Create(FeatType.Rampart)
                 .Name(LocaleString.Rampart)
                 .Description(LocaleString.RampartDescription)
+                .Classification(AbilityCategoryType.Defensive)
                 .HasRecastDelay(RecastGroup.Rampart, 90f)
                 .HasActivationDelay(2f)
                 .RequirementEP(8)

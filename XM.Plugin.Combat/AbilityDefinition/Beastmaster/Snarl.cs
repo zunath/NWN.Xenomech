@@ -38,6 +38,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Beastmaster
             _builder.Create(FeatType.Snarl)
                 .Name(LocaleString.Snarl)
                 .Description(LocaleString.SnarlDescription)
+                .Classification(AbilityCategoryType.Offensive)
                 .HasRecastDelay(RecastGroup.Snarl, 30f)
                 .HasActivationDelay(2f)
                 .RequirementEP(20)
