@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Anvil.Services;
+using XM.Plugin.Combat.StatusEffectDefinition.Buff;
+using XM.Plugin.Combat.StatusEffectDefinition.Debuff;
 using XM.Plugin.Combat.StatusEffectDefinition.WeaponSkill;
 using XM.Progression.Ability;
 using XM.Progression.Skill;
@@ -15,12 +17,20 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
     internal class AxeAbilities : WeaponSkillBaseAbility
     {
         private readonly AbilityBuilder _builder = new();
+        private readonly Lazy<StatusEffectService> _status;
+        private readonly SpellService _spell;
+        private readonly StatService _stat;
 
         public AxeAbilities(
             Lazy<CombatService> combat,
-            Lazy<StatusEffectService> status)
+            Lazy<StatusEffectService> status,
+            SpellService spell,
+            StatService stat)
             : base(combat, status)
         {
+            _status = status;
+            _spell = spell;
+            _stat = stat;
         }
 
         public override Dictionary<FeatType, AbilityDetail> BuildAbilities()
@@ -130,12 +140,29 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
 
         private void SpinningAxe()
         {
-
+            _builder.Create(FeatType.SpinningAxe)
+                .Name(LocaleString.SpinningAxe)
+                .Description(LocaleString.SpinningAxeDescription)
+                .IsWeaponSkill(SkillType.Axe, 1130)
+                .RequirementTP(1350)
+                .HasImpactAction((activator, target, location) =>
+                {
+                    var duration = _spell.CalculateResistedTicks(target, ResistType.Ice, 6);
+                    _status.Value.ApplyStatusEffect<SpinningAxeStatusEffect>(activator, target, duration);
+                });
         }
 
         private void Rampage()
         {
-
+            _builder.Create(FeatType.Rampage)
+                .Name(LocaleString.Rampage)
+                .Description(LocaleString.RampageDescription)
+                .IsWeaponSkill(SkillType.Axe, 1390)
+                .RequirementTP(2000)
+                .HasImpactAction((activator, target, location) =>
+                {
+                    _status.Value.ApplyStatusEffect<RampageStatusEffect>(activator, activator, 1);
+                });
         }
 
         private void PrimalRend()

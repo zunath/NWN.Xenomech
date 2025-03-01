@@ -126,7 +126,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Weapon
             _builder.Create(FeatType.Omniscience)
                 .Name(LocaleString.Omniscience)
                 .Description(LocaleString.OmniscienceDescription)
-                .IsWeaponSkill(SkillType.Longsword, 1130)
+                .IsWeaponSkill(SkillType.Staff, 1130)
                 .RequirementTP(1350)
                 .TelegraphSize(4f, 4f)
                 .HasTelegraphSphereAction((activator, targets, location) =>

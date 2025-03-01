@@ -7216,6 +7216,10 @@
     {
       "id": 1805,
       "text": "Ether Attack %"
+    },
+    {
+      "id": 1806,
+      "text": "Evasion %"
     }
   ]
 }

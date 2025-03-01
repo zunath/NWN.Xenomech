@@ -175,7 +175,8 @@ namespace XM.Progression.Stat
             { ItemPropertyType.EtherDefenseModifier, StatType.EtherDefenseModifier},
             { ItemPropertyType.ExtraAttackModifier, StatType.ExtraAttackModifier},
             { ItemPropertyType.AttackModifier, StatType.AttackModifier},
-            { ItemPropertyType.EtherAttackModifier, StatType.EtherAttackModifier}
+            { ItemPropertyType.EtherAttackModifier, StatType.EtherAttackModifier},
+            { ItemPropertyType.EvasionModifier, StatType.EvasionModifier}
         };
         public StatService(
             DBService db, 
@@ -852,7 +853,10 @@ namespace XM.Progression.Stat
         }
         public int GetEvasion(uint creature)
         {
-            var statusEvasion = _status.GetCreatureStatusEffects(creature).StatGroup.Stats[StatType.Evasion];
+            var effects = _status.GetCreatureStatusEffects(creature);
+            var statusEvasion = effects.StatGroup.Stats[StatType.Evasion];
+            var statusEvasionModifier = 1 + effects.StatGroup.Stats[StatType.EvasionModifier] * 0.01f;
+
             if (GetIsPC(creature))
             {
                 var playerId = PlayerId.Get(creature);
@@ -860,12 +864,12 @@ namespace XM.Progression.Stat
                 var itemEvasion = dbPlayerStat.EquippedItemStats.CalculateStat(StatType.Evasion);
                 var abilityEvasion = dbPlayerStat.AbilityStats.CalculateStat(StatType.Evasion);
 
-                return itemEvasion + abilityEvasion + statusEvasion;
+                return (int)((itemEvasion + abilityEvasion + statusEvasion) * statusEvasionModifier);
             }
             else
             {
                 var npcStats = GetNPCStats(creature);
-                return npcStats.StatGroup.Stats[StatType.Evasion] + statusEvasion;
+                return (int)((npcStats.StatGroup.Stats[StatType.Evasion] + statusEvasion) * statusEvasionModifier);
             }
         }
         public int GetDefense(uint creature)
