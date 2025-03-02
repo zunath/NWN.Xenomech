@@ -38,6 +38,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Hunter
                 .Name(LocaleString.EagleEyeShot)
                 .Description(LocaleString.EagleEyeShotDescription)
                 .Classification(AbilityCategoryType.Offensive)
+                .TargetingType(AbilityTargetingType.SelfTargetsEnemy)
                 .HasRecastDelay(RecastGroup.JobCapstone, 60f * 30f)
                 .IsCastedAbility()
                 .RequirementEP(150)

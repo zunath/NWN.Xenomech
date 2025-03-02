@@ -1,6 +1,6 @@
 ﻿namespace XM.AI.Targeters
 {
-    internal class LowestHPAllyTargeter: IAITargeter
+    internal class LowestEPAllyTargeter: IAITargeter
     {
         public uint SelectTarget(IAIContext context)
         {
@@ -13,7 +13,7 @@
                 if (GetIsDead(ally))
                     continue;
 
-                var hpPercentage = (float)stat.GetCurrentHP(ally) / (float)stat.GetMaxHP(ally);
+                var hpPercentage = (float)stat.GetCurrentEP(ally) / (float)stat.GetMaxEP(ally);
                 if (hpPercentage < lowestPercentage)
                 {
                     lowestPercentage = hpPercentage;

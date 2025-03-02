@@ -14,13 +14,18 @@ namespace XM.AI.Scorer
             Actions = 
             [
                 // Ally
-                new HealAllyAction(context),
+                new HPHealAllyAction(context),
+                new EPHealAllyAction(context),
+                new DefensiveAbilityAllyAction(context),
 
                 // Enemy
                 new AttackEnemyAction(context),
+                new OffensiveAbilityAction(context),
 
                 // Self
-                new HealSelfAction(context),
+                new HPHealSelfAction(context),
+                new EPHealSelfAction(context),
+                new DefensiveAbilitySelfAction(context),
                 new ReturnHomeAction(context)
             ];
         }

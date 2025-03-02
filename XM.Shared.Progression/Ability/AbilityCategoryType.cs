@@ -3,9 +3,10 @@
     public enum AbilityCategoryType
     {
         Invalid = 0,
-        Healing = 1,
-        Offensive = 2,
-        Defensive = 3,
-        Special = 4,
+        HPRestoration = 1,
+        EPRestoration = 2,
+        Offensive = 3,
+        Defensive = 4,
+        Special = 5,
     }
 }

@@ -53,6 +53,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
                 .Name(LocaleString.ShockwaveSurgeI)
                 .Description(LocaleString.ShockwaveSurgeIDescription)
                 .Classification(AbilityCategoryType.Offensive)
+                .TargetingType(AbilityTargetingType.SelfTargetsEnemy)
                 .HasRecastDelay(RecastGroup.ShockwaveSurge, 16f)
                 .HasActivationDelay(4f)
                 .DisplaysVisualEffectWhenActivating()

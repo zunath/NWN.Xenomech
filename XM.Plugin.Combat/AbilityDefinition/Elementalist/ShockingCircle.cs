@@ -38,6 +38,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
                 .Name(LocaleString.ShockingCircle)
                 .Description(LocaleString.ShockingCircleDescription)
                 .Classification(AbilityCategoryType.Offensive)
+                .TargetingType(AbilityTargetingType.SelfTargetsEnemy)
                 .HasRecastDelay(RecastGroup.ShockingCircle, 60f * 5f)
                 .HasActivationDelay(2f)
                 .DisplaysVisualEffectWhenActivating()

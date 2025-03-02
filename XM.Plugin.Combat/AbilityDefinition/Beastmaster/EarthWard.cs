@@ -33,6 +33,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Beastmaster
                 .Name(LocaleString.EarthWard)
                 .Description(LocaleString.EarthWardDescription)
                 .Classification(AbilityCategoryType.Defensive)
+                .TargetingType(AbilityTargetingType.SelfTargetsParty)
                 .HasRecastDelay(RecastGroup.Ward, 10f)
                 .HasActivationDelay(4f)
                 .RequirementEP(30)

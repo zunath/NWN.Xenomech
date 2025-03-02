@@ -33,6 +33,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
                 .Name(LocaleString.DarknessWard)
                 .Description(LocaleString.DarknessWardDescription)
                 .Classification(AbilityCategoryType.Defensive)
+                .TargetingType(AbilityTargetingType.SelfTargetsParty)
                 .HasRecastDelay(RecastGroup.Ward, 10f)
                 .HasActivationDelay(4f)
                 .RequirementEP(30)

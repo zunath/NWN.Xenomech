@@ -112,19 +112,24 @@ namespace XM.AI
                     if (!_creatureFeats[resref].ContainsKey(ability.Category))
                         _creatureFeats[resref][ability.Category] = new Dictionary<AITargetType, HashSet<FeatType>>();
 
-                    if (targetTypes.HasFlag(SpellTargetTypes.Self))
+                    if (targetTypes.HasFlag(SpellTargetTypes.Self) || 
+                        ability.TargetingType == AbilityTargetingType.SelfOnly)
                     {
                         if (!_creatureFeats[resref][ability.Category].ContainsKey(AITargetType.Self))
                             _creatureFeats[resref][ability.Category][AITargetType.Self] = new HashSet<FeatType>();
 
+                        Console.WriteLine($"Self = {ability.Name.ToLocalizedString()}");
                         _creatureFeats[resref][ability.Category][AITargetType.Self].Add(feat);
                     }
 
-                    if (targetTypes.HasFlag(SpellTargetTypes.Creature))
+                    if (targetTypes.HasFlag(SpellTargetTypes.Creature) ||
+                        ability.TargetingType == AbilityTargetingType.SelfTargetsEnemy ||
+                        ability.TargetingType == AbilityTargetingType.SelfTargetsParty)
                     {
                         if (!_creatureFeats[resref][ability.Category].ContainsKey(AITargetType.Others))
                             _creatureFeats[resref][ability.Category][AITargetType.Others] = new HashSet<FeatType>();
 
+                        Console.WriteLine($"Others = {ability.Name.ToLocalizedString()}");
                         _creatureFeats[resref][ability.Category][AITargetType.Others].Add(feat);
                     }
                 }

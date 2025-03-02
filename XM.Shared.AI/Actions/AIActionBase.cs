@@ -1,6 +1,7 @@
 ﻿
 using System;
 using XM.AI.Targeters;
+using XM.Progression.Ability;
 using XM.Shared.API.Constants;
 
 namespace XM.AI.Actions
@@ -57,8 +58,17 @@ namespace XM.AI.Actions
 
         protected void UseAbility(FeatType feat, uint target)
         {
+            var abilityTarget = target;
+            var ability = Context.Services.Ability.GetAbilityDetail(feat);
+
+            if (ability.TargetingType == AbilityTargetingType.SelfTargetsParty ||
+                ability.TargetingType == AbilityTargetingType.SelfTargetsEnemy)
+            {
+                abilityTarget = Context.Creature;
+            }
+
             AssignCommand(Context.Creature, () => ClearAllActions());
-            AssignCommand(Context.Creature, () => ActionUseFeat(feat, target));
+            AssignCommand(Context.Creature, () => ActionUseFeat(feat, abilityTarget));
         }
     }
 }
