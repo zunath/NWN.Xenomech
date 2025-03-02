@@ -842,7 +842,7 @@ namespace XM.Progression.UI.Job
             IsNightstalkerFilterEnabled = _selectedJob != JobType.Nightstalker;
         }
 
-        public Action OnChangeTab() => () =>
+        private void LoadView()
         {
             switch (SelectedTab)
             {
@@ -853,6 +853,11 @@ namespace XM.Progression.UI.Job
                     LoadEquippedAbilitiesView();
                     break;
             }
+        }
+
+        public Action OnChangeTab() => () =>
+        {
+            LoadView();
         };
 
         private void LoadAvailableAbilitiesView()
@@ -942,7 +947,9 @@ namespace XM.Progression.UI.Job
                     SelectNewJob(JobType.Keeper);
                     IsKeeperEncouraged = true;
                     IsKeeperFilterEnabled = false;
-                });
+                    LoadView();
+                    RefreshPips();
+                }, LoadView);
         };
 
         public Action OnClickMender() => () =>
@@ -954,7 +961,9 @@ namespace XM.Progression.UI.Job
                     SelectNewJob(JobType.Mender);
                     IsMenderEncouraged = true;
                     IsMenderFilterEnabled = false;
-                });
+                    LoadView();
+                    RefreshPips();
+                }, LoadView);
         };
 
         public Action OnClickTechweaver() => () =>
@@ -966,7 +975,9 @@ namespace XM.Progression.UI.Job
                     SelectNewJob(JobType.Techweaver);
                     IsTechweaverEncouraged = true;
                     IsTechweaverFilterEnabled = false;
-                });
+                    LoadView();
+                    RefreshPips();
+                }, LoadView);
         };
 
         public Action OnClickBeastmaster() => () =>
@@ -978,7 +989,9 @@ namespace XM.Progression.UI.Job
                     SelectNewJob(JobType.Beastmaster);
                     IsBeastmasterEncouraged = true;
                     IsBeastmasterFilterEnabled = false;
-                });
+                    LoadView();
+                    RefreshPips();
+                }, LoadView);
         };
 
         public Action OnClickBrawler() => () =>
@@ -990,7 +1003,9 @@ namespace XM.Progression.UI.Job
                     SelectNewJob(JobType.Brawler);
                     IsBrawlerEncouraged = true;
                     IsBrawlerFilterEnabled = false;
-                });
+                    LoadView();
+                    RefreshPips();
+                }, LoadView);
         };
 
         public Action OnClickNightstalker() => () =>
@@ -1002,7 +1017,9 @@ namespace XM.Progression.UI.Job
                     SelectNewJob(JobType.Nightstalker);
                     IsNightstalkerEncouraged = true;
                     IsNightstalkerFilterEnabled = false;
-                });
+                    LoadView();
+                    RefreshPips();
+                }, LoadView);
         };
 
         public Action OnClickHunter() => () =>
@@ -1014,7 +1031,9 @@ namespace XM.Progression.UI.Job
                     SelectNewJob(JobType.Hunter);
                     IsHunterEncouraged = true;
                     IsHunterFilterEnabled = false;
-                });
+                    LoadView();
+                    RefreshPips();
+                }, LoadView);
         };
 
         public Action OnClickElementalist() => () =>
@@ -1026,7 +1045,9 @@ namespace XM.Progression.UI.Job
                     SelectNewJob(JobType.Elementalist);
                     IsElementalistEncouraged = true;
                     IsElementalistFilterEnabled = false;
-                });
+                    LoadView();
+                    RefreshPips();
+                }, LoadView);
         };
 
         public Action OnClickFilterKeeper() => () =>
