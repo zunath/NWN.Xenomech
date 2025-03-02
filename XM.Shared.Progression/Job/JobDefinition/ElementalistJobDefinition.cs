@@ -8,6 +8,7 @@ namespace XM.Progression.Job.JobDefinition
     internal class ElementalistJobDefinition: JobDefinitionBase
     {
         public override JobType Type => JobType.Elementalist;
+        public override ClassType NWNClass => ClassType.Elementalist;
         public override bool IsVisibleToPlayers => true;
 
         public override LocaleString Name => LocaleString.Elementalist;

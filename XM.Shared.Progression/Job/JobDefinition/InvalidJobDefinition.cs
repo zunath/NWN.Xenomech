@@ -8,6 +8,7 @@ namespace XM.Progression.Job.JobDefinition
     internal class InvalidJobDefinition : JobDefinitionBase
     {
         public override JobType Type => JobType.Invalid;
+        public override ClassType NWNClass => ClassType.Invalid;
         public override bool IsVisibleToPlayers => false;
 
         public override LocaleString Name => LocaleString.Empty;

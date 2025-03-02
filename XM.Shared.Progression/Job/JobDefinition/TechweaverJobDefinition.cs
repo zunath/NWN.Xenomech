@@ -8,6 +8,7 @@ namespace XM.Progression.Job.JobDefinition
     internal class TechweaverJobDefinition: JobDefinitionBase
     {
         public override JobType Type => JobType.Techweaver;
+        public override ClassType NWNClass => ClassType.Techweaver;
         public override bool IsVisibleToPlayers => true;
 
         public override LocaleString Name => LocaleString.Techweaver;

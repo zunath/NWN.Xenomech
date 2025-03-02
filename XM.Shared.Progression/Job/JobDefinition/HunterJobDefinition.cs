@@ -8,6 +8,7 @@ namespace XM.Progression.Job.JobDefinition
     internal class HunterJobDefinition: JobDefinitionBase
     {
         public override JobType Type => JobType.Hunter;
+        public override ClassType NWNClass => ClassType.Hunter;
         public override bool IsVisibleToPlayers => true;
 
         public override LocaleString Name => LocaleString.Hunter;

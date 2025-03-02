@@ -8,6 +8,7 @@ namespace XM.Progression.Job.JobDefinition
     internal class NightstalkerJobDefinition: JobDefinitionBase
     {
         public override JobType Type => JobType.Nightstalker;
+        public override ClassType NWNClass => ClassType.Nightstalker;
         public override bool IsVisibleToPlayers => true;
 
         public override LocaleString Name => LocaleString.Nightstalker;

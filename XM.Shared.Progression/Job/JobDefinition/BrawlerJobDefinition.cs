@@ -8,6 +8,7 @@ namespace XM.Progression.Job.JobDefinition
     internal class BrawlerJobDefinition: JobDefinitionBase
     {
         public override JobType Type => JobType.Brawler;
+        public override ClassType NWNClass => ClassType.Brawler;
         public override bool IsVisibleToPlayers => true;
 
         public override LocaleString Name => LocaleString.Brawler;

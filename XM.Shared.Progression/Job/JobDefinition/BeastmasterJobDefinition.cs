@@ -8,6 +8,7 @@ namespace XM.Progression.Job.JobDefinition
     internal class BeastmasterJobDefinition: JobDefinitionBase
     {
         public override JobType Type => JobType.Beastmaster;
+        public override ClassType NWNClass => ClassType.Beastmaster;
         public override bool IsVisibleToPlayers => true;
 
         public override LocaleString Name => LocaleString.Beastmaster;

@@ -8,6 +8,7 @@ namespace XM.Progression.Job.JobDefinition
     internal class KeeperJobDefinition: JobDefinitionBase
     {
         public override JobType Type => JobType.Keeper;
+        public override ClassType NWNClass => ClassType.Keeper;
         public override bool IsVisibleToPlayers => true;
 
         public override LocaleString Name => LocaleString.Keeper;

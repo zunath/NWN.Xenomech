@@ -7,6 +7,7 @@ namespace XM.Progression.Job.JobDefinition
     public interface IJobDefinition
     {
         public JobType Type { get; }
+        public ClassType NWNClass { get; }
         public bool IsVisibleToPlayers { get; }
         public LocaleString Name { get; }
         public string IconResref { get; }

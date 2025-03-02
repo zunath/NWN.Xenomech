@@ -6,7 +6,6 @@ using XM.Inventory;
 using XM.Progression.Event;
 using XM.Progression.Job.Entity;
 using XM.Progression.Job.JobDefinition;
-using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.CreaturePlugin;
 using XM.Shared.Core;
@@ -23,41 +22,43 @@ namespace XM.Progression.Job
         public const int LevelCap = 50;
         public const int ResonanceNodeLevelAcquisitionRate = 5; // One every 5 levels
 
-        private readonly Dictionary<JobType, IJobDefinition> _jobDefinitions = new()
-        {
-            { JobType.Invalid, new InvalidJobDefinition()},
-            { JobType.Beastmaster , new BeastmasterJobDefinition()},
-            { JobType.Brawler , new BrawlerJobDefinition()},
-            { JobType.Elementalist , new ElementalistJobDefinition()},
-            { JobType.Hunter , new HunterJobDefinition()},
-            { JobType.Keeper , new KeeperJobDefinition()},
-            { JobType.Mender , new MenderJobDefinition()},
-            { JobType.Nightstalker , new NightstalkerJobDefinition()},
-            { JobType.Techweaver , new TechweaverJobDefinition()},
+        private readonly IList<IJobDefinition> _jobDefinitionsList;
+        private readonly Dictionary<JobType, IJobDefinition> _jobDefinitions = new();
 
-        };
+        private readonly Dictionary<JobType, ClassType> _jobsToClasses = new();
+        private readonly Dictionary<ClassType, JobType> _classesToJobs = new();
 
         private readonly InventoryService _inventory;
         private readonly DBService _db;
-        private readonly StatService _stat;
         private readonly XMEventService _event;
         private readonly XPChart _xp;
 
         public JobService(
             InventoryService inventory, 
             DBService db,
-            StatService stat,
             XMEventService @event,
-            XPChart xp)
+            XPChart xp,
+            IList<IJobDefinition> jobDefinitionsList)
         {
             _inventory = inventory;
             _db = db;
-            _stat = stat;
             _event = @event;
             _xp = xp;
+            _jobDefinitionsList = jobDefinitionsList;
 
+            CacheData();
             RegisterEvents();
             SubscribeEvents();
+        }
+
+        private void CacheData()
+        {
+            foreach (var definition in _jobDefinitionsList)
+            {
+                _jobDefinitions[definition.Type] = definition;
+                _jobsToClasses[definition.Type] = definition.NWNClass;
+                _classesToJobs[definition.NWNClass] = definition.Type;
+            }
         }
 
         private void RegisterEvents()
@@ -73,37 +74,13 @@ namespace XM.Progression.Job
             _event.Subscribe<XMEvent.OnPCInitialized>(InitializeJob);
         }
 
+
         private void InitializeJob(uint player)
         {
             var @class = GetClassByPosition(1, player);
-            var job = ClassToJob(@class);
+            var job = _classesToJobs[@class];
 
             ChangeJob(player, job, []);
-        }
-
-        private JobType ClassToJob(ClassType @class)
-        {
-            switch (@class)
-            {
-                case ClassType.Beastmaster:
-                    return JobType.Beastmaster;
-                case ClassType.Brawler:
-                    return JobType.Brawler;
-                case ClassType.Elementalist:
-                    return JobType.Elementalist;
-                case ClassType.Hunter:
-                    return JobType.Hunter;
-                case ClassType.Keeper:
-                    return JobType.Keeper;
-                case ClassType.Mender:
-                    return JobType.Mender;
-                case ClassType.Nightstalker:
-                    return JobType.Nightstalker;
-                case ClassType.Techweaver:
-                    return JobType.Techweaver;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(@class), @class, null);
-            }
         }
 
         internal Dictionary<JobType, IJobDefinition> GetAllJobDefinitions()
@@ -252,6 +229,9 @@ namespace XM.Progression.Job
 
             dbPlayerJob.ActiveJob = job;
             _db.Set(dbPlayerJob);
+
+            var @class = _jobsToClasses[job];
+            CreaturePlugin.SetClassByPosition(player, 0, @class);
 
             foreach (var feat in featsToRemove)
             {

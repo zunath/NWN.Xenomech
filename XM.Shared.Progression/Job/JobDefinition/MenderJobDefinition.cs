@@ -8,6 +8,7 @@ namespace XM.Progression.Job.JobDefinition
     internal class MenderJobDefinition: JobDefinitionBase
     {
         public override JobType Type => JobType.Mender;
+        public override ClassType NWNClass => ClassType.Mender;
         public override bool IsVisibleToPlayers => true;
 
         public override LocaleString Name => LocaleString.Mender;

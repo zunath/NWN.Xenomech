@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Anvil.Services;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
 namespace XM.Progression.Job.JobDefinition
 {
+    [ServiceBinding(typeof(IJobDefinition))]
     internal abstract class JobDefinitionBase: IJobDefinition
     {
         public abstract JobType Type { get; }
+        public abstract ClassType NWNClass { get; }
         public abstract bool IsVisibleToPlayers { get; }
         public abstract LocaleString Name { get; }
         public abstract string IconResref { get; }
