@@ -1492,8 +1492,8 @@ namespace XM.Shared.Core.Localization
         EtherAttackPercentage = 1805,
         EvasionPercentage = 1806,
         XTPHasBeenReducedByYPercent = 1807,
-        AutoRegen1Description = 1808,
-        AutoRegen2Description = 1809,
+        // 1808 is free
+        // 1809 is free
         TypeX = 1810,
         ActivationDelayX = 1811,
         RecastDelayX = 1812,

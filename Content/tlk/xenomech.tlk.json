@@ -1627,7 +1627,7 @@
     },
     {
       "id": 407,
-      "text": "Ether Bloom I Description"
+      "text": "Restores HP to a single target."
     },
     {
       "id": 408,
@@ -1635,7 +1635,7 @@
     },
     {
       "id": 409,
-      "text": "Ether Bloom II Description"
+      "text": "Restores HP to a single target."
     },
     {
       "id": 410,
@@ -1643,7 +1643,7 @@
     },
     {
       "id": 411,
-      "text": "Ether Bloom III Description"
+      "text": "Restores HP to a single target."
     },
     {
       "id": 412,
@@ -1651,7 +1651,7 @@
     },
     {
       "id": 413,
-      "text": "Ether Bloom IV Description"
+      "text": "Restores HP to a single target."
     },
     {
       "id": 414,
@@ -2103,7 +2103,7 @@
     },
     {
       "id": 527,
-      "text": "Provoke I Description"
+      "text": "Goads a single target to attack you."
     },
     {
       "id": 528,
@@ -2111,7 +2111,7 @@
     },
     {
       "id": 529,
-      "text": "Provoke II Description"
+      "text": "Goads a group of enemies to attack you."
     },
     {
       "id": 530,
@@ -2119,7 +2119,7 @@
     },
     {
       "id": 531,
-      "text": "Defense Bonus I Description"
+      "text": "Increases defense by 10"
     },
     {
       "id": 532,
@@ -2127,7 +2127,7 @@
     },
     {
       "id": 533,
-      "text": "Defense Bonus II Description"
+      "text": "Increases defense by 30"
     },
     {
       "id": 534,
@@ -2135,7 +2135,7 @@
     },
     {
       "id": 535,
-      "text": "Defense Bonus III Description"
+      "text": "Increases defense by 50"
     },
     {
       "id": 536,
@@ -2143,7 +2143,7 @@
     },
     {
       "id": 537,
-      "text": "Defense Bonus IV Description"
+      "text": "Increases defense by 70"
     },
     {
       "id": 538,
@@ -2151,7 +2151,7 @@
     },
     {
       "id": 539,
-      "text": "Resonance Node I Description"
+      "text": "Increases the available resource nodes by 1."
     },
     {
       "id": 540,
@@ -2159,7 +2159,7 @@
     },
     {
       "id": 541,
-      "text": "Resonance Node II Description"
+      "text": "Increases the available resource nodes by 1."
     },
     {
       "id": 542,
@@ -2167,7 +2167,7 @@
     },
     {
       "id": 543,
-      "text": "Resonance Node III Description"
+      "text": "Increases the available resource nodes by 1."
     },
     {
       "id": 544,
@@ -2175,7 +2175,7 @@
     },
     {
       "id": 545,
-      "text": "Resonance Node IV Description"
+      "text": "Increases the available resource nodes by 1."
     },
     {
       "id": 546,
@@ -2183,7 +2183,7 @@
     },
     {
       "id": 547,
-      "text": "Resonance Node V Description"
+      "text": "Increases the available resource nodes by 1."
     },
     {
       "id": 548,
@@ -2195,7 +2195,7 @@
     },
     {
       "id": 550,
-      "text": "Restoration I Description"
+      "text": "Restores HP to the caster."
     },
     {
       "id": 551,
@@ -2203,7 +2203,7 @@
     },
     {
       "id": 552,
-      "text": "Restoration II Description"
+      "text": "Restores HP to the caster."
     },
     {
       "id": 553,
@@ -2211,7 +2211,7 @@
     },
     {
       "id": 554,
-      "text": "Restoration III Description"
+      "text": "Restores HP to the caster."
     },
     {
       "id": 555,
@@ -2219,7 +2219,7 @@
     },
     {
       "id": 556,
-      "text": "Shield Mastery I Description"
+      "text": "Increases shield deflection by 10%."
     },
     {
       "id": 557,
@@ -2227,7 +2227,7 @@
     },
     {
       "id": 558,
-      "text": "Shield Mastery II Description"
+      "text": "Increases shield deflection by 20%."
     },
     {
       "id": 559,
@@ -2239,7 +2239,7 @@
     },
     {
       "id": 561,
-      "text": "Aggressor I Description"
+      "text": "Increases enmity gain while toggled by 5%."
     },
     {
       "id": 562,
@@ -2247,7 +2247,7 @@
     },
     {
       "id": 563,
-      "text": "Aggressor II Description"
+      "text": "Increases enmity gain while toggled by 10%."
     },
     {
       "id": 564,
@@ -2259,7 +2259,7 @@
     },
     {
       "id": 566,
-      "text": "Radiant Blast I Description"
+      "text": "Deals 30 light DMG to a single target."
     },
     {
       "id": 567,
@@ -2267,7 +2267,7 @@
     },
     {
       "id": 568,
-      "text": "Radiant Blast II Description"
+      "text": "Deals 60 light DMG to a single target."
     },
     {
       "id": 569,
@@ -2275,7 +2275,7 @@
     },
     {
       "id": 570,
-      "text": "HP Bonus I Description"
+      "text": "Increases max HP by 60."
     },
     {
       "id": 571,
@@ -2283,7 +2283,7 @@
     },
     {
       "id": 572,
-      "text": "HP Bonus II Description"
+      "text": "Increases max HP by 120."
     },
     {
       "id": 573,
@@ -2291,7 +2291,7 @@
     },
     {
       "id": 574,
-      "text": "Darkness Ward Description"
+      "text": "Grants +50% protection towards darkness to all nearby party members for 15 minutes."
     },
     {
       "id": 575,
@@ -2299,7 +2299,7 @@
     },
     {
       "id": 576,
-      "text": "Rampart Description"
+      "text": "Increases defense of all nearby party members by 30 for 2 minutes."
     },
     {
       "id": 577,
@@ -2307,7 +2307,7 @@
     },
     {
       "id": 578,
-      "text": "Raise Description"
+      "text": "Revives an unconscious target with 1 HP. Cannot be used on mechs."
     },
     {
       "id": 579,
@@ -2315,7 +2315,7 @@
     },
     {
       "id": 580,
-      "text": "Mighty Strikes Description"
+      "text": "All attacks become critical hits for 1 minute."
     },
     {
       "id": 581,
@@ -2323,7 +2323,7 @@
     },
     {
       "id": 582,
-      "text": "Resonance Node VI Description"
+      "text": "Increases the available resource nodes by 1."
     },
     {
       "id": 583,
@@ -2331,7 +2331,7 @@
     },
     {
       "id": 584,
-      "text": "Resonance Node VII Description"
+      "text": "Increases the available resource nodes by 1."
     },
     {
       "id": 585,
@@ -2339,7 +2339,7 @@
     },
     {
       "id": 586,
-      "text": "Resonance Node VIII Description"
+      "text": "Increases the available resource nodes by 1."
     },
     {
       "id": 587,
@@ -2347,7 +2347,7 @@
     },
     {
       "id": 588,
-      "text": "Resonance Node IX Description"
+      "text": "Increases the available resource nodes by 1."
     },
     {
       "id": 589,
@@ -2355,7 +2355,7 @@
     },
     {
       "id": 590,
-      "text": "Resonance Node X Description"
+      "text": "Increases the available resource nodes by 1."
     },
     {
       "id": 591,
@@ -2363,7 +2363,7 @@
     },
     {
       "id": 592,
-      "text": "Antidote Description"
+      "text": "Removes poison from a single target."
     },
     {
       "id": 593,
@@ -2375,7 +2375,7 @@
     },
     {
       "id": 595,
-      "text": "Protection I Description"
+      "text": "Increases defense of all nearby party members by 20 for 30 minutes."
     },
     {
       "id": 596,
@@ -2383,7 +2383,7 @@
     },
     {
       "id": 597,
-      "text": "Protection II Description"
+      "text": "Increases defense of all nearby party members by 50 for 30 minutes."
     },
     {
       "id": 598,
@@ -2391,7 +2391,7 @@
     },
     {
       "id": 599,
-      "text": "Protection III Description"
+      "text": "Increases defense of all nearby party members by 90 for 30 minutes."
     },
     {
       "id": 600,
@@ -2399,7 +2399,7 @@
     },
     {
       "id": 601,
-      "text": "Divine Seal Description"
+      "text": "Doubles the potency of your next healing spell."
     },
     {
       "id": 602,
@@ -2419,7 +2419,7 @@
     },
     {
       "id": 606,
-      "text": "Ether Blast I Description"
+      "text": "Restores HP to all nearby party members."
     },
     {
       "id": 607,
@@ -2427,7 +2427,7 @@
     },
     {
       "id": 608,
-      "text": "Ether Blast II Description"
+      "text": "Restores HP to all nearby party members."
     },
     {
       "id": 609,
@@ -2439,7 +2439,7 @@
     },
     {
       "id": 611,
-      "text": "Regen I Description"
+      "text": "Gradually restore a single target's HP over time."
     },
     {
       "id": 612,
@@ -2447,7 +2447,7 @@
     },
     {
       "id": 613,
-      "text": "Regen II Description"
+      "text": "Gradually restore a single target's HP over time."
     },
     {
       "id": 614,
@@ -2455,7 +2455,7 @@
     },
     {
       "id": 615,
-      "text": "Revive Description"
+      "text": "Revives an unconscious target with 50% HP."
     },
     {
       "id": 616,
@@ -2463,7 +2463,7 @@
     },
     {
       "id": 617,
-      "text": "Fire Ward Description"
+      "text": "Grants +50% protection towards fire to all nearby party members for 15 minutes."
     },
     {
       "id": 618,
@@ -2471,7 +2471,7 @@
     },
     {
       "id": 619,
-      "text": "Tsu Description"
+      "text": "Deals 150 light DMG to a single target."
     },
     {
       "id": 620,
@@ -2479,7 +2479,7 @@
     },
     {
       "id": 621,
-      "text": "Erase Description"
+      "text": "Removes one detrimental effect from a single target."
     },
     {
       "id": 622,
@@ -2487,7 +2487,7 @@
     },
     {
       "id": 623,
-      "text": "Haste Description"
+      "text": "Reduces attack delay for a single target by 15% for 3 minutes."
     },
     {
       "id": 624,
@@ -2495,7 +2495,7 @@
     },
     {
       "id": 625,
-      "text": "Benediction Description"
+      "text": "Completely restores your party's HP to max."
     },
     {
       "id": 626,
@@ -2503,7 +2503,7 @@
     },
     {
       "id": 627,
-      "text": "Tame Description"
+      "text": "Soothes a target beast and forces it to succumb to your will."
     },
     {
       "id": 628,
@@ -2515,7 +2515,7 @@
     },
     {
       "id": 630,
-      "text": "Reward I Description"
+      "text": "Restores your pet's HP."
     },
     {
       "id": 631,
@@ -2523,7 +2523,7 @@
     },
     {
       "id": 632,
-      "text": "Reward II Description"
+      "text": "Restores your pet's HP."
     },
     {
       "id": 633,
@@ -2531,7 +2531,7 @@
     },
     {
       "id": 634,
-      "text": "Reward III Description"
+      "text": "Restores your pet's HP."
     },
     {
       "id": 635,
@@ -2543,7 +2543,7 @@
     },
     {
       "id": 637,
-      "text": "Crescent Moon I Description"
+      "text": "Your next attack deals an additional 18 Wind DMG and inflicts stun for 4 seconds."
     },
     {
       "id": 638,
@@ -2551,7 +2551,7 @@
     },
     {
       "id": 639,
-      "text": "Crescent Moon II Description"
+      "text": "Your next attack deals an additional 32 Wind DMG and inflicts stun for 4 seconds."
     },
     {
       "id": 640,
@@ -2559,7 +2559,7 @@
     },
     {
       "id": 641,
-      "text": "Crescent Moon III Description"
+      "text": "Your next attack deals an additional 50 Wind DMG and inflicts stun for 4 seconds."
     },
     {
       "id": 642,
@@ -2567,7 +2567,7 @@
     },
     {
       "id": 643,
-      "text": "Sic Description"
+      "text": "Your pet initiates a special ability."
     },
     {
       "id": 644,
@@ -2579,7 +2579,7 @@
     },
     {
       "id": 646,
-      "text": "Mercy Strike I Description"
+      "text": "You deal 24 DMG to all nearby enemies."
     },
     {
       "id": 647,
@@ -2587,7 +2587,7 @@
     },
     {
       "id": 648,
-      "text": "Mercy Strike II Description"
+      "text": "You deal 44 DMG to all nearby enemies."
     },
     {
       "id": 649,
@@ -2595,7 +2595,7 @@
     },
     {
       "id": 650,
-      "text": "Snarl Description"
+      "text": "Reduces the accuracy of all nearby enemies by 15 for 1 minute"
     },
     {
       "id": 651,
@@ -2603,7 +2603,7 @@
     },
     {
       "id": 652,
-      "text": "Resist Poison Description"
+      "text": "Improves poison resistance by 25%."
     },
     {
       "id": 653,
@@ -2611,7 +2611,7 @@
     },
     {
       "id": 654,
-      "text": "Third Eye Description"
+      "text": "Reduces the amount of damage you take from the next attack by 10%."
     },
     {
       "id": 655,
@@ -2619,7 +2619,7 @@
     },
     {
       "id": 656,
-      "text": "Earth Ward Description"
+      "text": "Grants +50% protection towards earth to all nearby party members for 15 minutes."
     },
     {
       "id": 657,
@@ -2627,7 +2627,7 @@
     },
     {
       "id": 658,
-      "text": "Feral Howl Description"
+      "text": "Increases accuracy of all nearby party members by 30 for 1 minute."
     },
     {
       "id": 659,
@@ -2635,7 +2635,7 @@
     },
     {
       "id": 660,
-      "text": "Quickness Description"
+      "text": "Reduces your attack delay by 10% for five minutes."
     },
     {
       "id": 661,
@@ -2643,7 +2643,7 @@
     },
     {
       "id": 662,
-      "text": "Assault Description"
+      "text": "Your pet's next attack deals an additional 25 DMG."
     },
     {
       "id": 663,
@@ -2651,7 +2651,7 @@
     },
     {
       "id": 664,
-      "text": "Killer Instinct Description"
+      "text": "Increases attack by 15."
     },
     {
       "id": 665,
@@ -2659,7 +2659,7 @@
     },
     {
       "id": 666,
-      "text": "Beast Speed Description"
+      "text": "Your pet gains permanent 15% haste."
     },
     {
       "id": 667,
@@ -2667,7 +2667,7 @@
     },
     {
       "id": 668,
-      "text": "Ether Link Description"
+      "text": "Each time your pet lands an attack, you have a 20% chance to restore 5 EP."
     },
     {
       "id": 669,
@@ -2675,7 +2675,7 @@
     },
     {
       "id": 670,
-      "text": "Familiar Description"
+      "text": "Your pet's attributes are doubled for 10 minutes."
     },
     {
       "id": 671,
@@ -2687,7 +2687,7 @@
     },
     {
       "id": 673,
-      "text": "Electric Fist I Description"
+      "text": "Your next attack deals an additional 12 DMG."
     },
     {
       "id": 674,
@@ -2695,7 +2695,7 @@
     },
     {
       "id": 675,
-      "text": "Electric Fist II Description"
+      "text": "Your next attack deals an additional 22 DMG."
     },
     {
       "id": 676,
@@ -2703,7 +2703,7 @@
     },
     {
       "id": 677,
-      "text": "Electric Fist III Description"
+      "text": "Your next attack deals an additional 52 DMG."
     },
     {
       "id": 678,
@@ -2715,7 +2715,7 @@
     },
     {
       "id": 680,
-      "text": "Striking Cobra I Description"
+      "text": "Your next attack deals an additional 14 DMG and inflicts Poison."
     },
     {
       "id": 681,
@@ -2723,7 +2723,7 @@
     },
     {
       "id": 682,
-      "text": "Striking Cobra II Description"
+      "text": "Your next attack deals an additional 32 DMG and inflicts Poison."
     },
     {
       "id": 683,
@@ -2731,7 +2731,7 @@
     },
     {
       "id": 684,
-      "text": "Flash Description"
+      "text": "Goads nearby enemies into targeting you and reduces their accuracy by 10 for 1 minute."
     },
     {
       "id": 685,
@@ -2739,7 +2739,7 @@
     },
     {
       "id": 686,
-      "text": "Parry I Description"
+      "text": "Increases attack deflection chance by 5%."
     },
     {
       "id": 687,
@@ -2747,7 +2747,7 @@
     },
     {
       "id": 688,
-      "text": "Parry II Description"
+      "text": "Increases attack deflection chance by 10%."
     },
     {
       "id": 689,
@@ -2755,7 +2755,7 @@
     },
     {
       "id": 690,
-      "text": "Parry III Description"
+      "text": "Increases attack deflection chance by 15%."
     },
     {
       "id": 691,
@@ -2763,7 +2763,7 @@
     },
     {
       "id": 692,
-      "text": "Attack Bonus I Description"
+      "text": "Increases attack by 10."
     },
     {
       "id": 693,
@@ -2771,7 +2771,7 @@
     },
     {
       "id": 694,
-      "text": "Attack Bonus II Description"
+      "text": "Increases attack by 30."
     },
     {
       "id": 695,
@@ -2779,7 +2779,7 @@
     },
     {
       "id": 696,
-      "text": "Power Attack I Description"
+      "text": "Grants the Power Attack feat which grants +3 DMG at the cost of -5 to accuracy."
     },
     {
       "id": 697,
@@ -2787,7 +2787,7 @@
     },
     {
       "id": 698,
-      "text": "Power Attack II Description"
+      "text": "Grants the Improved Power Attack feat which grants a +6 DMG bonus at the cost of -10 to accuracy."
     },
     {
       "id": 699,
@@ -2799,7 +2799,7 @@
     },
     {
       "id": 701,
-      "text": "Shadowstrike I Description"
+      "text": "Deals 18 DMG to all nearby enemies and inflicts knockdown."
     },
     {
       "id": 702,
@@ -2807,7 +2807,7 @@
     },
     {
       "id": 703,
-      "text": "Shadowstrike II Description"
+      "text": "Deals 45 DMG to all nearby enemies and has inflicts knockdown."
     },
     {
       "id": 704,
@@ -2815,7 +2815,7 @@
     },
     {
       "id": 705,
-      "text": "Warcry Description"
+      "text": "Increases attack by 25 to all nearby party members for 2 minutes."
     },
     {
       "id": 706,
@@ -2827,7 +2827,7 @@
     },
     {
       "id": 708,
-      "text": "Chi I Description"
+      "text": "Restores HP to the caster and grants Regen for 2 minutes."
     },
     {
       "id": 709,
@@ -2835,7 +2835,7 @@
     },
     {
       "id": 710,
-      "text": "Chi II Description"
+      "text": "Restores HP to the caster and grants Regen for 2 minutes."
     },
     {
       "id": 711,
@@ -2843,7 +2843,7 @@
     },
     {
       "id": 712,
-      "text": "Wind Ward Description"
+      "text": "Grants +50% protection towards wind to all nearby party members for 15 minutes."
     },
     {
       "id": 713,
@@ -2851,7 +2851,7 @@
     },
     {
       "id": 714,
-      "text": "Martial Arts Description"
+      "text": "Your hand-to-hand attack delay is reduced by 20%."
     },
     {
       "id": 715,
@@ -2859,7 +2859,7 @@
     },
     {
       "id": 716,
-      "text": "Hundred Fists Description"
+      "text": "Greatly reduces attack delay for 1 minute."
     },
     {
       "id": 717,
@@ -2867,7 +2867,7 @@
     },
     {
       "id": 718,
-      "text": "Back Attack I Description"
+      "text": "Melee DMG dealt from behind a target is increased by 4. Does not stack with other abilities in the Back Attack line."
     },
     {
       "id": 719,
@@ -2875,7 +2875,7 @@
     },
     {
       "id": 720,
-      "text": "Back Attack II Description"
+      "text": "Melee DMG dealt from behind a target is increased by 8. Does not stack with other abilities in the Back Attack line."
     },
     {
       "id": 721,
@@ -2883,7 +2883,7 @@
     },
     {
       "id": 722,
-      "text": "Back Attack III Description"
+      "text": "Melee DMG dealt from behind a target is increased by 12. Does not stack with other abilities in the Back Attack line."
     },
     {
       "id": 723,
@@ -2891,7 +2891,7 @@
     },
     {
       "id": 724,
-      "text": "Back Attack IV Description"
+      "text": "Melee DMG dealt from behind a target is increased by 16. Does not stack with other abilities in the Back Attack line."
     },
     {
       "id": 725,
@@ -2899,7 +2899,7 @@
     },
     {
       "id": 726,
-      "text": "Steal Description"
+      "text": "Steals an item from an enemy."
     },
     {
       "id": 727,
@@ -2907,7 +2907,7 @@
     },
     {
       "id": 728,
-      "text": "Creditfinder Description"
+      "text": "Increases the amount of credits found by 50%."
     },
     {
       "id": 729,
@@ -2919,7 +2919,7 @@
     },
     {
       "id": 731,
-      "text": "Sneak Attack I Description"
+      "text": "Melee DMG dealt from behind your next target is increased by 10."
     },
     {
       "id": 732,
@@ -2927,7 +2927,7 @@
     },
     {
       "id": 733,
-      "text": "Sneak Attack II Description"
+      "text": "Melee DMG dealt from behind your next target is increased by 20."
     },
     {
       "id": 734,
@@ -2935,7 +2935,7 @@
     },
     {
       "id": 735,
-      "text": "Sneak Attack III Description"
+      "text": "Melee DMG dealt from behind your next target is increased by 30."
     },
     {
       "id": 736,
@@ -2943,7 +2943,7 @@
     },
     {
       "id": 737,
-      "text": "Subtle Blow I Description"
+      "text": "Reduces enemy TP acquisition via damage by 10%."
     },
     {
       "id": 738,
@@ -2951,7 +2951,7 @@
     },
     {
       "id": 739,
-      "text": "Subtle Blow II Description"
+      "text": "Reduces enemy TP acquisition via damage by 20%."
     },
     {
       "id": 740,
@@ -2959,7 +2959,7 @@
     },
     {
       "id": 741,
-      "text": "Treasure Hunter I Description"
+      "text": "Increases the chance to find rare items by 15. Does not stack with Treasure Hunter II."
     },
     {
       "id": 742,
@@ -2967,7 +2967,7 @@
     },
     {
       "id": 743,
-      "text": "Treasure Hunter II Description"
+      "text": "Increases the chance to find rare items by 30. Does not stack with Treasure Hunter I"
     },
     {
       "id": 744,
@@ -2983,7 +2983,7 @@
     },
     {
       "id": 747,
-      "text": "Critical Bonus I Description"
+      "text": "Increases critical hit rate by 5%."
     },
     {
       "id": 748,
@@ -2991,7 +2991,7 @@
     },
     {
       "id": 749,
-      "text": "Critical Bonus II Description"
+      "text": "Increases critical hit rate by 10%."
     },
     {
       "id": 750,
@@ -2999,7 +2999,7 @@
     },
     {
       "id": 751,
-      "text": "Light Ward Description"
+      "text": "Grants +50% protection towards light to all nearby party members for 15 minutes."
     },
     {
       "id": 752,
@@ -3007,7 +3007,7 @@
     },
     {
       "id": 753,
-      "text": "Flee Description"
+      "text": "Increases movement speed by 60% for 30 seconds."
     },
     {
       "id": 754,
@@ -3015,7 +3015,7 @@
     },
     {
       "id": 755,
-      "text": "Stasis Field Description"
+      "text": "Increases your evasion by 40 for one minute."
     },
     {
       "id": 756,
@@ -3023,7 +3023,7 @@
     },
     {
       "id": 757,
-      "text": "Hide Description"
+      "text": "You become invisible for 1 minute and enmity is reduced."
     },
     {
       "id": 758,
@@ -3031,7 +3031,7 @@
     },
     {
       "id": 759,
-      "text": "Perfect Dodge Description"
+      "text": "You will dodge every melee attack for 1 minute."
     },
     {
       "id": 760,
@@ -3043,7 +3043,7 @@
     },
     {
       "id": 762,
-      "text": "Cryo Venom I Description"
+      "text": "Your next attack deals an additional 12 DMG and inflicts Poison."
     },
     {
       "id": 763,
@@ -3051,7 +3051,7 @@
     },
     {
       "id": 764,
-      "text": "Cryo Venom II Description"
+      "text": "Your next attack deals an additional 36 DMG and inflicts Poison."
     },
     {
       "id": 765,
@@ -3063,7 +3063,7 @@
     },
     {
       "id": 767,
-      "text": "Freezing Shot I Description"
+      "text": "Your next attack deals an additional 18 DMG and inflicts Slow."
     },
     {
       "id": 768,
@@ -3071,7 +3071,7 @@
     },
     {
       "id": 769,
-      "text": "Freezing Shot II Description"
+      "text": "Your next attack deals an additional 26 DMG and inflicts Slow."
     },
     {
       "id": 770,
@@ -3079,7 +3079,7 @@
     },
     {
       "id": 771,
-      "text": "Freezing Shot III Description"
+      "text": "Your next attack deals an additional 76 DMG and inflicts Slow."
     },
     {
       "id": 772,
@@ -3091,7 +3091,7 @@
     },
     {
       "id": 774,
-      "text": "Ice Volley I Description"
+      "text": "You deal 18 DMG to all enemies within area of effect."
     },
     {
       "id": 775,
@@ -3099,7 +3099,7 @@
     },
     {
       "id": 776,
-      "text": "Ice Volley II Description"
+      "text": "You deal 30 DMG to all enemies within area of effect."
     },
     {
       "id": 777,
@@ -3107,7 +3107,7 @@
     },
     {
       "id": 778,
-      "text": "Ice Volley III Description"
+      "text": "You deal 50 DMG to all enemies within area of effect."
     },
     {
       "id": 779,
@@ -3119,7 +3119,7 @@
     },
     {
       "id": 781,
-      "text": "Choking Shot I Description"
+      "text": "Each enemy within the area of effect is inflicted with Grasping Death which slows movement and reduces HP over time."
     },
     {
       "id": 782,
@@ -3127,7 +3127,7 @@
     },
     {
       "id": 783,
-      "text": "Choking Shot II Description"
+      "text": "Each enemy within the area of effect is inflicted with Grasping Death which slows movement and reduces HP over time."
     },
     {
       "id": 784,
@@ -3135,7 +3135,7 @@
     },
     {
       "id": 785,
-      "text": "Accuracy Bonus I Description"
+      "text": "Increases accuracy by 10."
     },
     {
       "id": 786,
@@ -3143,7 +3143,7 @@
     },
     {
       "id": 787,
-      "text": "Accuracy Bonus II Description"
+      "text": "Increases accuracy by 30."
     },
     {
       "id": 788,
@@ -3155,7 +3155,7 @@
     },
     {
       "id": 790,
-      "text": "Cripple I Description"
+      "text": "Your next attack reduces your target's defense by 20 for 1 minute."
     },
     {
       "id": 791,
@@ -3163,7 +3163,7 @@
     },
     {
       "id": 792,
-      "text": "Cripple II Description"
+      "text": "Your next attack reduces your target's defense by 40 for 1 minute."
     },
     {
       "id": 793,
@@ -3171,7 +3171,7 @@
     },
     {
       "id": 794,
-      "text": "Recycle I Description"
+      "text": "You have a 20% chance to not consume any ammo on each ranged attack."
     },
     {
       "id": 795,
@@ -3179,7 +3179,7 @@
     },
     {
       "id": 796,
-      "text": "Recycle II Description"
+      "text": "You have a 30% chance to not consume any ammo on each ranged attack."
     },
     {
       "id": 797,
@@ -3187,7 +3187,7 @@
     },
     {
       "id": 798,
-      "text": "Ice Ward Description"
+      "text": "Grants +50% protection towards ice to all nearby party members for 15 minutes."
     },
     {
       "id": 799,
@@ -3195,7 +3195,7 @@
     },
     {
       "id": 800,
-      "text": "Sharpshot Description"
+      "text": "Accuracy of nearby party members increases by 20 for 2 minutes."
     },
     {
       "id": 801,
@@ -3211,7 +3211,7 @@
     },
     {
       "id": 804,
-      "text": "Barrage Description"
+      "text": "Your bow attack speed delay is reduced by 20%."
     },
     {
       "id": 805,
@@ -3219,7 +3219,7 @@
     },
     {
       "id": 806,
-      "text": "Eagle Eye Shot Description"
+      "text": "Your next ranged attack deals 5x the normal amount of damage."
     },
     {
       "id": 807,
@@ -3231,7 +3231,7 @@
     },
     {
       "id": 809,
-      "text": "Flame I Description"
+      "text": "Deals 10 fire DMG to a single target."
     },
     {
       "id": 810,
@@ -3239,7 +3239,7 @@
     },
     {
       "id": 811,
-      "text": "Flame II Description"
+      "text": "Deals 60 fire DMG to a single target."
     },
     {
       "id": 812,
@@ -3247,7 +3247,7 @@
     },
     {
       "id": 813,
-      "text": "Flame III Description"
+      "text": "Deals 120 fire DMG to a single target."
     },
     {
       "id": 814,
@@ -3255,7 +3255,7 @@
     },
     {
       "id": 815,
-      "text": "Neurotoxin Description"
+      "text": "Inflicts poison to a single target for 2 minutes."
     },
     {
       "id": 816,
@@ -3263,7 +3263,7 @@
     },
     {
       "id": 817,
-      "text": "Clear Mind Description"
+      "text": "Doubles the amount of EP restored by resting."
     },
     {
       "id": 818,
@@ -3275,7 +3275,7 @@
     },
     {
       "id": 820,
-      "text": "Drown I Description"
+      "text": "Deals 16 water DMG to a single target and reduces its Might by 6 for 2 minutes."
     },
     {
       "id": 821,
@@ -3283,7 +3283,7 @@
     },
     {
       "id": 822,
-      "text": "Drown II Description"
+      "text": "Deals 50 water DMG to a single target and reduces its Might by 15 for 2 minutes."
     },
     {
       "id": 823,
@@ -3291,7 +3291,7 @@
     },
     {
       "id": 824,
-      "text": "Ether Attack Bonus I Description"
+      "text": "Increases Ether Attack by 10."
     },
     {
       "id": 825,
@@ -3299,7 +3299,7 @@
     },
     {
       "id": 826,
-      "text": "Ether Attack Bonus II Description"
+      "text": "Increases Ether Attack by 30."
     },
     {
       "id": 827,
@@ -3311,7 +3311,7 @@
     },
     {
       "id": 829,
-      "text": "Shockwave Surge I Description"
+      "text": "Deals 24 lightning DMG to all enemies within the area of effect."
     },
     {
       "id": 830,
@@ -3319,7 +3319,7 @@
     },
     {
       "id": 831,
-      "text": "Shockwave Surge II Description"
+      "text": "Deals 82 lightning DMG to all enemies within the area of effect."
     },
     {
       "id": 832,
@@ -3327,7 +3327,7 @@
     },
     {
       "id": 833,
-      "text": "Shocking Circle Description"
+      "text": "All nearby enemies become paralyzed for 30 seconds."
     },
     {
       "id": 834,
@@ -3339,7 +3339,7 @@
     },
     {
       "id": 836,
-      "text": "Abyssal Veil I Description"
+      "text": "Deals 38 darkness DMG and drains 2 EP/tick for a short period of time from a single target."
     },
     {
       "id": 837,
@@ -3347,7 +3347,7 @@
     },
     {
       "id": 838,
-      "text": "Abyssal Veil II Description"
+      "text": "Deals 65 darkness DMG and drains 4 EP/tick for a short period of time from a single target."
     },
     {
       "id": 839,
@@ -3355,7 +3355,7 @@
     },
     {
       "id": 840,
-      "text": "Elemental Seal Description"
+      "text": "Doubles the damage of the next elemental spell."
     },
     {
       "id": 841,
@@ -3363,7 +3363,7 @@
     },
     {
       "id": 842,
-      "text": "Lightning Ward Description"
+      "text": "Grants +50% protection towards lightning to all nearby party members for 15 minutes."
     },
     {
       "id": 843,
@@ -3371,7 +3371,7 @@
     },
     {
       "id": 844,
-      "text": "Escape Description"
+      "text": "All nearby party members are transported out of a dungeon."
     },
     {
       "id": 845,
@@ -3379,7 +3379,7 @@
     },
     {
       "id": 846,
-      "text": "Zephyr Shroud Description"
+      "text": "Increases the Evasion of all nearby party members by 30 for 2 minutes."
     },
     {
       "id": 847,
@@ -3387,7 +3387,7 @@
     },
     {
       "id": 848,
-      "text": "Ether Wall Description"
+      "text": "50% of the damage you would have taken is applied to EP instead."
     },
     {
       "id": 849,
@@ -3395,7 +3395,7 @@
     },
     {
       "id": 850,
-      "text": "Graviton Field Description"
+      "text": "\"Reduces the movement speed and evasion of all enemies \nwithin the area of effect by 25 for 1 minute.\""
     },
     {
       "id": 851,
@@ -3403,7 +3403,7 @@
     },
     {
       "id": 852,
-      "text": "Manafont Description"
+      "text": "Abilities cost zero EP for the next 1 minute."
     },
     {
       "id": 853,
@@ -3415,7 +3415,7 @@
     },
     {
       "id": 855,
-      "text": "Neural Cascade I Description"
+      "text": "Pacifies a single target."
     },
     {
       "id": 856,
@@ -3423,7 +3423,7 @@
     },
     {
       "id": 857,
-      "text": "Neural Cascade II Description"
+      "text": "Pacifies all targets within the area of effect."
     },
     {
       "id": 858,
@@ -3435,7 +3435,7 @@
     },
     {
       "id": 860,
-      "text": "Null Lance I Description"
+      "text": "Your next attack deals an additional 12 DMG and stuns your target for 4 seconds."
     },
     {
       "id": 861,
@@ -3443,7 +3443,7 @@
     },
     {
       "id": 862,
-      "text": "Null Lance II Description"
+      "text": "Your next attack deals an additional 24 DMG and stuns your target for 4 seconds."
     },
     {
       "id": 863,
@@ -3451,7 +3451,7 @@
     },
     {
       "id": 864,
-      "text": "Null Lance III Description"
+      "text": "Your next attack deals an additional 44 DMG and stuns your target for 4 seconds."
     },
     {
       "id": 865,
@@ -3459,7 +3459,7 @@
     },
     {
       "id": 866,
-      "text": "Synaptic Shock Description"
+      "text": "Stuns a single target for 8 seconds."
     },
     {
       "id": 867,
@@ -3467,7 +3467,7 @@
     },
     {
       "id": 868,
-      "text": "Rupture Description"
+      "text": "Inflicts mind rend to a single target which deals Mind damage for two minutes."
     },
     {
       "id": 869,
@@ -3479,7 +3479,7 @@
     },
     {
       "id": 871,
-      "text": "Cerebral Spike I Description"
+      "text": "Deals 30 Mind DMG to a single target."
     },
     {
       "id": 872,
@@ -3487,7 +3487,7 @@
     },
     {
       "id": 873,
-      "text": "Cerebral Spike II Description"
+      "text": "Deals 60 Mind DMG to a single target."
     },
     {
       "id": 874,
@@ -3495,7 +3495,7 @@
     },
     {
       "id": 875,
-      "text": "Auto Refresh I Description"
+      "text": "Automatically restore 1 EP every tick."
     },
     {
       "id": 876,
@@ -3503,7 +3503,7 @@
     },
     {
       "id": 877,
-      "text": "Auto Refresh II Description"
+      "text": "Automatically restore 2 EP every tick."
     },
     {
       "id": 878,
@@ -3511,7 +3511,7 @@
     },
     {
       "id": 879,
-      "text": "EP Bonus I Description"
+      "text": "Increases max EP by 40."
     },
     {
       "id": 880,
@@ -3519,7 +3519,7 @@
     },
     {
       "id": 881,
-      "text": "EP Bonus II Description"
+      "text": "Increases max EP by 80."
     },
     {
       "id": 882,
@@ -3531,7 +3531,7 @@
     },
     {
       "id": 884,
-      "text": "Aurion Infusion I Description"
+      "text": "Increases a single target's Ether Attack by 15 for 30 minutes."
     },
     {
       "id": 885,
@@ -3539,7 +3539,7 @@
     },
     {
       "id": 886,
-      "text": "Aurion Infusion II Description"
+      "text": "Increases a single target's Ether Attack by 30 for 30 minutes."
     },
     {
       "id": 887,
@@ -3551,7 +3551,7 @@
     },
     {
       "id": 889,
-      "text": "Mindstream I Description"
+      "text": "Gradually restores a single target's EP over time for 2.5 minutes."
     },
     {
       "id": 890,
@@ -3559,7 +3559,7 @@
     },
     {
       "id": 891,
-      "text": "Mindstream II Description"
+      "text": "Gradually restores a single target's EP over time for 2.5 minutes."
     },
     {
       "id": 892,
@@ -3567,7 +3567,7 @@
     },
     {
       "id": 893,
-      "text": "Mind Ward Description"
+      "text": "Grants +50% protection towards mind to all nearby party members for 15 minutes."
     },
     {
       "id": 894,
@@ -3575,7 +3575,7 @@
     },
     {
       "id": 895,
-      "text": "Neural Stasis Description"
+      "text": "Slows a single target, reducing their attack speed by 20% for 3 minutes."
     },
     {
       "id": 896,
@@ -3583,7 +3583,7 @@
     },
     {
       "id": 897,
-      "text": "Convert Description"
+      "text": "Swaps current HP with EP. Must have at least 1 EP."
     },
     {
       "id": 898,
@@ -3591,7 +3591,7 @@
     },
     {
       "id": 899,
-      "text": "Etherwarp Description"
+      "text": "Completely restores your party's EP to max."
     },
     {
       "id": 900,
@@ -3607,7 +3607,7 @@
     },
     {
       "id": 903,
-      "text": "Call Beast Description"
+      "text": "Grants the ability to summon beasts by using the appropriate Jug."
     },
     {
       "id": 904,
@@ -3615,7 +3615,7 @@
     },
     {
       "id": 905,
-      "text": "Longsword Lore Description"
+      "text": "Permits equipping longswords on another job with an A rank."
     },
     {
       "id": 906,
@@ -3623,7 +3623,7 @@
     },
     {
       "id": 907,
-      "text": "Club Lore Description"
+      "text": "Permits equipping clubs on another job with an A rank."
     },
     {
       "id": 908,
@@ -3631,7 +3631,7 @@
     },
     {
       "id": 909,
-      "text": "Axe Lore Description"
+      "text": "Permits equipping axes on another job with an A rank."
     },
     {
       "id": 910,
@@ -3639,7 +3639,7 @@
     },
     {
       "id": 911,
-      "text": "Hand-to-Hand Lore Description"
+      "text": "Permits equipping hand-to-hand weapons on another job with an A rank."
     },
     {
       "id": 912,
@@ -3647,7 +3647,7 @@
     },
     {
       "id": 913,
-      "text": "Dagger Lore Description"
+      "text": "Permits equipping daggers on another job with an A rank."
     },
     {
       "id": 914,
@@ -3655,7 +3655,7 @@
     },
     {
       "id": 915,
-      "text": "Bow Lore Description"
+      "text": "Permits equipping bows on another job with an A rank."
     },
     {
       "id": 916,
@@ -3663,7 +3663,7 @@
     },
     {
       "id": 917,
-      "text": "Staff Lore Description"
+      "text": "Permits equipping staves on another job with an A rank."
     },
     {
       "id": 918,
@@ -3671,7 +3671,7 @@
     },
     {
       "id": 919,
-      "text": "Polearm Lore Description"
+      "text": "Permits equipping polearms on another job with an A rank."
     },
     {
       "id": 920,
@@ -4087,7 +4087,7 @@
     },
     {
       "id": 1023,
-      "text": "Fast Blade Description"
+      "text": "Deals an additional 10 Darkness DMG."
     },
     {
       "id": 1024,
@@ -4095,7 +4095,7 @@
     },
     {
       "id": 1025,
-      "text": "Burning Blade Description"
+      "text": "Deals an additional 13 Fire DMG."
     },
     {
       "id": 1026,
@@ -4103,7 +4103,7 @@
     },
     {
       "id": 1027,
-      "text": "Red Lotus Blade Description"
+      "text": "Deals an additional 16 Fire DMG."
     },
     {
       "id": 1028,
@@ -4111,7 +4111,7 @@
     },
     {
       "id": 1029,
-      "text": "Flat Blade Description"
+      "text": "Inflicts Blind on your target for 1 minute."
     },
     {
       "id": 1030,
@@ -4119,7 +4119,7 @@
     },
     {
       "id": 1031,
-      "text": "Shining Blade Description"
+      "text": "20% of damage dealt is restored to the attacker."
     },
     {
       "id": 1032,
@@ -4135,7 +4135,7 @@
     },
     {
       "id": 1035,
-      "text": "Vorpal Blade Description"
+      "text": "Deals an additional 20 Water DMG and inflicts Slow."
     },
     {
       "id": 1036,
@@ -4159,7 +4159,7 @@
     },
     {
       "id": 1041,
-      "text": "Atonement Description"
+      "text": "Grants Atonement to all allies within range, which increases TP Gain by 10% for 1 minute."
     },
     {
       "id": 1042,
@@ -4167,7 +4167,7 @@
     },
     {
       "id": 1043,
-      "text": "Hard Slash Description"
+      "text": "Deals an additional 12 Earth DMG."
     },
     {
       "id": 1044,
@@ -4183,7 +4183,7 @@
     },
     {
       "id": 1047,
-      "text": "Frostbite Description"
+      "text": "Deals an additional 16 Ice DMG and inflicts Slow."
     },
     {
       "id": 1048,
@@ -4191,7 +4191,7 @@
     },
     {
       "id": 1049,
-      "text": "Shock Slash Description"
+      "text": "Reduces the target's Ether Defense by 10% for 18 seconds."
     },
     {
       "id": 1050,
@@ -4199,7 +4199,7 @@
     },
     {
       "id": 1051,
-      "text": "Sickle Moon Description"
+      "text": "Deals an additional 19 Wind DMG."
     },
     {
       "id": 1052,
@@ -4207,7 +4207,7 @@
     },
     {
       "id": 1053,
-      "text": "Ground Strike Description"
+      "text": "Reduces the target's Defense by 15% for 30 seconds."
     },
     {
       "id": 1054,
@@ -4231,7 +4231,7 @@
     },
     {
       "id": 1059,
-      "text": "Spinning Slash Description"
+      "text": "Deals an additional 24 Darkness DMG."
     },
     {
       "id": 1060,
@@ -4239,7 +4239,7 @@
     },
     {
       "id": 1061,
-      "text": "Scourge Description"
+      "text": "20% chance to inflict the Scourge status effect on your target, which drains 0.5% of max HP every tick."
     },
     {
       "id": 1062,
@@ -4247,7 +4247,7 @@
     },
     {
       "id": 1063,
-      "text": "Quick Draw Description"
+      "text": "Deals an additional 8 Lightning DMG."
     },
     {
       "id": 1064,
@@ -4255,7 +4255,7 @@
     },
     {
       "id": 1065,
-      "text": "Ricochet Description"
+      "text": "Deals an additional 13 Water DMG."
     },
     {
       "id": 1066,
@@ -4279,7 +4279,7 @@
     },
     {
       "id": 1071,
-      "text": "Burning Shot Description"
+      "text": "Deals an additional 10 Fire DMG."
     },
     {
       "id": 1072,
@@ -4295,7 +4295,7 @@
     },
     {
       "id": 1075,
-      "text": "Shadow Barrage Description"
+      "text": "Reduces the target's Accuracy by 10% for 18 seconds."
     },
     {
       "id": 1076,
@@ -4303,7 +4303,7 @@
     },
     {
       "id": 1077,
-      "text": "Piercing Shot Description"
+      "text": "Deals an additional 16 Mind DMG."
     },
     {
       "id": 1078,
@@ -4311,7 +4311,7 @@
     },
     {
       "id": 1079,
-      "text": "True Shot Description"
+      "text": "Increases Accuracy by 20%."
     },
     {
       "id": 1080,
@@ -4319,7 +4319,7 @@
     },
     {
       "id": 1081,
-      "text": "Deadeye Description"
+      "text": "Increases critical hit rate of all nearby allies by 5% for 30 seconds."
     },
     {
       "id": 1082,
@@ -4327,7 +4327,7 @@
     },
     {
       "id": 1083,
-      "text": "Wasp Sting Description"
+      "text": "Deals an additional 9 Earth DMG and inflicts Poison."
     },
     {
       "id": 1084,
@@ -4335,7 +4335,7 @@
     },
     {
       "id": 1085,
-      "text": "Gust Slash Description"
+      "text": "Deals an additional 12 Wind DMG."
     },
     {
       "id": 1086,
@@ -4343,7 +4343,7 @@
     },
     {
       "id": 1087,
-      "text": "Shadowstitch Description"
+      "text": "Slows your target for 18 seconds."
     },
     {
       "id": 1088,
@@ -4351,7 +4351,7 @@
     },
     {
       "id": 1089,
-      "text": "Cyclone Description"
+      "text": "Deals an additional 14 Wind DMG."
     },
     {
       "id": 1090,
@@ -4359,7 +4359,7 @@
     },
     {
       "id": 1091,
-      "text": "Energy Drain Description"
+      "text": "Grants Energy Drain to all nearby allies, which grants 1 EP restoration on hit for 1 minute."
     },
     {
       "id": 1092,
@@ -4391,7 +4391,7 @@
     },
     {
       "id": 1099,
-      "text": "Shark Bite Description"
+      "text": "Deals an additional 18 Water DMG."
     },
     {
       "id": 1100,
@@ -4399,7 +4399,7 @@
     },
     {
       "id": 1101,
-      "text": "Dancing Edge Description"
+      "text": "Increases TP gain by 20%."
     },
     {
       "id": 1102,
@@ -4407,7 +4407,7 @@
     },
     {
       "id": 1103,
-      "text": "Stone Toss Description"
+      "text": "Deals an additional 8 Earth DMG."
     },
     {
       "id": 1104,
@@ -4415,7 +4415,7 @@
     },
     {
       "id": 1105,
-      "text": "Wind Slash Description"
+      "text": "Deals an additional 10 Wind DMG."
     },
     {
       "id": 1106,
@@ -4423,7 +4423,7 @@
     },
     {
       "id": 1107,
-      "text": "Shuriken Storm Description"
+      "text": "Deals an additional 13 Lightning DMG."
     },
     {
       "id": 1108,
@@ -4439,7 +4439,7 @@
     },
     {
       "id": 1111,
-      "text": "Flame Toss Description"
+      "text": "Applies Burn, dealing damage equivalent to 2% of target's max HP/tick for 60 seconds."
     },
     {
       "id": 1112,
@@ -4447,7 +4447,7 @@
     },
     {
       "id": 1113,
-      "text": "Frost Dart Description"
+      "text": "Reduces your target's movement speed and attack speed by 25% for 30 seconds."
     },
     {
       "id": 1114,
@@ -4471,7 +4471,7 @@
     },
     {
       "id": 1119,
-      "text": "Star Strike Description"
+      "text": "20% chance to inflict the Star Strike status effect on your target, which reduces accuracy by 20%."
     },
     {
       "id": 1120,
@@ -4479,7 +4479,7 @@
     },
     {
       "id": 1121,
-      "text": "Phantom Hurl Description"
+      "text": "Deals an additional 16 Darkness DMG."
     },
     {
       "id": 1122,
@@ -4487,7 +4487,7 @@
     },
     {
       "id": 1123,
-      "text": "Shield Break Description"
+      "text": "Deals an additional 14 Earth DMG."
     },
     {
       "id": 1124,
@@ -4495,7 +4495,7 @@
     },
     {
       "id": 1125,
-      "text": "Iron Tempest Description"
+      "text": "Deals an additional 18 Wind DMG."
     },
     {
       "id": 1126,
@@ -4527,7 +4527,7 @@
     },
     {
       "id": 1133,
-      "text": "Fell Cleave Description"
+      "text": "Deals an additional 22 Darkness DMG."
     },
     {
       "id": 1134,
@@ -4535,7 +4535,7 @@
     },
     {
       "id": 1135,
-      "text": "Upheaval Description"
+      "text": "Recast delays are reduced by 20%."
     },
     {
       "id": 1136,
@@ -4543,7 +4543,7 @@
     },
     {
       "id": 1137,
-      "text": "Knockout Description"
+      "text": "Inflicts Knockdown to all nearby enemies for 8 seconds."
     },
     {
       "id": 1138,
@@ -4551,7 +4551,7 @@
     },
     {
       "id": 1139,
-      "text": "Fury Slash Description"
+      "text": "Grants Fury Slash to all nearby allies, increasing Attack by 10% for 30 seconds."
     },
     {
       "id": 1140,
@@ -4559,7 +4559,7 @@
     },
     {
       "id": 1141,
-      "text": "Grand Slash Description"
+      "text": "Deals an additional 28 Lightning DMG."
     },
     {
       "id": 1142,
@@ -4567,7 +4567,7 @@
     },
     {
       "id": 1143,
-      "text": "Combo Description"
+      "text": "Deals an additional 11 Mind DMG."
     },
     {
       "id": 1144,
@@ -4575,7 +4575,7 @@
     },
     {
       "id": 1145,
-      "text": "One Inch Punch Description"
+      "text": "Reduces target's Attack by 15% for 30 seconds."
     },
     {
       "id": 1146,
@@ -4591,7 +4591,7 @@
     },
     {
       "id": 1149,
-      "text": "Raging Fists Description"
+      "text": "Deals an additional 14 Fire DMG."
     },
     {
       "id": 1150,
@@ -4607,7 +4607,7 @@
     },
     {
       "id": 1153,
-      "text": "Howling Fist Description"
+      "text": "Deals an additional 18 Wind DMG."
     },
     {
       "id": 1154,
@@ -4623,7 +4623,7 @@
     },
     {
       "id": 1157,
-      "text": "Dragon Blow Description"
+      "text": "Inflicts Burn to all enemies within area of effect for 1 minute."
     },
     {
       "id": 1158,
@@ -4631,7 +4631,7 @@
     },
     {
       "id": 1159,
-      "text": "Final Heaven Description"
+      "text": "Deals an additional 22 Light DMG."
     },
     {
       "id": 1160,
@@ -4639,7 +4639,7 @@
     },
     {
       "id": 1161,
-      "text": "Asuran Fists Description"
+      "text": "TP costs of abilities are reduced by 20%."
     },
     {
       "id": 1162,
@@ -4647,7 +4647,7 @@
     },
     {
       "id": 1163,
-      "text": "Hot Shot Description"
+      "text": "Deals an additional 9 Fire DMG."
     },
     {
       "id": 1164,
@@ -4655,7 +4655,7 @@
     },
     {
       "id": 1165,
-      "text": "Split Shot Description"
+      "text": "Deals an additional 12 Water DMG."
     },
     {
       "id": 1166,
@@ -4663,7 +4663,7 @@
     },
     {
       "id": 1167,
-      "text": "Sniper Shot Description"
+      "text": "Deals an additional 14 Wind DMG."
     },
     {
       "id": 1168,
@@ -4671,7 +4671,7 @@
     },
     {
       "id": 1169,
-      "text": "Slug Shot Description"
+      "text": "Deals an additional 18 Mind DMG."
     },
     {
       "id": 1170,
@@ -4679,7 +4679,7 @@
     },
     {
       "id": 1171,
-      "text": "Blast Shot Description"
+      "text": "Inflicts Burn on all enemies within area of effect for 30 seconds."
     },
     {
       "id": 1172,
@@ -4687,7 +4687,7 @@
     },
     {
       "id": 1173,
-      "text": "Heavy Shot Description"
+      "text": "Inflicts Paralysis to all enemies within area of effect for 1 minute."
     },
     {
       "id": 1174,
@@ -4711,7 +4711,7 @@
     },
     {
       "id": 1179,
-      "text": "Trueflight Description"
+      "text": "20% of damage bypasses your target's defense."
     },
     {
       "id": 1180,
@@ -4727,7 +4727,7 @@
     },
     {
       "id": 1183,
-      "text": "Shining Strike Description"
+      "text": "Deals an additional 7 Light DMG."
     },
     {
       "id": 1184,
@@ -4735,7 +4735,7 @@
     },
     {
       "id": 1185,
-      "text": "Seraph Strike Description"
+      "text": "Deals an additional 9 Light DMG."
     },
     {
       "id": 1186,
@@ -4743,7 +4743,7 @@
     },
     {
       "id": 1187,
-      "text": "Brainshaker Description"
+      "text": "Deals an additional 11 Mind DMG."
     },
     {
       "id": 1188,
@@ -4775,7 +4775,7 @@
     },
     {
       "id": 1195,
-      "text": "Judgment Description"
+      "text": "Restores 40% of max HP to the user."
     },
     {
       "id": 1196,
@@ -4783,7 +4783,7 @@
     },
     {
       "id": 1197,
-      "text": "Hexa Strike Description"
+      "text": "Healing abilities restore 20% more HP."
     },
     {
       "id": 1198,
@@ -4791,7 +4791,7 @@
     },
     {
       "id": 1199,
-      "text": "Black Halo Description"
+      "text": "Deals an additional 14 Darkness DMG."
     },
     {
       "id": 1200,
@@ -4799,7 +4799,7 @@
     },
     {
       "id": 1201,
-      "text": "Flash Nova Description"
+      "text": "Blinds all enemies within area of effect for 18 seconds."
     },
     {
       "id": 1202,
@@ -4807,7 +4807,7 @@
     },
     {
       "id": 1203,
-      "text": "Heavy Swing Description"
+      "text": "Deals an additional 7 Earth DMG."
     },
     {
       "id": 1204,
@@ -4815,7 +4815,7 @@
     },
     {
       "id": 1205,
-      "text": "Rock Crusher Description"
+      "text": "Deals an additional 9 Earth DMG."
     },
     {
       "id": 1206,
@@ -4823,7 +4823,7 @@
     },
     {
       "id": 1207,
-      "text": "Earth Crusher Description"
+      "text": "Deals an additional 11 Earth DMG."
     },
     {
       "id": 1208,
@@ -4831,7 +4831,7 @@
     },
     {
       "id": 1209,
-      "text": "Starburst Description"
+      "text": "Deals an additional 14 Mind DMG."
     },
     {
       "id": 1210,
@@ -4847,7 +4847,7 @@
     },
     {
       "id": 1213,
-      "text": "Spirit Taker Description"
+      "text": "Restores 40% of max EP to the user."
     },
     {
       "id": 1214,
@@ -4863,7 +4863,7 @@
     },
     {
       "id": 1217,
-      "text": "Omniscience Description"
+      "text": "Increases the Ether Defense of all nearby allies by 10% for 1 minute."
     },
     {
       "id": 1218,
@@ -4879,7 +4879,7 @@
     },
     {
       "id": 1221,
-      "text": "Shattersoul Description"
+      "text": "Each hit restores 2 EP."
     },
     {
       "id": 1222,
@@ -4887,7 +4887,7 @@
     },
     {
       "id": 1223,
-      "text": "Raging Axe Description"
+      "text": "Deals an additional 13 Fire DMG."
     },
     {
       "id": 1224,
@@ -4895,7 +4895,7 @@
     },
     {
       "id": 1225,
-      "text": "Smash Axe Description"
+      "text": "Deals an additional 17 Earth DMG."
     },
     {
       "id": 1226,
@@ -4903,7 +4903,7 @@
     },
     {
       "id": 1227,
-      "text": "Gale Axe Description"
+      "text": "Deals an additional 21 Wind DMG."
     },
     {
       "id": 1228,
@@ -4911,7 +4911,7 @@
     },
     {
       "id": 1229,
-      "text": "Avalanche Axe Description"
+      "text": "Deals an additional 26 Ice DMG."
     },
     {
       "id": 1230,
@@ -4919,7 +4919,7 @@
     },
     {
       "id": 1231,
-      "text": "Spinning Axe Description"
+      "text": "Reduces your target's evasion by 15% for 18 seconds."
     },
     {
       "id": 1232,
@@ -4927,7 +4927,7 @@
     },
     {
       "id": 1233,
-      "text": "Rampage Description"
+      "text": "Reduces your attack delay by 20% for 30 seconds."
     },
     {
       "id": 1234,
@@ -4959,7 +4959,7 @@
     },
     {
       "id": 1241,
-      "text": "Primal Rend Description"
+      "text": "20% chance to inflict the Primal Rend status effect on your target, which reduces Defense by 20%."
     },
     {
       "id": 1242,
@@ -4967,7 +4967,7 @@
     },
     {
       "id": 1243,
-      "text": "Piercing Blade Description"
+      "text": "Deals an additional 9 Wind DMG."
     },
     {
       "id": 1244,
@@ -4975,7 +4975,7 @@
     },
     {
       "id": 1245,
-      "text": "Burning Edge Description"
+      "text": "Deals an additional 12 Fire DMG."
     },
     {
       "id": 1246,
@@ -4991,7 +4991,7 @@
     },
     {
       "id": 1249,
-      "text": "Ice Fang Description"
+      "text": "Deals an additional 18 Ice DMG."
     },
     {
       "id": 1250,
@@ -4999,7 +4999,7 @@
     },
     {
       "id": 1251,
-      "text": "Sonic Slash Description"
+      "text": "Reduces evasion of all enemies in the area of effect by 10% for 18 seconds."
     },
     {
       "id": 1252,
@@ -5007,7 +5007,7 @@
     },
     {
       "id": 1253,
-      "text": "Ember Fang Description"
+      "text": "Reduces attack delay by 20% to all nearby party members for 30 seconds."
     },
     {
       "id": 1254,
@@ -5023,7 +5023,7 @@
     },
     {
       "id": 1257,
-      "text": "Frostbite Blade Description"
+      "text": "Attack delays are reduced by 10%."
     },
     {
       "id": 1258,
@@ -5039,7 +5039,7 @@
     },
     {
       "id": 1261,
-      "text": "Soul Blade Description"
+      "text": "Deals an additional 14 Darkness DMG."
     },
     {
       "id": 1262,
@@ -5047,7 +5047,7 @@
     },
     {
       "id": 1263,
-      "text": "Double Thrust Description"
+      "text": "Deals an additional 11 Lightning DMG."
     },
     {
       "id": 1264,
@@ -5055,7 +5055,7 @@
     },
     {
       "id": 1265,
-      "text": "Thunder Thrust Description"
+      "text": "Deals an additional 14 Lightning DMG."
     },
     {
       "id": 1266,
@@ -5063,7 +5063,7 @@
     },
     {
       "id": 1267,
-      "text": "Raiden Thrust Description"
+      "text": "Deals an additional 18 Lightning DMG."
     },
     {
       "id": 1268,
@@ -5071,7 +5071,7 @@
     },
     {
       "id": 1269,
-      "text": "Penta Thrust Description"
+      "text": "Deals an additional 22 Lightning DMG."
     },
     {
       "id": 1270,
@@ -5079,7 +5079,7 @@
     },
     {
       "id": 1271,
-      "text": "Vorpal Thrust Description"
+      "text": "Inflicts Paralysis for 1 minute."
     },
     {
       "id": 1272,
@@ -5087,7 +5087,7 @@
     },
     {
       "id": 1273,
-      "text": "Sonic Thrust Description"
+      "text": "Reduces the Ether Defense of all enemies within area of effect by 20% for 30 seconds."
     },
     {
       "id": 1274,
@@ -5095,7 +5095,7 @@
     },
     {
       "id": 1275,
-      "text": "Drakesbane Description"
+      "text": "20% chance to inflict the Drakesbane status effect on your target, which reduces Ether Defense by 20%."
     },
     {
       "id": 1276,
@@ -5127,7 +5127,7 @@
     },
     {
       "id": 1283,
-      "text": "Flaming Arrow Description"
+      "text": "Deals an additional 10 Fire DMG."
     },
     {
       "id": 1284,
@@ -5135,7 +5135,7 @@
     },
     {
       "id": 1285,
-      "text": "Piercing Arrow Description"
+      "text": "Deals an additional 13 Ice DMG."
     },
     {
       "id": 1286,
@@ -5143,7 +5143,7 @@
     },
     {
       "id": 1287,
-      "text": "Dulling Arrow Description"
+      "text": "Deals an additional 16 Mind DMG."
     },
     {
       "id": 1288,
@@ -5151,7 +5151,7 @@
     },
     {
       "id": 1289,
-      "text": "Sidewinder Description"
+      "text": "Deals an additional 20 Wind DMG."
     },
     {
       "id": 1290,
@@ -5159,7 +5159,7 @@
     },
     {
       "id": 1291,
-      "text": "Blast Arrow Description"
+      "text": "Reduces your target's TP by 50%."
     },
     {
       "id": 1292,
@@ -5167,7 +5167,7 @@
     },
     {
       "id": 1293,
-      "text": "Arching Arrow Description"
+      "text": "Inflicts Blind on your target for 2 minutes."
     },
     {
       "id": 1294,
@@ -5191,7 +5191,7 @@
     },
     {
       "id": 1299,
-      "text": "Apex Arrow Description"
+      "text": "Attack delays are reduced by 15%."
     },
     {
       "id": 1300,
@@ -5299,7 +5299,7 @@
     },
     {
       "id": 1326,
-      "text": "Great Axe Lore Description"
+      "text": "Permits equipping great axes on another job with an A rank."
     },
     {
       "id": 1327,
@@ -5307,7 +5307,7 @@
     },
     {
       "id": 1328,
-      "text": "Great Sword Lore Description"
+      "text": "Permits equipping great swords on another job with an A rank."
     },
     {
       "id": 1329,
@@ -5315,7 +5315,7 @@
     },
     {
       "id": 1330,
-      "text": "Pistol Lore Description"
+      "text": "Permits equipping pistols on another job with an A rank."
     },
     {
       "id": 1331,
@@ -5323,7 +5323,7 @@
     },
     {
       "id": 1332,
-      "text": "Rifle Lore Description"
+      "text": "Permits equipping rifles on another job with an A rank."
     },
     {
       "id": 1333,
@@ -5331,7 +5331,7 @@
     },
     {
       "id": 1334,
-      "text": "Short Sword Lore Description"
+      "text": "Permits equipping short swords on another job with an A rank."
     },
     {
       "id": 1335,
@@ -5339,7 +5339,7 @@
     },
     {
       "id": 1336,
-      "text": "Throwing Lore Description"
+      "text": "Permits equipping throwing weapons on another job with an A rank."
     },
     {
       "id": 1337,
@@ -6915,11 +6915,11 @@
     },
     {
       "id": 1730,
-      "text": "Auto Regen I Description"
+      "text": "Automatically restore 1 HP every tick."
     },
     {
       "id": 1731,
-      "text": "Auto Regen II Description"
+      "text": "Automatically restore 2 HP every tick."
     },
     {
       "id": 1732,
@@ -6951,7 +6951,7 @@
     },
     {
       "id": 1739,
-      "text": "Slow Description"
+      "text": "Increases attack delay."
     },
     {
       "id": 1740,
@@ -7075,7 +7075,7 @@
     },
     {
       "id": 1770,
-      "text": "Flame Breath Description"
+      "text": "Deals X fire DMG to all targets within the area of effect."
     },
     {
       "id": 1771,
@@ -7224,14 +7224,6 @@
     {
       "id": 1807,
       "text": "{0}'s TP has been reduced by {1}%."
-    },
-    {
-      "id": 1808,
-      "text": "Auto Regen I Description"
-    },
-    {
-      "id": 1809,
-      "text": "Auto Regen II Description"
     },
     {
       "id": 1810,
