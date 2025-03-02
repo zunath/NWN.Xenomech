@@ -118,7 +118,6 @@ namespace XM.AI
                         if (!_creatureFeats[resref][ability.Category].ContainsKey(AITargetType.Self))
                             _creatureFeats[resref][ability.Category][AITargetType.Self] = new HashSet<FeatType>();
 
-                        Console.WriteLine($"Self = {ability.Name.ToLocalizedString()}");
                         _creatureFeats[resref][ability.Category][AITargetType.Self].Add(feat);
                     }
 
@@ -129,7 +128,6 @@ namespace XM.AI
                         if (!_creatureFeats[resref][ability.Category].ContainsKey(AITargetType.Others))
                             _creatureFeats[resref][ability.Category][AITargetType.Others] = new HashSet<FeatType>();
 
-                        Console.WriteLine($"Others = {ability.Name.ToLocalizedString()}");
                         _creatureFeats[resref][ability.Category][AITargetType.Others].Add(feat);
                     }
                 }

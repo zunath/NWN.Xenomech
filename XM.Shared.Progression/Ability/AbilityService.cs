@@ -134,6 +134,8 @@ namespace XM.Progression.Ability
                     }
                 }
             }
+
+            Console.WriteLine($"Loaded {_abilities.Count} abilities.");
         }
 
         internal List<FeatType> GetAbilityFeatsByJob(JobType jobType)
