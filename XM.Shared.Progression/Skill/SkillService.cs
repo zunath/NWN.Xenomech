@@ -19,8 +19,7 @@ using XM.Shared.Core.Localization;
 namespace XM.Progression.Skill
 {
     [ServiceBinding(typeof(SkillService))]
-    [ServiceBinding(typeof(IInitializable))]
-    public class SkillService: IInitializable
+    public class SkillService
     {
         private readonly DBService _db;
         private readonly StatService _stat;
@@ -46,6 +45,7 @@ namespace XM.Progression.Skill
             _event = @event;
             _skillDefinitions = skillDefinitions;
 
+            LoadSkillDefinitions();
             SubscribeEvents();
         }
 
@@ -219,11 +219,6 @@ namespace XM.Progression.Skill
                 var grade = npcStats.EvasionGrade;
                 return _skillGrades.GetSkillCap(grade, npcStats.Level);
             }
-        }
-
-        public void Init()
-        {
-            LoadSkillDefinitions();
         }
 
         private void LoadSkillDefinitions()

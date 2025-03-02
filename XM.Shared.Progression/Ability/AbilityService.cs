@@ -84,7 +84,18 @@ namespace XM.Progression.Ability
 
         public void Init()
         {
+            LoadAbilityDescriptions();
             PublishAbilities();
+        }
+
+        private void LoadAbilityDescriptions()
+        {
+            foreach (var (type, detail) in _abilities)
+            {
+                var tlkId = detail.Description.GetTlkId();
+                var description = BuildAbilityDescription(type);
+                SetTlkOverride(tlkId, description);
+            }
         }
 
         private void PublishAbilities()
@@ -328,7 +339,7 @@ namespace XM.Progression.Ability
                 }
             }
             // Toggle abilities
-            else if (ability.ActivationType == AbilityActivationType.Toggle &&
+            else if (ability.ActivationType == AbilityActivationType.Toggled &&
                      ability.AbilityIsToggledAction(caster))
             {
                 var activator = ability.RetargetActivatorAction?.Invoke(caster) ?? caster;
@@ -734,5 +745,120 @@ namespace XM.Progression.Ability
             _event.PublishEvent(player, new JobEvent.JobFeatAddedEvent(feat));
         }
 
+        private string BuildAbilityDescription(FeatType feat)
+        {
+            var module = GetModule();
+            var ability = GetAbilityDetail(feat);
+            var description = ability.Description.ToLocalizedString();
+            var type = string.Empty;
+            var activationDelay = 
+                ability.ActivationDelay?.Invoke(module, module) ?? 0f;
+            var recastDelay = ability.RecastDelay?.Invoke(module) ?? 0f;
+            var ep = ability.EPRequired;
+            var tp = ability.TPRequired;
+            var element = string.Empty;
+            var range = ability.MaxRange;
+            var resonanceCost = ability.ResonanceCost;
+            var skill = string.Empty;
+
+            switch (ability.ActivationType)
+            {
+                case AbilityActivationType.Casted:
+                    type = LocaleString.Casted.ToLocalizedString();
+                    break;
+                case AbilityActivationType.QueuedAttack:
+                    type = LocaleString.QueuedAttack.ToLocalizedString();
+                    break;
+                case AbilityActivationType.Stance:
+                    type = LocaleString.Stance.ToLocalizedString();
+                    break;
+                case AbilityActivationType.Aura:
+                    type = LocaleString.Aura.ToLocalizedString();
+                    break;
+                case AbilityActivationType.Toggled:
+                    type = LocaleString.Toggled.ToLocalizedString();
+                    break;
+                case AbilityActivationType.PassiveWeaponSkill:
+                    type = LocaleString.PassiveWeaponSkill.ToLocalizedString();
+                    break;
+                case AbilityActivationType.WeaponSkill:
+                    type = LocaleString.WeaponSkill.ToLocalizedString();
+                    break;
+                default:
+                    type = LocaleString.Unknown.ToLocalizedString();
+                    break;
+            }
+
+            switch (ability.ResistType)
+            {
+                case ResistType.Fire:
+                    element = LocaleString.Fire.ToLocalizedString();
+                    break;
+                case ResistType.Ice:
+                    element = LocaleString.Ice.ToLocalizedString();
+                    break;
+                case ResistType.Wind:
+                    element = LocaleString.Wind.ToLocalizedString();
+                    break;
+                case ResistType.Earth:
+                    element = LocaleString.Earth.ToLocalizedString();
+                    break;
+                case ResistType.Lightning:
+                    element = LocaleString.Lightning.ToLocalizedString();
+                    break;
+                case ResistType.Water:
+                    element = LocaleString.Water.ToLocalizedString();
+                    break;
+                case ResistType.Light:
+                    element = LocaleString.Light.ToLocalizedString();
+                    break;
+                case ResistType.Darkness:
+                    element = LocaleString.Darkness.ToLocalizedString();
+                    break;
+                case ResistType.Mind:
+                    element = LocaleString.Mind.ToLocalizedString();
+                    break;
+                default:
+                    element = LocaleString.Unknown.ToLocalizedString();
+                    break;
+            }
+
+            if (ability.WeaponSkillType != SkillType.Invalid)
+            {
+                var skillDefinition = _skill.GetSkillDefinition(ability.WeaponSkillType);
+                var level = ability.SkillLevelRequired;
+                skill = $"{skillDefinition.Name.ToLocalizedString()} {LocaleString.Lv.ToLocalizedString()} {level}";
+            }
+
+            var abilityText = LocaleString.TypeX.ToLocalizedString(type) + "\n";
+
+            if (activationDelay > 0f)
+                abilityText += LocaleString.ActivationDelayX.ToLocalizedString(activationDelay.ToString("F1")) + "\n";
+
+            if (recastDelay > 0f)
+                abilityText += LocaleString.RecastDelayX.ToLocalizedString(recastDelay.ToString("F1")) + "\n";
+
+            if (ep > 0)
+                abilityText += LocaleString.EPX.ToLocalizedString(ep) + "\n";
+
+            if (tp > 0)
+                abilityText += LocaleString.TPX.ToLocalizedString(tp) + "\n";
+
+            if (ability.ResistType != ResistType.Invalid)
+                abilityText += LocaleString.ElementX.ToLocalizedString(element) + "\n";
+
+            if (range > 0f)
+                abilityText += LocaleString.RangeX.ToLocalizedString(range.ToString("F1")) + "\n";
+
+            if(resonanceCost > 0)
+                abilityText += LocaleString.ResonanceCostX.ToLocalizedString(resonanceCost) + "\n";
+
+            if (!string.IsNullOrWhiteSpace(skill))
+                abilityText += LocaleString.SkillX.ToLocalizedString(skill) + "\n";
+
+            abilityText += "\n" + description;
+
+            return abilityText;
+        }
     }
 }

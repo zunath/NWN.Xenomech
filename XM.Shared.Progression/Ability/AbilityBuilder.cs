@@ -125,7 +125,7 @@ namespace XM.Progression.Ability
         /// <returns>An ability builder with the configured options.</returns>
         public AbilityBuilder IsToggled(AbilityIsToggledAction abilityIsToggled)
         {
-            _activeAbility.ActivationType = AbilityActivationType.Toggle;
+            _activeAbility.ActivationType = AbilityActivationType.Toggled;
             _activeAbility.AbilityIsToggledAction = abilityIsToggled;
 
             return this;

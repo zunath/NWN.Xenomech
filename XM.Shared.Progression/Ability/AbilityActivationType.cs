@@ -7,7 +7,7 @@
         QueuedAttack = 2,
         Stance = 3,
         Aura = 4,
-        Toggle = 5,
+        Toggled = 5,
         PassiveWeaponSkill = 6,
         WeaponSkill = 7,
     }

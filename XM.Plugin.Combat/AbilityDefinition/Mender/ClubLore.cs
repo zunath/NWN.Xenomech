@@ -22,7 +22,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
         {
             _builder.Create(FeatType.ClubLore)
                 .Name(LocaleString.ClubLore)
-                .Description(LocaleString.ClubLore)
+                .Description(LocaleString.ClubLoreDescription)
                 .ResonanceCost(1);
         }
     }

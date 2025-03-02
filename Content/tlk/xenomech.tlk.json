@@ -7232,6 +7232,82 @@
     {
       "id": 1809,
       "text": "Auto Regen II Description"
+    },
+    {
+      "id": 1810,
+      "text": "Type: {0}"
+    },
+    {
+      "id": 1811,
+      "text": "Activation Delay: {0}"
+    },
+    {
+      "id": 1812,
+      "text": "Recast Delay: {0}"
+    },
+    {
+      "id": 1813,
+      "text": "EP: {0}"
+    },
+    {
+      "id": 1814,
+      "text": "TP: {0}"
+    },
+    {
+      "id": 1815,
+      "text": "Element: {0}"
+    },
+    {
+      "id": 1816,
+      "text": "Range: {0}"
+    },
+    {
+      "id": 1817,
+      "text": "Resonance Cost: {0}"
+    },
+    {
+      "id": 1818,
+      "text": "Skill: {0}"
+    },
+    {
+      "id": 1819,
+      "text": "Description: {0}"
+    },
+    {
+      "id": 1820,
+      "text": "Casted"
+    },
+    {
+      "id": 1821,
+      "text": "Queued Attack"
+    },
+    {
+      "id": 1822,
+      "text": "Stance"
+    },
+    {
+      "id": 1823,
+      "text": "Aura"
+    },
+    {
+      "id": 1824,
+      "text": "Toggled"
+    },
+    {
+      "id": 1825,
+      "text": "Passive Weapon Skill"
+    },
+    {
+      "id": 1826,
+      "text": "Weapon Skill"
+    },
+    {
+      "id": 1827,
+      "text": "Unknown"
+    },
+    {
+      "id": 1828,
+      "text": "Fire"
     }
   ]
 }

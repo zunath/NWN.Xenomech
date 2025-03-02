@@ -25,6 +25,11 @@
             return text;
         }
 
+        public static int GetTlkId(this LocaleString stringId)
+        {
+            return CustomTlkIdStart + (int)stringId;
+        }
+
         public static string ToLocalizedString(this LocaleString localeString, params object[] args)
         {
             return GetString(localeString, args);
