@@ -7224,6 +7224,14 @@
     {
       "id": 1807,
       "text": "{0}'s TP has been reduced by {1}%."
+    },
+    {
+      "id": 1808,
+      "text": "Auto Regen I Description"
+    },
+    {
+      "id": 1809,
+      "text": "Auto Regen II Description"
     }
   ]
 }
