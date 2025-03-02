@@ -38,6 +38,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Techweaver
             _builder.Create(FeatType.Rupture)
                 .Name(LocaleString.Rupture)
                 .Description(LocaleString.RuptureDescription)
+                .Classification(AbilityCategoryType.Offensive)
                 .HasRecastDelay(RecastGroup.Rupture, 18f)
                 .HasActivationDelay(4f)
                 .UsesAnimation(AnimationType.LoopingConjure1)

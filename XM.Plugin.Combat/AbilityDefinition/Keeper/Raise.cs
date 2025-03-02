@@ -32,6 +32,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
             _builder.Create(FeatType.Raise)
                 .Name(LocaleString.Raise)
                 .Description(LocaleString.RaiseDescription)
+                .Classification(AbilityCategoryType.Special)
                 .HasRecastDelay(RecastGroup.Raise, 120f)
                 .IsCastedAbility()
                 .HasMaxRange(5f)

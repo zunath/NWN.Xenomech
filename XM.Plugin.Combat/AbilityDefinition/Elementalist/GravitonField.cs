@@ -41,6 +41,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
             _builder.Create(FeatType.GravitonField)
                 .Name(LocaleString.GravitonField)
                 .Description(LocaleString.GravitonFieldDescription)
+                .Classification(AbilityCategoryType.Offensive)
                 .HasRecastDelay(RecastGroup.GravitonField, 60f)
                 .HasActivationDelay(4f)
                 .DisplaysVisualEffectWhenActivating()

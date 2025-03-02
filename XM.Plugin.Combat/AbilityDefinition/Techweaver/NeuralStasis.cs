@@ -38,6 +38,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Techweaver
             _builder.Create(FeatType.NeuralStasis)
                 .Name(LocaleString.NeuralStasis)
                 .Description(LocaleString.NeuralStasisDescription)
+                .Classification(AbilityCategoryType.Offensive)
                 .HasRecastDelay(RecastGroup.NeuralStasis, 4f)
                 .HasActivationDelay(2f)
                 .UsesAnimation(AnimationType.LoopingConjure1)

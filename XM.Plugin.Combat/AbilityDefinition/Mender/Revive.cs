@@ -35,6 +35,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
             _builder.Create(FeatType.Revive)
                 .Name(LocaleString.Revive)
                 .Description(LocaleString.ReviveDescription)
+                .Classification(AbilityCategoryType.Special)
                 .HasRecastDelay(RecastGroup.Revive, 120f)
                 .IsCastedAbility()
                 .HasMaxRange(5f)

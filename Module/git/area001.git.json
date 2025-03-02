@@ -194,7 +194,7 @@
         },
         "TemplateResRef": {
           "type": "resref",
-          "value": "nw_wswls001"
+          "value": "test_longsword"
         },
         "xModelPart1": {
           "type": "word",

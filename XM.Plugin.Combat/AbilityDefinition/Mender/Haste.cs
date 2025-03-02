@@ -33,6 +33,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
             _builder.Create(FeatType.Haste)
                 .Name(LocaleString.Haste)
                 .Description(LocaleString.HasteDescription)
+                .Classification(AbilityCategoryType.Defensive)
                 .HasRecastDelay(RecastGroup.Haste, 20f)
                 .HasActivationDelay(6f)
                 .RequirementEP(40)

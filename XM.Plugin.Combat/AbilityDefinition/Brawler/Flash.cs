@@ -51,6 +51,8 @@ namespace XM.Plugin.Combat.AbilityDefinition.Brawler
             _builder.Create(FeatType.Flash)
                 .Name(LocaleString.Flash)
                 .Description(LocaleString.FlashDescription)
+                .Classification(AbilityCategoryType.Offensive)
+                .TargetingType(AbilityTargetingType.SelfTargetsEnemy)
                 .HasRecastDelay(RecastGroup.Flash, 30f)
                 .HasActivationDelay(2f)
                 .UsesAnimation(AnimationType.FireForgetTaunt)

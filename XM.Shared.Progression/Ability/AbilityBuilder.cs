@@ -67,6 +67,19 @@ namespace XM.Progression.Ability
         }
 
         /// <summary>
+        /// Sets the targeting type of the active ability we're building.
+        /// This is primarily used in the AI to determine how the ability is used.
+        /// </summary>
+        /// <param name="targetingType">The targeting type</param>
+        /// <returns>An ability builder with the configured options.</returns>
+        public AbilityBuilder TargetingType(AbilityTargetingType targetingType)
+        {
+            _activeAbility.TargetingType = targetingType;
+
+            return this;
+        }
+
+        /// <summary>
         /// Indicates this ability is casted which fires once after the end of a configured delay (or instantly if no delay is assigned).
         /// </summary>
         /// <returns>An ability builder with the configured options.</returns>

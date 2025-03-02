@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Anvil.Services;
+using XM.AI.Event;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.EventManagement;
@@ -32,6 +33,11 @@ namespace XM.AI.Enmity
             _party = party;
             _stat = stat;
 
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
             _event.Subscribe<CreatureEvent.OnDamaged>(OnCreatureDamaged);
             _event.Subscribe<CreatureEvent.OnMeleeAttacked>(OnCreatureAttacked);
             _event.Subscribe<CreatureEvent.OnDeath>(OnCreatureDeath);
@@ -39,6 +45,20 @@ namespace XM.AI.Enmity
             _event.Subscribe<PlayerEvent.OnDamaged>(OnPlayerDamaged);
             _event.Subscribe<ModuleEvent.OnPlayerLeave>(OnPlayerExit);
             _event.Subscribe<AreaEvent.OnAreaExit>(OnPlayerExit);
+            _event.Subscribe<AIEvent.OnEnterAggroAOE>(OnEnterAggroRange);
+        }
+
+        private void OnEnterAggroRange(uint aoe)
+        {
+            var npc = GetAreaOfEffectCreator(aoe);
+            var entering = GetEnteringObject();
+            var table = GetEnmityTable(npc);
+
+            if (GetIsReactionTypeHostile(npc, entering) &&
+                !table.ContainsKey(entering))
+            {
+                ModifyEnmity(entering, npc, EnmityType.Cumulative, 1);
+            }
         }
 
         private void ReduceCumulativeEnmity(uint creature, uint enemy, int damage)

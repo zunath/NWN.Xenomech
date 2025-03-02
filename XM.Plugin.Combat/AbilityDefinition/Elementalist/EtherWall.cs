@@ -34,6 +34,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Elementalist
             _builder.Create(FeatType.EtherWall)
                 .Name(LocaleString.EtherWall)
                 .Description(LocaleString.EtherWallDescription)
+                .Classification(AbilityCategoryType.Defensive)
                 .HasRecastDelay(RecastGroup.EtherWall, 60f * 3f)
                 .HasActivationDelay(2f)
                 .UsesAnimation(AnimationType.LoopingConjure1)

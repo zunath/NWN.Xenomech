@@ -32,6 +32,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
             _builder.Create(FeatType.Antidote)
                 .Name(LocaleString.Antidote)
                 .Description(LocaleString.AntidoteDescription)
+                .Classification(AbilityCategoryType.Special)
                 .HasRecastDelay(RecastGroup.Antidote, 4f)
                 .HasActivationDelay(2f)
                 .RequirementEP(6)

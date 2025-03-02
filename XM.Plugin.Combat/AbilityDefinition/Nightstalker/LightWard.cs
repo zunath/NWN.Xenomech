@@ -32,6 +32,8 @@ namespace XM.Plugin.Combat.AbilityDefinition.Nightstalker
             _builder.Create(FeatType.LightWard)
                 .Name(LocaleString.LightWard)
                 .Description(LocaleString.LightWardDescription)
+                .Classification(AbilityCategoryType.Defensive)
+                .TargetingType(AbilityTargetingType.SelfTargetsParty)
                 .HasRecastDelay(RecastGroup.Ward, 10f)
                 .HasActivationDelay(4f)
                 .RequirementEP(30)

@@ -15,6 +15,7 @@ namespace XM.Progression.Ability
         public LocaleString Name { get; set; }
         public LocaleString Description { get; set; }
         public AbilityCategoryType Category { get; set; }
+        public AbilityTargetingType TargetingType { get; set; }
         public AbilityActivationAction ActivationAction { get; set; }
         public AbilityRetargetActivatorAction RetargetActivatorAction { get; set; }
         public AbilityImpactAction ImpactAction { get; set; }

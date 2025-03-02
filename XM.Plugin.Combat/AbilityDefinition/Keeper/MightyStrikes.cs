@@ -38,6 +38,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Keeper
             _builder.Create(FeatType.MightyStrikes)
                 .Name(LocaleString.MightyStrikes)
                 .Description(LocaleString.MightyStrikesDescription)
+                .Classification(AbilityCategoryType.Offensive)
                 .HasRecastDelay(RecastGroup.JobCapstone, 60f * 30f)
                 .IsCastedAbility()
                 .RequirementEP(150)

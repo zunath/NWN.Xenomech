@@ -31,6 +31,8 @@ namespace XM.Plugin.Combat.AbilityDefinition.Techweaver
             _builder.Create(FeatType.Convert)
                 .Name(LocaleString.Convert)
                 .Description(LocaleString.ConvertDescription)
+                .Classification(AbilityCategoryType.EPRestoration)
+                .TargetingType(AbilityTargetingType.SelfOnly)
                 .HasRecastDelay(RecastGroup.Convert, 60f * 10f)
                 .HasActivationDelay(1f)
                 .UsesAnimation(AnimationType.LoopingConjure1)

@@ -33,6 +33,8 @@ namespace XM.Plugin.Combat.AbilityDefinition.Beastmaster
             _builder.Create(FeatType.FeralHowl)
                 .Name(LocaleString.FeralHowl)
                 .Description(LocaleString.FeralHowlDescription)
+                .Classification(AbilityCategoryType.Defensive)
+                .TargetingType(AbilityTargetingType.SelfTargetsParty)
                 .HasRecastDelay(RecastGroup.FeralHowl, 60f * 3f)
                 .HasActivationDelay(2f)
                 .RequirementEP(38)

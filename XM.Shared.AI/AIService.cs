@@ -70,7 +70,11 @@ namespace XM.AI
             _event.Subscribe<AIEvent.OnExitAggroAOE>(OnExitAggroAOE);
 
             _event.Subscribe<NWNXEvent.OnDmToggleAiAfter>(OnDMToggleAI);
+
+            _event.Subscribe<CreatureEvent.OnMeleeAttacked>(OnCreatureAttacked);
         }
+
+
         public void Init()
         {
             LoadCachedCreatureFeats();
@@ -108,19 +112,24 @@ namespace XM.AI
                     if (!_creatureFeats[resref].ContainsKey(ability.Category))
                         _creatureFeats[resref][ability.Category] = new Dictionary<AITargetType, HashSet<FeatType>>();
 
-                    if (targetTypes.HasFlag(SpellTargetTypes.Self))
+                    if (targetTypes.HasFlag(SpellTargetTypes.Self) || 
+                        ability.TargetingType == AbilityTargetingType.SelfOnly)
                     {
                         if (!_creatureFeats[resref][ability.Category].ContainsKey(AITargetType.Self))
                             _creatureFeats[resref][ability.Category][AITargetType.Self] = new HashSet<FeatType>();
 
+                        Console.WriteLine($"Self = {ability.Name.ToLocalizedString()}");
                         _creatureFeats[resref][ability.Category][AITargetType.Self].Add(feat);
                     }
 
-                    if (targetTypes.HasFlag(SpellTargetTypes.Creature))
+                    if (targetTypes.HasFlag(SpellTargetTypes.Creature) ||
+                        ability.TargetingType == AbilityTargetingType.SelfTargetsEnemy ||
+                        ability.TargetingType == AbilityTargetingType.SelfTargetsParty)
                     {
                         if (!_creatureFeats[resref][ability.Category].ContainsKey(AITargetType.Others))
                             _creatureFeats[resref][ability.Category][AITargetType.Others] = new HashSet<FeatType>();
 
+                        Console.WriteLine($"Others = {ability.Name.ToLocalizedString()}");
                         _creatureFeats[resref][ability.Category][AITargetType.Others].Add(feat);
                     }
                 }
@@ -247,20 +256,27 @@ namespace XM.AI
             context.RemoveFriendly(exiting);
         }
 
+        private void OnCreatureAttacked(uint creature)
+        {
+            if (!_creatureAITrees.ContainsKey(creature))
+                return;
+
+            var attacker = GetLastAttacker(creature);
+            var context = _creatureAITrees[creature];
+
+            foreach (var friendly in context.GetNearbyFriendlies())
+            {
+                if (GetFactionEqual(creature, friendly))
+                {
+                    _enmity.ModifyEnmity(attacker, friendly, EnmityType.Volatile, 1);
+                }
+            }
+        }
+
         public void Dispose()
         {
             _creatureAITrees.Clear();
             _lastUpdateTimestamps.Clear();
         }
-
-        [ScriptHandler("bread_test3")]
-        public void Test3()
-        {
-            var npc = GetObjectByTag("goblintest");
-            ApplyEffectToObject(DurationType.Instant, EffectDamage(1), npc);
-
-            SendMessageToPC(GetLastUsedBy(), $"Goblin HP: {GetCurrentHitPoints(npc)} / {GetMaxHitPoints(npc)}");
-        }
-
     }
 }

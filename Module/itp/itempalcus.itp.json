@@ -724,6 +724,22 @@
                       "type": "byte",
                       "value": 36
                     },
+                    "LIST": {
+                      "type": "list",
+                      "value": [
+                        {
+                          "__struct_id": 0,
+                          "NAME": {
+                            "type": "cexostring",
+                            "value": "Test Longsword"
+                          },
+                          "RESREF": {
+                            "type": "resref",
+                            "value": "test_longsword"
+                          }
+                        }
+                      ]
+                    },
                     "STRREF": {
                       "type": "dword",
                       "value": 6767

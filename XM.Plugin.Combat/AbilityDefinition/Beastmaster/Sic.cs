@@ -41,6 +41,8 @@ namespace XM.Plugin.Combat.AbilityDefinition.Beastmaster
             _builder.Create(FeatType.Sic)
                 .Name(LocaleString.Sic)
                 .Description(LocaleString.SicDescription)
+                .Classification(AbilityCategoryType.Offensive)
+                .TargetingType(AbilityTargetingType.SelfTargetsEnemy)
                 .HasRecastDelay(RecastGroup.Sic, 60f)
                 .IsCastedAbility()
                 .RequirementEP(10)

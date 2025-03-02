@@ -37,6 +37,8 @@ namespace XM.Plugin.Combat.AbilityDefinition.Techweaver
             _builder.Create(FeatType.Etherwarp)
                 .Name(LocaleString.Etherwarp)
                 .Description(LocaleString.EtherwarpDescription)
+                .Classification(AbilityCategoryType.EPRestoration)
+                .TargetingType(AbilityTargetingType.SelfTargetsParty)
                 .HasRecastDelay(RecastGroup.JobCapstone, 60f * 30f)
                 .IsCastedAbility()
                 .RequirementEP(150)

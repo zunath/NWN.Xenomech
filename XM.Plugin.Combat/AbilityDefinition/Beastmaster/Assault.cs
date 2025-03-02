@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
-using XM.Plugin.Combat.StatusEffectDefinition.Buff;
 using XM.Progression.Ability;
 using XM.Progression.Beast;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
-using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
@@ -34,6 +32,8 @@ namespace XM.Plugin.Combat.AbilityDefinition.Beastmaster
             _builder.Create(FeatType.Assault)
                 .Name(LocaleString.Assault)
                 .Description(LocaleString.AssaultDescription)
+                .Classification(AbilityCategoryType.Offensive)
+                .TargetingType(AbilityTargetingType.SelfTargetsEnemy)
                 .HasRecastDelay(RecastGroup.Assault, 60f)
                 .HasActivationDelay(2f)
                 .RequirementEP(22)

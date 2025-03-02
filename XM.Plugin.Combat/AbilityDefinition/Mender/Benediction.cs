@@ -37,6 +37,8 @@ namespace XM.Plugin.Combat.AbilityDefinition.Mender
             _builder.Create(FeatType.Benediction)
                 .Name(LocaleString.Benediction)
                 .Description(LocaleString.BenedictionDescription)
+                .Classification(AbilityCategoryType.HPRestoration)
+                .TargetingType(AbilityTargetingType.SelfTargetsParty)
                 .HasRecastDelay(RecastGroup.JobCapstone, 60f * 30f)
                 .IsCastedAbility()
                 .RequirementEP(150)

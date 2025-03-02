@@ -2,14 +2,13 @@
 using XM.Progression.Ability;
 using XM.Shared.API.Constants;
 
-namespace XM.AI.Actions.Ally
+namespace XM.AI.Actions.Enemy
 {
-    internal class HealAllyAction: AIActionBase
+    internal class OffensiveAbilityAction: AIActionBase
     {
-        public HealAllyAction(IAIContext context) 
-            : base(context, new LowestHPAllyTargeter())
+        public OffensiveAbilityAction(IAIContext context) 
+            : base(context, new HighestEnmityTargeter())
         {
-
         }
 
         private FeatType _selectedFeat = FeatType.Invalid;
@@ -17,24 +16,23 @@ namespace XM.AI.Actions.Ally
 
         protected override float CalculateScore()
         {
-            _target = Targeter.SelectTarget(Context);
-            var hp = (float)GetCurrentHitPoints(_target) / (float)GetMaxHitPoints(_target);
-            var score = 0;
+            _target = Context.Services.Enmity.GetHighestEnmityTarget(Context.Creature);
+            if (_target == OBJECT_INVALID)
+                return 0;
 
-            if (hp <= 0.2f)
-                score = 70;
-            else if (hp <= 0.5f)
-                score = 40;
+            var queuedAbility = Context.Services.Ability.GetQueuedAbility(Context.Creature);
+            if (queuedAbility != null)
+                return 0;
 
-            if (score > 0)
-                score = FindBestAvailableAbility() ? score : 0;
+            if (FindBestAvailableAbility())
+                return 60; // Medium-high priority
 
-            return score;
+            return 0;
         }
 
         private bool FindBestAvailableAbility()
         {
-            var feats = Context.GetFeatsByType(AbilityCategoryType.Healing, AITargetType.Others);
+            var feats = Context.GetFeatsByType(AbilityCategoryType.Offensive, AITargetType.Others);
             foreach (var feat in feats)
             {
                 if (CanUseAbility(feat, _target))
@@ -47,6 +45,7 @@ namespace XM.AI.Actions.Ally
             _selectedFeat = FeatType.Invalid;
             return false;
         }
+
         public override void Execute()
         {
             UseAbility(_selectedFeat, _target);

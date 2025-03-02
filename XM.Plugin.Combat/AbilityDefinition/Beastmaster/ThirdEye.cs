@@ -33,6 +33,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Beastmaster
             _builder.Create(FeatType.ThirdEye)
                 .Name(LocaleString.ThirdEye)
                 .Description(LocaleString.ThirdEyeDescription)
+                .Classification(AbilityCategoryType.Defensive)
                 .HasRecastDelay(RecastGroup.ThirdEye, 15f)
                 .HasActivationDelay(1f)
                 .RequirementEP(6)

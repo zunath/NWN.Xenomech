@@ -31,6 +31,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Nightstalker
             _builder.Create(FeatType.Hide)
                 .Name(LocaleString.Hide)
                 .Description(LocaleString.HideDescription)
+                .Classification(AbilityCategoryType.Special)
                 .HasRecastDelay(RecastGroup.Hide, 60f * 3f)
                 .HasActivationDelay(2f)
                 .RequirementEP(52)

@@ -233,13 +233,16 @@ namespace XM.Progression.Ability
                     return false;
                 }
 
-                var requiredLevel = ability.SkillLevelRequired;
-                var level = _skill.GetSkillLevel(activator, skill);
-
-                if (level < requiredLevel)
+                if (GetIsPC(activator))
                 {
-                    SendMessageToPC(activator, LocaleString.InsufficientLevel.ToLocalizedString());
-                    return false;
+                    var requiredLevel = ability.SkillLevelRequired;
+                    var level = _skill.GetSkillLevel(activator, skill);
+
+                    if (level < requiredLevel)
+                    {
+                        SendMessageToPC(activator, LocaleString.InsufficientLevel.ToLocalizedString());
+                        return false;
+                    }
                 }
             }
 

@@ -33,6 +33,7 @@ namespace XM.Plugin.Combat.AbilityDefinition.Beastmaster
             _builder.Create(FeatType.Quickness)
                 .Name(LocaleString.Quickness)
                 .Description(LocaleString.Quickness)
+                .Classification(AbilityCategoryType.Defensive)
                 .HasRecastDelay(RecastGroup.Quickness, 60f * 10f)
                 .HasActivationDelay(2f)
                 .RequirementEP(15)

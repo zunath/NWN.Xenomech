@@ -32,6 +32,8 @@ namespace XM.Plugin.Combat.AbilityDefinition.Techweaver
             _builder.Create(FeatType.MindWard)
                 .Name(LocaleString.MindWard)
                 .Description(LocaleString.MindWardDescription)
+                .Classification(AbilityCategoryType.Defensive)
+                .TargetingType(AbilityTargetingType.SelfTargetsParty)
                 .HasRecastDelay(RecastGroup.Ward, 10f)
                 .HasActivationDelay(4f)
                 .RequirementEP(30)
