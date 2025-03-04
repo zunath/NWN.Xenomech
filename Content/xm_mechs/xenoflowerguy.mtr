@@ -1,0 +1,9 @@
+// Shaders
+renderhint NormalAndSpecMapped
+
+// textures0 overwrites bitmap and texture0 values in mdl
+texture0 xenoflowerguy
+// Used by normal and spec mapping shaders
+texture1 
+texture2 
+texture3 

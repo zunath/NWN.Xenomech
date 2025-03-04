@@ -1,0 +1,16 @@
+// Shaders
+customshaderVS vslit_sm_nm
+customshaderFS fs_plt_hair
+renderhint NormalAndSpecMapped
+
+// textures0 overwrites bitmap and texture0 values in mdl
+texture0 xenoatglass
+// Used by normal and spec mapping shaders
+texture1 xenoatglass_n
+texture2 
+texture3
+texture4
+texture5 
+
+transparency 1
+twosided 1
