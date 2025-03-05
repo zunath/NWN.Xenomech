@@ -7300,6 +7300,18 @@
     {
       "id": 1828,
       "text": "Fire"
+    },
+    {
+      "id": 1829,
+      "text": "name"
+    },
+    {
+      "id": 1830,
+      "text": "Assigns a name to the targeted player."
+    },
+    {
+      "id": 1831,
+      "text": "Invalid name entered. Please enter the command as follows: \"/name <new name>\". Example: \"/name Joe Blow\""
     }
   ]
 }

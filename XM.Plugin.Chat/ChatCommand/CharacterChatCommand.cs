@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using Anvil.Services;
+using XM.Chat.Entity;
+using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.AdminPlugin;
+using XM.Shared.API.NWNX.RenamePlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Authorization;
 using XM.Shared.Core.ChatCommand;
+using XM.Shared.Core.Data;
 using XM.Shared.Core.Localization;
 
 namespace XM.Chat.ChatCommand
@@ -15,13 +20,21 @@ namespace XM.Chat.ChatCommand
     {
         private readonly ChatCommandBuilder _builder = new();
 
+        private readonly DBService _db;
+        public CharacterChatCommand(DBService db)
+        {
+            _db = db;
+        }
+
         public Dictionary<LocaleString, ChatCommandDetail> BuildChatCommands()
         {
             Char();
             DeleteCommand();
+            Name();
 
             return _builder.Build();
         }
+
 
         private void Char()
         {
@@ -110,5 +123,45 @@ namespace XM.Chat.ChatCommand
                 });
         }
 
+        private void Name()
+        {
+            _builder.Create(LocaleString.name)
+                .Description(LocaleString.AssignsANameToTheTargetedPlayer)
+                .Permissions(AuthorizationLevel.All)
+                .RequiresTarget(ObjectType.Creature)
+                .Validate((user, args) =>
+                {
+                    if (GetIsDM(user))
+                    {
+                        return LocaleString.ThisCommandCanOnlyBeUsedOnPCs.ToLocalizedString();
+                    }
+
+                    if (args.Length <= 0)
+                    {
+                        return LocaleString.NameCommandError.ToLocalizedString();
+                    }
+
+                    return string.Empty;
+                })
+                .Action((user, target, location, args) =>
+                {
+                    if (GetIsDM(target) || !GetIsPC(target))
+                    {
+                        var error = LocaleString.ThisCommandCanOnlyBeUsedOnPCs.ToLocalizedString();
+                        SendMessageToPC(user, error);
+                        return;
+                    }
+
+                    var playerId = PlayerId.Get(user);
+                    var targetPlayerId = PlayerId.Get(target);
+
+                    var name = string.Join(' ', args);
+                    var dbPlayerName = _db.Get<PlayerName>(playerId);
+                    dbPlayerName.OverrideNames[targetPlayerId] = name;
+
+                    _db.Set(dbPlayerName);
+                    RenamePlugin.SetPCNameOverride(target, name, string.Empty, string.Empty, PlayerNameOverrideType.Default, user);
+                });
+        }
     }
 }
