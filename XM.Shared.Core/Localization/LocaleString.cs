@@ -1513,5 +1513,9 @@ namespace XM.Shared.Core.Localization
         WeaponSkill = 1826,
         Unknown = 1827,
         Fire = 1828,
+        name = 1829,
+        AssignsANameToTheTargetedPlayer = 1830,
+        NameCommandError = 1831,
+        Someone = 1832,
     }
 }
