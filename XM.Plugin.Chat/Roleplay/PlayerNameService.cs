@@ -42,6 +42,7 @@ namespace XM.Chat.Roleplay
             var anonymousName = LocaleString.Someone.ToLocalizedString();
             RenamePlugin.SetPCNameOverride(player, anonymousName, UnknownNamePrefix, UnknownNameSuffix, PlayerNameOverrideType.Default);
             RenamePlugin.SetPCNameOverride(player, GetName(player), string.Empty, string.Empty, PlayerNameOverrideType.Default, player);
+            RenamePlugin.SetPCNameOverride(player, anonymousName, UnknownNamePrefix, UnknownNameSuffix, PlayerNameOverrideType.Obfuscate);
 
             var playerId = PlayerId.Get(player);
             var dbPlayerName = _db.Get<PlayerName>(playerId);
