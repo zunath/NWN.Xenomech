@@ -11,7 +11,7 @@ namespace XM.Shared.Core.Party
     [ServiceBinding(typeof(PartyService))]
     public class PartyService
     {
-        private const int PartyMemberLimit = 2;
+        private const int PartyMemberLimit = 6;
         private readonly Dictionary<Guid, PartyDetail> _parties = new();
         private readonly Dictionary<uint, Guid> _creatureToParty = new();
 
