@@ -176,7 +176,8 @@ namespace XM.Progression.Stat
             { ItemPropertyType.ExtraAttackModifier, StatType.ExtraAttackModifier},
             { ItemPropertyType.AttackModifier, StatType.AttackModifier},
             { ItemPropertyType.EtherAttackModifier, StatType.EtherAttackModifier},
-            { ItemPropertyType.EvasionModifier, StatType.EvasionModifier}
+            { ItemPropertyType.EvasionModifier, StatType.EvasionModifier},
+            { ItemPropertyType.XPModifier, StatType.XPModifier},
         };
         public StatService(
             DBService db, 
@@ -1106,6 +1107,21 @@ namespace XM.Progression.Stat
                 enmity = -50;
 
             return enmity;
+        }
+
+        public float GetXPModifier(uint creature)
+        {
+            var effects = _status.GetCreatureStatusEffects(creature);
+            var xpModifier = effects.StatGroup.Stats[StatType.XPModifier];
+
+            if (GetIsPC(creature))
+            {
+                return 1 + xpModifier * 0.01f;
+            }
+            else
+            {
+                return 0f;
+            }
         }
 
         public void SetTP(uint creature, int amount)

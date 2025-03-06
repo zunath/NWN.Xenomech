@@ -7312,6 +7312,22 @@
     {
       "id": 1831,
       "text": "Invalid name entered. Please enter the command as follows: \"/name <new name>\". Example: \"/name Joe Blow\""
+    },
+    {
+      "id": 1832,
+      "text": "Someone"
+    },
+    {
+      "id": 1833,
+      "text": "That party is full."
+    },
+    {
+      "id": 1834,
+      "text": "Your party is full."
+    },
+    {
+      "id": 1835,
+      "text": "XP Modifier"
     }
   ]
 }

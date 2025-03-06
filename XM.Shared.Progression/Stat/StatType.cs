@@ -45,5 +45,6 @@
         AttackModifier = 40,
         EtherAttackModifier = 41,
         EvasionModifier = 42,
+        XPModifier = 43,
     }
 }

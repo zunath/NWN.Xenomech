@@ -6,12 +6,14 @@ using XM.Inventory;
 using XM.Progression.Event;
 using XM.Progression.Job.Entity;
 using XM.Progression.Job.JobDefinition;
+using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.CreaturePlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
+using XM.Shared.Core.Party;
 using XM.UI.Event;
 
 namespace XM.Progression.Job
@@ -32,18 +34,27 @@ namespace XM.Progression.Job
         private readonly DBService _db;
         private readonly XMEventService _event;
         private readonly XPChart _xp;
+        private readonly DeltaXPChart _deltaXP;
+        private readonly StatService _stat;
+        private readonly PartyService _party;
 
         public JobService(
             InventoryService inventory, 
             DBService db,
             XMEventService @event,
             XPChart xp,
+            DeltaXPChart deltaXP,
+            StatService stat,
+            PartyService party,
             IList<IJobDefinition> jobDefinitionsList)
         {
             _inventory = inventory;
             _db = db;
             _event = @event;
             _xp = xp;
+            _deltaXP = deltaXP;
+            _stat = stat;
+            _party = party;
             _jobDefinitionsList = jobDefinitionsList;
 
             CacheData();
@@ -72,6 +83,7 @@ namespace XM.Progression.Job
         private void SubscribeEvents()
         {
             _event.Subscribe<XMEvent.OnPCInitialized>(InitializeJob);
+            _event.Subscribe<CreatureEvent.OnDeath>(CreatureDeathXP);
         }
 
 
@@ -126,7 +138,7 @@ namespace XM.Progression.Job
 
             return dbPlayerJob.JobLevels.ToDictionary(x => x.Key, y => y.Value);
         }
-        public void GiveXP(uint player, int xp)
+        public void GiveXP(uint player, int xp, bool includeModifiers = true)
         {
             if (!GetIsPC(player) ||
                 GetIsDM(player) ||
@@ -139,6 +151,12 @@ namespace XM.Progression.Job
             var level = dbPlayerJob.JobLevels[job];
             var xpRequired = _xp[level];
             var levelsGained = new List<int>();
+
+            if (includeModifiers)
+            {
+                var modifier = _stat.GetXPModifier(player);
+                xp = (int)(xp * modifier);
+            }
 
             dbPlayerJob.JobXP[job] += xp;
 
@@ -248,6 +266,38 @@ namespace XM.Progression.Job
             var name = definition.Name.ToLocalizedString();
             var message = LocaleString.JobChangedToX.ToLocalizedString(ColorToken.Green(name));
             SendMessageToPC(player, message);
+        }
+
+        private void CreatureDeathXP(uint creature)
+        {
+            var killer = GetLastKiller();
+            var npcStats = _stat.GetNPCStats(creature);
+            var party = _party.GetAllPartyMembersWithinRange(killer, 20f, false);
+            var level = 0;
+
+            foreach (var member in party)
+            {
+                var memberLevel = _stat.GetLevel(member);
+                if (level < memberLevel)
+                {
+                    level = memberLevel;
+                }
+            }
+
+            var delta = level - npcStats.Level;
+            var baseXP = _deltaXP.GetBaseXP(delta);
+            if (baseXP <= 0)
+                return;
+
+            var divisor = party.Count;
+            if (divisor > 4)
+                divisor = 4;
+
+            var xp = baseXP / divisor;
+            foreach (var member in party)
+            {
+                GiveXP(member, xp);
+            }
         }
 
         [ScriptHandler("bread_test1")]
