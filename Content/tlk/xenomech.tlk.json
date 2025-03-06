@@ -7328,6 +7328,30 @@
     {
       "id": 1835,
       "text": "XP Modifier"
+    },
+    {
+      "id": 1836,
+      "text": "Cannot acquire item"
+    },
+    {
+      "id": 1837,
+      "text": "Weaponcraft"
+    },
+    {
+      "id": 1838,
+      "text": "Armorcraft"
+    },
+    {
+      "id": 1839,
+      "text": "Fabrication"
+    },
+    {
+      "id": 1840,
+      "text": "Synthesis"
+    },
+    {
+      "id": 1841,
+      "text": "Engineering"
     }
   ]
 }

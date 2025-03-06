@@ -1519,5 +1519,12 @@ namespace XM.Shared.Core.Localization
         Someone = 1832,
         ThatPartyIsFull = 1833,
         YourPartyIsFull = 1834,
+        XPModifier = 1835,
+        CannotAcquireItem = 1836,
+        Weaponcraft = 1837,
+        Armorcraft = 1838,
+        Fabrication = 1839,
+        Synthesis = 1840,
+        Engineering = 1841,
     }
 }

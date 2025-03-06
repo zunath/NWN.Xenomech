@@ -18,6 +18,12 @@
         Polearm = 13,
         Bow = 14,
 
+        Weaponcraft = 50,
+        Armorcraft = 51,
+        Fabrication = 52,
+        Synthesis = 53,
+        Engineering = 54,
+
         Evasion = 100,
     }
 }
