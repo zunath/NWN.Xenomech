@@ -7,7 +7,7 @@ using XM.Progression.Event;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
 using XM.Progression.Job.JobDefinition;
-using XM.Progression.Skill.SkillDefinition;
+using XM.Progression.Skill.CombatSkillDefinition;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.CreaturePlugin;
@@ -26,8 +26,8 @@ namespace XM.Progression.Skill
         private readonly JobService _job;
         private readonly XMEventService _event;
 
-        private readonly IList<ISkillDefinition> _skillDefinitions;
-        private readonly Dictionary<SkillType, ISkillDefinition> _skills = new();
+        private readonly IList<ICombatSkillDefinition> _skillDefinitions;
+        private readonly Dictionary<SkillType, ICombatSkillDefinition> _skills = new();
         private readonly Dictionary<BaseItemType, SkillType> _weaponToSkills = new();
         private readonly SkillGrades _skillGrades = new();
         private readonly Dictionary<SkillType, Dictionary<int, FeatType>> _weaponSkillAcquisitionLevels = new();
@@ -37,7 +37,7 @@ namespace XM.Progression.Skill
             XMEventService @event,
             StatService stat,
             JobService job,
-            IList<ISkillDefinition> skillDefinitions)
+            IList<ICombatSkillDefinition> skillDefinitions)
         {
             _db = db;
             _stat = stat;
@@ -127,15 +127,15 @@ namespace XM.Progression.Skill
         public GradeType GetGrade(
             uint player, 
             IJobDefinition job,
-            ISkillDefinition skill)
+            ICombatSkillDefinition combatSkill)
         {
-            if (GetHasFeat(skill.LoreFeat, player))
+            if (GetHasFeat(combatSkill.LoreFeat, player))
                 return GradeType.A;
 
-            if (!job.Grades.SkillGrades.ContainsKey(skill.Type))
+            if (!job.Grades.SkillGrades.ContainsKey(combatSkill.Type))
                 return GradeType.Invalid;
 
-            return job.Grades.SkillGrades[skill.Type];
+            return job.Grades.SkillGrades[combatSkill.Type];
         }
 
         public int GetSkillCap(
@@ -168,12 +168,12 @@ namespace XM.Progression.Skill
             return true;
         }
 
-        public List<ISkillDefinition> GetAllSkillDefinitions()
+        public List<ICombatSkillDefinition> GetAllSkillDefinitions()
         {
             return _skillDefinitions.ToList();
         }
 
-        public ISkillDefinition GetSkillDefinition(SkillType skillType)
+        public ICombatSkillDefinition GetSkillDefinition(SkillType skillType)
         {
             return _skills[skillType];
         }

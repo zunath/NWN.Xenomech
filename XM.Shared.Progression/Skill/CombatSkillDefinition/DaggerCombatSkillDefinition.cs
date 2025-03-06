@@ -1,12 +1,12 @@
-﻿using Anvil.Services;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Anvil.Services;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
-namespace XM.Progression.Skill.SkillDefinition
+namespace XM.Progression.Skill.CombatSkillDefinition
 {
-    [ServiceBinding(typeof(ISkillDefinition))]
-    public class DaggerSkillDefinition: ISkillDefinition
+    [ServiceBinding(typeof(ICombatSkillDefinition))]
+    public class DaggerCombatSkillDefinition: ICombatSkillDefinition
     {
         public SkillType Type => SkillType.Dagger;
         public LocaleString Name => LocaleString.Dagger;
