@@ -1517,5 +1517,7 @@ namespace XM.Shared.Core.Localization
         AssignsANameToTheTargetedPlayer = 1830,
         NameCommandError = 1831,
         Someone = 1832,
+        ThatPartyIsFull = 1833,
+        YourPartyIsFull = 1834,
     }
 }

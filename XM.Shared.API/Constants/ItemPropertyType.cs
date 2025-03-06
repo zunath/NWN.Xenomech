@@ -132,5 +132,6 @@ namespace XM.Shared.API.Constants
         AttackModifier = 131,
         EtherAttackModifier = 132,
         EvasionModifier = 133,
+        XPModifier = 134,
     }
 }
