@@ -1530,5 +1530,10 @@ namespace XM.Shared.Core.Localization
         Harvesting = 1843,
         CombatSkills = 1844,
         CraftSkills = 1845,
+        Uncategorized = 1846,
+        OnlyPlayersMayUseThisItem = 1847,
+        YouAlreadyLearnedThisRecipe = 1848,
+        ItemMisconfiguredError = 1849,
+        RecipeLearnedX = 1850,
     }
 }
