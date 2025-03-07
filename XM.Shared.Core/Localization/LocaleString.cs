@@ -1526,5 +1526,9 @@ namespace XM.Shared.Core.Localization
         Fabrication = 1839,
         Synthesis = 1840,
         Engineering = 1841,
+        Extraction = 1842,
+        Harvesting = 1843,
+        CombatSkills = 1844,
+        CraftSkills = 1845,
     }
 }

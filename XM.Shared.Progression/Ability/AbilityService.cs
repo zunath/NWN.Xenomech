@@ -249,7 +249,7 @@ namespace XM.Progression.Ability
                 if (GetIsPC(activator))
                 {
                     var requiredLevel = ability.SkillLevelRequired;
-                    var level = _skill.GetSkillLevel(activator, skill);
+                    var level = _skill.GetCombatSkillLevel(activator, skill);
 
                     if (level < requiredLevel)
                     {
@@ -825,7 +825,7 @@ namespace XM.Progression.Ability
 
             if (ability.WeaponSkillType != SkillType.Invalid)
             {
-                var skillDefinition = _skill.GetSkillDefinition(ability.WeaponSkillType);
+                var skillDefinition = _skill.GetCombatSkillDefinition(ability.WeaponSkillType);
                 var level = ability.SkillLevelRequired;
                 skill = $"{skillDefinition.Name.ToLocalizedString()} {LocaleString.Lv.ToLocalizedString()} {level}";
             }

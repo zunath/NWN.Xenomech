@@ -2,10 +2,11 @@
 
 namespace XM.Progression.Skill.CraftingSkillDefinition
 {
-    public interface ICraftingSkillDefinition
+    public interface ICraftSkillDefinition
     {
         SkillType Type { get; }
         LocaleString Name { get; }
         string IconResref { get; }
+        int LevelCap { get; }
     }
 }

@@ -307,7 +307,7 @@ namespace XM.Plugin.Item
             if (skillType != SkillType.Invalid)
             {
                 var job = _job.GetActiveJob(player);
-                var skill = _skill.GetSkillDefinition(skillType);
+                var skill = _skill.GetCombatSkillDefinition(skillType);
                 var grade = _skill.GetGrade(player, job, skill);
 
                 if (grade == GradeType.Invalid)

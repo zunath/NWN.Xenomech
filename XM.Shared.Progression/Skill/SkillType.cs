@@ -23,6 +23,8 @@
         Fabrication = 52,
         Synthesis = 53,
         Engineering = 54,
+        Extraction = 55,
+        Harvesting = 56,
 
         Evasion = 100,
     }

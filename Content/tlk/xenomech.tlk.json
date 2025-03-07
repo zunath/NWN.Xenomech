@@ -7352,6 +7352,22 @@
     {
       "id": 1841,
       "text": "Engineering"
+    },
+    {
+      "id": 1842,
+      "text": "Extraction"
+    },
+    {
+      "id": 1843,
+      "text": "Harvesting"
+    },
+    {
+      "id": 1844,
+      "text": "Combat Skills"
+    },
+    {
+      "id": 1845,
+      "text": "Craft Skills"
     }
   ]
 }

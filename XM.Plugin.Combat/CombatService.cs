@@ -323,7 +323,7 @@ namespace XM.Plugin.Combat
                 : _stat.GetAttribute(attacker, AbilityType.Agility);
             var level = _stat.GetLevel(attacker);
             var skillType = _skill.GetSkillOfWeapon(weapon);
-            var skillLevel = _skill.GetSkillLevel(attacker, skillType) / 10;
+            var skillLevel = _skill.GetCombatSkillLevel(attacker, skillType) / 10;
 
             return 8 + (2 * level) + stat + (attack + skillLevel);
         }
@@ -672,7 +672,7 @@ namespace XM.Plugin.Combat
             if (skill == SkillType.Invalid)
                 return;
 
-            var definition = _skill.GetSkillDefinition(skill);
+            var definition = _skill.GetCombatSkillDefinition(skill);
             if (!_ability.IsFeatRegistered(definition.PassiveFeat))
                 return;
 

@@ -1,11 +1,14 @@
-﻿using XM.Shared.Core.Localization;
+﻿using Anvil.Services;
+using XM.Shared.Core.Localization;
 
 namespace XM.Progression.Skill.CraftingSkillDefinition
 {
-    internal class ArmorcraftCraftingSkillDefinition: ICraftingSkillDefinition
+    [ServiceBinding(typeof(ICraftSkillDefinition))]
+    internal class ArmorcraftCraftSkillDefinition: ICraftSkillDefinition
     {
         public SkillType Type => SkillType.Armorcraft;
         public LocaleString Name => LocaleString.Armorcraft;
         public string IconResref => "ife_armorcraft";
+        public int LevelCap => 100;
     }
 }

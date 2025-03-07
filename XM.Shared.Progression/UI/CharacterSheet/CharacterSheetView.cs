@@ -59,7 +59,8 @@ namespace XM.Progression.UI.CharacterSheet
                     .DefinePartialView(CharacterSheetViewModel.StatPartialId, BuildCharacterPartial)
                     .DefinePartialView(CharacterSheetViewModel.MechPartialId, BuildMechPartial)
                     .DefinePartialView(CharacterSheetViewModel.JobPartialId, BuildJobPartial)
-                    .DefinePartialView(CharacterSheetViewModel.SkillsPartialId, BuildSkillsPartial)
+                    .DefinePartialView(CharacterSheetViewModel.CombatSkillsPartialId, BuildCombatSkillsPartial)
+                    .DefinePartialView(CharacterSheetViewModel.CraftSkillsPartialId, BuildCraftSkillsPartial)
                     .DefinePartialView(CharacterSheetViewModel.KeyItemsPartialId, BuildKeyItemsPartial)
                     .DefinePartialView(CharacterSheetViewModel.SettingsPartialId, BuildSettingsPartial);
             }).Build();
@@ -73,7 +74,8 @@ namespace XM.Progression.UI.CharacterSheet
                     .AddOption(LocaleString.Character)
                     .AddOption(LocaleString.Mech)
                     .AddOption(LocaleString.Job)
-                    .AddOption(LocaleString.Skills)
+                    .AddOption(LocaleString.CombatSkills)
+                    .AddOption(LocaleString.CraftSkills)
                     .AddOption(LocaleString.KeyItems)
                     .AddOption(LocaleString.Settings)
                     .SelectedValue(model => model.SelectedTab)
@@ -386,7 +388,7 @@ namespace XM.Progression.UI.CharacterSheet
                 });
         }
 
-        private void BuildSkillsPartial(NuiGroupBuilder<CharacterSheetViewModel> partial)
+        private void BuildCombatSkillsPartial(NuiGroupBuilder<CharacterSheetViewModel> partial)
         {
             partial
                 .Border(false)
@@ -418,7 +420,7 @@ namespace XM.Progression.UI.CharacterSheet
                                                         image
                                                             .HorizontalAlign(NuiHAlign.Center)
                                                             .VerticalAlign(NuiVAlign.Top)
-                                                            .ResRef(model => model.SkillIcons)
+                                                            .ResRef(model => model.CombatSkillIcons)
                                                             .Height(64f)
                                                             .Width(64f);
                                                     });
@@ -456,7 +458,7 @@ namespace XM.Progression.UI.CharacterSheet
                                         row.AddText(label =>
                                         {
                                             label
-                                                .Text(model => model.SkillNames);
+                                                .Text(model => model.CombatSkillNames);
                                         });
                                     });
                                     col.AddRow(row =>
@@ -464,7 +466,7 @@ namespace XM.Progression.UI.CharacterSheet
                                         row.AddText(label =>
                                         {
                                             label
-                                                .Text(model => model.SkillLevels);
+                                                .Text(model => model.CombatSkillLevels);
                                         });
                                     });
                                 });
@@ -486,16 +488,127 @@ namespace XM.Progression.UI.CharacterSheet
                                     {
                                         row.AddProgress(progress =>
                                         {
-                                            progress.Value(model => model.SkillProgresses);
+                                            progress.Value(model => model.CombatSkillProgresses);
                                         });
                                     });
                                 });
                             });
                         });
-                    }, model => model.SkillNames);
+                    }, model => model.CombatSkillNames);
                 });
         }
 
+        private void BuildCraftSkillsPartial(NuiGroupBuilder<CharacterSheetViewModel> partial)
+        {
+            partial
+                .Border(false)
+                .Scrollbars(NuiScrollbars.Auto)
+                .SetLayout(layout =>
+                {
+                    layout.AddList(list =>
+                    {
+                        list.RowHeight(70f);
+                        list.AddTemplateCell(cell =>
+                        {
+                            cell.Width(70f);
+                            cell.IsVariable(false);
+                            cell.AddGroup(group =>
+                            {
+                                group.SetLayout(cellLayout =>
+                                {
+                                    cellLayout.AddRow(cellLayoutRow =>
+                                    {
+                                        cellLayoutRow.AddColumn(col =>
+                                        {
+                                            col.AddGroup(imageGroup =>
+                                            {
+                                                imageGroup.Scrollbars(NuiScrollbars.None);
+                                                imageGroup.SetLayout(layout =>
+                                                {
+                                                    layout.AddImage(image =>
+                                                    {
+                                                        image
+                                                            .HorizontalAlign(NuiHAlign.Center)
+                                                            .VerticalAlign(NuiVAlign.Top)
+                                                            .ResRef(model => model.CraftSkillIcons)
+                                                            .Height(64f)
+                                                            .Width(64f);
+                                                    });
+                                                });
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        });
+
+                        list.AddTemplateCell(cell =>
+                        {
+                            cell.Width(16f);
+                            cell.IsVariable(false);
+                            cell.AddGroup(group =>
+                            {
+                                group.SetLayout(layout =>
+                                {
+                                    layout.AddSpacer();
+                                });
+                            });
+                        });
+
+                        list.AddTemplateCell(cell =>
+                        {
+                            cell.Width(200f);
+                            cell.IsVariable(false);
+                            cell.AddGroup(group =>
+                            {
+                                group.SetLayout(col =>
+                                {
+                                    col.AddRow(row =>
+                                    {
+                                        row.AddText(label =>
+                                        {
+                                            label
+                                                .Text(model => model.CraftSkillNames);
+                                        });
+                                    });
+                                    col.AddRow(row =>
+                                    {
+                                        row.AddText(label =>
+                                        {
+                                            label
+                                                .Text(model => model.CraftSkillLevels);
+                                        });
+                                    });
+                                });
+                            });
+                        });
+
+                        list.AddTemplateCell(cell =>
+                        {
+                            cell.AddGroup(group =>
+                            {
+                                group.SetLayout(col =>
+                                {
+                                    col.AddRow(row =>
+                                    {
+                                        row.Height(10f);
+                                        row.AddSpacer();
+                                    });
+                                    col.AddRow(row =>
+                                    {
+                                        row.AddProgress(progress =>
+                                        {
+                                            progress.Value(model => model.CraftSkillProgresses);
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    }, model => model.CraftSkillNames);
+                });
+        }
+
+        
         private void BuildKeyItemsPartial(NuiGroupBuilder<CharacterSheetViewModel> partial)
         {
             partial
