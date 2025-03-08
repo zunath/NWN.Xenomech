@@ -1,12 +1,12 @@
-﻿using Anvil.Services;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Anvil.Services;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
-namespace XM.Progression.Skill.SkillDefinition
+namespace XM.Progression.Skill.CombatSkillDefinition
 {
-    [ServiceBinding(typeof(ISkillDefinition))]
-    public class ClubSkillDefinition: ISkillDefinition
+    [ServiceBinding(typeof(ICombatSkillDefinition))]
+    public class ClubCombatSkillDefinition: ICombatSkillDefinition
     {
         public SkillType Type => SkillType.Club;
         public LocaleString Name => LocaleString.Club;

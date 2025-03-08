@@ -7,7 +7,8 @@ using XM.Progression.Event;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
 using XM.Progression.Job.JobDefinition;
-using XM.Progression.Skill.SkillDefinition;
+using XM.Progression.Skill.CombatSkillDefinition;
+using XM.Progression.Skill.CraftingSkillDefinition;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.CreaturePlugin;
@@ -26,8 +27,10 @@ namespace XM.Progression.Skill
         private readonly JobService _job;
         private readonly XMEventService _event;
 
-        private readonly IList<ISkillDefinition> _skillDefinitions;
-        private readonly Dictionary<SkillType, ISkillDefinition> _skills = new();
+        private readonly IList<ICombatSkillDefinition> _combatSkillDefinitions;
+        private readonly IList<ICraftSkillDefinition> _craftSkillDefinitions;
+        private readonly Dictionary<SkillType, ICombatSkillDefinition> _combatSkills = new();
+        private readonly Dictionary<SkillType, ICraftSkillDefinition> _craftSkills = new();
         private readonly Dictionary<BaseItemType, SkillType> _weaponToSkills = new();
         private readonly SkillGrades _skillGrades = new();
         private readonly Dictionary<SkillType, Dictionary<int, FeatType>> _weaponSkillAcquisitionLevels = new();
@@ -37,13 +40,15 @@ namespace XM.Progression.Skill
             XMEventService @event,
             StatService stat,
             JobService job,
-            IList<ISkillDefinition> skillDefinitions)
+            IList<ICombatSkillDefinition> combatSkillDefinitions,
+            IList<ICraftSkillDefinition> craftSkillDefinitions)
         {
             _db = db;
             _stat = stat;
             _job = job;
             _event = @event;
-            _skillDefinitions = skillDefinitions;
+            _combatSkillDefinitions = combatSkillDefinitions;
+            _craftSkillDefinitions = craftSkillDefinitions;
 
             LoadSkillDefinitions();
             SubscribeEvents();
@@ -51,11 +56,11 @@ namespace XM.Progression.Skill
 
         private void SubscribeEvents()
         {
-            _event.Subscribe<XMEvent.OnItemHit>(ProcessSkillGain);
+            _event.Subscribe<XMEvent.OnItemHit>(ProcessWeaponSkillGain);
             _event.Subscribe<AbilityEvent.OnAbilitiesRegistered>(RegisterSkillAbilities);
         }
 
-        private void ProcessSkillGain(uint player)
+        private void ProcessWeaponSkillGain(uint player)
         {
             if (!GetIsPC(player) || GetIsDM(player))
                 return;
@@ -74,7 +79,7 @@ namespace XM.Progression.Skill
             var targetLevel = _stat.GetLevel(target);
             var job = _job.GetActiveJob(player);
             var skillType = _weaponToSkills[itemType];
-            var skill = _skills[skillType];
+            var skill = _combatSkills[skillType];
             var grade = GetGrade(player, job, skill);
             if (grade == GradeType.Invalid)
                 return;
@@ -92,11 +97,11 @@ namespace XM.Progression.Skill
             var roll = XMRandom.Next(100);
             if (roll <= increaseChance)
             {
-                LevelUpSkill(player, skillType);
+                LevelUpCombatSkill(player, skillType);
             }
         }
 
-        private void LevelUpSkill(uint player, SkillType skillType)
+        private void LevelUpCombatSkill(uint player, SkillType skillType)
         {
             var playerId = PlayerId.Get(player);
             var dbPlayerSkill = _db.Get<PlayerSkill>(playerId);
@@ -104,12 +109,12 @@ namespace XM.Progression.Skill
                 dbPlayerSkill.Skills[skillType] = 0;
             const int IncreaseBy = 1;
 
-            var newLevel = dbPlayerSkill.Skills[skillType] += IncreaseBy;
+            var newLevel = dbPlayerSkill.Skills[skillType] + IncreaseBy;
             dbPlayerSkill.Skills[skillType] = newLevel;
 
             _db.Set(dbPlayerSkill);
 
-            var definition = _skills[skillType];
+            var definition = _combatSkills[skillType];
             SendMessageToPC(player, LocaleString.YourXSkillIncreasesToY.ToLocalizedString(definition.Name.ToLocalizedString(), dbPlayerSkill.Skills[skillType]));
 
             if (_weaponSkillAcquisitionLevels.ContainsKey(skillType) &&
@@ -127,15 +132,15 @@ namespace XM.Progression.Skill
         public GradeType GetGrade(
             uint player, 
             IJobDefinition job,
-            ISkillDefinition skill)
+            ICombatSkillDefinition combatSkill)
         {
-            if (GetHasFeat(skill.LoreFeat, player))
+            if (GetHasFeat(combatSkill.LoreFeat, player))
                 return GradeType.A;
 
-            if (!job.Grades.SkillGrades.ContainsKey(skill.Type))
+            if (!job.Grades.SkillGrades.ContainsKey(combatSkill.Type))
                 return GradeType.Invalid;
 
-            return job.Grades.SkillGrades[skill.Type];
+            return job.Grades.SkillGrades[combatSkill.Type];
         }
 
         public int GetSkillCap(
@@ -168,14 +173,24 @@ namespace XM.Progression.Skill
             return true;
         }
 
-        public List<ISkillDefinition> GetAllSkillDefinitions()
+        public List<ICombatSkillDefinition> GetAllCombatSkillDefinitions()
         {
-            return _skillDefinitions.ToList();
+            return _combatSkillDefinitions.ToList();
         }
 
-        public ISkillDefinition GetSkillDefinition(SkillType skillType)
+        public List<ICraftSkillDefinition> GetAllCraftSkillDefinitions()
         {
-            return _skills[skillType];
+            return _craftSkillDefinitions.ToList();
+        }
+
+        public ICombatSkillDefinition GetCombatSkillDefinition(SkillType skillType)
+        {
+            return _combatSkills[skillType];
+        }
+
+        public ICraftSkillDefinition GetCraftSkillDefinition(SkillType skillType)
+        {
+            return _craftSkills[skillType];
         }
 
         public SkillType GetSkillOfWeapon(uint weapon)
@@ -186,22 +201,35 @@ namespace XM.Progression.Skill
                 : SkillType.Invalid;
         }
 
-        public int GetSkillLevel(uint creature, SkillType skillType)
+        private int GetPlayerSkill(uint creature, SkillType skillType)
+        {
+            var playerId = PlayerId.Get(creature);
+            var dbPlayerSkill = _db.Get<PlayerSkill>(playerId);
+
+            if (!dbPlayerSkill.Skills.ContainsKey(skillType))
+                dbPlayerSkill.Skills[skillType] = 0;
+
+            return dbPlayerSkill.Skills[skillType];
+        }
+
+        public int GetCombatSkillLevel(uint creature, SkillType skillType)
         {
             if (GetIsPC(creature))
             {
-                var playerId = PlayerId.Get(creature);
-                var dbPlayerSkill = _db.Get<PlayerSkill>(playerId);
-
-                if (!dbPlayerSkill.Skills.ContainsKey(skillType))
-                    dbPlayerSkill.Skills[skillType] = 0;
-
-                return dbPlayerSkill.Skills[skillType];
+                return GetPlayerSkill(creature, skillType);
             }
             else
             {
                 return GetSkillCap(GradeType.C, _stat.GetLevel(creature));
             }
+        }
+
+        public int GetCraftSkillLevel(uint player, SkillType skillType)
+        {
+            if (!GetIsPC(player) || GetIsDM(player))
+                return 0;
+
+            return GetPlayerSkill(player, skillType);
         }
 
         public int GetEvasionSkill(uint creature)
@@ -223,14 +251,18 @@ namespace XM.Progression.Skill
 
         private void LoadSkillDefinitions()
         {
-            foreach (var definition in _skillDefinitions)
+            foreach (var definition in _combatSkillDefinitions)
             {
-                _skills[definition.Type] = definition;
+                _combatSkills[definition.Type] = definition;
 
                 foreach (var itemType in definition.BaseItems)
                 {
                     _weaponToSkills[itemType] = definition.Type;
                 }
+            }
+            foreach (var definition in _craftSkillDefinitions)
+            {
+                _craftSkills[definition.Type] = definition;
             }
         }
 
@@ -250,19 +282,5 @@ namespace XM.Progression.Skill
                 _weaponSkillAcquisitionLevels[skill].Add(ability.SkillLevelRequired, ability.FeatType);
             }
         }
-
-
-        [ScriptHandler("bread_test2")]
-        public void TestBread2()
-        {
-            var player = GetLastUsedBy();
-            var weapon = GetItemInSlot(InventorySlotType.RightHand, player);
-            var skill = GetSkillOfWeapon(weapon);
-            if (skill == SkillType.Invalid)
-                return;
-
-            LevelUpSkill(player, skill);
-        }
-
     }
 }

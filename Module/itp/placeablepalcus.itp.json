@@ -131,6 +131,28 @@
                     "__struct_id": 0,
                     "NAME": {
                       "type": "cexostring",
+                      "value": "Assembler"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "craft_assembler"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Catalyst Lab"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "craft_catlab"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
                       "value": "Corpse"
                     },
                     "RESREF": {
@@ -142,11 +164,44 @@
                     "__struct_id": 0,
                     "NAME": {
                       "type": "cexostring",
+                      "value": "Fabricator"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "craft_fabricator"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Foundry"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "craft_foundry"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
                       "value": "Market Terminal"
                     },
                     "RESREF": {
                       "type": "resref",
                       "value": "market_terminal"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Pulseforge"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "craft_pulseforge"
                     }
                   },
                   {

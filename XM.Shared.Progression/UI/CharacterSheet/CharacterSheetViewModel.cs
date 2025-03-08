@@ -3,6 +3,7 @@ using Anvil.API;
 using Anvil.Services;
 using XM.Inventory.Entity;
 using XM.Inventory.KeyItem;
+using XM.Progression.Craft.Entity;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
 using XM.Progression.Skill;
@@ -427,7 +428,7 @@ namespace XM.Progression.UI.CharacterSheet
             var skillLevels = new XMBindingList<string>();
             var skillProgresses = new XMBindingList<float>();
 
-            var skills = Skill.GetAllSkillDefinitions();
+            var skills = Skill.GetAllCombatSkillDefinitions();
             foreach (var skill in skills)
             {
                 var level = 0;
@@ -446,6 +447,33 @@ namespace XM.Progression.UI.CharacterSheet
                 skillLevels.Add($"{level} / {skillCap}");
                 skillProgresses.Add(progress);
             }
+
+
+            var dbPlayerCraft = DB.Get<PlayerCraft>(playerId);
+            if (dbPlayerCraft.PrimaryCraftSkill != SkillType.Invalid)
+            {
+                var skill = Skill.GetCraftSkillDefinition(dbPlayerCraft.PrimaryCraftSkill);
+                var level = Skill.GetCraftSkillLevel(Player, dbPlayerCraft.PrimaryCraftSkill);
+                var progress = (float)level / (float)skill.LevelCap;
+
+                skillNames.Add(skill.Name.ToLocalizedString());
+                skillIcons.Add(skill.IconResref);
+                skillLevels.Add($"{level} / {skill.LevelCap}");
+                skillProgresses.Add(progress);
+            }
+
+            if (dbPlayerCraft.SecondaryCraftSkill != SkillType.Invalid)
+            {
+                var skill = Skill.GetCraftSkillDefinition(dbPlayerCraft.SecondaryCraftSkill);
+                var level = Skill.GetCraftSkillLevel(Player, dbPlayerCraft.SecondaryCraftSkill);
+                var progress = (float)level / (float)skill.LevelCap;
+
+                skillNames.Add(skill.Name.ToLocalizedString());
+                skillIcons.Add(skill.IconResref);
+                skillLevels.Add($"{level} / {skill.LevelCap}");
+                skillProgresses.Add(progress);
+            }
+
 
             SkillNames = skillNames;
             SkillIcons = skillIcons;

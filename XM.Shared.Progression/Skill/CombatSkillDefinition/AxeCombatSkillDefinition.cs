@@ -3,10 +3,10 @@ using Anvil.Services;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
-namespace XM.Progression.Skill.SkillDefinition
+namespace XM.Progression.Skill.CombatSkillDefinition
 {
-    [ServiceBinding(typeof(ISkillDefinition))]
-    public class AxeSkillDefinition: ISkillDefinition
+    [ServiceBinding(typeof(ICombatSkillDefinition))]
+    public class AxeCombatSkillDefinition: ICombatSkillDefinition
     {
         public SkillType Type => SkillType.Axe;
         public LocaleString Name => LocaleString.Axe;

@@ -2,9 +2,9 @@
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
-namespace XM.Progression.Skill.SkillDefinition
+namespace XM.Progression.Skill.CombatSkillDefinition
 {
-    public interface ISkillDefinition
+    public interface ICombatSkillDefinition
     {
         SkillType Type { get; }
         LocaleString Name { get; }

@@ -363,6 +363,22 @@
                 "type": "byte",
                 "value": 64
               },
+              "LIST": {
+                "type": "list",
+                "value": [
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Test Component"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "test_component"
+                    }
+                  }
+                ]
+              },
               "STRREF": {
                 "type": "dword",
                 "value": 83602

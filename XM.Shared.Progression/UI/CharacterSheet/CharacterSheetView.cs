@@ -495,7 +495,7 @@ namespace XM.Progression.UI.CharacterSheet
                     }, model => model.SkillNames);
                 });
         }
-
+        
         private void BuildKeyItemsPartial(NuiGroupBuilder<CharacterSheetViewModel> partial)
         {
             partial

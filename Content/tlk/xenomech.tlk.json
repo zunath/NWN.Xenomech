@@ -7328,6 +7328,166 @@
     {
       "id": 1835,
       "text": "XP Modifier"
+    },
+    {
+      "id": 1836,
+      "text": "Cannot acquire item"
+    },
+    {
+      "id": 1837,
+      "text": "Weaponcraft"
+    },
+    {
+      "id": 1838,
+      "text": "Armorcraft"
+    },
+    {
+      "id": 1839,
+      "text": "Fabrication"
+    },
+    {
+      "id": 1840,
+      "text": "Synthesis"
+    },
+    {
+      "id": 1841,
+      "text": "Engineering"
+    },
+    {
+      "id": 1842,
+      "text": "Extraction"
+    },
+    {
+      "id": 1843,
+      "text": "Harvesting"
+    },
+    {
+      "id": 1844,
+      "text": "Combat Skills"
+    },
+    {
+      "id": 1845,
+      "text": "Craft Skills"
+    },
+    {
+      "id": 1846,
+      "text": "Uncategorized"
+    },
+    {
+      "id": 1847,
+      "text": "Only players may use this item."
+    },
+    {
+      "id": 1848,
+      "text": "You already learned this recipe."
+    },
+    {
+      "id": 1849,
+      "text": "This item is misconfigured. Please submit a bug report with the /bug command."
+    },
+    {
+      "id": 1850,
+      "text": "Recipe Learned: {0}"
+    },
+    {
+      "id": 1851,
+      "text": "Craft Menu"
+    },
+    {
+      "id": 1852,
+      "text": "Craft"
+    },
+    {
+      "id": 1853,
+      "text": "Pulseforge"
+    },
+    {
+      "id": 1854,
+      "text": "Foundry"
+    },
+    {
+      "id": 1855,
+      "text": "Fabricator"
+    },
+    {
+      "id": 1856,
+      "text": "Catalyst Lab"
+    },
+    {
+      "id": 1857,
+      "text": "Assembler"
+    },
+    {
+      "id": 1858,
+      "text": "Extractor"
+    },
+    {
+      "id": 1859,
+      "text": "Harvester"
+    },
+    {
+      "id": 1860,
+      "text": "Recipe must be learned."
+    },
+    {
+      "id": 1861,
+      "text": "[COMPONENTS]"
+    },
+    {
+      "id": 1862,
+      "text": "[REQUIREMENTS]"
+    },
+    {
+      "id": 1863,
+      "text": "[PROPERTIES]"
+    },
+    {
+      "id": 1864,
+      "text": "Select"
+    },
+    {
+      "id": 1865,
+      "text": "Missing components!"
+    },
+    {
+      "id": 1866,
+      "text": "You cannot craft that item."
+    },
+    {
+      "id": 1867,
+      "text": "Failed to craft the item..."
+    },
+    {
+      "id": 1868,
+      "text": "You create {0}x {1}!"
+    },
+    {
+      "id": 1869,
+      "text": "You can only learn two crafting skills. Would you like {0} to be your first one?"
+    },
+    {
+      "id": 1870,
+      "text": "You can only learn two crafting skills. Would you like {0} to be your second one?"
+    },
+    {
+      "id": 1871,
+      "text": "You cannot use that skill."
+    },
+    {
+      "id": 1872,
+      "text": "Select Craft Skill"
+    },
+    {
+      "id": 1873,
+      "text": "Confirm"
+    },
+    {
+      "id": 1874,
+      "text": "You learn the {0} skill!"
+    },
+    {
+      "id": 1875,
+      "text": "Are you sure you want to learn the {0} craft skill?"
     }
   ]
 }
