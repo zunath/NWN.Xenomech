@@ -97,11 +97,11 @@ namespace XM.Progression.Skill
             var roll = XMRandom.Next(100);
             if (roll <= increaseChance)
             {
-                LevelUpSkill(player, skillType);
+                LevelUpCombatSkill(player, skillType);
             }
         }
 
-        private void LevelUpSkill(uint player, SkillType skillType)
+        private void LevelUpCombatSkill(uint player, SkillType skillType)
         {
             var playerId = PlayerId.Get(player);
             var dbPlayerSkill = _db.Get<PlayerSkill>(playerId);
@@ -201,22 +201,35 @@ namespace XM.Progression.Skill
                 : SkillType.Invalid;
         }
 
+        private int GetPlayerSkill(uint creature, SkillType skillType)
+        {
+            var playerId = PlayerId.Get(creature);
+            var dbPlayerSkill = _db.Get<PlayerSkill>(playerId);
+
+            if (!dbPlayerSkill.Skills.ContainsKey(skillType))
+                dbPlayerSkill.Skills[skillType] = 0;
+
+            return dbPlayerSkill.Skills[skillType];
+        }
+
         public int GetCombatSkillLevel(uint creature, SkillType skillType)
         {
             if (GetIsPC(creature))
             {
-                var playerId = PlayerId.Get(creature);
-                var dbPlayerSkill = _db.Get<PlayerSkill>(playerId);
-
-                if (!dbPlayerSkill.Skills.ContainsKey(skillType))
-                    dbPlayerSkill.Skills[skillType] = 0;
-
-                return dbPlayerSkill.Skills[skillType];
+                return GetPlayerSkill(creature, skillType);
             }
             else
             {
                 return GetSkillCap(GradeType.C, _stat.GetLevel(creature));
             }
+        }
+
+        public int GetCraftSkillLevel(uint player, SkillType skillType)
+        {
+            if (!GetIsPC(player) || GetIsDM(player))
+                return 0;
+
+            return GetPlayerSkill(player, skillType);
         }
 
         public int GetEvasionSkill(uint creature)

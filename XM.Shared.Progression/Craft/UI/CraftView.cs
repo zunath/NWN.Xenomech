@@ -84,7 +84,8 @@ namespace XM.Progression.Craft.UI
                                                     button
                                                         .IsSelected(model => model.RecipeToggles)
                                                         .Label(model => model.RecipeNames)
-                                                        .OnClick(model => model.OnSelectRecipe());
+                                                        .OnClick(model => model.OnSelectRecipe())
+                                                        .ForegroundColor(model => model.RecipeColors);
                                                 });
                                             });
                                         });

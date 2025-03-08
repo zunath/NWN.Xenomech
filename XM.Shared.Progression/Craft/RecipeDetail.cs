@@ -5,8 +5,7 @@ namespace XM.Progression.Craft
 {
     public class RecipeDetail
     {
-        public int Quantity { get; set; }
-        public string Resref { get; set; }
+        public Dictionary<RecipeQualityType, RecipeItem> Items { get; set; }
         public Dictionary<string, int> Components { get; set; }
         public SkillType Skill { get; set; }
         public RecipeCategoryType Category { get; set; }
@@ -17,9 +16,9 @@ namespace XM.Progression.Craft
         public RecipeDetail()
         {
             IsActive = true;
-            Quantity = 1;
             Category = RecipeCategoryType.Uncategorized;
             Components = new Dictionary<string, int>();
+            Items = new Dictionary<RecipeQualityType, RecipeItem>();
         }
     }
 }

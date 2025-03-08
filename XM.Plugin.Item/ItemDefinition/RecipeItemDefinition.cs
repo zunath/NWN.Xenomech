@@ -75,7 +75,8 @@ namespace XM.Plugin.Item.ItemDefinition
                     dbPlayerCraft.LearnedRecipes.Add(recipeType);
                     _db.Set(dbPlayerCraft);
 
-                    var name = _itemCache.GetItemNameByResref(recipeDetail.Resref);
+                    var normalItem = recipeDetail.Items[RecipeQualityType.Normal];
+                    var name = _itemCache.GetItemNameByResref(normalItem.Resref);
                     var message = LocaleString.RecipeLearnedX.ToLocalizedString(name);
                     SendMessageToPC(user, message);
                 });

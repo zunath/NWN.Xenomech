@@ -50,29 +50,47 @@ namespace XM.Progression.Craft
         }
 
         /// <summary>
-        /// Sets the quantity of items the player receives when crafting this recipe.
-        /// Quantity is automatically set to 1 by default so this is only necessary if
-        /// you need a different number.
+        /// Sets the normal item and quantity created when a player crafts this recipe.
         /// </summary>
-        /// <param name="quantity">The quantity of items to create.</param>
+        /// <param name="resref">The resref of the item to create.</param>
+        /// <param name="quantity">The quantity of the item to create.</param>
         /// <returns>A recipe builder with the configured options</returns>
-        public RecipeBuilder Quantity(int quantity)
+        public RecipeBuilder NormalItem(string resref, int quantity = 1)
         {
             if (quantity < 1)
                 quantity = 1;
 
-            _activeRecipe.Quantity = quantity;
+            _activeRecipe.Items[RecipeQualityType.Normal] = new RecipeItem(resref, quantity);
             return this;
         }
 
         /// <summary>
-        /// Sets the resref of the item created when a player crafts this recipe.
+        /// Sets the HQ resref of the item created when a player crafts this recipe.
         /// </summary>
         /// <param name="resref">The resref of the item to create.</param>
+        /// <param name="quantity">The quantity of the item to create.</param>
         /// <returns>A recipe builder with the configured options</returns>
-        public RecipeBuilder Resref(string resref)
+        public RecipeBuilder HQItem(string resref, int quantity = 1)
         {
-            _activeRecipe.Resref = resref;
+            if (quantity < 1)
+                quantity = 1;
+
+            _activeRecipe.Items[RecipeQualityType.HQ] = new RecipeItem(resref, quantity);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the Ultra resref of the item created when a player crafts this recipe.
+        /// </summary>
+        /// <param name="resref">The resref of the item to create.</param>
+        /// <param name="quantity">The quantity of the item to create.</param>
+        /// <returns>A recipe builder with the configured options</returns>
+        public RecipeBuilder UltraItem(string resref, int quantity = 1)
+        {
+            if (quantity < 1)
+                quantity = 1;
+
+            _activeRecipe.Items[RecipeQualityType.Ultra] = new RecipeItem(resref, quantity);
             return this;
         }
 

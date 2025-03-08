@@ -21,8 +21,9 @@ namespace XM.Progression.Craft.RecipeDefinition
             _builder.Create(RecipeType.Test, SkillType.Weaponcraft)
                 .Level(1)
                 .Category(RecipeCategoryType.Longsword)
-                .Quantity(1)
-                .Resref("test_longsword")
+                .NormalItem("test_longsword", 1)
+                .HQItem("test_longsword1", 1)
+                .UltraItem("test_longsword2", 1)
                 .Component("test_component", 3);
         }
     }

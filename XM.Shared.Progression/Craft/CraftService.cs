@@ -6,6 +6,7 @@ using NLog;
 using XM.Inventory;
 using XM.Progression.Craft.Entity;
 using XM.Progression.Craft.UI;
+using XM.Progression.Job.Entity;
 using XM.Progression.Skill;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
@@ -19,7 +20,7 @@ namespace XM.Progression.Craft
     [ServiceBinding(typeof(CraftService))]
     public class CraftService
     {
-        private static Logger _log = LogManager.GetCurrentClassLogger();
+        private static readonly Logger _log = LogManager.GetCurrentClassLogger();
 
         private static readonly Color _cyan = new(0, 255, 255);
         private static readonly Color _white = new(255, 255, 255);
@@ -163,7 +164,15 @@ namespace XM.Progression.Craft
 
         public bool CanPlayerCraftRecipe(uint player, RecipeType recipeType)
         {
+            const int MaxDelta = -10;
             var recipe = GetRecipe(recipeType);
+            var skill = _skill.GetCraftSkillLevel(player, recipe.Skill);
+            var delta = skill - recipe.Level;
+
+            if (delta <= MaxDelta)
+            {
+                return false;
+            }
 
             if (recipe.MustBeUnlocked)
             {
@@ -174,6 +183,56 @@ namespace XM.Progression.Craft
             }
 
             return true;
+        }
+
+        public bool CanPlayerSkillUp(uint player, RecipeType recipeType)
+        {
+            const int MaxDelta = 5;
+            var recipe = GetRecipe(recipeType);
+            var skill = _skill.GetCraftSkillLevel(player, recipe.Skill);
+            var definition = _skill.GetCraftSkillDefinition(recipe.Skill);
+            var delta = skill - recipe.Level;
+
+            if (delta > MaxDelta)
+                return false;
+
+            if (skill >= definition.LevelCap)
+                return false;
+
+            return true;
+        }
+
+        public int CalculateSkillUpChance(uint player, RecipeType recipeType)
+        {
+            var recipe = GetRecipe(recipeType);
+            var skill = _skill.GetCraftSkillLevel(player, recipe.Skill);
+            skill = Math.Clamp(skill, 0, 100);
+            var baseChance = 80.0f * Math.Exp(-0.03 * skill);
+            var delta = recipe.Level - skill;
+            var difficultyModifier = 1.0f + (delta * 0.02f);
+            var chance = baseChance * difficultyModifier;
+            chance = Math.Clamp(chance, 5, 95);
+
+            return (int)Math.Round(chance, 2);
+        }
+
+        internal void LevelUpCraftSkill(uint player, SkillType skillType)
+        {
+            var playerId = PlayerId.Get(player);
+            var dbPlayerSkill = _db.Get<PlayerSkill>(playerId);
+
+            if (!dbPlayerSkill.Skills.ContainsKey(skillType))
+                dbPlayerSkill.Skills[skillType] = 0;
+
+            dbPlayerSkill.Skills[skillType]++;
+
+            _db.Set(dbPlayerSkill);
+
+            var definition = _skill.GetCraftSkillDefinition(skillType);
+            var name = definition.Name.ToLocalizedString();
+            var level = dbPlayerSkill.Skills[skillType];
+            var message = LocaleString.YourXSkillIncreasesToY.ToLocalizedString(name, level);
+            SendMessageToPC(player, message);
         }
 
         private bool HasUnlockedRecipe(uint player, RecipeType recipeType)
@@ -224,7 +283,8 @@ namespace XM.Progression.Craft
             recipeDetails.Add(LocaleString.PROPERTIES.ToLocalizedString());
             recipeDetailColors.Add(_cyan);
             var tempStorage = GetObjectByTag("TEMP_ITEM_STORAGE");
-            var item = CreateItemOnObject(detail.Resref, tempStorage);
+            var normalItem = detail.Items[RecipeQualityType.Normal];
+            var item = CreateItemOnObject(normalItem.Resref, tempStorage);
 
             foreach (var ip in _itemProperty.BuildItemPropertyList(item))
             {

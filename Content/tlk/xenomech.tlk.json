@@ -7444,6 +7444,22 @@
     {
       "id": 1864,
       "text": "Select"
+    },
+    {
+      "id": 1865,
+      "text": "Missing components!"
+    },
+    {
+      "id": 1866,
+      "text": "You cannot craft that item."
+    },
+    {
+      "id": 1867,
+      "text": "Failed to craft the item..."
+    },
+    {
+      "id": 1868,
+      "text": "You create {0}x {1}!"
     }
   ]
 }

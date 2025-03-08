@@ -1,13 +1,20 @@
-﻿using Anvil.Services;
+﻿using System;
+using Anvil.Services;
 using System.Collections.Generic;
 using System.Linq;
 using Anvil.API;
 using XM.Inventory;
 using XM.Progression.Skill;
+using XM.Shared.API.Constants;
+using XM.Shared.API.NWNX.ObjectPlugin;
 using XM.Shared.Core;
+using XM.Shared.Core.Activity;
 using XM.Shared.Core.Localization;
 using XM.UI;
 using Action = System.Action;
+using NLog;
+using XM.Shared.API.NWNX.PlayerPlugin;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace XM.Progression.Craft.UI
 {
@@ -17,11 +24,22 @@ namespace XM.Progression.Craft.UI
         ViewModel<CraftViewModel>, 
         IRefreshable
     {
-        private int _currentRecipeIndex;
+        private static readonly Logger _log = LogManager.GetCurrentClassLogger();
+        private static readonly Color _red = new(255, 0, 0);
+        private static readonly Color _green = new(0, 255, 0);
+
+        private int _selectedRecipeIndex;
         private readonly List<RecipeType> _recipeTypes = new();
         private const int RecordsPerPage = 40;
         private bool _skipPaginationSearch;
         private SkillType _skill;
+        private const float CraftDelaySeconds = 6f;
+        private const int BaseSuccessRate = 65;
+
+        private readonly List<string> _components = new();
+
+        [Inject]
+        public ActivityService Activity { get; set; }
 
         [Inject]
         public SkillService Skill { get; set; }
@@ -68,7 +86,7 @@ namespace XM.Progression.Craft.UI
             set
             {
                 Set(value);
-                _currentRecipeIndex = -1;
+                _selectedRecipeIndex = -1;
 
                 if (!_skipPaginationSearch)
                     Search();
@@ -90,6 +108,12 @@ namespace XM.Progression.Craft.UI
         public XMBindingList<NuiComboEntry> Categories
         {
             get => Get<XMBindingList<NuiComboEntry>>();
+            set => Set(value);
+        }
+
+        public XMBindingList<Color> RecipeColors
+        {
+            get => Get<XMBindingList<Color>>();
             set => Set(value);
         }
 
@@ -137,7 +161,7 @@ namespace XM.Progression.Craft.UI
             SearchText = string.Empty;
             SelectedPageIndex = 0;
             SelectedCategoryId = 0;
-            _currentRecipeIndex = -1;
+            _selectedRecipeIndex = -1;
 
             LoadCategories();
             Search();
@@ -189,7 +213,7 @@ namespace XM.Progression.Craft.UI
             {
                 recipes = recipes
                     .Where(x =>
-                        ItemCache.GetItemNameByResref(x.Value.Resref)
+                        ItemCache.GetItemNameByResref(x.Value.Items[RecipeQualityType.Normal].Resref)
                             .ToLower()
                             .Contains(SearchText.ToLower()))
                     .ToDictionary(x => x.Key, y => y.Value);
@@ -203,6 +227,7 @@ namespace XM.Progression.Craft.UI
                 .ToDictionary(x => x.Key, y => y.Value);
 
             var recipeNames = new XMBindingList<string>();
+            var recipeColors = new XMBindingList<Color>();
             var recipeToggles = new XMBindingList<bool>();
             _recipeTypes.Clear();
 
@@ -210,15 +235,18 @@ namespace XM.Progression.Craft.UI
             {
                 if (Craft.CanPlayerCraftRecipe(Player, type))
                 {
-                    var name = $"{ItemCache.GetItemNameByResref(detail.Resref)} [{LocaleString.Lv.ToLocalizedString()} {detail.Level}]";
+                    var name = $"{ItemCache.GetItemNameByResref(detail.Items[RecipeQualityType.Normal].Resref)} [{LocaleString.Lv.ToLocalizedString()} {detail.Level}]";
+                    var canCraft = Craft.CanPlayerCraftRecipe(Player, type);
 
                     recipeNames.Add(name);
+                    recipeColors.Add(canCraft ? _green : _red);
                     recipeToggles.Add(false);
                     _recipeTypes.Add(type);
                 }
             }
 
             RecipeNames = recipeNames;
+            RecipeColors = recipeColors;
             RecipeToggles = recipeToggles;
 
             LoadRecipeDetail();
@@ -250,7 +278,7 @@ namespace XM.Progression.Craft.UI
 
             _skipPaginationSearch = false;
 
-            _currentRecipeIndex = -1;
+            _selectedRecipeIndex = -1;
             LoadRecipeDetail();
         }
         public Action OnClickClearSearch() => () =>
@@ -269,7 +297,7 @@ namespace XM.Progression.Craft.UI
             if (newPage < 0)
                 newPage = 0;
 
-            _currentRecipeIndex = -1;
+            _selectedRecipeIndex = -1;
             SelectedPageIndex = newPage;
             Search();
             _skipPaginationSearch = false;
@@ -282,7 +310,7 @@ namespace XM.Progression.Craft.UI
             if (newPage > PageNumbers.Count - 1)
                 newPage = PageNumbers.Count - 1;
 
-            _currentRecipeIndex = -1;
+            _selectedRecipeIndex = -1;
             SelectedPageIndex = newPage;
             Search();
             _skipPaginationSearch = false;
@@ -291,26 +319,262 @@ namespace XM.Progression.Craft.UI
         public Action OnSelectRecipe() => () =>
         {
             // Deselect the current recipe.
-            if (_currentRecipeIndex > -1)
+            if (_selectedRecipeIndex > -1)
             {
-                RecipeToggles[_currentRecipeIndex] = false;
+                RecipeToggles[_selectedRecipeIndex] = false;
             }
 
-            _currentRecipeIndex = NuiGetEventArrayIndex();
-            RecipeToggles[_currentRecipeIndex] = true;
+            _selectedRecipeIndex = NuiGetEventArrayIndex();
+            RecipeToggles[_selectedRecipeIndex] = true;
             LoadRecipeDetail();
         };
 
+        private List<uint> GetComponents()
+        {
+            var components = new List<uint>();
+            var recipe = _recipeTypes[_selectedRecipeIndex];
+            var detail = Craft.GetRecipe(recipe);
+
+            for (var item = GetFirstItemInInventory(Player); GetIsObjectValid(item); item = GetNextItemInInventory(Player))
+            {
+                var resref = GetResRef(item);
+                if (detail.Components.ContainsKey(resref))
+                    components.Add(item);
+            }
+
+            return components;
+        }
+
+        private bool ProcessComponents()
+        {
+            var components = GetComponents();
+            var aggregateList = AggregateComponents(components);
+            if (aggregateList.Count <= 0)
+            {
+                var message = LocaleString.MissingComponents.ToLocalizedString();
+                SendMessageToPC(Player, ColorToken.Red(message));
+                return false;
+            }
+
+            return true;
+        }
+        private List<uint> AggregateComponents(List<uint> components)
+        {
+            var recipeType = _recipeTypes[_selectedRecipeIndex];
+            var recipe = Craft.GetRecipe(recipeType);
+            var remainingComponents = recipe.Components.ToDictionary(x => x.Key, y => y.Value);
+            var result = new List<uint>();
+
+            for (var index = components.Count - 1; index >= 0; index--)
+            {
+                var component = components[index];
+                var resref = GetResRef(component);
+
+                // Recipe does not need any more of this component type.
+                if (!remainingComponents.ContainsKey(resref))
+                    continue;
+
+                var quantity = GetItemStackSize(component);
+
+                // Player's component stack size is greater than the amount required.
+                if (quantity > remainingComponents[resref])
+                {
+                    var originalStackSize = GetItemStackSize(component);
+                    SetItemStackSize(component, remainingComponents[resref]);
+                    _components.Add(ObjectPlugin.Serialize(component));
+                    var reducedStackSize = originalStackSize - remainingComponents[resref];
+                    SetItemStackSize(component, reducedStackSize);
+                    result.Add(component);
+                    remainingComponents[resref] = 0;
+                }
+                // Player's component stack size is less than or equal to the amount required.
+                else if (quantity <= remainingComponents[resref])
+                {
+                    remainingComponents[resref] -= quantity;
+                    _components.Add(ObjectPlugin.Serialize(component));
+                    result.Add(component);
+                    DestroyObject(component);
+                }
+
+                if (remainingComponents[resref] <= 0)
+                    remainingComponents.Remove(resref);
+            }
+
+            var hasAllComponents = remainingComponents.Count <= 0;
+
+            // If we're missing some components, clear the serialized component list and the result list.
+            if (!hasAllComponents)
+            {
+                DelayCommand(0.1f, () =>
+                {
+                    foreach (var component in _components)
+                    {
+                        var item = ObjectPlugin.Deserialize(component);
+                        ObjectPlugin.AcquireItem(Player, item);
+                    }
+
+                    _components.Clear();
+                });
+
+                result.Clear();
+            }
+
+            return result;
+        }
+
+        private int CalculateSuccessRate()
+        {
+            var skill = Skill.GetCraftSkillLevel(Player, _skill);
+            var recipeType = _recipeTypes[_selectedRecipeIndex];
+            var recipe = Craft.GetRecipe(recipeType);
+            var delta = skill - recipe.Level;
+            var rate = BaseSuccessRate + (2.5f * delta);
+            rate += (int)(XMRandom.NextFloat() * 14 - 7);
+            rate = Math.Clamp(rate, 5, 95);
+
+            return (int)rate;
+        }
+
+        private void PerformCraft()
+        {
+            var rate = CalculateSuccessRate();
+            var roll = XMRandom.D100(1);
+            if (roll > rate)
+            {
+                ProcessFailure();
+                return;
+            }
+
+            ProcessSuccess(rate);
+        }
+
+        private void ProcessSuccess(int rate)
+        {
+            var recipeType = _recipeTypes[_selectedRecipeIndex];
+            var recipe = Craft.GetRecipe(recipeType);
+            var hqChance = 0;
+            var ultraChance = 0;
+            var normalItem = recipe.Items[RecipeQualityType.Normal];
+            var resref = normalItem.Resref;
+            var quantity = normalItem.Quantity;
+
+            if (recipe.Items.ContainsKey(RecipeQualityType.HQ) &&
+                !string.IsNullOrWhiteSpace(recipe.Items[RecipeQualityType.HQ].Resref) &&
+                rate > 75)
+            {
+                hqChance = rate - 75;
+            }
+
+            if (recipe.Items.ContainsKey(RecipeQualityType.Ultra) &&
+                !string.IsNullOrWhiteSpace(recipe.Items[RecipeQualityType.Ultra].Resref) &&
+                rate > 90)
+            {
+                ultraChance = rate - 90;
+            }
+
+            if (XMRandom.D100(1) <= ultraChance)
+            {
+                var ultraItem = recipe.Items[RecipeQualityType.Ultra];
+                resref = ultraItem.Resref;
+                quantity = ultraItem.Quantity;
+            }
+            else if (XMRandom.D100(1) <= hqChance)
+            {
+                var hqItem = recipe.Items[RecipeQualityType.HQ];
+                resref = hqItem.Resref;
+                quantity = hqItem.Quantity;
+            }
+
+            _components.Clear();
+
+            CreateItemOnObject(resref, Player, quantity);
+
+            if (Craft.CanPlayerSkillUp(Player, recipeType))
+            {
+                var chance = Craft.CalculateSkillUpChance(Player, recipeType);
+                if (XMRandom.D100(1) <= chance)
+                {
+                    Craft.LevelUpCraftSkill(Player, _skill);
+                }
+            }
+
+            var itemName = ItemCache.GetItemNameByResref(resref);
+            var message = LocaleString.YouCreateXxY.ToLocalizedString(quantity, itemName);
+            Messaging.SendMessageNearbyToPlayers(Player, message);
+        }
+
+        private void ProcessFailure()
+        {
+            const int ChanceToLoseItem = 65;
+            const int ChanceToSkillUpOnFailure = 1;
+
+            var recipeType = _recipeTypes[_selectedRecipeIndex];
+            var recipe = Craft.GetRecipe(recipeType);
+            var normalItem = recipe.Items[RecipeQualityType.Normal];
+            var itemName = ItemCache.GetItemNameByResref(normalItem.Resref);
+
+            // Process components
+            foreach (var serialized in _components)
+            {
+                if (XMRandom.D100(1) > ChanceToLoseItem)
+                {
+                    var item = ObjectPlugin.Deserialize(serialized);
+                    ObjectPlugin.AcquireItem(Player, item);
+                }
+            }
+
+            _components.Clear();
+
+            var message = ColorToken.Red(LocaleString.FailedToCraftTheItem.ToLocalizedString());
+            SendMessageToPC(Player, message);
+
+            if (Craft.CanPlayerSkillUp(Player, recipeType) &&
+                XMRandom.D100(1) <= ChanceToSkillUpOnFailure)
+            {
+                Craft.LevelUpCraftSkill(Player, _skill);
+            }
+
+            _log.Info($"{GetName(Player)} ({GetObjectUUID(Player)}) failed to craft '{itemName}'.");
+        }
+
         public Action OnClickCraft() => () =>
         {
+            if (Activity.IsBusy(Player))
+            {
+                SendMessageToPC(Player, LocaleString.YouAreBusy.ToLocalizedString());
+                return;
+            }
+
+            if (!Craft.CanPlayerCraftRecipe(Player, _recipeTypes[_selectedRecipeIndex]))
+            {
+                var message = LocaleString.YouCannotCraftThatItem.ToLocalizedString();
+                SendMessageToPC(Player, ColorToken.Red(message));
+                return;
+            }
+
+            if (ProcessComponents())
+            {
+                ApplyEffectToObject(DurationType.Temporary, EffectCutsceneImmobilize(), Player, CraftDelaySeconds);
+                PlayerPlugin.StartGuiTimingBar(Player, CraftDelaySeconds);
+                Activity.SetBusy(Player, ActivityStatusType.Crafting);
+                AssignCommand(Player, () => ActionPlayAnimation(AnimationType.LoopingGetMid, 1f, CraftDelaySeconds+0.1f));
+
+                DelayCommand(CraftDelaySeconds, () =>
+                {
+                    Activity.ClearBusy(Player);
+                    PerformCraft();
+                });
+
+            }
         };
 
         private void DisplayRecipeDetail(RecipeType recipe)
         {
             var detail = Craft.GetRecipe(recipe);
-            var itemName = ItemCache.GetItemNameByResref(detail.Resref);
+            var normalItem = detail.Items[RecipeQualityType.Normal];
+            var itemName = ItemCache.GetItemNameByResref(normalItem.Resref);
 
-            RecipeName = $"Recipe: {detail.Quantity}x {itemName}";
+            RecipeName = $"Recipe: {normalItem.Quantity}x {itemName}";
             RecipeLevel = $"Level: {detail.Level}";
             var (recipeDetails, recipeDetailColors) = Craft.BuildRecipeDetail(Player, recipe);
 
@@ -324,19 +588,23 @@ namespace XM.Progression.Craft.UI
             RecipeLevel = string.Empty;
             RecipeDetails = new XMBindingList<string>();
             RecipeDetailColors = new XMBindingList<Color>();
-            _currentRecipeIndex = -1;
+            _selectedRecipeIndex = -1;
         }
 
         private void LoadRecipeDetail()
         {
-            if (_currentRecipeIndex > -1)
+            if (_selectedRecipeIndex > -1)
             {
-                var selectedRecipe = _recipeTypes[_currentRecipeIndex];
+                var selectedRecipe = _recipeTypes[_selectedRecipeIndex];
                 DisplayRecipeDetail(selectedRecipe);
+
+                var recipeType = _recipeTypes[_selectedRecipeIndex];
+                CanCraftRecipe = Craft.CanPlayerCraftRecipe(Player, recipeType);
             }
             else
             {
                 ClearRecipeDetail();
+                CanCraftRecipe = false;
             }
         }
 

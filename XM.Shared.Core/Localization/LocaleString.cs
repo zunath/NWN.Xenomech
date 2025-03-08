@@ -1549,5 +1549,9 @@ namespace XM.Shared.Core.Localization
         REQUIREMENTS = 1862,
         PROPERTIES = 1863,
         Select = 1864,
+        MissingComponents = 1865,
+        YouCannotCraftThatItem = 1866,
+        FailedToCraftTheItem = 1867,
+        YouCreateXxY = 1868,
     }
 }
