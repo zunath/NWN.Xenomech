@@ -52,11 +52,11 @@ namespace XM.Progression.Craft.UI
 
         public Action OnClickConfirm() => () =>
         {
-            ShowModal(LocaleString.AreYouSureYouWantToLearnTheXCraftSkill.ToLocalizedString(), () =>
+            var skillDefinition = Skill.GetCraftSkillDefinition(_skill);
+            ShowModal(LocaleString.AreYouSureYouWantToLearnTheXCraftSkill.ToLocalizedString(skillDefinition.Name.ToLocalizedString()), () =>
             {
                 var playerId = PlayerId.Get(Player);
                 var dbPlayerCraft = DB.Get<PlayerCraft>(playerId);
-                var skillDefinition = Skill.GetCraftSkillDefinition(_skill);
 
                 if (dbPlayerCraft.PrimaryCraftSkill == SkillType.Invalid)
                 {

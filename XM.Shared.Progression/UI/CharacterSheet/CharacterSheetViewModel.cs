@@ -3,6 +3,7 @@ using Anvil.API;
 using Anvil.Services;
 using XM.Inventory.Entity;
 using XM.Inventory.KeyItem;
+using XM.Progression.Craft.Entity;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
 using XM.Progression.Skill;
@@ -27,8 +28,7 @@ namespace XM.Progression.UI.CharacterSheet
         internal const string StatPartialId = "STAT_PARTIAL";
         internal const string MechPartialId = "MECH_PARTIAL";
         internal const string JobPartialId = "JOB_PARTIAL";
-        internal const string CombatSkillsPartialId = "COMBAT_SKILLS_PARTIAL";
-        internal const string CraftSkillsPartialId = "CRAFT_SKILLS_PARTIAL";
+        internal const string SkillsPartialId = "SKILLS_PARTIAL";
         internal const string KeyItemsPartialId = "KEYITEMS_PARTIAL";
         internal const string SettingsPartialId = "SETTINGS_PARTIAL";
         internal const string MainView = "MAIN_VIEW";
@@ -218,49 +218,25 @@ namespace XM.Progression.UI.CharacterSheet
             set => Set(value);
         }
 
-        public XMBindingList<string> CombatSkillNames
+        public XMBindingList<string> SkillNames
         {
             get => Get<XMBindingList<string>>();
             set => Set(value);
         }
 
-        public XMBindingList<string> CombatSkillLevels
+        public XMBindingList<string> SkillLevels
         {
             get => Get<XMBindingList<string>>();
             set => Set(value);
         }
 
-        public XMBindingList<string> CombatSkillIcons
+        public XMBindingList<string> SkillIcons
         {
             get => Get<XMBindingList<string>>();
             set => Set(value);
         }
 
-        public XMBindingList<float> CombatSkillProgresses
-        {
-            get => Get<XMBindingList<float>>();
-            set => Set(value);
-        }
-
-        public XMBindingList<string> CraftSkillNames
-        {
-            get => Get<XMBindingList<string>>();
-            set => Set(value);
-        }
-
-        public XMBindingList<string> CraftSkillLevels
-        {
-            get => Get<XMBindingList<string>>();
-            set => Set(value);
-        }
-
-        public XMBindingList<string> CraftSkillIcons
-        {
-            get => Get<XMBindingList<string>>();
-            set => Set(value);
-        }
-
-        public XMBindingList<float> CraftSkillProgresses
+        public XMBindingList<float> SkillProgresses
         {
             get => Get<XMBindingList<float>>();
             set => Set(value);
@@ -433,24 +409,24 @@ namespace XM.Progression.UI.CharacterSheet
             JobProgresses = jobProgresses;
         }
 
-        private void LoadCombatSkillsView()
+        private void LoadSkillsView()
         {
-            ChangePartialView(MainView, CombatSkillsPartialId);
+            ChangePartialView(MainView, SkillsPartialId);
 
-            RefreshCombatSkills();
+            RefreshSkills();
         }
 
-        private void RefreshCombatSkills()
+        private void RefreshSkills()
         {
             var playerId = PlayerId.Get(Player);
             var dbPlayerSkill = DB.Get<PlayerSkill>(playerId);
             var job = Job.GetActiveJob(Player);
             var jobLevel = Stat.GetLevel(Player);
 
-            var combatSkillNames = new XMBindingList<string>();
-            var combatSkillIcons = new XMBindingList<string>();
-            var combatSkillLevels = new XMBindingList<string>();
-            var combatSkillProgresses = new XMBindingList<float>();
+            var skillNames = new XMBindingList<string>();
+            var skillIcons = new XMBindingList<string>();
+            var skillLevels = new XMBindingList<string>();
+            var skillProgresses = new XMBindingList<float>();
 
             var skills = Skill.GetAllCombatSkillDefinitions();
             foreach (var skill in skills)
@@ -466,54 +442,43 @@ namespace XM.Progression.UI.CharacterSheet
 
                 var progress = (float)level / (float)skillCap;
 
-                combatSkillNames.Add(skill.Name.ToLocalizedString());
-                combatSkillIcons.Add(skill.IconResref);
-                combatSkillLevels.Add($"{level} / {skillCap}");
-                combatSkillProgresses.Add(progress);
+                skillNames.Add(skill.Name.ToLocalizedString());
+                skillIcons.Add(skill.IconResref);
+                skillLevels.Add($"{level} / {skillCap}");
+                skillProgresses.Add(progress);
             }
 
-            CombatSkillNames = combatSkillNames;
-            CombatSkillIcons = combatSkillIcons;
-            CombatSkillLevels = combatSkillLevels;
-            CombatSkillProgresses = combatSkillProgresses;
-        }
 
-        private void LoadCraftSkillsView()
-        {
-            ChangePartialView(MainView, CraftSkillsPartialId);
-
-            RefreshCraftSkills();
-        }
-
-        private void RefreshCraftSkills()
-        {
-            var playerId = PlayerId.Get(Player);
-            var dbPlayerSkill = DB.Get<PlayerSkill>(playerId);
-
-            var craftSkillNames = new XMBindingList<string>();
-            var craftSkillIcons = new XMBindingList<string>();
-            var craftSkillLevels = new XMBindingList<string>();
-            var craftSkillProgresses = new XMBindingList<float>();
-
-            var skills = Skill.GetAllCraftSkillDefinitions();
-            foreach (var skill in skills)
+            var dbPlayerCraft = DB.Get<PlayerCraft>(playerId);
+            if (dbPlayerCraft.PrimaryCraftSkill != SkillType.Invalid)
             {
-                var level = 0;
-                if (dbPlayerSkill.Skills.ContainsKey(skill.Type))
-                    level = dbPlayerSkill.Skills[skill.Type];
-
+                var skill = Skill.GetCraftSkillDefinition(dbPlayerCraft.PrimaryCraftSkill);
+                var level = Skill.GetCraftSkillLevel(Player, dbPlayerCraft.PrimaryCraftSkill);
                 var progress = (float)level / (float)skill.LevelCap;
 
-                craftSkillNames.Add(skill.Name.ToLocalizedString());
-                craftSkillIcons.Add(skill.IconResref);
-                craftSkillLevels.Add($"{level} / {skill.LevelCap}");
-                craftSkillProgresses.Add(progress);
+                skillNames.Add(skill.Name.ToLocalizedString());
+                skillIcons.Add(skill.IconResref);
+                skillLevels.Add($"{level} / {skill.LevelCap}");
+                skillProgresses.Add(progress);
             }
 
-            CraftSkillNames = craftSkillNames;
-            CraftSkillIcons = craftSkillIcons;
-            CraftSkillLevels = craftSkillLevels;
-            CraftSkillProgresses = craftSkillProgresses;
+            if (dbPlayerCraft.SecondaryCraftSkill != SkillType.Invalid)
+            {
+                var skill = Skill.GetCraftSkillDefinition(dbPlayerCraft.SecondaryCraftSkill);
+                var level = Skill.GetCraftSkillLevel(Player, dbPlayerCraft.SecondaryCraftSkill);
+                var progress = (float)level / (float)skill.LevelCap;
+
+                skillNames.Add(skill.Name.ToLocalizedString());
+                skillIcons.Add(skill.IconResref);
+                skillLevels.Add($"{level} / {skill.LevelCap}");
+                skillProgresses.Add(progress);
+            }
+
+
+            SkillNames = skillNames;
+            SkillIcons = skillIcons;
+            SkillLevels = skillLevels;
+            SkillProgresses = skillProgresses;
         }
 
         private void LoadKeyItemsView()
@@ -589,16 +554,13 @@ namespace XM.Progression.UI.CharacterSheet
                 case 2: // 2 = Job
                     LoadJobView();
                     break;
-                case 3: // 3 = Combat Skills
-                    LoadCombatSkillsView();
+                case 3: // 3 = Skills
+                    LoadSkillsView();
                     break;
-                case 4: // 4 = Craft Skills
-                    LoadCraftSkillsView();
-                    break;
-                case 5: // 5 = Key Items
+                case 4: // 4 = Key Items
                     LoadKeyItemsView();
                     break;
-                case 6: // 6 = Settings
+                case 5: // 5 = Settings
                     LoadSettingsView();
                     break;
             }
@@ -633,8 +595,7 @@ namespace XM.Progression.UI.CharacterSheet
         {
             RefreshHP();
             RefreshEP();
-            RefreshCombatSkills();
-            RefreshCraftSkills();
+            RefreshSkills();
             RefreshJobs();
             RefreshKeyItems();
         }
