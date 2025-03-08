@@ -150,16 +150,18 @@ namespace XM.Progression.Craft.UI
 
         private void LoadCategories()
         {
+            var selectText = LocaleString.Select.ToLocalizedString() + "...";
+
             if (Categories != null)
             {
                 Categories.Clear();
-                Categories.Add(new NuiComboEntry("Select...", 0));
+                Categories.Add(new NuiComboEntry(selectText, 0));
                 return;
             }
 
             var categories = new XMBindingList<NuiComboEntry>();
 
-            categories.Add(new NuiComboEntry("Select...", 0));
+            categories.Add(new NuiComboEntry(selectText, 0));
             foreach (var (type, detail) in Craft.GetRecipeCategoriesBySkill(_skill))
             {
                 categories.Add(new NuiComboEntry(detail.Name.ToLocalizedString(), (int)type));
@@ -172,16 +174,14 @@ namespace XM.Progression.Craft.UI
         {
             Dictionary<RecipeType, RecipeDetail> recipes;
 
-            // Category selected
             if (SelectedCategoryId > 0)
             {
                 var category = (RecipeCategoryType)SelectedCategoryId;
                 recipes = Craft.GetRecipesBySkillAndCategory(_skill, category);
             }
-            // Neither filters selected
             else
             {
-                recipes = Craft.GetAllRecipes();
+                recipes = Craft.GetAllRecipesBySkill(_skill);
             }
 
             // Search text filter
@@ -210,7 +210,7 @@ namespace XM.Progression.Craft.UI
             {
                 if (Craft.CanPlayerCraftRecipe(Player, type))
                 {
-                    var name = $"{ItemCache.GetItemNameByResref(detail.Resref)} [{LocaleString.Lv.ToLocalizedString()}. {detail.Level}]";
+                    var name = $"{ItemCache.GetItemNameByResref(detail.Resref)} [{LocaleString.Lv.ToLocalizedString()} {detail.Level}]";
 
                     recipeNames.Add(name);
                     recipeToggles.Add(false);
@@ -232,10 +232,10 @@ namespace XM.Progression.Craft.UI
 
             // Always add page 1. In the event no recipes are found,
             // it still needs to be displayed.
-            pageNumbers.Add(new NuiComboEntry($"Page 1", 0));
+            pageNumbers.Add(new NuiComboEntry(LocaleString.PageX.ToLocalizedString(1), 0));
             for (var x = 2; x <= pages; x++)
             {
-                pageNumbers.Add(new NuiComboEntry($"Page {x}", x - 1));
+                pageNumbers.Add(new NuiComboEntry(LocaleString.PageX.ToLocalizedString(x), x - 1));
             }
 
             PageNumbers = pageNumbers;

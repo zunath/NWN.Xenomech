@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
+using XM.Inventory;
 using XM.Progression.Craft;
 using XM.Progression.Craft.Entity;
 using XM.Shared.Core;
@@ -17,13 +18,16 @@ namespace XM.Plugin.Item.ItemDefinition
 
         private readonly DBService _db;
         private readonly CraftService _craft;
+        private readonly ItemCacheService _itemCache;
 
         public RecipeItemDefinition(
             DBService db,
-            CraftService craft)
+            CraftService craft,
+            ItemCacheService itemCache)
         {
             _db = db;
             _craft = craft;
+            _itemCache = itemCache;
         }
 
         public Dictionary<string, ItemDetail> BuildItems()
@@ -71,7 +75,8 @@ namespace XM.Plugin.Item.ItemDefinition
                     dbPlayerCraft.LearnedRecipes.Add(recipeType);
                     _db.Set(dbPlayerCraft);
 
-                    var message = LocaleString.RecipeLearnedX.ToLocalizedString(recipeDetail.Name);
+                    var name = _itemCache.GetItemNameByResref(recipeDetail.Resref);
+                    var message = LocaleString.RecipeLearnedX.ToLocalizedString(name);
                     SendMessageToPC(user, message);
                 });
         }

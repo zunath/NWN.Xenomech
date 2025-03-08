@@ -1548,5 +1548,6 @@ namespace XM.Shared.Core.Localization
         COMPONENTS = 1861,
         REQUIREMENTS = 1862,
         PROPERTIES = 1863,
+        Select = 1864,
     }
 }

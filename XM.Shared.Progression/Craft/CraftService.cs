@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using Anvil.Services;
+using NLog;
 using XM.Inventory;
 using XM.Progression.Craft.Entity;
 using XM.Progression.Craft.UI;
@@ -19,6 +19,8 @@ namespace XM.Progression.Craft
     [ServiceBinding(typeof(CraftService))]
     public class CraftService
     {
+        private static Logger _log = LogManager.GetCurrentClassLogger();
+
         private static readonly Color _cyan = new(0, 255, 255);
         private static readonly Color _white = new(255, 255, 255);
         private static readonly Color _red = new(255, 0, 0);
@@ -92,7 +94,13 @@ namespace XM.Progression.Craft
                 var recipes = definition.BuildRecipes();
                 foreach (var (recipeType, recipe) in recipes)
                 {
-                    recipe.Name = _itemCache.GetItemNameByResref(recipe.Resref);
+                    if (_recipes.ContainsKey(recipeType))
+                    {
+                        _log.Error($"ERROR: Duplicate recipe detected: {recipeType}");
+                        continue;
+                    }
+
+                    _recipes[recipeType] = recipe;
 
                     // Organize recipes by skill.
                     if (!_recipesBySkill.ContainsKey(recipe.Skill))
@@ -146,10 +154,13 @@ namespace XM.Progression.Craft
             return _recipesBySkillAndCategory[skill][category].ToDictionary(x => x.Key, y => y.Value);
         }
 
-        public Dictionary<RecipeType, RecipeDetail> GetAllRecipes()
+        public Dictionary<RecipeType, RecipeDetail> GetAllRecipesBySkill(SkillType skill)
         {
-            return _recipes;
+            return _recipesBySkill.ContainsKey(skill) 
+                ? _recipesBySkill[skill]
+                : new Dictionary<RecipeType, RecipeDetail>();
         }
+
         public bool CanPlayerCraftRecipe(uint player, RecipeType recipeType)
         {
             var recipe = GetRecipe(recipeType);
