@@ -7460,6 +7460,30 @@
     {
       "id": 1868,
       "text": "You create {0}x {1}!"
+    },
+    {
+      "id": 1869,
+      "text": "You can only learn two crafting skills. Would you like {0} to be your first one?"
+    },
+    {
+      "id": 1870,
+      "text": "You can only learn two crafting skills. Would you like {0} to be your second one?"
+    },
+    {
+      "id": 1871,
+      "text": "You cannot use that skill."
+    },
+    {
+      "id": 1872,
+      "text": "Select Craft Skill"
+    },
+    {
+      "id": 1873,
+      "text": "Confirm"
+    },
+    {
+      "id": 1874,
+      "text": "You learn the {0} skill!"
     }
   ]
 }

@@ -165,6 +165,8 @@ namespace XM.Progression.Craft
         public bool CanPlayerCraftRecipe(uint player, RecipeType recipeType)
         {
             const int MaxDelta = -10;
+            var playerId = PlayerId.Get(player);
+            var dbPlayerCraft = _db.Get<PlayerCraft>(playerId);
             var recipe = GetRecipe(recipeType);
             var skill = _skill.GetCraftSkillLevel(player, recipe.Skill);
             var delta = skill - recipe.Level;
@@ -174,11 +176,14 @@ namespace XM.Progression.Craft
                 return false;
             }
 
+            if (dbPlayerCraft.PrimaryCraftSkill != recipe.Skill &&
+                dbPlayerCraft.SecondaryCraftSkill != recipe.Skill)
+            {
+                return false;
+            }
+
             if (recipe.MustBeUnlocked)
             {
-                var playerId = PlayerId.Get(player);
-                var dbPlayerCraft = _db.Get<PlayerCraft>(playerId);
-
                 return dbPlayerCraft.LearnedRecipes.Contains(recipeType);
             }
 
@@ -188,6 +193,8 @@ namespace XM.Progression.Craft
         public bool CanPlayerSkillUp(uint player, RecipeType recipeType)
         {
             const int MaxDelta = 5;
+            var playerId = PlayerId.Get(player);
+            var dbPlayerCraft = _db.Get<PlayerCraft>(playerId);
             var recipe = GetRecipe(recipeType);
             var skill = _skill.GetCraftSkillLevel(player, recipe.Skill);
             var definition = _skill.GetCraftSkillDefinition(recipe.Skill);
@@ -195,6 +202,12 @@ namespace XM.Progression.Craft
 
             if (delta > MaxDelta)
                 return false;
+
+            if (dbPlayerCraft.PrimaryCraftSkill != recipe.Skill &&
+                dbPlayerCraft.SecondaryCraftSkill != recipe.Skill)
+            {
+                return false;
+            }
 
             if (skill >= definition.LevelCap)
                 return false;
@@ -314,8 +327,26 @@ namespace XM.Progression.Craft
 
             var device = OBJECT_SELF;
             var skillType = (SkillType)GetLocalInt(device, "SKILL_ID");
-            var payload = new CraftPayload(skillType);
-            _gui.Value.ShowWindow<CraftView>(player, payload, device);
+            var playerId = PlayerId.Get(player);
+            var dbPlayerCraft = _db.Get<PlayerCraft>(playerId);
+
+            if (dbPlayerCraft.PrimaryCraftSkill == skillType ||
+                dbPlayerCraft.SecondaryCraftSkill == skillType)
+            {
+                var payload = new CraftPayload(skillType);
+                _gui.Value.ShowWindow<CraftView>(player, payload, device);
+            }
+            else if (dbPlayerCraft.PrimaryCraftSkill == SkillType.Invalid ||
+                     dbPlayerCraft.SecondaryCraftSkill == SkillType.Invalid)
+            {
+                var payload = new SelectCraftPayload(skillType);
+                _gui.Value.ShowWindow<SelectCraftView>(player, payload, device);
+            }
+            else
+            {
+                var message = ColorToken.Red(LocaleString.YouCannotUseThatSkill.ToLocalizedString());
+                SendMessageToPC(player, message);
+            }
         }
 
         public RecipeDetail GetRecipe(RecipeType recipeType)

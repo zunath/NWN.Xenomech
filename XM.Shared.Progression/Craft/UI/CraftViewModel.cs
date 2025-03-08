@@ -12,9 +12,7 @@ using XM.Shared.Core.Activity;
 using XM.Shared.Core.Localization;
 using XM.UI;
 using Action = System.Action;
-using NLog;
 using XM.Shared.API.NWNX.PlayerPlugin;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace XM.Progression.Craft.UI
 {
@@ -24,7 +22,6 @@ namespace XM.Progression.Craft.UI
         ViewModel<CraftViewModel>, 
         IRefreshable
     {
-        private static readonly Logger _log = LogManager.GetCurrentClassLogger();
         private static readonly Color _red = new(255, 0, 0);
         private static readonly Color _green = new(0, 255, 0);
 
@@ -533,8 +530,6 @@ namespace XM.Progression.Craft.UI
             {
                 Craft.LevelUpCraftSkill(Player, _skill);
             }
-
-            _log.Info($"{GetName(Player)} ({GetObjectUUID(Player)}) failed to craft '{itemName}'.");
         }
 
         public Action OnClickCraft() => () =>

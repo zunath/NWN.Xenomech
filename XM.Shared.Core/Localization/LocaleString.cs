@@ -1553,5 +1553,12 @@ namespace XM.Shared.Core.Localization
         YouCannotCraftThatItem = 1866,
         FailedToCraftTheItem = 1867,
         YouCreateXxY = 1868,
+        YouCanOnlyLearnTwoCraftingSkillsWouldYouLikeXToBeYourFirstOne = 1869,
+        YouCanOnlyLearnTwoCraftingSkillsWouldYouLikeXToBeYourSecondOne = 1870,
+        YouCannotUseThatSkill = 1871,
+        SelectCraftSkill = 1872,
+        Confirm = 1873,
+        YouLearnTheXSkill = 1874,
+        AreYouSureYouWantToLearnTheXCraftSkill = 1875,
     }
 }
