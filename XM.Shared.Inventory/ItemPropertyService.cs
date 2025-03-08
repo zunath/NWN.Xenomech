@@ -3,6 +3,7 @@ using System.Text;
 using Anvil.API;
 using Anvil.Services;
 using XM.Shared.API.Constants;
+using XM.Shared.Core;
 using XM.Shared.Core.EventManagement;
 using BaseItemType = XM.Shared.API.Constants.BaseItemType;
 using ItemPropertyType = XM.Shared.API.Constants.ItemPropertyType;
@@ -61,6 +62,19 @@ namespace XM.Inventory
             }
 
             return sb.ToString();
+        }
+        public XMBindingList<string> BuildItemPropertyList(uint item)
+        {
+            var list = new XMBindingList<string>();
+            var sb = new StringBuilder();
+            for (var ip = GetFirstItemProperty(item); GetIsItemPropertyValid(ip); ip = GetNextItemProperty(item))
+            {
+                BuildSingleItemPropertyString(sb, ip);
+                list.Add(sb.ToString());
+                sb.Clear();
+            }
+
+            return list;
         }
 
         private void BuildSingleItemPropertyString(StringBuilder sb, ItemProperty ip)

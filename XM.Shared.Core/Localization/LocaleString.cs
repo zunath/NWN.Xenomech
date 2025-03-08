@@ -1544,5 +1544,9 @@ namespace XM.Shared.Core.Localization
         Assembler = 1857,
         Extractor = 1858,
         Harvester = 1859,
+        RecipeMustBeLearned = 1860,
+        COMPONENTS = 1861,
+        REQUIREMENTS = 1862,
+        PROPERTIES = 1863,
     }
 }

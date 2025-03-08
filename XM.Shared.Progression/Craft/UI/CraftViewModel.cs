@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Anvil.API;
+using XM.Inventory;
 using XM.Progression.Skill;
-using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Localization;
 using XM.UI;
@@ -11,13 +11,15 @@ using Action = System.Action;
 
 namespace XM.Progression.Craft.UI
 {
+    [ServiceBinding(typeof(IViewModel))]
+    [ServiceBinding(typeof(IRefreshable))]
     internal class CraftViewModel: 
         ViewModel<CraftViewModel>, 
         IRefreshable
     {
         private int _currentRecipeIndex;
         private readonly List<RecipeType> _recipeTypes = new();
-        private const int RecordsPerPage = 20;
+        private const int RecordsPerPage = 40;
         private bool _skipPaginationSearch;
         private SkillType _skill;
 
@@ -26,6 +28,9 @@ namespace XM.Progression.Craft.UI
 
         [Inject]
         public CraftService Craft { get; set; }
+
+        [Inject]
+        public ItemCacheService ItemCache { get; set; }
 
         public string Title
         {
@@ -97,6 +102,11 @@ namespace XM.Progression.Craft.UI
         public string RecipeLevel
         {
             get => Get<string>();
+            set => Set(value);
+        }
+        public bool CanCraftRecipe
+        {
+            get => Get<bool>();
             set => Set(value);
         }
 
@@ -179,7 +189,7 @@ namespace XM.Progression.Craft.UI
             {
                 recipes = recipes
                     .Where(x =>
-                        Cache.GetItemNameByResref(x.Value.Resref)
+                        ItemCache.GetItemNameByResref(x.Value.Resref)
                             .ToLower()
                             .Contains(SearchText.ToLower()))
                     .ToDictionary(x => x.Key, y => y.Value);
@@ -193,19 +203,19 @@ namespace XM.Progression.Craft.UI
                 .ToDictionary(x => x.Key, y => y.Value);
 
             var recipeNames = new XMBindingList<string>();
-            var recipeColors = new XMBindingList<Color>();
             var recipeToggles = new XMBindingList<bool>();
             _recipeTypes.Clear();
 
             foreach (var (type, detail) in recipes)
             {
-                var canCraft = Craft.CanPlayerCraftRecipe(Player, type);
-                var name = $"{Cache.GetItemNameByResref(detail.Resref)} [Lvl. {detail.Level}]";
+                if (Craft.CanPlayerCraftRecipe(Player, type))
+                {
+                    var name = $"{ItemCache.GetItemNameByResref(detail.Resref)} [{LocaleString.Lv.ToLocalizedString()}. {detail.Level}]";
 
-                recipeNames.Add(name);
-                recipeColors.Add(canCraft ? Color.Green : Color.Red);
-                recipeToggles.Add(false);
-                _recipeTypes.Add(type);
+                    recipeNames.Add(name);
+                    recipeToggles.Add(false);
+                    _recipeTypes.Add(type);
+                }
             }
 
             RecipeNames = recipeNames;
@@ -291,18 +301,18 @@ namespace XM.Progression.Craft.UI
             LoadRecipeDetail();
         };
 
-        public Action OnClickCraftOrResearch() => () =>
+        public Action OnClickCraft() => () =>
         {
         };
 
         private void DisplayRecipeDetail(RecipeType recipe)
         {
             var detail = Craft.GetRecipe(recipe);
-            var itemName = Cache.GetItemNameByResref(detail.Resref);
+            var itemName = ItemCache.GetItemNameByResref(detail.Resref);
 
             RecipeName = $"Recipe: {detail.Quantity}x {itemName}";
             RecipeLevel = $"Level: {detail.Level}";
-            var (recipeDetails, recipeDetailColors) = Craft.BuildRecipeDetail(Player, recipe, blueprint);
+            var (recipeDetails, recipeDetailColors) = Craft.BuildRecipeDetail(Player, recipe);
 
             RecipeDetails = recipeDetails;
             RecipeDetailColors = recipeDetailColors;

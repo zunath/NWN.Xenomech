@@ -3,19 +3,26 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using Anvil.Services;
+using XM.Inventory;
+using XM.Progression.Craft.Entity;
 using XM.Progression.Craft.UI;
 using XM.Progression.Skill;
 using XM.Shared.Core;
+using XM.Shared.Core.Data;
 using XM.Shared.Core.Extension;
 using XM.Shared.Core.Localization;
 using XM.UI;
+using Color = Anvil.API.Color;
 
 namespace XM.Progression.Craft
 {
     [ServiceBinding(typeof(CraftService))]
     public class CraftService
     {
-        private const string TempStorageTag = "TEMP_ITEM_STORAGE";
+        private static readonly Color _cyan = new(0, 255, 255);
+        private static readonly Color _white = new(255, 255, 255);
+        private static readonly Color _red = new(255, 0, 0);
+        private static readonly Color _green = new(0, 255, 0);
 
         private readonly IList<IRecipeListDefinition> _recipeLists;
         private readonly Dictionary<RecipeType, RecipeDetail> _recipes = new();
@@ -25,16 +32,25 @@ namespace XM.Progression.Craft
         private static readonly Dictionary<SkillType, Dictionary<RecipeCategoryType, Dictionary<RecipeType, RecipeDetail>>> _recipesBySkillAndCategory = new();
         private static readonly Dictionary<SkillType, Dictionary<RecipeCategoryType, RecipeCategoryAttribute>> _categoriesBySkill = new();
         private static readonly HashSet<string> _componentResrefs = new();
-        private readonly GuiService _gui;
+        private readonly DBService _db;
+        private readonly Lazy<GuiService> _gui;
         private readonly SkillService _skill;
+        private readonly ItemPropertyService _itemProperty;
+        private readonly ItemCacheService _itemCache;
 
         public CraftService(
-            GuiService gui,
+            DBService db,
+            Lazy<GuiService> gui,
             SkillService skill,
+            ItemPropertyService itemProperty,
+            ItemCacheService itemCache,
             IList<IRecipeListDefinition> recipeLists)
         {
+            _db = db;
             _gui = gui;
             _skill = skill;
+            _itemProperty = itemProperty;
+            _itemCache = itemCache;
             _recipeLists = recipeLists;
 
             RegisterEvents();
@@ -69,26 +85,14 @@ namespace XM.Progression.Craft
             Console.WriteLine($"Loaded {_allCategories.Count} recipe category types.");
         }
 
-        private uint GetTempStorage()
-        {
-            var storage = GetObjectByTag(TempStorageTag);
-
-            return storage;
-        }
-
         private void CacheRecipes()
         {
-            var storage = GetTempStorage();
-
             foreach (var definition in _recipeLists)
             {
                 var recipes = definition.BuildRecipes();
                 foreach (var (recipeType, recipe) in recipes)
                 {
-                    var item = CreateItemOnObject(recipe.Resref, storage);
-                    var name = GetName(item);
-                    DestroyObject(item);
-                    recipe.Name = name;
+                    recipe.Name = _itemCache.GetItemNameByResref(recipe.Resref);
 
                     // Organize recipes by skill.
                     if (!_recipesBySkill.ContainsKey(recipe.Skill))
@@ -150,56 +154,77 @@ namespace XM.Progression.Craft
         {
             var recipe = GetRecipe(recipeType);
 
+            if (recipe.MustBeUnlocked)
+            {
+                var playerId = PlayerId.Get(player);
+                var dbPlayerCraft = _db.Get<PlayerCraft>(playerId);
 
+                return dbPlayerCraft.LearnedRecipes.Contains(recipeType);
+            }
 
             return true;
         }
+
+        private bool HasUnlockedRecipe(uint player, RecipeType recipeType)
+        {
+            var detail = _recipes[recipeType];
+
+            if (!detail.MustBeUnlocked)
+                return true;
+
+            var playerId = PlayerId.Get(player);
+            var dbPlayerCraft = _db.Get<PlayerCraft>(playerId);
+            return dbPlayerCraft.LearnedRecipes.Contains(recipeType);
+        }
+
         public (XMBindingList<string>, XMBindingList<Color>) BuildRecipeDetail(uint player, RecipeType recipe)
         {
             var detail = GetRecipe(recipe);
             var recipeDetails = new XMBindingList<string>();
             var recipeDetailColors = new XMBindingList<Color>();
 
-            recipeDetails.Add("[COMPONENTS]");
-            recipeDetailColors.Add(Color.Cyan);
+            recipeDetails.Add(LocaleString.COMPONENTS.ToLocalizedString());
+            recipeDetailColors.Add(_cyan);
             foreach (var (resref, quantity) in detail.Components)
             {
-                var componentName = Cache.GetItemNameByResref(resref);
+                var componentName = _itemCache.GetItemNameByResref(resref);
                 recipeDetails.Add($"{quantity}x {componentName}");
-                recipeDetailColors.Add(Color.White);
+                recipeDetailColors.Add(_white);
             }
 
             recipeDetails.Add(string.Empty);
-            recipeDetailColors.Add(Color.Green);
+            recipeDetailColors.Add(_green);
 
-            recipeDetails.Add("[REQUIREMENTS]");
-            recipeDetailColors.Add(Color.Cyan);
-            foreach (var req in detail.Requirements)
+            recipeDetails.Add(LocaleString.REQUIREMENTS.ToLocalizedString());
+            recipeDetailColors.Add(_cyan);
+
+            if (detail.MustBeUnlocked)
             {
-                recipeDetails.Add(req.RequirementText);
-                recipeDetailColors.Add(string.IsNullOrWhiteSpace(req.CheckRequirements(player))
-                    ? Color.Green
-                    : Color.Red);
+                recipeDetails.Add(LocaleString.RecipeMustBeLearned.ToLocalizedString());
+
+                recipeDetailColors.Add(HasUnlockedRecipe(player, recipe) 
+                    ? _green 
+                    : _red);
             }
 
             recipeDetails.Add(string.Empty);
-            recipeDetailColors.Add(Color.Green);
+            recipeDetailColors.Add(_green);
 
-            recipeDetails.Add("[PROPERTIES]");
-            recipeDetailColors.Add(Color.Cyan);
+            recipeDetails.Add(LocaleString.PROPERTIES.ToLocalizedString());
+            recipeDetailColors.Add(_cyan);
             var tempStorage = GetObjectByTag("TEMP_ITEM_STORAGE");
             var item = CreateItemOnObject(detail.Resref, tempStorage);
 
-            foreach (var ip in Item.BuildItemPropertyList(item))
+            foreach (var ip in _itemProperty.BuildItemPropertyList(item))
             {
                 recipeDetails.Add(ip);
-                recipeDetailColors.Add(Color.White);
+                recipeDetailColors.Add(_white);
             }
 
             DestroyObject(item);
 
             recipeDetails.Add(string.Empty);
-            recipeDetailColors.Add(Color.White);
+            recipeDetailColors.Add(_white);
 
             return (recipeDetails, recipeDetailColors);
         }
@@ -219,7 +244,7 @@ namespace XM.Progression.Craft
             var device = OBJECT_SELF;
             var skillType = (SkillType)GetLocalInt(device, "SKILL_ID");
             var payload = new CraftPayload(skillType);
-            _gui.ShowWindow<CraftView>(player, payload, device);
+            _gui.Value.ShowWindow<CraftView>(player, payload, device);
         }
 
         public RecipeDetail GetRecipe(RecipeType recipeType)

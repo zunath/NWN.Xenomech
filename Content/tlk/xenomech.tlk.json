@@ -7424,6 +7424,22 @@
     {
       "id": 1859,
       "text": "Harvester"
+    },
+    {
+      "id": 1860,
+      "text": "Recipe must be learned."
+    },
+    {
+      "id": 1861,
+      "text": "[COMPONENTS]"
+    },
+    {
+      "id": 1862,
+      "text": "[REQUIREMENTS]"
+    },
+    {
+      "id": 1863,
+      "text": "[PROPERTIES]"
     }
   ]
 }
