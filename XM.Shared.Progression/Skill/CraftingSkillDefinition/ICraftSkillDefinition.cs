@@ -6,6 +6,7 @@ namespace XM.Progression.Skill.CraftingSkillDefinition
     {
         SkillType Type { get; }
         LocaleString Name { get; }
+        LocaleString DeviceName { get; }
         string IconResref { get; }
         int LevelCap { get; }
     }

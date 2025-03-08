@@ -8,6 +8,7 @@ namespace XM.Progression.Skill.CraftingSkillDefinition
     {
         public SkillType Type => SkillType.Synthesis;
         public LocaleString Name => LocaleString.Synthesis;
+        public LocaleString DeviceName => LocaleString.CatalystLab;
         public string IconResref => "ife_synthesis";
         public int LevelCap => 100;
     }

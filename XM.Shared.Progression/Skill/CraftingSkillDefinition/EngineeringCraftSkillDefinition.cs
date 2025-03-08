@@ -8,6 +8,7 @@ namespace XM.Progression.Skill.CraftingSkillDefinition
     {
         public SkillType Type => SkillType.Engineering;
         public LocaleString Name => LocaleString.Engineering;
+        public LocaleString DeviceName => LocaleString.Assembler;
         public string IconResref => "ife_engineering";
         public int LevelCap => 100;
     }

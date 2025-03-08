@@ -8,6 +8,7 @@ namespace XM.Progression.Skill.CraftingSkillDefinition
     {
         public SkillType Type => SkillType.Fabrication;
         public LocaleString Name => LocaleString.Fabrication;
+        public LocaleString DeviceName => LocaleString.Fabricator;
         public string IconResref => "ife_fabrication";
         public int LevelCap => 100;
     }

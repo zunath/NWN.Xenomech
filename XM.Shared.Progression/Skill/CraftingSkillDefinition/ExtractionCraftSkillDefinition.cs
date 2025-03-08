@@ -8,6 +8,7 @@ namespace XM.Progression.Skill.CraftingSkillDefinition
     {
         public SkillType Type => SkillType.Extraction;
         public LocaleString Name => LocaleString.Extraction;
+        public LocaleString DeviceName => LocaleString.Extractor;
         public string IconResref => "ife_extraction";
         public int LevelCap => 100;
     }

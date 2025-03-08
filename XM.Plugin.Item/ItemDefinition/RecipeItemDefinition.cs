@@ -11,7 +11,7 @@ namespace XM.Plugin.Item.ItemDefinition
     [ServiceBinding(typeof(IItemListDefinition))]
     internal class RecipeItemDefinition: IItemListDefinition
     {
-        private const string RecipeID = "RECIPE_ID";
+        private const string RecipeId = "RECIPE_ID";
 
         private readonly ItemBuilder _builder = new();
 
@@ -45,7 +45,7 @@ namespace XM.Plugin.Item.ItemDefinition
                         return LocaleString.OnlyPlayersMayUseThisItem.ToLocalizedString();
                     }
 
-                    var recipeId = GetLocalInt(item, RecipeID);
+                    var recipeId = GetLocalInt(item, RecipeId);
                     if (recipeId <= 0)
                     {
                         return LocaleString.ItemMisconfiguredError.ToLocalizedString();
@@ -65,7 +65,7 @@ namespace XM.Plugin.Item.ItemDefinition
                 {
                     var playerId = PlayerId.Get(user);
                     var dbPlayerCraft = _db.Get<PlayerCraft>(playerId);
-                    var recipeType = (RecipeType)GetLocalInt(item, RecipeID);
+                    var recipeType = (RecipeType)GetLocalInt(item, RecipeId);
                     var recipeDetail = _craft.GetRecipe(recipeType);
 
                     dbPlayerCraft.LearnedRecipes.Add(recipeType);

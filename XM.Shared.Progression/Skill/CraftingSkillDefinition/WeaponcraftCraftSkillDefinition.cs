@@ -8,6 +8,7 @@ namespace XM.Progression.Skill.CraftingSkillDefinition
     {
         public SkillType Type => SkillType.Weaponcraft;
         public LocaleString Name => LocaleString.Weaponcraft;
+        public LocaleString DeviceName => LocaleString.Pulseforge;
         public string IconResref => "ife_weaponcraft";
         public int LevelCap => 100;
     }

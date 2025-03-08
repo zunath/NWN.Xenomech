@@ -7372,6 +7372,58 @@
     {
       "id": 1846,
       "text": "Uncategorized"
+    },
+    {
+      "id": 1847,
+      "text": "Only players may use this item."
+    },
+    {
+      "id": 1848,
+      "text": "You already learned this recipe."
+    },
+    {
+      "id": 1849,
+      "text": "This item is misconfigured. Please submit a bug report with the /bug command."
+    },
+    {
+      "id": 1850,
+      "text": "Recipe Learned: {0}"
+    },
+    {
+      "id": 1851,
+      "text": "Craft Menu"
+    },
+    {
+      "id": 1852,
+      "text": "Craft"
+    },
+    {
+      "id": 1853,
+      "text": "Pulseforge"
+    },
+    {
+      "id": 1854,
+      "text": "Foundry"
+    },
+    {
+      "id": 1855,
+      "text": "Fabricator"
+    },
+    {
+      "id": 1856,
+      "text": "Catalyst Lab"
+    },
+    {
+      "id": 1857,
+      "text": "Assembler"
+    },
+    {
+      "id": 1858,
+      "text": "Extractor"
+    },
+    {
+      "id": 1859,
+      "text": "Harvester"
     }
   ]
 }

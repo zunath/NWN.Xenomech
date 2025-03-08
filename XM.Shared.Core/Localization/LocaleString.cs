@@ -1535,5 +1535,14 @@ namespace XM.Shared.Core.Localization
         YouAlreadyLearnedThisRecipe = 1848,
         ItemMisconfiguredError = 1849,
         RecipeLearnedX = 1850,
+        CraftMenu = 1851,
+        Craft = 1852,
+        Pulseforge = 1853,
+        Foundry = 1854,
+        Fabricator = 1855,
+        CatalystLab = 1856,
+        Assembler = 1857,
+        Extractor = 1858,
+        Harvester = 1859,
     }
 }

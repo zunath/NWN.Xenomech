@@ -8,6 +8,7 @@ namespace XM.Progression.Skill.CraftingSkillDefinition
     {
         public SkillType Type => SkillType.Armorcraft;
         public LocaleString Name => LocaleString.Armorcraft;
+        public LocaleString DeviceName => LocaleString.Foundry;
         public string IconResref => "ife_armorcraft";
         public int LevelCap => 100;
     }
