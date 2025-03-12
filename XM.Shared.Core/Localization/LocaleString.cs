@@ -1560,5 +1560,9 @@ namespace XM.Shared.Core.Localization
         Confirm = 1873,
         YouLearnTheXSkill = 1874,
         AreYouSureYouWantToLearnTheXCraftSkill = 1875,
+        // 1876-2276 are numbers
+        Max = 2277,
+        ItemCondition = 2278,
+        DurabilityMessage = 2279,
     }
 }
