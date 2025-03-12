@@ -44,3 +44,4 @@
 40    IPRP_NPERC1        NegativePercent           0            
 41    IPRP_HP            HP                        0            
 42    IPRP_PNPER         PositiveNegativePercent   0            
+43    IPRP_DUR           Durability                0            
