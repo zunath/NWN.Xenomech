@@ -5,6 +5,8 @@ namespace XM.Inventory.Durability
 {
     internal class ItemDurability
     {
+        private const int DurabilityCap = 500;
+
         public uint Item { get; }
         private int _currentDurability;
 
@@ -16,6 +18,8 @@ namespace XM.Inventory.Durability
                 _currentDurability = value;
                 if (_currentDurability < 0)
                     _currentDurability = 0;
+                else if (_currentDurability > DurabilityCap)
+                    _currentDurability = DurabilityCap;
             }
         }
         public int MaxDurability { get; set; }
@@ -37,7 +41,7 @@ namespace XM.Inventory.Durability
                 if (type == ItemPropertyType.Durability)
                 {
                     CurrentDurability = GetItemPropertyCostTableValue(ip);
-                    MaxDurability = (GetItemPropertyParam1Value(ip) + 1) * 10;
+                    MaxDurability = GetItemPropertyParam1Value(ip) * 10;
                 }
                 else if (type == ItemPropertyType.Condition)
                 {

@@ -86,9 +86,15 @@ namespace XM.Inventory.Durability
             SendMessageToPC(creature, ColorToken.Red(message));
         }
 
-        private void RestoreDurability(uint item, int amount)
+        private void RestoreDurability(uint creature, uint item, int amount)
         {
+            var durability = new ItemDurability(item);
+            durability.CurrentDurability += amount;
+            durability.SaveProperties();
 
+            var itemName = GetName(item);
+            var message = LocaleString.DurabilityMessage.ToLocalizedString(itemName, durability.CurrentDurability, durability.MaxDurability);
+            SendMessageToPC(creature, ColorToken.Green(message));
         }
 
         [ScriptHandler("bread_test3")]
