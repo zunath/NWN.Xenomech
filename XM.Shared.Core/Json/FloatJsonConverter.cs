@@ -17,7 +17,7 @@ namespace XM.Shared.Core.Json
 
         public override void Write(Utf8JsonWriter writer, float value, JsonSerializerOptions options)
         {
-            writer.WriteRawValue(value.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture));
+            writer.WriteRawValue(value.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture));
         }
     }
 }

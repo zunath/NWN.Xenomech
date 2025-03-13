@@ -19,7 +19,7 @@ namespace XM.Progression.Stat
             var total = 0;
             foreach (var (_, item) in this)
             {
-                total += item.Stats[type];
+                total += (int)(item.Stats[type] * item.Condition);
             }
 
             return total;
@@ -31,7 +31,7 @@ namespace XM.Progression.Stat
 
             foreach (var (_, item) in this)
             {
-                resist += item.Resists[resistType];
+                resist += (int)(item.Resists[resistType] * item.Condition);
             }
 
             return resist;

@@ -1,5 +1,6 @@
 ﻿using Anvil.API;
 using Anvil.Services;
+using XM.Inventory.Event;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.EventManagement;
@@ -21,7 +22,13 @@ namespace XM.Inventory.Durability
             _event = @event;
             _itemType = itemType;
 
+            RegisterEvents();
             SubscribeEvents();
+        }
+
+        private void RegisterEvents()
+        {
+            _event.RegisterEvent<InventoryEvent.ItemDurabilityChangedEvent>(InventoryEventScript.DurabilityChangedScript);
         }
 
         private void SubscribeEvents()
@@ -84,6 +91,9 @@ namespace XM.Inventory.Durability
             var itemName = GetName(item);
             var message = LocaleString.DurabilityMessage.ToLocalizedString(itemName, durability.CurrentDurability, durability.MaxDurability);
             SendMessageToPC(creature, ColorToken.Red(message));
+
+            var slot = GetInventorySlot(creature, item);
+            _event.PublishEvent(creature, new InventoryEvent.ItemDurabilityChangedEvent(item, slot, durability.Condition));
         }
 
         private void RestoreDurability(uint creature, uint item, int amount)
@@ -95,13 +105,30 @@ namespace XM.Inventory.Durability
             var itemName = GetName(item);
             var message = LocaleString.DurabilityMessage.ToLocalizedString(itemName, durability.CurrentDurability, durability.MaxDurability);
             SendMessageToPC(creature, ColorToken.Green(message));
+
+            var slot = GetInventorySlot(creature, item);
+            _event.PublishEvent(creature, new InventoryEvent.ItemDurabilityChangedEvent(item, slot, durability.Condition));
+        }
+
+        private InventorySlotType GetInventorySlot(uint creature, uint item)
+        {
+            for (var index = 0; index < GeneralConstants.NumberOfInventorySlots; index++)
+            {
+                var itemSlot = (InventorySlotType)index;
+                if (GetItemInSlot(itemSlot, creature) == item)
+                {
+                    return itemSlot;
+                }
+            }
+
+            return InventorySlotType.Invalid;
         }
 
         [ScriptHandler("bread_test3")]
         public void DurabilityReduceTest()
         {
             var player = GetLastUsedBy();
-            var item = GetItemInSlot(InventorySlotType.RightHand, player);
+            var item = GetItemInSlot(InventorySlotType.Chest, player);
 
             ReduceDurability(player, item);
         }

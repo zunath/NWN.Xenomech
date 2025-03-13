@@ -45,7 +45,7 @@ namespace XM.Inventory.Durability
                 }
                 else if (type == ItemPropertyType.Condition)
                 {
-                    Condition = GetItemPropertyCostTableValue(ip) * 0.01f;
+                    Condition = 1f - GetItemPropertyCostTableValue(ip) * 0.01f;
                 }
             }
         }
@@ -70,6 +70,8 @@ namespace XM.Inventory.Durability
                     RemoveItemProperty(Item, ip);
                 }
             }
+
+            Condition = 1f;
         }
 
         private void ApplyCondition()
@@ -96,6 +98,8 @@ namespace XM.Inventory.Durability
 
             var condition = ItemPropertyCustom(ItemPropertyType.Condition, -1, conditionId);
             BiowareXP2.IPSafeAddItemProperty(Item, condition, 0f, AddItemPropertyPolicy.ReplaceExisting, true, true);
+
+            Condition = 1f - conditionId * 0.01f;
         }
     }
 }
