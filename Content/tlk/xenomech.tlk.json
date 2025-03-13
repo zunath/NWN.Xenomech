@@ -9304,6 +9304,30 @@
     {
       "id": 2329,
       "text": "/ 500"
+    },
+    {
+      "id": 2330,
+      "text": "Repair Item"
+    },
+    {
+      "id": 2331,
+      "text": "Are you sure you want to pay {0} credits to repair this item?"
+    },
+    {
+      "id": 2332,
+      "text": "Select an item from your inventory."
+    },
+    {
+      "id": 2333,
+      "text": "The item must be in your inventory."
+    },
+    {
+      "id": 2334,
+      "text": "That item does not need repairs."
+    },
+    {
+      "id": 2335,
+      "text": "cr"
     }
   ]
 }

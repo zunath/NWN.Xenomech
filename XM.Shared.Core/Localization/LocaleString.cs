@@ -1564,5 +1564,12 @@ namespace XM.Shared.Core.Localization
         Max = 2277,
         ItemCondition = 2278,
         DurabilityMessage = 2279,
+        // 2280-2329 are numbers
+        RepairItem = 2330,
+        RepairConfirmation = 2331,
+        SelectAnItemFromYourInventory = 2332,
+        TheItemMustBeInYourInventory = 2333,
+        ThatItemDoesNotNeedRepairs = 2334,
+        cr = 2335,
     }
 }
