@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Anvil.Services;
+using XM.Inventory.Event;
 using XM.Progression.Event;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
@@ -235,7 +236,9 @@ namespace XM.Progression.Stat
             _event.Subscribe<ModuleEvent.OnPlayerLeave>(OnPlayerLeave);
             _event.Subscribe<JobEvent.PlayerChangedJobEvent>(OnPlayerChangeJob);
             _event.Subscribe<JobEvent.PlayerLeveledUpEvent>(OnPlayerLevelUp);
+            _event.Subscribe<InventoryEvent.ItemDurabilityChangedEvent>(ItemDurabilityChanged);
         }
+
 
         private void OnInitializePlayer(uint player)
         {
@@ -298,6 +301,9 @@ namespace XM.Progression.Stat
                         break;
                     case ItemPropertyType.EtherAttack:
                         itemStat.Stats[StatType.EtherAttack] += GetItemPropertyCostTableValue(ip);
+                        break;
+                    case ItemPropertyType.Condition:
+                        itemStat.Condition = 1f - (GetItemPropertyCostTableValue(ip) * 0.01f);
                         break;
                 }
             }
@@ -1496,6 +1502,23 @@ namespace XM.Progression.Stat
 
                 SetLocalInt(creature, NPCEPStatVariable, GetMaxEP(creature));
             }
+        }
+
+        private void ItemDurabilityChanged(uint player)
+        {
+            if (!GetIsPC(player) || GetIsDM(player))
+                return;
+
+            var data = _event.GetEventData<InventoryEvent.ItemDurabilityChangedEvent>();
+            var slot = data.Slot;
+
+            var playerId = PlayerId.Get(player);
+            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
+            if (!dbPlayerStat.EquippedItemStats.ContainsKey(slot))
+                return;
+
+            dbPlayerStat.EquippedItemStats[slot].Condition = data.NewCondition;
+            _db.Set(dbPlayerStat);
         }
 
         [ScriptHandler("bread_test6")]

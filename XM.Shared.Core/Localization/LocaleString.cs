@@ -1560,5 +1560,20 @@ namespace XM.Shared.Core.Localization
         Confirm = 1873,
         YouLearnTheXSkill = 1874,
         AreYouSureYouWantToLearnTheXCraftSkill = 1875,
+        // 1876-2276 are numbers
+        Max = 2277,
+        ItemCondition = 2278,
+        DurabilityMessage = 2279,
+        // 2280-2329 are numbers
+        RepairItem = 2330,
+        RepairConfirmation = 2331,
+        SelectAnItemFromYourInventory = 2332,
+        TheItemMustBeInYourInventory = 2333,
+        ThatItemDoesNotNeedRepairs = 2334,
+        cr = 2335,
+        RepairXCredits = 2336,
+        Repair = 2337,
+        SelectAnItem = 2338,
+        InsufficientCredits = 2339,
     }
 }
