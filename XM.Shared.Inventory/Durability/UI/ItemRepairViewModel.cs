@@ -1,5 +1,6 @@
 ﻿using System;
 using Anvil.Services;
+using NRediSearch.Aggregation;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Localization;
@@ -9,10 +10,15 @@ namespace XM.Inventory.Durability.UI
 {
     internal class ItemRepairViewModel: ViewModel<ItemRepairViewModel>
     {
+        private const int PricePerRepairPoint = 1000;
+        private const string BlankTexture = "Blank";
         private uint _item;
 
         [Inject]
         public ItemTypeService ItemType { get; set; }
+
+        [Inject]
+        public ItemDurabilityService ItemDurability { get; set; }
 
         public string Name
         {
@@ -26,21 +32,30 @@ namespace XM.Inventory.Durability.UI
             set => Set(value);
         }
 
-        public string Durability
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
         public string Price
         {
             get => Get<string>();
             set => Set(value);
         }
 
+        public string RepairButtonText
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public bool IsRepairButtonEnabled
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
         public override void OnOpen()
         {
-            
+            ItemIconResref = BlankTexture;
+            IsRepairButtonEnabled = false;
+            Name = LocaleString.SelectAnItem.ToLocalizedString();
+            RepairButtonText = LocaleString.Repair.ToLocalizedString();
         }
 
         public override void OnClose()
@@ -50,10 +65,9 @@ namespace XM.Inventory.Durability.UI
 
         private int CalculateCost()
         {
-            const int PricePerPoint = 1000;
             var durability = new ItemDurability(_item);
             var pointsToRepair = durability.MaxDurability - durability.CurrentDurability;
-            var cost = PricePerPoint * pointsToRepair;
+            var cost = PricePerRepairPoint * pointsToRepair;
 
             return cost;
         }
@@ -81,10 +95,14 @@ namespace XM.Inventory.Durability.UI
 
                 ItemIconResref = ItemType.GetIconResref(item);
                 _item = item;
-                Name = GetName(item);
+                Name = $"{GetName(item)} ({durability.CurrentDurability} / {durability.MaxDurability})";
 
                 var cost = CalculateCost();
                 Price = $"{cost}" + LocaleString.cr;
+
+                RepairButtonText = LocaleString.RepairXCredits.ToLocalizedString(cost);
+                IsRepairButtonEnabled = true;
+                RepairButtonText = LocaleString.Repair.ToLocalizedString();
             });
         };
 
@@ -94,12 +112,24 @@ namespace XM.Inventory.Durability.UI
             var prompt = LocaleString.RepairConfirmation.ToLocalizedString(price);
             ShowModal(prompt, () =>
             {
+                price = CalculateCost();
+
+                if (GetGold(Player) < price)
+                {
+                    var message = LocaleString.InsufficientCredits.ToLocalizedString();
+                    SendMessageToPC(Player, message);
+                    return;
+                }
+
                 AssignCommand(Player, () => TakeGoldFromCreature(price, Player, true));
+
                 var durability = new ItemDurability(_item);
-                durability.CurrentDurability = durability.MaxDurability;
-                durability.SaveProperties();
+                ItemDurability.RestoreDurability(Player, _item, durability.MaxDurability);
 
                 _item = OBJECT_INVALID;
+                IsRepairButtonEnabled = false;
+                ItemIconResref = BlankTexture;
+                Name = LocaleString.SelectAnItem.ToLocalizedString();
             });
         };
     }

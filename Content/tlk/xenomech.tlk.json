@@ -9328,6 +9328,22 @@
     {
       "id": 2335,
       "text": "cr"
+    },
+    {
+      "id": 2336,
+      "text": "Repair ({0} cr)"
+    },
+    {
+      "id": 2337,
+      "text": "Repair"
+    },
+    {
+      "id": 2338,
+      "text": "Select an Item..."
+    },
+    {
+      "id": 2339,
+      "text": "Insufficient Credits"
     }
   ]
 }

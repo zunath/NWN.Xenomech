@@ -138,6 +138,13 @@
           "type": "cexostring",
           "value": "Alchemist's Apparatus"
         }
+      },
+      {
+        "__struct_id": 9,
+        "Comment": {
+          "type": "cexostring",
+          "value": ""
+        }
       }
     ]
   },

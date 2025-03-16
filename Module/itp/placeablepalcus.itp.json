@@ -230,6 +230,17 @@
                     "__struct_id": 0,
                     "NAME": {
                       "type": "cexostring",
+                      "value": "Repair Terminal"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "repair_terminal"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
                       "value": "Trash Can"
                     },
                     "RESREF": {

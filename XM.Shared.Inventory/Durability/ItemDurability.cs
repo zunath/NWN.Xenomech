@@ -20,6 +20,8 @@ namespace XM.Inventory.Durability
                     _currentDurability = 0;
                 else if (_currentDurability > DurabilityCap)
                     _currentDurability = DurabilityCap;
+                else if (_currentDurability > MaxDurability && MaxDurability > 0)
+                    _currentDurability = MaxDurability;
             }
         }
         public int MaxDurability { get; set; }

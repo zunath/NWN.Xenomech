@@ -1571,5 +1571,9 @@ namespace XM.Shared.Core.Localization
         TheItemMustBeInYourInventory = 2333,
         ThatItemDoesNotNeedRepairs = 2334,
         cr = 2335,
+        RepairXCredits = 2336,
+        Repair = 2337,
+        SelectAnItem = 2338,
+        InsufficientCredits = 2339,
     }
 }
