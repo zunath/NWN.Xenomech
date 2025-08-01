@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.CommandLineUtils" Version="1.1.1" />
-    <PackageReference Include="NWN.Anvil" Version="8193.37.0-dev.12.raf500cfc" />
+    <PackageReference Include="NWN.Anvil" Version="8193.37.2" />
   </ItemGroup>
 
   <ItemGroup>

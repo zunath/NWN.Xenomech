@@ -8,14 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ductus.FluentDocker" Version="2.10.59" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="9.0.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Interop" Version="17.12.40391" />
-    <PackageReference Include="Microsoft.VisualStudio.Shared.VSCodeDebugProtocol" Version="17.10.10123.1" />
+    <PackageReference Include="Ductus.FluentDocker" Version="2.85.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.0-preview.6.25358.103" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.0-preview.6.25358.103" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.0-preview.6.25358.103" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.0-preview.6.25358.103" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="10.0.0-preview.6.25358.103" />
+    <PackageReference Include="Microsoft.VisualStudio.Interop" Version="17.14.40260" />
+    <PackageReference Include="Microsoft.VisualStudio.Shared.VSCodeDebugProtocol" Version="18.0.10427.1" />
   </ItemGroup>
 
   <ItemGroup>

@@ -29,8 +29,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Plugin.Quest", "XM.Plugi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Shared.Progression", "XM.Shared.Progression\XM.Shared.Progression.csproj", "{2CE4FC05-0101-44CD-B3C9-CF532EC6D12D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.App.Database", "XM.App.Database\XM.App.Database.csproj", "{AFA0A7B9-3F91-42DA-A4C0-57BB529205D8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Plugin.Area", "XM.Plugin.Area\XM.Plugin.Area.csproj", "{20F05A36-AD39-4FD6-A2CD-1D47B1CA50B6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XM.Plugin.Item", "XM.Plugin.Item\XM.Plugin.Item.csproj", "{2E2903ED-3391-4A0F-9E42-0498F3E3F988}"
@@ -95,10 +93,6 @@ Global
 		{2CE4FC05-0101-44CD-B3C9-CF532EC6D12D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CE4FC05-0101-44CD-B3C9-CF532EC6D12D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CE4FC05-0101-44CD-B3C9-CF532EC6D12D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AFA0A7B9-3F91-42DA-A4C0-57BB529205D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AFA0A7B9-3F91-42DA-A4C0-57BB529205D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AFA0A7B9-3F91-42DA-A4C0-57BB529205D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AFA0A7B9-3F91-42DA-A4C0-57BB529205D8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{20F05A36-AD39-4FD6-A2CD-1D47B1CA50B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{20F05A36-AD39-4FD6-A2CD-1D47B1CA50B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20F05A36-AD39-4FD6-A2CD-1D47B1CA50B6}.Release|Any CPU.ActiveCfg = Release|Any CPU

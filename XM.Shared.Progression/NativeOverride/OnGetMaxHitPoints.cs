@@ -1,4 +1,5 @@
-﻿using Anvil.Services;
+﻿using Anvil.API;
+using Anvil.Services;
 using NWN.Native.API;
 
 namespace XM.Progression.NativeOverride
@@ -13,12 +14,14 @@ namespace XM.Progression.NativeOverride
 
         public OnGetMaxHitPoints(HookService hook)
         {
-            _getMaxHitPointsHook = hook.RequestHook<GetMaxHitPointsHook>(GetMaxHitPoints, HookOrder.Late);
+            _getMaxHitPointsHook = hook.RequestHook<GetMaxHitPointsHook>(GetMaxHitPoints);
         }
 
         private short GetMaxHitPoints(void* thisPtr, int bIncludeToughness)
         {
             var creature = CNWSCreature.FromPointer(thisPtr);
+            if (creature == null)
+                return 0;
 
             var con = creature.m_pStats.m_nConstitutionModifier;
             creature.m_pStats.m_nConstitutionModifier = 0;

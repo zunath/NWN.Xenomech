@@ -62,7 +62,7 @@
   </PropertyGroup>
 
 <ItemGroup>
-	<PackageReference Include="NWN.Anvil" Version="8193.37.0-dev.12.raf500cfc" ExcludeAssets="runtime" PrivateAssets="all">
+	<PackageReference Include="NWN.Anvil" Version="8193.37.2" ExcludeAssets="runtime" PrivateAssets="all">
 		<IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	</PackageReference>
 </ItemGroup>
