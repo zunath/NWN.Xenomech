@@ -1,5 +1,4 @@
-﻿using Anvil.Services;
-using XM.Shared.Core;
+﻿using XM.Progression.Job;
 using XM.Shared.Core.Data;
 
 namespace XM.Quest.Reward
@@ -11,24 +10,20 @@ namespace XM.Quest.Reward
         public string MenuName => Amount + " XP";
 
         private readonly DBService _db;
+        private readonly JobService _job;
 
-        public XPReward(DBService db)
+        public XPReward(DBService db, JobService job)
         {
             _db = db;
+            _job = job;
         }
 
         public void GiveReward(uint player)
         {
-            var playerId = PlayerId.Get(player);
+            if (!GetIsPC(player) || GetIsDM(player) || GetIsDMPossessed(player))
+                return;
 
-
-            // todo: Need to update with new class system
-            //var dbPlayer = DB.Get<Player>(playerId);
-            //dbPlayer.UnallocatedXP += Amount;
-
-            //DB.Set(dbPlayer);
-            //SendMessageToPC(player, $"You earned {Amount} XP!");
+            _job.GiveXP(player, Amount);
         }
     }
-
 }
