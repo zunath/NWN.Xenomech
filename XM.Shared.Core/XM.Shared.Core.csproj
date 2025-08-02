@@ -69,10 +69,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="NRediSearch" Version="2.2.79" />
-		<PackageReference Include="NWN.Anvil" Version="8193.37.0-dev.12.raf500cfc" ExcludeAssets="runtime" PrivateAssets="all">
+		<PackageReference Include="NReJSON" Version="4.0.0" />
+		<PackageReference Include="NWN.Anvil" Version="8193.37.2" ExcludeAssets="runtime" PrivateAssets="all">
 			<IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="StackExchange.Redis" Version="2.8.24" />
+		<PackageReference Include="StackExchange.Redis" Version="2.8.58" />
 	</ItemGroup>
 
 	<ItemGroup>

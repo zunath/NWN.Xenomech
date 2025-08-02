@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NWN.Anvil" Version="8193.37.0-dev.12.raf500cfc" />
-    <PackageReference Include="NWN.Core" Version="8193.37.0" />
+    <PackageReference Include="NWN.Anvil" Version="8193.37.2" />
+    <PackageReference Include="NWN.Core" Version="8193.37.3" />
   </ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">

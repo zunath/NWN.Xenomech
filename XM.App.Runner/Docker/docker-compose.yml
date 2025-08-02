@@ -18,37 +18,25 @@ services:
         depends_on:
             - redis
             
-    db:
-        hostname: db
-        privileged: true
-        image: xmappdatabase:latest
-        user: "0:0"
-        restart: unless-stopped
-        depends_on:
-            - redis
-        volumes:
-            - socket:/tmp/xm-sockets
-                
     anvil:
         container_name: anvil
         privileged: true
         user: "0:0"
         hostname: anvil
         stop_signal: SIGINT
-        image: zunath/anvil-debugger:8193.37.0-dev.7.r1b4d3f3b
+        image: zunath/nwn-anvil:latest
         env_file:
             - ./nwserver.env
         stdin_open: true
         tty: true
         volumes:
-            - socket:/tmp/xm-sockets
             - ${PWD-.}/logs:/nwn/run/logs.0
             - ${PWD-.}/:/nwn/home
             - ${PWD-.}/logs:/nwn/data/bin/linux-x86/logs.0
         ports:
             - '5121:5121/udp'
         depends_on:
-            - db
+            - redis
                 
     influxdb:
         hostname: influxdb
@@ -86,5 +74,3 @@ services:
 volumes:
     influxdb:
     grafana:
-    socket:
-        driver: local

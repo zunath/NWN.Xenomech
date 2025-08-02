@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Sockets;
 using System.Reflection;
-using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using Anvil.Services;
 using NLog;
+using NRediSearch;
+using NReJSON;
+using StackExchange.Redis;
 using XM.Shared.Core.Configuration;
 using XM.Shared.Core.Json;
+using XM.Shared.Core.EventManagement;
 
 namespace XM.Shared.Core.Data
 {
@@ -15,20 +18,84 @@ namespace XM.Shared.Core.Data
     public class DBService
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
-        private readonly string _socketPath;
-
+        private readonly ConnectionMultiplexer _multiplexer;
+        private readonly Dictionary<string, Client> _searchClientsByType = new();
         private readonly Dictionary<Type, List<IndexedProperty>> _indexedPropertiesByType = new();
-
         private readonly IList<IDBEntity> _entities;
+        private bool _initialized = false;
+        private readonly SemaphoreSlim _initSemaphore = new(1, 1);
 
         public DBService(
             XMSettingsService settings,
-            IList<IDBEntity> entities)
+            IList<IDBEntity> entities,
+            XMEventService eventService)
         {
-            _socketPath = settings.DatabaseSocketPath;
             _entities = entities;
+            
+            var options = new ConfigurationOptions
+            {
+                AbortOnConnectFail = false,
+                EndPoints = { settings.RedisIPAddress }
+            };
 
-            LoadEntities();
+            _multiplexer = ConnectionMultiplexer.Connect(options);
+            NReJSONSerializer.SerializerProxy = new XMJsonSerializer();
+            
+            // Subscribe to module load event for automatic initialization
+            eventService.Subscribe<ModuleEvent.OnLoad>(OnModuleLoad);
+        }
+
+        private void OnModuleLoad(uint objectSelf)
+        {
+            _logger.Info("Module loaded, starting database initialization...");
+            _ = StartAsync();
+        }
+
+        public async Task StartAsync()
+        {
+            _logger.Info("Starting database initialization in background...");
+            
+            // Start initialization in background to avoid blocking hot reloading
+            _ = Task.Run(async () =>
+            {
+                try
+                {
+                    await InitializeAsync();
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex, "Failed to initialize database");
+                }
+            });
+        }
+
+        public async Task InitializeAsync()
+        {
+            if (_initialized) return;
+
+            await _initSemaphore.WaitAsync();
+            try
+            {
+                if (_initialized) return;
+
+                _logger.Info("Starting database initialization...");
+                
+                _logger.Info("Waiting for database connection...");
+                while (!_multiplexer.IsConnected)
+                {
+                    await Task.Delay(100);
+                }
+                _logger.Info("Database connection established.");
+
+                await LoadEntitiesAsync();
+                _initialized = true;
+                
+                _logger.Info("Database initialization completed.");
+            }
+            finally
+            {
+                _initSemaphore.Release();
+            }
         }
 
         private void BuildIndexedProperties(Type type)
@@ -73,58 +140,129 @@ namespace XM.Shared.Core.Data
                 }
             }
 
-            // Cache the indexed properties for quick look-up later.
             _indexedPropertiesByType[type] = indexedProperties;
         }
 
-        private void LoadEntities()
+        private async Task LoadEntitiesAsync()
         {
             foreach (var entity in _entities)
             {
                 var type = entity.GetType();
                 BuildIndexedProperties(type);
 
-                var command = new DBServerCommand
-                {
-                    CommandType = DBServerCommandType.Register,
-                    EntityType = type.Name,
-                    IndexedProperties = _indexedPropertiesByType[type]
-                };
-
-                //Console.WriteLine($"Sending command: {XMJsonUtility.Serialize(command)}");
-
-                var response = SendCommand(command);
-                if (response.CommandType != DBServerCommandType.Ok)
-                {
-                    throw new Exception($"Failed to register entity: {response.Message}");
-                }
-
+                await RegisterEntityAsync(type.Name, _indexedPropertiesByType[type]);
                 _logger.Info($"Registered type '{entity.GetType()}' using key prefix {type.Name}");
             }
 
-            // Indexing can take the DB server a bit of time. We cannot continue on past here until the server gives the OK
-            // Periodically check with the server to make sure indexing is complete.
-            
-            Console.WriteLine($"Waiting for reindexing to finish...");
+            // Wait for indexing to complete
+            _logger.Info("Waiting for reindexing to finish...");
             var indexing = true;
             do
             {
-                var indexCompleteResponse = SendCommand(new DBServerCommand
-                {
-                    CommandType = DBServerCommandType.IndexingStatus
-                });
-
-                if (indexCompleteResponse.CommandType == DBServerCommandType.Ok)
+                var status = await GetIndexingStatusAsync();
+                if (status)
                 {
                     indexing = false;
                 }
                 else
                 {
-                    Thread.Sleep(100);
+                    await Task.Delay(100);
                 }
             } while (indexing);
-            Console.WriteLine($"Reindexing is complete!");
+            _logger.Info("Reindexing is complete!");
+        }
 
+        private async Task RegisterEntityAsync(string type, List<IndexedProperty> indexedProperties)
+        {
+            _logger.Info($"Registering type: {type}");
+
+            // Register the search client
+            _searchClientsByType[type] = new Client(type, _multiplexer.GetDatabase());
+            await ProcessIndexAsync(type, indexedProperties);
+        }
+
+        private async Task ProcessIndexAsync(string type, List<IndexedProperty> indexedProperties)
+        {
+            // Drop any existing index
+            try
+            {
+                _multiplexer.GetDatabase().Execute("FT.DROPINDEX", type);
+                _logger.Info($"Dropped index for {type}");
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("Unknown Index name", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    _logger.Info($"Index does not exist for type {type}.");
+                }
+                else
+                {
+                    _logger.Warn($"Issue dropping index for type {type}. Exception: {ex}");
+                }
+            }
+
+            // Build the schema based on the IndexedAttribute associated to properties
+            var schema = new Schema();
+
+            foreach (var prop in indexedProperties)
+            {
+                if (prop.Type == IndexedPropertyType.Numeric)
+                {
+                    schema.AddNumericField(prop.Name);
+                }
+                else
+                {
+                    schema.AddTextField(prop.Name);
+                }
+            }
+
+            _searchClientsByType[type].CreateIndex(schema, new Client.ConfiguredIndexOptions());
+            _logger.Info($"Created index for {type}");
+            await WaitForReindexingAsync(type);
+        }
+
+        private async Task WaitForReindexingAsync(string type)
+        {
+            string indexing;
+
+            _logger.Info($"Waiting for Redis to complete indexing of: {type}");
+            do
+            {
+                await Task.Delay(100);
+
+                try
+                {
+                    var info = _searchClientsByType[type].GetInfo();
+                    indexing = info["percent_indexed"];
+                }
+                catch (Exception ex)
+                {
+                    indexing = "0";
+                    _logger.Warn($"Error during indexing: {ex}");
+                }
+
+            } while (indexing != "1");
+        }
+
+        private async Task<bool> GetIndexingStatusAsync()
+        {
+            // Check if all search clients are ready
+            foreach (var client in _searchClientsByType.Values)
+            {
+                try
+                {
+                    var info = client.GetInfo();
+                    if (info["percent_indexed"] != "1")
+                    {
+                        return false;
+                    }
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         /// <summary>
@@ -133,39 +271,29 @@ namespace XM.Shared.Core.Data
         /// <typeparam name="T">The type of data to retrieve</typeparam>
         /// <param name="id">The arbitrary key the data is stored under</param>
         /// <returns>The object stored in the database under the specified key</returns>
-        public T Get<T>(string id)
-            where T : IDBEntity
+        public async Task<T> GetAsync<T>(string id) where T : IDBEntity
         {
-            var command = new DBServerCommand
-            {
-                CommandType = DBServerCommandType.Get,
-                Key = id,
-                EntityType = typeof(T).Name
-            };
+            await InitializeAsync();
 
-            var response = SendCommand(command);
-            if (response.CommandType != DBServerCommandType.Result)
-            {
-                throw new Exception($"Failed to get entity: {response.Message}");
-            }
+            var combinedKey = $"{typeof(T).Name}:{id}";
+            var data = await _multiplexer.GetDatabase().JsonGetAsync(combinedKey);
 
-            if (string.IsNullOrWhiteSpace(response.EntitySingle))
+            if (data.IsNull)
             {
                 var newObj = Activator.CreateInstance<T>();
                 newObj.Id = id;
                 return newObj;
             }
 
-            var entity = XMJsonUtility.Deserialize<T>(response.EntitySingle);
-            return entity;
+            return XMJsonUtility.Deserialize<T>(data.ToString());
         }
 
-
-        public void Set<T>(T entity)
-            where T : IDBEntity
+        public async Task SetAsync<T>(T entity) where T : IDBEntity
         {
+            await InitializeAsync();
+
             var type = typeof(T);
-            var indexData = new Dictionary<string, string>();
+            var indexData = new Dictionary<string, RedisValue>();
 
             foreach (var prop in _indexedPropertiesByType[type])
             {
@@ -174,11 +302,11 @@ namespace XM.Shared.Core.Data
 
                 if (value != null)
                 {
-                    string indexValue;
+                    RedisValue indexValue;
                     switch (prop.Type)
                     {
                         case IndexedPropertyType.Enum:
-                            indexValue = Convert.ToInt32(value).ToString();
+                            indexValue = Convert.ToInt32(value);
                             break;
                         case IndexedPropertyType.Guid:
                             indexValue = RedisTokenHelper.EscapeTokens(((Guid)value).ToString());
@@ -187,10 +315,10 @@ namespace XM.Shared.Core.Data
                             indexValue = RedisTokenHelper.EscapeTokens((string)value);
                             break;
                         case IndexedPropertyType.Numeric:
-                            indexValue = Convert.ToInt32(value).ToString();
+                            indexValue = Convert.ToInt32(value);
                             break;
                         case IndexedPropertyType.Boolean:
-                            indexValue = ((bool)value) ? "1" : "0";
+                            indexValue = (bool)value ? 1 : 0;
                             break;
                         default:
                             throw new Exception("Unable to determine property type.");
@@ -201,20 +329,10 @@ namespace XM.Shared.Core.Data
             }
 
             var jsonEntity = XMJsonUtility.Serialize(entity);
-            var command = new DBServerCommand
-            {
-                CommandType = DBServerCommandType.Set,
-                EntityType = type.Name,
-                Key = entity.Id,
-                EntitySingle = jsonEntity,
-                IndexData = indexData
-            };
+            var indexKey = $"Index:{type.Name}:{entity.Id}";
 
-            var response = SendCommand(command);
-            if (response.CommandType != DBServerCommandType.Ok)
-            {
-                throw new Exception($"Failed to set entity: {response.Message}");
-            }
+            await _searchClientsByType[type.Name].ReplaceDocumentAsync(indexKey, indexData);
+            await _multiplexer.GetDatabase().JsonSetAsync($"{type.Name}:{entity.Id}", jsonEntity);
         }
 
         /// <summary>
@@ -223,108 +341,71 @@ namespace XM.Shared.Core.Data
         /// <typeparam name="T">The type of entity to retrieve.</typeparam>
         /// <param name="query">The query to run.</param>
         /// <returns>An enumerable of entities matching the criteria.</returns>
-        public IEnumerable<T> Search<T>(DBQuery query)
-            where T : IDBEntity
+        public async Task<IEnumerable<T>> SearchAsync<T>(DBQuery query) where T : IDBEntity
         {
+            await InitializeAsync();
+
             var type = typeof(T);
-            var command = new DBServerCommand
+            var result = await _searchClientsByType[type.Name].SearchAsync(query.BuildQuery(type.Name));
+
+            var entities = new List<T>();
+            foreach (var doc in result.Documents)
             {
-                CommandType = DBServerCommandType.Search,
-                EntityType = type.Name,
-                Query = query
-            };
-
-            var response = SendCommand(command);
-            if (response.CommandType != DBServerCommandType.Result)
-            {
-                throw new Exception($"Failed to search entities: {response.Message}");
-            }
-
-            foreach (var result in response.EntitiesList)
-            {
-                yield return XMJsonUtility.Deserialize<T>(result);
-            }
-        }
-        public int SearchCount<T>(DBQuery query)
-            where T : IDBEntity
-        {
-            var type = typeof(T);
-            var command = new DBServerCommand
-            {
-                CommandType = DBServerCommandType.SearchCount,
-                EntityType = type.Name,
-                Query = query
-            };
-
-            var response = SendCommand(command);
-            if (response.CommandType != DBServerCommandType.Result)
-            {
-                throw new Exception($"Failed to search entities: {response.Message}");
-            }
-
-            return (int)response.SearchCount;
-        }
-
-        public void Delete<T>(string key)
-            where T: IDBEntity
-        {
-            var type = typeof(T);
-            var command = new DBServerCommand
-            {
-                CommandType = DBServerCommandType.Delete,
-                EntityType = type.Name,
-                Key = key,
-            };
-
-            var response = SendCommand(command);
-            if (response.CommandType != DBServerCommandType.Result)
-            {
-                throw new Exception($"Failed to delete entity: {response.Message}");
-            }
-        }
-
-        private DBServerCommand SendCommand(DBServerCommand command)
-        {
-            using (var client = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified))
-            {
-                // Connect to the server
-                var endPoint = new UnixDomainSocketEndPoint(_socketPath);
-                client.Connect(endPoint);
-
-                // Serialize the command to JSON and convert to bytes
-                var commandJson = XMJsonUtility.Serialize(command);
-                var commandBytes = Encoding.UTF8.GetBytes(commandJson);
-
-                // Send the length of the command first
-                var lengthBytes = BitConverter.GetBytes(commandBytes.Length);
-                client.Send(lengthBytes);
-
-                // Send the actual command
-                client.Send(commandBytes);
-
-                // Receive the length of the response
-                var lengthBuffer = new byte[4];
-                client.Receive(lengthBuffer);
-                var responseLength = BitConverter.ToInt32(lengthBuffer, 0);
-
-                // Receive the response data
-                var responseBuffer = new byte[responseLength];
-                int totalReceived = 0;
-                while (totalReceived < responseLength)
+                var recordId = doc.Id.Remove(0, 6); // Remove the 'Index:' prefix
+                var data = await _multiplexer.GetDatabase().JsonGetAsync(recordId);
+                if (!data.IsNull)
                 {
-                    totalReceived += client.Receive(
-                        responseBuffer,
-                        totalReceived,
-                        responseLength - totalReceived,
-                        SocketFlags.None);
+                    entities.Add(XMJsonUtility.Deserialize<T>(data.ToString()));
                 }
-
-                // Deserialize and return the response
-                var responseJson = Encoding.UTF8.GetString(responseBuffer);
-
-                //Console.WriteLine($"SendCommand json response: {responseJson}");
-                return XMJsonUtility.Deserialize<DBServerCommand>(responseJson);
             }
+
+            return entities;
+        }
+
+        public async Task<int> SearchCountAsync<T>(DBQuery query) where T : IDBEntity
+        {
+            await InitializeAsync();
+
+            var type = typeof(T);
+            var result = await _searchClientsByType[type.Name].SearchAsync(query.BuildQuery(type.Name, true));
+            return (int)result.TotalResults;
+        }
+
+        public async Task DeleteAsync<T>(string key) where T : IDBEntity
+        {
+            await InitializeAsync();
+
+            var type = typeof(T);
+            var indexKey = $"Index:{type.Name}:{key}";
+            
+            await _searchClientsByType[type.Name].DeleteDocumentAsync(indexKey);
+            await _multiplexer.GetDatabase().JsonDeleteAsync($"{type.Name}:{key}");
+        }
+
+        // Synchronous wrappers for backward compatibility
+        public T Get<T>(string id) where T : IDBEntity
+        {
+            return GetAsync<T>(id).GetAwaiter().GetResult();
+        }
+
+        public void Set<T>(T entity) where T : IDBEntity
+        {
+            SetAsync<T>(entity).GetAwaiter().GetResult();
+        }
+
+        public IEnumerable<T> Search<T>(DBQuery query) where T : IDBEntity
+        {
+            return SearchAsync<T>(query).GetAwaiter().GetResult();
+        }
+
+        public int SearchCount<T>(DBQuery query) where T : IDBEntity
+        {
+            return SearchCountAsync<T>(query).GetAwaiter().GetResult();
+        }
+
+        public void Delete<T>(string key) where T : IDBEntity
+        {
+            DeleteAsync<T>(key).GetAwaiter().GetResult();
         }
     }
 }

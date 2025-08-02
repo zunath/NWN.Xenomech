@@ -1,8 +1,8 @@
-﻿using NReJSON;
+using NReJSON;
 using StackExchange.Redis;
 using XM.Shared.Core.Json;
 
-namespace XM.App.Database
+namespace XM.Shared.Core.Json
 {
     internal class XMJsonSerializer : ISerializerProxy
     {
@@ -16,4 +16,4 @@ namespace XM.App.Database
             return XMJsonUtility.Serialize(obj);
         }
     }
-}
+} 

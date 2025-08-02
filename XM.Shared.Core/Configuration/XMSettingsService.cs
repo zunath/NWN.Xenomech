@@ -8,7 +8,6 @@ namespace XM.Shared.Core.Configuration
     {
         public string SuperAdminCDKey { get; }
         public string RedisIPAddress { get; }
-        public string DatabaseSocketPath { get; }
         public bool IsGameServerContext { get; }
         public ServerEnvironmentType ServerEnvironment { get; }
         public string BugWebHookUrl { get; }
@@ -18,7 +17,6 @@ namespace XM.Shared.Core.Configuration
         {
             SuperAdminCDKey = Environment.GetEnvironmentVariable("XM_SUPER_ADMIN_CD_KEY");
             RedisIPAddress = Environment.GetEnvironmentVariable("NWNX_REDIS_HOST");
-            DatabaseSocketPath = Environment.GetEnvironmentVariable("XM_DATABASE_SOCKET_PATH");
             IsGameServerContext = Convert.ToBoolean(Environment.GetEnvironmentVariable("XM_GAME_SERVER_CONTEXT"));
             BugWebHookUrl = Environment.GetEnvironmentVariable("XM_BUG_WEBHOOK_URL");
             ResourcesDirectory = Environment.GetEnvironmentVariable("XM_RESOURCES_DIRECTORY");
