@@ -17,6 +17,18 @@ This is a C# server-side solution for the Neverwinter Nights: Enhanced Edition X
 - **Usage**: All plugins in this solution are built as Anvil plugins
 - **Integration**: Provides the base classes and interfaces for NWN server plugins
 
+## External Documentation
+
+### Design Documents
+- **XM Design Bible**: https://docs.google.com/spreadsheets/d/1CnS5sk6c9cjlRETEuAkkyI5P1gPSskJWct7Qemx-KVs/edit?gid=776582455#gid=776582455
+  - Contains comprehensive game design specifications including attributes, stats, weapon skills, armor, jobs, and other game mechanics
+  - Reference for implementing character progression, combat systems, and item mechanics
+  - Includes XP charts, damage calculations, and spell damage formulas
+
+- **Additional Design Document**: https://docs.google.com/document/d/1D24AT6qYXE9DDVpsuVY9D4jW-2cNlvTWPrx38P1topI/edit?tab=t.0#heading=h.5mpdqkyy0jba
+  - Contains additional design specifications and implementation details
+  - Reference for game mechanics and system design decisions
+
 ## Architecture
 
 ### Solution Structure
