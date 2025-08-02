@@ -36,6 +36,8 @@ namespace XM.Progression.Craft
         Polearm = 14,
         [RecipeCategory(LocaleString.Bow, true)]
         Bow = 15,
+        [RecipeCategory(LocaleString.Claw, true)]
+        Claw = 16,
         
     }
 }

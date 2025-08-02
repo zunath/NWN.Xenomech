@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Anvil.Services;
 using XM.Inventory;
 using XM.Inventory.KeyItem;
+using XM.Progression.Job;
 using XM.Quest.Objective;
 using XM.Quest.Prerequisite;
 using XM.Quest.Reward;
@@ -17,17 +18,20 @@ namespace XM.Quest
         private QuestDetail _activeQuest;
         private QuestStateDetail _activeState;
         private readonly DBService _db;
+        private readonly JobService _job;
         private readonly ItemCacheService _itemCache;
         private readonly KeyItemService _keyItem;
         private readonly QuestNPCService _questNPC;
 
         public QuestBuilder(
             DBService db,
+            JobService job,
             ItemCacheService itemCache,
             KeyItemService keyItem,
             QuestNPCService questNPC)
         {
             _db = db;
+            _job = job;
             _itemCache = itemCache;
             _keyItem = keyItem;
             _questNPC = questNPC;
@@ -131,7 +135,7 @@ namespace XM.Quest
         /// <returns>A QuestBuilder with the configured options.</returns>
         public QuestBuilder AddXPReward(int amount, bool isSelectable = true)
         {
-            var reward = new XPReward(_db)
+            var reward = new XPReward(_db, _job)
             {
                 Amount = amount,
                 IsSelectable = isSelectable
