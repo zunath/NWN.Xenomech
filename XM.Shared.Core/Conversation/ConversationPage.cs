@@ -1,39 +1,16 @@
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 
-namespace XM.Shared.Core.Conversation
+namespace XM.Shared.Core.Conversation;
+
+/// <summary>
+/// Represents a single page in a conversation with header and responses.
+/// </summary>
+public class ConversationPage
 {
-    public class ConversationPage : INotifyPropertyChanged
-    {
-        private string _header = string.Empty;
-        private List<ConversationResponse> _responses = new();
+    [JsonPropertyName("header")]
+    public string Header { get; set; } = string.Empty;
 
-        public string Header
-        {
-            get => _header;
-            set => SetProperty(ref _header, value);
-        }
-
-        public List<ConversationResponse> Responses
-        {
-            get => _responses;
-            set => SetProperty(ref _responses, value);
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
-        }
-    }
+    [JsonPropertyName("responses")]
+    public List<ConversationResponse> Responses { get; set; } = new();
 } 

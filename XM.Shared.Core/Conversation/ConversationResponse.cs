@@ -1,39 +1,19 @@
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 
-namespace XM.Shared.Core.Conversation
+namespace XM.Shared.Core.Conversation;
+
+/// <summary>
+/// Represents a response option in a conversation page.
+/// </summary>
+public class ConversationResponse
 {
-    public class ConversationResponse : INotifyPropertyChanged
-    {
-        private string _text = string.Empty;
-        private ResponseAction _action = new();
+    [JsonPropertyName("text")]
+    public string Text { get; set; } = string.Empty;
 
-        public string Text
-        {
-            get => _text;
-            set => SetProperty(ref _text, value);
-        }
+    [JsonPropertyName("conditions")]
+    public List<ConversationCondition> Conditions { get; set; } = new();
 
-        public ResponseAction Action
-        {
-            get => _action;
-            set => SetProperty(ref _action, value);
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
-        }
-    }
+    [JsonPropertyName("action")]
+    public ConversationAction Action { get; set; } = new();
 } 

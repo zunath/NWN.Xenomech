@@ -15,6 +15,7 @@ namespace XM.App.CLI
         private const string AnvilPath = ServerPath + "anvil/";
         private const string AnvilPluginsPath = AnvilPath + "Plugins/";
         private const string ResourcesPath = AnvilPluginsPath + "resources/";
+        private const string DataPath = "../Data/";
 
         private readonly HakBuilder _hakBuilder = new();
 
@@ -25,6 +26,7 @@ namespace XM.App.CLI
             BuildModule();
             BuildCachedCreatureFeatsFile();
             CopyExternalPlugins();
+            CopyDataFiles();
         }
 
         private void CreateServerDirectory()
@@ -133,5 +135,16 @@ namespace XM.App.CLI
             File.WriteAllText(OutputPath, JsonSerializer.Serialize(creatureFeatsList, new JsonSerializerOptions { WriteIndented = true }));
             Console.WriteLine($"Processed {creatureFeatsList.Count} files and saved output to {OutputPath}");
         }
+
+        private void CopyDataFiles()
+        {
+            var source = new DirectoryInfo(DataPath);
+            var target = new DirectoryInfo(ResourcesPath);
+
+            Console.WriteLine($"Copying Data files to: {target.FullName}");
+            CopyAll(source, target, string.Empty);
+            Console.WriteLine("Data files copied successfully.");
+        }
+
     }
 }

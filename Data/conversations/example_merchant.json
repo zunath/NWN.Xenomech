@@ -2,11 +2,7 @@
   "metadata": {
     "id": "merchant_general_001",
     "name": "General Merchant",
-    "description": "Main merchant conversation with shop access",
-    "version": "1.0",
-    "lastModified": "2024-01-15T10:30:00Z",
-    "author": "Game Designer",
-    "tags": ["merchant", "shop", "general"]
+    "description": "Main merchant conversation with shop access"
   },
   "conversation": {
     "defaultPage": "greeting",
