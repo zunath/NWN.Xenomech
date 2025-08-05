@@ -1,0 +1,308 @@
+{
+  "metadata": {
+    "id": "merchant_general_001",
+    "name": "General Merchant",
+    "description": "Main merchant conversation with shop access",
+    "version": "1.0",
+    "lastModified": "2024-01-15T10:30:00Z",
+    "author": "Game Designer",
+    "tags": ["merchant", "shop", "general"]
+  },
+  "conversation": {
+    "defaultPage": "greeting",
+    "pages": {
+      "greeting": {
+        "header": "Welcome to my shop! I have the finest wares in all the land. What can I help you with today?",
+        "responses": [
+          {
+            "text": "Show me your wares",
+            "conditions": [],
+            "action": {
+              "type": "OpenShop",
+              "parameters": {
+                "shopId": "general_merchant_shop"
+              }
+            }
+          },
+          {
+            "text": "I have some questions",
+            "conditions": [],
+            "action": {
+              "type": "ChangePage",
+              "parameters": {
+                "pageId": "questions"
+              }
+            }
+          },
+          {
+            "text": "Do you have any special deals?",
+            "conditions": [
+              {
+                "type": "player_level",
+                "operator": ">=",
+                "value": 5
+              }
+            ],
+            "action": {
+              "type": "ChangePage",
+              "parameters": {
+                "pageId": "special_deals"
+              }
+            }
+          },
+          {
+            "text": "Goodbye",
+            "conditions": [],
+            "action": {
+              "type": "EndConversation"
+            }
+          }
+        ]
+      },
+      "questions": {
+        "header": "What would you like to know about?",
+        "responses": [
+          {
+            "text": "Tell me about this area",
+            "conditions": [],
+            "action": {
+              "type": "ChangePage",
+              "parameters": {
+                "pageId": "area_info"
+              }
+            }
+          },
+          {
+            "text": "What's new in town?",
+            "conditions": [],
+            "action": {
+              "type": "ChangePage",
+              "parameters": {
+                "pageId": "town_news"
+              }
+            }
+          },
+          {
+            "text": "Back to main menu",
+            "conditions": [],
+            "action": {
+              "type": "ChangePage",
+              "parameters": {
+                "pageId": "greeting"
+              }
+            }
+          }
+        ]
+      },
+      "special_deals": {
+        "header": "Ah, a discerning customer! I do have some special items for experienced adventurers like yourself.",
+        "responses": [
+          {
+            "text": "Show me the special items",
+            "conditions": [],
+            "action": {
+              "type": "OpenShop",
+              "parameters": {
+                "shopId": "special_merchant_shop"
+              }
+            }
+          },
+          {
+            "text": "Back to main menu",
+            "conditions": [],
+            "action": {
+              "type": "ChangePage",
+              "parameters": {
+                "pageId": "greeting"
+              }
+            }
+          }
+        ]
+      },
+      "area_info": {
+        "header": "This area is known for its rich history and dangerous dungeons. Many adventurers come here seeking fortune and glory.",
+        "responses": [
+          {
+            "text": "Tell me more about the dungeons",
+            "conditions": [],
+            "action": {
+              "type": "ChangePage",
+              "parameters": {
+                "pageId": "dungeon_info"
+              }
+            }
+          },
+          {
+            "text": "Back to questions",
+            "conditions": [],
+            "action": {
+              "type": "ChangePage",
+              "parameters": {
+                "pageId": "questions"
+              }
+            }
+          }
+        ]
+      },
+      "dungeon_info": {
+        "header": "The dungeons here are filled with ancient treasures and powerful monsters. Be careful if you venture there!",
+        "responses": [
+          {
+            "text": "I'll be careful. Thanks for the warning.",
+            "conditions": [],
+            "action": {
+              "type": "ChangePage",
+              "parameters": {
+                "pageId": "questions"
+              }
+            }
+          }
+        ]
+      },
+      "town_news": {
+        "header": "There's been talk of strange creatures appearing at night. The guards are on high alert.",
+        "responses": [
+          {
+            "text": "I'll keep my eyes open.",
+            "conditions": [],
+            "action": {
+              "type": "ChangePage",
+              "parameters": {
+                "pageId": "questions"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "actions": {
+      "open_shop": {
+        "description": "Opens a shop interface for the player",
+        "parameters": {
+          "shopId": {
+            "type": "string",
+            "description": "The ID of the shop to open",
+            "required": true
+          }
+        }
+      },
+      "teleport_player": {
+        "description": "Teleports the player to a specific location",
+        "parameters": {
+          "location": {
+            "type": "string",
+            "description": "The location ID to teleport to",
+            "required": true
+          }
+        }
+      },
+      "accept_quest": {
+        "description": "Gives a quest to the player",
+        "parameters": {
+          "questId": {
+            "type": "string",
+            "description": "The ID of the quest to give",
+            "required": true
+          }
+        }
+      },
+      "give_item": {
+        "description": "Gives an item to the player",
+        "parameters": {
+          "itemId": {
+            "type": "string",
+            "description": "The ID of the item to give",
+            "required": true
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "The quantity to give",
+            "required": true,
+            "default": 1
+          }
+        }
+      },
+      "set_variable": {
+        "description": "Sets a conversation variable",
+        "parameters": {
+          "name": {
+            "type": "string",
+            "description": "The variable name",
+            "required": true
+          },
+          "value": {
+            "type": "any",
+            "description": "The value to set",
+            "required": true
+          }
+        }
+      },
+      "execute_script": {
+        "description": "Executes a custom script",
+        "parameters": {
+          "scriptId": {
+            "type": "string",
+            "description": "The script to execute",
+            "required": true
+          }
+        }
+      }
+    },
+    "conditions": {
+      "player_level": {
+        "description": "Checks the player's level",
+        "parameters": {
+          "operator": {
+            "type": "string",
+            "enum": ["==", "!=", ">", ">=", "<", "<="],
+            "required": true
+          },
+          "value": {
+            "type": "integer",
+            "required": true
+          }
+        }
+      },
+      "has_item": {
+        "description": "Checks if player has a specific item",
+        "parameters": {
+          "itemId": {
+            "type": "string",
+            "required": true
+          },
+          "quantity": {
+            "type": "integer",
+            "default": 1
+          }
+        }
+      },
+      "has_quest": {
+        "description": "Checks if player has a specific quest",
+        "parameters": {
+          "questId": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "variable_check": {
+        "description": "Checks a conversation variable",
+        "parameters": {
+          "name": {
+            "type": "string",
+            "required": true
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["==", "!=", ">", ">=", "<", "<="],
+            "required": true
+          },
+          "value": {
+            "type": "any",
+            "required": true
+          }
+        }
+      }
+    }
+  }
+} 
