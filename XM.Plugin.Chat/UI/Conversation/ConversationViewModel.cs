@@ -173,8 +173,15 @@ namespace XM.Chat.UI.Conversation
                 return;
             }
 
-            // Handle the action
-            HandleResponseAction(response.Action);
+            // Handle multiple actions if present, otherwise handle single action
+            if (response.Actions != null && response.Actions.Count > 0)
+            {
+                HandleResponseActions(response.Actions);
+            }
+            else if (response.Action != null)
+            {
+                HandleResponseAction(response.Action);
+            }
         }
 
         /// <summary>
@@ -246,6 +253,20 @@ namespace XM.Chat.UI.Conversation
             {
                 // Unknown or invalid action type
                 // Could log this for debugging purposes
+            }
+        }
+
+        /// <summary>
+        /// Handles multiple actions associated with a response.
+        /// </summary>
+        /// <param name="actions">The list of actions to handle.</param>
+        private void HandleResponseActions(List<ConversationAction> actions)
+        {
+            if (actions == null || actions.Count == 0) return;
+
+            foreach (var action in actions)
+            {
+                HandleResponseAction(action);
             }
         }
 

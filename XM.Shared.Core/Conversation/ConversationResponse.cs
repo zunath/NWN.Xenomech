@@ -16,4 +16,7 @@ public class ConversationResponse
 
     [JsonPropertyName("action")]
     public ConversationAction Action { get; set; } = new();
+
+    [JsonPropertyName("actions")]
+    public List<ConversationAction> Actions { get; set; } = new();
 } 

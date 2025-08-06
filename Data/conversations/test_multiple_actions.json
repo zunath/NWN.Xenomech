@@ -1,0 +1,254 @@
+{
+  "metadata": {
+    "id": "test_multiple_actions",
+    "name": "Test Multiple Actions",
+    "description": "Test conversation to verify multiple actions functionality",
+    "portrait": ""
+  },
+  "conversation": {
+    "defaultPage": "start",
+    "pages": {
+      "start": {
+        "header": "Welcome to the multiple actions test! This conversation will demonstrate how multiple actions can be triggered from a single response.",
+        "responses": [
+          {
+            "text": "Give me an item and change page",
+            "conditions": [],
+            "actions": [
+              {
+                "type": "GiveItem",
+                "parameters": {
+                  "itemId": "xm_sword_001",
+                  "quantity": 1
+                }
+              },
+              {
+                "type": "ChangePage",
+                "parameters": {
+                  "pageId": "item_given"
+                }
+              }
+            ]
+          },
+          {
+            "text": "Execute script and end conversation",
+            "conditions": [],
+            "actions": [
+              {
+                "type": "ExecuteScript",
+                "parameters": {
+                  "scriptId": "test_script"
+                }
+              },
+              {
+                "type": "EndConversation"
+              }
+            ]
+          },
+          {
+            "text": "Give multiple items",
+            "conditions": [],
+            "actions": [
+              {
+                "type": "GiveItem",
+                "parameters": {
+                  "itemId": "xm_sword_001",
+                  "quantity": 1
+                }
+              },
+              {
+                "type": "GiveItem",
+                "parameters": {
+                  "itemId": "xm_gold_coin",
+                  "quantity": 50
+                }
+              },
+              {
+                "type": "ChangePage",
+                "parameters": {
+                  "pageId": "multiple_items"
+                }
+              }
+            ]
+          },
+          {
+            "text": "Single action (backward compatibility)",
+            "conditions": [],
+            "action": {
+              "type": "ChangePage",
+              "parameters": {
+                "pageId": "single_action"
+              }
+            }
+          },
+          {
+            "text": "Goodbye",
+            "conditions": [],
+            "action": {
+              "type": "EndConversation"
+            }
+          }
+        ]
+      },
+      "item_given": {
+        "header": "You received a sword! The conversation continued to this page after giving the item.",
+        "responses": [
+          {
+            "text": "Back to start",
+            "conditions": [],
+            "action": {
+              "type": "ChangePage",
+              "parameters": {
+                "pageId": "start"
+              }
+            }
+          }
+        ]
+      },
+      "multiple_items": {
+        "header": "You received multiple items! This demonstrates that multiple actions can be executed in sequence.",
+        "responses": [
+          {
+            "text": "Back to start",
+            "conditions": [],
+            "action": {
+              "type": "ChangePage",
+              "parameters": {
+                "pageId": "start"
+              }
+            }
+          }
+        ]
+      },
+      "single_action": {
+        "header": "This page was reached using the old single action format, demonstrating backward compatibility.",
+        "responses": [
+          {
+            "text": "Back to start",
+            "conditions": [],
+            "action": {
+              "type": "ChangePage",
+              "parameters": {
+                "pageId": "start"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "actions": {
+      "OpenShop": {
+        "description": "Opens a shop interface for the player",
+        "parameters": {
+          "shopId": {
+            "type": "string",
+            "description": "The ID of the shop to open",
+            "required": true
+          }
+        }
+      },
+      "Teleport": {
+        "description": "Teleports the player to a specific location",
+        "parameters": {
+          "location": {
+            "type": "string",
+            "description": "The location ID to teleport to",
+            "required": true
+          }
+        }
+      },
+      "AcceptQuest": {
+        "description": "Gives a quest to the player",
+        "parameters": {
+          "questId": {
+            "type": "string",
+            "description": "The ID of the quest to give",
+            "required": true
+          }
+        }
+      },
+      "GiveItem": {
+        "description": "Gives an item to the player",
+        "parameters": {
+          "itemId": {
+            "type": "string",
+            "description": "The ID of the item to give",
+            "required": true
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "The quantity to give",
+            "required": true,
+            "default": 1
+          }
+        }
+      },
+      "ExecuteScript": {
+        "description": "Executes a custom script",
+        "parameters": {
+          "scriptId": {
+            "type": "string",
+            "description": "The script to execute",
+            "required": true
+          }
+        }
+      }
+    },
+    "conditions": {
+      "player_level": {
+        "description": "Checks the player's level",
+        "parameters": {
+          "operator": {
+            "type": "string",
+            "enum": ["==", "!=", ">", ">=", "<", "<="],
+            "required": true
+          },
+          "value": {
+            "type": "integer",
+            "required": true
+          }
+        }
+      },
+      "has_item": {
+        "description": "Checks if player has a specific item",
+        "parameters": {
+          "itemId": {
+            "type": "string",
+            "required": true
+          },
+          "quantity": {
+            "type": "integer",
+            "default": 1
+          }
+        }
+      },
+      "has_quest": {
+        "description": "Checks if player has a specific quest",
+        "parameters": {
+          "questId": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "variable_check": {
+        "description": "Checks a conversation variable",
+        "parameters": {
+          "name": {
+            "type": "string",
+            "required": true
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["==", "!=", ">", ">=", "<", "<="],
+            "required": true
+          },
+          "value": {
+            "type": "any",
+            "required": true
+          }
+        }
+      }
+    }
+  }
+} 

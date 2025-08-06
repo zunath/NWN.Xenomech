@@ -170,6 +170,70 @@
             }
           }
         ]
+      },
+      "welcome_gift": {
+        "header": "Welcome, new adventurer! Let me give you a small gift to help you on your journey.",
+        "responses": [
+          {
+            "text": "Thank you! I'll put it to good use.",
+            "conditions": [],
+            "actions": [
+              {
+                "type": "GiveItem",
+                "parameters": {
+                  "itemId": "xm_sword_001",
+                  "quantity": 1
+                }
+              },
+              {
+                "type": "ChangePage",
+                "parameters": {
+                  "pageId": "greeting"
+                }
+              }
+            ]
+          },
+          {
+            "text": "I don't need charity.",
+            "conditions": [],
+            "action": {
+              "type": "ChangePage",
+              "parameters": {
+                "pageId": "greeting"
+              }
+            }
+          }
+        ]
+      },
+      "quest_reward": {
+        "header": "Excellent work! You've completed the quest. Here's your reward.",
+        "responses": [
+          {
+            "text": "Thank you for the reward!",
+            "conditions": [],
+            "actions": [
+              {
+                "type": "GiveItem",
+                "parameters": {
+                  "itemId": "xm_gold_coin",
+                  "quantity": 100
+                }
+              },
+              {
+                "type": "ExecuteScript",
+                "parameters": {
+                  "scriptId": "quest_complete_script"
+                }
+              },
+              {
+                "type": "ChangePage",
+                "parameters": {
+                  "pageId": "greeting"
+                }
+              }
+            ]
+          }
+        ]
       }
     },
     "actions": {
