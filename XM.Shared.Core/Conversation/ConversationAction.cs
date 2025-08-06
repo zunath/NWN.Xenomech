@@ -11,6 +11,13 @@ public class ConversationAction
     [JsonPropertyName("type")]
     public string Type { get; set; } = string.Empty;
 
+    [JsonIgnore]
+    public ConversationActionType ActionType
+    {
+        get => System.Enum.TryParse<ConversationActionType>(Type, true, out var result) ? result : ConversationActionType.Invalid;
+        set => Type = value.ToString();
+    }
+
     [JsonPropertyName("parameters")]
     public Dictionary<string, object> Parameters { get; set; } = new();
 } 

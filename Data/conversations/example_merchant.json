@@ -173,7 +173,7 @@
       }
     },
     "actions": {
-      "open_shop": {
+      "OpenShop": {
         "description": "Opens a shop interface for the player",
         "parameters": {
           "shopId": {
@@ -183,7 +183,7 @@
           }
         }
       },
-      "teleport_player": {
+      "Teleport": {
         "description": "Teleports the player to a specific location",
         "parameters": {
           "location": {
@@ -193,7 +193,7 @@
           }
         }
       },
-      "accept_quest": {
+      "AcceptQuest": {
         "description": "Gives a quest to the player",
         "parameters": {
           "questId": {
@@ -203,7 +203,7 @@
           }
         }
       },
-      "give_item": {
+      "GiveItem": {
         "description": "Gives an item to the player",
         "parameters": {
           "itemId": {
@@ -219,22 +219,7 @@
           }
         }
       },
-      "set_variable": {
-        "description": "Sets a conversation variable",
-        "parameters": {
-          "name": {
-            "type": "string",
-            "description": "The variable name",
-            "required": true
-          },
-          "value": {
-            "type": "any",
-            "description": "The value to set",
-            "required": true
-          }
-        }
-      },
-      "execute_script": {
+      "ExecuteScript": {
         "description": "Executes a custom script",
         "parameters": {
           "scriptId": {
