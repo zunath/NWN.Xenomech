@@ -1,19 +1,18 @@
 # XM.App.Editor
 
-A cross-platform desktop application for editing Neverwinter Nights: Enhanced Edition modules, specifically designed for the Xenomech project.
+A cross-platform desktop application framework for custom editors within the Xenomech project.
 
 ## Overview
 
-XM.App.Editor is a modern desktop application built with Avalonia UI that provides a comprehensive editing environment for NWN:EE modules. It runs on both Windows and Linux operating systems.
+XM.App.Editor is a modern desktop application built with Avalonia UI that provides a foundation for creating custom editors for various components within the Xenomech project. It runs on both Windows and Linux operating systems.
 
 ## Features
 
 - **Cross-Platform**: Runs on Windows and Linux
-- **Module Explorer**: Tree-view navigation of module content
-- **Property Editor**: Edit properties of selected items
-- **Preview Panel**: Visual preview of 3D models and assets
+- **Clean Framework**: Minimal UI ready for custom editor implementations
 - **Modern UI**: Built with Avalonia UI framework
 - **Configuration**: JSON-based settings management
+- **Extensible**: Easy to add custom editors and functionality
 
 ## Architecture
 
@@ -69,7 +68,6 @@ The application uses `appsettings.json` for configuration:
 
 - **Logging**: Log level settings
 - **Editor**: Window dimensions, auto-save settings, theme preferences
-- **Module Paths**: Default module locations
 
 ## Dependencies
 
@@ -79,13 +77,21 @@ The application uses `appsettings.json` for configuration:
 - **XM.Shared.Core**: Core functionality
 - **XM.Shared.UI**: Shared UI components
 
+## Adding Custom Editors
+
+The application is designed to be extended with custom editors. To add a new editor:
+
+1. Create a new UserControl for your editor
+2. Add it to the main window or create a new window
+3. Implement the necessary ViewModel and business logic
+4. Register services in the dependency injection container
+
 ## Future Enhancements
 
-- Module file format support
-- 3D model preview integration
-- Plugin system for custom editors
+- Custom editor implementations
+- Plugin system for editor extensions
 - Real-time collaboration features
-- Advanced search and filtering
+- Advanced configuration management
 - Export/import functionality
 
 ## Contributing

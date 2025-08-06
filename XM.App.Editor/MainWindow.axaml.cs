@@ -27,51 +27,16 @@ public partial class MainWindow : Window
 
 public class MainWindowViewModel : INotifyPropertyChanged
 {
-    private bool _moduleExplorerVisible = true;
-    private bool _propertiesPanelVisible = true;
-
-    public bool ModuleExplorerVisible
-    {
-        get => _moduleExplorerVisible;
-        set
-        {
-            _moduleExplorerVisible = value;
-            OnPropertyChanged(nameof(ModuleExplorerVisible));
-        }
-    }
-
-    public bool PropertiesPanelVisible
-    {
-        get => _propertiesPanelVisible;
-        set
-        {
-            _propertiesPanelVisible = value;
-            OnPropertyChanged(nameof(PropertiesPanelVisible));
-        }
-    }
-
     // Commands
-    public ICommand OpenModuleCommand { get; }
-    public ICommand SaveCommand { get; }
-    public ICommand SaveAsCommand { get; }
     public ICommand ExitCommand { get; }
-    public ICommand UndoCommand { get; }
-    public ICommand RedoCommand { get; }
-    public ICommand ToggleModuleExplorerCommand { get; }
-    public ICommand TogglePropertiesPanelCommand { get; }
     public ICommand AboutCommand { get; }
+    public ICommand OpenConversationEditorCommand { get; }
 
     public MainWindowViewModel()
     {
-        OpenModuleCommand = new RelayCommand(OpenModule);
-        SaveCommand = new RelayCommand(Save);
-        SaveAsCommand = new RelayCommand(SaveAs);
         ExitCommand = new RelayCommand(Exit);
-        UndoCommand = new RelayCommand(Undo);
-        RedoCommand = new RelayCommand(Redo);
-        ToggleModuleExplorerCommand = new RelayCommand(ToggleModuleExplorer);
-        TogglePropertiesPanelCommand = new RelayCommand(TogglePropertiesPanel);
         AboutCommand = new RelayCommand(About);
+        OpenConversationEditorCommand = new RelayCommand(OpenConversationEditor);
     }
 
     public void Initialize()
@@ -79,49 +44,19 @@ public class MainWindowViewModel : INotifyPropertyChanged
         // Initialize the editor with default settings
     }
 
-    public void OpenModule()
-    {
-        // TODO: Implement module opening functionality
-    }
-
-    public void Save()
-    {
-        // TODO: Implement save functionality
-    }
-
-    public void SaveAs()
-    {
-        // TODO: Implement save as functionality
-    }
-
     public void Exit()
     {
         // TODO: Implement exit functionality
     }
 
-    public void Undo()
-    {
-        // TODO: Implement undo functionality
-    }
-
-    public void Redo()
-    {
-        // TODO: Implement redo functionality
-    }
-
-    public void ToggleModuleExplorer()
-    {
-        ModuleExplorerVisible = !ModuleExplorerVisible;
-    }
-
-    public void TogglePropertiesPanel()
-    {
-        PropertiesPanelVisible = !PropertiesPanelVisible;
-    }
-
     public void About()
     {
         // TODO: Implement about dialog
+    }
+
+    public void OpenConversationEditor()
+    {
+        // TODO: Implement conversation editor opening
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
