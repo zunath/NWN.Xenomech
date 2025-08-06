@@ -10,8 +10,16 @@ public class ConversationCondition
     [JsonPropertyName("type")]
     public string Type { get; set; } = string.Empty;
 
+    [JsonIgnore]
+    public ConversationConditionType ConditionType
+    {
+        get => System.Enum.TryParse<ConversationConditionType>(Type, true, out var result) ? result : ConversationConditionType.Invalid;
+        set => Type = value.ToString();
+    }
+
     [JsonPropertyName("operator")]
-    public string Operator { get; set; } = string.Empty;
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public ComparisonOperator Operator { get; set; } = ComparisonOperator.Equal;
 
     [JsonPropertyName("value")]
     public object Value { get; set; } = new();

@@ -12,8 +12,6 @@ namespace XM.Chat.UI.Conversation.Actions
         public void HandleAction(ConversationAction action, uint player, IConversationCallback conversationCallback = null)
         {
             var shopId = action.Parameters?.GetValueOrDefault("shopId")?.ToString();
-            
-            Console.WriteLine($"shopId = {shopId}");
 
             if (!string.IsNullOrEmpty(shopId))
             {

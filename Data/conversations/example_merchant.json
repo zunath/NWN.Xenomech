@@ -35,8 +35,8 @@
             "text": "Do you have any special deals?",
             "conditions": [
               {
-                "type": "player_level",
-                "operator": ">=",
+                "type": "PlayerLevel",
+                "operator": "GreaterThanOrEqual",
                 "value": 5
               }
             ],
@@ -295,12 +295,12 @@
       }
     },
     "conditions": {
-      "player_level": {
+      "PlayerLevel": {
         "description": "Checks the player's level",
         "parameters": {
           "operator": {
-            "type": "string",
-            "enum": ["==", "!=", ">", ">=", "<", "<="],
+            "type": "enum",
+            "enum": ["Equal", "NotEqual", "GreaterThan", "GreaterThanOrEqual", "LessThan", "LessThanOrEqual"],
             "required": true
           },
           "value": {
@@ -331,7 +331,7 @@
           }
         }
       },
-      "variable_check": {
+      "Variable": {
         "description": "Checks a conversation variable",
         "parameters": {
           "name": {
@@ -339,8 +339,8 @@
             "required": true
           },
           "operator": {
-            "type": "string",
-            "enum": ["==", "!=", ">", ">=", "<", "<="],
+            "type": "enum",
+            "enum": ["Equal", "NotEqual", "GreaterThan", "GreaterThanOrEqual", "LessThan", "LessThanOrEqual", "Contains", "NotContains"],
             "required": true
           },
           "value": {

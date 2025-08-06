@@ -8,6 +8,8 @@ using XM.UI;
 using XM.Inventory;
 using XM.Shared.Core.Data;
 using XM.Chat.UI.Conversation.Actions;
+using XM.Chat.UI.Conversation.Conditions;
+using XM.Progression.Stat;
 
 namespace XM.Chat.UI.Conversation
 {
@@ -21,12 +23,16 @@ namespace XM.Chat.UI.Conversation
         private ConversationPage _currentPage;
         private readonly List<ConversationResponse> _responseObjects;
         private readonly ConversationActionHandlerFactory _actionHandlerFactory;
+        private ConversationConditionHandlerFactory _conditionHandlerFactory;
 
         [Inject]
         public InventoryService Inventory { get; set; }
 
         [Inject]
         public DBService DB { get; set; }
+
+        [Inject]
+        public StatService Stat { get; set; }
 
         /// <summary>
         /// The current conversation page being displayed.
@@ -97,6 +103,9 @@ namespace XM.Chat.UI.Conversation
 
         public override void OnOpen()
         {
+            // Initialize the condition handler factory with the injected StatService
+            _conditionHandlerFactory = new ConversationConditionHandlerFactory(Stat);
+            
             // Get initial data
             var initialData = GetInitialData<ConversationInitialData>();
             if (initialData != null)
@@ -230,8 +239,23 @@ namespace XM.Chat.UI.Conversation
             if (conditions == null || conditions.Count == 0)
                 return true;
 
-            // TODO: Implement condition evaluation logic
-            // This would check player level, items, quests, variables, etc.
+            foreach (var condition in conditions)
+            {
+                var handler = _conditionHandlerFactory.GetHandler(condition.ConditionType);
+                
+                if (handler != null)
+                {
+                    var conditionMet = handler.EvaluateCondition(condition, Player);
+                    if (!conditionMet)
+                        return false;
+                }
+                else
+                {
+                    // Unknown condition type - fail by default for safety
+                    return false;
+                }
+            }
+
             return true;
         }
 
