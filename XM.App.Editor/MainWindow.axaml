@@ -1,0 +1,128 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:XM.App.Editor"
+        x:Class="XM.App.Editor.MainWindow"
+        x:DataType="local:MainWindowViewModel"
+        Title="Xenomech Editor"
+        Width="1200" Height="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Menu Bar -->
+        <Menu Grid.Row="0">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open Module" Command="{Binding OpenModuleCommand}"/>
+                <MenuItem Header="_Save" Command="{Binding SaveCommand}"/>
+                <MenuItem Header="_Save As" Command="{Binding SaveAsCommand}"/>
+                <Separator/>
+                <MenuItem Header="_Exit" Command="{Binding ExitCommand}"/>
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Undo" Command="{Binding UndoCommand}"/>
+                <MenuItem Header="_Redo" Command="{Binding RedoCommand}"/>
+            </MenuItem>
+            <MenuItem Header="_View">
+                <MenuItem Header="_Module Explorer" Command="{Binding ToggleModuleExplorerCommand}"/>
+                <MenuItem Header="_Properties Panel" Command="{Binding TogglePropertiesPanelCommand}"/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_About" Command="{Binding AboutCommand}"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- Main Content Area -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250" MinWidth="200"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="300" MinWidth="250"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Left Panel - Module Explorer -->
+            <Border Grid.Column="0" BorderBrush="{DynamicResource SystemControlForegroundBaseMediumBrush}" BorderThickness="0,0,1,0">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="Module Explorer" FontWeight="Bold" Margin="10,5"/>
+                    <TreeView Name="ModuleTreeView" Margin="5">
+                        <TreeViewItem Header="Areas" IsExpanded="True">
+                            <TreeViewItem Header="Area 1"/>
+                            <TreeViewItem Header="Area 2"/>
+                        </TreeViewItem>
+                        <TreeViewItem Header="Items" IsExpanded="True">
+                            <TreeViewItem Header="Weapons"/>
+                            <TreeViewItem Header="Armor"/>
+                            <TreeViewItem Header="Consumables"/>
+                        </TreeViewItem>
+                        <TreeViewItem Header="Creatures" IsExpanded="True">
+                            <TreeViewItem Header="NPCs"/>
+                            <TreeViewItem Header="Monsters"/>
+                        </TreeViewItem>
+                        <TreeViewItem Header="Quests" IsExpanded="True">
+                            <TreeViewItem Header="Main Quests"/>
+                            <TreeViewItem Header="Side Quests"/>
+                        </TreeViewItem>
+                    </TreeView>
+                </DockPanel>
+            </Border>
+
+            <!-- Center Panel - Editor Area -->
+            <Border Grid.Column="1" BorderBrush="{DynamicResource SystemControlForegroundBaseMediumBrush}" BorderThickness="0,0,1,0">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="Editor" FontWeight="Bold" Margin="10,5"/>
+                    <TabControl Margin="5">
+                        <TabItem Header="Properties">
+                            <ScrollViewer>
+                                <StackPanel Margin="10">
+                                    <TextBlock Text="Select an item from the Module Explorer to edit its properties." 
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"/>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </TabItem>
+                        <TabItem Header="Preview">
+                            <Border Background="{DynamicResource SystemControlBackgroundBaseLowBrush}">
+                                <TextBlock Text="Preview area will show 3D models and visual representations of selected items." 
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center"
+                                           Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"/>
+                            </Border>
+                        </TabItem>
+                    </TabControl>
+                </DockPanel>
+            </Border>
+
+            <!-- Right Panel - Properties -->
+            <Border Grid.Column="2" BorderBrush="{DynamicResource SystemControlForegroundBaseMediumBrush}" BorderThickness="0,0,0,0">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="Properties" FontWeight="Bold" Margin="10,5"/>
+                    <ScrollViewer>
+                        <StackPanel Margin="10">
+                            <TextBlock Text="No item selected" 
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center"
+                                       Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+        </Grid>
+
+        <!-- Status Bar -->
+        <Border Grid.Row="2" BorderBrush="{DynamicResource SystemControlForegroundBaseMediumBrush}" BorderThickness="0,1,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Ready" Margin="10,5"/>
+                <TextBlock Grid.Column="1" Text="Xenomech Editor v1.0" Margin="10,5"/>
+            </Grid>
+        </Border>
+    </Grid>
+
+</Window> 
