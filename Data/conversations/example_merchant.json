@@ -2,7 +2,8 @@
   "metadata": {
     "id": "merchant_general_001",
     "name": "General Merchant",
-    "description": "Main merchant conversation with shop access"
+    "description": "Main merchant conversation with shop access",
+	"portrait": ""
   },
   "conversation": {
     "defaultPage": "greeting",

@@ -17,22 +17,19 @@ namespace XM.Chat.UI.Conversation.ViewModels
     {
         private ConversationDefinition _conversationDefinition;
         private ConversationPage _currentPage;
-        private string _currentPageId;
-        private string _npcName;
-        private string _npcPortrait;
-        private XMBindingList<string> _availableResponses;
         private readonly List<ConversationResponse> _responseObjects;
 
         /// <summary>
         /// The current conversation page being displayed.
         /// </summary>
-        public ConversationPage CurrentPage
+        private ConversationPage CurrentPage
         {
             get => _currentPage;
             set
             {
                 _currentPage = value;
-                OnPropertyChanged();
+                // Update the conversation header when the page changes
+                ConversationHeader = value?.Header ?? string.Empty;
                 UpdateAvailableResponses();
             }
         }
@@ -42,12 +39,8 @@ namespace XM.Chat.UI.Conversation.ViewModels
         /// </summary>
         public string CurrentPageId
         {
-            get => _currentPageId;
-            set
-            {
-                _currentPageId = value;
-                OnPropertyChanged();
-            }
+            get => Get<string>();
+            set => Set(value);
         }
 
         /// <summary>
@@ -55,12 +48,8 @@ namespace XM.Chat.UI.Conversation.ViewModels
         /// </summary>
         public string NpcName
         {
-            get => _npcName;
-            set
-            {
-                _npcName = value;
-                OnPropertyChanged();
-            }
+            get => Get<string>();
+            set => Set(value);
         }
 
         /// <summary>
@@ -68,12 +57,8 @@ namespace XM.Chat.UI.Conversation.ViewModels
         /// </summary>
         public string NpcPortrait
         {
-            get => _npcPortrait;
-            set
-            {
-                _npcPortrait = value;
-                OnPropertyChanged();
-            }
+            get => Get<string>();
+            set => Set(value);
         }
 
         /// <summary>
@@ -81,18 +66,18 @@ namespace XM.Chat.UI.Conversation.ViewModels
         /// </summary>
         public XMBindingList<string> AvailableResponses
         {
-            get => _availableResponses;
-            set
-            {
-                _availableResponses = value;
-                OnPropertyChanged();
-            }
+            get => Get<XMBindingList<string>>();
+            set => Set(value);
         }
 
         /// <summary>
         /// The conversation header text displayed in the main panel.
         /// </summary>
-        public string ConversationHeader => CurrentPage?.Header ?? string.Empty;
+        public string ConversationHeader
+        {
+            get => CurrentPage?.Header ?? string.Empty;
+            set => Set(value);
+        }
 
         /// <summary>
         /// Event raised when a response is selected.
@@ -106,7 +91,7 @@ namespace XM.Chat.UI.Conversation.ViewModels
 
         public ConversationViewModel()
         {
-            _availableResponses = new XMBindingList<string>();
+            AvailableResponses = new XMBindingList<string>();
             _responseObjects = new List<ConversationResponse>();
         }
 
@@ -202,6 +187,15 @@ namespace XM.Chat.UI.Conversation.ViewModels
         {
             OnConversationClosed?.Invoke(this, EventArgs.Empty);
             CloseWindow();
+        };
+
+        /// <summary>
+        /// Handles when a player selects a response option from the UI.
+        /// </summary>
+        public Action OnSelectResponse() => () =>
+        {
+            var index = NuiGetEventArrayIndex();
+            SelectResponse(index);
         };
 
         /// <summary>

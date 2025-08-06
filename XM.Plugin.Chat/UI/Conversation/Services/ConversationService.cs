@@ -79,10 +79,9 @@ namespace XM.Chat.UI.Conversation.Services
         /// <param name="player">The player to open the conversation for.</param>
         /// <param name="conversationId">The ID of the conversation to load.</param>
         /// <param name="npcName">The name of the NPC.</param>
-        /// <param name="npcPortrait">The portrait image path for the NPC.</param>
         /// <param name="tetherObject">The object to tether the window to (usually the NPC).</param>
         /// <returns>True if the conversation was opened successfully, false otherwise.</returns>
-        public bool OpenConversation(uint player, string conversationId, string npcName, string npcPortrait = "", uint tetherObject = 0)
+        public bool OpenConversation(uint player, string conversationId, string npcName, uint tetherObject = 0)
         {
             // Load the conversation definition
             var conversationDefinition = LoadConversation(conversationId);
@@ -91,6 +90,11 @@ namespace XM.Chat.UI.Conversation.Services
                 Console.WriteLine($"Failed to load conversation: {conversationId}");
                 return false;
             }
+
+            // Get portrait from conversation definition, with fallback
+            var npcPortrait = string.IsNullOrWhiteSpace(conversationDefinition.Metadata.Portrait) 
+                ? "po_hu_m_99_l"
+                : conversationDefinition.Metadata.Portrait;
 
             // Create initial data for the conversation
             var initialData = new ConversationInitialData
@@ -128,10 +132,9 @@ namespace XM.Chat.UI.Conversation.Services
             }
 
             var npcName = npc.Name;
-            var npcPortrait = npc.PortraitResRef;
             var tetherObject = npc.ObjectId;
 
-            return OpenConversation(player, conversationId, npcName, npcPortrait, tetherObject);
+            return OpenConversation(player, conversationId, npcName, tetherObject);
         }
 
         /// <summary>

@@ -5,6 +5,7 @@ using XM.Shared.Core.Localization;
 using XM.UI;
 using XM.UI.Builder;
 using XM.UI.Builder.Layout;
+using NuiAspect = XM.Shared.API.NUI.NuiAspect;
 
 namespace XM.Chat.UI.Conversation.Views
 {
@@ -26,7 +27,7 @@ namespace XM.Chat.UI.Conversation.Views
             return _builder.CreateWindow(window =>
             {
                 window.InitialGeometry(0, 0, 400, 300)
-                    .Title(LocaleString.Conversation)
+                    .Title(model => model.NpcName)
                     .IsClosable(true)
                     .IsResizable(true)
                     .IsCollapsible(WindowCollapsibleType.UserCollapsible)
@@ -39,17 +40,16 @@ namespace XM.Chat.UI.Conversation.Views
 
         private void BuildWindow(NuiColumnBuilder<ConversationViewModel> col)
         {
-            col.AddRow(BuildHeader);
             col.AddRow(BuildMainContent);
             col.AddRow(BuildResponseButtons);
         }
 
         /// <summary>
-        /// Builds the header section with NPC portrait and name.
+        /// Builds the main content area with portrait and dialogue in separate columns.
         /// </summary>
-        private void BuildHeader(NuiRowBuilder<ConversationViewModel> row)
+        private void BuildMainContent(NuiRowBuilder<ConversationViewModel> row)
         {
-            // NPC Portrait
+            // Portrait Column
             row.AddColumn(col =>
             {
                 col.AddRow(portraitRow =>
@@ -57,52 +57,17 @@ namespace XM.Chat.UI.Conversation.Views
                     portraitRow.AddImage(image =>
                     {
                         image.ResRef(model => model.NpcPortrait)
-                            .Width(80f)
-                            .Height(80f)
+                            .Width(128f)
+                            .Height(200f)
                             .Margin(8f)
+                            .ImageAspect(NuiAspect.Exact)
                             .HorizontalAlign(NuiHAlign.Center)
                             .VerticalAlign(NuiVAlign.Middle);
                     });
                 });
             });
 
-            // NPC Name
-            row.AddColumn(col =>
-            {
-                col.AddRow(nameRow =>
-                {
-                    nameRow.AddLabel(label =>
-                    {
-                        label.Label(model => model.NpcName)
-                            .Height(30f)
-                            .HorizontalAlign(NuiHAlign.Left)
-                            .VerticalAlign(NuiVAlign.Middle);
-                    });
-                });
-            });
-
-            // Close button
-            row.AddColumn(col =>
-            {
-                col.AddRow(closeRow =>
-                {
-                    closeRow.AddButton(button =>
-                    {
-                        button.Label(LocaleString.X)
-                            .Width(30f)
-                            .Height(30f)
-                            .Margin(4f)
-                            .OnClick(model => model.CloseConversation());
-                    });
-                });
-            });
-        }
-
-        /// <summary>
-        /// Builds the main content area with NPC dialogue text.
-        /// </summary>
-        private void BuildMainContent(NuiRowBuilder<ConversationViewModel> row)
-        {
+            // Dialogue Column
             row.AddColumn(col =>
             {
                 col.AddRow(textRow =>
@@ -110,7 +75,7 @@ namespace XM.Chat.UI.Conversation.Views
                     textRow.AddText(text =>
                     {
                         text.Text(model => model.ConversationHeader)
-                            .Height(120f)
+                            .Height(200f)
                             .Margin(8f);
                     });
                 });
@@ -118,21 +83,26 @@ namespace XM.Chat.UI.Conversation.Views
         }
 
         /// <summary>
-        /// Builds the response buttons section.
+        /// Builds the response buttons section spanning both columns.
         /// </summary>
         private void BuildResponseButtons(NuiRowBuilder<ConversationViewModel> row)
         {
             row.AddColumn(col =>
             {
-                col.AddRow(responseRow =>
+                col.AddList(list =>
                 {
-                    responseRow.AddLabel(label =>
+                    list.AddTemplateCell(template =>
                     {
-                        label.Label(LocaleString.Empty)
-                            .Height(100f)
-                            .Margin(8f);
+                        template.AddRow(row2 =>
+                        {
+                            row2.AddButton(button =>
+                            {
+                                button.Label(model => model.AvailableResponses);
+                            });
+                        });
                     });
-                });
+
+                }, model => model.AvailableResponses);
             });
         }
     }

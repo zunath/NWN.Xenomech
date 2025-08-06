@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 namespace XM.Shared.Core.Conversation;
 
 /// <summary>
-/// Metadata about the conversation including ID, name, and description.
+/// Metadata about the conversation including ID, name, description, and portrait.
 /// </summary>
 public class ConversationMetadata
 {
@@ -15,4 +15,7 @@ public class ConversationMetadata
 
     [JsonPropertyName("description")]
     public string Description { get; set; } = string.Empty;
+
+    [JsonPropertyName("portrait")]
+    public string Portrait { get; set; } = "po_hu_m_99_l";
 } 
