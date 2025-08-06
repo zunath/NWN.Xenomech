@@ -1,0 +1,136 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:XM.App.Editor.ViewModels"
+        x:Class="XM.App.Editor.Views.ConversationEditorWindow"
+        x:DataType="local:ConversationEditorViewModel"
+        Title="Conversation Editor"
+        Width="1400" Height="900">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Panel - Conversation List -->
+        <Border Grid.Column="0" BorderBrush="{DynamicResource SystemControlForegroundBaseMediumBrush}" BorderThickness="0,0,1,0">
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Top" Text="Conversations" FontWeight="Bold" Margin="10,5"/>
+                
+                <!-- Buttons -->
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="10,5">
+                    <Button Command="{Binding CreateNewConversationCommand}" 
+                            Margin="0,0,5,0"
+                            Padding="10,5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="➕" FontSize="12" Margin="0,0,5,0"/>
+                            <TextBlock Text="New" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding DeleteConversationCommand}" 
+                            Margin="0,0,5,0"
+                            Padding="10,5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="🗑️" FontSize="12" Margin="0,0,5,0"/>
+                            <TextBlock Text="Delete" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+                <!-- Conversation List -->
+                <ListBox Name="ConversationListBox" 
+                         ItemsSource="{Binding ConversationFiles}"
+                         SelectedItem="{Binding SelectedConversationFile}"
+                         Margin="10,5">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Margin="5"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </Border>
+
+        <!-- Right Panel - Editor -->
+        <Border Grid.Column="1" Background="{DynamicResource SystemControlBackgroundBaseLowBrush}">
+            <ScrollViewer>
+                <StackPanel Margin="20">
+                    <TextBlock Text="Conversation Editor" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+                    
+                    <!-- Metadata Section -->
+                    <Border BorderBrush="{DynamicResource SystemControlForegroundBaseMediumBrush}" 
+                            BorderThickness="1" 
+                            CornerRadius="4" 
+                            Margin="0,0,0,20" 
+                            Padding="10">
+                        <StackPanel>
+                            <TextBlock Text="Metadata" FontWeight="Bold" Margin="0,0,0,10"/>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="ID:" VerticalAlignment="Center"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CurrentConversation.Metadata.Id}" Margin="5"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:" VerticalAlignment="Center"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CurrentConversation.Metadata.Name}" Margin="5"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Description:" VerticalAlignment="Center"/>
+                                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding CurrentConversation.Metadata.Description}" Margin="5"/>
+
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Portrait:" VerticalAlignment="Center"/>
+                                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding CurrentConversation.Metadata.Portrait}" Margin="5"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Conversation Content Section -->
+                    <Border BorderBrush="{DynamicResource SystemControlForegroundBaseMediumBrush}" 
+                            BorderThickness="1" 
+                            CornerRadius="4" 
+                            Margin="0,0,0,20" 
+                            Padding="10">
+                        <StackPanel>
+                            <TextBlock Text="Conversation Content" FontWeight="Bold" Margin="0,0,0,10"/>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Default Page:" VerticalAlignment="Center"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CurrentConversation.Conversation.DefaultPage}" Margin="5"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Pages:" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding PagesCount}" Margin="5,10,5,5"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Save Button -->
+                    <Button Command="{Binding SaveConversationCommand}" 
+                            HorizontalAlignment="Right"
+                            Padding="20,10">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="💾" FontSize="16" Margin="0,0,5,0"/>
+                            <TextBlock Text="Save Conversation" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+
+</Window> 
