@@ -28,6 +28,8 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
         DeleteNodeCommand = new RelayCommand(DeleteNode, CanDeleteNode);
         AddActionCommand = new RelayCommand(AddAction, CanAddAction);
         DeleteActionCommand = new RelayCommand(DeleteAction, CanDeleteAction);
+        MoveActionUpCommand = new RelayCommand<ConversationAction>(MoveActionUp, CanMoveActionUp);
+        MoveActionDownCommand = new RelayCommand<ConversationAction>(MoveActionDown, CanMoveActionDown);
         
         // Load conversation files
         LoadConversationFiles();
@@ -93,6 +95,8 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
                 OnPropertyChanged(nameof(SelectedAction));
                 ((RelayCommand)AddActionCommand).RaiseCanExecuteChanged();
                 ((RelayCommand)DeleteActionCommand).RaiseCanExecuteChanged();
+                ((RelayCommand<ConversationAction>)MoveActionUpCommand).RaiseCanExecuteChanged();
+                ((RelayCommand<ConversationAction>)MoveActionDownCommand).RaiseCanExecuteChanged();
             }
         }
     }
@@ -116,6 +120,8 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
     public ICommand DeleteNodeCommand { get; }
     public ICommand AddActionCommand { get; }
     public ICommand DeleteActionCommand { get; }
+    public ICommand MoveActionUpCommand { get; }
+    public ICommand MoveActionDownCommand { get; }
 
     private void LoadConversationFiles()
     {
@@ -362,6 +368,58 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
     private bool CanDeleteAction()
     {
         return SelectedAction != null && SelectedResponseNode != null;
+    }
+
+    public void MoveActionUp(ConversationAction? actionToMove)
+    {
+        if (SelectedResponseNode == null || actionToMove == null)
+            return;
+
+        var actions = SelectedResponseNode.Response.Actions;
+        var currentIndex = actions.IndexOf(actionToMove);
+        
+        if (currentIndex > 0)
+        {
+            actions.Move(currentIndex, currentIndex - 1);
+            OnPropertyChanged(nameof(SelectedResponseNode));
+            OnPropertyChanged(nameof(SelectedResponseNode.Response));
+        }
+    }
+
+    private bool CanMoveActionUp(ConversationAction? actionToMove)
+    {
+        if (SelectedResponseNode == null || actionToMove == null)
+            return false;
+
+        var actions = SelectedResponseNode.Response.Actions;
+        var currentIndex = actions.IndexOf(actionToMove);
+        return currentIndex > 0;
+    }
+
+    public void MoveActionDown(ConversationAction? actionToMove)
+    {
+        if (SelectedResponseNode == null || actionToMove == null)
+            return;
+
+        var actions = SelectedResponseNode.Response.Actions;
+        var currentIndex = actions.IndexOf(actionToMove);
+        
+        if (currentIndex < actions.Count - 1)
+        {
+            actions.Move(currentIndex, currentIndex + 1);
+            OnPropertyChanged(nameof(SelectedResponseNode));
+            OnPropertyChanged(nameof(SelectedResponseNode.Response));
+        }
+    }
+
+    private bool CanMoveActionDown(ConversationAction? actionToMove)
+    {
+        if (SelectedResponseNode == null || actionToMove == null)
+            return false;
+
+        var actions = SelectedResponseNode.Response.Actions;
+        var currentIndex = actions.IndexOf(actionToMove);
+        return currentIndex < actions.Count - 1;
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

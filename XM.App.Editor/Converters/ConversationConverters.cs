@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Text.Json;
 using Avalonia.Data.Converters;
@@ -223,3 +224,46 @@ public class StringLengthConverter : IValueConverter
         throw new NotImplementedException();
     }
 }
+
+public class CanMoveUpConverter : IValueConverter
+{
+    public static readonly CanMoveUpConverter Instance = new();
+
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is ConversationAction action && parameter is ObservableCollection<ConversationAction> actions)
+        {
+            var index = actions.IndexOf(action);
+            return index > 0;
+        }
+        return false;
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class CanMoveDownConverter : IValueConverter
+{
+    public static readonly CanMoveDownConverter Instance = new();
+
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is ConversationAction action && parameter is ObservableCollection<ConversationAction> actions)
+        {
+            var index = actions.IndexOf(action);
+            return index < actions.Count - 1;
+        }
+        return false;
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+
+
