@@ -1,0 +1,21 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="XM.App.Editor.Views.ConfirmationDialog"
+        Width="420" Height="200"
+        CanResize="False"
+        Title="Confirm">
+  <Grid Margin="16">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <TextBlock x:Name="MessageText" TextWrapping="Wrap"/>
+
+    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+      <Button x:Name="OkButton" Content="Delete" Margin="0,0,8,0" MinWidth="90"/>
+      <Button x:Name="CancelButton" Content="Cancel" MinWidth="90"/>
+    </StackPanel>
+  </Grid>
+</Window>
+

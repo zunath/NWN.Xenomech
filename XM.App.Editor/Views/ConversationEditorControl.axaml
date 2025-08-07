@@ -228,26 +228,86 @@
                             Margin="0,0,0,20" 
                             Padding="10"
                             IsVisible="{Binding SelectedResponseNode, Converter={x:Static converters:NotNullToVisibilityConverter.Instance}}">
-                        <StackPanel>
-                            <TextBlock Text="Conditions" FontWeight="Bold" Margin="0,0,0,10"/>
-                            <ListBox ItemsSource="{Binding SelectedResponseNode.Response.Conditions}" 
-                                     Height="150" Margin="0,5">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Type}" FontWeight="Bold" Margin="0,0,5,0"/>
-                                            <TextBlock Text="{Binding Operator}" Margin="0,0,5,0"/>
-                                            <TextBlock Text="{Binding Value}" Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                <Button Content="Add Condition" Margin="0,0,5,0" Padding="8,4"/>
-                                <Button Content="Edit Condition" Margin="0,0,5,0" Padding="8,4"/>
-                                <Button Content="Delete Condition" Padding="8,4"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200" MinWidth="150"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="*" MinWidth="200"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Left Panel - Conditions List -->
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Conditions" FontWeight="Bold" Margin="0,0,0,10"/>
+                                <ListBox ItemsSource="{Binding SelectedResponseNode.Response.Conditions}"
+                                         SelectedItem="{Binding SelectedCondition}"
+                                         Height="200" Margin="0,5">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Summary}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                    <Button Command="{Binding AddConditionCommand}" Content="Add" Margin="0,0,5,0" Padding="8,4"/>
+                                    <Button Command="{Binding DeleteConditionCommand}" Content="Delete" Padding="8,4"/>
+                                </StackPanel>
                             </StackPanel>
-                        </StackPanel>
+
+                            <!-- Resizable Panel -->
+                            <GridSplitter Grid.Column="1" 
+                                         HorizontalAlignment="Stretch" 
+                                         Background="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                         Width="5"/>
+
+                            <!-- Right Panel - Condition Details -->
+                            <StackPanel Grid.Column="2" 
+                                       IsVisible="{Binding SelectedCondition, Converter={x:Static converters:NotNullToVisibilityConverter.Instance}}"
+                                       Margin="10,0,0,0">
+                                <TextBlock Text="Condition Details" FontWeight="Bold" Margin="0,0,0,10"/>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Type:" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding SelectedCondition.Type}" Width="180" Margin="5">
+                                        <sys:String>PlayerLevel</sys:String>
+                                        <sys:String>Variable</sys:String>
+                                    </ComboBox>
+
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Operator:" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding SelectedCondition.Operator}" Width="180" Margin="5">
+                                        <sys:String>Equal</sys:String>
+                                        <sys:String>NotEqual</sys:String>
+                                        <sys:String>GreaterThan</sys:String>
+                                        <sys:String>GreaterThanOrEqual</sys:String>
+                                        <sys:String>LessThan</sys:String>
+                                        <sys:String>LessThanOrEqual</sys:String>
+                                        <sys:String>Contains</sys:String>
+                                        <sys:String>NotContains</sys:String>
+                                    </ComboBox>
+
+                                    <!-- Value (dynamic per type) -->
+                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Value:" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <!-- PlayerLevel numeric -->
+                                    <TextBox Grid.Row="2" Grid.Column="1" Margin="5"
+                                             IsVisible="{Binding SelectedCondition.Type, Converter={x:Static converters:StringEqualsConverter.Instance}, ConverterParameter=PlayerLevel}"
+                                             Text="{Binding SelectedCondition.NumericValue}"/>
+                                    <!-- Variable string -->
+                                    <TextBox Grid.Row="2" Grid.Column="1" Margin="5"
+                                             IsVisible="{Binding SelectedCondition.Type, Converter={x:Static converters:StringEqualsConverter.Instance}, ConverterParameter=Variable}"
+                                             Text="{Binding SelectedCondition.StringValue}"/>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
                     </Border>
 
                                                                                    <!-- Actions List -->

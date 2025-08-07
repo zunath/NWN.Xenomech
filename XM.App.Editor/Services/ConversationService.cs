@@ -113,7 +113,7 @@ public class ConversationService
                             new ConversationResponse
                             {
                                 Text = "Goodbye",
-                                Conditions = new List<ConversationCondition>(),
+                                Conditions = new ObservableCollection<ConversationCondition>(),
                                 Actions = new ObservableCollection<ConversationAction>
                                 {
                                     new ConversationAction

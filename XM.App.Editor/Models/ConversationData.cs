@@ -52,22 +52,123 @@ public class ConversationResponse
     public string Text { get; set; } = string.Empty;
 
     [JsonPropertyName("conditions")]
-    public List<ConversationCondition> Conditions { get; set; } = new();
+    public ObservableCollection<ConversationCondition> Conditions { get; set; } = new();
 
     [JsonPropertyName("actions")]
     public ObservableCollection<ConversationAction> Actions { get; set; } = new();
 }
 
-public class ConversationCondition
+public class ConversationCondition : INotifyPropertyChanged
 {
+    private string _type = string.Empty;
+    private string _operator = string.Empty;
+    private object _value = new();
+
     [JsonPropertyName("type")]
-    public string Type { get; set; } = string.Empty;
+    public string Type
+    {
+        get => _type;
+        set
+        {
+            if (_type != value)
+            {
+                _type = value;
+                OnPropertyChanged(nameof(Type));
+                // Initialize sensible defaults when type changes
+                if (_type == "PlayerLevel")
+                {
+                    if (string.IsNullOrEmpty(Operator))
+                        Operator = "GreaterThanOrEqual";
+                    // Ensure numeric value
+                    if (_value is not int)
+                        _value = 1;
+                }
+                else if (_type == "Variable")
+                {
+                    if (string.IsNullOrEmpty(Operator))
+                        Operator = "Equal";
+                    if (_value is not string)
+                        _value = string.Empty;
+                }
+                OnPropertyChanged(nameof(Summary));
+            }
+        }
+    }
 
     [JsonPropertyName("operator")]
-    public string Operator { get; set; } = string.Empty;
+    public string Operator
+    {
+        get => _operator;
+        set
+        {
+            if (_operator != value)
+            {
+                _operator = value;
+                OnPropertyChanged(nameof(Operator));
+                OnPropertyChanged(nameof(Summary));
+            }
+        }
+    }
 
     [JsonPropertyName("value")]
-    public object Value { get; set; } = new();
+    public object Value
+    {
+        get => _value;
+        set
+        {
+            if (!Equals(_value, value))
+            {
+                _value = value ?? new object();
+                OnPropertyChanged(nameof(Value));
+                OnPropertyChanged(nameof(NumericValue));
+                OnPropertyChanged(nameof(StringValue));
+                OnPropertyChanged(nameof(Summary));
+            }
+        }
+    }
+
+    [System.Text.Json.Serialization.JsonIgnore]
+    public string NumericValue
+    {
+        get => _value is int i ? i.ToString() : (_value?.ToString() ?? string.Empty);
+        set
+        {
+            if (int.TryParse(value, out var parsed))
+            {
+                Value = parsed; // sets and raises
+            }
+            else if (string.IsNullOrWhiteSpace(value))
+            {
+                Value = 0;
+            }
+        }
+    }
+
+    [System.Text.Json.Serialization.JsonIgnore]
+    public string StringValue
+    {
+        get => _value?.ToString() ?? string.Empty;
+        set => Value = value ?? string.Empty;
+    }
+
+    [System.Text.Json.Serialization.JsonIgnore]
+    public string Summary
+    {
+        get
+        {
+            var valueText = Type == "PlayerLevel" ? NumericValue : StringValue;
+            return string.IsNullOrWhiteSpace(Type)
+                ? ""
+                : $"{Type} {Operator} {valueText}";
+        }
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 }
 
 public class ConversationAction : INotifyPropertyChanged

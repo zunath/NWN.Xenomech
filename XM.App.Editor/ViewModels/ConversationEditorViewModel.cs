@@ -28,6 +28,8 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
         DeleteNodeCommand = new RelayCommand(DeleteNode, CanDeleteNode);
         AddActionCommand = new RelayCommand(AddAction, CanAddAction);
         DeleteActionCommand = new RelayCommand(DeleteAction, CanDeleteAction);
+        AddConditionCommand = new RelayCommand(AddCondition, CanAddCondition);
+        DeleteConditionCommand = new RelayCommand(DeleteCondition, CanDeleteCondition);
         MoveActionUpCommand = new RelayCommand<ConversationAction>(MoveActionUp, CanMoveActionUp);
         MoveActionDownCommand = new RelayCommand<ConversationAction>(MoveActionDown, CanMoveActionDown);
         
@@ -77,6 +79,8 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
             ((RelayCommand)DeleteNodeCommand).RaiseCanExecuteChanged();
             ((RelayCommand)AddActionCommand).RaiseCanExecuteChanged();
             ((RelayCommand)DeleteActionCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)AddConditionCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)DeleteConditionCommand).RaiseCanExecuteChanged();
         }
     }
 
@@ -101,6 +105,21 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
         }
     }
 
+    private ConversationCondition? _selectedCondition;
+    public ConversationCondition? SelectedCondition
+    {
+        get => _selectedCondition;
+        set
+        {
+            if (_selectedCondition != value)
+            {
+                _selectedCondition = value;
+                OnPropertyChanged(nameof(SelectedCondition));
+                ((RelayCommand)DeleteConditionCommand).RaiseCanExecuteChanged();
+            }
+        }
+    }
+
     public int PagesCount => CurrentConversation?.Conversation.Pages.Count ?? 0;
 
     public List<string> ActionTypes { get; } = new()
@@ -120,6 +139,8 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
     public ICommand DeleteNodeCommand { get; }
     public ICommand AddActionCommand { get; }
     public ICommand DeleteActionCommand { get; }
+    public ICommand AddConditionCommand { get; }
+    public ICommand DeleteConditionCommand { get; }
     public ICommand MoveActionUpCommand { get; }
     public ICommand MoveActionDownCommand { get; }
 
@@ -346,6 +367,29 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
         return SelectedResponseNode != null;
     }
 
+    private void AddCondition()
+    {
+        if (SelectedResponseNode == null)
+            return;
+
+        var newCondition = new ConversationCondition
+        {
+            Type = "PlayerLevel",
+            Operator = "GreaterThanOrEqual",
+            Value = 1
+        };
+
+        SelectedResponseNode.Response.Conditions.Add(newCondition);
+        SelectedCondition = newCondition;
+        OnPropertyChanged(nameof(SelectedResponseNode));
+        OnPropertyChanged(nameof(SelectedResponseNode.Response));
+    }
+
+    private bool CanAddCondition()
+    {
+        return SelectedResponseNode != null;
+    }
+
     private async void DeleteAction()
     {
         if (SelectedAction == null || SelectedResponseNode == null)
@@ -368,6 +412,30 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
     private bool CanDeleteAction()
     {
         return SelectedAction != null && SelectedResponseNode != null;
+    }
+
+    private async void DeleteCondition()
+    {
+        if (SelectedCondition == null || SelectedResponseNode == null)
+            return;
+
+        var confirmed = await _confirmationService.ShowConfirmationAsync(
+            "Delete Condition",
+            $"Are you sure you want to delete the {SelectedCondition.Type} condition? This action cannot be undone."
+        );
+
+        if (!confirmed)
+            return;
+
+        SelectedResponseNode.Response.Conditions.Remove(SelectedCondition);
+        SelectedCondition = null;
+        OnPropertyChanged(nameof(SelectedResponseNode));
+        OnPropertyChanged(nameof(SelectedResponseNode.Response));
+    }
+
+    private bool CanDeleteCondition()
+    {
+        return SelectedCondition != null && SelectedResponseNode != null;
     }
 
     public void MoveActionUp(ConversationAction? actionToMove)
