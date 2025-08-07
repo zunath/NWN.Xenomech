@@ -26,7 +26,7 @@ The conversation editor provides a comprehensive interface for managing conversa
 ### Node Management
 - **NPC**: Create new NPC dialogue nodes with default content
 - **Response**: Add player choice options to selected NPC dialogue
-- **Delete**: Remove NPC dialogue or player options with confirmation
+- **Delete**: Remove NPC dialogue or player options with confirmation dialog
 - **Real-time Updates**: Tree view updates automatically when changes are made
 
 ### Node Details Panel
@@ -47,19 +47,33 @@ When a conversation is loaded, the right panel shows conversation details and no
 - **Conditions List**: View and manage response conditions
   - Condition type, operator, and value display
   - Add, edit, and delete condition buttons
-- **Actions List**: View and manage response actions
-  - Action type and parameters editing
-  - JSON format for complex parameter structures
-  - Edit action functionality
+- **Actions List**: View and manage multiple response actions
+  - **Left Panel**: List of actions with type and summary
+  - **Right Panel**: Action details with type selection and parameter fields
+  - **Action Type**: Dropdown with predefined action types (OpenShop, GiveItem, StartQuest)
+  - **Dynamic Parameters**: Parameter fields change based on selected action type:
+    - **OpenShop**: Shop ID field
+    - **GiveItem**: Resref and Quantity fields
+    - **StartQuest**: Quest ID field
+         - **Add Action**: Create new actions for the response (defaults to OpenShop type)
+    - **Delete Action**: Remove selected actions from the response with confirmation dialog
+   - **Real-time Updates**: Actions list updates automatically when changes are made
+   - **Action Selection**: Click on an action in the list to edit its details
+  - **Action Types**:
+    - **OpenShop**: Opens a shop interface (requires ShopId parameter)
+    - **GiveItem**: Gives items to the player (requires Resref and Quantity parameters)
+    - **StartQuest**: Starts a quest (requires QuestId parameter)
 
 ### File Management
 - **Load Conversations**: Select from existing conversation files
 - **Save Changes**: Save modifications to conversation files
 - **Create New**: Generate new conversation files with default structure
-- **Delete Files**: Remove conversation files with confirmation
+- **Delete Files**: Remove conversation files with confirmation dialog
 
 ### Data Structure
 The editor works with conversation data in the following format:
+
+#### New Format (Recommended)
 ```json
 {
   "metadata": {
@@ -83,13 +97,15 @@ The editor works with conversation data in the following format:
                 "value": "condition_value"
               }
             ],
-            "action": {
-              "type": "action_type",
-              "parameters": {
-                "param1": "value1",
-                "param2": "value2"
+            "actions": [
+              {
+                "type": "action_type",
+                "parameters": {
+                  "param1": "value1",
+                  "param2": "value2"
+                }
               }
-            }
+            ]
           }
         ]
       }
@@ -97,6 +113,8 @@ The editor works with conversation data in the following format:
   }
 }
 ```
+
+
 
 ## Architecture
 

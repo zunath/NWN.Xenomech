@@ -182,14 +182,10 @@ namespace XM.Chat.UI.Conversation
                 return;
             }
 
-            // Handle multiple actions if present, otherwise handle single action
+            // Handle multiple actions if present
             if (response.Actions != null && response.Actions.Count > 0)
             {
                 HandleResponseActions(response.Actions);
-            }
-            else if (response.Action != null)
-            {
-                HandleResponseAction(response.Action);
             }
         }
 

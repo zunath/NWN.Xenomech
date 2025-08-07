@@ -2,8 +2,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:XM.App.Editor.ViewModels"
              xmlns:converters="clr-namespace:XM.App.Editor.Converters"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
              x:Class="XM.App.Editor.Views.ConversationEditorControl"
              x:DataType="local:ConversationEditorViewModel">
+
+
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -167,22 +170,26 @@
                              Margin="0,0,0,20" 
                              Padding="10"
                              IsVisible="{Binding SelectedPageNode, Converter={x:Static converters:NotNullToVisibilityConverter.Instance}}">
-                         <StackPanel>
-                             <TextBlock Text="NPC Dialogue" FontWeight="Bold" Margin="0,0,0,10"/>
-                             <Grid>
-                                 <Grid.RowDefinitions>
-                                     <RowDefinition Height="Auto"/>
-                                 </Grid.RowDefinitions>
-                                 <Grid.ColumnDefinitions>
-                                     <ColumnDefinition Width="100"/>
-                                     <ColumnDefinition Width="*"/>
-                                 </Grid.ColumnDefinitions>
+                                                   <StackPanel>
+                              <TextBlock Text="NPC Dialogue" FontWeight="Bold" Margin="0,0,0,10"/>
+                              <Grid>
+                                  <Grid.RowDefinitions>
+                                      <RowDefinition Height="Auto"/>
+                                      <RowDefinition Height="Auto"/>
+                                  </Grid.RowDefinitions>
+                                  <Grid.ColumnDefinitions>
+                                      <ColumnDefinition Width="100"/>
+                                      <ColumnDefinition Width="*"/>
+                                  </Grid.ColumnDefinitions>
 
-                                                                   <TextBlock Grid.Row="0" Grid.Column="0" Text="NPC Text:" VerticalAlignment="Top" Margin="0,5,0,0"/>
-                                  <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedPageNode.Page.Header}" 
+                                  <TextBlock Grid.Row="0" Grid.Column="0" Text="Page ID:" VerticalAlignment="Center"/>
+                                  <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedPageNode.PageId}" Margin="5" LostFocus="OnPageIdLostFocus"/>
+
+                                  <TextBlock Grid.Row="1" Grid.Column="0" Text="NPC Text:" VerticalAlignment="Top" Margin="0,5,0,0"/>
+                                  <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedPageNode.Page.Header}" 
                                            Margin="5" AcceptsReturn="True" Height="120" TextWrapping="Wrap"/>
-                             </Grid>
-                         </StackPanel>
+                              </Grid>
+                          </StackPanel>
                      </Border>
 
                                          <!-- Response Details -->
@@ -239,45 +246,142 @@
                         </StackPanel>
                     </Border>
 
-                    <!-- Actions List -->
-                    <Border BorderBrush="{DynamicResource SystemControlForegroundBaseMediumBrush}" 
-                            BorderThickness="1" 
-                            CornerRadius="4" 
-                            Margin="0,0,0,20" 
-                            Padding="10"
-                            IsVisible="{Binding SelectedResponseNode, Converter={x:Static converters:NotNullToVisibilityConverter.Instance}}">
-                        <StackPanel>
-                            <TextBlock Text="Actions" FontWeight="Bold" Margin="0,0,0,10"/>
-                            <Border BorderBrush="{DynamicResource SystemControlForegroundBaseMediumBrush}" 
-                                    BorderThickness="1" 
-                                    CornerRadius="2" 
-                                    Padding="10" 
-                                    Margin="0,5">
-                                <StackPanel>
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="100"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
+                                                                                   <!-- Actions List -->
+                      <Border BorderBrush="{DynamicResource SystemControlForegroundBaseMediumBrush}" 
+                              BorderThickness="1" 
+                              CornerRadius="4" 
+                              Margin="0,0,0,20" 
+                              Padding="10"
+                              IsVisible="{Binding SelectedResponseNode, Converter={x:Static converters:NotNullToVisibilityConverter.Instance}}">
+                          <Grid>
+                              <Grid.ColumnDefinitions>
+                                  <ColumnDefinition Width="200" MinWidth="150"/>
+                                  <ColumnDefinition Width="5"/>
+                                  <ColumnDefinition Width="*" MinWidth="200"/>
+                              </Grid.ColumnDefinitions>
+                              
+                              <!-- Left Panel - Actions List -->
+                              <StackPanel Grid.Column="0">
+                                  <TextBlock Text="Actions" FontWeight="Bold" Margin="0,0,0,10"/>
+                                  <ListBox ItemsSource="{Binding SelectedResponseNode.Response.Actions}" 
+                                           SelectedItem="{Binding SelectedAction}"
+                                           Height="200" Margin="0,5"
+                                           Name="ActionsListBox">
+                                      <ListBox.ItemTemplate>
+                                          <DataTemplate>
+                                              <Border BorderBrush="{DynamicResource SystemControlForegroundBaseMediumBrush}" 
+                                                      BorderThickness="1" 
+                                                      CornerRadius="2" 
+                                                      Padding="8" 
+                                                      Margin="0,2">
+                                                  <StackPanel>
+                                                      <TextBlock Text="{Binding Type}" FontWeight="Bold" Margin="0,0,0,2"/>
+                                                      <TextBlock Text="{Binding Summary}" 
+                                                                 FontSize="10" Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"/>
+                                                  </StackPanel>
+                                              </Border>
+                                          </DataTemplate>
+                                      </ListBox.ItemTemplate>
+                                  </ListBox>
+                                  <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                      <Button Command="{Binding AddActionCommand}" Content="Add" Margin="0,0,5,0" Padding="8,4"/>
+                                      <Button Command="{Binding DeleteActionCommand}" Content="Delete" Padding="8,4"/>
+                                  </StackPanel>
+                              </StackPanel>
+                              
+                              <!-- Resizable Panel -->
+                              <GridSplitter Grid.Column="1" 
+                                           HorizontalAlignment="Stretch" 
+                                           Background="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                           Width="5"/>
+                              
+                              <!-- Right Panel - Action Details -->
+                              <StackPanel Grid.Column="2" 
+                                         IsVisible="{Binding SelectedAction, Converter={x:Static converters:NotNullToVisibilityConverter.Instance}}">
+                                  <TextBlock Text="Action Details" FontWeight="Bold" Margin="0,0,0,10"/>
+                                  <Grid>
+                                      <Grid.RowDefinitions>
+                                          <RowDefinition Height="Auto"/>
+                                          <RowDefinition Height="Auto"/>
+                                      </Grid.RowDefinitions>
+                                      <Grid.ColumnDefinitions>
+                                          <ColumnDefinition Width="100"/>
+                                          <ColumnDefinition Width="*"/>
+                                      </Grid.ColumnDefinitions>
 
-                                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Type:" VerticalAlignment="Center"/>
-                                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedResponseNode.Response.Action.Type}" Margin="5"/>
+                                      <TextBlock Grid.Row="0" Grid.Column="0" Text="Type:" VerticalAlignment="Center"/>
+                                      <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding SelectedAction.Type}" Width="150" Margin="5">
+                                          <sys:String>OpenShop</sys:String>
+                                          <sys:String>GiveItem</sys:String>
+                                          <sys:String>StartQuest</sys:String>
+                                      </ComboBox>
 
-                                                                                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Parameters:" VerticalAlignment="Top" Margin="0,10,0,0"/>
-                                         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedResponseNode.Response.Action.Parameters, Converter={x:Static converters:DictionaryToJsonConverter.Instance}}" 
-                                                  Margin="5" AcceptsReturn="True" Height="120" TextWrapping="Wrap"/>
-                                    </Grid>
-                                </StackPanel>
-                            </Border>
-                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                <Button Content="Edit Action" Padding="8,4"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
+                                      <!-- Action Parameters -->
+                                      <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                              Margin="0,10,0,0">
+                                          <Grid>
+                                              <Grid.ColumnDefinitions>
+                                                  <ColumnDefinition Width="100"/>
+                                                  <ColumnDefinition Width="*"/>
+                                              </Grid.ColumnDefinitions>
+                                              
+                                              <!-- OpenShop Parameters -->
+                                              <StackPanel Grid.Column="0" Grid.ColumnSpan="2" 
+                                                          IsVisible="{Binding SelectedAction.Type, Converter={x:Static converters:StringEqualsConverter.Instance}, ConverterParameter=OpenShop}">
+                                                  <Grid>
+                                                      <Grid.ColumnDefinitions>
+                                                          <ColumnDefinition Width="100"/>
+                                                          <ColumnDefinition Width="*"/>
+                                                      </Grid.ColumnDefinitions>
+                                                      <TextBlock Grid.Column="0" Text="Shop ID:" VerticalAlignment="Center"/>
+                                                      <TextBox Grid.Column="1" Text="{Binding SelectedAction.ShopId}" Margin="5"/>
+                                                  </Grid>
+                                              </StackPanel>
+                                              
+                                              <!-- GiveItem Parameters -->
+                                              <StackPanel Grid.Column="0" Grid.ColumnSpan="2" 
+                                                          IsVisible="{Binding SelectedAction.Type, Converter={x:Static converters:StringEqualsConverter.Instance}, ConverterParameter=GiveItem}">
+                                                  <Grid>
+                                                      <Grid.RowDefinitions>
+                                                          <RowDefinition Height="Auto"/>
+                                                          <RowDefinition Height="Auto"/>
+                                                      </Grid.RowDefinitions>
+                                                      <Grid.ColumnDefinitions>
+                                                          <ColumnDefinition Width="100"/>
+                                                          <ColumnDefinition Width="*"/>
+                                                      </Grid.ColumnDefinitions>
+                                                                                                             <TextBlock Grid.Row="0" Grid.Column="0" Text="Resref:" VerticalAlignment="Center"/>
+                                                       <StackPanel Grid.Row="0" Grid.Column="1">
+                                                           <TextBox Text="{Binding SelectedAction.ItemId}" Margin="5" MaxLength="16"/>
+                                                           <TextBlock Text="{Binding SelectedAction.ItemId, Converter={x:Static converters:StringLengthConverter.Instance}}" 
+                                                                      FontSize="10" Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}" 
+                                                                      HorizontalAlignment="Right" Margin="5,0,5,0"/>
+                                                       </StackPanel>
+                                                                                                             <TextBlock Grid.Row="1" Grid.Column="0" Text="Quantity:" VerticalAlignment="Center"/>
+                                                       <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedAction.Quantity}" Margin="5" 
+                                                                InputMethod.IsInputMethodEnabled="False" 
+                                                                KeyDown="OnQuantityKeyDown"/>
+                                                  </Grid>
+                                              </StackPanel>
+                                              
+                                              <!-- StartQuest Parameters -->
+                                              <StackPanel Grid.Column="0" Grid.ColumnSpan="2" 
+                                                          IsVisible="{Binding SelectedAction.Type, Converter={x:Static converters:StringEqualsConverter.Instance}, ConverterParameter=StartQuest}">
+                                                  <Grid>
+                                                      <Grid.ColumnDefinitions>
+                                                          <ColumnDefinition Width="100"/>
+                                                          <ColumnDefinition Width="*"/>
+                                                      </Grid.ColumnDefinitions>
+                                                      <TextBlock Grid.Column="0" Text="Quest ID:" VerticalAlignment="Center"/>
+                                                      <TextBox Grid.Column="1" Text="{Binding SelectedAction.QuestId}" Margin="5"/>
+                                                  </Grid>
+                                              </StackPanel>
+                                          </Grid>
+                                      </Border>
+                                  </Grid>
+                              </StackPanel>
+                          </Grid>
+                      </Border>
 
                                          <!-- Save Button -->
                      <Button Command="{Binding SaveConversationCommand}" 

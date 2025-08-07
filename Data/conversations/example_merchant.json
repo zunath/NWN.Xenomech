@@ -3,7 +3,7 @@
     "id": "merchant_general_001",
     "name": "General Merchant",
     "description": "Main merchant conversation with shop access",
-	"portrait": ""
+    "portrait": ""
   },
   "conversation": {
     "defaultPage": "greeting",
@@ -14,22 +14,38 @@
           {
             "text": "Show me your wares",
             "conditions": [],
-            "action": {
-              "type": "OpenShop",
-              "parameters": {
-                "shopId": "general_merchant_shop"
+            "actions": [
+              {
+                "type": "OpenShop",
+                "parameters": {
+                  "shopId": "general_merchant_shop2",
+                  "itemId": "",
+                  "quantity": "1",
+                  "questId": ""
+                }
+              },
+              {
+                "type": "StartQuest",
+                "parameters": {
+                  "shopId": "",
+                  "itemId": "",
+                  "quantity": "1",
+                  "questId": "asdasd"
+                }
               }
-            }
+            ]
           },
           {
             "text": "I have some questions",
             "conditions": [],
-            "action": {
-              "type": "ChangePage",
-              "parameters": {
-                "pageId": "questions"
+            "actions": [
+              {
+                "type": "ChangePage",
+                "parameters": {
+                  "pageId": "questions"
+                }
               }
-            }
+            ]
           },
           {
             "text": "Do you have any special deals?",
@@ -40,19 +56,24 @@
                 "value": 5
               }
             ],
-            "action": {
-              "type": "ChangePage",
-              "parameters": {
-                "pageId": "special_deals"
+            "actions": [
+              {
+                "type": "ChangePage",
+                "parameters": {
+                  "pageId": "special_deals"
+                }
               }
-            }
+            ]
           },
           {
             "text": "Goodbye",
             "conditions": [],
-            "action": {
-              "type": "EndConversation"
-            }
+            "actions": [
+              {
+                "type": "EndConversation",
+                "parameters": {}
+              }
+            ]
           }
         ]
       },
@@ -62,32 +83,38 @@
           {
             "text": "Tell me about this area",
             "conditions": [],
-            "action": {
-              "type": "ChangePage",
-              "parameters": {
-                "pageId": "area_info"
+            "actions": [
+              {
+                "type": "ChangePage",
+                "parameters": {
+                  "pageId": "area_info"
+                }
               }
-            }
+            ]
           },
           {
-            "text": "What's new in town?",
+            "text": "What\u0027s new in town?",
             "conditions": [],
-            "action": {
-              "type": "ChangePage",
-              "parameters": {
-                "pageId": "town_news"
+            "actions": [
+              {
+                "type": "ChangePage",
+                "parameters": {
+                  "pageId": "town_news"
+                }
               }
-            }
+            ]
           },
           {
             "text": "Back to main menu",
             "conditions": [],
-            "action": {
-              "type": "ChangePage",
-              "parameters": {
-                "pageId": "greeting"
+            "actions": [
+              {
+                "type": "ChangePage",
+                "parameters": {
+                  "pageId": "greeting"
+                }
               }
-            }
+            ]
           }
         ]
       },
@@ -97,22 +124,26 @@
           {
             "text": "Show me the special items",
             "conditions": [],
-            "action": {
-              "type": "OpenShop",
-              "parameters": {
-                "shopId": "special_merchant_shop"
+            "actions": [
+              {
+                "type": "OpenShop",
+                "parameters": {
+                  "shopId": "special_merchant_shop"
+                }
               }
-            }
+            ]
           },
           {
             "text": "Back to main menu",
             "conditions": [],
-            "action": {
-              "type": "ChangePage",
-              "parameters": {
-                "pageId": "greeting"
+            "actions": [
+              {
+                "type": "ChangePage",
+                "parameters": {
+                  "pageId": "greeting"
+                }
               }
-            }
+            ]
           }
         ]
       },
@@ -122,22 +153,26 @@
           {
             "text": "Tell me more about the dungeons",
             "conditions": [],
-            "action": {
-              "type": "ChangePage",
-              "parameters": {
-                "pageId": "dungeon_info"
+            "actions": [
+              {
+                "type": "ChangePage",
+                "parameters": {
+                  "pageId": "dungeon_info"
+                }
               }
-            }
+            ]
           },
           {
             "text": "Back to questions",
             "conditions": [],
-            "action": {
-              "type": "ChangePage",
-              "parameters": {
-                "pageId": "questions"
+            "actions": [
+              {
+                "type": "ChangePage",
+                "parameters": {
+                  "pageId": "questions"
+                }
               }
-            }
+            ]
           }
         ]
       },
@@ -145,29 +180,33 @@
         "header": "The dungeons here are filled with ancient treasures and powerful monsters. Be careful if you venture there!",
         "responses": [
           {
-            "text": "I'll be careful. Thanks for the warning.",
+            "text": "I\u0027ll be careful. Thanks for the warning.",
             "conditions": [],
-            "action": {
-              "type": "ChangePage",
-              "parameters": {
-                "pageId": "questions"
+            "actions": [
+              {
+                "type": "ChangePage",
+                "parameters": {
+                  "pageId": "questions"
+                }
               }
-            }
+            ]
           }
         ]
       },
       "town_news": {
-        "header": "There's been talk of strange creatures appearing at night. The guards are on high alert.",
+        "header": "There\u0027s been talk of strange creatures appearing at night. The guards are on high alert.",
         "responses": [
           {
-            "text": "I'll keep my eyes open.",
+            "text": "I\u0027ll keep my eyes open.",
             "conditions": [],
-            "action": {
-              "type": "ChangePage",
-              "parameters": {
-                "pageId": "questions"
+            "actions": [
+              {
+                "type": "ChangePage",
+                "parameters": {
+                  "pageId": "questions"
+                }
               }
-            }
+            ]
           }
         ]
       },
@@ -175,7 +214,7 @@
         "header": "Welcome, new adventurer! Let me give you a small gift to help you on your journey.",
         "responses": [
           {
-            "text": "Thank you! I'll put it to good use.",
+            "text": "Thank you! I\u0027ll put it to good use.",
             "conditions": [],
             "actions": [
               {
@@ -194,19 +233,21 @@
             ]
           },
           {
-            "text": "I don't need charity.",
+            "text": "I don\u0027t need charity.",
             "conditions": [],
-            "action": {
-              "type": "ChangePage",
-              "parameters": {
-                "pageId": "greeting"
+            "actions": [
+              {
+                "type": "ChangePage",
+                "parameters": {
+                  "pageId": "greeting"
+                }
               }
-            }
+            ]
           }
         ]
       },
       "quest_reward": {
-        "header": "Excellent work! You've completed the quest. Here's your reward.",
+        "header": "Excellent work! You\u0027ve completed the quest. Here\u0027s your reward.",
         "responses": [
           {
             "text": "Thank you for the reward!",
@@ -235,120 +276,6 @@
           }
         ]
       }
-    },
-    "actions": {
-      "OpenShop": {
-        "description": "Opens a shop interface for the player",
-        "parameters": {
-          "shopId": {
-            "type": "string",
-            "description": "The ID of the shop to open",
-            "required": true
-          }
-        }
-      },
-      "Teleport": {
-        "description": "Teleports the player to a specific location",
-        "parameters": {
-          "location": {
-            "type": "string",
-            "description": "The location ID to teleport to",
-            "required": true
-          }
-        }
-      },
-      "AcceptQuest": {
-        "description": "Gives a quest to the player",
-        "parameters": {
-          "questId": {
-            "type": "string",
-            "description": "The ID of the quest to give",
-            "required": true
-          }
-        }
-      },
-      "GiveItem": {
-        "description": "Gives an item to the player",
-        "parameters": {
-          "itemId": {
-            "type": "string",
-            "description": "The ID of the item to give",
-            "required": true
-          },
-          "quantity": {
-            "type": "integer",
-            "description": "The quantity to give",
-            "required": true,
-            "default": 1
-          }
-        }
-      },
-      "ExecuteScript": {
-        "description": "Executes a custom script",
-        "parameters": {
-          "scriptId": {
-            "type": "string",
-            "description": "The script to execute",
-            "required": true
-          }
-        }
-      }
-    },
-    "conditions": {
-      "PlayerLevel": {
-        "description": "Checks the player's level",
-        "parameters": {
-          "operator": {
-            "type": "enum",
-            "enum": ["Equal", "NotEqual", "GreaterThan", "GreaterThanOrEqual", "LessThan", "LessThanOrEqual"],
-            "required": true
-          },
-          "value": {
-            "type": "integer",
-            "required": true
-          }
-        }
-      },
-      "has_item": {
-        "description": "Checks if player has a specific item",
-        "parameters": {
-          "itemId": {
-            "type": "string",
-            "required": true
-          },
-          "quantity": {
-            "type": "integer",
-            "default": 1
-          }
-        }
-      },
-      "has_quest": {
-        "description": "Checks if player has a specific quest",
-        "parameters": {
-          "questId": {
-            "type": "string",
-            "required": true
-          }
-        }
-      },
-      "Variable": {
-        "description": "Checks a conversation variable",
-        "parameters": {
-          "name": {
-            "type": "string",
-            "required": true
-          },
-          "operator": {
-            "type": "enum",
-            "enum": ["Equal", "NotEqual", "GreaterThan", "GreaterThanOrEqual", "LessThan", "LessThanOrEqual", "Contains", "NotContains"],
-            "required": true
-          },
-          "value": {
-            "type": "any",
-            "required": true
-          }
-        }
-      }
     }
   }
-} 
+}

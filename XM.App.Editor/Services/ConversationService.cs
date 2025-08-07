@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Collections.ObjectModel;
 using XM.App.Editor.Models;
 
 namespace XM.App.Editor.Services;
@@ -113,10 +114,13 @@ public class ConversationService
                             {
                                 Text = "Goodbye",
                                 Conditions = new List<ConversationCondition>(),
-                                Action = new ConversationAction
+                                Actions = new ObservableCollection<ConversationAction>
                                 {
-                                    Type = "EndConversation",
-                                    Parameters = new Dictionary<string, object>()
+                                    new ConversationAction
+                                    {
+                                        Type = "EndConversation",
+                                        Parameters = new Dictionary<string, object>()
+                                    }
                                 }
                             }
                         }

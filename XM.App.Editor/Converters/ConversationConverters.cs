@@ -65,6 +65,28 @@ public class NodeFontWeightConverter : IValueConverter
     }
 }
 
+public class PageIdConverter : IValueConverter
+{
+    public static readonly PageIdConverter Instance = new();
+
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is ConversationPageNode pageNode)
+            return pageNode.PageId;
+        return string.Empty;
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is string newPageId && parameter is ConversationPageNode pageNode)
+        {
+            // This would need to be handled in the ViewModel
+            return newPageId;
+        }
+        return string.Empty;
+    }
+}
+
 public class NotNullToVisibilityConverter : IValueConverter
 {
     public static readonly NotNullToVisibilityConverter Instance = new();
@@ -118,4 +140,86 @@ public class DictionaryToJsonConverter : IValueConverter
         }
         return new Dictionary<string, object>();
     }
-} 
+}
+
+public class ActionTypeToVisibilityConverter : IValueConverter
+{
+    public static readonly ActionTypeToVisibilityConverter Instance = new();
+
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is string actionType && parameter is string expectedType)
+        {
+            return actionType == expectedType;
+        }
+        return false;
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class StringEqualsConverter : IValueConverter
+{
+    public static readonly StringEqualsConverter Instance = new();
+
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is string stringValue && parameter is string expectedValue)
+        {
+            return stringValue == expectedValue;
+        }
+        return false;
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class ActionSummaryConverter : IValueConverter
+{
+    public static readonly ActionSummaryConverter Instance = new();
+
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is ConversationAction action)
+        {
+            return action.Type switch
+            {
+                "OpenShop" => $"Shop: {action.ShopId}",
+                "GiveItem" => $"Resref: {action.ItemId} x{action.Quantity}",
+                "StartQuest" => $"Quest: {action.QuestId}",
+                _ => "Unknown Action"
+            };
+        }
+        return "Unknown Action";
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class StringLengthConverter : IValueConverter
+{
+    public static readonly StringLengthConverter Instance = new();
+
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is string stringValue)
+        {
+            return $"{stringValue.Length}/16 characters";
+        }
+        return "0/16 characters";
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}

@@ -9,6 +9,7 @@ namespace XM.App.Editor.ViewModels;
 public class ConversationEditorViewModel : INotifyPropertyChanged
 {
     private readonly ConversationService _conversationService;
+    private readonly IConfirmationService _confirmationService;
     private string? _selectedConversationFile;
     private ConversationData? _currentConversation;
     private ConversationTreeNode? _selectedNode;
@@ -16,6 +17,7 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
     public ConversationEditorViewModel()
     {
         _conversationService = new ConversationService();
+        _confirmationService = new ConfirmationService();
         
         // Initialize commands
         CreateNewConversationCommand = new RelayCommand(CreateNewConversation);
@@ -24,6 +26,8 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
         AddPageCommand = new RelayCommand(AddPage, CanAddPage);
         AddResponseCommand = new RelayCommand(AddResponse, CanAddResponse);
         DeleteNodeCommand = new RelayCommand(DeleteNode, CanDeleteNode);
+        AddActionCommand = new RelayCommand(AddAction, CanAddAction);
+        DeleteActionCommand = new RelayCommand(DeleteAction, CanDeleteAction);
         
         // Load conversation files
         LoadConversationFiles();
@@ -69,13 +73,39 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
             OnPropertyChanged(nameof(SelectedResponseNode));
             ((RelayCommand)AddResponseCommand).RaiseCanExecuteChanged();
             ((RelayCommand)DeleteNodeCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)AddActionCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)DeleteActionCommand).RaiseCanExecuteChanged();
         }
     }
 
     public ConversationPageNode? SelectedPageNode => SelectedNode as ConversationPageNode;
     public ConversationResponseNode? SelectedResponseNode => SelectedNode as ConversationResponseNode;
 
+    private ConversationAction? _selectedAction;
+    public ConversationAction? SelectedAction
+    {
+        get => _selectedAction;
+        set
+        {
+            if (_selectedAction != value)
+            {
+                _selectedAction = value;
+                OnPropertyChanged(nameof(SelectedAction));
+                ((RelayCommand)AddActionCommand).RaiseCanExecuteChanged();
+                ((RelayCommand)DeleteActionCommand).RaiseCanExecuteChanged();
+            }
+        }
+    }
+
     public int PagesCount => CurrentConversation?.Conversation.Pages.Count ?? 0;
+
+    public List<string> ActionTypes { get; } = new()
+    {
+        "OpenShop",
+        "GiveItem", 
+        "StartQuest",
+        "Custom"
+    };
 
     // Commands
     public ICommand CreateNewConversationCommand { get; }
@@ -84,6 +114,8 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
     public ICommand AddPageCommand { get; }
     public ICommand AddResponseCommand { get; }
     public ICommand DeleteNodeCommand { get; }
+    public ICommand AddActionCommand { get; }
+    public ICommand DeleteActionCommand { get; }
 
     private void LoadConversationFiles()
     {
@@ -157,13 +189,17 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
         }
     }
 
-    private void DeleteConversation()
+    private async void DeleteConversation()
     {
         if (string.IsNullOrEmpty(SelectedConversationFile))
             return;
 
-        // TODO: Add confirmation dialog
-        if (_conversationService.DeleteConversation(SelectedConversationFile))
+        var confirmed = await _confirmationService.ShowConfirmationAsync(
+            "Delete Conversation",
+            $"Are you sure you want to delete the conversation '{SelectedConversationFile}'? This action cannot be undone."
+        );
+
+        if (confirmed && _conversationService.DeleteConversation(SelectedConversationFile))
         {
             LoadConversationFiles();
             SelectedConversationFile = null;
@@ -227,9 +263,20 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
         return SelectedPageNode != null;
     }
 
-    private void DeleteNode()
+    private async void DeleteNode()
     {
         if (SelectedNode == null || CurrentConversation == null)
+            return;
+
+        string nodeName = SelectedNode.Name;
+        string nodeType = SelectedNode is ConversationPageNode ? "NPC dialogue" : "player response";
+
+        var confirmed = await _confirmationService.ShowConfirmationAsync(
+            "Delete Node",
+            $"Are you sure you want to delete the {nodeType} '{nodeName}'? This action cannot be undone."
+        );
+
+        if (!confirmed)
             return;
 
         if (SelectedNode is ConversationPageNode pageNode)
@@ -251,6 +298,70 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
     private bool CanDeleteNode()
     {
         return SelectedNode != null;
+    }
+
+    public void UpdatePageId(string oldPageId, string newPageId)
+    {
+        if (CurrentConversation == null || string.IsNullOrEmpty(oldPageId) || string.IsNullOrEmpty(newPageId) || oldPageId == newPageId)
+            return;
+
+        if (CurrentConversation.Conversation.Pages.ContainsKey(newPageId))
+        {
+            // TODO: Show error message - page ID already exists
+            return;
+        }
+
+        if (CurrentConversation.Conversation.Pages.TryGetValue(oldPageId, out var page))
+        {
+            CurrentConversation.Conversation.Pages.Remove(oldPageId);
+            CurrentConversation.Conversation.Pages[newPageId] = page;
+            BuildConversationTree();
+        }
+    }
+
+    private void AddAction()
+    {
+        if (SelectedResponseNode == null)
+            return;
+
+        var newAction = new ConversationAction
+        {
+            Type = "OpenShop"
+        };
+
+        SelectedResponseNode.Response.Actions.Add(newAction);
+        SelectedAction = newAction; // Select the new action
+        OnPropertyChanged(nameof(SelectedResponseNode));
+        OnPropertyChanged(nameof(SelectedResponseNode.Response));
+    }
+
+    private bool CanAddAction()
+    {
+        return SelectedResponseNode != null;
+    }
+
+    private async void DeleteAction()
+    {
+        if (SelectedAction == null || SelectedResponseNode == null)
+            return;
+
+        var confirmed = await _confirmationService.ShowConfirmationAsync(
+            "Delete Action",
+            $"Are you sure you want to delete the {SelectedAction.Type} action? This action cannot be undone."
+        );
+
+        if (!confirmed)
+            return;
+
+        SelectedResponseNode.Response.Actions.Remove(SelectedAction);
+        SelectedAction = null; // Clear selection
+        OnPropertyChanged(nameof(SelectedResponseNode));
+        OnPropertyChanged(nameof(SelectedResponseNode.Response));
+    }
+
+    private bool CanDeleteAction()
+    {
+        return SelectedAction != null && SelectedResponseNode != null;
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
