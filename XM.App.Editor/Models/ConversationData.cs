@@ -64,6 +64,11 @@ public class ConversationCondition : INotifyPropertyChanged
     private string _type = string.Empty;
     private string _operator = string.Empty;
     private object _value = new();
+    private static readonly Dictionary<string, List<string>> TypeToOperators = new()
+    {
+        { "PlayerLevel", new List<string> { "Equal", "NotEqual", "GreaterThan", "GreaterThanOrEqual", "LessThan", "LessThanOrEqual" } },
+        { "Variable", new List<string> { "Equal", "NotEqual", "Contains", "NotContains" } }
+    };
 
     [JsonPropertyName("type")]
     public string Type
@@ -91,7 +96,13 @@ public class ConversationCondition : INotifyPropertyChanged
                     if (_value is not string)
                         _value = string.Empty;
                 }
+                // Adjust operator if it's not valid for this type
+                if (!AvailableOperators.Contains(Operator))
+                {
+                    Operator = AvailableOperators.FirstOrDefault() ?? "Equal";
+                }
                 OnPropertyChanged(nameof(Summary));
+                OnPropertyChanged(nameof(AvailableOperators));
             }
         }
     }
@@ -125,6 +136,18 @@ public class ConversationCondition : INotifyPropertyChanged
                 OnPropertyChanged(nameof(StringValue));
                 OnPropertyChanged(nameof(Summary));
             }
+        }
+    }
+
+    [System.Text.Json.Serialization.JsonIgnore]
+    public List<string> AvailableOperators
+    {
+        get
+        {
+            if (TypeToOperators.TryGetValue(Type, out var ops))
+                return ops;
+            // Default operators if type is unknown
+            return new List<string> { "Equal", "NotEqual" };
         }
     }
 

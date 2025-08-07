@@ -4,17 +4,19 @@ using Avalonia.Data.Converters;
 using System.ComponentModel;
 using System.Windows.Input;
 using System.Globalization;
+using Avalonia.Controls.ApplicationLifetimes;
 using XM.App.Editor.ViewModels;
 using XM.App.Editor.Views;
+using XM.App.Editor.Services;
 
 namespace XM.App.Editor;
 
 public partial class MainWindow : Window
 {
-    public MainWindow()
+    public MainWindow(IUserSettingsService userSettingsService)
     {
         InitializeComponent();
-        DataContext = new MainWindowViewModel();
+        DataContext = new MainWindowViewModel(userSettingsService);
     }
 
     protected override void OnLoaded(RoutedEventArgs e)
@@ -35,6 +37,31 @@ public partial class MainWindow : Window
                 editor.IsVisible = false;
             }
         }
+
+        // Apply persisted window settings
+        if (DataContext is MainWindowViewModel vm)
+        {
+            if (vm.Settings.MainWindowWidth.HasValue)
+                Width = vm.Settings.MainWindowWidth.Value;
+            if (vm.Settings.MainWindowHeight.HasValue)
+                Height = vm.Settings.MainWindowHeight.Value;
+            if (vm.Settings.IsMaximized == true)
+                WindowState = WindowState.Maximized;
+        }
+    }
+
+    protected override void OnClosing(WindowClosingEventArgs e)
+    {
+        base.OnClosing(e);
+        if (DataContext is MainWindowViewModel vm)
+        {
+            vm.Settings.IsMaximized = WindowState == WindowState.Maximized;
+            if (WindowState == WindowState.Normal)
+            {
+                vm.Settings.MainWindowWidth = Width;
+                vm.Settings.MainWindowHeight = Height;
+            }
+        }
     }
 
     private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -51,6 +78,7 @@ public partial class MainWindow : Window
 
 public class MainWindowViewModel : INotifyPropertyChanged
 {
+    private readonly IUserSettingsService _userSettingsService;
     private bool _isConversationEditorVisible;
     private ConversationEditorViewModel? _conversationEditorViewModel;
 
@@ -79,8 +107,9 @@ public class MainWindowViewModel : INotifyPropertyChanged
         }
     }
 
-    public MainWindowViewModel()
+    public MainWindowViewModel(IUserSettingsService userSettingsService)
     {
+        _userSettingsService = userSettingsService;
         ExitCommand = new RelayCommand(Exit);
         AboutCommand = new RelayCommand(About);
         OpenConversationEditorCommand = new RelayCommand(OpenConversationEditor);
@@ -89,6 +118,8 @@ public class MainWindowViewModel : INotifyPropertyChanged
         _isConversationEditorVisible = false;
     }
 
+    public UserSettings Settings => _userSettingsService.Current;
+
     public void Initialize()
     {
         // Initialize the editor with default settings
@@ -96,7 +127,19 @@ public class MainWindowViewModel : INotifyPropertyChanged
 
     public void Exit()
     {
-        // TODO: Implement exit functionality
+        var desktop = Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
+        var mainWindow = desktop?.MainWindow;
+        if (mainWindow != null)
+        {
+            Settings.IsMaximized = mainWindow.WindowState == WindowState.Maximized;
+            if (mainWindow.WindowState == WindowState.Normal)
+            {
+                Settings.MainWindowWidth = mainWindow.Width;
+                Settings.MainWindowHeight = mainWindow.Height;
+            }
+        }
+        // Trigger app shutdown; settings are saved via shutdown hook
+        desktop?.Shutdown();
     }
 
     public void About()
@@ -112,12 +155,12 @@ public class MainWindowViewModel : INotifyPropertyChanged
             IsConversationEditorVisible = false;
             ConversationEditorViewModel = null;
         }
-        else
-        {
-            // Show the conversation editor
-            ConversationEditorViewModel = new ViewModels.ConversationEditorViewModel();
-            IsConversationEditorVisible = true;
-        }
+            else
+            {
+                // Show the conversation editor
+                ConversationEditorViewModel = new ViewModels.ConversationEditorViewModel(_userSettingsService);
+                IsConversationEditorVisible = true;
+            }
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

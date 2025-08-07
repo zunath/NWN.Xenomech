@@ -108,43 +108,17 @@
 
                  <TextBlock DockPanel.Dock="Top" Text="Conversation Flow" FontWeight="Bold" Margin="10,5"/>
                  
-                 <!-- Tree Buttons -->
+                 <!-- Tree Buttons (Simplified) -->
                  <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="10,5">
-                     <Button Command="{Binding AddPageCommand}" 
+                     <Button Command="{Binding AddNodeCommand}"
                              Margin="0,0,3,0"
                              Padding="6,4">
                          <StackPanel Orientation="Horizontal">
-                             <TextBlock Text="🗣️" FontSize="11" Margin="0,0,2,0"/>
-                             <TextBlock Text="NPC" VerticalAlignment="Center" FontSize="10"/>
+                             <TextBlock Text="➕" FontSize="11" Margin="0,0,2,0"/>
+                             <TextBlock Text="{Binding AddNodeButtonText}" VerticalAlignment="Center" FontSize="10"/>
                          </StackPanel>
                      </Button>
-                      <Button Command="{Binding AddResponseCommand}" 
-                             Margin="0,0,3,0"
-                             Padding="6,4">
-                         <StackPanel Orientation="Horizontal">
-                             <TextBlock Text="👤" FontSize="11" Margin="0,0,2,0"/>
-                             <TextBlock Text="Response" VerticalAlignment="Center" FontSize="10"/>
-                         </StackPanel>
-                     </Button>
-                      <Button Command="{Binding AddNextNpcCommand}"
-                              Margin="0,0,3,0"
-                              Padding="6,4"
-                              IsEnabled="{Binding SelectedResponseNode}">
-                          <StackPanel Orientation="Horizontal">
-                              <TextBlock Text="➡️" FontSize="11" Margin="0,0,2,0"/>
-                              <TextBlock Text="Next NPC" VerticalAlignment="Center" FontSize="10"/>
-                          </StackPanel>
-                      </Button>
-                      <Button Command="{Binding DeleteNextNpcCommand}"
-                              Margin="0,0,0,0"
-                              Padding="6,4"
-                              IsEnabled="{Binding SelectedResponseNode}">
-                          <StackPanel Orientation="Horizontal">
-                              <TextBlock Text="⛔" FontSize="11" Margin="0,0,2,0"/>
-                              <TextBlock Text="Remove Next" VerticalAlignment="Center" FontSize="10"/>
-                          </StackPanel>
-                      </Button>
-                     <Button Command="{Binding DeleteNodeCommand}" 
+                     <Button Command="{Binding DeleteNodeCommand}"
                              Margin="0,0,0,0"
                              Padding="6,4">
                          <StackPanel Orientation="Horizontal">
@@ -301,16 +275,10 @@
                                     </ComboBox>
 
                                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Operator:" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                    <ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding SelectedCondition.Operator}" Width="180" Margin="5">
-                                        <sys:String>Equal</sys:String>
-                                        <sys:String>NotEqual</sys:String>
-                                        <sys:String>GreaterThan</sys:String>
-                                        <sys:String>GreaterThanOrEqual</sys:String>
-                                        <sys:String>LessThan</sys:String>
-                                        <sys:String>LessThanOrEqual</sys:String>
-                                        <sys:String>Contains</sys:String>
-                                        <sys:String>NotContains</sys:String>
-                                    </ComboBox>
+                                    <ComboBox Grid.Row="1" Grid.Column="1"
+                                              ItemsSource="{Binding SelectedCondition.AvailableOperators}"
+                                              SelectedItem="{Binding SelectedCondition.Operator}"
+                                              Width="180" Margin="5"/>
 
                                     <!-- Value (dynamic per type) -->
                                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Value:" VerticalAlignment="Center" Margin="5,0,0,0"/>

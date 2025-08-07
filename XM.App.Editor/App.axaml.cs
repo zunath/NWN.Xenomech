@@ -4,6 +4,7 @@ using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using XM.App.Editor.Services;
 
 namespace XM.App.Editor;
 
@@ -26,11 +27,22 @@ public partial class App : Application
                 {
                     // Register services
                     services.AddLogging();
+                    services.AddSingleton<IUserSettingsService, UserSettingsService>();
                     services.AddSingleton<MainWindow>();
                 })
                 .Build();
 
+            // Load user settings early
+            var settingsService = _host.Services.GetRequiredService<IUserSettingsService>();
+            settingsService.Load();
+
             desktop.MainWindow = _host.Services.GetRequiredService<MainWindow>();
+
+            // Ensure settings are saved on shutdown
+            desktop.ShutdownRequested += (_, _) =>
+            {
+                settingsService.Save();
+            };
         }
 
         base.OnFrameworkInitializationCompleted();

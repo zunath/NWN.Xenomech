@@ -17,6 +17,7 @@ public partial class ConversationEditorControl : UserControl
     {
         InitializeComponent();
         DataContextChanged += OnDataContextChanged;
+        this.AttachedToVisualTree += (_, __) => ExpandRootAndSelected();
     }
 
     private void OnDataContextChanged(object? sender, EventArgs e)
@@ -36,12 +37,19 @@ public partial class ConversationEditorControl : UserControl
         {
             UpdateButtonStates();
         }
+
+        if (e.PropertyName == nameof(ConversationEditorViewModel.SelectedNode))
+        {
+            // After selection changes, ensure ancestors are expanded
+            ExpandRootAndSelected();
+        }
     }
 
     protected override void OnLoaded(RoutedEventArgs e)
     {
         base.OnLoaded(e);
         UpdateButtonStates();
+        ExpandRootAndSelected();
     }
 
     private void OnPageIdLostFocus(object sender, RoutedEventArgs e)
@@ -173,5 +181,35 @@ public partial class ConversationEditorControl : UserControl
         }
     }
 
+    private void ExpandRootAndSelected()
+    {
+        if (ConversationTreeView == null)
+            return;
 
+        // Expand root item
+        var rootContainer = ConversationTreeView.ItemContainerGenerator?.ContainerFromIndex(0) as TreeViewItem;
+        if (rootContainer != null)
+        {
+            rootContainer.IsExpanded = true;
+        }
+
+        // Expand ancestors of selected node so it's visible
+        if (DataContext is ConversationEditorViewModel vm && vm.SelectedNode is ConversationTreeNode node)
+        {
+            var selectedContainer = FindContainerForNode(node);
+            var current = selectedContainer;
+            while (current != null)
+            {
+                current.IsExpanded = true;
+                current = current.GetVisualAncestors().OfType<TreeViewItem>().FirstOrDefault();
+            }
+        }
+    }
+
+    private TreeViewItem? FindContainerForNode(ConversationTreeNode node)
+    {
+        if (ConversationTreeView == null) return null;
+        return ConversationTreeView.GetVisualDescendants().OfType<TreeViewItem>()
+            .FirstOrDefault(tvi => ReferenceEquals(tvi.DataContext, node));
+    }
 }

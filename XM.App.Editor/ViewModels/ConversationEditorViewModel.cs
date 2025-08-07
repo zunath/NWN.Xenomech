@@ -6,16 +6,18 @@ using XM.App.Editor.Services;
 
 namespace XM.App.Editor.ViewModels;
 
-public class ConversationEditorViewModel : INotifyPropertyChanged
+    public class ConversationEditorViewModel : INotifyPropertyChanged
 {
     private readonly ConversationService _conversationService;
     private readonly IConfirmationService _confirmationService;
+    private readonly IUserSettingsService _userSettingsService;
     private string? _selectedConversationFile;
     private ConversationData? _currentConversation;
     private ConversationTreeNode? _selectedNode;
 
-    public ConversationEditorViewModel()
+    public ConversationEditorViewModel(IUserSettingsService userSettingsService)
     {
+        _userSettingsService = userSettingsService;
         _conversationService = new ConversationService();
         _confirmationService = new ConfirmationService();
         
@@ -26,6 +28,7 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
         AddPageCommand = new RelayCommand(AddPage, CanAddPage);
         AddResponseCommand = new RelayCommand(AddResponse, CanAddResponse);
         DeleteNodeCommand = new RelayCommand(DeleteNode, CanDeleteNode);
+        AddNodeCommand = new RelayCommand(AddNode, CanAddNode);
         AddActionCommand = new RelayCommand(AddAction, CanAddAction);
         DeleteActionCommand = new RelayCommand(DeleteAction, CanDeleteAction);
         AddConditionCommand = new RelayCommand(AddCondition, CanAddCondition);
@@ -37,6 +40,13 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
         
         // Load conversation files
         LoadConversationFiles();
+
+        // Restore last opened conversation if available
+        if (!string.IsNullOrWhiteSpace(_userSettingsService.Current.LastOpenedConversationPath) &&
+            ConversationFiles.Contains(_userSettingsService.Current.LastOpenedConversationPath))
+        {
+            SelectedConversationFile = _userSettingsService.Current.LastOpenedConversationPath;
+        }
     }
 
     public ObservableCollection<string> ConversationFiles { get; } = new();
@@ -50,9 +60,13 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
             _selectedConversationFile = value;
             OnPropertyChanged(nameof(SelectedConversationFile));
             LoadSelectedConversation();
+            // Persist selection
+            _userSettingsService.Current.LastOpenedConversationPath = _selectedConversationFile;
             ((RelayCommand)DeleteConversationCommand).RaiseCanExecuteChanged();
             ((RelayCommand)SaveConversationCommand).RaiseCanExecuteChanged();
             ((RelayCommand)AddPageCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)AddNodeCommand).RaiseCanExecuteChanged();
+            OnPropertyChanged(nameof(AddNodeButtonText));
         }
     }
 
@@ -79,6 +93,8 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
             OnPropertyChanged(nameof(SelectedResponseNode));
             ((RelayCommand)AddResponseCommand).RaiseCanExecuteChanged();
             ((RelayCommand)DeleteNodeCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)AddNodeCommand).RaiseCanExecuteChanged();
+            OnPropertyChanged(nameof(AddNodeButtonText));
             ((RelayCommand)AddActionCommand).RaiseCanExecuteChanged();
             ((RelayCommand)DeleteActionCommand).RaiseCanExecuteChanged();
             ((RelayCommand)AddConditionCommand).RaiseCanExecuteChanged();
@@ -149,6 +165,31 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
     public ICommand MoveActionDownCommand { get; }
     public ICommand AddNextNpcCommand { get; }
     public ICommand DeleteNextNpcCommand { get; }
+    public ICommand AddNodeCommand { get; }
+
+    public string AddNodeButtonText
+    {
+        get
+        {
+            // No conversation loaded
+            if (CurrentConversation == null)
+                return "Add";
+
+            // No root yet or nothing selected: offer to add root NPC
+            if (CurrentConversation.Conversation.Root == null || SelectedNode == null)
+                return "Add NPC";
+
+            // Selected NPC page: add a player response
+            if (SelectedNode is ConversationPageNode)
+                return "Add Response";
+
+            // Selected player response: add next NPC if not present
+            if (SelectedNode is ConversationResponseNode rn)
+                return rn.Response.Next == null ? "Add NPC" : "Add";
+
+            return "Add";
+        }
+    }
 
     private void LoadConversationFiles()
     {
@@ -173,13 +214,50 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
 
     private void BuildConversationTree()
     {
+        // Preserve selection/expansion state using NodePath keys
+        var previousSelectedPath = (SelectedNode as ConversationTreeNode)?.NodePath;
+        var expandedPaths = new HashSet<string>(ConversationTree
+            .SelectMany(RetrieveExpandedPaths));
+
         ConversationTree.Clear();
+        var previousSelectedNode = SelectedNode; // keep reference for type info
         SelectedNode = null;
 
         if (CurrentConversation?.Conversation.Root == null)
             return;
 
-        ConversationTree.Add(BuildTreeRecursive(CurrentConversation.Conversation.Root, "root"));
+        var rebuiltRoot = BuildTreeRecursive(CurrentConversation.Conversation.Root, "root");
+        // Auto-expand root
+        rebuiltRoot.IsExpanded = true;
+        // Restore expansions
+        RestoreExpansion(rebuiltRoot, expandedPaths);
+        ConversationTree.Add(rebuiltRoot);
+
+        // Restore selection if possible
+        if (!string.IsNullOrEmpty(previousSelectedPath))
+        {
+            var nodeToSelect = FindByPath(rebuiltRoot, previousSelectedPath);
+            if (nodeToSelect == null)
+            {
+                // If deleted response, fallback to parent page selection
+                var lastSlash = previousSelectedPath.LastIndexOf('/')
+                                 >= 0 ? previousSelectedPath.LastIndexOf('/') : -1;
+                if (lastSlash > 0)
+                {
+                    var parentPath = previousSelectedPath.Substring(0, lastSlash);
+                    nodeToSelect = FindByPath(rebuiltRoot, parentPath);
+                }
+            }
+
+            if (nodeToSelect != null)
+            {
+                nodeToSelect.IsSelected = true;
+                SelectedNode = nodeToSelect;
+            }
+        }
+        // Update Add button state/label after rebuild
+        ((RelayCommand)AddNodeCommand).RaiseCanExecuteChanged();
+        OnPropertyChanged(nameof(AddNodeButtonText));
     }
 
     private ConversationPageNode BuildTreeRecursive(ConversationPage page, string pageId)
@@ -188,7 +266,8 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
         {
             Name = string.IsNullOrEmpty(page.Header) ? $"NPC: {pageId}" : page.Header,
             PageId = pageId,
-            Page = page
+            Page = page,
+            NodePath = $"P:{pageId}"
         };
 
         if (page.Responses != null)
@@ -200,7 +279,8 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
                 {
                     Name = string.IsNullOrEmpty(response.Text) ? $"Player Option {i + 1}" : response.Text,
                     Response = response,
-                    ResponseIndex = i
+                    ResponseIndex = i,
+                    NodePath = $"P:{pageId}/R:{i}"
                 };
                 pageNode.Children.Add(responseNode);
 
@@ -214,6 +294,38 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
         }
 
         return pageNode;
+    }
+
+    private IEnumerable<string> RetrieveExpandedPaths(ConversationTreeNode node)
+    {
+        var result = new List<string>();
+        if (node.IsExpanded && !string.IsNullOrEmpty(node.NodePath))
+            result.Add(node.NodePath);
+
+        foreach (var child in node.Children)
+            result.AddRange(RetrieveExpandedPaths(child));
+
+        return result;
+    }
+
+    private void RestoreExpansion(ConversationTreeNode node, HashSet<string> expandedPaths)
+    {
+        if (!string.IsNullOrEmpty(node.NodePath))
+            node.IsExpanded = expandedPaths.Contains(node.NodePath) || node.NodePath == "P:root";
+        foreach (var child in node.Children)
+            RestoreExpansion(child, expandedPaths);
+    }
+
+    private ConversationTreeNode? FindByPath(ConversationTreeNode node, string targetPath)
+    {
+        if (node.NodePath == targetPath)
+            return node;
+        foreach (var child in node.Children)
+        {
+            var found = FindByPath(child, targetPath);
+            if (found != null) return found;
+        }
+        return null;
     }
 
     private void CreateNewConversation()
@@ -300,6 +412,50 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
     private bool CanAddResponse()
     {
         return SelectedPageNode != null;
+    }
+
+    private void AddNode()
+    {
+        if (!CanAddNode())
+            return;
+
+        // If there's no root yet or nothing selected, create root NPC page
+        if (CurrentConversation != null && (CurrentConversation.Conversation.Root == null || SelectedNode == null))
+        {
+            AddPage();
+            return;
+        }
+
+        // If an NPC page is selected, add a player response
+        if (SelectedPageNode != null)
+        {
+            AddResponse();
+            return;
+        }
+
+        // If a player response without a next NPC is selected, add next NPC
+        if (SelectedResponseNode != null && SelectedResponseNode.Response.Next == null)
+        {
+            AddNextNpc();
+            return;
+        }
+    }
+
+    private bool CanAddNode()
+    {
+        if (CurrentConversation == null)
+            return false;
+
+        if (CurrentConversation.Conversation.Root == null || SelectedNode == null)
+            return true; // allow creating root
+
+        if (SelectedPageNode != null)
+            return true; // can add response
+
+        if (SelectedResponseNode != null && SelectedResponseNode.Response.Next == null)
+            return true; // can add next NPC
+
+        return false;
     }
 
     private async void DeleteNode()
