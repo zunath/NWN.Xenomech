@@ -393,10 +393,11 @@
                                       </Grid.ColumnDefinitions>
 
                                       <TextBlock Grid.Row="0" Grid.Column="0" Text="Type:" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                      <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding SelectedAction.Type}" Width="150" Margin="5">
+                                      <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding SelectedAction.Type}" Margin="5" HorizontalAlignment="Stretch" MinWidth="220">
                                           <sys:String>OpenShop</sys:String>
                                           <sys:String>GiveItem</sys:String>
                                           <sys:String>StartQuest</sys:String>
+                                          <sys:String>EndConversation</sys:String>
                                       </ComboBox>
 
                                       <!-- Action Parameters -->
@@ -458,6 +459,12 @@
                                                       <TextBlock Grid.Column="0" Text="Quest ID:" VerticalAlignment="Center" Margin="5,0,0,0"/>
                                                       <TextBox Grid.Column="1" Text="{Binding SelectedAction.QuestId}" Margin="5"/>
                                                   </Grid>
+                                              </StackPanel>
+
+                                              <!-- EndConversation has no parameters -->
+                                              <StackPanel Grid.Column="0" Grid.ColumnSpan="2"
+                                                          IsVisible="{Binding SelectedAction.Type, Converter={x:Static converters:StringEqualsConverter.Instance}, ConverterParameter=EndConversation}">
+                                                  <TextBlock Text="No parameters" Margin="5"/>
                                               </StackPanel>
                                           </Grid>
                                       </Border>

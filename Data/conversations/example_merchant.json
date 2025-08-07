@@ -9,30 +9,32 @@
     "root": {
       "header": "Welcome to my shop! I have the finest wares in all the land. What can I help you with today?",
       "responses": [
-          {
-            "text": "Show me your wares",
-            "conditions": [],
-            "actions": [
-              {
-                "type": "OpenShop",
-                "parameters": {
-                  "shopId": "general_merchant_shop2",
-                  "itemId": "",
-                  "quantity": "1",
-                  "questId": ""
-                }
-              },
-              {
-                "type": "StartQuest",
-                "parameters": {
-                  "shopId": "",
-                  "itemId": "",
-                  "quantity": "1",
-                  "questId": "asdasd"
-                }
+        {
+          "text": "Show me your wares",
+          "conditions": [
+            {
+              "type": "PlayerLevel",
+              "operator": "GreaterThanOrEqual",
+              "value": 1
+            }
+          ],
+          "actions": [
+            {
+              "type": "OpenShop",
+              "parameters": {
+                "shopId": "general_merchant_shop2",
+                "itemId": "",
+                "quantity": "1",
+                "questId": ""
               }
-            ]
-          },
+            },
+            {
+              "type": "EndConversation",
+              "parameters": {}
+            }
+          ],
+          "next": null
+        },
         {
           "text": "I have some questions",
           "conditions": [],
@@ -55,9 +57,10 @@
                         "header": "The dungeons here are filled with ancient treasures and powerful monsters. Be careful if you venture there!",
                         "responses": [
                           {
-                            "text": "I'll be careful. Thanks for the warning.",
+                            "text": "I\u0027ll be careful. Thanks for the warning.",
                             "conditions": [],
-                            "actions": []
+                            "actions": [],
+                            "next": null
                           }
                         ]
                       }
@@ -65,22 +68,24 @@
                     {
                       "text": "Back to main menu",
                       "conditions": [],
-                      "actions": []
+                      "actions": [],
+                      "next": null
                     }
                   ]
                 }
               },
               {
-                "text": "What's new in town?",
+                "text": "What\u0027s new in town?",
                 "conditions": [],
                 "actions": [],
                 "next": {
-                  "header": "There's been talk of strange creatures appearing at night. The guards are on high alert.",
+                  "header": "There\u0027s been talk of strange creatures appearing at night. The guards are on high alert.",
                   "responses": [
                     {
-                      "text": "I'll keep my eyes open.",
+                      "text": "I\u0027ll keep my eyes open.",
                       "conditions": [],
-                      "actions": []
+                      "actions": [],
+                      "next": null
                     }
                   ]
                 }
@@ -88,15 +93,15 @@
             ]
           }
         },
-          {
-            "text": "Do you have any special deals?",
-            "conditions": [
-              {
-                "type": "PlayerLevel",
-                "operator": "GreaterThanOrEqual",
-                "value": 5
-              }
-            ],
+        {
+          "text": "Do you have any special deals?",
+          "conditions": [
+            {
+              "type": "PlayerLevel",
+              "operator": "GreaterThanOrEqual",
+              "value": 5
+            }
+          ],
           "actions": [],
           "next": {
             "header": "Ah, a discerning customer! I do have some special items for experienced adventurers like yourself.",
@@ -111,21 +116,23 @@
                       "shopId": "special_merchant_shop"
                     }
                   }
-                ]
+                ],
+                "next": null
               }
             ]
           }
-          },
-          {
-            "text": "Goodbye",
-            "conditions": [],
-            "actions": [
-              {
-                "type": "EndConversation",
-                "parameters": {}
-              }
-            ]
-          }
+        },
+        {
+          "text": "Goodbye",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "EndConversation",
+              "parameters": {}
+            }
+          ],
+          "next": null
+        }
       ]
     }
   }
