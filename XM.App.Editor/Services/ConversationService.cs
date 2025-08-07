@@ -102,25 +102,21 @@ public class ConversationService
             },
             Conversation = new ConversationContent
             {
-                DefaultPage = "greeting",
-                Pages = new Dictionary<string, ConversationPage>
+                Root = new ConversationPage
                 {
-                    ["greeting"] = new ConversationPage
+                    Header = "Hello! How can I help you?",
+                    Responses = new List<ConversationResponse>
                     {
-                        Header = "Hello! How can I help you?",
-                        Responses = new List<ConversationResponse>
+                        new ConversationResponse
                         {
-                            new ConversationResponse
+                            Text = "Goodbye",
+                            Conditions = new ObservableCollection<ConversationCondition>(),
+                            Actions = new ObservableCollection<ConversationAction>
                             {
-                                Text = "Goodbye",
-                                Conditions = new ObservableCollection<ConversationCondition>(),
-                                Actions = new ObservableCollection<ConversationAction>
+                                new ConversationAction
                                 {
-                                    new ConversationAction
-                                    {
-                                        Type = "EndConversation",
-                                        Parameters = new Dictionary<string, object>()
-                                    }
+                                    Type = "EndConversation",
+                                    Parameters = new Dictionary<string, object>()
                                 }
                             }
                         }

@@ -114,11 +114,11 @@ namespace XM.Chat.UI.Conversation
             }
             else
             {
-                // Initialize with default page if no initial data
-                if (_conversationDefinition?.Conversation?.Pages != null)
+                // Initialize with root if no initial data (tree-based model)
+                if (_conversationDefinition?.Conversation?.Root != null)
                 {
-                    var defaultPageId = _conversationDefinition.Conversation.DefaultPage;
-                    NavigateToPage(defaultPageId);
+                    CurrentPageId = "root";
+                    CurrentPage = _conversationDefinition.Conversation.Root;
                 }
             }
         }
@@ -140,11 +140,11 @@ namespace XM.Chat.UI.Conversation
             NpcName = npcName;
             NpcPortrait = npcPortrait;
 
-            // Navigate to default page
-            if (conversationDefinition?.Conversation?.Pages != null)
+            // Navigate to root page (tree-based model)
+            if (conversationDefinition?.Conversation?.Root != null)
             {
-                var defaultPageId = conversationDefinition.Conversation.DefaultPage;
-                NavigateToPage(defaultPageId);
+                CurrentPageId = "root";
+                CurrentPage = conversationDefinition.Conversation.Root;
             }
         }
 
@@ -154,14 +154,8 @@ namespace XM.Chat.UI.Conversation
         /// <param name="pageId">The ID of the page to navigate to.</param>
         public void NavigateToPage(string pageId)
         {
-            if (_conversationDefinition?.Conversation?.Pages == null || 
-                !_conversationDefinition.Conversation.Pages.ContainsKey(pageId))
-            {
-                return;
-            }
-
-            CurrentPageId = pageId;
-            CurrentPage = _conversationDefinition.Conversation.Pages[pageId];
+            // Navigation via pageId is not used in tree-based model; handled by Next pointers
+            return;
         }
 
         /// <summary>
@@ -186,6 +180,12 @@ namespace XM.Chat.UI.Conversation
             if (response.Actions != null && response.Actions.Count > 0)
             {
                 HandleResponseActions(response.Actions);
+            }
+
+            // Advance to next NPC page if present
+            if (response.Next != null)
+            {
+                CurrentPage = response.Next;
             }
         }
 

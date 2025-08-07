@@ -6,11 +6,9 @@
     "portrait": ""
   },
   "conversation": {
-    "defaultPage": "greeting",
-    "pages": {
-      "greeting": {
-        "header": "Welcome to my shop! I have the finest wares in all the land. What can I help you with today?",
-        "responses": [
+    "root": {
+      "header": "Welcome to my shop! I have the finest wares in all the land. What can I help you with today?",
+      "responses": [
           {
             "text": "Show me your wares",
             "conditions": [],
@@ -35,18 +33,61 @@
               }
             ]
           },
-          {
-            "text": "I have some questions",
-            "conditions": [],
-            "actions": [
+        {
+          "text": "I have some questions",
+          "conditions": [],
+          "actions": [],
+          "next": {
+            "header": "What would you like to know about?",
+            "responses": [
               {
-                "type": "ChangePage",
-                "parameters": {
-                  "pageId": "questions"
+                "text": "Tell me about this area",
+                "conditions": [],
+                "actions": [],
+                "next": {
+                  "header": "This area is known for its rich history and dangerous dungeons. Many adventurers come here seeking fortune and glory.",
+                  "responses": [
+                    {
+                      "text": "Tell me more about the dungeons",
+                      "conditions": [],
+                      "actions": [],
+                      "next": {
+                        "header": "The dungeons here are filled with ancient treasures and powerful monsters. Be careful if you venture there!",
+                        "responses": [
+                          {
+                            "text": "I'll be careful. Thanks for the warning.",
+                            "conditions": [],
+                            "actions": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "text": "Back to main menu",
+                      "conditions": [],
+                      "actions": []
+                    }
+                  ]
+                }
+              },
+              {
+                "text": "What's new in town?",
+                "conditions": [],
+                "actions": [],
+                "next": {
+                  "header": "There's been talk of strange creatures appearing at night. The guards are on high alert.",
+                  "responses": [
+                    {
+                      "text": "I'll keep my eyes open.",
+                      "conditions": [],
+                      "actions": []
+                    }
+                  ]
                 }
               }
             ]
-          },
+          }
+        },
           {
             "text": "Do you have any special deals?",
             "conditions": [
@@ -56,14 +97,24 @@
                 "value": 5
               }
             ],
-            "actions": [
+          "actions": [],
+          "next": {
+            "header": "Ah, a discerning customer! I do have some special items for experienced adventurers like yourself.",
+            "responses": [
               {
-                "type": "ChangePage",
-                "parameters": {
-                  "pageId": "special_deals"
-                }
+                "text": "Show me the special items",
+                "conditions": [],
+                "actions": [
+                  {
+                    "type": "OpenShop",
+                    "parameters": {
+                      "shopId": "special_merchant_shop"
+                    }
+                  }
+                ]
               }
             ]
+          }
           },
           {
             "text": "Goodbye",
@@ -75,207 +126,7 @@
               }
             ]
           }
-        ]
-      },
-      "questions": {
-        "header": "What would you like to know about?",
-        "responses": [
-          {
-            "text": "Tell me about this area",
-            "conditions": [],
-            "actions": [
-              {
-                "type": "ChangePage",
-                "parameters": {
-                  "pageId": "area_info"
-                }
-              }
-            ]
-          },
-          {
-            "text": "What\u0027s new in town?",
-            "conditions": [],
-            "actions": [
-              {
-                "type": "ChangePage",
-                "parameters": {
-                  "pageId": "town_news"
-                }
-              }
-            ]
-          },
-          {
-            "text": "Back to main menu",
-            "conditions": [],
-            "actions": [
-              {
-                "type": "ChangePage",
-                "parameters": {
-                  "pageId": "greeting"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "special_deals": {
-        "header": "Ah, a discerning customer! I do have some special items for experienced adventurers like yourself.",
-        "responses": [
-          {
-            "text": "Show me the special items",
-            "conditions": [],
-            "actions": [
-              {
-                "type": "OpenShop",
-                "parameters": {
-                  "shopId": "special_merchant_shop"
-                }
-              }
-            ]
-          },
-          {
-            "text": "Back to main menu",
-            "conditions": [],
-            "actions": [
-              {
-                "type": "ChangePage",
-                "parameters": {
-                  "pageId": "greeting"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "area_info": {
-        "header": "This area is known for its rich history and dangerous dungeons. Many adventurers come here seeking fortune and glory.",
-        "responses": [
-          {
-            "text": "Tell me more about the dungeons",
-            "conditions": [],
-            "actions": [
-              {
-                "type": "ChangePage",
-                "parameters": {
-                  "pageId": "dungeon_info"
-                }
-              }
-            ]
-          },
-          {
-            "text": "Back to questions",
-            "conditions": [],
-            "actions": [
-              {
-                "type": "ChangePage",
-                "parameters": {
-                  "pageId": "questions"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "dungeon_info": {
-        "header": "The dungeons here are filled with ancient treasures and powerful monsters. Be careful if you venture there!",
-        "responses": [
-          {
-            "text": "I\u0027ll be careful. Thanks for the warning.",
-            "conditions": [],
-            "actions": [
-              {
-                "type": "ChangePage",
-                "parameters": {
-                  "pageId": "questions"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "town_news": {
-        "header": "There\u0027s been talk of strange creatures appearing at night. The guards are on high alert.",
-        "responses": [
-          {
-            "text": "I\u0027ll keep my eyes open.",
-            "conditions": [],
-            "actions": [
-              {
-                "type": "ChangePage",
-                "parameters": {
-                  "pageId": "questions"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "welcome_gift": {
-        "header": "Welcome, new adventurer! Let me give you a small gift to help you on your journey.",
-        "responses": [
-          {
-            "text": "Thank you! I\u0027ll put it to good use.",
-            "conditions": [],
-            "actions": [
-              {
-                "type": "GiveItem",
-                "parameters": {
-                  "itemId": "xm_sword_001",
-                  "quantity": 1
-                }
-              },
-              {
-                "type": "ChangePage",
-                "parameters": {
-                  "pageId": "greeting"
-                }
-              }
-            ]
-          },
-          {
-            "text": "I don\u0027t need charity.",
-            "conditions": [],
-            "actions": [
-              {
-                "type": "ChangePage",
-                "parameters": {
-                  "pageId": "greeting"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "quest_reward": {
-        "header": "Excellent work! You\u0027ve completed the quest. Here\u0027s your reward.",
-        "responses": [
-          {
-            "text": "Thank you for the reward!",
-            "conditions": [],
-            "actions": [
-              {
-                "type": "GiveItem",
-                "parameters": {
-                  "itemId": "xm_gold_coin",
-                  "quantity": 100
-                }
-              },
-              {
-                "type": "ExecuteScript",
-                "parameters": {
-                  "scriptId": "quest_complete_script"
-                }
-              },
-              {
-                "type": "ChangePage",
-                "parameters": {
-                  "pageId": "greeting"
-                }
-              }
-            ]
-          }
-        ]
-      }
+      ]
     }
   }
 }

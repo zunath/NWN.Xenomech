@@ -32,6 +32,8 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
         DeleteConditionCommand = new RelayCommand(DeleteCondition, CanDeleteCondition);
         MoveActionUpCommand = new RelayCommand<ConversationAction>(MoveActionUp, CanMoveActionUp);
         MoveActionDownCommand = new RelayCommand<ConversationAction>(MoveActionDown, CanMoveActionDown);
+        AddNextNpcCommand = new RelayCommand(AddNextNpc, CanAddNextNpc);
+        DeleteNextNpcCommand = new RelayCommand(DeleteNextNpc, CanDeleteNextNpc);
         
         // Load conversation files
         LoadConversationFiles();
@@ -81,6 +83,8 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
             ((RelayCommand)DeleteActionCommand).RaiseCanExecuteChanged();
             ((RelayCommand)AddConditionCommand).RaiseCanExecuteChanged();
             ((RelayCommand)DeleteConditionCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)AddNextNpcCommand).RaiseCanExecuteChanged();
+            ((RelayCommand)DeleteNextNpcCommand).RaiseCanExecuteChanged();
         }
     }
 
@@ -120,7 +124,7 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
         }
     }
 
-    public int PagesCount => CurrentConversation?.Conversation.Pages.Count ?? 0;
+    public int PagesCount => CurrentConversation?.Conversation.Root == null ? 0 : 1; // root-based structure
 
     public List<string> ActionTypes { get; } = new()
     {
@@ -143,6 +147,8 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
     public ICommand DeleteConditionCommand { get; }
     public ICommand MoveActionUpCommand { get; }
     public ICommand MoveActionDownCommand { get; }
+    public ICommand AddNextNpcCommand { get; }
+    public ICommand DeleteNextNpcCommand { get; }
 
     private void LoadConversationFiles()
     {
@@ -170,22 +176,26 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
         ConversationTree.Clear();
         SelectedNode = null;
 
-        if (CurrentConversation?.Conversation.Pages == null)
+        if (CurrentConversation?.Conversation.Root == null)
             return;
 
-        foreach (var pageEntry in CurrentConversation.Conversation.Pages)
-        {
-            var pageNode = new ConversationPageNode
-            {
-                Name = string.IsNullOrEmpty(pageEntry.Value.Header) ? $"NPC: {pageEntry.Key}" : pageEntry.Value.Header,
-                PageId = pageEntry.Key,
-                Page = pageEntry.Value
-            };
+        ConversationTree.Add(BuildTreeRecursive(CurrentConversation.Conversation.Root, "root"));
+    }
 
-            // Add response nodes (player options)
-            for (int i = 0; i < pageEntry.Value.Responses.Count; i++)
+    private ConversationPageNode BuildTreeRecursive(ConversationPage page, string pageId)
+    {
+        var pageNode = new ConversationPageNode
+        {
+            Name = string.IsNullOrEmpty(page.Header) ? $"NPC: {pageId}" : page.Header,
+            PageId = pageId,
+            Page = page
+        };
+
+        if (page.Responses != null)
+        {
+            for (int i = 0; i < page.Responses.Count; i++)
             {
-                var response = pageEntry.Value.Responses[i];
+                var response = page.Responses[i];
                 var responseNode = new ConversationResponseNode
                 {
                     Name = string.IsNullOrEmpty(response.Text) ? $"Player Option {i + 1}" : response.Text,
@@ -193,10 +203,17 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
                     ResponseIndex = i
                 };
                 pageNode.Children.Add(responseNode);
-            }
 
-            ConversationTree.Add(pageNode);
+                if (response.Next != null)
+                {
+                    var childPageId = $"{pageId}.{i+1}";
+                    var child = BuildTreeRecursive(response.Next, childPageId);
+                    responseNode.Children.Add(child);
+                }
+            }
         }
+
+        return pageNode;
     }
 
     private void CreateNewConversation()
@@ -256,13 +273,8 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
         if (CurrentConversation == null)
             return;
 
-        var pageId = $"page_{DateTime.Now.Ticks}";
-        var newPage = new ConversationPage
-        {
-            Header = "New Page"
-        };
-
-        CurrentConversation.Conversation.Pages[pageId] = newPage;
+        var newPage = new ConversationPage { Header = "New Page" };
+        CurrentConversation.Conversation.Root = newPage;
         BuildConversationTree();
     }
 
@@ -308,14 +320,34 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
 
         if (SelectedNode is ConversationPageNode pageNode)
         {
-            CurrentConversation.Conversation.Pages.Remove(pageNode.PageId);
+            // If deleting root, clear root
+            if (pageNode.Page == CurrentConversation.Conversation.Root)
+            {
+                CurrentConversation.Conversation.Root = null;
+            }
+            else
+            {
+                // Find the parent response whose Next references this page and remove it
+                var parentResponseNode = ConversationTree
+                    .SelectMany(p => GetAllResponseNodes(p))
+                    .FirstOrDefault(rn => rn.Response.Next == pageNode.Page);
+
+                if (parentResponseNode != null)
+                {
+                    parentResponseNode.Response.Next = null;
+                }
+            }
         }
         else if (SelectedNode is ConversationResponseNode responseNode)
         {
-            var parentPage = ConversationTree.FirstOrDefault(p => p.Children.Contains(responseNode)) as ConversationPageNode;
-            if (parentPage != null)
+            // Find parent page node that owns this response
+            var parentPageNode = ConversationTree
+                .SelectMany(p => GetAllPageNodes(p))
+                .FirstOrDefault(pn => pn.Page.Responses.Contains(responseNode.Response));
+
+            if (parentPageNode != null)
             {
-                parentPage.Page.Responses.RemoveAt(responseNode.ResponseIndex);
+                parentPageNode.Page.Responses.RemoveAt(responseNode.ResponseIndex);
             }
         }
 
@@ -329,21 +361,26 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
 
     public void UpdatePageId(string oldPageId, string newPageId)
     {
-        if (CurrentConversation == null || string.IsNullOrEmpty(oldPageId) || string.IsNullOrEmpty(newPageId) || oldPageId == newPageId)
-            return;
+        // With hierarchical model, page IDs are implicit; no-op retained for binding compatibility
+        return;
+    }
 
-        if (CurrentConversation.Conversation.Pages.ContainsKey(newPageId))
-        {
-            // TODO: Show error message - page ID already exists
-            return;
-        }
+    private IEnumerable<ConversationPageNode> GetAllPageNodes(ConversationTreeNode node)
+    {
+        if (node is ConversationPageNode pn)
+            yield return pn;
+        foreach (var child in node.Children)
+        foreach (var pnChild in GetAllPageNodes(child))
+            yield return pnChild;
+    }
 
-        if (CurrentConversation.Conversation.Pages.TryGetValue(oldPageId, out var page))
-        {
-            CurrentConversation.Conversation.Pages.Remove(oldPageId);
-            CurrentConversation.Conversation.Pages[newPageId] = page;
-            BuildConversationTree();
-        }
+    private IEnumerable<ConversationResponseNode> GetAllResponseNodes(ConversationTreeNode node)
+    {
+        if (node is ConversationResponseNode rn)
+            yield return rn;
+        foreach (var child in node.Children)
+        foreach (var rnChild in GetAllResponseNodes(child))
+            yield return rnChild;
     }
 
     private void AddAction()
@@ -488,6 +525,44 @@ public class ConversationEditorViewModel : INotifyPropertyChanged
         var actions = SelectedResponseNode.Response.Actions;
         var currentIndex = actions.IndexOf(actionToMove);
         return currentIndex < actions.Count - 1;
+    }
+
+    private void AddNextNpc()
+    {
+        if (SelectedResponseNode == null)
+            return;
+
+        if (SelectedResponseNode.Response.Next == null)
+        {
+            SelectedResponseNode.Response.Next = new ConversationPage
+            {
+                Header = "NPC continues...",
+                Responses = new List<ConversationResponse>()
+                {
+                    new ConversationResponse { Text = "Back" }
+                }
+            };
+            BuildConversationTree();
+        }
+    }
+
+    private bool CanAddNextNpc()
+    {
+        return SelectedResponseNode != null && SelectedResponseNode.Response.Next == null;
+    }
+
+    private void DeleteNextNpc()
+    {
+        if (SelectedResponseNode == null || SelectedResponseNode.Response.Next == null)
+            return;
+
+        SelectedResponseNode.Response.Next = null;
+        BuildConversationTree();
+    }
+
+    private bool CanDeleteNextNpc()
+    {
+        return SelectedResponseNode != null && SelectedResponseNode.Response.Next != null;
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

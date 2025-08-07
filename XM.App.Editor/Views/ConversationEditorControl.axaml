@@ -118,7 +118,7 @@
                              <TextBlock Text="NPC" VerticalAlignment="Center" FontSize="10"/>
                          </StackPanel>
                      </Button>
-                     <Button Command="{Binding AddResponseCommand}" 
+                      <Button Command="{Binding AddResponseCommand}" 
                              Margin="0,0,3,0"
                              Padding="6,4">
                          <StackPanel Orientation="Horizontal">
@@ -126,6 +126,24 @@
                              <TextBlock Text="Response" VerticalAlignment="Center" FontSize="10"/>
                          </StackPanel>
                      </Button>
+                      <Button Command="{Binding AddNextNpcCommand}"
+                              Margin="0,0,3,0"
+                              Padding="6,4"
+                              IsEnabled="{Binding SelectedResponseNode}">
+                          <StackPanel Orientation="Horizontal">
+                              <TextBlock Text="➡️" FontSize="11" Margin="0,0,2,0"/>
+                              <TextBlock Text="Next NPC" VerticalAlignment="Center" FontSize="10"/>
+                          </StackPanel>
+                      </Button>
+                      <Button Command="{Binding DeleteNextNpcCommand}"
+                              Margin="0,0,0,0"
+                              Padding="6,4"
+                              IsEnabled="{Binding SelectedResponseNode}">
+                          <StackPanel Orientation="Horizontal">
+                              <TextBlock Text="⛔" FontSize="11" Margin="0,0,2,0"/>
+                              <TextBlock Text="Remove Next" VerticalAlignment="Center" FontSize="10"/>
+                          </StackPanel>
+                      </Button>
                      <Button Command="{Binding DeleteNodeCommand}" 
                              Margin="0,0,0,0"
                              Padding="6,4">
@@ -177,21 +195,20 @@
                                                    <StackPanel>
                               <TextBlock Text="NPC Dialogue" FontWeight="Bold" Margin="0,0,0,10"/>
                               <Grid>
-                                  <Grid.RowDefinitions>
-                                      <RowDefinition Height="Auto"/>
-                                      <RowDefinition Height="Auto"/>
-                                  </Grid.RowDefinitions>
+                              <Grid.RowDefinitions>
+                                  <RowDefinition Height="Auto"/>
+                                  <RowDefinition Height="Auto"/>
+                              </Grid.RowDefinitions>
                                   <Grid.ColumnDefinitions>
                                       <ColumnDefinition Width="100"/>
                                       <ColumnDefinition Width="*"/>
                                   </Grid.ColumnDefinitions>
 
-                                  <TextBlock Grid.Row="0" Grid.Column="0" Text="Page ID:" VerticalAlignment="Center"/>
-                                  <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedPageNode.PageId}" Margin="5" LostFocus="OnPageIdLostFocus"/>
-
-                                  <TextBlock Grid.Row="1" Grid.Column="0" Text="NPC Text:" VerticalAlignment="Top" Margin="0,5,0,0"/>
-                                  <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedPageNode.Page.Header}" 
+                                  <TextBlock Grid.Row="0" Grid.Column="0" Text="NPC Text:" VerticalAlignment="Top" Margin="0,5,0,0"/>
+                                  <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedPageNode.Page.Header}" 
                                            Margin="5" AcceptsReturn="True" Height="120" TextWrapping="Wrap"/>
+                                  <TextBlock Grid.Row="1" Grid.Column="0" Text="Children:" VerticalAlignment="Center" Margin="0,5,0,0"/>
+                                  <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding SelectedPageNode.Children.Count}" Margin="5,5,5,0"/>
                               </Grid>
                           </StackPanel>
                      </Border>

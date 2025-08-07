@@ -6,15 +6,13 @@
     "portrait": ""
   },
   "conversation": {
-    "defaultPage": "start",
-    "pages": {
-      "start": {
-        "header": "Welcome to the multiple actions test! This conversation will demonstrate how multiple actions can be triggered from a single response.",
-        "responses": [
+    "root": {
+      "header": "Welcome to the multiple actions test! This conversation will demonstrate how multiple actions can be triggered from a single response.",
+      "responses": [
           {
             "text": "Give me an item and change page",
             "conditions": [],
-            "actions": [
+          "actions": [
               {
                 "type": "GiveItem",
                 "parameters": {
@@ -22,13 +20,19 @@
                   "quantity": 1
                 }
               },
+            { "type": "ExecuteScript", "parameters": { "scriptId": "after_give" } }
+            ]
+          ,
+          "next": {
+            "header": "You received a sword! The conversation continued to this page after giving the item.",
+            "responses": [
               {
-                "type": "ChangePage",
-                "parameters": {
-                  "pageId": "item_given"
-                }
+                "text": "Back to start",
+                "conditions": [],
+                "actions": []
               }
             ]
+          }
           },
           {
             "text": "Execute script and end conversation",
@@ -62,79 +66,41 @@
                   "itemId": "xm_gold_coin",
                   "quantity": 50
                 }
-              },
+            }
+            ]
+          ,
+          "next": {
+            "header": "You received multiple items! This demonstrates that multiple actions can be executed in sequence.",
+            "responses": [
               {
-                "type": "ChangePage",
-                "parameters": {
-                  "pageId": "multiple_items"
-                }
+                "text": "Back to start",
+                "conditions": [],
+                "actions": []
               }
             ]
+          }
           },
           {
             "text": "Single action (backward compatibility)",
             "conditions": [],
-            "action": {
-              "type": "ChangePage",
-              "parameters": {
-                "pageId": "single_action"
+          "actions": [],
+          "next": {
+            "header": "This page was reached using the old single action format, demonstrating backward compatibility.",
+            "responses": [
+              {
+                "text": "Back to start",
+                "conditions": [],
+                "actions": []
               }
-            }
+            ]
+          }
           },
           {
             "text": "Goodbye",
             "conditions": [],
-            "action": {
-              "type": "EndConversation"
-            }
+          "actions": [ { "type": "EndConversation" } ]
           }
-        ]
-      },
-      "item_given": {
-        "header": "You received a sword! The conversation continued to this page after giving the item.",
-        "responses": [
-          {
-            "text": "Back to start",
-            "conditions": [],
-            "action": {
-              "type": "ChangePage",
-              "parameters": {
-                "pageId": "start"
-              }
-            }
-          }
-        ]
-      },
-      "multiple_items": {
-        "header": "You received multiple items! This demonstrates that multiple actions can be executed in sequence.",
-        "responses": [
-          {
-            "text": "Back to start",
-            "conditions": [],
-            "action": {
-              "type": "ChangePage",
-              "parameters": {
-                "pageId": "start"
-              }
-            }
-          }
-        ]
-      },
-      "single_action": {
-        "header": "This page was reached using the old single action format, demonstrating backward compatibility.",
-        "responses": [
-          {
-            "text": "Back to start",
-            "conditions": [],
-            "action": {
-              "type": "ChangePage",
-              "parameters": {
-                "pageId": "start"
-              }
-            }
-          }
-        ]
-      }
+      ]
     },
     "actions": {
       "OpenShop": {

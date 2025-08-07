@@ -30,11 +30,8 @@ public class ConversationMetadata
 
 public class ConversationContent
 {
-    [JsonPropertyName("defaultPage")]
-    public string DefaultPage { get; set; } = string.Empty;
-
-    [JsonPropertyName("pages")]
-    public Dictionary<string, ConversationPage> Pages { get; set; } = new();
+    [JsonPropertyName("root")]
+    public ConversationPage Root { get; set; } = new();
 }
 
 public class ConversationPage
@@ -56,6 +53,10 @@ public class ConversationResponse
 
     [JsonPropertyName("actions")]
     public ObservableCollection<ConversationAction> Actions { get; set; } = new();
+
+    // Next NPC node in the tree after this response
+    [JsonPropertyName("next")]
+    public ConversationPage? Next { get; set; }
 }
 
 public class ConversationCondition : INotifyPropertyChanged
