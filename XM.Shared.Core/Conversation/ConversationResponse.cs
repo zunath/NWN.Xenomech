@@ -14,9 +14,10 @@ public class ConversationResponse
     [JsonPropertyName("conditions")]
     public List<ConversationCondition> Conditions { get; set; } = new();
 
-    [JsonPropertyName("action")]
-    public ConversationAction Action { get; set; } = new();
-
     [JsonPropertyName("actions")]
     public List<ConversationAction> Actions { get; set; } = new();
+
+    // Next NPC page to navigate to after this response; null means stay/close depending on actions
+    [JsonPropertyName("next")]
+    public ConversationPage? Next { get; set; }
 } 
