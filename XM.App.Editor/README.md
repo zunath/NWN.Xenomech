@@ -14,6 +14,90 @@ XM.App.Editor is a modern desktop application built with Avalonia UI that provid
 - **Configuration**: JSON-based settings management
 - **Extensible**: Easy to add custom editors and functionality
 
+## Conversation Editor
+
+The conversation editor provides a comprehensive interface for managing conversation data with the following features:
+
+### Tree View Structure
+- **NPC Dialogue**: Displayed as top-level nodes (🗣️ icon, bold text) showing what the NPC says
+- **Player Options**: Displayed as child nodes (👤 icon, normal text) showing what the player can choose
+- **Conversation Flow**: Clear visual representation of the dialogue structure
+
+### Node Management
+- **NPC**: Create new NPC dialogue nodes with default content
+- **Response**: Add player choice options to selected NPC dialogue
+- **Delete**: Remove NPC dialogue or player options with confirmation
+- **Real-time Updates**: Tree view updates automatically when changes are made
+
+### Node Details Panel
+When a conversation is loaded, the right panel shows conversation details and node-specific information:
+
+#### Conversation Details
+- **ID**: Edit the unique conversation identifier
+- **Name**: Edit the conversation display name
+- **Description**: Edit the conversation description (multi-line)
+- **Portrait**: Edit the portrait path for the conversation
+
+#### NPC Dialogue Details
+- **NPC Text**: Edit what the NPC says to the player
+- **Page ID**: Display the unique page identifier
+
+#### Player Option Details
+- **Player Text**: Edit what the player can choose to say
+- **Conditions List**: View and manage response conditions
+  - Condition type, operator, and value display
+  - Add, edit, and delete condition buttons
+- **Actions List**: View and manage response actions
+  - Action type and parameters editing
+  - JSON format for complex parameter structures
+  - Edit action functionality
+
+### File Management
+- **Load Conversations**: Select from existing conversation files
+- **Save Changes**: Save modifications to conversation files
+- **Create New**: Generate new conversation files with default structure
+- **Delete Files**: Remove conversation files with confirmation
+
+### Data Structure
+The editor works with conversation data in the following format:
+```json
+{
+  "metadata": {
+    "id": "conversation_id",
+    "name": "Conversation Name",
+    "description": "Description",
+    "portrait": "portrait_path"
+  },
+  "conversation": {
+    "defaultPage": "greeting",
+    "pages": {
+      "page_id": {
+        "header": "Page header text",
+        "responses": [
+          {
+            "text": "Response text",
+            "conditions": [
+              {
+                "type": "condition_type",
+                "operator": "operator",
+                "value": "condition_value"
+              }
+            ],
+            "action": {
+              "type": "action_type",
+              "parameters": {
+                "param1": "value1",
+                "param2": "value2"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
 ## Architecture
 
 The application follows the MVVM (Model-View-ViewModel) pattern and uses:
@@ -43,57 +127,46 @@ dotnet build XM.App.Editor/XM.App.Editor.csproj
 ### Running
 
 ```bash
-# Run the editor
-dotnet run --project XM.App.Editor/XM.App.Editor.csproj
+# Run the editor application
+cd XM.App.Editor
+dotnet run
 ```
 
-## Project Structure
+### Project Structure
 
 ```
 XM.App.Editor/
-├── App.axaml                 # Main application XAML
-├── App.axaml.cs              # Application code-behind
-├── MainWindow.axaml          # Main window XAML
-├── MainWindow.axaml.cs       # Main window code-behind
-├── Program.cs                # Application entry point
-├── GlobalUsings.cs           # Global using statements
-├── appsettings.json          # Application configuration
-├── app.manifest              # Windows compatibility manifest
-└── XM.App.Editor.csproj     # Project file
+├── Models/                    # Data models
+│   ├── ConversationData.cs   # Conversation data structure
+│   └── ConversationTreeNode.cs # Tree view node models
+├── ViewModels/               # View models for MVVM
+│   └── ConversationEditorViewModel.cs
+├── Views/                    # UI views
+│   ├── ConversationEditorControl.axaml
+│   └── ConversationEditorControl.axaml.cs
+├── Services/                 # Business logic services
+│   └── ConversationService.cs
+├── Converters/               # UI data converters
+│   └── ConversationConverters.cs
+└── README.md                # This file
 ```
 
-## Configuration
+## Usage
 
-The application uses `appsettings.json` for configuration:
-
-- **Logging**: Log level settings
-- **Editor**: Window dimensions, auto-save settings, theme preferences
-
-## Dependencies
-
-- **Avalonia**: Cross-platform UI framework
-- **Microsoft.Extensions**: Configuration and dependency injection
-- **XM.Shared.API**: NWN API bindings
-- **XM.Shared.Core**: Core functionality
-- **XM.Shared.UI**: Shared UI components
-
-## Adding Custom Editors
-
-The application is designed to be extended with custom editors. To add a new editor:
-
-1. Create a new UserControl for your editor
-2. Add it to the main window or create a new window
-3. Implement the necessary ViewModel and business logic
-4. Register services in the dependency injection container
+1. **Launch the Editor**: Run the application and click the conversation editor button
+2. **Load a Conversation**: Select an existing conversation file from the left panel
+3. **Navigate the Tree**: Use the tree view to navigate pages and responses
+4. **Edit Node Details**: Select a node to edit its properties in the right panel
+5. **Manage Conditions**: Add, edit, or delete conditions for responses
+6. **Manage Actions**: Edit action types and parameters for responses
+7. **Save Changes**: Use the save button to persist your changes
 
 ## Future Enhancements
 
-- Custom editor implementations
-- Plugin system for editor extensions
-- Real-time collaboration features
-- Advanced configuration management
-- Export/import functionality
-
-## Contributing
-
-This project follows the same development patterns as other Xenomech projects. See the main project README for contribution guidelines. 
+- **Condition Editor**: Advanced condition editing with type-specific controls
+- **Action Editor**: Visual action editor with parameter validation
+- **Preview Mode**: Test conversations in a preview environment
+- **Validation**: Real-time validation of conversation structure
+- **Import/Export**: Support for importing from other formats
+- **Undo/Redo**: Change history management
+- **Search**: Find text across all conversation nodes 

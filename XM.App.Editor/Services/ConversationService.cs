@@ -20,6 +20,7 @@ public class ConversationService
         return Directory.GetFiles(_conversationsDirectory, "*.json")
                        .Select(Path.GetFileNameWithoutExtension)
                        .Where(name => !string.IsNullOrEmpty(name))
+                       .Select(name => name!)
                        .ToList();
     }
 
