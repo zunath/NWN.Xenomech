@@ -172,6 +172,7 @@
                               <Grid.RowDefinitions>
                                   <RowDefinition Height="Auto"/>
                                   <RowDefinition Height="Auto"/>
+                                  <RowDefinition Height="Auto"/>
                               </Grid.RowDefinitions>
                                   <Grid.ColumnDefinitions>
                                       <ColumnDefinition Width="100"/>
@@ -181,8 +182,12 @@
                                   <TextBlock Grid.Row="0" Grid.Column="0" Text="NPC Text:" VerticalAlignment="Top" Margin="0,5,0,0"/>
                                   <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedPageNode.Page.Header}" 
                                            Margin="5" AcceptsReturn="True" Height="120" TextWrapping="Wrap"/>
-                                  <TextBlock Grid.Row="1" Grid.Column="0" Text="Children:" VerticalAlignment="Center" Margin="0,5,0,0"/>
-                                  <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding SelectedPageNode.Children.Count}" Margin="5,5,5,0"/>
+
+                                  <TextBlock Grid.Row="1" Grid.Column="0" Text="Page ID:" VerticalAlignment="Center" Margin="0,5,0,0"/>
+                                  <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedPageNode.Page.Id}" Margin="5"/>
+
+                                  <TextBlock Grid.Row="2" Grid.Column="0" Text="Children:" VerticalAlignment="Center" Margin="0,5,0,0"/>
+                                  <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SelectedPageNode.Children.Count}" Margin="5,5,5,0"/>
                               </Grid>
                           </StackPanel>
                      </Border>
@@ -394,6 +399,7 @@
 
                                       <TextBlock Grid.Row="0" Grid.Column="0" Text="Type:" VerticalAlignment="Center" Margin="5,0,0,0"/>
                                       <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding SelectedAction.Type}" Margin="5" HorizontalAlignment="Stretch" MinWidth="220">
+                                          <sys:String>ChangePage</sys:String>
                                           <sys:String>OpenShop</sys:String>
                                           <sys:String>GiveItem</sys:String>
                                           <sys:String>StartQuest</sys:String>
@@ -409,6 +415,21 @@
                                                   <ColumnDefinition Width="*"/>
                                               </Grid.ColumnDefinitions>
                                               
+                                              <!-- ChangePage Parameters -->
+                                              <StackPanel Grid.Column="0" Grid.ColumnSpan="2" 
+                                                          IsVisible="{Binding SelectedAction.Type, Converter={x:Static converters:StringEqualsConverter.Instance}, ConverterParameter=ChangePage}">
+                                                  <Grid>
+                                                      <Grid.ColumnDefinitions>
+                                                          <ColumnDefinition Width="100"/>
+                                                          <ColumnDefinition Width="*"/>
+                                                      </Grid.ColumnDefinitions>
+                                                      <TextBlock Grid.Column="0" Text="Page:" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                                      <ComboBox Grid.Column="1" Margin="5"
+                                                                ItemsSource="{Binding AvailablePageIds}"
+                                                                SelectedItem="{Binding SelectedChangePageItem, Mode=TwoWay}"/>
+                                                  </Grid>
+                                              </StackPanel>
+
                                               <!-- OpenShop Parameters -->
                                               <StackPanel Grid.Column="0" Grid.ColumnSpan="2" 
                                                           IsVisible="{Binding SelectedAction.Type, Converter={x:Static converters:StringEqualsConverter.Instance}, ConverterParameter=OpenShop}">

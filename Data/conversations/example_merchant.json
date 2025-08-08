@@ -7,6 +7,7 @@
   },
   "conversation": {
     "root": {
+      "id": "main",
       "header": "Welcome to my shop! I have the finest wares in all the land. What can I help you with today?",
       "responses": [
         {
@@ -30,7 +31,16 @@
             },
             {
               "type": "EndConversation",
-              "parameters": {}
+              "parameters": {
+                "pageId": null
+              }
+            },
+            {
+              "type": "ChangePage",
+              "parameters": {
+                "shopId": "",
+                "pageId": "main"
+              }
             }
           ],
           "next": null
@@ -40,6 +50,7 @@
           "conditions": [],
           "actions": [],
           "next": {
+            "id": "knowabout",
             "header": "What would you like to know about?",
             "responses": [
               {

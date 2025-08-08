@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
+using System.Linq;
 using XM.App.Editor.Models;
 using XM.App.Editor.Services;
 
@@ -14,6 +15,8 @@ namespace XM.App.Editor.ViewModels;
     private string? _selectedConversationFile;
     private ConversationData? _currentConversation;
     private ConversationTreeNode? _selectedNode;
+    private ConversationPage? _subscribedPageForIdChanges;
+    private readonly List<ConversationPage> _allSubscribedPages = new();
 
     public ConversationEditorViewModel(IUserSettingsService userSettingsService)
     {
@@ -51,6 +54,7 @@ namespace XM.App.Editor.ViewModels;
 
     public ObservableCollection<string> ConversationFiles { get; } = new();
     public ObservableCollection<ConversationTreeNode> ConversationTree { get; } = new();
+    public ObservableCollection<string> AvailablePageIds { get; } = new();
 
     public string? SelectedConversationFile
     {
@@ -91,6 +95,27 @@ namespace XM.App.Editor.ViewModels;
             OnPropertyChanged(nameof(SelectedNode));
             OnPropertyChanged(nameof(SelectedPageNode));
             OnPropertyChanged(nameof(SelectedResponseNode));
+
+            // If a different node is selected, clear the selected action so the Action Details panel hides
+            if (SelectedAction != null)
+            {
+                SelectedAction = null;
+            }
+
+            // Rewire page Id change subscription
+            if (_subscribedPageForIdChanges != null)
+            {
+                if (_subscribedPageForIdChanges is INotifyPropertyChanged oldInpc)
+                {
+                    oldInpc.PropertyChanged -= OnSelectedPagePropertyChanged;
+                }
+                _subscribedPageForIdChanges = null;
+            }
+            if (SelectedPageNode?.Page is INotifyPropertyChanged inpc)
+            {
+                _subscribedPageForIdChanges = SelectedPageNode.Page;
+                inpc.PropertyChanged += OnSelectedPagePropertyChanged;
+            }
             ((RelayCommand)AddResponseCommand).RaiseCanExecuteChanged();
             ((RelayCommand)DeleteNodeCommand).RaiseCanExecuteChanged();
             ((RelayCommand)AddNodeCommand).RaiseCanExecuteChanged();
@@ -101,6 +126,7 @@ namespace XM.App.Editor.ViewModels;
             ((RelayCommand)DeleteConditionCommand).RaiseCanExecuteChanged();
             ((RelayCommand)AddNextNpcCommand).RaiseCanExecuteChanged();
             ((RelayCommand)DeleteNextNpcCommand).RaiseCanExecuteChanged();
+            RefreshAvailablePageIds();
         }
     }
 
@@ -117,6 +143,9 @@ namespace XM.App.Editor.ViewModels;
             {
                 _selectedAction = value;
                 OnPropertyChanged(nameof(SelectedAction));
+                // Ensure dropdown reflects latest ids when switching actions
+                RefreshAvailablePageIds();
+                OnPropertyChanged(nameof(SelectedChangePageItem));
                 ((RelayCommand)AddActionCommand).RaiseCanExecuteChanged();
                 ((RelayCommand)DeleteActionCommand).RaiseCanExecuteChanged();
                 ((RelayCommand<ConversationAction>)MoveActionUpCommand).RaiseCanExecuteChanged();
@@ -144,6 +173,7 @@ namespace XM.App.Editor.ViewModels;
 
     public List<string> ActionTypes { get; } = new()
     {
+        "ChangePage",
         "OpenShop",
         "GiveItem", 
         "StartQuest",
@@ -225,7 +255,11 @@ namespace XM.App.Editor.ViewModels;
         SelectedNode = null;
 
         if (CurrentConversation?.Conversation.Root == null)
+        {
+            // No pages available
+            AvailablePageIds.Clear();
             return;
+        }
 
         var rebuiltRoot = BuildTreeRecursive(CurrentConversation.Conversation.Root, "root");
         // Auto-expand root
@@ -233,6 +267,11 @@ namespace XM.App.Editor.ViewModels;
         // Restore expansions
         RestoreExpansion(rebuiltRoot, expandedPaths);
         ConversationTree.Add(rebuiltRoot);
+
+        // Subscribe to Id changes across all pages in the tree
+        ResubscribeAllPageIdChanges();
+
+        RefreshAvailablePageIds();
 
         // Restore selection if possible
         if (!string.IsNullOrEmpty(previousSelectedPath))
@@ -295,6 +334,124 @@ namespace XM.App.Editor.ViewModels;
         }
 
         return pageNode;
+    }
+
+    private void CollectPageIds(ConversationPage page, string pageId, List<string> accumulator)
+    {
+        // Only include pages that have an explicit Id
+        if (!string.IsNullOrWhiteSpace(page.Id))
+        {
+            accumulator.Add(page.Id!);
+        }
+        if (page.Responses == null)
+            return;
+        for (int i = 0; i < page.Responses.Count; i++)
+        {
+            var resp = page.Responses[i];
+            if (resp.Next != null)
+            {
+                var childId = $"{pageId}.{i + 1}";
+                CollectPageIds(resp.Next, childId, accumulator);
+            }
+        }
+    }
+
+    private void RefreshAvailablePageIds()
+    {
+        AvailablePageIds.Clear();
+        if (CurrentConversation?.Conversation.Root == null)
+            return;
+
+        var pageIds = new List<string>();
+        CollectPageIds(CurrentConversation.Conversation.Root, "root", pageIds);
+        foreach (var id in pageIds.Distinct())
+            AvailablePageIds.Add(id);
+
+        // Normalize SelectedAction.PageId to an item from the list (case-insensitive)
+        if (SelectedAction != null && SelectedAction.Type == "ChangePage" && !string.IsNullOrWhiteSpace(SelectedAction.PageId))
+        {
+            var match = AvailablePageIds.FirstOrDefault(x => string.Equals(x, SelectedAction.PageId, StringComparison.OrdinalIgnoreCase));
+            if (!string.IsNullOrEmpty(match) && !string.Equals(match, SelectedAction.PageId, StringComparison.Ordinal))
+            {
+                SelectedAction.PageId = match; // ensure exact reference equals an item in ItemsSource
+            }
+        }
+
+        OnPropertyChanged(nameof(SelectedChangePageItem));
+    }
+
+    public string? SelectedChangePageItem
+    {
+        get
+        {
+            if (SelectedAction == null || SelectedAction.Type != "ChangePage") return null;
+            if (string.IsNullOrWhiteSpace(SelectedAction.PageId)) return null;
+            return AvailablePageIds.FirstOrDefault(x => string.Equals(x, SelectedAction.PageId, StringComparison.OrdinalIgnoreCase));
+        }
+        set
+        {
+            if (SelectedAction == null || SelectedAction.Type != "ChangePage") return;
+            var newValue = value ?? string.Empty;
+            if (!string.Equals(SelectedAction.PageId, newValue, StringComparison.Ordinal))
+            {
+                SelectedAction.PageId = newValue;
+                OnPropertyChanged(nameof(SelectedChangePageItem));
+            }
+        }
+    }
+
+    private void ResubscribeAllPageIdChanges()
+    {
+        // Unsubscribe previous
+        foreach (var page in _allSubscribedPages)
+        {
+            if (page is INotifyPropertyChanged inpc)
+            {
+                inpc.PropertyChanged -= OnAnyPagePropertyChanged;
+            }
+        }
+        _allSubscribedPages.Clear();
+
+        if (CurrentConversation?.Conversation.Root == null)
+            return;
+
+        SubscribePageRecursive(CurrentConversation.Conversation.Root);
+    }
+
+    private void SubscribePageRecursive(ConversationPage page)
+    {
+        if (page is INotifyPropertyChanged inpc)
+        {
+            inpc.PropertyChanged += OnAnyPagePropertyChanged;
+            _allSubscribedPages.Add(page);
+        }
+
+        if (page.Responses == null)
+            return;
+
+        foreach (var response in page.Responses)
+        {
+            if (response.Next != null)
+            {
+                SubscribePageRecursive(response.Next);
+            }
+        }
+    }
+
+    private void OnAnyPagePropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(ConversationPage.Id))
+        {
+            RefreshAvailablePageIds();
+        }
+    }
+
+    private void OnSelectedPagePropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(ConversationPage.Id))
+        {
+            RefreshAvailablePageIds();
+        }
     }
 
     private IEnumerable<string> RetrieveExpandedPaths(ConversationTreeNode node)
@@ -389,6 +546,7 @@ namespace XM.App.Editor.ViewModels;
         var newPage = new ConversationPage { Header = "New Page" };
         CurrentConversation.Conversation.Root = newPage;
         BuildConversationTree();
+            RefreshAvailablePageIds();
     }
 
     private bool CanAddPage()
@@ -408,6 +566,7 @@ namespace XM.App.Editor.ViewModels;
 
         SelectedPageNode.Page.Responses.Add(newResponse);
         BuildConversationTree();
+            RefreshAvailablePageIds();
     }
 
     private bool CanAddResponse()
@@ -700,6 +859,7 @@ namespace XM.App.Editor.ViewModels;
                 }
             };
             BuildConversationTree();
+                RefreshAvailablePageIds();
         }
     }
 
@@ -715,6 +875,7 @@ namespace XM.App.Editor.ViewModels;
 
         SelectedResponseNode.Response.Next = null;
         BuildConversationTree();
+            RefreshAvailablePageIds();
     }
 
     private bool CanDeleteNextNpc()

@@ -15,6 +15,7 @@ public class ActionSummaryConverter : IValueConverter
         {
             return action.Type switch
             {
+                    "ChangePage" => $"Page: {action.PageId}",
                 "OpenShop" => $"Shop: {action.ShopId}",
                 "GiveItem" => $"Resref: {action.ItemId} x{action.Quantity}",
                 "StartQuest" => $"Quest: {action.QuestId}",

@@ -40,6 +40,22 @@ public class ConversationAction : INotifyPropertyChanged
 
     // Parameter properties for binding (not serialized)
     [System.Text.Json.Serialization.JsonIgnore]
+    public string PageId
+    {
+        get => Parameters.TryGetValue("pageId", out var value) ? value?.ToString() ?? "" : "";
+        set
+        {
+            if (Parameters.ContainsKey("pageId"))
+                Parameters["pageId"] = value;
+            else
+                Parameters.Add("pageId", value);
+            OnPropertyChanged(nameof(PageId));
+            OnPropertyChanged(nameof(Parameters));
+            OnPropertyChanged(nameof(Summary));
+        }
+    }
+
+    [System.Text.Json.Serialization.JsonIgnore]
     public string ShopId
     {
         get => Parameters.TryGetValue("shopId", out var value) ? value?.ToString() ?? "" : "";
@@ -127,6 +143,7 @@ public class ConversationAction : INotifyPropertyChanged
         {
             return Type switch
             {
+                "ChangePage" => $"Page: {PageId}",
                 "OpenShop" => $"Shop: {ShopId}",
                 "GiveItem" => $"Resref: {ItemId} x{Quantity}",
                 "StartQuest" => $"Quest: {QuestId}",
@@ -140,6 +157,10 @@ public class ConversationAction : INotifyPropertyChanged
     {
         switch (_type)
         {
+            case "ChangePage":
+                if (!Parameters.ContainsKey("pageId"))
+                    Parameters["pageId"] = "";
+                break;
             case "OpenShop":
                 if (!Parameters.ContainsKey("shopId"))
                     Parameters["shopId"] = "";
@@ -162,6 +183,7 @@ public class ConversationAction : INotifyPropertyChanged
         }
         OnPropertyChanged(nameof(Parameters));
         // Trigger property change notifications for all parameter properties
+        OnPropertyChanged(nameof(PageId));
         OnPropertyChanged(nameof(ShopId));
         OnPropertyChanged(nameof(ItemId));
         OnPropertyChanged(nameof(Quantity));
