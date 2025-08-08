@@ -274,7 +274,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Type:" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                    <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding SelectedCondition.Type}" Width="180" Margin="5">
+                                    <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding SelectedCondition.Type, Mode=TwoWay}" Width="180" Margin="5">
                                         <sys:String>PlayerLevel</sys:String>
                                         <sys:String>Variable</sys:String>
                                     </ComboBox>
@@ -282,19 +282,32 @@
                                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Operator:" VerticalAlignment="Center" Margin="5,0,0,0"/>
                                     <ComboBox Grid.Row="1" Grid.Column="1"
                                               ItemsSource="{Binding SelectedCondition.AvailableOperators}"
-                                              SelectedItem="{Binding SelectedCondition.Operator}"
+                                              SelectedItem="{Binding SelectedCondition.Operator, Mode=TwoWay}"
                                               Width="180" Margin="5"/>
 
                                     <!-- Value (dynamic per type) -->
-                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Value:" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <!-- PlayerLevel label -->
+                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Value:" VerticalAlignment="Center" Margin="5,0,0,0"
+                                               IsVisible="{Binding SelectedCondition.Type, Converter={x:Static converters:StringEqualsConverter.Instance}, ConverterParameter=PlayerLevel}"/>
                                     <!-- PlayerLevel numeric -->
                                     <TextBox Grid.Row="2" Grid.Column="1" Margin="5"
                                              IsVisible="{Binding SelectedCondition.Type, Converter={x:Static converters:StringEqualsConverter.Instance}, ConverterParameter=PlayerLevel}"
                                              Text="{Binding SelectedCondition.NumericValue}"/>
-                                    <!-- Variable string -->
-                                    <TextBox Grid.Row="2" Grid.Column="1" Margin="5"
-                                             IsVisible="{Binding SelectedCondition.Type, Converter={x:Static converters:StringEqualsConverter.Instance}, ConverterParameter=Variable}"
-                                             Text="{Binding SelectedCondition.StringValue}"/>
+                                    <!-- Variable split into Variable Name and Expected Value -->
+                                    <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="5"
+                                          IsVisible="{Binding SelectedCondition.Type, Converter={x:Static converters:StringEqualsConverter.Instance}, ConverterParameter=Variable}">
+                                        <Grid.ColumnDefinitions>
+                                          <ColumnDefinition Width="Auto"/>
+                                          <ColumnDefinition Width="150"/>
+                                          <ColumnDefinition Width="10"/>
+                                          <ColumnDefinition Width="Auto"/>
+                                          <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="Variable Name:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                        <TextBox Grid.Column="1" Text="{Binding SelectedCondition.VariableName}"/>
+                                        <TextBlock Grid.Column="3" Text="Value:" VerticalAlignment="Center" Margin="10,0,5,0"/>
+                                        <TextBox Grid.Column="4" Text="{Binding SelectedCondition.VariableExpectedValue}"/>
+                                    </Grid>
                                 </Grid>
                             </StackPanel>
                         </Grid>

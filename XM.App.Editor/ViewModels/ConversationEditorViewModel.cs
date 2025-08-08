@@ -164,6 +164,15 @@ namespace XM.App.Editor.ViewModels;
             {
                 _selectedCondition = value;
                 OnPropertyChanged(nameof(SelectedCondition));
+                    // Ensure operator is valid/displayable when a condition is selected
+                    if (_selectedCondition != null)
+                    {
+                        var ops = _selectedCondition.AvailableOperators;
+                        if (string.IsNullOrWhiteSpace(_selectedCondition.Operator) || !ops.Contains(_selectedCondition.Operator))
+                        {
+                            _selectedCondition.Operator = ops.FirstOrDefault() ?? "Equal";
+                        }
+                    }
                 ((RelayCommand)DeleteConditionCommand).RaiseCanExecuteChanged();
             }
         }

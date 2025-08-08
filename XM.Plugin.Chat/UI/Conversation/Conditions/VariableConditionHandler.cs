@@ -40,14 +40,18 @@ namespace XM.Chat.UI.Conversation.Conditions
                 return false;
 
             string variableName;
-            string expectedValue = null;
+            string? typeHint = null; // "int", "float", or "string"
+            string? expectedValue = null;
 
-            if (valueStr.Contains(':'))
+            var parts = valueStr.Split(':');
+            if (parts.Length >= 3 && (parts[0].Equals("int", StringComparison.OrdinalIgnoreCase) || parts[0].Equals("float", StringComparison.OrdinalIgnoreCase) || parts[0].Equals("string", StringComparison.OrdinalIgnoreCase)))
             {
-                var parts = valueStr.Split(':', 2);
-                if (parts.Length != 2)
-                    return false;
-
+                typeHint = parts[0].ToLowerInvariant();
+                variableName = parts[1];
+                expectedValue = string.Join(':', parts, 2, parts.Length - 2);
+            }
+            else if (parts.Length == 2)
+            {
                 variableName = parts[0];
                 expectedValue = parts[1];
             }
@@ -56,12 +60,11 @@ namespace XM.Chat.UI.Conversation.Conditions
                 variableName = valueStr;
             }
 
-            var currentValue = GetLocalString(player, variableName);
-
+            // No expected value: treat as string existence check (legacy behavior)
             if (expectedValue == null)
             {
-                // Just check if variable exists and has a value
-                var hasValue = !string.IsNullOrEmpty(currentValue);
+                var currentStr = GetLocalString(player, variableName);
+                var hasValue = !string.IsNullOrEmpty(currentStr);
                 return condition.Operator switch
                 {
                     ComparisonOperator.Equal => hasValue,
@@ -69,17 +72,73 @@ namespace XM.Chat.UI.Conversation.Conditions
                     _ => false
                 };
             }
-            else
+
+            // With expected value: decide type and compare
+            // Prefer explicit type hint, otherwise infer from expectedValue
+            if (typeHint == null)
             {
-                // Compare variable value
-                return condition.Operator switch
+                if (int.TryParse(expectedValue, out _))
                 {
-                    ComparisonOperator.Equal => currentValue == expectedValue,
-                    ComparisonOperator.NotEqual => currentValue != expectedValue,
-                    ComparisonOperator.Contains => currentValue.Contains(expectedValue),
-                    ComparisonOperator.NotContains => !currentValue.Contains(expectedValue),
-                    _ => false
-                };
+                    typeHint = "int";
+                }
+                else if (float.TryParse(expectedValue, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out _))
+                {
+                    typeHint = "float";
+                }
+                else
+                {
+                    typeHint = "string";
+                }
+            }
+
+            switch (typeHint)
+            {
+                case "int":
+                    {
+                        if (!int.TryParse(expectedValue, out var expectedInt))
+                            return false;
+                        var currentInt = GetLocalInt(player, variableName);
+                        return condition.Operator switch
+                        {
+                            ComparisonOperator.Equal => currentInt == expectedInt,
+                            ComparisonOperator.NotEqual => currentInt != expectedInt,
+                            ComparisonOperator.GreaterThan => currentInt > expectedInt,
+                            ComparisonOperator.GreaterThanOrEqual => currentInt >= expectedInt,
+                            ComparisonOperator.LessThan => currentInt < expectedInt,
+                            ComparisonOperator.LessThanOrEqual => currentInt <= expectedInt,
+                            _ => false
+                        };
+                    }
+                case "float":
+                    {
+                        if (!float.TryParse(expectedValue, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var expectedFloat))
+                            return false;
+                        var currentFloat = GetLocalFloat(player, variableName);
+                        // Use a small epsilon for float equality
+                        const float Epsilon = 0.0001f;
+                        return condition.Operator switch
+                        {
+                            ComparisonOperator.Equal => Math.Abs(currentFloat - expectedFloat) <= Epsilon,
+                            ComparisonOperator.NotEqual => Math.Abs(currentFloat - expectedFloat) > Epsilon,
+                            ComparisonOperator.GreaterThan => currentFloat > expectedFloat,
+                            ComparisonOperator.GreaterThanOrEqual => currentFloat > expectedFloat || Math.Abs(currentFloat - expectedFloat) <= Epsilon,
+                            ComparisonOperator.LessThan => currentFloat < expectedFloat,
+                            ComparisonOperator.LessThanOrEqual => currentFloat < expectedFloat || Math.Abs(currentFloat - expectedFloat) <= Epsilon,
+                            _ => false
+                        };
+                    }
+                default:
+                    {
+                        var currentStr = GetLocalString(player, variableName);
+                        return condition.Operator switch
+                        {
+                            ComparisonOperator.Equal => currentStr == expectedValue,
+                            ComparisonOperator.NotEqual => currentStr != expectedValue,
+                            ComparisonOperator.Contains => currentStr.Contains(expectedValue),
+                            ComparisonOperator.NotContains => !currentStr.Contains(expectedValue),
+                            _ => false
+                        };
+                    }
             }
         }
     }

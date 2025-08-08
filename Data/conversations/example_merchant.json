@@ -14,9 +14,14 @@
           "text": "Show me your wares",
           "conditions": [
             {
-              "type": "PlayerLevel",
-              "operator": "GreaterThanOrEqual",
-              "value": 1
+              "type": "Variable",
+              "operator": "NotEqual",
+              "value": "varname:123"
+            },
+            {
+              "type": "Variable",
+              "operator": "Equal",
+              "value": "asdas:123"
             }
           ],
           "actions": [

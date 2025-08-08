@@ -29,16 +29,15 @@ public class ConversationCondition : INotifyPropertyChanged
                 {
                     if (string.IsNullOrEmpty(Operator))
                         Operator = "GreaterThanOrEqual";
-                    // Ensure numeric value
-                    if (_value is not int)
-                        _value = 1;
+                    // Reset value to default for this type
+                    Value = 1;
                 }
                 else if (_type == "Variable")
                 {
                     if (string.IsNullOrEmpty(Operator))
                         Operator = "Equal";
-                    if (_value is not string)
-                        _value = string.Empty;
+                    // Reset value to default for this type
+                    Value = string.Empty;
                 }
                 // Adjust operator if it's not valid for this type
                 if (!AvailableOperators.Contains(Operator))
@@ -78,6 +77,8 @@ public class ConversationCondition : INotifyPropertyChanged
                 OnPropertyChanged(nameof(Value));
                 OnPropertyChanged(nameof(NumericValue));
                 OnPropertyChanged(nameof(StringValue));
+                OnPropertyChanged(nameof(VariableName));
+                OnPropertyChanged(nameof(VariableExpectedValue));
                 OnPropertyChanged(nameof(Summary));
             }
         }
@@ -120,14 +121,83 @@ public class ConversationCondition : INotifyPropertyChanged
     }
 
     [System.Text.Json.Serialization.JsonIgnore]
+    public string VariableName
+    {
+        get
+        {
+            var raw = _value?.ToString() ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(raw)) return string.Empty;
+
+            var parts = raw.Split(':');
+            if (parts.Length >= 3 && (parts[0].Equals("int", StringComparison.OrdinalIgnoreCase) || parts[0].Equals("float", StringComparison.OrdinalIgnoreCase) || parts[0].Equals("string", StringComparison.OrdinalIgnoreCase)))
+            {
+                return parts[1];
+            }
+            if (parts.Length >= 2)
+            {
+                return parts[0];
+            }
+            return raw;
+        }
+        set
+        {
+            var name = value ?? string.Empty;
+            var expected = VariableExpectedValue;
+            Value = string.IsNullOrWhiteSpace(expected) ? name : $"{name}:{expected}";
+            OnPropertyChanged(nameof(VariableName));
+        }
+    }
+
+    [System.Text.Json.Serialization.JsonIgnore]
+    public string VariableExpectedValue
+    {
+        get
+        {
+            var raw = _value?.ToString() ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(raw)) return string.Empty;
+
+            var parts = raw.Split(':');
+            if (parts.Length >= 3 && (parts[0].Equals("int", StringComparison.OrdinalIgnoreCase) || parts[0].Equals("float", StringComparison.OrdinalIgnoreCase) || parts[0].Equals("string", StringComparison.OrdinalIgnoreCase)))
+            {
+                return string.Join(':', parts, 2, parts.Length - 2);
+            }
+            if (parts.Length == 2)
+            {
+                return parts[1];
+            }
+            return string.Empty;
+        }
+        set
+        {
+            var name = VariableName;
+            var expected = value ?? string.Empty;
+            Value = string.IsNullOrWhiteSpace(expected) ? name : $"{name}:{expected}";
+            OnPropertyChanged(nameof(VariableExpectedValue));
+        }
+    }
+
+    [System.Text.Json.Serialization.JsonIgnore]
     public string Summary
     {
         get
         {
-            var valueText = Type == "PlayerLevel" ? NumericValue : StringValue;
-            return string.IsNullOrWhiteSpace(Type)
-                ? ""
-                : $"{Type} {Operator} {valueText}";
+            if (string.IsNullOrWhiteSpace(Type)) return "";
+
+            if (Type == "PlayerLevel")
+            {
+                return $"PlayerLevel {Operator} {NumericValue}";
+            }
+
+            if (Type == "Variable")
+            {
+                var name = VariableName;
+                var expected = VariableExpectedValue;
+                return string.IsNullOrWhiteSpace(expected)
+                    ? $"Variable {Operator} {name} (exists)"
+                    : $"Variable '{name}' {Operator} {expected}";
+            }
+
+            return $"{Type} {Operator} {StringValue}";
         }
     }
 
