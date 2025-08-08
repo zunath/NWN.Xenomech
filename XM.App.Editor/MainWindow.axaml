@@ -1,0 +1,71 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:XM.App.Editor"
+        xmlns:views="clr-namespace:XM.App.Editor.Views"
+        x:Class="XM.App.Editor.MainWindow"
+        x:DataType="local:MainWindowViewModel"
+        Title="Xenomech Editor"
+        Width="1200" Height="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Menu Bar -->
+        <Menu Grid.Row="0">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Exit" Command="{Binding ExitCommand}"/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_About" Command="{Binding AboutCommand}"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- Toolbar -->
+        <Border Grid.Row="1" BorderBrush="{DynamicResource SystemControlForegroundBaseMediumBrush}" BorderThickness="0,0,0,1">
+            <StackPanel Orientation="Horizontal" Margin="10,5">
+                <Button Command="{Binding OpenConversationEditorCommand}" 
+                        ToolTip.Tip="{Binding IsConversationEditorVisible, Converter={x:Static local:BooleanToTooltipConverter.Instance}}"
+                        Margin="0,0,10,0"
+                        Padding="10,5">
+                    <TextBlock Text="{Binding IsConversationEditorVisible, Converter={x:Static local:BooleanToIconConverter.Instance}}" FontSize="16"/>
+                </Button>
+            </StackPanel>
+        </Border>
+
+        <!-- Main Content Area -->
+        <Border Grid.Row="2" Background="{DynamicResource SystemControlBackgroundBaseLowBrush}">
+            <Grid>
+                <!-- Default Content -->
+                <TextBlock Name="DefaultContent"
+                           Text="Please select an editor from above." 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Center"
+                           FontSize="18"
+                           Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                           IsVisible="{Binding IsConversationEditorVisible, Converter={x:Static local:InverseBooleanConverter.Instance}}"/>
+                
+                <!-- Conversation Editor -->
+                <views:ConversationEditorControl Name="ConversationEditor"
+                                                DataContext="{Binding ConversationEditorViewModel}"/>
+            </Grid>
+        </Border>
+
+        <!-- Status Bar -->
+        <Border Grid.Row="3" BorderBrush="{DynamicResource SystemControlForegroundBaseMediumBrush}" BorderThickness="0,1,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Ready" Margin="10,5"/>
+                <TextBlock Grid.Column="1" Text="Xenomech Editor v1.0" Margin="10,5"/>
+            </Grid>
+        </Border>
+    </Grid>
+
+</Window> 

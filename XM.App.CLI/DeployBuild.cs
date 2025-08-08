@@ -15,16 +15,78 @@ namespace XM.App.CLI
         private const string AnvilPath = ServerPath + "anvil/";
         private const string AnvilPluginsPath = AnvilPath + "Plugins/";
         private const string ResourcesPath = AnvilPluginsPath + "resources/";
+        private const string DataPath = "../Data/";
 
         private readonly HakBuilder _hakBuilder = new();
 
         public void Process()
         {
+            // Check if NWN server might be running and warn user
+            CheckForPotentialFileLocks();
+            
             CreateServerDirectory();
             BuildHaks();
             BuildModule();
             BuildCachedCreatureFeatsFile();
             CopyExternalPlugins();
+            CopyDataFiles();
+        }
+
+        /// <summary>
+        /// Checks for potential file locks and warns the user if NWN server might be running.
+        /// </summary>
+        private void CheckForPotentialFileLocks()
+        {
+            var modulePath = "../Module/Xenomech.mod";
+            var tlkPath = "../Content/tlk/xenomech.tlk";
+            
+            var lockedFiles = new List<string>();
+            
+            if (File.Exists(modulePath) && IsFileLocked(modulePath))
+            {
+                lockedFiles.Add("Xenomech.mod");
+            }
+            
+            if (File.Exists(tlkPath) && IsFileLocked(tlkPath))
+            {
+                lockedFiles.Add("xenomech.tlk");
+            }
+            
+            if (lockedFiles.Count > 0)
+            {
+                Console.WriteLine("Warning: The following files appear to be locked by another process:");
+                foreach (var file in lockedFiles)
+                {
+                    Console.WriteLine($"  - {file}");
+                }
+                Console.WriteLine("This may be due to the NWN server running. The deployment will attempt to retry file operations.");
+                Console.WriteLine("If deployment fails, please stop the NWN server and try again.");
+                Console.WriteLine();
+            }
+        }
+
+        /// <summary>
+        /// Checks if a file is locked by attempting to open it for reading.
+        /// </summary>
+        /// <param name="filePath">Path to the file to check</param>
+        /// <returns>True if the file is locked, false otherwise</returns>
+        private bool IsFileLocked(string filePath)
+        {
+            try
+            {
+                using (var stream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.None))
+                {
+                    return false; // File is not locked
+                }
+            }
+            catch (IOException)
+            {
+                return true; // File is locked
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return true; // File is locked or access denied
+            }
         }
 
         private void CreateServerDirectory()
@@ -58,7 +120,64 @@ namespace XM.App.CLI
         private void BuildModule()
         {
             var modulePath = "../Module/Xenomech.mod";
-            File.Copy(modulePath, ModulesPath + "/Xenomech.mod", true);
+            var destinationPath = ModulesPath + "/Xenomech.mod";
+            CopyFileWithRetry(modulePath, destinationPath);
+        }
+
+        /// <summary>
+        /// Copies a file with retry logic to handle file locking issues.
+        /// </summary>
+        /// <param name="sourcePath">Source file path</param>
+        /// <param name="destinationPath">Destination file path</param>
+        /// <param name="maxRetries">Maximum number of retry attempts</param>
+        /// <param name="retryDelayMs">Delay between retries in milliseconds</param>
+        private void CopyFileWithRetry(string sourcePath, string destinationPath, int maxRetries = 3, int retryDelayMs = 1000)
+        {
+            for (int attempt = 1; attempt <= maxRetries; attempt++)
+            {
+                try
+                {
+                    // Ensure destination directory exists
+                    var destinationDir = Path.GetDirectoryName(destinationPath);
+                    if (!string.IsNullOrEmpty(destinationDir) && !Directory.Exists(destinationDir))
+                    {
+                        Directory.CreateDirectory(destinationDir);
+                    }
+
+                    File.Copy(sourcePath, destinationPath, true);
+                    Console.WriteLine($"Successfully copied {Path.GetFileName(sourcePath)} on attempt {attempt}");
+                    return;
+                }
+                catch (IOException ex) when (IsSharingOrLockViolation(ex))
+                {
+                    if (attempt < maxRetries)
+                    {
+                        Console.WriteLine($"{Path.GetFileName(sourcePath)} is locked by another process (likely NWN server). Retrying in {retryDelayMs}ms... (Attempt {attempt}/{maxRetries})");
+                        Thread.Sleep(retryDelayMs);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Failed to copy {Path.GetFileName(sourcePath)} after {maxRetries} attempts. The file may be locked by the NWN server.");
+                        Console.WriteLine("Please ensure the NWN server is not running, or try again later.");
+                        Console.WriteLine($"Error: {ex.Message}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Unexpected error copying {Path.GetFileName(sourcePath)}: {ex.Message}");
+                    return;
+                }
+            }
+        }
+
+        private static bool IsSharingOrLockViolation(IOException ex)
+        {
+            // HRESULT codes for sharing/lock violations
+            // ERROR_SHARING_VIOLATION: 0x20 (32) -> 0x80070020
+            // ERROR_LOCK_VIOLATION: 0x21 (33) -> 0x80070021
+            const int HR_ERROR_SHARING_VIOLATION = unchecked((int)0x80070020);
+            const int HR_ERROR_LOCK_VIOLATION = unchecked((int)0x80070021);
+            return ex.HResult == HR_ERROR_SHARING_VIOLATION || ex.HResult == HR_ERROR_LOCK_VIOLATION;
         }
 
         private static void CopyAll(DirectoryInfo source, DirectoryInfo target, string preventOverwriteFile, params string[] excludeFiles)
@@ -133,5 +252,16 @@ namespace XM.App.CLI
             File.WriteAllText(OutputPath, JsonSerializer.Serialize(creatureFeatsList, new JsonSerializerOptions { WriteIndented = true }));
             Console.WriteLine($"Processed {creatureFeatsList.Count} files and saved output to {OutputPath}");
         }
+
+        private void CopyDataFiles()
+        {
+            var source = new DirectoryInfo(DataPath);
+            var target = new DirectoryInfo(ResourcesPath);
+
+            Console.WriteLine($"Copying Data files to: {target.FullName}");
+            CopyAll(source, target, string.Empty);
+            Console.WriteLine("Data files copied successfully.");
+        }
+
     }
 }

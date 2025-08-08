@@ -1,0 +1,14 @@
+global using System;
+global using System.Collections.Generic;
+global using System.ComponentModel;
+global using System.IO;
+global using System.Linq;
+global using System.Threading.Tasks;
+global using Avalonia;
+global using Avalonia.Controls;
+global using Avalonia.Interactivity;
+global using Avalonia.Markup.Xaml;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Hosting;
+global using Microsoft.Extensions.Logging; 

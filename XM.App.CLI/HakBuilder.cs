@@ -16,8 +16,17 @@ namespace XM.App.CLI
             // Read the config file.
             _config = GetConfig();
             _haksToProcess = _config.HakList.ToList();
+            
+            // Debug: Show current directory and TLK path
+            Console.WriteLine($"Current working directory: {Directory.GetCurrentDirectory()}");
+            Console.WriteLine($"TLK path from config: {_config.TlkPath}");
+            Console.WriteLine($"TLK path resolved: {Path.GetFullPath(_config.TlkPath)}");
+            
             // Clean the output folder.
             CleanOutputFolder();
+
+            // Check if TLK file is locked before attempting to copy
+            CheckTlkFileLock();
 
             // Copy the TLK to the output folder.
             Console.WriteLine($"Copying TLK: {_config.TlkPath}");
@@ -25,7 +34,7 @@ namespace XM.App.CLI
             if (File.Exists(_config.TlkPath))
             {
                 var destination = $"{_config.OutputPath}tlk/{Path.GetFileName(_config.TlkPath)}";
-                File.Copy(_config.TlkPath, destination);
+                CopyFileWithRetry(_config.TlkPath, destination);
             }
             else
             {
@@ -117,6 +126,92 @@ namespace XM.App.CLI
                 {
                     Directory.CreateDirectory(_config.OutputPath);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Copies a file with retry logic to handle file locking issues.
+        /// </summary>
+        /// <param name="sourcePath">Source file path</param>
+        /// <param name="destinationPath">Destination file path</param>
+        /// <param name="maxRetries">Maximum number of retry attempts</param>
+        /// <param name="retryDelayMs">Delay between retries in milliseconds</param>
+        private void CopyFileWithRetry(string sourcePath, string destinationPath, int maxRetries = 3, int retryDelayMs = 1000)
+        {
+            for (int attempt = 1; attempt <= maxRetries; attempt++)
+            {
+                try
+                {
+                    // Ensure destination directory exists
+                    var destinationDir = Path.GetDirectoryName(destinationPath);
+                    if (!string.IsNullOrEmpty(destinationDir) && !Directory.Exists(destinationDir))
+                    {
+                        Directory.CreateDirectory(destinationDir);
+                    }
+
+                    File.Copy(sourcePath, destinationPath, true);
+                    Console.WriteLine($"Successfully copied TLK file on attempt {attempt}");
+                    return;
+                }
+                catch (IOException ex) when (ex.Message.Contains("being used by another process") || 
+                                           ex.Message.Contains("The process cannot access the file") ||
+                                           ex.Message.Contains("Access is denied"))
+                {
+                    if (attempt < maxRetries)
+                    {
+                        Console.WriteLine($"TLK file is locked by another process (likely NWN server). Retrying in {retryDelayMs}ms... (Attempt {attempt}/{maxRetries})");
+                        Thread.Sleep(retryDelayMs);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Failed to copy TLK file after {maxRetries} attempts. The file may be locked by the NWN server.");
+                        Console.WriteLine("Please ensure the NWN server is not running, or try again later.");
+                        Console.WriteLine($"Error: {ex.Message}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Unexpected error copying TLK file: {ex.Message}");
+                    return;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Checks if the TLK file is locked and warns the user.
+        /// </summary>
+        private void CheckTlkFileLock()
+        {
+            if (File.Exists(_config.TlkPath) && IsFileLocked(_config.TlkPath))
+            {
+                Console.WriteLine("Warning: The TLK file appears to be locked by another process.");
+                Console.WriteLine("This may be due to the NWN server running. The hak builder will attempt to retry the file operation.");
+                Console.WriteLine("If the operation fails, please stop the NWN server and try again.");
+                Console.WriteLine();
+            }
+        }
+
+        /// <summary>
+        /// Checks if a file is locked by attempting to open it for reading.
+        /// </summary>
+        /// <param name="filePath">Path to the file to check</param>
+        /// <returns>True if the file is locked, false otherwise</returns>
+        private bool IsFileLocked(string filePath)
+        {
+            try
+            {
+                using (var stream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.None))
+                {
+                    return false; // File is not locked
+                }
+            }
+            catch (IOException)
+            {
+                return true; // File is locked
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return true; // File is locked or access denied
             }
         }
 
