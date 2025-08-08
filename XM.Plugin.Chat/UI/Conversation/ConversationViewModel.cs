@@ -189,6 +189,11 @@ namespace XM.Chat.UI.Conversation
             {
                 CurrentPage = response.Next;
             }
+            else if (response.Actions == null || response.Actions.Count == 0)
+            {
+                // No next page and no actions -> end the conversation by default
+                CloseConversation();
+            }
         }
 
         /// <summary>
