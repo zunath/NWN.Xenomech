@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using Anvil.Services;
 using XM.Shared.Core.Conversation;
+using XM.Shared.Core.EventManagement;
 
 namespace XM.Chat.UI.Conversation.Actions
 {
@@ -8,15 +10,21 @@ namespace XM.Chat.UI.Conversation.Actions
     /// </summary>
     public class ExecuteScriptActionHandler : IConversationActionHandler
     {
+        private readonly IScriptDispatcher _scriptDispatcher;
+
+        public ExecuteScriptActionHandler(IScriptDispatcher scriptDispatcher)
+        {
+            _scriptDispatcher = scriptDispatcher;
+        }
+
         public void HandleAction(ConversationAction action, uint player, IConversationCallback conversationCallback = null)
         {
             var scriptId = action.Parameters?.GetValueOrDefault("scriptId")?.ToString();
-            if (!string.IsNullOrEmpty(scriptId))
-            {
-                // TODO: Implement script execution logic
-                // ExecuteScript is commented out in NWScript.cs, so we'll just send a message for now
-                SendMessageToPC(player, $"Script '{scriptId}' would execute here.");
-            }
+            if (string.IsNullOrWhiteSpace(scriptId))
+                return;
+
+
+            _scriptDispatcher.ExecuteScript(scriptId, player);
         }
     }
 } 

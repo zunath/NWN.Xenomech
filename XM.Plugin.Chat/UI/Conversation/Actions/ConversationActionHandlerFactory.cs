@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Anvil.Services;
 using XM.Shared.Core.Conversation;
 
 namespace XM.Chat.UI.Conversation.Actions
@@ -6,11 +7,12 @@ namespace XM.Chat.UI.Conversation.Actions
     /// <summary>
     /// Factory for creating conversation action handlers.
     /// </summary>
+    [ServiceBinding(typeof(ConversationActionHandlerFactory))]
     public class ConversationActionHandlerFactory
     {
         private readonly Dictionary<ConversationActionType, IConversationActionHandler> _handlers;
 
-        public ConversationActionHandlerFactory()
+        public ConversationActionHandlerFactory(IScriptDispatcher scriptDispatcher)
         {
             _handlers = new Dictionary<ConversationActionType, IConversationActionHandler>
             {
@@ -20,7 +22,7 @@ namespace XM.Chat.UI.Conversation.Actions
                 { ConversationActionType.Teleport, new TeleportActionHandler() },
                 { ConversationActionType.AcceptQuest, new AcceptQuestActionHandler() },
                 { ConversationActionType.GiveItem, new GiveItemActionHandler() },
-                { ConversationActionType.ExecuteScript, new ExecuteScriptActionHandler() }
+                { ConversationActionType.ExecuteScript, new ExecuteScriptActionHandler(scriptDispatcher) }
             };
         }
 

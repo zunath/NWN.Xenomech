@@ -15,6 +15,7 @@ public class ActionSummaryConverter : IValueConverter
         {
             return action.Type switch
             {
+                    "ExecuteScript" => $"Script: {action.ScriptId}",
                     "Teleport" => $"Tag: {action.Tag}",
                     "ChangePage" => $"Page: {action.PageId}",
                 "OpenShop" => $"Shop: {action.ShopId}",

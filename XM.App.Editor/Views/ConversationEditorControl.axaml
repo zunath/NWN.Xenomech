@@ -404,6 +404,7 @@
                                           <sys:String>GiveItem</sys:String>
                                           <sys:String>StartQuest</sys:String>
                                           <sys:String>Teleport</sys:String>
+                                          <sys:String>ExecuteScript</sys:String>
                                           <sys:String>EndConversation</sys:String>
                                       </ComboBox>
 
@@ -493,6 +494,19 @@
                                                        </Grid.ColumnDefinitions>
                                                        <TextBlock Grid.Column="0" Text="Tag:" VerticalAlignment="Center" Margin="5,0,0,0"/>
                                                        <TextBox Grid.Column="1" Text="{Binding SelectedAction.Tag}" Margin="5" MaxLength="32"/>
+                                                   </Grid>
+                                               </StackPanel>
+
+                                               <!-- ExecuteScript Parameters -->
+                                               <StackPanel Grid.Column="0" Grid.ColumnSpan="2" 
+                                                           IsVisible="{Binding SelectedAction.Type, Converter={x:Static converters:StringEqualsConverter.Instance}, ConverterParameter=ExecuteScript}">
+                                                   <Grid>
+                                                       <Grid.ColumnDefinitions>
+                                                           <ColumnDefinition Width="100"/>
+                                                           <ColumnDefinition Width="*"/>
+                                                       </Grid.ColumnDefinitions>
+                                                       <TextBlock Grid.Column="0" Text="Script ID:" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                                       <TextBox Grid.Column="1" Text="{Binding SelectedAction.ScriptId}" Margin="5"/>
                                                    </Grid>
                                                </StackPanel>
 

@@ -156,6 +156,22 @@ public class ConversationAction : INotifyPropertyChanged
         }
     }
 
+    [System.Text.Json.Serialization.JsonIgnore]
+    public string ScriptId
+    {
+        get => Parameters.TryGetValue("scriptId", out var value) ? value?.ToString() ?? "" : "";
+        set
+        {
+            if (Parameters.ContainsKey("scriptId"))
+                Parameters["scriptId"] = value ?? "";
+            else
+                Parameters.Add("scriptId", value ?? "");
+            OnPropertyChanged(nameof(ScriptId));
+            OnPropertyChanged(nameof(Parameters));
+            OnPropertyChanged(nameof(Summary));
+        }
+    }
+
     // Property specifically for the converter to bind to
     [System.Text.Json.Serialization.JsonIgnore]
     public string Summary
@@ -164,6 +180,7 @@ public class ConversationAction : INotifyPropertyChanged
         {
             return Type switch
             {
+                "ExecuteScript" => $"Script: {ScriptId}",
                 "Teleport" => $"Tag: {Tag}",
                 "ChangePage" => $"Page: {PageId}",
                 "OpenShop" => $"Shop: {ShopId}",
@@ -179,6 +196,10 @@ public class ConversationAction : INotifyPropertyChanged
     {
         switch (_type)
         {
+            case "ExecuteScript":
+                if (!Parameters.ContainsKey("scriptId"))
+                    Parameters["scriptId"] = "";
+                break;
             case "Teleport":
                 if (!Parameters.ContainsKey("tag"))
                     Parameters["tag"] = "";
@@ -209,6 +230,7 @@ public class ConversationAction : INotifyPropertyChanged
         }
         OnPropertyChanged(nameof(Parameters));
         // Trigger property change notifications for all parameter properties
+        OnPropertyChanged(nameof(ScriptId));
         OnPropertyChanged(nameof(Tag));
         OnPropertyChanged(nameof(PageId));
         OnPropertyChanged(nameof(ShopId));

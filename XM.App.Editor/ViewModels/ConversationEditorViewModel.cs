@@ -178,6 +178,7 @@ namespace XM.App.Editor.ViewModels;
         "GiveItem", 
         "StartQuest",
         "Teleport",
+        "ExecuteScript",
         "EndConversation",
         "Custom"
     };

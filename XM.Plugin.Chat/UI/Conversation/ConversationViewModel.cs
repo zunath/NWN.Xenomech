@@ -22,7 +22,7 @@ namespace XM.Chat.UI.Conversation
         private ConversationDefinition _conversationDefinition;
         private ConversationPage _currentPage;
         private readonly List<ConversationResponse> _responseObjects;
-        private readonly ConversationActionHandlerFactory _actionHandlerFactory;
+        
         private ConversationConditionHandlerFactory _conditionHandlerFactory;
 
         [Inject]
@@ -33,6 +33,9 @@ namespace XM.Chat.UI.Conversation
 
         [Inject]
         public StatService Stat { get; set; }
+
+        [Inject]
+        public ConversationActionHandlerFactory ActionHandlerFactory { get; set; }
 
         /// <summary>
         /// The current conversation page being displayed.
@@ -98,7 +101,6 @@ namespace XM.Chat.UI.Conversation
         {
             AvailableResponses = new XMBindingList<string>();
             _responseObjects = new List<ConversationResponse>();
-            _actionHandlerFactory = new ConversationActionHandlerFactory();
         }
 
         public override void OnOpen()
@@ -263,7 +265,7 @@ namespace XM.Chat.UI.Conversation
         {
             if (action == null) return;
 
-            var handler = _actionHandlerFactory.GetHandler(action.ActionType);
+            var handler = ActionHandlerFactory.GetHandler(action.ActionType);
             
             if (handler != null)
             {
