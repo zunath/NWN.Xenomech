@@ -8,6 +8,10 @@ using System.Linq;
 using Avalonia.VisualTree;
 using System.ComponentModel;
 using System;
+using System.Threading.Tasks;
+using Avalonia.Input.Platform;
+using Avalonia.Threading;
+using System.Text.RegularExpressions;
 
 namespace XM.App.Editor.Views;
 
@@ -89,6 +93,20 @@ public partial class ConversationEditorControl : UserControl
         }
     }
 
+    private void OnQuantityTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        if (sender is TextBox textBox)
+        {
+            var digitsOnly = Regex.Replace(textBox.Text ?? string.Empty, "[^0-9]", string.Empty);
+            if (digitsOnly != (textBox.Text ?? string.Empty))
+            {
+                var caret = textBox.CaretIndex;
+                textBox.Text = digitsOnly;
+                textBox.CaretIndex = Math.Min(caret, textBox.Text.Length);
+            }
+        }
+    }
+
     private void OnMoveActionUp(object? sender, RoutedEventArgs e)
     {
         if (sender is Button button && button.Tag is ConversationAction action && DataContext is ConversationEditorViewModel viewModel)
@@ -140,18 +158,9 @@ public partial class ConversationEditorControl : UserControl
                     if (container.DataContext is ConversationAction action)
                     {
                         var index = actions.IndexOf(action);
-                        
-                        // Update selection visual state
-                        if (action == viewModel.SelectedAction)
-                        {
-                            container.Background = Avalonia.Media.Brushes.LightBlue;
-                            container.BorderThickness = new Avalonia.Thickness(2);
-                        }
-                        else
-                        {
-                            container.Background = Avalonia.Media.Brushes.Transparent;
-                            container.BorderThickness = new Avalonia.Thickness(1);
-                        }
+
+                        // Update selection visual state via CSS-like class
+                        container.Classes.Set("selected", action == viewModel.SelectedAction);
                         
                         // Find and update button states
                         var upButton = container.GetVisualDescendants().OfType<Button>().FirstOrDefault(b => b.Name == "MoveUpButton");

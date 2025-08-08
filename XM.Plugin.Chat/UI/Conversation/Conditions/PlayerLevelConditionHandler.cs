@@ -22,26 +22,15 @@ namespace XM.Chat.UI.Conversation.Conditions
         {
             int requiredLevel;
             
-            // Handle JsonElement from JSON deserialization
-            if (condition.Value is JsonElement jsonElement)
+            // condition.Value is always a JsonElement
+            var jsonElement = condition.Value;
+            if (jsonElement.ValueKind == JsonValueKind.Number)
             {
-                if (jsonElement.ValueKind == JsonValueKind.Number)
-                {
-                    requiredLevel = jsonElement.GetInt32();
-                }
-                else
-                {
-                    return false;
-                }
+                requiredLevel = jsonElement.GetInt32();
             }
             else
             {
-                // Handle direct integer/string values safely
-                var valueString = condition.Value.ToString();
-                if (!int.TryParse(valueString, out requiredLevel))
-                {
-                    return false;
-                }
+                return false;
             }
 
             var playerLevel = _statService.GetLevel(player);

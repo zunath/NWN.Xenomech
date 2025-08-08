@@ -517,18 +517,30 @@ namespace XM.App.Editor.ViewModels;
 
     private async void DeleteConversation()
     {
-        if (string.IsNullOrEmpty(SelectedConversationFile))
-            return;
-
-        var confirmed = await _confirmationService.ShowConfirmationAsync(
-            "Delete Conversation",
-            $"Are you sure you want to delete the conversation '{SelectedConversationFile}'? This action cannot be undone."
-        );
-
-        if (confirmed && _conversationService.DeleteConversation(SelectedConversationFile))
+        try
         {
-            LoadConversationFiles();
-            SelectedConversationFile = null;
+            if (string.IsNullOrEmpty(SelectedConversationFile))
+                return;
+
+            var confirmed = await _confirmationService.ShowConfirmationAsync(
+                "Delete Conversation",
+                $"Are you sure you want to delete the conversation '{SelectedConversationFile}'? This action cannot be undone."
+            );
+
+            if (confirmed && _conversationService.DeleteConversation(SelectedConversationFile))
+            {
+                LoadConversationFiles();
+                SelectedConversationFile = null;
+            }
+        }
+        catch (Exception ex)
+        {
+            // Show a user-friendly error and log for diagnostics
+            await _confirmationService.ShowConfirmationAsync(
+                "Error",
+                $"Failed to delete the conversation.\nDetails: {ex.Message}"
+            );
+            System.Diagnostics.Debug.WriteLine($"[ConversationEditor] Error deleting conversation '{SelectedConversationFile}': {ex}");
         }
     }
 

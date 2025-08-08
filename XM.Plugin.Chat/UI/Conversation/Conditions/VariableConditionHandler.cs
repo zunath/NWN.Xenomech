@@ -13,25 +13,11 @@ namespace XM.Chat.UI.Conversation.Conditions
     {
         public bool EvaluateCondition(ConversationCondition condition, uint player)
         {
-            string valueStr;
-            
-            // Handle JsonElement from JSON deserialization
-            if (condition.Value is JsonElement jsonElement)
-            {
-                if (jsonElement.ValueKind == JsonValueKind.String)
-                {
-                    valueStr = jsonElement.GetString();
-                }
-                else
-                {
-                    valueStr = jsonElement.ToString();
-                }
-            }
-            else
-            {
-                // Handle direct string values
-                valueStr = condition.Value.ToString();
-            }
+            // condition.Value is always JsonElement
+            var jsonElement = condition.Value;
+            string valueStr = jsonElement.ValueKind == JsonValueKind.String
+                ? jsonElement.GetString()
+                : jsonElement.ToString();
 
             if (string.IsNullOrEmpty(valueStr))
                 return false;

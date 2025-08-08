@@ -8,10 +8,12 @@
               x:DataType="local:ConversationEditorViewModel"
               x:Name="EditorControl">
 
-
-
-
-
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="ActionItemSelectedBackground" Color="LightBlue"/>
+        <SolidColorBrush x:Key="ActionItemDefaultBackground" Color="Transparent"/>
+        <Thickness x:Key="ActionItemSelectedBorderThickness">2</Thickness>
+        <Thickness x:Key="ActionItemDefaultBorderThickness">1</Thickness>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" MinWidth="150"/>
@@ -374,16 +376,24 @@
                                                 Name="ActionsItemsControl">
                                        <ItemsControl.ItemTemplate>
                                            <DataTemplate>
-                                               <Border x:Name="ActionBorder"
+                                                <Border x:Name="ActionBorder"
                                                        BorderBrush="{DynamicResource SystemControlForegroundBaseMediumBrush}" 
-                                                       BorderThickness="1" 
+                                                        
                                                        CornerRadius="2" 
                                                        Padding="8" 
                                                        Margin="0,2"
-                                                       Background="Transparent"
+                                                        
                                                        PointerPressed="OnActionItemClicked"
                                                        Cursor="Hand">
                                                    <Border.Styles>
+                                                        <Style Selector="Border">
+                                                            <Setter Property="Background" Value="{DynamicResource ActionItemDefaultBackground}"/>
+                                                            <Setter Property="BorderThickness" Value="{DynamicResource ActionItemDefaultBorderThickness}"/>
+                                                        </Style>
+                                                        <Style Selector="Border.selected">
+                                                            <Setter Property="Background" Value="{DynamicResource ActionItemSelectedBackground}"/>
+                                                            <Setter Property="BorderThickness" Value="{DynamicResource ActionItemSelectedBorderThickness}"/>
+                                                        </Style>
                                                        <Style Selector="Border:pointerover">
                                                            <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundListLowBrush}"/>
                                                        </Style>
@@ -516,10 +526,11 @@
                                                                       FontSize="10" Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}" 
                                                                       HorizontalAlignment="Right" Margin="5,0,5,0"/>
                                                        </StackPanel>
-                                                                                                             <TextBlock Grid.Row="1" Grid.Column="0" Text="Quantity:" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                                      <TextBlock Grid.Row="1" Grid.Column="0" Text="Quantity:" VerticalAlignment="Center" Margin="5,0,0,0"/>
                                                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedAction.Quantity}" Margin="5" 
                                                                 InputMethod.IsInputMethodEnabled="False" 
-                                                                KeyDown="OnQuantityKeyDown"/>
+                                                                KeyDown="OnQuantityKeyDown"
+                                                                TextChanged="OnQuantityTextChanged"/>
                                                   </Grid>
                                               </StackPanel>
                                               
