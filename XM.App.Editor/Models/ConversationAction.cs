@@ -56,6 +56,27 @@ public class ConversationAction : INotifyPropertyChanged
     }
 
     [System.Text.Json.Serialization.JsonIgnore]
+    public string Tag
+    {
+        get => Parameters.TryGetValue("tag", out var value) ? value?.ToString() ?? "" : "";
+        set
+        {
+            // Keep only alphanumeric characters and underscores, cap at 32 chars
+            var sanitized = new string((value ?? "").Where(c => char.IsLetterOrDigit(c) || c == '_').ToArray());
+            if (sanitized.Length > 32)
+                sanitized = sanitized.Substring(0, 32);
+
+            if (Parameters.ContainsKey("tag"))
+                Parameters["tag"] = sanitized;
+            else
+                Parameters.Add("tag", sanitized);
+            OnPropertyChanged(nameof(Tag));
+            OnPropertyChanged(nameof(Parameters));
+            OnPropertyChanged(nameof(Summary));
+        }
+    }
+
+    [System.Text.Json.Serialization.JsonIgnore]
     public string ShopId
     {
         get => Parameters.TryGetValue("shopId", out var value) ? value?.ToString() ?? "" : "";
@@ -143,6 +164,7 @@ public class ConversationAction : INotifyPropertyChanged
         {
             return Type switch
             {
+                "Teleport" => $"Tag: {Tag}",
                 "ChangePage" => $"Page: {PageId}",
                 "OpenShop" => $"Shop: {ShopId}",
                 "GiveItem" => $"Resref: {ItemId} x{Quantity}",
@@ -157,6 +179,10 @@ public class ConversationAction : INotifyPropertyChanged
     {
         switch (_type)
         {
+            case "Teleport":
+                if (!Parameters.ContainsKey("tag"))
+                    Parameters["tag"] = "";
+                break;
             case "ChangePage":
                 if (!Parameters.ContainsKey("pageId"))
                     Parameters["pageId"] = "";
@@ -183,6 +209,7 @@ public class ConversationAction : INotifyPropertyChanged
         }
         OnPropertyChanged(nameof(Parameters));
         // Trigger property change notifications for all parameter properties
+        OnPropertyChanged(nameof(Tag));
         OnPropertyChanged(nameof(PageId));
         OnPropertyChanged(nameof(ShopId));
         OnPropertyChanged(nameof(ItemId));

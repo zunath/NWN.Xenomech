@@ -177,6 +177,7 @@ namespace XM.App.Editor.ViewModels;
         "OpenShop",
         "GiveItem", 
         "StartQuest",
+        "Teleport",
         "EndConversation",
         "Custom"
     };

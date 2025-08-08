@@ -403,6 +403,7 @@
                                           <sys:String>OpenShop</sys:String>
                                           <sys:String>GiveItem</sys:String>
                                           <sys:String>StartQuest</sys:String>
+                                          <sys:String>Teleport</sys:String>
                                           <sys:String>EndConversation</sys:String>
                                       </ComboBox>
 
@@ -481,6 +482,19 @@
                                                       <TextBox Grid.Column="1" Text="{Binding SelectedAction.QuestId}" Margin="5"/>
                                                   </Grid>
                                               </StackPanel>
+
+                                               <!-- Teleport Parameters -->
+                                               <StackPanel Grid.Column="0" Grid.ColumnSpan="2" 
+                                                           IsVisible="{Binding SelectedAction.Type, Converter={x:Static converters:StringEqualsConverter.Instance}, ConverterParameter=Teleport}">
+                                                   <Grid>
+                                                       <Grid.ColumnDefinitions>
+                                                           <ColumnDefinition Width="100"/>
+                                                           <ColumnDefinition Width="*"/>
+                                                       </Grid.ColumnDefinitions>
+                                                       <TextBlock Grid.Column="0" Text="Tag:" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                                       <TextBox Grid.Column="1" Text="{Binding SelectedAction.Tag}" Margin="5" MaxLength="32"/>
+                                                   </Grid>
+                                               </StackPanel>
 
                                               <!-- EndConversation has no parameters -->
                                               <StackPanel Grid.Column="0" Grid.ColumnSpan="2"
