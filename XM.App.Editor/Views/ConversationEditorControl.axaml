@@ -277,6 +277,7 @@
                                     <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding SelectedCondition.Type, Mode=TwoWay}" Width="180" Margin="5">
                                         <sys:String>PlayerLevel</sys:String>
                                         <sys:String>Variable</sys:String>
+                                        <sys:String>PlayerSkill</sys:String>
                                     </ComboBox>
 
                                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Operator:" VerticalAlignment="Center" Margin="5,0,0,0"/>
@@ -307,6 +308,44 @@
                                         <TextBox Grid.Column="1" Text="{Binding SelectedCondition.VariableName}"/>
                                         <TextBlock Grid.Column="3" Text="Value:" VerticalAlignment="Center" Margin="10,0,5,0"/>
                                         <TextBox Grid.Column="4" Text="{Binding SelectedCondition.VariableExpectedValue}"/>
+                                    </Grid>
+                                    <!-- PlayerSkill: dropdown for skill and numeric input for level -->
+                                    <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="5"
+                                          IsVisible="{Binding SelectedCondition.Type, Converter={x:Static converters:StringEqualsConverter.Instance}, ConverterParameter=PlayerSkill}">
+                                      <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                      </Grid.ColumnDefinitions>
+                                      <TextBlock Grid.Column="0" Text="Skill:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                      <ComboBox Grid.Column="1" SelectedItem="{Binding SelectedCondition.SkillType, Mode=TwoWay}">
+                                        <sys:String>Longsword</sys:String>
+                                        <sys:String>GreatSword</sys:String>
+                                        <sys:String>Pistol</sys:String>
+                                        <sys:String>Dagger</sys:String>
+                                        <sys:String>Throwing</sys:String>
+                                        <sys:String>GreatAxe</sys:String>
+                                        <sys:String>HandToHand</sys:String>
+                                        <sys:String>Rifle</sys:String>
+                                        <sys:String>Club</sys:String>
+                                        <sys:String>Staff</sys:String>
+                                        <sys:String>Axe</sys:String>
+                                        <sys:String>ShortSword</sys:String>
+                                        <sys:String>Polearm</sys:String>
+                                        <sys:String>Bow</sys:String>
+                                        <sys:String>Weaponcraft</sys:String>
+                                        <sys:String>Armorcraft</sys:String>
+                                        <sys:String>Fabrication</sys:String>
+                                        <sys:String>Synthesis</sys:String>
+                                        <sys:String>Engineering</sys:String>
+                                        <sys:String>Extraction</sys:String>
+                                        <sys:String>Harvesting</sys:String>
+                                        <sys:String>Evasion</sys:String>
+                                      </ComboBox>
+                                      <TextBlock Grid.Column="3" Text="Level:" VerticalAlignment="Center" Margin="10,0,5,0"/>
+                                      <TextBox Grid.Column="4" Text="{Binding SelectedCondition.SkillLevelNumeric, Mode=TwoWay}"/>
                                     </Grid>
                                 </Grid>
                             </StackPanel>

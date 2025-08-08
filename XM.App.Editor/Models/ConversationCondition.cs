@@ -11,7 +11,8 @@ public class ConversationCondition : INotifyPropertyChanged
     private static readonly Dictionary<string, List<string>> TypeToOperators = new()
     {
         { "PlayerLevel", new List<string> { "Equal", "NotEqual", "GreaterThan", "GreaterThanOrEqual", "LessThan", "LessThanOrEqual" } },
-        { "Variable", new List<string> { "Equal", "NotEqual", "Contains", "NotContains" } }
+        { "Variable", new List<string> { "Equal", "NotEqual", "Contains", "NotContains" } },
+        { "PlayerSkill", new List<string> { "Equal", "NotEqual", "GreaterThan", "GreaterThanOrEqual", "LessThan", "LessThanOrEqual" } }
     };
 
     [JsonPropertyName("type")]
@@ -38,6 +39,15 @@ public class ConversationCondition : INotifyPropertyChanged
                         Operator = "Equal";
                     // Reset value to default for this type
                     Value = string.Empty;
+                }
+                else if (_type == "PlayerSkill")
+                {
+                    if (string.IsNullOrEmpty(Operator))
+                        Operator = "GreaterThanOrEqual";
+                    // Default as structured fields
+                    SkillType = "Longsword";
+                    SkillLevelNumeric = "1";
+                    Value = $"{SkillType}:{SkillLevelNumeric}";
                 }
                 // Adjust operator if it's not valid for this type
                 if (!AvailableOperators.Contains(Operator))
@@ -120,6 +130,43 @@ public class ConversationCondition : INotifyPropertyChanged
         set => Value = value ?? string.Empty;
     }
 
+    // PlayerSkill helpers
+    [System.Text.Json.Serialization.JsonIgnore]
+    public string SkillType
+    {
+        get
+        {
+            var raw = _value?.ToString() ?? string.Empty;
+            var parts = raw.Split(':');
+            return parts.Length >= 1 ? parts[0] : string.Empty;
+        }
+        set
+        {
+            var level = SkillLevelNumeric;
+            Value = string.IsNullOrWhiteSpace(value) ? $":{level}" : $"{value}:{level}";
+            OnPropertyChanged(nameof(SkillType));
+        }
+    }
+
+    [System.Text.Json.Serialization.JsonIgnore]
+    public string SkillLevelNumeric
+    {
+        get
+        {
+            var raw = _value?.ToString() ?? string.Empty;
+            var parts = raw.Split(':');
+            return parts.Length >= 2 ? parts[1] : string.Empty;
+        }
+        set
+        {
+            var type = SkillType;
+            // Clamp to non-negative integer in string form
+            if (!int.TryParse(value, out var parsed) || parsed < 0) parsed = 0;
+            Value = string.IsNullOrWhiteSpace(type) ? $":{parsed}" : $"{type}:{parsed}";
+            OnPropertyChanged(nameof(SkillLevelNumeric));
+        }
+    }
+
     [System.Text.Json.Serialization.JsonIgnore]
     public string VariableName
     {
@@ -195,6 +242,11 @@ public class ConversationCondition : INotifyPropertyChanged
                 return string.IsNullOrWhiteSpace(expected)
                     ? $"Variable {Operator} {name} (exists)"
                     : $"Variable '{name}' {Operator} {expected}";
+            }
+
+            if (Type == "PlayerSkill")
+            {
+                return $"PlayerSkill {Operator} {StringValue}";
             }
 
             return $"{Type} {Operator} {StringValue}";

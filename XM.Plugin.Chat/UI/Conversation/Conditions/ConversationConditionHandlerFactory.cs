@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Anvil.Services;
 using XM.Progression.Stat;
+using XM.Progression.Skill;
 using XM.Shared.Core.Conversation;
 
 namespace XM.Chat.UI.Conversation.Conditions
@@ -12,10 +13,12 @@ namespace XM.Chat.UI.Conversation.Conditions
     {
         private readonly Dictionary<ConversationConditionType, IConversationConditionHandler> _handlers;
         private readonly StatService _statService;
+        private readonly SkillService _skillService;
 
-        public ConversationConditionHandlerFactory(StatService statService)
+        public ConversationConditionHandlerFactory(StatService statService, SkillService skillService)
         {
             _statService = statService;
+            _skillService = skillService;
             _handlers = new Dictionary<ConversationConditionType, IConversationConditionHandler>();
         }
 
@@ -36,6 +39,7 @@ namespace XM.Chat.UI.Conversation.Conditions
             {
                 ConversationConditionType.PlayerLevel => CreatePlayerLevelHandler(),
                 ConversationConditionType.Variable => new VariableConditionHandler(),
+                ConversationConditionType.PlayerSkill => CreatePlayerSkillHandler(),
                 _ => null
             };
 
@@ -51,6 +55,15 @@ namespace XM.Chat.UI.Conversation.Conditions
         {
             var handler = new PlayerLevelConditionHandler();
             handler.Stat = _statService;
+            return handler;
+        }
+
+        private PlayerSkillConditionHandler CreatePlayerSkillHandler()
+        {
+            var handler = new PlayerSkillConditionHandler
+            {
+                Skill = _skillService
+            };
             return handler;
         }
     }

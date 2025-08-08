@@ -10,6 +10,7 @@ using XM.Shared.Core.Data;
 using XM.Chat.UI.Conversation.Actions;
 using XM.Chat.UI.Conversation.Conditions;
 using XM.Progression.Stat;
+using XM.Progression.Skill;
 
 namespace XM.Chat.UI.Conversation
 {
@@ -36,6 +37,9 @@ namespace XM.Chat.UI.Conversation
 
         [Inject]
         public ConversationActionHandlerFactory ActionHandlerFactory { get; set; }
+
+        [Inject]
+        public SkillService Skill { get; set; }
 
         /// <summary>
         /// The current conversation page being displayed.
@@ -105,8 +109,8 @@ namespace XM.Chat.UI.Conversation
 
         public override void OnOpen()
         {
-            // Initialize the condition handler factory with the injected StatService
-            _conditionHandlerFactory = new ConversationConditionHandlerFactory(Stat);
+            // Initialize the condition handler factory with injected services
+            _conditionHandlerFactory = new ConversationConditionHandlerFactory(Stat, Skill);
             
             // Get initial data
             var initialData = GetInitialData<ConversationInitialData>();

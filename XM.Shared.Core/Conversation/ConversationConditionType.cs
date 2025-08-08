@@ -5,5 +5,6 @@ namespace XM.Shared.Core.Conversation
         Invalid = 0,
         PlayerLevel = 1,
         Variable = 2,
+        PlayerSkill = 3,
     }
 } 
