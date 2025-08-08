@@ -14,6 +14,7 @@ namespace XM.Chat.UI.Conversation.Actions
 
         public ConversationActionHandlerFactory(IScriptDispatcher scriptDispatcher)
         {
+            if (scriptDispatcher is null) throw new System.ArgumentNullException(nameof(scriptDispatcher));
             _handlers = new Dictionary<ConversationActionType, IConversationActionHandler>
             {
                 { ConversationActionType.ChangePage, new ChangePageActionHandler() },

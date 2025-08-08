@@ -12,6 +12,7 @@ namespace XM.Chat.UI.Conversation.Conditions
     public class ConversationConditionHandlerFactory
     {
         private readonly Dictionary<ConversationConditionType, IConversationConditionHandler> _handlers;
+        private readonly object _syncRoot = new();
         private readonly StatService _statService;
         private readonly SkillService _skillService;
 
@@ -34,27 +35,34 @@ namespace XM.Chat.UI.Conversation.Conditions
                 return handler;
             }
 
-            // Create handler on-demand with dependency injection
-            handler = conditionType switch
+            lock (_syncRoot)
             {
-                ConversationConditionType.PlayerLevel => CreatePlayerLevelHandler(),
-                ConversationConditionType.Variable => new VariableConditionHandler(),
-                ConversationConditionType.PlayerSkill => CreatePlayerSkillHandler(),
-                _ => null
-            };
+                if (_handlers.TryGetValue(conditionType, out handler))
+                {
+                    return handler;
+                }
 
-            if (handler != null)
-            {
-                _handlers[conditionType] = handler;
+                // Create handler on-demand with dependency injection
+                handler = conditionType switch
+                {
+                    ConversationConditionType.PlayerLevel => CreatePlayerLevelHandler(),
+                    ConversationConditionType.Variable => new VariableConditionHandler(),
+                    ConversationConditionType.PlayerSkill => CreatePlayerSkillHandler(),
+                    _ => null
+                };
+
+                if (handler != null)
+                {
+                    _handlers[conditionType] = handler;
+                }
+
+                return handler;
             }
-
-            return handler;
         }
 
         private PlayerLevelConditionHandler CreatePlayerLevelHandler()
         {
-            var handler = new PlayerLevelConditionHandler();
-            handler.Stat = _statService;
+            var handler = new PlayerLevelConditionHandler(_statService);
             return handler;
         }
 

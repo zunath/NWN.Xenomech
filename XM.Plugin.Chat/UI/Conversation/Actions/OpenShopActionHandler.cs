@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XM.Shared.Core.Conversation;
 
 namespace XM.Chat.UI.Conversation.Actions
@@ -20,7 +21,13 @@ namespace XM.Chat.UI.Conversation.Actions
                 if(GetIsObjectValid(store))
                     OpenStore(store, player);
                 else 
-                    SendMessageToPC(player, $"ERROR: Could not find store: {shopId}");
+                {
+                    var safeShopId = new string((shopId ?? string.Empty).ToCharArray()
+                        .Where(ch => char.IsLetterOrDigit(ch) || ch == '_' || ch == '-' || ch == ' ')
+                        .ToArray());
+                    if (safeShopId.Length > 64) safeShopId = safeShopId.Substring(0, 64);
+                    SendMessageToPC(player, $"ERROR: Could not find store: {safeShopId}");
+                }
             }
         }
     }

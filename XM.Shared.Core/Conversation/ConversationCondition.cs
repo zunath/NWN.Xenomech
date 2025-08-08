@@ -8,19 +8,13 @@ namespace XM.Shared.Core.Conversation;
 public class ConversationCondition
 {
     [JsonPropertyName("type")]
-    public string Type { get; set; } = string.Empty;
-
-    [JsonIgnore]
-    public ConversationConditionType ConditionType
-    {
-        get => System.Enum.TryParse<ConversationConditionType>(Type, true, out var result) ? result : ConversationConditionType.Invalid;
-        set => Type = value.ToString();
-    }
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public ConversationConditionType ConditionType { get; set; } = ConversationConditionType.Invalid;
 
     [JsonPropertyName("operator")]
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public ComparisonOperator Operator { get; set; } = ComparisonOperator.Equal;
 
     [JsonPropertyName("value")]
-    public object Value { get; set; } = new();
+    public System.Text.Json.JsonElement Value { get; set; }
 } 

@@ -18,12 +18,14 @@ namespace XM.App.Editor.ViewModels;
     private ConversationPage? _subscribedPageForIdChanges;
     private readonly List<ConversationPage> _allSubscribedPages = new();
 
-    public ConversationEditorViewModel(IUserSettingsService userSettingsService)
+    public ConversationEditorViewModel(
+        IUserSettingsService userSettingsService,
+        ConversationService conversationService,
+        IConfirmationService confirmationService)
     {
         _userSettingsService = userSettingsService;
-        // Provide conversation directory via env or default; can be overridden later for tests/config
-        _conversationService = new ConversationService();
-        _confirmationService = new ConfirmationService();
+        _conversationService = conversationService;
+        _confirmationService = confirmationService;
         
         // Initialize commands
         CreateNewConversationCommand = new RelayCommand(CreateNewConversation);
@@ -104,18 +106,16 @@ namespace XM.App.Editor.ViewModels;
             }
 
             // Rewire page Id change subscription
-            if (_subscribedPageForIdChanges != null)
+            if (_subscribedPageForIdChanges is INotifyPropertyChanged oldInpc)
             {
-                if (_subscribedPageForIdChanges is INotifyPropertyChanged oldInpc)
-                {
-                    oldInpc.PropertyChanged -= OnSelectedPagePropertyChanged;
-                }
-                _subscribedPageForIdChanges = null;
+                oldInpc.PropertyChanged -= OnSelectedPagePropertyChanged;
             }
-            if (SelectedPageNode?.Page is INotifyPropertyChanged inpc)
+            _subscribedPageForIdChanges = null;
+            
+            if (SelectedPageNode?.Page is INotifyPropertyChanged newInpc)
             {
                 _subscribedPageForIdChanges = SelectedPageNode.Page;
-                inpc.PropertyChanged += OnSelectedPagePropertyChanged;
+                newInpc.PropertyChanged += OnSelectedPagePropertyChanged;
             }
             ((RelayCommand)AddResponseCommand).RaiseCanExecuteChanged();
             ((RelayCommand)DeleteNodeCommand).RaiseCanExecuteChanged();

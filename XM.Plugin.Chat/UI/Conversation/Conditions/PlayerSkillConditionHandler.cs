@@ -15,9 +15,6 @@ namespace XM.Chat.UI.Conversation.Conditions
         public SkillService Skill { get; set; }
         public bool EvaluateCondition(ConversationCondition condition, uint player)
         {
-            if (condition.Value == null)
-                return false;
-
             string raw;
             if (condition.Value is JsonElement jsonElement)
             {

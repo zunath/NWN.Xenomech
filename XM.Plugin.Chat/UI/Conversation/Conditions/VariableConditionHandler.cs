@@ -13,9 +13,6 @@ namespace XM.Chat.UI.Conversation.Conditions
     {
         public bool EvaluateCondition(ConversationCondition condition, uint player)
         {
-            if (condition.Value == null)
-                return false;
-
             string valueStr;
             
             // Handle JsonElement from JSON deserialization
@@ -134,8 +131,8 @@ namespace XM.Chat.UI.Conversation.Conditions
                         {
                             ComparisonOperator.Equal => currentStr == expectedValue,
                             ComparisonOperator.NotEqual => currentStr != expectedValue,
-                            ComparisonOperator.Contains => currentStr.Contains(expectedValue),
-                            ComparisonOperator.NotContains => !currentStr.Contains(expectedValue),
+                            ComparisonOperator.Contains => !string.IsNullOrEmpty(currentStr) && currentStr.Contains(expectedValue),
+                            ComparisonOperator.NotContains => string.IsNullOrEmpty(currentStr) || !currentStr.Contains(expectedValue),
                             _ => false
                         };
                     }

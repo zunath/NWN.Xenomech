@@ -11,13 +11,15 @@ namespace XM.Chat.UI.Conversation.Conditions
     /// </summary>
     public class PlayerLevelConditionHandler : IConversationConditionHandler
     {
-        public StatService Stat { get; set; }
+        private readonly StatService _statService;
+
+        public PlayerLevelConditionHandler(StatService statService)
+        {
+            _statService = statService ?? throw new ArgumentNullException(nameof(statService));
+        }
 
         public bool EvaluateCondition(ConversationCondition condition, uint player)
         {
-            if (condition.Value == null)
-                return false;
-
             int requiredLevel;
             
             // Handle JsonElement from JSON deserialization
@@ -34,11 +36,15 @@ namespace XM.Chat.UI.Conversation.Conditions
             }
             else
             {
-                // Handle direct integer values
-                requiredLevel = Convert.ToInt32(condition.Value);
+                // Handle direct integer/string values safely
+                var valueString = condition.Value.ToString();
+                if (!int.TryParse(valueString, out requiredLevel))
+                {
+                    return false;
+                }
             }
 
-            var playerLevel = Stat.GetLevel(player);
+            var playerLevel = _statService.GetLevel(player);
 
             return condition.Operator switch
             {

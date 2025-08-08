@@ -6,6 +6,7 @@ using System.IO;
 using System.Runtime;
 using System.Text.Json;
 using XM.Shared.Core.Configuration;
+using Microsoft.Extensions.Logging;
 using XM.Shared.Core.Conversation;
 using XM.UI;
 
@@ -18,14 +19,17 @@ namespace XM.Chat.UI.Conversation
     public class ConversationService
     {
         private readonly Dictionary<string, ConversationDefinition> _cachedConversations = new();
-        private readonly string _conversationDataPath = "anvil/Plugins/resources/conversations";
+        private readonly string _conversationDataPath;
         private readonly GuiService _guiService;
         private readonly XMSettingsService _settings;
+        private readonly ILogger<ConversationService> _logger;
 
-        public ConversationService(GuiService guiService, XMSettingsService settings)
+        public ConversationService(GuiService guiService, XMSettingsService settings, ILogger<ConversationService> logger)
         {
             _guiService = guiService;
             _settings = settings;
+            _logger = logger;
+            _conversationDataPath = Path.Combine(_settings.ResourcesDirectory, "conversations");
         }
 
         /// <summary>
@@ -35,7 +39,7 @@ namespace XM.Chat.UI.Conversation
         /// <returns>The loaded conversation definition, or null if not found.</returns>
         public ConversationDefinition LoadConversation(string conversationId)
         {
-            var fileName = _settings.ResourcesDirectory + $"conversations/{conversationId}.json";
+            var fileName = Path.Combine(_conversationDataPath, $"{conversationId}.json");
 
             // Check cache first
             if (_cachedConversations.ContainsKey(conversationId))
@@ -67,7 +71,7 @@ namespace XM.Chat.UI.Conversation
             catch (Exception ex)
             {
                 // Log error and return null
-                Console.WriteLine($"Error loading conversation {conversationId}: {ex.Message}");
+                _logger.LogError(ex, "Error loading conversation {ConversationId}", conversationId);
                 return null;
             }
         }
@@ -86,7 +90,7 @@ namespace XM.Chat.UI.Conversation
             var conversationDefinition = LoadConversation(conversationId);
             if (conversationDefinition == null)
             {
-                Console.WriteLine($"Failed to load conversation: {conversationId}");
+                _logger.LogWarning("Failed to load conversation {ConversationId}", conversationId);
                 return false;
             }
 
@@ -111,7 +115,7 @@ namespace XM.Chat.UI.Conversation
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error opening conversation window: {ex.Message}");
+                _logger.LogError(ex, "Error opening conversation window for {ConversationId} and player {Player}", conversationId, player);
                 return false;
             }
         }
@@ -160,7 +164,7 @@ namespace XM.Chat.UI.Conversation
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error getting available conversations: {ex.Message}");
+                _logger.LogError(ex, "Error getting available conversations from {Path}", _conversationDataPath);
             }
 
             return conversations;

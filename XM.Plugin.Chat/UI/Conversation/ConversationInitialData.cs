@@ -7,7 +7,7 @@ namespace XM.Chat.UI.Conversation
     /// </summary>
     public class ConversationInitialData
     {
-        public ConversationDefinition ConversationDefinition { get; set; }
+        public ConversationDefinition ConversationDefinition { get; set; } = new ConversationDefinition();
         public string NpcName { get; set; } = string.Empty;
         public string NpcPortrait { get; set; } = string.Empty;
     }

@@ -50,6 +50,15 @@ public partial class MainWindow : Window
         }
     }
 
+    protected override void OnUnloaded(RoutedEventArgs e)
+    {
+        if (DataContext is MainWindowViewModel viewModel)
+        {
+            viewModel.PropertyChanged -= OnViewModelPropertyChanged;
+        }
+        base.OnUnloaded(e);
+    }
+
     protected override void OnClosing(WindowClosingEventArgs e)
     {
         base.OnClosing(e);
@@ -158,7 +167,9 @@ public class MainWindowViewModel : INotifyPropertyChanged
             else
             {
                 // Show the conversation editor
-                ConversationEditorViewModel = new ViewModels.ConversationEditorViewModel(_userSettingsService);
+                var conversationService = new ConversationService();
+                var confirmationService = new ConfirmationService();
+                ConversationEditorViewModel = new ViewModels.ConversationEditorViewModel(_userSettingsService, conversationService, confirmationService);
                 IsConversationEditorVisible = true;
             }
     }

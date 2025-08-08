@@ -148,9 +148,7 @@ namespace XM.App.CLI
                     Console.WriteLine($"Successfully copied {Path.GetFileName(sourcePath)} on attempt {attempt}");
                     return;
                 }
-                catch (IOException ex) when (ex.Message.Contains("being used by another process") || 
-                                           ex.Message.Contains("The process cannot access the file") ||
-                                           ex.Message.Contains("Access is denied"))
+                catch (IOException ex) when (IsSharingOrLockViolation(ex))
                 {
                     if (attempt < maxRetries)
                     {
@@ -170,6 +168,16 @@ namespace XM.App.CLI
                     return;
                 }
             }
+        }
+
+        private static bool IsSharingOrLockViolation(IOException ex)
+        {
+            // HRESULT codes for sharing/lock violations
+            // ERROR_SHARING_VIOLATION: 0x20 (32) -> 0x80070020
+            // ERROR_LOCK_VIOLATION: 0x21 (33) -> 0x80070021
+            const int HR_ERROR_SHARING_VIOLATION = unchecked((int)0x80070020);
+            const int HR_ERROR_LOCK_VIOLATION = unchecked((int)0x80070021);
+            return ex.HResult == HR_ERROR_SHARING_VIOLATION || ex.HResult == HR_ERROR_LOCK_VIOLATION;
         }
 
         private static void CopyAll(DirectoryInfo source, DirectoryInfo target, string preventOverwriteFile, params string[] excludeFiles)
