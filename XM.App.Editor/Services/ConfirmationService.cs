@@ -33,9 +33,9 @@ public class ConfirmationService : IConfirmationService
         }
         else
         {
-            // Fallback if no owner window is available
-            await dialog.ShowDialog<bool>(null);
-            return false;
+            // Fallback if no owner window is available: still return the user's choice
+            var result = await dialog.ShowDialog<bool>(null);
+            return result;
         }
     }
 } 

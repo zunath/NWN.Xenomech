@@ -1,10 +1,12 @@
 using System.Text.Json;
 using System.Runtime.InteropServices;
+using Microsoft.Extensions.Logging;
 
 namespace XM.App.Editor.Services;
 
 public class UserSettingsService : IUserSettingsService
 {
+    private readonly ILogger<UserSettingsService> _logger;
     private readonly JsonSerializerOptions _jsonOptions = new()
     {
         WriteIndented = true,
@@ -17,8 +19,9 @@ public class UserSettingsService : IUserSettingsService
 
     public UserSettings Current { get; private set; } = new();
 
-    public UserSettingsService()
+    public UserSettingsService(ILogger<UserSettingsService> logger)
     {
+        _logger = logger;
         _settingsDirectory = GetAppDataDirectory();
         _settingsFilePath = Path.Combine(_settingsDirectory, "settings.json");
     }
@@ -39,8 +42,9 @@ public class UserSettingsService : IUserSettingsService
                 }
             }
         }
-        catch
+        catch (Exception ex)
         {
+            _logger.LogError(ex, "Failed to load user settings from {SettingsFile}. Using defaults.", _settingsFilePath);
             Current = new UserSettings();
         }
     }
@@ -53,9 +57,10 @@ public class UserSettingsService : IUserSettingsService
             var json = JsonSerializer.Serialize(Current, _jsonOptions);
             File.WriteAllText(_settingsFilePath, json);
         }
-        catch
+        catch (Exception ex)
         {
-            // Swallow errors to avoid crashing the editor due to settings persistence.
+            // Log but do not crash the editor due to settings persistence failures
+            _logger.LogError(ex, "Failed to save user settings to {SettingsFile}.", _settingsFilePath);
         }
     }
 

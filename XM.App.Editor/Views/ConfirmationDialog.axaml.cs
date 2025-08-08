@@ -7,6 +7,8 @@ public partial class ConfirmationDialog : Window
 {
     public ConfirmationDialog(string title, string message)
     {
+        if (title is null) throw new System.ArgumentNullException(nameof(title));
+        if (message is null) throw new System.ArgumentNullException(nameof(message));
         InitializeComponent();
         Title = title;
 

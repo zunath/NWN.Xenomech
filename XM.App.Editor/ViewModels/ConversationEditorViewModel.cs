@@ -21,6 +21,7 @@ namespace XM.App.Editor.ViewModels;
     public ConversationEditorViewModel(IUserSettingsService userSettingsService)
     {
         _userSettingsService = userSettingsService;
+        // Provide conversation directory via env or default; can be overridden later for tests/config
         _conversationService = new ConversationService();
         _confirmationService = new ConfirmationService();
         

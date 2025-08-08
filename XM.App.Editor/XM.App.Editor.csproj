@@ -15,11 +15,11 @@
     <PackageReference Include="Avalonia.Desktop" Version="11.0.10" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.10" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.10" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.0-preview.6.25358.103" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.0-preview.6.25358.103" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.0-preview.6.25358.103" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.0-preview.6.25358.103" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="10.0.0-preview.6.25358.103" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>

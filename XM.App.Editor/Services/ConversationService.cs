@@ -8,9 +8,15 @@ public class ConversationService
 {
     private readonly string _conversationsDirectory;
 
-    public ConversationService()
+    public ConversationService(string? conversationsDirectory = null)
     {
-        _conversationsDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "Data", "conversations");
+        // Prefer explicitly provided directory, otherwise use environment variable, then a sane default
+        var envDir = Environment.GetEnvironmentVariable("XM_CONVERSATIONS_DIR");
+        _conversationsDirectory = !string.IsNullOrWhiteSpace(conversationsDirectory)
+            ? conversationsDirectory!
+            : !string.IsNullOrWhiteSpace(envDir)
+                ? envDir!
+                : Path.Combine(AppContext.BaseDirectory, "Data", "conversations");
     }
 
     public List<string> GetConversationFiles()
@@ -54,6 +60,7 @@ public class ConversationService
         
         try
         {
+            Directory.CreateDirectory(_conversationsDirectory);
             var json = JsonSerializer.Serialize(conversation, new JsonSerializerOptions
             {
                 WriteIndented = true

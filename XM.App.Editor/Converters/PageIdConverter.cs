@@ -18,10 +18,18 @@ public class PageIdConverter : IValueConverter
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is string newPageId && parameter is ConversationPageNode)
+        if (value is string newPageId)
         {
+            if (parameter is ConversationPageNode pageNode)
+            {
+                pageNode.PageId = newPageId ?? string.Empty;
+                // Return the updated string so bindings expecting a string source still work
+                return pageNode.PageId;
+            }
+
             return newPageId;
         }
+
         return string.Empty;
     }
 }

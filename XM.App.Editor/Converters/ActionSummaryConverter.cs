@@ -13,14 +13,15 @@ public class ActionSummaryConverter : IValueConverter
     {
         if (value is ConversationAction action)
         {
-            return action.Type switch
+            var type = action.Type ?? string.Empty;
+            return type switch
             {
-                    "ExecuteScript" => $"Script: {action.ScriptId}",
-                    "Teleport" => $"Tag: {action.Tag}",
-                    "ChangePage" => $"Page: {action.PageId}",
-                "OpenShop" => $"Shop: {action.ShopId}",
-                "GiveItem" => $"Resref: {action.ItemId} x{action.Quantity}",
-                "StartQuest" => $"Quest: {action.QuestId}",
+                "ExecuteScript" => $"Script: {action.ScriptId ?? string.Empty}",
+                "Teleport" => $"Tag: {action.Tag ?? string.Empty}",
+                "ChangePage" => $"Page: {action.PageId ?? string.Empty}",
+                "OpenShop" => $"Shop: {action.ShopId ?? string.Empty}",
+                "GiveItem" => $"Resref: {action.ItemId ?? string.Empty} x{(action.Quantity ?? "0")}",
+                "StartQuest" => $"Quest: {action.QuestId ?? string.Empty}",
                 "EndConversation" => "End conversation",
                 _ => "Unknown Action"
             };

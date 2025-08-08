@@ -15,6 +15,15 @@
     </application>
   </compatibility>
   
+  <!-- UAC: Explicitly specify execution level to avoid virtualization issues -->
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
+    <security>
+      <requestedPrivileges>
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  
   <!-- Indicates that the application is DPI-aware and will not be automatically scaled by Windows at higher DPI. -->
   <application xmlns="urn:schemas-microsoft-com:asm.v3">
     <windowsSettings>
