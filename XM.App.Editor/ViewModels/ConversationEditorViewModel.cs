@@ -501,13 +501,14 @@ namespace XM.App.Editor.ViewModels;
     private void CreateNewConversation()
     {
         // TODO: Show dialog to get conversation details
+        var ticks = DateTime.Now.Ticks;
         var newConversation = _conversationService.CreateNewConversation(
-            "new_conversation_" + DateTime.Now.Ticks,
+            "new_conversation_" + ticks,
             "New Conversation",
             "A new conversation"
         );
 
-        var fileName = $"new_conversation_{DateTime.Now.Ticks}";
+        var fileName = $"new_conversation_{ticks}";
         if (_conversationService.SaveConversation(fileName, newConversation))
         {
             LoadConversationFiles();
@@ -588,6 +589,10 @@ namespace XM.App.Editor.ViewModels;
             Text = "New Response"
         };
 
+        if (SelectedPageNode.Page.Responses == null)
+        {
+            SelectedPageNode.Page.Responses = new List<ConversationResponse>();
+        }
         SelectedPageNode.Page.Responses.Add(newResponse);
         BuildConversationTree();
             RefreshAvailablePageIds();
@@ -733,6 +738,10 @@ namespace XM.App.Editor.ViewModels;
             Type = "OpenShop"
         };
 
+        if (SelectedResponseNode.Response.Actions == null)
+        {
+            SelectedResponseNode.Response.Actions = new ObservableCollection<ConversationAction>();
+        }
         SelectedResponseNode.Response.Actions.Add(newAction);
         SelectedAction = newAction; // Select the new action
         OnPropertyChanged(nameof(SelectedResponseNode));
@@ -756,6 +765,10 @@ namespace XM.App.Editor.ViewModels;
             Value = 1
         };
 
+        if (SelectedResponseNode.Response.Conditions == null)
+        {
+            SelectedResponseNode.Response.Conditions = new ObservableCollection<ConversationCondition>();
+        }
         SelectedResponseNode.Response.Conditions.Add(newCondition);
         SelectedCondition = newCondition;
         OnPropertyChanged(nameof(SelectedResponseNode));
