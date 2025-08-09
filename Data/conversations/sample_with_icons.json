@@ -10,7 +10,7 @@
       "header": "Welcome, traveler. What do you need?",
       "responses": [
         {
-          "icon": "resp_speech",
+          "icon": "Blank",
           "text": "Show me your wares.",
           "conditions": [],
           "actions": [

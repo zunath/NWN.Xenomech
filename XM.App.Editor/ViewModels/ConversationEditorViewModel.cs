@@ -148,16 +148,24 @@ public class ConversationEditorViewModel : INotifyPropertyChanged, IDisposable
         get
         {
             var iconName = SelectedResponseNode?.Response.Icon ?? string.Empty;
-            // Normalize (strip .tga if present)
+                // Normalize (strip .tga if present)
             if (iconName.EndsWith(".tga", StringComparison.OrdinalIgnoreCase))
                 iconName = iconName[..^4];
+                // Map stored "Blank" to empty option in UI
+                if (string.Equals(iconName, "Blank", StringComparison.OrdinalIgnoreCase))
+                    iconName = string.Empty;
             return AvailableResponseIcons.FirstOrDefault(x => string.Equals(x.Name, iconName, StringComparison.OrdinalIgnoreCase));
         }
         set
         {
             if (SelectedResponseNode == null)
                 return;
-            var newName = value?.Name ?? string.Empty;
+                var newName = value?.Name ?? string.Empty;
+                // When empty option is selected, persist as "Blank"
+                if (string.IsNullOrEmpty(newName))
+                {
+                    newName = "Blank";
+                }
             if (!string.Equals(SelectedResponseNode.Response.Icon, newName, StringComparison.Ordinal))
             {
                 SelectedResponseNode.Response.Icon = newName; // store without .tga
@@ -287,6 +295,10 @@ public class ConversationEditorViewModel : INotifyPropertyChanged, IDisposable
             if (string.IsNullOrEmpty(repoRoot))
                 return;
             var guiPath = Path.Combine(repoRoot!, "Content", "xm_gui");
+
+            // Add an empty option at the top (represents "Blank" in saved JSON)
+            var emptyBitmap = new WriteableBitmap(new PixelSize(24, 24), new Vector(96, 96), PixelFormat.Rgba8888, AlphaFormat.Unpremul);
+            AvailableResponseIcons.Add(new IconOption { Name = string.Empty, Image = emptyBitmap });
             var names = new[] { "resp_check", "resp_exclaim", "resp_question", "resp_speech", "resp_x" };
             foreach (var name in names)
             {
