@@ -205,16 +205,32 @@
                              <TextBlock Text="Player Option" FontWeight="Bold" Margin="0,0,0,10"/>
                              <Grid>
                                  <Grid.RowDefinitions>
-                                     <RowDefinition Height="Auto"/>
+                                      <RowDefinition Height="Auto"/>
+                                      <RowDefinition Height="Auto"/>
                                  </Grid.RowDefinitions>
                                  <Grid.ColumnDefinitions>
                                      <ColumnDefinition Width="100"/>
                                      <ColumnDefinition Width="*"/>
                                  </Grid.ColumnDefinitions>
 
-                                                                   <TextBlock Grid.Row="0" Grid.Column="0" Text="Player Text:" VerticalAlignment="Top" Margin="0,5,0,0"/>
-                                  <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedResponseNode.Response.Text}" 
+                                  <TextBlock Grid.Row="0" Grid.Column="0" Text="Player Text:" VerticalAlignment="Top" Margin="0,5,0,0"/>
+                                  <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedResponseNode.Response.Text}"
                                            Margin="5" AcceptsReturn="True" Height="120" TextWrapping="Wrap"/>
+
+                                  <TextBlock Grid.Row="1" Grid.Column="0" Text="Icon:" VerticalAlignment="Center" Margin="0,5,0,0"/>
+                                  <ComboBox Grid.Row="1" Grid.Column="1"
+                                            ItemsSource="{Binding AvailableResponseIcons}"
+                                            SelectedItem="{Binding SelectedResponseIcon, Mode=TwoWay}"
+                                            Margin="5" MinHeight="32">
+                                      <ComboBox.ItemTemplate>
+                                          <DataTemplate>
+                                              <StackPanel Orientation="Horizontal" Spacing="8">
+                                                  <Image Source="{Binding Image}" Width="24" Height="24"/>
+                                                  <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                                              </StackPanel>
+                                          </DataTemplate>
+                                      </ComboBox.ItemTemplate>
+                                  </ComboBox>
                              </Grid>
                          </StackPanel>
                      </Border>

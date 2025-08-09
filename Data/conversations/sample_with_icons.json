@@ -1,0 +1,64 @@
+{
+  "metadata": {
+    "id": "sample_with_icons",
+    "name": "Sample With Icons",
+    "description": "Demonstrates response icons.",
+    "portrait": "po_hu_m_99_l"
+  },
+  "conversation": {
+    "root": {
+      "header": "Welcome, traveler. What do you need?",
+      "responses": [
+        {
+          "icon": "Blank",
+          "text": "Show me your wares.",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "OpenShop",
+              "parameters": {
+                "shopId": "GeneralStore"
+              }
+            }
+          ],
+          "next": null
+        },
+        {
+          "icon": "resp_question",
+          "text": "Where am I?",
+          "conditions": [],
+          "actions": [],
+          "next": {
+            "header": "You\u0027re in Port Aria, jewel of the coast.",
+            "responses": [
+              {
+                "icon": "resp_speech",
+                "text": "Thanks.",
+                "conditions": [],
+                "actions": [
+                  {
+                    "type": "EndConversation",
+                    "parameters": {}
+                  }
+                ],
+                "next": null
+              }
+            ]
+          }
+        },
+        {
+          "icon": "resp_x",
+          "text": "Goodbye.",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "EndConversation",
+              "parameters": {}
+            }
+          ],
+          "next": null
+        }
+      ]
+    }
+  }
+}

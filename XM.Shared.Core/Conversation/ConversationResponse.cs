@@ -8,6 +8,9 @@ namespace XM.Shared.Core.Conversation;
 /// </summary>
 public class ConversationResponse
 {
+    [JsonPropertyName("icon")]
+    public string Icon { get; set; } = string.Empty;
+
     [JsonPropertyName("text")]
     public string Text { get; set; } = string.Empty;
 
