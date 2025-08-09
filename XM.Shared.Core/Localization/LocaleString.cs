@@ -1575,8 +1575,9 @@ namespace XM.Shared.Core.Localization
         Repair = 2337,
         SelectAnItem = 2338,
         InsufficientCredits = 2339,
-        Conversation = 2340,
-        conversation = 2341,
-        TestConversationSystem = 2342,
+        RepairAmount = 2340,
+        RepairCostXCredits = 2341,
+        RepairConfirmationPartial = 2342,
+        NothingToRepair = 2343,
     }
 }

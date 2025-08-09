@@ -9347,15 +9347,19 @@
     },
     {
       "id": 2340,
-      "text": "Conversation"
+      "text": "Repair Amount"
     },
     {
       "id": 2341,
-      "text": "conversation"
+      "text": "Cost: {0} cr"
     },
     {
       "id": 2342,
-      "text": "Test conversation"
+      "text": "Are you sure you want to repair {0} durability for {1} credits?"
+    },
+    {
+      "id": 2343,
+      "text": "Nothing to repair."
     }
   ]
 }

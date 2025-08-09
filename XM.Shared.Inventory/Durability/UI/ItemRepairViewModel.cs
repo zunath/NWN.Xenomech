@@ -50,12 +50,40 @@ namespace XM.Inventory.Durability.UI
             set => Set(value);
         }
 
+        public int SelectedRepairPoints
+        {
+            get => Get<int>();
+            set
+            {
+                Set(value);
+                UpdatePrice();
+            }
+        }
+
+        public int MinRepairPoints
+        {
+            get => Get<int>();
+            set => Set(value);
+        }
+
+        public int MaxRepairPoints
+        {
+            get => Get<int>();
+            set => Set(value);
+        }
+
         public override void OnOpen()
         {
             ItemIconResref = BlankTexture;
             IsRepairButtonEnabled = false;
             Name = LocaleString.SelectAnItem.ToLocalizedString();
             RepairButtonText = LocaleString.Repair.ToLocalizedString();
+            Price = string.Empty;
+            MinRepairPoints = 0;
+            MaxRepairPoints = 0;
+            SelectedRepairPoints = 0;
+
+            WatchOnClient(model => model.SelectedRepairPoints);
         }
 
         public override void OnClose()
@@ -65,11 +93,25 @@ namespace XM.Inventory.Durability.UI
 
         private int CalculateCost()
         {
-            var durability = new ItemDurability(_item);
-            var pointsToRepair = durability.MaxDurability - durability.CurrentDurability;
+            var pointsToRepair = SelectedRepairPoints;
+            if (pointsToRepair < 0)
+                pointsToRepair = 0;
             var cost = PricePerRepairPoint * pointsToRepair;
 
             return cost;
+        }
+
+        private void UpdatePrice()
+        {
+            var cost = CalculateCost();
+            if (cost <= 0)
+            {
+                Price = string.Empty;
+            }
+            else
+            {
+                Price = LocaleString.RepairCostXCredits.ToLocalizedString(cost);
+            }
         }
 
         public Action OnSelectItem() => () =>
@@ -97,10 +139,12 @@ namespace XM.Inventory.Durability.UI
                 _item = item;
                 Name = $"{GetName(item)} ({durability.CurrentDurability} / {durability.MaxDurability})";
 
-                var cost = CalculateCost();
-                Price = $"{cost}" + LocaleString.cr;
+                MinRepairPoints = 1;
+                MaxRepairPoints = durability.MaxDurability - durability.CurrentDurability;
+                SelectedRepairPoints = MaxRepairPoints;
 
-                RepairButtonText = LocaleString.RepairXCredits.ToLocalizedString(cost);
+                UpdatePrice();
+
                 IsRepairButtonEnabled = true;
                 RepairButtonText = LocaleString.Repair.ToLocalizedString();
             });
@@ -109,7 +153,7 @@ namespace XM.Inventory.Durability.UI
         public Action OnRepairItem() => () =>
         {
             var price = CalculateCost();
-            var prompt = LocaleString.RepairConfirmation.ToLocalizedString(price);
+            var prompt = LocaleString.RepairConfirmationPartial.ToLocalizedString(SelectedRepairPoints, price);
             ShowModal(prompt, () =>
             {
                 price = CalculateCost();
@@ -124,12 +168,26 @@ namespace XM.Inventory.Durability.UI
                 AssignCommand(Player, () => TakeGoldFromCreature(price, Player, true));
 
                 var durability = new ItemDurability(_item);
-                ItemDurability.RestoreDurability(Player, _item, durability.MaxDurability);
+                var maxPossible = durability.MaxDurability - durability.CurrentDurability;
+                var toRepair = SelectedRepairPoints;
+                if (toRepair > maxPossible) toRepair = maxPossible;
+                if (toRepair < 0) toRepair = 0;
+                if (toRepair == 0)
+                {
+                    var msg = LocaleString.NothingToRepair.ToLocalizedString();
+                    SendMessageToPC(Player, msg);
+                    return;
+                }
+                ItemDurability.RestoreDurability(Player, _item, toRepair);
 
                 _item = OBJECT_INVALID;
                 IsRepairButtonEnabled = false;
                 ItemIconResref = BlankTexture;
                 Name = LocaleString.SelectAnItem.ToLocalizedString();
+                Price = string.Empty;
+                MinRepairPoints = 0;
+                MaxRepairPoints = 0;
+                SelectedRepairPoints = 0;
             });
         };
     }
