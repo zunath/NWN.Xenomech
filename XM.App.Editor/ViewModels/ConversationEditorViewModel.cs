@@ -3,11 +3,15 @@ using System.ComponentModel;
 using System.Windows.Input;
 using System.Linq;
 using XM.App.Editor.Models;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
+using StbImageSharp;
+using System.Runtime.InteropServices;
 using XM.App.Editor.Services;
 
 namespace XM.App.Editor.ViewModels;
 
-    public class ConversationEditorViewModel : INotifyPropertyChanged, IDisposable
+public class ConversationEditorViewModel : INotifyPropertyChanged, IDisposable
 {
     private readonly ConversationService _conversationService;
     private readonly IConfirmationService _confirmationService;
@@ -18,6 +22,8 @@ namespace XM.App.Editor.ViewModels;
     private ConversationPage? _subscribedPageForIdChanges;
     private readonly List<ConversationPage> _allSubscribedPages = new();
 
+    public ObservableCollection<IconOption> AvailableResponseIcons { get; } = new();
+
     public ConversationEditorViewModel(
         IUserSettingsService userSettingsService,
         ConversationService conversationService,
@@ -26,7 +32,9 @@ namespace XM.App.Editor.ViewModels;
         _userSettingsService = userSettingsService;
         _conversationService = conversationService;
         _confirmationService = confirmationService;
-        
+        // Load icon options
+        LoadResponseIcons();
+
         // Initialize commands
         CreateNewConversationCommand = new RelayCommand(CreateNewConversation);
         DeleteConversationCommand = new RelayCommand(DeleteConversation, CanDeleteConversation);
@@ -43,7 +51,7 @@ namespace XM.App.Editor.ViewModels;
         MoveActionDownCommand = new RelayCommand<ConversationAction>(MoveActionDown, CanMoveActionDown);
         AddNextNpcCommand = new RelayCommand(AddNextNpc, CanAddNextNpc);
         DeleteNextNpcCommand = new RelayCommand(DeleteNextNpc, CanDeleteNextNpc);
-        
+
         // Load conversation files
         LoadConversationFiles();
 
@@ -98,6 +106,7 @@ namespace XM.App.Editor.ViewModels;
             OnPropertyChanged(nameof(SelectedNode));
             OnPropertyChanged(nameof(SelectedPageNode));
             OnPropertyChanged(nameof(SelectedResponseNode));
+            OnPropertyChanged(nameof(SelectedResponseIcon));
 
             // If a different node is selected, clear the selected action so the Action Details panel hides
             if (SelectedAction != null)
@@ -111,7 +120,7 @@ namespace XM.App.Editor.ViewModels;
                 oldInpc.PropertyChanged -= OnSelectedPagePropertyChanged;
             }
             _subscribedPageForIdChanges = null;
-            
+
             if (SelectedPageNode?.Page is INotifyPropertyChanged newInpc)
             {
                 _subscribedPageForIdChanges = SelectedPageNode.Page;
@@ -133,6 +142,31 @@ namespace XM.App.Editor.ViewModels;
 
     public ConversationPageNode? SelectedPageNode => SelectedNode as ConversationPageNode;
     public ConversationResponseNode? SelectedResponseNode => SelectedNode as ConversationResponseNode;
+
+    public IconOption? SelectedResponseIcon
+    {
+        get
+        {
+            var iconName = SelectedResponseNode?.Response.Icon ?? string.Empty;
+            // Normalize (strip .tga if present)
+            if (iconName.EndsWith(".tga", StringComparison.OrdinalIgnoreCase))
+                iconName = iconName[..^4];
+            return AvailableResponseIcons.FirstOrDefault(x => string.Equals(x.Name, iconName, StringComparison.OrdinalIgnoreCase));
+        }
+        set
+        {
+            if (SelectedResponseNode == null)
+                return;
+            var newName = value?.Name ?? string.Empty;
+            if (!string.Equals(SelectedResponseNode.Response.Icon, newName, StringComparison.Ordinal))
+            {
+                SelectedResponseNode.Response.Icon = newName; // store without .tga
+                OnPropertyChanged(nameof(SelectedResponseIcon));
+                OnPropertyChanged(nameof(SelectedResponseNode));
+                OnPropertyChanged(nameof(SelectedResponseNode.Response));
+            }
+        }
+    }
 
     private ConversationAction? _selectedAction;
     public ConversationAction? SelectedAction
@@ -165,15 +199,15 @@ namespace XM.App.Editor.ViewModels;
             {
                 _selectedCondition = value;
                 OnPropertyChanged(nameof(SelectedCondition));
-                    // Ensure operator is valid/displayable when a condition is selected
-                    if (_selectedCondition != null)
+                // Ensure operator is valid/displayable when a condition is selected
+                if (_selectedCondition != null)
+                {
+                    var ops = _selectedCondition.AvailableOperators;
+                    if (string.IsNullOrWhiteSpace(_selectedCondition.Operator) || !ops.Contains(_selectedCondition.Operator))
                     {
-                        var ops = _selectedCondition.AvailableOperators;
-                        if (string.IsNullOrWhiteSpace(_selectedCondition.Operator) || !ops.Contains(_selectedCondition.Operator))
-                        {
-                            _selectedCondition.Operator = ops.FirstOrDefault() ?? "Equal";
-                        }
+                        _selectedCondition.Operator = ops.FirstOrDefault() ?? "Equal";
                     }
+                }
                 ((RelayCommand)DeleteConditionCommand).RaiseCanExecuteChanged();
             }
         }
@@ -185,7 +219,7 @@ namespace XM.App.Editor.ViewModels;
     {
         "ChangePage",
         "OpenShop",
-        "GiveItem", 
+        "GiveItem",
         "StartQuest",
         "Teleport",
         "ExecuteScript",
@@ -244,6 +278,84 @@ namespace XM.App.Editor.ViewModels;
         }
     }
 
+    private void LoadResponseIcons()
+    {
+        try
+        {
+            AvailableResponseIcons.Clear();
+            var repoRoot = FindRepoRootForImages(AppContext.BaseDirectory) ?? FindRepoRootForImages(Directory.GetCurrentDirectory());
+            if (string.IsNullOrEmpty(repoRoot))
+                return;
+            var guiPath = Path.Combine(repoRoot!, "Content", "xm_gui");
+            var names = new[] { "resp_check", "resp_exclaim", "resp_question", "resp_speech", "resp_x" };
+            foreach (var name in names)
+            {
+                var tgaFile = Path.Combine(guiPath, name + ".tga");
+                if (!File.Exists(tgaFile))
+                    continue;
+                var bitmap = LoadBitmapFromTga(tgaFile);
+                if (bitmap != null)
+                {
+                    AvailableResponseIcons.Add(new IconOption { Name = name, Image = bitmap });
+                }
+            }
+        }
+        catch
+        {
+            // Ignore icon load failures; UI will fallback to text
+        }
+    }
+
+    private static Bitmap? LoadBitmapFromTga(string filePath)
+    {
+        try
+        {
+            using var fs = File.OpenRead(filePath);
+            var result = ImageResult.FromStream(fs, ColorComponents.RedGreenBlueAlpha);
+            var pixelSize = new PixelSize(result.Width, result.Height);
+            var wb = new WriteableBitmap(pixelSize, new Vector(96, 96), PixelFormat.Rgba8888, AlphaFormat.Unpremul);
+            using var fb = wb.Lock();
+            var stride = fb.RowBytes;
+            // If stride matches width*4, can copy in one go; else row by row
+            if (stride == result.Width * 4)
+            {
+                Marshal.Copy(result.Data, 0, fb.Address, result.Data.Length);
+            }
+            else
+            {
+                for (int y = 0; y < result.Height; y++)
+                {
+                    var srcOffset = y * result.Width * 4;
+                    var dstPtr = fb.Address + y * stride;
+                    Marshal.Copy(result.Data, srcOffset, dstPtr, result.Width * 4);
+                }
+            }
+            return wb;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static string? FindRepoRootForImages(string startPath)
+    {
+        try
+        {
+            var dirInfo = new DirectoryInfo(startPath);
+            for (int i = 0; i < 10 && dirInfo != null; i++)
+            {
+                var sln = Path.Combine(dirInfo.FullName, "Xenomech.sln");
+                var contentDir = Path.Combine(dirInfo.FullName, "Content", "xm_gui");
+                if (File.Exists(sln) && Directory.Exists(contentDir))
+                    return dirInfo.FullName;
+                dirInfo = dirInfo.Parent;
+            }
+        }
+        catch { }
+        return null;
+    }
+
     private void LoadSelectedConversation()
     {
         if (string.IsNullOrEmpty(SelectedConversationFile))
@@ -253,6 +365,11 @@ namespace XM.App.Editor.ViewModels;
         }
 
         CurrentConversation = _conversationService.LoadConversation(SelectedConversationFile);
+        // Normalize any legacy icon values to exclude .tga extension
+        if (CurrentConversation?.Conversation.Root != null)
+        {
+            NormalizeIconsRecursive(CurrentConversation.Conversation.Root);
+        }
     }
 
     private void BuildConversationTree()
@@ -338,7 +455,7 @@ namespace XM.App.Editor.ViewModels;
 
                 if (response.Next != null)
                 {
-                    var childPageId = $"{pageId}.{i+1}";
+                    var childPageId = $"{pageId}.{i + 1}";
                     var child = BuildTreeRecursive(response.Next, childPageId);
                     responseNode.Children.Add(child);
                 }
@@ -555,12 +672,35 @@ namespace XM.App.Editor.ViewModels;
         if (string.IsNullOrEmpty(SelectedConversationFile) || CurrentConversation == null)
             return;
 
+        // Ensure icons are saved without .tga extension
+        if (CurrentConversation.Conversation.Root != null)
+        {
+            NormalizeIconsRecursive(CurrentConversation.Conversation.Root);
+        }
         _conversationService.SaveConversation(SelectedConversationFile, CurrentConversation);
     }
 
     private bool CanSaveConversation()
     {
         return !string.IsNullOrEmpty(SelectedConversationFile) && CurrentConversation != null;
+    }
+
+    private static void NormalizeIconsRecursive(ConversationPage page)
+    {
+        if (page.Responses == null)
+            return;
+        for (int i = 0; i < page.Responses.Count; i++)
+        {
+            var resp = page.Responses[i];
+            if (!string.IsNullOrWhiteSpace(resp.Icon) && resp.Icon.EndsWith(".tga", StringComparison.OrdinalIgnoreCase))
+            {
+                resp.Icon = resp.Icon[..^4];
+            }
+            if (resp.Next != null)
+            {
+                NormalizeIconsRecursive(resp.Next);
+            }
+        }
     }
 
     private void AddPage()
@@ -571,7 +711,7 @@ namespace XM.App.Editor.ViewModels;
         var newPage = new ConversationPage { Header = "New Page" };
         CurrentConversation.Conversation.Root = newPage;
         BuildConversationTree();
-            RefreshAvailablePageIds();
+        RefreshAvailablePageIds();
     }
 
     private bool CanAddPage()
@@ -595,7 +735,7 @@ namespace XM.App.Editor.ViewModels;
         }
         SelectedPageNode.Page.Responses.Add(newResponse);
         BuildConversationTree();
-            RefreshAvailablePageIds();
+        RefreshAvailablePageIds();
     }
 
     private bool CanAddResponse()
@@ -715,8 +855,8 @@ namespace XM.App.Editor.ViewModels;
         if (node is ConversationPageNode pn)
             yield return pn;
         foreach (var child in node.Children)
-        foreach (var pnChild in GetAllPageNodes(child))
-            yield return pnChild;
+            foreach (var pnChild in GetAllPageNodes(child))
+                yield return pnChild;
     }
 
     private IEnumerable<ConversationResponseNode> GetAllResponseNodes(ConversationTreeNode node)
@@ -724,8 +864,8 @@ namespace XM.App.Editor.ViewModels;
         if (node is ConversationResponseNode rn)
             yield return rn;
         foreach (var child in node.Children)
-        foreach (var rnChild in GetAllResponseNodes(child))
-            yield return rnChild;
+            foreach (var rnChild in GetAllResponseNodes(child))
+                yield return rnChild;
     }
 
     private void AddAction()
@@ -835,7 +975,7 @@ namespace XM.App.Editor.ViewModels;
 
         var actions = SelectedResponseNode.Response.Actions;
         var currentIndex = actions.IndexOf(actionToMove);
-        
+
         if (currentIndex > 0)
         {
             actions.Move(currentIndex, currentIndex - 1);
@@ -861,7 +1001,7 @@ namespace XM.App.Editor.ViewModels;
 
         var actions = SelectedResponseNode.Response.Actions;
         var currentIndex = actions.IndexOf(actionToMove);
-        
+
         if (currentIndex < actions.Count - 1)
         {
             actions.Move(currentIndex, currentIndex + 1);
@@ -896,7 +1036,7 @@ namespace XM.App.Editor.ViewModels;
                 }
             };
             BuildConversationTree();
-                RefreshAvailablePageIds();
+            RefreshAvailablePageIds();
         }
     }
 
@@ -912,7 +1052,7 @@ namespace XM.App.Editor.ViewModels;
 
         SelectedResponseNode.Response.Next = null;
         BuildConversationTree();
-            RefreshAvailablePageIds();
+        RefreshAvailablePageIds();
     }
 
     private bool CanDeleteNextNpc()
@@ -944,4 +1084,4 @@ namespace XM.App.Editor.ViewModels;
         }
         _allSubscribedPages.Clear();
     }
-} 
+}

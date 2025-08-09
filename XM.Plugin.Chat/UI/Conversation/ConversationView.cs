@@ -5,6 +5,7 @@ using XM.UI;
 using XM.UI.Builder;
 using XM.UI.Builder.Layout;
 using NuiAspect = XM.Shared.API.NUI.NuiAspect;
+using NuiScrollbars = XM.Shared.API.NUI.NuiScrollbars;
 
 namespace XM.Chat.UI.Conversation
 {
@@ -90,6 +91,30 @@ namespace XM.Chat.UI.Conversation
             {
                 col.AddList(list =>
                 {
+                    list.RowHeight(32f);
+                    list.Scrollbars(NuiScrollbars.None);
+
+                    list.AddTemplateCell(template =>
+                    {
+                        template.Width(32f);
+                        template.IsVariable(false);
+
+                        template.AddGroup(group =>
+                        {
+                            group.SetLayout(layout =>
+                            {
+                                layout.AddImage(image =>
+                                {
+                                    image
+                                        .ResRef(model => model.AvailableResponseIcons)
+                                        .HorizontalAlign(NuiHAlign.Center)
+                                        .VerticalAlign(NuiVAlign.Middle)
+                                        .ImageAspect(NuiAspect.Exact);
+                                });
+                            });
+                        });
+                    });
+
                     list.AddTemplateCell(template =>
                     {
                         template.AddRow(row2 =>

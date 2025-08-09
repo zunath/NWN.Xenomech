@@ -15,6 +15,7 @@
     <PackageReference Include="Avalonia.Desktop" Version="11.3.3" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.3" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.3" />
+    <PackageReference Include="StbImageSharp" Version="2.27.12" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.8" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.8" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.8" />
@@ -26,6 +27,10 @@
     <ProjectReference Include="..\XM.Shared.API\XM.Shared.API.csproj" />
     <ProjectReference Include="..\XM.Shared.Core\XM.Shared.Core.csproj" />
     <ProjectReference Include="..\XM.Shared.UI\XM.Shared.UI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Resources\**\*.*" />
   </ItemGroup>
 
   <ItemGroup>

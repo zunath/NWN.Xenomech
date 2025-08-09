@@ -84,9 +84,18 @@ namespace XM.Chat.UI.Conversation
         }
 
         /// <summary>
-        /// Available response options for the current page.
+        /// Available response option labels.
         /// </summary>
         public XMBindingList<string> AvailableResponses
+        {
+            get => Get<XMBindingList<string>>();
+            set => Set(value);
+        }
+
+        /// <summary>
+        /// Optional icons for each available response.
+        /// </summary>
+        public XMBindingList<string> AvailableResponseIcons
         {
             get => Get<XMBindingList<string>>();
             set => Set(value);
@@ -104,6 +113,7 @@ namespace XM.Chat.UI.Conversation
         public ConversationViewModel()
         {
             AvailableResponses = new XMBindingList<string>();
+            AvailableResponseIcons = new XMBindingList<string>();
             _responseObjects = new List<ConversationResponse>();
         }
 
@@ -217,6 +227,7 @@ namespace XM.Chat.UI.Conversation
             if (CurrentPage?.Responses == null)
             {
                 AvailableResponses.Clear();
+                AvailableResponseIcons.Clear();
                 _responseObjects.Clear();
                 return;
             }
@@ -227,11 +238,13 @@ namespace XM.Chat.UI.Conversation
                 .ToList();
 
             AvailableResponses.Clear();
+            AvailableResponseIcons.Clear();
             _responseObjects.Clear();
             
             foreach (var response in availableResponses)
             {
                 AvailableResponses.Add(response.Text);
+                AvailableResponseIcons.Add(response.Icon ?? "Blank");
                 _responseObjects.Add(response);
             }
         }
