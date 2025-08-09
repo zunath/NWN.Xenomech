@@ -28,6 +28,25 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Build dependencies to ensure all projects rebuild when Runner is built/run -->
+    <ProjectReference Include="..\XM.Plugin.Chat\XM.Plugin.Chat.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\XM.Plugin.Area\XM.Plugin.Area.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\XM.Plugin.Combat\XM.Plugin.Combat.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\XM.Plugin.Item\XM.Plugin.Item.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\XM.Plugin.Spawn\XM.Plugin.Spawn.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\XM.Plugin.Quest\XM.Plugin.Quest.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\XM.Plugin.Migration\XM.Plugin.Migration.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\XM.Plugin.Administration\XM.Plugin.Administration.csproj" ReferenceOutputAssembly="false" />
+
+    <ProjectReference Include="..\XM.Shared.API\XM.Shared.API.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\XM.Shared.Core\XM.Shared.Core.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\XM.Shared.Inventory\XM.Shared.Inventory.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\XM.Shared.Progression\XM.Shared.Progression.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\XM.Shared.UI\XM.Shared.UI.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\XM.Shared.AI\XM.Shared.AI.csproj" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="cd $(SolutionDir)Tools\&#xD;&#xA;XM.App.CLI.exe -o" />
   </Target>
