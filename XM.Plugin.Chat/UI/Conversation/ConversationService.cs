@@ -6,7 +6,7 @@ using System.IO;
 using System.Runtime;
 using System.Text.Json;
 using XM.Shared.Core.Configuration;
-using Microsoft.Extensions.Logging;
+using NLog;
 using XM.Shared.Core.Conversation;
 using XM.UI;
 
@@ -22,13 +22,12 @@ namespace XM.Chat.UI.Conversation
         private readonly string _conversationDataPath;
         private readonly GuiService _guiService;
         private readonly XMSettingsService _settings;
-        private readonly ILogger<ConversationService> _logger;
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-        public ConversationService(GuiService guiService, XMSettingsService settings, ILogger<ConversationService> logger)
+        public ConversationService(GuiService guiService, XMSettingsService settings)
         {
             _guiService = guiService;
             _settings = settings;
-            _logger = logger;
             _conversationDataPath = Path.Combine(_settings.ResourcesDirectory, "conversations");
         }
 
@@ -71,7 +70,7 @@ namespace XM.Chat.UI.Conversation
             catch (Exception ex)
             {
                 // Log error and return null
-                _logger.LogError(ex, "Error loading conversation {ConversationId}", conversationId);
+                _logger.Error(ex, $"Error loading conversation {conversationId}");
                 return null;
             }
         }
@@ -90,7 +89,7 @@ namespace XM.Chat.UI.Conversation
             var conversationDefinition = LoadConversation(conversationId);
             if (conversationDefinition == null)
             {
-                _logger.LogWarning("Failed to load conversation {ConversationId}", conversationId);
+                _logger.Warn($"Failed to load conversation {conversationId}");
                 return false;
             }
 
@@ -115,7 +114,7 @@ namespace XM.Chat.UI.Conversation
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error opening conversation window for {ConversationId} and player {Player}", conversationId, player);
+                _logger.Error(ex, $"Error opening conversation window for {conversationId} and player {player}");
                 return false;
             }
         }
@@ -164,7 +163,7 @@ namespace XM.Chat.UI.Conversation
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting available conversations from {Path}", _conversationDataPath);
+                _logger.Error(ex, $"Error getting available conversations from {_conversationDataPath}");
             }
 
             return conversations;
