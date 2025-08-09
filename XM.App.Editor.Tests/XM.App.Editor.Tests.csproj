@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+
+    <!-- Coverage configuration -->
+    <CollectCoverage>true</CollectCoverage>
+    <CoverletOutput>TestResults/coverage.xml</CoverletOutput>
+    <CoverletOutputFormat>cobertura</CoverletOutputFormat>
+    <Include>[XM.App.Editor]XM.App.Editor.Converters.*;[XM.App.Editor]XM.App.Editor.ViewModels.*;[XM.App.Editor]XM.App.Editor.Services.*;[XM.App.Editor]XM.App.Editor.Models.*</Include>
+    <ExcludeByFile>**/*.axaml;**/*.axaml.cs;**/*.g.cs;**/obj/**/*.cs;**\*.axaml;**\*.axaml.cs;**\*.g.cs;**\obj\**\*.cs</ExcludeByFile>
+    <Exclude>[XM.App.Editor]XM.App.Editor.Views.*;[XM.App.Editor]XM.App.Editor.MainWindow*;[XM.App.Editor]XM.App.Editor.App*;[XM.App.Editor]XM.App.Editor.Services.UserSettingsService*;[XM.App.Editor]XM.App.Editor.Services.ConfirmationService*;[XM.App.Editor]XM.App.Editor.Resources*;[XM.App.Editor]XM.App.Editor.Program*</Exclude>
+    <Threshold>70</Threshold>
+    <ThresholdType>line</ThresholdType>
+    <ThresholdStat>total</ThresholdStat>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.msbuild" Version="6.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.8" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\XM.App.Editor\XM.App.Editor.csproj" />
+  </ItemGroup>
+
+</Project>
