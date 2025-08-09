@@ -14,10 +14,11 @@ public class ServicesUserSettingsServiceTests
         var svc = new UserSettingsService(logger);
         svc.Current.LastOpenedConversationPath = null; // ensure some default
         svc.Save();
-        svc.Load();
-        // Nothing to assert strongly; just ensure no exceptions and file exists
-        // Path location depends on OS; validate indirect effect: Save then Load keeps type
-        Assert.NotNull(svc.Current);
+
+        // Create a new instance to validate persistence without relying on in-memory state
+        var svc2 = new UserSettingsService(logger);
+        svc2.Load();
+        Assert.NotNull(svc2.Current);
     }
 }
 

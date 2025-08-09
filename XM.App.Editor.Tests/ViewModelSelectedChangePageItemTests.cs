@@ -26,7 +26,9 @@ public class ViewModelSelectedChangePageItemTests
     {
         var settings = new FakeSettingsService();
         confirm = new FakeConfirm { Result = false };
-        var svc = new ConversationService(System.IO.Path.Combine(System.IO.Path.GetTempPath(), "vm-tests-1"));
+        var uniqueDir = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "vm-tests-" + System.Guid.NewGuid());
+        System.IO.Directory.CreateDirectory(uniqueDir);
+        var svc = new ConversationService(uniqueDir);
         var vm = new ConversationEditorViewModel(settings, svc, confirm);
         vm.CurrentConversation = new ConversationData
         {

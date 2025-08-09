@@ -7,9 +7,10 @@ namespace XM.App.Editor.Tests;
 
 public class ViewModelMoreTests
 {
-    private class Confirm(bool result) : IConfirmationService
+    private class Confirm : IConfirmationService
     {
-        private readonly bool _result = result;
+        private readonly bool _result;
+        public Confirm(bool result) { _result = result; }
         public Task<bool> ShowConfirmationAsync(string title, string message) => Task.FromResult(_result);
     }
 
@@ -51,7 +52,7 @@ public class ViewModelMoreTests
         }
         finally
         {
-            if (Directory.Exists(temp)) Directory.Delete(temp, true);
+            try { if (Directory.Exists(temp)) Directory.Delete(temp, true); } catch { }
         }
     }
 
@@ -85,7 +86,7 @@ public class ViewModelMoreTests
         }
         finally
         {
-            if (Directory.Exists(temp)) Directory.Delete(temp, true);
+            try { if (Directory.Exists(temp)) Directory.Delete(temp, true); } catch { }
         }
     }
 
@@ -127,7 +128,7 @@ public class ViewModelMoreTests
         }
         finally
         {
-            if (Directory.Exists(temp)) Directory.Delete(temp, true);
+            try { if (Directory.Exists(temp)) Directory.Delete(temp, true); } catch { }
         }
     }
 }

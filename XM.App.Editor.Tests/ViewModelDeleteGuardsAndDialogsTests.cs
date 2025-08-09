@@ -26,7 +26,9 @@ public class ViewModelDeleteGuardsAndDialogsTests
     {
         var settings = new FakeSettingsService();
         var confirm = new FakeConfirm { Result = confirmResult };
-        var svc = new ConversationService(System.IO.Path.Combine(System.IO.Path.GetTempPath(), "vm-tests-3"));
+        var uniqueDir = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "vm-tests-" + System.Guid.NewGuid());
+        System.IO.Directory.CreateDirectory(uniqueDir);
+        var svc = new ConversationService(uniqueDir);
         var vm = new ConversationEditorViewModel(settings, svc, confirm);
         vm.CurrentConversation = new ConversationData
         {
@@ -64,13 +66,37 @@ public class ViewModelDeleteGuardsAndDialogsTests
     [Fact]
     public void DeleteAction_Respect_Confirmation_No()
     {
-        var vm = CreateVm(confirmResult: true);
+        var settings = new FakeSettingsService();
+        var confirm = new FakeConfirm { Result = true };
+        var uniqueDir = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "vm-tests-" + System.Guid.NewGuid());
+        System.IO.Directory.CreateDirectory(uniqueDir);
+        var svc = new ConversationService(uniqueDir);
+        var vm = new ConversationEditorViewModel(settings, svc, confirm);
+        vm.CurrentConversation = new ConversationData
+        {
+            Conversation = new ConversationContent
+            {
+                Root = new ConversationPage
+                {
+                    Header = "NPC",
+                    Responses = new()
+                    {
+                        new ConversationResponse
+                        {
+                            Text = "Hello",
+                            Actions = new ObservableCollection<ConversationAction>(),
+                            Conditions = new ObservableCollection<ConversationCondition>()
+                        }
+                    }
+                }
+            }
+        };
         vm.SelectedNode = vm.ConversationTree[0].Children[0];
         vm.AddActionCommand.Execute(null);
         vm.SelectedAction = ((ConversationResponseNode)vm.SelectedNode).Response.Actions[0];
 
         // Now decline deletion
-        ((FakeConfirm)vm.GetType().GetField("_confirmationService", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)!.GetValue(vm)!).Result = false;
+        confirm.Result = false;
         vm.DeleteActionCommand.Execute(null);
         Assert.Single(((ConversationResponseNode)vm.SelectedNode).Response.Actions);
     }

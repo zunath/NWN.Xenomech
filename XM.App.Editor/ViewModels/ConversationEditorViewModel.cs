@@ -7,7 +7,7 @@ using XM.App.Editor.Services;
 
 namespace XM.App.Editor.ViewModels;
 
-    public class ConversationEditorViewModel : INotifyPropertyChanged
+    public class ConversationEditorViewModel : INotifyPropertyChanged, IDisposable
 {
     private readonly ConversationService _conversationService;
     private readonly IConfirmationService _confirmationService;
@@ -925,5 +925,23 @@ namespace XM.App.Editor.ViewModels;
     protected virtual void OnPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    public void Dispose()
+    {
+        if (_subscribedPageForIdChanges is INotifyPropertyChanged oldInpc)
+        {
+            oldInpc.PropertyChanged -= OnSelectedPagePropertyChanged;
+        }
+        _subscribedPageForIdChanges = null;
+
+        foreach (var page in _allSubscribedPages)
+        {
+            if (page is INotifyPropertyChanged inpc)
+            {
+                inpc.PropertyChanged -= OnAnyPagePropertyChanged;
+            }
+        }
+        _allSubscribedPages.Clear();
     }
 } 
