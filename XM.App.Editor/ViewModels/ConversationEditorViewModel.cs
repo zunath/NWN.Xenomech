@@ -1095,5 +1095,12 @@ public class ConversationEditorViewModel : INotifyPropertyChanged, IDisposable
             }
         }
         _allSubscribedPages.Clear();
+
+        // Dispose any loaded icon bitmaps
+        foreach (var icon in AvailableResponseIcons)
+        {
+            icon.Dispose();
+        }
+        AvailableResponseIcons.Clear();
     }
 }
