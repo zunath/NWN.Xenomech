@@ -6,7 +6,7 @@ using XM.UI.Builder;
 using NuiDirection = XM.Shared.API.NUI.NuiDirection;
 using NuiScrollbars = XM.Shared.API.NUI.NuiScrollbars;
 
-namespace XM.UI.Codex
+namespace XM.Codex
 {
     [ServiceBinding(typeof(IView))]
     internal class CodexView : IView
@@ -31,7 +31,6 @@ namespace XM.UI.Codex
                     {
                         root.AddRow(row =>
                         {
-                            // Left column: search + categories + topics
                             row.AddColumn(left =>
                             {
                                 left.AddRow(sr =>
@@ -60,7 +59,6 @@ namespace XM.UI.Codex
                                     });
                                 });
 
-                                // Categories list
                                 left.AddGroup(group =>
                                 {
                                     group
@@ -91,7 +89,6 @@ namespace XM.UI.Codex
                                         });
                                 });
 
-                                // Topics list
                                 left.AddGroup(group =>
                                 {
                                     group
@@ -124,7 +121,6 @@ namespace XM.UI.Codex
                                 });
                             });
 
-                            // Right column: topic content
                             row.AddColumn(right =>
                             {
                                 right.AddRow(titleRow =>

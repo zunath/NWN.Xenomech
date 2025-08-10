@@ -9,7 +9,7 @@ using XM.Shared.Core.Configuration;
 using XM.Shared.Core.Localization;
 using XM.UI;
 
-namespace XM.UI.Codex
+namespace XM.Codex
 {
     [ServiceBinding(typeof(IViewModel))]
     internal class CodexViewModel : ViewModel<CodexViewModel>
@@ -282,13 +282,11 @@ namespace XM.UI.Codex
 
         private static string NormalizeMarkdown(string text)
         {
-            // Basic normalization: strip leading markdown headers while keeping readable content
             var lines = text.Replace("\r\n", "\n").Split('\n');
             var normalized = new List<string>(lines.Length);
             foreach (var l in lines)
             {
                 var line = l;
-                // Remove markdown header symbols and list markers for readability
                 line = line.TrimStart();
                 line = line.StartsWith("#") ? line.TrimStart('#', ' ') : line;
                 if (line.StartsWith("- ") || line.StartsWith("* ") || line.StartsWith("+ "))

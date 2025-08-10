@@ -3,7 +3,7 @@ using XM.Shared.API.Constants;
 using XM.Shared.Core.EventManagement;
 using XM.UI;
 
-namespace XM.UI.Codex
+namespace XM.Codex
 {
     [ServiceBinding(typeof(CodexService))]
     internal class CodexService
