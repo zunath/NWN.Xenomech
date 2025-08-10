@@ -23,3 +23,5 @@ namespace XM.Plugin.Area.Entity
         public float LocationOrientation { get; set; }
     }
 }
+
+// Moved to XM.Shared.Core.Entity.PlayerLocation

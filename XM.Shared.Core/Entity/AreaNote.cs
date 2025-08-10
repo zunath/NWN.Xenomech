@@ -1,10 +1,10 @@
-﻿using Anvil.Services;
+using Anvil.Services;
 using XM.Shared.Core.Data;
 
-namespace XM.Plugin.Area.Entity
+namespace XM.Shared.Core.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
-    internal class AreaNote: EntityBase
+    public class AreaNote : EntityBase
     {
         [Indexed]
         public string AreaResref { get; set; }
@@ -19,4 +19,4 @@ namespace XM.Plugin.Area.Entity
     }
 }
 
-// Moved to XM.Shared.Core.Entity.AreaNote
+

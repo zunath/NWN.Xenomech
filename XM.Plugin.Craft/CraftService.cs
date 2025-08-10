@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using XM.Inventory;
 using XM.Inventory.Durability;
-using XM.Plugin.Craft.Entity;
+using XM.Progression.Craft.Entity;
 using XM.Plugin.Craft.UI;
 using XM.Progression.Job.Entity;
 using XM.Progression.Skill;
@@ -171,7 +171,7 @@ namespace XM.Plugin.Craft
         {
             const int MaxDelta = -10;
             var playerId = PlayerId.Get(player);
-            var dbPlayerCraft = _db.Get<PlayerCraft>(playerId);
+            var dbPlayerCraft = _db.Get<XM.Progression.Craft.Entity.PlayerCraft>(playerId);
             var recipe = GetRecipe(recipeType);
             var skill = _skill.GetCraftSkillLevel(player, recipe.Skill);
             var delta = skill - recipe.Level;
@@ -189,7 +189,7 @@ namespace XM.Plugin.Craft
 
             if (recipe.MustBeUnlocked)
             {
-                return dbPlayerCraft.LearnedRecipes.Contains(recipeType);
+                return dbPlayerCraft.LearnedRecipes.Contains((int)recipeType);
             }
 
             return true;
@@ -199,7 +199,7 @@ namespace XM.Plugin.Craft
         {
             const int MaxDelta = 5;
             var playerId = PlayerId.Get(player);
-            var dbPlayerCraft = _db.Get<PlayerCraft>(playerId);
+            var dbPlayerCraft = _db.Get<XM.Progression.Craft.Entity.PlayerCraft>(playerId);
             var recipe = GetRecipe(recipeType);
             var skill = _skill.GetCraftSkillLevel(player, recipe.Skill);
             var definition = _skill.GetCraftSkillDefinition(recipe.Skill);
@@ -261,8 +261,8 @@ namespace XM.Plugin.Craft
                 return true;
 
             var playerId = PlayerId.Get(player);
-            var dbPlayerCraft = _db.Get<PlayerCraft>(playerId);
-            return dbPlayerCraft.LearnedRecipes.Contains(recipeType);
+            var dbPlayerCraft = _db.Get<XM.Progression.Craft.Entity.PlayerCraft>(playerId);
+            return dbPlayerCraft.LearnedRecipes.Contains((int)recipeType);
         }
 
         public (XMBindingList<string>, XMBindingList<Color>) BuildRecipeDetail(uint player, RecipeType recipe)

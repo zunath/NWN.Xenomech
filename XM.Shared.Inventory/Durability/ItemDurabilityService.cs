@@ -5,7 +5,7 @@ using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
-using XM.UI;
+// using XM.UI; // Removed to break DI cycle
 
 namespace XM.Inventory.Durability
 {
@@ -14,18 +14,16 @@ namespace XM.Inventory.Durability
     {
         private readonly XMEventService _event;
         private readonly ItemTypeService _itemType;
-        private readonly GuiService _gui;
+        // Removed GuiService to avoid circular dependency with GuiService -> IList<IViewModel> -> CraftService -> ItemDurabilityService -> GuiService
 
         private const int DecayLossChance = 1;
 
         public ItemDurabilityService(
             XMEventService @event,
-            ItemTypeService itemType,
-            GuiService gui)
+            ItemTypeService itemType)
         {
             _event = @event;
             _itemType = itemType;
-            _gui = gui;
 
             RegisterEvents();
             SubscribeEvents();

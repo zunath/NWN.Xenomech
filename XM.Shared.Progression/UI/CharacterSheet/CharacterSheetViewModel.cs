@@ -448,7 +448,7 @@ namespace XM.Progression.UI.CharacterSheet
             }
 
 
-            var dbPlayerCraft = DB.Get<PlayerCraft>(playerId);
+            var dbPlayerCraft = DB.Get<Craft.Entity.PlayerCraft>(playerId);
             if (dbPlayerCraft.PrimaryCraftSkill != SkillType.Invalid)
             {
                 var skill = Skill.GetCraftSkillDefinition(dbPlayerCraft.PrimaryCraftSkill);

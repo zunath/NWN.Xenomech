@@ -25,3 +25,5 @@ namespace XM.Plugin.Area.Entity
         public Dictionary<string, List<MapPin>> MapPins { get; set; }
     }
 }
+
+// Moved to XM.Shared.Core.Entity.PlayerMap
