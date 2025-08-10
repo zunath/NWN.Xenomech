@@ -1,8 +1,6 @@
 using System;
 using System.Text.Json;
-using Anvil.Services;
 using XM.Shared.Core.Conversation;
-using XM.Shared.Core.Data;
 
 namespace XM.Chat.UI.Conversation.Conditions
 {

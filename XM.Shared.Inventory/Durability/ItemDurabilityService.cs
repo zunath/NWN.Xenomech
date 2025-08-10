@@ -1,11 +1,9 @@
-﻿using Anvil.API;
-using Anvil.Services;
+﻿using Anvil.Services;
 using XM.Inventory.Event;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
-// using XM.UI; // Removed to break DI cycle
 
 namespace XM.Inventory.Durability
 {

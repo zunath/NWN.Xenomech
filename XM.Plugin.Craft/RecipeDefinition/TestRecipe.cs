@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
-using XM.Plugin.Craft;
 using XM.Progression.Skill;
 
 namespace XM.Plugin.Craft.RecipeDefinition

@@ -11,7 +11,6 @@ using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.EventManagement;
 using XM.Spawn.Event;
-using Anvil.API;
 
 namespace XM.Spawn
 {

@@ -1,26 +1,24 @@
 ﻿using Anvil.Services;
-using XM.Shared.Core.Entity;
+using XM.Shared.Core.Entity.Stat;
 
-namespace XM.Progression.Stat.Entity
+namespace XM.Shared.Core.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
     public class PlayerStat : EntityBase
     {
         public PlayerStat()
         {
-            Init();
+            BaseStats = new StatGroup();
+            JobStats = new StatGroup();
+            EquippedItemStats = new ItemStatCollection();
+            AbilityStats = new AbilityStatCollection();
         }
 
         public PlayerStat(string playerId)
         {
             Id = playerId;
-            Init();
-        }
-
-        private void Init()
-        {
+            BaseStats = new StatGroup();
             JobStats = new StatGroup();
-            BaseStats = new ItemStatGroup();
             EquippedItemStats = new ItemStatCollection();
             AbilityStats = new AbilityStatCollection();
         }

@@ -19,8 +19,9 @@ namespace XM.Shared.Core.Entity
 
         // Store recipe identifiers as ints to avoid plugin dependency
         public HashSet<int> LearnedRecipes { get; set; }
-        public SkillType PrimaryCraftSkill { get; set; }
-        public SkillType SecondaryCraftSkill { get; set; }
+        // SkillType codes represented as ints to avoid dependency on XM.Shared.Progression
+        public int PrimaryCraftSkillCode { get; set; }
+        public int SecondaryCraftSkillCode { get; set; }
     }
 }
 

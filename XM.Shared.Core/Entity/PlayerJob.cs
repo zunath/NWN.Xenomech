@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
 using XM.Shared.API.Constants;
-using XM.Shared.Core.Entity;
 
-namespace XM.Progression.Job.Entity
+namespace XM.Shared.Core.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
     public class PlayerJob: EntityBase
@@ -21,36 +20,37 @@ namespace XM.Progression.Job.Entity
 
         private void Init()
         {
-            ActiveJob = JobType.Invalid;
-            JobLevels = new Dictionary<JobType, int>()
+            ActiveJobCode = 0; // corresponds to JobType.Invalid in Progression
+            JobLevels = new Dictionary<int, int>
             {
-                { JobType.Keeper, 1},
-                { JobType.Mender, 1},
-                { JobType.Brawler, 1},
-                { JobType.Beastmaster, 1},
-                { JobType.Techweaver, 1},
-                { JobType.Elementalist, 1},
-                { JobType.Nightstalker, 1},
-                { JobType.Hunter, 1},
+                { 1, 1 }, // Keeper
+                { 2, 1 }, // Mender
+                { 3, 1 }, // Brawler
+                { 4, 1 }, // Beastmaster
+                { 5, 1 }, // Techweaver
+                { 6, 1 }, // Elementalist
+                { 7, 1 }, // Nightstalker
+                { 8, 1 }, // Hunter
             };
-            JobXP = new Dictionary<JobType, int>()
+            JobXP = new Dictionary<int, int>
             {
-                { JobType.Keeper, 0},
-                { JobType.Mender, 0},
-                { JobType.Brawler, 0},
-                { JobType.Beastmaster, 0},
-                { JobType.Techweaver, 0},
-                { JobType.Elementalist, 0},
-                { JobType.Nightstalker, 0},
-                { JobType.Hunter, 0},
+                { 1, 0 },
+                { 2, 0 },
+                { 3, 0 },
+                { 4, 0 },
+                { 5, 0 },
+                { 6, 0 },
+                { 7, 0 },
+                { 8, 0 },
             };
 
             ResonanceFeats = new List<FeatType>();
         }
 
-        public JobType ActiveJob { get; set; }
-        public Dictionary<JobType, int> JobLevels { get; set; }
-        public Dictionary<JobType, int> JobXP { get; set; }
+        // Active job and maps stored as int codes to avoid dependency on Progression.Job.JobType
+        public int ActiveJobCode { get; set; }
+        public Dictionary<int, int> JobLevels { get; set; }
+        public Dictionary<int, int> JobXP { get; set; }
         public List<FeatType> ResonanceFeats { get; set; }
     }
 }

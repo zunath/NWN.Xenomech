@@ -5,7 +5,7 @@ using Anvil.Services;
 using XM.Progression.Ability;
 using XM.Progression.Event;
 using XM.Progression.Job;
-using XM.Progression.Job.Entity;
+using XM.Shared.Core.Entity;
 using XM.Progression.Job.JobDefinition;
 using XM.Progression.Skill.CombatSkillDefinition;
 using XM.Progression.Skill.CraftingSkillDefinition;
@@ -14,7 +14,6 @@ using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.CreaturePlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
-using XM.Shared.Core.Entity;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 
@@ -106,17 +105,17 @@ namespace XM.Progression.Skill
         {
             var playerId = PlayerId.Get(player);
             var dbPlayerSkill = _db.Get<PlayerSkill>(playerId);
-            if (!dbPlayerSkill.Skills.ContainsKey(skillType))
-                dbPlayerSkill.Skills[skillType] = 0;
+            if (!dbPlayerSkill.Skills.ContainsKey((int)skillType))
+                dbPlayerSkill.Skills[(int)skillType] = 0;
             const int IncreaseBy = 1;
 
-            var newLevel = dbPlayerSkill.Skills[skillType] + IncreaseBy;
-            dbPlayerSkill.Skills[skillType] = newLevel;
+            var newLevel = dbPlayerSkill.Skills[(int)skillType] + IncreaseBy;
+            dbPlayerSkill.Skills[(int)skillType] = newLevel;
 
             _db.Set(dbPlayerSkill);
 
             var definition = _combatSkills[skillType];
-            SendMessageToPC(player, LocaleString.YourXSkillIncreasesToY.ToLocalizedString(definition.Name.ToLocalizedString(), dbPlayerSkill.Skills[skillType]));
+            SendMessageToPC(player, LocaleString.YourXSkillIncreasesToY.ToLocalizedString(definition.Name.ToLocalizedString(), dbPlayerSkill.Skills[(int)skillType]));
 
             if (_weaponSkillAcquisitionLevels.ContainsKey(skillType) &&
                 _weaponSkillAcquisitionLevels[skillType].ContainsKey(newLevel))
@@ -159,11 +158,11 @@ namespace XM.Progression.Skill
         {
             var playerId = PlayerId.Get(player);
             var dbPlayerSkill = _db.Get<PlayerSkill>(playerId);
-            if (!dbPlayerSkill.Skills.ContainsKey(skillType))
-                dbPlayerSkill.Skills[skillType] = 0;
+            if (!dbPlayerSkill.Skills.ContainsKey((int)skillType))
+                dbPlayerSkill.Skills[(int)skillType] = 0;
 
             // Player is at the cap for their current level.
-            var currentSkillLevel = dbPlayerSkill.Skills[skillType];
+            var currentSkillLevel = dbPlayerSkill.Skills[(int)skillType];
             if (currentSkillLevel >= playerSkillCap)
                 return false;
 
@@ -207,10 +206,10 @@ namespace XM.Progression.Skill
             var playerId = PlayerId.Get(creature);
             var dbPlayerSkill = _db.Get<PlayerSkill>(playerId);
 
-            if (!dbPlayerSkill.Skills.ContainsKey(skillType))
-                dbPlayerSkill.Skills[skillType] = 0;
+            if (!dbPlayerSkill.Skills.ContainsKey((int)skillType))
+                dbPlayerSkill.Skills[(int)skillType] = 0;
 
-            return dbPlayerSkill.Skills[skillType];
+            return dbPlayerSkill.Skills[(int)skillType];
         }
 
         public int GetCombatSkillLevel(uint creature, SkillType skillType)

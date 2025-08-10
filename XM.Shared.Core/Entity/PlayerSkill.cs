@@ -19,9 +19,10 @@ namespace XM.Shared.Core.Entity
 
         private void Init()
         {
-            Skills = new SkillCollection();
+            Skills = new Dictionary<int, int>();
         }
 
-        public Dictionary<SkillType, int> Skills { get; set; }
+        // Key: SkillType code (int), Value: skill level
+        public Dictionary<int, int> Skills { get; set; }
     }
 }

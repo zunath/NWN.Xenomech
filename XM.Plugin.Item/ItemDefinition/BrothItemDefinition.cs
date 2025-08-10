@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Anvil.Services;
 using XM.Progression.Beast;
-using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 
 namespace XM.Plugin.Item.ItemDefinition

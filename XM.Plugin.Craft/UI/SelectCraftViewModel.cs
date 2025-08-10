@@ -1,7 +1,6 @@
 ﻿using System;
 using Anvil.Services;
 using XM.Progression.Skill;
-using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.Entity;
@@ -36,11 +35,11 @@ namespace XM.Plugin.Craft.UI
             var dbPlayerCraft = DB.Get<PlayerCraft>(playerId);
             var skillDefinition = Skill.GetCraftSkillDefinition(_skill);
 
-            if (dbPlayerCraft.PrimaryCraftSkill == SkillType.Invalid)
+            if (dbPlayerCraft.PrimaryCraftSkillCode == 0)
             {
                 Message = LocaleString.YouCanOnlyLearnTwoCraftingSkillsWouldYouLikeXToBeYourFirstOne.ToLocalizedString(skillDefinition.Name.ToLocalizedString());
             }
-            else if (dbPlayerCraft.SecondaryCraftSkill == SkillType.Invalid)
+            else if (dbPlayerCraft.SecondaryCraftSkillCode == 0)
             {
                 Message = LocaleString.YouCanOnlyLearnTwoCraftingSkillsWouldYouLikeXToBeYourSecondOne.ToLocalizedString(skillDefinition.Name.ToLocalizedString());
             }
@@ -59,13 +58,13 @@ namespace XM.Plugin.Craft.UI
                 var playerId = PlayerId.Get(Player);
                 var dbPlayerCraft = DB.Get<PlayerCraft>(playerId);
 
-                if (dbPlayerCraft.PrimaryCraftSkill == SkillType.Invalid)
+                if (dbPlayerCraft.PrimaryCraftSkillCode == 0)
                 {
-                    dbPlayerCraft.PrimaryCraftSkill = _skill;
+                    dbPlayerCraft.PrimaryCraftSkillCode = (int)_skill;
                 }
-                else if (dbPlayerCraft.SecondaryCraftSkill == SkillType.Invalid)
+                else if (dbPlayerCraft.SecondaryCraftSkillCode == 0)
                 {
-                    dbPlayerCraft.SecondaryCraftSkill = _skill;
+                    dbPlayerCraft.SecondaryCraftSkillCode = (int)_skill;
                 }
 
                 DB.Set(dbPlayerCraft);

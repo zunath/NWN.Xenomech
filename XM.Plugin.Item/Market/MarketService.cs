@@ -5,7 +5,6 @@ using Anvil.Services;
 using XM.Plugin.Item.Market.Dialog;
 using XM.Shared.Core.Entity;
 using XM.Plugin.Item.Market.Event;
-using XM.Plugin.Item.Market.UI.MarketBuyMenu;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;

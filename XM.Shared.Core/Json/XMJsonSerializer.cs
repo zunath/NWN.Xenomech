@@ -1,6 +1,5 @@
 using NReJSON;
 using StackExchange.Redis;
-using XM.Shared.Core.Json;
 
 namespace XM.Shared.Core.Json
 {

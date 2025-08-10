@@ -8,7 +8,7 @@ using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using XM.UI.Builder;
-using XM.UI.Entity;
+using XM.Shared.Core.Entity;
 using XM.UI.Event;
 using Action = System.Action;
 

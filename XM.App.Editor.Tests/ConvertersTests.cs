@@ -1,7 +1,6 @@
 using System.Collections.ObjectModel;
 using XM.App.Editor.Converters;
 using XM.App.Editor.Models;
-using Xunit;
 
 namespace XM.App.Editor.Tests;
 

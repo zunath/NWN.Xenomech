@@ -1,5 +1,4 @@
 ﻿using Anvil.Services;
-using XM.Shared.Core.Entity;
 using XM.Plugin.Item.Market.UI.MarketBuyMenu;
 using XM.Plugin.Item.Market.UI.MarketListingMenu;
 using XM.Shared.Core.Dialog;

@@ -5,9 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using XM.Inventory;
 using XM.Inventory.Durability;
-using XM.Progression.Craft.Entity;
+using XM.Shared.Core.Entity;
 using XM.Plugin.Craft.UI;
-using XM.Progression.Job.Entity;
 using XM.Progression.Skill;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
@@ -171,7 +170,7 @@ namespace XM.Plugin.Craft
         {
             const int MaxDelta = -10;
             var playerId = PlayerId.Get(player);
-            var dbPlayerCraft = _db.Get<XM.Progression.Craft.Entity.PlayerCraft>(playerId);
+            var dbPlayerCraft = _db.Get<PlayerCraft>(playerId);
             var recipe = GetRecipe(recipeType);
             var skill = _skill.GetCraftSkillLevel(player, recipe.Skill);
             var delta = skill - recipe.Level;
@@ -181,8 +180,8 @@ namespace XM.Plugin.Craft
                 return false;
             }
 
-            if (dbPlayerCraft.PrimaryCraftSkill != recipe.Skill &&
-                dbPlayerCraft.SecondaryCraftSkill != recipe.Skill)
+            if (dbPlayerCraft.PrimaryCraftSkillCode != (int)recipe.Skill &&
+                dbPlayerCraft.SecondaryCraftSkillCode != (int)recipe.Skill)
             {
                 return false;
             }
@@ -199,7 +198,7 @@ namespace XM.Plugin.Craft
         {
             const int MaxDelta = 5;
             var playerId = PlayerId.Get(player);
-            var dbPlayerCraft = _db.Get<XM.Progression.Craft.Entity.PlayerCraft>(playerId);
+            var dbPlayerCraft = _db.Get<PlayerCraft>(playerId);
             var recipe = GetRecipe(recipeType);
             var skill = _skill.GetCraftSkillLevel(player, recipe.Skill);
             var definition = _skill.GetCraftSkillDefinition(recipe.Skill);
@@ -208,8 +207,8 @@ namespace XM.Plugin.Craft
             if (delta > MaxDelta)
                 return false;
 
-            if (dbPlayerCraft.PrimaryCraftSkill != recipe.Skill &&
-                dbPlayerCraft.SecondaryCraftSkill != recipe.Skill)
+            if (dbPlayerCraft.PrimaryCraftSkillCode != (int)recipe.Skill &&
+                dbPlayerCraft.SecondaryCraftSkillCode != (int)recipe.Skill)
             {
                 return false;
             }
@@ -239,16 +238,16 @@ namespace XM.Plugin.Craft
             var playerId = PlayerId.Get(player);
             var dbPlayerSkill = _db.Get<PlayerSkill>(playerId);
 
-            if (!dbPlayerSkill.Skills.ContainsKey(skillType))
-                dbPlayerSkill.Skills[skillType] = 0;
+            if (!dbPlayerSkill.Skills.ContainsKey((int)skillType))
+                dbPlayerSkill.Skills[(int)skillType] = 0;
 
-            dbPlayerSkill.Skills[skillType]++;
+            dbPlayerSkill.Skills[(int)skillType]++;
 
             _db.Set(dbPlayerSkill);
 
             var definition = _skill.GetCraftSkillDefinition(skillType);
             var name = definition.Name.ToLocalizedString();
-            var level = dbPlayerSkill.Skills[skillType];
+            var level = dbPlayerSkill.Skills[(int)skillType];
             var message = LocaleString.YourXSkillIncreasesToY.ToLocalizedString(name, level);
             SendMessageToPC(player, message);
         }
@@ -261,7 +260,7 @@ namespace XM.Plugin.Craft
                 return true;
 
             var playerId = PlayerId.Get(player);
-            var dbPlayerCraft = _db.Get<XM.Progression.Craft.Entity.PlayerCraft>(playerId);
+            var dbPlayerCraft = _db.Get<PlayerCraft>(playerId);
             return dbPlayerCraft.LearnedRecipes.Contains((int)recipeType);
         }
 
@@ -335,14 +334,14 @@ namespace XM.Plugin.Craft
             var playerId = PlayerId.Get(player);
             var dbPlayerCraft = _db.Get<PlayerCraft>(playerId);
 
-            if (dbPlayerCraft.PrimaryCraftSkill == skillType ||
-                dbPlayerCraft.SecondaryCraftSkill == skillType)
+            if (dbPlayerCraft.PrimaryCraftSkillCode == (int)skillType ||
+                dbPlayerCraft.SecondaryCraftSkillCode == (int)skillType)
             {
                 var payload = new CraftPayload(skillType);
                 _gui.Value.ShowWindow<CraftView>(player, payload, device);
             }
-            else if (dbPlayerCraft.PrimaryCraftSkill == SkillType.Invalid ||
-                     dbPlayerCraft.SecondaryCraftSkill == SkillType.Invalid)
+            else if (dbPlayerCraft.PrimaryCraftSkillCode == 0 ||
+                     dbPlayerCraft.SecondaryCraftSkillCode == 0)
             {
                 var payload = new SelectCraftPayload(skillType);
                 _gui.Value.ShowWindow<SelectCraftView>(player, payload, device);

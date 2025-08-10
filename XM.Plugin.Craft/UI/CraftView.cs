@@ -1,5 +1,4 @@
-﻿using System;
-using Anvil.API;
+﻿using Anvil.API;
 using Anvil.Services;
 using XM.Shared.Core.Localization;
 using XM.UI;

@@ -1,7 +1,6 @@
 ﻿
 using System.Numerics;
 using Anvil.API;
-using XM.Shared.API.BaseTypes;
 
 // ReSharper disable once CheckNamespace
 namespace XM.Shared.API

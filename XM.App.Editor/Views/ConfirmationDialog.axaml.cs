@@ -1,6 +1,3 @@
-using Avalonia.Controls;
-using Avalonia.Interactivity;
-
 namespace XM.App.Editor.Views;
 
 public partial class ConfirmationDialog : Window

@@ -1,9 +1,7 @@
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using XM.App.Editor.Models;
 using XM.App.Editor.Services;
 using XM.App.Editor.ViewModels;
-using Xunit;
 
 namespace XM.App.Editor.Tests;
 

@@ -4,13 +4,11 @@ using Anvil.Services;
 using XM.Shared.Core.Entity;
 using XM.Inventory.KeyItem;
 using XM.Progression.Job;
-using XM.Progression.Job.Entity;
 using XM.Progression.Skill;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
-using XM.Shared.Core.Entity;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 using XM.UI;
@@ -389,7 +387,7 @@ namespace XM.Progression.UI.CharacterSheet
                     continue;
 
                 jobNames.Add(Locale.GetString(definition.Name));
-                jobLevels.Add($"{lvText} {dbPlayerJob.JobLevels[type]}");
+                jobLevels.Add($"{lvText} {dbPlayerJob.JobLevels[(int)type]}");
 
                 jobColors.Add(currentJob.Type == type 
                     ? new Color(255, 215, 0) 
@@ -397,7 +395,7 @@ namespace XM.Progression.UI.CharacterSheet
 
                 jobIcons.Add(definition.IconResref);
 
-                var ratio = (float)dbPlayerJob.JobXP[type] / (float)XP[dbPlayerJob.JobLevels[type]];
+                var ratio = (float)dbPlayerJob.JobXP[(int)type] / (float)XP[dbPlayerJob.JobLevels[(int)type]];
                 jobProgresses.Add(Math.Clamp(ratio, 0f, 1f));
             }
 
@@ -431,8 +429,8 @@ namespace XM.Progression.UI.CharacterSheet
             foreach (var skill in skills)
             {
                 var level = 0;
-                if (dbPlayerSkill.Skills.ContainsKey(skill.Type))
-                    level = dbPlayerSkill.Skills[skill.Type];
+                if (dbPlayerSkill.Skills.ContainsKey((int)skill.Type))
+                    level = dbPlayerSkill.Skills[(int)skill.Type];
 
                 var grade = Skill.GetGrade(Player, job, skill);
                 var skillCap = Skill.GetSkillCap(grade, jobLevel);
@@ -449,10 +447,11 @@ namespace XM.Progression.UI.CharacterSheet
 
 
             var dbPlayerCraft = DB.Get<PlayerCraft>(playerId);
-            if (dbPlayerCraft.PrimaryCraftSkill != SkillType.Invalid)
+            if (dbPlayerCraft.PrimaryCraftSkillCode != 0)
             {
-                var skill = Skill.GetCraftSkillDefinition(dbPlayerCraft.PrimaryCraftSkill);
-                var level = Skill.GetCraftSkillLevel(Player, dbPlayerCraft.PrimaryCraftSkill);
+                var primary = (SkillType)dbPlayerCraft.PrimaryCraftSkillCode;
+                var skill = Skill.GetCraftSkillDefinition(primary);
+                var level = Skill.GetCraftSkillLevel(Player, primary);
                 var progress = (float)level / (float)skill.LevelCap;
 
                 skillNames.Add(skill.Name.ToLocalizedString());
@@ -461,10 +460,11 @@ namespace XM.Progression.UI.CharacterSheet
                 skillProgresses.Add(progress);
             }
 
-            if (dbPlayerCraft.SecondaryCraftSkill != SkillType.Invalid)
+            if (dbPlayerCraft.SecondaryCraftSkillCode != 0)
             {
-                var skill = Skill.GetCraftSkillDefinition(dbPlayerCraft.SecondaryCraftSkill);
-                var level = Skill.GetCraftSkillLevel(Player, dbPlayerCraft.SecondaryCraftSkill);
+                var secondary = (SkillType)dbPlayerCraft.SecondaryCraftSkillCode;
+                var skill = Skill.GetCraftSkillDefinition(secondary);
+                var level = Skill.GetCraftSkillLevel(Player, secondary);
                 var progress = (float)level / (float)skill.LevelCap;
 
                 skillNames.Add(skill.Name.ToLocalizedString());
@@ -509,7 +509,7 @@ namespace XM.Progression.UI.CharacterSheet
         private void RefreshKeyItems()
         {
             var playerId = PlayerId.Get(Player);
-            var dbPlayerKeyItems = DB.Get<XM.Shared.Core.Entity.PlayerKeyItem>(playerId) ?? new XM.Shared.Core.Entity.PlayerKeyItem(playerId);
+            var dbPlayerKeyItems = DB.Get<PlayerKeyItem>(playerId) ?? new PlayerKeyItem(playerId);
 
             var keyItemNames = new XMBindingList<string>();
             var keyItemDescriptions = new XMBindingList<string>();
