@@ -112,7 +112,7 @@ namespace XM.Progression.Job
 
             var playerId = PlayerId.Get(player);
             var dbPlayerJob = _db.Get<PlayerJob>(playerId) ?? new PlayerJob(playerId);
-            var activeJob = (JobType)dbPlayerJob.ActiveJobCode;
+            var activeJob = JobType.FromValue(dbPlayerJob.ActiveJobCode);
             return _jobDefinitions[activeJob];
         }
 
@@ -137,7 +137,7 @@ namespace XM.Progression.Job
             var playerId = PlayerId.Get(player);
             var dbPlayerJob = _db.Get<PlayerJob>(playerId) ?? new PlayerJob(playerId);
 
-            return dbPlayerJob.JobLevels.ToDictionary(x => (JobType)x.Key, y => y.Value);
+            return dbPlayerJob.JobLevels.ToDictionary(x => JobType.FromValue(x.Key), y => y.Value);
         }
         public void GiveXP(uint player, int xp, bool includeModifiers = true)
         {
@@ -148,7 +148,7 @@ namespace XM.Progression.Job
 
             var playerId = PlayerId.Get(player);
             var dbPlayerJob = _db.Get<PlayerJob>(playerId);
-            var job = (JobType)dbPlayerJob.ActiveJobCode;
+            var job = JobType.FromValue(dbPlayerJob.ActiveJobCode);
             var level = dbPlayerJob.JobLevels[(int)job];
             var xpRequired = _xp[level];
             var levelsGained = new List<int>();

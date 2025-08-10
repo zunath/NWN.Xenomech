@@ -105,17 +105,17 @@ namespace XM.Progression.Skill
         {
             var playerId = PlayerId.Get(player);
             var dbPlayerSkill = _db.Get<PlayerSkill>(playerId);
-            if (!dbPlayerSkill.Skills.ContainsKey((int)skillType))
-                dbPlayerSkill.Skills[(int)skillType] = 0;
+            if (!dbPlayerSkill.Skills.ContainsKey(skillType.Value))
+                dbPlayerSkill.Skills[skillType.Value] = 0;
             const int IncreaseBy = 1;
 
-            var newLevel = dbPlayerSkill.Skills[(int)skillType] + IncreaseBy;
-            dbPlayerSkill.Skills[(int)skillType] = newLevel;
+            var newLevel = dbPlayerSkill.Skills[skillType.Value] + IncreaseBy;
+            dbPlayerSkill.Skills[skillType.Value] = newLevel;
 
             _db.Set(dbPlayerSkill);
 
             var definition = _combatSkills[skillType];
-            SendMessageToPC(player, LocaleString.YourXSkillIncreasesToY.ToLocalizedString(definition.Name.ToLocalizedString(), dbPlayerSkill.Skills[(int)skillType]));
+            SendMessageToPC(player, LocaleString.YourXSkillIncreasesToY.ToLocalizedString(definition.Name.ToLocalizedString(), dbPlayerSkill.Skills[skillType.Value]));
 
             if (_weaponSkillAcquisitionLevels.ContainsKey(skillType) &&
                 _weaponSkillAcquisitionLevels[skillType].ContainsKey(newLevel))
@@ -158,11 +158,11 @@ namespace XM.Progression.Skill
         {
             var playerId = PlayerId.Get(player);
             var dbPlayerSkill = _db.Get<PlayerSkill>(playerId);
-            if (!dbPlayerSkill.Skills.ContainsKey((int)skillType))
-                dbPlayerSkill.Skills[(int)skillType] = 0;
+            if (!dbPlayerSkill.Skills.ContainsKey(skillType.Value))
+                dbPlayerSkill.Skills[skillType.Value] = 0;
 
             // Player is at the cap for their current level.
-            var currentSkillLevel = dbPlayerSkill.Skills[(int)skillType];
+            var currentSkillLevel = dbPlayerSkill.Skills[skillType.Value];
             if (currentSkillLevel >= playerSkillCap)
                 return false;
 
@@ -206,10 +206,10 @@ namespace XM.Progression.Skill
             var playerId = PlayerId.Get(creature);
             var dbPlayerSkill = _db.Get<PlayerSkill>(playerId);
 
-            if (!dbPlayerSkill.Skills.ContainsKey((int)skillType))
-                dbPlayerSkill.Skills[(int)skillType] = 0;
+            if (!dbPlayerSkill.Skills.ContainsKey(skillType.Value))
+                dbPlayerSkill.Skills[skillType.Value] = 0;
 
-            return dbPlayerSkill.Skills[(int)skillType];
+            return dbPlayerSkill.Skills[skillType.Value];
         }
 
         public int GetCombatSkillLevel(uint creature, SkillType skillType)

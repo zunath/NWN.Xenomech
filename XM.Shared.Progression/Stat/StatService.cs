@@ -1387,11 +1387,11 @@ namespace XM.Progression.Stat
             {
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerJob = _db.Get<PlayerJob>(playerId) ?? new PlayerJob(playerId);
-                var activeJob = (JobType)dbPlayerJob.ActiveJobCode;
+                var activeJob = JobType.FromValue(dbPlayerJob.ActiveJobCode);
 
                 return activeJob == JobType.Invalid 
                     ? 1 
-                    : dbPlayerJob.JobLevels[(int)activeJob];
+                    : dbPlayerJob.JobLevels[activeJob.Value];
             }
             else
             {

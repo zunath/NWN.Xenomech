@@ -1,5 +1,6 @@
 using System;
 using System.Text.Json;
+using System.Linq;
 using XM.Progression.Skill;
 using XM.Shared.Core.Conversation;
 
@@ -32,7 +33,9 @@ namespace XM.Chat.UI.Conversation.Conditions
             if (parts.Length != 2)
                 return false;
 
-            if (!Enum.TryParse<SkillType>(parts[0], true, out var skillType) || skillType == SkillType.Invalid)
+            var parsed = parts[0].Trim();
+            var skillType = SkillType.List.FirstOrDefault(s => s.Name.Equals(parsed, StringComparison.OrdinalIgnoreCase)) ?? SkillType.Invalid;
+            if (skillType == SkillType.Invalid)
                 return false;
 
             if (!int.TryParse(parts[1], out var requiredLevel))
