@@ -175,7 +175,7 @@ namespace XM.Codex
             TopicToggles = toggles;
 
             SelectedTopic = -1;
-            TopicContent = LocaleString.SelectAQuest.ToLocalizedString();
+            TopicContent = LocaleString.SelectACodexEntry.ToLocalizedString();
         }
 
         public System.Action OnClearSearch() => () =>

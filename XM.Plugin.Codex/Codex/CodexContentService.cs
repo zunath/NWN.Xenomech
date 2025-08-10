@@ -92,10 +92,6 @@ namespace XM.Codex.Codex
                 category: CodexCategory.Technology,
                 content: LocaleString.AurionFramesDescription));
             entries.Add(new CodexEntryRecord(
-                title: LocaleString.EpsilonFrames,
-                category: CodexCategory.Technology,
-                content: LocaleString.EpsilonFramesDescription));
-            entries.Add(new CodexEntryRecord(
                 title: LocaleString.DivineFrames,
                 category: CodexCategory.Technology,
                 content: LocaleString.DivineFramesDescription));
