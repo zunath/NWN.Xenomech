@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
+using Anvil.API;
 using Anvil.Services;
+using XM.Codex.Codex;
+using XM.Codex.Codex.Model;
 using XM.Shared.Core;
 using XM.Shared.Core.Configuration;
 using XM.Shared.Core.Localization;
@@ -15,15 +17,34 @@ namespace XM.Codex
     internal class CodexViewModel : ViewModel<CodexViewModel>
     {
         private const string CodexFolderName = "codex";
+        private static LocaleString MapCategoryToLocale(CodexCategory cat)
+        {
+            return cat switch
+            {
+                CodexCategory.Lore => LocaleString.Lore,
+                CodexCategory.History => LocaleString.History,
+                CodexCategory.Factions => LocaleString.Factions,
+                CodexCategory.Regions => LocaleString.Regions,
+                CodexCategory.Culture => LocaleString.CultureAndDailyLife,
+                CodexCategory.Religion => LocaleString.ReligionsAndBeliefs,
+                CodexCategory.Legends => LocaleString.MythsAndLegends,
+                CodexCategory.Threats => LocaleString.MajorThreatsAndAdversaries,
+                CodexCategory.Technology => LocaleString.Technology,
+                CodexCategory.Systems => LocaleString.Systems,
+                CodexCategory.Classes => LocaleString.Classes,
+                _ => LocaleString.Miscellaneous,
+            };
+        }
 
         private sealed class CodexEntry
         {
-            public string Title { get; init; }
-            public string Category { get; init; }
-            public string FilePath { get; init; }
+            public LocaleString Title { get; init; }
+            public CodexCategory Category { get; init; }
+            public LocaleString Content { get; init; }
         }
 
         private readonly List<CodexEntry> _allEntries = new();
+        private readonly List<CodexCategory> _categoryIndexToName = new();
 
         public string SearchText
         {
@@ -31,22 +52,20 @@ namespace XM.Codex
             set => Set(value);
         }
 
-        public XMBindingList<string> Categories
+        public XMBindingList<NuiComboEntry> CategoryOptions
         {
-            get => Get<XMBindingList<string>>();
-            set => Set(value);
-        }
-
-        public XMBindingList<bool> CategoryToggles
-        {
-            get => Get<XMBindingList<bool>>();
+            get => Get<XMBindingList<NuiComboEntry>>();
             set => Set(value);
         }
 
         public int SelectedCategory
         {
             get => Get<int>();
-            set => Set(value);
+            set
+            {
+                Set(value);
+                BuildTopics();
+            }
         }
 
         public XMBindingList<string> TopicTitles
@@ -76,6 +95,9 @@ namespace XM.Codex
         [Inject]
         public XMSettingsService Settings { get; set; }
 
+        [Inject]
+        public CodexContentService Content { get; set; }
+
         public override void OnOpen()
         {
             SelectedCategory = -1;
@@ -84,6 +106,7 @@ namespace XM.Codex
             BuildCategories();
             BuildTopics();
             WatchOnClient(m => m.SearchText);
+            WatchOnClient(m => m.SelectedCategory);
         }
 
         public override void OnClose()
@@ -95,48 +118,33 @@ namespace XM.Codex
         {
             _allEntries.Clear();
 
-            var root = Settings.ResourcesDirectory;
-            if (string.IsNullOrWhiteSpace(root) || !Directory.Exists(root))
+            var items = Content.GetAllEntries();
+            foreach (var item in items)
             {
-                TopicContent = LocaleString.Invalid.ToLocalizedString();
-                return;
-            }
-
-            var codexPath = Path.Combine(root, CodexFolderName);
-            if (!Directory.Exists(codexPath))
-            {
-                TopicContent = LocaleString.Invalid.ToLocalizedString();
-                return;
-            }
-
-            foreach (var file in Directory.GetFiles(codexPath, "*.md"))
-            {
-                var title = TryReadTitleFromFile(file) ?? PrettifyTitle(Path.GetFileNameWithoutExtension(file));
-                var category = DeriveCategoryFromFileName(Path.GetFileName(file));
-
                 _allEntries.Add(new CodexEntry
                 {
-                    Title = title,
-                    Category = category,
-                    FilePath = file
+                    Title = item.Title,
+                    Category = item.Category,
+                    Content = item.Content
                 });
             }
         }
 
         private void BuildCategories()
         {
-            var categories = new XMBindingList<string>();
-            var toggles = new XMBindingList<bool>();
+            var distinct = _allEntries.Select(e => e.Category).Distinct().OrderBy(s => s.ToString()).ToList();
+            _categoryIndexToName.Clear();
+            _categoryIndexToName.AddRange(distinct);
 
-            var distinct = _allEntries.Select(e => e.Category).Distinct().OrderBy(s => s).ToList();
-            foreach (var c in distinct)
+            var options = new XMBindingList<NuiComboEntry>();
+            options.Add(new NuiComboEntry(Locale.GetString(LocaleString.AllCategories), -1));
+            for (var i = 0; i < _categoryIndexToName.Count; i++)
             {
-                categories.Add(c);
-                toggles.Add(false);
+                var cat = _categoryIndexToName[i];
+                options.Add(new NuiComboEntry(Locale.GetString(MapCategoryToLocale(cat)), i));
             }
 
-            Categories = categories;
-            CategoryToggles = toggles;
+            CategoryOptions = options;
         }
 
         private void BuildTopics()
@@ -145,21 +153,21 @@ namespace XM.Codex
             var toggles = new XMBindingList<bool>();
 
             IEnumerable<CodexEntry> query = _allEntries;
-            if (SelectedCategory > -1 && SelectedCategory < Categories.Count)
+            if (SelectedCategory > -1 && SelectedCategory < _categoryIndexToName.Count)
             {
-                var cat = Categories[SelectedCategory];
-                query = query.Where(e => e.Category.Equals(cat, StringComparison.OrdinalIgnoreCase));
+                var cat = _categoryIndexToName[SelectedCategory];
+                query = query.Where(e => e.Category == cat);
             }
 
             if (!string.IsNullOrWhiteSpace(SearchText))
             {
                 var s = SearchText.Trim().ToLowerInvariant();
-                query = query.Where(e => e.Title.ToLowerInvariant().Contains(s));
+                query = query.Where(e => Locale.GetString(e.Title).ToLowerInvariant().Contains(s));
             }
 
-            foreach (var e in query.OrderBy(e => e.Title))
+            foreach (var e in query.OrderBy(e => Locale.GetString(e.Title)))
             {
-                topics.Add(e.Title);
+                topics.Add(Locale.GetString(e.Title));
                 toggles.Add(false);
             }
 
@@ -170,29 +178,28 @@ namespace XM.Codex
             TopicContent = LocaleString.SelectAQuest.ToLocalizedString();
         }
 
-        public Action OnClearSearch() => () =>
+        public System.Action OnClearSearch() => () =>
         {
             SearchText = string.Empty;
             BuildTopics();
         };
 
-        public Action OnSearch() => BuildTopics;
+        public System.Action OnSearch() => BuildTopics;
 
-        public Action OnSelectCategory() => () =>
+        public System.Action OnSelectCategory() => () =>
         {
             if (SelectedCategory > -1)
             {
-                CategoryToggles[SelectedCategory] = false;
+                // no-op for combo based selection
             }
 
             var index = NuiGetEventArrayIndex();
             SelectedCategory = index;
-            CategoryToggles[index] = true;
 
             BuildTopics();
         };
 
-        public Action OnSelectTopic() => () =>
+        public System.Action OnSelectTopic() => () =>
         {
             if (SelectedTopic > -1)
             {
@@ -215,8 +222,12 @@ namespace XM.Codex
             }
 
             var title = TopicTitles[SelectedTopic];
-            var cat = SelectedCategory > -1 && SelectedCategory < Categories.Count ? Categories[SelectedCategory] : null;
-            var entry = _allEntries.FirstOrDefault(e => e.Title == title && (cat == null || e.Category == cat));
+            CodexCategory? selectedCat = null;
+            if (SelectedCategory > -1 && SelectedCategory < _categoryIndexToName.Count)
+            {
+                selectedCat = _categoryIndexToName[SelectedCategory];
+            }
+            var entry = _allEntries.FirstOrDefault(e => Locale.GetString(e.Title) == title && (selectedCat == null || e.Category == selectedCat.Value));
             if (entry == null)
             {
                 TopicContent = string.Empty;
@@ -225,36 +236,12 @@ namespace XM.Codex
 
             try
             {
-                var text = File.ReadAllText(entry.FilePath);
-                TopicContent = NormalizeMarkdown(text);
+                TopicContent = NormalizeMarkdown(Locale.GetString(entry.Content));
             }
             catch
             {
                 TopicContent = string.Empty;
             }
-        }
-
-        private static string TryReadTitleFromFile(string file)
-        {
-            try
-            {
-                using var reader = new StreamReader(file);
-                for (var i = 0; i < 50 && !reader.EndOfStream; i++)
-                {
-                    var line = reader.ReadLine();
-                    if (string.IsNullOrWhiteSpace(line))
-                        continue;
-                    if (line.StartsWith("#"))
-                    {
-                        return line.TrimStart('#', ' ', '\t');
-                    }
-                }
-            }
-            catch
-            {
-                // ignore
-            }
-            return null;
         }
 
         private static string PrettifyTitle(string name)
@@ -263,22 +250,7 @@ namespace XM.Codex
             return CultureInfo.InvariantCulture.TextInfo.ToTitleCase(s);
         }
 
-        private static string DeriveCategoryFromFileName(string fileName)
-        {
-            var n = Path.GetFileNameWithoutExtension(fileName).ToLowerInvariant();
-            if (n.Contains("history")) return "History";
-            if (n.Contains("culture")) return "Culture";
-            if (n.Contains("faction")) return "Factions";
-            if (n.Contains("religion")) return "Religion";
-            if (n.Contains("class")) return "Classes";
-            if (n.Contains("mech")) return "Technology";
-            if (n.Contains("teleport") || n.Contains("resonance")) return "Technology";
-            if (n.Contains("myth")) return "Legends";
-            if (n.Contains("hook")) return "Adventure Hooks";
-            if (n.Contains("world") || n.Contains("overview") || n.Contains("conclusion") || n.Contains("project")) return "Overview";
-            if (n.Contains("threat")) return "Threats";
-            return "Misc";
-        }
+        
 
         private static string NormalizeMarkdown(string text)
         {
@@ -288,7 +260,10 @@ namespace XM.Codex
             {
                 var line = l;
                 line = line.TrimStart();
-                line = line.StartsWith("#") ? line.TrimStart('#', ' ') : line;
+                if (line.StartsWith("#"))
+                {
+                    line = line.TrimStart('#', ' ');
+                }
                 if (line.StartsWith("- ") || line.StartsWith("* ") || line.StartsWith("+ "))
                 {
                     line = "• " + line.Substring(2);

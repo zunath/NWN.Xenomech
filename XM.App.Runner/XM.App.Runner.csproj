@@ -32,7 +32,9 @@
     <!-- Build dependencies to ensure all projects rebuild when Runner is built/run -->
     <ProjectReference Include="..\XM.Plugin.Chat\XM.Plugin.Chat.csproj" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\XM.Plugin.Area\XM.Plugin.Area.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\XM.Plugin.Codex\XM.Plugin.Codex.csproj" />
     <ProjectReference Include="..\XM.Plugin.Combat\XM.Plugin.Combat.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\XM.Plugin.Craft\XM.Plugin.Craft.csproj" />
     <ProjectReference Include="..\XM.Plugin.Item\XM.Plugin.Item.csproj" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\XM.Plugin.Spawn\XM.Plugin.Spawn.csproj" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\XM.Plugin.Quest\XM.Plugin.Quest.csproj" ReferenceOutputAssembly="false" />

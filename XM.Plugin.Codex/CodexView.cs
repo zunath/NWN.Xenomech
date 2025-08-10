@@ -29,95 +29,69 @@ namespace XM.Codex
                     .Title(LocaleString.Codex)
                     .Root(root =>
                     {
+                        // Top search bar spanning full width
+                        root.AddRow(sr =>
+                        {
+                            sr.AddTextEdit(edit =>
+                            {
+                                edit
+                                    .Placeholder(LocaleString.Search)
+                                    .Value(model => model.SearchText);
+                            });
+                            sr.AddButton(btn =>
+                            {
+                                btn
+                                    .Label(LocaleString.X)
+                                    .Height(35f)
+                                    .Width(35f)
+                                    .OnClick(model => model.OnClearSearch());
+                            });
+                            sr.AddButton(btn =>
+                            {
+                                btn
+                                    .Label(LocaleString.Search)
+                                    .Height(35f)
+                                    .Width(80f)
+                                    .OnClick(model => model.OnSearch());
+                            });
+                        });
+
+                        // Main content row with left navigation and right content
                         root.AddRow(row =>
                         {
+                            // Left column
                             row.AddColumn(left =>
                             {
-                                left.AddRow(sr =>
+                                left.AddRow(row2 =>
                                 {
-                                    sr.AddTextEdit(edit =>
+                                    row2.AddComboBox(combo =>
                                     {
-                                        edit
-                                            .Placeholder(LocaleString.Search)
-                                            .Value(model => model.SearchText);
-                                    });
-                                    sr.AddButton(btn =>
-                                    {
-                                        btn
-                                            .Label(LocaleString.X)
-                                            .Height(35f)
-                                            .Width(35f)
-                                            .OnClick(model => model.OnClearSearch());
-                                    });
-                                    sr.AddButton(btn =>
-                                    {
-                                        btn
-                                            .Label(LocaleString.Search)
-                                            .Height(35f)
-                                            .Width(60f)
-                                            .OnClick(model => model.OnSearch());
+                                        combo
+                                            .Option(model => model.CategoryOptions)
+                                            .Selection(model => model.SelectedCategory)
+                                            .Width(300f);
                                     });
                                 });
 
-                                left.AddGroup(group =>
+                                left.AddRow(topicsRow =>
                                 {
-                                    group
-                                        .Height(200f)
-                                        .Border(true)
-                                        .Scrollbars(NuiScrollbars.Y)
-                                        .SetLayout(layout =>
+                                    topicsRow.AddList(list =>
+                                    {
+                                        list.AddTemplateCell(tpl =>
                                         {
-                                            layout.AddRow(catRow =>
+                                            tpl.AddRow(r =>
                                             {
-                                                catRow.AddList(list =>
+                                                r.AddButtonSelect(btn =>
                                                 {
-                                                    list.AddTemplateCell(tpl =>
-                                                    {
-                                                        tpl.AddRow(r =>
-                                                        {
-                                                            r.AddButtonSelect(btn =>
-                                                            {
-                                                                btn
-                                                                    .IsSelected(model => model.CategoryToggles)
-                                                                    .Label(model => model.Categories)
-                                                                    .OnClick(model => model.OnSelectCategory());
-                                                            });
-                                                        });
-                                                    });
-                                                }, model => model.Categories);
+                                                    btn
+                                                        .IsSelected(model => model.TopicToggles)
+                                                        .Label(model => model.TopicTitles)
+                                                        .TooltipText(model => model.TopicTitles)
+                                                        .OnClick(model => model.OnSelectTopic());
+                                                });
                                             });
                                         });
-                                });
-
-                                left.AddGroup(group =>
-                                {
-                                    group
-                                        .Height(280f)
-                                        .Border(true)
-                                        .Scrollbars(NuiScrollbars.Y)
-                                        .SetLayout(layout =>
-                                        {
-                                            layout.AddRow(topicsRow =>
-                                            {
-                                                topicsRow.AddList(list =>
-                                                {
-                                                    list.AddTemplateCell(tpl =>
-                                                    {
-                                                        tpl.AddRow(r =>
-                                                        {
-                                                            r.AddButtonSelect(btn =>
-                                                            {
-                                                                btn
-                                                                    .IsSelected(model => model.TopicToggles)
-                                                                    .Label(model => model.TopicTitles)
-                                                                    .TooltipText(model => model.TopicTitles)
-                                                                    .OnClick(model => model.OnSelectTopic());
-                                                            });
-                                                        });
-                                                    });
-                                                }, model => model.TopicTitles);
-                                            });
-                                        });
+                                    }, model => model.TopicTitles);
                                 });
                             });
 

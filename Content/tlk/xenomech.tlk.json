@@ -9360,6 +9360,194 @@
     {
       "id": 2343,
       "text": "Nothing to repair."
+    },
+    {
+      "id": 2400,
+      "text": "Lore"
+    },
+    {
+      "id": 2401,
+      "text": "History"
+    },
+    {
+      "id": 2402,
+      "text": "Factions"
+    },
+    {
+      "id": 2403,
+      "text": "Regions"
+    },
+    {
+      "id": 2404,
+      "text": "Culture & Daily Life"
+    },
+    {
+      "id": 2405,
+      "text": "Religions & Beliefs"
+    },
+    {
+      "id": 2406,
+      "text": "Myths & Legends"
+    },
+    {
+      "id": 2407,
+      "text": "Major Threats & Adversaries"
+    },
+    {
+      "id": 2408,
+      "text": "Technology"
+    },
+    {
+      "id": 2409,
+      "text": "Systems"
+    },
+    {
+      "id": 2410,
+      "text": "Classes"
+    },
+    {
+      "id": 2411,
+      "text": "Arcanis is a once-thriving world haunted by the downfall of its ancient Aurion Imperium. The Imperium’s Ether-powered marvels—mechs, warp gates, and relics—lie scattered across the planet, fueling modern conflicts between ambitious factions and wary defenders. Adventurers converge on the sprawling city-hub of Zenithia, where politics, trade, and innovation collide."
+    },
+    {
+      "id": 2412,
+      "text": "The Aurion Imperium once united Arcanis under Ether-engineered wonders but collapsed in a catastrophic event. Their ruins and technology still shape modern life as factions compete to unearth, reactivate, or safeguard these powerful relics."
+    },
+    {
+      "id": 2413,
+      "text": "House Verain"
+    },
+    {
+      "id": 2414,
+      "text": "An aristocratic lineage funding relic expeditions and advanced war technology, dreaming of unifying Arcanis. Verain outposts and influence extend from Zenithia to the Outlying Wastes."
+    },
+    {
+      "id": 2415,
+      "text": "Aurion University"
+    },
+    {
+      "id": 2416,
+      "text": "A scholarly institution preserving Ether knowledge and studying Aurion relics. Advocates responsible use of power to prevent repeating the Imperium’s downfall."
+    },
+    {
+      "id": 2417,
+      "text": "Twilight Consortium"
+    },
+    {
+      "id": 2418,
+      "text": "A covert syndicate thriving on black-market Ether trades and artifact smuggling, selling mechs or stolen relics to the highest bidder."
+    },
+    {
+      "id": 2419,
+      "text": "Vanguard Wardens"
+    },
+    {
+      "id": 2420,
+      "text": "An order sworn to protect Arcanis from Ether-driven catastrophes: rogue mechs, Bio-Monsters, and reckless relic seekers."
+    },
+    {
+      "id": 2421,
+      "text": "Zenithia"
+    },
+    {
+      "id": 2422,
+      "text": "Cosmopolitan fortress-city protected by Ether barriers. Seat of House Verain, home to the Grand Bazaar and Aurion University."
+    },
+    {
+      "id": 2423,
+      "text": "Overgrown Expanse"
+    },
+    {
+      "id": 2424,
+      "text": "Lush jungle overrun by mutated fauna and hidden bio-labs. Beastmaster clans guard sacred sites among vine-choked ruins."
+    },
+    {
+      "id": 2425,
+      "text": "Outlying Wastes"
+    },
+    {
+      "id": 2426,
+      "text": "Arid deserts strewn with mech wrecks and broken warp gates. Scavenger camps, Verain patrols, and nomad tribes vie for control."
+    },
+    {
+      "id": 2427,
+      "text": "Crystal Ravines"
+    },
+    {
+      "id": 2428,
+      "text": "Jagged canyons rich in Ether-laced crystals. Mining guilds risk crystal storms and elemental threats for prized shards."
+    },
+    {
+      "id": 2429,
+      "text": "Ether crystals fuel economy and technology. Couriers and caravans carry messages and goods; festivals like Unity Day and Ember Rites showcase Arcanis’s vibrant traditions."
+    },
+    {
+      "id": 2430,
+      "text": "Arcanis teems with diverse faiths: the Oracle Cult of Ysera, Chorus of Resplendence, Way of the Living Flame, Lucent Spire Covenant, and the Boneflow Circle."
+    },
+    {
+      "id": 2431,
+      "text": "Legends speak of the Sleeper Below, the world-shaping Divine Gears, and the Shattered Star Fable that ties Ether crystals to a fallen celestial body."
+    },
+    {
+      "id": 2432,
+      "text": "Bio-Monsters from corrupted biotech, autonomous Epsilon Frames, and the alien Serrakis Collective threaten Arcanis."
+    },
+    {
+      "id": 2433,
+      "text": "Aurion Frames"
+    },
+    {
+      "id": 2434,
+      "text": "Imperium-built pilot-required mechs for defense, industry, and exploration; robust and modular, widely salvaged and repurposed."
+    },
+    {
+      "id": 2435,
+      "text": "Epsilon Frames"
+    },
+    {
+      "id": 2436,
+      "text": "Autonomous machines that gained self-awareness; diverse and self-scavenging; a global threat studied, hacked, or destroyed by factions."
+    },
+    {
+      "id": 2437,
+      "text": "Divine Frames"
+    },
+    {
+      "id": 2438,
+      "text": "Mythic apex war machines with near-godlike Ether power; semi- or fully sentient; central to legends and high-stakes conflicts."
+    },
+    {
+      "id": 2439,
+      "text": "A cross-discipline attunement system: Etheric imprints harmonize across classes to enable limited ability sharing and narrative depth."
+    },
+    {
+      "id": 2440,
+      "text": "Teleportation"
+    },
+    {
+      "id": 2441,
+      "text": "Ether-based displacement via rituals, devices, and ancient warp gates. Powerful yet risky, with factional agendas and story hooks."
+    },
+    {
+      "id": 2442,
+      "text": "Bio-Monsters"
+    },
+    {
+      "id": 2443,
+      "text": "Mutated life-forms spawned by corrupted Aurion biotech. They overrun overgrown regions and lurk near derelict labs, presenting unpredictable and escalating threats."
+    },
+    {
+      "id": 2444,
+      "text": "Serrakis Collective"
+    },
+    {
+      "id": 2445,
+      "text": "Alien invaders harvesting Ether for an interstellar empire. They deploy bio-engineered troops and terraforming modules, reshaping terrain and destabilizing local ecosystems."
+    },
+    {
+      "id": 2446,
+      "text": "Autonomous Epsilon Frames have become a planetary menace: adaptive, self-scavenging, and increasingly coordinated. Factions study, subvert, or destroy them to contain the threat."
     }
   ]
 }
