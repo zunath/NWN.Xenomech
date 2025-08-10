@@ -1,12 +1,12 @@
 ﻿using XM.Progression.Skill;
 
-namespace XM.Progression.Craft.UI
+namespace XM.Plugin.Craft.UI
 {
-    internal class SelectCraftPayload
+    internal class CraftPayload
     {
         public SkillType Skill { get; }
 
-        public SelectCraftPayload(SkillType skill)
+        public CraftPayload(SkillType skill)
         {
             Skill = skill;
         }

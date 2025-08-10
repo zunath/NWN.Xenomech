@@ -14,7 +14,7 @@ using XM.UI;
 using Action = System.Action;
 using XM.Shared.API.NWNX.PlayerPlugin;
 
-namespace XM.Progression.Craft.UI
+namespace XM.Plugin.Craft.UI
 {
     [ServiceBinding(typeof(IViewModel))]
     [ServiceBinding(typeof(IRefreshable))]
@@ -253,7 +253,7 @@ namespace XM.Progression.Craft.UI
         {
             _skipPaginationSearch = true;
             var pageNumbers = new XMBindingList<NuiComboEntry>();
-            var pages = (int)(totalRecordCount / RecordsPerPage + (totalRecordCount % RecordsPerPage == 0 ? 0 : 1));
+            var pages = totalRecordCount / RecordsPerPage + (totalRecordCount % RecordsPerPage == 0 ? 0 : 1);
 
             // Always add page 1. In the event no recipes are found,
             // it still needs to be displayed.
@@ -425,7 +425,7 @@ namespace XM.Progression.Craft.UI
             var recipeType = _recipeTypes[_selectedRecipeIndex];
             var recipe = Craft.GetRecipe(recipeType);
             var delta = skill - recipe.Level;
-            var rate = BaseSuccessRate + (2.5f * delta);
+            var rate = BaseSuccessRate + 2.5f * delta;
             rate += (int)(XMRandom.NextFloat() * 14 - 7);
             rate = Math.Clamp(rate, 5, 95);
 

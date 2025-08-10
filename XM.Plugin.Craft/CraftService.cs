@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Anvil.Services;
+using NLog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Anvil.Services;
-using NLog;
 using XM.Inventory;
-using XM.Progression.Craft.Entity;
-using XM.Progression.Craft.UI;
+using XM.Inventory.Durability;
+using XM.Plugin.Craft.Entity;
+using XM.Plugin.Craft.UI;
 using XM.Progression.Job.Entity;
 using XM.Progression.Skill;
+using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.Extension;
@@ -15,7 +17,7 @@ using XM.Shared.Core.Localization;
 using XM.UI;
 using Color = Anvil.API.Color;
 
-namespace XM.Progression.Craft
+namespace XM.Plugin.Craft
 {
     [ServiceBinding(typeof(CraftService))]
     public class CraftService
@@ -40,6 +42,7 @@ namespace XM.Progression.Craft
         private readonly SkillService _skill;
         private readonly ItemPropertyService _itemProperty;
         private readonly ItemCacheService _itemCache;
+        private readonly ItemDurabilityService _itemDurability;
 
         public CraftService(
             DBService db,
@@ -47,6 +50,7 @@ namespace XM.Progression.Craft
             SkillService skill,
             ItemPropertyService itemProperty,
             ItemCacheService itemCache,
+            ItemDurabilityService itemDurability,
             IList<IRecipeListDefinition> recipeLists)
         {
             _db = db;
@@ -54,6 +58,7 @@ namespace XM.Progression.Craft
             _skill = skill;
             _itemProperty = itemProperty;
             _itemCache = itemCache;
+            _itemDurability = itemDurability;
             _recipeLists = recipeLists;
 
             RegisterEvents();
@@ -222,7 +227,7 @@ namespace XM.Progression.Craft
             skill = Math.Clamp(skill, 0, 100);
             var baseChance = 80.0f * Math.Exp(-0.03 * skill);
             var delta = recipe.Level - skill;
-            var difficultyModifier = 1.0f + (delta * 0.02f);
+            var difficultyModifier = 1.0f + delta * 0.02f;
             var chance = baseChance * difficultyModifier;
             chance = Math.Clamp(chance, 5, 95);
 
@@ -352,6 +357,30 @@ namespace XM.Progression.Craft
         public RecipeDetail GetRecipe(RecipeType recipeType)
         {
             return _recipes[recipeType];
+        }
+
+
+        [ScriptHandler("repair_terminal")]
+        public void OpenRepairWindow()
+        {
+            var player = GetLastUsedBy();
+            if (!GetIsPC(player) || GetIsDM(player))
+            {
+                var message = LocaleString.OnlyPlayersMayUseThisItem.ToLocalizedString();
+                SendMessageToPC(player, message);
+                return;
+            }
+
+            _gui.Value.ShowWindow<ItemRepairView>(player, null, OBJECT_SELF);
+        }
+
+        [ScriptHandler("bread_test3")]
+        public void DurabilityReduceTest()
+        {
+            var player = GetLastUsedBy();
+            var item = GetItemInSlot(InventorySlotType.Chest, player);
+
+            _itemDurability.ReduceDurability(player, item);
         }
     }
 }

@@ -3,7 +3,6 @@ using Anvil.API;
 using Anvil.Services;
 using XM.Inventory.Entity;
 using XM.Inventory.KeyItem;
-using XM.Progression.Craft.Entity;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
 using XM.Progression.Skill;

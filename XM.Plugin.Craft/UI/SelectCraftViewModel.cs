@@ -1,13 +1,14 @@
 ﻿using System;
 using Anvil.Services;
-using XM.Progression.Craft.Entity;
+using XM.Plugin.Craft.Entity;
 using XM.Progression.Skill;
+using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.Localization;
 using XM.UI;
 
-namespace XM.Progression.Craft.UI
+namespace XM.Plugin.Craft.UI
 {
     [ServiceBinding(typeof(IViewModel))]
     internal class SelectCraftViewModel: ViewModel<SelectCraftViewModel>
@@ -77,5 +78,7 @@ namespace XM.Progression.Craft.UI
         };
 
         public Action OnClickCancel() => CloseWindow;
+
+
     }
 }

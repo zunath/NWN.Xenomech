@@ -1,6 +1,6 @@
 ﻿using XM.Shared.Core.Localization;
 
-namespace XM.Progression.Craft
+namespace XM.Plugin.Craft
 {
     public enum RecipeCategoryType
     {

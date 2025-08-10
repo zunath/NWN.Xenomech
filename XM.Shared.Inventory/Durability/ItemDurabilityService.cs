@@ -1,6 +1,5 @@
 ﻿using Anvil.API;
 using Anvil.Services;
-using XM.Inventory.Durability.UI;
 using XM.Inventory.Event;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
@@ -11,7 +10,7 @@ using XM.UI;
 namespace XM.Inventory.Durability
 {
     [ServiceBinding(typeof(ItemDurabilityService))]
-    internal class ItemDurabilityService
+    public class ItemDurabilityService
     {
         private readonly XMEventService _event;
         private readonly ItemTypeService _itemType;
@@ -85,7 +84,7 @@ namespace XM.Inventory.Durability
             ReduceDurability(creature, item);
         }
 
-        private void ReduceDurability(uint creature, uint item)
+        public void ReduceDurability(uint creature, uint item)
         {
             var durability = new ItemDurability(item);
             if (durability.MaxDurability <= 0)
@@ -102,7 +101,7 @@ namespace XM.Inventory.Durability
             _event.PublishEvent(creature, new InventoryEvent.ItemDurabilityChangedEvent(item, slot, durability.Condition));
         }
 
-        internal void RestoreDurability(uint creature, uint item, int amount)
+        public void RestoreDurability(uint creature, uint item, int amount)
         {
             var durability = new ItemDurability(item);
             durability.CurrentDurability += amount;
@@ -130,27 +129,5 @@ namespace XM.Inventory.Durability
             return InventorySlotType.Invalid;
         }
 
-        [ScriptHandler("repair_terminal")]
-        public void OpenRepairWindow()
-        {
-            var player = GetLastUsedBy();
-            if (!GetIsPC(player) || GetIsDM(player))
-            {
-                var message = LocaleString.OnlyPlayersMayUseThisItem.ToLocalizedString();
-                SendMessageToPC(player, message);
-                return;
-            }
-
-            _gui.ShowWindow<ItemRepairView>(player, null, OBJECT_SELF);
-        }
-
-        [ScriptHandler("bread_test3")]
-        public void DurabilityReduceTest()
-        {
-            var player = GetLastUsedBy();
-            var item = GetItemInSlot(InventorySlotType.Chest, player);
-
-            ReduceDurability(player, item);
-        }
     }
 }

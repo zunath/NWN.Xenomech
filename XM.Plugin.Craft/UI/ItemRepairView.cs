@@ -4,7 +4,7 @@ using XM.Shared.Core.Localization;
 using XM.UI;
 using XM.UI.Builder;
 
-namespace XM.Inventory.Durability.UI
+namespace XM.Plugin.Craft.UI
 {
     [ServiceBinding(typeof(IView))]
     internal class ItemRepairView: IView

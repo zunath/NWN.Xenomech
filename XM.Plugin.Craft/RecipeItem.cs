@@ -1,4 +1,4 @@
-﻿namespace XM.Progression.Craft
+﻿namespace XM.Plugin.Craft
 {
     public class RecipeItem
     {

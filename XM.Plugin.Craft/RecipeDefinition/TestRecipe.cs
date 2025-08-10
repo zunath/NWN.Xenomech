@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
+using XM.Plugin.Craft;
 using XM.Progression.Skill;
 
-namespace XM.Progression.Craft.RecipeDefinition
+namespace XM.Plugin.Craft.RecipeDefinition
 {
     [ServiceBinding(typeof(IRecipeListDefinition))]
     internal class TestRecipe: IRecipeListDefinition

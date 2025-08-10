@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using XM.Progression.Skill;
 
-namespace XM.Progression.Craft
+namespace XM.Plugin.Craft
 {
     internal class RecipeBuilder
     {

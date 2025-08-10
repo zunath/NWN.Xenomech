@@ -5,7 +5,7 @@ using XM.Shared.Core.Localization;
 using XM.UI;
 using XM.UI.Builder;
 
-namespace XM.Progression.Craft.UI
+namespace XM.Plugin.Craft.UI
 {
     [ServiceBinding(typeof(IView))]
     internal class CraftView: IView

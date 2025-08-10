@@ -1,7 +1,7 @@
 ﻿using System;
 using XM.Shared.Core.Localization;
 
-namespace XM.Progression.Craft
+namespace XM.Plugin.Craft
 {
     internal class RecipeCategoryAttribute: Attribute
     {
