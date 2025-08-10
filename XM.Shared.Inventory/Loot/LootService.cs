@@ -2,7 +2,6 @@
 using NLog;
 using System;
 using System.Collections.Generic;
-using XM.Shared.API.BaseTypes;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.EventManagement;

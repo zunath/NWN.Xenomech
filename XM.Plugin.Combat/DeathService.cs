@@ -1,6 +1,6 @@
 ﻿using Anvil.Services;
 using NLog;
-using XM.Plugin.Combat.Entity;
+using XM.Shared.Core.Entity;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Caching;

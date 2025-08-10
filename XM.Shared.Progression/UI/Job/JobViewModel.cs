@@ -507,33 +507,14 @@ namespace XM.Progression.UI.Job
             ClearAllJobEncouragedFlags();
             RefreshAllJobFilterFlags();
 
-            switch (job.Type)
-            {
-                case JobType.Keeper:
-                    IsKeeperEncouraged = true;
-                    break;
-                case JobType.Mender:
-                    IsMenderEncouraged = true;
-                    break;
-                case JobType.Techweaver:
-                    IsTechweaverEncouraged = true;
-                    break;
-                case JobType.Beastmaster:
-                    IsBeastmasterEncouraged = true;
-                    break;
-                case JobType.Brawler:
-                    IsBrawlerEncouraged = true;
-                    break;
-                case JobType.Nightstalker:
-                    IsNightstalkerEncouraged = true;
-                    break;
-                case JobType.Hunter:
-                    IsHunterEncouraged = true;
-                    break;
-                case JobType.Elementalist:
-                    IsElementalistEncouraged = true;
-                    break;
-            }
+            IsKeeperEncouraged = job.Type == JobType.Keeper;
+            IsMenderEncouraged = job.Type == JobType.Mender;
+            IsTechweaverEncouraged = job.Type == JobType.Techweaver;
+            IsBeastmasterEncouraged = job.Type == JobType.Beastmaster;
+            IsBrawlerEncouraged = job.Type == JobType.Brawler;
+            IsNightstalkerEncouraged = job.Type == JobType.Nightstalker;
+            IsHunterEncouraged = job.Type == JobType.Hunter;
+            IsElementalistEncouraged = job.Type == JobType.Elementalist;
 
             var resonanceAbilities = Ability.GetPlayerResonanceAbilities(Player);
             foreach (var feat in resonanceAbilities)

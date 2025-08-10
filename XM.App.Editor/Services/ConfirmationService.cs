@@ -1,7 +1,3 @@
-using System;
-using System.Threading.Tasks;
-using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 
 namespace XM.App.Editor.Services;

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Anvil.Services;
 using XM.Shared.Core.Conversation;
-using XM.Shared.Core.EventManagement;
 
 namespace XM.Chat.UI.Conversation.Actions
 {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using XM.AI.Targeters;
+﻿using XM.AI.Targeters;
 using XM.Progression.Ability;
 using XM.Shared.API.Constants;
 

@@ -1,17 +1,14 @@
 ﻿using System;
 using Anvil.API;
 using Anvil.Services;
-using XM.Inventory.Entity;
+using XM.Shared.Core.Entity;
 using XM.Inventory.KeyItem;
-using XM.Progression.Craft.Entity;
 using XM.Progression.Job;
-using XM.Progression.Job.Entity;
 using XM.Progression.Skill;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
-using XM.Shared.Core.Entity;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 using XM.UI;
@@ -390,7 +387,7 @@ namespace XM.Progression.UI.CharacterSheet
                     continue;
 
                 jobNames.Add(Locale.GetString(definition.Name));
-                jobLevels.Add($"{lvText} {dbPlayerJob.JobLevels[type]}");
+                jobLevels.Add($"{lvText} {dbPlayerJob.JobLevels[type.Value]}");
 
                 jobColors.Add(currentJob.Type == type 
                     ? new Color(255, 215, 0) 
@@ -398,7 +395,7 @@ namespace XM.Progression.UI.CharacterSheet
 
                 jobIcons.Add(definition.IconResref);
 
-                var ratio = (float)dbPlayerJob.JobXP[type] / (float)XP[dbPlayerJob.JobLevels[type]];
+                var ratio = (float)dbPlayerJob.JobXP[type.Value] / (float)XP[dbPlayerJob.JobLevels[type.Value]];
                 jobProgresses.Add(Math.Clamp(ratio, 0f, 1f));
             }
 
@@ -432,8 +429,8 @@ namespace XM.Progression.UI.CharacterSheet
             foreach (var skill in skills)
             {
                 var level = 0;
-                if (dbPlayerSkill.Skills.ContainsKey(skill.Type))
-                    level = dbPlayerSkill.Skills[skill.Type];
+                if (dbPlayerSkill.Skills.ContainsKey(skill.Type.Value))
+                    level = dbPlayerSkill.Skills[skill.Type.Value];
 
                 var grade = Skill.GetGrade(Player, job, skill);
                 var skillCap = Skill.GetSkillCap(grade, jobLevel);
@@ -450,10 +447,11 @@ namespace XM.Progression.UI.CharacterSheet
 
 
             var dbPlayerCraft = DB.Get<PlayerCraft>(playerId);
-            if (dbPlayerCraft.PrimaryCraftSkill != SkillType.Invalid)
+            if (dbPlayerCraft.PrimaryCraftSkillCode != 0)
             {
-                var skill = Skill.GetCraftSkillDefinition(dbPlayerCraft.PrimaryCraftSkill);
-                var level = Skill.GetCraftSkillLevel(Player, dbPlayerCraft.PrimaryCraftSkill);
+                var primary = SkillType.FromValue(dbPlayerCraft.PrimaryCraftSkillCode);
+                var skill = Skill.GetCraftSkillDefinition(primary);
+                var level = Skill.GetCraftSkillLevel(Player, primary);
                 var progress = (float)level / (float)skill.LevelCap;
 
                 skillNames.Add(skill.Name.ToLocalizedString());
@@ -462,10 +460,11 @@ namespace XM.Progression.UI.CharacterSheet
                 skillProgresses.Add(progress);
             }
 
-            if (dbPlayerCraft.SecondaryCraftSkill != SkillType.Invalid)
+            if (dbPlayerCraft.SecondaryCraftSkillCode != 0)
             {
-                var skill = Skill.GetCraftSkillDefinition(dbPlayerCraft.SecondaryCraftSkill);
-                var level = Skill.GetCraftSkillLevel(Player, dbPlayerCraft.SecondaryCraftSkill);
+                var secondary = SkillType.FromValue(dbPlayerCraft.SecondaryCraftSkillCode);
+                var skill = Skill.GetCraftSkillDefinition(secondary);
+                var level = Skill.GetCraftSkillLevel(Player, secondary);
                 var progress = (float)level / (float)skill.LevelCap;
 
                 skillNames.Add(skill.Name.ToLocalizedString());
@@ -515,8 +514,9 @@ namespace XM.Progression.UI.CharacterSheet
             var keyItemNames = new XMBindingList<string>();
             var keyItemDescriptions = new XMBindingList<string>();
 
-            foreach (var (type, _) in dbPlayerKeyItems.KeyItems)
+            foreach (var (typeId, _) in dbPlayerKeyItems.KeyItems)
             {
+                var type = KeyItem.GetKeyItemTypeById(typeId);
                 var detail = KeyItem.GetKeyItem(type);
                 if (SelectedKeyItemCategory > -1 &&
                     detail.Category != (KeyItemCategoryType)SelectedKeyItemCategory)

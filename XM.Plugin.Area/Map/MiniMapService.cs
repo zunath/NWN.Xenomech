@@ -1,5 +1,4 @@
 ﻿using Anvil.Services;
-using Pipelines.Sockets.Unofficial.Arenas;
 using XM.Inventory.Event;
 using XM.Inventory.KeyItem;
 using XM.Shared.API.Constants;

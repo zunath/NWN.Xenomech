@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using XM.Shared.Core.Conversation;
 
 namespace XM.Chat.UI.Conversation.Actions

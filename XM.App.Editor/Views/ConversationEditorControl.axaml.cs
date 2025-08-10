@@ -1,16 +1,7 @@
-using Avalonia.Controls;
 using Avalonia.Input;
-using Avalonia.Interactivity;
 using XM.App.Editor.ViewModels;
 using XM.App.Editor.Models;
-using Avalonia;
-using System.Linq;
 using Avalonia.VisualTree;
-using System.ComponentModel;
-using System;
-using System.Threading.Tasks;
-using Avalonia.Input.Platform;
-using Avalonia.Threading;
 using System.Text.RegularExpressions;
 
 namespace XM.App.Editor.Views;

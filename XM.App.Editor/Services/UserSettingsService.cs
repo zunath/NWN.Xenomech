@@ -1,6 +1,5 @@
 using System.Text.Json;
 using System.Runtime.InteropServices;
-using Microsoft.Extensions.Logging;
 
 namespace XM.App.Editor.Services;
 

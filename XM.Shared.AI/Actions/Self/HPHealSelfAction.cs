@@ -1,5 +1,4 @@
-﻿using System;
-using XM.AI.Targeters;
+﻿using XM.AI.Targeters;
 using XM.Progression.Ability;
 using XM.Shared.API.Constants;
 

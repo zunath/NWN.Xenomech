@@ -1,6 +1,4 @@
-﻿using System;
-using Anvil.Services;
-using NWN.Core.NWNX;
+﻿using Anvil.Services;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.EventManagement;
 using XM.UI;

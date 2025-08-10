@@ -1,7 +1,7 @@
 ﻿using Anvil.Services;
-using XM.Plugin.Administration.Entity;
 using XM.Shared.API.NWNX.AdminPlugin;
 using XM.Shared.Core.Data;
+using XM.Shared.Core.Entity;
 
 namespace XM.Plugin.Administration.BanManagement
 {

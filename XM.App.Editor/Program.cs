@@ -1,6 +1,3 @@
-using Avalonia;
-using System;
-
 namespace XM.App.Editor;
 
 class Program

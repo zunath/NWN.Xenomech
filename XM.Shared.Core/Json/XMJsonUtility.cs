@@ -32,6 +32,9 @@ namespace XM.Shared.Core.Json
             {
                 Converters = { new NuiRectJsonConverter() }
             }));
+            _options.Converters.Add(new StatGroupJsonConverter());
+            _options.Converters.Add(new ItemStatCollectionJsonConverter());
+            _options.Converters.Add(new AbilityStatCollectionJsonConverter());
         }
 
         /// <summary>

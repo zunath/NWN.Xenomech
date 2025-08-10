@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Anvil.Services;
-using XM.Quest.Entity;
+using XM.Shared.Core.Entity;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.Localization;

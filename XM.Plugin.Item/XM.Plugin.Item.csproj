@@ -73,6 +73,7 @@
 	<ProjectReference Include="..\XM.Shared.Inventory\XM.Shared.Inventory.csproj" />
 	<ProjectReference Include="..\XM.Shared.Progression\XM.Shared.Progression.csproj" />
 	<ProjectReference Include="..\XM.Shared.UI\XM.Shared.UI.csproj" />
+    <ProjectReference Include="..\XM.Plugin.Craft\XM.Plugin.Craft.csproj" />
 </ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">

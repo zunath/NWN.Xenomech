@@ -1,6 +1,5 @@
-﻿using Anvil.Services;
-using XM.Inventory;
-using XM.Quest.Entity;
+﻿using XM.Inventory;
+using XM.Shared.Core.Entity;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 
