@@ -19,3 +19,4 @@
 - Ether anomalies can spontaneously alter the environment, mutating creatures or empowering local wards.
 
 
+

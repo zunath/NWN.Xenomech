@@ -17,3 +17,4 @@ Resonance Nodes are a manifestation of Ether resonance—a subtle link between a
 - Enables dynamic storytelling and complex character legacies, embodying Arcanis’s interconnectedness.
 
 
+

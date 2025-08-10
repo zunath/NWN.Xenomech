@@ -5,3 +5,4 @@
 - **Shattered Star Fable**: Suggests many of Arcanis’s Ether crystals stem from a fallen celestial star, tying the planet’s fate to cosmic forces.
 
 
+
