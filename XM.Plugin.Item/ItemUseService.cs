@@ -267,7 +267,7 @@ namespace XM.Plugin.Item
 
                 if (type == ItemPropertyType.UseLimitationJob)
                 {
-                    var jobType = (JobType)GetItemPropertySubType(ip);
+                    var jobType = JobType.FromValue(GetItemPropertySubType(ip));
 
                     if (job.Type != jobType)
                         return false;

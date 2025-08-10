@@ -1,4 +1,4 @@
-﻿using Ardalis.SmartEnum;
+﻿using XM.Shared.Core.Primitives;
 
 namespace XM.Progression.Job
 {

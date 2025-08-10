@@ -112,7 +112,7 @@ namespace XM.Progression.Job
 
             var playerId = PlayerId.Get(player);
             var dbPlayerJob = _db.Get<PlayerJob>(playerId) ?? new PlayerJob(playerId);
-            var activeJob = JobType.FromValue(dbPlayerJob.ActiveJobCode);
+            var activeJob = dbPlayerJob.ActiveJobCode == 0 ? JobType.Invalid : JobType.FromValue(dbPlayerJob.ActiveJobCode);
             return _jobDefinitions[activeJob];
         }
 
@@ -123,8 +123,8 @@ namespace XM.Progression.Job
 
             var playerId = PlayerId.Get(player);
             var dbPlayerJob = _db.Get<PlayerJob>(playerId) ?? new PlayerJob(playerId);
-            var level = dbPlayerJob.JobLevels.ContainsKey((int)job)
-                ? dbPlayerJob.JobLevels[(int)job]
+            var level = dbPlayerJob.JobLevels.ContainsKey(job.Value)
+                ? dbPlayerJob.JobLevels[job.Value]
                 : 0;
             return level;
         }
@@ -149,7 +149,7 @@ namespace XM.Progression.Job
             var playerId = PlayerId.Get(player);
             var dbPlayerJob = _db.Get<PlayerJob>(playerId);
             var job = JobType.FromValue(dbPlayerJob.ActiveJobCode);
-            var level = dbPlayerJob.JobLevels[(int)job];
+            var level = dbPlayerJob.JobLevels[job.Value];
             var xpRequired = _xp[level];
             var levelsGained = new List<int>();
 
@@ -159,19 +159,19 @@ namespace XM.Progression.Job
                 xp = (int)(xp * modifier);
             }
 
-            dbPlayerJob.JobXP[(int)job] += xp;
+            dbPlayerJob.JobXP[job.Value] += xp;
 
-            while (dbPlayerJob.JobXP[(int)job] >= xpRequired)
+            while (dbPlayerJob.JobXP[job.Value] >= xpRequired)
             {
                 if (level >= LevelCap)
                 {
-                    dbPlayerJob.JobXP[(int)job] = xpRequired - 1;
+                    dbPlayerJob.JobXP[job.Value] = xpRequired - 1;
                     break;
                 }
 
                 level++;
-                dbPlayerJob.JobLevels[(int)job] = level;
-                dbPlayerJob.JobXP[(int)job] -= xpRequired;
+                dbPlayerJob.JobLevels[job.Value] = level;
+                dbPlayerJob.JobXP[job.Value] -= xpRequired;
                 xpRequired = _xp[level];
 
                 levelsGained.Add(level);
@@ -208,7 +208,7 @@ namespace XM.Progression.Job
             var definition = GetJobDefinition(job);
             var playerId = PlayerId.Get(player);
             var dbPlayerJob = _db.Get<PlayerJob>(playerId);
-            var level = dbPlayerJob.JobLevels[(int)job];
+            var level = dbPlayerJob.JobLevels[job.Value];
             var currentJob = GetActiveJob(player);
             var featsToAdd = new List<FeatType>();
             var featsToRemove = new List<FeatType>();
@@ -246,7 +246,7 @@ namespace XM.Progression.Job
                 featsToAdd.Add(feat);
             }
 
-            dbPlayerJob.ActiveJobCode = (int)job;
+            dbPlayerJob.ActiveJobCode = job.Value;
             _db.Set(dbPlayerJob);
 
             var @class = _jobsToClasses[job];

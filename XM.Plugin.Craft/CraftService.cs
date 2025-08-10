@@ -180,8 +180,8 @@ namespace XM.Plugin.Craft
                 return false;
             }
 
-            if (dbPlayerCraft.PrimaryCraftSkillCode != (int)recipe.Skill &&
-                dbPlayerCraft.SecondaryCraftSkillCode != (int)recipe.Skill)
+            if (dbPlayerCraft.PrimaryCraftSkillCode != recipe.Skill.Value &&
+                dbPlayerCraft.SecondaryCraftSkillCode != recipe.Skill.Value)
             {
                 return false;
             }
@@ -207,8 +207,8 @@ namespace XM.Plugin.Craft
             if (delta > MaxDelta)
                 return false;
 
-            if (dbPlayerCraft.PrimaryCraftSkillCode != (int)recipe.Skill &&
-                dbPlayerCraft.SecondaryCraftSkillCode != (int)recipe.Skill)
+            if (dbPlayerCraft.PrimaryCraftSkillCode != recipe.Skill.Value &&
+                dbPlayerCraft.SecondaryCraftSkillCode != recipe.Skill.Value)
             {
                 return false;
             }
@@ -238,16 +238,16 @@ namespace XM.Plugin.Craft
             var playerId = PlayerId.Get(player);
             var dbPlayerSkill = _db.Get<PlayerSkill>(playerId);
 
-            if (!dbPlayerSkill.Skills.ContainsKey((int)skillType))
-                dbPlayerSkill.Skills[(int)skillType] = 0;
+            if (!dbPlayerSkill.Skills.ContainsKey(skillType.Value))
+                dbPlayerSkill.Skills[skillType.Value] = 0;
 
-            dbPlayerSkill.Skills[(int)skillType]++;
+            dbPlayerSkill.Skills[skillType.Value]++;
 
             _db.Set(dbPlayerSkill);
 
             var definition = _skill.GetCraftSkillDefinition(skillType);
             var name = definition.Name.ToLocalizedString();
-            var level = dbPlayerSkill.Skills[(int)skillType];
+            var level = dbPlayerSkill.Skills[skillType.Value];
             var message = LocaleString.YourXSkillIncreasesToY.ToLocalizedString(name, level);
             SendMessageToPC(player, message);
         }
@@ -330,12 +330,12 @@ namespace XM.Plugin.Craft
             }
 
             var device = OBJECT_SELF;
-            var skillType = (SkillType)GetLocalInt(device, "SKILL_ID");
+            var skillType = SkillType.FromValue(GetLocalInt(device, "SKILL_ID"));
             var playerId = PlayerId.Get(player);
             var dbPlayerCraft = _db.Get<PlayerCraft>(playerId);
 
-            if (dbPlayerCraft.PrimaryCraftSkillCode == (int)skillType ||
-                dbPlayerCraft.SecondaryCraftSkillCode == (int)skillType)
+            if (dbPlayerCraft.PrimaryCraftSkillCode == skillType.Value ||
+                dbPlayerCraft.SecondaryCraftSkillCode == skillType.Value)
             {
                 var payload = new CraftPayload(skillType);
                 _gui.Value.ShowWindow<CraftView>(player, payload, device);

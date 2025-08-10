@@ -387,7 +387,7 @@ namespace XM.Progression.UI.CharacterSheet
                     continue;
 
                 jobNames.Add(Locale.GetString(definition.Name));
-                jobLevels.Add($"{lvText} {dbPlayerJob.JobLevels[(int)type]}");
+                jobLevels.Add($"{lvText} {dbPlayerJob.JobLevels[type.Value]}");
 
                 jobColors.Add(currentJob.Type == type 
                     ? new Color(255, 215, 0) 
@@ -395,7 +395,7 @@ namespace XM.Progression.UI.CharacterSheet
 
                 jobIcons.Add(definition.IconResref);
 
-                var ratio = (float)dbPlayerJob.JobXP[(int)type] / (float)XP[dbPlayerJob.JobLevels[(int)type]];
+                var ratio = (float)dbPlayerJob.JobXP[type.Value] / (float)XP[dbPlayerJob.JobLevels[type.Value]];
                 jobProgresses.Add(Math.Clamp(ratio, 0f, 1f));
             }
 
@@ -429,8 +429,8 @@ namespace XM.Progression.UI.CharacterSheet
             foreach (var skill in skills)
             {
                 var level = 0;
-                if (dbPlayerSkill.Skills.ContainsKey((int)skill.Type))
-                    level = dbPlayerSkill.Skills[(int)skill.Type];
+                if (dbPlayerSkill.Skills.ContainsKey(skill.Type.Value))
+                    level = dbPlayerSkill.Skills[skill.Type.Value];
 
                 var grade = Skill.GetGrade(Player, job, skill);
                 var skillCap = Skill.GetSkillCap(grade, jobLevel);
@@ -449,7 +449,7 @@ namespace XM.Progression.UI.CharacterSheet
             var dbPlayerCraft = DB.Get<PlayerCraft>(playerId);
             if (dbPlayerCraft.PrimaryCraftSkillCode != 0)
             {
-                var primary = (SkillType)dbPlayerCraft.PrimaryCraftSkillCode;
+                var primary = SkillType.FromValue(dbPlayerCraft.PrimaryCraftSkillCode);
                 var skill = Skill.GetCraftSkillDefinition(primary);
                 var level = Skill.GetCraftSkillLevel(Player, primary);
                 var progress = (float)level / (float)skill.LevelCap;
@@ -462,7 +462,7 @@ namespace XM.Progression.UI.CharacterSheet
 
             if (dbPlayerCraft.SecondaryCraftSkillCode != 0)
             {
-                var secondary = (SkillType)dbPlayerCraft.SecondaryCraftSkillCode;
+                var secondary = SkillType.FromValue(dbPlayerCraft.SecondaryCraftSkillCode);
                 var skill = Skill.GetCraftSkillDefinition(secondary);
                 var level = Skill.GetCraftSkillLevel(Player, secondary);
                 var progress = (float)level / (float)skill.LevelCap;

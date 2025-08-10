@@ -60,11 +60,11 @@ namespace XM.Plugin.Craft.UI
 
                 if (dbPlayerCraft.PrimaryCraftSkillCode == 0)
                 {
-                    dbPlayerCraft.PrimaryCraftSkillCode = (int)_skill;
+                    dbPlayerCraft.PrimaryCraftSkillCode = _skill.Value;
                 }
                 else if (dbPlayerCraft.SecondaryCraftSkillCode == 0)
                 {
-                    dbPlayerCraft.SecondaryCraftSkillCode = (int)_skill;
+                    dbPlayerCraft.SecondaryCraftSkillCode = _skill.Value;
                 }
 
                 DB.Set(dbPlayerCraft);

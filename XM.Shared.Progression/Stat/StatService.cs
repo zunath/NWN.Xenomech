@@ -1387,7 +1387,7 @@ namespace XM.Progression.Stat
             {
                 var playerId = PlayerId.Get(creature);
                 var dbPlayerJob = _db.Get<PlayerJob>(playerId) ?? new PlayerJob(playerId);
-                var activeJob = JobType.FromValue(dbPlayerJob.ActiveJobCode);
+                var activeJob = dbPlayerJob.ActiveJobCode == 0 ? JobType.Invalid : JobType.FromValue(dbPlayerJob.ActiveJobCode);
 
                 return activeJob == JobType.Invalid 
                     ? 1 
