@@ -1,5 +1,4 @@
-﻿using Anvil.Services;
-using XM.Quest.Entity;
+﻿using XM.Shared.Core.Entity;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 
@@ -28,7 +27,7 @@ namespace XM.Quest.Objective
             var dbPlayer = _db.Get<PlayerQuest>(playerId) ?? new PlayerQuest(playerId);
             var quest = dbPlayer.Quests.ContainsKey(questId) ? dbPlayer.Quests[questId] : new PlayerQuestDetail();
 
-            quest.KillProgresses[Group] = Quantity;
+            quest.KillProgresses[(int)Group] = Quantity;
             dbPlayer.Quests[questId] = quest;
             _db.Set(dbPlayer);
         }
@@ -40,17 +39,17 @@ namespace XM.Quest.Objective
             var quest = dbPlayer.Quests.ContainsKey(questId) ? dbPlayer.Quests[questId] : null;
 
             if (quest == null) return;
-            if (!quest.KillProgresses.ContainsKey(Group)) return;
-            if (quest.KillProgresses[Group] <= 0) return;
+            if (!quest.KillProgresses.ContainsKey((int)Group)) return;
+            if (quest.KillProgresses[(int)Group] <= 0) return;
 
-            quest.KillProgresses[Group]--;
+            quest.KillProgresses[(int)Group]--;
             _db.Set(dbPlayer);
 
             var npcGroup = _questNPC.GetQuestNPCGroup(Group);
 
-            var statusMessage = $"[{npcGroup.Name} remaining: {quest.KillProgresses[Group]}";
+            var statusMessage = $"[{npcGroup.Name} remaining: {quest.KillProgresses[(int)Group]}";
 
-            if (quest.KillProgresses[Group] <= 0)
+            if (quest.KillProgresses[(int)Group] <= 0)
             {
                 statusMessage += $" {ColorToken.Green("{COMPLETE}")}";
             }
@@ -83,7 +82,7 @@ namespace XM.Quest.Objective
                 return "N/A";
 
             var npcGroup = _questNPC.GetQuestNPCGroup(Group);
-            var numberRemaining = dbPlayer.Quests[questId].KillProgresses[Group];
+            var numberRemaining = dbPlayer.Quests[questId].KillProgresses[(int)Group];
 
             return $"{Quantity - numberRemaining} / {Quantity} {npcGroup.Name}";
         }

@@ -1,6 +1,5 @@
 ﻿using System.Numerics;
 using Anvil.API;
-using XM.Shared.API.BaseTypes;
 using XM.Shared.API.Constants;
 using AnimalCompanionCreatureType = XM.Shared.API.Constants.AnimalCompanionCreatureType;
 using AssociateType = XM.Shared.API.Constants.AssociateType;

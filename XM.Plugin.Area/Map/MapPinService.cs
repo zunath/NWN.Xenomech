@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Anvil.Services;
 using NWN.Core.NWNX;
-using XM.Plugin.Area.Entity;
+using XM.Shared.Core.Entity;
 using XM.Shared.Core.Caching;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
@@ -71,9 +71,9 @@ namespace XM.Plugin.Area.Map
             var areaResref = GetResRef(area);
 
             if (!dbPlayerMap.MapPins.ContainsKey(areaResref))
-                dbPlayerMap.MapPins[areaResref] = new List<MapPin>();
+                dbPlayerMap.MapPins[areaResref] = new List<MapPinEntry>();
 
-            dbPlayerMap.MapPins[areaResref].Add(mapPin);
+            dbPlayerMap.MapPins[areaResref].Add(new MapPinEntry { Id = mapPin.Id, X = mapPin.X, Y = mapPin.Y, Note = mapPin.Note });
 
             _db.Set(dbPlayerMap);
         }

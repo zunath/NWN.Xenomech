@@ -10,7 +10,6 @@ using XM.Progression.Beast;
 using XM.Progression.Event;
 using XM.Progression.Skill;
 using XM.Progression.Stat;
-using XM.Progression.Stat.Entity;
 using XM.Progression.StatusEffect;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.FeedbackPlugin;
@@ -549,9 +548,10 @@ namespace XM.Plugin.Combat
             if (GetIsPC(attacker) && !GetIsDMPossessed(attacker))
             {
                 var playerId = PlayerId.Get(attacker);
-                var dbPlayerStat = _db.Get<PlayerStat>(playerId);
-                delay = dbPlayerStat.EquippedItemStats[InventorySlotType.RightHand].Delay +
-                        dbPlayerStat.EquippedItemStats[InventorySlotType.LeftHand].Delay;
+                var dbPlayerStat = _db.Get<XM.Shared.Core.Entity.PlayerStat>(playerId);
+                var right = dbPlayerStat.EquippedItemStats.ContainsKey(InventorySlotType.RightHand.GetHashCode()) ? dbPlayerStat.EquippedItemStats[InventorySlotType.RightHand.GetHashCode()].Delay : 0;
+                var left = dbPlayerStat.EquippedItemStats.ContainsKey(InventorySlotType.LeftHand.GetHashCode()) ? dbPlayerStat.EquippedItemStats[InventorySlotType.LeftHand.GetHashCode()].Delay : 0;
+                delay = right + left;
             }
             else
             {
@@ -585,9 +585,9 @@ namespace XM.Plugin.Combat
         internal int CalculateTPGainPlayer(uint player, bool useSubtleBlow)
         {
             var playerId = PlayerId.Get(player);
-            var dbPlayerStat = _db.Get<PlayerStat>(playerId);
-            var main = dbPlayerStat.EquippedItemStats[InventorySlotType.RightHand];
-            var off = dbPlayerStat.EquippedItemStats[InventorySlotType.LeftHand];
+            var dbPlayerStat = _db.Get<XM.Shared.Core.Entity.PlayerStat>(playerId);
+            var main = dbPlayerStat.EquippedItemStats.ContainsKey(InventorySlotType.RightHand.GetHashCode()) ? dbPlayerStat.EquippedItemStats[InventorySlotType.RightHand.GetHashCode()] : new XM.Shared.Core.Entity.Stat.ItemStatGroup();
+            var off = dbPlayerStat.EquippedItemStats.ContainsKey(InventorySlotType.LeftHand.GetHashCode()) ? dbPlayerStat.EquippedItemStats[InventorySlotType.LeftHand.GetHashCode()] : new XM.Shared.Core.Entity.Stat.ItemStatGroup();
             var mainDelay = main.Delay;
             var offDelay = off.Delay;
             var totalDelay = mainDelay + offDelay;

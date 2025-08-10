@@ -1,5 +1,4 @@
-﻿using NWN.Core;
-using NWNX.NET;
+﻿using NWNX.NET;
 
 namespace XM.Shared.API.BaseTypes
 {

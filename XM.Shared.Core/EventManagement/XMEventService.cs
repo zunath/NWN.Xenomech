@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using Anvil.API;
 using Anvil.Services;
 using NLog;
 using NWN.Core.NWNX;
-using XM.Shared.Core.Json;
 
 namespace XM.Shared.Core.EventManagement
 {

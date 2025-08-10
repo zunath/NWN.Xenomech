@@ -3,7 +3,7 @@ using Anvil.API;
 using Anvil.Services;
 using NLog;
 using XM.Inventory;
-using XM.Plugin.Item.Market.Entity;
+using XM.Shared.Core.Entity;
 using XM.Plugin.Item.Market.UI.ExamineItem;
 using XM.Shared.API.NWNX.ObjectPlugin;
 using XM.Shared.Core;
@@ -132,10 +132,10 @@ namespace XM.Plugin.Item.Market.UI.MarketBuyMenu
             if (!string.IsNullOrWhiteSpace(SearchText))
                 query.AddFieldSearch(nameof(MarketItem.Name), SearchText, true);
 
-            if (_activeCategoryIdFilters.Count > 0)
-            {
-                query.AddFieldSearch(nameof(MarketItem.Category), _activeCategoryIdFilters);
-            }
+                if (_activeCategoryIdFilters.Count > 0)
+                {
+                    query.AddFieldSearch(nameof(MarketItem.CategoryId), _activeCategoryIdFilters);
+                }
 
             query.AddPaging(ListingsPerPage, ListingsPerPage * SelectedPageIndex);
 

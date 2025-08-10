@@ -1,5 +1,4 @@
-﻿using Anvil.Services;
-using XM.Inventory;
+﻿using XM.Inventory;
 
 namespace XM.Quest.Reward
 {

@@ -1,5 +1,4 @@
-﻿using Anvil.Services;
-using XM.Shared.API.Constants;
+﻿using XM.Shared.API.Constants;
 
 namespace XM.Quest.Reward
 {

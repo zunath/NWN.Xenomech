@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using XM.Inventory.Entity;
+using XM.Shared.Core.Entity;
 using XM.Inventory.Event;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
@@ -107,10 +107,10 @@ namespace XM.Inventory.KeyItem
             var playerId = PlayerId.Get(player);
             var dbPlayerKeyItem = _db.Get<PlayerKeyItem>(playerId) ?? new PlayerKeyItem(playerId);
 
-            if (dbPlayerKeyItem.KeyItems.ContainsKey(keyItem))
+            if (dbPlayerKeyItem.KeyItems.ContainsKey((int)keyItem))
                 return;
 
-            dbPlayerKeyItem.KeyItems[keyItem] = DateTime.UtcNow;
+            dbPlayerKeyItem.KeyItems[(int)keyItem] = DateTime.UtcNow;
             _db.Set(dbPlayerKeyItem);
 
             var keyItemDetail = _allKeyItems[keyItem];
@@ -133,10 +133,10 @@ namespace XM.Inventory.KeyItem
             var playerId = PlayerId.Get(player);
             var dbPlayer = _db.Get<PlayerKeyItem>(playerId);
 
-            if (!dbPlayer.KeyItems.ContainsKey(keyItem))
+            if (!dbPlayer.KeyItems.ContainsKey((int)keyItem))
                 return;
 
-            dbPlayer.KeyItems.Remove(keyItem);
+            dbPlayer.KeyItems.Remove((int)keyItem);
             _db.Set(dbPlayer);
 
             var keyItemDetail = _allKeyItems[keyItem];
@@ -159,7 +159,7 @@ namespace XM.Inventory.KeyItem
             var playerId = PlayerId.Get(player);
             var dbPlayer = _db.Get<PlayerKeyItem>(playerId);
 
-            return dbPlayer.KeyItems.ContainsKey(keyItem);
+            return dbPlayer.KeyItems.ContainsKey((int)keyItem);
         }
 
         /// <summary>
@@ -182,7 +182,7 @@ namespace XM.Inventory.KeyItem
 
             foreach (var ki in keyItems)
             {
-                if (!dbPlayer.KeyItems.ContainsKey(ki))
+                if (!dbPlayer.KeyItems.ContainsKey((int)ki))
                     return false;
             }
 

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Anvil.Services;
-using XM.Plugin.Area.Entity;
+using XM.Shared.Core.Entity;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;

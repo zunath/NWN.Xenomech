@@ -1,7 +1,7 @@
-﻿using NLog;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using XM.Quest.Objective;
-using XM.Quest.Entity;
+using XM.Shared.Core.Entity;
+// using XM.Shared.Core.Entity.Quest; // No longer in sub-namespace
 using JournalEntry = XM.Shared.API.NWNX.PlayerPlugin.JournalEntry;
 using System.Linq;
 using XM.Inventory;
@@ -19,8 +19,6 @@ using Anvil.Services;
 using XM.Quest.Reward;
 using XM.Quest.Conversation;
 using DialogService = XM.Shared.Core.Dialog.DialogService;
-using Anvil.API;
-using XM.Progression.Event;
 
 namespace XM.Quest
 {

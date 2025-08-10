@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
-using Anvil.API;
 using Anvil.Services;
 using Discord;
 using Discord.Webhook;

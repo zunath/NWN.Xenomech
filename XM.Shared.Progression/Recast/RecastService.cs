@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using Anvil.Services;
-using XM.Progression.Recast.Entity;
+using XM.Shared.Core.Entity;
 using XM.Progression.Stat;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
@@ -43,10 +43,11 @@ namespace XM.Progression.Recast
                 var playerId = PlayerId.Get(creature);
                 var dbPlayer = _db.Get<PlayerRecast>(playerId) ?? new PlayerRecast(playerId);
 
-                if (!dbPlayer.RecastTimes.ContainsKey(recastGroup)) return (false, string.Empty);
+                var groupId = (int)recastGroup;
+                if (!dbPlayer.RecastTimes.ContainsKey(groupId)) return (false, string.Empty);
 
-                var timeToWait = _time.GetTimeToWaitLongIntervals(now, dbPlayer.RecastTimes[recastGroup], false);
-                return (now < dbPlayer.RecastTimes[recastGroup], timeToWait);
+                var timeToWait = _time.GetTimeToWaitLongIntervals(now, dbPlayer.RecastTimes[groupId], false);
+                return (now < dbPlayer.RecastTimes[groupId], timeToWait);
             }
             // NPCs and DM-possessed NPCs
             else
@@ -102,7 +103,7 @@ namespace XM.Progression.Recast
                 }
 
                 var recastDate = DateTime.UtcNow.AddSeconds(delaySeconds);
-                dbPlayerCombat.RecastTimes[group] = recastDate;
+                dbPlayerCombat.RecastTimes[(int)group] = recastDate;
 
                 _db.Set(dbPlayerCombat);
             }

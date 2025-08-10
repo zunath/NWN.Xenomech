@@ -1,6 +1,5 @@
 ﻿using Anvil.API;
 using Anvil.Services;
-using NLog.Layouts;
 using XM.Shared.Core.Localization;
 using XM.UI;
 using XM.UI.Builder;

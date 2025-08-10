@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
 using NLog;
-using XM.Quest.Entity;
+using XM.Shared.Core.Entity;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.Dialog.Snippet;

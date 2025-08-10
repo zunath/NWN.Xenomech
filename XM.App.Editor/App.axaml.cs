@@ -1,10 +1,4 @@
-using Avalonia;
-using System;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Markup.Xaml;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using XM.App.Editor.Services;
 
 namespace XM.App.Editor;

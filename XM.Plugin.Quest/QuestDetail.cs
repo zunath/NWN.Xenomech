@@ -3,7 +3,6 @@ using System.Linq;
 using Anvil.Services;
 using XM.Quest.Prerequisite;
 using XM.Quest.Reward;
-using XM.Shared.Core.Data;
 
 namespace XM.Quest
 {

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
 using XM.Inventory;
-using XM.Progression.Craft;
-using XM.Progression.Craft.Entity;
+using PlayerCraft = XM.Shared.Core.Entity.PlayerCraft;
+using XM.Plugin.Craft;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.Localization;
@@ -58,7 +58,7 @@ namespace XM.Plugin.Item.ItemDefinition
                     var recipeType = (RecipeType)recipeId;
                     var playerId = PlayerId.Get(user);
                     var dbPlayerCraft = _db.Get<PlayerCraft>(playerId);
-                    if (dbPlayerCraft.LearnedRecipes.Contains(recipeType))
+                    if (dbPlayerCraft.LearnedRecipes.Contains((int)recipeType))
                     {
                         return LocaleString.YouAlreadyLearnedThisRecipe.ToLocalizedString();
                     }
@@ -72,7 +72,7 @@ namespace XM.Plugin.Item.ItemDefinition
                     var recipeType = (RecipeType)GetLocalInt(item, RecipeId);
                     var recipeDetail = _craft.GetRecipe(recipeType);
 
-                    dbPlayerCraft.LearnedRecipes.Add(recipeType);
+                    dbPlayerCraft.LearnedRecipes.Add((int)recipeType);
                     _db.Set(dbPlayerCraft);
 
                     var normalItem = recipeDetail.Items[RecipeQualityType.Normal];

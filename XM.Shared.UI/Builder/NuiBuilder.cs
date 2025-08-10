@@ -1,6 +1,4 @@
 ﻿using System;
-using Anvil.API;
-using XM.UI.Builder.Layout;
 
 namespace XM.UI.Builder
 {

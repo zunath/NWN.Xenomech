@@ -1,6 +1,6 @@
 ﻿using Anvil.API;
 using Anvil.Services;
-using XM.Plugin.Area.Entity;
+using XM.Shared.Core.Entity;
 using XM.Shared.Core;
 using XM.Shared.Core.Caching;
 using XM.Shared.Core.Data;
