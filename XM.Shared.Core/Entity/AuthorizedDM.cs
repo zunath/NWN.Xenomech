@@ -1,5 +1,6 @@
 ﻿using Anvil.Services;
 using XM.Shared.Core.Data;
+using XM.Shared.Core.Entity;
 
 namespace XM.Shared.Core.Authorization.Entity
 {

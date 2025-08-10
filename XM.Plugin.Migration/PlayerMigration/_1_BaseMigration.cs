@@ -1,5 +1,5 @@
 ﻿using Anvil.Services;
-using XM.Migration.Entity;
+using XM.Shared.Core.Entity;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core;
 using XM.Shared.API.Constants;

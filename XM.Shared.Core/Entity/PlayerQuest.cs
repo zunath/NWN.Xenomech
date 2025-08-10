@@ -1,8 +1,7 @@
-﻿using Anvil.Services;
+using Anvil.Services;
 using System.Collections.Generic;
-using XM.Shared.Core.Data;
 
-namespace XM.Quest.Entity
+namespace XM.Shared.Core.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
     public class PlayerQuest: EntityBase
@@ -19,6 +18,8 @@ namespace XM.Quest.Entity
             Id = playerId;
             Quests = new Dictionary<string, PlayerQuestDetail>();
         }
-
     }
 }
+
+
+

@@ -1,10 +1,10 @@
-﻿using Anvil.Services;
+using Anvil.Services;
 using XM.Shared.Core.Data;
 
-namespace XM.Plugin.Item.OutfitEditor.Entity
+namespace XM.Shared.Core.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
-    internal class PlayerOutfit: EntityBase
+    public class PlayerOutfit : EntityBase
     {
         [Indexed]
         public string PlayerId { get; set; }
@@ -35,3 +35,6 @@ namespace XM.Plugin.Item.OutfitEditor.Entity
         public int RightThighId { get; set; }
     }
 }
+
+
+

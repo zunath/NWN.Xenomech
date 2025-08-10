@@ -1,10 +1,10 @@
 ﻿using System;
 using Anvil.Services;
-using XM.Progression.Craft.Entity;
 using XM.Progression.Skill;
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
+using XM.Shared.Core.Entity;
 using XM.Shared.Core.Localization;
 using XM.UI;
 
@@ -33,7 +33,7 @@ namespace XM.Plugin.Craft.UI
             _skill = payload.Skill;
 
             var playerId = PlayerId.Get(Player);
-            var dbPlayerCraft = DB.Get<XM.Progression.Craft.Entity.PlayerCraft>(playerId);
+            var dbPlayerCraft = DB.Get<PlayerCraft>(playerId);
             var skillDefinition = Skill.GetCraftSkillDefinition(_skill);
 
             if (dbPlayerCraft.PrimaryCraftSkill == SkillType.Invalid)
@@ -57,7 +57,7 @@ namespace XM.Plugin.Craft.UI
             ShowModal(LocaleString.AreYouSureYouWantToLearnTheXCraftSkill.ToLocalizedString(skillDefinition.Name.ToLocalizedString()), () =>
             {
                 var playerId = PlayerId.Get(Player);
-                var dbPlayerCraft = DB.Get<XM.Progression.Craft.Entity.PlayerCraft>(playerId);
+                var dbPlayerCraft = DB.Get<PlayerCraft>(playerId);
 
                 if (dbPlayerCraft.PrimaryCraftSkill == SkillType.Invalid)
                 {

@@ -2,11 +2,10 @@
 using Anvil.API;
 using Anvil.Services;
 using NLog;
-using NLog.Fluent;
-using XM.Plugin.Administration.Entity;
 using XM.Shared.API.NWNX.AdminPlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
+using XM.Shared.Core.Entity;
 using XM.Shared.Core.Localization;
 using XM.UI;
 using Action = System.Action;

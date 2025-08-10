@@ -2,7 +2,7 @@
 using Anvil.Services;
 using XM.Inventory;
 using XM.Progression.Craft;
-using PlayerCraft = XM.Progression.Craft.Entity.PlayerCraft;
+using PlayerCraft = XM.Shared.Core.Entity.PlayerCraft;
 using XM.Plugin.Craft;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;

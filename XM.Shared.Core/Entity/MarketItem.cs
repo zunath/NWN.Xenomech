@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using Anvil.Services;
 using XM.Shared.Core.Data;
 
-namespace XM.Plugin.Item.Market.Entity
+namespace XM.Shared.Core.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
-    internal class MarketItem: EntityBase
+    public class MarketItem : EntityBase
     {
         [Indexed]
         public string PlayerId { get; set; }
@@ -23,7 +23,10 @@ namespace XM.Plugin.Item.Market.Entity
         public int Quantity { get; set; }
         public string IconResref { get; set; }
         [Indexed]
-        public MarketCategoryType Category { get; set; }
+        public int CategoryId { get; set; }
         public DateTime? DateListed { get; set; }
     }
 }
+
+
+

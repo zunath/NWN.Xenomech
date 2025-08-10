@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using Anvil.Services;
-using XM.Progression.Skill;
-using XM.Shared.Core.Data;
 
-namespace XM.Progression.Craft.Entity
+namespace XM.Shared.Core.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
     public class PlayerCraft : EntityBase

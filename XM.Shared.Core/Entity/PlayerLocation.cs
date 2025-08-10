@@ -1,14 +1,12 @@
-﻿using Anvil.Services;
-using XM.Shared.Core.Data;
+using Anvil.Services;
 
-namespace XM.Plugin.Area.Entity
+namespace XM.Shared.Core.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
-    internal class PlayerLocation: EntityBase
+    public class PlayerLocation : EntityBase
     {
         public PlayerLocation()
         {
-            
         }
 
         public PlayerLocation(string playerId)
@@ -24,4 +22,5 @@ namespace XM.Plugin.Area.Entity
     }
 }
 
-// Moved to XM.Shared.Core.Entity.PlayerLocation
+
+

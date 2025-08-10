@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace XM.Shared.Core.Data
+namespace XM.Shared.Core.Entity
 {
     public interface IDBEntity
     {

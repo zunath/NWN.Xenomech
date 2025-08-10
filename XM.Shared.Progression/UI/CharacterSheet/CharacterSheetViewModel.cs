@@ -1,7 +1,7 @@
 ﻿using System;
 using Anvil.API;
 using Anvil.Services;
-using XM.Inventory.Entity;
+using XM.Shared.Core.Entity;
 using XM.Inventory.KeyItem;
 using XM.Progression.Job;
 using XM.Progression.Job.Entity;
@@ -448,7 +448,7 @@ namespace XM.Progression.UI.CharacterSheet
             }
 
 
-            var dbPlayerCraft = DB.Get<Craft.Entity.PlayerCraft>(playerId);
+            var dbPlayerCraft = DB.Get<PlayerCraft>(playerId);
             if (dbPlayerCraft.PrimaryCraftSkill != SkillType.Invalid)
             {
                 var skill = Skill.GetCraftSkillDefinition(dbPlayerCraft.PrimaryCraftSkill);
@@ -509,13 +509,14 @@ namespace XM.Progression.UI.CharacterSheet
         private void RefreshKeyItems()
         {
             var playerId = PlayerId.Get(Player);
-            var dbPlayerKeyItems = DB.Get<PlayerKeyItem>(playerId) ?? new PlayerKeyItem(playerId);
+            var dbPlayerKeyItems = DB.Get<XM.Shared.Core.Entity.PlayerKeyItem>(playerId) ?? new XM.Shared.Core.Entity.PlayerKeyItem(playerId);
 
             var keyItemNames = new XMBindingList<string>();
             var keyItemDescriptions = new XMBindingList<string>();
 
-            foreach (var (type, _) in dbPlayerKeyItems.KeyItems)
+            foreach (var (typeId, _) in dbPlayerKeyItems.KeyItems)
             {
+                var type = KeyItem.GetKeyItemTypeById(typeId);
                 var detail = KeyItem.GetKeyItem(type);
                 if (SelectedKeyItemCategory > -1 &&
                     detail.Category != (KeyItemCategoryType)SelectedKeyItemCategory)

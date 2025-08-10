@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Anvil.Services;
-using XM.Shared.Core.Data;
 
-namespace XM.Chat.Entity
+namespace XM.Shared.Core.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
-    internal class PlayerName: EntityBase
+    public class PlayerName : EntityBase
     {
         public Dictionary<string, string> OverrideNames { get; set; }
 
@@ -21,3 +20,6 @@ namespace XM.Chat.Entity
         }
     }
 }
+
+
+

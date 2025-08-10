@@ -1,5 +1,5 @@
 ﻿using Anvil.Services;
-using XM.Shared.Core.Data;
+using XM.Shared.Core.Entity;
 
 namespace XM.Progression.Stat.Entity
 {
@@ -32,6 +32,5 @@ namespace XM.Progression.Stat.Entity
         public StatGroup JobStats { get; set; }
         public ItemStatCollection EquippedItemStats { get; set; }
         public AbilityStatCollection AbilityStats { get; set; }
-
     }
 }

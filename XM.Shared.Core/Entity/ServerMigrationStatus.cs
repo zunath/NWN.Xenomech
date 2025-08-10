@@ -1,7 +1,7 @@
-﻿using Anvil.Services;
+using Anvil.Services;
 using XM.Shared.Core.Data;
 
-namespace XM.Migration.Entity
+namespace XM.Shared.Core.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
     public class ServerMigrationStatus: EntityBase
@@ -18,3 +18,6 @@ namespace XM.Migration.Entity
         public int MigrationVersion { get; set; }
     }
 }
+
+
+

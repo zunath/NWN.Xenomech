@@ -1,7 +1,8 @@
 ﻿using NLog;
 using System.Collections.Generic;
 using XM.Quest.Objective;
-using XM.Quest.Entity;
+using XM.Shared.Core.Entity;
+using XM.Shared.Core.Entity.Quest;
 using JournalEntry = XM.Shared.API.NWNX.PlayerPlugin.JournalEntry;
 using System.Linq;
 using XM.Inventory;

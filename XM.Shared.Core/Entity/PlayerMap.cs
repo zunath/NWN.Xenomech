@@ -1,29 +1,28 @@
-﻿using Anvil.Services;
+using Anvil.Services;
 using System.Collections.Generic;
-using XM.Plugin.Area.Map;
-using XM.Shared.Core.Data;
 
-namespace XM.Plugin.Area.Entity
+namespace XM.Shared.Core.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
-    internal class PlayerMap: EntityBase
+    public class PlayerMap : EntityBase
     {
         public PlayerMap()
         {
             MapProgressions = new Dictionary<string, string>();
-            MapPins = new Dictionary<string, List<MapPin>>();
+            MapPins = new Dictionary<string, List<MapPinEntry>>();
         }
 
         public PlayerMap(string playerId)
         {
             Id = playerId;
             MapProgressions = new Dictionary<string, string>();
-            MapPins = new Dictionary<string, List<MapPin>>();
+            MapPins = new Dictionary<string, List<MapPinEntry>>();
         }
 
         public Dictionary<string, string> MapProgressions { get; set; }
-        public Dictionary<string, List<MapPin>> MapPins { get; set; }
+        public Dictionary<string, List<MapPinEntry>> MapPins { get; set; }
     }
 }
 
-// Moved to XM.Shared.Core.Entity.PlayerMap
+
+

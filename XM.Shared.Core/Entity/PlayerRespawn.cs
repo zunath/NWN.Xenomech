@@ -1,7 +1,7 @@
-﻿using Anvil.Services;
+using Anvil.Services;
 using XM.Shared.Core.Data;
 
-namespace XM.Plugin.Combat.Entity
+namespace XM.Shared.Core.Entity
 {
     [ServiceBinding(typeof(IDBEntity))]
     public class PlayerRespawn: EntityBase
@@ -30,3 +30,6 @@ namespace XM.Plugin.Combat.Entity
         }
     }
 }
+
+
+

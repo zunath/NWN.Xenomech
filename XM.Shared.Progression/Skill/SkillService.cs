@@ -14,6 +14,7 @@ using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.CreaturePlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
+using XM.Shared.Core.Entity;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 

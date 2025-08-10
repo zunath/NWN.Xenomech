@@ -1,6 +1,7 @@
 ﻿using System;
+using XM.Shared.Core.Data;
 
-namespace XM.Shared.Core.Data
+namespace XM.Shared.Core.Entity
 {
     public class EntityBase: IDBEntity
     {
