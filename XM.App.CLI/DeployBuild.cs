@@ -30,6 +30,7 @@ namespace XM.App.CLI
             BuildCachedCreatureFeatsFile();
             CopyExternalPlugins();
             CopyDataFiles();
+            CopyCodexLore();
         }
 
         /// <summary>
@@ -261,6 +262,36 @@ namespace XM.App.CLI
             Console.WriteLine($"Copying Data files to: {target.FullName}");
             CopyAll(source, target, string.Empty);
             Console.WriteLine("Data files copied successfully.");
+        }
+
+        private void CopyCodexLore()
+        {
+            try
+            {
+                var repoRoot = "../";
+                var loreDir = Path.Combine(repoRoot, "docs", "lore");
+                if (!Directory.Exists(loreDir))
+                {
+                    Console.WriteLine("Codex: docs/lore not found. Skipping lore copy.");
+                    return;
+                }
+
+                var codexTargetDir = Path.Combine(ResourcesPath, "codex");
+                Directory.CreateDirectory(codexTargetDir);
+
+                var markdownFiles = Directory.GetFiles(loreDir, "*.md");
+                foreach (var file in markdownFiles)
+                {
+                    var dest = Path.Combine(codexTargetDir, Path.GetFileName(file));
+                    File.Copy(file, dest, true);
+                }
+
+                Console.WriteLine($"Codex: Copied {markdownFiles.Length} lore files to resources/codex.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Codex: Failed to copy lore files: {ex.Message}");
+            }
         }
 
     }
