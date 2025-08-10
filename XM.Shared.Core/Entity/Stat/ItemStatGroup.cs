@@ -1,5 +1,9 @@
+using System.Text.Json.Serialization;
+using XM.Shared.Core.Json;
+
 namespace XM.Shared.Core.Entity.Stat
 {
+    [JsonConverter(typeof(ItemStatGroupJsonConverter))]
     public class ItemStatGroup : StatGroup
     {
         public bool IsEquipped { get; set; }

@@ -1,7 +1,11 @@
-﻿using XM.Shared.Core.Primitives;
+﻿using System.Text.Json.Serialization;
+using XM.Shared.Core.Json;
+using XM.Shared.Core.Primitives;
 
 namespace XM.Progression.Skill
 {
+    [JsonConverter(typeof(SmartEnumJsonConverter<SkillType>))]
+    [KeyNameDomain("SkillType")]
     public sealed class SkillType : SmartEnum<SkillType>
     {
         public static readonly SkillType Invalid = new(nameof(Invalid), 0);

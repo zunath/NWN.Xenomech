@@ -1,7 +1,11 @@
-﻿using XM.Shared.Core.Primitives;
+﻿using System.Text.Json.Serialization;
+using XM.Shared.Core.Json;
+using XM.Shared.Core.Primitives;
 
 namespace XM.Progression.Job
 {
+    [JsonConverter(typeof(SmartEnumJsonConverter<JobType>))]
+    [KeyNameDomain("JobType")]
     public sealed class JobType : SmartEnum<JobType>
     {
         public static readonly JobType Invalid = new(nameof(Invalid), 0);

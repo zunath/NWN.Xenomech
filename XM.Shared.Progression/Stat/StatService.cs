@@ -16,7 +16,6 @@ using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
 using XM.UI.Event;
-using XM.Shared.Progression.Stat;
 
 namespace XM.Progression.Stat
 {
