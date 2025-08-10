@@ -1,4 +1,3 @@
-using System;
 using Avalonia.Media.Imaging;
 
 namespace XM.App.Editor.Models;

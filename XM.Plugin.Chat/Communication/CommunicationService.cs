@@ -1,10 +1,9 @@
 ﻿using Anvil.Services;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
-using XM.Chat.Entity;
+using XM.Shared.Core.Entity;
 using XM.Shared.API.NWNX.ChatPlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
@@ -287,12 +286,11 @@ namespace XM.Chat.Communication
                     byte b = 255;
                     if (component.IsOOC)
                     {
-                        if (dbReceiverChat != null &&
-                            dbReceiverChat.OOCChatColor != null)
+                            if (dbReceiverChat != null)
                         {
-                            r = dbReceiverChat.OOCChatColor.Red;
-                            g = dbReceiverChat.OOCChatColor.Green;
-                            b = dbReceiverChat.OOCChatColor.Blue;
+                            r = dbReceiverChat.OOC_R;
+                            g = dbReceiverChat.OOC_G;
+                            b = dbReceiverChat.OOC_B;
                         }
                         else
                         {
@@ -306,12 +304,11 @@ namespace XM.Chat.Communication
                     {
                         byte emoteRed, emoteGreen, emoteBlue;
 
-                        if (dbReceiverChat != null &&
-                            dbReceiverChat.EmoteChatColor != null)
+                        if (dbReceiverChat != null)
                         {
-                            emoteRed = dbReceiverChat.EmoteChatColor.Red;
-                            emoteGreen = dbReceiverChat.EmoteChatColor.Green;
-                            emoteBlue = dbReceiverChat.EmoteChatColor.Blue;
+                            emoteRed = dbReceiverChat.Emote_R;
+                            emoteGreen = dbReceiverChat.Emote_G;
+                            emoteBlue = dbReceiverChat.Emote_B;
                         }
                         else
                         {
@@ -607,8 +604,8 @@ namespace XM.Chat.Communication
             {
                 var playerId = GetObjectUUID(player);
                 var dbPlayer = _db.Get<PlayerChat>(playerId);
-
-                return dbPlayer.EmoteStyle;
+                
+                return (EmoteStyle)dbPlayer.EmoteStyleCode;
             }
 
             return EmoteStyle.Regular;
@@ -620,7 +617,7 @@ namespace XM.Chat.Communication
             {
                 var playerId = GetObjectUUID(player);
                 var dbPlayer = _db.Get<PlayerChat>(playerId);
-                dbPlayer.EmoteStyle = style;
+                dbPlayer.EmoteStyleCode = (int)style;
                 _db.Set(dbPlayer);
             }
         }

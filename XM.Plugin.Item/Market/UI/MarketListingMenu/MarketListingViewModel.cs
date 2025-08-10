@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Anvil.Services;
 using XM.Inventory;
-using XM.Plugin.Item.Market.Entity;
+using XM.Shared.Core.Entity;
 using XM.Plugin.Item.Market.Event;
 using XM.Plugin.Item.Market.UI.PriceSelection;
 using XM.Shared.API.Constants;
@@ -203,7 +203,7 @@ namespace XM.Plugin.Item.Market.UI.MarketListingMenu
                 Data = ObjectPlugin.Serialize(item),
                 Quantity = GetItemStackSize(item),
                 IconResref = ItemType.GetIconResref(item),
-                Category = Market.GetItemMarketCategory(item)
+                CategoryId = (int)Market.GetItemMarketCategory(item)
             };
 
             DB.Set(listing);

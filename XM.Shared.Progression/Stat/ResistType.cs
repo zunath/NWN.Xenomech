@@ -1,5 +1,8 @@
-﻿namespace XM.Progression.Stat
+﻿using XM.Shared.Core.Json;
+
+namespace XM.Progression.Stat
 {
+    [KeyNameDomain("ResistType")]
     public enum ResistType
     {
         Invalid = 0,

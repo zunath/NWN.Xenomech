@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using Anvil.Services;
 using NLog;
-using XM.Shared.Core.Authorization.Entity;
 using XM.Shared.Core.Configuration;
 using XM.Shared.Core.Data;
+using XM.Shared.Core.Entity;
 using XM.Shared.Core.EventManagement;
 using XM.Shared.Core.Localization;
 

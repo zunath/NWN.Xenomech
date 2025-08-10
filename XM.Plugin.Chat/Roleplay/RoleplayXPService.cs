@@ -7,7 +7,7 @@ using XM.Shared.API.NWNX.ChatPlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.EventManagement;
-using XM.Chat.Entity;
+using XM.Shared.Core.Entity;
 
 namespace XM.Chat.Roleplay
 {

@@ -1,5 +1,5 @@
 ﻿using Anvil.Services;
-using XM.Chat.Entity;
+using XM.Shared.Core.Entity;
 using XM.Shared.API.NWNX.RenamePlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;

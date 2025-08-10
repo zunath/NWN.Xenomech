@@ -1,11 +1,9 @@
 ﻿using Anvil.API;
 using Anvil.Services;
-using NLog.Layouts;
 using XM.Shared.Core.Localization;
 using XM.UI;
 using XM.UI.Builder;
 using XM.UI.Builder.Layout;
-using NuiDirection = XM.Shared.API.NUI.NuiDirection;
 using NuiScrollbars = XM.Shared.API.NUI.NuiScrollbars;
 
 namespace XM.Quest.UI

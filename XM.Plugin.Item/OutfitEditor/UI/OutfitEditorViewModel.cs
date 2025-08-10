@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Anvil.Services;
-using XM.Plugin.Item.OutfitEditor.Entity;
+using XM.Shared.Core.Entity;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.ObjectPlugin;
 using XM.Shared.Core;

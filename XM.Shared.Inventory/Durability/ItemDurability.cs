@@ -3,7 +3,7 @@ using XM.Shared.API.Constants;
 
 namespace XM.Inventory.Durability
 {
-    internal class ItemDurability
+    public class ItemDurability
     {
         private const int DurabilityCap = 500;
 

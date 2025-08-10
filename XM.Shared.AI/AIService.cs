@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
-using Anvil;
 using Anvil.API;
 using Anvil.Services;
 using NLog;

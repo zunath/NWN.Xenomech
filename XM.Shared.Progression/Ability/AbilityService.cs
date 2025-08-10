@@ -8,11 +8,11 @@ using NWN.Core.NWNX;
 using XM.Progression.Ability.Telegraph;
 using XM.Progression.Event;
 using XM.Progression.Job;
-using XM.Progression.Job.Entity;
+using XM.Shared.Core.Entity;
 using XM.Progression.Recast;
 using XM.Progression.Skill;
 using XM.Progression.Stat;
-using XM.Progression.Stat.Entity;
+// using XM.Progression.Stat.Entity; // PlayerStat moved to Core
 using XM.Shared.API.Constants;
 using XM.Shared.Core;
 using XM.Shared.Core.Activity;
@@ -683,7 +683,13 @@ namespace XM.Progression.Ability
             var dbPlayerStat = _db.Get<PlayerStat>(playerId);
             var ability = _abilities[data.Feat];
 
-            dbPlayerStat.AbilityStats.Add(data.Feat, ability.StatGroup);
+            // Map Progression StatGroup into CoreStatGroup
+            var core = new XM.Shared.Core.Entity.Stat.StatGroup();
+            foreach (var (k, v) in ability.StatGroup.Stats)
+                core.Stats[(int)k] = v;
+            foreach (var (k, v) in ability.StatGroup.Resists)
+                core.Resists[(int)k] = v;
+            dbPlayerStat.AbilityStats[(int)data.Feat] = core;
             _db.Set(dbPlayerStat);
 
             ability.AbilityEquippedAction?.Invoke(player);
@@ -698,7 +704,7 @@ namespace XM.Progression.Ability
             var dbPlayerStat = _db.Get<PlayerStat>(playerId);
             var ability = _abilities[data.Feat];
 
-            dbPlayerStat.AbilityStats.Remove(data.Feat);
+            dbPlayerStat.AbilityStats.Remove((int)data.Feat);
             _db.Set(dbPlayerStat);
 
             ability.AbilityUnequippedAction?.Invoke(player);

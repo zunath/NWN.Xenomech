@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using Anvil.Services;
-using XM.Chat.Entity;
+using XM.Shared.Core.Entity;
 using XM.Shared.API.Constants;
 using XM.Shared.API.NWNX.AdminPlugin;
 using XM.Shared.API.NWNX.RenamePlugin;

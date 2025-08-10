@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using NRediSearch;
-using XM.Shared.Core.Json;
 
 namespace XM.Shared.Core.Data
 {

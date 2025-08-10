@@ -11,6 +11,7 @@ using StackExchange.Redis;
 using XM.Shared.Core.Configuration;
 using XM.Shared.Core.Json;
 using XM.Shared.Core.EventManagement;
+using XM.Shared.Core.Entity;
 
 namespace XM.Shared.Core.Data
 {
