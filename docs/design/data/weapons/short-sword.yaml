@@ -1,0 +1,82 @@
+# Source: docs/_incoming/XM Design Bible - Short Sword.tsv
+updated: 2025-08-10
+weapon: Short Sword
+items:
+  - { level: 1, name: "Phantom Fang", source: Weaponcraft, dmg: 4, delay: 200 }
+  - { level: 1, name: "Phantom Fang +1", source: Weaponcraft, dmg: 5, delay: 190 }
+  - { level: 7, name: "Stormpiercer", source: Weaponcraft, dmg: 8, delay: 230 }
+  - { level: 7, name: "Stormpiercer +1", source: Weaponcraft, dmg: 9, delay: 220 }
+  - { level: 13, name: "Gale Fang", source: Weaponcraft, dmg: 11, delay: 230 }
+  - { level: 13, name: "Gale Fang +1", source: Weaponcraft, dmg: 12, delay: 220 }
+  - { level: 13, name: "Shadowfang Blade", source: Weaponcraft, dmg: 11, delay: 230 }
+  - { level: 13, name: "Shadowfang Blade +1", source: Weaponcraft, dmg: 12, delay: 220 }
+  - { level: 16, name: "Obsidian Fang", source: Weaponcraft, dmg: 11, delay: 240 }
+  - { level: 16, name: "Obsidian Fang +1", source: Weaponcraft, dmg: 12, delay: 230 }
+  - { level: 16, name: "Sentinel Edge", source: Loot, dmg: 11, delay: 240 }
+  - { level: 19, name: "Swiftstrike Blade", source: Loot, dmg: 11, delay: 190 }
+  - { level: 20, name: "Ironfang Blade", source: Loot, dmg: 12, delay: 230 }
+  - { level: 24, name: "Skylark Edge", source: Weaponcraft, dmg: 13, delay: 200 }
+  - { level: 24, name: "Skylark Edge +1", source: Weaponcraft, dmg: 14, delay: 190 }
+  - { level: 26, name: "Vanguard Fang", source: Weaponcraft, dmg: 16, delay: 240 }
+  - { level: 26, name: "Vanguard Fang +1", source: Weaponcraft, dmg: 17, delay: 230 }
+  - { level: 28, name: "Talon Blade", source: Loot, dmg: 15, delay: 190, atk: 1, wil: 1 }
+  - { level: 32, name: "Swiftclaw Sword", source: Weaponcraft, dmg: 19, delay: 230 }
+  - { level: 32, name: "Swiftclaw Sword +1", source: Weaponcraft, dmg: 20, delay: 220 }
+  - { level: 32, name: "Tempest Fang", source: Weaponcraft, dmg: 19, delay: 230 }
+  - { level: 32, name: "Tempest Fang +1", source: Weaponcraft, dmg: 20, delay: 220 }
+  - { level: 36, name: "Fracture Fang", source: Weaponcraft, dmg: 20, delay: 230, vit: 1 }
+  - { level: 36, name: "Fracture Fang +1", source: Weaponcraft, dmg: 21, delay: 220, vit: 2 }
+  - { level: 41, name: "Training Blade", source: Weaponcraft, dmg: 23, delay: 240 }
+  - { level: 41, name: "Training Blade +1", source: Weaponcraft, dmg: 24, delay: 230 }
+  - { level: 43, name: "Petalstorm Blade", source: Loot, dmg: 24, delay: 230 }
+  - { level: 43, name: "Cherryblade", source: Weaponcraft, dmg: 24, delay: 230 }
+  - { level: 43, name: "Cherryblade +1", source: Weaponcraft, dmg: 25, delay: 220 }
+  - { level: 46, name: "Twilight Fang", source: Weaponcraft, dmg: 25, delay: 240 }
+  - { level: 46, name: "Twilight Fang +1", source: Weaponcraft, dmg: 26, delay: 230 }
+  - { level: 47, name: "Crimson Wing", source: Weaponcraft, dmg: 21, delay: 190 }
+  - { level: 47, name: "Crimson Wing +1", source: Weaponcraft, dmg: 22, delay: 180 }
+  - { level: 48, name: "Twinstrike Blade", source: Loot, dmg: 28, delay: 250 }
+  - { level: 48, name: "Twinstrike Blade +1", source: Loot, dmg: 29, delay: 240 }
+  - { level: 50, name: "Nyxblade", source: Weaponcraft, dmg: 24, delay: 190, agi: 2 }
+
+
+tsv: |
+  Type	Level	Item Name	Source	DMG	Delay	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC
+  Short Sword	1	Phantom Fang	Weaponcraft	4	200										
+  Short Sword	1	Phantom Fang +1	Weaponcraft	5	190										
+  Short Sword	7	Stormpiercer	Weaponcraft	8	230										
+  Short Sword	7	Stormpiercer +1	Weaponcraft	9	220										
+  Short Sword	13	Gale Fang	Weaponcraft	11	230										
+  Short Sword	13	Gale Fang +1	Weaponcraft	12	220										
+  Short Sword	13	Shadowfang Blade	Weaponcraft	11	230										
+  Short Sword	13	Shadowfang Blade +1	Weaponcraft	12	220										
+  Short Sword	16	Obsidian Fang	Weaponcraft	11	240										
+  Short Sword	16	Obsidian Fang +1	Weaponcraft	12	230										
+  Short Sword	16	Sentinel Edge	Loot	11	240										
+  Short Sword	19	Swiftstrike Blade	Loot	11	190										
+  Short Sword	20	Ironfang Blade	Loot	12	230										
+  Short Sword	24	Skylark Edge	Weaponcraft	13	200										
+  Short Sword	24	Skylark Edge +1	Weaponcraft	14	190										
+  Short Sword	26	Vanguard Fang	Weaponcraft	16	240										
+  Short Sword	26	Vanguard Fang +1	Weaponcraft	17	230										
+  Short Sword	28	Talon Blade	Loot	15	190								1			1	
+  Short Sword	32	Swiftclaw Sword	Weaponcraft	19	230										
+  Short Sword	32	Swiftclaw Sword +1	Weaponcraft	20	220										
+  Short Sword	32	Tempest Fang	Weaponcraft	19	230										
+  Short Sword	32	Tempest Fang +1	Weaponcraft	20	220										
+  Short Sword	36	Fracture Fang	Weaponcraft	20	230							1				
+  Short Sword	36	Fracture Fang +1	Weaponcraft	21	220							2				
+  Short Sword	41	Training Blade	Weaponcraft	23	240										
+  Short Sword	41	Training Blade +1	Weaponcraft	24	230										
+  Short Sword	43	Petalstorm Blade	Loot	24	230										
+  Short Sword	43	Cherryblade	Weaponcraft	24	230										
+  Short Sword	43	Cherryblade +1	Weaponcraft	25	220										
+  Short Sword	46	Twilight Fang	Weaponcraft	25	240										
+  Short Sword	46	Twilight Fang +1	Weaponcraft	26	230										
+  Short Sword	47	Crimson Wing	Weaponcraft	21	190										
+  Short Sword	47	Crimson Wing +1	Weaponcraft	22	180										
+  Short Sword	48	Twinstrike Blade	Loot	28	250										
+  Short Sword	48	Twinstrike Blade +1	Loot	29	240										
+  Short Sword	50	Nyxblade	Weaponcraft	24	190										2	
+
+

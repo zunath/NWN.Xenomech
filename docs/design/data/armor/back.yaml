@@ -1,0 +1,44 @@
+source: docs/_incoming/XM Design Bible - Armor.tsv
+slot: Back
+tsv: |
+  Type	Level	Item Name	Source	DEF	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC	BST	BRW	ELM	HNT	KPR	MDR	NGT	TEC
+  Back	4	Harestride Mantle	Fabrication	1										x	x			x	x		x	x
+  Back	4	Harestride Mantle +1	Fabrication	2										x	x			x	x		x	x
+  Back	7	Etherwoven Cape	Fabrication	1												x			x	
+  Back	7	Etherwoven Cape +1	Fabrication	1												x			x	
+  Back	12	Wayfarer’s Mantle	Fabrication	1								3						x	x			x	x		x	x
+  Back	17	Lizardscale Mantle	Fabrication	2										x	x			x	x		x	x
+  Back	17	Lizardscale Mantle +1	Fabrication	3										x	x			x	x		x	x
+  Back	18	Cotton-Woven Cape	Fabrication	2												x			x	
+  Back	18	Cotton-Woven Cape +1	Fabrication	3												x			x	
+  Back	18	Dhalmelhide Mantle	Fabrication	3										x	x			x	x		x	x
+  Back	18	Dhalmelhide Mantle +1	Fabrication	4										x	x			x	x		x	x
+  Back	24	Nomad’s Trail Mantle	Fabrication	2								3					1		x	x			x	x		x	x
+  Back	24	Nomad’s Trail Mantle +1	Fabrication	3								3					2		x	x			x	x		x	x
+  Back	25	Bonze’s Ether Cape	Fabrication	2		3												x			x	
+  Back	25	Bonze’s Ether Cape +1	Fabrication	3		6												x			x	
+  Back	26	Precision Mantle	Fabrication	2								1						x	x			x	x		x	x
+  Back	26	Precision Mantle +1	Fabrication	3								2						x	x			x	x		x	x
+  Back	28	Direwolf Mantle	Fabrication	4										x	x			x	x		x	x
+  Back	28	Direwolf Mantle +1	Fabrication	5										x	x			x	x		x	x
+  Back	30	Midnight Shadow Cape	Fabrication	3								3							x			x	
+  Back	30	Midnight Shadow Cape +1	Fabrication	4								4							x			x	
+  Back	32	Obsidian Cloak	Fabrication	3										2				x			x	
+  Back	32	Obsidian Cloak +1	Fabrication	4										3				x			x	
+  Back	36	Ramguard Mantle	Fabrication	5										x	x			x	x		x	x
+  Back	36	Ramguard Mantle +1	Fabrication	6										x	x			x	x		x	x
+  Back	37	Cavalier’s War Mantle	Fabrication	8									1						x	x			x	x		x	x
+  Back	37	Cavalier’s War Mantle +1	Fabrication	9									2						x	x			x	x		x	x
+  Back	43	Crimson Drape	Fabrication	4										2				x			x	
+  Back	43	Crimson Drape +1	Fabrication	5										3				x			x	
+  Back	44	Aurora Sky Mantle	Fabrication	4		10												x			x	
+  Back	44	Aurora Sky Mantle +1	Fabrication	5		12												x			x	
+  Back	47	Shadow Jaguar Mantle	Fabrication	3								2							x	x			x	x		x	x
+  Back	47	Shadow Jaguar Mantle +1	Fabrication	4								3				1			x	x			x	x		x	x
+  Back	48	Raptorstrike Mantle	Fabrication	6										x	x			x	x		x	x
+  Back	48	Raptorstrike Mantle +1	Fabrication	7										x	x			x	x		x	x
+  Back	49	Reflex Cloak	Loot	4									5						x			x	
+  Back	50	Arcane Veil Mantle	Fabrication	2		7												x			x	
+  Back	50	Titan War Mantle	Fabrication	9														x			x
+  Back	50	Sharpshooter’s Mantle	Fabrication	4								1	2						x			x	
+

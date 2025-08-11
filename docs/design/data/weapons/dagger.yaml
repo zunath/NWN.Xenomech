@@ -1,0 +1,186 @@
+# Source: docs/_incoming/XM Design Bible - Dagger.tsv
+updated: 2025-08-10
+weapon: Dagger
+items:
+  - { level: 1, name: "Aurion Alloy Dagger", source: Weaponcraft, dmg: 3, delay: 190 }
+  - { level: 1, name: "Aurion Alloy Dagger +1", source: Weaponcraft, dmg: 4, delay: 180 }
+  - { level: 1, name: "Aurion Alloy Knife", source: Weaponcraft, dmg: 4, delay: 200 }
+  - { level: 1, name: "Aurion Alloy Knife +1", source: Weaponcraft, dmg: 5, delay: 190 }
+  - { level: 1, name: "Ritual Fang", source: Loot, dmg: 1, delay: 190, ep: 10 }
+  - { level: 1, name: "Ether-Tuned Dagger", source: Loot, dmg: 3, delay: 190 }
+  - { level: 1, name: "Ether-Tuned Knife", source: Loot, dmg: 4, delay: 210 }
+  - { level: 1, name: "Corroded Fang", source: Loot, dmg: 3, delay: 190 }
+  - { level: 7, name: "Shadowpiercer", source: Weaponcraft, dmg: 4, delay: 190 }
+  - { level: 7, name: "Shadowpiercer +1", source: Weaponcraft, dmg: 5, delay: 180 }
+  - { level: 7, name: "Phantom Knife", source: Weaponcraft, dmg: 4, delay: 200 }
+  - { level: 7, name: "Phantom Knife +1", source: Weaponcraft, dmg: 5, delay: 190 }
+  - { level: 9, name: "Brassfang Dagger", source: Weaponcraft, dmg: 5, delay: 190 }
+  - { level: 9, name: "Brassfang Dagger +1", source: Weaponcraft, dmg: 6, delay: 180 }
+  - { level: 9, name: "Precision Fang", source: Loot, dmg: 5, delay: 190 }
+  - { level: 12, name: "Arc Dagger", source: Weaponcraft, dmg: 7, delay: 190 }
+  - { level: 12, name: "Arc Dagger +1", source: Weaponcraft, dmg: 8, delay: 180 }
+  - { level: 12, name: "Whisperfang Dagger", source: Weaponcraft, dmg: 6, delay: 190 }
+  - { level: 12, name: "Whisperfang Dagger +1", source: Weaponcraft, dmg: 7, delay: 180 }
+  - { level: 12, name: "Sparkfang Dagger", source: Weaponcraft, dmg: 7, delay: 180 }
+  - { level: 12, name: "Sparkfang Dagger +1", source: Weaponcraft, dmg: 8, delay: 180 }
+  - { level: 13, name: "Arc Knife", source: Weaponcraft, dmg: 8, delay: 200 }
+  - { level: 13, name: "Arc Knife +1", source: Weaponcraft, dmg: 9, delay: 190 }
+  - { level: 18, name: "Venomfang Baselard", source: Weaponcraft, dmg: 8, delay: 190 }
+  - { level: 18, name: "Venomfang Baselard +1", source: Weaponcraft, dmg: 9, delay: 180 }
+  - { level: 20, name: "Decurion’s Fang", source: Loot, dmg: 10, delay: 180, hp: 2 }
+  - { level: 20, name: "Etherfang Kukri", source: Weaponcraft, dmg: 10, delay: 200 }
+  - { level: 20, name: "Etherfang Kukri +1", source: Weaponcraft, dmg: 11, delay: 190 }
+  - { level: 20, name: "Mercenary’s Fang", source: Loot, dmg: 11, delay: 190 }
+  - { level: 20, name: "Vanguard Dagger", source: Loot, dmg: 8, delay: 150 }
+  - { level: 20, name: "Toxin Baselard", source: Loot, dmg: 8, delay: 190 }
+  - { level: 20, name: "Toxin Fang", source: Weaponcraft, dmg: 8, delay: 190 }
+  - { level: 20, name: "Toxin Fang +1", source: Weaponcraft, dmg: 9, delay: 180 }
+  - { level: 20, name: "Python’s Fang", source: Loot, dmg: 9, delay: 190 }
+  - { level: 21, name: "Toxin Knife", source: Weaponcraft, dmg: 9, delay: 200 }
+  - { level: 21, name: "Toxin Knife +1", source: Weaponcraft, dmg: 10, delay: 190 }
+  - { level: 23, name: "Acidfang Dagger", source: Loot, dmg: 10, delay: 190 }
+  - { level: 23, name: "Corrosive Fang", source: Loot, dmg: 11, delay: 180 }
+  - { level: 23, name: "Meltfang Dagger", source: Loot, dmg: 10, delay: 190 }
+  - { level: 23, name: "Mythrite Dagger", source: Weaponcraft, dmg: 10, delay: 190 }
+  - { level: 23, name: "Mythrite Dagger +1", source: Weaponcraft, dmg: 10, delay: 180 }
+  - { level: 24, name: "Toxin Kukri", source: Weaponcraft, dmg: 11, delay: 210 }
+  - { level: 24, name: "Toxin Kukri +1", source: Weaponcraft, dmg: 10, delay: 200 }
+  - { level: 24, name: "Ranging Fang", source: Weaponcraft, dmg: 7, delay: 200, hp: 6 }
+  - { level: 24, name: "Ranging Fang +1", source: Weaponcraft, dmg: 8, delay: 190, hp: 7 }
+  - { level: 25, name: "Bastion Dagger", source: Loot, dmg: 11, delay: 180, hp: 2, per: 2 }
+  - { level: 25, name: "Dominion Knife", source: Loot, dmg: 13, delay: 180, hp: 2, atk: 5 }
+  - { level: 25, name: "Deflector Knife", source: Loot, dmg: 11, delay: 200 }
+  - { level: 25, name: "Republic Fang", source: Loot, dmg: 12, delay: 170, hp: 2, per: 3 }
+  - { level: 25, name: "Zephyr Knife", source: Loot, dmg: 12, delay: 190, hp: 2, atk: 3 }
+  - { level: 27, name: "Etherfang Kris", source: Weaponcraft, dmg: 11, delay: 200 }
+  - { level: 27, name: "Etherfang Kris +1", source: Weaponcraft, dmg: 12, delay: 190 }
+  - { level: 28, name: "Marksman’s Blade", source: Loot, dmg: 11, delay: 200, ep: 10, agi: 1 }
+  - { level: 30, name: "Striker’s Knife", source: Weaponcraft, dmg: 12, delay: 200, ep: 11, per: 2, agi: 2 }
+  - { level: 30, name: "Striker’s Knife +1", source: Weaponcraft, dmg: 13, delay: 190, ep: 12, per: 3, agi: 3 }
+  - { level: 30, name: "Mercenary Captain’s Fang", source: Loot, dmg: 13, delay: 200, hp: 3 }
+  - { level: 30, name: "Regal Squire’s Dagger", source: Loot, dmg: 12, delay: 180, hp: 3 }
+  - { level: 30, name: "Lullfang Dagger", source: Loot, dmg: 10, delay: 190 }
+  - { level: 30, name: "Rogue’s Jambiya", source: Weaponcraft, dmg: 13, delay: 200, wil: 1 }
+  - { level: 30, name: "Rogue’s Jambiya +1", source: Weaponcraft, dmg: 14, delay: 190, wil: 2 }
+  - { level: 31, name: "Acidfang Knife", source: Loot, dmg: 12, delay: 200 }
+  - { level: 31, name: "Corrosive Knife", source: Loot, dmg: 13, delay: 190 }
+  - { level: 31, name: "Meltfang Knife", source: Loot, dmg: 12, delay: 200 }
+  - { level: 31, name: "Mythrite Knife", source: Weaponcraft, dmg: 12, delay: 200 }
+  - { level: 31, name: "Mythrite Knife +1", source: Weaponcraft, dmg: 13, delay: 190 }
+  - { level: 34, name: "Acidfang Kukri", source: Loot, dmg: 14, delay: 200 }
+  - { level: 34, name: "Corrosive Kukri", source: Loot, dmg: 15, delay: 200 }
+  - { level: 34, name: "Dominion Kukri", source: Loot, dmg: 15, delay: 190 }
+  - { level: 34, name: "Sovereign Dagger", source: Loot, dmg: 14, delay: 170 }
+  - { level: 34, name: "Meltfang Kukri", source: Loot, dmg: 14, delay: 200 }
+  - { level: 34, name: "Mythrite Kukri", source: Weaponcraft, dmg: 14, delay: 200 }
+  - { level: 34, name: "Mythrite Kukri +1", source: Weaponcraft, dmg: 15, delay: 190 }
+  - { level: 34, name: "Sandus Fang", source: Loot, dmg: 13, delay: 180, ep: 3, agi: 1 }
+  - { level: 34, name: "Zephyr Kukri", source: Loot, dmg: 14, delay: 190, ep: 3, atk: 5 }
+  - { level: 36, name: "Precision Baselard", source: Loot, dmg: 14, delay: 180 }
+  - { level: 36, name: "Mythrite Baselard", source: Loot, dmg: 13, delay: 190 }
+  - { level: 36, name: "Sparkfang Baselard", source: Weaponcraft, dmg: 13, delay: 190 }
+  - { level: 36, name: "Sparkfang Baselard +1", source: Weaponcraft, dmg: 14, delay: 180 }
+  - { level: 40, name: "Acidfang Baselard", source: Loot, dmg: 14, delay: 190 }
+  - { level: 40, name: "Warcaster’s Dagger", source: Weaponcraft, dmg: 15, delay: 200 }
+  - { level: 40, name: "Corrosive Baselard", source: Loot, dmg: 15, delay: 190 }
+  - { level: 40, name: "Meltfang Baselard", source: Loot, dmg: 14, delay: 190 }
+  - { level: 43, name: "Warcaster’s Dagger +1", source: Weaponcraft, dmg: 16, delay: 190, ep: 14 }
+  - { level: 43, name: "Warcaster’s Dagger +2", source: Weaponcraft, dmg: 17, delay: 180, ep: 16 }
+  - { level: 46, name: "Bonefang Knife", source: Weaponcraft, dmg: 17, delay: 200, ep: 3, atk: 3 }
+  - { level: 46, name: "Bonefang Knife +1", source: Weaponcraft, dmg: 18, delay: 190, ep: 5, atk: 5 }
+  - { level: 46, name: "Deathfang Knife", source: Loot, dmg: 17, delay: 200, ep: 3, atk: 3 }
+  - { level: 50, name: "Corsair’s Fang", source: Weaponcraft, dmg: 21, delay: 210, ep: 10 }
+
+
+tsv: |
+  Type	Level	Item Name	Source	DMG	Delay	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC
+  Dagger	1	Aurion Alloy Dagger	Weaponcraft	3	190										
+  Dagger	1	Aurion Alloy Dagger +1	Weaponcraft	4	180										
+  Dagger	1	Aurion Alloy Knife	Weaponcraft	4	200										
+  Dagger	1	Aurion Alloy Knife +1	Weaponcraft	5	190										
+  Dagger	1	Ritual Fang	Loot	1	190		10									
+  Dagger	1	Ether-Tuned Dagger	Loot	3	190										
+  Dagger	1	Ether-Tuned Knife	Loot	4	210										
+  Dagger	1	Corroded Fang	Loot	3	190										
+  Dagger	7	Shadowpiercer	Weaponcraft	4	190										
+  Dagger	7	Shadowpiercer +1	Weaponcraft	5	180										
+  Dagger	7	Phantom Knife	Weaponcraft	4	200										
+  Dagger	7	Phantom Knife +1	Weaponcraft	5	190										
+  Dagger	9	Brassfang Dagger	Weaponcraft	5	190										
+  Dagger	9	Brassfang Dagger +1	Weaponcraft	6	180										
+  Dagger	9	Precision Fang	Loot	5	190										
+  Dagger	12	Arc Dagger	Weaponcraft	7	190										
+  Dagger	12	Arc Dagger +1	Weaponcraft	8	180										
+  Dagger	12	Whisperfang Dagger	Weaponcraft	6	190										
+  Dagger	12	Whisperfang Dagger +1	Weaponcraft	7	180										
+  Dagger	12	Sparkfang Dagger	Weaponcraft	7	180										
+  Dagger	12	Sparkfang Dagger +1	Weaponcraft	8	180										
+  Dagger	13	Arc Knife	Weaponcraft	8	200										
+  Dagger	13	Arc Knife +1	Weaponcraft	9	190										
+  Dagger	18	Venomfang Baselard	Weaponcraft	8	190										
+  Dagger	18	Venomfang Baselard +1	Weaponcraft	9	180										
+  Dagger	20	Decurion’s Fang	Loot	10	180			2									
+  Dagger	20	Etherfang Kukri	Weaponcraft	10	200										
+  Dagger	20	Etherfang Kukri +1	Weaponcraft	11	190										
+  Dagger	20	Mercenary’s Fang	Loot	11	190										
+  Dagger	20	Vanguard Dagger	Loot	8	150										
+  Dagger	20	Toxin Baselard	Loot	8	190										
+  Dagger	20	Toxin Fang	Weaponcraft	8	190										
+  Dagger	20	Toxin Fang +1	Weaponcraft	9	180										
+  Dagger	20	Python’s Fang	Loot	9	190										
+  Dagger	21	Toxin Knife	Weaponcraft	9	200										
+  Dagger	21	Toxin Knife +1	Weaponcraft	10	190										
+  Dagger	23	Acidfang Dagger	Loot	10	190										
+  Dagger	23	Corrosive Fang	Loot	11	180										
+  Dagger	23	Meltfang Dagger	Loot	10	190										
+  Dagger	23	Mythrite Dagger	Weaponcraft	10	190										
+  Dagger	23	Mythrite Dagger +1	Weaponcraft	10	180										
+  Dagger	24	Toxin Kukri	Weaponcraft	11	210										
+  Dagger	24	Toxin Kukri +1	Weaponcraft	10	200										
+  Dagger	24	Ranging Fang	Weaponcraft	7	200		6									
+  Dagger	24	Ranging Fang +1	Weaponcraft	8	190		7									
+  Dagger	25	Bastion Dagger	Loot	11	180		2				2					
+  Dagger	25	Dominion Knife	Loot	13	180		2	5								
+  Dagger	25	Deflector Knife	Loot	11	200										
+  Dagger	25	Republic Fang	Loot	12	170		2				3					
+  Dagger	25	Zephyr Knife	Loot	12	190		2	3								
+  Dagger	27	Etherfang Kris	Weaponcraft	11	200										
+  Dagger	27	Etherfang Kris +1	Weaponcraft	12	190										
+  Dagger	28	Marksman’s Blade	Loot	11	200		10								1	
+  Dagger	30	Striker’s Knife	Weaponcraft	12	200		11								2	2
+  Dagger	30	Striker’s Knife +1	Weaponcraft	13	190		12								3	3
+  Dagger	30	Mercenary Captain’s Fang	Loot	13	200		3									
+  Dagger	30	Regal Squire’s Dagger	Loot	12	180		3									
+  Dagger	30	Lullfang Dagger	Loot	10	190										
+  Dagger	30	Rogue’s Jambiya	Weaponcraft	13	200								1		
+  Dagger	30	Rogue’s Jambiya +1	Weaponcraft	14	190								2		
+  Dagger	31	Acidfang Knife	Loot	12	200										
+  Dagger	31	Corrosive Knife	Loot	13	190										
+  Dagger	31	Meltfang Knife	Loot	12	200										
+  Dagger	31	Mythrite Knife	Weaponcraft	12	200										
+  Dagger	31	Mythrite Knife +1	Weaponcraft	13	190										
+  Dagger	34	Acidfang Kukri	Loot	14	200										
+  Dagger	34	Corrosive Kukri	Loot	15	200										
+  Dagger	34	Dominion Kukri	Loot	15	190										
+  Dagger	34	Sovereign Dagger	Loot	14	170										
+  Dagger	34	Meltfang Kukri	Loot	14	200										
+  Dagger	34	Mythrite Kukri	Weaponcraft	14	200										
+  Dagger	34	Mythrite Kukri +1	Weaponcraft	15	190										
+  Dagger	34	Sandus Fang	Loot	13	180		3								1	
+  Dagger	34	Zephyr Kukri	Loot	14	190		3	5									
+  Dagger	36	Precision Baselard	Loot	14	180										
+  Dagger	36	Mythrite Baselard	Loot	13	190										
+  Dagger	36	Sparkfang Baselard	Weaponcraft	13	190										
+  Dagger	36	Sparkfang Baselard +1	Weaponcraft	14	180										
+  Dagger	40	Acidfang Baselard	Loot	14	190										
+  Dagger	40	Warcaster’s Dagger	Weaponcraft	15	200										
+  Dagger	40	Corrosive Baselard	Loot	15	190										
+  Dagger	40	Meltfang Baselard	Loot	14	190										
+  Dagger	43	Warcaster’s Dagger +1	Weaponcraft	16	190		14									
+  Dagger	43	Warcaster’s Dagger +2	Weaponcraft	17	180		16									
+  Dagger	46	Bonefang Knife	Weaponcraft	17	200		3	3									
+  Dagger	46	Bonefang Knife +1	Weaponcraft	18	190		5	5									
+  Dagger	46	Deathfang Knife	Loot	17	200		3	3									
+  Dagger	50	Corsair’s Fang	Weaponcraft	21	210			10									
+
+

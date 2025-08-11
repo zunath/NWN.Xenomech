@@ -1,0 +1,78 @@
+# Source: docs/_incoming/XM Design Bible - Polearm.tsv
+updated: 2025-08-10
+weapon: Polearm
+items:
+  - { level: 1, name: "Storm Harpoon", source: Weaponcraft, dmg: 8, delay: 400 }
+  - { level: 1, name: "Storm Harpoon +1", source: Weaponcraft, dmg: 9, delay: 390 }
+  - { level: 4, name: "Obelisk Spear", source: Loot, dmg: 13, delay: 400, atk: 1 }
+  - { level: 7, name: "Aurion Alloy Spear", source: Weaponcraft, dmg: 16, delay: 400 }
+  - { level: 7, name: "Aurion Alloy Spear +1", source: Weaponcraft, dmg: 17, delay: 390 }
+  - { level: 7, name: "Gimlet Piercer", source: Loot, dmg: 16, delay: 400 }
+  - { level: 14, name: "Brassstrike Spear", source: Weaponcraft, dmg: 25, delay: 400 }
+  - { level: 14, name: "Brassstrike Spear +1", source: Weaponcraft, dmg: 26, delay: 390 }
+  - { level: 14, name: "Sparkfang Spear", source: Weaponcraft, dmg: 25, delay: 400 }
+  - { level: 14, name: "Sparkfang Spear +1", source: Weaponcraft, dmg: 26, delay: 390 }
+  - { level: 18, name: "Regal Spearman’s Pike", source: Loot, dmg: 28, delay: 400 }
+  - { level: 20, name: "Fuscina Trident", source: Loot, dmg: 31, delay: 400 }
+  - { level: 20, name: "Vanguard Lance", source: Weaponcraft, dmg: 37, delay: 490 }
+  - { level: 23, name: "Sovereign Spear", source: Loot, dmg: 30, delay: 380, ep: 5 }
+  - { level: 23, name: "Sandus Pike", source: Loot, dmg: 29, delay: 390, ep: 3 }
+  - { level: 24, name: "Titan Spear", source: Weaponcraft, dmg: 34, delay: 400 }
+  - { level: 24, name: "Titan Spear +1", source: Weaponcraft, dmg: 35, delay: 390 }
+  - { level: 28, name: "Military Pike", source: Loot, dmg: 36, delay: 380, agi: 1 }
+  - { level: 30, name: "Regal Squire’s Halberd", source: Loot, dmg: 37, delay: 400 }
+  - { level: 34, name: "Sovereign Halberd", source: Loot, dmg: 39, delay: 380, ep: 4 }
+  - { level: 34, name: "Titan Lance", source: Weaponcraft, dmg: 51, delay: 500 }
+  - { level: 34, name: "Titan Lance +1", source: Weaponcraft, dmg: 52, delay: 490 }
+  - { level: 34, name: "Sandus Halberd", source: Loot, dmg: 38, delay: 390, ep: 3 }
+  - { level: 34, name: "Sparkfang Lance", source: Weaponcraft, dmg: 51, delay: 500 }
+  - { level: 34, name: "Sparkfang Lance +1", source: Weaponcraft, dmg: 52, delay: 490 }
+  - { level: 36, name: "Warborn Halberd", source: Weaponcraft, dmg: 42, delay: 400 }
+  - { level: 36, name: "Warborn Halberd +1", source: Weaponcraft, dmg: 43, delay: 390 }
+  - { level: 38, name: "Obelisk War Lance", source: Weaponcraft, dmg: 57, delay: 500, atk: 2 }
+  - { level: 38, name: "Obelisk War Lance +1", source: Weaponcraft, dmg: 58, delay: 490, atk: 3 }
+  - { level: 45, name: "Tri-Edge Trident", source: Loot, dmg: 45, delay: 400 }
+  - { level: 47, name: "Heavy War Halberd", source: Loot, dmg: 56, delay: 420 }
+  - { level: 48, name: "Mythrite Lance", source: Weaponcraft, dmg: 69, delay: 500 }
+  - { level: 48, name: "Mythrite Lance +1", source: Weaponcraft, dmg: 70, delay: 490 }
+  - { level: 50, name: "Royal Knight Army War Lance", source: Weaponcraft, dmg: 56, delay: 400 }
+
+
+tsv: |
+  Type	Level	Item Name	Source	DMG	Delay	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC
+  Polearm	1	Storm Harpoon	Weaponcraft	8	400										
+  Polearm	1	Storm Harpoon +1	Weaponcraft	9	390										
+  Polearm	4	Obelisk Spear	Loot	13	400					1							
+  Polearm	7	Aurion Alloy Spear	Weaponcraft	16	400										
+  Polearm	7	Aurion Alloy Spear +1	Weaponcraft	17	390										
+  Polearm	7	Gimlet Piercer	Loot	16	400										
+  Polearm	14	Brassstrike Spear	Weaponcraft	25	400										
+  Polearm	14	Brassstrike Spear +1	Weaponcraft	26	390										
+  Polearm	14	Sparkfang Spear	Weaponcraft	25	400										
+  Polearm	14	Sparkfang Spear +1	Weaponcraft	26	390										
+  Polearm	18	Regal Spearman’s Pike	Loot	28	400										
+  Polearm	20	Fuscina Trident	Loot	31	400										
+  Polearm	20	Vanguard Lance	Weaponcraft	37	490										
+  Polearm	23	Sovereign Spear	Loot	30	380			5									
+  Polearm	23	Sandus Pike	Loot	29	390			3									
+  Polearm	24	Titan Spear	Weaponcraft	34	400										
+  Polearm	24	Titan Spear +1	Weaponcraft	35	390										
+  Polearm	28	Military Pike	Loot	36	380								1				
+  Polearm	30	Regal Squire’s Halberd	Loot	37	400										
+  Polearm	34	Sovereign Halberd	Loot	39	380			4									
+  Polearm	34	Titan Lance	Weaponcraft	51	500										
+  Polearm	34	Titan Lance +1	Weaponcraft	52	490										
+  Polearm	34	Sandus Halberd	Loot	38	390			3									
+  Polearm	34	Sparkfang Lance	Weaponcraft	51	500										
+  Polearm	34	Sparkfang Lance +1	Weaponcraft	52	490										
+  Polearm	36	Warborn Halberd	Weaponcraft	42	400										
+  Polearm	36	Warborn Halberd +1	Weaponcraft	43	390										
+  Polearm	38	Obelisk War Lance	Weaponcraft	57	500								2				
+  Polearm	38	Obelisk War Lance +1	Weaponcraft	58	490								3				
+  Polearm	45	Tri-Edge Trident	Loot	45	400										
+  Polearm	47	Heavy War Halberd	Loot	56	420										
+  Polearm	48	Mythrite Lance	Weaponcraft	69	500										
+  Polearm	48	Mythrite Lance +1	Weaponcraft	70	490										
+  Polearm	50	Royal Knight Army War Lance	Weaponcraft	56	400										
+
+

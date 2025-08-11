@@ -1,0 +1,87 @@
+# Source: docs/_incoming/XM Design Bible - Nightstalker.tsv
+updated: 2025-08-10
+
+job: Nightstalker
+role: DPS
+armor: Light
+weaponProficiencies:
+  - { type: Dagger, grade: A }
+  - { type: "Short Sword", grade: B }
+  - { type: Pistol, grade: C }
+
+attributeGrades:
+  hp: D
+  ep: G
+  might: D
+  perception: A
+  vitality: D
+  agility: B
+  willpower: G
+  social: G
+  evasion: A
+
+abilities:
+  - { level: 2, name: "Back Attack I", type: Trait, description: "Melee DMG dealt from behind a target is increased by 4.  Does not stack with other abilities in the Back Attack line.", resonanceCost: 1, devStatus: Complete }
+  - { level: 4, name: "Steal", type: Action, description: "Steals an item from an enemy.", ep: 7, castingTime: "2 seconds", cooldown: "3 minutes", resonanceCost: 1, devStatus: Complete }
+  - { level: 8, name: "Creditfinder", type: Trait, description: "Increases the amount of credits found by 50%.", resonanceCost: 1, devStatus: Complete }
+  - { level: 10, name: "Sneak Attack I", type: Action, description: "Melee DMG dealt from behind your next target is increased by 10.", ep: 15, castingTime: Queued, cooldown: "1 minute", resist: Darkness, resonanceCost: 1, devStatus: Complete }
+  - { level: 12, name: "Subtle Blow I", type: Trait, description: "Reduces enemy TP acquisition via damage by 10%.", resonanceCost: 1, devStatus: Complete }
+  - { level: 14, name: "Treasure Hunter I", type: Trait, description: "Increases the chance to find rare items by 15. Does not stack with Treasure Hunter II.", resonanceCost: 2, devStatus: Complete }
+  - { level: 16, name: "Dagger Lore", type: Trait, description: "Permits equipping daggers on another job with an A rank.", resonanceCost: 1, devStatus: Complete }
+  - { level: 18, name: "Back Attack II", type: Trait, description: "Melee DMG dealt from behind a target is increased by 8. Does not stack with other abilities in the Back Attack line.", resonanceCost: 2, devStatus: Complete }
+  - { level: 22, name: "Sneak Attack II", type: Action, description: "Melee DMG dealt from behind your next target is increased by 20.", ep: 35, castingTime: Queued, cooldown: "1 minute", resist: Darkness, resonanceCost: 2, devStatus: Complete }
+  - { level: 24, name: "Critical Bonus I", type: Trait, description: "Increases critical hit rate by 5%.", resonanceCost: 1, devStatus: Complete }
+  - { level: 25, name: "Light Ward", type: Action, description: "Grants +50% protection towards light to all nearby party members for 15 minutes.", ep: 30, castingTime: "4 seconds", cooldown: "10 seconds", resonanceCost: 1, devStatus: Complete }
+  - { level: 26, name: "Flee", type: Action, description: "Increases movement speed by 60% for 30 seconds.", ep: 12, castingTime: "2 seconds", cooldown: "5 minutes", resonanceCost: 1, devStatus: Complete }
+  - { level: 30, name: "Treasure Hunter II", type: Trait, description: "Increases the chance to find rare items by 30. Does not stack with Treasure Hunter I", resonanceCost: 3, devStatus: Complete }
+  - { level: 32, name: "Back Attack III", type: Trait, description: "Melee DMG dealt from behind a target is increased by 12. Does not stack with other abilities in the Back Attack line.", resonanceCost: 3, devStatus: Complete }
+  - { level: 34, name: "Stasis Field", type: Action, description: "Increases your evasion by 40 for one minute.", ep: 40, castingTime: "2 seconds", cooldown: "5 minutes", resonanceCost: 2, devStatus: Complete }
+  - { level: 36, name: "Sneak Attack III", type: Action, description: "Melee DMG dealt from behind your next target is increased by 30.", ep: 55, castingTime: Queued, cooldown: "1 minute", resist: Darkness, resonanceCost: 3, devStatus: Complete }
+  - { level: 40, name: "Subtle Blow II", type: Trait, description: "Reduces enemy TP acquisition via damage by 20%.", resonanceCost: 2, devStatus: Complete }
+  - { level: 42, name: "Critical Bonus II", type: Trait, description: "Increases critical hit rate by 10%.", resonanceCost: 2, devStatus: Complete }
+  - { level: 44, name: "Hide", type: Action, description: "You become invisible for 1 minute and enmity is reduced.", ep: 52, castingTime: "2 seconds", cooldown: "3 minutes", resonanceCost: 2, devStatus: Complete }
+  - { level: 48, name: "Back Attack IV", type: Trait, description: "Melee DMG dealt from behind a target is increased by 16. Does not stack with other abilities in the Back Attack line.", resonanceCost: 4, devStatus: Complete }
+  - { level: 50, name: "Perfect Dodge", type: Action, description: "You will dodge every melee attack for 1 minute.", ep: 150, castingTime: "2 seconds", cooldown: "30 minutes", resonanceCost: 3, devStatus: Complete }
+
+tsv: |
+  Job Name	Nightstalker		Dagger	A
+  Role	DPS		Short Sword	B
+  Armor	Light		Pistol	C
+  HP	D
+  EP	G
+  Might	D
+  Perception	A
+  Vitality	D
+  Agility	B
+  Willpower	G
+  Social	G
+  Evasion	A
+  Level	Ability Name	Type	Description	EP	Casting Time	Cooldown Time	Resist	Resonance Cost	Dev Status	Additional Requirements	Notes
+  2	Back Attack I	Trait	Melee DMG dealt from behind a target is increased by 4.  Does not stack with other abilities in the Back Attack line.	-	-	-	-	1	Complete		
+  4	Steal	Action	Steals an item from an enemy.	7	2 seconds	3 minutes	-	1	Complete		
+  											
+  8	Creditfinder	Trait	Increases the amount of credits found by 50%.	-	-	-	-	1	Complete		
+  10	Sneak Attack I	Action	Melee DMG dealt from behind your next target is increased by 10.	15	Queued	1 minute	Darkness	1	Complete		
+  12	Subtle Blow I	Trait	Reduces enemy TP acquisition via damage by 10%.	-	-	-	-	1	Complete		
+  14	Treasure Hunter I	Trait	Increases the chance to find rare items by 15. Does not stack with Treasure Hunter II.	-	-	-	-	2	Complete		
+  16	Dagger Lore	Trait	Permits equipping daggers on another job with an A rank.	-	-	-	-	1	Complete		
+  18	Back Attack II	Trait	Melee DMG dealt from behind a target is increased by 8. Does not stack with other abilities in the Back Attack line.	-	-	-	-	2	Complete		
+  											
+  22	Sneak Attack II	Action	Melee DMG dealt from behind your next target is increased by 20.	35	Queued	1 minute	Darkness	2	Complete		
+  24	Critical Bonus I	Trait	Increases critical hit rate by 5%.	-	-	-	-	1	Complete		
+  25	Light Ward	Action	Grants +50% protection towards light to all nearby party members for 15 minutes.	30	4 seconds	10 seconds	-	1	Complete		
+  26	Flee	Action	Increases movement speed by 60% for 30 seconds.	12	2 seconds	5 minutes	-	1	Complete		
+  											
+  30	Treasure Hunter II	Trait	Increases the chance to find rare items by 30. Does not stack with Treasure Hunter I	-	-	-	-	3	Complete		
+  32	Back Attack III	Trait	Melee DMG dealt from behind a target is increased by 12. Does not stack with other abilities in the Back Attack line.	-	-	-	-	3	Complete		
+  34	Stasis Field	Action	Increases your evasion by 40 for one minute.	40	2 seconds	5 minutes	-	2	Complete		
+  36	Sneak Attack III	Action	Melee DMG dealt from behind your next target is increased by 30.	55	Queued	1 minute	Darkness	3	Complete		
+  											
+  40	Subtle Blow II	Trait	Reduces enemy TP acquisition via damage by 20%.	-	-	-	-	2	Complete		
+  42	Critical Bonus II	Trait	Increases critical hit rate by 10%.	-	-	-	-	2	Complete		
+  44	Hide	Action	You become invisible for 1 minute and enmity is reduced.	52	2 seconds	3 minutes	-	2	Complete		
+  											
+  48	Back Attack IV	Trait	Melee DMG dealt from behind a target is increased by 16. Does not stack with other abilities in the Back Attack line.	-	-	-	-	4	Complete		
+  50	Perfect Dodge	Action	You will dodge every melee attack for 1 minute.	150	2 seconds	30 minutes	-	3	Complete		
+
+

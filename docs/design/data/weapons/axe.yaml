@@ -1,0 +1,86 @@
+# Source: docs/_incoming/XM Design Bible - Axe.tsv
+updated: 2025-08-10
+weapon: Axe
+items:
+  - { level: 1, name: "Aurion Alloy Axe", source: Weaponcraft, dmg: 8, delay: 280 }
+  - { level: 1, name: "Aurion Alloy Axe +1", source: Weaponcraft, dmg: 9, delay: 270 }
+  - { level: 8, name: "Brassstrike Axe", source: Weaponcraft, dmg: 12, delay: 280 }
+  - { level: 8, name: "Brassstrike Axe +1", source: Weaponcraft, dmg: 13, delay: 270 }
+  - { level: 10, name: "Legionnaire’s Waraxe", source: Loot, dmg: 13, delay: 280 }
+  - { level: 11, name: "Lightfang Axe", source: Loot, dmg: 14, delay: 260 }
+  - { level: 13, name: "Bonecleaver Axe", source: Weaponcraft, dmg: 16, delay: 280 }
+  - { level: 13, name: "Bonecleaver Axe +1", source: Weaponcraft, dmg: 17, delay: 270 }
+  - { level: 13, name: "Joltstrike Axe", source: Loot, dmg: 16, delay: 280, ep: 3 }
+  - { level: 15, name: "Bastion Waraxe", source: Loot, dmg: 14, delay: 270, hp: 1 }
+  - { level: 15, name: "Republic Waraxe", source: Loot, dmg: 15, delay: 260, hp: 2 }
+  - { level: 16, name: "Boneforged Pick", source: Weaponcraft, dmg: 18, delay: 320 }
+  - { level: 16, name: "Boneforged Pick +1", source: Weaponcraft, dmg: 19, delay: 310 }
+  - { level: 20, name: "Titan Battleaxe", source: Weaponcraft, dmg: 20, delay: 280 }
+  - { level: 20, name: "Titan Battleaxe +1", source: Weaponcraft, dmg: 21, delay: 270 }
+  - { level: 20, name: "Vanguard Axe", source: Loot, dmg: 19, delay: 280 }
+  - { level: 22, name: "Corroded Pick", source: Loot, dmg: 22, delay: 320 }
+  - { level: 25, name: "Raider’s Tomahawk", source: Weaponcraft, dmg: 23, delay: 340 }
+  - { level: 25, name: "Raider’s Tomahawk +1", source: Weaponcraft, dmg: 24, delay: 330 }
+  - { level: 28, name: "Military War Pick", source: Loot, dmg: 24, delay: 260, hp: 1 }
+  - { level: 31, name: "Unmarked Pick", source: Loot, dmg: 26, delay: 320 }
+  - { level: 31, name: "Warborn Pick", source: Weaponcraft, dmg: 26, delay: 320 }
+  - { level: 31, name: "Warborn Pick +1", source: Weaponcraft, dmg: 27, delay: 310 }
+  - { level: 32, name: "Warrior’s Waraxe", source: Loot, dmg: 25, delay: 280, per: 1, vit: 1 }
+  - { level: 37, name: "Mythrite Axe", source: Weaponcraft, dmg: 29, delay: 280 }
+  - { level: 37, name: "Mythrite Axe +1", source: Weaponcraft, dmg: 30, delay: 270 }
+  - { level: 37, name: "Naval Waraxe", source: Loot, dmg: 29, delay: 280 }
+  - { level: 40, name: "Warcaster’s Axe", source: Weaponcraft, dmg: 33, delay: 280, ep: 5 }
+  - { level: 42, name: "Veldt Cleaver", source: Weaponcraft, dmg: 27, delay: 280, ep: 3 }
+  - { level: 42, name: "Veldt Cleaver +1", source: Weaponcraft, dmg: 28, delay: 270, ep: 4 }
+  - { level: 43, name: "Warcaster’s Axe +1", source: Weaponcraft, dmg: 34, delay: 280, ep: 5, per: 2 }
+  - { level: 43, name: "Warcaster’s Axe +2", source: Weaponcraft, dmg: 35, delay: 270, ep: 5, per: 3 }
+  - { level: 43, name: "Stormfang Axe", source: Loot, dmg: 32, delay: 280 }
+  - { level: 43, name: "Reaver’s Tabar", source: Weaponcraft, dmg: 34, delay: 290 }
+  - { level: 43, name: "Reaver’s Tabar +1", source: Weaponcraft, dmg: 35, delay: 280 }
+  - { level: 48, name: "Viking Cleaver", source: Loot, dmg: 36, delay: 280, hp: 10 }
+  - { level: 50, name: "Mythrite Pick", source: Weaponcraft, dmg: 39, delay: 320 }
+  - { level: 50, name: "Mythrite Pick +1", source: Weaponcraft, dmg: 40, delay: 310 }
+
+
+tsv: |
+  Type	Level	Item Name	Source	DMG	Delay	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC
+  Axe	1	Aurion Alloy Axe	Weaponcraft	8	280										
+  Axe	1	Aurion Alloy Axe +1	Weaponcraft	9	270										
+  Axe	8	Brassstrike Axe	Weaponcraft	12	280										
+  Axe	8	Brassstrike Axe +1	Weaponcraft	13	270										
+  Axe	10	Legionnaire’s Waraxe	Loot	13	280										
+  Axe	11	Lightfang Axe	Loot	14	260										
+  Axe	13	Bonecleaver Axe	Weaponcraft	16	280										
+  Axe	13	Bonecleaver Axe +1	Weaponcraft	17	270										
+  Axe	13	Joltstrike Axe	Loot	16	280						3					
+  Axe	15	Bastion Waraxe	Loot	14	270		1									
+  Axe	15	Republic Waraxe	Loot	15	260		2									
+  Axe	16	Boneforged Pick	Weaponcraft	18	320										
+  Axe	16	Boneforged Pick +1	Weaponcraft	19	310										
+  Axe	20	Titan Battleaxe	Weaponcraft	20	280										
+  Axe	20	Titan Battleaxe +1	Weaponcraft	21	270										
+  Axe	20	Vanguard Axe	Loot	19	280										
+  Axe	22	Corroded Pick	Loot	22	320										
+  Axe	25	Raider’s Tomahawk	Weaponcraft	23	340										
+  Axe	25	Raider’s Tomahawk +1	Weaponcraft	24	330										
+  Axe	28	Military War Pick	Loot	24	260		1									
+  Axe	31	Unmarked Pick	Loot	26	320										
+  Axe	31	Warborn Pick	Weaponcraft	26	320										
+  Axe	31	Warborn Pick +1	Weaponcraft	27	310										
+  Axe	32	Warrior’s Waraxe	Loot	25	280							1	1				
+  Axe	37	Mythrite Axe	Weaponcraft	29	280										
+  Axe	37	Mythrite Axe +1	Weaponcraft	30	270										
+  Axe	37	Naval Waraxe	Loot	29	280										
+  Axe	40	Warcaster’s Axe	Weaponcraft	33	280						5					
+  Axe	42	Veldt Cleaver	Weaponcraft	27	280						3					
+  Axe	42	Veldt Cleaver +1	Weaponcraft	28	270						4					
+  Axe	43	Warcaster’s Axe +1	Weaponcraft	34	280						5			2			
+  Axe	43	Warcaster’s Axe +2	Weaponcraft	35	270						5			3			
+  Axe	43	Stormfang Axe	Loot	32	280										
+  Axe	43	Reaver’s Tabar	Weaponcraft	34	290										
+  Axe	43	Reaver’s Tabar +1	Weaponcraft	35	280										
+  Axe	48	Viking Cleaver	Loot	36	280		10									
+  Axe	50	Mythrite Pick	Weaponcraft	39	320										
+  Axe	50	Mythrite Pick +1	Weaponcraft	40	310										
+
+

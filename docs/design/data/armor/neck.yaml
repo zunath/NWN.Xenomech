@@ -1,0 +1,54 @@
+source: docs/_incoming/XM Design Bible - Armor.tsv
+slot: Neck
+tsv: |
+  Type	Level	Item Name	Source	DEF	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC	BST	BRW	ELM	HNT	KPR	MDR	NGT	TEC
+  Neck	7	Plume Collar	Fabrication	1										x	x	x		x	x	
+  Neck	7	Plume Collar +1	Fabrication	2				2								x	x	x		x	x	
+  Neck	7	Judicator’s Badge	Fabrication	0								3						x			x		
+  Neck	7	Leatherbound Gorget	Fabrication	1										x			x	x			x
+  Neck	7	Leatherbound Gorget +1	Fabrication	2										x			x	x			x
+  Neck	10	Verdant Scarf	Fabrication	1	2										x	x	x			x	
+  Neck	10	Republican Bronze Insignia	Loot	0		4									x	x	x	x	x	x	x	x
+  Neck	11	Titan Scale Gorget	Fabrication	2										x			x	x			x
+  Neck	14	Ranger’s Pendant	Fabrication	0			5	5										x				
+  Neck	15	Avian Whistle	Fabrication	0	5										3	x					
+  Neck	18	Focused Resonance Collar	Fabrication	0			2								x	x	x	x	x	x	x	x
+  Neck	18	Focused Resonance Collar +1	Fabrication	0			3								x	x	x	x	x	x	x	x
+  Neck	20	Obsidian Silk Neckerchief	Fabrication	2								1						x			x		
+  Neck	21	Chitin-Plated Gorget	Fabrication	2										x	x			x	x		x	x
+  Neck	21	Predator Fang Necklace	Fabrication	0							1		1						x	x			x	x	x
+  Neck	21	Predator Fang Necklace +1	Fabrication	0							2		2						x	x			x	x	x
+  Neck	21	Verdant Gorget	Fabrication	3							1							x	x			x	x		x	x
+  Neck	23	Woven Hemp Gorget	Fabrication	2											x	x			x	x	
+  Neck	23	Woven Hemp Gorget +1	Fabrication	3											x	x			x	x	
+  Neck	24	Beastmaster’s Whistle	Fabrication	0								2						2	x				
+  Neck	24	Titan Chain Gorget	Fabrication	3										x			x			x
+  Neck	24	Titan Chain Gorget +1	Fabrication	4										x			x			x
+  Neck	24	Tigerfang Stole	Fabrication	2								5						x	x	x	x	x	x	x	x
+  Neck	26	Sanctified Phial	Fabrication	3		9								2				x			x	
+  Neck	27	Blossom Necklace	Loot	0									3	x	x	x	x	x	x	x	x
+  Neck	30	Paisley Woven Scarf	Loot	2	6											x	x	x		x	x	
+  Neck	30	Republican Iron Insignia	Loot	0		6									x	x	x	x	x	x	x	x
+  Neck	30	Regal Squire’s Collar	Loot	3									1				x			x			x
+  Neck	30	Direwolf Gorget	Fabrication	3										x			x	x			x
+  Neck	30	Direwolf Gorget +1	Fabrication	4										x			x	x			x
+  Neck	35	Medieval War Collar	Fabrication	3									2				x	x	x	x	x	x	x	x
+  Neck	35	Aegis Shield Pendant	Fabrication	0	20											x	x	x	x	x	x	x	x
+  Neck	40	Reinforced Gorget	Fabrication	4														x		
+  Neck	40	Reinforced Gorget +1	Fabrication	5														x		
+  Neck	40	Mohbwa Warden Scarf	Fabrication	1		5									1				x			x	
+  Neck	40	Mohbwa Warden Scarf +1	Fabrication	2		6									2				x			x	
+  Neck	45	Azure Gorget	Fabrication	5										1				x	x			x	x		x	x
+  Neck	45	Chitin-Plated Gorget	Fabrication	4										x	x			x	x		x	x
+  Neck	48	Oathkeeper’s Badge	Loot	3	10										3				x			x	
+  Neck	49	Mythrite Gorget	Fabrication	5														x		
+  Neck	49	Mythrite Gorget +1	Fabrication	6														x		
+  Neck	49	Warlord’s Nodowa	Fabrication	4											x					
+  Neck	49	Warlord’s Nodowa +1	Fabrication	5											1				x				
+  Neck	50	Raptor Beak Necklace	Fabrication	4		20											x	x	x	x	x	x	x	x
+  Neck	50	Raptor Beak Necklace +1	Fabrication	5		22											x	x	x	x	x	x	x	x
+  Neck	50	Intellect Resonance Torque	Fabrication	3										2				x			
+  Neck	50	Moonlit Arc Torque	Fabrication	3										2						x	
+  Neck	50	Stormborn Gorget	Loot	4											6		2			x			x	
+  Neck	50	Temple Knight Army Collar	Loot	5										2			1			x			x	
+

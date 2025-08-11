@@ -1,0 +1,82 @@
+# Source: docs/_incoming/XM Design Bible - Great Axe.tsv
+updated: 2025-08-10
+weapon: Great Axe
+items:
+  - { level: 1, name: "Trainee Waraxe", source: Weaponcraft, dmg: 12, delay: 510 }
+  - { level: 5, name: "Assailant’s Waraxe", source: Loot, dmg: 19, delay: 510 }
+  - { level: 5, name: "Razorwing Axe", source: Weaponcraft, dmg: 19, delay: 510 }
+  - { level: 5, name: "Razorwing Axe +1", source: Weaponcraft, dmg: 20, delay: 500 }
+  - { level: 8, name: "Hellfire Cleaver", source: Weaponcraft, dmg: 24, delay: 490 }
+  - { level: 8, name: "Infernal Cleaver", source: Weaponcraft, dmg: 23, delay: 510 }
+  - { level: 8, name: "Prominence Cleaver", source: Loot, dmg: 23, delay: 510 }
+  - { level: 12, name: "Titan Greataxe", source: Weaponcraft, dmg: 30, delay: 510 }
+  - { level: 12, name: "Titan Greataxe +1", source: Weaponcraft, dmg: 31, delay: 490 }
+  - { level: 12, name: "Hydro Cleaver", source: Weaponcraft, dmg: 30, delay: 510 }
+  - { level: 12, name: "Hydro Cleaver +1", source: Weaponcraft, dmg: 31, delay: 490 }
+  - { level: 16, name: "Mothfang Axe", source: Weaponcraft, dmg: 32, delay: 480, per: 1 }
+  - { level: 20, name: "Vanguard Splitter", source: Weaponcraft, dmg: 32, delay: 490 }
+  - { level: 25, name: "Verdant Slayer", source: Weaponcraft, dmg: 43, delay: 510 }
+  - { level: 28, name: "Military Waraxe", source: Loot, dmg: 46, delay: 480, agi: 1 }
+  - { level: 30, name: "Centurion’s Cleaver", source: Weaponcraft, dmg: 48, delay: 510 }
+  - { level: 31, name: "Twinfang Axe", source: Weaponcraft, dmg: 50, delay: 510 }
+  - { level: 31, name: "Reaper’s Voulge", source: Weaponcraft, dmg: 50, delay: 510 }
+  - { level: 31, name: "Reaper’s Voulge +1", source: Weaponcraft, dmg: 51, delay: 490 }
+  - { level: 34, name: "Bastion Greataxe", source: Loot, dmg: 49, delay: 490, atk: 1 }
+  - { level: 34, name: "Titan Waraxe", source: Weaponcraft, dmg: 52, delay: 510 }
+  - { level: 34, name: "Titan Waraxe +1", source: Weaponcraft, dmg: 53, delay: 500 }
+  - { level: 34, name: "Hydro Cleaver", source: Weaponcraft, dmg: 52, delay: 510 }
+  - { level: 34, name: "Hydro Cleaver +1", source: Weaponcraft, dmg: 53, delay: 490 }
+  - { level: 34, name: "Lucent Waraxe", source: Loot, dmg: 52, delay: 510 }
+  - { level: 34, name: "Republic Waraxe", source: Loot, dmg: 50, delay: 480, atk: 2 }
+  - { level: 39, name: "Colossal Moth Axe", source: Loot, dmg: 59, delay: 510, atk: 2 }
+  - { level: 44, name: "Kheten Warblade", source: Weaponcraft, dmg: 63, delay: 510 }
+  - { level: 44, name: "Kheten Warblade +1", source: Weaponcraft, dmg: 64, delay: 490 }
+  - { level: 44, name: "Juggernaut Moth Axe", source: Weaponcraft, dmg: 65, delay: 510, atk: 3 }
+  - { level: 44, name: "Regiment Kheten", source: Loot, dmg: 63, delay: 510 }
+  - { level: 45, name: "Tewha Reaver", source: Weaponcraft, dmg: 69, delay: 530 }
+  - { level: 45, name: "Tewha Reaver +1", source: Weaponcraft, dmg: 70, delay: 520 }
+  - { level: 49, name: "Gigant Cleaver", source: Loot, dmg: 75, delay: 520, atk: 4 }
+  - { level: 50, name: "Leucos Reaper’s Voulge", source: Weaponcraft, dmg: 79, delay: 510 }
+  - { level: 50, name: "Leucos Reaper’s Voulge +1", source: Weaponcraft, dmg: 80, delay: 490 }
+
+
+tsv: |
+  Type	Level	Item Name	Source	DMG	Delay	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC
+  Great Axe	1	Trainee Waraxe	Weaponcraft	12	510										
+  Great Axe	5	Assailant’s Waraxe	Loot	19	510										
+  Great Axe	5	Razorwing Axe	Weaponcraft	19	510										
+  Great Axe	5	Razorwing Axe +1	Weaponcraft	20	500										
+  Great Axe	8	Hellfire Cleaver	Weaponcraft	24	490										
+  Great Axe	8	Infernal Cleaver	Weaponcraft	23	510										
+  Great Axe	8	Prominence Cleaver	Loot	23	510										
+  Great Axe	12	Titan Greataxe	Weaponcraft	30	510										
+  Great Axe	12	Titan Greataxe +1	Weaponcraft	31	490										
+  Great Axe	12	Hydro Cleaver	Weaponcraft	30	510										
+  Great Axe	12	Hydro Cleaver +1	Weaponcraft	31	490										
+  Great Axe	16	Mothfang Axe	Weaponcraft	32	480								1				
+  Great Axe	20	Vanguard Splitter	Weaponcraft	32	490										
+  Great Axe	25	Verdant Slayer	Weaponcraft	43	510										
+  Great Axe	28	Military Waraxe	Loot	46	480									1	
+  Great Axe	30	Centurion’s Cleaver	Weaponcraft	48	510										
+  Great Axe	31	Twinfang Axe	Weaponcraft	50	510										
+  Great Axe	31	Reaper’s Voulge	Weaponcraft	50	510										
+  Great Axe	31	Reaper’s Voulge +1	Weaponcraft	51	490										
+  Great Axe	34	Bastion Greataxe	Loot	49	490							1				
+  Great Axe	34	Titan Waraxe	Weaponcraft	52	510										
+  Great Axe	34	Titan Waraxe +1	Weaponcraft	53	500										
+  Great Axe	34	Hydro Cleaver	Weaponcraft	52	510										
+  Great Axe	34	Hydro Cleaver +1	Weaponcraft	53	490										
+  Great Axe	34	Lucent Waraxe	Loot	52	510										
+  Great Axe	34	Republic Waraxe	Loot	50	480							2				
+  Great Axe	39	Colossal Moth Axe	Loot	59	510							2				
+  Great Axe	44	Kheten Warblade	Weaponcraft	63	510										
+  Great Axe	44	Kheten Warblade +1	Weaponcraft	64	490										
+  Great Axe	44	Juggernaut Moth Axe	Weaponcraft	65	510							3				
+  Great Axe	44	Regiment Kheten	Loot	63	510										
+  Great Axe	45	Tewha Reaver	Weaponcraft	69	530										
+  Great Axe	45	Tewha Reaver +1	Weaponcraft	70	520										
+  Great Axe	49	Gigant Cleaver	Loot	75	520								4			
+  Great Axe	50	Leucos Reaper’s Voulge	Weaponcraft	79	510										
+  Great Axe	50	Leucos Reaper’s Voulge +1	Weaponcraft	80	490										
+
+

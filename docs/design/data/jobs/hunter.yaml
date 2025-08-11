@@ -1,0 +1,87 @@
+# Source: docs/_incoming/XM Design Bible - Hunter.tsv
+updated: 2025-08-10
+
+job: Hunter
+role: DPS
+armor: Light
+weaponProficiencies:
+  - { type: Bow, grade: A }
+  - { type: Rifle, grade: B }
+  - { type: Dagger, grade: C }
+
+attributeGrades:
+  hp: E
+  ep: G
+  might: E
+  perception: D
+  vitality: D
+  agility: A
+  willpower: D
+  social: E
+  evasion: E
+
+abilities:
+  - { level: 2, name: "Cryo Venom I", type: Action, description: "Your next attack deals an additional 12 DMG and inflicts Poison.", ep: 12, castingTime: "Queued", cooldown: "1 minute", resist: Ice, resonanceCost: 1, devStatus: Complete }
+  - { level: 4, name: "Freezing Shot I", type: Action, description: "Your next attack deals an additional 18 DMG and inflicts Slow.", ep: 16, castingTime: "Queued", cooldown: "3 minutes", resist: Ice, resonanceCost: 1, devStatus: Complete }
+  - { level: 8, name: "Ice Volley I", type: Action, description: "You deal 18 DMG to all enemies within area of effect.", ep: 22, castingTime: "2 seconds", cooldown: "1 minute", resist: Ice, resonanceCost: 1, devStatus: Complete }
+  - { level: 10, name: "Choking Shot I", type: Action, description: "Each enemy within the area of effect is inflicted with Grasping Death which slows movement and reduces HP over time.", ep: 12, castingTime: "2 seconds", cooldown: "24 seconds", resist: Darkness, resonanceCost: 1, devStatus: Complete }
+  - { level: 12, name: "Accuracy Bonus I", type: Trait, description: "Increases accuracy by 10.", resonanceCost: 1, devStatus: Complete }
+  - { level: 14, name: "Freezing Shot II", type: Action, description: "Your next attack deals an additional 26 DMG and inflicts Slow.", ep: 38, castingTime: "Queued", cooldown: "3 minutes", resist: Ice, resonanceCost: 2, devStatus: Complete }
+  - { level: 16, name: "Bow Lore", type: Trait, description: "Permits equipping bows on another job with an A rank.", resonanceCost: 1, devStatus: Complete }
+  - { level: 18, name: "Cripple I", type: Action, description: "Your next attack reduces your target's defense by 20 for 1 minute.", ep: 20, castingTime: "Queued", cooldown: "3 minutes", resist: Ice, resonanceCost: 1, devStatus: Complete }
+  - { level: 20, name: "Recycle I", type: Trait, description: "You have a 20% chance to not consume any ammo on each ranged attack.", resonanceCost: 1, devStatus: Complete }
+  - { level: 22, name: "Choking Shot II", type: Action, description: "Each enemy within the area of effect is inflicted with Grasping Death which slows movement and reduces HP over time.", ep: 38, castingTime: "2 seconds", cooldown: "24 seconds", resist: Darkness, resonanceCost: 2, devStatus: Complete }
+  - { level: 24, name: "Ice Volley II", type: Action, description: "You deal 30 DMG to all enemies within area of effect.", ep: 44, castingTime: "2 seconds", cooldown: "1 minute", resist: Ice, resonanceCost: 2, devStatus: Complete }
+  - { level: 25, name: "Ice Ward", type: Action, description: "Grants +50% protection towards ice to all nearby party members for 15 minutes.", ep: 30, castingTime: "4 seconds", cooldown: "10 seconds", resonanceCost: 1, devStatus: Complete }
+  - { level: 26, name: "Cryo Venom II", type: Action, description: "Your next attack deals an additional 36 DMG and inflicts Poison.", ep: 45, castingTime: "Queued", cooldown: "1 minute", resist: Ice, resonanceCost: 2, devStatus: Complete }
+  - { level: 30, name: "Sharpshot", type: Action, description: "Accuracy of nearby party members increases by 20 for 2 minutes.", ep: 40, castingTime: "2 seconds", cooldown: "5 minutes", resonanceCost: 2, devStatus: Complete }
+  - { level: 32, name: "Accuracy Bonus II", type: Trait, description: "Increases accuracy by 30.", resonanceCost: 2, devStatus: Complete }
+  - { level: 36, name: "Recycle II", type: Trait, description: "You have a 30% chance to not consume any ammo on each ranged attack.", resonanceCost: 2, devStatus: Complete }
+  - { level: 40, name: "Cripple II", type: Action, description: "Your next attack reduces your target's defense by 40 for 1 minute.", ep: 45, castingTime: "Queued", cooldown: "3 minutes", resist: Ice, resonanceCost: 2, devStatus: Complete }
+  - { level: 42, name: "Ice Volley III", type: Action, description: "You deal 50 DMG to all enemies within area of effect.", ep: 66, castingTime: "2 seconds", cooldown: "1 minute", resist: Ice, resonanceCost: 3, devStatus: Complete }
+  - { level: 44, name: "Freezing Shot III", type: Action, description: "Your next attack deals an additional 76 DMG and inflicts Slow.", ep: 73, castingTime: "Queued", cooldown: "3 minutes", resist: Ice, resonanceCost: 3, devStatus: Complete }
+  - { level: 48, name: "Barrage", type: Trait, description: "Your bow attack speed delay is reduced by 20%.", resonanceCost: 4, devStatus: Complete }
+  - { level: 50, name: "Eagle Eye Shot", type: Action, description: "Your next ranged attack deals 5x the normal amount of damage.", ep: 150, castingTime: "Queued", cooldown: "30 minutes", resonanceCost: 3, devStatus: Complete }
+
+tsv: |
+  Job Name	Hunter		Bow	A
+  Role	DPS		Rifle	B
+  Armor	Light		Dagger	C
+  HP	E
+  EP	G
+  Might	E
+  Perception	D
+  Vitality	D
+  Agility	A
+  Willpower	D
+  Social	E
+  Evasion	E
+  Level	Ability Name	Type	Description	EP	Casting Time	Cooldown Time	Resist	Resonance Cost	Dev Status	Additional Requirements	Notes
+  2	Cryo Venom I	Action	Your next attack deals an additional 12 DMG and inflicts Poison.	12	Queued	1 minute	Ice	1	Complete		
+  4	Freezing Shot I	Action	Your next attack deals an additional 18 DMG and inflicts Slow.	16	Queued	3 minutes	Ice	1	Complete		
+  											
+  8	Ice Volley I	Action	You deal 18 DMG to all enemies within area of effect.	22	2 seconds	1 minute	Ice	1	Complete		
+  10	Choking Shot I	Action	Each enemy within the area of effect is inflicted with Grasping Death which slows movement and reduces HP over time.	12	2 seconds	24 seconds	Darkness	1	Complete		
+  12	Accuracy Bonus I	Trait	Increases accuracy by 10.	-	-	-	-	1	Complete		
+  14	Freezing Shot II	Action	Your next attack deals an additional 26 DMG and inflicts Slow.	38	Queued	3 minutes	Ice	2	Complete		
+  16	Bow Lore	Trait	Permits equipping bows on another job with an A rank.	-	-	-	-	1	Complete		
+  18	Cripple I	Action	Your next attack reduces your target's defense by 20 for 1 minute.	20	Queued	3 minutes	Ice	1	Complete		
+  20	Recycle I	Trait	You have a 20% chance to not consume any ammo on each ranged attack.	-	-	-	-	1	Complete		
+  22	Choking Shot II	Action	Each enemy within the area of effect is inflicted with Grasping Death which slows movement and reduces HP over time.	38	2 seconds	24 seconds	Darkness	2	Complete		
+  24	Ice Volley II	Action	You deal 30 DMG to all enemies within area of effect.	44	2 seconds	1 minute	Ice	2	Complete		
+  25	Ice Ward	Action	Grants +50% protection towards ice to all nearby party members for 15 minutes.	30	4 seconds	10 seconds	-	1	Complete		
+  26	Cryo Venom II	Action	Your next attack deals an additional 36 DMG and inflicts Poison.	45	Queued	1 minute	Ice	2	Complete		
+  											
+  30	Sharpshot	Action	Accuracy of nearby party members increases by 20 for 2 minutes.	40	2 seconds	5 minutes	-	2	Complete		
+  32	Accuracy Bonus II	Trait	Increases accuracy by 30.	-	-	-	-	2	Complete		
+  											
+  36	Recycle II	Trait	You have a 30% chance to not consume any ammo on each ranged attack.	-	-	-	-	2	Complete		
+  											
+  40	Cripple II	Action	Your next attack reduces your target's defense by 40 for 1 minute.	45	Queued	3 minutes	Ice	2	Complete		
+  42	Ice Volley III	Action	You deal 50 DMG to all enemies within area of effect.	66	2 seconds	1 minute	Ice	3	Complete		
+  44	Freezing Shot III	Action	Your next attack deals an additional 76 DMG and inflicts Slow.	73	Queued	3 minutes	Ice	3	Complete		
+  											
+  48	Barrage	Trait	Your bow attack speed delay is reduced by 20%.	-	-	-	-	4	Complete		
+  50	Eagle Eye Shot	Action	Your next ranged attack deals 5x the normal amount of damage.	150	Queued	30 minutes	-	3	Complete		
+
+

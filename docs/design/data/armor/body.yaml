@@ -1,0 +1,120 @@
+source: docs/_incoming/XM Design Bible - Armor.tsv
+slot: Body
+tsv: |
+  Type	Level	Item Name	Source	DEF	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC	BST	BRW	ELM	HNT	KPR	MDR	NGT	TEC
+  Body	1	Aurion Alloy Harness	Armorcraft	4										x	x			x		x
+  Body	1	Aurion Alloy Harness +1	Armorcraft	5										x	x			x		x
+  Body	1	Etherwoven Robe	Armorcraft	3											x	x	x		x	x	
+  Body	1	Etherwoven Robe +1	Armorcraft	4											x	x	x		x	x	
+  Body	7	Leather Combat Vest	Armorcraft	7										x			x		x	x	x
+  Body	7	Leather Combat Vest +1	Armorcraft	9										x			x		x	x	x
+  Body	8	Warwoven Kenpogi	Armorcraft	8											x					
+  Body	8	Warwoven Kenpogi +1	Armorcraft	9						1						x					
+  Body	8	Reinforced Tunic	Armorcraft	9										x	x			x		
+  Body	8	Reinforced Tunic +1	Armorcraft	10										x	x			x		
+  Body	10	Legionnaire’s War Harness	Loot	10										x	x			x		x
+  Body	10	Titan Scale Mail	Armorcraft	11										x			x	x			x
+  Body	10	Titan Scale Mail +1	Armorcraft	12										x			x	x			x
+  Body	11	Brassguard Harness	Armorcraft	10										x					x	
+  Body	11	Brassguard Harness +1	Armorcraft	11										x					x	
+  Body	11	Reinforced Doublet	Armorcraft	10										x	x			x		x	
+  Body	11	Reinforced Doublet +1	Armorcraft	11										x	x			x		x	
+  Body	12	Etherwoven Linen Robe	Armorcraft	10											x	x			x	
+  Body	12	Etherwoven Linen Robe +1	Armorcraft	11											x	x			x	
+  Body	13	Powerforged Gi	Loot	12						1						x					
+  Body	16	Boneforged Harness	Armorcraft	14										x	x			x		x
+  Body	16	Boneforged Harness +1	Armorcraft	15						1						x	x			x		x
+  Body	17	Lizardscale Jerkin	Armorcraft	15										x			x	x			x
+  Body	17	Lizardscale Jerkin +1	Armorcraft	16										x			x	x			x
+  Body	18	Cotton-Woven Dogi	Armorcraft	14											x					
+  Body	18	Cotton-Woven Dogi +1	Armorcraft	15											x					
+  Body	19	Oracle’s Robe	Loot	14							1				x	x			x	x	
+  Body	20	Obsidian Tunic	Armorcraft	18							1					x			x	
+  Body	20	Obsidian Tunic +1	Armorcraft	19							2					x			x	
+  Body	20	Mercenary’s War Gi	Loot	15								1				x					
+  Body	21	Chitin-Plated Harness	Armorcraft	17										x	x			x		x
+  Body	21	Chitin-Plated Harness +1	Armorcraft	18						1						x	x			x		x
+  Body	23	Cottonfield Doublet	Armorcraft	17										x	x			x		
+  Body	23	Cottonfield Doublet +1	Armorcraft	18										x	x			x		
+  Body	24	Titan Chainmail	Armorcraft	21										x			x			x
+  Body	24	Titan Chainmail +1	Armorcraft	22										x			x			x
+  Body	25	Federation War Gi	Loot	16						3				1			x					
+  Body	27	Brassguard Scale Mail	Armorcraft	21										x			x	x			x
+  Body	27	Brassguard Scale Mail +1	Armorcraft	22										x			x	x			x
+  Body	28	War-Woven Wool Robe	Armorcraft	18											x	x			x	x	
+  Body	28	War-Woven Wool Robe +1	Armorcraft	19											x	x			x	x	
+  Body	29	Eisenbreastplate	Armorcraft	24										2					x	
+  Body	29	Eisenbreastplate +1	Armorcraft	25										3					x	
+  Body	29	Oracle’s Tunic	Armorcraft	18		8									x			x		
+  Body	29	Oracle’s Tunic +1	Armorcraft	19		9									x			x		
+  Body	29	Earthforged Gi	Armorcraft	20											x					
+  Body	29	Earthforged Gi +1	Armorcraft	21											x					
+  Body	30	Centurion’s Warplate	Loot	23								1				x			x	x			x
+  Body	30	Mercenary Captain’s Battle Doublet	Loot	20									1			1			x	x	x		x	
+  Body	30	Noctshadow Doublet	Armorcraft	18						2						x			x		
+  Body	30	Noctshadow Doublet +1	Armorcraft	19						3						x			x		
+  Body	30	Reinforced Studded Vest	Armorcraft	22										x			x			x	x
+  Body	30	Reinforced Studded Vest +1	Armorcraft	23										x			x			x	x
+  Body	33	Frostforged Robe	Loot	21		6									x	x			x	
+  Body	33	Etherwoven Doublet	Armorcraft	22											x	x	x		x	x	
+  Body	33	Etherwoven Doublet +1	Armorcraft	23						5						x	x	x		x	x	
+  Body	34	Warcaster’s Cloak	Armorcraft	27											x	x	x		x	
+  Body	34	Warcaster’s Cloak +1	Armorcraft	28											x	x	x		x	
+  Body	35	Bishop’s Sanctified Robe	Armorcraft	22		3							2				x			x	
+  Body	35	Bishop’s Sanctified Robe +1	Armorcraft	23		4							3				x			x	
+  Body	35	Padded Combat Armor	Armorcraft	24										x	x			x		x
+  Body	35	Padded Combat Armor +1	Armorcraft	25										x	x			x		x
+  Body	36	Fortified Gambison	Armorcraft	23											x	x			x	x	
+  Body	36	Fortified Gambison +1	Armorcraft	24											x	x			x	x	
+  Body	36	Silverguard Mail	Armorcraft	28										x			x			x
+  Body	36	Silverguard Mail +1	Armorcraft	29										x			x			x
+  Body	37	Ironclad Scale Mail	Armorcraft	28										x			x	x			x
+  Body	37	Ironclad Scale Mail +1	Armorcraft	29										x			x	x			x
+  Body	38	Battle-Hardened Cuirass	Armorcraft	28														x			x
+  Body	38	Battle-Hardened Cuirass +1	Armorcraft	29														x			x
+  Body	38	Regal Velvet Robe	Armorcraft	24											x	x			x	
+  Body	38	Regal Velvet Robe +1	Armorcraft	25		3							1				x	x			x	
+  Body	40	Titan Breastplate	Armorcraft	32														x		
+  Body	40	Titan Breastplate +1	Armorcraft	33														x		
+  Body	40	Warcaster’s Cloak	Armorcraft	32							2			2				x			x	
+  Body	40	Divine Aegis Breastplate	Armorcraft	45																x
+  Body	40	Divine Aegis Breastplate +1	Armorcraft	50																x
+  Body	40	Iron Musketeer’s War Gambison	Armorcraft	27						3			3					x			x	
+  Body	40	Jujitsu Combat Gi	Loot	27							4						x					
+  Body	40	Regal Squire’s Chainmail	Armorcraft	31									1				x			x			x
+  Body	40	Regal Squire’s Ether Robe	Armorcraft	26		10									x	x			x	
+  Body	42	Earthforged Doublet	Loot	27									4				x	x	x		x	x	
+  Body	42	Woolen Combat Doublet	Armorcraft	27										x	x			x		x
+  Body	42	Woolen Combat Doublet +1	Armorcraft	28										5				x	x			x		x
+  Body	43	Warcaster’s Cloak +1	Armorcraft	33							4			2				x			x	
+  Body	43	Warcaster’s Cloak +2	Armorcraft	34							6			2				x			x	
+  Body	43	Iron Musketeer’s War Gambison +1	Armorcraft	32							5			3					x			x	
+  Body	43	Iron Musketeer’s War Gambison +2	Armorcraft	34							5			3					x			x	
+  Body	43	Regal Squire’s Chainmail +1	Armorcraft	32							6			1				x			x			x
+  Body	43	Regal Squire’s Chainmail +2	Armorcraft	33							8			1				x			x			x
+  Body	43	Regal Squire’s Ether Robe +1	Armorcraft	27		10									2			x	x			x	
+  Body	43	Regal Squire’s Ether Robe +2	Armorcraft	28		10									3			x	x			x	
+  Body	45	Alumine War Haubert	Loot	30										x			x			x
+  Body	45	Reinforced Brigandine	Armorcraft	32		10						2		2				x			x	x		x
+  Body	45	Reinforced Brigandine +1	Armorcraft	33		15						1		3		3		1	1	1	x			x	x		x
+  Body	45	Chitin-Plated Harness	Armorcraft	31										x	x			x		x
+  Body	45	Chitin-Plated Harness +1	Armorcraft	32						1						x	x			x		x
+  Body	46	Banded War Mail	Armorcraft	36										x			x			x
+  Body	46	Banded War Mail +1	Armorcraft	37										x			x			x
+  Body	48	Dinohide Jerkin	Armorcraft	35										x			x	x			x
+  Body	48	Dinohide Jerkin +1	Armorcraft	36										x			x	x			x
+  Body	48	Steelguard Scale Mail	Armorcraft	36										x			x			x
+  Body	48	Steelguard Scale Mail +1	Armorcraft	37										x			x			x
+  Body	48	Woolen War Gambison	Armorcraft	31											x	x			x	x	
+  Body	48	Woolen War Gambison +1	Armorcraft	32											x	x			x	x	
+  Body	49	Mythrite Breastplate	Armorcraft	39														x		
+  Body	49	Mythrite Breastplate +1	Armorcraft	40														x		
+  Body	49	Shinobi Shadow Gi	Armorcraft	33											x					
+  Body	49	Shinobi Shadow Gi +1	Armorcraft	34										3						x	
+  Body	50	Obsidian Crow Jupon	Armorcraft	28							8						x	x	x		x	x	
+  Body	50	Obsidian Crow Jupon +1	Armorcraft	29							9						x	x	x		x	x	
+  Body	50	Iron Musketeer’s War Cuirass	Loot	40									1							x			x
+  Body	50	Tactician Magician’s Warcoat	Loot	31							1				1				x			x	
+  Body	50	Sanctified White Cloak	Armorcraft	39							2						x	x			x	
+  Body	50	Sanctified White Cloak +1	Armorcraft	40							3						x	x			x	
+

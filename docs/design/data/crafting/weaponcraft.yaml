@@ -1,0 +1,38 @@
+# Source: docs/_incoming/XM Design Bible - Weaponcraft.tsv
+updated: 2025-08-10
+
+columns:
+  - skill
+  - recipeId
+  - recipeEnum
+  - category
+  - level
+  - normalName
+  - normalQty
+  - normalResref
+  - hqName
+  - hqQty
+  - hqResref
+  - ultraName
+  - ultraQty
+  - ultraResref
+  - augmentType
+  - augmentSlots
+  - components
+
+tsv: |
+  Skill	Required  Recipe	Recipe Enum	Category Enum	Level	Normal Name	Normal Quantity	Normal Resref	HQ Name	HQ Quantity	HQ Resref	Ultra Name	Ultra Quantity	Ultra Resref	Augment Type	Augment Slots	Component 1	Component Quantity 1	Component 2	Component Quantity 2	Component 3	Component Quantity 3	Component 4	Component Quantity 4	Component 5	Component Quantity 5	Component 6	Component Quantity 6	Component 7	Component Quantity 7	Component 8	Component Quantity 8
+  Weaponcraft		AurionAlloyDagger	Dagger	1	Aurion Alloy Dagger	1	aurion_daggr	Aurion Alloy Dagger +1	1	aurion_daggr_p1																	
+  Weaponcraft		PantherClaws	Claw	2	Panther Claws	1	panther_claws	Panther Claws +1	1	panther_claws_p1																	
+  Weaponcraft		EtherCesti	Claw	2	Ether Cesti	1	ether_cesti	Ether Cesti +1	1	ether_cesti_p1																	
+  Weaponcraft		AurionAlloyBlade	Longsword	2	Aurion Alloy Blade	1	aurion_blade	Aurion Alloy Blade +1	1	aurion_blade_p1																	
+  Weaponcraft		ResonanceBlade	Longsword	2	Resonance Blade	1	reson_blade	Resonance Blade +1	1	reson_blade_p1																	
+  Weaponcraft		AshStriker	Club	2	Ash Striker	1	ash_striker	Ash Striker +1	1	ash_striker_p1																	
+  Weaponcraft		AurionAlloyKnife	Dagger	3	Aurion Alloy Knife	1	aurion_knife	Aurion Alloy Knife +1		aurion_knife_p1																	
+  Weaponcraft		CorrodedGreatblade	Greatsword	3	Corroded Greatblade	1	corrod_grtblad																	
+  Weaponcraft		MapleConduit	Club	3	Maple Conduit	1	maple_conduit	Maple Conduit +1	1	maple_conduit_p1																	
+  Weaponcraft		PhantomFang	Short Sword	3	Phantom Fang	1	phantom_fang	Phantom Fang +1	1	phantom_fang_p1																	
+  Weaponcraft		CoarseShuriken	Throwing	4	Coarse Shuriken	25	coarse_shurikn																	
+  Weaponcraft		AshenWarstaff	Staff	4	Ashen Warstaff	1	ashen_wstaff	Ashen Warstaff +1	1	ashen_wstf_p1
+
+

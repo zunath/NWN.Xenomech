@@ -1,0 +1,67 @@
+source: docs/_incoming/XM Design Bible - Armor.tsv
+slot: Ring
+tsv: |
+  Type	Level	Item Name	Source	DEF	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC	BST	BRW	ELM	HNT	KPR	MDR	NGT	TEC
+  Ring	1	Copperforge Ring	Fabrication	0	1										x	x	x	x	x	x	x	x
+  Ring	1	Copperforge Ring +1	Fabrication	0	2										x	x	x	x	x	x	x	x
+  Ring	7	Brassguard Ring	Fabrication	0	2										x	x	x	x	x	x	x	x
+  Ring	7	Brassguard Ring +1	Fabrication	0	3										x	x	x	x	x	x	x	x
+  Ring	10	Eremite’s Focus Ring	Fabrication	0								1						x	x			x			x
+  Ring	10	Eremite’s Focus Ring +1	Fabrication	0								2						x	x			x			x
+  Ring	10	Sentinel’s Safeguard Ring	Fabrication	2										x	x	x	x	x	x	x	x
+  Ring	10	Sanctified Band	Fabrication	0								1				x			x			x	x	
+  Ring	10	Sanctified Band +1	Fabrication	0								2				x			x			x	x	
+  Ring	14	Amber Resonance Ring	Fabrication	0								1					x	x	x	x	x	x	x	x
+  Ring	14	Amethyst Arc Ring	Fabrication	0							1							x	x	x	x	x	x	x	x
+  Ring	14	Equilibrium Ring	Fabrication	1							1							x	x	x	x	x	x	x	x
+  Ring	14	Equilibrium Ring +1	Fabrication	2							2							x	x	x	x	x	x	x	x
+  Ring	14	Valor Ring	Fabrication	1								1						x	x	x	x	x	x	x	x
+  Ring	14	Valor Ring +1	Fabrication	2								2						x	x	x	x	x	x	x	x
+  Ring	14	Etherflow Ring	Fabrication	1		3											x	x	x	x	x	x	x	x
+  Ring	14	Etherflow Ring +1	Fabrication	2		5											x	x	x	x	x	x	x	x
+  Ring	14	Beacon of Hope Ring	Fabrication	1									1	x	x	x	x	x	x	x	x
+  Ring	14	Beacon of Hope Ring +1	Fabrication	2									2	x	x	x	x	x	x	x	x
+  Ring	14	Lapis Arcane Ring	Fabrication	0								1				x	x	x	x	x	x	x	x
+  Ring	14	Leatherbound Ring	Fabrication	1										x	x	x	x	x	x	x	x
+  Ring	14	Leatherbound Ring +1	Fabrication	2										x	x	x	x	x	x	x	x
+  Ring	14	Obsidian Onyx Ring	Fabrication	0		2											x	x	x	x	x	x	x	x
+  Ring	14	Reflex Resonance Ring	Fabrication	1										1	x	x	x	x	x	x	x	x
+  Ring	14	Reflex Resonance Ring +1	Fabrication	2										2	x	x	x	x	x	x	x	x
+  Ring	14	Silverguard Ring	Fabrication	0		3										x	x	x	x	x	x	x	x
+  Ring	14	Silverguard Ring +1	Fabrication	0		4										x	x	x	x	x	x	x	x
+  Ring	14	Endurance Ring	Fabrication	1								1						x	x	x	x	x	x	x	x
+  Ring	14	Endurance Ring +1	Fabrication	2								2						x	x	x	x	x	x	x	x
+  Ring	16	Boneforged Ring	Fabrication	0				2									x	x	x	x	x	x	x	x
+  Ring	16	Boneforged Ring +1	Fabrication	0				3									x	x	x	x	x	x	x	x
+  Ring	21	Chitin-Plated Ring	Fabrication	0				3									x	x	x	x	x	x	x	x
+  Ring	21	Chitin-Plated Ring +1	Fabrication	0				4									x	x	x	x	x	x	x	x
+  Ring	24	Mythrite Band	Fabrication	0	4											x	x	x	x	x	x	x	x
+  Ring	24	Mythrite Band +1	Fabrication	0	5											x	x	x	x	x	x	x	x
+  Ring	30	Marksman’s Ring	Fabrication	0				4									x	x	x	x	x	x	x	x
+  Ring	32	Smilodon Fang Ring	Fabrication	0										1		x	x	x	x	x	x	x	x
+  Ring	32	Smilodon Fang Ring +1	Fabrication	0				1									2		x	x	x	x	x	x	x	x
+  Ring	35	Horned Crest Ring	Fabrication	0				4									x	x	x	x	x	x	x	x
+  Ring	35	Horned Crest Ring +1	Fabrication	0				5									x	x	x	x	x	x	x	x
+  Ring	36	Alacrity Resonance Ring	Fabrication	2										2		x	x	x	x	x	x	x	x
+  Ring	36	Alacrity Resonance Ring +1	Fabrication	3										3		x	x	x	x	x	x	x	x
+  Ring	36	Deftstrike Ring	Fabrication	2										2		x	x	x	x	x	x	x	x
+  Ring	36	Deftstrike Ring +1	Fabrication	3										3		x	x	x	x	x	x	x	x
+  Ring	36	Oathkeeper’s Loyalty Ring	Fabrication	2										2	x	x	x	x	x	x	x	x
+  Ring	36	Oathkeeper’s Loyalty Ring +1	Fabrication	3										3	x	x	x	x	x	x	x	x
+  Ring	36	Puissance Battle Ring	Fabrication	2										2		x	x	x	x	x	x	x	x
+  Ring	36	Puissance Battle Ring +1	Fabrication	3										3		x	x	x	x	x	x	x	x
+  Ring	36	Solace Guardian Ring	Fabrication	2										2			x	x	x	x	x	x	x	x
+  Ring	36	Solace Guardian Ring +1	Fabrication	3										3			x	x	x	x	x	x	x	x
+  Ring	36	Verve Etherflow Ring	Fabrication	2										2			x	x	x	x	x	x	x	x
+  Ring	36	Verve Etherflow Ring +1	Fabrication	3										3			x	x	x	x	x	x	x	x
+  Ring	40	Electrum Arc Ring	Fabrication	0		10											x	x	x	x	x	x	x	x
+  Ring	40	Electrum Arc Ring +1	Fabrication	1		12											x	x	x	x	x	x	x	x
+  Ring	40	Sharpshooter’s Ring	Fabrication	0				3									x	x	x	x	x	x	x	x
+  Ring	40	Sharpshooter’s Ring +1	Fabrication	0				5									x	x	x	x	x	x	x	x
+  Ring	42	Woodsman’s Tracker Ring	Fabrication	0				2	3								x	x	x	x	x	x	x	x
+  Ring	42	Woodsman’s Tracker Ring +1	Fabrication	0				3	4								x	x	x	x	x	x	x	x
+  Ring	45	Auric Gold Ring	Fabrication	0	5											x	x	x	x	x	x	x	x
+  Ring	45	Auric Gold Ring +1	Fabrication	0	7											x	x	x	x	x	x	x	x
+  Ring	50	Phalanx Defender Ring	Fabrication	7											x	x	x	x	x	x	x	x
+  Ring	50	Phalanx Defender Ring +1	Fabrication	10											x	x	x	x	x	x	x	x
+

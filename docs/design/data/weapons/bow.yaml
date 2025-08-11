@@ -1,0 +1,74 @@
+# Source: docs/_incoming/XM Design Bible - Bow.tsv
+updated: 2025-08-10
+weapon: Bow
+items:
+  - { level: 1, name: "Striker Shortbow", source: Engineering, dmg: 5, delay: 360 }
+  - { level: 1, name: "Striker Shortbow +1", source: Engineering, dmg: 6, delay: 350, ep: 3 }
+  - { level: 5, name: "Vanguard Longbow", source: Engineering, dmg: 17, delay: 540 }
+  - { level: 5, name: "Vanguard Longbow +1", source: Engineering, dmg: 18, delay: 530, ep: 2, atk: 3 }
+  - { level: 7, name: "Arcwood Bow", source: Engineering, dmg: 14, delay: 450 }
+  - { level: 7, name: "Arcwood Bow +1", source: Engineering, dmg: 15, delay: 440, ep: 3 }
+  - { level: 10, name: "Freesword’s Recurve", source: Loot, dmg: 12, delay: 360 }
+  - { level: 10, name: "Regal Archer’s Warbow", source: Engineering, dmg: 24, delay: 540 }
+  - { level: 12, name: "Hunter’s Recurve", source: Loot, dmg: 27, delay: 490, ep: 2, atk: 5, per: 1, wil: 1 }
+  - { level: 15, name: "Dominion Warbow", source: Loot, dmg: 14, delay: 340, ep: 3 }
+  - { level: 15, name: "Sovereign Warbow", source: Loot, dmg: 26, delay: 510, ep: 2 }
+  - { level: 15, name: "Sandus Recurve", source: Engineering, dmg: 25, delay: 530, ep: 1 }
+  - { level: 15, name: "Zephyr Bow", source: Loot, dmg: 13, delay: 350, ep: 2 }
+  - { level: 16, name: "Powerstrike Bow", source: Engineering, dmg: 30, delay: 540 }
+  - { level: 16, name: "Powerstrike Bow +1", source: Engineering, dmg: 31, delay: 530, ep: 2, atk: 9 }
+  - { level: 20, name: "Vanguard Recurve", source: Loot, dmg: 15, delay: 360 }
+  - { level: 24, name: "Wrapped Warbow", source: Engineering, dmg: 19, delay: 360 }
+  - { level: 24, name: "Wrapped Warbow +1", source: Engineering, dmg: 20, delay: 350, ep: 3 }
+  - { level: 29, name: "Assassin’s Fangbow", source: Loot, dmg: 21, delay: 330, ep: 3, agi: 2 }
+  - { level: 30, name: "Titan Greatbow", source: Engineering, dmg: 43, delay: 540 }
+  - { level: 30, name: "Titan Greatbow +1", source: Engineering, dmg: 44, delay: 530, ep: 2, atk: 12 }
+  - { level: 34, name: "Shadowpiercer Bow", source: Engineering, dmg: 24, delay: 330, ep: 8, agi: 2 }
+  - { level: 34, name: "Shadowpiercer Bow +1", source: Engineering, dmg: 25, delay: 320, ep: 10, agi: 2 }
+  - { level: 36, name: "Composite Recurve", source: Engineering, dmg: 36, delay: 450 }
+  - { level: 36, name: "Composite Recurve +1", source: Engineering, dmg: 37, delay: 440, ep: 3 }
+  - { level: 38, name: "Velocity Bow", source: Loot, dmg: 25, delay: 330 }
+  - { level: 40, name: "Battleforged Bow", source: Engineering, dmg: 54, delay: 540 }
+  - { level: 40, name: "Battleforged Bow +1", source: Engineering, dmg: 55, delay: 530, ep: 2, atk: 15 }
+  - { level: 50, name: "Kaman Striker", source: Engineering, dmg: 32, delay: 360 }
+  - { level: 50, name: "Kaman Striker +1", source: Engineering, dmg: 33, delay: 350, ep: 3 }
+  - { level: 50, name: "Warborn Bow", source: Engineering, dmg: 65, delay: 540 }
+  - { level: 50, name: "Warborn Bow +1", source: Engineering, dmg: 66, delay: 530, ep: 2, atk: 18 }
+
+
+tsv: |
+  Type	Level	Item Name	Source	DMG	Delay	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC
+  Bow	1	Striker Shortbow	Engineering	5	360										
+  Bow	1	Striker Shortbow +1	Engineering	6	350		3									
+  Bow	5	Vanguard Longbow	Engineering	17	540										
+  Bow	5	Vanguard Longbow +1	Engineering	18	530		2	3								
+  Bow	7	Arcwood Bow	Engineering	14	450										
+  Bow	7	Arcwood Bow +1	Engineering	15	440		3									
+  Bow	10	Freesword’s Recurve	Loot	12	360										
+  Bow	10	Regal Archer’s Warbow	Engineering	24	540										
+  Bow	12	Hunter’s Recurve	Loot	27	490		2	5		1					1	
+  Bow	15	Dominion Warbow	Loot	14	340			3								
+  Bow	15	Sovereign Warbow	Loot	26	510		2									
+  Bow	15	Sandus Recurve	Engineering	25	530		1									
+  Bow	15	Zephyr Bow	Loot	13	350			2								
+  Bow	16	Powerstrike Bow	Engineering	30	540										
+  Bow	16	Powerstrike Bow +1	Engineering	31	530		2	9								
+  Bow	20	Vanguard Recurve	Loot	15	360										
+  Bow	24	Wrapped Warbow	Engineering	19	360										
+  Bow	24	Wrapped Warbow +1	Engineering	20	350		3									
+  Bow	29	Assassin’s Fangbow	Loot	21	330		3								2	
+  Bow	30	Titan Greatbow	Engineering	43	540										
+  Bow	30	Titan Greatbow +1	Engineering	44	530		2	12								
+  Bow	34	Shadowpiercer Bow	Engineering	24	330		8								2	
+  Bow	34	Shadowpiercer Bow +1	Engineering	25	320		10								2	
+  Bow	36	Composite Recurve	Engineering	36	450										
+  Bow	36	Composite Recurve +1	Engineering	37	440		3									
+  Bow	38	Velocity Bow	Loot	25	330										
+  Bow	40	Battleforged Bow	Engineering	54	540										
+  Bow	40	Battleforged Bow +1	Engineering	55	530		2	15								
+  Bow	50	Kaman Striker	Engineering	32	360										
+  Bow	50	Kaman Striker +1	Engineering	33	350		3									
+  Bow	50	Warborn Bow	Engineering	65	540										
+  Bow	50	Warborn Bow +1	Engineering	66	530		2	18								
+
+

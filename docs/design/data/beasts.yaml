@@ -1,0 +1,31 @@
+# Source: docs/_incoming/XM Design Bible - Beasts.tsv
+updated: 2025-08-10
+
+columns:
+  - levelReq
+  - name
+  - scale
+  - portraitId
+  - soundId
+  - item
+  - hp
+  - ep
+  - might
+  - perception
+  - vitality
+  - agility
+  - willpower
+  - social
+  - dmg
+  - delay
+  - evasion
+  - ability1
+  - ability2
+  - ability3
+  - ability4
+
+tsv: |
+  Level Req.	Name	Scale	Portrait Id	Sound Id	Item	HP	EP	Might	Perception	Vitality	Agility	Willpower	Social	DMG	Delay	Evasion	Ability 1	Ability 2	Ability 3	Ability 4
+  1	Badger	1	144	4	Fruit Broth	C	C	D	C	D	F	E	A	C	300	C	Flame Breath			
+
+

@@ -1,0 +1,112 @@
+source: docs/_incoming/XM Design Bible - Armor.tsv
+slot: Hands
+tsv: |
+  Type	Level	Item Name	Source	DEF	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC	BST	BRW	ELM	HNT	KPR	MDR	NGT	TEC
+  Hands	1	Aurion Alloy Mittens	Armorcraft	1										x	x			x		x
+  Hands	1	Aurion Alloy Mittens +1	Armorcraft	2										x	x			x		x
+  Hands	1	Reinforced Cuffs	Armorcraft	1											x	x	x		x	x	
+  Hands	1	Reinforced Cuffs +1	Armorcraft	2											x	x	x		x	x	
+  Hands	6	Heatguard Mitts	Loot	2											x	x	x		x	x	
+  Hands	7	Leather Combat Gloves	Armorcraft	2										x			x		x	x
+  Hands	7	Leather Combat Gloves +1	Armorcraft	3										x			x		x	x
+  Hands	8	Warforged Mitts	Armorcraft	2											x	x	x		x	
+  Hands	8	Warforged Mitts +1	Armorcraft	3											x	x	x		x	
+  Hands	8	Battleforged Tekko	Armorcraft	2											x					
+  Hands	8	Battleforged Tekko +1	Armorcraft	3											x					
+  Hands	10	Legionnaire’s War Mittens	Loot	3							3						x	x			x	x	
+  Hands	10	Titan Scale Gauntlets	Armorcraft	3										x			x	x			x
+  Hands	10	Titan Scale Gauntlets +1	Armorcraft	4										x			x	x			x
+  Hands	11	Brassguard Mittens	Armorcraft	3										x					x	x
+  Hands	11	Brassguard Mittens +1	Armorcraft	4										x					x	x
+  Hands	11	Combat Gloves	Armorcraft	3										x	x			x		
+  Hands	11	Combat Gloves +1	Armorcraft	4										x	x			x		
+  Hands	11	Zealot’s War Mitts	Loot	3		5									3				x			x	
+  Hands	12	Etherwoven Cuffs	Armorcraft	3											x	x	x		x	x	
+  Hands	12	Etherwoven Cuffs +1	Armorcraft	4						1						x	x	x		x	x	
+  Hands	14	Battleforged Gloves	Loot	4			3		3								x	x	x		x	x	
+  Hands	16	Boneforged Mittens	Armorcraft	4										x	x			x		x
+  Hands	16	Boneforged Mittens +1	Armorcraft	5						1						x	x			x		x
+  Hands	17	Lizardscale Combat Gloves	Armorcraft	5										x			x	x			x
+  Hands	17	Lizardscale Combat Gloves +1	Armorcraft	6										x			x	x			x
+  Hands	18	Cotton-Woven Tekko	Armorcraft	5											x					
+  Hands	18	Cotton-Woven Tekko +1	Armorcraft	6											x					
+  Hands	20	Baron’s Reinforced Cuffs	Loot	6		4									1			x	x			x	x	
+  Hands	20	Mercenary’s War Tekko	Loot	5											x					
+  Hands	20	Sanctified White Mitts	Armorcraft	4																
+  Hands	20	Sanctified White Mitts +1	Armorcraft	5		3									2				x	x			x	
+  Hands	21	Chitin-Plated Mittens	Armorcraft	6										x	x			x		x
+  Hands	21	Chitin-Plated Mittens +1	Armorcraft	7						1						x	x			x		x
+  Hands	23	Cotton Combat Gloves	Armorcraft	6										x	x			x		
+  Hands	23	Cotton Combat Gloves +1	Armorcraft	7										x	x			x		
+  Hands	24	Titan Chain Mittens	Armorcraft	7										x			x			x
+  Hands	24	Titan Chain Mittens +1	Armorcraft	8										x			x			x
+  Hands	27	Brassguard Finger Gauntlets	Armorcraft	7										x			x	x			x
+  Hands	27	Brassguard Finger Gauntlets +1	Armorcraft	8										x			x	x			x
+  Hands	27	Devotee’s Sanctified Mitts	Armorcraft	5		8									2				x			x	
+  Hands	27	Devotee’s Sanctified Mitts +1	Armorcraft	6		9									3				x			x	
+  Hands	28	Woolen Combat Cuffs	Armorcraft	6											x	x			x	x	
+  Hands	28	Woolen Combat Cuffs +1	Armorcraft	7											x	x			x	x	
+  Hands	29	Eisenwrought Gauntlets	Armorcraft	9										1					x	
+  Hands	29	Eisenwrought Gauntlets +1	Armorcraft	10										2					x	
+  Hands	29	Oracle’s Mitts	Armorcraft	5							1						x			x		
+  Hands	29	Oracle’s Mitts +1	Armorcraft	6							2						x			x		
+  Hands	29	Earthforged Tekko	Armorcraft	7											x					
+  Hands	29	Earthforged Tekko +1	Armorcraft	8											x					
+  Hands	30	Centurion’s War Gauntlets	Loot	8								1				x			x	x			x
+  Hands	30	Combat Reinforced Mittens	Armorcraft	8						4						x	x			x	x	
+  Hands	30	Combat Reinforced Mittens +1	Armorcraft	9						4		1					x	x			x	x	
+  Hands	30	Gigas War Bracelets	Loot	9		15							3						x	x			x		x
+  Hands	30	Noctshadow Gloves	Armorcraft	5						1						x			x		
+  Hands	30	Noctshadow Gloves +1	Armorcraft	6						2						x			x		
+  Hands	30	Reinforced Studded Gloves	Armorcraft	7										x			x	x			x
+  Hands	30	Reinforced Studded Gloves +1	Armorcraft	8										x			x	x			x
+  Hands	34	Etherwoven Mitts	Armorcraft	7											x	x	x		x	
+  Hands	34	Etherwoven Mitts +1	Armorcraft	8											x	x	x		x	
+  Hands	34	Ochiudo’s Battle Kote	Loot	4							15						x					
+  Hands	35	Ironclad Mittens	Armorcraft	8										x	x			x		x
+  Hands	35	Ironclad Mittens +1	Armorcraft	9										x	x			x		x
+  Hands	36	Combat Bracers	Armorcraft	8											x	x	x		x	
+  Hands	36	Combat Bracers +1	Armorcraft	9											x	x	x		x	
+  Hands	36	Silverguard Mittens	Armorcraft	9										x			x			x
+  Hands	36	Silverguard Mittens +1	Armorcraft	10										x			x			x
+  Hands	37	Ironclad Finger Gauntlets	Armorcraft	9										x			x	x			x
+  Hands	37	Ironclad Finger Gauntlets +1	Armorcraft	10										x			x	x			x
+  Hands	38	Leatherbound Gloves	Armorcraft	9										x			x	x			x
+  Hands	38	Leatherbound Gloves +1	Armorcraft	10										x			x	x			x
+  Hands	38	Regal Velvet Cuffs	Armorcraft	8											x	x			x	
+  Hands	38	Regal Velvet Cuffs +1	Armorcraft	9										2			x	x			x	
+  Hands	40	Warcaster’s Mitts	Armorcraft	8							5						x	x	x		x	
+  Hands	40	Titan Gauntlets	Armorcraft	11														x		
+  Hands	40	Titan Gauntlets +1	Armorcraft	12														x		
+  Hands	40	Iron Musketeer’s Battle Gauntlets	Armorcraft	12							5						x	x				
+  Hands	41	Silver-Plated Bangles	Armorcraft	9											x	x			x	x	
+  Hands	41	Silver-Plated Bangles +1	Armorcraft	10											x	x			x	x	
+  Hands	43	Warcaster’s Mitts +1	Armorcraft	9		14							5						x	x	x		x	
+  Hands	43	Warcaster’s Mitts +2	Armorcraft	10		16							5						x	x	x		x	
+  Hands	43	Iron Musketeer’s Battle Gauntlets +1	Armorcraft	13							5			2					x	x				
+  Hands	43	Iron Musketeer’s Battle Gauntlets +2	Armorcraft	14							5			3					x	x				
+  Hands	45	Chitin-Plated Mittens	Armorcraft	10										x	x			x		x
+  Hands	45	Chitin-Plated Mittens +1	Armorcraft	11						1						x	x			x		x
+  Hands	46	Insulated Mufflers	Armorcraft	12										x			x			x
+  Hands	46	Insulated Mufflers +1	Armorcraft	13										x			x			x
+  Hands	47	Tideshell Bangles	Armorcraft	10											x	x			x	x	
+  Hands	47	Tideshell Bangles +1	Armorcraft	11											x	x			x	x	
+  Hands	48	Raptorstrike Gloves	Armorcraft	12										x			x			x	x
+  Hands	48	Raptorstrike Gloves +1	Armorcraft	13										x			x			x	x
+  Hands	48	Steelguard Finger Gauntlets	Armorcraft	12										x			x	x			x
+  Hands	48	Steelguard Finger Gauntlets +1	Armorcraft	13										x			x	x			x
+  Hands	48	Woolen Combat Bracers	Armorcraft	10											x	x			x	
+  Hands	48	Woolen Combat Bracers +1	Armorcraft	11											x	x			x	
+  Hands	49	Mythrite Gauntlets	Armorcraft	13														x		
+  Hands	49	Mythrite Gauntlets +1	Armorcraft	14											1					x	
+  Hands	49	Shinobi Shadow Tekko	Armorcraft	11											x					
+  Hands	49	Shinobi Shadow Tekko +1	Armorcraft	12										1						x	
+  Hands	50	Obsidian Mitts	Armorcraft	10											x	x			x	x	
+  Hands	50	Obsidian Mitts +1	Armorcraft	10							5						x	x			x	x	
+  Hands	50	Ivoryforged Mitts	Loot	9		12									3						x	
+  Hands	50	Arcane Weaver’s Mitts	Loot	11		15									3					x		
+  Hands	50	Obsidian Crow Bracers	Armorcraft	10							5						x	x			x	x	
+  Hands	50	Obsidian Crow Bracers +1	Armorcraft	11							6						x	x			x	x	
+  Hands	50	Royal Knight’s War Mufflers	Loot	13											x			x			x
+  Hands	50	Tactician Magician’s War Cuffs	Armorcraft	10							5						x	x	x		x	x	
+

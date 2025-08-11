@@ -1,0 +1,200 @@
+# Source: docs/_incoming/XM Design Bible - Longsword.tsv
+updated: 2025-08-10
+weapon: Longsword
+items:
+  - { level: 1, name: "Aurion Alloy Blade", source: Weaponcraft, dmg: 6, delay: 230 }
+  - { level: 1, name: "Aurion Alloy Blade +1", source: Weaponcraft, dmg: 7, delay: 220 }
+  - { level: 1, name: "Ether-Tuned Edge", source: Loot, dmg: 5, delay: 230 }
+  - { level: 1, name: "Resonance Blade", source: Weaponcraft, dmg: 6, delay: 230 }
+  - { level: 1, name: "Resonance Blade +1", source: Weaponcraft, dmg: 7, delay: 220, ep: 2 }
+  - { level: 7, name: "Vanguard Cutter", source: Weaponcraft, dmg: 9, delay: 240 }
+  - { level: 7, name: "Vanguard Cutter +1", source: Weaponcraft, dmg: 10, delay: 230 }
+  - { level: 7, name: "Zenithian Arcblade", source: Weaponcraft, dmg: 8, delay: 230 }
+  - { level: 7, name: "Zenithian Arcblade +1", source: Weaponcraft, dmg: 9, delay: 220 }
+  - { level: 9, name: "Spatha-Tek Edge", source: Weaponcraft, dmg: 11, delay: 240 }
+  - { level: 9, name: "Spatha-Tek Edge +1", source: Weaponcraft, dmg: 12, delay: 230 }
+  - { level: 10, name: "Royal Striker's Blade", source: Loot, dmg: 10, delay: 230 }
+  - { level: 11, name: "Hivefang Spatha", source: Weaponcraft, dmg: 13, delay: 230 }
+  - { level: 11, name: "Hivefang Spatha +1", source: Weaponcraft, dmg: 14, delay: 220, ep: 2 }
+  - { level: 13, name: "Bilbron Edge", source: Weaponcraft, dmg: 11, delay: 230 }
+  - { level: 13, name: "Bilbron Edge +1", source: Weaponcraft, dmg: 12, delay: 220 }
+  - { level: 13, name: "Brass Arcblade", source: Weaponcraft, dmg: 12, delay: 230 }
+  - { level: 13, name: "Brass Arcblade +1", source: Weaponcraft, dmg: 13, delay: 220 }
+  - { level: 13, name: "Ether Scimitar", source: Weaponcraft, dmg: 13, delay: 240 }
+  - { level: 13, name: "Ether Scimitar +1", source: Weaponcraft, dmg: 14, delay: 230 }
+  - { level: 13, name: "Sparkfang Edge", source: Weaponcraft, dmg: 11, delay: 230 }
+  - { level: 13, name: "Sparkfang Edge +1", source: Weaponcraft, dmg: 12, delay: 220 }
+  - { level: 13, name: "Dominion Blade", source: Loot, dmg: 12, delay: 220, hp: 6 }
+  - { level: 15, name: "Sandorian Cutter", source: Loot, dmg: 11, delay: 220, hp: 4 }
+  - { level: 18, name: "Pyrebrand", source: Loot, dmg: 15, delay: 230 }
+  - { level: 18, name: "Infernal Edge", source: Loot, dmg: 16, delay: 220 }
+  - { level: 18, name: "Ferrite Sword", source: Weaponcraft, dmg: 14, delay: 230 }
+  - { level: 18, name: "Ferrite Sword +1", source: Weaponcraft, dmg: 15, delay: 220 }
+  - { level: 18, name: "Arcblade Longsword", source: Weaponcraft, dmg: 16, delay: 240 }
+  - { level: 18, name: "Arcblade Longsword +1", source: Weaponcraft, dmg: 17, delay: 230 }
+  - { level: 18, name: "Vulcan Edge", source: Loot, dmg: 15, delay: 230 }
+  - { level: 19, name: "Compact Cutter", source: Loot, dmg: 13, delay: 230, wil: 2 }
+  - { level: 20, name: "Degen-Tek", source: Weaponcraft, dmg: 14, delay: 230 }
+  - { level: 20, name: "Degen-Tek +1", source: Weaponcraft, dmg: 15, delay: 220 }
+  - { level: 20, name: "Vanguard Spatha", source: Loot, dmg: 15, delay: 230 }
+  - { level: 22, name: "Kaiser Edge", source: Loot, dmg: 15, delay: 230 }
+  - { level: 23, name: "Pulse Tuck", source: Weaponcraft, dmg: 15, delay: 230 }
+  - { level: 23, name: "Pulse Tuck +1", source: Weaponcraft, dmg: 16, delay: 220 }
+  - { level: 27, name: "Gladiator’s Arc", source: Loot, dmg: 18, delay: 220 }
+  - { level: 27, name: "Gladius Prime", source: Loot, dmg: 17, delay: 230 }
+  - { level: 28, name: "Mithrite Scimitar", source: Loot, dmg: 19, delay: 240, wil: 3 }
+  - { level: 30, name: "Titan Broadsword", source: Weaponcraft, dmg: 19, delay: 230 }
+  - { level: 30, name: "Titan Broadsword +1", source: Weaponcraft, dmg: 20, delay: 220 }
+  - { level: 30, name: "Centurion’s Fang", source: Loot, dmg: 19, delay: 220, ep: 3, atk: 4 }
+  - { level: 30, name: "Ether Fleuret", source: Weaponcraft, dmg: 18, delay: 220 }
+  - { level: 30, name: "Ether Fleuret +1", source: Weaponcraft, dmg: 19, delay: 210 }
+  - { level: 30, name: "Steel Kilj Blade", source: Weaponcraft, dmg: 21, delay: 240, ep: 10 }
+  - { level: 30, name: "Steel Kilj Blade +1", source: Weaponcraft, dmg: 22, delay: 230, ep: 15 }
+  - { level: 32, name: "Strider’s Edge", source: Loot, dmg: 19, delay: 230, agi: 3 }
+  - { level: 34, name: "Bastion Sword", source: Loot, dmg: 20, delay: 220, ep: 4, acc: 3, atk: 4 }
+  - { level: 34, name: "Hunter’s Fang", source: Loot, dmg: 27, delay: 270 }
+  - { level: 34, name: "Republic Cutter", source: Loot, dmg: 21, delay: 210, ep: 6, acc: 3, atk: 4 }
+  - { level: 34, name: "Warforged Blade", source: Loot, dmg: 28, delay: 260 }
+  - { level: 36, name: "Sanctified Edge", source: Weaponcraft, dmg: 22, delay: 230 }
+  - { level: 36, name: "Sanctified Edge +1", source: Weaponcraft, dmg: 23, delay: 220 }
+  - { level: 36, name: "Mythrite Degen", source: Weaponcraft, dmg: 20, delay: 230 }
+  - { level: 36, name: "Mythrite Degen +1", source: Weaponcraft, dmg: 21, delay: 220 }
+  - { level: 36, name: "Mythrite Blade", source: Weaponcraft, dmg: 21, delay: 230 }
+  - { level: 36, name: "Mythrite Blade +1", source: Weaponcraft, dmg: 22, delay: 220 }
+  - { level: 36, name: "Reverence Sword", source: Loot, dmg: 22, delay: 230 }
+  - { level: 36, name: "Sparkfang Degen", source: Weaponcraft, dmg: 20, delay: 230 }
+  - { level: 36, name: "Sparkfang Degen +1", source: Weaponcraft, dmg: 21, delay: 220 }
+  - { level: 36, name: "Phantasmal Blade", source: Loot, dmg: 22, delay: 230 }
+  - { level: 36, name: "Rift Tulwar", source: Weaponcraft, dmg: 23, delay: 240 }
+  - { level: 36, name: "Rift Tulwar +1", source: Weaponcraft, dmg: 24, delay: 230 }
+  - { level: 38, name: "Ascendant Blade", source: Weaponcraft, dmg: 23, delay: 240 }
+  - { level: 38, name: "Ascendant Blade +1", source: Weaponcraft, dmg: 24, delay: 220 }
+  - { level: 38, name: "Hallowed Arcblade", source: Loot, dmg: 23, delay: 230 }
+  - { level: 40, name: "Combat Caster’s Talon", source: Weaponcraft, dmg: 26, delay: 230, ep: 3, acc: 5 }
+  - { level: 40, name: "Infernal Degen", source: Weaponcraft, dmg: 22, delay: 230 }
+  - { level: 40, name: "Infernal Degen +1", source: Weaponcraft, dmg: 23, delay: 220 }
+  - { level: 40, name: "Novice Duelist’s Tuck", source: Weaponcraft, dmg: 21, delay: 230 }
+  - { level: 40, name: "Vulcan Fang", source: Loot, dmg: 22, delay: 230 }
+  - { level: 42, name: "Crescent Shotel", source: Weaponcraft, dmg: 30, delay: 290, hp: 2 }
+  - { level: 42, name: "Crescent Shotel +1", source: Weaponcraft, dmg: 31, delay: 280, hp: 3 }
+  - { level: 43, name: "Combat Caster’s Talon +1", source: Weaponcraft, dmg: 27, delay: 230, ep: 3, acc: 5 }
+  - { level: 43, name: "Combat Caster’s Talon +2", source: Weaponcraft, dmg: 28, delay: 220, ep: 3, acc: 5 }
+  - { level: 43, name: "Duelist’s Rapier", source: Loot, dmg: 23, delay: 230 }
+  - { level: 43, name: "Novice Duelist’s Tuck +1", source: Weaponcraft, dmg: 22, delay: 220, ep: 4 }
+  - { level: 43, name: "Novice Duelist’s Tuck +2", source: Weaponcraft, dmg: 23, delay: 210, ep: 5 }
+  - { level: 44, name: "Arc-Falchion", source: Weaponcraft, dmg: 28, delay: 240 }
+  - { level: 44, name: "Arc-Falchion +1", source: Weaponcraft, dmg: 29, delay: 230 }
+  - { level: 45, name: "Relic Blade", source: Loot, dmg: 25, delay: 230 }
+  - { level: 45, name: "Sanctified Degen", source: Weaponcraft, dmg: 24, delay: 230 }
+  - { level: 45, name: "Sanctified Degen +1", source: Weaponcraft, dmg: 25, delay: 220 }
+  - { level: 45, name: "Reverence Degen", source: Loot, dmg: 24, delay: 230 }
+  - { level: 47, name: "Infernal Edge", source: Weaponcraft, dmg: 30, delay: 240 }
+  - { level: 47, name: "Infernal Edge +1", source: Weaponcraft, dmg: 31, delay: 230 }
+  - { level: 47, name: "Vanguard Knight’s Sword", source: Weaponcraft, dmg: 31, delay: 240 }
+  - { level: 47, name: "Vanguard Knight’s Sword +1", source: Weaponcraft, dmg: 32, delay: 230 }
+  - { level: 47, name: "Vulcan Arcblade", source: Loot, dmg: 30, delay: 240 }
+  - { level: 49, name: "Crimson Fang", source: Loot, dmg: 28, delay: 230, ep: 10, agi: 3 }
+  - { level: 50, name: "Musketeer’s Edge", source: Weaponcraft, dmg: 26, delay: 230 }
+  - { level: 50, name: "Warcaster’s Espadon", source: Loot, dmg: 38, delay: 260, ep: 12 }
+  - { level: 50, name: "Templar Army Blade", source: Loot, dmg: 32, delay: 240 }
+
+
+tsv: |
+  Type	Level	Item Name	Source	DMG	Delay	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC
+  Longsword	1	Aurion Alloy Blade	Weaponcraft	6	230										
+  Longsword	1	Aurion Alloy Blade +1	Weaponcraft	7	220										
+  Longsword	1	Ether-Tuned Edge	Loot	5	230										
+  Longsword	1	Resonance Blade	Weaponcraft	6	230										
+  Longsword	1	Resonance Blade +1	Weaponcraft	7	220			2									
+  Longsword	7	Vanguard Cutter	Weaponcraft	9	240										
+  Longsword	7	Vanguard Cutter +1	Weaponcraft	10	230										
+  Longsword	7	Zenithian Arcblade	Weaponcraft	8	230										
+  Longsword	7	Zenithian Arcblade +1	Weaponcraft	9	220										
+  Longsword	9	Spatha-Tek Edge	Weaponcraft	11	240										
+  Longsword	9	Spatha-Tek Edge +1	Weaponcraft	12	230										
+  Longsword	10	Royal Striker's Blade	Loot	10	230										
+  Longsword	11	Hivefang Spatha	Weaponcraft	13	230										
+  Longsword	11	Hivefang Spatha +1	Weaponcraft	14	220			2									
+  Longsword	13	Bilbron Edge	Weaponcraft	11	230										
+  Longsword	13	Bilbron Edge +1	Weaponcraft	12	220										
+  Longsword	13	Brass Arcblade	Weaponcraft	12	230										
+  Longsword	13	Brass Arcblade +1	Weaponcraft	13	220										
+  Longsword	13	Ether Scimitar	Weaponcraft	13	240										
+  Longsword	13	Ether Scimitar +1	Weaponcraft	14	230										
+  Longsword	13	Sparkfang Edge	Weaponcraft	11	230										
+  Longsword	13	Sparkfang Edge +1	Weaponcraft	12	220										
+  Longsword	13	Dominion Blade	Loot	12	220	6										
+  Longsword	15	Sandorian Cutter	Loot	11	220	4										
+  Longsword	18	Pyrebrand	Loot	15	230										
+  Longsword	18	Infernal Edge	Loot	16	220										
+  Longsword	18	Ferrite Sword	Weaponcraft	14	230										
+  Longsword	18	Ferrite Sword +1	Weaponcraft	15	220										
+  Longsword	18	Arcblade Longsword	Weaponcraft	16	240										
+  Longsword	18	Arcblade Longsword +1	Weaponcraft	17	230										
+  Longsword	18	Vulcan Edge	Loot	15	230										
+  Longsword	19	Compact Cutter	Loot	13	230								2			
+  Longsword	20	Degen-Tek	Weaponcraft	14	230										
+  Longsword	20	Degen-Tek +1	Weaponcraft	15	220										
+  Longsword	20	Vanguard Spatha	Loot	15	230										
+  Longsword	22	Kaiser Edge	Loot	15	230										
+  Longsword	23	Pulse Tuck	Weaponcraft	15	230										
+  Longsword	23	Pulse Tuck +1	Weaponcraft	16	220										
+  Longsword	27	Gladiator’s Arc	Loot	18	220										
+  Longsword	27	Gladius Prime	Loot	17	230										
+  Longsword	28	Mithrite Scimitar	Loot	19	240									3		
+  Longsword	30	Titan Broadsword	Weaponcraft	19	230										
+  Longsword	30	Titan Broadsword +1	Weaponcraft	20	220										
+  Longsword	30	Centurion’s Fang	Loot	19	220			3	4							
+  Longsword	30	Ether Fleuret	Weaponcraft	18	220										
+  Longsword	30	Ether Fleuret +1	Weaponcraft	19	210										
+  Longsword	30	Steel Kilj Blade	Weaponcraft	21	240		10									
+  Longsword	30	Steel Kilj Blade +1	Weaponcraft	22	230		15									
+  Longsword	32	Strider’s Edge	Loot	19	230										3	
+  Longsword	34	Bastion Sword	Loot	20	220			4	3	4							
+  Longsword	34	Hunter’s Fang	Loot	27	270										
+  Longsword	34	Republic Cutter	Loot	21	210			6	3	4							
+  Longsword	34	Warforged Blade	Loot	28	260										
+  Longsword	36	Sanctified Edge	Weaponcraft	22	230										
+  Longsword	36	Sanctified Edge +1	Weaponcraft	23	220										
+  Longsword	36	Mythrite Degen	Weaponcraft	20	230										
+  Longsword	36	Mythrite Degen +1	Weaponcraft	21	220										
+  Longsword	36	Mythrite Blade	Weaponcraft	21	230										
+  Longsword	36	Mythrite Blade +1	Weaponcraft	22	220										
+  Longsword	36	Reverence Sword	Loot	22	230										
+  Longsword	36	Sparkfang Degen	Weaponcraft	20	230										
+  Longsword	36	Sparkfang Degen +1	Weaponcraft	21	220										
+  Longsword	36	Phantasmal Blade	Loot	22	230										
+  Longsword	36	Rift Tulwar	Weaponcraft	23	240										
+  Longsword	36	Rift Tulwar +1	Weaponcraft	24	230										
+  Longsword	38	Ascendant Blade	Weaponcraft	23	240										
+  Longsword	38	Ascendant Blade +1	Weaponcraft	24	220										
+  Longsword	38	Hallowed Arcblade	Loot	23	230										
+  Longsword	40	Combat Caster’s Talon	Weaponcraft	26	230			3	5							
+  Longsword	40	Infernal Degen	Weaponcraft	22	230										
+  Longsword	40	Infernal Degen +1	Weaponcraft	23	220										
+  Longsword	40	Novice Duelist’s Tuck	Weaponcraft	21	230										
+  Longsword	40	Vulcan Fang	Loot	22	230										
+  Longsword	42	Crescent Shotel	Weaponcraft	30	290			2									
+  Longsword	42	Crescent Shotel +1	Weaponcraft	31	280			3									
+  Longsword	43	Combat Caster’s Talon +1	Weaponcraft	27	230			3	5							
+  Longsword	43	Combat Caster’s Talon +2	Weaponcraft	28	220			3	5							
+  Longsword	43	Duelist’s Rapier	Loot	23	230										
+  Longsword	43	Novice Duelist’s Tuck +1	Weaponcraft	22	220			4									
+  Longsword	43	Novice Duelist’s Tuck +2	Weaponcraft	23	210			5									
+  Longsword	44	Arc-Falchion	Weaponcraft	28	240										
+  Longsword	44	Arc-Falchion +1	Weaponcraft	29	230										
+  Longsword	45	Relic Blade	Loot	25	230										
+  Longsword	45	Sanctified Degen	Weaponcraft	24	230										
+  Longsword	45	Sanctified Degen +1	Weaponcraft	25	220										
+  Longsword	45	Reverence Degen	Loot	24	230										
+  Longsword	47	Infernal Edge	Weaponcraft	30	240										
+  Longsword	47	Infernal Edge +1	Weaponcraft	31	230										
+  Longsword	47	Vanguard Knight’s Sword	Weaponcraft	31	240										
+  Longsword	47	Vanguard Knight’s Sword +1	Weaponcraft	32	230										
+  Longsword	47	Vulcan Arcblade	Loot	30	240										
+  Longsword	49	Crimson Fang	Loot	28	230			10							3		
+  Longsword	50	Musketeer’s Edge	Weaponcraft	26	230										
+  Longsword	50	Warcaster’s Espadon	Loot	38	260			12									
+  Longsword	50	Templar Army Blade	Loot	32	240										
+
+

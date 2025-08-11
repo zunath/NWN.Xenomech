@@ -1,0 +1,46 @@
+# Source: docs/_incoming/XM Design Bible - Pistol.tsv
+updated: 2025-08-10
+weapon: Pistol
+items:
+  - { level: 1, name: "Arcstrike Pistol", source: Engineering, dmg: 6, delay: 290 }
+  - { level: 1, name: "Arcstrike Pistol +1", source: Engineering, dmg: 7, delay: 280, ep: 3 }
+  - { level: 10, name: "Legionnaire’s Repeater", source: Engineering, dmg: 10, delay: 290 }
+  - { level: 12, name: "Vanguard Repeater", source: Engineering, dmg: 12, delay: 290 }
+  - { level: 12, name: "Vanguard Repeater +1", source: Engineering, dmg: 13, delay: 280, ep: 6 }
+  - { level: 15, name: "Bastion Repeater", source: Engineering, dmg: 11, delay: 280, hp: 4 }
+  - { level: 15, name: "Republic Handcannon", source: Engineering, dmg: 12, delay: 270, hp: 6 }
+  - { level: 25, name: "Powercaster Pistol", source: Loot, dmg: 17, delay: 290, agi: 1 }
+  - { level: 30, name: "Zamburak Auto", source: Engineering, dmg: 19, delay: 290 }
+  - { level: 30, name: "Zamburak Auto +1", source: Engineering, dmg: 20, delay: 280, ep: 9 }
+  - { level: 31, name: "Nous Magnum", source: Loot, dmg: 20, delay: 290, wil: 4 }
+  - { level: 37, name: "Rikonodo Striker", source: Engineering, dmg: 24, delay: 290, ep: 3, atk: 3 }
+  - { level: 40, name: "Hunter’s Fang", source: Engineering, dmg: 24, delay: 290 }
+  - { level: 44, name: "Tell’s Marksman", source: Engineering, dmg: 23, delay: 260 }
+  - { level: 45, name: "Tracker’s Sidearm", source: Engineering, dmg: 26, delay: 290, agi: 1 }
+  - { level: 45, name: "Tracker’s Sidearm +1", source: Engineering, dmg: 27, delay: 280, agi: 2 }
+  - { level: 50, name: "Etherbolt Arbalest", source: Engineering, dmg: 29, delay: 290 }
+  - { level: 50, name: "Etherbolt Arbalest +1", source: Engineering, dmg: 30, delay: 280, ep: 12 }
+
+
+tsv: |
+  Type	Level	Item Name	Source	DMG	Delay	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC
+  Pistol	1	Arcstrike Pistol	Engineering	6	290										
+  Pistol	1	Arcstrike Pistol +1	Engineering	7	280			3									
+  Pistol	10	Legionnaire’s Repeater	Engineering	10	290										
+  Pistol	12	Vanguard Repeater	Engineering	12	290										
+  Pistol	12	Vanguard Repeater +1	Engineering	13	280			6									
+  Pistol	15	Bastion Repeater	Engineering	11	280	4										
+  Pistol	15	Republic Handcannon	Engineering	12	270	6										
+  Pistol	25	Powercaster Pistol	Loot	17	290									1	
+  Pistol	30	Zamburak Auto	Engineering	19	290										
+  Pistol	30	Zamburak Auto +1	Engineering	20	280			9									
+  Pistol	31	Nous Magnum	Loot	20	290									4	
+  Pistol	37	Rikonodo Striker	Engineering	24	290			3	3								
+  Pistol	40	Hunter’s Fang	Engineering	24	290										
+  Pistol	44	Tell’s Marksman	Engineering	23	260										
+  Pistol	45	Tracker’s Sidearm	Engineering	26	290									1	
+  Pistol	45	Tracker’s Sidearm +1	Engineering	27	280									2	
+  Pistol	50	Etherbolt Arbalest	Engineering	29	290										
+  Pistol	50	Etherbolt Arbalest +1	Engineering	30	280			12									
+
+

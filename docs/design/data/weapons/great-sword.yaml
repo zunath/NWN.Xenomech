@@ -1,0 +1,86 @@
+# Source: docs/_incoming/XM Design Bible - Great Sword.tsv
+updated: 2025-08-10
+weapon: Great Sword
+items:
+  - { level: 1, name: "Corroded Greatblade", source: Weaponcraft, dmg: 14, delay: 460 }
+  - { level: 10, name: "Titan Claymore", source: Weaponcraft, dmg: 22, delay: 450 }
+  - { level: 10, name: "Titan Claymore +1", source: Weaponcraft, dmg: 23, delay: 440 }
+  - { level: 10, name: "Galeforged Claymore", source: Weaponcraft, dmg: 22, delay: 450 }
+  - { level: 10, name: "Galeforged Claymore +1", source: Weaponcraft, dmg: 23, delay: 440 }
+  - { level: 13, name: "Blazing Claymore", source: Loot, dmg: 27, delay: 430 }
+  - { level: 13, name: "Infernal Claymore", source: Loot, dmg: 26, delay: 450 }
+  - { level: 13, name: "Vulcan Warblade", source: Weaponcraft, dmg: 26, delay: 450 }
+  - { level: 18, name: "Valorheart", source: Loot, dmg: 30, delay: 450, ep: 5, wil: 2 }
+  - { level: 20, name: "Lucent Arcblade", source: Loot, dmg: 35, delay: 460 }
+  - { level: 20, name: "Mercenary’s Fang", source: Weaponcraft, dmg: 33, delay: 430, ep: 7 }
+  - { level: 20, name: "Vanguard Battalion Sword", source: Weaponcraft, dmg: 33, delay: 450 }
+  - { level: 20, name: "Unmarked Greatsword", source: Weaponcraft, dmg: 35, delay: 460 }
+  - { level: 20, name: "Warborn Blade", source: Weaponcraft, dmg: 35, delay: 460 }
+  - { level: 20, name: "Warborn Blade +1", source: Weaponcraft, dmg: 36, delay: 440 }
+  - { level: 24, name: "Barbarian’s Wrath", source: Loot, dmg: 37, delay: 450, ep: 15 }
+  - { level: 25, name: "Dominion Warblade", source: Weaponcraft, dmg: 35, delay: 410, ep: 8, atk: 7 }
+  - { level: 25, name: "Zephyr Cutter", source: Weaponcraft, dmg: 34, delay: 420, ep: 6, atk: 7 }
+  - { level: 27, name: "Hellfire Fang", source: Loot, dmg: 41, delay: 440 }
+  - { level: 27, name: "Inferno Fang", source: Loot, dmg: 40, delay: 460 }
+  - { level: 27, name: "Prominence Edge", source: Loot, dmg: 40, delay: 460 }
+  - { level: 31, name: "Abyssal Blade", source: Weaponcraft, dmg: 44, delay: 460 }
+  - { level: 33, name: "Reaper’s Falx", source: Weaponcraft, dmg: 42, delay: 430 }
+  - { level: 33, name: "Reaper’s Falx +1", source: Weaponcraft, dmg: 43, delay: 420 }
+  - { level: 36, name: "Precision Claymore", source: Loot, dmg: 47, delay: 430 }
+  - { level: 36, name: "Halo Warblade", source: Loot, dmg: 46, delay: 450 }
+  - { level: 36, name: "Mythrite Claymore", source: Weaponcraft, dmg: 46, delay: 450 }
+  - { level: 39, name: "Frostfang Sword", source: Loot, dmg: 53, delay: 460 }
+  - { level: 40, name: "Regal Vanguard Blade", source: Weaponcraft, dmg: 56, delay: 480 }
+  - { level: 41, name: "Titan Greatsword", source: Weaponcraft, dmg: 55, delay: 460 }
+  - { level: 41, name: "Titan Greatsword +1", source: Weaponcraft, dmg: 56, delay: 440 }
+  - { level: 41, name: "Zephyr Warblade", source: Weaponcraft, dmg: 55, delay: 460 }
+  - { level: 41, name: "Zephyr Warblade +1", source: Weaponcraft, dmg: 56, delay: 450 }
+  - { level: 43, name: "Regal Vanguard Blade +1", source: Weaponcraft, dmg: 57, delay: 470, per: 2 }
+  - { level: 43, name: "Regal Vanguard Blade +2", source: Weaponcraft, dmg: 58, delay: 460, per: 3 }
+  - { level: 47, name: "Executioner’s Faussar", source: Weaponcraft, dmg: 61, delay: 480 }
+  - { level: 47, name: "Executioner’s Faussar +1", source: Weaponcraft, dmg: 62, delay: 470 }
+  - { level: 50, name: "Cobra Warblade", source: Weaponcraft, dmg: 63, delay: 420, ep: 8, atk: 7 }
+
+
+tsv: |
+  Type	Level	Item Name	Source	DMG	Delay	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC
+  Great Sword	1	Corroded Greatblade	Weaponcraft	14	460										
+  Great Sword	10	Titan Claymore	Weaponcraft	22	450										
+  Great Sword	10	Titan Claymore +1	Weaponcraft	23	440										
+  Great Sword	10	Galeforged Claymore	Weaponcraft	22	450										
+  Great Sword	10	Galeforged Claymore +1	Weaponcraft	23	440										
+  Great Sword	13	Blazing Claymore	Loot	27	430										
+  Great Sword	13	Infernal Claymore	Loot	26	450										
+  Great Sword	13	Vulcan Warblade	Weaponcraft	26	450										
+  Great Sword	18	Valorheart	Loot	30	450		5							2			
+  Great Sword	20	Lucent Arcblade	Loot	35	460										
+  Great Sword	20	Mercenary’s Fang	Weaponcraft	33	430			7								
+  Great Sword	20	Vanguard Battalion Sword	Weaponcraft	33	450										
+  Great Sword	20	Unmarked Greatsword	Weaponcraft	35	460										
+  Great Sword	20	Warborn Blade	Weaponcraft	35	460										
+  Great Sword	20	Warborn Blade +1	Weaponcraft	36	440										
+  Great Sword	24	Barbarian’s Wrath	Loot	37	450			15								
+  Great Sword	25	Dominion Warblade	Weaponcraft	35	410		8		7								
+  Great Sword	25	Zephyr Cutter	Weaponcraft	34	420		6		7								
+  Great Sword	27	Hellfire Fang	Loot	41	440										
+  Great Sword	27	Inferno Fang	Loot	40	460										
+  Great Sword	27	Prominence Edge	Loot	40	460										
+  Great Sword	31	Abyssal Blade	Weaponcraft	44	460										
+  Great Sword	33	Reaper’s Falx	Weaponcraft	42	430										
+  Great Sword	33	Reaper’s Falx +1	Weaponcraft	43	420										
+  Great Sword	36	Precision Claymore	Loot	47	430										
+  Great Sword	36	Halo Warblade	Loot	46	450										
+  Great Sword	36	Mythrite Claymore	Weaponcraft	46	450										
+  Great Sword	39	Frostfang Sword	Loot	53	460										
+  Great Sword	40	Regal Vanguard Blade	Weaponcraft	56	480										
+  Great Sword	41	Titan Greatsword	Weaponcraft	55	460										
+  Great Sword	41	Titan Greatsword +1	Weaponcraft	56	440										
+  Great Sword	41	Zephyr Warblade	Weaponcraft	55	460										
+  Great Sword	41	Zephyr Warblade +1	Weaponcraft	56	450										
+  Great Sword	43	Regal Vanguard Blade +1	Weaponcraft	57	470									2		
+  Great Sword	43	Regal Vanguard Blade +2	Weaponcraft	58	460									3		
+  Great Sword	47	Executioner’s Faussar	Weaponcraft	61	480										
+  Great Sword	47	Executioner’s Faussar +1	Weaponcraft	62	470										
+  Great Sword	50	Cobra Warblade	Weaponcraft	63	420			8		7								
+
+
