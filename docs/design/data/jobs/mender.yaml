@@ -1,0 +1,89 @@
+# Source: docs/_incoming/XM Design Bible - Mender.tsv
+updated: 2025-08-10
+
+job: Mender
+role: Healer
+armor: Light
+weaponProficiencies:
+  - { type: Club, grade: A }
+  - { type: Pistol, grade: B }
+  - { type: Staff, grade: C }
+  - { type: Shield, grade: C }
+
+attributeGrades:
+  hp: E
+  ep: C
+  might: D
+  perception: F
+  vitality: D
+  agility: E
+  willpower: A
+  social: C
+  evasion: E
+
+abilities:
+  - { level: 2, name: "Ether Bloom I", type: Action, description: "Restores HP to a single target.", ep: 8, castingTime: "2 seconds", cooldown: "4 seconds", resonanceCost: 1, devStatus: Complete }
+  - { level: 4, name: "Antidote", type: Action, description: "Removes poison from a single target.", ep: 6, castingTime: "2 seconds", cooldown: "4 seconds", resonanceCost: 1, devStatus: Complete }
+  - { level: 8, name: "Protection I", type: Action, description: "Increases defense of all nearby party members by 20 for 30 minutes.", ep: 9, castingTime: "4 seconds", cooldown: "15 seconds", resonanceCost: 1, devStatus: Complete }
+  - { level: 10, name: "Divine Seal", type: Action, description: "Doubles the potency of your next healing spell.", castingTime: Instant, cooldown: "5 minutes", resonanceCost: 1, devStatus: Complete }
+  - { level: 12, name: "Ether Bloom II", type: Action, description: "Restores HP to a single target.", ep: 24, castingTime: "2 seconds", cooldown: "4 seconds", resonanceCost: 2, devStatus: Complete }
+  - { level: 14, name: "Auto Regen I", type: Trait, description: "Automatically restore 1 HP every tick.", resonanceCost: 1, devStatus: Complete }
+  - { level: 16, name: "Club Lore", type: Trait, description: "Permits equipping clubs on another job with an A rank.", resonanceCost: 1, devStatus: Complete }
+  - { level: 18, name: "Ether Blast I", type: Action, description: "Restores HP to all nearby party members.", ep: 60, castingTime: "4 seconds", cooldown: "10 seconds", resonanceCost: 2, devStatus: Complete }
+  - { level: 20, name: "Regen I", type: Action, description: "Gradually restore a single target's HP over time.", ep: 25, castingTime: "2 seconds", cooldown: "12 seconds", resonanceCost: 1, devStatus: Complete }
+  - { level: 22, name: "Revive", type: Action, description: "Revives an unconscious target with 50% HP.", ep: 150, castingTime: "15 seconds", cooldown: "60 seconds", resonanceCost: 2, devStatus: Complete }
+  - { level: 24, name: "Ether Bloom III", type: Action, description: "Restores HP to a single target.", ep: 46, castingTime: "3 seconds", cooldown: "5 seconds", resonanceCost: 2, devStatus: Complete }
+  - { level: 25, name: "Fire Ward", type: Action, description: "Grants +50% protection towards fire to all nearby party members for 15 minutes.", ep: 30, castingTime: "4 seconds", cooldown: "10 seconds", resonanceCost: 1, devStatus: Complete }
+  - { level: 26, name: "Protection II", type: Action, description: "Increases defense of all nearby party members by 50 for 30 minutes.", ep: 28, castingTime: "4 seconds", cooldown: "15 seconds", resonanceCost: 2, devStatus: Complete }
+  - { level: 30, name: "Tsu", type: Action, description: "Deals 150 light DMG to a single target.", ep: 100, castingTime: "1 second", cooldown: "30 seconds", resist: Light, resonanceCost: 2, devStatus: Complete }
+  - { level: 32, name: "Ether Blast II", type: Action, description: "Restores HP to all nearby party members.", ep: 95, castingTime: "5 seconds", cooldown: "10 seconds", resonanceCost: 3, devStatus: Complete }
+  - { level: 34, name: "Erase", type: Action, description: "Removes one detrimental effect from a single target.", ep: 18, castingTime: "3 seconds", cooldown: "15 seconds", resonanceCost: 1, devStatus: Complete }
+  - { level: 36, name: "Auto Regen II", type: Trait, description: "Automatically restore 2 HP every tick.", resonanceCost: 2, devStatus: Complete }
+  - { level: 40, name: "Haste", type: Action, description: "Reduces attack delay for a single target by 15% for 3 minutes.", ep: 40, castingTime: "6 seconds", cooldown: "20 seconds", resonanceCost: 3, devStatus: Complete }
+  - { level: 42, name: "Ether Bloom IV", type: Action, description: "Restores HP to a single target.", ep: 88, castingTime: "5 seconds", cooldown: "10 seconds", resonanceCost: 4, devStatus: Complete }
+  - { level: 44, name: "Regen II", type: Action, description: "Gradually restore a single target's HP over time.", ep: 63, castingTime: "2 seconds", cooldown: "18 seconds", resonanceCost: 2, devStatus: Complete }
+  - { level: 48, name: "Protection III", type: Action, description: "Increases defense of all nearby party members by 90 for 30 minutes.", ep: 56, castingTime: "4 seconds", cooldown: "15 seconds", resonanceCost: 3, devStatus: Complete }
+  - { level: 50, name: "Benediction", type: Action, description: "Completely restores your party's HP to max.", ep: 150, castingTime: "4 seconds", cooldown: "30 minutes", resonanceCost: 3, devStatus: Complete }
+
+tsv: |
+  Job Name	Mender		Club	A
+  Role	Healer		Pistol	B
+  Armor	Light		Staff	C
+  HP	E		Shield	C
+  EP	C
+  Might	D
+  Perception	F
+  Vitality	D
+  Agility	E
+  Willpower	A
+  Social	C
+  Evasion	E
+  Level	Ability Name	Type	Description	EP	Casting Time	Cooldown Time	Resist	Resonance Cost	Dev Status	Additional Requirements	Notes
+  2	Ether Bloom I	Action	Restores HP to a single target.	8	2 seconds	4 seconds	-	1	Complete		
+  4	Antidote	Action	Removes poison from a single target.	6	2 seconds	4 seconds	-	1	Complete		
+  											
+  8	Protection I	Action	Increases defense of all nearby party members by 20 for 30 minutes.	9	4 seconds	15 seconds	-	1	Complete		
+  10	Divine Seal	Action	Doubles the potency of your next healing spell.	-	Instant	5 minutes	-	1	Complete		
+  12	Ether Bloom II	Action	Restores HP to a single target.	24	2 seconds	4 seconds	-	2	Complete		
+  14	Auto Regen I	Trait	Automatically restore 1 HP every tick.	-	-	-	-	1	Complete		
+  16	Club Lore	Trait	Permits equipping clubs on another job with an A rank.	-	-	-	-	1	Complete		
+  18	Ether Blast I	Action	Restores HP to all nearby party members.	60	4 seconds	10 seconds	-	2	Complete		
+  20	Regen I	Action	Gradually restore a single target's HP over time.	25	2 seconds	12 seconds	-	1	Complete		
+  22	Revive	Action	Revives an unconscious target with 50% HP.	150	15 seconds	60 seconds	-	2	Complete		
+  24	Ether Bloom III	Action	Restores HP to a single target.	46	3 seconds	5 seconds	-	2	Complete		
+  25	Fire Ward	Action	Grants +50% protection towards fire to all nearby party members for 15 minutes.	30	4 seconds	10 seconds	-	1	Complete		
+  26	Protection II	Action	Increases defense of all nearby party members by 50 for 30 minutes.	28	4 seconds	15 seconds	-	2	Complete		
+  											
+  30	Tsu	Action	Deals 150 light DMG to a single target.	100	1 second	30 seconds	Light	2	Complete		
+  32	Ether Blast II	Action	Restores HP to all nearby party members.	95	5 seconds	10 seconds	-	3	Complete		
+  34	Erase	Action	Removes one detrimental effect from a single target.	18	3 seconds	15 seconds	-	1	Complete		
+  36	Auto Regen II	Trait	Automatically restore 2 HP every tick.	-	-	-	-	2	Complete		
+  											
+  40	Haste	Action	Reduces attack delay for a single target by 15% for 3 minutes.	40	6 seconds	20 seconds	-	3	Complete		
+  42	Ether Bloom IV	Action	Restores HP to a single target.	88	5 seconds	10 seconds	-	4	Complete		
+  44	Regen II	Action	Gradually restore a single target's HP over time.	63	2 seconds	18 seconds	-	2	Complete		
+  											
+  48	Protection III	Action	Increases defense of all nearby party members by 90 for 30 minutes.	56	4 seconds	15 seconds	-	3	Complete		
+  50	Benediction	Action	Completely restores your party's HP to max.	150	4 seconds	30 minutes	-	3	Complete		
+
+

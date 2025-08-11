@@ -1,0 +1,96 @@
+# Source: docs/_incoming/XM Design Bible - Staff.tsv
+updated: 2025-08-10
+weapon: Staff
+items:
+  - { level: 1, name: "Ashen Warstaff", source: Weaponcraft, dmg: 5, delay: 370, hp: 2, ep: 2 }
+  - { level: 1, name: "Ashen Warstaff +1", source: Weaponcraft, dmg: 6, delay: 360, hp: 3, ep: 3 }
+  - { level: 1, name: "Ether-Touched Staff", source: Loot, dmg: 4, delay: 370 }
+  - { level: 5, name: "Ashen Polearm", source: Weaponcraft, dmg: 11, delay: 410 }
+  - { level: 5, name: "Ashen Polearm +1", source: Weaponcraft, dmg: 12, delay: 390 }
+  - { level: 10, name: "Freesword’s Battlestaff", source: Loot, dmg: 9, delay: 350, hp: 6, ep: 6 }
+  - { level: 10, name: "Legionnaire’s Warstaff", source: Loot, dmg: 12, delay: 380, hp: 6, ep: 6 }
+  - { level: 11, name: "Verdant Holly Staff", source: Weaponcraft, dmg: 10, delay: 370, hp: 4, ep: 4 }
+  - { level: 11, name: "Verdant Holly Staff +1", source: Weaponcraft, dmg: 11, delay: 360, hp: 5, ep: 5 }
+  - { level: 15, name: "Bastion Warstaff", source: Loot, dmg: 13, delay: 370, hp: 6, ep: 6, acc: 1 }
+  - { level: 15, name: "Dominion Warstaff", source: Loot, dmg: 11, delay: 330, hp: 6, ep: 6, atk: 3 }
+  - { level: 15, name: "Republic Warstaff", source: Loot, dmg: 14, delay: 360, hp: 6, ep: 6, acc: 2 }
+  - { level: 15, name: "Zephyr Warstaff", source: Loot, dmg: 10, delay: 340, hp: 6, ep: 6, acc: 2 }
+  - { level: 16, name: "Verdant Holly Polearm", source: Weaponcraft, dmg: 20, delay: 410 }
+  - { level: 16, name: "Verdant Holly Polearm +1", source: Weaponcraft, dmg: 21, delay: 400 }
+  - { level: 18, name: "Mercenary’s Polearm", source: Loot, dmg: 22, delay: 410 }
+  - { level: 20, name: "Vanguard Polearm", source: Loot, dmg: 13, delay: 370 }
+  - { level: 23, name: "Elmwood Warstaff", source: Weaponcraft, dmg: 15, delay: 370, hp: 6, ep: 6 }
+  - { level: 23, name: "Elmwood Warstaff +1", source: Weaponcraft, dmg: 16, delay: 360, hp: 7, ep: 7 }
+  - { level: 23, name: "Dominion Polearm", source: Loot, dmg: 24, delay: 380, ep: 5 }
+  - { level: 23, name: "Zephyr Polearm", source: Loot, dmg: 23, delay: 390, ep: 3 }
+  - { level: 25, name: "Spiked Maul", source: Weaponcraft, dmg: 26, delay: 410, ep: 3 }
+  - { level: 25, name: "Spiked Maul +1", source: Weaponcraft, dmg: 27, delay: 400, ep: 5 }
+  - { level: 27, name: "Dolphin Arcane Staff", source: Loot, dmg: 16, delay: 370, hp: 7, ep: 7 }
+  - { level: 30, name: "Elmwood Polearm", source: Weaponcraft, dmg: 29, delay: 410 }
+  - { level: 30, name: "Elmwood Polearm +1", source: Weaponcraft, dmg: 30, delay: 400 }
+  - { level: 30, name: "Hypnotic Warstaff", source: Loot, dmg: 17, delay: 370 }
+  - { level: 32, name: "Leviathan Staff", source: Weaponcraft, dmg: 18, delay: 370, hp: 14, ep: 7 }
+  - { level: 32, name: "Leviathan Staff +1", source: Weaponcraft, dmg: 19, delay: 360, hp: 15, ep: 7 }
+  - { level: 33, name: "Military Polearm", source: Loot, dmg: 29, delay: 380, wil: 1 }
+  - { level: 39, name: "Oakwood Warstaff", source: Weaponcraft, dmg: 21, delay: 370, hp: 8, ep: 8 }
+  - { level: 39, name: "Oakwood Warstaff +1", source: Weaponcraft, dmg: 22, delay: 360, hp: 9, ep: 9 }
+  - { level: 39, name: "Passaddhi Mystic Staff", source: Weaponcraft, dmg: 15, delay: 370, wil: 1 }
+  - { level: 39, name: "Passaddhi Mystic Staff +1", source: Weaponcraft, dmg: 16, delay: 360, wil: 2 }
+  - { level: 40, name: "Oakwood Polearm", source: Weaponcraft, dmg: 37, delay: 410 }
+  - { level: 40, name: "Oakwood Polearm +1", source: Weaponcraft, dmg: 38, delay: 400 }
+  - { level: 43, name: "Qi Resonance Staff", source: Weaponcraft, dmg: 16, delay: 420 }
+  - { level: 43, name: "Qi Resonance Staff +1", source: Weaponcraft, dmg: 17, delay: 410 }
+  - { level: 45, name: "Footman’s Warstaff", source: Loot, dmg: 41, delay: 390, ep: 7 }
+  - { level: 45, name: "Pastoral Mystic Staff", source: Loot, dmg: 40, delay: 410, ep: 4 }
+  - { level: 45, name: "Arcane Quarterstaff", source: Loot, dmg: 40, delay: 410, ep: 4 }
+  - { level: 50, name: "Musketeer’s Polearm", source: Weaponcraft, dmg: 45, delay: 400, ep: 3, acc: 3 }
+  - { level: 50, name: "Tundra Walrus Staff", source: Weaponcraft, dmg: 26, delay: 370, hp: 9, ep: 9, agi: 3 }
+
+
+tsv: |
+  Type	Level	Item Name	Source	DMG	Delay	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC
+  Staff	1	Ashen Warstaff	Weaponcraft	5	370	2	2									
+  Staff	1	Ashen Warstaff +1	Weaponcraft	6	360	3	3									
+  Staff	1	Ether-Touched Staff	Loot	4	370										
+  Staff	5	Ashen Polearm	Weaponcraft	11	410										
+  Staff	5	Ashen Polearm +1	Weaponcraft	12	390										
+  Staff	10	Freesword’s Battlestaff	Loot	9	350	6	6									
+  Staff	10	Legionnaire’s Warstaff	Loot	12	380	6	6									
+  Staff	11	Verdant Holly Staff	Weaponcraft	10	370	4	4									
+  Staff	11	Verdant Holly Staff +1	Weaponcraft	11	360	5	5									
+  Staff	15	Bastion Warstaff	Loot	13	370	6	6	1									
+  Staff	15	Dominion Warstaff	Loot	11	330	6	6	3									
+  Staff	15	Republic Warstaff	Loot	14	360	6	6	2									
+  Staff	15	Zephyr Warstaff	Loot	10	340	6	6	2									
+  Staff	16	Verdant Holly Polearm	Weaponcraft	20	410										
+  Staff	16	Verdant Holly Polearm +1	Weaponcraft	21	400										
+  Staff	18	Mercenary’s Polearm	Loot	22	410										
+  Staff	20	Vanguard Polearm	Loot	13	370										
+  Staff	23	Elmwood Warstaff	Weaponcraft	15	370	6	6									
+  Staff	23	Elmwood Warstaff +1	Weaponcraft	16	360	7	7									
+  Staff	23	Dominion Polearm	Loot	24	380			5									
+  Staff	23	Zephyr Polearm	Loot	23	390			3									
+  Staff	25	Spiked Maul	Weaponcraft	26	410			3									
+  Staff	25	Spiked Maul +1	Weaponcraft	27	400			5									
+  Staff	27	Dolphin Arcane Staff	Loot	16	370	7	7									
+  Staff	30	Elmwood Polearm	Weaponcraft	29	410										
+  Staff	30	Elmwood Polearm +1	Weaponcraft	30	400										
+  Staff	30	Hypnotic Warstaff	Loot	17	370										
+  Staff	32	Leviathan Staff	Weaponcraft	18	370	14	7									
+  Staff	32	Leviathan Staff +1	Weaponcraft	19	360	15	7									
+  Staff	33	Military Polearm	Loot	29	380									1	
+  Staff	39	Oakwood Warstaff	Weaponcraft	21	370	8	8									
+  Staff	39	Oakwood Warstaff +1	Weaponcraft	22	360	9	9									
+  Staff	39	Passaddhi Mystic Staff	Weaponcraft	15	370									1	
+  Staff	39	Passaddhi Mystic Staff +1	Weaponcraft	16	360									2	
+  Staff	40	Oakwood Polearm	Weaponcraft	37	410										
+  Staff	40	Oakwood Polearm +1	Weaponcraft	38	400										
+  Staff	43	Qi Resonance Staff	Weaponcraft	16	420										
+  Staff	43	Qi Resonance Staff +1	Weaponcraft	17	410										
+  Staff	45	Footman’s Warstaff	Loot	41	390			7									
+  Staff	45	Pastoral Mystic Staff	Loot	40	410			4									
+  Staff	45	Arcane Quarterstaff	Loot	40	410			4									
+  Staff	50	Musketeer’s Polearm	Weaponcraft	45	400			3	3								
+  Staff	50	Tundra Walrus Staff	Weaponcraft	26	370	9	9									3	
+
+

@@ -1,0 +1,49 @@
+source: docs/_incoming/XM Design Bible - Armor.tsv
+slot: Waist
+tsv: |
+  Type	Level	Item Name	Source	DEF	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC	BST	BRW	ELM	HNT	KPR	MDR	NGT	TEC
+  Waist	1	Bloodforged Stone	Fabrication	0	5										x	x	x		x	
+  Waist	1	Bloodforged Stone +1	Fabrication	0	7										x	x	x		x	
+  Waist	7	Leatherbound Belt	Fabrication	1										x			x		x	x
+  Waist	7	Leatherbound Belt +1	Fabrication	2										x			x		x	x
+  Waist	8	Woven Heko Obi	Fabrication	1											x	x			x	
+  Waist	8	Woven Heko Obi +1	Fabrication	2		3											x	x			x	
+  Waist	12	Titan Plate Belt	Fabrication	2														x		
+  Waist	15	Warrior’s War Belt	Fabrication	1	3									1				x	x			x	x	
+  Waist	15	Warrior’s War Belt +1	Fabrication	2	4									2				x	x			x	x	
+  Waist	17	Lizardscale Belt	Fabrication	2											x	x	x	x	x	x	x	x
+  Waist	17	Lizardscale Belt +1	Fabrication	3											x	x	x	x	x	x	x	x
+  Waist	18	Arcane Infused Belt	Fabrication	2		2											x	x	x		x	
+  Waist	18	Arcane Infused Belt +1	Fabrication	3		5											x	x	x		x	
+  Waist	18	Shadowweave Belt	Loot	2									2						x				
+  Waist	20	Silverthread Obi	Fabrication	2												x			x	
+  Waist	20	Silverthread Obi +1	Fabrication	3		3												x			x	
+  Waist	20	Mohbwa Warden Sash	Fabrication	2		10											x	x			x	
+  Waist	20	Mohbwa Warden Sash +1	Fabrication	3		12											x	x			x	
+  Waist	24	Reinforced Chain Belt	Fabrication	3										x			x			x
+  Waist	24	Reinforced Chain Belt +1	Fabrication	4										x			x			x
+  Waist	27	Forcebound Belt	Fabrication	3	3	3											x	x	x		x	x	
+  Waist	28	Griot’s Resonance Belt	Fabrication	1	1	1										1	x	x	x	x	x	x	x	x
+  Waist	28	Griot’s Resonance Belt +1	Fabrication	2	2	2										2	x	x	x	x	x	x	x	x
+  Waist	29	Shaman’s Ether Belt	Fabrication	1		5											x	x			x	
+  Waist	29	Shaman’s Ether Belt +1	Fabrication	2		7									1				x	x			x	
+  Waist	32	Hojutsu Combat Belt	Fabrication	1		7												x			x	
+  Waist	32	Hojutsu Combat Belt +1	Fabrication	2		10												x			x	
+  Waist	32	Silverguard Belt	Fabrication	3										x			x	x			x
+  Waist	32	Silverguard Belt +1	Fabrication	4										x			x	x			x
+  Waist	34	Auric Gold Obi	Fabrication	3												x	x			x	
+  Waist	34	Auric Gold Obi +1	Fabrication	4		10												x	x			x	
+  Waist	39	Oracle’s Divination Belt	Loot	3		7										2				x	x	x		x	
+  Waist	40	Reinforced Corsette	Fabrication	4														3				
+  Waist	40	Reinforced Corsette +1	Fabrication	5														4				
+  Waist	40	Tactical Waistbelt	Fabrication	4														x			x
+  Waist	40	Tactical Waistbelt +1	Fabrication	5														x			x
+  Waist	40	Qiqirn Scout’s Sash	Fabrication	4		14												x	x	x		x	
+  Waist	40	Qiqirn Scout’s Sash +1	Fabrication	5		16												x	x	x		x	
+  Waist	42	Adept’s Arcane Rope	Loot	3	8	8											x	x	x		x	
+  Waist	43	Warforged Swordbelt	Fabrication	4									10						x			x	x		x
+  Waist	43	Warforged Swordbelt +1	Fabrication	5									12						x			x	x		x
+  Waist	44	Titan’s Binding Rope	Loot	0	20	20											x	x	x	x	x	x	x	x
+  Waist	45	Vanguard War Belt	Loot	3									5		2				x			x	x		x
+  Waist	48	Lifewarden Belt	Fabrication	0		10											x	x	x	x	x	x	x	x
+

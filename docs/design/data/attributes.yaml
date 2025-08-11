@@ -1,0 +1,118 @@
+# Source: docs/_incoming/XM Design Bible - Character Stats.tsv
+updated: 2025-08-10
+
+attributes:
+  - name: Might
+    description: Improves damage dealt by melee weapons and increases carrying capacity.
+    notes: Increases Fortitude saving throws.
+  - name: Perception
+    description: Improves accuracy.
+    notes: Increases Reflex saving throws.
+  - name: Vitality
+    description: Improves your max hit points and reduces damage received.
+    notes: Improves HP/EP gained while resting
+  - name: Willpower
+    description: Improves effectiveness of ether abilities.
+    notes: Increases Will saving throws.
+  - name: Agility
+    description: Improves accuracy of ranged weapons and evasion.
+    notes: Improves evasion.
+  - name: Social
+    description: Improves your XP gain and leadership capabilities.
+    notes: Improves credit rewards.
+
+stats:
+  - name: Hit Points (HP)
+    description: Determines how much damage you take before you die.
+    notes: ""
+  - name: Ether Points (EP)
+    description: A resource pool used to activate special abilities.
+    notes: ""
+  - name: Tactical Points (TP)
+    description: Gained by hitting or being hit by an enemy. Can be spent to use weapon skills.
+    notes: ""
+  - name: HP Regen
+    description: The amount of HP restored every three seconds.
+    notes: ""
+  - name: EP Regen
+    description: The amount of EP restored every three seconds.
+    notes: ""
+  - name: DMG
+    description: The base damage rating of a weapon.
+    notes: ""
+  - name: Delay
+    description: The amount of time a weapon takes between attacks.
+    notes: ""
+  - name: Attack
+    description: Improves the damage dealt to a target.
+    notes: ""
+  - name: Accuracy
+    description: Improves your ability to land attacks on a target.
+    notes: ""
+  - name: Evasion
+    description: Improves your ability to evade attacks.
+    notes: ""
+  - name: Defense
+    description: Reduces damage received by Physical attacks.
+    notes: ""
+  - name: Ether Attack
+    description: Increases damage dealt by Ether attacks.
+    notes: ""
+  - name: Resonance Nodes
+    description: Permits you to equip an ability from a different job on your current one.
+    notes: A new node is granted every 5 levels, to a max of 10.
+  - name: Recast Reduction
+    description: Reduces the waiting time between using abilities.
+    notes: Recast Reduction caps at 50%.
+  - name: TP Gain
+    description: Improves the amount of TP gained when receiving hits or dealing them.
+    notes: ""
+  - name: Shield Deflection
+    description: Determines the percent chance to deflect an attack when equipped with a shield.
+    notes: Does not stack with Attack Deflection.
+  - name: Attack Deflection
+    description: Determines the percent chance to deflect an attack.
+    notes: Does not stack with Shield Deflection.
+  - name: Subtle Blow
+    description: Reduces the amount of TP a target receives when you hit them.
+    notes: Subtle blow caps at 75%
+  - name: Critical Rate
+    description: Improves the chance to inflict a critical hit on your target.
+    notes: Critical rate caps at 35%
+  - name: Enmity
+    description: Increases or decreases enmity acquisition.
+    notes: Range between -50 and 200.
+
+
+tsv: |
+  Attributes						
+  Attribute Name	Description				Other Notes
+  Might	Improves damage dealt by melee weapons and increases carrying capacity.					Increases Fortitude saving throws.
+  Perception	Improves accuracy.					Increases Reflex saving throws.
+  Vitality	Improves your max hit points and reduces damage received.					Improves HP/EP gained while resting
+  Willpower	Improves effectiveness of ether abilities.					Increases Will saving throws.
+  Agility	Improves accuracy of ranged weapons and evasion.					Improves evasion.
+  Social	Improves your XP gain and leadership capabilities.					Improves credit rewards.
+  						
+  Stats						
+  Stat Name	Description				Other Notes
+  Hit Points (HP)	Determines how much damage you take before you die.					
+  Ether Points (EP)	A resource pool used to activate special abilities.					
+  Tactical Points (TP)	Gained by hitting or being hit by an enemy. Can be spent to use weapon skills.					
+  HP Regen	The amount of HP restored every three seconds.					
+  EP Regen	The amount of EP restored every three seconds.					
+  DMG	The base damage rating of a weapon.					
+  Delay	The amount of time a weapon takes between attacks.					
+  Attack	Improves the damage dealt to a target.					
+  Accuracy	Improves your ability to land attacks on a target.					
+  Evasion	Improves your ability to evade attacks.					
+  Defense	Reduces damage received by Physical attacks.					
+  Ether Attack	Increases damage dealt by Ether attacks.					
+  Resonance Nodes	Permits you to equip an ability from a different job on your current one.					A new node is granted every 5 levels, to a max of 10.
+  Recast Reduction	Reduces the waiting time between using abilities.					Recast Reduction caps at 50%.
+  TP Gain	Improves the amount of TP gained when receiving hits or dealing them.					
+  Shield Deflection	Determines the percent chance to deflect an attack when equipped with a shield.					Does not stack with Attack Deflection.
+  Attack Deflection	Determines the percent chance to deflect an attack.					Does not stack with Shield Deflection.
+  Subtle Blow	Reduces the amount of TP a target receives when you hit them.					Subtle blow caps at 75%
+  Critical Rate	Improves the chance to inflict a critical hit on your target.					Critical rate caps at 35%
+  Enmity	Increases or decreases enmity acquisition.					Range between -50 and 200.

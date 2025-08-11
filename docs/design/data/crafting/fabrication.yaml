@@ -1,0 +1,43 @@
+# Source: docs/_incoming/XM Design Bible - Fabrication.tsv
+updated: 2025-08-10
+
+columns:
+  - skill
+  - recipeId
+  - recipeEnum
+  - category
+  - level
+  - normalName
+  - normalQty
+  - normalResref
+  - hqName
+  - hqQty
+  - hqResref
+  - ultraName
+  - ultraQty
+  - ultraResref
+  - augmentType
+  - augmentSlots
+  - components
+
+tsv: |
+  Skill	Required  Recipe	Recipe Enum	Category Enum	Level	Normal Name	Normal Quantity	Normal Resref	HQ Name	HQ Quantity	HQ Resref	Ultra Name	Ultra Quantity	Ultra Resref	Augment Type	Augment Slots	Component 1	Component Quantity 1	Component 2	Component Quantity 2	Component 3	Component Quantity 3	Component 4	Component Quantity 4	Component 5	Component Quantity 5	Component 6	Component Quantity 6	Component 7	Component Quantity 7	Component 8	Component Quantity 8
+  Fabrication		CopperforgeRing	Ring	1	Copperforge Ring	1	copperforge_rng	Copperforge Ring +1	1	copperforge_p1																	
+  Fabrication		BloodforgedStone	Waist	3	Bloodforged Stone	1	bloodforged_stn	Bloodforged Stone +1	1	bloodforged_p1																	
+  Fabrication		HarestrideMantle	Back	5	Harestride Mantle	1	harestride_mnt	Harestride Mantle +1	1	harestride_p1																	
+  Fabrication		BrassguardRing	Ring	7	Brassguard Ring	1	brassguard_rng	Brassguard Ring +1	1	brassguard_p1																	
+  Fabrication		LeatherboundGorget	Neck	9	Leatherbound Gorget	1	leatherb_gorget	Leatherbound Gorget +1	1	leatherb_gorg_p1																	
+  Fabrication		PlumeCollar	Neck	11	Plume Collar	1	plume_collar	Plume Collar +1	1	plume_collar_p1																	
+  Fabrication		EtherwovenCape	Back	13	Etherwoven Cape	1	etherwvn_cape	Etherwoven Cape +1	1	etherwvn_cape_p1																	
+  Fabrication		WovenHekoObi	Waist	13	Woven Heko Obi	1	woven_heko_obi	Woven Heko Obi +1	1	woven_hekoobi_p1																	
+  Fabrication		JudicatorsBadge	Neck	15	Judicator’s Badge	1	judicator_badge																	
+  Fabrication		VerdantScarf	Neck	17	Verdant Scarf	1	verdant_scarf																	
+  Fabrication		EremitesFocusRing	Ring	17	Eremite’s Focus Ring	1	erem_focus_rng	Eremite’s Focus Ring +1	1	erem_focus_p1																	
+  Fabrication		LeatherboundBelt	Waist	17	Leatherbound Belt	1	leatherb_belt	Leatherbound Belt +1	1	leatherb_belt_p1																	
+  Fabrication		SentinelsSafeguardRing	Ring	20	Sentinel’s Safeguard Ring	1	sentinel_safrng																	
+  Fabrication		SanctifiedBand	Ring	20	Sanctified Band	1	sanctified_band	Sanctified Band +1	1	sanctified_bnd_p1																	
+  Fabrication		TitanScaleGorget	Neck	21	Titan Scale Gorget	1	titan_scale_gor																	
+  Fabrication		TitanPlateBelt	Waist	21	Titan Plate Belt	1	titan_plate_blt																	
+  Fabrication		ReflexResonanceRing	Ring	25	Reflex Resonance Ring	1	reflex_reso_rng	Reflex Resonance Ring +1	1	reflex_reso_p1
+
+

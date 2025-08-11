@@ -1,0 +1,88 @@
+# Source: docs/_incoming/XM Design Bible - Elementalist.tsv
+updated: 2025-08-10
+
+job: Elementalist
+role: DPS
+armor: Light
+weaponProficiencies:
+  - { type: Staff, grade: A }
+  - { type: Club, grade: B }
+  - { type: Throwing, grade: C }
+
+attributeGrades:
+  hp: F
+  ep: B
+  might: F
+  perception: C
+  vitality: F
+  agility: C
+  willpower: A
+  social: D
+  evasion: E
+
+abilities:
+  - { level: 2, name: "Flame I", type: Action, description: "Deals 10 fire DMG to a single target.", ep: 6, castingTime: "1 second", cooldown: "2 seconds", resist: Fire, resonanceCost: 1, devStatus: Complete }
+  - { level: 4, name: "Neurotoxin", type: Action, description: "Inflicts poison to a single target for 2 minutes.", ep: 10, castingTime: "1 second", cooldown: "5 seconds", resist: Wind, resonanceCost: 1, devStatus: Complete }
+  - { level: 8, name: "Clear Mind", type: Trait, description: "Doubles the amount of EP restored by resting.", resonanceCost: 1, devStatus: Complete }
+  - { level: 10, name: "Drown I", type: Action, description: "Deals 16 water DMG to a single target and reduces its Might by 6 for 2 minutes.", ep: 16, castingTime: "3 seconds", cooldown: "10 seconds", resist: Water, resonanceCost: 1, devStatus: Complete }
+  - { level: 12, name: "Ether Attack Bonus I", type: Trait, description: "Increases Ether Attack by 10.", resonanceCost: 1, devStatus: Complete }
+  - { level: 14, name: "Shockwave Surge I", type: Action, description: "Deals 24 lightning DMG to all enemies within the area of effect.", ep: 21, castingTime: "4 seconds", cooldown: "16 seconds", resist: Lightning, resonanceCost: 1, devStatus: Complete }
+  - { level: 16, name: "Staff Lore", type: Trait, description: "Permits equipping staves on another job with an A rank.", resonanceCost: 1, devStatus: Complete }
+  - { level: 18, name: "Shocking Circle", type: Action, description: "All nearby enemies become paralyzed for 30 seconds.", ep: 35, castingTime: "2 seconds", cooldown: "5 minutes", resist: Lightning, resonanceCost: 2, devStatus: Complete }
+  - { level: 20, name: "Flame II", type: Action, description: "Deals 60 fire DMG to a single target.", ep: 22, castingTime: "2 seconds", cooldown: "3 seconds", resist: Fire, resonanceCost: 2, devStatus: Complete }
+  - { level: 22, name: "Abyssal Veil I", type: Action, description: "Deals 38 darkness DMG and drains 2 EP/tick for a short period of time from a single target.", ep: 31, castingTime: "3 seconds", cooldown: "12 seconds", resist: Darkness, resonanceCost: 1, devStatus: Complete }
+  - { level: 24, name: "Elemental Seal", type: Action, description: "Doubles the damage of the next elemental spell.", ep: 40, castingTime: "2 seconds", cooldown: "1 minute", resonanceCost: 1, devStatus: Complete }
+  - { level: 25, name: "Lightning Ward", type: Action, description: "Grants +50% protection towards lightning to all nearby party members for 15 minutes.", ep: 30, castingTime: "4 seconds", cooldown: "10 seconds", resonanceCost: 1, devStatus: Complete }
+  - { level: 26, name: "Escape", type: Action, description: "All nearby party members are transported out of a dungeon.", ep: 125, castingTime: "15 seconds", cooldown: "1 minute", resonanceCost: 2, devStatus: Complete }
+  - { level: 30, name: "Zephyr Shroud", type: Action, description: "Increases the Evasion of all nearby party members by 30 for 2 minutes.", ep: 40, castingTime: "2 seconds", cooldown: "5 minutes", resonanceCost: 2, devStatus: Complete }
+  - { level: 32, name: "Ether Attack Bonus II", type: Trait, description: "Increases Ether Attack by 30.", resonanceCost: 2, devStatus: Complete }
+  - { level: 34, name: "Drown II", type: Action, description: "Deals 50 water DMG to a single target and reduces its Might by 15 for 2 minutes.", ep: 84, castingTime: "3 seconds", cooldown: "30 seconds", resist: Water, resonanceCost: 2, devStatus: Complete }
+  - { level: 36, name: "Ether Wall", type: Action, description: "50% of the damage you would have taken is applied to EP instead.", ep: 10, castingTime: "2 seconds", cooldown: "3 minutes", resonanceCost: 1, devStatus: Complete }
+  - { level: 40, name: "Shockwave Surge II", type: Action, description: "Deals 82 lightning DMG to all enemies within the area of effect.", ep: 48, castingTime: "4 seconds", cooldown: "16 seconds", resist: Lightning, resonanceCost: 2, devStatus: Complete }
+  - { level: 42, name: "Abyssal Veil II", type: Action, description: "Deals 65 darkness DMG and drains 4 EP/tick for a short period of time from a single target.", ep: 62, castingTime: "3 seconds", cooldown: "12 seconds", resist: Darkness, resonanceCost: 2, devStatus: Complete }
+  - { level: 44, name: "Flame III", type: Action, description: "Deals 120 fire DMG to a single target.", ep: 65, castingTime: "3 seconds", cooldown: "4 seconds", resist: Fire, resonanceCost: 3, devStatus: Complete }
+  - { level: 48, name: "Graviton Field", type: Action, description: "Reduces the movement speed and evasion of all enemies  within the area of effect by 25 for 1 minute.", ep: 90, castingTime: "4 seconds", cooldown: "60 seconds", resist: Darkness, resonanceCost: 2, devStatus: Complete }
+  - { level: 50, name: "Manafont", type: Action, description: "Abilities cost zero EP for the next 1 minute.", ep: 150, castingTime: "2 seconds", cooldown: "30 minutes", resonanceCost: 3, devStatus: Complete }
+
+tsv: |
+  Job Name	Elementalist		Staff	A
+  Role	DPS		Club	B
+  Armor	Light		Throwing	C
+  HP	F
+  EP	B
+  Might	F
+  Perception	C
+  Vitality	F
+  Agility	C
+  Willpower	A
+  Social	D
+  Evasion	E
+  Level	Ability Name	Type	Description	EP	Casting Time	Cooldown Time	Resist	Resonance Cost	Dev Status	Additional Requirements	Notes
+  2	Flame I	Action	Deals 10 fire DMG to a single target.	6	1 second	2 seconds	Fire	1	Complete		
+  4	Neurotoxin	Action	Inflicts poison to a single target for 2 minutes.	10	1 second	5 seconds	Wind	1	Complete		
+  											
+  8	Clear Mind	Trait	Doubles the amount of EP restored by resting.	-	-	-	-	1	Complete		
+  10	Drown I	Action	Deals 16 water DMG to a single target and reduces its Might by 6 for 2 minutes.	16	3 seconds	10 seconds	Water	1	Complete		
+  12	Ether Attack Bonus I	Trait	Increases Ether Attack by 10.	-	-	-	-	1	Complete		
+  14	Shockwave Surge I	Action	Deals 24 lightning DMG to all enemies within the area of effect.	21	4 seconds	16 seconds	Lightning	1	Complete		
+  16	Staff Lore	Trait	Permits equipping staves on another job with an A rank.	-	-	-	-	1	Complete		
+  18	Shocking Circle	Action	All nearby enemies become paralyzed for 30 seconds.	35	2 seconds	5 minutes	Lightning	2	Complete		
+  20	Flame II	Action	Deals 60 fire DMG to a single target.	22	2 seconds	3 seconds	Fire	2	Complete		
+  22	Abyssal Veil I	Action	Deals 38 darkness DMG and drains 2 EP/tick for a short period of time from a single target.	31	3 seconds	12 seconds	Darkness	1	Complete		
+  24	Elemental Seal	Action	Doubles the damage of the next elemental spell.	40	2 seconds	1 minute	-	1	Complete		
+  25	Lightning Ward	Action	Grants +50% protection towards lightning to all nearby party members for 15 minutes.	30	4 seconds	10 seconds	-	1	Complete		
+  26	Escape	Action	All nearby party members are transported out of a dungeon.	125	15 seconds	1 minute	-	2	Complete		
+  											
+  30	Zephyr Shroud	Action	Increases the Evasion of all nearby party members by 30 for 2 minutes.	40	2 seconds	5 minutes	-	2	Complete		
+  32	Ether Attack Bonus II	Trait	Increases Ether Attack by 30.	-	-	-	-	2	Complete		
+  34	Drown II	Action	Deals 50 water DMG to a single target and reduces its Might by 15 for 2 minutes.	84	3 seconds	30 seconds	Water	2	Complete		
+  36	Ether Wall	Action	50% of the damage you would have taken is applied to EP instead.	10	2 seconds	3 minutes	-	1	Complete		
+  											
+  40	Shockwave Surge II	Action	Deals 82 lightning DMG to all enemies within the area of effect.	48	4 seconds	16 seconds	Lightning	2	Complete		
+  42	Abyssal Veil II	Action	Deals 65 darkness DMG and drains 4 EP/tick for a short period of time from a single target.	62	3 seconds	12 seconds	Darkness	2	Complete		
+  44	Flame III	Action	Deals 120 fire DMG to a single target.	65	3 seconds	4 seconds	Fire	3	Complete		
+  											
+  48	Graviton Field	Action	Reduces the movement speed and evasion of all enemies  within the area of effect by 25 for 1 minute.	90	4 seconds	60 seconds	Darkness	2	Complete		
+  50	Manafont	Action	Abilities cost zero EP for the next 1 minute.	150	2 seconds	30 minutes	-	3	Complete		
+
+

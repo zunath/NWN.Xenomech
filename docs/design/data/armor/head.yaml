@@ -1,0 +1,122 @@
+source: docs/_incoming/XM Design Bible - Armor.tsv
+slot: Head
+tsv: |
+  Type	Level	Item Name	Source	DEF	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC	BST	BRW	ELM	HNT	KPR	MDR	NGT	TEC
+  Head	1	Aurion Alloy Cap	Armorcraft	2										x	x			x	x			x	x
+  Head	1	Aurion Alloy Cap +1	Armorcraft	3										x	x			x	x			x	x
+  Head	1	Etherwoven Circlet	Synthesis	1												x	x			x	x	
+  Head	1	Etherwoven Circlet +1	Synthesis	2												x	x			x	x	
+  Head	1	Copperlink Hairpin	Synthesis	0		2									x	x	x	x	x	x	x	x
+  Head	1	Copperlink Hairpin +1	Synthesis	0		3									x	x	x	x	x	x	x	x
+  Head	5	Boneforged Hairpin	Synthesis	0		4									x	x	x	x	x	x	x	x
+  Head	5	Boneforged Hairpin +1	Synthesis	0		5									x	x	x	x	x	x	x	x
+  Head	6	Wayfarer’s Hat	Armorcraft	3								1				x	x			x	x	
+  Head	7	Leather Tactical Bandana	Armorcraft	3										x	x			x	x			x	x
+  Head	7	Leather Tactical Bandana +1	Armorcraft	4										x	x			x	x			x	x
+  Head	8	Combat Hachimaki	Armorcraft	4										x					x	
+  Head	8	Combat Hachimaki +1	Armorcraft	5										x					x	
+  Head	10	Brasslink Hairpin	Synthesis	0		6									x	x	x	x	x	x	x	x
+  Head	10	Brasslink Hairpin +1	Synthesis	0		7									x	x	x	x	x	x	x	x
+  Head	10	Vanguard Faceguard	Armorcraft	5										x			x	x				x
+  Head	10	Vanguard Faceguard +1	Armorcraft	6										x			x	x				x
+  Head	10	Legionnaire’s Helm	Armorcraft	5								1				x			x	x				x
+  Head	10	Regal Footman’s Bandana	Armorcraft	5									1			x			x				x
+  Head	11	Brassguard Cap	Armorcraft	5										x			x	x				x
+  Head	11	Brassguard Cap +1	Armorcraft	6										x			x	x				x
+  Head	11	Tactical Headgear	Armorcraft	5										x					x	
+  Head	11	Tactical Headgear +1	Armorcraft	6										x					x	
+  Head	11	Monk’s Wargear	Armorcraft	5								2				x						
+  Head	12	Scholar’s Circlet	Armorcraft	5												x			x		
+  Head	12	Sage’s Ether Circlet	Armorcraft	6									1				x			x		
+  Head	14	Cotton-Weave Headband	Armorcraft	3								3						x	x	x	x	x	x	x	x
+  Head	14	Erudite’s Mindband	Armorcraft	4								3				1			x	x	x	x	x	x	x	x
+  Head	14	Shell-Enforced Hairpin	Synthesis	0		8											x	x	x	x	x	x	x	x
+  Head	14	Shell-Enforced Hairpin +1	Synthesis	0		9											x	x	x	x	x	x	x	x
+  Head	15	Hoshikazu Warwrap	Armorcraft	5									1				x					x
+  Head	16	Boneforged Mask	Armorcraft	7										x	x			x	x			x
+  Head	16	Boneforged Mask +1	Armorcraft	8								1				x	x			x	x			x
+  Head	17	Lizardscale Helm	Armorcraft	7										x			x	x			x
+  Head	17	Lizardscale Helm +1	Armorcraft	8										x			x	x			x
+  Head	18	Bonze’s Ether Circlet	Synthesis	7												x			x		
+  Head	18	Cotton Combat Wrap	Armorcraft	7										x					
+  Head	18	Cotton Combat Wrap +1	Armorcraft	8										x					
+  Head	19	Garrison War Sallet	Armorcraft	5								1		1		x			x			x	x
+  Head	20	Mercenary’s Warwrap	Armorcraft	8									1				x					
+  Head	20	Silverlink Hairpin	Synthesis	0		12									x	x	x	x	x	x	x	x
+  Head	20	Silverlink Hairpin +1	Synthesis	0		13									x	x	x	x	x	x	x	x
+  Head	21	Chitin-Plated Mask	Armorcraft	9										x	x			x	x			x
+  Head	21	Chitin-Plated Mask +1	Armorcraft	10								1				x	x			x	x			x
+  Head	23	Cottonfield Headgear	Armorcraft	9										x	x	x			x	x
+  Head	23	Cottonfield Headgear +1	Armorcraft	10										x	x	x			x	x
+  Head	24	Emperor’s Crest Hairpin	Loot	0								5		2			2		x	x	x	x	x	x	x	x
+  Head	24	Ironclad Mask	Armorcraft	11										x	x			x	x			x
+  Head	24	Ironclad Mask +1	Armorcraft	12										x	x			x	x			x
+  Head	25	Federation Combat Wrap	Armorcraft	10	4	4									1				x					x
+  Head	25	Precision Combat Bandana	Armorcraft	8								3					x	x			x	x			x	x
+  Head	26	Reflex Headband	Armorcraft	5								3						x	x	x	x	x	x	x	x
+  Head	27	Brassguard Mask	Armorcraft	11										x	x			x	x			x
+  Head	27	Brassguard Mask +1	Armorcraft	12										x	x			x	x			x
+  Head	28	Woolen Tactical Hat	Armorcraft	9										x	x	x			x
+  Head	28	Woolen Tactical Hat +1	Armorcraft	10										x	x	x			x
+  Head	29	Eisenwar Helm	Armorcraft	13										1					x
+  Head	29	Kampfschaller War Helm	Armorcraft	14										2					x
+  Head	29	Oracle’s Crown	Synthesis	4									2				x			x		
+  Head	29	Oracle’s Crown +1	Synthesis	5									3				x			x		
+  Head	29	Earthwoven Hachimaki	Armorcraft	10											x					
+  Head	29	Earthwoven Hachimaki +1	Armorcraft	11											x					
+  Head	30	Centurion’s War Visor	Armorcraft	12									1				x			x	x				x
+  Head	30	Horned Crest Hairpin	Synthesis	0		13									x	x	x	x	x	x	x	x
+  Head	30	Horned Crest Hairpin +1	Synthesis	0		14									x	x	x	x	x	x	x	x
+  Head	30	Legionnaire’s Ether Circlet	Armorcraft	10										x	x			x	x	
+  Head	30	Mercenary Captain’s Wargear	Armorcraft	10								1		1					x			x	x	x	x	x
+  Head	30	Noctshade Beret	Armorcraft	9										1			x			x		
+  Head	30	Noctshade Beret +1	Armorcraft	10										2			x			x		
+  Head	30	Regal Squire’s Helm	Armorcraft	12									1				x			x			x
+  Head	30	Reinforced Bandana	Armorcraft	11										x			x	x				x
+  Head	30	Reinforced Bandana +1	Armorcraft	12										x			x	x				x
+  Head	35	Padded Combat Cap	Armorcraft	12										x	x			x			x
+  Head	35	Unmarked Combat Cap	Armorcraft	12										x	x			x			x
+  Head	35	Corroded War Cap	Armorcraft	8										x	x			x			x
+  Head	35	Fortified Guard Cap	Armorcraft	13										x	x			x			x
+  Head	36	Crimson War Cap	Armorcraft	12										x	x			x		
+  Head	36	Crimson War Cap +1	Armorcraft	13										x	x			x		
+  Head	36	Silvered Mask	Armorcraft	14										x			x				x
+  Head	36	Silvered Mask +1	Armorcraft	15										x			x				x
+  Head	37	Ironclad Visor	Armorcraft	14										x			x	x				x
+  Head	37	Ironclad Visor +1	Armorcraft	15										x			x	x				x
+  Head	38	Leatherbound Bandana	Armorcraft	14										x			x	x				x
+  Head	38	Leatherbound Bandana +1	Armorcraft	15										x			x	x				x
+  Head	38	Arcane Weaver’s Hat	Synthesis	12										x			x			x
+  Head	38	Arcane Weaver’s Hat +1	Synthesis	13										x			x			x
+  Head	40	Electrum Crest Hairpin	Synthesis	0		18									x	x	x	x	x	x	x	x
+  Head	40	Electrum Crest Hairpin +1	Synthesis	0		19									x	x	x	x	x	x	x	x
+  Head	40	Warborn Sallet	Armorcraft	16														x			x
+  Head	40	Warborn Sallet +1	Armorcraft	17														x			x
+  Head	40	Iron Musketeer’s Battle Armet	Armorcraft	17										2					x			x
+  Head	43	Iron Musketeer’s Battle Armet +1	Armorcraft	18		8										2					x			x
+  Head	43	Iron Musketeer’s Battle Armet +2	Armorcraft	19		10										2					x			x
+  Head	43	Valkyrian Mask	Armorcraft	16		10									7				x			x
+  Head	43	Walküre Mask	Armorcraft	11	15									6				x			x	x			x	x
+  Head	44	Corsair’s Tricorne	Armorcraft	14									1				x			x			x
+  Head	44	Corsair’s Tricorne +1	Armorcraft	15									2				x			x			x
+  Head	45	Chitin-Plated Mask	Armorcraft	16										x	x			x	x			x
+  Head	45	Chitin-Plated Mask +1	Armorcraft	17								1				x	x			x	x			x
+  Head	46	Banded Warhelm	Armorcraft	18										x			x				x
+  Head	46	Banded Warhelm +1	Armorcraft	19										x			x				x
+  Head	48	Raptorstrike Helm	Armorcraft	18										x			x	x			x	x
+  Head	48	Raptorstrike Helm +1	Armorcraft	19										x			x	x			x	x
+  Head	48	Steelguard Visor	Armorcraft	18										x			x	x			
+  Head	48	Steelguard Visor +1	Armorcraft	19										x			x	x			
+  Head	48	Woolen War Cap	Armorcraft	16										x	x			x		
+  Head	48	Woolen War Cap +1	Armorcraft	17										x	x			x		
+  Head	49	Mythrite Sallet	Armorcraft	20														x		
+  Head	49	Mythrite Sallet +1	Armorcraft	21														x		
+  Head	49	Shinobi Shadowguard	Armorcraft	17										x					
+  Head	49	Shinobi Shadowguard +1	Armorcraft	18										x					
+  Head	50	Obsidian Crow Beret	Armorcraft	15										4						x	x			x	x
+  Head	50	Obsidian Crow Beret +1	Armorcraft	16										5						x	x			x	x
+  Head	50	Auric Crest Hairpin	Synthesis	0		21									x	x	x	x	x	x	x	x
+  Head	50	Auric Crest Hairpin +1	Synthesis	0		22									x	x	x	x	x	x	x	x
+  Head	50	Tactician’s Arcane Hat	Armorcraft	16													x			x	x
+  Head	50	Shockguard Mask	Armorcraft	19								4		4							x	x			x
+
