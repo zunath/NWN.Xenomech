@@ -142,3 +142,27 @@ Key NWNX configuration in `server/nwserver.env`:
 - **XM Design Bible**: https://docs.google.com/spreadsheets/d/1CnS5sk6c9cjlRETEuAkkyI5P1gPSskJWct7Qemx-KVs/edit?gid=776582455#gid=776582455
 - Contains comprehensive game mechanics specifications
 - Reference for character progression, combat systems, and item mechanics
+
+## Game Design Documentation
+
+### Design Documentation Structure
+The `docs/design/` directory contains structured game design specifications derived from the XM Design Bible spreadsheet:
+
+- **Character Attributes**: Six core attributes (Might, Perception, Vitality, Willpower, Agility, Social) affecting combat, skills, and progression
+- **Growth Grades**: Lettered grade system (A-G) determining stat growth per level for HP, EP, skills, and damage
+- **Weapon Skills**: 14 weapon types with unique skill trees, elemental damage, and progression abilities
+- **Job System**: 8 character jobs (Beastmaster, Brawler, Elementalist, Hunter, Keeper, Mender, Nightstalker, Techweaver) with distinct roles and abilities
+- **Crafting Systems**: Five crafting disciplines (Armorcraft, Engineering, Fabrication, Synthesis, Weaponcraft) with recipes and materials
+- **Combat Systems**: Damage calculation formulas, hit rate mechanics, spell damage scaling, and XP progression charts
+
+### Design File Formats
+- **Human-readable**: Markdown files in `docs/design/` with structured tables and descriptions
+- **Machine-readable**: YAML mirrors in `docs/design/data/` containing full TSV data for programmatic access
+- **Source data**: Original TSV exports from XM Design Bible in `docs/_incoming/`
+
+### Key Game Mechanics
+- **Tactical Points (TP)**: Resource for weapon skills, gained by combat actions
+- **Ether Points (EP)**: Resource for job abilities and magic
+- **Resonance Nodes**: Cross-job ability system, gained every 5 levels (max 10)
+- **Elemental System**: 10 damage types with resistances and weaknesses
+- **Status Effects**: Comprehensive debuff/buff system with duration and stacking rules
