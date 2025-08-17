@@ -29,6 +29,9 @@
         public struct OnPlayerOpenAppearanceMenu : IXMEvent
         {
         }
+        public struct OnPlayerOpenCodexMenu : IXMEvent
+        {
+        }
         public struct OnItemHit : IXMEvent
         {
         }

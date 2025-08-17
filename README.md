@@ -13,6 +13,11 @@ It serves as a replacement for NWScript and handles most server features and fun
 
 Refer to the quick start guide below and be sure to post any issues on our forums. The link to the forums is above.
 
+# Documentation
+
+- Gameplay documentation: `docs/gameplay/README.md`
+- Lore documentation: `docs/lore/`
+
 # Prerequisites: 
 
 Git: https://git-scm.com/downloads

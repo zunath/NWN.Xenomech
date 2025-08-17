@@ -41,6 +41,7 @@ namespace XM.Shared.Core.EventManagement.Registration
             _event.RegisterEvent<XMEvent.OnPlayerMigrationAfter>(EventScript.OnXMPlayerMigrationAfterScript);
             _event.RegisterEvent<XMEvent.OnPlayerOpenAppearanceMenu>(EventScript.OnXMPlayerOpenedAppearanceMenuScript);
             _event.RegisterEvent<XMEvent.OnPlayerOpenQuestsMenu>(EventScript.OnXMPlayerOpenedQuestsMenuScript);
+            _event.RegisterEvent<XMEvent.OnPlayerOpenCodexMenu>(EventScript.OnXMPlayerOpenedCodexMenuScript);
             _event.RegisterEvent<XMEvent.OnItemHit>(EventScript.OnXMItemHitScript);
             _event.RegisterEvent<XMEvent.OnDamageDealt>(EventScript.OnXMDamageDealtScript);
         }

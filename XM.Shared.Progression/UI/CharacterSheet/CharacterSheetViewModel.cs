@@ -579,6 +579,10 @@ namespace XM.Progression.UI.CharacterSheet
         {
             Event.PublishEvent<XMEvent.OnPlayerOpenQuestsMenu>(Player);
         };
+        public Action OnClickCodex() => () =>
+        {
+            Event.PublishEvent<XMEvent.OnPlayerOpenCodexMenu>(Player);
+        };
         public Action OnClickAppearance() => () =>
         {
             Event.PublishEvent<XMEvent.OnPlayerOpenAppearanceMenu>(Player);

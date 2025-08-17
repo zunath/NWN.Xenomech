@@ -579,6 +579,13 @@ namespace XM.Progression.UI.CharacterSheet
                 col.AddButton(button =>
                 {
                     button
+                        .Label(LocaleString.Codex)
+                        .Width(ButtonWidth)
+                        .OnClick(model => model.OnClickCodex());
+                });
+                col.AddButton(button =>
+                {
+                    button
                         .Label(LocaleString.OpenTrash)
                         .Width(ButtonWidth)
                         .OnClick(model => model.OnClickOpenTrash());
