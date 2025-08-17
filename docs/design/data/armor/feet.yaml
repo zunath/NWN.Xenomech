@@ -1,0 +1,106 @@
+source: docs/_incoming/XM Design Bible - Armor.tsv
+slot: Feet
+tsv: |
+  Type	Level	Item Name	Source	DEF	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC	BST	BRW	ELM	HNT	KPR	MDR	NGT	TEC
+  Feet	1	Ashen Stride Clogs	Armorcraft	1											x	x	x		x	x	
+  Feet	1	Ashen Stride Clogs +1	Armorcraft	2											x	x	x		x	x	
+  Feet	1	Aurion Alloy Leggings	Armorcraft	1										x			x		x	x
+  Feet	1	Aurion Alloy Leggings +1	Armorcraft	2										x			x		x	x
+  Feet	7	Leather Combat Highboots	Armorcraft	2										x			x	x			x
+  Feet	7	Leather Combat Highboots +1	Armorcraft	3										x			x	x			x
+  Feet	8	Warwoven Kyahan	Armorcraft	2											x					
+  Feet	8	Warwoven Kyahan +1	Armorcraft	3											x					
+  Feet	8	Ether-Touched Soleas	Armorcraft	2											x	x	x		x	
+  Feet	8	Ether-Touched Soleas +1	Armorcraft	3											x	x	x		x	
+  Feet	10	Titan Scale Greaves	Armorcraft	3										x			x	x			x
+  Feet	10	Titan Scale Greaves +1	Armorcraft	4										x			x	x			x
+  Feet	11	Brassguard Leggings	Armorcraft	3										x					x	x
+  Feet	11	Brassguard Leggings +1	Armorcraft	4										x					x	x
+  Feet	11	Reinforced Gaiters	Armorcraft	3											x	x			x	x	
+  Feet	11	Reinforced Gaiters +1	Armorcraft	4											x	x			x	x	
+  Feet	12	Verdant Holly Clogs	Armorcraft	3											x	x	x		x	
+  Feet	12	Verdant Holly Clogs +1	Armorcraft	4											x	x	x		x	
+  Feet	13	Lightstep Soleas	Loot	4							3						x	x	x		x	
+  Feet	16	Boneforged Leggings	Armorcraft	4										x	x			x		x
+  Feet	16	Boneforged Leggings +1	Armorcraft	5						1						x	x			x		x
+  Feet	17	Lizardscale Ledelsens	Armorcraft	4										x			x	x			x
+  Feet	17	Lizardscale Ledelsens +1	Armorcraft	5										x			x	x			x
+  Feet	17	Mettleforged Leggings	Armorcraft	5									1						x	x			x		x
+  Feet	17	Mettleforged Leggings +1	Armorcraft	6							2		1						x	x			x		x
+  Feet	18	Cotton-Woven Kyahan	Armorcraft	4											x					
+  Feet	18	Cotton-Woven Kyahan +1	Armorcraft	5											x					
+  Feet	18	Powerforged Sandals	Loot	3								2				2		x	x	x	x	x	x	x	x
+  Feet	20	Arcane Weaver’s Sandals	Armorcraft	5		3											x	x			x	
+  Feet	20	Arcane Weaver’s Sandals +1	Armorcraft	5		3									1				x	x			x	
+  Feet	20	Mercenary’s War Kyahan	Loot	4											x					
+  Feet	20	Regal Footman’s Clogs	Loot	5										1				x	x	x		x	x	
+  Feet	21	Chitin-Plated Leggings	Armorcraft	5										x	x			x		x
+  Feet	21	Chitin-Plated Leggings +1	Armorcraft	6						1						x	x			x		x
+  Feet	23	Cotton-Woven Gaiters	Armorcraft	5											x	x			x		
+  Feet	23	Cotton-Woven Gaiters +1	Armorcraft	6											x	x			x		
+  Feet	24	Titan War Greaves	Armorcraft	6										x			x			x
+  Feet	24	Titan War Greaves +1	Armorcraft	7										x			x			x
+  Feet	24	Wingstride Boots	Armorcraft	1								2						2		x			x
+  Feet	24	Wingstride Boots +1	Armorcraft	2								3						3		x			x
+  Feet	27	Brassguard Greaves	Armorcraft	6										x			x	x			x
+  Feet	27	Brassguard Greaves +1	Armorcraft	7										x			x	x			x
+  Feet	28	Zephyr Soleas	Armorcraft	5									4						x	x			x	
+  Feet	28	Zephyr Soleas +1	Armorcraft	6									5						x	x			x	
+  Feet	29	Eisensteel Boots	Armorcraft	8										2					x	
+  Feet	29	Eisensteel Boots +1	Armorcraft	9										3					x	
+  Feet	29	Oracle’s Pumps	Armorcraft	6							4						x			x		
+  Feet	29	Oracle’s Pumps +1	Armorcraft	7							5						x			x		
+  Feet	29	Earthforged Kyahan	Armorcraft	6											x					
+  Feet	29	Earthforged Kyahan +1	Armorcraft	7											x					
+  Feet	30	Centurion’s War Greaves	Loot	7										1			x			x			x
+  Feet	30	Noctshadow Gaiters	Armorcraft	4									1						x			x		
+  Feet	30	Noctshadow Gaiters +1	Armorcraft	5									2						x			x		
+  Feet	30	Regal Squire’s Sollerets	Loot	7										1			x			x			x
+  Feet	30	Reinforced Studded Boots	Armorcraft	6										x			x	x			x
+  Feet	30	Reinforced Studded Boots +1	Armorcraft	7										x			x	x			x
+  Feet	34	Etherwoven Shoes	Armorcraft	6											x	x	x		x	
+  Feet	34	Etherwoven Shoes +1	Armorcraft	7											x	x	x		x	
+  Feet	35	Combat Leggings	Armorcraft	7										x	x			x		x
+  Feet	35	Combat Leggings +1	Armorcraft	8										x	x			x		x
+  Feet	36	Silverguard Greaves	Armorcraft	8										x			x			x
+  Feet	36	Silverguard Greaves +1	Armorcraft	9										x			x			x
+  Feet	36	Insulated Socks	Armorcraft	7											x	x			x	x	
+  Feet	36	Insulated Socks +1	Armorcraft	8											x	x			x	x	
+  Feet	37	Ironclad Greaves	Armorcraft	8										x			x	x			x
+  Feet	37	Ironclad Greaves +1	Armorcraft	9										x			x	x			x
+  Feet	38	Leatherbound Highboots	Armorcraft	8										x			x	x			x
+  Feet	38	Leatherbound Highboots +1	Armorcraft	9										x			x	x			x
+  Feet	38	Obsidian Sabots	Armorcraft	7											x	x	x		x	x	
+  Feet	38	Obsidian Sabots +1	Armorcraft	8											x	x	x		x	x	
+  Feet	40	Ceremonial War Boots	Loot	2											1		x					
+  Feet	40	Warcaster’s Shoes	Armorcraft	7											x	x	x		x	
+  Feet	40	Iron Musketeer’s Battle Sabatons	Armorcraft	10							5						x	x				
+  Feet	40	Plateforged Leggings	Armorcraft	9														x		
+  Feet	40	Plateforged Leggings +1	Armorcraft	10														x		
+  Feet	41	Infernal Sabots	Armorcraft	7		10									1				x			x	
+  Feet	41	Infernal Sabots +1	Armorcraft	8		13									2				x			x	
+  Feet	43	Warcaster’s Shoes +1	Armorcraft	8										2			x	x	x		x	
+  Feet	43	Warcaster’s Shoes +2	Armorcraft	9										3			x	x	x		x	
+  Feet	43	Iron Musketeer’s Battle Sabatons +1	Armorcraft	11							5						2			x	
+  Feet	43	Iron Musketeer’s Battle Sabatons +2	Armorcraft	12							5						3			x	
+  Feet	45	Chitin-Plated Leggings	Armorcraft	9										x	x			x		x
+  Feet	45	Chitin-Plated Leggings +1	Armorcraft	10						1						x	x			x		x
+  Feet	46	Warborn Sollerets	Armorcraft	10										x			x			x
+  Feet	46	Warborn Sollerets +1	Armorcraft	11										x			x			x
+  Feet	47	Steelguard Greaves	Armorcraft	10										x			x	x			x
+  Feet	47	Steelguard Greaves +1	Armorcraft	11										x			x	x			x
+  Feet	48	Raptorstrike Ledelsens	Armorcraft	10										x			x	x			x
+  Feet	48	Raptorstrike Ledelsens +1	Armorcraft	11										x			x	x			x
+  Feet	48	Woolen Insulated Socks	Armorcraft	9											x	x			x	x	
+  Feet	48	Woolen Insulated Socks +1	Armorcraft	10											x	x			x	x	
+  Feet	49	Mythrite Leggings	Armorcraft	11														x		
+  Feet	49	Mythrite Leggings +1	Armorcraft	12														x		
+  Feet	49	Shinobi Shadow Kyahan	Armorcraft	9															
+  Feet	49	Shinobi Shadow Kyahan +1	Armorcraft	10											1			x				
+  Feet	50	Obsidian Crow Gaiters	Armorcraft	8											x	x	x		x	
+  Feet	50	Obsidian Crow Gaiters +1	Armorcraft	9											x	x	x		x	
+  Feet	50	Reinforced Moccasins	Armorcraft	8											x	x	x		x	
+  Feet	50	Reinforced Moccasins +1	Armorcraft	9											x	x	x		x	
+  Feet	50	Royal Knight’s War Sollerets	Loot	11										2				x			x			x
+  Feet	50	Tactician Magician’s War Pigaches	Armorcraft	9											x	x	x		x	x	
+

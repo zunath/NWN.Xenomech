@@ -1,0 +1,110 @@
+# Source: docs/_incoming/XM Design Bible - XP Chart(1).tsv
+updated: 2025-08-10
+
+levels:
+  - { level: 1, xp: 550, cumulative: 550 }
+  - { level: 2, xp: 825, cumulative: 1375 }
+  - { level: 3, xp: 1100, cumulative: 2475 }
+  - { level: 4, xp: 1375, cumulative: 3850 }
+  - { level: 5, xp: 1650, cumulative: 5500 }
+  - { level: 6, xp: 1925, cumulative: 7425 }
+  - { level: 7, xp: 2200, cumulative: 9625 }
+  - { level: 8, xp: 2420, cumulative: 12045 }
+  - { level: 9, xp: 2640, cumulative: 14685 }
+  - { level: 10, xp: 2860, cumulative: 17545 }
+  - { level: 11, xp: 3080, cumulative: 20625 }
+  - { level: 12, xp: 4200, cumulative: 24825 }
+  - { level: 13, xp: 4480, cumulative: 29305 }
+  - { level: 14, xp: 4760, cumulative: 34065 }
+  - { level: 15, xp: 5040, cumulative: 39105 }
+  - { level: 16, xp: 5320, cumulative: 44425 }
+  - { level: 17, xp: 5600, cumulative: 50025 }
+  - { level: 18, xp: 5880, cumulative: 55905 }
+  - { level: 19, xp: 6160, cumulative: 62065 }
+  - { level: 20, xp: 6440, cumulative: 68505 }
+  - { level: 21, xp: 6720, cumulative: 75225 }
+  - { level: 22, xp: 8500, cumulative: 83725 }
+  - { level: 23, xp: 8670, cumulative: 92395 }
+  - { level: 24, xp: 8840, cumulative: 101235 }
+  - { level: 25, xp: 9010, cumulative: 110245 }
+  - { level: 26, xp: 9180, cumulative: 119425 }
+  - { level: 27, xp: 9350, cumulative: 128775 }
+  - { level: 28, xp: 9520, cumulative: 138295 }
+  - { level: 29, xp: 9690, cumulative: 147985 }
+  - { level: 30, xp: 9860, cumulative: 157845 }
+  - { level: 31, xp: 10030, cumulative: 167875 }
+  - { level: 32, xp: 10200, cumulative: 178075 }
+  - { level: 33, xp: 10370, cumulative: 188445 }
+  - { level: 34, xp: 10540, cumulative: 198985 }
+  - { level: 35, xp: 10710, cumulative: 209695 }
+  - { level: 36, xp: 10880, cumulative: 220575 }
+  - { level: 37, xp: 11050, cumulative: 231625 }
+  - { level: 38, xp: 11220, cumulative: 242845 }
+  - { level: 39, xp: 11390, cumulative: 254235 }
+  - { level: 40, xp: 11560, cumulative: 265795 }
+  - { level: 41, xp: 11730, cumulative: 277525 }
+  - { level: 42, xp: 14000, cumulative: 291525 }
+  - { level: 43, xp: 14200, cumulative: 305725 }
+  - { level: 44, xp: 14400, cumulative: 320125 }
+  - { level: 45, xp: 14600, cumulative: 334725 }
+  - { level: 46, xp: 14800, cumulative: 349525 }
+  - { level: 47, xp: 15000, cumulative: 364525 }
+  - { level: 48, xp: 15200, cumulative: 379725 }
+  - { level: 49, xp: 15400, cumulative: 395125 }
+  - { level: 50, xp: 15600, cumulative: 410725 }
+
+
+tsv: |
+  Level	XP Required	Cumulative
+  1	550	550
+  2	825	1375
+  3	1100	2475
+  4	1375	3850
+  5	1650	5500
+  6	1925	7425
+  7	2200	9625
+  8	2420	12045
+  9	2640	14685
+  10	2860	17545
+  11	3080	20625
+  12	4200	24825
+  13	4480	29305
+  14	4760	34065
+  15	5040	39105
+  16	5320	44425
+  17	5600	50025
+  18	5880	55905
+  19	6160	62065
+  20	6440	68505
+  21	6720	75225
+  22	8500	83725
+  23	8670	92395
+  24	8840	101235
+  25	9010	110245
+  26	9180	119425
+  27	9350	128775
+  28	9520	138295
+  29	9690	147985
+  30	9860	157845
+  31	10030	167875
+  32	10200	178075
+  33	10370	188445
+  34	10540	198985
+  35	10710	209695
+  36	10880	220575
+  37	11050	231625
+  38	11220	242845
+  39	11390	254235
+  40	11560	265795
+  41	11730	277525
+  42	14000	291525
+  43	14200	305725
+  44	14400	320125
+  45	14600	334725
+  46	14800	349525
+  47	15000	364525
+  48	15200	379725
+  49	15400	395125
+  50	15600	410725
+
+

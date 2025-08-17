@@ -1,0 +1,85 @@
+# Source: docs/_incoming/XM Design Bible - Keeper.tsv
+updated: 2025-08-10
+
+job: Keeper
+role: Tank
+armor: Plate
+weaponProficiencies:
+  - { type: Longsword, grade: A }
+  - { type: "Great Sword", grade: B }
+  - { type: Shield, grade: A }
+  - { type: Pistol, grade: C }
+
+attributeGrades:
+  hp: C
+  ep: F
+  might: B
+  perception: E
+  vitality: A
+  agility: G
+  willpower: C
+  social: C
+  evasion: C
+
+abilities:
+  - { level: 2, name: "Provoke I", type: Action, description: "Goads a single target to attack you.", ep: 2, castingTime: Instant, cooldown: "30 seconds", resonanceCost: 1, devStatus: Complete }
+  - { level: 4, name: "Defense Bonus I", type: Trait, description: "Increases defense by 10", resonanceCost: 1, devStatus: Complete }
+  - { level: 8, name: "Restoration I", type: Action, description: "Restores HP to the caster.", ep: 4, castingTime: "2 seconds", cooldown: "4 seconds", resonanceCost: 1, devStatus: Complete }
+  - { level: 10, name: "Shield Mastery I", type: Trait, description: "Increases shield deflection by 10%.", resonanceCost: 1, devStatus: Complete }
+  - { level: 12, name: "Aggressor I", type: Action, description: "Increases enmity gain while toggled by 5%.", castingTime: "2 seconds", cooldown: "1 minute", resonanceCost: 1, devStatus: Complete }
+  - { level: 14, name: "Defense Bonus II", type: Trait, description: "Increases defense by 30", resonanceCost: 2, devStatus: Complete }
+  - { level: 16, name: "Longsword Lore", type: Trait, description: "Permits equipping longswords on another job with an A rank.", resonanceCost: 1, devStatus: Complete }
+  - { level: 18, name: "Provoke II", type: Action, description: "Goads a group of enemies to attack you.", ep: 4, castingTime: Instant, cooldown: "30 seconds", resonanceCost: 1, devStatus: Complete }
+  - { level: 20, name: "Radiant Blast I", type: Action, description: "Deals 30 light DMG to a single target.", ep: 8, castingTime: "2 seconds", cooldown: "4 seconds", resist: Light, resonanceCost: 1, devStatus: Complete }
+  - { level: 22, name: "Restoration II", type: Action, description: "Restores HP to the caster.", ep: 10, castingTime: "2 seconds", cooldown: "4 seconds", resonanceCost: 2, devStatus: Complete }
+  - { level: 24, name: "HP Bonus I", type: Trait, description: "Increases max HP by 60.", resonanceCost: 1, devStatus: Complete }
+  - { level: 25, name: "Darkness Ward", type: Action, description: "Grants +50% protection towards darkness to all nearby party members for 15 minutes.", ep: 30, castingTime: "4 seconds", cooldown: "10 seconds", resonanceCost: 1, devStatus: Complete }
+  - { level: 26, name: "Rampart", type: Action, description: "Increases defense of all nearby party members by 30 for 2 minutes.", ep: 8, castingTime: "2 seconds", cooldown: "3 minutes", resonanceCost: 2, devStatus: Complete }
+  - { level: 30, name: "Defense Bonus III", type: Trait, description: "Increases defense by 50", resonanceCost: 3, devStatus: Complete }
+  - { level: 32, name: "Raise", type: Action, description: "Revives an unconscious target with 1 HP. Cannot be used on mechs.", ep: 60, castingTime: "6 seconds", cooldown: "2 minutes", resonanceCost: 1, devStatus: Complete }
+  - { level: 34, name: "Shield Mastery II", type: Trait, description: "Increases shield deflection by 20%.", resonanceCost: 2, devStatus: Complete }
+  - { level: 36, name: "Aggressor II", type: Action, description: "Increases enmity gain while toggled by 10%.", castingTime: "2 seconds", cooldown: "1 minute", resonanceCost: 1, devStatus: Complete }
+  - { level: 40, name: "Radiant Blast II", type: Action, description: "Deals 60 light DMG to a single target.", ep: 22, castingTime: "2 seconds", cooldown: "4 seconds", resist: Light, resonanceCost: 2, devStatus: Complete }
+  - { level: 42, name: "Restoration III", type: Action, description: "Restores HP to the caster.", ep: 15, castingTime: "2 seconds", cooldown: "4 seconds", resonanceCost: 3, devStatus: Complete }
+  - { level: 44, name: "HP Bonus II", type: Trait, description: "Increases max HP by 120.", resonanceCost: 2, devStatus: Complete }
+  - { level: 48, name: "Defense Bonus IV", type: Trait, description: "Increases defense by 70", resonanceCost: 4, devStatus: Complete }
+  - { level: 50, name: "Mighty Strikes", type: Action, description: "All attacks become critical hits for 1 minute.", ep: 150, castingTime: "3 seconds", cooldown: "30 minutes", resonanceCost: 3, devStatus: Complete }
+
+tsv: |
+  Job Name	Keeper		Longsword	A
+  Role	Tank		Great Sword	B
+  Armor	Plate		Shield	A
+  HP	C		Pistol	C
+  EP	F
+  Might	B
+  Perception	E
+  Vitality	A
+  Agility	G
+  Willpower	C
+  Social	C
+  Evasion	C
+  Level	Ability Name	Type	Description	EP	Fuel	Casting Time	Cooldown Time	Resist	Resonance Cost	Dev Status	Additional  Requirements	Notes
+  2	Provoke I	Action	Goads a single target to attack you.	2	-	Instant	30 seconds	-	1	Complete		
+  4	Defense Bonus I	Trait	Increases defense by 10	-	-	-	-	-	1	Complete		
+  8	Restoration I	Action	Restores HP to the caster.	4	-	2 seconds	4 seconds	-	1	Complete		
+  10	Shield Mastery I	Trait	Increases shield deflection by 10%.	-	-	-	-	-	1	Complete		
+  12	Aggressor I	Action	Increases enmity gain while toggled by 5%.	-	-	2 seconds	1 minute	-	1	Complete		
+  14	Defense Bonus II	Trait	Increases defense by 30	-	-	-	-	-	2	Complete		
+  16	Longsword Lore	Trait	Permits equipping longswords on another job with an A rank.	-	-	-	-	-	1	Complete		
+  18	Provoke II	Action	Goads a group of enemies to attack you.	4	-	Instant	30 seconds	-	1	Complete		
+  20	Radiant Blast I	Action	Deals 30 light DMG to a single target.	8	-	2 seconds	4 seconds	Light	1	Complete		
+  22	Restoration II	Action	Restores HP to the caster.	10	-	2 seconds	4 seconds	-	2	Complete		
+  24	HP Bonus I	Trait	Increases max HP by 60.	-	-	-	-	-	1	Complete		
+  25	Darkness Ward	Action	Grants +50% protection towards darkness to all nearby party members for 15 minutes.	30	-	4 seconds	10 seconds	-	1	Complete		
+  26	Rampart	Action	Increases defense of all nearby party members by 30 for 2 minutes.	8	-	2 seconds	3 minutes	-	2	Complete		
+  30	Defense Bonus III	Trait	Increases defense by 50	-	-	-	-	-	3	Complete		
+  32	Raise	Action	Revives an unconscious target with 1 HP. Cannot be used on mechs.	60	-	6 seconds	2 minutes	-	1	Complete		
+  34	Shield Mastery II	Trait	Increases shield deflection by 20%.	-	-	-	-	-	2	Complete		
+  36	Aggressor II	Action	Increases enmity gain while toggled by 10%.	-	-	2 seconds	1 minute	-	1	Complete		
+  40	Radiant Blast II	Action	Deals 60 light DMG to a single target.	22	-	2 seconds	4 seconds	Light	2	Complete		
+  42	Restoration III	Action	Restores HP to the caster.	15	-	2 seconds	4 seconds	-	3	Complete		
+  44	HP Bonus II	Trait	Increases max HP by 120.	-	-	-	-	-	2	Complete		
+  48	Defense Bonus IV	Trait	Increases defense by 70	-	-	-	-	-	4	Complete		
+  50	Mighty Strikes	Action	All attacks become critical hits for 1 minute.	150	-	3 seconds	30 minutes	-	3	Complete		
+
+

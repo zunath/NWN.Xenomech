@@ -1,0 +1,58 @@
+# Source: docs/_incoming/XM Design Bible - Rifle.tsv
+updated: 2025-08-10
+weapon: Rifle
+items:
+  - { level: 1, name: "Hakenbuechse Rifle", source: Engineering, dmg: 9, delay: 600 }
+  - { level: 5, name: "Vanguard Musket", source: Engineering, dmg: 9, delay: 600 }
+  - { level: 5, name: "Vanguard Musket +1", source: Engineering, dmg: 10, delay: 580 }
+  - { level: 10, name: "Marauder’s Rifle", source: Engineering, dmg: 14, delay: 600 }
+  - { level: 10, name: "Marauder’s Rifle +1", source: Engineering, dmg: 15, delay: 580 }
+  - { level: 15, name: "Tanegashima Rifle", source: Engineering, dmg: 15, delay: 600 }
+  - { level: 15, name: "Tanegashima Rifle +1", source: Engineering, dmg: 16, delay: 580 }
+  - { level: 20, name: "Vanguard Battle Rifle", source: Loot, dmg: 15, delay: 600 }
+  - { level: 22, name: "Arquebus Rifle", source: Engineering, dmg: 18, delay: 600 }
+  - { level: 22, name: "Arquebus Rifle +1", source: Engineering, dmg: 19, delay: 580 }
+  - { level: 27, name: "Corsair’s Rifle", source: Engineering, dmg: 20, delay: 600 }
+  - { level: 27, name: "Corsair’s Rifle +1", source: Engineering, dmg: 21, delay: 580, ep: 5 }
+  - { level: 30, name: "Mars Hex-Rifle", source: Engineering, dmg: 22, delay: 480, ep: 3 }
+  - { level: 30, name: "Mars Hex-Rifle +1", source: Engineering, dmg: 23, delay: 460, ep: 5 }
+  - { level: 30, name: "Military Repeater", source: Loot, dmg: 23, delay: 550, ep: 7 }
+  - { level: 34, name: "Serpentine Rifle", source: Loot, dmg: 25, delay: 660, ep: 10, atk: 10 }
+  - { level: 36, name: "Darksteel Hex-Rifle", source: Engineering, dmg: 25, delay: 480, ep: 4 }
+  - { level: 36, name: "Darksteel Hex-Rifle +1", source: Engineering, dmg: 26, delay: 470, ep: 6 }
+  - { level: 42, name: "Negoroshiki Rifle", source: Engineering, dmg: 28, delay: 600 }
+  - { level: 42, name: "Negoroshiki Rifle +1", source: Engineering, dmg: 29, delay: 580 }
+  - { level: 46, name: "Deluxe Carbine Rifle", source: Loot, dmg: 32, delay: 600 }
+  - { level: 50, name: "Musketeer’s Rifle", source: Loot, dmg: 34, delay: 580, ep: 10 }
+  - { level: 50, name: "Seadog Repeater", source: Engineering, dmg: 25, delay: 600 }
+  - { level: 50, name: "Seadog Repeater +1", source: Engineering, dmg: 26, delay: 580 }
+
+
+tsv: |
+  Type	Level	Item Name	Source	DMG	Delay	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC
+  Rifle	1	Hakenbuechse Rifle	Engineering	9	600										
+  Rifle	5	Vanguard Musket	Engineering	9	600										
+  Rifle	5	Vanguard Musket +1	Engineering	10	580										
+  Rifle	10	Marauder’s Rifle	Engineering	14	600										
+  Rifle	10	Marauder’s Rifle +1	Engineering	15	580										
+  Rifle	15	Tanegashima Rifle	Engineering	15	600										
+  Rifle	15	Tanegashima Rifle +1	Engineering	16	580										
+  Rifle	20	Vanguard Battle Rifle	Loot	15	600										
+  Rifle	22	Arquebus Rifle	Engineering	18	600										
+  Rifle	22	Arquebus Rifle +1	Engineering	19	580										
+  Rifle	27	Corsair’s Rifle	Engineering	20	600										
+  Rifle	27	Corsair’s Rifle +1	Engineering	21	580				5								
+  Rifle	30	Mars Hex-Rifle	Engineering	22	480			3									
+  Rifle	30	Mars Hex-Rifle +1	Engineering	23	460			5									
+  Rifle	30	Military Repeater	Loot	23	550				7									
+  Rifle	34	Serpentine Rifle	Loot	25	660			10	10								
+  Rifle	36	Darksteel Hex-Rifle	Engineering	25	480			4									
+  Rifle	36	Darksteel Hex-Rifle +1	Engineering	26	470			6									
+  Rifle	42	Negoroshiki Rifle	Engineering	28	600										
+  Rifle	42	Negoroshiki Rifle +1	Engineering	29	580										
+  Rifle	46	Deluxe Carbine Rifle	Loot	32	600										
+  Rifle	50	Musketeer’s Rifle	Loot	34	580			10									
+  Rifle	50	Seadog Repeater	Engineering	25	600										
+  Rifle	50	Seadog Repeater +1	Engineering	26	580										
+
+

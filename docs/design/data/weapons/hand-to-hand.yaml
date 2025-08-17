@@ -1,0 +1,150 @@
+# Source: docs/_incoming/XM Design Bible - Hand-to-Hand.tsv
+updated: 2025-08-10
+weapon: Hand-to-Hand
+items:
+  - { level: 1, name: "Panther Claws", source: Weaponcraft, dmg: 15, delay: 540 }
+  - { level: 1, name: "Panther Claws +1", source: Weaponcraft, dmg: 16, delay: 530 }
+  - { level: 1, name: "Ether Cesti", source: Weaponcraft, dmg: 14, delay: 530, ep: 3 }
+  - { level: 1, name: "Ether Cesti +1", source: Weaponcraft, dmg: 15, delay: 520, ep: 4 }
+  - { level: 5, name: "Aurion Alloy Knuckles", source: Weaponcraft, dmg: 17, delay: 580, ep: 2 }
+  - { level: 5, name: "Aurion Alloy Knuckles +1", source: Weaponcraft, dmg: 18, delay: 570, ep: 3 }
+  - { level: 9, name: "Brassstrike Knuckles", source: Weaponcraft, dmg: 20, delay: 580, ep: 2 }
+  - { level: 9, name: "Brassstrike Knuckles +1", source: Weaponcraft, dmg: 21, delay: 570, ep: 3 }
+  - { level: 10, name: "Freesword’s Talons", source: Loot, dmg: 21, delay: 550 }
+  - { level: 10, name: "Legionnaire’s Strikers", source: Loot, dmg: 21, delay: 580, ep: 2, atk: 3 }
+  - { level: 10, name: "Regal Archer’s Cesti", source: Loot, dmg: 20, delay: 530, ep: 3 }
+  - { level: 10, name: "Tropic Strikers", source: Weaponcraft, dmg: 17, delay: 480, ep: 10 }
+  - { level: 10, name: "Tropic Strikers +1", source: Weaponcraft, dmg: 18, delay: 480, ep: 12 }
+  - { level: 11, name: "Brassfang Claws", source: Weaponcraft, dmg: 22, delay: 540 }
+  - { level: 11, name: "Brassfang Claws +1", source: Weaponcraft, dmg: 23, delay: 530 }
+  - { level: 11, name: "Hydrofang Claws", source: Weaponcraft, dmg: 22, delay: 540 }
+  - { level: 11, name: "Hydrofang Claws +1", source: Weaponcraft, dmg: 23, delay: 530 }
+  - { level: 12, name: "Infernal Cesti", source: Loot, dmg: 23, delay: 520, ep: 3 }
+  - { level: 12, name: "Lizardfang Cesti", source: Loot, dmg: 24, delay: 530, ep: 3 }
+  - { level: 12, name: "Smashstrike Cesti", source: Loot, dmg: 24, delay: 530, ep: 3, atk: 3 }
+  - { level: 14, name: "Precision Claws", source: Weaponcraft, dmg: 26, delay: 520, per: 2 }
+  - { level: 15, name: "Bastion Knuckles", source: Loot, dmg: 27, delay: 570, hp: 2, ep: 2, acc: 2, atk: 3 }
+  - { level: 15, name: "Dominion Claws", source: Loot, dmg: 28, delay: 530, ep: 2 }
+  - { level: 15, name: "Sovereign Cesti", source: Loot, dmg: 28, delay: 510, ep: 3, atk: 3 }
+  - { level: 15, name: "Republic Strikers", source: Loot, dmg: 27, delay: 560, hp: 3, ep: 3, acc: 2, atk: 3 }
+  - { level: 15, name: "Sandus Cesti", source: Loot, dmg: 27, delay: 520, ep: 3, atk: 2 }
+  - { level: 15, name: "Zephyr Claws", source: Weaponcraft, dmg: 27, delay: 540, ep: 1 }
+  - { level: 19, name: "Whisperfang Claws", source: Loot, dmg: 30, delay: 540 }
+  - { level: 19, name: "Shadowfang Claws", source: Weaponcraft, dmg: 29, delay: 540 }
+  - { level: 19, name: "Shadowfang Claws +1", source: Weaponcraft, dmg: 30, delay: 530 }
+  - { level: 20, name: "Cougarfang Claws", source: Loot, dmg: 30, delay: 530 }
+  - { level: 20, name: "Alloy Knuckles", source: Weaponcraft, dmg: 31, delay: 580, ep: 2 }
+  - { level: 20, name: "Alloy Knuckles +1", source: Weaponcraft, dmg: 32, delay: 570, ep: 3 }
+  - { level: 20, name: "Vanguard Cesti", source: Loot, dmg: 31, delay: 530 }
+  - { level: 24, name: "Predator Claws", source: Weaponcraft, dmg: 35, delay: 540 }
+  - { level: 24, name: "Predator Claws +1", source: Weaponcraft, dmg: 36, delay: 530 }
+  - { level: 24, name: "Lynxfang Claws", source: Loot, dmg: 34, delay: 510 }
+  - { level: 27, name: "Toxin Cesti", source: Weaponcraft, dmg: 37, delay: 530, ep: 3 }
+  - { level: 27, name: "Toxin Cesti +1", source: Weaponcraft, dmg: 38, delay: 520, ep: 4 }
+  - { level: 30, name: "Ravager Claws", source: Weaponcraft, dmg: 40, delay: 550 }
+  - { level: 30, name: "Ravager Claws +1", source: Weaponcraft, dmg: 41, delay: 540 }
+  - { level: 30, name: "Hydrofang Talons", source: Weaponcraft, dmg: 40, delay: 550 }
+  - { level: 30, name: "Hydrofang Talons +1", source: Weaponcraft, dmg: 41, delay: 540 }
+  - { level: 31, name: "Tyro War-Katars", source: Weaponcraft, dmg: 42, delay: 570 }
+  - { level: 31, name: "Tyro War-Katars +1", source: Weaponcraft, dmg: 43, delay: 560 }
+  - { level: 32, name: "Impact Strikers", source: Loot, dmg: 44, delay: 570, ep: 3, wil: 1 }
+  - { level: 33, name: "War-Katars", source: Weaponcraft, dmg: 45, delay: 570 }
+  - { level: 33, name: "War-Katars +1", source: Weaponcraft, dmg: 46, delay: 560 }
+  - { level: 33, name: "Toxinfang Claws", source: Weaponcraft, dmg: 45, delay: 540 }
+  - { level: 33, name: "Toxinfang Claws +1", source: Weaponcraft, dmg: 46, delay: 530 }
+  - { level: 36, name: "Toxinfang Talons", source: Weaponcraft, dmg: 48, delay: 550 }
+  - { level: 36, name: "Toxinfang Talons +1", source: Weaponcraft, dmg: 49, delay: 540 }
+  - { level: 38, name: "Mythrite Knuckles", source: Weaponcraft, dmg: 50, delay: 580, ep: 2 }
+  - { level: 38, name: "Mythrite Knuckles +1", source: Weaponcraft, dmg: 51, delay: 570, ep: 3 }
+  - { level: 38, name: "Toxin War-Katars", source: Weaponcraft, dmg: 50, delay: 530 }
+  - { level: 38, name: "Toxin War-Katars +1", source: Weaponcraft, dmg: 51, delay: 520 }
+  - { level: 40, name: "Etherwoven Straps", source: Weaponcraft, dmg: 54, delay: 530, ep: 3 }
+  - { level: 40, name: "Etherwoven Straps +1", source: Weaponcraft, dmg: 55, delay: 520, ep: 4 }
+  - { level: 40, name: "Regal Etherwoven Straps", source: Loot, dmg: 56, delay: 530, ep: 3 }
+  - { level: 41, name: "Acidfang Claws", source: Loot, dmg: 57, delay: 550 }
+  - { level: 41, name: "Corrosivefang Claws", source: Loot, dmg: 58, delay: 540 }
+  - { level: 41, name: "Meltfang Claws", source: Loot, dmg: 57, delay: 550 }
+  - { level: 41, name: "Mythrite Claws", source: Weaponcraft, dmg: 58, delay: 550 }
+  - { level: 41, name: "Mythrite Claws +1", source: Weaponcraft, dmg: 59, delay: 540 }
+  - { level: 47, name: "Arcstrike Adargas", source: Weaponcraft, dmg: 61, delay: 540, per: 1 }
+  - { level: 47, name: "Arcstrike Adargas +1", source: Weaponcraft, dmg: 62, delay: 530, per: 2 }
+  - { level: 48, name: "Predator Patas", source: Weaponcraft, dmg: 63, delay: 580 }
+  - { level: 48, name: "Predator Patas +1", source: Weaponcraft, dmg: 64, delay: 570 }
+  - { level: 50, name: "Cross-Counter Strikers", source: Loot, dmg: 65, delay: 580, ep: 3 }
+  - { level: 50, name: "Tactician Magician’s Talons", source: Weaponcraft, dmg: 66, delay: 570, ep: 10 }
+
+
+tsv: |
+  Type	Level	Item Name	Source	DMG	Delay	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC
+  Claw	1	Panther Claws	Weaponcraft	15	540										
+  Claw	1	Panther Claws +1	Weaponcraft	16	530										
+  Claw	1	Ether Cesti	Weaponcraft	14	530		3									
+  Claw	1	Ether Cesti +1	Weaponcraft	15	520		4									
+  Claw	5	Aurion Alloy Knuckles	Weaponcraft	17	580		2									
+  Claw	5	Aurion Alloy Knuckles +1	Weaponcraft	18	570		3									
+  Claw	9	Brassstrike Knuckles	Weaponcraft	20	580		2									
+  Claw	9	Brassstrike Knuckles +1	Weaponcraft	21	570		3									
+  Claw	10	Freesword’s Talons	Loot	21	550										
+  Claw	10	Legionnaire’s Strikers	Loot	21	580		2	3								
+  Claw	10	Regal Archer’s Cesti	Loot	20	530		3									
+  Claw	10	Tropic Strikers	Weaponcraft	17	480		10									
+  Claw	10	Tropic Strikers +1	Weaponcraft	18	480		12									
+  Claw	11	Brassfang Claws	Weaponcraft	22	540										
+  Claw	11	Brassfang Claws +1	Weaponcraft	23	530										
+  Claw	11	Hydrofang Claws	Weaponcraft	22	540										
+  Claw	11	Hydrofang Claws +1	Weaponcraft	23	530										
+  Claw	12	Infernal Cesti	Loot	23	520		3									
+  Claw	12	Lizardfang Cesti	Loot	24	530		3									
+  Claw	12	Smashstrike Cesti	Loot	24	530		3	3								
+  Claw	14	Precision Claws	Weaponcraft	26	520								2			
+  Claw	15	Bastion Knuckles	Loot	27	570	2	2	2	3								
+  Claw	15	Dominion Claws	Loot	28	530		2									
+  Claw	15	Sovereign Cesti	Loot	28	510		3	3								
+  Claw	15	Republic Strikers	Loot	27	560	3	3	2	3								
+  Claw	15	Sandus Cesti	Loot	27	520		3	2									
+  Claw	15	Zephyr Claws	Weaponcraft	27	540		1									
+  Claw	19	Whisperfang Claws	Loot	30	540										
+  Claw	19	Shadowfang Claws	Weaponcraft	29	540										
+  Claw	19	Shadowfang Claws +1	Weaponcraft	30	530										
+  Claw	20	Cougarfang Claws	Loot	30	530										
+  Claw	20	Alloy Knuckles	Weaponcraft	31	580		2									
+  Claw	20	Alloy Knuckles +1	Weaponcraft	32	570		3									
+  Claw	20	Vanguard Cesti	Loot	31	530										
+  Claw	24	Predator Claws	Weaponcraft	35	540										
+  Claw	24	Predator Claws +1	Weaponcraft	36	530										
+  Claw	24	Lynxfang Claws	Loot	34	510										
+  Claw	27	Toxin Cesti	Weaponcraft	37	530		3									
+  Claw	27	Toxin Cesti +1	Weaponcraft	38	520		4									
+  Claw	30	Ravager Claws	Weaponcraft	40	550										
+  Claw	30	Ravager Claws +1	Weaponcraft	41	540										
+  Claw	30	Hydrofang Talons	Weaponcraft	40	550										
+  Claw	30	Hydrofang Talons +1	Weaponcraft	41	540										
+  Claw	31	Tyro War-Katars	Weaponcraft	42	570										
+  Claw	31	Tyro War-Katars +1	Weaponcraft	43	560										
+  Claw	32	Impact Strikers	Loot	44	570		3						1				
+  Claw	33	War-Katars	Weaponcraft	45	570										
+  Claw	33	War-Katars +1	Weaponcraft	46	560										
+  Claw	33	Toxinfang Claws	Weaponcraft	45	540										
+  Claw	33	Toxinfang Claws +1	Weaponcraft	46	530										
+  Claw	36	Toxinfang Talons	Weaponcraft	48	550										
+  Claw	36	Toxinfang Talons +1	Weaponcraft	49	540										
+  Claw	38	Mythrite Knuckles	Weaponcraft	50	580		2									
+  Claw	38	Mythrite Knuckles +1	Weaponcraft	51	570		3									
+  Claw	38	Toxin War-Katars	Weaponcraft	50	530										
+  Claw	38	Toxin War-Katars +1	Weaponcraft	51	520										
+  Claw	40	Etherwoven Straps	Weaponcraft	54	530		3									
+  Claw	40	Etherwoven Straps +1	Weaponcraft	55	520		4									
+  Claw	40	Regal Etherwoven Straps	Loot	56	530		3									
+  Claw	41	Acidfang Claws	Loot	57	550										
+  Claw	41	Corrosivefang Claws	Loot	58	540										
+  Claw	41	Meltfang Claws	Loot	57	550										
+  Claw	41	Mythrite Claws	Weaponcraft	58	550										
+  Claw	41	Mythrite Claws +1	Weaponcraft	59	540										
+  Claw	47	Arcstrike Adargas	Weaponcraft	61	540									1	
+  Claw	47	Arcstrike Adargas +1	Weaponcraft	62	530									2	
+  Claw	48	Predator Patas	Weaponcraft	63	580										
+  Claw	48	Predator Patas +1	Weaponcraft	64	570										
+  Claw	50	Cross-Counter Strikers	Loot	65	580		3									
+  Claw	50	Tactician Magician’s Talons	Weaponcraft	66	570			10									
+
+

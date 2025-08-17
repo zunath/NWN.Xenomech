@@ -1,0 +1,73 @@
+# Source: docs/_incoming/XM Design Bible - Armorcraft.tsv
+updated: 2025-08-10
+
+columns:
+  - skill
+  - recipeId
+  - recipeEnum
+  - category
+  - level
+  - normalName
+  - normalQty
+  - normalResref
+  - hqName
+  - hqQty
+  - hqResref
+  - ultraName
+  - ultraQty
+  - ultraResref
+  - augmentType
+  - augmentSlots
+  - components
+
+tsv: |
+  Skill	Required  Recipe	Recipe Enum	Category Enum	Level	Normal Name	Normal Quantity	Normal Resref	HQ Name	HQ Quantity	HQ Resref	Ultra Name	Ultra Quantity	Ultra Resref	Augment Type	Augment Slots	Component 1	Component Quantity 1	Component 2	Component Quantity 2	Component 3	Component Quantity 3	Component 4	Component Quantity 4	Component 5	Component Quantity 5	Component 6	Component Quantity 6	Component 7	Component Quantity 7	Component 8	Component Quantity 8
+  Armorcraft		AurionAlloyCap	Head	1	Aurion Alloy Cap	1	aurion_cap	Aurion Alloy Cap +1	1	aurion_cap_p1																	
+  Armorcraft		AurionAlloyHarness	Body	2	Aurion Alloy Harness	1	aurion_harness	Aurion Alloy Harness +1	1	aurion_harnes_p1																	
+  Armorcraft		EtherwovenRobe	Body	3	Etherwoven Robe	1	etherwvn_robe	Etherwoven Robe +1	1	etherwvn_robe_p1																	
+  Armorcraft		AshenStrideClogs	Feet	4	Ashen Stride Clogs	1	ashenstrd_clg	Ashen Stride Clogs +1	1	ashenstrd_clg_p1																	
+  Armorcraft		VerdantGuard	Shield	5	Verdant Guard	1	verdant_guard	Verdant Guard +1	1	verdant_guard_p1																	
+  Armorcraft		AbyssalBarrier	Shield	6	Abyssal Barrier	1	abyssal_barr																	
+  Armorcraft		AurionAlloyLeggings	Feet	7	Aurion Alloy Leggings	1	aurion_leggins	Aurion Alloy Leggings +1	1	aurion_leggins_p1																	
+  Armorcraft		ReinforcedCuffs	Hands	8	Reinforced Cuffs	1	reinforc_cuff	Reinforced Cuffs +1	1	reinforc_cuff_p1																	
+  Armorcraft		AurionAlloyMittens	Hands	9	Aurion Alloy Mittens	1	aurion_mitts	Aurion Alloy Mittens +1	1	aurion_mitts_p1																	
+  Armorcraft		LeatherCombatGloves	Hands	11	Leather Combat Gloves	1	leather_comglv	Leather Combat Gloves +1	1	leather_comglv_p1																	
+  Armorcraft		LeatherCombatHighboots	Feet	11	Leather Combat Highboots	1	leather_comhbt	Leather Combat Highboots +1	1	leather_comhbt_p1																	
+  Armorcraft		LeatherCombatVest	Body	12	Leather Combat Vest	1	leather_comvst	Leather Combat Vest +1	1	leather_comvst_p1																	
+  Armorcraft		WarwovenKyahan	Feet	13	Warwoven Kyahan	1	warwvn_kyahan	Warwoven Kyahan +1	1	warwvn_kyahan_p1																	
+  Armorcraft		ShellbackAegis	Shield	14	Shellback Aegis	1	shellback_aegis																	
+  Armorcraft		BattleforgedTekko	Hands	14	Battleforged Tekko	1	battlefrg_tkko	Battleforged Tekko +1	1	battlefrg_tkko_p1																	
+  Armorcraft		WarforgedMitts	Hands	15	Warforged Mitts	1	warforged_mitts	Warforged Mitts +1	1	warforged_mitts_p1																	
+  Armorcraft		TimberguardShield	Shield	16	Timberguard Shield	1	timbergrd_shld	Timberguard Shield +1	1	timbergrd_shld_p1																	
+  Armorcraft		WarwovenKenpogi	Body	16	Warwoven Kenpogi	1	warwvn_kenpgi	Warwoven Kenpogi +1	1	warwvn_kenpgi_p1																	
+  Armorcraft		EtherTouchedSoleas	Feet	16	Ether-Touched Soleas	1	ethertch_sleas	Ether-Touched Soleas +1	1	ethertch_sleas_p1																	
+  Armorcraft		TitanScaleGauntlets	Hands	17	Titan Scale Gauntlets	1	titan_gauntlts	Titan Scale Gauntlets +1	1	titan_gauntlts_p1																	
+  Armorcraft		SentinelAegis	Shield	18	Sentinel Aegis	1	sentinel_aegis	Sentinel Aegis +1	1	sentinel_aegis_p1																	
+  Armorcraft		ReinforcedTunic	Body	18	Reinforced Tunic	1	reinforc_tunc	Reinforced Tunic +1	1	reinforc_tunc_p1																	
+  Armorcraft		BrassguardMittens	Hands	19	Brassguard Mittens	1	brassg_mitts	Brassguard Mittens +1	1	brassg_mitts_p1																	
+  Armorcraft		ReinforcedGaiters	Feet	19	Reinforced Gaiters	1	reinforc_gait	Reinforced Gaiters +1	1	reinforc_gait_p1																	
+  Armorcraft		BrassguardHarness	Body	20	Brassguard Harness	1	brassg_harness	Brassguard Harness +1	1	brassg_harness_p1																	
+  Armorcraft		BrassguardLeggings	Feet	20	Brassguard Leggings	1	brassg_legg	Brassguard Leggings +1	1	brassg_legg_p1																	
+  Armorcraft		ReinforcedDoublet	Body	22	Reinforced Doublet	1	reinforc_dblt	Reinforced Doublet +1	1	reinforc_dblt_p1																	
+  Armorcraft		LeatherTacticalBandana	Head	23	Leather Tactical Bandana	1	leather_tacbnd	Leather Tactical Bandana +1	1	leather_tacbnd_p1																	
+  Armorcraft		TitanScaleMail	Body	23	Titan Scale Mail	1	titan_scale_ml	Titan Scale Mail +1	1	titan_scale_ml_p1																	
+  Armorcraft		EtherwovenLinenRobe	Body	23	Etherwoven Linen Robe	1	etherwvn_lrobe	Etherwoven Linen Robe +1	1	etherwvn_lrobe_p1																	
+  Armorcraft		EtherwovenCuffs	Hands	23	Etherwoven Cuffs	1	etherwvn_cuffs	Etherwoven Cuffs +1	1	etherwvn_cuffs_p1																	
+  Armorcraft		TitanScaleGreaves	Feet	23	Titan Scale Greaves	1	titan_scale_gvs	Titan Scale Greaves +1	1	titan_scale_gvs_p1																	
+  Armorcraft		CombatHachimaki	Head	24	Combat Hachimaki	1	combat_hachmk	Combat Hachimaki +1	1	combat_hachmk_p1																	
+  Armorcraft		CombatGloves	Hands	24	Combat Gloves	1	combat_gloves	Combat Gloves +1	1	combat_gloves_p1																	
+  Armorcraft		ElmguardShield	Shield	26	Elmguard Shield	1	elmguard_shld	Elmguard Shield +1	1	elmguard_shld_p1																	
+  Armorcraft		WayfarersHat	Head	27	Wayfarer’s Hat	1	wayfarer_hat																	
+  Armorcraft		VerdantHollyClogs	Feet	27	Verdant Holly Clogs	1	verdholly_clgs	Verdant Holly Clogs +1	1	verdholly_clgs_p1																	
+  Armorcraft		BoneforgedMittens	Hands	29	Boneforged Mittens	1	bonefrg_mitts	Boneforged Mittens +1	1	bonefrg_mitts_p1																	
+  Armorcraft		TitanTarge	Shield	32	Titan Targe	1	titan_targe	Titan Targe +1	1	titan_targe_p1																	
+  Armorcraft		LizardscaleLedelsens	Feet	32	Lizardscale Ledelsens	1	lizardsc_ledls	Lizardscale Ledelsens +1	1	lizardsc_ledls_p1																	
+  Armorcraft		BoneforgedLeggings	Feet	33	Boneforged Leggings	1	bonefrg_legg	Boneforged Leggings +1	1	bonefrg_legg_p1																	
+  Armorcraft		CottonWovenKyahan	Feet	33	Cotton-Woven Kyahan	1	cottonwv_kyhan	Cotton-Woven Kyahan +1	1	cottonwv_kyhan_p1																	
+  Armorcraft		TropicWard	Shield	34	Tropic Ward	1	tropic_ward																	
+  Armorcraft		LizardscaleJerkin	Body	34	Lizardscale Jerkin	1	lizardsc_jerkn	Lizardscale Jerkin +1	1	lizardsc_jerkn_p1																	
+  Armorcraft		BoneforgedHarness	Body	35	Boneforged Harness	1	bonefrg_harness	Boneforged Harness +1	1	bonefrg_harness_p1																	
+  Armorcraft		LizardscaleCombatGloves	Hands	35	Lizardscale Combat Gloves	1	lizardsc_comglv	Lizardscale Combat Gloves +1	1	lizardsc_comglv_p1																	
+  Armorcraft		CottonWovenTekko	Hands	35	Cotton-Woven Tekko	1	cottonwv_tekko	Cotton-Woven Tekko +1	1	cottonwv_tekko_p1
+
+

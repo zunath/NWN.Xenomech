@@ -1,0 +1,48 @@
+# Source: docs/_incoming/XM Design Bible - Throwing.tsv
+updated: 2025-08-10
+weapon: Throwing
+items:
+  - { level: 1, name: "Coarse Shuriken", source: Weaponcraft, dmg: 6, delay: 330 }
+  - { level: 5, name: "Arc Shuriken", source: Weaponcraft, dmg: 11, delay: 300 }
+  - { level: 5, name: "Arc Shuriken +1", source: Weaponcraft, dmg: 12, delay: 290 }
+  - { level: 10, name: "Infernal Shuriken", source: Loot, dmg: 13, delay: 300 }
+  - { level: 15, name: "Vanguard Shuriken", source: Weaponcraft, dmg: 11, delay: 290 }
+  - { level: 15, name: "Vanguard Edge Shuriken", source: Loot, dmg: 13, delay: 300 }
+  - { level: 20, name: "Wing Shuriken", source: Weaponcraft, dmg: 15, delay: 300 }
+  - { level: 20, name: "Wing Shuriken +1", source: Weaponcraft, dmg: 16, delay: 290 }
+  - { level: 28, name: "Ether Shuriken", source: Weaponcraft, dmg: 16, delay: 300 }
+  - { level: 28, name: "Ether Shuriken +1", source: Weaponcraft, dmg: 17, delay: 290 }
+  - { level: 33, name: "Longstrike Shuriken", source: Weaponcraft, dmg: 18, delay: 300, agi: 2 }
+  - { level: 40, name: "Warcaster’s Shuriken", source: Weaponcraft, dmg: 21, delay: 300 }
+  - { level: 40, name: "Novice Duelist’s Shuriken", source: Weaponcraft, dmg: 23, delay: 310, ep: 5, atk: 5 }
+  - { level: 43, name: "Warcaster’s Shuriken +1", source: Weaponcraft, dmg: 22, delay: 290, ep: 4, atk: 4 }
+  - { level: 43, name: "Warcaster’s Shuriken +2", source: Weaponcraft, dmg: 23, delay: 280, ep: 5, atk: 5 }
+  - { level: 43, name: "Novice Duelist’s Shuriken +1", source: Weaponcraft, dmg: 24, delay: 300, ep: 5, atk: 5, per: 2 }
+  - { level: 43, name: "Novice Duelist’s Shuriken +2", source: Weaponcraft, dmg: 25, delay: 290, ep: 5, atk: 5, per: 3 }
+  - { level: 47, name: "Yagudo Cryo-Shuriken", source: Weaponcraft, dmg: 24, delay: 300 }
+  - { level: 50, name: "Comet Fang Shuriken", source: Weaponcraft, dmg: 26, delay: 270, hp: 15, ep: 15, acc: 10, atk: 5 }
+
+
+tsv: |
+  Type	Level	Item Name	Source	DMG	Delay	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC
+  Throwing	1	Coarse Shuriken	Weaponcraft	6	330										
+  Throwing	5	Arc Shuriken	Weaponcraft	11	300										
+  Throwing	5	Arc Shuriken +1	Weaponcraft	12	290										
+  Throwing	10	Infernal Shuriken	Loot	13	300										
+  Throwing	15	Vanguard Shuriken	Weaponcraft	11	290										
+  Throwing	15	Vanguard Edge Shuriken	Loot	13	300										
+  Throwing	20	Wing Shuriken	Weaponcraft	15	300										
+  Throwing	20	Wing Shuriken +1	Weaponcraft	16	290										
+  Throwing	28	Ether Shuriken	Weaponcraft	16	300										
+  Throwing	28	Ether Shuriken +1	Weaponcraft	17	290										
+  Throwing	33	Longstrike Shuriken	Weaponcraft	18	300									2	
+  Throwing	40	Warcaster’s Shuriken	Weaponcraft	21	300										
+  Throwing	40	Novice Duelist’s Shuriken	Weaponcraft	23	310			5	5								
+  Throwing	43	Warcaster’s Shuriken +1	Weaponcraft	22	290			4	4								
+  Throwing	43	Warcaster’s Shuriken +2	Weaponcraft	23	280			5	5								
+  Throwing	43	Novice Duelist’s Shuriken +1	Weaponcraft	24	300			5	5						2		
+  Throwing	43	Novice Duelist’s Shuriken +2	Weaponcraft	25	290			5	5						3		
+  Throwing	47	Yagudo Cryo-Shuriken	Weaponcraft	24	300										
+  Throwing	50	Comet Fang Shuriken	Weaponcraft	26	270	15	15	10	5								
+
+

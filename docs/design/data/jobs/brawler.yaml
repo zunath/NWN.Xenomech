@@ -1,0 +1,88 @@
+# Source: docs/_incoming/XM Design Bible - Brawler.tsv
+updated: 2025-08-10
+
+job: Brawler
+role: DPS/Tank
+armor: Light
+weaponProficiencies:
+  - { type: Hand-to-Hand, grade: A }
+  - { type: Club, grade: B }
+  - { type: Staff, grade: C }
+
+attributeGrades:
+  hp: A
+  ep: G
+  might: C
+  perception: B
+  vitality: A
+  agility: F
+  willpower: D
+  social: E
+  evasion: B
+
+abilities:
+  - { level: 2, name: "Electric Fist I", type: Action, description: "Your next attack deals an additional 12 DMG.", ep: 6, castingTime: "Queued", cooldown: "12 seconds", resist: Lightning, resonanceCost: 1, devStatus: Complete }
+  - { level: 4, name: "Striking Cobra I", type: Action, description: "Your next attack deals an additional 14 DMG and inflicts Poison.", ep: 10, castingTime: "Queued", cooldown: "30 seconds", resist: Wind, resonanceCost: 1, devStatus: Complete }
+  - { level: 8, name: "Flash", type: Action, description: "Goads nearby enemies into targeting you and reduces their accuracy by 10 for 1 minute.", ep: 8, castingTime: "2 seconds", cooldown: "30 seconds", resist: Lightning, resonanceCost: 1, devStatus: Complete }
+  - { level: 10, name: "Parry I", type: Trait, description: "Increases attack deflection chance by 5%.", resonanceCost: 1, devStatus: Complete }
+  - { level: 12, name: "Attack Bonus I", type: Trait, description: "Increases attack by 10.", resonanceCost: 1, devStatus: Complete }
+  - { level: 14, name: "Power Attack I", type: Action, description: "Grants the Power Attack feat which grants +3 DMG at the cost of -5 to accuracy.", resonanceCost: 1, devStatus: Complete, castingTime: Toggle }
+  - { level: 16, name: "Hand-to-Hand Lore", type: Trait, description: "Permits equipping hand-to-hand weapons on another job with an A rank.", resonanceCost: 1, devStatus: Complete }
+  - { level: 18, name: "Shadowstrike I", type: Action, description: "Deals 18 DMG to all nearby enemies and inflicts knockdown.", ep: 22, castingTime: "2 seconds", cooldown: "30 seconds", resist: Darkness, resonanceCost: 1, devStatus: Complete }
+  - { level: 20, name: "Electric Fist II", type: Action, description: "Your next attack deals an additional 22 DMG.", ep: 15, castingTime: "Queued", cooldown: "12 seconds", resist: Lightning, resonanceCost: 2, devStatus: Complete }
+  - { level: 22, name: "Warcry", type: Action, description: "Increases attack by 25 to all nearby party members for 2 minutes.", ep: 14, castingTime: "2 seconds", cooldown: "15 seconds", resonanceCost: 2, devStatus: Complete }
+  - { level: 24, name: "Chi I", type: Action, description: "Restores HP to the caster and grants Regen for 2 minutes.", ep: 12, castingTime: "4 seconds", cooldown: "8 seconds", resonanceCost: 1, devStatus: Complete }
+  - { level: 25, name: "Wind Ward", type: Action, description: "Grants +50% protection towards wind to all nearby party members for 15 minutes.", ep: 30, castingTime: "4 seconds", cooldown: "10 seconds", resonanceCost: 1, devStatus: Complete }
+  - { level: 26, name: "Parry II", type: Trait, description: "Increases attack deflection chance by 10%.", resonanceCost: 2, devStatus: Complete }
+  - { level: 30, name: "Striking Cobra II", type: Action, description: "Your next attack deals an additional 32 DMG and inflicts Poison.", ep: 28, castingTime: "Queued", cooldown: "30 seconds", resist: Wind, resonanceCost: 2, devStatus: Complete }
+  - { level: 32, name: "Attack Bonus II", type: Trait, description: "Increases attack by 30.", resonanceCost: 2, devStatus: Complete }
+  - { level: 34, name: "Power Attack II", type: Action, description: "Grants the Improved Power Attack feat which grants a +6 DMG bonus at the cost of -10 to accuracy.", resonanceCost: 2, devStatus: Complete }
+  - { level: 36, name: "Electric Fist III", type: Action, description: "Your next attack deals an additional 52 DMG.", ep: 35, castingTime: "Queued", cooldown: "12 seconds", resist: Lightning, resonanceCost: 3, devStatus: Complete }
+  - { level: 40, name: "Chi II", type: Action, description: "Restores HP to the caster and grants Regen for 2 minutes.", ep: 32, castingTime: "4 seconds", cooldown: "8 seconds", resonanceCost: 2, devStatus: Complete }
+  - { level: 42, name: "Shadowstrike II", type: Action, description: "Deals 45 DMG to all nearby enemies and has inflicts knockdown.", ep: 45, castingTime: "2 seconds", cooldown: "30 seconds", resist: Darkness, resonanceCost: 2, devStatus: Complete }
+  - { level: 44, name: "Parry III", type: Trait, description: "Increases attack deflection chance by 15%.", resonanceCost: 3, devStatus: Complete }
+  - { level: 48, name: "Martial Arts", type: Trait, description: "Your hand-to-hand attack delay is reduced by 20%.", resonanceCost: 4, devStatus: Complete }
+  - { level: 50, name: "Hundred Fists", type: Action, description: "Greatly reduces attack delay for 1 minute.", ep: 150, castingTime: "2 seconds", cooldown: "30 minutes", resonanceCost: 3, devStatus: Complete }
+
+tsv: |
+  Job Name	Brawler		Hand-to-Hand	A
+  Role	DPS/Tank		Club	B
+  Armor	Light		Staff	C
+  HP	A
+  EP	G
+  Might	C
+  Perception	B
+  Vitality	A
+  Agility	F
+  Willpower	D
+  Social	E
+  Evasion	B
+  Level	Ability Name	Type	Description	EP	Casting Time	Cooldown Time	Resist	Resonance Cost	Dev Status	Additional Requirements	Notes
+  2	Electric Fist I	Action	Your next attack deals an additional 12 DMG.	6	Queued	12 seconds	Lightning	1	Complete		
+  4	Striking Cobra I	Action	Your next attack deals an additional 14 DMG and inflicts Poison.	10	Queued	30 seconds	Wind	1	Complete		
+  											
+  8	Flash	Action	Goads nearby enemies into targeting you and reduces their accuracy by 10 for 1 minute.	8	2 seconds	30 seconds	Lightning	1	Complete		
+  10	Parry I	Trait	Increases attack deflection chance by 5%.	-	-	-	-	1	Complete		
+  12	Attack Bonus I	Trait	Increases attack by 10.	-	-	-	-	1	Complete		
+  14	Power Attack I	Action	Grants the Power Attack feat which grants +3 DMG at the cost of -5 to accuracy.	-	Toggle	-	-	1	Complete		
+  16	Hand-to-Hand Lore	Trait	Permits equipping hand-to-hand weapons on another job with an A rank.	-	-	-	-	1	Complete		
+  18	Shadowstrike I	Action	Deals 18 DMG to all nearby enemies and inflicts knockdown.	22	2 seconds	30 seconds	Darkness	1	Complete		
+  20	Electric Fist II	Action	Your next attack deals an additional 22 DMG.	15	Queued	12 seconds	Lightning	2	Complete		
+  22	Warcry	Action	Increases attack by 25 to all nearby party members for 2 minutes.	14	2 seconds	15 seconds	-	2	Complete		
+  24	Chi I	Action	Restores HP to the caster and grants Regen for 2 minutes.	12	4 seconds	8 seconds	-	1	Complete		
+  25	Wind Ward	Action	Grants +50% protection towards wind to all nearby party members for 15 minutes.	30	4 seconds	10 seconds	-	1	Complete		
+  26	Parry II	Trait	Increases attack deflection chance by 10%.	-	-	-	-	2	Complete		
+  											
+  30	Striking Cobra II	Action	Your next attack deals an additional 32 DMG and inflicts Poison.	28	Queued	30 seconds	Wind	2	Complete		
+  32	Attack Bonus II	Trait	Increases attack by 30.	-	-	-	-	2	Complete		
+  34	Power Attack II	Action	Grants the Improved Power Attack feat which grants a +6 DMG bonus at the cost of -10 to accuracy.			-	-	2	Complete		
+  36	Electric Fist III	Action	Your next attack deals an additional 52 DMG.	35	Queued	12 seconds	Lightning	3	Complete		
+  											
+  40	Chi II	Action	Restores HP to the caster and grants Regen for 2 minutes.	32	4 seconds	8 seconds	-	2	Complete		
+  42	Shadowstrike II	Action	Deals 45 DMG to all nearby enemies and has inflicts knockdown.	45	2 seconds	30 seconds	Darkness	2	Complete		
+  44	Parry III	Trait	Increases attack deflection chance by 15%.	-	-	-	-	3	Complete		
+  											
+  48	Martial Arts	Trait	Your hand-to-hand attack delay is reduced by 20%.	-	-	-	-	4	Complete		
+  50	Hundred Fists	Action	Greatly reduces attack delay for 1 minute.	150	2 seconds	30 minutes	-	3	Complete		
+
+

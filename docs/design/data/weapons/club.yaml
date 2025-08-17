@@ -1,0 +1,156 @@
+# Source: docs/_incoming/XM Design Bible - Club.tsv
+updated: 2025-08-10
+weapon: Club
+items:
+  - { level: 1, name: "Ash Striker", source: Weaponcraft, dmg: 4, delay: 270 }
+  - { level: 1, name: "Ash Striker +1", source: Weaponcraft, dmg: 5, delay: 260 }
+  - { level: 1, name: "Maple Conduit", source: Weaponcraft, dmg: 3, delay: 220, wil: 1 }
+  - { level: 1, name: "Maple Conduit +1", source: Weaponcraft, dmg: 4, delay: 210, wil: 2 }
+  - { level: 4, name: "Aurion Alloy Mace", source: Weaponcraft, dmg: 6, delay: 310 }
+  - { level: 4, name: "Aurion Alloy Mace +1", source: Weaponcraft, dmg: 7, delay: 300 }
+  - { level: 5, name: "Aurion Alloy Hammer", source: Weaponcraft, dmg: 8, delay: 330 }
+  - { level: 5, name: "Aurion Alloy Hammer +1", source: Weaponcraft, dmg: 9, delay: 320 }
+  - { level: 5, name: "Aurion Alloy Rod", source: Weaponcraft, dmg: 5, delay: 290, hp: 3 }
+  - { level: 5, name: "Aurion Alloy Rod +1", source: Weaponcraft, dmg: 6, delay: 280, hp: 4 }
+  - { level: 9, name: "Etherforce Wand", source: Loot, dmg: 5, delay: 220, wil: 2 }
+  - { level: 9, name: "Willow Conduit", source: Weaponcraft, dmg: 5, delay: 220, wil: 2 }
+  - { level: 9, name: "Willow Conduit +1", source: Weaponcraft, dmg: 6, delay: 210, wil: 3 }
+  - { level: 10, name: "Freesword’s Striker", source: Loot, dmg: 7, delay: 270 }
+  - { level: 11, name: "Wildfang Cudgel", source: Loot, dmg: 7, delay: 270, hp: 20 }
+  - { level: 12, name: "Brassstrike Hammer", source: Weaponcraft, dmg: 13, delay: 330 }
+  - { level: 12, name: "Brassstrike Hammer +1", source: Weaponcraft, dmg: 14, delay: 320 }
+  - { level: 12, name: "Brassforce Rod", source: Weaponcraft, dmg: 8, delay: 290, hp: 3, per: 1 }
+  - { level: 12, name: "Brassforce Rod +1", source: Weaponcraft, dmg: 9, delay: 280, hp: 4, per: 1 }
+  - { level: 13, name: "Hermit’s Ether Wand", source: Loot, dmg: 6, delay: 220, wil: 2 }
+  - { level: 15, name: "Zephyr Club", source: Loot, dmg: 8, delay: 260, hp: 2, ep: 2 }
+  - { level: 15, name: "Dominion Striker", source: Loot, dmg: 9, delay: 250, hp: 3, ep: 3 }
+  - { level: 16, name: "Chestnut War Club", source: Loot, dmg: 9, delay: 270 }
+  - { level: 16, name: "Titan Striker", source: Loot, dmg: 10, delay: 260 }
+  - { level: 18, name: "Decurion’s Warhammer", source: Loot, dmg: 16, delay: 330 }
+  - { level: 18, name: "Yew Conduit", source: Weaponcraft, dmg: 7, delay: 220, wil: 3 }
+  - { level: 18, name: "Yew Conduit +1", source: Weaponcraft, dmg: 8, delay: 210, wil: 4 }
+  - { level: 19, name: "Titan Mace", source: Weaponcraft, dmg: 14, delay: 300 }
+  - { level: 19, name: "Titan Mace +1", source: Weaponcraft, dmg: 15, delay: 290 }
+  - { level: 20, name: "Bouncer’s Club", source: Loot, dmg: 10, delay: 270 }
+  - { level: 20, name: "Vanguard Mace", source: Loot, dmg: 14, delay: 300 }
+  - { level: 20, name: "Warbringer Hammer", source: Weaponcraft, dmg: 17, delay: 330 }
+  - { level: 20, name: "Warbringer Hammer +1", source: Weaponcraft, dmg: 18, delay: 320 }
+  - { level: 22, name: "Arcane Rod", source: Weaponcraft, dmg: 11, delay: 290, hp: 6 }
+  - { level: 22, name: "Arcane Rod +1", source: Weaponcraft, dmg: 12, delay: 290, hp: 7 }
+  - { level: 23, name: "Bastion Warhammer", source: Loot, dmg: 17, delay: 320, hp: 2 }
+  - { level: 23, name: "Republic Warhammer", source: Loot, dmg: 18, delay: 310, hp: 3 }
+  - { level: 24, name: "Pixie Striker", source: Loot, dmg: 16, delay: 300, hp: 5 }
+  - { level: 27, name: "Bonecrusher Cudgel", source: Weaponcraft, dmg: 12, delay: 270 }
+  - { level: 27, name: "Bonecrusher Cudgel +1", source: Weaponcraft, dmg: 13, delay: 260 }
+  - { level: 27, name: "Heatstrike Rod", source: Loot, dmg: 12, delay: 290 }
+  - { level: 28, name: "Eremite’s Ether Wand", source: Weaponcraft, dmg: 9, delay: 220, ep: 5, per: 2 }
+  - { level: 28, name: "Eremite’s Ether Wand +1", source: Weaponcraft, dmg: 10, delay: 210, ep: 6, per: 2 }
+  - { level: 30, name: "Regal Squire’s Mace", source: Loot, dmg: 18, delay: 290, ep: 5 }
+  - { level: 31, name: "Titan Maul", source: Weaponcraft, dmg: 22, delay: 330 }
+  - { level: 31, name: "Titan Maul +1", source: Weaponcraft, dmg: 23, delay: 320 }
+  - { level: 32, name: "Chestnut Conduit", source: Loot, dmg: 10, delay: 220, wil: 4 }
+  - { level: 32, name: "Titanforce Wand", source: Loot, dmg: 11, delay: 210, wil: 5 }
+  - { level: 32, name: "High Ether Conduit", source: Loot, dmg: 10, delay: 220, wil: 4 }
+  - { level: 34, name: "Sovereign Mace", source: Loot, dmg: 20, delay: 280, ep: 5, per: 2 }
+  - { level: 34, name: "Mythrite Rod", source: Weaponcraft, dmg: 14, delay: 290, hp: 9 }
+  - { level: 34, name: "Mythrite Rod +1", source: Weaponcraft, dmg: 15, delay: 280, hp: 10 }
+  - { level: 34, name: "Sandus Striker", source: Loot, dmg: 19, delay: 290, ep: 5, per: 1 }
+  - { level: 35, name: "Mythrite Mace", source: Weaponcraft, dmg: 20, delay: 300 }
+  - { level: 35, name: "Mythrite Mace +1", source: Weaponcraft, dmg: 21, delay: 290 }
+  - { level: 36, name: "Oakfang Cudgel", source: Weaponcraft, dmg: 15, delay: 270 }
+  - { level: 36, name: "Oakfang Cudgel +1", source: Weaponcraft, dmg: 16, delay: 260 }
+  - { level: 38, name: "Hallowed Maul", source: Weaponcraft, dmg: 26, delay: 330, wil: 2 }
+  - { level: 38, name: "Hallowed Maul +1", source: Weaponcraft, dmg: 27, delay: 320, wil: 3 }
+  - { level: 38, name: "Sanctified Maul", source: Loot, dmg: 26, delay: 330, wil: 2 }
+  - { level: 38, name: "Phantasmal Maul", source: Loot, dmg: 26, delay: 330, wil: 2 }
+  - { level: 39, name: "Titan Club", source: Weaponcraft, dmg: 19, delay: 270 }
+  - { level: 39, name: "Titan Club +1", source: Weaponcraft, dmg: 20, delay: 260 }
+  - { level: 43, name: "Boneforged Rod", source: Weaponcraft, dmg: 17, delay: 290, hp: 12 }
+  - { level: 43, name: "Boneforged Rod +1", source: Weaponcraft, dmg: 18, delay: 280, hp: 13 }
+  - { level: 43, name: "Hallowed Mace", source: Weaponcraft, dmg: 24, delay: 300 }
+  - { level: 43, name: "Hallowed Mace +1", source: Weaponcraft, dmg: 25, delay: 290 }
+  - { level: 43, name: "Reverence Mace", source: Loot, dmg: 24, delay: 300 }
+  - { level: 48, name: "Rosethorn Conduit", source: Weaponcraft, dmg: 14, delay: 220, wil: 5 }
+  - { level: 48, name: "Rosethorn Conduit +1", source: Weaponcraft, dmg: 15, delay: 210, wil: 6 }
+  - { level: 48, name: "Shellbreaker", source: Loot, dmg: 18, delay: 270 }
+  - { level: 50, name: "Lilith’s Arcane Rod", source: Loot, dmg: 19, delay: 290, ep: 10, per: 5 }
+  - { level: 50, name: "Tactician Magician’s Conduit", source: Weaponcraft, dmg: 15, delay: 210, ep: 5, per: 5 }
+
+
+tsv: |
+  Type	Level	Item Name	Source	DMG	Delay	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC
+  Club	1	Ash Striker	Weaponcraft	4	270										
+  Club	1	Ash Striker +1	Weaponcraft	5	260										
+  Club	1	Maple Conduit	Weaponcraft	3	220								1		
+  Club	1	Maple Conduit +1	Weaponcraft	4	210								2		
+  Club	4	Aurion Alloy Mace	Weaponcraft	6	310										
+  Club	4	Aurion Alloy Mace +1	Weaponcraft	7	300										
+  Club	5	Aurion Alloy Hammer	Weaponcraft	8	330										
+  Club	5	Aurion Alloy Hammer +1	Weaponcraft	9	320										
+  Club	5	Aurion Alloy Rod	Weaponcraft	5	290	3										
+  Club	5	Aurion Alloy Rod +1	Weaponcraft	6	280	4										
+  Club	9	Etherforce Wand	Loot	5	220									2	
+  Club	9	Willow Conduit	Weaponcraft	5	220									2	
+  Club	9	Willow Conduit +1	Weaponcraft	6	210									3	
+  Club	10	Freesword’s Striker	Loot	7	270										
+  Club	11	Wildfang Cudgel	Loot	7	270	20										
+  Club	12	Brassstrike Hammer	Weaponcraft	13	330										
+  Club	12	Brassstrike Hammer +1	Weaponcraft	14	320										
+  Club	12	Brassforce Rod	Weaponcraft	8	290	3								1		
+  Club	12	Brassforce Rod +1	Weaponcraft	9	280	4								1		
+  Club	13	Hermit’s Ether Wand	Loot	6	220									2	
+  Club	15	Zephyr Club	Loot	8	260	2	2										
+  Club	15	Dominion Striker	Loot	9	250	3	3										
+  Club	16	Chestnut War Club	Loot	9	270										
+  Club	16	Titan Striker	Loot	10	260										
+  Club	18	Decurion’s Warhammer	Loot	16	330										
+  Club	18	Yew Conduit	Weaponcraft	7	220								3		
+  Club	18	Yew Conduit +1	Weaponcraft	8	210								4		
+  Club	19	Titan Mace	Weaponcraft	14	300										
+  Club	19	Titan Mace +1	Weaponcraft	15	290										
+  Club	20	Bouncer’s Club	Loot	10	270										
+  Club	20	Vanguard Mace	Loot	14	300										
+  Club	20	Warbringer Hammer	Weaponcraft	17	330										
+  Club	20	Warbringer Hammer +1	Weaponcraft	18	320										
+  Club	22	Arcane Rod	Weaponcraft	11	290	6										
+  Club	22	Arcane Rod +1	Weaponcraft	12	290	7										
+  Club	23	Bastion Warhammer	Loot	17	320		2									
+  Club	23	Republic Warhammer	Loot	18	310		3									
+  Club	24	Pixie Striker	Loot	16	300		5									
+  Club	27	Bonecrusher Cudgel	Weaponcraft	12	270										
+  Club	27	Bonecrusher Cudgel +1	Weaponcraft	13	260										
+  Club	27	Heatstrike Rod	Loot	12	290										
+  Club	28	Eremite’s Ether Wand	Weaponcraft	9	220		5								2		
+  Club	28	Eremite’s Ether Wand +1	Weaponcraft	10	210		6								2		
+  Club	30	Regal Squire’s Mace	Loot	18	290						5						
+  Club	31	Titan Maul	Weaponcraft	22	330										
+  Club	31	Titan Maul +1	Weaponcraft	23	320										
+  Club	32	Chestnut Conduit	Loot	10	220								4		
+  Club	32	Titanforce Wand	Loot	11	210								5		
+  Club	32	High Ether Conduit	Loot	10	220								4		
+  Club	34	Sovereign Mace	Loot	20	280			5							2		
+  Club	34	Mythrite Rod	Weaponcraft	14	290	9										
+  Club	34	Mythrite Rod +1	Weaponcraft	15	280	10										
+  Club	34	Sandus Striker	Loot	19	290			5							1		
+  Club	35	Mythrite Mace	Weaponcraft	20	300										
+  Club	35	Mythrite Mace +1	Weaponcraft	21	290										
+  Club	36	Oakfang Cudgel	Weaponcraft	15	270										
+  Club	36	Oakfang Cudgel +1	Weaponcraft	16	260										
+  Club	38	Hallowed Maul	Weaponcraft	26	330									2	
+  Club	38	Hallowed Maul +1	Weaponcraft	27	320									3	
+  Club	38	Sanctified Maul	Loot	26	330									2	
+  Club	38	Phantasmal Maul	Loot	26	330									2	
+  Club	39	Titan Club	Weaponcraft	19	270										
+  Club	39	Titan Club +1	Weaponcraft	20	260										
+  Club	43	Boneforged Rod	Weaponcraft	17	290	12										
+  Club	43	Boneforged Rod +1	Weaponcraft	18	280	13										
+  Club	43	Hallowed Mace	Weaponcraft	24	300										
+  Club	43	Hallowed Mace +1	Weaponcraft	25	290										
+  Club	43	Reverence Mace	Loot	24	300										
+  Club	48	Rosethorn Conduit	Weaponcraft	14	220								5		
+  Club	48	Rosethorn Conduit +1	Weaponcraft	15	210								6		
+  Club	48	Shellbreaker	Loot	18	270										
+  Club	50	Lilith’s Arcane Rod	Loot	19	290		10								5		
+  Club	50	Tactician Magician’s Conduit	Weaponcraft	15	210		5								5		
+
+

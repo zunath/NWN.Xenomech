@@ -1,0 +1,46 @@
+source: docs/_incoming/XM Design Bible - Armor.tsv
+slot: Shield
+tsv: |
+  Type	Level	Item Name	Source	DEF	HP	EP	ACC	ATK	EVA	MGT	PER	VIT	WIL	AGI	SOC	BST	BRW	ELM	HNT	KPR	MDR	NGT	TEC
+  Shield	1	Verdant Guard	Armorcraft	1										x				x	x		
+  Shield	1	Verdant Guard +1	Armorcraft	2										x				x	x		
+  Shield	1	Abyssal Barrier	Armorcraft	1							1		1						x	x		
+  Shield	7	Shellback Aegis	Armorcraft	2							1								x	x		
+  Shield	8	Timberguard Shield	Armorcraft	2										x				x	x		
+  Shield	8	Timberguard Shield +1	Armorcraft	3										x				x	x		
+  Shield	9	Sentinel Aegis	Armorcraft	3										x				x	x		
+  Shield	9	Sentinel Aegis +1	Armorcraft	4										x				x	x		
+  Shield	13	Elmguard Shield	Armorcraft	3										x				x	x		
+  Shield	13	Elmguard Shield +1	Armorcraft	4										x				x	x		
+  Shield	17	Tropic Ward	Armorcraft	3															x	x		
+  Shield	19	Lantern Aegis	Armorcraft	4				5										x	x		
+  Shield	20	Decurion’s Bulwark	Loot	6															x		
+  Shield	20	Mahogany Bastion	Loot	4															x	x		
+  Shield	20	Fortified Guard	Loot	5															x		
+  Shield	24	Tideshell Shield	Armorcraft	6								3			x				x	x		
+  Shield	24	Tideshell Shield +1	Armorcraft	6								4			x				x	x		
+  Shield	25	Vanguard Targe	Loot	7	6														x	x		
+  Shield	25	Republic Bastion	Loot	8	8														x	x		
+  Shield	28	Frostward Shield	Loot	5															x	x		
+  Shield	28	Warborn Kite	Armorcraft	8										x				x	x		
+  Shield	28	Warborn Kite +1	Armorcraft	9										x				x	x		
+  Shield	31	Titan Targe	Armorcraft	7										x				x	x		
+  Shield	31	Titan Targe +1	Armorcraft	8										x				x	x		
+  Shield	36	Oakheart Shield	Armorcraft	6										x				x	x		
+  Shield	36	Oakheart Shield +1	Armorcraft	7										x				x	x		
+  Shield	39	Sylphic Aegis	Armorcraft	2										x				x	x		
+  Shield	39	Sylphic Aegis +1	Armorcraft	3										x				x	x		
+  Shield	40	Phantom Buckler	Loot	6															x	x		
+  Shield	40	Regal Squire’s Guard	Armorcraft	7					3										x		
+  Shield	43	Emberplate Heater	Armorcraft	12										x				x	x		
+  Shield	43	Emberplate Heater +1	Armorcraft	13										x				x	x		
+  Shield	43	Regal Squire’s Guard +1	Armorcraft	8															x		
+  Shield	43	Regal Squire’s Guard +2	Armorcraft	9															x		
+  Shield	45	Warborn Buckler	Armorcraft	10										x				x	x		
+  Shield	45	Warborn Buckler +1	Armorcraft	11										x				x	x		
+  Shield	45	Raider’s Shield	Loot	8				12										x		
+  Shield	48	Titan Barrier	Loot	10	5														x		
+  Shield	48	Leatherclad Guard	Armorcraft	8										x				x	x		
+  Shield	48	Leatherclad Guard +1	Armorcraft	9										x				x	x		
+  Shield	50	Royal Knight Army Bulwark	Armorcraft	14						2			1							x		
+
