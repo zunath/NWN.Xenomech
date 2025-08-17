@@ -412,6 +412,7 @@
         public const string OnXMPlayerMigrationAfterScript = "xm_migrate_aft";
         public const string OnXMPlayerOpenedQuestsMenuScript = "xm_open_quests";
         public const string OnXMPlayerOpenedAppearanceMenuScript = "xm_open_appear";
+        public const string OnXMPlayerOpenedCodexMenuScript = "xm_open_codex";
         public const string OnXMItemHitScript = "xm_item_hit";
         public const string OnXMDamageDealtScript = "xm_dmg_dealt";
     }

@@ -15,6 +15,7 @@ namespace XM.Codex
             _gui = gui;
 
             @event.Subscribe<ModuleEvent.OnPlayerGui>(ToggleCodexWindow);
+            @event.Subscribe<XMEvent.OnPlayerOpenCodexMenu>(OnOpenCodexMenu);
         }
 
         private void ToggleCodexWindow(uint objectSelf)
@@ -29,6 +30,11 @@ namespace XM.Codex
                 return;
 
             _gui.ToggleWindow<CodexView>(player);
+        }
+
+        private void OnOpenCodexMenu(uint objectSelf)
+        {
+            _gui.ToggleWindow<CodexView>(objectSelf);
         }
     }
 }
