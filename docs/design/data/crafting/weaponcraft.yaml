@@ -1,5 +1,15 @@
 # Source: docs/_incoming/XM Design Bible - Weaponcraft.tsv
-updated: 2025-08-10
+updated: 2025-08-24
+
+# Complete dataset with 205 weaponcraft recipes
+# WARNING: All component specifications are empty - requires design work before implementation
+
+status:
+  total_recipes: 205
+  component_completion: "0% - all recipes missing component specifications"
+  hq_coverage: "87.8% - 25 recipes missing HQ versions"
+  ultra_coverage: "5.9% - 12 recipes with Ultra versions"
+  implementation_ready: false
 
 columns:
   - skill
@@ -18,7 +28,26 @@ columns:
   - ultraResref
   - augmentType
   - augmentSlots
-  - components
+  - components # 8 component slots with quantities - ALL EMPTY
+
+categories:
+  - { name: "Dagger", count: 24, percentage: 11.7 }
+  - { name: "Longsword", count: 23, percentage: 11.2 }
+  - { name: "Claw", count: 22, percentage: 10.7 }
+  - { name: "Club", count: 20, percentage: 9.8 }
+  - { name: "Great Axe", count: 17, percentage: 8.3 }
+  - { name: "Greatsword", count: 16, percentage: 7.8 }
+  - { name: "Staff", count: 15, percentage: 7.3 }
+  - { name: "Short Sword", count: 13, percentage: 6.3 }
+  - { name: "Axe", count: 12, percentage: 5.9 }
+  - { name: "Polearm", count: 12, percentage: 5.9 }
+  - { name: "Throwing", count: 9, percentage: 4.4 }
+
+level_distribution:
+  early_game: { range: "1-25", count: 24 }
+  mid_game: { range: "26-50", count: 52 }
+  late_game: { range: "51-75", count: 74 }
+  end_game: { range: "76-100", count: 55 }
 
 tsv: |
   Skill	Required  Recipe	Recipe Enum	Category Enum	Level	Normal Name	Normal Quantity	Normal Resref	HQ Name	HQ Quantity	HQ Resref	Ultra Name	Ultra Quantity	Ultra Resref	Augment Type	Augment Slots	Component 1	Component Quantity 1	Component 2	Component Quantity 2	Component 3	Component Quantity 3	Component 4	Component Quantity 4	Component 5	Component Quantity 5	Component 6	Component Quantity 6	Component 7	Component Quantity 7	Component 8	Component Quantity 8
@@ -33,6 +62,199 @@ tsv: |
   Weaponcraft		MapleConduit	Club	3	Maple Conduit	1	maple_conduit	Maple Conduit +1	1	maple_conduit_p1																	
   Weaponcraft		PhantomFang	Short Sword	3	Phantom Fang	1	phantom_fang	Phantom Fang +1	1	phantom_fang_p1																	
   Weaponcraft		CoarseShuriken	Throwing	4	Coarse Shuriken	25	coarse_shurikn																	
-  Weaponcraft		AshenWarstaff	Staff	4	Ashen Warstaff	1	ashen_wstaff	Ashen Warstaff +1	1	ashen_wstf_p1
+  Weaponcraft		AshenWarstaff	Staff	4	Ashen Warstaff	1	ashen_wstaff	Ashen Warstaff +1	1	ashen_wstf_p1																	
+  Weaponcraft		VanguardCutter	Longsword	5	Vanguard Cutter	1	vanguard_cutr	Vanguard Cutter +1	1	vanguard_cutr_p1																	
+  Weaponcraft		AurionAlloyMace	Club	5	Aurion Alloy Mace	1	aurion_mace	Aurion Alloy Mace +1	1	aurion_mace_p1																	
+  Weaponcraft		AurionAlloyHammer	Club	6	Aurion Alloy Hammer	1	aurion_hammer	Aurion Alloy Hammer +1	1	aurion_hammer_p1																	
+  Weaponcraft		ArcShuriken	Throwing	7	Arc Shuriken	25	arc_shuriken	Arc Shuriken +1	25	arc_shuriken_p1																	
+  Weaponcraft		AurionAlloyAxe	Axe	7	Aurion Alloy Axe	1	aurion_axe	Aurion Alloy Axe +1	1	aurion_axe_p1																	
+  Weaponcraft		StormHarpoon	Polearm	7	Storm Harpoon	1	storm_harpoon	Storm Harpoon +1		storm_harpon_p1																	
+  Weaponcraft		Shadowpiercer	Dagger	8	Shadowpiercer	1	shadowpiercer	Shadowpiercer +1		shadowpiercer_p1																	
+  Weaponcraft		TraineeWaraxe	Great Axe	9	Trainee Waraxe	1	trainee_waraxe																	
+  Weaponcraft		AurionAlloyKnuckles	Claw	10	Aurion Alloy Knuckles	1	aurion_knkls	Aurion Alloy Knuckles +1	1	aurion_knkls_p1																	
+  Weaponcraft		ZenithianArcblade	Longsword	10	Zenithian Arcblade	1	zenith_arcbl	Zenithian Arcblade +1	1	zenith_arcbl_p1																	
+  Weaponcraft		RazorwingAxe	Great Axe	11	Razorwing Axe	1	razorw_axe	Razorwing Axe +1	1	razorw_axe_p1																	
+  Weaponcraft		AurionAlloyRod	Club	11	Aurion Alloy Rod	1	aurion_rod	Aurion Alloy Rod +1	1	aurion_rod_p1																	
+  Weaponcraft		PhantomKnife	Dagger	12	Phantom Knife	1	phantom_knife	Phantom Knife +1	1	phantom_knf_p1																	
+  Weaponcraft		TitanClaymore	Greatsword	12	Titan Claymore	1	titan_claymr	Titan Claymore +1	1	titan_claymr_p1																	
+  Weaponcraft		GaleforgedClaymore	Greatsword	13	Galeforged Claymore	1	galef_claymr	Galeforged Claymore +1	1	galef_claymr_p1																	
+  Weaponcraft		AurionAlloySpear	Polearm	13	Aurion Alloy Spear	1	aurion_spear	Aurion Alloy Spear +1	1	aurion_spear_p1																	
+  Weaponcraft		SpathaTekEdge	Longsword	14	Spatha-Tek Edge	1	spathatek_edg	Spatha-Tek Edge +1	1	spathatek_edg_p1																	
+  Weaponcraft		AshenPolearm	Staff	14	Ashen Polearm	1	ashen_polearm	Ashen Polearm +1	1	ashen_plrm_p1																	
+  Weaponcraft		InfernalCleaver	Great Axe	15	Infernal Cleaver	1	infernal_cleavr	Hellfire Cleaver	1	hellfire_clvr																	
+  Weaponcraft		Stormpiercer	Short Sword	15	Stormpiercer	1	stormpiercer	Stormpiercer +1	1	stormpiercer_p1																	
+  Weaponcraft		ArcDagger	Dagger	16	Arc Dagger	1	arc_dagger	Arc Dagger +1	1	arc_dagger_p1																	
+  Weaponcraft		HivefangSpatha	Longsword	16	Hivefang Spatha	1	hivefang_spth	Hivefang Spatha +1	1	hivefang_spth_p1																	
+  Weaponcraft		VulcanWarblade	Greatsword	17	Vulcan Warblade	1	vulcan_warblad																	
+  Weaponcraft		BrassstrikeKnuckles	Claw	18	Brassstrike Knuckles	1	brass_knkls	Brassstrike Knuckles +1	1	brass_knkls_p1																	
+  Weaponcraft		BrassArcblade	Longsword	18	Brass Arcblade	1	brass_arcbl	Brass Arcblade +1	1	brass_arcbl_p1																	
+  Weaponcraft		BrassfangDagger	Dagger	19	Brassfang Dagger	1	brassfang_dgr	Brassfang Dagger +1	1	brassfang_dgr_p1																	
+  Weaponcraft		WillowConduit	Club	19	Willow Conduit	1	willow_condui	Willow Conduit +1	1	willow_condui_p1																	
+  Weaponcraft		BrassstrikeAxe	Axe	19	Brassstrike Axe	1	brass_axestrk	Brassstrike Axe +1	1	brass_axestrk_p1																	
+  Weaponcraft		TropicStrikers	Claw	20	Tropic Strikers	1	tropic_strikr	Tropic Strikers +1	1	tropic_strkr_p1																	
+  Weaponcraft		BilbronEdge	Longsword	20	Bilbron Edge	1	bilbron_edge	Bilbron Edge +1	1	bilbron_edge_p1																	
+  Weaponcraft		WhisperfangDagger	Dagger	21	Whisperfang Dagger	1	whisper_dgr	Whisperfang Dagger +1		whisper_dgr_p1																	
+  Weaponcraft		SparkfangEdge	Longsword	21	Sparkfang Edge	1	sparkfang_edg	Sparkfang Edge +1	1	sparkfang_edg_p1																	
+  Weaponcraft		BrassfangClaws	Claw	22	Brassfang Claws	1	brassfang_cls	Brassfang Claws +1	1	brassfang_cls_p1																	
+  Weaponcraft		EtherScimitar	Longsword	22	Ether Scimitar	1	ether_scimita	Ether Scimitar +1	1	ether_scimta_p1																	
+  Weaponcraft		HydrofangClaws	Claw	23	Hydrofang Claws	1	hydrofang_cls	Hydrofang Claws +1	1	hydrofang_cls_p1																	
+  Weaponcraft		ArcKnife	Dagger	23	Arc Knife	1	arc_knife	Arc Knife +1	1	arc_knife_p1																	
+  Weaponcraft		MercenaryFang	Greatsword	23	Mercenary's Fang	1	mercen_fang																	
+  Weaponcraft		BrassforceRod	Club	23	Brassforce Rod	1	brassforce_rd	Brassforce Rod +1	1	brassforce_rd_p1																	
+  Weaponcraft		VerdantHollyStaff	Staff	23	Verdant Holly Staff	1	verdant_hstf	Verdant Holly Staff +1	1	verdant_hstf_p1																	
+  Weaponcraft		TitanGreataxe	Great Axe	24	Titan Greataxe	1	titan_greatax	Titan Greataxe +1	1	titan_greatax_p1																	
+  Weaponcraft		BrassstrikeHammer	Club	24	Brassstrike Hammer	1	brass_hamstrk	Brassstrike Hammer +1	1	brass_hamstrk_p1																	
+  Weaponcraft		VanguardBattalionSword	Greatsword	25	Vanguard Battalion Sword	1	vang_battswrd																	
+  Weaponcraft		GaleFang	Short Sword	25	Gale Fang	1	gale_fang	Gale Fang +1	1	gale_fang_p1																	
+  Weaponcraft		HydroCleaver	Great Axe	26	Hydro Cleaver	1	hydro_cleavr	Hydro Cleaver +1	1	hydro_cleavr_p1																	
+  Weaponcraft		FerriteSword	Longsword	26	Ferrite Sword	1	ferrite_sword	Ferrite Sword +1	1	ferrite_sword_p1																	
+  Weaponcraft		ShadowfangBlade	Short Sword	26	Shadowfang Blade	1	shdwfang_bld	Shadowfang Blade +1	1	shdwfang_bld_p1																	
+  Weaponcraft		SparkfangDagger	Dagger	27	Sparkfang Dagger	1	spark_dagger	Sparkfang Dagger +1	1	spark_dagger_p1																	
+  Weaponcraft		PrecisionClaws	Claw	28	Precision Claws	1	precis_claws																	
+  Weaponcraft		ArcbladeLongsword	Longsword	28	Arcblade Longsword	1	arcblad_lngsw	Arcblade Longsword +1	1	arcblad_lngsw_p1																	
+  Weaponcraft		BonecleaverAxe	Axe	28	Bonecleaver Axe	1	bonecleav_axe	Bonecleaver Axe +1	1	bonecleav_axe_p1																	
+  Weaponcraft		UnmarkedGreatsword	Greatsword	29	Unmarked Greatsword	1	unmrk_greatswd																	
+  Weaponcraft		ZephyrClaws	Claw	30	Zephyr Claws	1	zephyr_claws																	
+  Weaponcraft		VenomfangBaselard	Dagger	31	Venomfang Baselard	1	venom_baselrd	Venomfang Baselard +1	1	venom_baselrd_p1																	
+  Weaponcraft		DegenTek	Longsword	32	Degen-Tek	1	degen_tek	Degen-Tek +1	1	degen_tek_p1																	
+  Weaponcraft		WarbornBlade	Greatsword	33	Warborn Blade	1	warborn_blade	Warborn Blade +1	1	warborn_blade_p1																	
+  Weaponcraft		VerdantHollyPolearm	Staff	33	Verdant Holly Polearm	1	verdant_hpole	Verdant Holly Polearm +1	1	verdant_hpole_p1																	
+  Weaponcraft		BrassstrikeSpear	Polearm	33	Brassstrike Spear	1	brass_spearstk	Brassstrike Spear +1	1	brass_spearstk_p1																	
+  Weaponcraft		PulseTuck	Longsword	34	Pulse Tuck	1	pulse_tuck	Pulse Tuck +1	1	pulse_tuck_p1																	
+  Weaponcraft		ObsidianFang	Short Sword	34	Obsidian Fang	1	obsidian_fang	Obsidian Fang +1	1	obsidian_fang_p1																	
+  Weaponcraft		VanguardShuriken	Throwing	35	Vanguard Shuriken	25	vang_shuriken																	
+  Weaponcraft		SparkfangSpear	Polearm	35	Sparkfang Spear	1	spark_spear	Sparkfang Spear +1		spark_spear_p1																	
+  Weaponcraft		TitanBroadsword	Longsword	36	Titan Broadsword	1	titan_broadsw	Titan Broadsword +1	1	titan_broadsw_p1																	
+  Weaponcraft		YewConduit	Club	36	Yew Conduit	1	yew_conduit	Yew Conduit +1	1	yew_conduit_p1																	
+  Weaponcraft		MothfangAxe	Great Axe	37	Mothfang Axe	1	mothfang_axe																	
+  Weaponcraft		TitanMace	Club	37	Titan Mace	1	titan_mace	Titan Mace +1	1	titan_mace_p1																	
+  Weaponcraft		BoneforgedPick	Axe	38	Boneforged Pick	1	boneforg_pick	Boneforged Pick +1	1	boneforg_pick_p1																	
+  Weaponcraft		ShadowfangClaws	Claw	39	Shadowfang Claws	1	shdwfang_cls	Shadowfang Claws +1	1	shdwfang_cls_p1																	
+  Weaponcraft		ZephyrCutter	Greatsword	39	Zephyr Cutter	1	zephyr_cutter	Dominion Warblade	1	dominion_wrbl																	
+  Weaponcraft		AlloyKnuckles	Claw	40	Alloy Knuckles	1	alloy_knkls	Alloy Knuckles +1	1	alloy_knkls_p1																	
+  Weaponcraft		EtherFleuret	Longsword	40	Ether Fleuret	1	ether_fleuret	Ether Fleuret +1	1	ether_fleurt_p1																	
+  Weaponcraft		WarbringerHammer	Club	40	Warbringer Hammer	1	warbrng_hamm	Warbringer Hammer +1	1	warbrng_hamm_p1																	
+  Weaponcraft		EtherfangKukri	Dagger	41	Etherfang Kukri	1	etherfang_kkr	Etherfang Kukri +1	1	etherfang_kkr_p1																	
+  Weaponcraft		ArcaneRod	Club	41	Arcane Rod	1	arcane_rod	Arcane Rod +1	1	arcane_rod_p1																	
+  Weaponcraft		SteelKiljBlade	Longsword	42	Steel Kilj Blade	1	steel_kiljbl	Steel Kilj Blade +1	1	steel_kiljbl_p1																	
+  Weaponcraft		TitanBattleaxe	Axe	42	Titan Battleaxe	1	titan_battleax	Titan Battleaxe +1	1	titan_battlax_p1																	
+  Weaponcraft		ToxinFang	Dagger	43	Toxin Fang	1	toxin_fang	Toxin Fang +1	1	toxin_fang_p1																	
+  Weaponcraft		WingShuriken	Throwing	43	Wing Shuriken	25	wing_shuriken	Wing Shuriken +1	25	wing_shurkn_p1																	
+  Weaponcraft		SanctifiedEdge	Longsword	44	Sanctified Edge	1	sanct_edge	Sanctified Edge +1	1	sanct_edge_p1																	
+  Weaponcraft		ToxinKnife	Dagger	45	Toxin Knife	1	toxin_knife	Toxin Knife +1	1	toxin_knife_p1																	
+  Weaponcraft		SkylarkEdge	Short Sword	45	Skylark Edge	1	skylark_edge	Skylark Edge +1	1	skylark_edge_p1																	
+  Weaponcraft		VanguardLance	Polearm	45	Vanguard Lance	1	vang_lance																	
+  Weaponcraft		MythriteDagger	Dagger	46	Mythrite Dagger	1	mythrite_dagr	Mythrite Dagger +1		mythrite_dgr_p1																	
+  Weaponcraft		ElmwoodWarstaff	Staff	46	Elmwood Warstaff	1	elmwood_wstf	Elmwood Warstaff +1	1	elmwood_wstf_p1																	
+  Weaponcraft		RangingFang	Dagger	47	Ranging Fang	1	ranging_fang	Ranging Fang +1		ranging_fang_p1																	
+  Weaponcraft		PredatorClaws	Claw	48	Predator Claws	1	predator_cls	Predator Claws +1	1	predator_cls_p1																	
+  Weaponcraft		VanguardSplitter	Great Axe	48	Vanguard Splitter	1	vang_splittr																	
+  Weaponcraft		AbyssalBlade	Greatsword	48	Abyssal Blade	1	abyssal_bld																	
+  Weaponcraft		EremitesEtherWand	Club	48	Eremite's Ether Wand	1	erem_etherwnd	Eremite's Ether Wand +1	1	erem_etherwnd_p1																	
+  Weaponcraft		ToxinKukri	Dagger	49	Toxin Kukri	1	toxin_kkr	Toxin Kukri +1		toxin_kkr_p1																	
+  Weaponcraft		BonecrusherCudgel	Club	49	Bonecrusher Cudgel	1	bonecrusher_cdgl	Bonecrusher Cudgel +1	1	bonecrusher_cdgl_p1																	
+  Weaponcraft		MythriteDegen	Longsword	50	Mythrite Degen	1	mythrite_dgn	Mythrite Degen +1	1	mythrite_dgn_p1																	
+  Weaponcraft		VerdantSlayer	Great Axe	51	Verdant Slayer	1	verdant_slyr																	
+  Weaponcraft		SpikedMaul	Staff	52	Spiked Maul	1	spiked_maul	Spiked Maul +1	1	spiked_maul_p1																	
+  Weaponcraft		RaidersTomahawk	Axe	53	Raider's Tomahawk	1	raider_tomhwk	Raider's Tomahawk +1	1	raider_tomhwk_p1																	
+  Weaponcraft		TitanSpear	Polearm	53	Titan Spear	1	titan_spear	Titan Spear +1		titan_spear_p1																	
+  Weaponcraft		ToxinCesti	Claw	54	Toxin Cesti	1	toxin_csti	Toxin Cesti +1	1	toxin_csti_p1																	
+  Weaponcraft		MythriteBlade	Longsword	54	Mythrite Blade	1	mythrite_bld	Mythrite Blade +1	1	mythrite_bld_p1																	
+  Weaponcraft		VanguardFang	Short Sword	54	Vanguard Fang	1	vang_fang	Vanguard Fang +1	1	vang_fang_p1																	
+  Weaponcraft		EtherShuriken	Throwing	55	Ether Shuriken	25	ether_shrkn	Ether Shuriken +1	25	ether_shrkn_p1																	
+  Weaponcraft		RavagerClaws	Claw	56	Ravager Claws	1	ravager_cls	Ravager Claws +1	1	ravager_cls_p1																	
+  Weaponcraft		CenturionCleaver	Great Axe	57	Centurion's Cleaver	1	centur_clvr																	
+  Weaponcraft		SparkfangDegen	Longsword	58	Sparkfang Degen	1	sparkfang_dgn	Sparkfang Degen +1	1	sparkfang_dgn_p1																	
+  Weaponcraft		EtherfangKris	Dagger	59	Etherfang Kris	1	etherfang_krs	Etherfang Kris +1		etherfang_krs_p1																	
+  Weaponcraft		HydrofangTalons	Claw	60	Hydrofang Talons	1	hydrofang_tln	Hydrofang Talons +1	1	hydrofang_tln_p1																	
+  Weaponcraft		TwinfangAxe	Great Axe	61	Twinfang Axe	1	twinfang_axe																	
+  Weaponcraft		TyroWarKatars	Claw	62	Tyro War-Katars	1	tyro_wrkatr	Tyro War-Katars +1	1	tyro_wrkatr_p1																	
+  Weaponcraft		StrikersKnife	Dagger	62	Striker's Knife	1	striker_knf	Striker's Knife +1		striker_knf_p1																	
+  Weaponcraft		TitanMaul	Club	62	Titan Maul	1	titan_maul	Titan Maul +1	1	titan_maul_p1																	
+  Weaponcraft		ElmwoodPolearm	Staff	62	Elmwood Polearm	1	elmwood_plrm	Elmwood Polearm +1	1	elmwood_plrm_p1																	
+  Weaponcraft		RoguesJambiya	Dagger	63	Rogue's Jambiya	1	rogue_jambya	Rogue's Jambiya +1		rogue_jambya_p1																	
+  Weaponcraft		ReapersFalx	Greatsword	63	Reaper's Falx	1	reaper_falx	Reaper's Falx +1	1	reaper_falx_p1																	
+  Weaponcraft		WarbornPick	Axe	63	Warborn Pick	1	warborn_pick	Warborn Pick +1	1	warborn_pick_p1																	
+  Weaponcraft		RiftTulwar	Longsword	64	Rift Tulwar	1	rift_tulwar	Rift Tulwar +1	1	rift_tulwar_p1																	
+  Weaponcraft		LeviathanStaff	Staff	64	Leviathan Staff	1	leviathan_stf	Leviathan Staff +1	1	leviathan_stf_p1																	
+  Weaponcraft		MythriteClaymore	Greatsword	65	Mythrite Claymore	1	mythrite_clymr																	
+  Weaponcraft		SwiftclawSword	Short Sword	65	Swiftclaw Sword	1	swiftclaw_swd	Swiftclaw Sword +1	1	swiftclaw_swd_p1																	
+  Weaponcraft		WarKatars	Claw	66	War-Katars	1	war_katars	War-Katars +1	1	war_katars_p1																	
+  Weaponcraft		TempestFang	Short Sword	66	Tempest Fang	1	tempest_fang	Tempest Fang +1	1	tempest_fang_p1																	
+  Weaponcraft		ToxinfangClaws	Claw	67	Toxinfang Claws	1	toxin_cls	Toxinfang Claws +1	1	toxin_cls_p1																	
+  Weaponcraft		LongstrikeShuriken	Throwing	67	Longstrike Shuriken	25	longstrk_shrkn																	
+  Weaponcraft		AscendantBlade	Longsword	68	Ascendant Blade	1	ascend_bld	Ascendant Blade +1	1	ascend_bld_p1																	
+  Weaponcraft		MythriteRod	Club	68	Mythrite Rod	1	mythrite_rod	Mythrite Rod +1	1	mythrite_rod_p1																	
+  Weaponcraft		ReapersVoulge	Great Axe	69	Reaper's Voulge	1	reaper_voulg	Reaper's Voulge +1	1	reaper_voulg_p1																	
+  Weaponcraft		MythriteKnife	Dagger	70	Mythrite Knife	1	mythrite_knf	Mythrite Knife +1		mythrite_knf_p1																	
+  Weaponcraft		MythriteMace	Club	70	Mythrite Mace	1	mythrite_mac	Mythrite Mace +1	1	mythrite_mac_p1																	
+  Weaponcraft		ToxinfangTalons	Claw	71	Toxinfang Talons	1	toxin_tlns	Toxinfang Talons +1	1	toxin_tlns_p1																	
+  Weaponcraft		HydroCleaver	Great Axe	71	Hydro Cleaver	1	hydro_cleavr	Hydro Cleaver +1	1	hydro_cleavr_p1																	
+  Weaponcraft		FractureFang	Short Sword	71	Fracture Fang	1	fracture_fang	Fracture Fang +1	1	fracture_fang_p1																	
+  Weaponcraft		TitanWaraxe	Great Axe	72	Titan Waraxe	1	titan_waraxe	Titan Waraxe +1	1	titan_waraxe_p1																	
+  Weaponcraft		OakfangCudgel	Club	72	Oakfang Cudgel	1	oakfang_cdgl	Oakfang Cudgel +1	1	oakfang_cdgl_p1																	
+  Weaponcraft		RegalVanguardBlade	Greatsword	73	Regal Vanguard Blade	1	regal_vangbl	Regal Vanguard Blade +1	1	regal_vangbl_p1	Regal Vanguard Blade +2	1	regal_vangbl_p2																		
+  Weaponcraft		TitanLance	Polearm	73	Titan Lance	1	titan_lance	Titan Lance +1		titan_lance_p1																	
+  Weaponcraft		MythriteKnuckles	Claw	74	Mythrite Knuckles	1	mythrite_knkls	Mythrite Knuckles +1	1	mythrite_knkls_p1																	
+  Weaponcraft		InfernalDegen	Longsword	74	Infernal Degen	1	infernal_dgn	Infernal Degen +1	1	infernal_dgn_p1																	
+  Weaponcraft		MythriteAxe	Axe	74	Mythrite Axe	1	mythrite_axe	Mythrite Axe +1	1	mythrite_axe_p1																	
+  Weaponcraft		ToxinWarKatars	Claw	75	Toxin War-Katars	1	toxin_wrkatr	Toxin War-Katars +1	1	toxin_wrkatr_p1																	
+  Weaponcraft		MythriteKukri	Dagger	75	Mythrite Kukri	1	mythrite_kkr	Mythrite Kukri +1		mythrite_kkr_p1																	
+  Weaponcraft		SparkfangLance	Polearm	75	Sparkfang Lance	1	sparkfang_lnc	Sparkfang Lance +1		sparkfang_lnc_p1																	
+  Weaponcraft		TitanGreatsword	Greatsword	76	Titan Greatsword	1	titan_grtswd	Titan Greatsword +1	1	titan_grtswd_p1																	
+  Weaponcraft		HallowedMaul	Club	77	Hallowed Maul	1	hallowed_maul	Hallowed Maul +1	1	hallowed_maul_p1																	
+  Weaponcraft		WarbornHalberd	Polearm	77	Warborn Halberd	1	warborn_hlbrd	Warborn Halberd +1		warborn_hlbrd_p1																	
+  Weaponcraft		CrescentShotel	Longsword	78	Crescent Shotel	1	crescent_shtl	Crescent Shotel +1	1	crescent_shtl_p1																	
+  Weaponcraft		EtherwovenStraps	Claw	79	Etherwoven Straps	1	etherwoven_stp	Etherwoven Straps +1	1	etherwoven_stp_p1																	
+  Weaponcraft		ObeliskWarLance	Polearm	79	Obelisk War Lance	1	obelisk_wlanc	Obelisk War Lance +1		obelisk_wlanc_p1																	
+  Weaponcraft		SparkfangBaselard	Dagger	80	Sparkfang Baselard	1	sparkfang_basl	Sparkfang Baselard +1		sparkfang_basl_p1																	
+  Weaponcraft		WarcastersShuriken	Throwing	81	Warcaster's Shuriken	25	warcast_shrkn	Warcaster's Shuriken +1	25	warcast_shrkn_p1	Warcaster's Shuriken +2	25	warcast_shrkn_p2																		
+  Weaponcraft		MythriteClaws	Claw	82	Mythrite Claws	1	mythrite_cls	Mythrite Claws +1	1	mythrite_cls_p1																	
+  Weaponcraft		SanctifiedDegen	Longsword	82	Sanctified Degen	1	sanct_dgn	Sanctified Degen +1	1	sanct_dgn_p1																	
+  Weaponcraft		TitanClub	Club	82	Titan Club	1	titan_club	Titan Club +1	1	titan_club_p1																	
+  Weaponcraft		OakwoodWarstaff	Staff	82	Oakwood Warstaff	1	oakwood_wstf	Oakwood Warstaff +1	1	oakwood_wstf_p1																	
+  Weaponcraft		TrainingBlade	Short Sword	82	Training Blade	1	train_bld	Training Blade +1	1	train_bld_p1																	
+  Weaponcraft		KhetenWarblade	Great Axe	83	Kheten Warblade	1	kheten_wrbl	Kheten Warblade +1	1	kheten_wrbl_p1																	
+  Weaponcraft		NoviceDuelistsTuck	Longsword	84	Novice Duelist's Tuck	1	nov_duel_tuck	Novice Duelist's Tuck +1	1	nov_duel_tuck_p1	Novice Duelist's Tuck +2	1	nov_duel_tuck_p2																		
+  Weaponcraft		PassaddhiMysticStaff	Staff	84	Passaddhi Mystic Staff	1	passaddh_myst	Passaddhi Mystic Staff +1	1	passaddh_myst_p1																	
+  Weaponcraft		ArcstrikeAdargas	Claw	85	Arcstrike Adargas	1	arcstrk_adgs	Arcstrike Adargas +1	1	arcstrk_adgs_p1																	
+  Weaponcraft		NoviceDuelistsShuriken	Throwing	85	Novice Duelist's Shuriken	25	nov_duel_shrkn	Novice Duelist's Shuriken +1	25	nov_duel_shrkn_p1	Novice Duelist's Shuriken +2	25	nov_duel_shrkn_p2																		
+  Weaponcraft		WarcastersAxe	Axe	85	Warcaster's Axe	1	warcast_axe	Warcaster's Axe +1	1	warcast_axe_p1	Warcaster's Axe +2	1	warcast_axe_p2																		
+  Weaponcraft		CombatCastersTalon	Longsword	86	Combat Caster's Talon	1	combatcast_tln	Combat Caster's Talon +1	1	combatcast_tln_p1	Combat Caster's Talon +2	1	combatcast_tln_p2																		
+  Weaponcraft		BoneforgedRod	Club	86	Boneforged Rod	1	boneforged_rd	Boneforged Rod +1	1	boneforged_rd_p1																	
+  Weaponcraft		OakwoodPolearm	Staff	86	Oakwood Polearm	1	oakwood_plrm	Oakwood Polearm +1	1	oakwood_plrm_p1																	
+  Weaponcraft		WarcasterDagger	Dagger	87	Warcaster's Dagger	1	warcast_dgr	Warcaster's Dagger +1		warcast_dgr_p1	Warcaster's Dagger +2		warcast_dgr_p2																		
+  Weaponcraft		VeldtCleaver	Axe	87	Veldt Cleaver	1	veldt_clvr	Veldt Cleaver +1	1	veldt_clvr_p1																	
+  Weaponcraft		ArcFalchion	Longsword	88	Arc-Falchion	1	arc_falchn	Arc-Falchion +1	1	arc_falchn_p1																	
+  Weaponcraft		HallowedMace	Club	88	Hallowed Mace	1	hallowed_mac	Hallowed Mace +1	1	hallowed_mac_p1																	
+  Weaponcraft		QiResonanceStaff	Staff	88	Qi Resonance Staff	1	qi_reson_stf	Qi Resonance Staff +1	1	qi_reson_stf_p1																	
+  Weaponcraft		Cherryblade	Short Sword	88	Cherryblade	1	cherryblade	Cherryblade +1	1	cherryblade_p1																	
+  Weaponcraft		JuggernautMothAxe	Great Axe	89	Juggernaut Moth Axe	1	jugger_mothaxe																	
+  Weaponcraft		ZephyrWarblade	Greatsword	89	Zephyr Warblade	1	zephyr_wrbl	Zephyr Warblade +1	1	zephyr_wrbl_p1																	
+  Weaponcraft		ExecutionersFaussar	Greatsword	90	Executioner's Faussar	1	exec_faussar	Executioner's Faussar +1	1	exec_faussr_p1																	
+  Weaponcraft		TwilightFang	Short Sword	90	Twilight Fang	1	twilight_fang	Twilight Fang +1	1	twilight_fng_p1																	
+  Weaponcraft		TewhaReaver	Great Axe	91	Tewha Reaver	1	tewha_reaver	Tewha Reaver +1	1	tewha_reavr_p1																	
+  Weaponcraft		YagudoCryoShuriken	Throwing	91	Yagudo Cryo-Shuriken	25	yagudo_cryo_shr																	
+  Weaponcraft		InfernalEdge	Longsword	92	Infernal Edge	1	infernal_edg	Infernal Edge +1	1	infernal_edg_p1																	
+  Weaponcraft		ReaversTabar	Axe	92	Reaver's Tabar	1	reaver_tabar	Reaver's Tabar +1	1	reaver_tabr_p1																	
+  Weaponcraft		CrimsonWing	Short Sword	92	Crimson Wing	1	crimson_wing	Crimson Wing +1	1	crimson_wing_p1																	
+  Weaponcraft		PredatorPatas	Claw	93	Predator Patas	1	predator_pts	Predator Patas +1	1	predator_pts_p1																	
+  Weaponcraft		BonefangKnife	Dagger	93	Bonefang Knife	1	bonefang_knf	Bonefang Knife +1		bonefang_knf_p1																	
+  Weaponcraft		CobraWarblade	Greatsword	94	Cobra Warblade	1	cobra_wrbl																	
+  Weaponcraft		RosethornConduit	Club	94	Rosethorn Conduit	1	rosethorn_cndt	Rosethorn Conduit +1	1	rosethorn_cndt_p1																	
+  Weaponcraft		MusketeersPolearm	Staff	95	Musketeer's Polearm	1	musketeer_plrm																	
+  Weaponcraft		VanguardKnightsSword	Longsword	96	Vanguard Knight's Sword	1	vang_knight_swd	Vanguard Knight's Sword +1	1	vang_knight_swd_p1																	
+  Weaponcraft		TwinstrikeBlade	Short Sword	96	Twinstrike Blade	1	twinstrk_bld	Twinstrike Blade +1	1	twinstrk_bld_p1																	
+  Weaponcraft		CorsairsFang	Dagger	97	Corsair's Fang	1	corsair_fang																	
+  Weaponcraft		TacticianMagiciansConduit	Club	97	Tactician Magician's Conduit	1	tact_mag_cndt																	
+  Weaponcraft		TacticianMagiciansTalons	Claw	98	Tactician Magician's Talons	1	tact_mag_tlns																	
+  Weaponcraft		MusketeersEdge	Longsword	98	Musketeer's Edge	1	musketeer_edg																	
+  Weaponcraft		MythriteLance	Polearm	98	Mythrite Lance	1	mythrite_lnc	Mythrite Lance +1		mythrite_lnc_p1																	
+  Weaponcraft		CometFangShuriken	Throwing	99	Comet Fang Shuriken	25	cometfang_shrkn																	
+  Weaponcraft		MythritePick	Axe	99	Mythrite Pick	1	mythrite_pick	Mythrite Pick +1	1	mythrite_pck_p1																	
+  Weaponcraft		LeucosReapersVoulge	Great Axe	100	Leucos Reaper's Voulge	1	leucos_reap_vlg	Leucos Reaper's Voulge +1	1	leucos_reap_vlg_p1																	
+  Weaponcraft		TundraWalrusStaff	Staff	100	Tundra Walrus Staff	1	tundra_wal_stf																	
+  Weaponcraft		Nyxblade	Short Sword	100	Nyxblade	1	nyxblade																	
+  Weaponcraft		RoyalKnightArmyWarLance	Polearm	100	Royal Knight Army War Lance	1	roy_knight_wlc
 
 

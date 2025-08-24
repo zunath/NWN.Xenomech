@@ -1,0 +1,105 @@
+Skill	Required  Recipe	Recipe Enum	Category Enum	Level	Normal Name	Normal Quantity	Normal Resref	HQ Name	HQ Quantity	HQ Resref	Ultra Name	Ultra Quantity	Ultra Resref	Augment Type	Augment Slots	Component 1	Component Quantity 1	Component 2	Component Quantity 2	Component 3	Component Quantity 3	Component 4	Component Quantity 4	Component 5	Component Quantity 5	Component 6	Component Quantity 6	Component 7	Component Quantity 7	Component 8	Component Quantity 8
+Fabrication		CopperforgeRing	Ring	1	Copperforge Ring	1	copperforge_rng	Copperforge Ring +1	1	copperforge_p1																					
+Fabrication		BloodforgedStone	Waist	3	Bloodforged Stone	1	bloodforged_stn	Bloodforged Stone +1	1	bloodforged_p1																					
+Fabrication		HarestrideMantle	Back	5	Harestride Mantle	1	harestride_mnt	Harestride Mantle +1	1	harestride_p1																					
+Fabrication		BrassguardRing	Ring	7	Brassguard Ring	1	brassguard_rng	Brassguard Ring +1	1	brassguard_p1																					
+Fabrication		LeatherboundGorget	Neck	9	Leatherbound Gorget	1	leatherb_gorget	Leatherbound Gorget +1	1	leatherb_gorg_p1																					
+Fabrication		PlumeCollar	Neck	11	Plume Collar	1	plume_collar	Plume Collar +1	1	plume_collar_p1																					
+Fabrication		EtherwovenCape	Back	13	Etherwoven Cape	1	etherwvn_cape	Etherwoven Cape +1	1	etherwvn_cape_p1																					
+Fabrication		WovenHekoObi	Waist	13	Woven Heko Obi	1	woven_heko_obi	Woven Heko Obi +1	1	woven_hekoobi_p1																					
+Fabrication		JudicatorsBadge	Neck	15	Judicator’s Badge	1	judicator_badge																								
+Fabrication		VerdantScarf	Neck	17	Verdant Scarf	1	verdant_scarf																								
+Fabrication		EremitesFocusRing	Ring	17	Eremite’s Focus Ring	1	erem_focus_rng	Eremite’s Focus Ring +1	1	erem_focus_p1																					
+Fabrication		LeatherboundBelt	Waist	17	Leatherbound Belt	1	leatherb_belt	Leatherbound Belt +1	1	leatherb_belt_p1																					
+Fabrication		SentinelsSafeguardRing	Ring	20	Sentinel’s Safeguard Ring	1	sentinel_safrng																								
+Fabrication		SanctifiedBand	Ring	20	Sanctified Band	1	sanctified_band	Sanctified Band +1	1	sanctified_bnd_p1																					
+Fabrication		TitanScaleGorget	Neck	21	Titan Scale Gorget	1	titan_scale_gor																								
+Fabrication		TitanPlateBelt	Waist	21	Titan Plate Belt	1	titan_plate_blt																								
+Fabrication		ReflexResonanceRing	Ring	25	Reflex Resonance Ring	1	reflex_reso_rng	Reflex Resonance Ring +1	1	reflex_reso_p1																					
+Fabrication		WayfarersMantle	Back	25	Wayfarer’s Mantle	1	wayfarer_mantle																								
+Fabrication		AmberResonanceRing	Ring	26	Amber Resonance Ring	1	amber_reso_rng																								
+Fabrication		EquilibriumRing	Ring	26	Equilibrium Ring	1	equilibrium_rng	Equilibrium Ring +1	1	equilibrium_p1																					
+Fabrication		ValorRing	Ring	26	Valor Ring	1	valor_ring	Valor Ring +1	1	valor_ring_p1																					
+Fabrication		LapisArcaneRing	Ring	26	Lapis Arcane Ring	1	lapis_arc_rng																								
+Fabrication		RangersPendant	Neck	27	Ranger’s Pendant	1	ranger_pendant																								
+Fabrication		EtherflowRing	Ring	27	Etherflow Ring	1	etherflow_ring	Etherflow Ring +1	1	etherflow_p1																					
+Fabrication		EnduranceRing	Ring	27	Endurance Ring	1	endurance_ring	Endurance Ring +1	1	endurance_p1																					
+Fabrication		ObsidianOnyxRing	Ring	29	Obsidian Onyx Ring	1	obsidian_onyxrn																								
+Fabrication		AmethystArcRing	Ring	30	Amethyst Arc Ring	1	amethyst_arc_rng																								
+Fabrication		BeaconofHopeRing	Ring	30	Beacon of Hope Ring	1	beacon_hope_rng	Beacon of Hope Ring +1	1	beacon_hope_p1																					
+Fabrication		LeatherboundRing	Ring	31	Leatherbound Ring	1	leatherb_ring	Leatherbound Ring +1	1	leatherb_ring_p1																					
+Fabrication		SilverguardRing	Ring	31	Silverguard Ring	1	silverg_ring	Silverguard Ring +1	1	silverg_ring_p1																					
+Fabrication		LizardscaleBelt	Waist	31	Lizardscale Belt	1	lizardsc_belt	Lizardscale Belt +1	1	lizardsc_belt_p1																					
+Fabrication		AvianWhistle	Neck	32	Avian Whistle	1	avian_whistle																								
+Fabrication		WarriorsWarBelt	Waist	32	Warrior’s War Belt	1	warrior_war_blt	Warrior’s War Belt +1	1	warrior_warblt_p1																					
+Fabrication		BoneforgedRing	Ring	33	Boneforged Ring	1	boneforged_ring	Boneforged Ring +1	1	boneforged_p1																					
+Fabrication		FocusedResonanceCollar	Neck	35	Focused Resonance Collar	1	focus_reso_colr	Focused Resonance Collar +1	1	focus_reso_p1																					
+Fabrication		ArcaneInfusedBelt	Waist	35	Arcane Infused Belt	1	arcane_inf_belt	Arcane Infused Belt +1	1	arcane_infblt_p1																					
+Fabrication		DhalmelhideMantle	Back	36	Dhalmelhide Mantle	1	dhalmel_mantle	Dhalmelhide Mantle +1	1	dhalmel_mant_p1																					
+Fabrication		LizardscaleMantle	Back	37	Lizardscale Mantle	1	lizardsc_mantle	Lizardscale Mantle +1	1	lizardsc_mant_p1																					
+Fabrication		ObsidianSilkNeckerchief	Neck	38	Obsidian Silk Neckerchief	1	obsidian_silk_nc																								
+Fabrication		CottonWovenCape	Back	38	Cotton-Woven Cape	1	cottonwv_cape	Cotton-Woven Cape +1	1	cottonwv_cape_p1																					
+Fabrication		ChitinPlatedGorget	Neck	39	Chitin-Plated Gorget	1	chitin_gorget																								
+Fabrication		MohbwaWardenSash	Waist	39	Mohbwa Warden Sash	1	mohbwa_ward_sas	Mohbwa Warden Sash +1	1	mohbwa_wards_p1																					
+Fabrication		VerdantGorget	Neck	40	Verdant Gorget	1	verdant_gorget																								
+Fabrication		SilverthreadObi	Waist	40	Silverthread Obi	1	silvert_obi	Silverthread Obi +1	1	silvert_obi_p1																					
+Fabrication		PredatorFangNecklace	Neck	44	Predator Fang Necklace	1	predator_fnk_nec	Predator Fang Necklace +1	1	pred_fang_nec_p1																					
+Fabrication		ChitinPlatedRing	Ring	44	Chitin-Plated Ring	1	chitin_ring	Chitin-Plated Ring +1	1	chitin_ring_p1																					
+Fabrication		TigerfangStole	Neck	45	Tigerfang Stole	1	tigerfang_stole																								
+Fabrication		MythriteBand	Ring	45	Mythrite Band	1	mythrite_band	Mythrite Band +1	1	mythrite_band_p1																					
+Fabrication		NomadsTrailMantle	Back	46	Nomad’s Trail Mantle	1	nomad_trail_mnt	Nomad’s Trail Mantle +1	1	nomad_trail_p1																					
+Fabrication		WovenHempGorget	Neck	47	Woven Hemp Gorget	1	woven_hemp_gor	Woven Hemp Gorget +1	1	woven_hempgr_p1																					
+Fabrication		BeastmastersWhistle	Neck	49	Beastmaster’s Whistle	1	beast_whistle																								
+Fabrication		TitanChainGorget	Neck	50	Titan Chain Gorget	1	titan_chain_gor	Titan Chain Gorget +1	1	titan_chain_p1																					
+Fabrication		SanctifiedPhial	Neck	50	Sanctified Phial	1	sanctified_phial																								
+Fabrication		BonzesEtherCape	Back	50	Bonze’s Ether Cape	1	bonze_ether_cape	Bonze’s Ether Cape +1	1	bonze_ether_p1																					
+Fabrication		ReinforcedChainBelt	Waist	50	Reinforced Chain Belt	1	reinforce_ch_blt	Reinforced Chain Belt +1	1	reinforce_chb_p1																					
+Fabrication		PrecisionMantle	Back	51	Precision Mantle	1	precision_mantle	Precision Mantle +1	1	precision_mant_p1																					
+Fabrication		ForceboundBelt	Waist	53	Forcebound Belt	1	forcebound_belt																								
+Fabrication		GriotsResonanceBelt	Waist	55	Griot’s Resonance Belt	1	griot_reso_belt	Griot’s Resonance Belt +1	1	griot_reso_p1																					
+Fabrication		DirewolfMantle	Back	56	Direwolf Mantle	1	direwolf_mantle	Direwolf Mantle +1	1	direwolf_mant_p1																					
+Fabrication		DirewolfGorget	Neck	57	Direwolf Gorget	1	direwolf_gorget	Direwolf Gorget +1	1	direwolf_gorg_p1																					
+Fabrication		MarksmansRing	Ring	57	Marksman’s Ring	1	marksman_ring																								
+Fabrication		ShamansEtherBelt	Waist	57	Shaman’s Ether Belt	1	shaman_ether_blt	Shaman’s Ether Belt +1	1	shaman_ether_p1																					
+Fabrication		SmilodonFangRing	Ring	62	Smilodon Fang Ring	1	smilodon_fangrn	Smilodon Fang Ring +1	1	smilodon_fang_p1																					
+Fabrication		MidnightShadowCape	Back	62	Midnight Shadow Cape	1	midnight_shdw_cp	Midnight Shadow Cape +1	1	midnight_shdw_p1																					
+Fabrication		HojutsuCombatBelt	Waist	64	Hojutsu Combat Belt	1	hojutsu_com_belt	Hojutsu Combat Belt +1	1	hojutsu_combl_p1																					
+Fabrication		AuricGoldObi	Waist	66	Auric Gold Obi	1	auric_gold_obi	Auric Gold Obi +1	1	auric_goldobi_p1																					
+Fabrication		ObsidianCloak	Back	67	Obsidian Cloak	1	obsidian_cloak	Obsidian Cloak +1	1	obsidian_cloak_p1																					
+Fabrication		SilverguardBelt	Waist	67	Silverguard Belt	1	silverg_belt	Silverguard Belt +1	1	silverg_belt_p1																					
+Fabrication		DeftstrikeRing	Ring	69	Deftstrike Ring	1	deftstrike_ring	Deftstrike Ring +1	1	deftstrike_p1																					
+Fabrication		VerveEtherflowRing	Ring	70	Verve Etherflow Ring	1	verve_ether_rng	Verve Etherflow Ring +1	1	verve_ether_p1																					
+Fabrication		AlacrityResonanceRing	Ring	71	Alacrity Resonance Ring	1	alacrity_res_rng	Alacrity Resonance Ring +1	1	alacrity_res_p1																					
+Fabrication		AegisShieldPendant	Neck	72	Aegis Shield Pendant	1	aegis_shield_pnd																								
+Fabrication		HornedCrestRing	Ring	72	Horned Crest Ring	1	horned_crest_rng	Horned Crest Ring +1	1	horned_crest_p1																					
+Fabrication		OathkeepersLoyaltyRing	Ring	72	Oathkeeper’s Loyalty Ring	1	oathkeeper_loyal	Oathkeeper’s Loyalty Ring +1	1	oathkeep_loyal_p1																					
+Fabrication		SolaceGuardianRing	Ring	72	Solace Guardian Ring	1	solace_guard_rng	Solace Guardian Ring +1	1	solace_guard_p1																					
+Fabrication		MedievalWarCollar	Neck	73	Medieval War Collar	1	medieval_war_col																								
+Fabrication		RamguardMantle	Back	73	Ramguard Mantle	1	ramguard_mantle	Ramguard Mantle +1	1	ramguard_mant_p1																					
+Fabrication		CavaliersWarMantle	Back	73	Cavalier’s War Mantle	1	cavalier_war_mnt	Cavalier’s War Mantle +1	1	cavalier_warm_p1																					
+Fabrication		PuissanceBattleRing	Ring	75	Puissance Battle Ring	1	puissance_btlrng	Puissance Battle Ring +1	1	puissance_btl_p1																					
+Fabrication		ElectrumArcRing	Ring	77	Electrum Arc Ring	1	electrum_arc_rng	Electrum Arc Ring +1	1	electrum_arc_p1																					
+Fabrication		ReinforcedGorget	Neck	80	Reinforced Gorget	1	reinforce_gorget	Reinforced Gorget +1	1	reinforce_gorg_p1																					
+Fabrication		ReinforcedCorsette	Waist	80	Reinforced Corsette	1	reinforce_corset	Reinforced Corsette +1	1	reinforce_cors_p1																					
+Fabrication		TacticalWaistbelt	Waist	80	Tactical Waistbelt	1	tactic_waistbelt	Tactical Waistbelt +1	1	tactic_waist_p1																					
+Fabrication		MohbwaWardenScarf	Neck	81	Mohbwa Warden Scarf	1	mohbwa_ward_scar	Mohbwa Warden Scarf +1	1	mohbwa_wardsc_p1																					
+Fabrication		QiqirnScoutsSash	Waist	82	Qiqirn Scout’s Sash	1	qiqirn_scout_sas	Qiqirn Scout’s Sash +1	1	qiqirn_scout_p1																					
+Fabrication		SharpshootersRing	Ring	83	Sharpshooter’s Ring	1	sharpshooter_rng	Sharpshooter’s Ring +1	1	sharpshoot_p1																					
+Fabrication		CrimsonDrape	Back	83	Crimson Drape	1	crimson_drape	Crimson Drape +1	1	crimson_drape_p1																					
+Fabrication		WoodsmansTrackerRing	Ring	85	Woodsman’s Tracker Ring	1	woodsman_trackrn	Woodsman’s Tracker Ring +1	1	woods_track_p1																					
+Fabrication		WarforgedSwordbelt	Waist	86	Warforged Swordbelt	1	warforged_swdbel	Warforged Swordbelt +1	1	warforged_swd_p1																					
+Fabrication		AuricGoldRing	Ring	87	Auric Gold Ring	1	auric_gold_ring	Auric Gold Ring +1	1	auric_goldrng_p1																					
+Fabrication		AuroraSkyMantle	Back	88	Aurora Sky Mantle	1	aurora_sky_mantl	Aurora Sky Mantle +1	1	aurora_sky_p1																					
+Fabrication		AzureGorget	Neck	91	Azure Gorget	1	azure_gorget																								
+Fabrication		ShadowJaguarMantle	Back	94	Shadow Jaguar Mantle	1	shadow_jag_mnt	Shadow Jaguar Mantle +1	1	shadow_jag_p1																					
+Fabrication		PhalanxDefenderRing	Ring	97	Phalanx Defender Ring	1	phalanx_def_rng	Phalanx Defender Ring +1	1	phalanx_def_p1																					
+Fabrication		LifewardenBelt	Waist	97	Lifewarden Belt	1	lifewarden_belt																								
+Fabrication		WarlordsNodowa	Neck	99	Warlord’s Nodowa	1	warlord_nodowa	Warlord’s Nodowa +1	1	warlord_nodo_p1																					
+Fabrication		MoonlitArcTorque	Neck	99	Moonlit Arc Torque	1	moonlit_arc_torq																								
+Fabrication		RaptorstrikeMantle	Back	99	Raptorstrike Mantle	1	raptorstrike_mnt	Raptorstrike Mantle +1	1	raptorstrike_p1																					
+Fabrication		ArcaneVeilMantle	Back	99	Arcane Veil Mantle	1	arcane_veil_mnt																								
+Fabrication		MythriteGorget	Neck	100	Mythrite Gorget	1	mythrite_gorget	Mythrite Gorget +1	1	mythrite_gorg_p1																					
+Fabrication		RaptorBeakNecklace	Neck	100	Raptor Beak Necklace	1	raptor_beak_neck	Raptor Beak Necklace +1	1	raptor_beak_p1																					
+Fabrication		IntellectResonanceTorque	Neck	100	Intellect Resonance Torque	1	intellect_res_tq																								
+Fabrication		TitanWarMantle	Back	100	Titan War Mantle	1	titan_war_mantle																								
+Fabrication		SharpshootersMantle	Back	100	Sharpshooter’s Mantle	1	sharpshooter_mnt																								
