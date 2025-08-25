@@ -36,6 +36,24 @@ namespace XM.Plugin.Craft
         Polearm = 14,
         [RecipeCategory(LocaleString.Bow, true)]
         Bow = 15,
+        [RecipeCategory(LocaleString.Head, true)]
+        Head = 40,
+        [RecipeCategory(LocaleString.Body, true)]
+        Body = 41,
+        [RecipeCategory(LocaleString.Arm, true)]
+        Hands = 42,
+        [RecipeCategory(LocaleString.Feet, true)]
+        Feet = 43,
+        [RecipeCategory(LocaleString.Shield, true)]
+        Shield = 44,
+        [RecipeCategory(LocaleString.Ring, true)]
+        Ring = 45,
+        [RecipeCategory(LocaleString.Neck, true)]
+        Neck = 46,
+        [RecipeCategory(LocaleString.Back, true)]
+        Back = 47,
+        [RecipeCategory(LocaleString.Waist, true)]
+        Waist = 48,
         
     }
 }
