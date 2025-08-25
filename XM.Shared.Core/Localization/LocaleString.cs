@@ -1579,7 +1579,8 @@ namespace XM.Shared.Core.Localization
         RepairCostXCredits = 2341,
         RepairConfirmationPartial = 2342,
         NothingToRepair = 2343,
-        // 2344-2399 are free
+        Ring = 2344,
+        // 2345-2399 are free
         Worldguide = 2400,
         Lore = 2400,
         History = 2401,

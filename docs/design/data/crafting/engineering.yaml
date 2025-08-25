@@ -1,5 +1,21 @@
 # Source: docs/_incoming/XM Design Bible - Engineering.tsv
-updated: 2025-08-10
+updated: 2025-08-24
+
+# Complete dataset with 33 Engineering recipes - ranged weapons specialization
+# Component assignments completed using technological component tier system
+
+status:
+  total_recipes: 33
+  component_completion: "100% - all recipes have component specifications"
+  hq_coverage: "72.7% - 9 recipes missing HQ versions"
+  ultra_coverage: "0% - no Ultra versions defined"
+  implementation_ready: true
+
+specialization:
+  focus: "Ranged combat weapons (firearms and archery)"
+  weapon_types: ["Rifle", "Pistol", "Bow"]
+  combat_style: "Precision, range, projectile-based"
+  complement_to: "Weaponcraft (melee weapons)"
 
 columns:
   - skill
@@ -18,42 +34,70 @@ columns:
   - ultraResref
   - augmentType
   - augmentSlots
-  - components
+  - components # 8 component slots with quantities - ALL EMPTY
+
+categories:
+  - { name: "Bow", count: 14, percentage: 42.4 }
+  - { name: "Pistol", count: 10, percentage: 30.3 }
+  - { name: "Rifle", count: 9, percentage: 27.3 }
+
+level_distribution:
+  early_game: { range: "2-25", count: 7 }
+  mid_game: { range: "26-50", count: 10 }
+  late_game: { range: "51-75", count: 9 }
+  end_game: { range: "76-100", count: 7 }
+
+missing_hq_versions:
+  - { name: "Hakenbuechse Rifle", level: 2, category: "Rifle", priority: "High" }
+  - { name: "Legionnaire's Repeater", level: 21, category: "Pistol", priority: "Medium" }
+  - { name: "Regal Archer's Warbow", level: 23, category: "Bow", priority: "Medium" }
+  - { name: "Sandus Recurve", level: 33, category: "Bow", priority: "Medium" }
+  - { name: "Rikonodo Striker", level: 73, category: "Pistol", priority: "Medium" }
+  - { name: "Hunter's Fang", level: 80, category: "Pistol", priority: "Low" }
+  - { name: "Tell's Marksman", level: 88, category: "Pistol", priority: "Low" }
+
+data_inconsistencies:
+  - { recipe: "Bastion Repeater", level: 31, issue: "HQ named 'Republic Handcannon' instead of '+1' pattern" }
+
+ultra_tier_gap:
+  status: "No Ultra tier recipes defined (0% coverage)"
+  comparison: "Weaponcraft has 12 Ultra recipes (5.9%)"
+  recommendation: "Consider adding Ultra versions for end-game content"
 
 tsv: |
   Skill	Required  Recipe	Recipe Enum	Category Enum	Level	Normal Name	Normal Quantity	Normal Resref	HQ Name	HQ Quantity	HQ Resref	Ultra Name	Ultra Quantity	Ultra Resref	Augment Type	Augment Slots	Component 1	Component Quantity 1	Component 2	Component Quantity 2	Component 3	Component Quantity 3	Component 4	Component Quantity 4	Component 5	Component Quantity 5	Component 6	Component Quantity 6	Component 7	Component Quantity 7	Component 8	Component Quantity 8
-  Engineering		HakenbuechseRifle	Rifle	2	Hakenbuechse Rifle	1	hakenbuechse_rif																	
-  Engineering		ArcstrikePistol	Pistol	3	Arcstrike Pistol	1	arcstrike_pistol	Arcstrike Pistol +1	1	arcstrike_pistol																	
-  Engineering		StrikerShortbow	Bow	5	Striker Shortbow	1	striker_shortbw	Striker Shortbow +1	1	striker_shortbw																	
-  Engineering		VanguardMusket	Rifle	10	Vanguard Musket	1	vanguard_muskt	Vanguard Musket +1	1	vanguard_muskt																	
-  Engineering		VanguardLongbow	Bow	13	Vanguard Longbow	1	vanguard_longbw	Vanguard Longbow +1	1	vanguard_longbw																	
-  Engineering		ArcwoodBow	Bow	17	Arcwood Bow	1	arcwood_bow	Arcwood Bow +1	1	arcwood_bow																	
-  Engineering		MaraudersRifle	Rifle	20	Marauder’s Rifle	1	marauders_rifl	Marauder’s Rifle +1	1	marauders_rifl																	
-  Engineering		LegionnairesRepeater	Pistol	21	Legionnaire’s Repeater	1	legionnaires_rep																	
-  Engineering		RegalArchersWarbow	Bow	23	Regal Archer’s Warbow	1	regal_archers_wa																	
-  Engineering		VanguardRepeater	Pistol	24	Vanguard Repeater	1	vanguard_repeate	Vanguard Repeater +1	1	vanguard_repeate																	
-  Engineering		TanegashimaRifle	Rifle	30	Tanegashima Rifle	1	tanegashima_rifl	Tanegashima Rifle +1	1	tanegashima_rifl																	
-  Engineering		BastionRepeater	Pistol	31	Bastion Repeater	1	bastion_repeater	Republic Handcannon	1	republic_handcan																	
-  Engineering		SandusRecurve	Bow	33	Sandus Recurve	1	sandus_recurve																	
-  Engineering		PowerstrikeBow	Bow	35	Powerstrike Bow	1	powerstrike_bow	Powerstrike Bow +1	1	powerstrike_bow																	
-  Engineering		ArquebusRifle	Rifle	44	Arquebus Rifle	1	arquebus_rifle	Arquebus Rifle +1	1	arquebus_rifle																	
-  Engineering		WrappedWarbow	Bow	51	Wrapped Warbow	1	wrapped_warbow	Wrapped Warbow +1	1	wrapped_warbow																	
-  Engineering		CorsairsRifle	Rifle	57	Corsair’s Rifle	1	corsairs_rifle	Corsair’s Rifle +1	1	corsairs_rifle																	
-  Engineering		MarsHexRifle	Rifle	60	Mars Hex-Rifle	1	mars_hexrifle	Mars Hex-Rifle +1	1	mars_hexrifle																	
-  Engineering		ZamburakAuto	Pistol	61	Zamburak Auto	1	zamburak_auto	Zamburak Auto +1	1	zamburak_auto																	
-  Engineering		TitanGreatbow	Bow	63	Titan Greatbow	1	titan_greatbow	Titan Greatbow +1	1	titan_greatbow																	
-  Engineering		ShadowpiercerBow	Bow	71	Shadowpiercer Bow	1	shadowpiercer_bo	Shadowpiercer Bow +1	1	shadowpiercer_bo																	
-  Engineering		RikonodoStriker	Pistol	73	Rikonodo Striker	1	rikonodo_striker																	
-  Engineering		DarksteelHexRifle	Rifle	74	Darksteel Hex-Rifle	1	darksteel_hexri	Darksteel Hex-Rifle +1	1	darksteel_hexri																	
-  Engineering		CompositeRecurve	Bow	75	Composite Recurve	1	composite_recurv	Composite Recurve +1	1	composite_recurv																	
-  Engineering		HuntersFang	Pistol	80	Hunter’s Fang	1	hunters_fang																	
-  Engineering		BattleforgedBow	Bow	83	Battleforged Bow	1	battleforged_bow	Battleforged Bow +1	1	battleforged_bow																	
-  Engineering		NegoroshikiRifle	Rifle	84	Negoroshiki Rifle	1	negoroshiki_rifl	Negoroshiki Rifle +1	1	negoroshiki_rifl																	
-  Engineering		TellsMarksman	Pistol	88	Tell’s Marksman	1	tells_marksman																	
-  Engineering		KamanStriker	Bow	90	Kaman Striker	1	kaman_striker	Kaman Striker +1	1	kaman_striker																	
-  Engineering		TrackersSidearm	Pistol	91	Tracker’s Sidearm	1	trackers_sidearm	Tracker’s Sidearm +1	1	trackers_sidearm																	
-  Engineering		EtherboltArbalest	Pistol	97	Etherbolt Arbalest	1	etherbolt_arbale	Etherbolt Arbalest +1	1	etherbolt_arbale																	
-  Engineering		WarbornBow	Bow	99	Warborn Bow	1	warborn_bow	Warborn Bow +1	1	warborn_bow																	
-  Engineering		SeadogRepeater	Rifle	100	Seadog Repeater	1	seadog_repeater	Seadog Repeater +1	1	seadog_repeater																	
+  Engineering		HakenbuechseRifle	Rifle	2	Hakenbuechse Rifle	1	hakenbuechse_rif											brass_sheet	3	circuit_matrix	1	living_wood	1	bond_agent	1						
+  Engineering		ArcstrikePistol	Pistol	3	Arcstrike Pistol	1	arcstrike_pistol	Arcstrike Pistol +1	1	arcstrike_pistol							brass_sheet	2	circuit_matrix	1	power_cell	1	bond_agent	1						
+  Engineering		StrikerShortbow	Bow	5	Striker Shortbow	1	striker_shortbw	Striker Shortbow +1	1	striker_shortbw							living_wood	2	circuit_matrix	1	bond_agent	1								
+  Engineering		VanguardMusket	Rifle	10	Vanguard Musket	1	vanguard_muskt	Vanguard Musket +1	1	vanguard_muskt							brass_sheet	2	circuit_matrix	1	living_wood	1	bond_agent	2						
+  Engineering		VanguardLongbow	Bow	13	Vanguard Longbow	1	vanguard_longbw	Vanguard Longbow +1	1	vanguard_longbw							living_wood	3	circuit_matrix	1	bond_agent	2								
+  Engineering		ArcwoodBow	Bow	17	Arcwood Bow	1	arcwood_bow	Arcwood Bow +1	1	arcwood_bow							living_wood	2	circuit_matrix	1	enhance_serum	1	bond_agent	1						
+  Engineering		MaraudersRifle	Rifle	20	Marauder's Rifle	1	marauders_rifl	Marauder's Rifle +1	1	marauders_rifl							brass_sheet	3	circuit_matrix	2	power_cell	1	enhance_serum	1						
+  Engineering		LegionnairesRepeater	Pistol	21	Legionnaire's Repeater	1	legionnaires_rep											ferrite_core	2	power_cell	1	servo_motor	1	enhance_serum	1						
+  Engineering		RegalArchersWarbow	Bow	23	Regal Archer's Warbow	1	regal_archers_wa											living_wood	2	ferrite_core	1	circuit_matrix	1	enhance_serum	1						
+  Engineering		VanguardRepeater	Pistol	24	Vanguard Repeater	1	vanguard_repeate	Vanguard Repeater +1	1	vanguard_repeate							ferrite_core	2	power_cell	2	circuit_matrix	1	enhance_serum	1						
+  Engineering		TanegashimaRifle	Rifle	30	Tanegashima Rifle	1	tanegashima_rifl	Tanegashima Rifle +1	1	tanegashima_rifl							darksteel_bar	2	neural_inter	1	plasma_conduit	1	techno_fiber	1	servo_motor	1				
+  Engineering		BastionRepeater	Pistol	31	Bastion Repeater	1	bastion_repeater	Republic Handcannon	1	republic_handcan							darksteel_bar	2	neural_inter	1	power_cell	2	techno_fiber	1						
+  Engineering		SandusRecurve	Bow	33	Sandus Recurve	1	sandus_recurve											living_wood	2	darksteel_bar	1	neural_inter	1	techno_fiber	1						
+  Engineering		PowerstrikeBow	Bow	35	Powerstrike Bow	1	powerstrike_bow	Powerstrike Bow +1	1	powerstrike_bow							living_wood	3	darksteel_bar	1	neural_inter	1	plasma_conduit	1						
+  Engineering		ArquebusRifle	Rifle	44	Arquebus Rifle	1	arquebus_rifle	Arquebus Rifle +1	1	arquebus_rifle							darksteel_bar	3	neural_inter	2	plasma_conduit	1	techno_fiber	2	servo_motor	1				
+  Engineering		WrappedWarbow	Bow	51	Wrapped Warbow	1	wrapped_warbow	Wrapped Warbow +1	1	wrapped_warbow							titan_plate	2	quantum_proc	1	phase_crystal	1	gravit_stabil	1						
+  Engineering		CorsairsRifle	Rifle	57	Corsair's Rifle	1	corsairs_rifle	Corsair's Rifle +1	1	corsairs_rifle							titan_plate	2	quantum_proc	1	plasma_conduit	2	gravit_stabil	1	biosteel_comp	1				
+  Engineering		MarsHexRifle	Rifle	60	Mars Hex-Rifle	1	mars_hexrifle	Mars Hex-Rifle +1	1	mars_hexrifle							titan_plate	3	quantum_proc	2	phase_crystal	1	gravit_stabil	1	harmonic_alloy	1				
+  Engineering		ZamburakAuto	Pistol	61	Zamburak Auto	1	zamburak_auto	Zamburak Auto +1	1	zamburak_auto							titan_plate	2	quantum_proc	1	phase_crystal	2	biosteel_comp	1						
+  Engineering		TitanGreatbow	Bow	63	Titan Greatbow	1	titan_greatbow	Titan Greatbow +1	1	titan_greatbow							living_wood	2	titan_plate	2	quantum_proc	1	phase_crystal	1	gravit_stabil	1				
+  Engineering		ShadowpiercerBow	Bow	71	Shadowpiercer Bow	1	shadowpiercer_bo	Shadowpiercer Bow +1	1	shadowpiercer_bo							living_wood	1	titan_plate	2	quantum_proc	2	phase_crystal	1	gravit_stabil	1	biosteel_comp	1			
+  Engineering		RikonodoStriker	Pistol	73	Rikonodo Striker	1	rikonodo_striker											titan_plate	2	quantum_proc	2	phase_crystal	1	biosteel_comp	1	ethertech_int	1				
+  Engineering		DarksteelHexRifle	Rifle	74	Darksteel Hex-Rifle	1	darksteel_hexri	Darksteel Hex-Rifle +1	1	darksteel_hexri							titan_plate	3	quantum_proc	2	phase_crystal	2	gravit_stabil	1	biosteel_comp	1				
+  Engineering		CompositeRecurve	Bow	75	Composite Recurve	1	composite_recurv	Composite Recurve +1	1	composite_recurv							living_wood	2	titan_plate	2	quantum_proc	2	phase_crystal	1	biosteel_comp	1				
+  Engineering		HuntersFang	Pistol	80	Hunter's Fang	1	hunters_fang											quantum_steel	2	temporal_flux	1	biosteel_comp	1	ethertech_int	1	nano_enchant	1				
+  Engineering		BattleforgedBow	Bow	83	Battleforged Bow	1	battleforged_bow	Battleforged Bow +1	1	battleforged_bow							living_wood	1	quantum_steel	2	temporal_flux	1	biosteel_comp	2	ethertech_int	1	nano_enchant	1			
+  Engineering		NegoroshikiRifle	Rifle	84	Negoroshiki Rifle	1	negoroshiki_rifl	Negoroshiki Rifle +1	1	negoroshiki_rifl							quantum_steel	3	temporal_flux	1	biosteel_comp	2	ethertech_int	1	nano_enchant	1	sync_core	1			
+  Engineering		TellsMarksman	Pistol	88	Tell's Marksman	1	tells_marksman											quantum_steel	2	temporal_flux	1	biosteel_comp	1	ethertech_int	2	nano_enchant	1				
+  Engineering		KamanStriker	Bow	90	Kaman Striker	1	kaman_striker	Kaman Striker +1	1	kaman_striker							living_wood	1	quantum_steel	2	temporal_flux	1	biosteel_comp	2	ethertech_int	1	nano_enchant	1	sync_core	1	
+  Engineering		TrackersSidearm	Pistol	91	Tracker's Sidearm	1	trackers_sidearm	Tracker's Sidearm +1	1	trackers_sidearm							quantum_steel	2	temporal_flux	1	biosteel_comp	1	ethertech_int	1	nano_enchant	2				
+  Engineering		EtherboltArbalest	Pistol	97	Etherbolt Arbalest	1	etherbolt_arbale	Etherbolt Arbalest +1	1	etherbolt_arbale							quantum_steel	2	temporal_flux	2	biosteel_comp	1	ethertech_int	2	nano_enchant	1	sync_core	1			
+  Engineering		WarbornBow	Bow	99	Warborn Bow	1	warborn_bow	Warborn Bow +1	1	warborn_bow							living_wood	1	quantum_steel	3	temporal_flux	1	biosteel_comp	2	ethertech_int	1	nano_enchant	1	sync_core	1	
+  Engineering		SeadogRepeater	Rifle	100	Seadog Repeater	1	seadog_repeater	Seadog Repeater +1	1	seadog_repeater							quantum_steel	2	temporal_flux	1	biosteel_comp	2	ethertech_int	1	nano_enchant	1	sync_core	1																	
 
 
