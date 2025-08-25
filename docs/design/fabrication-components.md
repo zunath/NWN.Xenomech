@@ -16,38 +16,38 @@ Fabrication focuses on utility accessories and enhancement systems:
 ### Rings (31 recipes)
 
 **Aurion Alloy Ring (Level 1)**
-- Component 1: Aurion Alloy Ingots (1x)
-- Component 2: Ether Crystals (1x)
-- Component 3: Bonding Agents (1x)
+- Component 1: Aurion Alloy Ingots (1x) - `aurion_ingot`
+- Component 2: Ether Crystals (1x) - `ether_crystal`
+- Component 3: Bonding Agents (1x) - `bond_agent`
 
 **Vanguard Ring (Level 15)**
-- Component 1: Ferrite Cores (1x)
-- Component 2: Circuit Matrices (1x)
-- Component 3: Enhancement Serums (1x)
+- Component 1: Ferrite Cores (1x) - `ferrite_core`
+- Component 2: Circuit Matrices (1x) - `circuit_matrix`
+- Component 3: Enhancement Serums (1x) - `enhance_serum`
 
 **Brass Ring (Level 18)**
-- Component 1: Brass Sheets (1x)
-- Component 2: Resonance Stones (1x)
-- Component 3: Amplification Crystals (1x)
+- Component 1: Brass Sheets (1x) - `brass_sheet`
+- Component 2: Resonance Stones (1x) - `resonance_ston`
+- Component 3: Amplification Crystals (1x) - `amp_crystal`
 
 **Mythrite Ring (Level 46)**
-- Component 1: Mythrite Fragments (2x)
-- Component 2: Psi-Crystals (1x)
-- Component 3: Spirit Essence (1x)
-- Component 4: Purification Filters (1x)
+- Component 1: Mythrite Fragments (2x) - `mythrite_frag`
+- Component 2: Psi-Crystals (1x) - `psi_crystal`
+- Component 3: Spirit Essence (1x) - `spirit_ess`
+- Component 4: Purification Filters (1x) - `purify_filter`
 
 **Titanium Ring (Level 82)**
-- Component 1: Titanium Plating (1x)
-- Component 2: Quantum Processors (1x)
-- Component 3: Nano-Enchantments (1x)
-- Component 4: Harmonic Alloys (1x)
-- Component 5: Synchronization Cores (1x)
+- Component 1: Titanium Plating (1x) - `titan_plate`
+- Component 2: Quantum Processors (1x) - `quantum_proc`
+- Component 3: Nano-Enchantments (1x) - `nano_enchant`
+- Component 4: Harmonic Alloys (1x) - `harmonic_alloy`
+- Component 5: Synchronization Cores (1x) - `sync_core`
 
 ### Waist Items (30 recipes)
 
 **Aurion Alloy Belt (Level 5)**
-- Component 1: Aurion Alloy Ingots (2x)
-- Component 2: Beast Hide (3x)
+- Component 1: Aurion Alloy Ingots (2x) - `aurion_ingot`
+- Component 2: Beast Hide (3x) - `beast_hide`
 - Component 3: Bonding Agents (1x)
 
 **Vanguard Belt (Level 15)**

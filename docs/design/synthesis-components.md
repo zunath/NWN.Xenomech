@@ -16,123 +16,123 @@ Synthesis focuses on magical head accessories and arcane headwear:
 ### Entry-Level Magical Items
 
 **Drab Circlet (Level 1)**
-- Component 1: Arcane Dust (2x)
-- Component 2: Brass Sheets (1x)
-- Component 3: Bonding Agents (1x)
+- Component 1: Arcane Dust (2x) - `arcane_dust`
+- Component 2: Brass Sheets (1x) - `brass_sheet`
+- Component 3: Bonding Agents (1x) - `bond_agent`
 
 **Aurion Alloy Circlet (Level 5)**
-- Component 1: Aurion Alloy Ingots (1x)
-- Component 2: Ether Crystals (1x)
-- Component 3: Arcane Dust (1x)
-- Component 4: Enhancement Serums (1x)
+- Component 1: Aurion Alloy Ingots (1x) - `aurion_ingot`
+- Component 2: Ether Crystals (1x) - `ether_crystal`
+- Component 3: Arcane Dust (1x) - `arcane_dust`
+- Component 4: Enhancement Serums (1x) - `enhance_serum`
 
 ### Progressive Magical Enhancement
 
 **Vanguard Circlet (Level 13)**
-- Component 1: Ferrite Cores (1x)
-- Component 2: Resonance Stones (2x)
-- Component 3: Spirit Essence (1x)
-- Component 4: Purification Filters (1x)
+- Component 1: Ferrite Cores (1x) - `ferrite_core`
+- Component 2: Resonance Stones (2x) - `resonance_ston`
+- Component 3: Spirit Essence (1x) - `spirit_ess`
+- Component 4: Purification Filters (1x) - `purify_filter`
 
 **Brass Circlet (Level 18)**
-- Component 1: Brass Sheets (1x)
-- Component 2: Psi-Crystals (1x)
-- Component 3: Arcane Dust (2x)
-- Component 4: Amplification Crystals (1x)
+- Component 1: Brass Sheets (1x) - `brass_sheet`
+- Component 2: Psi-Crystals (1x) - `psi_crystal`
+- Component 3: Arcane Dust (2x) - `arcane_dust`
+- Component 4: Amplification Crystals (1x) - `amp_crystal`
 
 **Ferrite Circlet (Level 26)**
-- Component 1: Ferrite Cores (1x)
-- Component 2: Ether Crystals (2x)
-- Component 3: Spirit Essence (1x)
-- Component 4: Quantum-Mystic Cores (1x)
+- Component 1: Ferrite Cores (1x) - `ferrite_core`
+- Component 2: Ether Crystals (2x) - `ether_crystal`
+- Component 3: Spirit Essence (1x) - `spirit_ess`
+- Component 4: Quantum-Mystic Cores (1x) - `quantmyst_core`
 
 ### Decorative Magical Items
 
 **Elaborate Hairpin (Level 31)** - Missing HQ
-- Component 1: Mythrite Fragments (1x)
-- Component 2: Void Shards (1x)
-- Component 3: Sanctified Elements (1x)
-- Component 4: Nano-Enchantments (1x)
+- Component 1: Mythrite Fragments (1x) - `mythrite_frag`
+- Component 2: Void Shards (1x) - `void_shard`
+- Component 3: Sanctified Elements (1x) - `sanctify_elem`
+- Component 4: Nano-Enchantments (1x) - `nano_enchant`
 
 **HQ Version Addition**:
-- Add: Psi-Crystals (1x) + Temporal Flux (1x)
+- Add: Psi-Crystals (1x) + Temporal Flux (1x) - `psi_crystal` + `temporal_flux`
 
 **Jeweled Hairpin (Level 37)** - Missing HQ  
-- Component 1: Mythrite Fragments (2x)
-- Component 2: Phase Crystals (1x)
-- Component 3: Spirit Essence (2x)
-- Component 4: Ether-Tech Interfaces (1x)
+- Component 1: Mythrite Fragments (2x) - `mythrite_frag`
+- Component 2: Phase Crystals (1x) - `phase_crystal`
+- Component 3: Spirit Essence (2x) - `spirit_ess`
+- Component 4: Ether-Tech Interfaces (1x) - `ethertech_int`
 
 **HQ Version Addition**:
-- Add: Quantum-Mystic Cores (1x) + Harmonic Alloys (1x)
+- Add: Quantum-Mystic Cores (1x) + Harmonic Alloys (1x) - `quantmyst_core` + `harmonic_alloy`
 
 ### Advanced Mystical Items
 
 **Mythrite Circlet (Level 46)**
-- Component 1: Mythrite Fragments (2x)
-- Component 2: Psi-Crystals (2x)
-- Component 3: Void Shards (1x)
-- Component 4: Quantum-Mystic Cores (1x)
-- Component 5: Synchronization Cores (1x)
+- Component 1: Mythrite Fragments (2x) - `mythrite_frag`
+- Component 2: Psi-Crystals (2x) - `psi_crystal`
+- Component 3: Void Shards (1x) - `void_shard`
+- Component 4: Quantum-Mystic Cores (1x) - `quantmyst_core`
+- Component 5: Synchronization Cores (1x) - `sync_core`
 
 **Toxin Circlet (Level 54)**
-- Component 1: Mythrite Fragments (1x)
-- Component 2: Venom Sacs (2x)
-- Component 3: Neural Fluid (1x)
-- Component 4: Bio-Steel Composites (1x)
-- Component 5: Chaos Fragments (1x)
+- Component 1: Mythrite Fragments (1x) - `mythrite_frag`
+- Component 2: Venom Sacs (2x) - `venom_sac`
+- Component 3: Neural Fluid (1x) - `neural_fluid`
+- Component 4: Bio-Steel Composites (1x) - `biosteel_comp`
+- Component 5: Chaos Fragments (1x) - `chaos_fragment`
 
 **Ornate Crown (Level 63)**
-- Component 1: Titanium Plating (2x)
-- Component 2: Phase Crystals (2x)
-- Component 3: Sanctified Elements (2x)
-- Component 4: Temporal Flux (1x)
-- Component 5: Ether-Tech Interfaces (1x)
+- Component 1: Titanium Plating (2x) - `titan_plate`
+- Component 2: Phase Crystals (2x) - `phase_crystal`
+- Component 3: Sanctified Elements (2x) - `sanctify_elem`
+- Component 4: Temporal Flux (1x) - `temporal_flux`
+- Component 5: Ether-Tech Interfaces (1x) - `ethertech_int`
 
 ### Master-Tier Mystical Items
 
 **Titanium Circlet (Level 71)**
-- Component 1: Titanium Plating (2x)
-- Component 2: Quantum Processors (1x)
-- Component 3: Psi-Crystals (3x)
-- Component 4: Temporal Flux (1x)
-- Component 5: Nano-Enchantments (2x)
+- Component 1: Titanium Plating (2x) - `titan_plate`
+- Component 2: Quantum Processors (1x) - `quantum_proc`
+- Component 3: Psi-Crystals (3x) - `psi_crystal`
+- Component 4: Temporal Flux (1x) - `temporal_flux`
+- Component 5: Nano-Enchantments (2x) - `nano_enchant`
 
 **Sanctified Circlet (Level 88)**
-- Component 1: Sanctified Elements (3x)
-- Component 2: Spirit Essence (3x)
-- Component 3: Quantum-Mystic Cores (2x)
-- Component 4: Temporal Flux (1x)
-- Component 5: Ether-Tech Interfaces (1x)
-- Component 6: Chaos Fragments (1x)
+- Component 1: Sanctified Elements (3x) - `sanctify_elem`
+- Component 2: Spirit Essence (3x) - `spirit_ess`
+- Component 3: Quantum-Mystic Cores (2x) - `quantmyst_core`
+- Component 4: Temporal Flux (1x) - `temporal_flux`
+- Component 5: Ether-Tech Interfaces (1x) - `ethertech_int`
+- Component 6: Chaos Fragments (1x) - `chaos_fragment`
 
 ### Ultimate Mystical Item
 
 **Bonze's Ether Circlet (Level 75)** - Missing HQ
-- Component 1: Quantum Steel (1x)
-- Component 2: Ether-Tech Interfaces (2x)
-- Component 3: Psi-Crystals (2x)
-- Component 4: Temporal Flux (1x)
-- Component 5: Spirit Essence (2x)
+- Component 1: Quantum Steel (1x) - `quantum_steel`
+- Component 2: Ether-Tech Interfaces (2x) - `ethertech_int`
+- Component 3: Psi-Crystals (2x) - `psi_crystal`
+- Component 4: Temporal Flux (1x) - `temporal_flux`
+- Component 5: Spirit Essence (2x) - `spirit_ess`
 
 **HQ Version Addition**:
-- Add: Quantum-Mystic Cores (1x) + Void Shards (1x)
+- Add: Quantum-Mystic Cores (1x) + Void Shards (1x) - `quantmyst_core` + `void_shard`
 
 **Xenomech Crown (Level 97)**
-- Component 1: Quantum Steel (3x)
-- Component 2: Temporal Flux (2x)
-- Component 3: Quantum-Mystic Cores (3x)
-- Component 4: Ether-Tech Interfaces (2x)
-- Component 5: Phase Crystals (2x)
-- Component 6: Sanctified Elements (1x)
-- Component 7: Void Shards (1x)
+- Component 1: Quantum Steel (3x) - `quantum_steel`
+- Component 2: Temporal Flux (2x) - `temporal_flux`
+- Component 3: Quantum-Mystic Cores (3x) - `quantmyst_core`
+- Component 4: Ether-Tech Interfaces (2x) - `ethertech_int`
+- Component 5: Phase Crystals (2x) - `phase_crystal`
+- Component 6: Sanctified Elements (1x) - `sanctify_elem`
+- Component 7: Void Shards (1x) - `void_shard`
 
 ## Synthesis Specialization Patterns
 
 ### Mystical Focus Components
-- **Primary**: Arcane Dust, Ether Crystals, Spirit Essence
-- **Advanced**: Psi-Crystals, Void Shards, Quantum-Mystic Cores
-- **Master**: Temporal Flux, Sanctified Elements, Chaos Fragments
+- **Primary**: Arcane Dust, Ether Crystals, Spirit Essence - `arcane_dust`, `ether_crystal`, `spirit_ess`
+- **Advanced**: Psi-Crystals, Void Shards, Quantum-Mystic Cores - `psi_crystal`, `void_shard`, `quantmyst_core`
+- **Master**: Temporal Flux, Sanctified Elements, Chaos Fragments - `temporal_flux`, `sanctify_elem`, `chaos_fragment`
 
 ### Material Integration
 - **Base Structure**: Metallic components (Aurion Alloy → Mythrite → Titanium → Quantum Steel)
@@ -245,3 +245,48 @@ Synthesis focuses on magical head accessories and arcane headwear:
 - **Collector Items**: Rare components create collectible mystical items
 
 This component specification transforms Synthesis from a minimalist discipline into the premium mystical crafting specialization, using the most advanced magical and dimensional components in the Xenomech universe.
+
+## Synthesis Component Resref Reference
+
+Synthesis uses the most mystical and rare components, with emphasis on magical enhancement:
+
+### Mystical Base Materials
+| Component Name | Resref | Primary Use |
+|---|---|---|
+| Arcane Dust | `arcane_dust` | Basic mystical foundation |
+| Ether Crystals | `ether_crystal` | Energy focusing |
+| Spirit Essence | `spirit_ess` | Spiritual enhancement |
+| Psi-Crystals | `psi_crystal` | Mental amplification |
+| Void Shards | `void_shard` | Dimensional power |
+| Chaos Fragments | `chaos_fragment` | Otherworldly energy |
+| Sanctified Elements | `sanctify_elem` | Divine power |
+
+### Advanced Mystical Components
+| Component Name | Resref | Primary Use |
+|---|---|---|
+| Quantum-Mystic Cores | `quantmyst_core` | Tech-magic fusion |
+| Temporal Flux | `temporal_flux` | Time manipulation |
+| Phase Crystals | `phase_crystal` | Dimensional shifting |
+| Ether-Tech Interfaces | `ethertech_int` | Magical technology |
+| Nano-Enchantments | `nano_enchant` | Microscopic enhancement |
+
+### Structural Materials (Shared)
+| Component Name | Resref | Primary Use |
+|---|---|---|
+| Aurion Alloy Ingots | `aurion_ingot` | Basic circlet frame |
+| Brass Sheets | `brass_sheet` | Decorative elements |
+| Ferrite Cores | `ferrite_core` | Conductive framework |
+| Mythrite Fragments | `mythrite_frag` | Advanced mystical conductor |
+| Titanium Plating | `titan_plate` | Master-tier framework |
+| Quantum Steel | `quantum_steel` | Legendary base material |
+
+### Processing Materials (Shared)
+| Component Name | Resref | Primary Use |
+|---|---|---|
+| Bonding Agents | `bond_agent` | Mystical material binding |
+| Enhancement Serums | `enhance_serum` | Magical property enhancement |
+| Purification Filters | `purify_filter` | Mystical purity improvement |
+| Resonance Stones | `resonance_ston` | Harmonic mystical tuning |
+| Amplification Crystals | `amp_crystal` | Power amplification |
+
+Note: Synthesis focuses on the rarest and most mystically potent components, creating the most valuable items in the crafting system.

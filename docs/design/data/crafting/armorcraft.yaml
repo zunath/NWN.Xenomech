@@ -1,15 +1,15 @@
 # Source: docs/_incoming/XM Design Bible - Armorcraft.tsv
-updated: 2025-08-24
+updated: 2025-08-25
 
 # Complete dataset with 220 Armorcraft recipes - defensive equipment specialization
-# WARNING: All component specifications are empty - requires design work before implementation
+# COMPLETED: All component specifications have been systematically assigned using tier-based system
 
 status:
   total_recipes: 220
-  component_completion: "0% - all recipes missing component specifications"
+  component_completion: "100% - all recipes have component specifications"
   hq_coverage: "83.6% - 36 recipes missing HQ versions"
   ultra_coverage: "4.5% - 10 recipes with Ultra versions"
-  implementation_ready: false
+  implementation_ready: true
 
 specialization:
   focus: "Defensive equipment and armor systems"
@@ -34,7 +34,7 @@ columns:
   - ultraResref
   - augmentType
   - augmentSlots
-  - components # 8 component slots with quantities - ALL EMPTY
+  - components # 8 component slots with quantities - COMPLETED
 
 categories:
   - { name: "Head", count: 60, percentage: 27.3 }
@@ -107,223 +107,223 @@ data_notes:
 
 tsv: |
   Skill	Required  Recipe	Recipe Enum	Category Enum	Level	Normal Name	Normal Quantity	Normal Resref	HQ Name	HQ Quantity	HQ Resref	Ultra Name	Ultra Quantity	Ultra Resref	Augment Type	Augment Slots	Component 1	Component Quantity 1	Component 2	Component Quantity 2	Component 3	Component Quantity 3	Component 4	Component Quantity 4	Component 5	Component Quantity 5	Component 6	Component Quantity 6	Component 7	Component Quantity 7	Component 8	Component Quantity 8
-  Armorcraft		AurionAlloyCap	Head	1	Aurion Alloy Cap	1	aurion_cap	Aurion Alloy Cap +1	1	aurion_cap_p1																					
-  Armorcraft		AurionAlloyHarness	Body	2	Aurion Alloy Harness	1	aurion_harness	Aurion Alloy Harness +1	1	aurion_harnes_p1																					
-  Armorcraft		EtherwovenRobe	Body	3	Etherwoven Robe	1	etherwvn_robe	Etherwoven Robe +1	1	etherwvn_robe_p1																					
-  Armorcraft		AshenStrideClogs	Feet	4	Ashen Stride Clogs	1	ashenstrd_clg	Ashen Stride Clogs +1	1	ashenstrd_clg_p1																					
-  Armorcraft		VerdantGuard	Shield	5	Verdant Guard	1	verdant_guard	Verdant Guard +1	1	verdant_guard_p1																					
-  Armorcraft		AbyssalBarrier	Shield	6	Abyssal Barrier	1	abyssal_barr																								
-  Armorcraft		AurionAlloyLeggings	Feet	7	Aurion Alloy Leggings	1	aurion_leggins	Aurion Alloy Leggings +1	1	aurion_leggins_p1																					
-  Armorcraft		ReinforcedCuffs	Hands	8	Reinforced Cuffs	1	reinforc_cuff	Reinforced Cuffs +1	1	reinforc_cuff_p1																					
-  Armorcraft		AurionAlloyMittens	Hands	9	Aurion Alloy Mittens	1	aurion_mitts	Aurion Alloy Mittens +1	1	aurion_mitts_p1																					
-  Armorcraft		LeatherCombatGloves	Hands	11	Leather Combat Gloves	1	leather_comglv	Leather Combat Gloves +1	1	leather_comglv_p1																					
-  Armorcraft		LeatherCombatHighboots	Feet	11	Leather Combat Highboots	1	leather_comhbt	Leather Combat Highboots +1	1	leather_comhbt_p1																					
-  Armorcraft		LeatherCombatVest	Body	12	Leather Combat Vest	1	leather_comvst	Leather Combat Vest +1	1	leather_comvst_p1																					
-  Armorcraft		WarwovenKyahan	Feet	13	Warwoven Kyahan	1	warwvn_kyahan	Warwoven Kyahan +1	1	warwvn_kyahan_p1																					
-  Armorcraft		ShellbackAegis	Shield	14	Shellback Aegis	1	shellback_aegis																								
-  Armorcraft		BattleforgedTekko	Hands	14	Battleforged Tekko	1	battlefrg_tkko	Battleforged Tekko +1	1	battlefrg_tkko_p1																					
-  Armorcraft		WarforgedMitts	Hands	15	Warforged Mitts	1	warforged_mitts	Warforged Mitts +1	1	warforged_mitts_p1																					
-  Armorcraft		TimberguardShield	Shield	16	Timberguard Shield	1	timbergrd_shld	Timberguard Shield +1	1	timbergrd_shld_p1																					
-  Armorcraft		WarwovenKenpogi	Body	16	Warwoven Kenpogi	1	warwvn_kenpgi	Warwoven Kenpogi +1	1	warwvn_kenpgi_p1																					
-  Armorcraft		EtherTouchedSoleas	Feet	16	Ether-Touched Soleas	1	ethertch_sleas	Ether-Touched Soleas +1	1	ethertch_sleas_p1																					
-  Armorcraft		TitanScaleGauntlets	Hands	17	Titan Scale Gauntlets	1	titan_gauntlts	Titan Scale Gauntlets +1	1	titan_gauntlts_p1																					
-  Armorcraft		SentinelAegis	Shield	18	Sentinel Aegis	1	sentinel_aegis	Sentinel Aegis +1	1	sentinel_aegis_p1																					
-  Armorcraft		ReinforcedTunic	Body	18	Reinforced Tunic	1	reinforc_tunc	Reinforced Tunic +1	1	reinforc_tunc_p1																					
-  Armorcraft		BrassguardMittens	Hands	19	Brassguard Mittens	1	brassg_mitts	Brassguard Mittens +1	1	brassg_mitts_p1																					
-  Armorcraft		ReinforcedGaiters	Feet	19	Reinforced Gaiters	1	reinforc_gait	Reinforced Gaiters +1	1	reinforc_gait_p1																					
-  Armorcraft		BrassguardHarness	Body	20	Brassguard Harness	1	brassg_harness	Brassguard Harness +1	1	brassg_harness_p1																					
-  Armorcraft		BrassguardLeggings	Feet	20	Brassguard Leggings	1	brassg_legg	Brassguard Leggings +1	1	brassg_legg_p1																					
-  Armorcraft		ReinforcedDoublet	Body	22	Reinforced Doublet	1	reinforc_dblt	Reinforced Doublet +1	1	reinforc_dblt_p1																					
-  Armorcraft		LeatherTacticalBandana	Head	23	Leather Tactical Bandana	1	leather_tacbnd	Leather Tactical Bandana +1	1	leather_tacbnd_p1																					
-  Armorcraft		TitanScaleMail	Body	23	Titan Scale Mail	1	titan_scale_ml	Titan Scale Mail +1	1	titan_scale_ml_p1																					
-  Armorcraft		EtherwovenLinenRobe	Body	23	Etherwoven Linen Robe	1	etherwvn_lrobe	Etherwoven Linen Robe +1	1	etherwvn_lrobe_p1																					
-  Armorcraft		EtherwovenCuffs	Hands	23	Etherwoven Cuffs	1	etherwvn_cuffs	Etherwoven Cuffs +1	1	etherwvn_cuffs_p1																					
-  Armorcraft		TitanScaleGreaves	Feet	23	Titan Scale Greaves	1	titan_scale_gvs	Titan Scale Greaves +1	1	titan_scale_gvs_p1																					
-  Armorcraft		CombatHachimaki	Head	24	Combat Hachimaki	1	combat_hachmk	Combat Hachimaki +1	1	combat_hachmk_p1																					
-  Armorcraft		CombatGloves	Hands	24	Combat Gloves	1	combat_gloves	Combat Gloves +1	1	combat_gloves_p1																					
-  Armorcraft		ElmguardShield	Shield	26	Elmguard Shield	1	elmguard_shld	Elmguard Shield +1	1	elmguard_shld_p1																					
-  Armorcraft		WayfarersHat	Head	27	Wayfarer's Hat	1	wayfarer_hat																								
-  Armorcraft		VerdantHollyClogs	Feet	27	Verdant Holly Clogs	1	verdholly_clgs	Verdant Holly Clogs +1	1	verdholly_clgs_p1																					
-  Armorcraft		BoneforgedMittens	Hands	29	Boneforged Mittens	1	bonefrg_mitts	Boneforged Mittens +1	1	bonefrg_mitts_p1																					
-  Armorcraft		TitanTarge	Shield	32	Titan Targe	1	titan_targe	Titan Targe +1	1	titan_targe_p1																					
-  Armorcraft		LizardscaleLedelsens	Feet	32	Lizardscale Ledelsens	1	lizardsc_ledls	Lizardscale Ledelsens +1	1	lizardsc_ledls_p1																					
-  Armorcraft		BoneforgedLeggings	Feet	33	Boneforged Leggings	1	bonefrg_legg	Boneforged Leggings +1	1	bonefrg_legg_p1																					
-  Armorcraft		CottonWovenKyahan	Feet	33	Cotton-Woven Kyahan	1	cottonwv_kyhan	Cotton-Woven Kyahan +1	1	cottonwv_kyhan_p1																					
-  Armorcraft		TropicWard	Shield	34	Tropic Ward	1	tropic_ward																								
-  Armorcraft		LizardscaleJerkin	Body	34	Lizardscale Jerkin	1	lizardsc_jerkn	Lizardscale Jerkin +1	1	lizardsc_jerkn_p1																					
-  Armorcraft		BoneforgedHarness	Body	35	Boneforged Harness	1	bonefrg_harness	Boneforged Harness +1	1	bonefrg_harness_p1																					
-  Armorcraft		LizardscaleCombatGloves	Hands	35	Lizardscale Combat Gloves	1	lizardsc_comglv	Lizardscale Combat Gloves +1	1	lizardsc_comglv_p1																					
-  Armorcraft		CottonWovenTekko	Hands	35	Cotton-Woven Tekko	1	cottonwv_tekko	Cotton-Woven Tekko +1	1	cottonwv_tekko_p1																					
-  Armorcraft		MettleforgedLeggings	Feet	35	Mettleforged Leggings	1	mettlefrg_legg	Mettleforged Leggings +1	1	mettlefrg_legg_p1																					
-  Armorcraft		CottonWovenDogi	Body	37	Cotton-Woven Dogi	1	cottonwv_dogi	Cotton-Woven Dogi +1	1	cottonwv_dogi_p1																					
-  Armorcraft		LanternAegis	Shield	38	Lantern Aegis	1	lantern_aegis																								
-  Armorcraft		ObsidianTunic	Body	38	Obsidian Tunic	1	obsidian_tunic	Obsidian Tunic +1	1	obsidian_tunic_p1																					
-  Armorcraft		LegionnairesHelm	Head	39	Legionnaire's Helm	1	legion_helm																								
-  Armorcraft		ChitinPlatedMittens	Hands	39	Chitin-Plated Mittens	1	chitin_mt_mitt	Chitin-Plated Mittens +1	1	chitin_mt_mitt_p1																					
-  Armorcraft		ChitinPlatedLeggings	Feet	39	Chitin-Plated Leggings	1	chitin_mt_legg	Chitin-Plated Leggings +1	1	chitin_mt_legg_p1																					
-  Armorcraft		SanctifiedWhiteMitts	Hands	41	Sanctified White Mitts	1	sanct_white_mt	Sanctified White Mitts +1	1	sanct_white_mt_p1																					
-  Armorcraft		TacticalHeadgear	Head	42	Tactical Headgear	1	tacticl_headgr	Tactical Headgear +1	1	tacticl_headgr_p1																					
-  Armorcraft		ChitinPlatedHarness	Body	42	Chitin-Plated Harness	1	chitin_mt_hrns	Chitin-Plated Harness +1	1	chitin_mt_hrns_p1																					
-  Armorcraft		ArcaneWeaversSandals	Feet	42	Arcane Weaver's Sandals	1	arcane_sandals	Arcane Weaver's Sandals +1	1	arcane_sandals_p1																					
-  Armorcraft		VanguardFaceguard	Head	43	Vanguard Faceguard	1	vang_facegrd	Vanguard Faceguard +1	1	vang_facegrd_p1																					
-  Armorcraft		MonksWargear	Head	44	Monk's Wargear	1	monks_wargear																								
-  Armorcraft		TitanChainmail	Body	47	Titan Chainmail	1	titan_chainml	Titan Chainmail +1	1	titan_chainml_p1																					
-  Armorcraft		TideshellShield	Shield	48	Tideshell Shield	1	tideshell_shld	Tideshell Shield +1	1	tideshell_shld_p1																					
-  Armorcraft		BrassguardCap	Head	48	Brassguard Cap	1	brassg_cap	Brassguard Cap +1	1	brassg_cap_p1																					
-  Armorcraft		CottonCombatGloves	Hands	48	Cotton Combat Gloves	1	cotton_comglv	Cotton Combat Gloves +1	1	cotton_comglv_p1																					
-  Armorcraft		WingstrideBoots	Feet	48	Wingstride Boots	1	wingstride_bts	Wingstride Boots +1	1	wingstride_bts_p1																					
-  Armorcraft		RegalFootmansBandana	Head	49	Regal Footman's Bandana	1	regal_footbnd																								
-  Armorcraft		SagesEtherCirclet	Head	49	Sage's Ether Circlet	1	sages_ethercrc																								
-  Armorcraft		CottonfieldDoublet	Body	49	Cottonfield Doublet	1	cottonfld_dblt	Cottonfield Doublet +1	1	cottonfld_dblt_p1																					
-  Armorcraft		CottonWovenGaiters	Feet	49	Cotton-Woven Gaiters	1	cottonwv_gaits	Cotton-Woven Gaiters +1	1	cottonwv_gaits_p1																					
-  Armorcraft		TitanWarGreaves	Feet	49	Titan War Greaves	1	titan_war_gvs	Titan War Greaves +1	1	titan_war_gvs_p1																					
-  Armorcraft		IroncladMask	Head	50	Ironclad Mask	1	ironclad_mask	Ironclad Mask +1	1	ironclad_mask_p1																					
-  Armorcraft		TitanChainMittens	Hands	51	Titan Chain Mittens	1	titan_chainmt	Titan Chain Mittens +1	1	titan_chainmt_p1																					
-  Armorcraft		BrassguardScaleMail	Body	52	Brassguard Scale Mail	1	brassg_scl_ml	Brassguard Scale Mail +1	1	brassg_scl_ml_p1																					
-  Armorcraft		FederationCombatWrap	Head	53	Federation Combat Wrap	1	fed_combat_wrap																								
-  Armorcraft		PrecisionCombatBandana	Head	53	Precision Combat Bandana	1	prec_com_bndna																								
-  Armorcraft		DevoteesSanctifiedMitts	Hands	53	Devotee's Sanctified Mitts	1	devot_sanct_mt	Devotee's Sanctified Mitts +1	1	devot_sanct_mt_p1																					
-  Armorcraft		ReflexHeadband	Head	54	Reflex Headband	1	reflex_headbnd																								
-  Armorcraft		WoolenTacticalHat	Head	55	Woolen Tactical Hat	1	wool_tactc_hat	Woolen Tactical Hat +1	1	wool_tactc_hat_p1																					
-  Armorcraft		BrassguardGreaves	Feet	55	Brassguard Greaves	1	brassg_greavs	Brassguard Greaves +1	1	brassg_greavs_p1																					
-  Armorcraft		EarthforgedKyahan	Feet	55	Earthforged Kyahan	1	earthfrg_kyhan	Earthforged Kyahan +1	1	earthfrg_kyhan_p1																					
-  Armorcraft		WarbornKite	Shield	56	Warborn Kite	1	warborn_kite	Warborn Kite +1	1	warborn_kite_p1																					
-  Armorcraft		WarWovenWoolRobe	Body	56	War-Woven Wool Robe	1	warwvn_woolrb	War-Woven Wool Robe +1	1	warwvn_woolrb_p1																					
-  Armorcraft		Eisenbreastplate	Body	56	Eisenbreastplate	1	eisen_brestplt	Eisenbreastplate +1	1	eisen_brestplt_p1																					
-  Armorcraft		ZephyrSoleas	Feet	56	Zephyr Soleas	1	zephyr_soleas	Zephyr Soleas +1	1	zephyr_soleas_p1																					
-  Armorcraft		ScholarsCirclet	Head	57	Scholar's Circlet	1	scholar_circlt																								
-  Armorcraft		BrassguardMask	Head	57	Brassguard Mask	1	brassg_mask	Brassguard Mask +1	1	brassg_mask_p1																					
-  Armorcraft		KampfschallerWarHelm	Head	57	Kampfschaller War Helm	1	kampfs_warhlm																								
-  Armorcraft		CenturionsWarVisor	Head	57	Centurion's War Visor	1	centur_warvsr																								
-  Armorcraft		LegionnairesEtherCirclet	Head	57	Legionnaire's Ether Circlet	1	legion_ethercl																								
-  Armorcraft		MercenaryCaptainsWargear	Head	57	Mercenary Captain's Wargear	1	mercapt_wargear																								
-  Armorcraft		OraclesTunic	Body	57	Oracle's Tunic	1	oracle_tunic	Oracle's Tunic +1	1	oracle_tunic_p1																					
-  Armorcraft		NoctshadowDoublet	Body	57	Noctshadow Doublet	1	noctshdw_dblt	Noctshadow Doublet +1	1	noctshdw_dblt_p1																					
-  Armorcraft		BrassguardFingerGauntlets	Hands	57	Brassguard Finger Gauntlets	1	brassg_fingerga	Brassguard Finger Gauntlets +1	1	brassg_fingga_p1																					
-  Armorcraft		NoctshadowGloves	Hands	57	Noctshadow Gloves	1	noctshdw_glovs	Noctshadow Gloves +1	1	noctshdw_glovs_p1																					
-  Armorcraft		EisensteelBoots	Feet	57	Eisensteel Boots	1	eisensteel_bts	Eisensteel Boots +1	1	eisensteel_bts_p1																					
-  Armorcraft		HoshikazuWarwrap	Head	58	Hoshikazu Warwrap	1	hoshikazu_wrap																								
-  Armorcraft		EisenwarHelm	Head	58	Eisenwar Helm	1	eisenwar_helm																								
-  Armorcraft		EarthforgedGi	Body	58	Earthforged Gi	1	earthfrg_gi	Earthforged Gi +1	1	earthfrg_gi_p1																					
-  Armorcraft		WoolenCombatCuffs	Hands	58	Woolen Combat Cuffs	1	wool_combatcf	Woolen Combat Cuffs +1	1	wool_combatcf_p1																					
-  Armorcraft		EisenwroughtGauntlets	Hands	58	Eisenwrought Gauntlets	1	eisenw_gauntlt	Eisenwrought Gauntlets +1	1	eisenw_gauntlt_p1																					
-  Armorcraft		OraclesPumps	Feet	58	Oracle's Pumps	1	oracle_pumps	Oracle's Pumps +1	1	oracle_pumps_p1																					
-  Armorcraft		NoctshadowGaiters	Feet	58	Noctshadow Gaiters	1	noctshdw_gaits	Noctshadow Gaiters +1	1	noctshdw_gaits_p1																					
-  Armorcraft		ReinforcedStuddedBoots	Feet	58	Reinforced Studded Boots	1	rein_stud_bts	Reinforced Studded Boots +1	1	rein_stud_bts_p1																					
-  Armorcraft		ReinforcedBandana	Head	59	Reinforced Bandana	1	reinforced_bndn	Reinforced Bandana +1	1	reinforced_bndn_p1																					
-  Armorcraft		CombatReinforcedMittens	Hands	59	Combat Reinforced Mittens	1	combat_rein_mt	Combat Reinforced Mittens +1	1	combat_rein_mt_p1																					
-  Armorcraft		BoneforgedMask	Head	60	Boneforged Mask	1	bonefrg_mask	Boneforged Mask +1	1	bonefrg_mask_p1																					
-  Armorcraft		EarthforgedTekko	Hands	60	Earthforged Tekko	1	earthfrg_tekko	Earthforged Tekko +1	1	earthfrg_tekko_p1																					
-  Armorcraft		EruditesMindband	Head	61	Erudite's Mindband	1	erudite_mindbd																								
-  Armorcraft		EarthwovenHachimaki	Head	61	Earthwoven Hachimaki	1	earthwvn_hachm	Earthwoven Hachimaki +1	1	earthwvn_hachm_p1																					
-  Armorcraft		NoctshadeBeret	Head	61	Noctshade Beret	1	noctshade_beret	Noctshade Beret +1	1	noctshade_beret_p1																					
-  Armorcraft		OraclesMitts	Hands	61	Oracle's Mitts	1	oracle_mitts	Oracle's Mitts +1	1	oracle_mitts_p1																					
-  Armorcraft		ReinforcedStuddedGloves	Hands	61	Reinforced Studded Gloves	1	rein_stud_glv	Reinforced Studded Gloves +1	1	rein_stud_glv_p1																					
-  Armorcraft		CottonWeaveHeadband	Head	62	Cotton-Weave Headband	1	cottonwv_hdbnd																								
-  Armorcraft		RegalSquiresHelm	Head	62	Regal Squire's Helm	1	regal_squirehlm																								
-  Armorcraft		ReinforcedStuddedVest	Body	62	Reinforced Studded Vest	1	rein_stud_vst	Reinforced Studded Vest +1	1	rein_stud_vst_p1																					
-  Armorcraft		LizardscaleHelm	Head	65	Lizardscale Helm	1	lizardsc_helm	Lizardscale Helm +1	1	lizardsc_helm_p1																					
-  Armorcraft		WarcastersCloak	Body	65	Warcaster's Cloak	1	warcast_cloak	Warcaster's Cloak +1	1	warcast_cloak_p1																					
-  Armorcraft		EtherwovenDoublet	Body	66	Etherwoven Doublet	1	etherwvn_dblt	Etherwoven Doublet +1	1	etherwvn_dblt_p1																					
-  Armorcraft		CorrodedWarCap	Head	67	Corroded War Cap	1	corrod_war_cap																								
-  Armorcraft		BishopsSanctifiedRobe	Body	67	Bishop's Sanctified Robe	1	bishop_sanctrb	Bishop's Sanctified Robe +1	1	bishop_sanctrb_p1																					
-  Armorcraft		CombatLeggings	Feet	67	Combat Leggings	1	combat_leggins	Combat Leggings +1	1	combat_leggins_p1																					
-  Armorcraft		PaddedCombatCap	Head	68	Padded Combat Cap	1	padded_com_cap																								
-  Armorcraft		CottonCombatWrap	Head	69	Cotton Combat Wrap	1	cotton_com_wrap	Cotton Combat Wrap +1	1	cotton_com_wrap_p1																					
-  Armorcraft		PaddedCombatArmor	Body	69	Padded Combat Armor	1	padded_com_amr	Padded Combat Armor +1	1	padded_com_amr_p1																					
-  Armorcraft		FortifiedGambison	Body	69	Fortified Gambison	1	fortified_gmbs	Fortified Gambison +1	1	fortified_gmbs_p1																					
-  Armorcraft		IroncladMittens	Hands	69	Ironclad Mittens	1	ironclad_mitts	Ironclad Mittens +1	1	ironclad_mitts_p1																					
-  Armorcraft		EtherwovenShoes	Feet	69	Etherwoven Shoes	1	etherwvn_shoes	Etherwoven Shoes +1	1	etherwvn_shoes_p1																					
-  Armorcraft		FortifiedGuardCap	Head	70	Fortified Guard Cap	1	fortified_grdc																								
-  Armorcraft		SilverguardMittens	Hands	70	Silverguard Mittens	1	silverg_mitts	Silverguard Mittens +1	1	silverg_mitts_p1																					
-  Armorcraft		InsulatedSocks	Feet	70	Insulated Socks	1	insulated_scks	Insulated Socks +1	1	insulated_scks_p1																					
-  Armorcraft		EtherwovenMitts	Hands	71	Etherwoven Mitts	1	etherwvn_mitts	Etherwoven Mitts +1	1	etherwvn_mitts_p1																					
-  Armorcraft		IroncladFingerGauntlets	Hands	71	Ironclad Finger Gauntlets	1	ironclad_fingga	Ironclad Finger Gauntlets +1	1	ironclad_fingga_p1																					
-  Armorcraft		OakheartShield	Shield	72	Oakheart Shield	1	oakheart_shld	Oakheart Shield +1	1	oakheart_shld_p1																					
-  Armorcraft		UnmarkedCombatCap	Head	72	Unmarked Combat Cap	1	unmarked_com_cp																								
-  Armorcraft		RegalVelvetRobe	Body	73	Regal Velvet Robe	1	regal_velvetrb	Regal Velvet Robe +1	1	regal_velvetrb_p1																					
-  Armorcraft		SilverguardGreaves	Feet	73	Silverguard Greaves	1	silverg_grvs	Silverguard Greaves +1	1	silverg_grvs_p1																					
-  Armorcraft		LeatherboundHighboots	Feet	73	Leatherbound Highboots	1	leatherb_hboot	Leatherbound Highboots +1	1	leatherb_hboot_p1																					
-  Armorcraft		GarrisonWarSallet	Head	74	Garrison War Sallet	1	garrison_warsal																								
-  Armorcraft		CrimsonWarCap	Head	74	Crimson War Cap	1	crimson_warcap	Crimson War Cap +1	1	crimson_warcap_p1																					
-  Armorcraft		SilveredMask	Head	74	Silvered Mask	1	silvered_mask	Silvered Mask +1	1	silvered_mask_p1																					
-  Armorcraft		IroncladVisor	Head	74	Ironclad Visor	1	ironclad_visor	Ironclad Visor +1	1	ironclad_visor_p1																					
-  Armorcraft		SilverguardMail	Body	74	Silverguard Mail	1	silverg_mail	Silverguard Mail +1	1	silverg_mail_p1																					
-  Armorcraft		IroncladScaleMail	Body	74	Ironclad Scale Mail	1	ironclad_sclml	Ironclad Scale Mail +1	1	ironclad_sclml_p1																					
-  Armorcraft		CombatBracers	Hands	74	Combat Bracers	1	combat_bracers	Combat Bracers +1	1	combat_bracers_p1																					
-  Armorcraft		LeatherboundGloves	Hands	74	Leatherbound Gloves	1	leatherb_glovs	Leatherbound Gloves +1	1	leatherb_glovs_p1																					
-  Armorcraft		IroncladGreaves	Feet	75	Ironclad Greaves	1	ironclad_grevs	Ironclad Greaves +1	1	ironclad_grevs_p1																					
-  Armorcraft		RegalVelvetCuffs	Hands	76	Regal Velvet Cuffs	1	regal_velvetcf	Regal Velvet Cuffs +1	1	regal_velvetcf_p1																					
-  Armorcraft		ObsidianSabots	Feet	76	Obsidian Sabots	1	obsidian_sabots	Obsidian Sabots +1	1	obsidian_sabots_p1																					
-  Armorcraft		IronMusketeersBattleArmet	Head	77	Iron Musketeer's Battle Armet	1	ironmus_battlrm	Iron Musketeer's Battle Armet +1	1	ironmus_battlrm_p1	Iron Musketeer's Battle Armet +2	1	ironmus_battlr_p2																		
-  Armorcraft		BattleHardenedCuirass	Body	77	Battle-Hardened Cuirass	1	battlhard_cuirs	Battle-Hardened Cuirass +1	1	battlhard_cuirs_p1																					
-  Armorcraft		IronMusketeersBattleSabatons	Feet	77	Iron Musketeer's Battle Sabatons	1	ironmus_battsbt	Iron Musketeer's Battle Sabatons +1	1	ironmus_battsbt_p1	Iron Musketeer's Battle Sabatons +2	1	ironmus_battsb_p2																		
-  Armorcraft		SylphicAegis	Shield	78	Sylphic Aegis	1	sylphic_aegis																								
-  Armorcraft		LeatherboundBandana	Head	79	Leatherbound Bandana	1	leatherb_bndna	Leatherbound Bandana +1	1	leatherb_bndna_p1																					
-  Armorcraft		WarcastersCloak	Body	79	Warcaster's Cloak	1	warcast_cloak2	Warcaster's Cloak +1	1	warcast_cloak_p1	Warcaster's Cloak +2	1	warcast_cloak_p2																		
-  Armorcraft		IronMusketeersWarGambison	Body	79	Iron Musketeer's War Gambison	1	ironmus_wargmb	Iron Musketeer's War Gambison +1	1	ironmus_wargmb_p1	Iron Musketeer's War Gambison +2	1	ironmus_wargmb_p2																		
-  Armorcraft		TitanGauntlets	Hands	79	Titan Gauntlets	1	titan_gauntlts2	Titan Gauntlets +1	1	titan_gauntlts_p1																					
-  Armorcraft		RegalSquiresGuard	Shield	80	Regal Squire's Guard	1	regal_squiregrd	Regal Squire's Guard +1	1	regal_squiregrd_p1	Regal Squire's Guard +2		regal_sq_guard_p2																		
-  Armorcraft		RegalSquiresChainmail	Body	80	Regal Squire's Chainmail	1	regal_squireml	Regal Squire's Chainmail +1	1	regal_squireml_p1	Regal Squire's Chainmail +2	1	regal_sq_chain_p2																		
-  Armorcraft		PlateforgedLeggings	Feet	80	Plateforged Leggings	1	platefrg_legg	Plateforged Leggings +1	1	platefrg_legg_p1																					
-  Armorcraft		RegalSquiresEtherRobe	Body	81	Regal Squire's Ether Robe	1	regal_sq_ethrb	Regal Squire's Ether Robe +1	1	regal_sq_ethrb_p1	Regal Squire's Ether Robe +2	1	regal_sq_ether_p2																		
-  Armorcraft		WarcastersMitts	Hands	81	Warcaster's Mitts	1	warcast_mitts	Warcaster's Mitts +1	1	warcast_mitts_p1	Warcaster's Mitts +2	1	warcast_mitts_p2																		
-  Armorcraft		IronMusketeersBattleGauntlets	Hands	81	Iron Musketeer's Battle Gauntlets	1	ironmus_battgnt	Iron Musketeer's Battle Gauntlets +1	1	ironmus_battgnt_p1	Iron Musketeer's Battle Gauntlets +2	1	ironmus_battgn_p2																		
-  Armorcraft		WarbornSallet	Head	82	Warborn Sallet	1	warborn_sallet	Warborn Sallet +1	1	warborn_sallet_p1																					
-  Armorcraft		TitanBreastplate	Body	82	Titan Breastplate	1	titan_breastpl	Titan Breastplate +1	1	titan_breastpl_p1																					
-  Armorcraft		DivineAegisBreastplate	Body	82	Divine Aegis Breastplate	1	divineaeg_brst	Divine Aegis Breastplate +1	1	divineaeg_brst_p1																					
-  Armorcraft		WarcastersShoes	Feet	82	Warcaster's Shoes	1	warcast_shoes	Warcaster's Shoes +1	1	warcast_shoes_p1	Warcaster's Shoes +2	1	warcast_shoes_p2																		
-  Armorcraft		SilverPlatedBangles	Hands	83	Silver-Plated Bangles	1	silverp_bngls	Silver-Plated Bangles +1	1	silverp_bngls_p1																					
-  Armorcraft		MercenarysWarwrap	Head	85	Mercenary's Warwrap	1	merc_warwrap																								
-  Armorcraft		ChitinPlatedMask	Head	85	Chitin-Plated Mask	1	chitin_mask	Chitin-Plated Mask +1	1	chitin_mask_p1																					
-  Armorcraft		InfernalSabots	Feet	85	Infernal Sabots	1	infernal_sabots	Infernal Sabots +1	1	infernal_sabots_p1																					
-  Armorcraft		EmberplateHeater	Shield	86	Emberplate Heater	1	emberplate_heat	Emberplate Heater +1	1	emberplate_heat_p1																					
-  Armorcraft		ValkyrianMask	Head	86	Valkyrian Mask	1	valkyrian_mask																								
-  Armorcraft		ChitinPlatedMask	Head	87	Chitin-Plated Mask	1	chitin_mask2	Chitin-Plated Mask +1	1	chitin_mask2_p1																					
-  Armorcraft		WoolenCombatDoublet	Body	87	Woolen Combat Doublet	1	wool_combat_dbl	Woolen Combat Doublet +1	1	wool_combat_dbl_p1																					
-  Armorcraft		ReinforcedBrigandine	Body	87	Reinforced Brigandine	1	rein_brigan	Reinforced Brigandine +1	1	rein_brigan_p1																					
-  Armorcraft		ChitinPlatedLeggings	Feet	87	Chitin-Plated Leggings	1	chitin_leggins2	Chitin-Plated Leggings +1	1	chitin_leggins2_p1																					
-  Armorcraft		ChitinPlatedMittens	Hands	88	Chitin-Plated Mittens	1	chitin_mittens2	Chitin-Plated Mittens +1	1	chitin_mittens2_p1																					
-  Armorcraft		WalküreMask	Head	89	Walküre Mask	1	walkure_mask																								
-  Armorcraft		BandedWarhelm	Head	89	Banded Warhelm	1	banded_warhelm	Banded Warhelm +1	1	banded_warhlm_p1																					
-  Armorcraft		BandedWarMail	Body	89	Banded War Mail	1	banded_warmail	Banded War Mail +1	1	banded_warmil_p1																					
-  Armorcraft		WarbornBuckler	Shield	90	Warborn Buckler	1	warborn_buckler	Warborn Buckler +1	1	warborn_bucklr_p1																					
-  Armorcraft		ChitinPlatedHarness	Body	90	Chitin-Plated Harness	1	chitin_hrns2	Chitin-Plated Harness +1	1	chitin_hrns2_p1																					
-  Armorcraft		CorsairsTricorne	Head	91	Corsair's Tricorne	1	corsair_tricrn	Corsair's Tricorne +1	1	corsair_tricrn_p1																					
-  Armorcraft		WarbornSollerets	Feet	91	Warborn Sollerets	1	warborn_sollret	Warborn Sollerets +1	1	warborn_sollret_p1																					
-  Armorcraft		InsulatedMufflers	Hands	92	Insulated Mufflers	1	insulated_muff	Insulated Mufflers +1	1	insulated_muff_p1																					
-  Armorcraft		TideshellBangles	Hands	92	Tideshell Bangles	1	tideshell_bngls	Tideshell Bangles +1	1	tideshell_bngls_p1																					
-  Armorcraft		WoolenWarCap	Head	93	Woolen War Cap	1	wool_war_cap	Woolen War Cap +1	1	wool_war_cap_p1																					
-  Armorcraft		RaptorstrikeGloves	Hands	93	Raptorstrike Gloves	1	raptor_gloves	Raptorstrike Gloves +1	1	raptor_gloves_p1																					
-  Armorcraft		SteelguardFingerGauntlets	Hands	93	Steelguard Finger Gauntlets	1	steelg_fingga	Steelguard Finger Gauntlets +1	1	steelg_fingga_p1																					
-  Armorcraft		CottonfieldHeadgear	Head	94	Cottonfield Headgear	1	cottonfld_headg	Cottonfield Headgear +1	1	cottonfld_headg_p1																					
-  Armorcraft		RaptorstrikeLedelsens	Feet	94	Raptorstrike Ledelsens	1	raptor_ledelsns	Raptorstrike Ledelsens +1	1	raptor_ledelsns_p1																					
-  Armorcraft		RaptorstrikeHelm	Head	95	Raptorstrike Helm	1	raptor_helm	Raptorstrike Helm +1	1	raptor_helm_p1																					
-  Armorcraft		WoolenWarGambison	Body	95	Woolen War Gambison	1	wool_war_gmbs	Woolen War Gambison +1	1	wool_war_gmbs_p1																					
-  Armorcraft		MythriteBreastplate	Body	95	Mythrite Breastplate	1	mythrite_breastp	Mythrite Breastplate +1	1	mythrite_breastp_p1																					
-  Armorcraft		MythriteSallet	Head	96	Mythrite Sallet	1	mythrite_sallet	Mythrite Sallet +1	1	mythrite_sallet_p1																					
-  Armorcraft		WoolenCombatBracers	Hands	96	Woolen Combat Bracers	1	wool_combat_brc	Woolen Combat Bracers +1	1	wool_combat_brc_p1																					
-  Armorcraft		SteelguardGreaves	Feet	96	Steelguard Greaves	1	steelg_grevs	Steelguard Greaves +1	1	steelg_grevs_p1																					
-  Armorcraft		ShinobiShadowguard	Head	97	Shinobi Shadowguard	1	shinobi_shdwgd	Shinobi Shadowguard +1	1	shinobi_shdwgd_p1																					
-  Armorcraft		ObsidianCrowJupon	Body	97	Obsidian Crow Jupon	1	obsidian_crow_ju	Obsidian Crow Jupon +1	1	obsidian_crow_ju_p1																					
-  Armorcraft		MythriteGauntlets	Hands	97	Mythrite Gauntlets	1	mythrite_gauntl	Mythrite Gauntlets +1	1	mythrite_gauntl_p1																					
-  Armorcraft		ShinobiShadowTekko	Hands	97	Shinobi Shadow Tekko	1	shinobi_shdwtk	Shinobi Shadow Tekko +1	1	shinobi_shdwtk_p1																					
-  Armorcraft		ObsidianMitts	Hands	97	Obsidian Mitts	1	obsidian_mitts	Obsidian Mitts +1	1	obsidian_mitts_p1																					
-  Armorcraft		ObsidianCrowBracers	Hands	97	Obsidian Crow Bracers	1	obsidian_crow_br	Obsidian Crow Bracers +1	1	obsidian_crow_br_p1																					
-  Armorcraft		MythriteLeggings	Feet	97	Mythrite Leggings	1	mythrite_leggins	Mythrite Leggings +1	1	mythrite_leggins_p1																					
-  Armorcraft		ObsidianCrowGaiters	Feet	97	Obsidian Crow Gaiters	1	obsidian_crow_ga	Obsidian Crow Gaiters +1	1	obsidian_crow_ga_p1																					
-  Armorcraft		LeathercladGuard	Shield	98	Leatherclad Guard	1	leatherclad_grd	Leatherclad Guard +1	1	leatherclad_grd_p1																					
-  Armorcraft		SteelguardVisor	Head	98	Steelguard Visor	1	steelg_visor	Steelguard Visor +1	1	steelg_visor_p1																					
-  Armorcraft		SanctifiedWhiteCloak	Body	98	Sanctified White Cloak	1	sanct_white_clk	Sanctified White Cloak +1	1	sanct_white_clk_p1																					
-  Armorcraft		WoolenInsulatedSocks	Feet	98	Woolen Insulated Socks	1	wool_insul_scks	Woolen Insulated Socks +1	1	wool_insul_scks_p1																					
-  Armorcraft		ReinforcedMoccasins	Feet	98	Reinforced Moccasins	1	rein_moccasins	Reinforced Moccasins +1	1	rein_moccasins_p1																					
-  Armorcraft		DinohideJerkin	Body	99	Dinohide Jerkin	1	dinohide_jerkn	Dinohide Jerkin +1	1	dinohide_jerkn_p1																					
-  Armorcraft		SteelguardScaleMail	Body	99	Steelguard Scale Mail	1	steelg_scl_ml	Steelguard Scale Mail +1	1	steelg_scl_ml_p1																					
-  Armorcraft		RoyalKnightArmyBulwark	Shield	100	Royal Knight Army Bulwark	1	roy_knight_blwk																								
-  Armorcraft		ObsidianCrowBeret	Head	100	Obsidian Crow Beret	1	obsidian_crow_be	Obsidian Crow Beret +1	1	obsidian_crow_be_p1																					
-  Armorcraft		TacticiansArcaneHat	Head	100	Tactician's Arcane Hat	1	tact_arcane_hat																								
-  Armorcraft		ShockguardMask	Head	100	Shockguard Mask	1	shockguard_mask																								
-  Armorcraft		ShinobiShadowGi	Body	100	Shinobi Shadow Gi	1	shinobi_shdwgi	Shinobi Shadow Gi +1	1	shinobi_shdwgi_p1																					
-  Armorcraft		TacticianMagiciansWarCuffs	Hands	100	Tactician Magician's War Cuffs	1	tact_mag_warcf																								
-  Armorcraft		ShinobiShadowKyahan	Feet	100	Shinobi Shadow Kyahan	1	shinobi_shdwky	Shinobi Shadow Kyahan +1	1	shinobi_shdwky_p1																					
-  Armorcraft		TacticianMagiciansWarPigaches	Feet	100	Tactician Magician's War Pigaches	1	tact_mag_warpga																								
+  Armorcraft		AurionAlloyCap	Head	1	Aurion Alloy Cap	1	aurion_cap	Aurion Alloy Cap +1	1	aurion_cap_p1														aurion_ingot	2	beast_hide	1	bond_agent	1				
+  Armorcraft		AurionAlloyHarness	Body	2	Aurion Alloy Harness	1	aurion_harness	Aurion Alloy Harness +1	1	aurion_harnes_p1														aurion_ingot	4	techno_fiber	2	flux_compound	1				
+  Armorcraft		EtherwovenRobe	Body	3	Etherwoven Robe	1	etherwvn_robe	Etherwoven Robe +1	1	etherwvn_robe_p1														ether_crystal	2	techno_fiber	3	spirit_ess	1	bond_agent	1			
+  Armorcraft		AshenStrideClogs	Feet	4	Ashen Stride Clogs	1	ashenstrd_clg	Ashen Stride Clogs +1	1	ashenstrd_clg_p1														living_wood	2	beast_hide	1	flux_compound	1				
+  Armorcraft		VerdantGuard	Shield	5	Verdant Guard	1	verdant_guard	Verdant Guard +1	1	verdant_guard_p1														living_wood	3	aurion_ingot	2	beast_hide	1	bond_agent	1		
+  Armorcraft		AbyssalBarrier	Shield	6	Abyssal Barrier	1	abyssal_barr														aurion_ingot	2	beast_hide	2	flux_compound	1	bond_agent	1		
+  Armorcraft		AurionAlloyLeggings	Feet	7	Aurion Alloy Leggings	1	aurion_leggins	Aurion Alloy Leggings +1	1	aurion_leggins_p1														aurion_ingot	3	beast_hide	2	bond_agent	1				
+  Armorcraft		ReinforcedCuffs	Hands	8	Reinforced Cuffs	1	reinforc_cuff	Reinforced Cuffs +1	1	reinforc_cuff_p1														aurion_ingot	2	beast_hide	1	flux_compound	1				
+Armorcraft		AurionAlloyMittens	Hands	9	Aurion Alloy Mittens	1	aurion_mitts	Aurion Alloy Mittens +1	1	aurion_mitts_p1																					servo_motor	1	aurion_ingot	1												
+Armorcraft		LeatherCombatGloves	Hands	11	Leather Combat Gloves	1	leather_comglv	Leather Combat Gloves +1	1	leather_comglv_p1																					sinew_strand	1	aurion_ingot	1												
+Armorcraft		LeatherCombatHighboots	Feet	11	Leather Combat Highboots	1	leather_comhbt	Leather Combat Highboots +1	1	leather_comhbt_p1																					sinew_strand	1	aurion_ingot	1												
+Armorcraft		LeatherCombatVest	Body	12	Leather Combat Vest	1	leather_comvst	Leather Combat Vest +1	1	leather_comvst_p1																					sinew_strand	2	aurion_ingot	2	beast_hide	2										
+Armorcraft		WarwovenKyahan	Feet	13	Warwoven Kyahan	1	warwvn_kyahan	Warwoven Kyahan +1	1	warwvn_kyahan_p1																					aurion_ingot	2	beast_hide	1												
+Armorcraft		ShellbackAegis	Shield	14	Shellback Aegis	1	shellback_aegis																								living_wood	3	aurion_ingot	2	beast_hide	2	flux_compound	1								
+Armorcraft		BattleforgedTekko	Hands	14	Battleforged Tekko	1	battlefrg_tkko	Battleforged Tekko +1	1	battlefrg_tkko_p1																					servo_motor	1	aurion_ingot	1												
+Armorcraft		WarforgedMitts	Hands	15	Warforged Mitts	1	warforged_mitts	Warforged Mitts +1	1	warforged_mitts_p1																					servo_motor	1	aurion_ingot	1												
+Armorcraft		TimberguardShield	Shield	16	Timberguard Shield	1	timbergrd_shld	Timberguard Shield +1	1	timbergrd_shld_p1																					living_wood	3	ferrite_core	2	circuit_matrix	2	enhance_serum	1								
+Armorcraft		WarwovenKenpogi	Body	16	Warwoven Kenpogi	1	warwvn_kenpgi	Warwoven Kenpogi +1	1	warwvn_kenpgi_p1																					techno_fiber	2	ferrite_core	2	circuit_matrix	2										
+Armorcraft		EtherTouchedSoleas	Feet	16	Ether-Touched Soleas	1	ethertch_sleas	Ether-Touched Soleas +1	1	ethertch_sleas_p1																					ether_crystal	1	ferrite_core	1												
+Armorcraft		TitanScaleGauntlets	Hands	17	Titan Scale Gauntlets	1	titan_gauntlts	Titan Scale Gauntlets +1	1	titan_gauntlts_p1																					servo_motor	1	ferrite_core	1												
+Armorcraft		SentinelAegis	Shield	18	Sentinel Aegis	1	sentinel_aegis	Sentinel Aegis +1	1	sentinel_aegis_p1																					living_wood	3	ferrite_core	2	circuit_matrix	2	enhance_serum	1								
+Armorcraft		ReinforcedTunic	Body	18	Reinforced Tunic	1	reinforc_tunc	Reinforced Tunic +1	1	reinforc_tunc_p1																					techno_fiber	2	ferrite_core	2	circuit_matrix	2										
+Armorcraft		BrassguardMittens	Hands	19	Brassguard Mittens	1	brassg_mitts	Brassguard Mittens +1	1	brassg_mitts_p1																					living_wood	2	ferrite_core	1												
+Armorcraft		ReinforcedGaiters	Feet	19	Reinforced Gaiters	1	reinforc_gait	Reinforced Gaiters +1	1	reinforc_gait_p1																					ferrite_core	2	circuit_matrix	1												
+Armorcraft		BrassguardHarness	Body	20	Brassguard Harness	1	brassg_harness	Brassguard Harness +1	1	brassg_harness_p1																					living_wood	3	ferrite_core	2	circuit_matrix	2										
+Armorcraft		BrassguardLeggings	Feet	20	Brassguard Leggings	1	brassg_legg	Brassguard Leggings +1	1	brassg_legg_p1																					living_wood	2	ferrite_core	1												
+Armorcraft		ReinforcedDoublet	Body	22	Reinforced Doublet	1	reinforc_dblt	Reinforced Doublet +1	1	reinforc_dblt_p1																					techno_fiber	2	ferrite_core	2	circuit_matrix	2										
+Armorcraft		LeatherTacticalBandana	Head	23	Leather Tactical Bandana	1	leather_tacbnd	Leather Tactical Bandana +1	1	leather_tacbnd_p1																					techno_fiber	1	ferrite_core	1												
+Armorcraft		TitanScaleMail	Body	23	Titan Scale Mail	1	titan_scale_ml	Titan Scale Mail +1	1	titan_scale_ml_p1																					ferrite_core	3	circuit_matrix	2	enhance_serum	1										
+Armorcraft		EtherwovenLinenRobe	Body	23	Etherwoven Linen Robe	1	etherwvn_lrobe	Etherwoven Linen Robe +1	1	etherwvn_lrobe_p1																					techno_fiber	2	ferrite_core	2	circuit_matrix	2										
+Armorcraft		EtherwovenCuffs	Hands	23	Etherwoven Cuffs	1	etherwvn_cuffs	Etherwoven Cuffs +1	1	etherwvn_cuffs_p1																					ether_crystal	1	ferrite_core	1												
+Armorcraft		TitanScaleGreaves	Feet	23	Titan Scale Greaves	1	titan_scale_gvs	Titan Scale Greaves +1	1	titan_scale_gvs_p1																					ferrite_core	2	circuit_matrix	1												
+Armorcraft		CombatHachimaki	Head	24	Combat Hachimaki	1	combat_hachmk	Combat Hachimaki +1	1	combat_hachmk_p1																					circuit_matrix	1	ferrite_core	1												
+Armorcraft		CombatGloves	Hands	24	Combat Gloves	1	combat_gloves	Combat Gloves +1	1	combat_gloves_p1																					circuit_matrix	1	ferrite_core	1												
+Armorcraft		ElmguardShield	Shield	26	Elmguard Shield	1	elmguard_shld	Elmguard Shield +1	1	elmguard_shld_p1																					living_wood	3	ferrite_core	2	biosteel_comp	2	neural_inter	1								
+Armorcraft		WayfarersHat	Head	27	Wayfarer's Hat	1	wayfarer_hat																								neural_inter	1	ferrite_core	1												
+Armorcraft		VerdantHollyClogs	Feet	27	Verdant Holly Clogs	1	verdholly_clgs	Verdant Holly Clogs +1	1	verdholly_clgs_p1																					living_wood	2	ferrite_core	1												
+Armorcraft		BoneforgedMittens	Hands	29	Boneforged Mittens	1	bonefrg_mitts	Boneforged Mittens +1	1	bonefrg_mitts_p1																					servo_motor	1	ferrite_core	1												
+Armorcraft		TitanTarge	Shield	32	Titan Targe	1	titan_targe	Titan Targe +1	1	titan_targe_p1																					living_wood	3	ferrite_core	2	biosteel_comp	2	neural_inter	1								
+Armorcraft		LizardscaleLedelsens	Feet	32	Lizardscale Ledelsens	1	lizardsc_ledls	Lizardscale Ledelsens +1	1	lizardsc_ledls_p1																					ferrite_core	2	biosteel_comp	1	neural_inter	1										
+Armorcraft		BoneforgedLeggings	Feet	33	Boneforged Leggings	1	bonefrg_legg	Boneforged Leggings +1	1	bonefrg_legg_p1																					ferrite_core	2	biosteel_comp	1	neural_inter	1										
+Armorcraft		CottonWovenKyahan	Feet	33	Cotton-Woven Kyahan	1	cottonwv_kyhan	Cotton-Woven Kyahan +1	1	cottonwv_kyhan_p1																					ferrite_core	2	biosteel_comp	1	neural_inter	1										
+Armorcraft		TropicWard	Shield	34	Tropic Ward	1	tropic_ward																								ferrite_core	3	biosteel_comp	2	neural_inter	1	enhance_serum	1								
+Armorcraft		LizardscaleJerkin	Body	34	Lizardscale Jerkin	1	lizardsc_jerkn	Lizardscale Jerkin +1	1	lizardsc_jerkn_p1																					techno_fiber	2	ferrite_core	2	biosteel_comp	2										
+Armorcraft		BoneforgedHarness	Body	35	Boneforged Harness	1	bonefrg_harness	Boneforged Harness +1	1	bonefrg_harness_p1																					ferrite_core	3	biosteel_comp	2	neural_inter	1										
+Armorcraft		LizardscaleCombatGloves	Hands	35	Lizardscale Combat Gloves	1	lizardsc_comglv	Lizardscale Combat Gloves +1	1	lizardsc_comglv_p1																					circuit_matrix	1	ferrite_core	1	biosteel_comp	1										
+Armorcraft		CottonWovenTekko	Hands	35	Cotton-Woven Tekko	1	cottonwv_tekko	Cotton-Woven Tekko +1	1	cottonwv_tekko_p1																					servo_motor	1	ferrite_core	1	biosteel_comp	1										
+Armorcraft		MettleforgedLeggings	Feet	35	Mettleforged Leggings	1	mettlefrg_legg	Mettleforged Leggings +1	1	mettlefrg_legg_p1																					ferrite_core	2	biosteel_comp	1	neural_inter	1										
+Armorcraft		CottonWovenDogi	Body	37	Cotton-Woven Dogi	1	cottonwv_dogi	Cotton-Woven Dogi +1	1	cottonwv_dogi_p1																					techno_fiber	2	ferrite_core	2	biosteel_comp	2										
+Armorcraft		LanternAegis	Shield	38	Lantern Aegis	1	lantern_aegis																								living_wood	3	ferrite_core	2	biosteel_comp	2	neural_inter	1								
+Armorcraft		ObsidianTunic	Body	38	Obsidian Tunic	1	obsidian_tunic	Obsidian Tunic +1	1	obsidian_tunic_p1																					techno_fiber	2	ferrite_core	2	biosteel_comp	2										
+Armorcraft		LegionnairesHelm	Head	39	Legionnaire's Helm	1	legion_helm																								neural_inter	1	ferrite_core	1	biosteel_comp	1										
+Armorcraft		ChitinPlatedMittens	Hands	39	Chitin-Plated Mittens	1	chitin_mt_mitt	Chitin-Plated Mittens +1	1	chitin_mt_mitt_p1																					servo_motor	1	ferrite_core	1	biosteel_comp	1										
+Armorcraft		ChitinPlatedLeggings	Feet	39	Chitin-Plated Leggings	1	chitin_mt_legg	Chitin-Plated Leggings +1	1	chitin_mt_legg_p1																					chitin_plate	1	ferrite_core	1	biosteel_comp	1										
+Armorcraft		SanctifiedWhiteMitts	Hands	41	Sanctified White Mitts	1	sanct_white_mt	Sanctified White Mitts +1	1	sanct_white_mt_p1																					ether_crystal	1	ferrite_core	1	biosteel_comp	1										
+Armorcraft		TacticalHeadgear	Head	42	Tactical Headgear	1	tacticl_headgr	Tactical Headgear +1	1	tacticl_headgr_p1																					circuit_matrix	1	ferrite_core	1	biosteel_comp	1										
+Armorcraft		ChitinPlatedHarness	Body	42	Chitin-Plated Harness	1	chitin_mt_hrns	Chitin-Plated Harness +1	1	chitin_mt_hrns_p1																					chitin_plate	2	ferrite_core	2	biosteel_comp	2	neural_inter	1								
+Armorcraft		ArcaneWeaversSandals	Feet	42	Arcane Weaver's Sandals	1	arcane_sandals	Arcane Weaver's Sandals +1	1	arcane_sandals_p1																					ether_crystal	1	ferrite_core	1	biosteel_comp	1										
+Armorcraft		VanguardFaceguard	Head	43	Vanguard Faceguard	1	vang_facegrd	Vanguard Faceguard +1	1	vang_facegrd_p1																					living_wood	2	ferrite_core	1	biosteel_comp	1										
+Armorcraft		MonksWargear	Head	44	Monk's Wargear	1	monks_wargear																								ferrite_core	2	biosteel_comp	1	neural_inter	1										
+Armorcraft		TitanChainmail	Body	47	Titan Chainmail	1	titan_chainml	Titan Chainmail +1	1	titan_chainml_p1																					mythrite_frag	3	psi_crystal	2	biosteel_comp	1	purify_filter	1								
+Armorcraft		TideshellShield	Shield	48	Tideshell Shield	1	tideshell_shld	Tideshell Shield +1	1	tideshell_shld_p1																					living_wood	3	mythrite_frag	2	psi_crystal	2	biosteel_comp	1								
+Armorcraft		BrassguardCap	Head	48	Brassguard Cap	1	brassg_cap	Brassguard Cap +1	1	brassg_cap_p1																					living_wood	2	mythrite_frag	1	psi_crystal	1										
+Armorcraft		CottonCombatGloves	Hands	48	Cotton Combat Gloves	1	cotton_comglv	Cotton Combat Gloves +1	1	cotton_comglv_p1																					circuit_matrix	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		WingstrideBoots	Feet	48	Wingstride Boots	1	wingstride_bts	Wingstride Boots +1	1	wingstride_bts_p1																					mythrite_frag	3	psi_crystal	1	biosteel_comp	1										
+Armorcraft		RegalFootmansBandana	Head	49	Regal Footman's Bandana	1	regal_footbnd																								techno_fiber	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		SagesEtherCirclet	Head	49	Sage's Ether Circlet	1	sages_ethercrc																								ether_crystal	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		CottonfieldDoublet	Body	49	Cottonfield Doublet	1	cottonfld_dblt	Cottonfield Doublet +1	1	cottonfld_dblt_p1																					techno_fiber	2	mythrite_frag	2	psi_crystal	2	biosteel_comp	1								
+Armorcraft		CottonWovenGaiters	Feet	49	Cotton-Woven Gaiters	1	cottonwv_gaits	Cotton-Woven Gaiters +1	1	cottonwv_gaits_p1																					mythrite_frag	3	psi_crystal	1	biosteel_comp	1										
+Armorcraft		TitanWarGreaves	Feet	49	Titan War Greaves	1	titan_war_gvs	Titan War Greaves +1	1	titan_war_gvs_p1																					mythrite_frag	3	psi_crystal	1	biosteel_comp	1										
+Armorcraft		IroncladMask	Head	50	Ironclad Mask	1	ironclad_mask	Ironclad Mask +1	1	ironclad_mask_p1																					neural_inter	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		TitanChainMittens	Hands	51	Titan Chain Mittens	1	titan_chainmt	Titan Chain Mittens +1	1	titan_chainmt_p1																					servo_motor	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		BrassguardScaleMail	Body	52	Brassguard Scale Mail	1	brassg_scl_ml	Brassguard Scale Mail +1	1	brassg_scl_ml_p1																					living_wood	4	mythrite_frag	2	psi_crystal	2	biosteel_comp	1								
+Armorcraft		FederationCombatWrap	Head	53	Federation Combat Wrap	1	fed_combat_wrap																								techno_fiber	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		PrecisionCombatBandana	Head	53	Precision Combat Bandana	1	prec_com_bndna																								techno_fiber	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		DevoteesSanctifiedMitts	Hands	53	Devotee's Sanctified Mitts	1	devot_sanct_mt	Devotee's Sanctified Mitts +1	1	devot_sanct_mt_p1																					ether_crystal	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		ReflexHeadband	Head	54	Reflex Headband	1	reflex_headbnd																								mythrite_frag	2	psi_crystal	1	biosteel_comp	1										
+Armorcraft		WoolenTacticalHat	Head	55	Woolen Tactical Hat	1	wool_tactc_hat	Woolen Tactical Hat +1	1	wool_tactc_hat_p1																					circuit_matrix	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		BrassguardGreaves	Feet	55	Brassguard Greaves	1	brassg_greavs	Brassguard Greaves +1	1	brassg_greavs_p1																					living_wood	3	mythrite_frag	1	psi_crystal	1										
+Armorcraft		EarthforgedKyahan	Feet	55	Earthforged Kyahan	1	earthfrg_kyhan	Earthforged Kyahan +1	1	earthfrg_kyhan_p1																					mythrite_frag	3	psi_crystal	1	biosteel_comp	1										
+Armorcraft		WarbornKite	Shield	56	Warborn Kite	1	warborn_kite	Warborn Kite +1	1	warborn_kite_p1																					mythrite_frag	3	psi_crystal	2	biosteel_comp	1	purify_filter	1								
+Armorcraft		WarWovenWoolRobe	Body	56	War-Woven Wool Robe	1	warwvn_woolrb	War-Woven Wool Robe +1	1	warwvn_woolrb_p1																					techno_fiber	2	mythrite_frag	2	psi_crystal	2	biosteel_comp	1								
+Armorcraft		Eisenbreastplate	Body	56	Eisenbreastplate	1	eisen_brestplt	Eisenbreastplate +1	1	eisen_brestplt_p1																					mythrite_frag	4	psi_crystal	2	biosteel_comp	1	purify_filter	1								
+Armorcraft		ZephyrSoleas	Feet	56	Zephyr Soleas	1	zephyr_soleas	Zephyr Soleas +1	1	zephyr_soleas_p1																					mythrite_frag	3	psi_crystal	1	biosteel_comp	1										
+Armorcraft		ScholarsCirclet	Head	57	Scholar's Circlet	1	scholar_circlt																								neural_inter	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		BrassguardMask	Head	57	Brassguard Mask	1	brassg_mask	Brassguard Mask +1	1	brassg_mask_p1																					living_wood	2	mythrite_frag	1	psi_crystal	1										
+Armorcraft		KampfschallerWarHelm	Head	57	Kampfschaller War Helm	1	kampfs_warhlm																								neural_inter	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		CenturionsWarVisor	Head	57	Centurion's War Visor	1	centur_warvsr																								neural_inter	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		LegionnairesEtherCirclet	Head	57	Legionnaire's Ether Circlet	1	legion_ethercl																								ether_crystal	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		MercenaryCaptainsWargear	Head	57	Mercenary Captain's Wargear	1	mercapt_wargear																								neural_inter	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		OraclesTunic	Body	57	Oracle's Tunic	1	oracle_tunic	Oracle's Tunic +1	1	oracle_tunic_p1																					techno_fiber	2	mythrite_frag	2	psi_crystal	2	biosteel_comp	1								
+Armorcraft		NoctshadowDoublet	Body	57	Noctshadow Doublet	1	noctshdw_dblt	Noctshadow Doublet +1	1	noctshdw_dblt_p1																					techno_fiber	2	mythrite_frag	2	psi_crystal	2	biosteel_comp	1								
+Armorcraft		BrassguardFingerGauntlets	Hands	57	Brassguard Finger Gauntlets	1	brassg_fingerga	Brassguard Finger Gauntlets +1	1	brassg_fingga_p1																					living_wood	3	mythrite_frag	1	psi_crystal	1										
+Armorcraft		NoctshadowGloves	Hands	57	Noctshadow Gloves	1	noctshdw_glovs	Noctshadow Gloves +1	1	noctshdw_glovs_p1																					mythrite_frag	3	psi_crystal	1	biosteel_comp	1										
+Armorcraft		EisensteelBoots	Feet	57	Eisensteel Boots	1	eisensteel_bts	Eisensteel Boots +1	1	eisensteel_bts_p1																					mythrite_frag	3	psi_crystal	1	biosteel_comp	1										
+Armorcraft		HoshikazuWarwrap	Head	58	Hoshikazu Warwrap	1	hoshikazu_wrap																								techno_fiber	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		EisenwarHelm	Head	58	Eisenwar Helm	1	eisenwar_helm																								neural_inter	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		EarthforgedGi	Body	58	Earthforged Gi	1	earthfrg_gi	Earthforged Gi +1	1	earthfrg_gi_p1																					mythrite_frag	4	psi_crystal	2	biosteel_comp	1	purify_filter	1								
+Armorcraft		WoolenCombatCuffs	Hands	58	Woolen Combat Cuffs	1	wool_combatcf	Woolen Combat Cuffs +1	1	wool_combatcf_p1																					servo_motor	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		EisenwroughtGauntlets	Hands	58	Eisenwrought Gauntlets	1	eisenw_gauntlt	Eisenwrought Gauntlets +1	1	eisenw_gauntlt_p1																					servo_motor	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		OraclesPumps	Feet	58	Oracle's Pumps	1	oracle_pumps	Oracle's Pumps +1	1	oracle_pumps_p1																					ether_crystal	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		NoctshadowGaiters	Feet	58	Noctshadow Gaiters	1	noctshdw_gaits	Noctshadow Gaiters +1	1	noctshdw_gaits_p1																					mythrite_frag	3	psi_crystal	1	biosteel_comp	1										
+Armorcraft		ReinforcedStuddedBoots	Feet	58	Reinforced Studded Boots	1	rein_stud_bts	Reinforced Studded Boots +1	1	rein_stud_bts_p1																					mythrite_frag	3	psi_crystal	1	biosteel_comp	1										
+Armorcraft		ReinforcedBandana	Head	59	Reinforced Bandana	1	reinforced_bndn	Reinforced Bandana +1	1	reinforced_bndn_p1																					techno_fiber	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		CombatReinforcedMittens	Hands	59	Combat Reinforced Mittens	1	combat_rein_mt	Combat Reinforced Mittens +1	1	combat_rein_mt_p1																					servo_motor	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		BoneforgedMask	Head	60	Boneforged Mask	1	bonefrg_mask	Boneforged Mask +1	1	bonefrg_mask_p1																					neural_inter	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		EarthforgedTekko	Hands	60	Earthforged Tekko	1	earthfrg_tekko	Earthforged Tekko +1	1	earthfrg_tekko_p1																					servo_motor	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		EruditesMindband	Head	61	Erudite's Mindband	1	erudite_mindbd																								neural_inter	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		EarthwovenHachimaki	Head	61	Earthwoven Hachimaki	1	earthwvn_hachm	Earthwoven Hachimaki +1	1	earthwvn_hachm_p1																					mythrite_frag	2	psi_crystal	1	biosteel_comp	1										
+Armorcraft		NoctshadeBeret	Head	61	Noctshade Beret	1	noctshade_beret	Noctshade Beret +1	1	noctshade_beret_p1																					mythrite_frag	2	psi_crystal	1	biosteel_comp	1										
+Armorcraft		OraclesMitts	Hands	61	Oracle's Mitts	1	oracle_mitts	Oracle's Mitts +1	1	oracle_mitts_p1																					ether_crystal	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		ReinforcedStuddedGloves	Hands	61	Reinforced Studded Gloves	1	rein_stud_glv	Reinforced Studded Gloves +1	1	rein_stud_glv_p1																					mythrite_frag	3	psi_crystal	1	biosteel_comp	1										
+Armorcraft		CottonWeaveHeadband	Head	62	Cotton-Weave Headband	1	cottonwv_hdbnd																								mythrite_frag	2	psi_crystal	1	biosteel_comp	1										
+Armorcraft		RegalSquiresHelm	Head	62	Regal Squire's Helm	1	regal_squirehlm																								neural_inter	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		ReinforcedStuddedVest	Body	62	Reinforced Studded Vest	1	rein_stud_vst	Reinforced Studded Vest +1	1	rein_stud_vst_p1																					mythrite_frag	4	psi_crystal	2	biosteel_comp	1	purify_filter	1								
+Armorcraft		LizardscaleHelm	Head	65	Lizardscale Helm	1	lizardsc_helm	Lizardscale Helm +1	1	lizardsc_helm_p1																					neural_inter	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		WarcastersCloak	Body	65	Warcaster's Cloak	1	warcast_cloak	Warcaster's Cloak +1	1	warcast_cloak_p1																					mythrite_frag	4	psi_crystal	2	biosteel_comp	1	purify_filter	1								
+Armorcraft		EtherwovenDoublet	Body	66	Etherwoven Doublet	1	etherwvn_dblt	Etherwoven Doublet +1	1	etherwvn_dblt_p1																					techno_fiber	2	mythrite_frag	2	psi_crystal	2	biosteel_comp	1								
+Armorcraft		CorrodedWarCap	Head	67	Corroded War Cap	1	corrod_war_cap																								neural_inter	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		BishopsSanctifiedRobe	Body	67	Bishop's Sanctified Robe	1	bishop_sanctrb	Bishop's Sanctified Robe +1	1	bishop_sanctrb_p1																					techno_fiber	2	mythrite_frag	2	psi_crystal	2	biosteel_comp	1								
+Armorcraft		CombatLeggings	Feet	67	Combat Leggings	1	combat_leggins	Combat Leggings +1	1	combat_leggins_p1																					circuit_matrix	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		PaddedCombatCap	Head	68	Padded Combat Cap	1	padded_com_cap																								circuit_matrix	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		CottonCombatWrap	Head	69	Cotton Combat Wrap	1	cotton_com_wrap	Cotton Combat Wrap +1	1	cotton_com_wrap_p1																					techno_fiber	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		PaddedCombatArmor	Body	69	Padded Combat Armor	1	padded_com_amr	Padded Combat Armor +1	1	padded_com_amr_p1																					circuit_matrix	2	mythrite_frag	2	psi_crystal	2	biosteel_comp	1								
+Armorcraft		FortifiedGambison	Body	69	Fortified Gambison	1	fortified_gmbs	Fortified Gambison +1	1	fortified_gmbs_p1																					mythrite_frag	4	psi_crystal	2	biosteel_comp	1	purify_filter	1								
+Armorcraft		IroncladMittens	Hands	69	Ironclad Mittens	1	ironclad_mitts	Ironclad Mittens +1	1	ironclad_mitts_p1																					servo_motor	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		EtherwovenShoes	Feet	69	Etherwoven Shoes	1	etherwvn_shoes	Etherwoven Shoes +1	1	etherwvn_shoes_p1																					ether_crystal	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		FortifiedGuardCap	Head	70	Fortified Guard Cap	1	fortified_grdc																								living_wood	2	mythrite_frag	1	psi_crystal	1										
+Armorcraft		SilverguardMittens	Hands	70	Silverguard Mittens	1	silverg_mitts	Silverguard Mittens +1	1	silverg_mitts_p1																					living_wood	3	mythrite_frag	1	psi_crystal	1										
+Armorcraft		InsulatedSocks	Feet	70	Insulated Socks	1	insulated_scks	Insulated Socks +1	1	insulated_scks_p1																					mythrite_frag	3	psi_crystal	1	biosteel_comp	1										
+Armorcraft		EtherwovenMitts	Hands	71	Etherwoven Mitts	1	etherwvn_mitts	Etherwoven Mitts +1	1	etherwvn_mitts_p1																					ether_crystal	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		IroncladFingerGauntlets	Hands	71	Ironclad Finger Gauntlets	1	ironclad_fingga	Ironclad Finger Gauntlets +1	1	ironclad_fingga_p1																					servo_motor	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		OakheartShield	Shield	72	Oakheart Shield	1	oakheart_shld	Oakheart Shield +1	1	oakheart_shld_p1																					living_wood	3	mythrite_frag	2	psi_crystal	2	biosteel_comp	1								
+Armorcraft		UnmarkedCombatCap	Head	72	Unmarked Combat Cap	1	unmarked_com_cp																								circuit_matrix	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		RegalVelvetRobe	Body	73	Regal Velvet Robe	1	regal_velvetrb	Regal Velvet Robe +1	1	regal_velvetrb_p1																					techno_fiber	2	mythrite_frag	2	psi_crystal	2	biosteel_comp	1								
+Armorcraft		SilverguardGreaves	Feet	73	Silverguard Greaves	1	silverg_grvs	Silverguard Greaves +1	1	silverg_grvs_p1																					living_wood	3	mythrite_frag	1	psi_crystal	1										
+Armorcraft		LeatherboundHighboots	Feet	73	Leatherbound Highboots	1	leatherb_hboot	Leatherbound Highboots +1	1	leatherb_hboot_p1																					sinew_strand	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		GarrisonWarSallet	Head	74	Garrison War Sallet	1	garrison_warsal																								mythrite_frag	2	psi_crystal	1	biosteel_comp	1										
+Armorcraft		CrimsonWarCap	Head	74	Crimson War Cap	1	crimson_warcap	Crimson War Cap +1	1	crimson_warcap_p1																					neural_inter	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		SilveredMask	Head	74	Silvered Mask	1	silvered_mask	Silvered Mask +1	1	silvered_mask_p1																					neural_inter	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		IroncladVisor	Head	74	Ironclad Visor	1	ironclad_visor	Ironclad Visor +1	1	ironclad_visor_p1																					neural_inter	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		SilverguardMail	Body	74	Silverguard Mail	1	silverg_mail	Silverguard Mail +1	1	silverg_mail_p1																					living_wood	4	mythrite_frag	2	psi_crystal	2	biosteel_comp	1								
+Armorcraft		IroncladScaleMail	Body	74	Ironclad Scale Mail	1	ironclad_sclml	Ironclad Scale Mail +1	1	ironclad_sclml_p1																					mythrite_frag	4	psi_crystal	2	biosteel_comp	1	purify_filter	1								
+Armorcraft		CombatBracers	Hands	74	Combat Bracers	1	combat_bracers	Combat Bracers +1	1	combat_bracers_p1																					servo_motor	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		LeatherboundGloves	Hands	74	Leatherbound Gloves	1	leatherb_glovs	Leatherbound Gloves +1	1	leatherb_glovs_p1																					sinew_strand	1	mythrite_frag	1	psi_crystal	1										
+Armorcraft		IroncladGreaves	Feet	75	Ironclad Greaves	1	ironclad_grevs	Ironclad Greaves +1	1	ironclad_grevs_p1																					mythrite_frag	3	psi_crystal	1	biosteel_comp	1										
+Armorcraft		RegalVelvetCuffs	Hands	76	Regal Velvet Cuffs	1	regal_velvetcf	Regal Velvet Cuffs +1	1	regal_velvetcf_p1																					servo_motor	1	titan_plate	1	crystal_scale	1										
+Armorcraft		ObsidianSabots	Feet	76	Obsidian Sabots	1	obsidian_sabots	Obsidian Sabots +1	1	obsidian_sabots_p1																					titan_plate	3	crystal_scale	1	quantum_proc	1										
+Armorcraft		IronMusketeersBattleArmet	Head	77	Iron Musketeer's Battle Armet	1	ironmus_battlrm	Iron Musketeer's Battle Armet +1	1	ironmus_battlrm_p1	Iron Musketeer's Battle Armet +2	1	ironmus_battlr_p2																		titan_plate	2	crystal_scale	1	quantum_proc	1										
+Armorcraft		BattleHardenedCuirass	Body	77	Battle-Hardened Cuirass	1	battlhard_cuirs	Battle-Hardened Cuirass +1	1	battlhard_cuirs_p1																					titan_plate	4	crystal_scale	2	quantum_proc	1	harmonic_alloy	1								
+Armorcraft		IronMusketeersBattleSabatons	Feet	77	Iron Musketeer's Battle Sabatons	1	ironmus_battsbt	Iron Musketeer's Battle Sabatons +1	1	ironmus_battsbt_p1	Iron Musketeer's Battle Sabatons +2	1	ironmus_battsb_p2																		titan_plate	3	crystal_scale	1	quantum_proc	1										
+Armorcraft		SylphicAegis	Shield	78	Sylphic Aegis	1	sylphic_aegis																								living_wood	3	titan_plate	2	crystal_scale	2	quantum_proc	1								
+Armorcraft		LeatherboundBandana	Head	79	Leatherbound Bandana	1	leatherb_bndna	Leatherbound Bandana +1	1	leatherb_bndna_p1																					techno_fiber	1	titan_plate	1	crystal_scale	1										
+Armorcraft		WarcastersCloak	Body	79	Warcaster's Cloak	1	warcast_cloak2	Warcaster's Cloak +1	1	warcast_cloak_p1	Warcaster's Cloak +2	1	warcast_cloak_p2																		titan_plate	4	crystal_scale	2	quantum_proc	1	harmonic_alloy	1								
+Armorcraft		IronMusketeersWarGambison	Body	79	Iron Musketeer's War Gambison	1	ironmus_wargmb	Iron Musketeer's War Gambison +1	1	ironmus_wargmb_p1	Iron Musketeer's War Gambison +2	1	ironmus_wargmb_p2																		titan_plate	4	crystal_scale	2	quantum_proc	1	harmonic_alloy	1								
+Armorcraft		TitanGauntlets	Hands	79	Titan Gauntlets	1	titan_gauntlts2	Titan Gauntlets +1	1	titan_gauntlts_p1																					servo_motor	1	titan_plate	1	crystal_scale	1										
+  Armorcraft		RegalSquiresGuard	Shield	80	Regal Squire's Guard	1	regal_squiregrd	Regal Squire's Guard +1	1	regal_squiregrd_p1	Regal Squire's Guard +2		regal_sq_guard_p2														living_wood	3	titan_plate	2	crystal_scale	2	quantum_proc	1		
+Armorcraft		RegalSquiresChainmail	Body	80	Regal Squire's Chainmail	1	regal_squireml	Regal Squire's Chainmail +1	1	regal_squireml_p1	Regal Squire's Chainmail +2	1	regal_sq_chain_p2																		titan_plate	4	crystal_scale	2	quantum_proc	1	harmonic_alloy	1								
+Armorcraft		PlateforgedLeggings	Feet	80	Plateforged Leggings	1	platefrg_legg	Plateforged Leggings +1	1	platefrg_legg_p1																					titan_plate	3	crystal_scale	1	quantum_proc	1										
+Armorcraft		RegalSquiresEtherRobe	Body	81	Regal Squire's Ether Robe	1	regal_sq_ethrb	Regal Squire's Ether Robe +1	1	regal_sq_ethrb_p1	Regal Squire's Ether Robe +2	1	regal_sq_ether_p2																		techno_fiber	2	titan_plate	2	crystal_scale	2	quantum_proc	1								
+Armorcraft		WarcastersMitts	Hands	81	Warcaster's Mitts	1	warcast_mitts	Warcaster's Mitts +1	1	warcast_mitts_p1	Warcaster's Mitts +2	1	warcast_mitts_p2																		servo_motor	1	titan_plate	1	crystal_scale	1										
+Armorcraft		IronMusketeersBattleGauntlets	Hands	81	Iron Musketeer's Battle Gauntlets	1	ironmus_battgnt	Iron Musketeer's Battle Gauntlets +1	1	ironmus_battgnt_p1	Iron Musketeer's Battle Gauntlets +2	1	ironmus_battgn_p2																		servo_motor	1	titan_plate	1	crystal_scale	1										
+Armorcraft		WarbornSallet	Head	82	Warborn Sallet	1	warborn_sallet	Warborn Sallet +1	1	warborn_sallet_p1																					titan_plate	2	crystal_scale	1	quantum_proc	1										
+Armorcraft		TitanBreastplate	Body	82	Titan Breastplate	1	titan_breastpl	Titan Breastplate +1	1	titan_breastpl_p1																					titan_plate	4	crystal_scale	2	quantum_proc	1	harmonic_alloy	1								
+Armorcraft		DivineAegisBreastplate	Body	82	Divine Aegis Breastplate	1	divineaeg_brst	Divine Aegis Breastplate +1	1	divineaeg_brst_p1																					living_wood	4	titan_plate	2	crystal_scale	2	quantum_proc	1								
+Armorcraft		WarcastersShoes	Feet	82	Warcaster's Shoes	1	warcast_shoes	Warcaster's Shoes +1	1	warcast_shoes_p1	Warcaster's Shoes +2	1	warcast_shoes_p2																		titan_plate	3	crystal_scale	1	quantum_proc	1										
+Armorcraft		SilverPlatedBangles	Hands	83	Silver-Plated Bangles	1	silverp_bngls	Silver-Plated Bangles +1	1	silverp_bngls_p1																					servo_motor	1	titan_plate	1	crystal_scale	1										
+Armorcraft		MercenarysWarwrap	Head	85	Mercenary's Warwrap	1	merc_warwrap																								techno_fiber	1	titan_plate	1	crystal_scale	1										
+Armorcraft		ChitinPlatedMask	Head	85	Chitin-Plated Mask	1	chitin_mask	Chitin-Plated Mask +1	1	chitin_mask_p1																					chitin_plate	1	titan_plate	1	crystal_scale	1										
+Armorcraft		InfernalSabots	Feet	85	Infernal Sabots	1	infernal_sabots	Infernal Sabots +1	1	infernal_sabots_p1																					titan_plate	3	crystal_scale	1	quantum_proc	1										
+Armorcraft		EmberplateHeater	Shield	86	Emberplate Heater	1	emberplate_heat	Emberplate Heater +1	1	emberplate_heat_p1																					living_wood	3	titan_plate	2	crystal_scale	2	quantum_proc	1								
+Armorcraft		ValkyrianMask	Head	86	Valkyrian Mask	1	valkyrian_mask																								neural_inter	1	titan_plate	1	crystal_scale	1										
+Armorcraft		ChitinPlatedMask	Head	87	Chitin-Plated Mask	1	chitin_mask2	Chitin-Plated Mask +1	1	chitin_mask2_p1																					chitin_plate	1	titan_plate	1	crystal_scale	1										
+Armorcraft		WoolenCombatDoublet	Body	87	Woolen Combat Doublet	1	wool_combat_dbl	Woolen Combat Doublet +1	1	wool_combat_dbl_p1																					techno_fiber	2	titan_plate	2	crystal_scale	2	quantum_proc	1								
+Armorcraft		ReinforcedBrigandine	Body	87	Reinforced Brigandine	1	rein_brigan	Reinforced Brigandine +1	1	rein_brigan_p1																					titan_plate	4	crystal_scale	2	quantum_proc	1	harmonic_alloy	1								
+Armorcraft		ChitinPlatedLeggings	Feet	87	Chitin-Plated Leggings	1	chitin_leggins2	Chitin-Plated Leggings +1	1	chitin_leggins2_p1																					chitin_plate	1	titan_plate	1	crystal_scale	1										
+Armorcraft		ChitinPlatedMittens	Hands	88	Chitin-Plated Mittens	1	chitin_mittens2	Chitin-Plated Mittens +1	1	chitin_mittens2_p1																					servo_motor	1	titan_plate	1	crystal_scale	1										
+Armorcraft		WalküreMask	Head	89	Walküre Mask	1	walkure_mask																								neural_inter	1	titan_plate	1	crystal_scale	1										
+Armorcraft		BandedWarhelm	Head	89	Banded Warhelm	1	banded_warhelm	Banded Warhelm +1	1	banded_warhlm_p1																					neural_inter	1	titan_plate	1	crystal_scale	1										
+Armorcraft		BandedWarMail	Body	89	Banded War Mail	1	banded_warmail	Banded War Mail +1	1	banded_warmil_p1																					titan_plate	4	crystal_scale	2	quantum_proc	1	harmonic_alloy	1								
+Armorcraft		WarbornBuckler	Shield	90	Warborn Buckler	1	warborn_buckler	Warborn Buckler +1	1	warborn_bucklr_p1																					living_wood	3	titan_plate	2	crystal_scale	2	quantum_proc	1								
+Armorcraft		ChitinPlatedHarness	Body	90	Chitin-Plated Harness	1	chitin_hrns2	Chitin-Plated Harness +1	1	chitin_hrns2_p1																					chitin_plate	2	titan_plate	2	crystal_scale	2	quantum_proc	1								
+Armorcraft		CorsairsTricorne	Head	91	Corsair's Tricorne	1	corsair_tricrn	Corsair's Tricorne +1	1	corsair_tricrn_p1																					titan_plate	2	crystal_scale	1	quantum_proc	1										
+Armorcraft		WarbornSollerets	Feet	91	Warborn Sollerets	1	warborn_sollret	Warborn Sollerets +1	1	warborn_sollret_p1																					titan_plate	3	crystal_scale	1	quantum_proc	1										
+Armorcraft		InsulatedMufflers	Hands	92	Insulated Mufflers	1	insulated_muff	Insulated Mufflers +1	1	insulated_muff_p1																					servo_motor	1	titan_plate	1	crystal_scale	1										
+Armorcraft		TideshellBangles	Hands	92	Tideshell Bangles	1	tideshell_bngls	Tideshell Bangles +1	1	tideshell_bngls_p1																					servo_motor	1	titan_plate	1	crystal_scale	1										
+Armorcraft		WoolenWarCap	Head	93	Woolen War Cap	1	wool_war_cap	Woolen War Cap +1	1	wool_war_cap_p1																					neural_inter	1	titan_plate	1	crystal_scale	1										
+Armorcraft		RaptorstrikeGloves	Hands	93	Raptorstrike Gloves	1	raptor_gloves	Raptorstrike Gloves +1	1	raptor_gloves_p1																					titan_plate	3	crystal_scale	1	quantum_proc	1										
+Armorcraft		SteelguardFingerGauntlets	Hands	93	Steelguard Finger Gauntlets	1	steelg_fingga	Steelguard Finger Gauntlets +1	1	steelg_fingga_p1																					living_wood	3	titan_plate	1	crystal_scale	1										
+Armorcraft		CottonfieldHeadgear	Head	94	Cottonfield Headgear	1	cottonfld_headg	Cottonfield Headgear +1	1	cottonfld_headg_p1																					neural_inter	1	titan_plate	1	crystal_scale	1										
+Armorcraft		RaptorstrikeLedelsens	Feet	94	Raptorstrike Ledelsens	1	raptor_ledelsns	Raptorstrike Ledelsens +1	1	raptor_ledelsns_p1																					titan_plate	3	crystal_scale	1	quantum_proc	1										
+Armorcraft		RaptorstrikeHelm	Head	95	Raptorstrike Helm	1	raptor_helm	Raptorstrike Helm +1	1	raptor_helm_p1																					neural_inter	1	titan_plate	1	crystal_scale	1										
+Armorcraft		WoolenWarGambison	Body	95	Woolen War Gambison	1	wool_war_gmbs	Woolen War Gambison +1	1	wool_war_gmbs_p1																					titan_plate	4	crystal_scale	2	quantum_proc	1	harmonic_alloy	1								
+Armorcraft		MythriteBreastplate	Body	95	Mythrite Breastplate	1	mythrite_breastp	Mythrite Breastplate +1	1	mythrite_breastp_p1																					titan_plate	4	crystal_scale	2	quantum_proc	1	harmonic_alloy	1								
+Armorcraft		MythriteSallet	Head	96	Mythrite Sallet	1	mythrite_sallet	Mythrite Sallet +1	1	mythrite_sallet_p1																					titan_plate	2	crystal_scale	1	quantum_proc	1										
+Armorcraft		WoolenCombatBracers	Hands	96	Woolen Combat Bracers	1	wool_combat_brc	Woolen Combat Bracers +1	1	wool_combat_brc_p1																					servo_motor	1	titan_plate	1	crystal_scale	1										
+Armorcraft		SteelguardGreaves	Feet	96	Steelguard Greaves	1	steelg_grevs	Steelguard Greaves +1	1	steelg_grevs_p1																					living_wood	3	titan_plate	1	crystal_scale	1										
+Armorcraft		ShinobiShadowguard	Head	97	Shinobi Shadowguard	1	shinobi_shdwgd	Shinobi Shadowguard +1	1	shinobi_shdwgd_p1																					living_wood	2	titan_plate	1	crystal_scale	1										
+Armorcraft		ObsidianCrowJupon	Body	97	Obsidian Crow Jupon	1	obsidian_crow_ju	Obsidian Crow Jupon +1	1	obsidian_crow_ju_p1																					titan_plate	4	crystal_scale	2	quantum_proc	1	harmonic_alloy	1								
+Armorcraft		MythriteGauntlets	Hands	97	Mythrite Gauntlets	1	mythrite_gauntl	Mythrite Gauntlets +1	1	mythrite_gauntl_p1																					servo_motor	1	titan_plate	1	crystal_scale	1										
+Armorcraft		ShinobiShadowTekko	Hands	97	Shinobi Shadow Tekko	1	shinobi_shdwtk	Shinobi Shadow Tekko +1	1	shinobi_shdwtk_p1																					servo_motor	1	titan_plate	1	crystal_scale	1										
+Armorcraft		ObsidianMitts	Hands	97	Obsidian Mitts	1	obsidian_mitts	Obsidian Mitts +1	1	obsidian_mitts_p1																					servo_motor	1	titan_plate	1	crystal_scale	1										
+Armorcraft		ObsidianCrowBracers	Hands	97	Obsidian Crow Bracers	1	obsidian_crow_br	Obsidian Crow Bracers +1	1	obsidian_crow_br_p1																					servo_motor	1	titan_plate	1	crystal_scale	1										
+Armorcraft		MythriteLeggings	Feet	97	Mythrite Leggings	1	mythrite_leggins	Mythrite Leggings +1	1	mythrite_leggins_p1																					titan_plate	3	crystal_scale	1	quantum_proc	1										
+Armorcraft		ObsidianCrowGaiters	Feet	97	Obsidian Crow Gaiters	1	obsidian_crow_ga	Obsidian Crow Gaiters +1	1	obsidian_crow_ga_p1																					titan_plate	3	crystal_scale	1	quantum_proc	1										
+Armorcraft		LeathercladGuard	Shield	98	Leatherclad Guard	1	leatherclad_grd	Leatherclad Guard +1	1	leatherclad_grd_p1																					living_wood	3	titan_plate	2	crystal_scale	2	quantum_proc	1								
+Armorcraft		SteelguardVisor	Head	98	Steelguard Visor	1	steelg_visor	Steelguard Visor +1	1	steelg_visor_p1																					living_wood	2	titan_plate	1	crystal_scale	1										
+Armorcraft		SanctifiedWhiteCloak	Body	98	Sanctified White Cloak	1	sanct_white_clk	Sanctified White Cloak +1	1	sanct_white_clk_p1																					ether_crystal	2	titan_plate	2	crystal_scale	2	quantum_proc	1								
+Armorcraft		WoolenInsulatedSocks	Feet	98	Woolen Insulated Socks	1	wool_insul_scks	Woolen Insulated Socks +1	1	wool_insul_scks_p1																					titan_plate	3	crystal_scale	1	quantum_proc	1										
+Armorcraft		ReinforcedMoccasins	Feet	98	Reinforced Moccasins	1	rein_moccasins	Reinforced Moccasins +1	1	rein_moccasins_p1																					titan_plate	3	crystal_scale	1	quantum_proc	1										
+Armorcraft		DinohideJerkin	Body	99	Dinohide Jerkin	1	dinohide_jerkn	Dinohide Jerkin +1	1	dinohide_jerkn_p1																					techno_fiber	2	titan_plate	2	crystal_scale	2	quantum_proc	1								
+Armorcraft		SteelguardScaleMail	Body	99	Steelguard Scale Mail	1	steelg_scl_ml	Steelguard Scale Mail +1	1	steelg_scl_ml_p1																					living_wood	4	titan_plate	2	crystal_scale	2	quantum_proc	1								
+Armorcraft		RoyalKnightArmyBulwark	Shield	100	Royal Knight Army Bulwark	1	roy_knight_blwk																								living_wood	3	titan_plate	2	crystal_scale	2	quantum_proc	1								
+Armorcraft		ObsidianCrowBeret	Head	100	Obsidian Crow Beret	1	obsidian_crow_be	Obsidian Crow Beret +1	1	obsidian_crow_be_p1																					titan_plate	2	crystal_scale	1	quantum_proc	1										
+Armorcraft		TacticiansArcaneHat	Head	100	Tactician's Arcane Hat	1	tact_arcane_hat																								ether_crystal	1	titan_plate	1	crystal_scale	1										
+Armorcraft		ShockguardMask	Head	100	Shockguard Mask	1	shockguard_mask																								living_wood	2	titan_plate	1	crystal_scale	1										
+Armorcraft		ShinobiShadowGi	Body	100	Shinobi Shadow Gi	1	shinobi_shdwgi	Shinobi Shadow Gi +1	1	shinobi_shdwgi_p1																					titan_plate	4	crystal_scale	2	quantum_proc	1	harmonic_alloy	1								
+Armorcraft		TacticianMagiciansWarCuffs	Hands	100	Tactician Magician's War Cuffs	1	tact_mag_warcf																								servo_motor	1	titan_plate	1	crystal_scale	1										
+Armorcraft		ShinobiShadowKyahan	Feet	100	Shinobi Shadow Kyahan	1	shinobi_shdwky	Shinobi Shadow Kyahan +1	1	shinobi_shdwky_p1																					titan_plate	3	crystal_scale	1	quantum_proc	1										
+Armorcraft		TacticianMagiciansWarPigaches	Feet	100	Tactician Magician's War Pigaches	1	tact_mag_warpga																								titan_plate	3	crystal_scale	1	quantum_proc	1										

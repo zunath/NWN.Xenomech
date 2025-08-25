@@ -16,38 +16,38 @@ Engineering recipes focus on precision technology and ranged weapon systems:
 ### Rifles
 
 **Hakenbuechse Rifle (Level 2)**
-- Component 1: Brass Sheets (3x)
-- Component 2: Circuit Matrices (1x)
-- Component 3: Living Wood (1x)
-- Component 4: Bonding Agents (1x)
+- Component 1: Brass Sheets (3x) - `brass_sheet`
+- Component 2: Circuit Matrices (1x) - `circuit_matrix`
+- Component 3: Living Wood (1x) - `living_wood`
+- Component 4: Bonding Agents (1x) - `bond_agent`
 
 **Vanguard Musket (Level 10)**
-- Component 1: Ferrite Cores (2x)
-- Component 2: Power Cells (1x)
-- Component 3: Servo Motors (1x)
-- Component 4: Enhancement Serums (1x)
+- Component 1: Ferrite Cores (2x) - `ferrite_core`
+- Component 2: Power Cells (1x) - `power_cell`
+- Component 3: Servo Motors (1x) - `servo_motor`
+- Component 4: Enhancement Serums (1x) - `enhance_serum`
 
 **Tanegashima Rifle (Level 30)**
-- Component 1: Darksteel Bars (2x)
-- Component 2: Neural Interfaces (1x)
-- Component 3: Plasma Conduits (1x)
-- Component 4: Techno-Organic Fibers (1x)
-- Component 5: Purification Filters (1x)
+- Component 1: Darksteel Bars (2x) - `darksteel_bar`
+- Component 2: Neural Interfaces (1x) - `neural_inter`
+- Component 3: Plasma Conduits (1x) - `plasma_conduit`
+- Component 4: Techno-Organic Fibers (1x) - `techno_fiber`
+- Component 5: Purification Filters (1x) - `purify_filter`
 
 **Mars Hex-Rifle (Level 60)**
-- Component 1: Titanium Plating (3x)
-- Component 2: Quantum Processors (2x)
-- Component 3: Phase Crystals (1x)
-- Component 4: Graviton Stabilizers (1x)
-- Component 5: Harmonic Alloys (1x)
+- Component 1: Titanium Plating (3x) - `titan_plate`
+- Component 2: Quantum Processors (2x) - `quantum_proc`
+- Component 3: Phase Crystals (1x) - `phase_crystal`
+- Component 4: Graviton Stabilizers (1x) - `gravit_stabil`
+- Component 5: Harmonic Alloys (1x) - `harmonic_alloy`
 
 **Seadog Repeater (Level 100)**
-- Component 1: Quantum Steel (2x)
-- Component 2: Temporal Flux (1x)
-- Component 3: Bio-Steel Composites (2x)
-- Component 4: Ether-Tech Interfaces (1x)
-- Component 5: Nano-Enchantments (1x)
-- Component 6: Synchronization Cores (1x)
+- Component 1: Quantum Steel (2x) - `quantum_steel`
+- Component 2: Temporal Flux (1x) - `temporal_flux`
+- Component 3: Bio-Steel Composites (2x) - `biosteel_comp`
+- Component 4: Ether-Tech Interfaces (1x) - `ethertech_int`
+- Component 5: Nano-Enchantments (1x) - `nano_enchant`
+- Component 6: Synchronization Cores (1x) - `sync_core`
 
 ### Pistols
 
