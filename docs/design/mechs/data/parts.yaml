@@ -1,0 +1,271 @@
+# Mech Parts Specifications
+# Generated from mech_parts.csv - Contains all 160+ parts with full specifications
+
+part_categories:
+  head:
+    name: "Head Parts"
+    description: "Sensors, targeting systems, and pilot interface components"
+    function: "Control targeting, sensor capability, and pilot interface systems"
+    slot_count: 1
+    
+  core:
+    name: "Core Parts" 
+    description: "Central processing, power distribution, and structural systems"
+    function: "Manage power distribution, computational processing, and structural integrity"
+    slot_count: 1
+    
+  arms:
+    name: "Arm Parts"
+    description: "Weapon mounts, manipulation systems, and specialized appendages" 
+    function: "Provide weapon mounting, manipulation capability, and specialized systems"
+    slot_count: 2
+    slots: ["L Arm", "R Arm"]
+    pairing: "All parts available in matched L/R pairs"
+    
+  legs:
+    name: "Leg Parts"
+    description: "Mobility, stability, and terrain adaptation systems"
+    function: "Determine movement capability, firing stability, and terrain adaptation"
+    slot_count: 1
+    
+  generator:
+    name: "Generator Parts"
+    description: "Power systems, fuel management, and energy distribution"
+    function: "Control fuel capacity, power output, and thermal management"  
+    slot_count: 1
+    
+  weapons:
+    name: "Weapon Parts"
+    description: "Combat systems, tools, and specialized armaments"
+    function: "Provide direct combat capability and specialized tools"
+    slot_count: 2
+    slots: ["L Weapon", "R Weapon"]
+
+# Sample parts from each category - Full specifications available in mech_parts.csv
+
+sample_parts:
+  head_parts:
+    aegis_vii_combat_array:
+      name: "Aegis-VII Combat Array"
+      type: "Head"
+      modifiers:
+        hp: 15
+        defense: 10
+        ether_defense: 5
+        evasion: -5
+        heat_capacity: 10
+        fuel_consumption: 5
+      description: "Heavily armored sensor package - durable but slow"
+      
+    nexus_targeting_matrix:
+      name: "Nexus Targeting Matrix" 
+      type: "Head"
+      modifiers:
+        hp: -5
+        attack: 15
+        ether_attack: 10
+        accuracy: 20
+        cooling_rate: 5
+        fuel_consumption: 10
+      description: "Advanced targeting system - fragile but accurate"
+      
+    phantom_cloak_array:
+      name: "Phantom Cloak Array"
+      type: "Head"
+      modifiers:
+        hp: -10
+        fuel: 5
+        ether_defense: 5
+        accuracy: -15
+        evasion: 40
+        cooling_rate: 15
+        fuel_consumption: -10
+      description: "Cloaking and dampening tech - evasive but blind"
+
+  core_parts:
+    helios_fusion_core:
+      name: "Helios Fusion Core"
+      type: "Core"
+      modifiers:
+        fuel: 30
+        heat_capacity: 20
+        cooling_rate: -10
+        fuel_consumption: 15
+      description: "High-output power core - more fuel but runs hot"
+      
+    atlas_stability_matrix:
+      name: "Atlas Stability Matrix"
+      type: "Core" 
+      modifiers:
+        hp: 20
+        defense: 15
+        ether_defense: 10
+        accuracy: 10
+        evasion: -10
+        cooling_rate: 5
+        fuel_consumption: 5
+      description: "Reinforced central systems - stable but heavy"
+      
+    abyss_void_engine:
+      name: "Abyss Void Engine"
+      type: "Core"
+      modifiers:
+        hp: -20
+        fuel: 40
+        ether_attack: 30
+        ether_defense: 25
+        heat_capacity: 30
+        cooling_rate: -20
+        fuel_consumption: 20
+      description: "Experimental dark energy core - powerful but unstable"
+
+  arm_parts:
+    destroyer_class_l_assault:
+      name: "Destroyer-Class L Assault Arms"
+      type: "L Arm"
+      modifiers:
+        hp: 10
+        attack: 20
+        defense: 10
+        accuracy: 5
+        evasion: -15
+        heat_capacity: 5
+        fuel_consumption: 10
+      description: "Reinforced left weapon mounts - powerful but slow"
+      
+    destroyer_class_r_assault:
+      name: "Destroyer-Class R Assault Arms"
+      type: "R Arm"
+      modifiers:
+        hp: 10
+        attack: 20
+        defense: 10
+        accuracy: 5
+        evasion: -15
+        heat_capacity: 5
+        fuel_consumption: 10
+      description: "Reinforced right weapon mounts - powerful but slow"
+
+  leg_parts:
+    olympus_siege_platform:
+      name: "Olympus Siege Platform"
+      type: "Legs"
+      modifiers:
+        hp: 25
+        attack: 5
+        defense: 20
+        ether_defense: -5
+        accuracy: -10
+        evasion: -20
+        heat_capacity: 15
+        cooling_rate: -5
+        fuel_consumption: 20
+      description: "Heavy assault platform - powerful but immobile"
+      
+    hermes_swift_legs:
+      name: "Hermes Swift Legs"
+      type: "Legs"
+      modifiers:
+        hp: -15
+        fuel: 10
+        accuracy: 10
+        evasion: 35
+        cooling_rate: 10
+        fuel_consumption: -15
+      description: "Lightweight mobility system - fast but fragile"
+
+  generator_parts:
+    helios_fusion_reactor:
+      name: "Helios Fusion Reactor"
+      type: "Generator"
+      modifiers:
+        fuel: 40
+        ether_attack: 10
+        heat_capacity: 25
+        cooling_rate: -15
+        fuel_consumption: 25
+      description: "High-energy fusion reactor - powerful but volatile"
+      
+    gaia_efficient_cell:
+      name: "Gaia Efficient Cell"
+      type: "Generator" 
+      modifiers:
+        fuel: 20
+        ether_defense: 10
+        heat_capacity: 5
+        cooling_rate: 25
+        fuel_consumption: -20
+      description: "Optimized power management - efficient and cool"
+
+  weapon_parts:
+    plasma_devastator:
+      name: "Plasma Devastator"
+      type: "L Weapon"
+      modifiers:
+        fuel: -5
+        attack: 30
+        ether_attack: 15
+        accuracy: 5
+        evasion: -5
+        heat_capacity: 15
+        cooling_rate: -20
+        fuel_consumption: 15
+      description: "High-energy directed weapon - devastating but demanding"
+      
+    aegis_shield_matrix:
+      name: "Aegis Shield Matrix"  
+      type: "L Weapon"
+      modifiers:
+        hp: -5
+        fuel: 10
+        defense: 30
+        ether_defense: 25
+        accuracy: -10
+        cooling_rate: 5
+      description: "Defensive energy projection - protective but limiting"
+
+design_philosophy:
+  meaningful_choice: "Every part has clear trade-offs between benefits and penalties"
+  no_best_parts: "All parts excel in different situations and build types"
+  percentage_scaling: "All modifiers scale with frame base stats for consistent balance"
+  
+  trade_off_patterns:
+    power_vs_heat: "High-damage parts generate more heat"
+    durability_vs_mobility: "Armored parts reduce speed and evasion"  
+    precision_vs_durability: "Accurate parts are often more fragile"
+    efficiency_vs_power: "Fuel-efficient parts have lower peak output"
+    standard_vs_exotic: "Experimental parts have extreme pros and cons"
+
+part_quality_tiers:
+  standard:
+    description: "Reliable parts with balanced trade-offs"
+    availability: "Common through salvage, crafting, vendors"
+    modifier_range: "±5% to ±25%"
+    
+  advanced:
+    description: "Enhanced parts with greater bonuses and penalties"
+    availability: "Uncommon, requires better materials"
+    modifier_range: "±10% to ±35%"
+    
+  experimental:
+    description: "Cutting-edge technology with extreme characteristics"
+    availability: "Rare, dangerous to obtain and use" 
+    modifier_range: "±20% to ±50%"
+    
+  mythological:
+    description: "Legendary parts with unique stat combinations"
+    availability: "Unique acquisitions, quest rewards"
+    modifier_range: "Custom combinations, often extreme"
+
+assembly_guidelines:
+  heat_management: "Balance heat generation with cooling capacity"
+  fuel_efficiency: "Consider fuel consumption for sustained operations"
+  role_specialization: "Enhance frame strengths or compensate weaknesses"
+  team_synergy: "Build for group tactics and complementary roles"
+  
+  build_archetypes:
+    glass_cannon: "Maximum damage at cost of survivability"
+    fortress: "Ultimate defense sacrificing mobility"
+    balanced: "Moderate trade-offs for versatility" 
+    specialist: "Extreme focus on single capability"
+    support: "Team enhancement and utility focus"

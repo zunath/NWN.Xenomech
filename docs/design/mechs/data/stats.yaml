@@ -1,0 +1,173 @@
+# Mech Stat Definitions and Calculations
+
+stat_definitions:
+  hp:
+    name: "Hit Points"
+    description: "Mech structural integrity and damage capacity"
+    type: "resource"
+    calculation: "base_frame_value * (1 + sum_of_part_modifiers)"
+    
+  fuel:
+    name: "Fuel"
+    description: "Power source for mech operations and abilities"
+    type: "resource" 
+    calculation: "base_frame_value * (1 + sum_of_part_modifiers)"
+    
+  attack:
+    name: "Attack"
+    description: "Physical damage capability through weapons and systems"
+    type: "combat"
+    calculation: "base_frame_value * (1 + sum_of_part_modifiers)"
+    
+  ether_attack:
+    name: "Ether Attack"
+    description: "Energy-based damage and ability effectiveness"
+    type: "combat"
+    calculation: "base_frame_value * (1 + sum_of_part_modifiers)"
+    
+  defense:
+    name: "Defense"
+    description: "Physical damage reduction and armor effectiveness"
+    type: "combat"
+    calculation: "base_frame_value * (1 + sum_of_part_modifiers)"
+    
+  ether_defense:
+    name: "Ether Defense"
+    description: "Energy damage reduction and system hardening"
+    type: "combat"
+    calculation: "base_frame_value * (1 + sum_of_part_modifiers)"
+    
+  accuracy:
+    name: "Accuracy"
+    description: "Targeting precision and hit probability"
+    type: "combat"
+    calculation: "base_frame_value * (1 + sum_of_part_modifiers)"
+    
+  evasion:
+    name: "Evasion"
+    description: "Ability to avoid incoming attacks"
+    type: "combat"
+    calculation: "base_frame_value * (1 + sum_of_part_modifiers)"
+    
+  heat_capacity:
+    name: "Heat Capacity"
+    description: "Maximum thermal load before performance penalties"
+    type: "thermal"
+    calculation: "base_frame_value * (1 + sum_of_part_modifiers)"
+    
+  cooling_rate:
+    name: "Cooling Rate"
+    description: "Heat dissipation per time unit"
+    type: "thermal"
+    calculation: "base_frame_value * (1 + sum_of_part_modifiers)"
+    
+  fuel_consumption:
+    name: "Fuel Consumption"
+    description: "Base fuel cost for operations and abilities"
+    type: "efficiency"
+    calculation: "base_frame_value * (1 + sum_of_part_modifiers)"
+
+modifier_system:
+  calculation_method: "percentage_based"
+  description: "All part modifiers are applied as percentage changes to base frame stats"
+  example: "Frame HP 1000 + Part +15% = 1150 final HP"
+  
+  positive_modifiers:
+    description: "Bonuses that enhance frame capabilities"
+    format: "+X%"
+    effect: "Multiplies base stat by (1 + modifier/100)"
+    
+  negative_modifiers:
+    description: "Penalties representing trade-offs and limitations"
+    format: "-X%"  
+    effect: "Multiplies base stat by (1 - modifier/100)"
+    
+  zero_modifiers:
+    description: "No effect on the specified stat"
+    format: "0"
+    effect: "Base frame stat unchanged"
+
+heat_system:
+  description: "Thermal management system for mech operations"
+  
+  heat_levels:
+    normal:
+      range: "0-50%"
+      effects: "No penalties, full combat effectiveness"
+      
+    warning:
+      range: "51-75%"
+      effects: "-10% Accuracy, -10% Attack effectiveness"
+      
+    critical:
+      range: "76-90%" 
+      effects: "-20% Accuracy, -20% Attack, -10% Evasion"
+      
+    emergency:
+      range: "91-100%"
+      effects: "-30% all combat stats, risk of emergency shutdown"
+  
+  heat_generation:
+    weapon_usage: "Weapons generate heat based on power level"
+    high_performance_parts: "Advanced parts increase heat generation"
+    sustained_combat: "Extended combat builds thermal load"
+    
+  heat_dissipation:
+    passive_cooling: "Automatic cooling each combat round"
+    active_cooling: "Abilities and equipment provide cooling"
+    environmental: "Cold environments boost cooling effectiveness"
+    part_modifiers: "Cooling rate affected by generator and core parts"
+
+fuel_system:
+  description: "Resource management system for sustained operations"
+  
+  fuel_levels:
+    full:
+      range: "100-75%"
+      effects: "Normal operation, full capabilities"
+      
+    low:
+      range: "74-50%"
+      effects: "-5% to all stats, fuel warning indicators"
+      
+    critical:
+      range: "49-25%"
+      effects: "-15% to all stats, emergency power mode"
+      
+    emergency:
+      range: "24-1%"
+      effects: "-30% to all stats, critical power shortage"
+      
+    depleted:
+      range: "0%"
+      effects: "Emergency shutdown, extreme vulnerability"
+  
+  fuel_usage:
+    all_actions: "Every mech action consumes fuel"
+    high_power_abilities: "Advanced abilities cost more fuel"
+    efficiency_modifiers: "Generator parts affect consumption rates"
+    
+  fuel_restoration:
+    out_of_combat: "Slow passive regeneration when not in combat"
+    consumables: "Field refuel items for emergency restoration"
+    maintenance: "Full restoration during proper maintenance periods"
+
+combat_integration:
+  stat_replacement: "Mech stats replace pilot stats during mech combat"
+  scale_multiplier: "Mech HP typically 3-5x pilot HP for survivability"
+  
+  job_ability_integration:
+    physical_abilities: "Enhanced by mech capabilities"
+    ether_abilities: "Benefit from mech ether systems"
+    support_abilities: "Can target both mechs and pilots"
+    
+  weapon_skill_integration:
+    skill_bonuses: "Traditional weapon skills affect mech weapons"
+    tp_generation: "Tactical points continue to generate in mech combat"
+    enhanced_effects: "Some abilities have increased effectiveness in mechs"
+
+balance_considerations:
+  level_gating: "Frame access limited by character level"
+  resource_costs: "Heat and fuel create tactical limitations"
+  maintenance_requirements: "Ongoing expenses limit casual usage"
+  counterplay_options: "Anti-mech abilities available to all classes"

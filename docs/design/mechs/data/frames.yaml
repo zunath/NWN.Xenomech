@@ -1,0 +1,368 @@
+# Mech Frame Specifications
+# Generated from mech_frames.csv
+
+frame_types:
+  tank:
+    name: "Tank"
+    description: "Defensive specialists designed for damage absorption and battlefield control"
+    primary_stats: ["HP", "Defense", "Ether Defense"]
+    secondary_stats: ["Heat Capacity", "Attack"]
+    
+  damage:
+    name: "Damage" 
+    description: "Assault specialists optimized for maximum physical damage output"
+    primary_stats: ["Attack", "Accuracy"]
+    secondary_stats: ["HP", "Heat Capacity"]
+    
+  ether:
+    name: "Ether"
+    description: "Energy warfare specialists focused on ether-based combat and manipulation"
+    primary_stats: ["Ether Attack", "Ether Defense"]
+    secondary_stats: ["Cooling Rate", "Fuel"]
+    
+  support:
+    name: "Support"
+    description: "Utility specialists designed for team support and sustained operations" 
+    primary_stats: ["Fuel", "Cooling Rate"]
+    secondary_stats: ["Fuel Consumption", "Balanced Stats"]
+
+frames:
+  aegis_mk1:
+    name: "Aegis Mk I"
+    type: "tank"
+    level_requirement: 10
+    base_stats:
+      hp: 900
+      fuel: 100
+      attack: 20
+      ether_attack: 15
+      defense: 45
+      ether_defense: 30
+      accuracy: 70
+      evasion: 10
+      heat_capacity: 110
+      cooling_rate: 12
+      fuel_consumption: 10
+
+  ravager_mk1:
+    name: "Ravager Mk I"
+    type: "damage"
+    level_requirement: 10
+    base_stats:
+      hp: 450
+      fuel: 120
+      attack: 50
+      ether_attack: 25
+      defense: 20
+      ether_defense: 20
+      accuracy: 85
+      evasion: 20
+      heat_capacity: 85
+      cooling_rate: 15
+      fuel_consumption: 12
+
+  nexus_mk1:
+    name: "Nexus Mk I"
+    type: "ether"
+    level_requirement: 10
+    base_stats:
+      hp: 400
+      fuel: 140
+      attack: 25
+      ether_attack: 50
+      defense: 15
+      ether_defense: 35
+      accuracy: 80
+      evasion: 25
+      heat_capacity: 75
+      cooling_rate: 18
+      fuel_consumption: 8
+
+  herald_mk1:
+    name: "Herald Mk I"
+    type: "support"
+    level_requirement: 10
+    base_stats:
+      hp: 600
+      fuel: 160
+      attack: 30
+      ether_attack: 35
+      defense: 25
+      ether_defense: 30
+      accuracy: 80
+      evasion: 20
+      heat_capacity: 90
+      cooling_rate: 20
+      fuel_consumption: 6
+
+  aegis_mk2:
+    name: "Aegis Mk II"
+    type: "tank"
+    level_requirement: 20
+    base_stats:
+      hp: 1350
+      fuel: 150
+      attack: 30
+      ether_attack: 22
+      defense: 67
+      ether_defense: 45
+      accuracy: 75
+      evasion: 15
+      heat_capacity: 165
+      cooling_rate: 18
+      fuel_consumption: 12
+
+  ravager_mk2:
+    name: "Ravager Mk II" 
+    type: "damage"
+    level_requirement: 20
+    base_stats:
+      hp: 675
+      fuel: 180
+      attack: 75
+      ether_attack: 37
+      defense: 30
+      ether_defense: 30
+      accuracy: 90
+      evasion: 25
+      heat_capacity: 127
+      cooling_rate: 22
+      fuel_consumption: 15
+
+  nexus_mk2:
+    name: "Nexus Mk II"
+    type: "ether"
+    level_requirement: 20
+    base_stats:
+      hp: 600
+      fuel: 210
+      attack: 37
+      ether_attack: 75
+      defense: 22
+      ether_defense: 52
+      accuracy: 85
+      evasion: 30
+      heat_capacity: 112
+      cooling_rate: 27
+      fuel_consumption: 10
+
+  herald_mk2:
+    name: "Herald Mk II"
+    type: "support"
+    level_requirement: 20
+    base_stats:
+      hp: 900
+      fuel: 240
+      attack: 45
+      ether_attack: 52
+      defense: 37
+      ether_defense: 45
+      accuracy: 85
+      evasion: 25
+      heat_capacity: 135
+      cooling_rate: 30
+      fuel_consumption: 8
+
+  aegis_mk3:
+    name: "Aegis Mk III"
+    type: "tank"
+    level_requirement: 30
+    base_stats:
+      hp: 2025
+      fuel: 225
+      attack: 45
+      ether_attack: 33
+      defense: 100
+      ether_defense: 67
+      accuracy: 80
+      evasion: 20
+      heat_capacity: 247
+      cooling_rate: 27
+      fuel_consumption: 15
+
+  ravager_mk3:
+    name: "Ravager Mk III"
+    type: "damage"
+    level_requirement: 30
+    base_stats:
+      hp: 1012
+      fuel: 270
+      attack: 112
+      ether_attack: 56
+      defense: 45
+      ether_defense: 45
+      accuracy: 95
+      evasion: 30
+      heat_capacity: 190
+      cooling_rate: 33
+      fuel_consumption: 18
+
+  nexus_mk3:
+    name: "Nexus Mk III"
+    type: "ether"
+    level_requirement: 30
+    base_stats:
+      hp: 900
+      fuel: 315
+      attack: 56
+      ether_attack: 112
+      defense: 33
+      ether_defense: 78
+      accuracy: 90
+      evasion: 37
+      heat_capacity: 168
+      cooling_rate: 40
+      fuel_consumption: 12
+
+  herald_mk3:
+    name: "Herald Mk III"
+    type: "support"
+    level_requirement: 30
+    base_stats:
+      hp: 1350
+      fuel: 360
+      attack: 67
+      ether_attack: 78
+      defense: 56
+      ether_defense: 67
+      accuracy: 90
+      evasion: 30
+      heat_capacity: 202
+      cooling_rate: 45
+      fuel_consumption: 10
+
+  aegis_mk4:
+    name: "Aegis Mk IV"
+    type: "tank"
+    level_requirement: 40
+    base_stats:
+      hp: 3037
+      fuel: 337
+      attack: 67
+      ether_attack: 50
+      defense: 150
+      ether_defense: 100
+      accuracy: 85
+      evasion: 25
+      heat_capacity: 370
+      cooling_rate: 40
+      fuel_consumption: 18
+
+  ravager_mk4:
+    name: "Ravager Mk IV"
+    type: "damage"
+    level_requirement: 40
+    base_stats:
+      hp: 1518
+      fuel: 405
+      attack: 168
+      ether_attack: 84
+      defense: 67
+      ether_defense: 67
+      accuracy: 100
+      evasion: 37
+      heat_capacity: 285
+      cooling_rate: 50
+      fuel_consumption: 22
+
+  nexus_mk4:
+    name: "Nexus Mk IV"
+    type: "ether"
+    level_requirement: 40
+    base_stats:
+      hp: 1350
+      fuel: 472
+      attack: 84
+      ether_attack: 168
+      defense: 50
+      ether_defense: 117
+      accuracy: 95
+      evasion: 45
+      heat_capacity: 252
+      cooling_rate: 60
+      fuel_consumption: 15
+
+  herald_mk4:
+    name: "Herald Mk IV"
+    type: "support"
+    level_requirement: 40
+    base_stats:
+      hp: 2025
+      fuel: 540
+      attack: 100
+      ether_attack: 117
+      defense: 84
+      ether_defense: 100
+      accuracy: 95
+      evasion: 37
+      heat_capacity: 303
+      cooling_rate: 67
+      fuel_consumption: 12
+
+  aegis_mk5:
+    name: "Aegis Mk V"
+    type: "tank"
+    level_requirement: 50
+    base_stats:
+      hp: 4556
+      fuel: 506
+      attack: 100
+      ether_attack: 75
+      defense: 225
+      ether_defense: 150
+      accuracy: 90
+      evasion: 30
+      heat_capacity: 555
+      cooling_rate: 60
+      fuel_consumption: 22
+
+  ravager_mk5:
+    name: "Ravager Mk V"
+    type: "damage"
+    level_requirement: 50
+    base_stats:
+      hp: 2277
+      fuel: 607
+      attack: 252
+      ether_attack: 126
+      defense: 100
+      ether_defense: 100
+      accuracy: 105
+      evasion: 45
+      heat_capacity: 427
+      cooling_rate: 75
+      fuel_consumption: 27
+
+  nexus_mk5:
+    name: "Nexus Mk V"
+    type: "ether"
+    level_requirement: 50
+    base_stats:
+      hp: 2025
+      fuel: 708
+      attack: 126
+      ether_attack: 252
+      defense: 75
+      ether_defense: 175
+      accuracy: 100
+      evasion: 55
+      heat_capacity: 378
+      cooling_rate: 90
+      fuel_consumption: 18
+
+  herald_mk5:
+    name: "Herald Mk V"
+    type: "support"
+    level_requirement: 50
+    base_stats:
+      hp: 3037
+      fuel: 810
+      attack: 150
+      ether_attack: 175
+      defense: 126
+      ether_defense: 150
+      accuracy: 100
+      evasion: 45
+      heat_capacity: 454
+      cooling_rate: 100
+      fuel_consumption: 15
