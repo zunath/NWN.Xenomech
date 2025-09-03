@@ -1,9 +1,10 @@
 # Source: docs/_incoming/XM Design Bible - Beasts.tsv
-updated: 2025-08-10
+# Updated: 2025-09-03 with complete sci-fi beast progression (levels 1-50)
 
 columns:
   - levelReq
   - name
+  - resref
   - scale
   - portraitId
   - soundId
@@ -24,8 +25,1206 @@ columns:
   - ability3
   - ability4
 
+beasts:
+  - levelReq: 1
+    name: Scout Drone
+    resref: broth_circuit
+    scale: 1
+    portraitId: 144
+    soundId: 4
+    item: Circuit Broth
+    hp: E
+    ep: F
+    might: E
+    perception: D
+    vitality: E
+    agility: D
+    willpower: F
+    social: F
+    dmg: F
+    delay: 300
+    evasion: D
+    ability1: Scan
+    ability2: null
+    ability3: null
+    ability4: null
+
+  - levelReq: 2
+    name: Data Rat
+    resref: broth_memory
+    scale: 1
+    portraitId: 15
+    soundId: 15
+    item: Memory Broth
+    hp: F
+    ep: F
+    might: F
+    perception: E
+    vitality: F
+    agility: E
+    willpower: F
+    social: F
+    dmg: G
+    delay: 320
+    evasion: E
+    ability1: Data Mine
+    ability2: null
+    ability3: null
+    ability4: null
+
+  - levelReq: 3
+    name: Recon Probe
+    resref: broth_sensor
+    scale: 1
+    portraitId: 43
+    soundId: 43
+    item: Sensor Broth
+    hp: F
+    ep: E
+    might: F
+    perception: C
+    vitality: F
+    agility: C
+    willpower: E
+    social: F
+    dmg: G
+    delay: 280
+    evasion: C
+    ability1: Probe Strike
+    ability2: null
+    ability3: null
+    ability4: null
+
+  - levelReq: 4
+    name: Combat Mech
+    resref: broth_scrap
+    scale: 1
+    portraitId: 44
+    soundId: 44
+    item: Scrap Broth
+    hp: D
+    ep: F
+    might: D
+    perception: E
+    vitality: D
+    agility: E
+    willpower: F
+    social: F
+    dmg: E
+    delay: 340
+    evasion: E
+    ability1: Ramming Strike
+    ability2: null
+    ability3: null
+    ability4: null
+
+  - levelReq: 5
+    name: Cyber Cat
+    resref: broth_neural
+    scale: 1
+    portraitId: 15
+    soundId: 15
+    item: Neural Broth
+    hp: E
+    ep: E
+    might: E
+    perception: C
+    vitality: E
+    agility: B
+    willpower: E
+    social: F
+    dmg: E
+    delay: 260
+    evasion: B
+    ability1: Digital Pounce
+    ability2: Stealth Mode
+    ability3: null
+    ability4: null
+
+  - levelReq: 6
+    name: Security Bot
+    resref: broth_power
+    scale: 1
+    portraitId: 44
+    soundId: 44
+    item: Power Broth
+    hp: C
+    ep: E
+    might: C
+    perception: E
+    vitality: C
+    agility: F
+    willpower: F
+    social: F
+    dmg: D
+    delay: 380
+    evasion: F
+    ability1: Guard Protocol
+    ability2: null
+    ability3: null
+    ability4: null
+
+  - levelReq: 7
+    name: Web Crawler
+    resref: broth_data
+    scale: 1
+    portraitId: 36
+    soundId: 36
+    item: Data Broth
+    hp: F
+    ep: E
+    might: F
+    perception: D
+    vitality: F
+    agility: D
+    willpower: E
+    social: F
+    dmg: F
+    delay: 300
+    evasion: D
+    ability1: Virus Bite
+    ability2: Net Trap
+    ability3: null
+    ability4: null
+
+  - levelReq: 8
+    name: Hunter Drone
+    resref: broth_target
+    scale: 1
+    portraitId: 42
+    soundId: 42
+    item: Target Broth
+    hp: F
+    ep: D
+    might: F
+    perception: B
+    vitality: F
+    agility: A
+    willpower: D
+    social: F
+    dmg: F
+    delay: 240
+    evasion: A
+    ability1: Lock-On Strike
+    ability2: null
+    ability3: null
+    ability4: null
+
+  - levelReq: 9
+    name: Pack Alpha
+    resref: broth_command
+    scale: 1
+    portraitId: 1
+    soundId: 1
+    item: Command Broth
+    hp: D
+    ep: E
+    might: D
+    perception: C
+    vitality: D
+    agility: C
+    willpower: E
+    social: F
+    dmg: D
+    delay: 300
+    evasion: C
+    ability1: Pack Sync
+    ability2: Alert Signal
+    ability3: null
+    ability4: null
+
+  - levelReq: 10
+    name: Bio Tank
+    resref: broth_nutrient
+    scale: 1
+    portraitId: 25
+    soundId: 25
+    item: Nutrient Broth
+    hp: E
+    ep: D
+    might: E
+    perception: F
+    vitality: E
+    agility: F
+    willpower: D
+    social: F
+    dmg: E
+    delay: 360
+    evasion: F
+    ability1: Bio Cannon
+    ability2: Acid Spit
+    ability3: null
+    ability4: null
+
+  - levelReq: 11
+    name: Mining Mech
+    resref: broth_mineral
+    scale: 1
+    portraitId: 44
+    soundId: 44
+    item: Mineral Broth
+    hp: E
+    ep: F
+    might: E
+    perception: E
+    vitality: E
+    agility: C
+    willpower: F
+    social: E
+    dmg: E
+    delay: 300
+    evasion: C
+    ability1: Drill Rush
+    ability2: Stabilizers
+    ability3: null
+    ability4: null
+
+  - levelReq: 12
+    name: Plasma Beetle
+    resref: broth_fusion
+    scale: 1
+    portraitId: 9
+    soundId: 9
+    item: Fusion Broth
+    hp: F
+    ep: D
+    might: F
+    perception: E
+    vitality: F
+    agility: E
+    willpower: D
+    social: F
+    dmg: F
+    delay: 320
+    evasion: E
+    ability1: Plasma Burst
+    ability2: null
+    ability3: null
+    ability4: null
+
+  - levelReq: 13
+    name: Cryo Hound
+    resref: broth_coolant
+    scale: 1
+    portraitId: 1
+    soundId: 1
+    item: Coolant Broth
+    hp: D
+    ep: D
+    might: D
+    perception: C
+    vitality: D
+    agility: C
+    willpower: D
+    social: F
+    dmg: D
+    delay: 300
+    evasion: C
+    ability1: Frost Bite
+    ability2: Howl Unit
+    ability3: null
+    ability4: null
+
+  - levelReq: 14
+    name: Echo Wing
+    resref: broth_sonic
+    scale: 1
+    portraitId: 6
+    soundId: 6
+    item: Sonic Broth
+    hp: F
+    ep: C
+    might: F
+    perception: D
+    vitality: F
+    agility: A
+    willpower: C
+    social: F
+    dmg: F
+    delay: 260
+    evasion: A
+    ability1: Sonic Pulse
+    ability2: Flight Mode
+    ability3: null
+    ability4: null
+
+  - levelReq: 15
+    name: Shadow Unit
+    resref: broth_cloak
+    scale: 1
+    portraitId: 20
+    soundId: 18
+    item: Cloak Broth
+    hp: C
+    ep: D
+    might: C
+    perception: B
+    vitality: C
+    agility: A
+    willpower: D
+    social: F
+    dmg: C
+    delay: 240
+    evasion: A
+    ability1: Phase Strike
+    ability2: Cloak
+    ability3: Digital Pounce
+    ability4: null
+
+  - levelReq: 16
+    name: Titan Frame
+    resref: broth_reactor
+    scale: 1
+    portraitId: 44
+    soundId: 44
+    item: Reactor Broth
+    hp: B
+    ep: E
+    might: A
+    perception: F
+    vitality: A
+    agility: G
+    willpower: E
+    social: G
+    dmg: B
+    delay: 400
+    evasion: G
+    ability1: Armor Plating
+    ability2: Heavy Strike
+    ability3: null
+    ability4: null
+
+  - levelReq: 17
+    name: Storm Hawk
+    resref: broth_tesla
+    scale: 1
+    portraitId: 42
+    soundId: 42
+    item: Tesla Broth
+    hp: E
+    ep: C
+    might: E
+    perception: A
+    vitality: E
+    agility: A
+    willpower: C
+    social: F
+    dmg: E
+    delay: 220
+    evasion: A
+    ability1: Lightning Dive
+    ability2: Shock Field
+    ability3: null
+    ability4: null
+
+  - levelReq: 18
+    name: Frost Walker
+    resref: broth_cryo
+    scale: 1
+    portraitId: 7
+    soundId: 7
+    item: Cryo Broth
+    hp: B
+    ep: D
+    might: B
+    perception: E
+    vitality: B
+    agility: F
+    willpower: D
+    social: F
+    dmg: C
+    delay: 380
+    evasion: F
+    ability1: Ice Claws
+    ability2: Freeze Ray
+    ability3: null
+    ability4: null
+
+  - levelReq: 19
+    name: Venom Synth
+    resref: broth_toxin
+    scale: 1
+    portraitId: 32
+    soundId: 32
+    item: Toxin Broth
+    hp: F
+    ep: D
+    might: F
+    perception: C
+    vitality: F
+    agility: B
+    willpower: D
+    social: F
+    dmg: F
+    delay: 300
+    evasion: B
+    ability1: Poison Dart
+    ability2: Constrict
+    ability3: Toxin Cloud
+    ability4: null
+
+  - levelReq: 20
+    name: Steel Guardian
+    resref: broth_alloy
+    scale: 1
+    portraitId: 1
+    soundId: 1
+    item: Alloy Broth
+    hp: C
+    ep: E
+    might: B
+    perception: C
+    vitality: B
+    agility: C
+    willpower: E
+    social: F
+    dmg: C
+    delay: 320
+    evasion: C
+    ability1: Metal Fang
+    ability2: Sonic Bark
+    ability3: null
+    ability4: null
+
+  - levelReq: 21
+    name: Flame Walker
+    resref: broth_thermal
+    scale: 1
+    portraitId: 20
+    soundId: 15
+    item: Thermal Broth
+    hp: E
+    ep: C
+    might: E
+    perception: B
+    vitality: E
+    agility: A
+    willpower: C
+    social: E
+    dmg: E
+    delay: 260
+    evasion: A
+    ability1: Fire Dash
+    ability2: Heat Wave
+    ability3: Ignition
+    ability4: null
+
+  - levelReq: 22
+    name: Thunder Lizard
+    resref: broth_arc
+    scale: 1
+    portraitId: 28
+    soundId: 28
+    item: Arc Broth
+    hp: D
+    ep: C
+    might: D
+    perception: C
+    vitality: D
+    agility: D
+    willpower: C
+    social: F
+    dmg: D
+    delay: 340
+    evasion: D
+    ability1: Electric Roar
+    ability2: Chain Lightning
+    ability3: null
+    ability4: null
+
+  - levelReq: 23
+    name: Holo Spider
+    resref: broth_project
+    scale: 1
+    portraitId: 36
+    soundId: 36
+    item: Projection Broth
+    hp: F
+    ep: B
+    might: F
+    perception: D
+    vitality: F
+    agility: D
+    willpower: B
+    social: F
+    dmg: F
+    delay: 300
+    evasion: D
+    ability1: Light Beam
+    ability2: Hard Light Web
+    ability3: Refraction
+    ability4: null
+
+  - levelReq: 24
+    name: Wind Rider
+    resref: broth_turbine
+    scale: 1
+    portraitId: 42
+    soundId: 42
+    item: Turbine Broth
+    hp: E
+    ep: B
+    might: E
+    perception: A
+    vitality: E
+    agility: A
+    willpower: B
+    social: E
+    dmg: E
+    delay: 200
+    evasion: A
+    ability1: Wind Blade
+    ability2: Cyclone
+    ability3: Flight Mode
+    ability4: null
+
+  - levelReq: 25
+    name: Siege Frame
+    resref: broth_quantum
+    scale: 1
+    portraitId: 44
+    soundId: 44
+    item: Quantum Broth
+    hp: A
+    ep: D
+    might: A
+    perception: F
+    vitality: A
+    agility: G
+    willpower: D
+    social: G
+    dmg: A
+    delay: 420
+    evasion: G
+    ability1: Seismic Strike
+    ability2: Barrier Field
+    ability3: Artillery
+    ability4: null
+
+  - levelReq: 26
+    name: Phase Hunter
+    resref: broth_crystal
+    scale: 1
+    portraitId: 20
+    soundId: 18
+    item: Crystal Broth
+    hp: C
+    ep: C
+    might: C
+    perception: A
+    vitality: C
+    agility: A
+    willpower: C
+    social: F
+    dmg: C
+    delay: 220
+    evasion: A
+    ability1: Phase Leap
+    ability2: Dimension Cloak
+    ability3: Vanish
+    ability4: Quantum Strike
+
+  - levelReq: 27
+    name: Ion Wolf
+    resref: broth_ion
+    scale: 1
+    portraitId: 27
+    soundId: 27
+    item: Ion Broth
+    hp: D
+    ep: B
+    might: D
+    perception: B
+    vitality: D
+    agility: B
+    willpower: B
+    social: F
+    dmg: D
+    delay: 280
+    evasion: B
+    ability1: Ion Bite
+    ability2: Energy Howl
+    ability3: Discharge
+    ability4: null
+
+  - levelReq: 28
+    name: Battle Wyrm
+    resref: broth_nano
+    scale: 1
+    portraitId: 29
+    soundId: 29
+    item: Nano Broth
+    hp: C
+    ep: B
+    might: C
+    perception: B
+    vitality: C
+    agility: C
+    willpower: B
+    social: E
+    dmg: C
+    delay: 300
+    evasion: C
+    ability1: Tail Laser
+    ability2: Wing Thrusters
+    ability3: Nano Sting
+    ability4: null
+
+  - levelReq: 29
+    name: Phoenix Core
+    resref: broth_rebirth
+    scale: 1
+    portraitId: 37
+    soundId: 37
+    item: Rebirth Broth
+    hp: D
+    ep: A
+    might: D
+    perception: B
+    vitality: D
+    agility: A
+    willpower: A
+    social: E
+    dmg: D
+    delay: 240
+    evasion: A
+    ability1: Plasma Burst
+    ability2: Auto-Repair
+    ability3: Energy Aura
+    ability4: null
+
+  - levelReq: 30
+    name: Apex Mech
+    resref: broth_prime
+    scale: 1
+    portraitId: 44
+    soundId: 44
+    item: Prime Broth
+    hp: A
+    ep: C
+    might: A
+    perception: D
+    vitality: A
+    agility: E
+    willpower: C
+    social: F
+    dmg: B
+    delay: 450
+    evasion: E
+    ability1: Berserker Mode
+    ability2: Shock Wave
+    ability3: Terror Protocol
+    ability4: Fortify Systems
+
+  - levelReq: 31
+    name: Stellar Hound
+    resref: broth_star
+    scale: 1
+    portraitId: 27
+    soundId: 27
+    item: Star Broth
+    hp: C
+    ep: A
+    might: C
+    perception: A
+    vitality: C
+    agility: B
+    willpower: A
+    social: E
+    dmg: C
+    delay: 260
+    evasion: B
+    ability1: Cosmic Bite
+    ability2: Void Howl
+    ability3: Nebula Beam
+    ability4: Solar Flare
+
+  - levelReq: 32
+    name: Null Spider
+    resref: broth_dark
+    scale: 1
+    portraitId: 36
+    soundId: 36
+    item: Dark Broth
+    hp: D
+    ep: A
+    might: D
+    perception: B
+    vitality: D
+    agility: C
+    willpower: A
+    social: F
+    dmg: D
+    delay: 300
+    evasion: C
+    ability1: Void Bite
+    ability2: Reality Tear
+    ability3: Null Web
+    ability4: null
+
+  - levelReq: 33
+    name: Storm Reaper
+    resref: broth_thunder
+    scale: 1
+    portraitId: 43
+    soundId: 43
+    item: Thunder Broth
+    hp: D
+    ep: A
+    might: D
+    perception: A
+    vitality: D
+    agility: A
+    willpower: A
+    social: D
+    dmg: D
+    delay: 200
+    evasion: A
+    ability1: Lightning Strike
+    ability2: Storm Genesis
+    ability3: Ion Shield
+    ability4: null
+
+  - levelReq: 34
+    name: Magma Titan
+    resref: broth_molten
+    scale: 1
+    portraitId: 26
+    soundId: 26
+    item: Molten Broth
+    hp: A
+    ep: B
+    might: A
+    perception: F
+    vitality: A
+    agility: F
+    willpower: B
+    social: F
+    dmg: A
+    delay: 480
+    evasion: F
+    ability1: Lava Cannon
+    ability2: Thermal Fortress
+    ability3: Heat Pulse
+    ability4: null
+
+  - levelReq: 35
+    name: Cryo Dragon
+    resref: broth_zero
+    scale: 1
+    portraitId: 30
+    soundId: 30
+    item: Zero Broth
+    hp: A
+    ep: A
+    might: B
+    perception: B
+    vitality: A
+    agility: C
+    willpower: A
+    social: D
+    dmg: B
+    delay: 320
+    evasion: C
+    ability1: Ice Breath
+    ability2: Cryo Armor
+    ability3: Blizzard Generator
+    ability4: Zero Point
+
+  - levelReq: 36
+    name: Photon Stag
+    resref: broth_light
+    scale: 1
+    portraitId: 24
+    soundId: 24
+    item: Light Broth
+    hp: B
+    ep: A
+    might: B
+    perception: A
+    vitality: B
+    agility: B
+    willpower: A
+    social: C
+    dmg: B
+    delay: 280
+    evasion: B
+    ability1: Laser Beam
+    ability2: Purification Ray
+    ability3: Light Blessing
+    ability4: Hard Light Shield
+
+  - levelReq: 37
+    name: Void Stalker
+    resref: broth_null
+    scale: 1
+    portraitId: 1
+    soundId: 1
+    item: Null Broth
+    hp: B
+    ep: A
+    might: B
+    perception: A
+    vitality: B
+    agility: A
+    willpower: A
+    social: E
+    dmg: B
+    delay: 300
+    evasion: A
+    ability1: Shadow Maul
+    ability2: Dark Contract
+    ability3: Nightmare Protocol
+    ability4: Soul Drain
+
+  - levelReq: 38
+    name: Omega Frame
+    resref: broth_singular
+    scale: 1
+    portraitId: 44
+    soundId: 44
+    item: Singularity Broth
+    hp: A
+    ep: B
+    might: A
+    perception: D
+    vitality: A
+    agility: E
+    willpower: B
+    social: F
+    dmg: A
+    delay: 500
+    evasion: E
+    ability1: Omega Strike
+    ability2: Energy Barrier
+    ability3: Power Overload
+    ability4: System Override
+
+  - levelReq: 39
+    name: Quantum Fox
+    resref: broth_particle
+    scale: 1
+    portraitId: 20
+    soundId: 15
+    item: Particle Broth
+    hp: C
+    ep: A
+    might: C
+    perception: A
+    vitality: C
+    agility: A
+    willpower: A
+    social: B
+    dmg: C
+    delay: 240
+    evasion: A
+    ability1: Quantum Fire
+    ability2: Time Dilation
+    ability3: Probability Shift
+    ability4: Reality Anchor
+
+  - levelReq: 40
+    name: Leviathan Mech
+    resref: broth_ocean
+    scale: 1
+    portraitId: 35
+    soundId: 35
+    item: Ocean Broth
+    hp: A
+    ep: A
+    might: B
+    perception: C
+    vitality: A
+    agility: D
+    willpower: A
+    social: E
+    dmg: B
+    delay: 400
+    evasion: D
+    ability1: Tsunami Cannon
+    ability2: Whirlpool Generator
+    ability3: Pressure Wave
+    ability4: Depth Charge
+
+  - levelReq: 41
+    name: Void Serpent
+    resref: broth_matrix
+    scale: 1
+    portraitId: 30
+    soundId: 30
+    item: Matrix Broth
+    hp: A
+    ep: A
+    might: B
+    perception: B
+    vitality: A
+    agility: B
+    willpower: A
+    social: C
+    dmg: B
+    delay: 300
+    evasion: B
+    ability1: Void Breath
+    ability2: Reality Fracture
+    ability3: Null Field
+    ability4: Dimension Storm
+
+  - levelReq: 42
+    name: Archangel Unit
+    resref: broth_divine
+    scale: 1
+    portraitId: 38
+    soundId: 38
+    item: Divine Broth
+    hp: A
+    ep: A
+    might: B
+    perception: A
+    vitality: B
+    agility: B
+    willpower: A
+    social: B
+    dmg: B
+    delay: 220
+    evasion: B
+    ability1: Judgment Strike
+    ability2: Sacred Protocol
+    ability3: Light Spear
+    ability4: Divine Override
+
+  - levelReq: 43
+    name: Alpha Prime
+    resref: broth_genesis
+    scale: 1
+    portraitId: 27
+    soundId: 27
+    item: Genesis Broth
+    hp: B
+    ep: A
+    might: A
+    perception: A
+    vitality: B
+    agility: B
+    willpower: A
+    social: D
+    dmg: B
+    delay: 260
+    evasion: B
+    ability1: Prime Strike
+    ability2: Pack Command
+    ability3: Ultimate Protocol
+    ability4: Apex Evolution
+
+  - levelReq: 44
+    name: Titan Beast
+    resref: broth_ancient
+    scale: 1
+    portraitId: 7
+    soundId: 7
+    item: Ancient Broth
+    hp: A
+    ep: A
+    might: A
+    perception: C
+    vitality: A
+    agility: D
+    willpower: A
+    social: E
+    dmg: A
+    delay: 480
+    evasion: D
+    ability1: Rage Protocol
+    ability2: Tectonic Strike
+    ability3: Unstoppable Force
+    ability4: Apex Program
+
+  - levelReq: 45
+    name: Wraith Engine
+    resref: broth_ghost
+    scale: 1
+    portraitId: 32
+    soundId: 32
+    item: Ghost Broth
+    hp: A
+    ep: A
+    might: A
+    perception: A
+    vitality: A
+    agility: B
+    willpower: A
+    social: C
+    dmg: A
+    delay: 320
+    evasion: B
+    ability1: Spectral Bite
+    ability2: Phase Coil
+    ability3: Ghost Mode
+    ability4: Soul Virus
+
+  - levelReq: 46
+    name: Cosmic Entity
+    resref: broth_galaxy
+    scale: 1
+    portraitId: 42
+    soundId: 42
+    item: Galaxy Broth
+    hp: B
+    ep: A
+    might: A
+    perception: A
+    vitality: B
+    agility: A
+    willpower: A
+    social: A
+    dmg: A
+    delay: 180
+    evasion: A
+    ability1: Stellar Dive
+    ability2: Gravity Storm
+    ability3: Black Hole
+    ability4: Supernova
+
+  - levelReq: 47
+    name: Nightmare Rider
+    resref: broth_terror
+    scale: 1
+    portraitId: 21
+    soundId: 21
+    item: Terror Broth
+    hp: A
+    ep: A
+    might: A
+    perception: B
+    vitality: A
+    agility: A
+    willpower: A
+    social: D
+    dmg: A
+    delay: 280
+    evasion: A
+    ability1: Hellfire Charge
+    ability2: Fear Protocol
+    ability3: Shadow Gallop
+    ability4: Apocalypse Systems
+
+  - levelReq: 48
+    name: World Engine
+    resref: broth_planet
+    scale: 1
+    portraitId: 26
+    soundId: 26
+    item: Planet Broth
+    hp: A
+    ep: A
+    might: A
+    perception: E
+    vitality: A
+    agility: F
+    willpower: A
+    social: F
+    dmg: A
+    delay: 600
+    evasion: F
+    ability1: Continental Strike
+    ability2: World Barrier
+    ability3: Ecosystem Override
+    ability4: Planet Pulse
+
+  - levelReq: 49
+    name: Chrono Wyrm
+    resref: broth_time
+    scale: 1
+    portraitId: 30
+    soundId: 30
+    item: Time Broth
+    hp: A
+    ep: A
+    might: A
+    perception: A
+    vitality: A
+    agility: B
+    willpower: A
+    social: B
+    dmg: A
+    delay: 260
+    evasion: B
+    ability1: Time Stop
+    ability2: Temporal Strike
+    ability3: Causality Loop
+    ability4: Reality Reset
+
+  - levelReq: 50
+    name: Genesis Machine
+    resref: broth_create
+    scale: 1
+    portraitId: 40
+    soundId: 40
+    item: Creation Broth
+    hp: A
+    ep: A
+    might: A
+    perception: B
+    vitality: A
+    agility: C
+    willpower: A
+    social: B
+    dmg: A
+    delay: 300
+    evasion: C
+    ability1: Genesis Protocol
+    ability2: Reality Engine
+    ability3: Infinite Processing
+    ability4: Omninet Access
+
 tsv: |
-  Level Req.	Name	Scale	Portrait Id	Sound Id	Item	HP	EP	Might	Perception	Vitality	Agility	Willpower	Social	DMG	Delay	Evasion	Ability 1	Ability 2	Ability 3	Ability 4
-  1	Badger	1	144	4	Fruit Broth	C	C	D	C	D	F	E	A	C	300	C	Flame Breath			
-
-
+  Level Req.	Name	Resref	Scale	Portrait Id	Sound Id	Item	HP	EP	Might	Perception	Vitality	Agility	Willpower	Social	DMG	Delay	Evasion	Ability 1	Ability 2	Ability 3	Ability 4
+  1	Scout Drone	broth_circuit	1	144	4	Circuit Broth	E	F	E	D	E	D	F	F	F	300	D	Scan			
+  2	Data Rat	broth_memory	1	15	15	Memory Broth	F	F	F	E	F	E	F	F	G	320	E	Data Mine			
+  3	Recon Probe	broth_sensor	1	43	43	Sensor Broth	F	E	F	C	F	C	E	F	G	280	C	Probe Strike			
+  4	Combat Mech	broth_scrap	1	44	44	Scrap Broth	D	F	D	E	D	E	F	F	E	340	E	Ramming Strike			
+  5	Cyber Cat	broth_neural	1	15	15	Neural Broth	E	E	E	C	E	B	E	F	E	260	B	Digital Pounce	Stealth Mode		
+  6	Security Bot	broth_power	1	44	44	Power Broth	C	E	C	E	C	F	F	F	D	380	F	Guard Protocol			
+  7	Web Crawler	broth_data	1	36	36	Data Broth	F	E	F	D	F	D	E	F	F	300	D	Virus Bite	Net Trap		
+  8	Hunter Drone	broth_target	1	42	42	Target Broth	F	D	F	B	F	A	D	F	F	240	A	Lock-On Strike			
+  9	Pack Alpha	broth_command	1	1	1	Command Broth	D	E	D	C	D	C	E	F	D	300	C	Pack Sync	Alert Signal		
+  10	Bio Tank	broth_nutrient	1	25	25	Nutrient Broth	E	D	E	F	E	F	D	F	E	360	F	Bio Cannon	Acid Spit		
+  11	Mining Mech	broth_mineral	1	44	44	Mineral Broth	E	F	E	E	E	C	F	E	E	300	C	Drill Rush	Stabilizers		
+  12	Plasma Beetle	broth_fusion	1	9	9	Fusion Broth	F	D	F	E	F	E	D	F	F	320	E	Plasma Burst			
+  13	Cryo Hound	broth_coolant	1	1	1	Coolant Broth	D	D	D	C	D	C	D	F	D	300	C	Frost Bite	Howl Unit		
+  14	Echo Wing	broth_sonic	1	6	6	Sonic Broth	F	C	F	D	F	A	C	F	F	260	A	Sonic Pulse	Flight Mode		
+  15	Shadow Unit	broth_cloak	1	20	18	Cloak Broth	C	D	C	B	C	A	D	F	C	240	A	Phase Strike	Cloak	Digital Pounce	
+  16	Titan Frame	broth_reactor	1	44	44	Reactor Broth	B	E	A	F	A	G	E	G	B	400	G	Armor Plating	Heavy Strike		
+  17	Storm Hawk	broth_tesla	1	42	42	Tesla Broth	E	C	E	A	E	A	C	F	E	220	A	Lightning Dive	Shock Field		
+  18	Frost Walker	broth_cryo	1	7	7	Cryo Broth	B	D	B	E	B	F	D	F	C	380	F	Ice Claws	Freeze Ray		
+  19	Venom Synth	broth_toxin	1	32	32	Toxin Broth	F	D	F	C	F	B	D	F	F	300	B	Poison Dart	Constrict	Toxin Cloud	
+  20	Steel Guardian	broth_alloy	1	1	1	Alloy Broth	C	E	B	C	B	C	E	F	C	320	C	Metal Fang	Sonic Bark		
+  21	Flame Walker	broth_thermal	1	20	15	Thermal Broth	E	C	E	B	E	A	C	E	E	260	A	Fire Dash	Heat Wave	Ignition	
+  22	Thunder Lizard	broth_arc	1	28	28	Arc Broth	D	C	D	C	D	D	C	F	D	340	D	Electric Roar	Chain Lightning		
+  23	Holo Spider	broth_project	1	36	36	Projection Broth	F	B	F	D	F	D	B	F	F	300	D	Light Beam	Hard Light Web	Refraction	
+  24	Wind Rider	broth_turbine	1	42	42	Turbine Broth	E	B	E	A	E	A	B	E	E	200	A	Wind Blade	Cyclone	Flight Mode	
+  25	Siege Frame	broth_quantum	1	44	44	Quantum Broth	A	D	A	F	A	G	D	G	A	420	G	Seismic Strike	Barrier Field	Artillery	
+  26	Phase Hunter	broth_crystal	1	20	18	Crystal Broth	C	C	C	A	C	A	C	F	C	220	A	Phase Leap	Dimension Cloak	Vanish	Quantum Strike
+  27	Ion Wolf	broth_ion	1	27	27	Ion Broth	D	B	D	B	D	B	B	F	D	280	B	Ion Bite	Energy Howl	Discharge	
+  28	Battle Wyrm	broth_nano	1	29	29	Nano Broth	C	B	C	B	C	C	B	E	C	300	C	Tail Laser	Wing Thrusters	Nano Sting	
+  29	Phoenix Core	broth_rebirth	1	37	37	Rebirth Broth	D	A	D	B	D	A	A	E	D	240	A	Plasma Burst	Auto-Repair	Energy Aura	
+  30	Apex Mech	broth_prime	1	44	44	Prime Broth	A	C	A	D	A	E	C	F	B	450	E	Berserker Mode	Shock Wave	Terror Protocol	Fortify Systems
+  31	Stellar Hound	broth_star	1	27	27	Star Broth	C	A	C	A	C	B	A	E	C	260	B	Cosmic Bite	Void Howl	Nebula Beam	Solar Flare
+  32	Null Spider	broth_dark	1	36	36	Dark Broth	D	A	D	B	D	C	A	F	D	300	C	Void Bite	Reality Tear	Null Web	
+  33	Storm Reaper	broth_thunder	1	43	43	Thunder Broth	D	A	D	A	D	A	A	D	D	200	A	Lightning Strike	Storm Genesis	Ion Shield	
+  34	Magma Titan	broth_molten	1	26	26	Molten Broth	A	B	A	F	A	F	B	F	A	480	F	Lava Cannon	Thermal Fortress	Heat Pulse	
+  35	Cryo Dragon	broth_zero	1	30	30	Zero Broth	A	A	B	B	A	C	A	D	B	320	C	Ice Breath	Cryo Armor	Blizzard Generator	Zero Point
+  36	Photon Stag	broth_light	1	24	24	Light Broth	B	A	B	A	B	B	A	C	B	280	B	Laser Beam	Purification Ray	Light Blessing	Hard Light Shield
+  37	Void Stalker	broth_null	1	1	1	Null Broth	B	A	B	A	B	A	A	E	B	300	A	Shadow Maul	Dark Contract	Nightmare Protocol	Soul Drain
+  38	Omega Frame	broth_singular	1	44	44	Singularity Broth	A	B	A	D	A	E	B	F	A	500	E	Omega Strike	Energy Barrier	Power Overload	System Override
+  39	Quantum Fox	broth_particle	1	20	15	Particle Broth	C	A	C	A	C	A	A	B	C	240	A	Quantum Fire	Time Dilation	Probability Shift	Reality Anchor
+  40	Leviathan Mech	broth_ocean	1	35	35	Ocean Broth	A	A	B	C	A	D	A	E	B	400	D	Tsunami Cannon	Whirlpool Generator	Pressure Wave	Depth Charge
+  41	Void Serpent	broth_matrix	1	30	30	Matrix Broth	A	A	B	B	A	B	A	C	B	300	B	Void Breath	Reality Fracture	Null Field	Dimension Storm
+  42	Archangel Unit	broth_divine	1	38	38	Divine Broth	A	A	B	A	B	B	A	B	B	220	B	Judgment Strike	Sacred Protocol	Light Spear	Divine Override
+  43	Alpha Prime	broth_genesis	1	27	27	Genesis Broth	B	A	A	A	B	B	A	D	B	260	B	Prime Strike	Pack Command	Ultimate Protocol	Apex Evolution
+  44	Titan Beast	broth_ancient	1	7	7	Ancient Broth	A	A	A	C	A	D	A	E	A	480	D	Rage Protocol	Tectonic Strike	Unstoppable Force	Apex Program
+  45	Wraith Engine	broth_ghost	1	32	32	Ghost Broth	A	A	A	A	A	B	A	C	A	320	B	Spectral Bite	Phase Coil	Ghost Mode	Soul Virus
+  46	Cosmic Entity	broth_galaxy	1	42	42	Galaxy Broth	B	A	A	A	B	A	A	A	A	180	A	Stellar Dive	Gravity Storm	Black Hole	Supernova
+  47	Nightmare Rider	broth_terror	1	21	21	Terror Broth	A	A	A	B	A	A	A	D	A	280	A	Hellfire Charge	Fear Protocol	Shadow Gallop	Apocalypse Systems
+  48	World Engine	broth_planet	1	26	26	Planet Broth	A	A	A	E	A	F	A	F	A	600	F	Continental Strike	World Barrier	Ecosystem Override	Planet Pulse
+  49	Chrono Wyrm	broth_time	1	30	30	Time Broth	A	A	A	A	A	B	A	B	A	260	B	Time Stop	Temporal Strike	Causality Loop	Reality Reset
+  50	Genesis Machine	broth_create	1	40	40	Creation Broth	A	A	A	B	A	C	A	B	A	300	C	Genesis Protocol	Reality Engine	Infinite Processing	Omninet Access
