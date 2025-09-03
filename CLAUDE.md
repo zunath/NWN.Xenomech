@@ -6,6 +6,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a C# server-side solution for Neverwinter Nights: Enhanced Edition using the Xenomech module. The project replaces traditional NWScript with C# code using the NWNX_DotNet plugin and Anvil framework.
 
+### Setting and Theme
+**IMPORTANT**: Xenomech is a **sci-fi setting**, not fantasy. When creating content, designing systems, or writing descriptions, always consider the futuristic, technological nature of the world:
+- Replace fantasy elements with sci-fi equivalents (e.g., "beasts" are cybernetic creatures, bioengineered entities, or mechanical constructs)
+- Use technological terminology (circuits, processors, quantum cores, neural networks, etc.)
+- Abilities and items should reflect advanced technology, not magic
+- Names and descriptions should evoke a futuristic, cyberpunk, or space-age aesthetic
+- Consider themes like AI, robotics, genetic engineering, energy weapons, and space technology
+
+### NWN Resource Reference (ResRef) Constraints
+**CRITICAL**: All NWN resource identifiers (resrefs) have strict limitations that must be followed:
+- **Length**: Must be between 1 and 16 characters (inclusive)
+- **Characters**: Only alphabetic (a-z, A-Z), numeric (0-9), and underscores (_) are allowed
+- **No spaces, hyphens, periods, or special characters** are permitted
+- **Case sensitive**: Use consistent naming conventions (typically lowercase with underscores)
+- **Examples**: 
+  - Valid: `scout_drone`, `cyber_cat_01`, `xm_plasma_gun`, `data_broth`
+  - Invalid: `scout-drone`, `cyber cat`, `plasma.gun`, `data@broth`, `this_name_is_way_too_long`
+- When creating items, creatures, areas, or any NWN resources, always ensure resrefs comply with these rules
+
 ## Common Development Commands
 
 ### Building and Running
