@@ -138,6 +138,11 @@
       "CompileModels": false
     },
     {
+      "Name":  "xm_portraits",
+      "Path": "../Content/xm_portraits/",
+      "CompileModels": false
+    },
+    {
       "Name":  "xm_plc_aforest",
       "Path": "../Content/xm_plc_aforest/",
       "CompileModels": false
