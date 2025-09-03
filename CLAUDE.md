@@ -185,3 +185,49 @@ The `docs/design/` directory contains structured game design specifications deri
 - **Resonance Nodes**: Cross-job ability system, gained every 5 levels (max 10)
 - **Elemental System**: 10 damage types with resistances and weaknesses
 - **Status Effects**: Comprehensive debuff/buff system with duration and stacking rules
+
+## Localization System
+
+### LocaleString and TLK File Management
+**CRITICAL**: When adding new user-facing strings to the game, you MUST update both the LocaleString enum and the corresponding TLK file:
+
+#### LocaleString Enum (`XM.Shared.Core.Localization.LocaleString.cs`)
+- Add new string entries to the enum with unique integer IDs
+- Use descriptive names that clearly indicate the string's purpose
+- Follow existing naming conventions (PascalCase)
+- Assign sequential IDs to avoid conflicts
+
+#### TLK JSON File (`Content/tlk/xenomech.tlk.json`)
+- Add corresponding entries with matching IDs to the TLK file
+- Ensure the "id" field matches the LocaleString enum value exactly
+- Provide clear, concise text that fits the sci-fi setting
+- Maintain proper JSON formatting
+
+#### Example Workflow:
+1. **Add to LocaleString enum**:
+   ```csharp
+   ScoutDrone = 2448,
+   DataRat = 2449,
+   ```
+
+2. **Add to TLK JSON**:
+   ```json
+   {
+     "id": 2448,
+     "text": "Scout Drone"
+   },
+   {
+     "id": 2449,
+     "text": "Data Rat"
+   }
+   ```
+
+3. **Convert TLK for deployment**:
+   - Use `Content/ConvertJsonToTlk.cmd` to generate the binary .tlk file for the game
+
+#### Important Notes:
+- **Never reuse LocaleString IDs** - always append new entries with higher IDs
+- **IDs must match exactly** between LocaleString enum and TLK entries
+- **Text should reflect sci-fi setting** - avoid fantasy terminology
+- **Keep descriptions concise** - TLK text appears in UI tooltips and messages
+- When adding features that display text to players, always add proper localization support

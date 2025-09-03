@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Anvil.Services;
+using XM.Plugin.Beast;
 using XM.Progression.Ability;
-using XM.Progression.Beast;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
 using XM.Shared.API.Constants;

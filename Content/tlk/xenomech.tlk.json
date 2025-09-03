@@ -9556,6 +9556,206 @@
     {
       "id": 2447,
       "text": "[Select a Codex Entry]"
+    },
+    {
+      "id": 2448,
+      "text": "Scout Drone"
+    },
+    {
+      "id": 2449,
+      "text": "Data Rat"
+    },
+    {
+      "id": 2450,
+      "text": "Recon Probe"
+    },
+    {
+      "id": 2451,
+      "text": "Combat Mech"
+    },
+    {
+      "id": 2452,
+      "text": "Cyber Cat"
+    },
+    {
+      "id": 2453,
+      "text": "Security Bot"
+    },
+    {
+      "id": 2454,
+      "text": "Web Crawler"
+    },
+    {
+      "id": 2455,
+      "text": "Hunter Drone"
+    },
+    {
+      "id": 2456,
+      "text": "Pack Alpha"
+    },
+    {
+      "id": 2457,
+      "text": "Bio Tank"
+    },
+    {
+      "id": 2458,
+      "text": "Mining Mech"
+    },
+    {
+      "id": 2459,
+      "text": "Plasma Beetle"
+    },
+    {
+      "id": 2460,
+      "text": "Cryo Hound"
+    },
+    {
+      "id": 2461,
+      "text": "Echo Wing"
+    },
+    {
+      "id": 2462,
+      "text": "Shadow Unit"
+    },
+    {
+      "id": 2463,
+      "text": "Titan Frame"
+    },
+    {
+      "id": 2464,
+      "text": "Storm Hawk"
+    },
+    {
+      "id": 2465,
+      "text": "Frost Walker"
+    },
+    {
+      "id": 2466,
+      "text": "Venom Synth"
+    },
+    {
+      "id": 2467,
+      "text": "Steel Guardian"
+    },
+    {
+      "id": 2468,
+      "text": "Flame Walker"
+    },
+    {
+      "id": 2469,
+      "text": "Thunder Lizard"
+    },
+    {
+      "id": 2470,
+      "text": "Holo Spider"
+    },
+    {
+      "id": 2471,
+      "text": "Wind Rider"
+    },
+    {
+      "id": 2472,
+      "text": "Siege Frame"
+    },
+    {
+      "id": 2473,
+      "text": "Phase Hunter"
+    },
+    {
+      "id": 2474,
+      "text": "Ion Wolf"
+    },
+    {
+      "id": 2475,
+      "text": "Battle Wyrm"
+    },
+    {
+      "id": 2476,
+      "text": "Phoenix Core"
+    },
+    {
+      "id": 2477,
+      "text": "Apex Mech"
+    },
+    {
+      "id": 2478,
+      "text": "Stellar Hound"
+    },
+    {
+      "id": 2479,
+      "text": "Null Spider"
+    },
+    {
+      "id": 2480,
+      "text": "Storm Reaper"
+    },
+    {
+      "id": 2481,
+      "text": "Magma Titan"
+    },
+    {
+      "id": 2482,
+      "text": "Cryo Dragon"
+    },
+    {
+      "id": 2483,
+      "text": "Photon Stag"
+    },
+    {
+      "id": 2484,
+      "text": "Void Stalker"
+    },
+    {
+      "id": 2485,
+      "text": "Omega Frame"
+    },
+    {
+      "id": 2486,
+      "text": "Quantum Fox"
+    },
+    {
+      "id": 2487,
+      "text": "Leviathan Mech"
+    },
+    {
+      "id": 2488,
+      "text": "Void Serpent"
+    },
+    {
+      "id": 2489,
+      "text": "Archangel Unit"
+    },
+    {
+      "id": 2490,
+      "text": "Alpha Prime"
+    },
+    {
+      "id": 2491,
+      "text": "Titan Beast"
+    },
+    {
+      "id": 2492,
+      "text": "Wraith Engine"
+    },
+    {
+      "id": 2493,
+      "text": "Cosmic Entity"
+    },
+    {
+      "id": 2494,
+      "text": "Nightmare Rider"
+    },
+    {
+      "id": 2495,
+      "text": "World Engine"
+    },
+    {
+      "id": 2496,
+      "text": "Chrono Wyrm"
+    },
+    {
+      "id": 2497,
+      "text": "Genesis Machine"
     }
   ]
 }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using XM.Progression;
-using XM.Progression.Beast;
 using XM.Shared.API.Constants;
 using XM.Shared.Core.Localization;
 

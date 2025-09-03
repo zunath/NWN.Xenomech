@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Anvil.Services;
-using XM.Progression.Beast;
+using XM.Plugin.Item;
 using XM.Shared.Core.Localization;
 
-namespace XM.Plugin.Item.ItemDefinition
+namespace XM.Plugin.Beast.ItemDefinition
 {
     [ServiceBinding(typeof(IItemListDefinition))]
     internal class BrothItemDefinition: IItemListDefinition

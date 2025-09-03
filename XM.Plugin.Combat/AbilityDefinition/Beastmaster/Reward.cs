@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Anvil.Services;
 using XM.AI.Enmity;
+using XM.Plugin.Beast;
 using XM.Plugin.Combat.StatusEffectDefinition.Buff;
 using XM.Progression.Ability;
-using XM.Progression.Beast;
 using XM.Progression.Recast;
 using XM.Progression.Stat;
 using XM.Progression.StatusEffect;

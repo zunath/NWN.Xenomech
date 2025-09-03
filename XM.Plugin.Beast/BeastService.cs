@@ -7,7 +7,7 @@ using XM.Shared.API.NWNX.CreaturePlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Localization;
 
-namespace XM.Progression.Beast
+namespace XM.Plugin.Beast
 {
     [ServiceBinding(typeof(BeastService))]
     [ServiceBinding(typeof(IInitializable))]
