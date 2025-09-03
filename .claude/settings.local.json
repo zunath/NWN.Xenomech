@@ -6,7 +6,10 @@
       "mcp__ide__getDiagnostics",
       "Bash(grep:*)",
       "Bash(rg:*)",
-      "Bash(csc:*)"
+      "Bash(csc:*)",
+      "Bash(dir \"C:\\Projects\\NWN.Xenomech\\Content\\xm_portraits\")",
+      "Bash(powershell:*)",
+      "Bash(dir:*)"
     ],
     "deny": [],
     "ask": []
