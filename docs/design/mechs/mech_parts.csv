@@ -1,158 +1,158 @@
-Part Name,Part Type,HP %,Fuel %,Attack %,Ether Attack %,Defense %,Ether Defense %,Accuracy %,Evasion %,Heat Capacity %,Cooling Rate %,Fuel Consumption %,Description
-Aegis-VII Combat Array,Head,+15,0,0,0,+10,+5,0,-5,+10,0,+5,Heavily armored sensor package - durable but slow
-Nexus Targeting Matrix,Head,-5,0,+15,+10,0,0,+20,0,0,+5,+10,Advanced targeting system - fragile but accurate
-Wraith ECM Suite,Head,0,+10,0,0,0,+15,-10,+25,0,0,0,Electronic countermeasures - evasive but inaccurate
-Sentinel Basic Array,Head,0,0,0,0,0,0,+5,+5,0,+5,0,Standard military sensor suite
-Oracle Command Node,Head,-10,+20,0,+15,0,+10,+15,+5,0,+10,-5,Command and control systems - strategic but vulnerable
-Predator Kill-Suite,Head,0,0,+20,+5,0,0,+25,-5,+5,-10,+10,Predatory targeting system - deadly but demanding
-Phantom Cloak Array,Head,-10,+5,0,0,-5,+5,-15,+40,0,+15,-10,Cloaking and dampening tech - evasive but blind
-Bastion Defense Grid,Head,+25,-5,0,0,+20,+15,-10,-15,+15,-10,+15,Maximum protection system - tough but cumbersome
-Synaptic Link Core,Head,-15,+15,+10,+25,0,+15,+10,+10,0,+5,0,Brain-machine interface - powerful but risky
-Quantum Sight Array,Head,0,+25,0,+20,0,+20,+20,0,0,+15,+5,Exotic detection array - advanced but power hungry
-Viper Strike Head,Head,+5,0,+25,0,0,0,+30,-5,0,-5,+5,Lightning-fast targeting system - quick but limited
-Hydra Multi-Sensor,Head,-5,+15,+10,+10,0,+5,+15,+10,0,+10,+10,Multi-spectrum analysis array - versatile but complex
-Cerberus Guardian,Head,+20,0,0,0,+15,+20,-5,-10,+10,0,+10,Triple-layered defense system - protective but heavy
-Phoenix Rebirth Core,Head,+10,+30,-5,-5,+5,+5,0,0,-5,+25,-20,Self-repairing sensor suite - resilient but passive
-Titan Fortress Head,Head,+30,-10,0,0,+25,+10,-15,-20,+20,-15,+20,Impenetrable armor plating - invulnerable but cumbersome
-Valkyrie War Crown,Head,0,+5,+30,+15,0,0,+20,+15,+5,0,+15,Combat-enhanced neural interface - deadly but demanding
-Reaper Skull Array,Head,-10,0,+35,+20,-5,0,+15,-10,+10,-15,+20,Death-dealing sensor system - lethal but grim
-Sphinx Enigma Core,Head,0,+40,0,+30,-10,+25,+25,+5,0,+20,+5,Riddle-solving quantum processor - wise but mysterious
-Aurora Light Matrix,Head,-15,+20,0,+25,0,+30,+10,+20,-10,+30,-15,Crystalline light-bending array - radiant but fragile
-Nova Burst Scanner,Head,-20,+10,+20,+40,-15,+10,+35,0,+25,-25,+30,Stellar-energy detection grid - explosive but volatile
-Helios Fusion Core,Core,0,+30,0,0,0,0,0,0,+20,-10,+15,High-output power core - more fuel but runs hot
-Atlas Stability Matrix,Core,+20,0,0,0,+15,+10,+10,-10,0,+5,+5,Reinforced central systems - stable but heavy
-Prometheus Logic Engine,Core,-10,+15,0,+15,0,+10,+5,+5,0,+15,-10,Advanced computation matrix - efficient but fragile
-Standard Titan Core,Core,0,+5,0,0,+5,+5,0,0,+5,+5,0,Balanced core system
-Abyss Void Engine,Core,-20,+40,0,+30,0,+25,0,0,+30,-20,+20,Experimental dark energy core - powerful but unstable
-Gaia Crystal Matrix,Core,+5,+25,0,+20,+10,+20,0,0,+15,+20,-15,Bio-engineered crystal matrix - harmonic but delicate
-Fortress Command Core,Core,+30,-10,0,0,+25,+10,-5,-15,+10,-5,+10,Maximum protection core - tough but slow
-Blitz Overdrive Core,Core,-15,+35,+15,+15,0,0,+10,+10,+25,-25,+25,Performance-tuned systems - fast but volatile
-Darwin Adaptive Core,Core,+10,+20,+5,+5,+5,+15,+5,+5,+10,+10,0,Self-modifying architecture - versatile but complex
-Paradox Quantum Core,Core,-5,+50,0,+35,0,+30,+15,+5,+35,-30,+30,Reality-bending technology - godlike but dangerous
-Icarus Solar Core,Core,+10,+35,0,+10,+5,+15,0,+5,+20,+25,-20,Solar energy converter - bright but temperamental
-Cerberus Triple Core,Core,+15,+10,+10,+10,+20,+20,0,-15,+15,0,+15,Three-chamber power system - redundant but heavy
-Ouroboros Loop Core,Core,0,+45,-5,-5,0,+5,0,0,+10,+35,-35,Self-sustaining energy cycle - efficient but limited
-Phoenix Flame Core,Core,-5,+40,+20,+25,-10,+5,0,0,+30,-20,+25,Rebirth-engine power source - fiery but consuming
-Mjolnir Thunder Core,Core,+5,+25,+15,+35,0,+10,+5,-5,+35,-15,+20,Storm-powered energy matrix - thunderous but chaotic
-Pandora Chaos Core,Core,-25,+60,+25,+45,-20,+35,+20,+15,+50,-35,+40,Unpredictable experimental core - godlike but unstable
-Chronos Time Core,Core,0,+30,0,+20,+10,+25,+25,+10,+15,+15,+10,Temporal manipulation engine - timeless but complex
-Medusa Petrify Core,Core,+25,+5,0,+15,+30,+25,-10,-25,+5,+10,+10,Stone-hardening defense matrix - impervious but slow
-Kraken Depth Core,Core,+15,+20,+10,+30,-5,+40,0,+5,+25,+20,-10,Abyssal pressure engine - crushing but alien
-Nemesis War Core,Core,-10,+25,+30,+20,-5,0,+15,+10,+20,-10,+30,Vengeance-driven power source - wrathful but costly
-Destroyer-Class L Assault Arms,L Arm,+10,0,+20,0,+10,0,+5,-15,+5,0,+10,Reinforced left weapon mounts - powerful but slow
-Destroyer-Class R Assault Arms,R Arm,+10,0,+20,0,+10,0,+5,-15,+5,0,+10,Reinforced right weapon mounts - powerful but slow
-Scalpel L Precision Arms,L Arm,-5,0,+10,+15,0,0,+25,+10,0,+10,0,Fine left manipulation actuators - accurate but delicate
-Scalpel R Precision Arms,R Arm,-5,0,+10,+15,0,0,+25,+10,0,+10,0,Fine right manipulation actuators - accurate but delicate
-Aegis L Shield Arms,L Arm,+5,0,-10,0,+25,+15,-5,+5,0,0,+5,Integrated left defensive systems
-Aegis R Shield Arms,R Arm,+5,0,-10,0,+25,+15,-5,+5,0,0,+5,Integrated right defensive systems
-Hermes L Utility Arms,L Arm,0,+10,0,+5,+5,+5,0,0,0,+10,-5,Multi-purpose left manipulators
-Hermes R Utility Arms,R Arm,0,+10,0,+5,+5,+5,0,0,0,+10,-5,Multi-purpose right manipulators
-Colossus L Crusher Arms,L Arm,+15,0,+30,-5,+5,0,0,-20,+10,-10,+15,Hydraulic left crushing systems - devastating but slow
-Colossus R Crusher Arms,R Arm,+15,0,+30,-5,+5,0,0,-20,+10,-10,+15,Hydraulic right crushing systems - devastating but slow
-Apollo L Surgical Arms,L Arm,-10,+5,+5,+20,0,+10,+30,+15,0,+15,-5,Medical left precision systems - delicate but exact
-Apollo R Surgical Arms,R Arm,-10,+5,+5,+20,0,+10,+30,+15,0,+15,-5,Medical right precision systems - delicate but exact
-Quicksilver L Reactive Arms,L Arm,0,0,+15,+10,+15,+10,+10,+20,+5,+5,+5,Adaptive left response systems - quick but standard
-Quicksilver R Reactive Arms,R Arm,0,0,+15,+10,+15,+10,+10,+20,+5,+5,+5,Adaptive right response systems - quick but standard
-Atlas L Titan Arms,L Arm,+20,0,+25,0,+15,-5,-5,-25,+15,-15,+20,Massive left industrial arms - mighty but unwieldy
-Atlas R Titan Arms,R Arm,+20,0,+25,0,+15,-5,-5,-25,+15,-15,+20,Massive right industrial arms - mighty but unwieldy
-Wraith L Phantom Arms,L Arm,-15,+10,+10,+15,-10,+5,+15,+30,-5,+10,-10,Left phase-shifting technology - elusive but fragile
-Wraith R Phantom Arms,R Arm,-15,+10,+10,+15,-10,+5,+15,+30,-5,+10,-10,Right phase-shifting technology - elusive but fragile
-Ares L Berserker Arms,L Arm,+5,0,+35,+5,0,-10,+5,-10,+20,-20,+25,Left rage-enhanced systems - furious but reckless
-Ares R Berserker Arms,R Arm,+5,0,+35,+5,0,-10,+5,-10,+20,-20,+25,Right rage-enhanced systems - furious but reckless
-Viper L Strike Arms,L Arm,0,+5,+25,+10,0,0,+20,+25,-10,+15,-5,Lightning-fast left combat limbs - quick but light
-Viper R Strike Arms,R Arm,0,+5,+25,+10,0,0,+20,+25,-10,+15,-5,Lightning-fast right combat limbs - quick but light
-Thor L Thunder Arms,L Arm,+10,0,+40,+20,+5,-5,0,-15,+25,-20,+25,Left storm-powered weapon mounts - electrifying but chaotic
-Thor R Thunder Arms,R Arm,+10,0,+40,+20,+5,-5,0,-15,+25,-20,+25,Right storm-powered weapon mounts - electrifying but chaotic
-Hades L Inferno Arms,L Arm,-5,0,+30,+25,-10,+10,+10,0,+35,-25,+20,Left hell-fire weapon systems - scorching but hot
-Hades R Inferno Arms,R Arm,-5,0,+30,+25,-10,+10,+10,0,+35,-25,+20,Right hell-fire weapon systems - scorching but hot
-Poseidon L Hydro Arms,L Arm,+5,+15,+15,+30,-5,+20,+15,+10,0,+25,+5,Left water-pressure hydraulics - fluid but complex
-Poseidon R Hydro Arms,R Arm,+5,+15,+15,+30,-5,+20,+15,+10,0,+25,+5,Right water-pressure hydraulics - fluid but complex
-Artemis L Hunter Arms,L Arm,-10,+10,+35,+5,0,0,+35,+20,-5,+10,0,Left predatory tracking limbs - deadly but specialized
-Artemis R Hunter Arms,R Arm,-10,+10,+35,+5,0,0,+35,+20,-5,+10,0,Right predatory tracking limbs - deadly but specialized
-Demeter L Growth Arms,L Arm,+20,+20,0,+15,+15,+15,-5,-10,0,+15,-15,Left bio-regenerative systems - growing but slow
-Demeter R Growth Arms,R Arm,+20,+20,0,+15,+15,+15,-5,-10,0,+15,-15,Right bio-regenerative systems - growing but slow
-Hephaestus L Forge Arms,L Arm,+15,-5,+20,+10,+20,0,-10,-20,+30,-30,+15,Left weapon-crafting appendages - creative but demanding
-Hephaestus R Forge Arms,R Arm,+15,-5,+20,+10,+20,0,-10,-20,+30,-30,+15,Right weapon-crafting appendages - creative but demanding
-Loki L Trickster Arms,L Arm,-10,+25,+15,+20,-15,+15,+25,+35,-10,+5,-10,Left deceptive manipulation systems - cunning but unreliable
-Loki R Trickster Arms,R Arm,-10,+25,+15,+20,-15,+15,+25,+35,-10,+5,-10,Right deceptive manipulation systems - cunning but unreliable
-Odin L Wisdom Arms,L Arm,0,+30,+10,+35,0,+25,+30,+5,+10,+20,+10,Left all-seeing combat limbs - wise but power hungry
-Odin R Wisdom Arms,R Arm,0,+30,+10,+35,0,+25,+30,+5,+10,+20,+10,Right all-seeing combat limbs - wise but power hungry
-Fenrir L Beast Arms,L Arm,+25,0,+45,+10,+10,-15,-5,-5,+15,-10,+20,Left savage predator systems - feral but uncontrolled
-Fenrir R Beast Arms,R Arm,+25,0,+45,+10,+10,-15,-5,-5,+15,-10,+20,Right savage predator systems - feral but uncontrolled
-Olympus Siege Platform,Legs,+25,0,+5,0,+20,-5,-10,-20,+15,-5,+20,Heavy assault platform - powerful but immobile
-Hermes Swift Legs,Legs,-15,+10,0,0,0,0,+10,+35,0,+10,-15,Lightweight mobility system - fast but fragile
-Artemis Stabilized Legs,Legs,+5,0,0,0,+10,+10,+15,-5,0,+5,0,Precision firing platform - accurate but standard
-Standard Mobility Legs,Legs,0,0,0,0,+5,+5,0,+5,0,0,0,Balanced mobility system
-Icarus Jump Legs,Legs,-10,+5,0,0,0,+5,+5,+25,-5,+15,-10,Vertical mobility system - aerial but light
-Atlas Fortress Legs,Legs,+35,0,0,0,+30,+15,-15,-30,+20,-10,+25,Immobile defense platform - impregnable but static
-Arachne Spider Legs,Legs,-5,+15,0,+10,0,+10,+20,+20,-10,+5,-5,Multi-limbed traverse system - versatile but complex
-Apollo Rocket Legs,Legs,0,+20,+10,0,0,0,+5,+15,+10,0,+15,Thruster-assisted mobility - dynamic but fuel hungry
-Poseidon Shock Legs,Legs,+10,0,+15,+20,-5,+5,0,+10,+15,+5,+10,Seismic impact system - earthshaking but demanding
-Hades Wraith Legs,Legs,-20,+25,0,+15,-15,+20,+10,+40,-15,+20,-20,Ethereal movement system - ghostly but vulnerable
-Zeus Thunder Legs,Legs,0,+15,+20,+25,-10,+10,+10,+15,+30,-15,+20,Lightning-powered locomotion - electrifying but erratic
-Kraken Tentacle Legs,Legs,+5,+10,+10,+15,+5,+15,+5,+25,-5,+10,+5,Flexible appendage system - adaptive but alien
-Cerberus Guardian Legs,Legs,+20,0,+5,0,+25,+20,-5,-15,+10,0,+10,Three-point stability system - protective but heavy
-Phoenix Wing Legs,Legs,-15,+30,0,+20,-10,+25,+5,+30,+5,+25,-20,Flame-assisted movement - soaring but fuel hungry
-Medusa Stone Legs,Legs,+30,-15,+10,0,+35,+30,-20,-35,+15,-5,+25,Petrified support system - immovable but solid
-Chronos Phase Legs,Legs,-10,+35,+15,+30,-15,+35,+20,+45,-10,+15,-15,Time-shifted movement - transcendent but unstable
-Gaia Root Legs,Legs,+15,+25,0,+25,+20,+35,-10,-20,+5,+30,-25,Bio-organic growth system - natural but slow
-Nemesis Hunt Legs,Legs,0,+5,+30,+10,0,0,+25,+20,+10,0,+15,Predator-class pursuit system - relentless but focused
-Valkyrie Flight Legs,Legs,-20,+40,+5,+35,-20,+30,+15,+50,-15,+20,-30,Angelic wing system - divine but fragile
-Titan March Legs,Legs,+40,-20,+15,0,+40,+20,-25,-40,+25,-15,+30,Colossal stride system - earth-shaking but ponderous
-Helios Fusion Reactor,Generator,0,+40,0,+10,0,0,0,0,+25,-15,+25,High-energy fusion reactor - powerful but volatile
-Gaia Efficient Cell,Generator,0,+20,0,0,0,+10,0,0,+5,+25,-20,Optimized power management - efficient and cool
-Phoenix Emergency Core,Generator,+10,+10,0,0,+5,+5,0,0,-10,+5,+5,Redundant backup systems - reliable but limited
-Standard Power Cell,Generator,0,+15,0,0,0,0,0,0,+10,+10,-5,Military-grade power source
-Zeus Arc Reactor,Generator,0,+35,0,+25,0,+5,0,0,+30,-25,+30,Lightning-based power system - energetic but chaotic
-Apollo Solar Array,Generator,+5,+25,0,+5,+5,+15,0,0,+10,+30,-25,Photovoltaic collection array - clean but situational
-Abyss Void Reactor,Generator,-10,+50,0,+20,0,+25,0,+5,+40,-35,+35,Dark energy harvester - limitless but dangerous
-Darwin Hybrid Cell,Generator,+5,+30,+5,+5,+5,+5,0,0,+15,+5,+5,Multi-source power system - balanced but complex
-Ares Overcharge Core,Generator,-15,+45,+15,+15,0,0,0,0,+35,-30,+40,Maximum output system - explosive but powerful
-Atlas Stable Reactor,Generator,+15,+10,0,0,+10,+20,0,0,+5,+35,-30,Ultra-reliable power source - steady but conservative
-Prometheus Fire Core,Generator,0,+30,+10,+15,0,0,0,0,+35,-20,+20,Flame-powered energy source - burning but hot
-Poseidon Hydro Cell,Generator,+10,+25,0,+10,+5,+15,0,0,+5,+40,-30,Water-cooled power system - fluid but heavy
-Chronos Temporal Core,Generator,-5,+55,+5,+25,0,+30,+10,+10,+45,-40,+35,Time-dilated energy generation - temporal but unstable
-Hades Inferno Core,Generator,-10,+40,+20,+30,-15,+5,0,0,+50,-35,+35,Hellfire energy source - scorching but demanding
-Thor Storm Generator,Generator,0,+35,+15,+20,0,+10,+5,0,+40,-25,+25,Thunder-powered reactor - electrifying but chaotic
-Odin Wisdom Core,Generator,+5,+45,0,+30,+10,+25,+15,+5,+25,+15,+15,All-knowing energy matrix - wise but complex
-Artemis Moon Cell,Generator,0,+30,0,+15,+5,+25,+10,+15,+15,+35,-25,Lunar-phase power source - cyclical but efficient
-Demeter Growth Core,Generator,+20,+20,0,+20,+15,+20,-5,-10,+10,+25,-20,Bio-regenerative energy system - living but slow
-Loki Chaos Generator,Generator,-20,+60,+25,+35,-10,+15,+20,+25,+55,-45,+50,Trickster energy source - unpredictable but powerful
-Fenrir Beast Core,Generator,+10,+35,+25,+10,+5,-10,0,0,+30,-15,+30,Savage power system - feral but raw
-Hera Divine Reactor,Generator,0,+40,0,+25,+15,+30,+10,+5,+30,+20,+10,Majestic energy source - regal but demanding
-Hephaestus Forge Core,Generator,+15,+25,+15,+5,+10,0,-5,-15,+45,-25,+20,Smithy-powered reactor - creative but industrial
-Hermes Quick Cell,Generator,-10,+35,+5,+15,-5,+10,+15,+25,+20,+10,-15,Swift energy generation - rapid but light
-Plasma Devastator,L Weapon,0,-5,+30,+15,0,0,+5,-5,+15,-20,+15,High-energy directed weapon - devastating but demanding
-Zeus Railgun,L Weapon,0,0,+25,0,0,0,+15,0,+10,-10,+10,Electromagnetic projectile weapon - accurate but hot
-Hermes Pulse Rifle,R Weapon,0,0,+15,+20,0,0,+10,+5,+5,0,+5,Rapid-fire energy weapon - versatile but standard
-Ares Missile Battery,R Weapon,0,0,+35,0,0,0,0,-10,+20,-15,+20,Area denial weapon system - explosive but unwieldy
-Apollo Beam Saber,L Weapon,0,+5,+20,+10,0,0,+5,+15,-5,+10,-10,Close-combat energy blade - efficient and agile
-Thor Autocannon,R Weapon,0,0,+30,0,0,0,+10,-5,+10,-5,+10,Rapid-fire ballistic weapon - reliable but standard
-Aegis Shield Matrix,L Weapon,-5,+10,0,0,+30,+25,-10,0,0,+5,0,Defensive energy projection - protective but limiting
-Gaia Repair Swarm,R Weapon,+15,+5,0,0,+10,+10,0,0,0,+20,-5,Automated maintenance system - supportive but non-combat
-Odin Gauss Lance,L Weapon,0,0,+20,0,0,0,+25,0,+5,-5,+5,Magnetic acceleration rifle - precise but standard
-Hades Ion Destructor,R Weapon,0,-10,+10,+35,0,+5,+15,-10,+25,-25,+25,Particle beam projector - devastating but draining
-Prometheus Flamethrower,L Weapon,0,0,+25,+5,0,0,-5,-5,+30,-30,+15,Incendiary weapon system - scorching but close range
-Artemis Cryo Lance,R Weapon,0,+10,+5,+25,0,+15,+20,0,-10,+25,+5,Freezing ray projector - chilling but energy hungry
-Ares Chaingun,L Weapon,0,0,+40,-5,0,0,+5,-15,+15,-15,+20,High-volume ballistic weapon - suppressive but unwieldy
-Apollo Sniper Cannon,R Weapon,0,-5,+35,+5,0,0,+35,-10,+5,+5,+10,Long-range precision weapon - deadly but slow
-Loki Reality Ripper,L Weapon,0,+5,+5,+30,-10,+20,+10,+10,+10,+10,+10,Reality distortion weapon - exotic but unpredictable
-Atlas Minigun,R Weapon,0,0,+45,-10,0,0,-5,-20,+20,-20,+25,Rotary ballistic weapon - overwhelming but cumbersome
-Helios Laser Array,L Weapon,0,0,+20,+25,0,0,+15,+5,+20,-15,+15,Multi-beam laser system - focused but hot
-Poseidon Gravity Well,R Weapon,0,+15,+15,+20,-5,+10,+5,+15,+15,+5,+20,Gravitational manipulation weapon - exotic but complex
-Hermes Stun Rod,L Weapon,+10,+15,+10,+15,+10,+15,+10,+20,-15,+10,-15,Non-lethal subjugation weapon - humane but limited
-Abyss Void Cannon,R Weapon,-10,-15,+50,+40,-15,-10,+20,-15,+45,-40,+50,Anti-matter projection system - apocalyptic but suicidal
-Kraken Harpoon Gun,L Weapon,+5,+5,+20,0,+5,0,+20,0,0,+5,0,Grappling and piercing weapon - tactical but specialized
-Medusa Acid Sprayer,R Weapon,0,+10,+15,+10,-5,-10,0,-5,+5,+15,+10,Corrosive chemical weapon - melting but hazardous
-Zeus Tesla Coil,L Weapon,0,+20,+25,+30,0,+5,+5,-10,+35,-20,+25,Electrical discharge weapon - shocking but erratic
-Helios Photon Torpedo,R Weapon,0,-20,+40,+25,0,0,+10,-20,+25,-25,+35,Self-guided energy projectile - devastating but expensive
-Poseidon Sonic Cannon,L Weapon,+5,+10,+20,+15,0,+10,+15,+5,-5,+10,+5,Sound-based disruption weapon - resonant but broad
-Artemis Needle Gun,R Weapon,0,+5,+15,+5,0,0,+30,+10,-10,+10,-5,Precision dart launcher - surgical but limited
-Atlas Meteor Hammer,L Weapon,+15,-10,+35,+10,+10,-10,-5,-10,+5,-15,+10,Kinetic impact weapon - crushing but demanding
-Chronos Phase Rifle,R Weapon,-5,+25,+10,+35,-10,+25,+20,+25,+10,+15,+10,Dimensional shifting weapon - transcendent but unstable
-Fenrir Claw Cannon,L Weapon,+10,0,+40,+15,0,-5,+15,-5,+20,-15,+20,Beast-tech weapon system - savage but primal
-Hera Divine Lance,R Weapon,0,+15,+20,+30,+5,+20,+25,+10,+15,+10,+15,Majestic energy spear - regal but demanding
-Nemesis Vengeance Gun,L Weapon,-5,0,+45,+25,-10,0,+30,-10,+25,-20,+25,Retribution weapon system - wrathful but consuming
-Demeter Thorn Launcher,R Weapon,+10,+20,+15,+20,+5,+15,+10,+5,0,+15,-10,Bio-organic projectile weapon - growing but natural
-Phoenix Rebirth Ray,L Weapon,+20,+25,+10,+25,+15,+20,0,0,-10,+30,-20,Life-restoring energy beam - healing but pacifist
-Valkyrie Honor Blade,R Weapon,+5,+10,+25,+20,+10,+10,+20,+15,+5,+5,0,Noble combat weapon - heroic but honorable
+Part Name,Part Type,HP %,Fuel %,Attack %,Ether Attack %,Defense %,Ether Defense %,Accuracy %,Evasion %,Fuel Consumption %,Description
+Aegis-VII Combat Array,Head,+20,0,0,0,+15,+5,0,-5,+5,Heavily armored sensor package - durable but slow
+Nexus Targeting Matrix,Head,-5,+2,+15,+10,0,0,+20,0,+8,Advanced targeting system - fragile but accurate
+Wraith ECM Suite,Head,0,+10,0,0,0,+15,-10,+25,0,Electronic countermeasures - evasive but inaccurate
+Sentinel Basic Array,Head,0,+2,0,0,0,0,+5,+5,-2,Standard military sensor suite
+Oracle Command Node,Head,-10,+25,0,+15,0,+10,+15,+5,-10,Command and control systems - strategic but vulnerable
+Predator Kill-Suite,Head,+2,0,+20,+5,+2,0,+25,-5,+20,Predatory targeting system - deadly but demanding
+Phantom Cloak Array,Head,-10,+12,0,0,-5,+5,-15,+40,-17,Cloaking and dampening tech - evasive but blind
+Bastion Defense Grid,Head,+32,-5,0,0,+27,+15,-10,-15,+25,Maximum protection system - tough but cumbersome
+Synaptic Link Core,Head,-15,+17,+10,+25,0,+15,+10,+10,-2,Brain-machine interface - powerful but risky
+Quantum Sight Array,Head,0,+32,0,+20,0,+20,+20,0,-2,Exotic detection array - advanced but power hungry
+Viper Strike Head,Head,+5,0,+25,0,0,0,+30,-5,+10,Lightning-fast targeting system - quick but limited
+Hydra Multi-Sensor,Head,-5,+20,+10,+10,0,+5,+15,+10,+5,Multi-spectrum analysis array - versatile but complex
+Cerberus Guardian,Head,+25,0,0,0,+20,+20,-5,-10,+10,Triple-layered defense system - protective but heavy
+Phoenix Rebirth Core,Head,+10,+42,-5,-5,+5,+5,0,0,-30,Self-repairing sensor suite - resilient but passive
+Titan Fortress Head,Head,+40,-10,0,0,+35,+10,-15,-20,+35,Impenetrable armor plating - invulnerable but cumbersome
+Valkyrie War Crown,Head,+2,+5,+30,+15,+2,0,+20,+15,+15,Combat-enhanced neural interface - deadly but demanding
+Reaper Skull Array,Head,-10,0,+35,+20,+5,0,+15,-10,+35,Death-dealing sensor system - lethal but grim
+Sphinx Enigma Core,Head,0,+50,0,+30,-10,+25,+25,+5,-5,Riddle-solving quantum processor - wise but mysterious
+Aurora Light Matrix,Head,-15,+35,0,+25,0,+30,+10,+20,-25,Crystalline light-bending array - radiant but fragile
+Nova Burst Scanner,Head,-20,+10,+20,+40,+10,+10,+35,0,+55,Stellar-energy detection grid - explosive but volatile
+Helios Fusion Core,Core,+10,+30,0,0,+10,0,0,0,+25,High-output power core - more fuel but runs hot
+Atlas Stability Matrix,Core,+20,+2,0,0,+15,+10,+10,-10,+3,Reinforced central systems - stable but heavy
+Prometheus Logic Engine,Core,-10,+22,0,+15,0,+10,+5,+5,-17,Advanced computation matrix - efficient but fragile
+Standard Titan Core,Core,+2,+7,0,0,+7,+5,0,0,-2,Balanced core system
+Abyss Void Engine,Core,-20,+40,0,+30,+30,+25,0,0,+40,Experimental dark energy core - powerful but unstable
+Gaia Crystal Matrix,Core,+12,+35,0,+20,+17,+20,0,0,-25,Bio-engineered crystal matrix - harmonic but delicate
+Fortress Command Core,Core,+35,-10,0,0,+30,+10,-5,-15,+15,Maximum protection core - tough but slow
+Blitz Overdrive Core,Core,-15,+35,+15,+15,+25,0,+10,+10,+50,Performance-tuned systems - fast but volatile
+Darwin Adaptive Core,Core,+15,+25,+5,+5,+10,+15,+5,+5,-5,Self-modifying architecture - versatile but complex
+Paradox Quantum Core,Core,-5,+50,0,+35,+35,+30,+15,+5,+60,Reality-bending technology - godlike but dangerous
+Icarus Solar Core,Core,+20,+47,0,+10,+15,+15,0,+5,-32,Solar energy converter - bright but temperamental
+Cerberus Triple Core,Core,+22,+10,+10,+10,+27,+20,0,-15,+15,Three-chamber power system - redundant but heavy
+Ouroboros Loop Core,Core,+5,+62,-5,-5,+5,+5,0,0,-52,Self-sustaining energy cycle - efficient but limited
+Phoenix Flame Core,Core,-5,+40,+20,+25,+20,+5,0,0,+45,Rebirth-engine power source - fiery but consuming
+Mjolnir Thunder Core,Core,+22,+25,+15,+35,+17,+10,+5,-5,+35,Storm-powered energy matrix - thunderous but chaotic
+Pandora Chaos Core,Core,-25,+60,+25,+45,+30,+35,+20,+15,+75,Unpredictable experimental core - godlike but unstable
+Chronos Time Core,Core,+7,+37,0,+20,+17,+25,+25,+10,+3,Temporal manipulation engine - timeless but complex
+Medusa Petrify Core,Core,+27,+10,0,+15,+32,+25,-10,-25,+5,Stone-hardening defense matrix - impervious but slow
+Kraken Depth Core,Core,+27,+30,+10,+30,+7,+40,0,+5,-20,Abyssal pressure engine - crushing but alien
+Nemesis War Core,Core,-10,+25,+30,+20,+15,0,+15,+10,+40,Vengeance-driven power source - wrathful but costly
+Destroyer-Class L Assault Arms,L Arm,+12,0,+20,0,+12,0,+5,-15,+10,Reinforced left weapon mounts - powerful but slow
+Destroyer-Class R Assault Arms,R Arm,+12,0,+20,0,+12,0,+5,-15,+10,Reinforced right weapon mounts - powerful but slow
+Scalpel L Precision Arms,L Arm,-5,+5,+10,+15,0,0,+25,+10,-5,Fine left manipulation actuators - accurate but delicate
+Scalpel R Precision Arms,R Arm,-5,+5,+10,+15,0,0,+25,+10,-5,Fine right manipulation actuators - accurate but delicate
+Aegis L Shield Arms,L Arm,+5,0,-10,0,+25,+15,-5,+5,+5,Integrated left defensive systems
+Aegis R Shield Arms,R Arm,+5,0,-10,0,+25,+15,-5,+5,+5,Integrated right defensive systems
+Hermes L Utility Arms,L Arm,0,+15,0,+5,+5,+5,0,0,-10,Multi-purpose left manipulators
+Hermes R Utility Arms,R Arm,0,+15,0,+5,+5,+5,0,0,-10,Multi-purpose right manipulators
+Colossus L Crusher Arms,L Arm,+20,0,+30,-5,+10,0,0,-20,+25,Hydraulic left crushing systems - devastating but slow
+Colossus R Crusher Arms,R Arm,+20,0,+30,-5,+10,0,0,-20,+25,Hydraulic right crushing systems - devastating but slow
+Apollo L Surgical Arms,L Arm,-10,+12,+5,+20,0,+10,+30,+15,-12,Medical left precision systems - delicate but exact
+Apollo R Surgical Arms,R Arm,-10,+12,+5,+20,0,+10,+30,+15,-12,Medical right precision systems - delicate but exact
+Quicksilver L Reactive Arms,L Arm,+2,+2,+15,+10,+17,+10,+10,+20,+3,Adaptive left response systems - quick but standard
+Quicksilver R Reactive Arms,R Arm,+2,+2,+15,+10,+17,+10,+10,+20,+3,Adaptive right response systems - quick but standard
+Atlas L Titan Arms,L Arm,+27,0,+25,0,+22,-5,-5,-25,+35,Massive left industrial arms - mighty but unwieldy
+Atlas R Titan Arms,R Arm,+27,0,+25,0,+22,-5,-5,-25,+35,Massive right industrial arms - mighty but unwieldy
+Wraith L Phantom Arms,L Arm,-15,+15,+10,+15,-10,+5,+15,+30,-13,Left phase-shifting technology - elusive but fragile
+Wraith R Phantom Arms,R Arm,-15,+15,+10,+15,-10,+5,+15,+30,-13,Right phase-shifting technology - elusive but fragile
+Ares L Berserker Arms,L Arm,+15,0,+35,+5,+10,-10,+5,-10,+45,Left rage-enhanced systems - furious but reckless
+Ares R Berserker Arms,R Arm,+15,0,+35,+5,+10,-10,+5,-10,+45,Right rage-enhanced systems - furious but reckless
+Viper L Strike Arms,L Arm,0,+12,+25,+10,0,0,+20,+25,-7,Lightning-fast left combat limbs - quick but light
+Viper R Strike Arms,R Arm,0,+12,+25,+10,0,0,+20,+25,-7,Lightning-fast right combat limbs - quick but light
+Thor L Thunder Arms,L Arm,+22,0,+40,+20,+17,-5,0,-15,+45,Left storm-powered weapon mounts - electrifying but chaotic
+Thor R Thunder Arms,R Arm,+22,0,+40,+20,+17,-5,0,-15,+45,Right storm-powered weapon mounts - electrifying but chaotic
+Hades L Inferno Arms,L Arm,-5,0,+30,+25,+25,+10,+10,0,+45,Left hell-fire weapon systems - scorching but hot
+Hades R Inferno Arms,R Arm,-5,0,+30,+25,+25,+10,+10,0,+45,Right hell-fire weapon systems - scorching but hot
+Poseidon L Hydro Arms,L Arm,+5,+27,+15,+30,-5,+20,+15,+10,-7,Left water-pressure hydraulics - fluid but complex
+Poseidon R Hydro Arms,R Arm,+5,+27,+15,+30,-5,+20,+15,+10,-7,Right water-pressure hydraulics - fluid but complex
+Artemis L Hunter Arms,L Arm,-10,+15,+35,+5,0,0,+35,+20,-3,Left predatory tracking limbs - deadly but specialized
+Artemis R Hunter Arms,R Arm,-10,+15,+35,+5,0,0,+35,+20,-3,Right predatory tracking limbs - deadly but specialized
+Demeter L Growth Arms,L Arm,+20,+27,0,+15,+15,+15,-5,-10,-22,Left bio-regenerative systems - growing but slow
+Demeter R Growth Arms,R Arm,+20,+27,0,+15,+15,+15,-5,-10,-22,Right bio-regenerative systems - growing but slow
+Hephaestus L Forge Arms,L Arm,+30,-5,+20,+10,+35,0,-10,-20,+45,Left weapon-crafting appendages - creative but demanding
+Hephaestus R Forge Arms,R Arm,+30,-5,+20,+10,+35,0,-10,-20,+45,Right weapon-crafting appendages - creative but demanding
+Loki L Trickster Arms,L Arm,-10,+27,+15,+20,-15,+15,+25,+35,-7,Left deceptive manipulation systems - cunning but unreliable
+Loki R Trickster Arms,R Arm,-10,+27,+15,+20,-15,+15,+25,+35,-7,Right deceptive manipulation systems - cunning but unreliable
+Odin L Wisdom Arms,L Arm,+5,+40,+10,+35,+5,+25,+30,+5,0,Left all-seeing combat limbs - wise but power hungry
+Odin R Wisdom Arms,R Arm,+5,+40,+10,+35,+5,+25,+30,+5,0,Right all-seeing combat limbs - wise but power hungry
+Fenrir L Beast Arms,L Arm,+32,0,+45,+10,+17,-15,-5,-5,+30,Left savage predator systems - feral but uncontrolled
+Fenrir R Beast Arms,R Arm,+32,0,+45,+10,+17,-15,-5,-5,+30,Right savage predator systems - feral but uncontrolled
+Olympus Siege Platform,Legs,+32,0,+5,0,+27,-5,-10,-20,+25,Heavy assault platform - powerful but immobile
+Hermes Swift Legs,Legs,-15,+15,0,0,0,0,+10,+35,-20,Lightweight mobility system - fast but fragile
+Artemis Stabilized Legs,Legs,+5,+2,0,0,+10,+10,+15,-5,-2,Precision firing platform - accurate but standard
+Standard Mobility Legs,Legs,0,0,0,0,+5,+5,0,+5,0,Balanced mobility system
+Icarus Jump Legs,Legs,-10,+12,0,0,0,+5,+5,+25,-15,Vertical mobility system - aerial but light
+Atlas Fortress Legs,Legs,+45,0,0,0,+40,+15,-15,-30,+35,Immobile defense platform - impregnable but static
+Arachne Spider Legs,Legs,-5,+17,0,+10,0,+10,+20,+20,-2,Multi-limbed traverse system - versatile but complex
+Apollo Rocket Legs,Legs,+5,+20,+10,0,+5,0,+5,+15,+15,Thruster-assisted mobility - dynamic but fuel hungry
+Poseidon Shock Legs,Legs,+17,+2,+15,+20,+2,+5,0,+10,+8,Seismic impact system - earthshaking but demanding
+Hades Wraith Legs,Legs,-20,+35,0,+15,-15,+20,+10,+40,-23,Ethereal movement system - ghostly but vulnerable
+Zeus Thunder Legs,Legs,+15,+15,+20,+25,+5,+10,+10,+15,+35,Lightning-powered locomotion - electrifying but erratic
+Kraken Tentacle Legs,Legs,+5,+15,+10,+15,+5,+15,+5,+25,+2,Flexible appendage system - adaptive but alien
+Cerberus Guardian Legs,Legs,+25,0,+5,0,+30,+20,-5,-15,+10,Three-point stability system - protective but heavy
+Phoenix Wing Legs,Legs,-15,+42,0,+20,-5,+25,+5,+30,-32,Flame-assisted movement - soaring but fuel hungry
+Medusa Stone Legs,Legs,+37,-15,+10,0,+42,+30,-20,-35,+30,Petrified support system - immovable but solid
+Chronos Phase Legs,Legs,-10,+42,+15,+30,-15,+35,+20,+45,-17,Time-shifted movement - transcendent but unstable
+Gaia Root Legs,Legs,+17,+40,0,+25,+22,+35,-10,-20,-40,Bio-organic growth system - natural but slow
+Nemesis Hunt Legs,Legs,+5,+5,+30,+10,+5,0,+25,+20,+15,Predator-class pursuit system - relentless but focused
+Valkyrie Flight Legs,Legs,-20,+50,+5,+35,-20,+30,+15,+50,-33,Angelic wing system - divine but fragile
+Titan March Legs,Legs,+52,-20,+15,0,+52,+20,-25,-40,+45,Colossal stride system - earth-shaking but ponderous
+Helios Fusion Reactor,Generator,+12,+40,0,+10,+12,0,0,0,+40,High-energy fusion reactor - powerful but volatile
+Gaia Efficient Cell,Generator,+2,+32,0,0,+2,+10,0,0,-32,Optimized power management - efficient and cool
+Phoenix Emergency Core,Generator,+10,+12,0,0,+5,+5,0,0,+8,Redundant backup systems - reliable but limited
+Standard Power Cell,Generator,+5,+20,0,0,+5,0,0,0,-10,Military-grade power source
+Zeus Arc Reactor,Generator,+15,+35,0,+25,+15,+5,0,0,+55,Lightning-based power system - energetic but chaotic
+Apollo Solar Array,Generator,+10,+40,0,+5,+10,+15,0,0,-40,Photovoltaic collection array - clean but situational
+Abyss Void Reactor,Generator,-10,+50,0,+20,+40,+25,0,+5,+70,Dark energy harvester - limitless but dangerous
+Darwin Hybrid Cell,Generator,+12,+32,+5,+5,+12,+5,0,0,+3,Multi-source power system - balanced but complex
+Ares Overcharge Core,Generator,-15,+45,+15,+15,+35,0,0,0,+70,Maximum output system - explosive but powerful
+Atlas Stable Reactor,Generator,+17,+27,0,0,+12,+20,0,0,-47,Ultra-reliable power source - steady but conservative
+Prometheus Fire Core,Generator,+17,+30,+10,+15,+17,0,0,0,+40,Flame-powered energy source - burning but hot
+Poseidon Hydro Cell,Generator,+12,+45,0,+10,+7,+15,0,0,-50,Water-cooled power system - fluid but heavy
+Chronos Temporal Core,Generator,-5,+55,+5,+25,+45,+30,+10,+10,+75,Time-dilated energy generation - temporal but unstable
+Hades Inferno Core,Generator,-10,+40,+20,+30,+35,+5,0,0,+70,Hellfire energy source - scorching but demanding
+Thor Storm Generator,Generator,+20,+35,+15,+20,+20,+10,+5,0,+50,Thunder-powered reactor - electrifying but chaotic
+Odin Wisdom Core,Generator,+17,+52,0,+30,+22,+25,+15,+5,+8,All-knowing energy matrix - wise but complex
+Artemis Moon Cell,Generator,+7,+47,0,+15,+12,+25,+10,+15,-42,Lunar-phase power source - cyclical but efficient
+Demeter Growth Core,Generator,+25,+32,0,+20,+20,+20,-5,-10,-32,Bio-regenerative energy system - living but slow
+Loki Chaos Generator,Generator,-20,+60,+25,+35,+45,+15,+20,+25,+95,Trickster energy source - unpredictable but powerful
+Fenrir Beast Core,Generator,+25,+35,+25,+10,+20,-10,0,0,+45,Savage power system - feral but raw
+Hera Divine Reactor,Generator,+15,+50,0,+25,+30,+30,+10,+5,0,Majestic energy source - regal but demanding
+Hephaestus Forge Core,Generator,+37,+25,+15,+5,+32,0,-5,-15,+45,Smithy-powered reactor - creative but industrial
+Hermes Quick Cell,Generator,-10,+40,+5,+15,+15,+10,+15,+25,-20,Swift energy generation - rapid but light
+Plasma Devastator,L Weapon,+7,-5,+30,+15,+7,0,+5,-5,+35,High-energy directed weapon - devastating but demanding
+Zeus Railgun,L Weapon,+5,0,+25,0,+5,0,+15,0,+20,Electromagnetic projectile weapon - accurate but hot
+Hermes Pulse Rifle,R Weapon,+2,0,+15,+20,+2,0,+10,+5,+5,Rapid-fire energy weapon - versatile but standard
+Ares Missile Battery,R Weapon,+10,0,+35,0,+10,0,0,-10,+35,Area denial weapon system - explosive but unwieldy
+Apollo Beam Saber,L Weapon,0,+10,+20,+10,0,0,+5,+15,-13,Close-combat energy blade - efficient and agile
+Thor Autocannon,R Weapon,+5,0,+30,0,+5,0,+10,-5,+15,Rapid-fire ballistic weapon - reliable but standard
+Aegis Shield Matrix,L Weapon,-5,+12,0,0,+30,+25,-10,0,-2,Defensive energy projection - protective but limiting
+Gaia Repair Swarm,R Weapon,+15,+15,0,0,+10,+10,0,0,-15,Automated maintenance system - supportive but non-combat
+Odin Gauss Lance,L Weapon,+2,0,+20,0,+2,0,+25,0,+10,Magnetic acceleration rifle - precise but standard
+Hades Ion Destructor,R Weapon,+12,-10,+10,+35,+12,+5,+15,-10,+50,Particle beam projector - devastating but draining
+Prometheus Flamethrower,L Weapon,+15,0,+25,+5,+15,0,-5,-5,+45,Incendiary weapon system - scorching but close range
+Artemis Cryo Lance,R Weapon,0,+22,+5,+25,0,+15,+20,0,-2,Freezing ray projector - chilling but energy hungry
+Ares Chaingun,L Weapon,+7,0,+40,-5,+7,0,+5,-15,+35,High-volume ballistic weapon - suppressive but unwieldy
+Apollo Sniper Cannon,R Weapon,+2,-3,+35,+5,+2,0,+35,-10,+8,Long-range precision weapon - deadly but slow
+Loki Reality Ripper,L Weapon,+5,+10,+5,+30,-5,+20,+10,+10,+5,Reality distortion weapon - exotic but unpredictable
+Atlas Minigun,R Weapon,+10,0,+45,-10,+10,0,-5,-20,+45,Rotary ballistic weapon - overwhelming but cumbersome
+Helios Laser Array,L Weapon,+10,0,+20,+25,+10,0,+15,+5,+30,Multi-beam laser system - focused but hot
+Poseidon Gravity Well,R Weapon,+7,+17,+15,+20,+2,+10,+5,+15,+18,Gravitational manipulation weapon - exotic but complex
+Hermes Stun Rod,L Weapon,+10,+20,+10,+15,+10,+15,+10,+20,-13,Non-lethal subjugation weapon - humane but limited
+Abyss Void Cannon,R Weapon,-10,-15,+50,+40,+30,-10,+20,-15,+90,Anti-matter projection system - apocalyptic but suicidal
+Kraken Harpoon Gun,L Weapon,+5,+7,+20,0,+5,0,+20,0,-2,Grappling and piercing weapon - tactical but specialized
+Medusa Acid Sprayer,R Weapon,+2,+17,+15,+10,-3,-10,0,-5,+3,Corrosive chemical weapon - melting but hazardous
+Zeus Tesla Coil,L Weapon,+17,+20,+25,+30,+17,+5,+5,-10,+45,Electrical discharge weapon - shocking but erratic
+Helios Photon Torpedo,R Weapon,+12,-20,+40,+25,+12,0,+10,-20,+60,Self-guided energy projectile - devastating but expensive
+Poseidon Sonic Cannon,L Weapon,+5,+15,+20,+15,0,+10,+15,+5,+2,Sound-based disruption weapon - resonant but broad
+Artemis Needle Gun,R Weapon,0,+10,+15,+5,0,0,+30,+10,-5,Precision dart launcher - surgical but limited
+Atlas Meteor Hammer,L Weapon,+17,-10,+35,+10,+12,-10,-5,-10,+25,Kinetic impact weapon - crushing but demanding
+Chronos Phase Rifle,R Weapon,-5,+32,+10,+35,0,+25,+20,+25,+3,Dimensional shifting weapon - transcendent but unstable
+Fenrir Claw Cannon,L Weapon,+20,0,+40,+15,+10,-5,+15,-5,+35,Beast-tech weapon system - savage but primal
+Hera Divine Lance,R Weapon,+7,+20,+20,+30,+12,+20,+25,+10,+10,Majestic energy spear - regal but demanding
+Nemesis Vengeance Gun,L Weapon,-5,0,+45,+25,+15,0,+30,-10,+45,Retribution weapon system - wrathful but consuming
+Demeter Thorn Launcher,R Weapon,+10,+27,+15,+20,+5,+15,+10,+5,-17,Bio-organic projectile weapon - growing but natural
+Phoenix Rebirth Ray,L Weapon,+20,+40,+10,+25,+15,+20,0,0,-30,Life-restoring energy beam - healing but pacifist
+Valkyrie Honor Blade,R Weapon,+7,+12,+25,+20,+12,+10,+20,+15,-2,Noble combat weapon - heroic but honorable

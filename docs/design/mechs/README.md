@@ -38,5 +38,4 @@ The mech system introduces pilotable mechanical units that enhance player capabi
 ### Key Mechanics
 - **Frame-Level Gating** - Frames require specific character levels (10-50)
 - **Percentage Modifiers** - Parts modify base frame stats by percentages
-- **Heat Management** - Thermal limits prevent overuse of high-power systems
 - **Fuel Economy** - Resource management adds tactical depth

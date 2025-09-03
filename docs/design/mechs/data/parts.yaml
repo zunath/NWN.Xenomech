@@ -49,11 +49,10 @@ sample_parts:
       name: "Aegis-VII Combat Array"
       type: "Head"
       modifiers:
-        hp: 15
-        defense: 10
-        ether_defense: 5
+        hp: 20
+        defense: 15
+        ether_defense: 10
         evasion: -5
-        heat_capacity: 10
         fuel_consumption: 5
       description: "Heavily armored sensor package - durable but slow"
       
@@ -62,10 +61,9 @@ sample_parts:
       type: "Head"
       modifiers:
         hp: -5
-        attack: 15
-        ether_attack: 10
-        accuracy: 20
-        cooling_rate: 5
+        attack: 20
+        ether_attack: 15
+        accuracy: 25
         fuel_consumption: 10
       description: "Advanced targeting system - fragile but accurate"
       
@@ -74,12 +72,11 @@ sample_parts:
       type: "Head"
       modifiers:
         hp: -10
-        fuel: 5
-        ether_defense: 5
+        fuel: 10
+        ether_defense: 10
         accuracy: -15
-        evasion: 40
-        cooling_rate: 15
-        fuel_consumption: -10
+        evasion: 45
+        fuel_consumption: -15
       description: "Cloaking and dampening tech - evasive but blind"
 
   core_parts:
@@ -87,22 +84,20 @@ sample_parts:
       name: "Helios Fusion Core"
       type: "Core"
       modifiers:
-        fuel: 30
-        heat_capacity: 20
-        cooling_rate: -10
-        fuel_consumption: 15
-      description: "High-output power core - more fuel but runs hot"
+        fuel: 40
+        ether_attack: 10
+        fuel_consumption: 20
+      description: "High-output power core - more fuel but higher consumption"
       
     atlas_stability_matrix:
       name: "Atlas Stability Matrix"
       type: "Core" 
       modifiers:
-        hp: 20
-        defense: 15
-        ether_defense: 10
+        hp: 25
+        defense: 20
+        ether_defense: 15
         accuracy: 10
         evasion: -10
-        cooling_rate: 5
         fuel_consumption: 5
       description: "Reinforced central systems - stable but heavy"
       
@@ -110,13 +105,11 @@ sample_parts:
       name: "Abyss Void Engine"
       type: "Core"
       modifiers:
-        hp: -20
-        fuel: 40
-        ether_attack: 30
-        ether_defense: 25
-        heat_capacity: 30
-        cooling_rate: -20
-        fuel_consumption: 20
+        hp: -25
+        fuel: 50
+        ether_attack: 40
+        ether_defense: 30
+        fuel_consumption: 25
       description: "Experimental dark energy core - powerful but unstable"
 
   arm_parts:
@@ -124,12 +117,11 @@ sample_parts:
       name: "Destroyer-Class L Assault Arms"
       type: "L Arm"
       modifiers:
-        hp: 10
-        attack: 20
-        defense: 10
+        hp: 15
+        attack: 25
+        defense: 15
         accuracy: 5
         evasion: -15
-        heat_capacity: 5
         fuel_consumption: 10
       description: "Reinforced left weapon mounts - powerful but slow"
       
@@ -137,12 +129,11 @@ sample_parts:
       name: "Destroyer-Class R Assault Arms"
       type: "R Arm"
       modifiers:
-        hp: 10
-        attack: 20
-        defense: 10
+        hp: 15
+        attack: 25
+        defense: 15
         accuracy: 5
         evasion: -15
-        heat_capacity: 5
         fuel_consumption: 10
       description: "Reinforced right weapon mounts - powerful but slow"
 
@@ -151,15 +142,13 @@ sample_parts:
       name: "Olympus Siege Platform"
       type: "Legs"
       modifiers:
-        hp: 25
-        attack: 5
-        defense: 20
+        hp: 35
+        attack: 10
+        defense: 25
         ether_defense: -5
         accuracy: -10
         evasion: -20
-        heat_capacity: 15
-        cooling_rate: -5
-        fuel_consumption: 20
+        fuel_consumption: 25
       description: "Heavy assault platform - powerful but immobile"
       
     hermes_swift_legs:
@@ -167,11 +156,10 @@ sample_parts:
       type: "Legs"
       modifiers:
         hp: -15
-        fuel: 10
-        accuracy: 10
-        evasion: 35
-        cooling_rate: 10
-        fuel_consumption: -15
+        fuel: 15
+        accuracy: 15
+        evasion: 40
+        fuel_consumption: -20
       description: "Lightweight mobility system - fast but fragile"
 
   generator_parts:
@@ -179,37 +167,31 @@ sample_parts:
       name: "Helios Fusion Reactor"
       type: "Generator"
       modifiers:
-        fuel: 40
-        ether_attack: 10
-        heat_capacity: 25
-        cooling_rate: -15
-        fuel_consumption: 25
+        fuel: 50
+        ether_attack: 15
+        fuel_consumption: 30
       description: "High-energy fusion reactor - powerful but volatile"
       
     gaia_efficient_cell:
       name: "Gaia Efficient Cell"
       type: "Generator" 
       modifiers:
-        fuel: 20
-        ether_defense: 10
-        heat_capacity: 5
-        cooling_rate: 25
-        fuel_consumption: -20
-      description: "Optimized power management - efficient and cool"
+        fuel: 30
+        ether_defense: 15
+        fuel_consumption: -25
+      description: "Optimized power management - efficient and clean"
 
   weapon_parts:
     plasma_devastator:
       name: "Plasma Devastator"
       type: "L Weapon"
       modifiers:
-        fuel: -5
-        attack: 30
-        ether_attack: 15
+        fuel: -10
+        attack: 35
+        ether_attack: 20
         accuracy: 5
         evasion: -5
-        heat_capacity: 15
-        cooling_rate: -20
-        fuel_consumption: 15
+        fuel_consumption: 20
       description: "High-energy directed weapon - devastating but demanding"
       
     aegis_shield_matrix:
@@ -217,11 +199,10 @@ sample_parts:
       type: "L Weapon"
       modifiers:
         hp: -5
-        fuel: 10
-        defense: 30
-        ether_defense: 25
+        fuel: 15
+        defense: 35
+        ether_defense: 30
         accuracy: -10
-        cooling_rate: 5
       description: "Defensive energy projection - protective but limiting"
 
 design_philosophy:
@@ -230,7 +211,7 @@ design_philosophy:
   percentage_scaling: "All modifiers scale with frame base stats for consistent balance"
   
   trade_off_patterns:
-    power_vs_heat: "High-damage parts generate more heat"
+    power_vs_fuel: "High-damage parts consume more fuel"
     durability_vs_mobility: "Armored parts reduce speed and evasion"  
     precision_vs_durability: "Accurate parts are often more fragile"
     efficiency_vs_power: "Fuel-efficient parts have lower peak output"
@@ -258,10 +239,10 @@ part_quality_tiers:
     modifier_range: "Custom combinations, often extreme"
 
 assembly_guidelines:
-  heat_management: "Balance heat generation with cooling capacity"
   fuel_efficiency: "Consider fuel consumption for sustained operations"
   role_specialization: "Enhance frame strengths or compensate weaknesses"
   team_synergy: "Build for group tactics and complementary roles"
+  resource_management: "Balance fuel capacity with consumption rates"
   
   build_archetypes:
     glass_cannon: "Maximum damage at cost of survivability"

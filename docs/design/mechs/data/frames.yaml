@@ -6,25 +6,25 @@ frame_types:
     name: "Tank"
     description: "Defensive specialists designed for damage absorption and battlefield control"
     primary_stats: ["HP", "Defense", "Ether Defense"]
-    secondary_stats: ["Heat Capacity", "Attack"]
+    secondary_stats: ["Attack", "Fuel"]
     
   damage:
     name: "Damage" 
     description: "Assault specialists optimized for maximum physical damage output"
     primary_stats: ["Attack", "Accuracy"]
-    secondary_stats: ["HP", "Heat Capacity"]
+    secondary_stats: ["HP", "Fuel"]
     
   ether:
     name: "Ether"
     description: "Energy warfare specialists focused on ether-based combat and manipulation"
     primary_stats: ["Ether Attack", "Ether Defense"]
-    secondary_stats: ["Cooling Rate", "Fuel"]
+    secondary_stats: ["Fuel", "Accuracy"]
     
   support:
     name: "Support"
     description: "Utility specialists designed for team support and sustained operations" 
-    primary_stats: ["Fuel", "Cooling Rate"]
-    secondary_stats: ["Fuel Consumption", "Balanced Stats"]
+    primary_stats: ["Fuel", "Fuel Consumption"]
+    secondary_stats: ["HP", "Balanced Stats"]
 
 frames:
   aegis_mk1:
@@ -40,8 +40,6 @@ frames:
       ether_defense: 30
       accuracy: 70
       evasion: 10
-      heat_capacity: 110
-      cooling_rate: 12
       fuel_consumption: 10
 
   ravager_mk1:
@@ -57,8 +55,6 @@ frames:
       ether_defense: 20
       accuracy: 85
       evasion: 20
-      heat_capacity: 85
-      cooling_rate: 15
       fuel_consumption: 12
 
   nexus_mk1:
@@ -74,8 +70,6 @@ frames:
       ether_defense: 35
       accuracy: 80
       evasion: 25
-      heat_capacity: 75
-      cooling_rate: 18
       fuel_consumption: 8
 
   herald_mk1:
@@ -91,8 +85,6 @@ frames:
       ether_defense: 30
       accuracy: 80
       evasion: 20
-      heat_capacity: 90
-      cooling_rate: 20
       fuel_consumption: 6
 
   aegis_mk2:
@@ -108,8 +100,6 @@ frames:
       ether_defense: 45
       accuracy: 75
       evasion: 15
-      heat_capacity: 165
-      cooling_rate: 18
       fuel_consumption: 12
 
   ravager_mk2:
@@ -125,8 +115,6 @@ frames:
       ether_defense: 30
       accuracy: 90
       evasion: 25
-      heat_capacity: 127
-      cooling_rate: 22
       fuel_consumption: 15
 
   nexus_mk2:
@@ -142,8 +130,6 @@ frames:
       ether_defense: 52
       accuracy: 85
       evasion: 30
-      heat_capacity: 112
-      cooling_rate: 27
       fuel_consumption: 10
 
   herald_mk2:
@@ -159,8 +145,6 @@ frames:
       ether_defense: 45
       accuracy: 85
       evasion: 25
-      heat_capacity: 135
-      cooling_rate: 30
       fuel_consumption: 8
 
   aegis_mk3:
@@ -176,8 +160,6 @@ frames:
       ether_defense: 67
       accuracy: 80
       evasion: 20
-      heat_capacity: 247
-      cooling_rate: 27
       fuel_consumption: 15
 
   ravager_mk3:
@@ -193,8 +175,6 @@ frames:
       ether_defense: 45
       accuracy: 95
       evasion: 30
-      heat_capacity: 190
-      cooling_rate: 33
       fuel_consumption: 18
 
   nexus_mk3:
@@ -210,8 +190,6 @@ frames:
       ether_defense: 78
       accuracy: 90
       evasion: 37
-      heat_capacity: 168
-      cooling_rate: 40
       fuel_consumption: 12
 
   herald_mk3:
@@ -227,8 +205,6 @@ frames:
       ether_defense: 67
       accuracy: 90
       evasion: 30
-      heat_capacity: 202
-      cooling_rate: 45
       fuel_consumption: 10
 
   aegis_mk4:
@@ -244,8 +220,6 @@ frames:
       ether_defense: 100
       accuracy: 85
       evasion: 25
-      heat_capacity: 370
-      cooling_rate: 40
       fuel_consumption: 18
 
   ravager_mk4:
@@ -261,8 +235,6 @@ frames:
       ether_defense: 67
       accuracy: 100
       evasion: 37
-      heat_capacity: 285
-      cooling_rate: 50
       fuel_consumption: 22
 
   nexus_mk4:
@@ -278,8 +250,6 @@ frames:
       ether_defense: 117
       accuracy: 95
       evasion: 45
-      heat_capacity: 252
-      cooling_rate: 60
       fuel_consumption: 15
 
   herald_mk4:
@@ -295,8 +265,6 @@ frames:
       ether_defense: 100
       accuracy: 95
       evasion: 37
-      heat_capacity: 303
-      cooling_rate: 67
       fuel_consumption: 12
 
   aegis_mk5:
@@ -312,8 +280,6 @@ frames:
       ether_defense: 150
       accuracy: 90
       evasion: 30
-      heat_capacity: 555
-      cooling_rate: 60
       fuel_consumption: 22
 
   ravager_mk5:
@@ -329,8 +295,6 @@ frames:
       ether_defense: 100
       accuracy: 105
       evasion: 45
-      heat_capacity: 427
-      cooling_rate: 75
       fuel_consumption: 27
 
   nexus_mk5:
@@ -346,8 +310,6 @@ frames:
       ether_defense: 175
       accuracy: 100
       evasion: 55
-      heat_capacity: 378
-      cooling_rate: 90
       fuel_consumption: 18
 
   herald_mk5:
@@ -363,6 +325,4 @@ frames:
       ether_defense: 150
       accuracy: 100
       evasion: 45
-      heat_capacity: 454
-      cooling_rate: 100
       fuel_consumption: 15

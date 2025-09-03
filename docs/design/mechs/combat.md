@@ -11,26 +11,6 @@ Mech stats replace pilot stats during mech combat:
 - **Defense/Ether Defense**: Damage mitigation systems
 - **Accuracy/Evasion**: Hit calculation modifiers
 
-### Heat Management System
-Heat buildup adds tactical depth without complex movement mechanics:
-
-**Heat Generation**:
-- Weapon usage generates heat based on power level
-- High-performance parts increase heat generation
-- Sustained combat operations build thermal load
-
-**Heat Effects**:
-- **0-50% Heat**: Normal operation, no penalties
-- **51-75% Heat**: -10% Accuracy, -10% Attack effectiveness  
-- **76-90% Heat**: -20% Accuracy, -20% Attack, -10% Evasion
-- **91-100% Heat**: -30% all combat stats, risk of emergency shutdown
-
-**Heat Dissipation**:
-- Passive cooling each combat round
-- Active cooling abilities and equipment
-- Environmental effects (cold areas boost cooling)
-- Part-based cooling rate modifiers
-
 ### Fuel Management System
 Fuel consumption creates resource management without movement complexity:
 
@@ -68,21 +48,21 @@ When mechs fight against non-mech opponents:
 
 **Balance Mechanics**:
 - Mech weapons have accuracy penalties vs. small targets
-- Players can exploit mech heat buildup and fuel consumption
+- Players can exploit mech fuel consumption and positioning
 - Environmental cover more effective against mech weapons
 
 ### Mech vs Mech Combat
 Direct mech-to-mech combat emphasizes:
 
 **Tactical Elements**:
-- Heat management becomes critical
 - Fuel consumption planning for extended engagements
 - Part targeting and subsystem damage
+- Positioning and firing angles
 
 **Advanced Mechanics**:
 - **Subsystem Targeting**: Called shots against specific parts
 - **Critical Hits**: Chance to disable or destroy components
-- **Heat Warfare**: Weapons and abilities that increase enemy heat
+- **Power Warfare**: Weapons and abilities that drain enemy fuel
 
 ## Combat Integration
 
@@ -101,7 +81,7 @@ Mech combat integrates with current game mechanics:
 
 **Status Effects**: Standard effects apply with modifications
 - Pilot-based effects may be filtered through mech systems
-- Mech-specific status effects (overheating, power loss)
+- Mech-specific status effects (power loss, system malfunctions)
 - Some effects may target the mech instead of pilot
 
 ### Team Combat Dynamics
@@ -113,7 +93,7 @@ Mech combat integrates with current game mechanics:
 
 **All-Mech Teams**:
 - Emphasis on role specialization (Tank/Damage/Support/Ether)
-- Coordinated heat and fuel management
+- Coordinated fuel management and tactical positioning
 - Strategic positioning and covering fire
 
 **Mech Support Roles**:
@@ -126,15 +106,10 @@ Mech combat integrates with current game mechanics:
 ### Terrain Effects
 Environmental conditions affect mech performance:
 
-**Heat Environments**:
-- Desert, volcanic areas increase heat generation
-- Reduced cooling efficiency
-- Fire-based attacks more effective
-
-**Cold Environments**:
-- Arctic, high-altitude areas improve cooling
-- Reduced fuel efficiency in extreme cold
-- Ice-based attacks more effective
+**Extreme Environments**:
+- Desert, volcanic areas strain power systems
+- Arctic conditions reduce fuel efficiency
+- Environmental damage types more effective
 
 **Urban Combat**:
 - Buildings provide cover but limit mech mobility
@@ -146,16 +121,16 @@ Environmental conditions affect mech performance:
 **Assault Operations**:
 - Direct combat focused missions
 - Emphasis on damage output and survivability
-- Heat management crucial for sustained combat
+- Fuel management crucial for sustained combat
 
 **Siege Warfare**:
 - Extended engagements requiring fuel efficiency
 - Defensive positioning and area denial
-- Cooling cycle coordination between team members
+- Resource management coordination between team members
 
 **Reconnaissance**:
 - Stealth-focused builds with enhanced sensors
-- Minimal heat signature and fuel consumption
+- Minimal power signature and fuel consumption
 - Information gathering and target designation
 
 **Support Operations**:
@@ -172,12 +147,12 @@ Environmental conditions affect mech performance:
 
 ### Weapon Synergy
 - Certain weapon combinations provide bonuses
-- Energy weapons benefit from heat management
-- Ballistic weapons offer heat-neutral options
+- Energy weapons offer high damage with fuel costs
+- Ballistic weapons provide fuel-efficient alternatives
 
 ### Emergency Systems
 - Auto-ejection prevents pilot death on mech destruction
-- Emergency cooling systems provide temporary heat relief
+- Emergency power systems provide temporary functionality
 - Backup power allows limited operation at zero fuel
 
 ## Balance Considerations
@@ -188,7 +163,7 @@ Environmental conditions affect mech performance:
 - Maintenance requirements create ongoing expenses
 
 ### Counterplay Options
-- Heat-inducing abilities available to all classes
+- Fuel-draining abilities available to all classes
 - EMP and disruption effects disable mech systems
 - Environmental hazards affect mechs differently than pilots
 

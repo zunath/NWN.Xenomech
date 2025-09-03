@@ -49,18 +49,6 @@ stat_definitions:
     type: "combat"
     calculation: "base_frame_value * (1 + sum_of_part_modifiers)"
     
-  heat_capacity:
-    name: "Heat Capacity"
-    description: "Maximum thermal load before performance penalties"
-    type: "thermal"
-    calculation: "base_frame_value * (1 + sum_of_part_modifiers)"
-    
-  cooling_rate:
-    name: "Cooling Rate"
-    description: "Heat dissipation per time unit"
-    type: "thermal"
-    calculation: "base_frame_value * (1 + sum_of_part_modifiers)"
-    
   fuel_consumption:
     name: "Fuel Consumption"
     description: "Base fuel cost for operations and abilities"
@@ -87,36 +75,6 @@ modifier_system:
     format: "0"
     effect: "Base frame stat unchanged"
 
-heat_system:
-  description: "Thermal management system for mech operations"
-  
-  heat_levels:
-    normal:
-      range: "0-50%"
-      effects: "No penalties, full combat effectiveness"
-      
-    warning:
-      range: "51-75%"
-      effects: "-10% Accuracy, -10% Attack effectiveness"
-      
-    critical:
-      range: "76-90%" 
-      effects: "-20% Accuracy, -20% Attack, -10% Evasion"
-      
-    emergency:
-      range: "91-100%"
-      effects: "-30% all combat stats, risk of emergency shutdown"
-  
-  heat_generation:
-    weapon_usage: "Weapons generate heat based on power level"
-    high_performance_parts: "Advanced parts increase heat generation"
-    sustained_combat: "Extended combat builds thermal load"
-    
-  heat_dissipation:
-    passive_cooling: "Automatic cooling each combat round"
-    active_cooling: "Abilities and equipment provide cooling"
-    environmental: "Cold environments boost cooling effectiveness"
-    part_modifiers: "Cooling rate affected by generator and core parts"
 
 fuel_system:
   description: "Resource management system for sustained operations"
