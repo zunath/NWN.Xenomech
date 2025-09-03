@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Anvil.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Anvil.Services;
 using XM.Inventory.Event;
 using XM.Progression.Event;
 using XM.Progression.Job;
-using XM.Shared.Core.Entity;
 using XM.Progression.Job.JobDefinition;
 using XM.Progression.Stat.ResistDefinition;
 using XM.Progression.StatusEffect;
@@ -14,6 +13,7 @@ using XM.Shared.API.NWNX.CreaturePlugin;
 using XM.Shared.API.NWNX.ObjectPlugin;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
+using XM.Shared.Core.Entity;
 using XM.Shared.Core.EventManagement;
 using XM.UI.Event;
 
@@ -1336,7 +1336,9 @@ namespace XM.Progression.Stat
 
         public void SetNPCStats(
             uint npc, 
-            NPCStats npcStats)
+            int level,
+            int attackDelay,
+            StatGrade npcGrades)
         {
             if (GetIsPC(npc) || GetIsDM(npc))
                 return;
@@ -1344,6 +1346,39 @@ namespace XM.Progression.Stat
             var skin = GetItemInSlot(InventorySlotType.CreatureArmor, npc);
             var clawRight = GetItemInSlot(InventorySlotType.CreatureWeaponRight, npc);
             var clawLeft = GetItemInSlot(InventorySlotType.CreatureWeaponLeft, npc);
+
+            var npcStats = new NPCStats
+            {
+                Level = level,
+                EvasionGrade = npcGrades.Evasion,
+                MainHandDMG = CalculateDMG(level, npcGrades.DMG),
+                MainHandDelay = attackDelay,
+                StatGroup =
+                {
+                    Stats =
+                    {
+                        [StatType.MaxHP] = CalculateHP(level, npcGrades.MaxHP),
+                        [StatType.MaxEP] = CalculateEP(level, npcGrades.MaxEP),
+                        [StatType.Might] = CalculateStat(level, npcGrades.Might),
+                        [StatType.Perception] = CalculateStat(level, npcGrades.Perception),
+                        [StatType.Vitality] = CalculateStat(level, npcGrades.Vitality),
+                        [StatType.Agility] = CalculateStat(level, npcGrades.Agility),
+                        [StatType.Willpower] = CalculateStat(level, npcGrades.Willpower),
+                        [StatType.Social] = CalculateStat(level, npcGrades.Social),
+                    }
+                }
+            };
+
+            if (GetHasFeat(FeatType.BeastSpeed, npc))
+            {
+                npcStats.StatGroup.Stats[StatType.Haste] += 15;
+            }
+
+            if (GetHasFeat(FeatType.EtherLink, npc))
+            {
+                npcStats.StatGroup.Stats[StatType.EtherLink] += 20;
+            }
+
 
             SetIP(skin, ItemPropertyType.NPCLevel, npcStats.Level);
 

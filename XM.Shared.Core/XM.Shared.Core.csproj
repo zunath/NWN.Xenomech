@@ -73,7 +73,7 @@
 		<PackageReference Include="NWN.Anvil" Version="8193.37.2" ExcludeAssets="runtime" PrivateAssets="all">
 			<IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="StackExchange.Redis" Version="2.8.58" />
+		<PackageReference Include="StackExchange.Redis" Version="2.9.11" />
 	</ItemGroup>
 
 	<ItemGroup>
