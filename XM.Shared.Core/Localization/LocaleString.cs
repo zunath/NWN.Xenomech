@@ -1580,8 +1580,16 @@ namespace XM.Shared.Core.Localization
         RepairConfirmationPartial = 2342,
         NothingToRepair = 2343,
         Ring = 2344,
-        // 2345-2399 are free
-        Worldguide = 2400,
+        MechHead = 2345,
+        MechCore = 2346,
+        MechLeftArm = 2347,
+        MechRightArm = 2348,
+        MechLegs = 2349,
+        MechGenerator = 2350,
+        Mechs = 2351,
+
+        // 2352-2399 are free
+
         Lore = 2400,
         History = 2401,
         Factions = 2402,

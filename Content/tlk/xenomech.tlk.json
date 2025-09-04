@@ -9366,6 +9366,34 @@
       "text": "Ring"
     },
     {
+      "id": 2345,
+      "text": "Mech Head"
+    },
+    {
+      "id": 2346,
+      "text": "Mech Core"
+    },
+    {
+      "id": 2347,
+      "text": "Mech Left Arm"
+    },
+    {
+      "id": 2348,
+      "text": "Mech Right Arm"
+    },
+    {
+      "id": 2349,
+      "text": "Mech Legs"
+    },
+    {
+      "id": 2350,
+      "text": "Mech Generator"
+    },
+    {
+      "id": 2351,
+      "text": "Mechs"
+    },
+    {
       "id": 2400,
       "text": "Lore"
     },
