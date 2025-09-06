@@ -326,6 +326,33 @@
               "__struct_id": 0,
               "ID": {
                 "type": "byte",
+                "value": 75
+              },
+              "LIST": {
+                "type": "list",
+                "value": [
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "mech_frame"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_frame"
+                    }
+                  }
+                ]
+              },
+              "STRREF": {
+                "type": "dword",
+                "value": 16779568
+              }
+            },
+            {
+              "__struct_id": 0,
+              "ID": {
+                "type": "byte",
                 "value": 74
               },
               "LIST": {

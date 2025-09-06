@@ -1587,8 +1587,9 @@ namespace XM.Shared.Core.Localization
         MechLegs = 2349,
         MechGenerator = 2350,
         Mechs = 2351,
+        MechFrames = 2352,
 
-        // 2352-2399 are free
+        // 2353-2399 are free
 
         Lore = 2400,
         History = 2401,
