@@ -39,46 +39,46 @@ Chronos Time Core,Core,+7,+37,0,+20,+17,+25,+25,+10,+3,Temporal manipulation eng
 Medusa Petrify Core,Core,+27,+10,0,+15,+32,+25,-10,-25,+5,Stone-hardening defense matrix - impervious but slow
 Kraken Depth Core,Core,+27,+30,+10,+30,+7,+40,0,+5,-20,Abyssal pressure engine - crushing but alien
 Nemesis War Core,Core,-10,+25,+30,+20,+15,0,+15,+10,+40,Vengeance-driven power source - wrathful but costly
-Destroyer-Class L Assault Arms,L Arm,+12,0,+20,0,+12,0,+5,-15,+10,Reinforced left weapon mounts - powerful but slow
-Destroyer-Class R Assault Arms,R Arm,+12,0,+20,0,+12,0,+5,-15,+10,Reinforced right weapon mounts - powerful but slow
-Scalpel L Precision Arms,L Arm,-5,+5,+10,+15,0,0,+25,+10,-5,Fine left manipulation actuators - accurate but delicate
-Scalpel R Precision Arms,R Arm,-5,+5,+10,+15,0,0,+25,+10,-5,Fine right manipulation actuators - accurate but delicate
-Aegis L Shield Arms,L Arm,+5,0,-10,0,+25,+15,-5,+5,+5,Integrated left defensive systems
-Aegis R Shield Arms,R Arm,+5,0,-10,0,+25,+15,-5,+5,+5,Integrated right defensive systems
-Hermes L Utility Arms,L Arm,0,+15,0,+5,+5,+5,0,0,-10,Multi-purpose left manipulators
-Hermes R Utility Arms,R Arm,0,+15,0,+5,+5,+5,0,0,-10,Multi-purpose right manipulators
-Colossus L Crusher Arms,L Arm,+20,0,+30,-5,+10,0,0,-20,+25,Hydraulic left crushing systems - devastating but slow
-Colossus R Crusher Arms,R Arm,+20,0,+30,-5,+10,0,0,-20,+25,Hydraulic right crushing systems - devastating but slow
-Apollo L Surgical Arms,L Arm,-10,+12,+5,+20,0,+10,+30,+15,-12,Medical left precision systems - delicate but exact
-Apollo R Surgical Arms,R Arm,-10,+12,+5,+20,0,+10,+30,+15,-12,Medical right precision systems - delicate but exact
-Quicksilver L Reactive Arms,L Arm,+2,+2,+15,+10,+17,+10,+10,+20,+3,Adaptive left response systems - quick but standard
-Quicksilver R Reactive Arms,R Arm,+2,+2,+15,+10,+17,+10,+10,+20,+3,Adaptive right response systems - quick but standard
-Atlas L Titan Arms,L Arm,+27,0,+25,0,+22,-5,-5,-25,+35,Massive left industrial arms - mighty but unwieldy
-Atlas R Titan Arms,R Arm,+27,0,+25,0,+22,-5,-5,-25,+35,Massive right industrial arms - mighty but unwieldy
-Wraith L Phantom Arms,L Arm,-15,+15,+10,+15,-10,+5,+15,+30,-13,Left phase-shifting technology - elusive but fragile
-Wraith R Phantom Arms,R Arm,-15,+15,+10,+15,-10,+5,+15,+30,-13,Right phase-shifting technology - elusive but fragile
-Ares L Berserker Arms,L Arm,+15,0,+35,+5,+10,-10,+5,-10,+45,Left rage-enhanced systems - furious but reckless
-Ares R Berserker Arms,R Arm,+15,0,+35,+5,+10,-10,+5,-10,+45,Right rage-enhanced systems - furious but reckless
-Viper L Strike Arms,L Arm,0,+12,+25,+10,0,0,+20,+25,-7,Lightning-fast left combat limbs - quick but light
-Viper R Strike Arms,R Arm,0,+12,+25,+10,0,0,+20,+25,-7,Lightning-fast right combat limbs - quick but light
-Thor L Thunder Arms,L Arm,+22,0,+40,+20,+17,-5,0,-15,+45,Left storm-powered weapon mounts - electrifying but chaotic
-Thor R Thunder Arms,R Arm,+22,0,+40,+20,+17,-5,0,-15,+45,Right storm-powered weapon mounts - electrifying but chaotic
-Hades L Inferno Arms,L Arm,-5,0,+30,+25,+25,+10,+10,0,+45,Left hell-fire weapon systems - scorching but hot
-Hades R Inferno Arms,R Arm,-5,0,+30,+25,+25,+10,+10,0,+45,Right hell-fire weapon systems - scorching but hot
-Poseidon L Hydro Arms,L Arm,+5,+27,+15,+30,-5,+20,+15,+10,-7,Left water-pressure hydraulics - fluid but complex
-Poseidon R Hydro Arms,R Arm,+5,+27,+15,+30,-5,+20,+15,+10,-7,Right water-pressure hydraulics - fluid but complex
-Artemis L Hunter Arms,L Arm,-10,+15,+35,+5,0,0,+35,+20,-3,Left predatory tracking limbs - deadly but specialized
-Artemis R Hunter Arms,R Arm,-10,+15,+35,+5,0,0,+35,+20,-3,Right predatory tracking limbs - deadly but specialized
-Demeter L Growth Arms,L Arm,+20,+27,0,+15,+15,+15,-5,-10,-22,Left bio-regenerative systems - growing but slow
-Demeter R Growth Arms,R Arm,+20,+27,0,+15,+15,+15,-5,-10,-22,Right bio-regenerative systems - growing but slow
-Hephaestus L Forge Arms,L Arm,+30,-5,+20,+10,+35,0,-10,-20,+45,Left weapon-crafting appendages - creative but demanding
-Hephaestus R Forge Arms,R Arm,+30,-5,+20,+10,+35,0,-10,-20,+45,Right weapon-crafting appendages - creative but demanding
-Loki L Trickster Arms,L Arm,-10,+27,+15,+20,-15,+15,+25,+35,-7,Left deceptive manipulation systems - cunning but unreliable
-Loki R Trickster Arms,R Arm,-10,+27,+15,+20,-15,+15,+25,+35,-7,Right deceptive manipulation systems - cunning but unreliable
-Odin L Wisdom Arms,L Arm,+5,+40,+10,+35,+5,+25,+30,+5,0,Left all-seeing combat limbs - wise but power hungry
-Odin R Wisdom Arms,R Arm,+5,+40,+10,+35,+5,+25,+30,+5,0,Right all-seeing combat limbs - wise but power hungry
-Fenrir L Beast Arms,L Arm,+32,0,+45,+10,+17,-15,-5,-5,+30,Left savage predator systems - feral but uncontrolled
-Fenrir R Beast Arms,R Arm,+32,0,+45,+10,+17,-15,-5,-5,+30,Right savage predator systems - feral but uncontrolled
+Destroyer-Class L Assault Arm,L Arm,+12,0,+20,0,+12,0,+5,-15,+10,Reinforced left weapon mounts - powerful but slow
+Destroyer-Class R Assault Arm,R Arm,+12,0,+20,0,+12,0,+5,-15,+10,Reinforced right weapon mounts - powerful but slow
+Scalpel L Precision Arm,L Arm,-5,+5,+10,+15,0,0,+25,+10,-5,Fine left manipulation actuators - accurate but delicate
+Scalpel R Precision Arm,R Arm,-5,+5,+10,+15,0,0,+25,+10,-5,Fine right manipulation actuators - accurate but delicate
+Aegis L Shield Arm,L Arm,+5,0,-10,0,+25,+15,-5,+5,+5,Integrated left defensive systems
+Aegis R Shield Arm,R Arm,+5,0,-10,0,+25,+15,-5,+5,+5,Integrated right defensive systems
+Hermes L Utility Arm,L Arm,0,+15,0,+5,+5,+5,0,0,-10,Multi-purpose left manipulators
+Hermes R Utility Arm,R Arm,0,+15,0,+5,+5,+5,0,0,-10,Multi-purpose right manipulators
+Colossus L Crusher Arm,L Arm,+20,0,+30,-5,+10,0,0,-20,+25,Hydraulic left crushing systems - devastating but slow
+Colossus R Crusher Arm,R Arm,+20,0,+30,-5,+10,0,0,-20,+25,Hydraulic right crushing systems - devastating but slow
+Apollo L Surgical Arm,L Arm,-10,+12,+5,+20,0,+10,+30,+15,-12,Medical left precision systems - delicate but exact
+Apollo R Surgical Arm,R Arm,-10,+12,+5,+20,0,+10,+30,+15,-12,Medical right precision systems - delicate but exact
+Quicksilver L Reactive Arm,L Arm,+2,+2,+15,+10,+17,+10,+10,+20,+3,Adaptive left response systems - quick but standard
+Quicksilver R Reactive Arm,R Arm,+2,+2,+15,+10,+17,+10,+10,+20,+3,Adaptive right response systems - quick but standard
+Atlas L Titan Arm,L Arm,+27,0,+25,0,+22,-5,-5,-25,+35,Massive left industrial arms - mighty but unwieldy
+Atlas R Titan Arm,R Arm,+27,0,+25,0,+22,-5,-5,-25,+35,Massive right industrial arms - mighty but unwieldy
+Wraith L Phantom Arm,L Arm,-15,+15,+10,+15,-10,+5,+15,+30,-13,Left phase-shifting technology - elusive but fragile
+Wraith R Phantom Arm,R Arm,-15,+15,+10,+15,-10,+5,+15,+30,-13,Right phase-shifting technology - elusive but fragile
+Ares L Berserker Arm,L Arm,+15,0,+35,+5,+10,-10,+5,-10,+45,Left rage-enhanced systems - furious but reckless
+Ares R Berserker Arm,R Arm,+15,0,+35,+5,+10,-10,+5,-10,+45,Right rage-enhanced systems - furious but reckless
+Viper L Strike Arm,L Arm,0,+12,+25,+10,0,0,+20,+25,-7,Lightning-fast left combat limbs - quick but light
+Viper R Strike Arm,R Arm,0,+12,+25,+10,0,0,+20,+25,-7,Lightning-fast right combat limbs - quick but light
+Thor L Thunder Arm,L Arm,+22,0,+40,+20,+17,-5,0,-15,+45,Left storm-powered weapon mounts - electrifying but chaotic
+Thor R Thunder Arm,R Arm,+22,0,+40,+20,+17,-5,0,-15,+45,Right storm-powered weapon mounts - electrifying but chaotic
+Hades L Inferno Arm,L Arm,-5,0,+30,+25,+25,+10,+10,0,+45,Left hell-fire weapon systems - scorching but hot
+Hades R Inferno Arm,R Arm,-5,0,+30,+25,+25,+10,+10,0,+45,Right hell-fire weapon systems - scorching but hot
+Poseidon L Hydro Arm,L Arm,+5,+27,+15,+30,-5,+20,+15,+10,-7,Left water-pressure hydraulics - fluid but complex
+Poseidon R Hydro Arm,R Arm,+5,+27,+15,+30,-5,+20,+15,+10,-7,Right water-pressure hydraulics - fluid but complex
+Artemis L Hunter Arm,L Arm,-10,+15,+35,+5,0,0,+35,+20,-3,Left predatory tracking limbs - deadly but specialized
+Artemis R Hunter Arm,R Arm,-10,+15,+35,+5,0,0,+35,+20,-3,Right predatory tracking limbs - deadly but specialized
+Demeter L Growth Arm,L Arm,+20,+27,0,+15,+15,+15,-5,-10,-22,Left bio-regenerative systems - growing but slow
+Demeter R Growth Arm,R Arm,+20,+27,0,+15,+15,+15,-5,-10,-22,Right bio-regenerative systems - growing but slow
+Hephaestus L Forge Arm,L Arm,+30,-5,+20,+10,+35,0,-10,-20,+45,Left weapon-crafting appendages - creative but demanding
+Hephaestus R Forge Arm,R Arm,+30,-5,+20,+10,+35,0,-10,-20,+45,Right weapon-crafting appendages - creative but demanding
+Loki L Trickster Arm,L Arm,-10,+27,+15,+20,-15,+15,+25,+35,-7,Left deceptive manipulation systems - cunning but unreliable
+Loki R Trickster Arm,R Arm,-10,+27,+15,+20,-15,+15,+25,+35,-7,Right deceptive manipulation systems - cunning but unreliable
+Odin L Wisdom Arm,L Arm,+5,+40,+10,+35,+5,+25,+30,+5,0,Left all-seeing combat limbs - wise but power hungry
+Odin R Wisdom Arm,R Arm,+5,+40,+10,+35,+5,+25,+30,+5,0,Right all-seeing combat limbs - wise but power hungry
+Fenrir L Beast Arm,L Arm,+32,0,+45,+10,+17,-15,-5,-5,+30,Left savage predator systems - feral but uncontrolled
+Fenrir R Beast Arm,R Arm,+32,0,+45,+10,+17,-15,-5,-5,+30,Right savage predator systems - feral but uncontrolled
 Olympus Siege Platform,Legs,+32,0,+5,0,+27,-5,-10,-20,+25,Heavy assault platform - powerful but immobile
 Hermes Swift Legs,Legs,-15,+15,0,0,0,0,+10,+35,-20,Lightweight mobility system - fast but fragile
 Artemis Stabilized Legs,Legs,+5,+2,0,0,+10,+10,+15,-5,-2,Precision firing platform - accurate but standard

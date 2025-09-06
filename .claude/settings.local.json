@@ -1,16 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python:*)",
-      "Bash(dotnet build:*)",
-      "mcp__ide__getDiagnostics",
-      "Bash(grep:*)",
-      "Bash(rg:*)",
-      "Bash(csc:*)",
-      "Bash(dir \"C:\\Projects\\NWN.Xenomech\\Content\\xm_portraits\")",
-      "Bash(powershell:*)",
-      "Bash(dir:*)",
-      "Bash(move:*)"
+      "Bash(sed:*)",
+      "Bash(python:*)"
     ],
     "deny": [],
     "ask": []

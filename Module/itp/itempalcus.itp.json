@@ -308,11 +308,220 @@
                     "__struct_id": 0,
                     "NAME": {
                       "type": "cexostring",
+                      "value": "Abyss Void Engine"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "abyss_void_eng"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Atlas Stability Matrix"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "atlas_stability"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Blitz Overdrive Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "blitz_overdrive"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Cerberus Triple Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "cerberus_triple"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Chronos Time Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "chronos_time"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Darwin Adaptive Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "darwin_adaptive"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Fortress Command Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "fortress_cmd"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Gaia Crystal Matrix"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "gaia_crystal"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Icarus Solar Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "icarus_solar"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Kraken Depth Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "kraken_depth"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
                       "value": "mech_core"
                     },
                     "RESREF": {
                       "type": "resref",
                       "value": "mech_core"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Medusa Petrify Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "medusa_petrify"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Mjolnir Thunder Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mjolnir_thunder"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Nemesis War Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "nemesis_war"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Ouroboros Loop Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "ouroboros_loop"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Pandora Chaos Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "pandora_chaos"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Paradox Quantum Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "paradox_quantum"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Phoenix Flame Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "phoenix_flame"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Prometheus Logic Engine"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "prometheus_logic"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Standard Titan Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "standard_titan"
                     }
                   }
                 ]
@@ -582,11 +791,264 @@
                     "__struct_id": 0,
                     "NAME": {
                       "type": "cexostring",
+                      "value": "Abyss Void Reactor"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "abyss_void_react"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Apollo Solar Array"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "apollo_solar_ary"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Ares Overcharge Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "ares_ovrchrg_cor"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Artemis Moon Cell"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "artemis_moon_cel"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Atlas Stable Reactor"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "atlas_stabl_rct"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Chronos Temporal Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "chronos_temprl"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Darwin Hybrid Cell"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "darwin_hybrd_cel"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Demeter Growth Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "demeter_grwth_cr"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Fenrir Beast Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "fenrir_beast_cor"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Gaia Efficient Cell"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "gaia_effic_cell"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hades Inferno Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "hades_inferno"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Helios Fusion Reactor"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "helios_fusion"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hephaestus Forge Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "hephaest_frg_cr"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hera Divine Reactor"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "hera_divine_rct"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hermes Quick Cell"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "hermes_quick_cel"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Loki Chaos Generator"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "loki_chaos_gen"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
                       "value": "mech_generator"
                     },
                     "RESREF": {
                       "type": "resref",
                       "value": "mech_generator"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Odin Wisdom Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "odin_wisdom_cor"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Phoenix Emergency Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "phoenix_emrg"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Poseidon Hydro Cell"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "poseidon_hydro"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Prometheus Fire Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "prometheus_fire"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Standard Power Cell"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "std_pwr_cell"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Thor Storm Generator"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "thor_storm_gen"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Zeus Arc Reactor"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "zeus_arc_reactor"
                     }
                   }
                 ]
@@ -845,11 +1307,231 @@
                     "__struct_id": 0,
                     "NAME": {
                       "type": "cexostring",
+                      "value": "Aegis L Shield Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_larm_03"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Apollo L Surgical Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_larm_06"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Ares L Berserker Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_larm_10"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Artemis L Hunter Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_larm_15"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Atlas L Titan Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_larm_08"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Colossus L Crusher Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_larm_05"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Demeter L Growth Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_larm_16"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Destroyer-Class L Assault Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_larm_01"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Fenrir L Beast Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_larm_20"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hades L Inferno Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_larm_13"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hephaestus L Forge Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_larm_17"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hermes L Utility Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_larm_04"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Loki L Trickster Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_larm_18"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
                       "value": "mech_larm"
                     },
                     "RESREF": {
                       "type": "resref",
                       "value": "mech_larm"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Odin L Wisdom Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_larm_19"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Poseidon L Hydro Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_larm_14"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Quicksilver L Reactive Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_larm_07"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Scalpel L Precision Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_larm_02"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Thor L Thunder Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_larm_12"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Viper L Strike Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_larm_11"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Wraith L Phantom Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_larm_09"
                     }
                   }
                 ]
@@ -899,11 +1581,231 @@
                     "__struct_id": 0,
                     "NAME": {
                       "type": "cexostring",
+                      "value": "Aegis R Shield Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_rarm_03"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Apollo R Surgical Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_rarm_06"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Ares R Berserker Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_rarm_10"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Artemis R Hunter Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_rarm_15"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Atlas R Titan Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_rarm_08"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Colossus R Crusher Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_rarm_05"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Demeter R Growth Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_rarm_16"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Destroyer-Class R Assault Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_rarm_01"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Fenrir R Beast Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_rarm_20"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hades R Inferno Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_rarm_13"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hephaestus R Forge Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_rarm_17"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hermes R Utility Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_rarm_04"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Loki R Trickster Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_rarm_18"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
                       "value": "mech_rarm"
                     },
                     "RESREF": {
                       "type": "resref",
                       "value": "mech_rarm"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Odin R Wisdom Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_rarm_19"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Poseidon R Hydro Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_rarm_14"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Quicksilver R Reactive Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_rarm_07"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Scalpel R Precision Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_rarm_02"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Thor R Thunder Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_rarm_12"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Viper R Strike Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_rarm_11"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Wraith R Phantom Arm"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_rarm_09"
                     }
                   }
                 ]
