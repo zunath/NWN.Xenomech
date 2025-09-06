@@ -1554,11 +1554,231 @@
                     "__struct_id": 0,
                     "NAME": {
                       "type": "cexostring",
+                      "value": "Apollo Rocket Legs"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_legs_08"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Arachne Spider Legs"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_legs_07"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Artemis Stabilized Legs"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_legs_03"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Atlas Fortress Legs"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_legs_06"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Cerberus Guardian Legs"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_legs_13"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Chronos Phase Legs"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_legs_16"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Gaia Root Legs"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_legs_17"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hades Wraith Legs"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_legs_10"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hermes Swift Legs"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_legs_02"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Icarus Jump Legs"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_legs_05"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Kraken Tentacle Legs"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_legs_12"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
                       "value": "mech_legs"
                     },
                     "RESREF": {
                       "type": "resref",
                       "value": "mech_legs"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Medusa Stone Legs"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_legs_15"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Nemesis Hunt Legs"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_legs_18"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Olympus Siege Platform"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_legs_01"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Phoenix Wing Legs"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_legs_14"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Poseidon Shock Legs"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_legs_09"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Standard Mobility Legs"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_legs_04"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Titan March Legs"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_legs_20"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Valkyrie Flight Legs"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_legs_19"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Zeus Thunder Legs"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_legs_11"
                     }
                   }
                 ]
