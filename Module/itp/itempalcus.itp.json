@@ -609,11 +609,220 @@
                     "__struct_id": 0,
                     "NAME": {
                       "type": "cexostring",
+                      "value": "Apex Targeting Matrix"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "apex_target_mtx"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Aurora Light Matrix"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "aurora_light"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Bastion Defense Grid"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "bastion_def_grid"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Cerberus Guardian"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "cerberus_guard"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Fortress-VII Combat Array"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "fortress_vii_ary"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Hydra Multi-Sensor"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "hydra_multi_sns"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
                       "value": "mech_head"
                     },
                     "RESREF": {
                       "type": "resref",
                       "value": "mech_head"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Nova Burst Scanner"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "nova_burst_scan"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Oracle Command Node"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "oracle_cmd_node"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Phantom Cloak Array"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "phantom_cloak"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Phoenix Rebirth Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "phoenix_rebirth"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Quantum Sight Array"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "quantum_sight"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Reaper Skull Array"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "reaper_skull"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Sentinel Basic Array"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "sentinel_basic"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Sphinx Enigma Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "sphinx_enigma"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Synaptic Link Core"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "synaptic_link"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Titan Fortress Head"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "titan_fortress"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Valkyrie War Crown"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "valkyrie_crown"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Viper Strike Head"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "viper_strike_hd"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Wraith ECM Suite"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "wraith_ecm_suite"
                     }
                   }
                 ]

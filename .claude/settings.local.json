@@ -9,7 +9,8 @@
       "Bash(csc:*)",
       "Bash(dir \"C:\\Projects\\NWN.Xenomech\\Content\\xm_portraits\")",
       "Bash(powershell:*)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(move:*)"
     ],
     "deny": [],
     "ask": []

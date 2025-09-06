@@ -1,6 +1,6 @@
 Part Name,Part Type,HP %,Fuel %,Attack %,Ether Attack %,Defense %,Ether Defense %,Accuracy %,Evasion %,Fuel Consumption %,Description
-Aegis-VII Combat Array,Head,+20,0,0,0,+15,+5,0,-5,+5,Heavily armored sensor package - durable but slow
-Nexus Targeting Matrix,Head,-5,+2,+15,+10,0,0,+20,0,+8,Advanced targeting system - fragile but accurate
+Fortress-VII Combat Array,Head,+20,0,0,0,+15,+5,0,-5,+5,Heavily armored sensor package - durable but slow
+Apex Targeting Matrix,Head,-5,+2,+15,+10,0,0,+20,0,+8,Advanced targeting system - fragile but accurate
 Wraith ECM Suite,Head,0,+10,0,0,0,+15,-10,+25,0,Electronic countermeasures - evasive but inaccurate
 Sentinel Basic Array,Head,0,+2,0,0,0,0,+5,+5,-2,Standard military sensor suite
 Oracle Command Node,Head,-10,+25,0,+15,0,+10,+15,+5,-10,Command and control systems - strategic but vulnerable
