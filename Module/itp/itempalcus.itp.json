@@ -335,11 +335,231 @@
                     "__struct_id": 0,
                     "NAME": {
                       "type": "cexostring",
+                      "value": "Aegis Mk I"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "aegis_mk1"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Aegis Mk II"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "aegis_mk2"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Aegis Mk III"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "aegis_mk3"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Aegis Mk IV"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "aegis_mk4"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Aegis Mk V"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "aegis_mk5"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Herald Mk I"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "herald_mk1"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Herald Mk II"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "herald_mk2"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Herald Mk III"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "herald_mk3"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Herald Mk IV"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "herald_mk4"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Herald Mk V"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "herald_mk5"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
                       "value": "mech_frame"
                     },
                     "RESREF": {
                       "type": "resref",
                       "value": "mech_frame"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Nexus Mk I"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "nexus_mk1"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Nexus Mk II"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "nexus_mk2"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Nexus Mk III"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "nexus_mk3"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Nexus Mk IV"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "nexus_mk4"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Nexus Mk V"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "nexus_mk5"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Ravager Mk I"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "ravager_mk1"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Ravager Mk II"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "ravager_mk2"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Ravager Mk III"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "ravager_mk3"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Ravager Mk IV"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "ravager_mk4"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
+                      "value": "Ravager Mk V"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "ravager_mk5"
                     }
                   }
                 ]
