@@ -96,6 +96,15 @@ namespace XM.Shared.API.Constants
         Claw = 113,
         Pistol = 114,
         Rifle = 115,
+        MechHead = 116,
+        MechCore = 117,
+        MechLeftArm = 118,
+        MechRightArm = 119,
+        MechLegs = 120,
+        MechGenerator = 121,
+        MechFrame = 122,
+        MechLeftWeapon = 123,
+        MechRightWeapon = 124,
         Invalid = 256
     }
 }
