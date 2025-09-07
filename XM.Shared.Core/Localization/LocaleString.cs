@@ -1588,8 +1588,11 @@ namespace XM.Shared.Core.Localization
         MechGenerator = 2350,
         Mechs = 2351,
         MechFrames = 2352,
+        CustomizeMechs = 2353,
+        MechLeftWeapon = 2354,
+        MechRightWeapon = 2355,
 
-        // 2353-2399 are free
+        // 2356-2399 are free
 
         Lore = 2400,
         History = 2401,
