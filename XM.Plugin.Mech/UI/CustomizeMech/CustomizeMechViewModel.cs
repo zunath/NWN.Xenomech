@@ -487,6 +487,16 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
             // TODO: Implement frame selection logic
             // This should show available frames and allow selection
         };
+
+        // Part selection methods for UI buttons
+        public Action OnSelectHead() => OnAttachPart(MechPartType.Head);
+        public Action OnSelectLeftArm() => OnAttachPart(MechPartType.LeftArm);
+        public Action OnSelectRightArm() => OnAttachPart(MechPartType.RightArm);
+        public Action OnSelectCore() => OnAttachPart(MechPartType.Core);
+        public Action OnSelectLegs() => OnAttachPart(MechPartType.Legs);
+        public Action OnSelectGenerator() => OnAttachPart(MechPartType.Generator);
+        public Action OnSelectLeftWeapon() => OnAttachPart(MechPartType.LeftWeapon);
+        public Action OnSelectRightWeapon() => OnAttachPart(MechPartType.RightWeapon);
     }
 }
 

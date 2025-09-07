@@ -1,15 +1,17 @@
 ﻿using Anvil.API;
 using Anvil.Services;
+using NLog.Layouts;
 using XM.Shared.Core.Localization;
 using XM.UI;
 using XM.UI.Builder;
 using XM.UI.Builder.Layout;
 using NuiAspect = XM.Shared.API.NUI.NuiAspect;
+using NuiScrollbars = XM.Shared.API.NUI.NuiScrollbars;
 
 namespace XM.Plugin.Mech.UI.CustomizeMech
 {
     [ServiceBinding(typeof(IView))]
-    internal class CustomizeMechView: IView
+    internal class CustomizeMechView : IView
     {
         private readonly NuiBuilder<CustomizeMechViewModel> _builder = new();
         public IViewModel CreateViewModel()
@@ -31,7 +33,6 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
                         {
                             row.AddColumn(BuildMechList);
                             row.AddColumn(BuildMechCustomizationPane);
-                            row.AddColumn(BuildMechSummaryPane);
                         });
                     });
 
@@ -92,14 +93,89 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
         {
             col.AddRow(row =>
             {
-                row.DrawList(drawList =>
+                row.AddGroup(group =>
                 {
-                    drawList.AddImage(image =>
+                    group.SetLayout(layout =>
                     {
-                        image.ResRef("mech_outline1")
-                            .Aspect(NuiAspect.Fit);
-                    });
+
+                        layout.AddImage(image =>
+                        {
+                            image.ResRef("mech_outline1")
+                                .ImageAspect(NuiAspect.Exact)
+                                .HorizontalAlign(NuiHAlign.Left)
+                                .VerticalAlign(NuiVAlign.Top);
+                        })
+                            .DrawList(drawList =>
+                            {
+                                drawList.AddImage(image =>
+                                {
+                                    image.ResRef("mech_head")
+                                        .Position(320f, 50f, 128f, 128f);
+                                    //.OnClick(model => model.OnSelectHead())
+                                    //.TooltipText(LocaleString.Head);
+                                });
+
+                                drawList.AddImage(button =>
+                                {
+                                    button.ResRef("mech_larm")
+                                        .Position(110f, 200f, 128f, 128f);
+                                    //.OnClick(model => model.OnSelectLeftArm())
+                                    //.TooltipText(LocaleString.MechLeftArm);
+                                });
+
+                                drawList.AddImage(button =>
+                                {
+                                    button.ResRef("mech_rarm")
+                                        .Position(530f, 200f, 128f, 128f);
+                                    //.OnClick(model => model.OnSelectRightArm())
+                                    //.TooltipText(LocaleString.MechRightArm);
+                                });
+
+                                drawList.AddImage(button =>
+                                {
+                                    button.ResRef("mech_core")
+                                        .Position(320f, 200f, 128f, 128f);
+                                    //.OnClick(model => model.OnSelectCore())
+                                    //.TooltipText(LocaleString.MechCore);
+                                });
+
+                                drawList.AddImage(button =>
+                                {
+                                    button.ResRef("mech_legs")
+                                        .Position(320f, 500f, 128f, 128f);
+                                    //.OnClick(model => model.OnSelectLegs())
+                                    //.TooltipText(LocaleString.MechLegs);
+                                });
+
+                                drawList.AddImage(button =>
+                                {
+                                    button.ResRef("mech_generator")
+                                        .Position(320f, 350f, 128f, 128f);
+                                    //.OnClick(model => model.OnSelectGenerator())
+                                    //.TooltipText(LocaleString.MechGenerator);
+                                });
+
+                                drawList.AddImage(button =>
+                                {
+                                    button.ResRef("mech_lweapon")
+                                        .Position(110f, 350f, 128f, 128f);
+                                    //.OnClick(model => model.OnSelectLeftWeapon())
+                                    //.TooltipText(LocaleString.MechLeftWeapon);
+                                });
+
+                                drawList.AddImage(button =>
+                                {
+                                    button.ResRef("mech_rweapon")
+                                        .Position(530f, 350f, 128f, 128f);
+                                    //.OnClick(model => model.OnSelectRightWeapon())
+                                    //.TooltipText(LocaleString.MechRightWeapon);
+                                });
+                            });
+                    })
+                        .Border(true)
+                        .Scrollbars(NuiScrollbars.Both);
                 });
+
             });
         }
 
