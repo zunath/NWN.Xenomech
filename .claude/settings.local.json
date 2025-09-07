@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(sed:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(mkdir:*)",
+      "Bash(rmdir:*)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []
