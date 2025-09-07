@@ -9395,7 +9395,19 @@
     },
     {
       "id": 2352,
-      "text": "Mech Frames"
+      "text": "Mech Frame"
+    },
+    {
+      "id": 2353,
+      "text": "Customize Mechs"
+    },
+    {
+      "id": 2354,
+      "text": "Mech Left Weapon"
+    },
+    {
+      "id": 2355,
+      "text": "Mech Right Weapon"
     },
     {
       "id": 2400,
