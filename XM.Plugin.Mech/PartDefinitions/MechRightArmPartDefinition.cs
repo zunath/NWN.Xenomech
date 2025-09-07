@@ -8,7 +8,7 @@ namespace XM.Plugin.Mech.PartDefinitions
     {
         private readonly MechPartBuilder _builder = new();
 
-        public Dictionary<string, MechPartStats> BuildMechParts()
+        public Dictionary<string, MechPart> BuildMechParts()
         {
             DestroyerRAssaultArm();
             ScalpelRPrecisionArm();

@@ -1591,6 +1591,15 @@ namespace XM.Shared.Core.Localization
         CustomizeMechs = 2353,
         MechLeftWeapon = 2354,
         MechRightWeapon = 2355,
+        Customization = 2356,
+        Frame = 2357,
+        Parts = 2358,
+        NoFrameSelected = 2359,
+        PleaseSelectAMechFirst = 2360,
+        PleaseSelectAFrameFirst = 2361,
+        PleaseSelectMechItemFromInventory = 2362,
+        Detach = 2363,
+        AreYouSureYouWantToDetachPartX = 2364,
 
         // 2356-2399 are free
 

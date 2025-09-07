@@ -8,7 +8,7 @@ namespace XM.Plugin.Mech.FrameDefinitions
     {
         private readonly MechFrameBuilder _builder = new();
 
-        public Dictionary<string, MechFrameStats> BuildMechFrames()
+        public Dictionary<string, MechFrame> BuildMechFrames()
         {
             HeraldMkI();
             HeraldMkII();
@@ -22,7 +22,7 @@ namespace XM.Plugin.Mech.FrameDefinitions
         {
             _builder.Create("herald_mk1")
                 .LevelRequirement(10)
-                .BaseHp(600)
+                .BaseHP(600)
                 .BaseFuel(160)
                 .BaseAttack(30)
                 .BaseEtherAttack(35)
@@ -37,7 +37,7 @@ namespace XM.Plugin.Mech.FrameDefinitions
         {
             _builder.Create("herald_mk2")
                 .LevelRequirement(20)
-                .BaseHp(900)
+                .BaseHP(900)
                 .BaseFuel(240)
                 .BaseAttack(45)
                 .BaseEtherAttack(52)
@@ -52,7 +52,7 @@ namespace XM.Plugin.Mech.FrameDefinitions
         {
             _builder.Create("herald_mk3")
                 .LevelRequirement(30)
-                .BaseHp(1350)
+                .BaseHP(1350)
                 .BaseFuel(360)
                 .BaseAttack(67)
                 .BaseEtherAttack(78)
@@ -67,7 +67,7 @@ namespace XM.Plugin.Mech.FrameDefinitions
         {
             _builder.Create("herald_mk4")
                 .LevelRequirement(40)
-                .BaseHp(2025)
+                .BaseHP(2025)
                 .BaseFuel(540)
                 .BaseAttack(100)
                 .BaseEtherAttack(117)
@@ -82,7 +82,7 @@ namespace XM.Plugin.Mech.FrameDefinitions
         {
             _builder.Create("herald_mk5")
                 .LevelRequirement(50)
-                .BaseHp(3037)
+                .BaseHP(3037)
                 .BaseFuel(810)
                 .BaseAttack(150)
                 .BaseEtherAttack(175)

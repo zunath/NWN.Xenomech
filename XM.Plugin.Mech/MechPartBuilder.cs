@@ -4,8 +4,8 @@ namespace XM.Plugin.Mech
 {
     public class MechPartBuilder
     {
-        private readonly Dictionary<string, MechPartStats> _mechParts = new();
-        private MechPartStats _activePart;
+        private readonly Dictionary<string, MechPart> _mechParts = new();
+        private MechPart _activePart;
 
         /// <summary>
         /// Creates a new mech part definition.
@@ -15,7 +15,7 @@ namespace XM.Plugin.Mech
         /// <returns>A mech part builder with the configured options</returns>
         public MechPartBuilder Create(string resref, MechPartType partType)
         {
-            _activePart = new MechPartStats
+            _activePart = new MechPart
             {
                 PartType = partType
             };
@@ -31,7 +31,7 @@ namespace XM.Plugin.Mech
         /// <returns>A mech part builder with the configured options</returns>
         public MechPartBuilder HPPercent(int percent)
         {
-            _activePart.HpPercent = percent;
+            _activePart.HPPercent = percent;
             return this;
         }
 
@@ -127,7 +127,7 @@ namespace XM.Plugin.Mech
         /// Returns a built dictionary of mech part stats.
         /// </summary>
         /// <returns>A dictionary of mech part stats keyed by resref.</returns>
-        public Dictionary<string, MechPartStats> Build()
+        public Dictionary<string, MechPart> Build()
         {
             return _mechParts;
         }

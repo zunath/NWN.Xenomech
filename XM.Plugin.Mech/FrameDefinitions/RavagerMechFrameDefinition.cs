@@ -8,7 +8,7 @@ namespace XM.Plugin.Mech.FrameDefinitions
     {
         private readonly MechFrameBuilder _builder = new();
 
-        public Dictionary<string, MechFrameStats> BuildMechFrames()
+        public Dictionary<string, MechFrame> BuildMechFrames()
         {
             RavagerMkI();
             RavagerMkII();
@@ -23,7 +23,7 @@ namespace XM.Plugin.Mech.FrameDefinitions
         {
             _builder.Create("ravager_mk1")
                 .LevelRequirement(10)
-                .BaseHp(450)
+                .BaseHP(450)
                 .BaseFuel(120)
                 .BaseAttack(50)
                 .BaseEtherAttack(25)
@@ -38,7 +38,7 @@ namespace XM.Plugin.Mech.FrameDefinitions
         {
             _builder.Create("ravager_mk2")
                 .LevelRequirement(20)
-                .BaseHp(675)
+                .BaseHP(675)
                 .BaseFuel(180)
                 .BaseAttack(75)
                 .BaseEtherAttack(37)
@@ -53,7 +53,7 @@ namespace XM.Plugin.Mech.FrameDefinitions
         {
             _builder.Create("ravager_mk3")
                 .LevelRequirement(30)
-                .BaseHp(1012)
+                .BaseHP(1012)
                 .BaseFuel(270)
                 .BaseAttack(112)
                 .BaseEtherAttack(56)
@@ -68,7 +68,7 @@ namespace XM.Plugin.Mech.FrameDefinitions
         {
             _builder.Create("ravager_mk4")
                 .LevelRequirement(40)
-                .BaseHp(1518)
+                .BaseHP(1518)
                 .BaseFuel(405)
                 .BaseAttack(168)
                 .BaseEtherAttack(84)
@@ -83,7 +83,7 @@ namespace XM.Plugin.Mech.FrameDefinitions
         {
             _builder.Create("ravager_mk5")
                 .LevelRequirement(50)
-                .BaseHp(2277)
+                .BaseHP(2277)
                 .BaseFuel(607)
                 .BaseAttack(252)
                 .BaseEtherAttack(126)

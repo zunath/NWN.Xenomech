@@ -1,9 +1,10 @@
 namespace XM.Plugin.Mech
 {
-    public class MechFrameStats
+    public class MechFrame
     {
+        public string Name { get; set; }
         public int LevelRequirement { get; set; }
-        public int BaseHp { get; set; }
+        public int BaseHP { get; set; }
         public int BaseFuel { get; set; }
         public int BaseAttack { get; set; }
         public int BaseEtherAttack { get; set; }

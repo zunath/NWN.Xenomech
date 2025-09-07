@@ -8,7 +8,7 @@ namespace XM.Plugin.Mech.FrameDefinitions
     {
         private readonly MechFrameBuilder _builder = new();
 
-        public Dictionary<string, MechFrameStats> BuildMechFrames()
+        public Dictionary<string, MechFrame> BuildMechFrames()
         {
             NexusMkI();
             NexusMkII();
@@ -23,7 +23,7 @@ namespace XM.Plugin.Mech.FrameDefinitions
         {
             _builder.Create("nexus_mk1")
                 .LevelRequirement(10)
-                .BaseHp(400)
+                .BaseHP(400)
                 .BaseFuel(140)
                 .BaseAttack(25)
                 .BaseEtherAttack(50)
@@ -38,7 +38,7 @@ namespace XM.Plugin.Mech.FrameDefinitions
         {
             _builder.Create("nexus_mk2")
                 .LevelRequirement(20)
-                .BaseHp(600)
+                .BaseHP(600)
                 .BaseFuel(210)
                 .BaseAttack(37)
                 .BaseEtherAttack(75)
@@ -53,7 +53,7 @@ namespace XM.Plugin.Mech.FrameDefinitions
         {
             _builder.Create("nexus_mk3")
                 .LevelRequirement(30)
-                .BaseHp(900)
+                .BaseHP(900)
                 .BaseFuel(315)
                 .BaseAttack(56)
                 .BaseEtherAttack(112)
@@ -68,7 +68,7 @@ namespace XM.Plugin.Mech.FrameDefinitions
         {
             _builder.Create("nexus_mk4")
                 .LevelRequirement(40)
-                .BaseHp(1350)
+                .BaseHP(1350)
                 .BaseFuel(472)
                 .BaseAttack(84)
                 .BaseEtherAttack(168)
@@ -83,7 +83,7 @@ namespace XM.Plugin.Mech.FrameDefinitions
         {
             _builder.Create("nexus_mk5")
                 .LevelRequirement(50)
-                .BaseHp(2025)
+                .BaseHP(2025)
                 .BaseFuel(708)
                 .BaseAttack(126)
                 .BaseEtherAttack(252)

@@ -4,8 +4,8 @@ namespace XM.Plugin.Mech
 {
     public class MechFrameBuilder
     {
-        private readonly Dictionary<string, MechFrameStats> _mechFrames = new();
-        private MechFrameStats _activeFrame;
+        private readonly Dictionary<string, MechFrame> _mechFrames = new();
+        private MechFrame _activeFrame;
 
         /// <summary>
         /// Creates a new mech frame definition.
@@ -14,7 +14,7 @@ namespace XM.Plugin.Mech
         /// <returns>A mech frame builder with the configured options</returns>
         public MechFrameBuilder Create(string resref)
         {
-            _activeFrame = new MechFrameStats();
+            _activeFrame = new MechFrame();
             _mechFrames.Add(resref, _activeFrame);
 
             return this;
@@ -36,9 +36,9 @@ namespace XM.Plugin.Mech
         /// </summary>
         /// <param name="hp">The base HP value.</param>
         /// <returns>A mech frame builder with the configured options</returns>
-        public MechFrameBuilder BaseHp(int hp)
+        public MechFrameBuilder BaseHP(int hp)
         {
-            _activeFrame.BaseHp = hp;
+            _activeFrame.BaseHP = hp;
             return this;
         }
 
@@ -134,7 +134,7 @@ namespace XM.Plugin.Mech
         /// Returns a built dictionary of mech frame stats.
         /// </summary>
         /// <returns>A dictionary of mech frame stats keyed by resref.</returns>
-        public Dictionary<string, MechFrameStats> Build()
+        public Dictionary<string, MechFrame> Build()
         {
             return _mechFrames;
         }

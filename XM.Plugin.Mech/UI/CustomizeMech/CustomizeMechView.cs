@@ -4,6 +4,7 @@ using XM.Shared.Core.Localization;
 using XM.UI;
 using XM.UI.Builder;
 using XM.UI.Builder.Layout;
+using NuiAspect = XM.Shared.API.NUI.NuiAspect;
 
 namespace XM.Plugin.Mech.UI.CustomizeMech
 {
@@ -89,7 +90,17 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
 
         private void BuildMechCustomizationPane(NuiColumnBuilder<CustomizeMechViewModel> col)
         {
-            col.AddSpacer();
+            col.AddRow(row =>
+            {
+                row.DrawList(drawList =>
+                {
+                    drawList.AddImage(image =>
+                    {
+                        image.ResRef("mech_outline1")
+                            .Aspect(NuiAspect.Fit);
+                    });
+                });
+            });
         }
 
         private void BuildMechSummaryPane(NuiColumnBuilder<CustomizeMechViewModel> col)

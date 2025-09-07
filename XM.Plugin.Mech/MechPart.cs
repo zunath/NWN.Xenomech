@@ -1,9 +1,10 @@
 namespace XM.Plugin.Mech
 {
-    public class MechPartStats
+    public class MechPart
     {
+        public string Name { get; set; }
         public MechPartType PartType { get; set; } = MechPartType.Invalid;
-        public int HpPercent { get; set; } = 0;
+        public int HPPercent { get; set; } = 0;
         public int FuelPercent { get; set; } = 0;
         public int AttackPercent { get; set; } = 0;
         public int EtherAttackPercent { get; set; } = 0;
