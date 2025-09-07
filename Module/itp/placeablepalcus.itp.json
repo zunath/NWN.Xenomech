@@ -197,6 +197,17 @@
                     "__struct_id": 0,
                     "NAME": {
                       "type": "cexostring",
+                      "value": "Mech Customization Terminal"
+                    },
+                    "RESREF": {
+                      "type": "resref",
+                      "value": "mech_customize"
+                    }
+                  },
+                  {
+                    "__struct_id": 0,
+                    "NAME": {
+                      "type": "cexostring",
                       "value": "Pulseforge"
                     },
                     "RESREF": {
