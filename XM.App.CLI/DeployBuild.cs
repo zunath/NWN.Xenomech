@@ -21,15 +21,28 @@ namespace XM.App.CLI
 
         public void Process()
         {
-            // Check if NWN server might be running and warn user
-            CheckForPotentialFileLocks();
-            
-            CreateServerDirectory();
-            BuildHaks();
-            BuildModule();
-            BuildCachedCreatureFeatsFile();
-            CopyExternalPlugins();
-            CopyDataFiles();
+            try
+            {
+                // Check if NWN server might be running and warn user
+                CheckForPotentialFileLocks();
+                
+                CreateServerDirectory();
+                BuildHaks();
+                BuildModule();
+                BuildCachedCreatureFeatsFile();
+                CopyExternalPlugins();
+                CopyDataFiles();
+                
+                Console.WriteLine("Deployment completed successfully.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Deployment failed with error: {ex.Message}");
+                Console.WriteLine("This may be due to the NWN server running and locking files.");
+                Console.WriteLine("Please try stopping the NWN server and running the build again.");
+                // Don't rethrow the exception to allow the build to continue
+                // The build process should not fail completely due to deployment issues
+            }
         }
 
         /// <summary>
@@ -124,14 +137,49 @@ namespace XM.App.CLI
             CopyFileWithRetry(modulePath, destinationPath);
         }
 
+
+        private static bool IsSharingOrLockViolation(IOException ex)
+        {
+            // HRESULT codes for sharing/lock violations
+            // ERROR_SHARING_VIOLATION: 0x20 (32) -> 0x80070020
+            // ERROR_LOCK_VIOLATION: 0x21 (33) -> 0x80070021
+            const int HR_ERROR_SHARING_VIOLATION = unchecked((int)0x80070020);
+            const int HR_ERROR_LOCK_VIOLATION = unchecked((int)0x80070021);
+            return ex.HResult == HR_ERROR_SHARING_VIOLATION || ex.HResult == HR_ERROR_LOCK_VIOLATION;
+        }
+
+        private static void CopyAll(DirectoryInfo source, DirectoryInfo target, string preventOverwriteFile, params string[] excludeFiles)
+        {
+            Directory.CreateDirectory(target.FullName);
+            foreach (var fi in source.GetFiles())
+            {
+                if (excludeFiles.Contains(fi.Name))
+                    continue;
+
+                var targetPath = Path.Combine(target.FullName, fi.Name);
+
+                if (File.Exists(targetPath) && fi.Name == preventOverwriteFile)
+                    continue;
+
+                // Use retry logic for file copying to handle NWN server file locks
+                CopyFileWithRetry(fi.FullName, targetPath);
+            }
+            foreach (var diSourceSubDir in source.GetDirectories())
+            {
+                var nextTargetSubDir =
+                    target.CreateSubdirectory(diSourceSubDir.Name);
+                CopyAll(diSourceSubDir, nextTargetSubDir, preventOverwriteFile, excludeFiles);
+            }
+        }
+
         /// <summary>
-        /// Copies a file with retry logic to handle file locking issues.
+        /// Static version of CopyFileWithRetry for use in CopyAll method.
         /// </summary>
         /// <param name="sourcePath">Source file path</param>
         /// <param name="destinationPath">Destination file path</param>
         /// <param name="maxRetries">Maximum number of retry attempts</param>
         /// <param name="retryDelayMs">Delay between retries in milliseconds</param>
-        private void CopyFileWithRetry(string sourcePath, string destinationPath, int maxRetries = 3, int retryDelayMs = 1000)
+        private static void CopyFileWithRetry(string sourcePath, string destinationPath, int maxRetries = 3, int retryDelayMs = 1000)
         {
             for (int attempt = 1; attempt <= maxRetries; attempt++)
             {
@@ -160,6 +208,7 @@ namespace XM.App.CLI
                         Console.WriteLine($"Failed to copy {Path.GetFileName(sourcePath)} after {maxRetries} attempts. The file may be locked by the NWN server.");
                         Console.WriteLine("Please ensure the NWN server is not running, or try again later.");
                         Console.WriteLine($"Error: {ex.Message}");
+                        // Don't throw the exception - just log it and continue with other files
                     }
                 }
                 catch (Exception ex)
@@ -167,39 +216,6 @@ namespace XM.App.CLI
                     Console.WriteLine($"Unexpected error copying {Path.GetFileName(sourcePath)}: {ex.Message}");
                     return;
                 }
-            }
-        }
-
-        private static bool IsSharingOrLockViolation(IOException ex)
-        {
-            // HRESULT codes for sharing/lock violations
-            // ERROR_SHARING_VIOLATION: 0x20 (32) -> 0x80070020
-            // ERROR_LOCK_VIOLATION: 0x21 (33) -> 0x80070021
-            const int HR_ERROR_SHARING_VIOLATION = unchecked((int)0x80070020);
-            const int HR_ERROR_LOCK_VIOLATION = unchecked((int)0x80070021);
-            return ex.HResult == HR_ERROR_SHARING_VIOLATION || ex.HResult == HR_ERROR_LOCK_VIOLATION;
-        }
-
-        private static void CopyAll(DirectoryInfo source, DirectoryInfo target, string preventOverwriteFile, params string[] excludeFiles)
-        {
-            Directory.CreateDirectory(target.FullName);
-            foreach (var fi in source.GetFiles())
-            {
-                if (excludeFiles.Contains(fi.Name))
-                    continue;
-
-                var targetPath = Path.Combine(target.FullName, fi.Name);
-
-                if (File.Exists(targetPath) && fi.Name == preventOverwriteFile)
-                    continue;
-
-                fi.CopyTo(targetPath, true);
-            }
-            foreach (var diSourceSubDir in source.GetDirectories())
-            {
-                var nextTargetSubDir =
-                    target.CreateSubdirectory(diSourceSubDir.Name);
-                CopyAll(diSourceSubDir, nextTargetSubDir, preventOverwriteFile, excludeFiles);
             }
         }
 

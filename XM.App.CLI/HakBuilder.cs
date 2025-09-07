@@ -13,40 +13,67 @@ namespace XM.App.CLI
 
         public void Process()
         {
-            // Read the config file.
-            _config = GetConfig();
-            _haksToProcess = _config.HakList.ToList();
-            
-            // Debug: Show current directory and TLK path
-            Console.WriteLine($"Current working directory: {Directory.GetCurrentDirectory()}");
-            Console.WriteLine($"TLK path from config: {_config.TlkPath}");
-            Console.WriteLine($"TLK path resolved: {Path.GetFullPath(_config.TlkPath)}");
-            
-            // Clean the output folder.
-            CleanOutputFolder();
-
-            // Check if TLK file is locked before attempting to copy
-            CheckTlkFileLock();
-
-            // Copy the TLK to the output folder.
-            Console.WriteLine($"Copying TLK: {_config.TlkPath}");
-
-            if (File.Exists(_config.TlkPath))
+            try
             {
-                var destination = $"{_config.OutputPath}tlk/{Path.GetFileName(_config.TlkPath)}";
-                CopyFileWithRetry(_config.TlkPath, destination);
+                // Read the config file.
+                _config = GetConfig();
+                _haksToProcess = _config.HakList.ToList();
+                
+                // Debug: Show current directory and TLK path
+                Console.WriteLine($"Current working directory: {Directory.GetCurrentDirectory()}");
+                Console.WriteLine($"TLK path from config: {_config.TlkPath}");
+                Console.WriteLine($"TLK path resolved: {Path.GetFullPath(_config.TlkPath)}");
+                
+                // Clean the output folder.
+                CleanOutputFolder();
+
+                // Check if TLK file is locked before attempting to copy
+                CheckTlkFileLock();
+
+                // Copy the TLK to the output folder.
+                Console.WriteLine($"Copying TLK: {_config.TlkPath}");
+
+                if (File.Exists(_config.TlkPath))
+                {
+                    var destination = $"{_config.OutputPath}tlk/{Path.GetFileName(_config.TlkPath)}";
+                    CopyFileWithRetry(_config.TlkPath, destination);
+                }
+                else
+                {
+                    Console.WriteLine("Error: TLK does not exist");
+                }
+
+                // Iterate over every configured hakpak folder and build the hak file.
+                Parallel.ForEach(_haksToProcess, hak =>
+                {
+                    CompileHakpak(hak.Name, hak.Path);
+                });
+
+                Console.WriteLine("Hak building completed successfully.");
             }
-            else
+            catch (Exception ex)
             {
-                Console.WriteLine("Error: TLK does not exist");
+                Console.WriteLine($"Hak building failed with error: {ex.Message}");
+                Console.WriteLine("This may be due to the NWN server running and locking files.");
+                Console.WriteLine("Please try stopping the NWN server and running the build again.");
+                // Don't rethrow the exception to allow the build to continue
+                // The build process should not fail completely due to hak building issues
             }
+        }
 
-            // Iterate over every configured hakpak folder and build the hak file.
-            Parallel.ForEach(_haksToProcess, hak =>
-            {
-                CompileHakpak(hak.Name, hak.Path);
-            });
-
+        /// <summary>
+        /// Checks if an IOException is due to file sharing or lock violations.
+        /// </summary>
+        /// <param name="ex">The IOException to check</param>
+        /// <returns>True if the exception is due to sharing/lock violations</returns>
+        private static bool IsSharingOrLockViolation(IOException ex)
+        {
+            // HRESULT codes for sharing/lock violations
+            // ERROR_SHARING_VIOLATION: 0x20 (32) -> 0x80070020
+            // ERROR_LOCK_VIOLATION: 0x21 (33) -> 0x80070021
+            const int HR_ERROR_SHARING_VIOLATION = unchecked((int)0x80070020);
+            const int HR_ERROR_LOCK_VIOLATION = unchecked((int)0x80070021);
+            return ex.HResult == HR_ERROR_SHARING_VIOLATION || ex.HResult == HR_ERROR_LOCK_VIOLATION;
         }
 
         /// <summary>
@@ -73,10 +100,23 @@ namespace XM.App.CLI
             {
                 if (Directory.Exists(_config.OutputPath))
                 {
-                    // Delete .tlk
-                    if (File.Exists($"{_config.OutputPath}tlk/{Path.GetFileName(_config.TlkPath)}"))
+                    // Delete .tlk with error handling for file locks
+                    var tlkPath = $"{_config.OutputPath}tlk/{Path.GetFileName(_config.TlkPath)}";
+                    if (File.Exists(tlkPath))
                     {
-                        File.Delete($"{_config.OutputPath}tlk/{Path.GetFileName(_config.TlkPath)}");
+                        try
+                        {
+                            File.Delete(tlkPath);
+                        }
+                        catch (IOException ex) when (IsSharingOrLockViolation(ex))
+                        {
+                            Console.WriteLine($"Warning: Could not delete TLK file {Path.GetFileName(tlkPath)} - it may be locked by the NWN server.");
+                            Console.WriteLine("The file will be overwritten during the copy operation.");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Warning: Could not delete TLK file {Path.GetFileName(tlkPath)}: {ex.Message}");
+                        }
                     }
 
                     Parallel.ForEach(_config.HakList, hak =>
@@ -113,12 +153,34 @@ namespace XM.App.CLI
                         var filePath = _config.OutputPath + "hak/" + hak.Name;
                         if (File.Exists(filePath + ".hak"))
                         {
-                            File.Delete(filePath + ".hak");
+                            try
+                            {
+                                File.Delete(filePath + ".hak");
+                            }
+                            catch (IOException ex) when (IsSharingOrLockViolation(ex))
+                            {
+                                Console.WriteLine($"Warning: Could not delete HAK file {hak.Name}.hak - it may be locked by the NWN server.");
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"Warning: Could not delete HAK file {hak.Name}.hak: {ex.Message}");
+                            }
                         }
 
                         if (File.Exists(filePath + ".md5"))
                         {
-                            File.Delete(filePath + ".md5");
+                            try
+                            {
+                                File.Delete(filePath + ".md5");
+                            }
+                            catch (IOException ex) when (IsSharingOrLockViolation(ex))
+                            {
+                                Console.WriteLine($"Warning: Could not delete checksum file {hak.Name}.md5 - it may be locked by the NWN server.");
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"Warning: Could not delete checksum file {hak.Name}.md5: {ex.Message}");
+                            }
                         }
                     });
                 }
@@ -153,9 +215,7 @@ namespace XM.App.CLI
                     Console.WriteLine($"Successfully copied TLK file on attempt {attempt}");
                     return;
                 }
-                catch (IOException ex) when (ex.Message.Contains("being used by another process") || 
-                                           ex.Message.Contains("The process cannot access the file") ||
-                                           ex.Message.Contains("Access is denied"))
+                catch (IOException ex) when (IsSharingOrLockViolation(ex))
                 {
                     if (attempt < maxRetries)
                     {

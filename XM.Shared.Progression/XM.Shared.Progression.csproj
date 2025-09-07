@@ -84,6 +84,6 @@
 </ItemGroup>
 
 <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	<Exec Command="del /Q /F &quot;$(SolutionDir)server\server\anvil\Plugins\XM.Shared.Progression\*.*&quot;&#xD;&#xA;xcopy &quot;$(OutDir)*.*&quot; &quot;$(SolutionDir)server\anvil\Plugins\XM.Shared.Progression\&quot; /E /Y" />
+	<Exec Command="del /Q /F &quot;..\server\anvil\Plugins\XM.Shared.Progression\*.*&quot;&#xD;&#xA;xcopy &quot;$(OutDir)*.*&quot; &quot;..\server\anvil\Plugins\XM.Shared.Progression\&quot; /E /Y" />
 </Target>
 </Project>
