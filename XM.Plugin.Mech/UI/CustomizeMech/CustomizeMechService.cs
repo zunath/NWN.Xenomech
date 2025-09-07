@@ -7,7 +7,7 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
     [ServiceBinding(typeof(CustomizeMechService))]
     internal class CustomizeMechService
     {
-        private GuiService _gui;
+        private readonly GuiService _gui;
 
         public CustomizeMechService(GuiService gui)
         {

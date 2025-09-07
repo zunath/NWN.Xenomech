@@ -43,7 +43,7 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
             {
                 row.AddLabel(label =>
                 {
-                    label.Label(LocaleString.Mechs)
+                    label.Label(model => model.MechCountText)
                         .Height(25f)
                         .HorizontalAlign(NuiHAlign.Center);
                 });
@@ -68,6 +68,22 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
                         });
                     });
                 }, model => model.MechNames);
+            });
+
+            col.AddRow(row =>
+            {
+                row.AddButton(button =>
+                {
+                    button.Label(LocaleString.New)
+                        .Height(32f)
+                        .OnClick(model => model.OnNewMech());
+                });
+                row.AddButton(button =>
+                {
+                    button.Label(LocaleString.Delete)
+                        .Height(32f)
+                        .OnClick(model => model.OnDeleteMech());
+                });
             });
         }
 

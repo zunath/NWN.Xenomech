@@ -7226,6 +7226,14 @@
       "text": "{0}'s TP has been reduced by {1}%."
     },
     {
+      "id": 1808,
+      "text": "Your hangar cannot support any more mechs. Dismantle a mech to make room."
+    },
+    {
+      "id": 1809,
+      "text": "Are you sure you want to delete the mech '{0}'?"
+    },
+    {
       "id": 1810,
       "text": "Type: {0}"
     },

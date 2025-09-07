@@ -1492,8 +1492,8 @@ namespace XM.Shared.Core.Localization
         EtherAttackPercentage = 1805,
         EvasionPercentage = 1806,
         XTPHasBeenReducedByYPercent = 1807,
-        // 1808 is free
-        // 1809 is free
+        YourHangarCannotSupportAnyMoreMechs = 1808,
+        AreYouSureYouWantToDeleteMechX = 1809,
         TypeX = 1810,
         ActivationDelayX = 1811,
         RecastDelayX = 1812,
