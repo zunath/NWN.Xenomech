@@ -16,7 +16,6 @@ namespace XM.Plugin.Mech
         private readonly Dictionary<string, MechPartStats> _mechParts = new();
         private readonly Dictionary<string, MechFrameStats> _mechFrames = new();
         private readonly Dictionary<MechPartType, List<string>> _partsByType = new();
-        private readonly Dictionary<MechFrameType, List<string>> _framesByType = new();
 
         public MechService(
             IList<IMechPartListDefinition> partDefinitions,
@@ -65,17 +64,11 @@ namespace XM.Plugin.Mech
                     if (!_mechFrames.TryAdd(resref, frameStats))
                     {
                         _log.Error($"ERROR: Duplicate mech frame detected: {resref}");
-                        continue;
                     }
-
-                    if (!_framesByType.ContainsKey(frameStats.FrameType))
-                        _framesByType[frameStats.FrameType] = new List<string>();
-
-                    _framesByType[frameStats.FrameType].Add(resref);
                 }
             }
 
-            _log.Info($"Loaded {_mechFrames.Count} mech frames across {_framesByType.Count} types.");
+            _log.Info($"Loaded {_mechFrames.Count} mech frames.");
         }
 
     }

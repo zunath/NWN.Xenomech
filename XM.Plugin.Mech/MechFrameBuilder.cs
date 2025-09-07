@@ -11,14 +11,10 @@ namespace XM.Plugin.Mech
         /// Creates a new mech frame definition.
         /// </summary>
         /// <param name="resref">The item resref of the mech frame.</param>
-        /// <param name="frameType">The type of mech frame.</param>
         /// <returns>A mech frame builder with the configured options</returns>
-        public MechFrameBuilder Create(string resref, MechFrameType frameType)
+        public MechFrameBuilder Create(string resref)
         {
-            _activeFrame = new MechFrameStats
-            {
-                FrameType = frameType
-            };
+            _activeFrame = new MechFrameStats();
             _mechFrames.Add(resref, _activeFrame);
 
             return this;
