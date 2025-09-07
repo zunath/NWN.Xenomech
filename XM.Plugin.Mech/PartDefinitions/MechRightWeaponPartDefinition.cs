@@ -90,7 +90,7 @@ namespace XM.Plugin.Mech.PartDefinitions
 
         private void ArtemisCryoLance()
         {
-            _builder.Create("artemis_rweap", MechPartType.RightWeapon)
+            _builder.Create("artemisc_rweap", MechPartType.RightWeapon)
                 .FuelPercent(22)
                 .AttackPercent(5)
                 .EtherAttackPercent(25)

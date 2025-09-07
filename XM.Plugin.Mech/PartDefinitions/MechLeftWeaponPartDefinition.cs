@@ -46,7 +46,7 @@ namespace XM.Plugin.Mech.PartDefinitions
 
         private void ZeusRailgun()
         {
-            _builder.Create("zeus_lweap", MechPartType.LeftWeapon)
+            _builder.Create("zeusr_lweap", MechPartType.LeftWeapon)
                 .HPPercent(5)
                 .AttackPercent(25)
                 .DefensePercent(5)

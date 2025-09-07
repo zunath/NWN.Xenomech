@@ -42,6 +42,10 @@
 	<ProjectReference Include="..\XM.Shared.UI\XM.Shared.UI.csproj" />
 </ItemGroup>
 
+<ItemGroup>
+  <Folder Include="UI\" />
+</ItemGroup>
+
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 	<Exec Command="del /Q /F &quot;$(SolutionDir)server\anvil\Plugins\XM.Plugin.Mech\*.*&quot;&#xD;&#xA;xcopy &quot;$(OutDir)*.*&quot; &quot;$(SolutionDir)server\anvil\Plugins\XM.Plugin.Mech\&quot; /E /Y" />
 </Target>
