@@ -1,8 +1,10 @@
-using System.Collections.Generic;
-using System.Linq;
 using Anvil.Services;
 using NLog;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using XM.Inventory;
+using XM.Shared.Core.Extension;
 
 namespace XM.Plugin.Mech
 {
@@ -20,6 +22,7 @@ namespace XM.Plugin.Mech
         private readonly Dictionary<string, MechPart> _mechParts = new();
         private readonly Dictionary<string, MechFrame> _mechFrames = new();
         private readonly Dictionary<MechPartType, List<string>> _partsByType = new();
+        private readonly Dictionary<MechPartType, MechPartTypeAttribute> _mechPartTypes = new();
 
         public MechService(
             ItemCacheService itemCache,
@@ -35,6 +38,7 @@ namespace XM.Plugin.Mech
         {
             CacheMechParts();
             CacheMechFrames();
+            CacheMechPartTypes();
         }
 
         private void CacheMechParts()
@@ -81,16 +85,28 @@ namespace XM.Plugin.Mech
             _log.Info($"Loaded {_mechFrames.Count} mech frames.");
         }
 
-        /// <summary>
-        /// Gets the mech part details by resref.
-        /// </summary>
-        /// <param name="resref">The resref of the mech part.</param>
-        /// <returns>The mech part stats, or null if not found.</returns>
-        public MechPart GetMechPart(string resref)
+        private void CacheMechPartTypes()
         {
-            _mechParts.TryGetValue(resref, out var partStats);
-            return partStats;
+            var types = Enum.GetValues(typeof(MechPartType)).Cast<MechPartType>();
+            foreach (var type in types)
+            {
+                var typeDetail = type.GetAttribute<MechPartType, MechPartTypeAttribute>();
+
+                if (typeDetail.IsActive)
+                {
+                    _mechPartTypes[type] = typeDetail;
+                }
+            }
         }
 
+        /// <summary>
+        /// Retrieves the mech part type details.
+        /// </summary>
+        /// <param name="type">The type of mech part to retrieve</param>
+        /// <returns>A mech part type attribute</returns>
+        public MechPartTypeAttribute GetMechPartType(MechPartType type)
+        {
+            return _mechPartTypes[type];
+        }
     }
 }

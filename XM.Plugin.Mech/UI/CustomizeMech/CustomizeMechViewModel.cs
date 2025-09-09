@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Anvil.API;
 using Anvil.Services;
 using XM.Shared.API.Constants;
+using XM.Shared.API.Extension;
 using XM.Shared.Core;
 using XM.Shared.Core.Data;
 using XM.Shared.Core.Entity;
 using XM.Shared.Core.Localization;
 using XM.UI;
+using Action = System.Action;
 
 namespace XM.Plugin.Mech.UI.CustomizeMech
 {
@@ -15,6 +18,17 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
     internal class CustomizeMechViewModel :
         ViewModel<CustomizeMechViewModel>
     {
+        internal static NuiRect HeadCoordinates { get; } = new(330f, 50f, 128f, 128f);
+        internal static NuiRect LeftArmCoordinates { get; } = new(140f, 200f, 128f, 128f);
+        internal static NuiRect RightArmCoordinates { get; } = new(520f, 200f, 128f, 128f);
+        internal static NuiRect LeftWeaponCoordinates { get; } = new(140f, 350f, 128f, 128f);
+        internal static NuiRect RightWeaponCoordinates { get; } = new(520f, 350f, 128f, 128f);
+        internal static NuiRect CoreCoordinates { get; } = new(330f, 200f, 128f, 128f);
+        internal static NuiRect LegsCoordinates { get; } = new(330f, 500f, 128f, 128f);
+        internal static NuiRect GeneratorCoordinates { get; } = new(330f, 350f, 128f, 128f);
+
+        private List<Guid> _mechIds = new();
+
         public XMBindingList<string> MechNames
         {
             get => Get<XMBindingList<string>>();
@@ -27,7 +41,48 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
             set => Set(value);
         }
 
-        public int SelectedMech
+        public string MechHeadResref
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string MechLeftArmResref
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string MechRightArmResref
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string MechCoreResref
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string MechLegsResref
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string MechGeneratorResref
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string MechLeftWeaponResref
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string MechRightWeaponResref
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public int SelectedMechIndex
         {
             get => Get<int>();
             set => Set(value);
@@ -52,65 +107,6 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
             set => Set(value);
         }
 
-        // Part slot states (internal resrefs)
-        private string _headPartResref;
-        private string _corePartResref;
-        private string _leftArmPartResref;
-        private string _rightArmPartResref;
-        private string _legsPartResref;
-        private string _generatorPartResref;
-        private string _leftWeaponPartResref;
-        private string _rightWeaponPartResref;
-
-        // Display names for UI
-        public string HeadPartDisplayName
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public string CorePartDisplayName
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public string LeftArmPartDisplayName
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public string RightArmPartDisplayName
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public string LegsPartDisplayName
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public string GeneratorPartDisplayName
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public string LeftWeaponPartDisplayName
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public string RightWeaponPartDisplayName
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
 
         [Inject]
         public DBService DB { get; set; }
@@ -120,7 +116,16 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
 
         public override void OnOpen()
         {
-            SelectedMech = -1;
+            MechHeadResref = MechService.GetMechPartType(MechPartType.Head).DefaultImageResref;
+            MechLeftArmResref = MechService.GetMechPartType(MechPartType.LeftArm).DefaultImageResref;
+            MechRightArmResref = MechService.GetMechPartType(MechPartType.RightArm).DefaultImageResref;
+            MechCoreResref = MechService.GetMechPartType(MechPartType.Core).DefaultImageResref;
+            MechLegsResref = MechService.GetMechPartType(MechPartType.Legs).DefaultImageResref;
+            MechGeneratorResref = MechService.GetMechPartType(MechPartType.Generator).DefaultImageResref;
+            MechLeftWeaponResref = MechService.GetMechPartType(MechPartType.LeftWeapon).DefaultImageResref;
+            MechRightWeaponResref = MechService.GetMechPartType(MechPartType.RightWeapon).DefaultImageResref;
+
+            SelectedMechIndex = -1;
             LoadMechList();
         }
 
@@ -129,16 +134,30 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
             
         }
 
+        private Shared.Core.Entity.MechConfiguration GetMech()
+        {
+            if (SelectedMechIndex < 0)
+                return null;
+
+            var playerId = PlayerId.Get(Player);
+            var dbPlayerMech = DB.Get<PlayerMech>(playerId);
+            var mechId = _mechIds[SelectedMechIndex];
+
+            return dbPlayerMech.SavedMechs[mechId];
+        }
+
         private void LoadMechList()
         {
             var playerId = PlayerId.Get(Player);
             var dbPlayerMech = DB.Get<PlayerMech>(playerId) ?? new PlayerMech(playerId);
 
+            _mechIds.Clear();
             var mechNames = new XMBindingList<string>();
             var mechToggles = new XMBindingList<bool>();
 
-            foreach (var (_, mechConfig) in dbPlayerMech.SavedMechs)
+            foreach (var (mechId, mechConfig) in dbPlayerMech.SavedMechs)
             {
+                _mechIds.Add(mechId);
                 mechNames.Add(mechConfig.Name);
                 mechToggles.Add(false);
             }
@@ -154,11 +173,11 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
 
         public Action OnSelectMech() => () =>
         {
-            if (SelectedMech > -1)
-                MechToggles[SelectedMech] = false;
+            if (SelectedMechIndex > -1)
+                MechToggles[SelectedMechIndex] = false;
 
             var index = NuiGetEventArrayIndex();
-            SelectedMech = index;
+            SelectedMechIndex = index;
             MechToggles[index] = true;
             
             LoadSelectedMechConfiguration();
@@ -166,29 +185,14 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
 
         private void LoadSelectedMechConfiguration()
         {
-            if (SelectedMech < 0 || SelectedMech >= MechNames.Count)
+            if (SelectedMechIndex < 0 || SelectedMechIndex >= MechNames.Count)
             {
-                ClearMechConfiguration();
                 return;
             }
 
             var playerId = PlayerId.Get(Player);
             var dbPlayerMech = DB.Get<PlayerMech>(playerId);
-            
-            if (dbPlayerMech == null)
-            {
-                ClearMechConfiguration();
-                return;
-            }
-
-            var mechIds = dbPlayerMech.SavedMechs.Keys.ToList();
-            if (SelectedMech >= mechIds.Count)
-            {
-                ClearMechConfiguration();
-                return;
-            }
-
-            var mechId = mechIds[SelectedMech];
+            var mechId = _mechIds[SelectedMechIndex];
             var mechConfig = dbPlayerMech.SavedMechs[mechId];
 
             // Load frame
@@ -196,30 +200,7 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
             SelectedFrameName = string.IsNullOrEmpty(mechConfig.FrameResref) 
                 ? LocaleString.NoFrameSelected.ToLocalizedString() 
                 : mechConfig.FrameResref;
-
-            // Load parts
-            SetPartResref(MechPartType.Head, mechConfig.Parts.GetValueOrDefault((int)MechPartType.Head, string.Empty));
-            SetPartResref(MechPartType.Core, mechConfig.Parts.GetValueOrDefault((int)MechPartType.Core, string.Empty));
-            SetPartResref(MechPartType.LeftArm, mechConfig.Parts.GetValueOrDefault((int)MechPartType.LeftArm, string.Empty));
-            SetPartResref(MechPartType.RightArm, mechConfig.Parts.GetValueOrDefault((int)MechPartType.RightArm, string.Empty));
-            SetPartResref(MechPartType.Legs, mechConfig.Parts.GetValueOrDefault((int)MechPartType.Legs, string.Empty));
-            SetPartResref(MechPartType.Generator, mechConfig.Parts.GetValueOrDefault((int)MechPartType.Generator, string.Empty));
-            SetPartResref(MechPartType.LeftWeapon, mechConfig.Parts.GetValueOrDefault((int)MechPartType.LeftWeapon, string.Empty));
-            SetPartResref(MechPartType.RightWeapon, mechConfig.Parts.GetValueOrDefault((int)MechPartType.RightWeapon, string.Empty));
-        }
-
-        private void ClearMechConfiguration()
-        {
-            SelectedFrameResref = string.Empty;
-            SelectedFrameName = LocaleString.NoFrameSelected.ToLocalizedString();
-            SetPartResref(MechPartType.Head, string.Empty);
-            SetPartResref(MechPartType.Core, string.Empty);
-            SetPartResref(MechPartType.LeftArm, string.Empty);
-            SetPartResref(MechPartType.RightArm, string.Empty);
-            SetPartResref(MechPartType.Legs, string.Empty);
-            SetPartResref(MechPartType.Generator, string.Empty);
-            SetPartResref(MechPartType.LeftWeapon, string.Empty);
-            SetPartResref(MechPartType.RightWeapon, string.Empty);
+            
         }
 
         public Action OnNewMech() => () =>
@@ -239,7 +220,7 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
             var mechNumber = dbPlayerMech.SavedMechs.Count + 1;
             var mechName = $"{LocaleString.Mech.ToLocalizedString()} {mechNumber}";
             
-            var newMechConfig = new MechConfiguration
+            var newMechConfig = new Shared.Core.Entity.MechConfiguration
             {
                 FrameResref = string.Empty,
                 Name = mechName,
@@ -254,10 +235,10 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
 
         public Action OnDeleteMech() => () =>
         {
-            if (SelectedMech < 0 || SelectedMech >= MechNames.Count)
+            if (SelectedMechIndex < 0 || SelectedMechIndex >= MechNames.Count)
                 return;
 
-            var mechName = MechNames[SelectedMech];
+            var mechName = MechNames[SelectedMechIndex];
             var confirmMessage = LocaleString.AreYouSureYouWantToDeleteMechX.ToLocalizedString(mechName);
             
             ShowModal(
@@ -271,7 +252,7 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
 
         private void ConfirmDeleteMech()
         {
-            if (SelectedMech < 0 || SelectedMech >= MechNames.Count)
+            if (SelectedMechIndex < 0 || SelectedMechIndex >= MechNames.Count)
                 return;
 
             var playerId = PlayerId.Get(Player);
@@ -282,9 +263,9 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
 
             // Get the mech ID to delete
             var mechIds = dbPlayerMech.SavedMechs.Keys.ToList();
-            if (SelectedMech < mechIds.Count)
+            if (SelectedMechIndex < mechIds.Count)
             {
-                var mechIdToDelete = mechIds[SelectedMech];
+                var mechIdToDelete = mechIds[SelectedMechIndex];
                 dbPlayerMech.SavedMechs.Remove(mechIdToDelete);
                 
                 // If this was the active mech, clear it
@@ -296,15 +277,15 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
                 DB.Set(dbPlayerMech);
                 
                 // Reset selection and reload
-                SelectedMech = -1;
+                SelectedMechIndex = -1;
                 LoadMechList();
             }
         }
 
         // Part attachment methods
-        public Action OnAttachPart(MechPartType partType) => () =>
+        private void AttachPart(MechPartType partType)
         {
-            if (SelectedMech < 0)
+            if (SelectedMechIndex < 0)
             {
                 SendMessageToPC(Player, ColorToken.Red(LocaleString.PleaseSelectAMechFirst.ToLocalizedString()));
                 return;
@@ -316,9 +297,10 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
                 return;
             }
 
-            var currentPartResref = GetPartResref(partType);
-            
-            if (string.IsNullOrEmpty(currentPartResref))
+            var mech = GetMech();
+            var part = mech.Parts[(int)partType];
+
+            if (string.IsNullOrEmpty(part))
             {
                 // No part attached, enter targeting mode
                 EnterTargetingMode(partType);
@@ -328,72 +310,11 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
                 // Part already attached, show detachment confirmation
                 ShowDetachPartConfirmation(partType);
             }
-        };
-
-        private string GetPartResref(MechPartType partType)
-        {
-            return partType switch
-            {
-                MechPartType.Head => _headPartResref,
-                MechPartType.Core => _corePartResref,
-                MechPartType.LeftArm => _leftArmPartResref,
-                MechPartType.RightArm => _rightArmPartResref,
-                MechPartType.Legs => _legsPartResref,
-                MechPartType.Generator => _generatorPartResref,
-                MechPartType.LeftWeapon => _leftWeaponPartResref,
-                MechPartType.RightWeapon => _rightWeaponPartResref,
-                _ => string.Empty
-            };
-        }
-
-        private void SetPartResref(MechPartType partType, string resref)
-        {
-            switch (partType)
-            {
-                case MechPartType.Head:
-                    _headPartResref = resref;
-                    HeadPartDisplayName = GetPartDisplayName(resref);
-                    break;
-                case MechPartType.Core:
-                    _corePartResref = resref;
-                    CorePartDisplayName = GetPartDisplayName(resref);
-                    break;
-                case MechPartType.LeftArm:
-                    _leftArmPartResref = resref;
-                    LeftArmPartDisplayName = GetPartDisplayName(resref);
-                    break;
-                case MechPartType.RightArm:
-                    _rightArmPartResref = resref;
-                    RightArmPartDisplayName = GetPartDisplayName(resref);
-                    break;
-                case MechPartType.Legs:
-                    _legsPartResref = resref;
-                    LegsPartDisplayName = GetPartDisplayName(resref);
-                    break;
-                case MechPartType.Generator:
-                    _generatorPartResref = resref;
-                    GeneratorPartDisplayName = GetPartDisplayName(resref);
-                    break;
-                case MechPartType.LeftWeapon:
-                    _leftWeaponPartResref = resref;
-                    LeftWeaponPartDisplayName = GetPartDisplayName(resref);
-                    break;
-                case MechPartType.RightWeapon:
-                    _rightWeaponPartResref = resref;
-                    RightWeaponPartDisplayName = GetPartDisplayName(resref);
-                    break;
-            }
-        }
-
-        private string GetPartDisplayName(string resref)
-        {
-            var part = MechService.GetMechPart(resref);
-            return part.Name;
         }
 
         private void EnterTargetingMode(MechPartType partType)
         {
-            var partTypeName = GetPartTypeName(partType);
+            var partTypeName = MechService.GetMechPartType(partType).Name.ToLocalizedString();
 
             Targeting.EnterTargetingMode(Player, ObjectType.Item, LocaleString.PleaseSelectMechItemFromInventory.ToLocalizedString(partTypeName),
                 item =>
@@ -402,25 +323,9 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
                 });
         }
 
-        private string GetPartTypeName(MechPartType partType)
-        {
-            return partType switch
-            {
-                MechPartType.Head => LocaleString.MechHead.ToLocalizedString(),
-                MechPartType.Core => LocaleString.MechCore.ToLocalizedString(),
-                MechPartType.LeftArm => LocaleString.MechLeftArm.ToLocalizedString(),
-                MechPartType.RightArm => LocaleString.MechRightArm.ToLocalizedString(),
-                MechPartType.Legs => LocaleString.MechLegs.ToLocalizedString(),
-                MechPartType.Generator => LocaleString.MechGenerator.ToLocalizedString(),
-                MechPartType.LeftWeapon => LocaleString.MechLeftWeapon.ToLocalizedString(),
-                MechPartType.RightWeapon => LocaleString.MechRightWeapon.ToLocalizedString(),
-                _ => LocaleString.Unknown.ToLocalizedString()
-            };
-        }
-
         private void ShowDetachPartConfirmation(MechPartType partType)
         {
-            var partTypeName = GetPartTypeName(partType);
+            var partTypeName = MechService.GetMechPartType(partType).Name.ToLocalizedString();
             var confirmMessage = LocaleString.AreYouSureYouWantToDetachPartX.ToLocalizedString(partTypeName);
             
             ShowModal(
@@ -436,49 +341,11 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
         {
             // TODO: Implement part detachment logic
             // This should deserialize the part back to player inventory
-            SetPartResref(partType, string.Empty);
-            SaveMechConfiguration();
-            
-            var partTypeName = GetPartTypeName(partType);
-        }
-
-        private void SaveMechConfiguration()
-        {
-            if (SelectedMech < 0)
-                return;
-
-            var playerId = PlayerId.Get(Player);
-            var dbPlayerMech = DB.Get<PlayerMech>(playerId);
-            
-            if (dbPlayerMech == null)
-                return;
-
-            var mechIds = dbPlayerMech.SavedMechs.Keys.ToList();
-            if (SelectedMech >= mechIds.Count)
-                return;
-
-            var mechId = mechIds[SelectedMech];
-            var mechConfig = dbPlayerMech.SavedMechs[mechId];
-
-            // Update frame
-            mechConfig.FrameResref = SelectedFrameResref;
-
-            // Update parts
-            mechConfig.Parts[(int)MechPartType.Head] = _headPartResref;
-            mechConfig.Parts[(int)MechPartType.Core] = _corePartResref;
-            mechConfig.Parts[(int)MechPartType.LeftArm] = _leftArmPartResref;
-            mechConfig.Parts[(int)MechPartType.RightArm] = _rightArmPartResref;
-            mechConfig.Parts[(int)MechPartType.Legs] = _legsPartResref;
-            mechConfig.Parts[(int)MechPartType.Generator] = _generatorPartResref;
-            mechConfig.Parts[(int)MechPartType.LeftWeapon] = _leftWeaponPartResref;
-            mechConfig.Parts[(int)MechPartType.RightWeapon] = _rightWeaponPartResref;
-
-            DB.Set(dbPlayerMech);
         }
 
         public Action OnSelectFrame() => () =>
         {
-            if (SelectedMech < 0)
+            if (SelectedMechIndex < 0)
             {
                 SendMessageToPC(Player, ColorToken.Red(LocaleString.PleaseSelectAMechFirst.ToLocalizedString()));
                 return;
@@ -488,15 +355,50 @@ namespace XM.Plugin.Mech.UI.CustomizeMech
             // This should show available frames and allow selection
         };
 
-        // Part selection methods for UI buttons
-        public Action OnSelectHead() => OnAttachPart(MechPartType.Head);
-        public Action OnSelectLeftArm() => OnAttachPart(MechPartType.LeftArm);
-        public Action OnSelectRightArm() => OnAttachPart(MechPartType.RightArm);
-        public Action OnSelectCore() => OnAttachPart(MechPartType.Core);
-        public Action OnSelectLegs() => OnAttachPart(MechPartType.Legs);
-        public Action OnSelectGenerator() => OnAttachPart(MechPartType.Generator);
-        public Action OnSelectLeftWeapon() => OnAttachPart(MechPartType.LeftWeapon);
-        public Action OnSelectRightWeapon() => OnAttachPart(MechPartType.RightWeapon);
+        public Action OnClickMechOutline() => () =>
+        {
+            var data = NuiGetEventPayload();
+            var coordinates = JsonObjectGet(data, "mouse_pos");
+            var jX = JsonObjectGet(coordinates, "x");
+            var jY = JsonObjectGet(coordinates, "y");
+            var x = JsonGetFloat(jX);
+            var y = JsonGetFloat(jY);
+
+            Console.WriteLine($"x = {x}, y = {y}");
+
+            if (HeadCoordinates.Contains(x, y))
+            {
+                AttachPart(MechPartType.Head);
+            }
+            else if (LeftArmCoordinates.Contains(x, y))
+            {
+                AttachPart(MechPartType.LeftArm);
+            }
+            else if (RightArmCoordinates.Contains(x, y))
+            {
+                AttachPart(MechPartType.RightArm);
+            }
+            else if (CoreCoordinates.Contains(x, y))
+            {
+                AttachPart(MechPartType.Core);
+            }
+            else if (LegsCoordinates.Contains(x, y))
+            {
+                AttachPart(MechPartType.Legs);
+            }
+            else if (GeneratorCoordinates.Contains(x, y))
+            {
+                AttachPart(MechPartType.Generator);
+            }
+            else if (LeftWeaponCoordinates.Contains(x, y))
+            {
+                AttachPart(MechPartType.LeftWeapon);
+            }
+            else if (RightWeaponCoordinates.Contains(x, y))
+            {
+                AttachPart(MechPartType.RightWeapon);
+            }
+        };
     }
 }
 
